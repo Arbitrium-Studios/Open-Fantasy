@@ -1,0 +1,4 @@
+[submodule "resources"]
+	path = resources
+	url = https://gitlab.com/Toontown-Delicious/toontown-delicious-resources
+	branch = master
