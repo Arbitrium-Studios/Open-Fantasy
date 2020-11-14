@@ -34,7 +34,15 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
     def load(self, zoneId):
         CogHQLoader.CogHQLoader.load(self, zoneId)
         Toon.loadBossbotHQAnims()
-
+        self.botcam1 = Actor("phase_9/models/char/BotCam-zero.bam",{"botcamneutral":"phase_9/models/char/BotCam-neutral.bam"})
+        self.botcam1.reparentTo(self.geom)
+        self.botcam1.setPos(53,127,6)
+        self.botcam1.loop('botcamneutral')
+        self.botcam2 = Actor("phase_9/models/char/BotCam-zero.bam",{"botcamneutral":"phase_9/models/char/BotCam-neutral.bam"})
+        self.botcam2.reparentTo(self.geom)
+        self.botcam2.setPos(72,127,6)
+        self.botcam2.loop('botcamneutral')
+        
     def unloadPlaceGeom(self):
         if self.geom:
             self.geom.removeNode()
