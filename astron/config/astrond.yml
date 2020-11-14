@@ -1,5 +1,5 @@
 daemon:
-    name: Open Toontown Astron Cluster
+    name: Toontown Astron Cluster
 
 general:
     eventlogger: 127.0.0.1:7197
@@ -42,7 +42,7 @@ uberdogs:
 roles:
     - type: clientagent
       bind: 0.0.0.0:7198
-      version: "sv1.0.47.38"
+      version: "sv1.0.0"
       client:
           relocate: true
           add_interest: enabled
