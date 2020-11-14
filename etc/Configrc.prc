@@ -2,7 +2,7 @@ direct-wtext 0
 ime-aware 1
 ime-hide 1
 collect-tcp 1
-server-version sv1.0.47.38
+server-version sv1.0.0
 model-path resources
 dc-file etc/toon.dc
 dc-file etc/otp.dc
