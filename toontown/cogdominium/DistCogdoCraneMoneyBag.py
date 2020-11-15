@@ -24,7 +24,44 @@ class DistCogdoCraneMoneyBag(DistCogdoCraneObject):
         self.hitFloorSfx = loader.loadSfx('phase_5/audio/sfx/AA_drop_bigweight_miss.ogg')
         self.hitFloorSoundInterval = SoundInterval(self.hitFloorSfx, node=self)
         return
-
+    
+    def DistCogDoCollHit
+        self.cogColl = %s 
+        shortChange = 0
+        pennyPincher = 1
+        tightwad = 2
+        beanCounter = 3
+        numberCruncher = 4
+        moneyBag = 5
+    if suit = a,b,c
+       a = 'suit_col'
+       b = 'suit_col'
+       c = 'suit_col'
+        
+#check for cog coll depending on suit type
+     def levelGlobal
+       grabCogID = ""
+         reparent(level)
+         level = '
+             1, 2, 3 = 1, 1.5 
+             4, 5, 6 = 2, 2.5
+             7, 8 = 3, 3.5'
+      def hitCenter
+    suit_col walk "15"
+    meter = ""
+    if CogID reparent meter = +1
+       elif grabCogId = 5
+            meter = +3
+    meter_finish = 10
+    
+    self.grabCogId generate "propeller"
+    properller = 'phase'
+    self.cogId setPos(x, y, +5)
+    
+    return generate
+    
+    meter_tint = LerpColorInterval(self.meter, 5, (5, 1, 1, 1)),
+    meter_tint = SetColorInterval(self.meter, , (5, 1, 1, 1)),
     def announceGenerate(self):
         DistCogdoCraneObject.announceGenerate(self)
         self.name = 'moneyBag-%s' % self.doId
