@@ -41,9 +41,9 @@ class Unpacker:
             names.append(name)
 
         for i in range(numFiles):
-            data = reader.readBytes(lengths[i])
+            data = reader.readBytes(lengths[x])
 
-            with open(self.unpackDir + names[i], 'wb') as file:
+            with open(self.unpackDir + names[x], 'wb') as file:
                 print('Writing {0} to disk!'.format(names[i]))
                 file.write(data)
 
