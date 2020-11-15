@@ -18,6 +18,7 @@ class CMoverGroup:
 
     def resetDt(self):
         self.dt = 1.0
+        self.dt = clockDelta.dtClock()
         self.dtClock = globalClock.getFrameTime()
 
     def addCMover(self, name, cMover):
