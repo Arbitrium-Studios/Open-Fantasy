@@ -1,0 +1,9 @@
+1. Sync accounts to the website
+2. Add a launcher folder to the source code
+3. Change game engines and test out Toontown using a separate branch
+4. Remove loading screens and implement unloading-and-loading areas; the further you get away from an area, the area unloads
+5. Add the capability for higher FPS and higher quality textures (upscale them up to 8k)
+6. Clear accounts after the game is completed.
+7. Patch as many bugs as possible.
+8. Move to the latest version of Python if it hasn't been done already.
+9. Add shaders to both versions of Toontown (Panda and Unreal Engine 4)
