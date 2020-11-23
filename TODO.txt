@@ -7,3 +7,5 @@
 7. Patch as many bugs as possible.
 8. Move to the latest version of Python if it hasn't been done already.
 9. Add shaders to both versions of Toontown (Panda and Unreal Engine 4)
+10. Implement the shaders
+11. Add realistic shaders options

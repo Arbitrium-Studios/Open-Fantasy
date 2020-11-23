@@ -10,6 +10,7 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase.DisplayOptions import DisplayOptions
 
 class DisplaySettingsDialog(DirectFrame, StateData.StateData):
+    __module__ = __name__
     ApplyTimeoutSeconds = 15
     TimeoutCountdownTask = 'DisplaySettingsTimeoutCountdown'
     WindowedMode = 0
@@ -18,7 +19,11 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('DisplaySettingsDialog')
 
     def __init__(self):
-        DirectFrame.__init__(self, pos=(0, 0, 0.3), relief=None, image=DGG.getDefaultDialogGeom(), image_scale=(1.6, 1, 1.2), image_pos=(0, 0, -0.05), image_color=ToontownGlobals.GlobalDialogColor, text=TTLocalizer.DisplaySettingsTitle, text_scale=0.12, text_pos=(0, 0.4), borderWidth=(0.01, 0.01))
+        DirectFrame.__init__(self, pos=(0, 0, 0.3), relief=None, image=DGG.getDefaultDialogGeom(), image_scale=(1.6,
+                                                                                                                1,
+                                                                                                                1.2), image_pos=(0, 0, -0.05), image_color=ToontownGlobals.GlobalDialogColor, text=TTLocalizer.DisplaySettingsTitle, text_scale=0.12, text_pos=(0,
+                                                                                                                                                                                                                                                                0.4), borderWidth=(0.01,
+                                                                                                                                                                                                                                                                                   0.01))
         StateData.StateData.__init__(self, 'display-settings-done')
         self.setBin('gui-popup', 0)
         self.initialiseoptions(DisplaySettingsDialog)
@@ -26,23 +31,19 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
 
     def unload(self):
         if self.isLoaded == 0:
-            return None
+            return
         self.isLoaded = 0
         self.exit()
         DirectFrame.destroy(self)
-        return None
+        return
 
     def load(self):
         if self.isLoaded == 1:
-            return None
+            return
         self.isLoaded = 1
         self.anyChanged = 0
         self.apiChanged = 0
-        self.screenSizes = ((640, 480),
-         (800, 600),
-         (1024, 768),
-         (1280, 1024),
-         (1600, 1200))
+        self.screenSizes = ((640, 480), (800, 600), (1024, 768), (1280, 1024), (1600, 1200))
         guiButton = loader.loadModel('phase_3/models/gui/quit_button')
         gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
         nameShopGui = loader.loadModel('phase_3/models/gui/nameshop_gui')
@@ -73,22 +74,24 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
         self.introText = DirectLabel(parent=self, relief=None, scale=TTLocalizer.DSDintroText, text=TTLocalizer.DisplaySettingsIntro, text_wordwrap=TTLocalizer.DSDintroTextWordwrap, text_align=TextNode.ALeft, pos=(-0.725, 0, 0.3))
         self.introTextSimple = DirectLabel(parent=self, relief=None, scale=0.06, text=TTLocalizer.DisplaySettingsIntroSimple, text_wordwrap=25, text_align=TextNode.ALeft, pos=(-0.725, 0, 0.3))
         self.apiLabel = DirectLabel(parent=self, relief=None, scale=0.06, text=TTLocalizer.DisplaySettingsApi, text_align=TextNode.ARight, pos=(-0.08, 0, 0))
-        self.apiMenu = DirectOptionMenu(parent=self, relief=DGG.RAISED, scale=0.06, items=['x'], pos=(0, 0, 0))
+        self.apiMenu = DirectOptionMenu(parent=self, relief=DGG.RAISED, scale=0.06, items=['x'], pos=(0,
+                                                                                                      0,
+                                                                                                      0))
         self.screenSizeLabel = DirectLabel(parent=self, relief=None, scale=0.06, text=TTLocalizer.DisplaySettingsResolution, text_align=TextNode.ARight, pos=(-0.08, 0, -0.1))
-        self.screenSizeLeftArrow = DirectButton(parent=self, relief=None, image=(gui.find('**/Horiz_Arrow_UP'),
-         gui.find('**/Horiz_Arrow_DN'),
-         gui.find('**/Horiz_Arrow_Rllvr'),
-         gui.find('**/Horiz_Arrow_UP')), scale=(-1.0, 1.0, 1.0), pos=(0.04, 0, -0.085), command=self.__doScreenSizeLeft)
-        self.screenSizeRightArrow = DirectButton(parent=self, relief=None, image=(gui.find('**/Horiz_Arrow_UP'),
-         gui.find('**/Horiz_Arrow_DN'),
-         gui.find('**/Horiz_Arrow_Rllvr'),
-         gui.find('**/Horiz_Arrow_UP')), pos=(0.54, 0, -0.085), command=self.__doScreenSizeRight)
+        self.screenSizeLeftArrow = DirectButton(parent=self, relief=None, image=(gui.find('**/Horiz_Arrow_UP'), gui.find('**/Horiz_Arrow_DN'), gui.find('**/Horiz_Arrow_Rllvr'), gui.find('**/Horiz_Arrow_UP')), scale=(-1.0,
+                                                                                                                                                                                                                        1.0,
+                                                                                                                                                                                                                        1.0), pos=(0.04, 0, -0.085), command=self.__doScreenSizeLeft)
+        self.screenSizeRightArrow = DirectButton(parent=self, relief=None, image=(gui.find('**/Horiz_Arrow_UP'), gui.find('**/Horiz_Arrow_DN'), gui.find('**/Horiz_Arrow_Rllvr'), gui.find('**/Horiz_Arrow_UP')), pos=(0.54, 0, -0.085), command=self.__doScreenSizeRight)
         self.screenSizeValueText = DirectLabel(parent=self, relief=None, text='x', text_align=TextNode.ACenter, text_scale=0.06, pos=(0.29, 0, -0.1))
         self.windowedButton = DirectCheckButton(parent=self, relief=None, text=TTLocalizer.DisplaySettingsWindowed, text_align=TextNode.ALeft, text_scale=0.6, scale=0.1, boxImage=innerCircle, boxImageScale=2.5, boxImageColor=VBase4(0, 0.25, 0.5, 1), boxRelief=None, pos=TTLocalizer.DSDwindowedButtonPos, command=self.__doWindowed)
         self.fullscreenButton = DirectCheckButton(parent=self, relief=None, text=TTLocalizer.DisplaySettingsFullscreen, text_align=TextNode.ALeft, text_scale=0.6, scale=0.1, boxImage=innerCircle, boxImageScale=2.5, boxImageColor=VBase4(0, 0.25, 0.5, 1), boxRelief=None, pos=TTLocalizer.DSDfullscreenButtonPos, command=self.__doFullscreen)
         self.embeddedButton = DirectCheckButton(parent=self, relief=None, text=TTLocalizer.DisplaySettingsEmbedded, text_align=TextNode.ALeft, text_scale=0.6, scale=0.1, boxImage=innerCircle, boxImageScale=2.5, boxImageColor=VBase4(0, 0.25, 0.5, 1), boxRelief=None, pos=TTLocalizer.DSDembeddedButtonPos, command=self.__doEmbedded)
-        self.apply = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')), image_scale=(0.6, 1, 1), text=TTLocalizer.DisplaySettingsApply, text_scale=0.06, text_pos=(0, -0.02), pos=(0.52, 0, -0.53), command=self.__apply)
-        self.cancel = DirectButton(parent=self, relief=None, text=TTLocalizer.DisplaySettingsCancel, image=(guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')), image_scale=(0.6, 1, 1), text_scale=TTLocalizer.DSDcancel, text_pos=TTLocalizer.DSDcancelPos, pos=(0.2, 0, -0.53), command=self.__cancel)
+        self.apply = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')), image_scale=(0.6,
+                                                                                                                                                                                      1,
+                                                                                                                                                                                      1), text=TTLocalizer.DisplaySettingsApply, text_scale=0.06, text_pos=(0, -0.02), pos=(0.52, 0, -0.53), command=self.__apply)
+        self.cancel = DirectButton(parent=self, relief=None, text=TTLocalizer.DisplaySettingsCancel, image=(guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')), image_scale=(0.6,
+                                                                                                                                                                                                                               1,
+                                                                                                                                                                                                                               1), text_scale=TTLocalizer.DSDcancel, text_pos=TTLocalizer.DSDcancelPos, pos=(0.2, 0, -0.53), command=self.__cancel)
         guiButton.removeNode()
         gui.removeNode()
         nameShopGui.removeNode()
@@ -98,7 +101,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
 
     def enter(self, changeDisplaySettings, changeDisplayAPI):
         if self.isEntered == 1:
-            return None
+            return
         self.isEntered = 1
         if self.isLoaded == 0:
             self.load()
@@ -159,7 +162,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
 
     def exit(self):
         if self.isEntered == 0:
-            return None
+            return
         self.isEntered = 0
         self.cleanupDialogs()
         base.transitions.noTransitions()
@@ -167,7 +170,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
         self.ignoreAll()
         self.hide()
         messenger.send(self.doneEvent, [self.anyChanged, self.apiChanged])
-        return None
+        return
 
     def cleanupDialogs(self):
         if self.applyDialog != None:
@@ -212,7 +215,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
             self.embeddedButton['indicatorValue'] = 1
 
     def updateScreenSize(self):
-        xSize, ySize = self.screenSizes[self.screenSizeIndex]
+        (xSize, ySize) = self.screenSizes[self.screenSizeIndex]
         self.screenSizeValueText['text'] = '%s x %s' % (xSize, ySize)
         if self.screenSizeIndex > 0:
             self.screenSizeLeftArrow.show()
@@ -225,7 +228,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
 
     def chooseClosestScreenSize(self, currentXSize, currentYSize):
         for i in range(len(self.screenSizes)):
-            xSize, ySize = self.screenSizes[i]
+            (xSize, ySize) = self.screenSizes[i]
             if currentXSize == xSize and currentYSize == ySize:
                 return i
 
@@ -233,7 +236,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
         bestDiff = None
         bestI = None
         for i in range(len(self.screenSizes)):
-            xSize, ySize = self.screenSizes[i]
+            (xSize, ySize) = self.screenSizes[i]
             diff = abs(xSize * ySize - currentCount)
             if bestI == None or diff < bestDiff:
                 bestI = i
@@ -280,7 +283,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
         self.origProperties = base.win.getProperties()
         pipe = self.apiPipes[self.apiMenu.selectedIndex]
         properties = WindowProperties()
-        xSize, ySize = self.screenSizes[self.screenSizeIndex]
+        (xSize, ySize) = self.screenSizes[self.screenSizeIndex]
         properties.setSize(xSize, ySize)
         properties.setFullscreen(self.displayMode == self.FullscreenMode)
         fullscreen = self.displayMode == self.FullscreenMode
@@ -302,7 +305,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
         taskMgr.add(self.__timeoutCountdown, self.TimeoutCountdownTask)
         return
 
-    def changeDisplayProperties(self, pipe, width, height, fullscreen = False, embedded = False):
+    def changeDisplayProperties(self, pipe, width, height, fullscreen=False, embedded=False):
         result = False
         self.notify.info('changeDisplayProperties')
         if embedded:
@@ -333,6 +336,8 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
             if embedded:
                 properties = base.appRunner.windowProperties
             original_sort = base.win.getSort()
+            lastShader = base.cr.getLastShader()
+            base.cr.useShader(None)
             if self.resetDisplayProperties(pipe, properties):
                 self.notify.debug('DISPLAY CHANGE SET')
                 properties = base.win.getProperties()
@@ -348,6 +353,7 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
                     self.notify.warning('DISPLAY CHANGE FAILED, RESTORING PREVIOUS DISPLAY')
             else:
                 self.notify.warning('DISPLAY CHANGE FAILED')
+            base.cr.useShader(lastShader)
             base.win.setSort(original_sort)
             base.graphicsEngine.renderFrame()
             base.graphicsEngine.renderFrame()
@@ -442,3 +448,4 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
         if base.win.getProperties().getParentWindow():
             result = True
         return result
+# okay decompiling toontown.shtiker.DisplaySettingsDialog.pyc
