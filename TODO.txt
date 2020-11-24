@@ -9,3 +9,9 @@
 9. Add shaders to both versions of Toontown (Panda and Unreal Engine 4)
 10. Implement the shaders
 11. Add realistic shaders options
+12. Import the default controls for PotCO as Toontown Fantasy's default controls
+13. Add custom keybinds
+14. Implement free, 360 degree camera to fit free roam
+15. Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button.
+16. Add the ability to play with an Xbox, Play Station, or PC controllers. (Back to view map; right stick to control camera angle; left stick to control the movement of your character AND in battles, to move the highlighted box around each gag box; double flick the left stick upward to sprint, Y button to open Shticker Book, B to preform action, Xbox/Play Station/{Company name} Home button to bring up the pause menu; X (PS)/A to jump/select the gag selected in battle; D-Pad to select one of four party members; Left Trigger (LT) to use Elemental magic; Right Trigger (RT) to ???; Left Button (LB) ???; Right Button (RB) ???;)
+17. Add a touch screen mode which is enabled/disabled in the Shticker Book 
