@@ -139,18 +139,14 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                     for torso in ToonDNA.toonTorsoTypes:
                         for legs in ToonDNA.toonLegTypes:
                             for gender in ('m', 'f'):
-                                print 'species: %s, head: %s, torso: %s, legs: %s, gender: %s' % (species, head, torso, legs, gender)
+                                print('species: %s, head: %s, torso: %s, legs: %s, gender: %s' % (species, head, torso, legs, gender))
                                 dna = ToonDNA.ToonDNA()
                                 dna.newToon((head, torso, legs, gender))
                                 toon = Toon.Toon()
                                 try:
                                     toon.setDNA(dna)
-                                except Exception, e:
-                                    print e
-
-        self.filterManager = None
-        self.lastShader = None
-        return
+                                except:
+                                    None
 
     def congratulations(self, avatarChoice):
         self.acceptedScreen = loader.loadModel('phase_3/models/gui/toon_council')
@@ -166,7 +162,9 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                                                                                                                                                                                                                                                                     -1), command=self.__handleCongrats, extraArgs=[avatarChoice])
         buttons.removeNode()
         base.transitions.noFade()
-        return
+
+        self.filterManager = None
+        self.lastShader = None
 
     def __handleCongrats(self, avatarChoice):
         self.acceptedBanner.destroy()
@@ -694,7 +692,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         return False
 
     def _wantShardListComplete(self):
-        print self.activeDistrictMap
+        print (self.activeDistrictMap)
         if self._shardsAreReady():
             self.acceptOnce(ToontownDistrictStats.EventName(), self.shardDetailStatsComplete)
             ToontownDistrictStats.refresh()
@@ -794,8 +792,8 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                 return 0
 
         if base.wantPets and base.localAvatar.hasPet():
-            print str(self.friendsMap)
-            print str(self.friendsMap.has_key(base.localAvatar.getPetId()))
+            print (self.friendsMap)
+            print (self.friendsMap.has_key(base.localAvatar.getPetId()))
             if self.friendsMap.has_key(base.localAvatar.getPetId()) == None:
                 return 0
         return 1
@@ -830,7 +828,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         for (objId, obj) in self.friendsMap.items():
             from toontown.pets import DistributedPet
             if isinstance(obj, DistributedPet.DistributedPet):
-                print 'Removing %s reference from the friendsMap' % obj.getName()
+                print('Removing %s reference from the friendsMap' % obj.getName())
                 del self.friendsMap[objId]
 
     def removePetFromFriendsMap(self):
@@ -1134,7 +1132,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         taskMgr.doMethodLater(0.1, self.sendAvatarInfoRequests, 'avatarRequestQueueTask')
 
     def sendAvatarInfoRequests(self, task=None):
-        print 'Sending request Queue for AV Handles'
+        print('Sending request Queue for AV Handles')
         if not hasattr(self, 'avatarInfoRequests'):
             return
         if len(self.avatarInfoRequests) == 0:

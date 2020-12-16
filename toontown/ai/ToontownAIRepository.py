@@ -47,6 +47,7 @@ from toontown.suit.SuitInvasionManagerAI import SuitInvasionManagerAI
 from toontown.toon import NPCToons
 from toontown.toonbase import ToontownGlobals
 from toontown.uberdog.DistributedInGameNewsMgrAI import DistributedInGameNewsMgrAI
+from toontown.dna.DNAParser import loadDNAFileAI
 
 
 class ToontownAIRepository(ToontownInternalRepository):
@@ -199,11 +200,9 @@ class ToontownAIRepository(ToontownInternalRepository):
     def generateHood(self, hoodConstructor, zoneId):
         # Bossbot HQ doesn't use DNA, so we skip over that.
         if zoneId != ToontownGlobals.BossbotHQ:
-            self.dnaStoreMap[zoneId] = DNAStorage()
             self.dnaDataMap[zoneId] = loadDNAFileAI(self.dnaStoreMap[zoneId], self.genDNAFileName(zoneId))
-            if zoneId in ToontownGlobals.HoodHierarchy:
-                for streetId in ToontownGlobals.HoodHierarchy[zoneId]:
-                    self.dnaStoreMap[streetId] = DNAStorage()
+            if zoneId in ToontownGlobals.Hood:
+                for streetId in ToontownGlobals.Hood[zoneId]:
                     self.dnaDataMap[streetId] = loadDNAFileAI(self.dnaStoreMap[streetId], self.genDNAFileName(streetId))
 
         hood = hoodConstructor(self, zoneId)
