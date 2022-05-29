@@ -2614,6 +2614,40 @@ def doPowerTrip(attack):
     return Parallel(suitTrack, partTrack1, partTrack2, waterfallTrack, toonTracks)
 
 
+def doSandTrap(attack):
+    battle = attack['battle']
+    target = attack['target']
+    dmg = target['hp']
+    toon = target['toon']
+    partDelay = 0.2
+    damageDelay = 1.3
+    dodgeDelay = 0.25
+    targetPoint = __toonFacePoint(toon)
+    targetPoint.setZ(targetPoint[2] + 3)
+    damageAnims = [['melt'], ['jump', 1.5, 0.4]]
+    suitTrack = getSuitTrack(attack)
+    puddle = globalPropPool.getProp('quicksand')
+    puddle.setHpr(Point3(120, 0, 0))
+    puddle.setScale(0.01)
+    puddleTrack = Sequence(
+        Func(battle.movie.needRestoreRenderProp, puddle),
+        Wait(damageDelay - 0.7),
+        Func(puddle.reparentTo, battle),
+        Func(puddle.setPos, toon.getPos(battle)),
+        LerpScaleInterval(puddle, 1.7, Point3(1.7, 1.7, 1.7), startScale=MovieUtil.PNT3_NEARZERO)
+    )
+    if dmg > 0:
+        puddleTrack.append(Wait(3.2))
+    else:
+        puddleTrack.append(Wait(0.3))
+    puddleTrack.append(LerpFunctionInterval(puddle.setAlphaScale, fromData=1, toData=0, duration=0.8))
+    puddleTrack.append(Func(MovieUtil.removeProp, puddle))
+    puddleTrack.append(Func(battle.movie.clearRenderProp, puddle))
+    toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
+    soundTrack = getSoundTrack('TL_quicksand.ogg', duration=None if dmg > 0 else 0.67, delay=0.5, node=toon)
+    return Parallel(suitTrack, toonTrack, soundTrack, puddleTrack)
+
+
 def getThrowEndPoint(suit, toon, battle, whichBounce):
     pnt = toon.getPos(toon)
     if whichBounce == 'one':

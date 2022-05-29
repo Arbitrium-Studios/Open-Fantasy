@@ -457,6 +457,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.2))
     elif name == SACKED:
         camTrack.append(defaultCamera(openShotDuration=2.9))
+    elif name == SANDTRAP:
+        camTrack.append(defaultCamera(openShotDuration=0.9))
     elif name == SCHMOOZE:
         camTrack.append(defaultCamera(openShotDuration=2.8))
     elif name == SHAKE:
