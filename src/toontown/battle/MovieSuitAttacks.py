@@ -789,30 +789,33 @@ def doClipOnTie(attack):
     toon = target['toon']
     dmg = target['hp']
     tie = globalPropPool.getProp('clip-on-tie')
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        throwDelay = 2.17
-        damageDelay = 3.3
-        dodgeDelay = 3.1
-    elif suitType == 'b':
-        throwDelay = 2.17
-        damageDelay = 3.3
-        dodgeDelay = 3.1
-    elif suitType == 'c':
-        throwDelay = 1.45
-        damageDelay = 2.61
-        dodgeDelay = 2.34
+    throwDelay = {
+        'a': 2.17,
+        'b': 2.17,
+        'c': 1.45
+    }
+    damageDelay = {
+        'a': 3.3,
+        'b': 3.3,
+        'c': 2.61
+    }
+    dodgeDelay = {
+        'a': 3.1,
+        'b': 3.1,
+        'c': 2.34
+    }
     suitTrack = getSuitTrack(attack)
     posPoints = [Point3(0.66, 0.51, 0.28), VBase3(-69.652, -17.199, 67.96)]
     tiePropTrack = Sequence(getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, MovieUtil.PNT3_ONE, scaleUpTime=0.5, poseExtraArgs=['clip-on-tie', 0]))
+    suitType = getSuitBodyType(attack['suitName'])
     if dmg > 0:
-        tiePropTrack.append(ActorInterval(tie, 'clip-on-tie', duration=throwDelay, startTime=1.1))
+        tiePropTrack.append(ActorInterval(tie, 'clip-on-tie', duration=throwDelay[suitType], startTime=1.1))
     else:
-        tiePropTrack.append(Wait(throwDelay))
+        tiePropTrack.append(Wait(throwDelay[suitType]))
     tiePropTrack.append(Func(tie.setHpr, Point3(0, -90, 0)))
     tiePropTrack.append(getPropThrowTrack(attack, tie, [__toonFacePoint(toon)], [__toonGroundPoint(attack, toon, 0.1)], hitDuration=0.4, missDuration=0.8, missScaleDown=1.2))
-    toonTrack = getToonTrack(attack, damageDelay, ['conked'], dodgeDelay, ['sidestep'])
-    throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay + 1, node=suit)
+    toonTrack = getToonTrack(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
+    throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay[suitType] + 1, node=suit)
     return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound)
 
 
@@ -1083,21 +1086,24 @@ def doFingerWag(attack):
     BattleParticles.loadParticles()
     particleEffect = BattleParticles.createParticleEffect('FingerWag')
     BattleParticles.setEffectTexture(particleEffect, 'blah', color=Vec4(0.55, 0, 0.55, 1))
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        partDelay = 1.3
-        damageDelay = 2.7
-        dodgeDelay = 1.7
-    elif suitType == 'b':
-        partDelay = 1.3
-        damageDelay = 2.7
-        dodgeDelay = 1.8
-    elif suitType == 'c':
-        partDelay = 1.3
-        damageDelay = 2.7
-        dodgeDelay = 2.0
+    partDelay = {
+        'a': 1.3,
+        'b': 1.3,
+        'c': 1.3
+    }
+    damageDelay = {
+        'a': 2.7,
+        'b': 2.7,
+        'c': 2.7
+    }
+    dodgeDelay = {
+        'a': 1.7,
+        'b': 1.8,
+        'c': 2.0
+    }
     suitTrack = getSuitTrack(attack)
-    partTrack = getPartTrack(particleEffect, partDelay, 2, [particleEffect, suit, 0])
+    suitType = getSuitBodyType(attack['suitName'])
+    partTrack = getPartTrack(particleEffect, partDelay[suitType], 2, [particleEffect, suit, 0])
     suitName = attack['suitName']
     if suitName == 'mm':
         particleEffect.setPos(0.167, 1.5, 2.731)
@@ -1111,7 +1117,7 @@ def doFingerWag(attack):
     elif suitName == 'bw':
         particleEffect.setPos(0.167, 1.9, suit.getHeight() - 1.8)
         particleEffect.setP(-110)
-    toonTrack = getToonTrack(attack, damageDelay, ['slip-backward'], dodgeDelay, ['sidestep'])
+    toonTrack = getToonTrack(attack, damageDelay[suitType], ['slip-backward'], dodgeDelay[suitType], ['sidestep'])
     soundTrack = getSoundTrack('SA_finger_wag.ogg', delay=1.3, node=suit)
     return Parallel(suitTrack, toonTrack, partTrack, soundTrack)
 
@@ -1338,23 +1344,27 @@ def doBuzzWord(attack):
             BattleParticles.setEffectTexture(effect, texturesList[i], color=Vec4(0, 0, 0, 1))
         particleEffects.append(effect)
 
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        partDelay = 4.0
-        partDuration = 2.2
-        damageDelay = 4.5
-        dodgeDelay = 3.8
-    elif suitType == 'b':
-        partDelay = 1.3
-        partDuration = 2
-        damageDelay = 2.5
-        dodgeDelay = 1.8
-    elif suitType == 'c':
-        partDelay = 4.0
-        partDuration = 2.2
-        damageDelay = 4.5
-        dodgeDelay = 3.8
-    suitName = suit.getStyleName()
+    partDelay = {
+        'a': 4.0,
+        'b': 1.3,
+        'c': 4.0
+    }
+    partDuration = {
+        'a': 2.2,
+        'b': 2,
+        'c': 2.2
+    }
+    damageDelay = {
+        'a': 4.5,
+        'b': 2.5,
+        'c': 4.5
+    }
+    dodgeDelay = {
+        'a': 3.8,
+        'b': 1.8,
+        'c': 3.8
+    }
+    suitName = attack['suitName']
     if suitName == 'm':
         for effect in particleEffects:
             effect.setPos(0, 2.8, suit.getHeight() - 2.5)
@@ -1366,10 +1376,11 @@ def doBuzzWord(attack):
 
     suitTrack = getSuitTrack(attack)
     particleTracks = []
+    suitType = getSuitBodyType(suitName)
     for effect in particleEffects:
-        particleTracks.append(getPartTrack(effect, partDelay, partDuration, [effect, suit, 0]))
+        particleTracks.append(getPartTrack(effect, partDelay[suitType], partDuration[suitType], [effect, suit, 0]))
 
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay, damageAnimNames=['cringe'], splicedDodgeAnims=[['duck', dodgeDelay, 1.4]], showMissedExtraTime=dodgeDelay + 0.5)
+    toonTrack = getToonTrack(attack, damageDelay=damageDelay[suitType], damageAnimNames=['cringe'], splicedDodgeAnims=[['duck', dodgeDelay[suitType], 1.4]], showMissedExtraTime=dodgeDelay[suitType] + 0.5)
     soundTrack = getSoundTrack('SA_buzz_word.ogg', delay=3.9, node=suit)
     return Parallel(suitTrack, toonTrack, soundTrack, *particleTracks)
 
