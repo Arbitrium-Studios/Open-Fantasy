@@ -2398,7 +2398,7 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,
                 75,
                 80,
                 85),
-        'attacks': (('RubberStamp',
+        'attacks': (('DoubleWindsor',
                      (1,
                       1,
                       1,
@@ -2883,6 +2883,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'Crunch': ('throw-object', ATK_TGT_SINGLE),
  'Demotion': ('magic1', ATK_TGT_SINGLE),
  'DoubleTalk': ('speak', ATK_TGT_SINGLE),
+ 'DoubleWindsor': ('throw-paper', ATK_TGT_SINGLE),
  'Downsize': ('magic2', ATK_TGT_SINGLE),
  'EvictionNotice': ('throw-paper', ATK_TGT_SINGLE),
  'EvilEye': ('glower', ATK_TGT_SINGLE),
@@ -2951,6 +2952,7 @@ CRUNCH = list(SuitAttacks.keys()).index('Crunch')
 DEMOTION = list(SuitAttacks.keys()).index('Demotion')
 DOWNSIZE = list(SuitAttacks.keys()).index('Downsize')
 DOUBLE_TALK = list(SuitAttacks.keys()).index('DoubleTalk')
+DOUBLE_WINDSOR = list(SuitAttacks.keys()).index('DoubleWindsor')
 EVICTION_NOTICE = list(SuitAttacks.keys()).index('EvictionNotice')
 EVIL_EYE = list(SuitAttacks.keys()).index('EvilEye')
 FILIBUSTER = list(SuitAttacks.keys()).index('Filibuster')

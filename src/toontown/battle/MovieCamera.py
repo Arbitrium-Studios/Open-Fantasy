@@ -379,6 +379,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=1.7))
     elif name == DOUBLE_TALK:
         camTrack.append(defaultCamera(openShotDuration=3.9))
+    elif name == DOUBLE_WINDSOR:
+        camTrack.append(defaultCamera(openShotDuration=2.8))
     elif name == EVICTION_NOTICE:
         camTrack.append(defaultCamera(openShotDuration=3.2))
     elif name == EVIL_EYE:
