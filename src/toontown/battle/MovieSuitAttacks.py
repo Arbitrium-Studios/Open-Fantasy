@@ -223,7 +223,7 @@ def doSuitAttack(attack):
     elif name == SACKED:
         suitTrack = doSacked(attack)
     elif name == SANDTRAP:
-        suitTrack = doDefault(attack)
+        suitTrack = doSandTrap(attack)
     elif name == SCHMOOZE:
         suitTrack = doSchmooze(attack)
     elif name == SHAKE:
@@ -251,7 +251,7 @@ def doSuitAttack(attack):
     elif name == WRITE_OFF:
         suitTrack = doWriteOff(attack)
     else:
-        notify.warning('unknown attack: %d substituting Finger Wag' % name)
+        notify.warning('unknown attack: %d substituting Default' % name)
         suitTrack = doDefault(attack)
     camTrack = MovieCamera.chooseSuitShot(attack, suitTrack.getDuration())
     battle = attack['battle']
@@ -470,10 +470,10 @@ def doDefault(attack):
         attack['animName'] = 'finger-wag'
         return doFingerWag(attack)
     else:
-        attack['id'] = LIQUIDATE
-        attack['name'] = 'Liquidate'
-        attack['animName'] = 'magic1'
-        return doLiquidate(attack)
+        attack['id'] = MUMBO_JUMBO
+        attack['name'] = 'MumboJumbo'
+        attack['animName'] = 'speak'
+        return doMumboJumbo(attack)
 
 
 def getSuitTrack(attack, delay = 1e-06, splicedAnims = None):
