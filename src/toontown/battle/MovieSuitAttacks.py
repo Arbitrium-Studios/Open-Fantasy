@@ -231,7 +231,7 @@ def doSuitAttack(attack):
     elif name == SHRED:
         suitTrack = doShred(attack)
     elif name == SONG_AND_DANCE:
-        suitTrack = doDefault(attack)
+        suitTrack = doSongAndDance(attack)
     elif name == SPIN:
         suitTrack = doSpin(attack)
     elif name == SYNERGY:
@@ -2093,6 +2093,14 @@ def doFloodTheMarket(attack):
     toonTracks = getToonTracks(attack, damageDelay=0.7, splicedDamageAnims=damageAnims, dodgeDelay=0.91, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.0)
     soundTrack = getSoundTrack('SA_synergy.ogg', delay=0.9, node=suit)
     return Parallel(suitTrack, partTrack, waterfallTrack, soundTrack, toonTracks)
+
+
+def doSongAndDance(attack):
+    suit = attack['suit']
+    suitTrack = getSuitTrack(attack)
+    toonTracks = getToonTrack(attack, 3.9, ['cringe'], 3.9, ['applause'])
+    soundTrack = getSoundTrack('AA_heal_happydance.ogg', node=suit)
+    return Parallel(suitTrack, toonTracks, soundTrack)
 
 
 def doDoubleTalk(attack):
