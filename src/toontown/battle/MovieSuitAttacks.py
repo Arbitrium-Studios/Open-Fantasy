@@ -3404,18 +3404,14 @@ def doEvictionNotice(attack):
 def doWithdrawal(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
+    targets = attack['target']
     BattleParticles.loadParticles()
     particleEffect = BattleParticles.createParticleEffect('Withdrawal')
     BattleParticles.setEffectTexture(particleEffect, 'snow-particle')
     suitTrack = getSuitAnimTrack(attack)
     partTrack = getPartTrack(particleEffect, 1e-05, suitTrack.getDuration() + 1.2, [particleEffect, suit, 0])
     toonTrack = getToonTrack(attack, 1.2, ['cringe'], 0.2, splicedDodgeAnims=[['duck', 1e-05, 0.8]], showMissedExtraTime=0.8)
-    headParts = toon.getHeadParts()
-    torsoParts = toon.getTorsoParts()
-    legsParts = toon.getLegsParts()
+    soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
 
     def changeColor(parts):
         track = Parallel()
@@ -3433,20 +3429,25 @@ def doWithdrawal(attack):
 
         return track
 
-    soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
-    multiTrackList = Parallel(suitTrack, partTrack, toonTrack, soundTrack)
-    if dmg > 0:
-        colorTrack = Sequence()
-        colorTrack.append(Wait(1.6))
-        colorTrack.append(Func(battle.movie.needRestoreColor))
-        colorTrack.append(Parallel(changeColor(headParts), changeColor(torsoParts), changeColor(legsParts)))
-        colorTrack.append(Wait(2.9))
-        colorTrack.append(resetColor(headParts))
-        colorTrack.append(resetColor(torsoParts))
-        colorTrack.append(resetColor(legsParts))
-        colorTrack.append(Func(battle.movie.clearRestoreColor))
-        multiTrackList.append(colorTrack)
-    return multiTrackList
+    colorTracks = Parallel()
+    for t in targets:
+        toon = t['toon']
+        dmg = t['hp']
+        headParts = toon.getHeadParts()
+        torsoParts = toon.getTorsoParts()
+        legsParts = toon.getLegsParts()
+        if dmg > 0:
+            colorTracks.append(Sequence(
+                Wait(1.6),
+                Func(battle.movie.needRestoreColor),
+                Parallel(changeColor(headParts), changeColor(torsoParts), changeColor(legsParts)),
+                Wait(2.9),
+                resetColor(headParts),
+                resetColor(torsoParts),
+                resetColor(legsParts),
+                Func(battle.movie.clearRestoreColor)
+            ))
+    return Parallel(suitTrack, partTrack, toonTrack, soundTrack, colorTracks)
 
 
 def doDoubleWindsor(attack):
