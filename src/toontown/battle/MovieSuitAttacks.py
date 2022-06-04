@@ -131,7 +131,7 @@ def doSuitAttack(attack):
     elif name == CHOMP:
         suitTrack = doChomp(attack)
     elif name == CIGAR_SMOKE:
-        suitTrack = doDefault(attack)
+        suitTrack = doCigarSmoke(attack)
     elif name == CLIPON_TIE:
         suitTrack = doClipOnTie(attack)
     elif name == CRUNCH:
@@ -2126,6 +2126,52 @@ def doPowerTie(attack):
         return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound, hitSound)
     else:
         return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound)
+
+
+def doCigarSmoke(attack):
+    suit = attack['suit']
+    battle = attack['battle']
+    target = attack['target']
+    toon = target['toon']
+    dmg = target['hp']
+    cigar = globalPropPool.getProp('cigar')
+    cigarPropTrack = getPropTrack(cigar, suit.getRightHand(), [Point3(-0.1, 0.0, -0.2), VBase3(180.0, 0.0, 0.0)], 0.1, 5.0, Point3(5.0, 5.0, 5.0))
+    # Smoke effect required.
+    suitTrack = getSuitTrack(attack)
+    toonTrack = getToonTrack(attack, 3.7, ['cringe'], 3.2, ['sidestep'])
+    headParts = toon.getHeadParts()
+    torsoParts = toon.getTorsoParts()
+    legsParts = toon.getLegsParts()
+
+    def changeColor(parts):
+        track = Parallel()
+        for partNum in xrange(0, parts.getNumPaths()):
+            nextPart = parts.getPath(partNum)
+            track.append(Func(nextPart.setColorScale, Vec4(0.5, 0.5, 0.5, 1)))
+
+        return track
+
+    def resetColor(parts):
+        track = Parallel()
+        for partNum in xrange(0, parts.getNumPaths()):
+            nextPart = parts.getPath(partNum)
+            track.append(Func(nextPart.clearColorScale))
+
+        return track
+
+    multiTrackList = Parallel(suitTrack, toonTrack, cigarPropTrack)
+    if dmg > 0:
+        colorTrack = Sequence()
+        colorTrack.append(Wait(3.7))
+        colorTrack.append(Func(battle.movie.needRestoreColor))
+        colorTrack.append(Parallel(changeColor(headParts), changeColor(torsoParts), changeColor(legsParts)))
+        colorTrack.append(Wait(3.0))
+        colorTrack.append(resetColor(headParts))
+        colorTrack.append(resetColor(torsoParts))
+        colorTrack.append(resetColor(legsParts))
+        colorTrack.append(Func(battle.movie.clearRestoreColor))
+        multiTrackList.append(colorTrack)
+    return multiTrackList
 
 
 def doFloodTheMarket(attack):
