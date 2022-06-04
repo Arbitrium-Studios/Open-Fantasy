@@ -192,6 +192,8 @@ def doSuitAttack(attack):
         suitTrack = doParadigmShift(attack)
     elif name == PECKING_ORDER:
         suitTrack = doPeckingOrder(attack)
+    elif name == PENNY_PINCH:
+        suitTrack = doPennyPinch(attack)
     elif name == PICK_POCKET:
         suitTrack = doPickPocket(attack)
     elif name == PINK_SLIP:
@@ -395,10 +397,10 @@ def doDefault(attack):
         attack['animName'] = 'throw-paper'
         return doBounceCheck(attack)
     elif suitName == 'pp':
-        attack['id'] = BOUNCE_CHECK
-        attack['name'] = 'BounceCheck'
-        attack['animName'] = 'throw-paper'
-        return doBounceCheck(attack)
+        attack['id'] = PENNY_PINCH
+        attack['name'] = 'PennyPinch'
+        attack['animName'] = 'pickpocket'
+        return doPennyPinch(attack)
     elif suitName == 'tw':
         attack['id'] = FREEZE_ASSETS
         attack['name'] = 'FreezeAssets'
@@ -2864,6 +2866,12 @@ def doWatercooler(attack):
     toonTrack = getToonTrack(attack, suitTrack.getDuration() - 1.5, ['cringe'], 2.4, ['sidestep'])
     soundTrack = Sequence(Wait(1.1), SoundInterval(globalBattleSoundCache.getSound('SA_watercooler_appear_only.ogg'), node=suit, duration=1.4722), Wait(0.4), SoundInterval(globalBattleSoundCache.getSound('SA_watercooler_spray_only.ogg'), node=suit, duration=2.313))
     return Parallel(suitTrack, toonTrack, propTrack, soundTrack, splashTrack)
+
+
+def doPennyPinch(attack):
+    suitTrack = getSuitTrack(attack)
+    toonTrack = getToonTrack(attack, 0.6, ['cringe'], 0.01, ['sidestep'])
+    return Parallel(suitTrack, toonTrack)
 
 
 def doFired(attack):

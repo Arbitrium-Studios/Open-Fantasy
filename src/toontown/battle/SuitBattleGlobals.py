@@ -936,6 +936,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'MumboJumbo': ('speak', ATK_TGT_SINGLE),
  'ParadigmShift': ('magic2', ATK_TGT_GROUP),
  'PeckingOrder': ('throw-object', ATK_TGT_SINGLE),
+ 'PennyPinch': ('pickpocket', ATK_TGT_SINGLE),
  'PickPocket': ('pickpocket', ATK_TGT_SINGLE),
  'PinkSlip': ('throw-paper', ATK_TGT_SINGLE),
  'PlayHardball': ('throw-paper', ATK_TGT_SINGLE),
@@ -1004,6 +1005,7 @@ MARKET_CRASH = list(SuitAttacks.keys()).index('MarketCrash')
 MUMBO_JUMBO = list(SuitAttacks.keys()).index('MumboJumbo')
 PARADIGM_SHIFT = list(SuitAttacks.keys()).index('ParadigmShift')
 PECKING_ORDER = list(SuitAttacks.keys()).index('PeckingOrder')
+PENNY_PINCH = list(SuitAttacks.keys()).index('PennyPinch')
 PICK_POCKET = list(SuitAttacks.keys()).index('PickPocket')
 PINK_SLIP = list(SuitAttacks.keys()).index('PinkSlip')
 PLAY_HARDBALL = list(SuitAttacks.keys()).index('PlayHardball')

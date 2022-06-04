@@ -429,6 +429,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.8))
     elif name == PLAY_HARDBALL:
         camTrack.append(defaultCamera(openShotDuration=2.3))
+    elif name == PENNY_PINCH:
+        camTrack.append(allGroupLowShot(suit, attackDuration))
     elif name == PICK_POCKET:
         camTrack.append(allGroupLowShot(suit, 2.7))
     elif name == PINK_SLIP:

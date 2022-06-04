@@ -85,7 +85,10 @@ tf = (('glower', 'glower', 5), ('phone', 'phone', 5), ('throw-object', 'throw-ob
 m = (('magic2', 'magic2', 5), ('smile', 'smile', 5), ('golf-club-swing', 'golf-club-swing', 5))
 mh = (('smile', 'smile', 5), ('effort', 'effort', 6), ('song-and-dance', 'song-and-dance', 8))
 sc = (('throw-paper', 'throw-paper', 3.5), ('watercooler', 'watercooler', 5), ('pickpocket', 'pickpocket', 5))
-pp = (('throw-paper', 'throw-paper', 5), ('glower', 'glower', 5), ('finger-wag', 'fingerwag', 5))
+pp = (('throw-paper', 'throw-paper', 5),
+ ('glower', 'glower', 5),
+ ('finger-wag', 'fingerwag', 5),
+ ('pickpocket', 'pickpocket', 5))
 tw = (('pickpocket', 'pickpocket', 5),
  ('glower', 'glower', 5),
  ('finger-wag', 'finger-wag', 5),
