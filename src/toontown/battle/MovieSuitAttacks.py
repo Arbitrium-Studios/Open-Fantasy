@@ -1312,19 +1312,21 @@ def doBrainStorm(attack):
     BattleParticles.setEffectTexture(snowEffect2, 'brainstorm-env', color=effectColor)
     BattleParticles.setEffectTexture(snowEffect3, 'brainstorm-track', color=effectColor)
     cloud = globalPropPool.getProp('stormcloud')
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        partDelay = 1.2
-        damageDelay = 4.5
-        dodgeDelay = 3.3
-    elif suitType == 'b':
-        partDelay = 1.2
-        damageDelay = 4.5
-        dodgeDelay = 3.3
-    elif suitType == 'c':
-        partDelay = 1.2
-        damageDelay = 4.5
-        dodgeDelay = 3.3
+    partDelay = {
+        'a': 1.2,
+        'b': 1.2,
+        'c': 1.2
+    }
+    damageDelay = {
+        'a': 4.5,
+        'b': 4.5,
+        'c': 4.5
+    }
+    dodgeDelay = {
+        'a': 3.3,
+        'b': 3.3,
+        'c': 3.3
+    }
     suitTrack = getSuitTrack(attack, delay=0.9)
     initialCloudHeight = suit.height + 3
     cloudPosPoints = [Point3(0, 3, initialCloudHeight), VBase3(180, 0, 0)]
@@ -1337,7 +1339,7 @@ def doBrainStorm(attack):
     targetPoint.setZ(targetPoint[2] + 3)
     cloudPropTrack.append(Wait(1.1))
     cloudPropTrack.append(LerpPosInterval(cloud, 1, pos=targetPoint))
-    cloudPropTrack.append(Wait(partDelay))
+    cloudPropTrack.append(Wait(partDelay[suitType]))
     cloudPropTrack.append(Parallel(ParticleInterval(snowEffect, cloud, worldRelative=0, duration=2.2, cleanup=True), Sequence(Wait(0.5), ParticleInterval(snowEffect2, cloud, worldRelative=0, duration=1.7, cleanup=True)), Sequence(Wait(1.0), ParticleInterval(snowEffect3, cloud, worldRelative=0, duration=1.2, cleanup=True)), Sequence(ActorInterval(cloud, 'stormcloud', startTime=3, duration=0.5), ActorInterval(cloud, 'stormcloud', startTime=2.5, duration=0.5), ActorInterval(cloud, 'stormcloud', startTime=1, duration=1.5))))
     cloudPropTrack.append(Wait(0.4))
     cloudPropTrack.append(LerpScaleInterval(cloud, 0.5, MovieUtil.PNT3_NEARZERO))
@@ -1347,7 +1349,8 @@ def doBrainStorm(attack):
       0.01,
       0.4,
       0.8], ['duck', 1e-06, 1.6]]
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'], showMissedExtraTime=1.1)
+    suitType = getSuitBodyType(attack['suitName'])
+    toonTrack = getToonTrack(attack, damageDelay=damageDelay[suitType], splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'], showMissedExtraTime=1.1)
     soundTrack = getSoundTrack('SA_brainstorm.ogg', delay=2.6, node=suit)
     return Parallel(suitTrack, toonTrack, cloudPropTrack, soundTrack)
 
@@ -1931,9 +1934,6 @@ def doRolodex(attack):
         part3Delay = 3.2
         partDuration = 1.6
         part2Duration = 1.9
-        part3Duration = 1
-        damageDelay = 3.8
-        dodgeDelay = 2.5
     elif suitType == 'b':
         propPosPoints = [Point3(0.12, 0.24, 0.01), VBase3(99.032, 5.973, -179.839)]
         propScale = Point3(0.91, 0.91, 0.91)
@@ -1942,9 +1942,6 @@ def doRolodex(attack):
         part3Delay = 3.5
         partDuration = 1.6
         part2Duration = 1.9
-        part3Duration = 1
-        damageDelay = 4
-        dodgeDelay = 2.5
     elif suitType == 'c':
         propPosPoints = [Point3(-0.51, -0.03, -0.1), VBase3(89.673, 2.166, 177.786)]
         propScale = Point3(1.2, 1.2, 1.2)
@@ -1953,15 +1950,27 @@ def doRolodex(attack):
         part3Delay = 3.2
         partDuration = 1.9
         part2Duration = 1.9
-        part3Duration = 1
-        damageDelay = 3.5
-        dodgeDelay = 2.5
+    part3Duration = {
+        'a': 1,
+        'b': 1,
+        'c': 1
+    }
+    damageDelay = {
+        'a': 3.8,
+        'b': 4,
+        'c': 3.5
+    }
+    dodgeDelay = {
+        'a': 2.5,
+        'b': 2.5,
+        'c': 2.5
+    }
     hitPoint = lambda toon = toon: __toonFacePoint(toon)
     partTrack2 = getPartTrack(particleEffect2, part2Delay, part2Duration, [particleEffect2, suit, 0])
-    partTrack3 = getPartTrack(particleEffect3, part3Delay, part3Duration, [particleEffect3, suit, 0])
+    partTrack3 = getPartTrack(particleEffect3, part3Delay, part3Duration[suitType], [particleEffect3, suit, 0])
     suitTrack = getSuitTrack(attack)
     propTrack = getPropTrack(rollodex, suit.getLeftHand(), propPosPoints, 1e-06, 4.7, scaleUpPoint=propScale, anim=0, propName='rollodex', animDuration=0, animStartTime=0)
-    toonTrack = getToonTrack(attack, damageDelay, ['conked'], dodgeDelay, ['sidestep'])
+    toonTrack = getToonTrack(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
     soundTrack = getSoundTrack('SA_rolodex.ogg', delay=2.8, node=suit)
     return Parallel(suitTrack, toonTrack, propTrack, soundTrack, partTrack2, partTrack3)
 
@@ -2023,23 +2032,26 @@ def doPlayHardball(attack):
     toon = target['toon']
     dmg = target['hp']
     ball = globalPropPool.getProp('baseball')
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        suitDelay = 1.09
-        damageDelay = 2.76
-        dodgeDelay = 1.86
-    elif suitType == 'b':
-        suitDelay = 1.79
-        damageDelay = 3.46
-        dodgeDelay = 2.56
-    elif suitType == 'c':
-        suitDelay = 1.09
-        damageDelay = 2.76
-        dodgeDelay = 1.86
+    suitDelay = {
+        'a': 1.79,
+        'b': 1.79,
+        'c': 1.09
+    }
+    damageDelay = {
+        'a': 3.46,
+        'b': 3.46,
+        'c': 2.76
+    }
+    dodgeDelay = {
+        'a': 2.56,
+        'b': 2.56,
+        'c': 1.86
+    }
     suitTrack = getSuitTrack(attack)
     ballPosPoints = [Point3(0.04, 0.03, -0.31), VBase3(-1.152, 86.581, -76.784)]
     propTrack = Sequence(getPropAppearTrack(ball, suit.getRightHand(), ballPosPoints, 0.8, Point3(5, 5, 5), scaleUpTime=0.5))
-    propTrack.append(Wait(suitDelay))
+    suitType = getSuitBodyType(attack['suitName'])
+    propTrack.append(Wait(suitDelay[suitType]))
     propTrack.append(Func(battle.movie.needRestoreRenderProp, ball))
     propTrack.append(Func(ball.wrtReparentTo, battle))
     toonPos = toon.getPos(battle)
@@ -2072,40 +2084,42 @@ def doPlayHardball(attack):
     propTrack.append(Func(MovieUtil.removeProp, ball))
     propTrack.append(Func(battle.movie.clearRenderProp, ball))
     damageAnims = [['conked',
-      damageDelay,
+      damageDelay[suitType],
       0.01,
       0.5], ['slip-backward', 0.01, 0.7]]
-    toonTrack = getToonTrack(attack, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'], showDamageExtraTime=3.9)
+    toonTrack = getToonTrack(attack, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'], showDamageExtraTime=3.9)
     return Parallel(suitTrack, toonTrack, propTrack, soundTrack)
 
 
 def doPowerTie(attack):
     suit = attack['suit']
-    battle = attack['battle']
     target = attack['target']
     toon = target['toon']
     dmg = target['hp']
     tie = globalPropPool.getProp('power-tie')
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        throwDelay = 2.17
-        damageDelay = 3.3
-        dodgeDelay = 3.1
-    elif suitType == 'b':
-        throwDelay = 2.17
-        damageDelay = 3.3
-        dodgeDelay = 3.1
-    elif suitType == 'c':
-        throwDelay = 1.45
-        damageDelay = 2.61
-        dodgeDelay = 2.34
+    throwDelay = {
+        'a': 2.17,
+        'b': 2.17,
+        'c': 1.45
+    }
+    damageDelay = {
+        'a': 3.3,
+        'b': 3.3,
+        'c': 2.61
+    }
+    dodgeDelay = {
+        'a': 3.1,
+        'b': 3.1,
+        'c': 2.34
+    }
     suitTrack = getSuitTrack(attack)
     posPoints = [Point3(1.16, 0.24, 0.63), VBase3(171.561, 1.745, -163.443)]
     tiePropTrack = Sequence(getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, Point3(3.5, 3.5, 3.5), scaleUpTime=0.5))
-    tiePropTrack.append(Wait(throwDelay))
+    suitType = getSuitBodyType(attack['suitName'])
+    tiePropTrack.append(Wait(throwDelay[suitType]))
     tiePropTrack.append(Func(tie.setBillboardPointEye))
     tiePropTrack.append(getPropThrowTrack(attack, tie, [__toonFacePoint(toon)], [__toonGroundPoint(attack, toon, 0.1)], hitDuration=0.4, missDuration=0.8))
-    toonTrack = getToonTrack(attack, damageDelay, ['conked'], dodgeDelay, ['sidestep'])
+    toonTrack = getToonTrack(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
     throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=2.3, node=suit)
     if dmg > 0:
         hitSound = getSoundTrack('SA_powertie_impact.ogg', delay=2.9, node=suit)
@@ -2144,33 +2158,35 @@ def doSongAndDance(attack):
 
 def doDoubleTalk(attack):
     suit = attack['suit']
-    battle = attack['battle']
     BattleParticles.loadParticles()
     particleEffect = BattleParticles.createParticleEffect('DoubleTalkLeft')
     particleEffect2 = BattleParticles.createParticleEffect('DoubleTalkRight')
     BattleParticles.setEffectTexture(particleEffect, 'doubletalk-double', color=Vec4(0, 1.0, 0.0, 1))
     BattleParticles.setEffectTexture(particleEffect2, 'doubletalk-good', color=Vec4(0, 1.0, 0.0, 1))
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        partDelay = 3.3
-        damageDelay = 3.5
-        dodgeDelay = 3.3
-    elif suitType == 'b':
-        partDelay = 3.3
-        damageDelay = 3.5
-        dodgeDelay = 3.3
-    elif suitType == 'c':
-        partDelay = 3.3
-        damageDelay = 3.5
-        dodgeDelay = 3.3
+    partDelay = {
+        'a': 3.3,
+        'b': 3.3,
+        'c': 3.3
+    }
+    damageDelay = {
+        'a': 3.5,
+        'b': 3.5,
+        'c': 3.5
+    }
+    dodgeDelay = {
+        'a': 3.3,
+        'b': 3.3,
+        'c': 3.3
+    }
     suitTrack = getSuitTrack(attack)
-    partTrack = getPartTrack(particleEffect, partDelay, 1.8, [particleEffect, suit, 0])
-    partTrack2 = getPartTrack(particleEffect2, partDelay, 1.8, [particleEffect2, suit, 0])
+    suitType = getSuitBodyType(attack['suitName'])
+    partTrack = getPartTrack(particleEffect, partDelay[suitType], 1.8, [particleEffect, suit, 0])
+    partTrack2 = getPartTrack(particleEffect2, partDelay[suitType], 1.8, [particleEffect2, suit, 0])
     damageAnims = [['duck',
       0.01,
       0.4,
       1.05], ['cringe', 1e-06, 0.8]]
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, splicedDodgeAnims=[['duck', 0.01, 1.4]], showMissedExtraTime=0.9, showDamageExtraTime=0.8)
+    toonTrack = getToonTrack(attack, damageDelay=damageDelay[suitType], splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], splicedDodgeAnims=[['duck', 0.01, 1.4]], showMissedExtraTime=0.9, showDamageExtraTime=0.8)
     soundTrack = getSoundTrack('SA_filibuster.ogg', delay=2.5, node=suit)
     return Parallel(suitTrack, toonTrack, partTrack, partTrack2, soundTrack)
 
@@ -2375,25 +2391,28 @@ def doSchmooze(attack):
         upperEffects.append(upperEffect)
         lowerEffects.append(lowerEffect)
 
+    partDelay = {
+        'a': 1.3,
+        'b': 1.3,
+        'c': 1.3
+    }
     suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        partDelay = 1.3
-        damageDelay = 1.8
-        dodgeDelay = 1.1
-    elif suitType == 'b':
-        partDelay = 1.3
-        damageDelay = 2.5
-        dodgeDelay = 1.8
-    elif suitType == 'c':
-        partDelay = 1.3
-        damageDelay = partDelay + 1.4
-        dodgeDelay = 0.9
+    damageDelay = {
+        'a': 1.8,
+        'b': 2.5,
+        'c': partDelay[suitType] + 1.4
+    }
+    dodgeDelay = {
+        'a': 1.1,
+        'b': 1.8,
+        'c': 0.9
+    }
     suitTrack = getSuitTrack(attack)
     upperPartTracks = Parallel()
     lowerPartTracks = Parallel()
     for i in range(0, 4):
-        upperPartTracks.append(getPartTrack(upperEffects[i], partDelay + i * 0.65, 0.8, [upperEffects[i], suit, 0]))
-        lowerPartTracks.append(getPartTrack(lowerEffects[i], partDelay + i * 0.65 + 0.7, 1.0, [lowerEffects[i], suit, 0]))
+        upperPartTracks.append(getPartTrack(upperEffects[i], partDelay[suitType] + i * 0.65, 0.8, [upperEffects[i], suit, 0]))
+        lowerPartTracks.append(getPartTrack(lowerEffects[i], partDelay[suitType] + i * 0.65 + 0.7, 1.0, [lowerEffects[i], suit, 0]))
 
     damageAnims = []
     for i in range(0, 3):
@@ -2413,7 +2432,7 @@ def doSchmooze(attack):
      1.22,
      1.28])
     dodgeAnims.append(['duck', 0.01, 3.16])
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.9, showDamageExtraTime=1.1)
+    toonTrack = getToonTrack(attack, damageDelay=damageDelay[suitType], splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.9, showDamageExtraTime=1.1)
     return Parallel(suitTrack, toonTrack, upperPartTracks, lowerPartTracks)
 
 
@@ -2499,8 +2518,8 @@ def doRedTape(attack):
         tubes.append(globalPropPool.getProp('redtape-tube'))
 
     suitTrack = getSuitTrack(attack)
-    suitName = suit.getStyleName()
-    if suitName == 'tf' or suitName == 'nc':
+    suitType = getSuitBodyType(attack['suitName'])
+    if suitType == 'a':
         tapePosPoints = [Point3(-0.24, 0.09, -0.38), VBase3(-1.152, 86.581, -76.784)]
     else:
         tapePosPoints = [Point3(0.24, 0.09, -0.38), VBase3(-1.152, 86.581, -76.784)]
@@ -2536,10 +2555,10 @@ def doRedTape(attack):
     tubeTracks.append(Func(battle.movie.clearRestoreHips))
     toonTrack = getToonTrack(attack, 3.4, ['struggle'], 2.8, ['jump'])
     soundTrack = getSoundTrack('SA_red_tape.ogg', delay=2.9, node=suit)
+    multiTrackList = Parallel(suitTrack, toonTrack, propTrack, soundTrack)
     if dmg > 0:
-        return Parallel(suitTrack, toonTrack, propTrack, soundTrack, tubeTracks)
-    else:
-        return Parallel(suitTrack, toonTrack, propTrack, soundTrack)
+        multiTrackList.append(tubeTracks)
+    return multiTrackList
 
 
 def doParadigmShift(attack):
@@ -2554,13 +2573,7 @@ def doParadigmShift(attack):
     damageDelay = 1.95
     dodgeDelay = 0.95
     sprayEffect = BattleParticles.createParticleEffect('ShiftSpray')
-    suitName = suit.getStyleName()
-    if suitName == 'm':
-        sprayEffect.setPos(Point3(-5.2, 4.6, 2.7))
-    elif suitName == 'sd':
-        sprayEffect.setPos(Point3(-5.2, 4.6, 2.7))
-    else:
-        sprayEffect.setPos(Point3(0.1, 4.6, 2.7))
+    sprayEffect.setPos(Point3(-5.2, 4.6, 2.7))
     suitTrack = getSuitAnimTrack(attack)
     sprayTrack = getPartTrack(sprayEffect, 1.0, 1.9, [sprayEffect, suit, 0])
     liftTracks = Parallel()
@@ -2650,7 +2663,7 @@ def doPowerTrip(attack):
     waterfallParticles = waterfallEffect.getParticlesNamed('particles-1')
     waterfallParticles.renderer.setCenterColor(centerColor)
     waterfallParticles.renderer.setEdgeColor(edgeColor)
-    suitName = suit.getStyleName()
+    suitName = attack['suitName']
     if suitName == 'mh':
         waterfallEffect.setPos(0, 4, 3.6)
     suitTrack = getSuitAnimTrack(attack)
@@ -2671,7 +2684,6 @@ def doSandTrap(attack):
     target = attack['target']
     dmg = target['hp']
     toon = target['toon']
-    partDelay = 0.2
     damageDelay = 1.3
     dodgeDelay = 0.25
     targetPoint = __toonFacePoint(toon)
@@ -2730,22 +2742,25 @@ def doBounceCheck(attack):
     hit3Point = lambda suit = suit, toon = toon, battle = battle: getThrowEndPoint(suit, toon, battle, 'threeHit')
     miss3Point = lambda suit = suit, toon = toon, battle = battle: getThrowEndPoint(suit, toon, battle, 'threeMiss')
     bounce4Point = lambda suit = suit, toon = toon, battle = battle: getThrowEndPoint(suit, toon, battle, 'four')
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        throwDelay = 2.5
-        dodgeDelay = 4.3
-        damageDelay = 5.1
-    elif suitType == 'b':
-        throwDelay = 1.8
-        dodgeDelay = 3.6
-        damageDelay = 4.4
-    elif suitType == 'c':
-        throwDelay = 1.8
-        dodgeDelay = 3.6
-        damageDelay = 4.4
+    throwDelay = {
+        'a': 2.5,
+        'b': 2.5,
+        'c': 1.8
+    }
+    dodgeDelay = {
+        'a': 4.3,
+        'b': 4.3,
+        'c': 3.6
+    }
+    damageDelay = {
+        'a': 5.1,
+        'b': 5.1,
+        'c': 4.4
+    }
     suitTrack = getSuitTrack(attack)
     checkPropTrack = Sequence(getPropAppearTrack(check, suit.getRightHand(), checkPosPoints, 1e-05, Point3(8.5, 8.5, 8.5), startScale=MovieUtil.PNT3_ONE))
-    checkPropTrack.append(Wait(throwDelay))
+    suitType = getSuitBodyType(attack['suitName'])
+    checkPropTrack.append(Wait(throwDelay[suitType]))
     checkPropTrack.append(Func(check.wrtReparentTo, toon))
     checkPropTrack.append(Func(check.setHpr, Point3(0, -90, 0)))
     checkPropTrack.append(getThrowTrack(check, bounce1Point, duration=0.5, parent=toon))
@@ -2757,8 +2772,8 @@ def doBounceCheck(attack):
         checkPropTrack.append(getThrowTrack(check, bounce4Point, duration=0.7, parent=toon))
         checkPropTrack.append(LerpScaleInterval(check, 0.3, MovieUtil.PNT3_NEARZERO))
     checkPropTrack.append(Func(MovieUtil.removeProp, check))
-    toonTrack = getToonTrack(attack, damageDelay, ['conked'], dodgeDelay, ['sidestep'])
-    soundTracks = Sequence(getSoundTrack('SA_pink_slip.ogg', delay=throwDelay + 0.5, duration=0.6, node=suit), getSoundTrack('SA_pink_slip.ogg', delay=0.4, duration=0.6, node=suit))
+    toonTrack = getToonTrack(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
+    soundTracks = Sequence(getSoundTrack('SA_pink_slip.ogg', delay=throwDelay[suitType] + 0.5, duration=0.6, node=suit), getSoundTrack('SA_pink_slip.ogg', delay=0.4, duration=0.6, node=suit))
     return Parallel(suitTrack, checkPropTrack, toonTrack, soundTracks)
 
 
@@ -3070,19 +3085,21 @@ def doLiquidate(attack):
     rainEffect2 = BattleParticles.createParticleEffect(file='liquidate')
     rainEffect3 = BattleParticles.createParticleEffect(file='liquidate')
     cloud = globalPropPool.getProp('stormcloud')
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        partDelay = 0.2
-        damageDelay = 3.5
-        dodgeDelay = 2.45
-    elif suitType == 'b':
-        partDelay = 0.2
-        damageDelay = 3.5
-        dodgeDelay = 2.45
-    elif suitType == 'c':
-        partDelay = 0.2
-        damageDelay = 3.5
-        dodgeDelay = 2.45
+    partDelay = {
+        'a': 0.2,
+        'b': 0.2,
+        'c': 0.2
+    }
+    damageDelay = {
+        'a': 3.5,
+        'b': 3.5,
+        'c': 3.5
+    }
+    dodgeDelay = {
+        'a': 2.45,
+        'b': 2.45,
+        'c': 2.45
+    }
     suitTrack = getSuitTrack(attack, delay=0.9)
     initialCloudHeight = suit.height + 3
     cloudPosPoints = [Point3(0, 3, initialCloudHeight), VBase3(180, 0, 0)]
@@ -3095,24 +3112,25 @@ def doLiquidate(attack):
     targetPoint.setZ(targetPoint[2] + 3)
     cloudPropTrack.append(Wait(1.1))
     cloudPropTrack.append(LerpPosInterval(cloud, 1, pos=targetPoint))
-    cloudPropTrack.append(Wait(partDelay))
+    suitType = getSuitBodyType(attack['suitName'])
+    cloudPropTrack.append(Wait(partDelay[suitType]))
     cloudPropTrack.append(Parallel(Sequence(ParticleInterval(rainEffect, cloud, worldRelative=0, duration=2.1, cleanup=True)), Sequence(Wait(0.1), ParticleInterval(rainEffect2, cloud, worldRelative=0, duration=2.0, cleanup=True)), Sequence(Wait(0.1), ParticleInterval(rainEffect3, cloud, worldRelative=0, duration=2.0, cleanup=True)), Sequence(ActorInterval(cloud, 'stormcloud', startTime=3, duration=0.1), ActorInterval(cloud, 'stormcloud', startTime=1, duration=2.3))))
     cloudPropTrack.append(Wait(0.4))
     cloudPropTrack.append(LerpScaleInterval(cloud, 0.5, MovieUtil.PNT3_NEARZERO))
     cloudPropTrack.append(Func(MovieUtil.removeProp, cloud))
     cloudPropTrack.append(Func(battle.movie.clearRenderProp, cloud))
     damageAnims = [['melt'], ['jump', 1.5, 0.4]]
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
+    toonTrack = getToonTrack(attack, damageDelay=damageDelay[suitType], splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'])
     soundTrack = getSoundTrack('SA_liquidate.ogg', delay=2.0, node=suit)
+    multiTrackList = Parallel(suitTrack, toonTrack, cloudPropTrack, soundTrack)
     if dmg > 0:
         puddle = globalPropPool.getProp('quicksand')
         puddle.setColor(Vec4(0.0, 0.0, 1.0, 1))
         puddle.setHpr(Point3(120, 0, 0))
         puddle.setScale(0.01)
-        puddleTrack = Sequence(Func(battle.movie.needRestoreRenderProp, puddle), Wait(damageDelay - 0.7), Func(puddle.reparentTo, battle), Func(puddle.setPos, toon.getPos(battle)), LerpScaleInterval(puddle, 1.7, Point3(1.7, 1.7, 1.7), startScale=MovieUtil.PNT3_NEARZERO), Wait(3.2), LerpFunctionInterval(puddle.setAlphaScale, fromData=1, toData=0, duration=0.8), Func(MovieUtil.removeProp, puddle), Func(battle.movie.clearRenderProp, puddle))
-        return Parallel(suitTrack, toonTrack, cloudPropTrack, soundTrack, puddleTrack)
-    else:
-        return Parallel(suitTrack, toonTrack, cloudPropTrack, soundTrack)
+        puddleTrack = Sequence(Func(battle.movie.needRestoreRenderProp, puddle), Wait(damageDelay[suitType] - 0.7), Func(puddle.reparentTo, battle), Func(puddle.setPos, toon.getPos(battle)), LerpScaleInterval(puddle, 1.7, Point3(1.7, 1.7, 1.7), startScale=MovieUtil.PNT3_NEARZERO), Wait(3.2), LerpFunctionInterval(puddle.setAlphaScale, fromData=1, toData=0, duration=0.8), Func(MovieUtil.removeProp, puddle), Func(battle.movie.clearRenderProp, puddle))
+        multiTrackList.append(puddleTrack)
+    return multiTrackList
 
 
 def doMarketCrash(attack):
@@ -3361,6 +3379,7 @@ def doWithdrawal(attack):
         return track
 
     soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
+    multiTrackList = Parallel(suitTrack, partTrack, toonTrack, soundTrack)
     if dmg > 0:
         colorTrack = Sequence()
         colorTrack.append(Wait(1.6))
@@ -3371,9 +3390,8 @@ def doWithdrawal(attack):
         colorTrack.append(resetColor(torsoParts))
         colorTrack.append(resetColor(legsParts))
         colorTrack.append(Func(battle.movie.clearRestoreColor))
-        return Parallel(suitTrack, partTrack, toonTrack, soundTrack, colorTrack)
-    else:
-        return Parallel(suitTrack, partTrack, toonTrack, soundTrack)
+        multiTrackList.append(colorTrack)
+    return multiTrackList
 
 
 def doDoubleWindsor(attack):
