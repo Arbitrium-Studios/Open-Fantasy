@@ -1931,33 +1931,45 @@ def doRolodex(attack):
     target = attack['target']
     toon = target['toon']
     rollodex = globalPropPool.getProp('rollodex')
+    particleEffect = BattleParticles.createParticleEffect(file='rollodexVortex')
     particleEffect2 = BattleParticles.createParticleEffect(file='rollodexWaterfall')
     particleEffect3 = BattleParticles.createParticleEffect(file='rollodexStream')
     suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        propPosPoints = [Point3(-0.51, -0.03, -0.1), VBase3(89.673, 2.166, 177.786)]
-        propScale = Point3(1.2, 1.2, 1.2)
-        partDelay = 2.6
-        part2Delay = 2.8
-        part3Delay = 3.2
-        partDuration = 1.6
-        part2Duration = 1.9
-    elif suitType == 'b':
-        propPosPoints = [Point3(0.12, 0.24, 0.01), VBase3(99.032, 5.973, -179.839)]
-        propScale = Point3(0.91, 0.91, 0.91)
-        partDelay = 2.9
-        part2Delay = 3.1
-        part3Delay = 3.5
-        partDuration = 1.6
-        part2Duration = 1.9
-    elif suitType == 'c':
-        propPosPoints = [Point3(-0.51, -0.03, -0.1), VBase3(89.673, 2.166, 177.786)]
-        propScale = Point3(1.2, 1.2, 1.2)
-        partDelay = 2.3
-        part2Delay = 2.8
-        part3Delay = 3.2
-        partDuration = 1.9
-        part2Duration = 1.9
+    propPosPoints = {
+        'a': [Point3(-0.51, -0.03, -0.1), VBase3(89.673, 2.166, 177.786)],
+        'b': [Point3(0.12, 0.24, 0.01), VBase3(99.032, 5.973, -179.839)],
+        'c': [Point3(-0.51, -0.03, -0.1), VBase3(89.673, 2.166, 177.786)]
+    }
+    propScale = {
+        'a': Point3(1.2, 1.2, 1.2),
+        'b': Point3(0.91, 0.91, 0.91),
+        'c': Point3(1.2, 1.2, 1.2)
+    }
+    partDelay = {
+        'a': 2.6,
+        'b': 2.9,
+        'c': 2.3
+    }
+    part2Delay = {
+        'a': 2.8,
+        'b': 3.1,
+        'c': 2.8
+    }
+    part3Delay = {
+        'a': 3.2,
+        'b': 3.5,
+        'c': 3.2
+    }
+    partDuration = {
+        'a': 1.6,
+        'b': 1.6,
+        'c': 1.9
+    }
+    part2Duration = {
+        'a': 1.9,
+        'b': 1.9,
+        'c': 1.9
+    }
     part3Duration = {
         'a': 1,
         'b': 1,
@@ -1974,10 +1986,11 @@ def doRolodex(attack):
         'c': 2.5
     }
     hitPoint = lambda toon = toon: __toonFacePoint(toon)
-    partTrack2 = getPartTrack(particleEffect2, part2Delay, part2Duration, [particleEffect2, suit, 0])
-    partTrack3 = getPartTrack(particleEffect3, part3Delay, part3Duration[suitType], [particleEffect3, suit, 0])
+    partTrack = Sequence((partDelay[suitType], Func(battle.movie.needRestoreParticleEffect, particleEffect)), Func(particleEffect.start, suit), Func(particleEffect.wrtReparentTo, render), LerpPosInterval(particleEffect, partDuration[suitType], pos=hitPoint), Func(particleEffect.cleanup), Func(battle.movie.clearRestoreParticleEffect, particleEffect))
+    partTrack2 = getPartTrack(particleEffect2, part2Delay[suitType], part2Duration[suitType], [particleEffect2, suit, 0])
+    partTrack3 = getPartTrack(particleEffect3, part3Delay[suitType], part3Duration[suitType], [particleEffect3, suit, 0])
     suitTrack = getSuitTrack(attack)
-    propTrack = getPropTrack(rollodex, suit.getLeftHand(), propPosPoints, 1e-06, 4.7, scaleUpPoint=propScale, anim=0, propName='rollodex', animDuration=0, animStartTime=0)
+    propTrack = getPropTrack(rollodex, suit.getLeftHand(), propPosPoints[suitType], 1e-06, 4.7, scaleUpPoint=propScale[suitType], anim=0, propName='rollodex', animDuration=0, animStartTime=0)
     toonTrack = getToonTrack(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
     soundTrack = getSoundTrack('SA_rolodex.ogg', delay=2.8, node=suit)
     return Parallel(suitTrack, toonTrack, propTrack, soundTrack, partTrack2, partTrack3)
