@@ -480,6 +480,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera())
     elif name == TEE_OFF:
         camTrack.append(defaultCamera(openShotDuration=4.5))
+    elif name == THROW_BOOK:
+        camTrack.append(defaultCamera())
     elif name == TREMOR:
         shakeIntensity = 0.25
         camTrack.append(suitCameraShakeShot(suit, attackDuration, shakeIntensity))
