@@ -65,20 +65,19 @@ hh = (('pen-squirt', 'fountain-pen', 7),
  ('glower', 'glower', 5),
  ('throw-paper', 'throw-paper', 5),
  ('roll-o-dex', 'roll-o-dex', 5))
-cr = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5))
+cr = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5), ('pickpocket', 'pickpocket', 5))
 tbc = (('glower', 'glower', 5),
  ('cigar-smoke', 'cigar-smoke', 8),
- ('effort', 'effort', 6),
  ('song-and-dance', 'song-and-dance', 8),
  ('golf-club-swing', 'golf-club-swing', 5))
 cc = (('phone', 'phone', 3.5), ('watercooler', 'watercooler', 5), ('glower', 'glower', 5))
 tm = (('pickpocket', 'pickpocket', 5),
  ('roll-o-dex', 'roll-o-dex', 5),
  ('phone', 'phone', 5))
-nd = (('pickpocket', 'pickpocket', 5),
- ('roll-o-dex', 'roll-o-dex', 5),
+nd = (('roll-o-dex', 'roll-o-dex', 5),
  ('magic3', 'magic3', 5),
- ('smile', 'smile', 5))
+ ('smile', 'smile', 5),
+ ('phone', 'phone', 5))
 gh = (('pen-squirt', 'fountain-pen', 5), ('rubber-stamp', 'rubber-stamp', 5))
 ms = (('effort', 'effort', 5), ('stomp', 'stomp', 5), ('quick-jump', 'jump', 6))
 tf = (('glower', 'glower', 5), ('phone', 'phone', 5), ('throw-object', 'throw-object', 5))

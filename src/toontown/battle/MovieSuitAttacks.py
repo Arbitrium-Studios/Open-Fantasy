@@ -342,10 +342,10 @@ def doDefault(attack):
         attack['animName'] = 'magic1'
         return doHeadShrink(attack)
     elif suitName == 'cr':
-        attack['id'] = EVIL_EYE
-        attack['name'] = 'EvilEye'
-        attack['animName'] = 'glower'
-        return doEvilEye(attack)
+        attack['id'] = PICK_POCKET
+        attack['name'] = 'PickPocket'
+        attack['animName'] = 'pickpocket'
+        return doPickPocket(attack)
     elif suitName == 'tbc':
         attack['id'] = GLOWER_POWER
         attack['name'] = 'GlowerPower'
@@ -432,10 +432,10 @@ def doDefault(attack):
         attack['animName'] = 'pickpocket'
         return doPickPocket(attack)
     elif suitName == 'bf':
-        attack['id'] = RUBBER_STAMP
-        attack['name'] = 'RubberStamp'
-        attack['animName'] = 'rubber-stamp'
-        return doRubberStamp(attack)
+        attack['id'] = CANNED
+        attack['name'] = 'Canned'
+        attack['animName'] = 'throw-paper'
+        return doCanned(attack)
     elif suitName == 'b':
         attack['id'] = WITHDRAWAL
         attack['name'] = 'Withdrawal'
