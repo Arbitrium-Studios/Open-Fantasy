@@ -1092,6 +1092,7 @@ def doRubOut(attack):
         return track
 
     soundTrack = getSoundTrack('SA_rubout.ogg', delay=1.7, node=suit)
+    multiTrackList = Parallel(suitTrack, toonTrack, padPropTrack, pencilPropTrack, soundTrack)
     if dmg > 0:
         hideTrack.append(Wait(2.2))
         hideTrack.append(Func(battle.movie.needRestoreColor))
@@ -1105,9 +1106,11 @@ def doRubOut(attack):
         hideTrack.append(showParts(torsoParts))
         hideTrack.append(showParts(legsParts))
         hideTrack.append(Func(battle.movie.clearRestoreColor))
-        return Parallel(suitTrack, toonTrack, padPropTrack, pencilPropTrack, soundTrack, hideTrack, headTrack, torsoTrack, legsTrack)
-    else:
-        return Parallel(suitTrack, toonTrack, padPropTrack, pencilPropTrack, soundTrack)
+        multiTrackList.append(hideTrack)
+        multiTrackList.append(headTrack)
+        multiTrackList.append(torsoTrack)
+        multiTrackList.append(legsTrack)
+    return multiTrackList
 
 
 def doFingerWag(attack):
@@ -1261,7 +1264,7 @@ def doSynergy(attack):
     dodgeAnims.extend(getSplicedLerpAnims('jump', 0.31, 1.3, startTime=0.6))
     dodgeAnims.append(['jump', 0, 0.91])
     toonTracks = getToonTracks(attack, damageDelay=damageDelay, damageAnimNames=['slip-forward'], dodgeDelay=0.91, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.0)
-    synergySoundTrack = Sequence(Wait(0.9), SoundInterval(globalBattleSoundCache.getSound('SA_synergy.ogg'), node=suit))
+    synergySoundTrack = getSoundTrack('SA_synergy.ogg', delay=0.9, node=suit)
     if hitAtleastOneToon > 0:
         fallingSoundTrack = Sequence(Wait(damageDelay + 0.5), SoundInterval(globalBattleSoundCache.getSound('Toon_bodyfall_synergy.ogg'), node=suit))
         return Parallel(suitTrack, partTrack, waterfallTrack, synergySoundTrack, fallingSoundTrack, toonTracks)
@@ -1450,10 +1453,11 @@ def doDemotion(attack):
     damageAnims.append(['cringe', 2.6, 1.5])
     toonTrack = getToonTrack(attack, damageDelay=1.0, splicedDamageAnims=damageAnims, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.6, showDamageExtraTime=1.3)
     soundTrack = getSoundTrack('SA_demotion.ogg', delay=1.2, node=suit)
+    multiTrackList = Parallel(suitTrack, toonTrack, soundTrack, partTrack)
     if dmg > 0:
-        return Parallel(suitTrack, toonTrack, soundTrack, partTrack, partTrack2, partTrack3)
-    else:
-        return Parallel(suitTrack, toonTrack, soundTrack, partTrack)
+        multiTrackList.append(partTrack2)
+        multiTrackList.append(partTrack3)
+    return multiTrackList
 
 
 def doCanned(attack):
@@ -1680,10 +1684,11 @@ def doReOrg(attack):
      0,
      0.6])
     toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=0.01, dodgeAnimNames=['duck'], showDamageExtraTime=2.1, showMissedExtraTime=2.0)
+    multiTrackList = Parallel(suitTrack, partTrack, toonTrack)
     if dmg > 0:
-        return Parallel(suitTrack, partTrack, toonTrack, headTracks, chestTracks)
-    else:
-        return Parallel(suitTrack, partTrack, toonTrack)
+        multiTrackList.append(headTracks)
+        multiTrackList.append(chestTracks)
+    return multiTrackList
 
 
 def doSacked(attack):
@@ -1755,7 +1760,7 @@ def doGlowerPower(attack):
         rightKnives.append(globalPropPool.getProp('dagger'))
 
     suitTrack = getSuitTrack(attack)
-    suitName = suit.getStyleName()
+    suitName = attack['suitName']
     if suitName == 'hh':
         leftPosPoints = [Point3(0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
         rightPosPoints = [Point3(-0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
@@ -1910,13 +1915,14 @@ def doHeadShrink(attack):
      3.1,
      0.4])
     toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
+    multiTrackList = Parallel(suitTrack, sprayTrack, cloudTrack, dropTrack, toonTrack)
     if dmg > 0:
         shrinkSound = globalBattleSoundCache.getSound('SA_head_shrink_only.ogg')
         growSound = globalBattleSoundCache.getSound('SA_head_grow_back_only.ogg')
         soundTrack = Sequence(Wait(2.1), SoundInterval(shrinkSound, duration=2.1, node=suit), Wait(1.6), SoundInterval(growSound, node=suit))
-        return Parallel(suitTrack, sprayTrack, cloudTrack, dropTrack, toonTrack, shrinkTrack, soundTrack)
-    else:
-        return Parallel(suitTrack, sprayTrack, cloudTrack, dropTrack, toonTrack)
+        multiTrackList.append(shrinkTrack)
+        multiTrackList.append(soundTrack)
+    return multiTrackList
 
 
 def doRolodex(attack):
