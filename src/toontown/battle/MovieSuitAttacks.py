@@ -2198,8 +2198,8 @@ def doFloodTheMarket(attack):
 
 def doSongAndDance(attack):
     suit = attack['suit']
-    suitTrack = getSuitTrack(attack)
-    toonTracks = getToonTrack(attack, 3.9, ['cringe'], 3.9, ['applause'])
+    suitTrack = getSuitAnimTrack(attack)
+    toonTracks = getToonTracks(attack, 3.9, ['cringe'], 3.9, ['applause'])
     soundTrack = getSoundTrack('AA_heal_happydance.ogg', node=suit)
     return Parallel(suitTrack, toonTracks, soundTrack)
 
