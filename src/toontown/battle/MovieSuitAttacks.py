@@ -2754,8 +2754,6 @@ def doSandTrap(attack):
     toon = target['toon']
     damageDelay = 1.3
     dodgeDelay = 0.25
-    targetPoint = __toonFacePoint(toon)
-    targetPoint.setZ(targetPoint[2] + 3)
     damageAnims = [['melt'], ['jump', 1.5, 0.4]]
     suitTrack = getSuitTrack(attack)
     puddle = globalPropPool.getProp('quicksand')
