@@ -1,5 +1,5 @@
 @echo off
-title Open Toontown - UberDOG Server
+title Start Toontown Fantasy - UberDOG Server
 cd..
 
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:

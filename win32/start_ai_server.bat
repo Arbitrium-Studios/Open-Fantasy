@@ -1,5 +1,5 @@
 @echo off
-title Open Toontown - AI (District) Server
+title Start Toontown Fantasy - AI (District) Server
 cd..
 
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:

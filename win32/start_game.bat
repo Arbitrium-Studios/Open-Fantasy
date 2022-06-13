@@ -1,5 +1,5 @@
 @echo off
-title Open Toontown - Game Client
+title Start Toontown Fantasy - Game Client
 cd..
 
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
