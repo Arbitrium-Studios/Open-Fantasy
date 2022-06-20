@@ -886,6 +886,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'Crunch': ('throw-object', ATK_TGT_SINGLE),
  'Demotion': ('magic1', ATK_TGT_SINGLE),
  'DoubleTalk': ('speak', ATK_TGT_SINGLE),
+ 'DoubleWindsor': ('throw-paper', ATK_TGT_SINGLE),
  'Downsize': ('magic2', ATK_TGT_SINGLE),
  'EvictionNotice': ('throw-paper', ATK_TGT_SINGLE),
  'EvilEye': ('glower', ATK_TGT_SINGLE),
@@ -953,6 +954,7 @@ CLIPON_TIE = list(SuitAttacks.keys()).index('ClipOnTie')
 CRUNCH = list(SuitAttacks.keys()).index('Crunch')
 DEMOTION = list(SuitAttacks.keys()).index('Demotion')
 DOUBLE_TALK = list(SuitAttacks.keys()).index('DoubleTalk')
+DOUBLE_WINDSOR = list(SuitAttacks.keys()).index('DoubleWindsor')
 DOWNSIZE = list(SuitAttacks.keys()).index('Downsize')
 EVICTION_NOTICE = list(SuitAttacks.keys()).index('EvictionNotice')
 EVIL_EYE = list(SuitAttacks.keys()).index('EvilEye')
