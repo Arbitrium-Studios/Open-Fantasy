@@ -361,10 +361,10 @@ def doDefault(attack):
         attack['animName'] = 'glower'
         return doFreezeAssets(attack)
     elif suitName == 'tm':
-        attack['id'] = ROLODEX
-        attack['name'] = 'Rolodex'
-        attack['animName'] = 'roll-o-dex'
-        return doRolodex(attack)
+        attack['id'] = POUND_KEY
+        attack['name'] = 'PoundKey'
+        attack['animName'] = 'phone'
+        return doPoundKey(attack)
     elif suitName == 'nd':
         attack['id'] = ROLODEX
         attack['name'] = 'Rolodex'
