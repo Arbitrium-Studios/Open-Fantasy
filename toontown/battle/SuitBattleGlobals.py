@@ -972,7 +972,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'TeeOff': ('golf-club-swing', ATK_TGT_SINGLE),
  'ThrowBook': ('throw-object', ATK_TGT_SINGLE),
  'Tremor': ('stomp', ATK_TGT_GROUP),
- 'UndergroundLiquidity': ('glower', ATK_TGT_SINGLE),
+ 'UndergroundLiquidity': ('magic1', ATK_TGT_SINGLE),
  'Watercooler': ('watercooler', ATK_TGT_SINGLE),
  'Withdrawal': ('magic1', ATK_TGT_SINGLE),
  'WriteOff': ('hold-pencil', ATK_TGT_SINGLE)}
