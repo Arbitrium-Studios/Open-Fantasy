@@ -159,7 +159,7 @@ def doSuitAttack(attack):
     elif name == FIVE_O_CLOCK_SHADOW:
         suitTrack = doDefault(attack)
     elif name == FLOOD_THE_MARKET:
-        suitTrack = doDefault(attack)
+        suitTrack = doFloodTheMarket(attack)
     elif name == FOUNTAIN_PEN:
         suitTrack = doFountainPen(attack)
     elif name == FREEZE_ASSETS:
@@ -2083,6 +2083,26 @@ def doPowerTie(attack):
         return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound, hitSound)
     else:
         return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound)
+
+
+def doFloodTheMarket(attack):
+    suit = attack['suit']
+    particleEffect = BattleParticles.createParticleEffect('Synergy')
+    waterfallEffect = BattleParticles.createParticleEffect(file='synergyWaterfall')
+    suitTrack = getSuitAnimTrack(attack)
+    partTrack = getPartTrack(particleEffect, 1.0, 1.9, [particleEffect, suit, 0])
+    waterfallTrack = getPartTrack(waterfallEffect, 0.8, 1.9, [waterfallEffect, suit, 0])
+    damageAnims = [['melt'], ['jump', 1.5, 0.4]]
+    dodgeAnims = []
+    dodgeAnims.append(['jump',
+     0.01,
+     0,
+     0.6])
+    dodgeAnims.extend(getSplicedLerpAnims('jump', 0.31, 1.3, startTime=0.6))
+    dodgeAnims.append(['jump', 0, 0.91])
+    toonTracks = getToonTracks(attack, damageDelay=0.7, splicedDamageAnims=damageAnims, dodgeDelay=0.91, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.0)
+    soundTrack = Sequence(Wait(0.9), SoundInterval(globalBattleSoundCache.getSound('SA_synergy.ogg'), node=suit))
+    return Parallel(suitTrack, partTrack, waterfallTrack, soundTrack, toonTracks)
 
 
 def doDoubleTalk(attack):

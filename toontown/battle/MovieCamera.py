@@ -395,6 +395,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.3))
     elif name == FIRED:
         camTrack.append(defaultCamera(openShotDuration=1.7))
+    elif name == FLOOD_THE_MARKET:
+        camTrack.append(defaultCamera(openShotDuration=1.7))
     elif name == FOUNTAIN_PEN:
         camTrack.append(defaultCamera(openShotDuration=2.6))
     elif name == FREEZE_ASSETS:
