@@ -1352,7 +1352,8 @@ def doBuzzWord(attack):
             BattleParticles.setEffectTexture(effect, texturesList[i], color=Vec4(0, 0, 0, 1))
         particleEffects.append(effect)
 
-    suitType = getSuitBodyType(attack['suitName'])
+    suitName = attack['suitName']
+    suitType = getSuitBodyType(suitName)
     if suitType == 'a':
         partDelay = 4.0
         partDuration = 2.2
@@ -1368,7 +1369,6 @@ def doBuzzWord(attack):
         partDuration = 2.2
         damageDelay = 4.5
         dodgeDelay = 3.8
-    suitName = suit.getStyleName()
     if suitName == 'm':
         for effect in particleEffects:
             effect.setPos(0, 2.8, suit.getHeight() - 2.5)
@@ -1725,7 +1725,7 @@ def doGlowerPower(attack):
         rightKnives.append(globalPropPool.getProp('dagger'))
 
     suitTrack = getSuitTrack(attack)
-    suitName = suit.getStyleName()
+    suitName = attack['suitName']
     if suitName == 'hh':
         leftPosPoints = [Point3(0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
         rightPosPoints = [Point3(-0.3, 4.3, 5.3), MovieUtil.PNT3_ZERO]
@@ -1950,7 +1950,7 @@ def doEvilEye(attack):
     eye = globalPropPool.getProp('evil-eye')
     damageDelay = 2.44
     dodgeDelay = 1.64
-    suitName = suit.getStyleName()
+    suitName = attack['suitName']
     if suitName == 'cr':
         posPoints = [Point3(-0.46, 4.85, 5.28), VBase3(-155.0, -20.0, 0.0)]
     elif suitName == 'tf':
@@ -2418,7 +2418,7 @@ def doHangUp(attack):
     phone = globalPropPool.getProp('phone')
     receiver = globalPropPool.getProp('receiver')
     suitTrack = getSuitTrack(attack)
-    suitName = suit.getStyleName()
+    suitName = attack['suitName']
     if suitName == 'tf':
         phonePosPoints = [Point3(-0.23, 0.01, -0.26), VBase3(5.939, 2.763, -177.591)]
         receiverPosPoints = [Point3(-0.13, -0.07, -0.06), VBase3(-1.854, 2.434, -177.579)]
@@ -2482,7 +2482,7 @@ def doRedTape(attack):
         tubes.append(globalPropPool.getProp('redtape-tube'))
 
     suitTrack = getSuitTrack(attack)
-    suitName = suit.getStyleName()
+    suitName = attack['suitName']
     if suitName == 'tf' or suitName == 'nc':
         tapePosPoints = [Point3(-0.24, 0.09, -0.38), VBase3(-1.152, 86.581, -76.784)]
     else:
@@ -2537,7 +2537,7 @@ def doParadigmShift(attack):
     damageDelay = 1.95
     dodgeDelay = 0.95
     sprayEffect = BattleParticles.createParticleEffect('ShiftSpray')
-    suitName = suit.getStyleName()
+    suitName = attack['suitName']
     if suitName == 'm':
         sprayEffect.setPos(Point3(-5.2, 4.6, 2.7))
     elif suitName == 'sd':
@@ -2633,7 +2633,7 @@ def doPowerTrip(attack):
     waterfallParticles = waterfallEffect.getParticlesNamed('particles-1')
     waterfallParticles.renderer.setCenterColor(centerColor)
     waterfallParticles.renderer.setEdgeColor(edgeColor)
-    suitName = suit.getStyleName()
+    suitName = attack['suitName']
     if suitName == 'mh':
         waterfallEffect.setPos(0, 4, 3.6)
     suitTrack = getSuitAnimTrack(attack)
