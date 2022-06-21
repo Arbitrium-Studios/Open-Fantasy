@@ -30,7 +30,7 @@ AllSuitsBattle = (('drop-react', 'anvil-drop'),
  ('rake-react', 'rake'),
  ('hypnotized', 'hypnotize'),
  ('soak', 'soak'),
- ('speak', 'speak', 5))
+ ('speak', 'speak'))
 SuitsCEOBattle = (('sit', 'sit'),
  ('sit-eat-in', 'sit-eat-in'),
  ('sit-eat-loop', 'sit-eat-loop'),
@@ -76,17 +76,12 @@ nd = (('pickpocket', 'pickpocket', 5),
  ('magic3', 'magic3', 5),
  ('smile', 'smile', 5))
 gh = (('pen-squirt', 'fountain-pen', 5), ('rubber-stamp', 'rubber-stamp', 5))
-ms = (('effort', 'effort', 5),
- ('stomp', 'stomp', 5),
- ('quick-jump', 'jump', 6))
+ms = (('effort', 'effort', 5), ('stomp', 'stomp', 5), ('quick-jump', 'jump', 6))
 tf = (('phone', 'phone', 5),
  ('throw-paper', 'throw-paper', 5),
  ('throw-object', 'throw-object', 5),
- ('glower', 'glower', 5),
- ('speak', 'speak', 5))
-m = (('magic2', 'magic2', 5),
- ('smile', 'smile', 5),
- ('golf-club-swing', 'golf-club-swing', 5))
+ ('glower', 'glower', 5))
+m = (('magic2', 'magic2', 5), ('smile', 'smile', 5), ('golf-club-swing', 'golf-club-swing', 5))
 mh = (('magic1', 'magic1', 5),
  ('smile', 'smile', 5),
  ('golf-club-swing', 'golf-club-swing', 5),
