@@ -91,7 +91,10 @@ mh = (('magic1', 'magic1', 5),
  ('golf-club-swing', 'golf-club-swing', 5),
  ('song-and-dance', 'song-and-dance', 5))
 sc = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5), ('pickpocket', 'pickpocket', 5))
-pp = (('throw-paper', 'throw-paper', 5), ('glower', 'glower', 5), ('finger-wag', 'fingerwag', 5))
+pp = (('throw-paper', 'throw-paper', 5),
+ ('glower', 'glower', 5),
+ ('finger-wag', 'fingerwag', 5),
+ ('pickpocket', 'pickpocket', 5))
 tw = (('throw-paper', 'throw-paper', 3.5),
  ('glower', 'glower', 5),
  ('pickpocket', 'pickpocket', 5),
