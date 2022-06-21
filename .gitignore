@@ -2,13 +2,9 @@
 *.pyo
 *.pyd
 *.log
-resources/
-news/
-sign/
-whitelist/
+screenshots/
 *.so
 *.DS_Store
-*.jpg
 .idea
 venv/
 *.json
