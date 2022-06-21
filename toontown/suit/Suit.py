@@ -65,7 +65,7 @@ hh = (('pen-squirt', 'fountain-pen', 7),
 cr = (('pickpocket', 'pickpocket', 5), ('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5))
 tbc = (('cigar-smoke', 'cigar-smoke', 8),
  ('glower', 'glower', 5),
- ('song-and-dance', 'song-and-dance', 8),
+ ('magic1', 'magic1', 5),
  ('golf-club-swing', 'golf-club-swing', 5))
 cc = (('glower', 'glower', 5), ('phone', 'phone', 3.5), ('watercooler', 'watercooler', 5))
 tm = (('throw-paper', 'throw-paper', 5),
@@ -89,7 +89,7 @@ m = (('magic2', 'magic2', 5),
 mh = (('magic1', 'magic1', 5),
  ('smile', 'smile', 5),
  ('golf-club-swing', 'golf-club-swing', 5),
- ('song-and-dance', 'song-and-dance', 5))
+ ('song-and-dance', 'song-and-dance', 8))
 sc = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5), ('pickpocket', 'pickpocket', 5))
 pp = (('throw-paper', 'throw-paper', 5),
  ('glower', 'glower', 5),
