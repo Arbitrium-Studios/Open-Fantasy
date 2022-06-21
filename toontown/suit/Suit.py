@@ -82,7 +82,8 @@ ms = (('effort', 'effort', 5),
 tf = (('phone', 'phone', 5),
  ('throw-paper', 'throw-paper', 5),
  ('throw-object', 'throw-object', 5),
- ('glower', 'glower', 5))
+ ('glower', 'glower', 5),
+ ('speak', 'speak', 5))
 m = (('magic2', 'magic2', 5),
  ('smile', 'smile', 5),
  ('golf-club-swing', 'golf-club-swing', 5))

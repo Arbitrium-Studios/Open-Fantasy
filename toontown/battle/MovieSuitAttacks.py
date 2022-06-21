@@ -228,6 +228,8 @@ def doSuitAttack(attack):
         suitTrack = doDefault(attack)
     elif name == SCHMOOZE:
         suitTrack = doSchmooze(attack)
+    elif name == SENSORY_OVERLOAD:
+        suitTrack = doDefault(attack)
     elif name == SHAKE:
         suitTrack = doShake(attack)
     elif name == SHRED:

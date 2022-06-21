@@ -461,7 +461,11 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,
                     ('RedTape',
                      (6, 7, 8, 9, 10),
                      (60, 65, 75, 85, 90),
-                     (25, 25, 25, 25, 25)))},
+                     (25, 25, 25, 25, 25)),
+                    ('SensoryOverload', # This move would reduce a Toon's accuracy.
+                     (0, 0, 0, 0, 0), # This is where the accuracy reduction should probably go.
+                     (75, 75, 75, 75, 75),
+                     (0, 0, 0, 0, 0)))},
  'm': {'name': TTLocalizer.SuitTheMingler,
        'singularname': TTLocalizer.SuitTheMinglerS,
        'pluralname': TTLocalizer.SuitTheMinglerP,
@@ -958,6 +962,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'Sacked': ('throw-paper', ATK_TGT_SINGLE),
  'SandTrap': ('golf-club-swing', ATK_TGT_SINGLE),
  'Schmooze': ('speak', ATK_TGT_SINGLE),
+ 'SensoryOverload': ('speak', ATK_TGT_SINGLE),
  'Shake': ('stomp', ATK_TGT_GROUP),
  'Shred': ('shredder', ATK_TGT_SINGLE),
  'SongAndDance': ('song-and-dance', ATK_TGT_SINGLE),
@@ -1028,6 +1033,7 @@ RUB_OUT = list(SuitAttacks.keys()).index('RubOut')
 SACKED = list(SuitAttacks.keys()).index('Sacked')
 SANDTRAP = list(SuitAttacks.keys()).index('SandTrap')
 SCHMOOZE = list(SuitAttacks.keys()).index('Schmooze')
+SENSORY_OVERLOAD = list(SuitAttacks.keys()).index('SensoryOverload')
 SHAKE = list(SuitAttacks.keys()).index('Shake')
 SHRED = list(SuitAttacks.keys()).index('Shred')
 SONG_AND_DANCE = list(SuitAttacks.keys()).index('SongAndDance')
