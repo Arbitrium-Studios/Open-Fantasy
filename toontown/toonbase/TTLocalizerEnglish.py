@@ -2458,6 +2458,7 @@ SuitAttackNames = {'Audit': 'Audit!',
  'TeeOff': 'Tee Off!',
  'ThrowBook': 'Throw Book!',
  'Tremor': 'Tremor!',
+ 'UndergroundLiquidity': 'Underground Liquidity!',
  'Watercooler': 'Watercooler!',
  'Withdrawal': 'Withdrawal!',
  'WriteOff': 'Write Off!'}

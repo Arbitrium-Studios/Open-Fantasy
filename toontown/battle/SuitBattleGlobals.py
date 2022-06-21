@@ -690,7 +690,7 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,
         'def': (35, 40, 45, 50, 55),
         'freq': (50, 30, 10, 5, 5),
         'acc': (35, 40, 45, 50, 55),
-        'attacks': (('FiveOClockShadow',
+        'attacks': (('UndergroundLiquidity',
                      (14, 17, 19, 21, 24),
                      (55, 65, 75, 85, 95),
                      (0, 0, 0, 0, 0)),
@@ -967,6 +967,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'TeeOff': ('golf-club-swing', ATK_TGT_SINGLE),
  'ThrowBook': ('throw-object', ATK_TGT_SINGLE),
  'Tremor': ('stomp', ATK_TGT_GROUP),
+ 'UndergroundLiquidity': ('glower', ATK_TGT_SINGLE),
  'Watercooler': ('watercooler', ATK_TGT_SINGLE),
  'Withdrawal': ('magic1', ATK_TGT_SINGLE),
  'WriteOff': ('hold-pencil', ATK_TGT_SINGLE)}
@@ -1036,6 +1037,7 @@ TABULATE = list(SuitAttacks.keys()).index('Tabulate')
 TEE_OFF = list(SuitAttacks.keys()).index('TeeOff')
 THROW_BOOK = list(SuitAttacks.keys()).index('ThrowBook')
 TREMOR = list(SuitAttacks.keys()).index('Tremor')
+UNDERGROUND_LIQUIDITY = list(SuitAttacks.keys()).index('UndergroundLiquidity')
 WATERCOOLER = list(SuitAttacks.keys()).index('Watercooler')
 WITHDRAWAL = list(SuitAttacks.keys()).index('Withdrawal')
 WRITE_OFF = list(SuitAttacks.keys()).index('WriteOff')

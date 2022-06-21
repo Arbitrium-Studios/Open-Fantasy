@@ -246,6 +246,8 @@ def doSuitAttack(attack):
         suitTrack = doDefault(attack)
     elif name == TREMOR:
         suitTrack = doTremor(attack)
+    elif name == UNDERGROUND_LIQUIDITY:
+        suitTrack = doDefault(attack)
     elif name == WATERCOOLER:
         suitTrack = doWatercooler(attack)
     elif name == WITHDRAWAL:
