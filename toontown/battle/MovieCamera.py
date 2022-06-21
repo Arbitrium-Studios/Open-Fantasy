@@ -483,6 +483,8 @@ def chooseSuitShot(attack, attackDuration):
     elif name == TREMOR:
         shakeIntensity = 0.25
         camTrack.append(suitCameraShakeShot(suit, attackDuration, shakeIntensity))
+    elif name == UNDERGROUND_LIQUIDITY:
+        camTrack.append(defaultCamera(openShotDuration=2.5))
     elif name == WATERCOOLER:
         camTrack.append(defaultCamera())
     elif name == WITHDRAWAL:
