@@ -235,7 +235,7 @@ def doSuitAttack(attack):
     elif name == SHRED:
         suitTrack = doShred(attack)
     elif name == SONG_AND_DANCE:
-        suitTrack = doDefault(attack)
+        suitTrack = doSongAndDance(attack)
     elif name == SPIN:
         suitTrack = doSpin(attack)
     elif name == SYNERGY:
@@ -2645,6 +2645,14 @@ def doPowerTrip(attack):
     waterfallTrack = getPartTrack(waterfallEffect, 0.6, 1.3, [waterfallEffect, suit, 0])
     toonTracks = getToonTracks(attack, 1.8, ['slip-forward'], 1.29, ['jump'])
     return Parallel(suitTrack, partTrack1, partTrack2, waterfallTrack, toonTracks)
+
+
+def doSongAndDance(attack):
+    suit = attack['suit']
+    suitTrack = getSuitAnimTrack(attack)
+    toonTracks = getToonTracks(attack, 3.9, ['cringe'], 3.9, ['applause'])
+    soundTrack = getSoundTrack('AA_heal_happydance.ogg', node=suit)
+    return Parallel(suitTrack, toonTracks, soundTrack)
 
 
 def getThrowEndPoint(suit, toon, battle, whichBounce):
