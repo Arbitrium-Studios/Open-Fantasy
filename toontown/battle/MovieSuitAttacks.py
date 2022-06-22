@@ -401,10 +401,10 @@ def doDefault(attack):
         attack['animName'] = 'throw-paper'
         return doBounceCheck(attack)
     elif suitName == 'pp':
-        attack['id'] = BOUNCE_CHECK
-        attack['name'] = 'BounceCheck'
-        attack['animName'] = 'throw-paper'
-        return doBounceCheck(attack)
+        attack['id'] = PENNY_PINCH
+        attack['name'] = 'PennyPinch'
+        attack['animName'] = 'pickpocket'
+        return doPennyPinch(attack)
     elif suitName == 'tw':
         attack['id'] = FREEZE_ASSETS
         attack['name'] = 'FreezeAssets'
