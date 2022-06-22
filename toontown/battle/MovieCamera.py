@@ -371,6 +371,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.9))
     elif name == CHOMP:
         camTrack.append(defaultCamera(openShotDuration=2.8))
+    elif name == CIGAR_SMOKE:
+        camTrack.append(defaultCamera())
     elif name == CLIPON_TIE:
         camTrack.append(defaultCamera(openShotDuration=3.3))
     elif name == CRUNCH:
