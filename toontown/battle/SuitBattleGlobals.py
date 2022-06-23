@@ -382,7 +382,7 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,
                      (3, 4, 6, 9, 10),
                      (50, 50, 50, 50, 50),
                      (15, 15, 15, 15, 15)),
-                    ('PoundKey',
+                    ('SpeedDial',
                      (2, 3, 4, 5, 7),
                      (95, 95, 95, 95, 95),
                      (15, 15, 15, 15, 15)))},
@@ -806,7 +806,7 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,
                      (3, 4, 5, 6, 7),
                      (75, 75, 75, 75, 75),
                      (20, 20, 20, 20, 20)),
-                    ('HangUp',
+                    ('SpeedDial',
                      (2, 3, 4, 5, 6),
                      (75, 75, 75, 75, 75),
                      (35, 35, 35, 35, 35)))},
@@ -966,6 +966,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'Shake': ('stomp', ATK_TGT_GROUP),
  'Shred': ('shredder', ATK_TGT_SINGLE),
  'SongAndDance': ('song-and-dance', ATK_TGT_GROUP),
+ 'SpeedDial': ('phone', ATK_TGT_SINGLE),
  'Spin': ('magic3', ATK_TGT_SINGLE),
  'Synergy': ('magic3', ATK_TGT_GROUP),
  'Tabulate': ('phone', ATK_TGT_SINGLE),
@@ -1037,6 +1038,7 @@ SENSORY_OVERLOAD = list(SuitAttacks.keys()).index('SensoryOverload')
 SHAKE = list(SuitAttacks.keys()).index('Shake')
 SHRED = list(SuitAttacks.keys()).index('Shred')
 SONG_AND_DANCE = list(SuitAttacks.keys()).index('SongAndDance')
+SPEED_DIAL = list(SuitAttacks.keys()).index('SpeedDial')
 SPIN = list(SuitAttacks.keys()).index('Spin')
 SYNERGY = list(SuitAttacks.keys()).index('Synergy')
 TABULATE = list(SuitAttacks.keys()).index('Tabulate')

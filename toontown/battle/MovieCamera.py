@@ -474,6 +474,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=4.1))
     elif name == SONG_AND_DANCE:
         camTrack.append(defaultCamera())
+    elif name == SPEED_DIAL:
+        camTrack.append(defaultCamera(openShotDuration=1.4))
     elif name == SPIN:
         camTrack.append(defaultCamera(openShotDuration=1.7))
     elif name == SYNERGY:

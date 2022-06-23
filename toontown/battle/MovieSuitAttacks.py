@@ -236,6 +236,8 @@ def doSuitAttack(attack):
         suitTrack = doShred(attack)
     elif name == SONG_AND_DANCE:
         suitTrack = doSongAndDance(attack)
+    elif name == SPEED_DIAL:
+        suitTrack = doSpeedDial(attack)
     elif name == SPIN:
         suitTrack = doSpin(attack)
     elif name == SYNERGY:
@@ -482,7 +484,7 @@ def doDefault(attack):
         return doMumboJumbo(attack)
 
 
-def getSuitTrack(attack, delay = 1e-06, splicedAnims = None):
+def getSuitTrack(attack, delay = 1e-06, splicedAnims = None, playRate = 1.0):
     suit = attack['suit']
     battle = attack['battle']
     tauntIndex = attack['taunt']
@@ -506,7 +508,7 @@ def getSuitTrack(attack, delay = 1e-06, splicedAnims = None):
     if splicedAnims:
         track.append(getSplicedAnimsTrack(splicedAnims, actor=suit))
     else:
-        track.append(ActorInterval(suit, attack['animName']))
+        track.append(ActorInterval(suit, attack['animName'], playRate=playRate))
     origPos, origHpr = battle.getActorPosHpr(suit)
     track.append(Func(suit.setHpr, battle, origHpr))
 
@@ -525,7 +527,7 @@ def getSuitTrack(attack, delay = 1e-06, splicedAnims = None):
     return track
 
 
-def getSuitAnimTrack(attack, delay = 0, splicedAnims = None):
+def getSuitAnimTrack(attack, delay = 0, splicedAnims = None, playRate = 1.0):
     suit = attack['suit']
     tauntIndex = attack['taunt']
     taunt = getAttackTaunt(attack['name'], tauntIndex)
@@ -533,7 +535,7 @@ def getSuitAnimTrack(attack, delay = 0, splicedAnims = None):
     if splicedAnims:
         track.append(getSplicedAnimsTrack(splicedAnims, actor=suit))
     else:
-        track.append(ActorInterval(suit, attack['animName']))
+        track.append(ActorInterval(suit, attack['animName'], playRate=playRate))
     track.append(Func(suit.clearChat))
     return track
 
@@ -2370,6 +2372,58 @@ def doPickPocket(attack):
         multiTrackList.append(billPropTrack)
         multiTrackList.append(soundTrack)
     return multiTrackList
+
+
+def doSpeedDial(attack):
+    suit = attack['suit']
+    battle = attack['battle']
+    phone = globalPropPool.getProp('phone')
+    receiver = globalPropPool.getProp('receiver')
+    BattleParticles.loadParticles()
+    particleEffect = BattleParticles.createParticleEffect('PoundKey')
+    BattleParticles.setEffectTexture(particleEffect, 'poundsign', color=Vec4(0, 0, 0, 1))
+    suitTrack = getSuitTrack(attack, playRate=2)
+    partTrack = Sequence(Wait(1.05), Parallel(ParticleInterval(particleEffect, suit, 0, duration=0.775, cleanup=True), ParticleInterval(particleEffect, suit, 0, duration=0.775, cleanup=True)))
+    suitType = getSuitBodyType(attack['suitName'])
+    if suitType == 'a':
+        phonePosPoints = [Point3(-0.23, 0.01, -0.26), VBase3(5.939, 2.763, -177.591)]
+        receiverPosPoints = [Point3(-0.13, -0.07, -0.06), VBase3(-1.854, 2.434, -177.579)]
+        receiverAdjustScale = Point3(0.8, 0.8, 0.8)
+        pickupDelay = 0.22
+        dialDuration = 1.535
+        finalPhoneDelay = 0.005
+        scaleUpPoint = Point3(0.75, 0.75, 0.75)
+    elif suitType == 'b':
+        phonePosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
+        receiverPosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
+        receiverAdjustScale = MovieUtil.PNT3_ONE
+        pickupDelay = 0.37
+        dialDuration = 1.535
+        finalPhoneDelay = 0.345
+        scaleUpPoint = MovieUtil.PNT3_ONE
+    else:
+        phonePosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
+        receiverPosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
+        pickupDelay = 0.37
+        dialDuration = 1.57
+        finalPhoneDelay = 0.31
+        scaleUpPoint = MovieUtil.PNT3_ONE
+    propTrack = Sequence(Wait(0.15), Func(__showProp, phone, suit.getLeftHand(), phonePosPoints[0], phonePosPoints[1]), Func(__showProp, receiver, suit.getLeftHand(), receiverPosPoints[0], receiverPosPoints[1]), LerpScaleInterval(phone, 0.25, scaleUpPoint, MovieUtil.PNT3_NEARZERO), Wait(pickupDelay), Func(receiver.wrtReparentTo, suit.getRightHand()))
+    if suitType == 'a' or suitType == 'b':
+        propTrack.append(LerpScaleInterval(receiver, 0.005, receiverAdjustScale))
+        propTrack.append(LerpPosHprInterval(receiver, 0.00005, Point3(-0.53, 0.21, -0.54), VBase3(-99.49, -35.27, 1.84)))
+    else:
+        propTrack.append(LerpPosHprInterval(receiver, 0.00005, Point3(-0.45, 0.48, -0.62), VBase3(-87.47, -18.21, 7.82)))
+    propTrack.append(Wait(dialDuration))
+    propTrack.append(Func(receiver.wrtReparentTo, phone))
+    propTrack.append(Wait(finalPhoneDelay))
+    propTrack.append(LerpScaleInterval(phone, 0.25, MovieUtil.PNT3_NEARZERO))
+    propTrack.append(Func(MovieUtil.removeProps, [receiver, phone]))
+    toonTrack = getToonTrack(attack, 1.35, ['cringe'], 0.95, ['sidestep'])
+    soundEffect = globalBattleSoundCache.getSound('SA_hangup.ogg')
+    soundEffect.setPlayRate(2)
+    soundTrack = Sequence(Wait(0.65), SoundInterval(soundEffect, node=suit))
+    return Parallel(suitTrack, toonTrack, propTrack, partTrack, soundTrack)
 
 
 def doFilibuster(attack):
