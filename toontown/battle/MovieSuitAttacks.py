@@ -193,7 +193,7 @@ def doSuitAttack(attack):
     elif name == PECKING_ORDER:
         suitTrack = doPeckingOrder(attack)
     elif name == PENNY_PINCH:
-        suitTrack = doDefault(attack)
+        suitTrack = doPennyPinch(attack)
     elif name == PICK_POCKET:
         suitTrack = doPickPocket(attack)
     elif name == PINK_SLIP:
