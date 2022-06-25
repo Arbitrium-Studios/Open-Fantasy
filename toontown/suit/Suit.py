@@ -101,7 +101,10 @@ sd = (('quick-jump', 'jump', 6),
  ('magic3', 'magic3', 5),
  ('hold-pencil', 'hold-pencil', 5),
  ('throw-paper', 'throw-paper', 5))
-le = (('throw-object', 'throw-object', 5), ('glower', 'glower', 5), ('throw-paper', 'throw-paper', 5))
+le = (('throw-object', 'throw-object', 5),
+ ('glower', 'glower', 5),
+ ('effort', 'effort', 6),
+ ('throw-paper', 'throw-paper', 5))
 bw = (('finger-wag', 'fingerwag', 5),
  ('gavel', 'gavel', 8),
  ('throw-object', 'throw-object', 5),

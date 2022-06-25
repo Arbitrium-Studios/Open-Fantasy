@@ -865,19 +865,23 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,
         'attacks': (('EvilEye',
                      (10, 11, 13, 15, 16),
                      (60, 75, 80, 85, 90),
-                     (20, 20, 20, 20, 20)),
+                     (15, 15, 15, 15, 15)),
                     ('Jargon',
                      (7, 9, 11, 13, 15),
                      (60, 70, 75, 80, 90),
-                     (15, 15, 15, 15, 15)),
+                     (10, 10, 10, 10, 10)),
                     ('Legalese',
                      (11, 13, 16, 19, 21),
                      (55, 65, 75, 85, 95),
-                     (35, 35, 35, 35, 35)),
+                     (30, 30, 30, 30, 30)),
                     ('PeckingOrder',
                      (12, 15, 18, 21, 24),
                      (70, 75, 80, 85, 95),
-                     (30, 30, 30, 30, 30)))},
+                     (25, 25, 25, 25, 25)),
+                    ('LegalStorm',
+                     (8, 10, 12, 14, 16),
+                     (70, 75, 80, 85, 90),
+                     (20, 20, 20, 20, 20)))},
  'bw': {'name': TTLocalizer.SuitBigWig,
         'singularname': TTLocalizer.SuitBigWigS,
         'pluralname': TTLocalizer.SuitBigWigP,
@@ -939,6 +943,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'HotAir': ('speak', ATK_TGT_SINGLE),
  'Jargon': ('speak', ATK_TGT_SINGLE),
  'Legalese': ('speak', ATK_TGT_SINGLE),
+ 'LegalStorm': ('effort', ATK_TGT_SINGLE),
  'Liquidate': ('magic1', ATK_TGT_SINGLE),
  'MarketCrash': ('throw-paper', ATK_TGT_SINGLE),
  'MumboJumbo': ('speak', ATK_TGT_SINGLE),
@@ -1011,6 +1016,7 @@ HEAD_SHRINK = list(SuitAttacks.keys()).index('HeadShrink')
 HOT_AIR = list(SuitAttacks.keys()).index('HotAir')
 JARGON = list(SuitAttacks.keys()).index('Jargon')
 LEGALESE = list(SuitAttacks.keys()).index('Legalese')
+LEGAL_STORM = list(SuitAttacks.keys()).index('LegalStorm')
 LIQUIDATE = list(SuitAttacks.keys()).index('Liquidate')
 MARKET_CRASH = list(SuitAttacks.keys()).index('MarketCrash')
 MUMBO_JUMBO = list(SuitAttacks.keys()).index('MumboJumbo')

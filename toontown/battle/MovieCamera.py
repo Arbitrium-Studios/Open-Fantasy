@@ -419,6 +419,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera())
     elif name == LEGALESE:
         camTrack.append(defaultCamera(openShotDuration=1.5))
+    elif name == LEGAL_STORM:
+        camTrack.append(defaultCamera(openShotDuration=2.4))
     elif name == LIQUIDATE:
         camTrack.append(defaultCamera(openShotDuration=2.5))
     elif name == MARKET_CRASH:
