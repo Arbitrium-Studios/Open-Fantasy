@@ -16,3 +16,5 @@ venv/
 local/
 errorCode
 screenshots/
+libotp/
+libtoontown/
