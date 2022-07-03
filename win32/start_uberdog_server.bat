@@ -2,6 +2,8 @@
 title Start Toontown Fantasy - UberDOG Server
 cd..
 
+:uberdog
+
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
 set /P PPYTHON_PATH=<PPYTHON_PATH
 
@@ -10,3 +12,5 @@ set /P PPYTHON_PATH=<PPYTHON_PATH
                --messagedirector-ip 127.0.0.1:7199 ^
                --eventlogger-ip 127.0.0.1:7197
 pause
+
+goto uberdog

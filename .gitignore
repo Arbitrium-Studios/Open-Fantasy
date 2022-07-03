@@ -13,7 +13,6 @@ venv/
 !darwin/.vscode/tasks.json
 *.buildings
 *.trackRecords
-PPYTHON_PATH
 local/
 errorCode
 screenshots/

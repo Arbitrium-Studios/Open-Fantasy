@@ -1,49 +1,43 @@
-# Open Toontown Fantasy
-This repository contains the code for Open Fantasy, based on the latest version of Disney's Toontown Online (sv1.0.47.38) using [Open-Toontown](https://github.com/open-toontown/open-toontown) as it's main source code!
+<img src="https://github.com/PLAYER-ZER0-STUDIOS-Toontown-Fantasy/Toontown_Fantasy/blob/main/assets/images/github-logo/fantasy-logo.png" align="right" width="200" />
 
-# Setup
-After cloning the repository, you will need to clone the [resources](https://github.com/open-toontown/resources) repository inside the directory where you cloned the source repo.
+# Toontown-Fantasy [![Discord][discordImg]][discordLink]
 
-Secondly, you would have to install and use a specific version of Panda3D, which includes `libotp` and `libtoontown`.  You can use the prebuilt installers for your operating system here:
+# What is Toontown Fantasy?
+ 
+## Toontown Fantasy is a non-profit re-envisioning of Disney's Toontown Online! The game is built from the ground up using the latest technologies to make your experience more enjoyable and immersive!
 
-## Windows
+### Management Team:
+* THE PLAYER ZER0 aka Gracie T. Lovelight | Director/Owner
+* Pizza Taco Burger | Co-Owner
 
-You can install Panda3D SDK through the 32-bit (x86) or 64-bit (x86_64) installers here:
+### Community Team:
 
-[Panda3D SDK for Windows (Python 3.9, x86)](https://drive.google.com/file/d/1sF4QLDl6h5ZRX-LMAftslDNpkJ-pF9SR/view?usp=sharing)
+* THE PLAYER ZER0 aka Gracie T. Lovelight | Community Manager
+* Redspade | Discord Moderator
 
-[Panda3D SDK for Windows (Python 3.9, x86_64)](https://drive.google.com/file/d/1TEdJ6D3W9ZUf883dg1FWDDPCInepImiz/view?usp=sharing)
+### Technical Team:
+* The Professor | Developer
+* ComradeNapCal | Developer
+* Something Random | Developer
+* Sighost | Developer
+* THE PLAYER ZER0 aka Gracie T. Lovelight | Developer
 
-If you install Panda3D outside the default directory (or use the x86 installer), you may have to change the `PPYTHON_PATH` file located in the root directory and change it to your install directory.
+### Creative Team:
+* SirDapperPenguin | 3D Modeler
+* Jardin | Artist
+* April | Artist
+* AiGenics | Story Writer
+* THE PLAYER ZER0 aka Gracie T. Lovelight | Story Writer
 
-## macOS 10.9+
-[Panda3D Wheel for macOS 10.9+ (Python3.9, x86_64)](https://drive.google.com/file/d/1_6WJxrkNfwisK5pe5ubJJy1psEp0IIft/view?usp=sharing)
+### Special Thanks To:
+* Satire6 for releasing Pandora & Anesidora to the public!
+* Toontown Rewritten for reviving the spirit of Toontown and its community!
+* Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
+* Jesse Schell for fighting for Toontown Online's Official Return
 
-Installing the provided Panda3D wheel requires Python 3.9, which is not installed on your system by default whatsoever.  We recommend installing Python 3.9 through [Homebrew](https://brew.sh/) (Make sure that the xcode command line tools are installed first `xcode-select --install`): 
-```shell
-$ brew install python@3.9
-```
-(This will symlink Python 3.9 to `python3.9` and pip to `pip3`).
+### Contributors:
+* Battery on Discord for fixing the Tuple error!
 
-After installing Python 3.9.  You can then install the wheel by using pip:
-```shell
-$ pip install panda3d-1.11.0-cp39-cp39-macosx_10_9_x86_64.whl
-```
-## Linux (Building your own)
-If you use Linux, or are interested in building Panda3D yourself, head on over to [our Panda3D fork](https://github.com/open-toontown/panda3d) and read the "Building Panda3D" section on the README file there.
+[discordImg]: https://img.shields.io/badge/Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&colorB=7289DA&style=for-the-badge
 
-# Starting the Server and Game
-To start the server and run the game locally, go to your platform directory (`win32` for Windows, `darwin` for Mac and `linux` for Linux), and make sure you start the following scripts in order:
-
-`Astron Server -> UberDOG (UD) Server -> AI (District) Server -> Game Client`
-
-Be sure to wait till the servers have finished booting before starting the next.  If done correctly, you should be able to make your toon and play the game!  There is no support for Magic Words (commands) yet, [but it is currently in the works!](https://github.com/open-toontown/open-toontown/projects/1)
-
-# Contributing
-Submitting issues and Pull Requests are encouraged and welcome.
-
-How you commit changes is your choice, but please include what you did and a basic description so that we know exactly what was modified. Here are some examples:
-
-* `minigames: Fix crash when entering the trolley`
-* `racing: Fix possible race condition when two racers tied`
-* `golf: Refix wonky physics once and for all (hopefully)`
+[discordLink]: https://discord.com/invite/9fgW8jAaf6/
