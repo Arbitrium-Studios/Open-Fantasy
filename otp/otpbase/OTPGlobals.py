@@ -359,21 +359,38 @@ AvatarSlotUnavailable = -2
 AvatarSlotAvailable = -3
 
 AccessLevelName2Int = {
- 'RESTRICTED': -100,
- 'NO_ACCESS': 0,
- 'MODERATOR': 100,
- 'DEVELOPER': 200,
- 'ADMIN': 300,
- 'SYSTEM_ADMIN': 400,
+    'RESTRICTED': -100,
+    'NO_ACCESS': 0,
+    'USER': 100,
+    'COMMUNITY': 200,
+    'CREATIVE': 300,
+    'MODERATOR': 400,
+    'DEVELOPER': 500,
+    'ADMIN': 600,
+    'SYSTEM_ADMIN': 700
+
 }
 
-AccessLevelInt2Name = {v: k for k, v in AccessLevelName2Int.items()}
+AccessLevelInt2Name = {
+    -100: 'RESTRICTED',
+    0: 'NO_ACCESS',
+    100: 'USER',
+    200: 'COMMUNITY',
+    300: 'CREATIVE',
+    400: 'MODERATOR',
+    500: 'DEVELOPER',
+    600: 'ADMIN',
+    700: 'SYSTEM_ADMIN'
+}
 
 AccessLevelDebug2Name = {
     'RESTRICTED': 'Banned',
     'NO_ACCESS': 'Player',
+    'USER': 'User',
+    'COMMUNTY': 'Community',
+    'CREATIVE': 'Creative',
     'MODERATOR': 'Mod',
-    'DEVELOPER': 'Developer',
+    'DEVELOPER': 'Dev',
     'ADMIN': 'Admin',
-    'SYSTEM_ADMIN': 'Sysadmin',
+    'SYSTEM_ADMIN': 'Sys Admin'
 }
