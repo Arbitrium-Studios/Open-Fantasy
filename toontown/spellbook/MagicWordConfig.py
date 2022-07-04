@@ -18,7 +18,7 @@ PREFIX_ALLOWED = ['~', '?', '/', '<', ':', ';']
 if config.GetBool('exec-chat', False):
     PREFIX_ALLOWED.append('>')
 
-WIZARD_DEFAULT = 'Aurora Lovelight'
+WIZARD_DEFAULT = 'Spellbook'
 
 MAGIC_WORD_SUCCESS_PHRASES = ['Alakazam!', 'Voila!', 'Ta-da!', 'Presto!', 'Abracadabra!']
 MAGIC_WORD_RESPONSES = {

@@ -14,7 +14,7 @@ import collections, types
 from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
 
-from libotp import NametagGroup, WhisperPopup
+from panda3d.otp import NametagGroup, WhisperPopup
 
 from otp.otpbase import OTPLocalizer
 from otp.otpbase import OTPGlobals
@@ -129,11 +129,12 @@ class MagicWord:
                     continue
                 return "{} is not a valid target!".format(name)
 
-            if toon.getLocked() and not self.administrative:
-                if len(self.targets) > 1:
-                    validTargets -= 1
-                    continue
-                return "{} is currently locked. You can only use administrative commands on them.".format(name)
+            # TODO: Should we implement locking?
+            # if toon.getLocked() and not self.administrative:
+            #     if len(self.targets) > 1:
+            #         validTargets -= 1
+            #         continue
+            #     return "{} is currently locked. You can only use administrative commands on them.".format(name)
 
             if invoker.getAccessLevel() <= toon.getAccessLevel() and toon != invoker:
                 if len(self.targets) > 1:
@@ -170,7 +171,7 @@ class MagicWord:
         return False
 
     def handleWord(self, invoker, avId, toon, *args):
-        NotImplemented
+        raise NotImplementedError
 
 
 class SetHP(MagicWord):
@@ -190,7 +191,7 @@ class SetHP(MagicWord):
             return "Can't set {0}'s laff to {1}! Specify a value between -1 and {0}'s max laff ({2}).".format(
                 toon.getName(), hp, toon.getMaxHp())
 
-        if hp <= 0 and (toon.getImmortalMode() or toon.getTempImmortalMode()):
+        if hp <= 0 and toon.immortalMode:
             return "Can't set {0}'s laff to {1} because they are in Immortal Mode!".format(toon.getName(), hp)
 
         toon.b_setHp(hp)
@@ -221,8 +222,7 @@ class ToggleOobe(MagicWord):
     desc = "Toggles the out of body experience mode, which lets you move the camera freely."
     advancedDesc = "This Magic Word will toggle what is known as 'Out Of Body Experience' Mode, hence the name " \
                    "'Oobe'. When this mode is active, you are able to move the camera around with your mouse- " \
-                   "though your camera will still follow your Toon. You can also toggle this mode by pressing the " \
-                   "'F4' key, or whichever other keybind you have set."
+                   "though your camera will still follow your Toon."
     execLocation = MagicWordConfig.EXEC_LOC_CLIENT
 
     def handleWord(self, invoker, avId, toon, *args):
@@ -234,15 +234,44 @@ class ToggleRun(MagicWord):
     aliases = ["run"]
     desc = "Toggles run mode, which gives you a faster running speed."
     advancedDesc = "This Magic Word will toggle Run Mode. When this mode is active, the target can run around at a " \
-                   "very fast speed. This running speed stacks with other speed multipliers, such as the one given" \
-                   "by the 'SetSpeed' Magic Word. You will automatically toggle Run Mode by using the 'EnableGod' " \
-                   "Magic Word."
-    execLocation = MagicWordConfig.EXEC_LOC_SERVER
+                   "very fast speed."
+    execLocation = MagicWordConfig.EXEC_LOC_CLIENT
 
     def handleWord(self, invoker, avId, toon, *args):
-        toon.b_setRun(not toon.getRun())
+        from direct.showbase.InputStateGlobal import inputState
+        inputState.set('debugRunning', not inputState.isSet('debugRunning'))
         return "Run mode has been toggled."
 
+class MaxToon(MagicWord):
+    aliases = ["max", "idkfa"]
+    desc = "Maxes your target toon."
+    execLocation = MagicWordConfig.EXEC_LOC_SERVER
+    accessLevel = 'ADMIN'
+
+    def handleWord(self, invoker, avId, toon, *args):
+        from toontown.toonbase import ToontownGlobals
+
+        # TODO: Handle this better, like giving out all awards, set the quest tier, stuff like that.
+        # This is mainly copied from Anesidora just so I can better work on things.
+        toon.b_setTrackAccess([1, 1, 1, 1, 1, 1, 1])
+
+        toon.b_setMaxCarry(ToontownGlobals.MaxCarryLimit)
+        toon.b_setQuestCarryLimit(ToontownGlobals.MaxQuestCarryLimit)
+
+        toon.experience.maxOutExp()
+        toon.d_setExperience(toon.experience.makeNetString())
+
+        toon.inventory.maxOutInv()
+        toon.d_setInventory(toon.inventory.makeNetString())
+
+        toon.b_setMaxHp(ToontownGlobals.MaxHpLimit)
+        toon.b_setHp(ToontownGlobals.MaxHpLimit)
+
+        toon.b_setMaxMoney(250)
+        toon.b_setMoney(toon.maxMoney)
+        toon.b_setBankMoney(toon.maxBankMoney)
+
+        return f"Successfully maxed {toon.getName()}!"
 
 # Instantiate all classes defined here to register them.
 # A bit hacky, but better than the old system
