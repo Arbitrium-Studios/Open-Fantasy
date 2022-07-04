@@ -4,17 +4,18 @@ from toontown.toonbase import TTLocalizer
 from otp.otpbase import OTPLocalizer
 from otp.chat import ChatGarbler
 
+
 class ToonChatGarbler(ChatGarbler.ChatGarbler):
     animalSounds = {'dog': TTLocalizer.ChatGarblerDog,
-     'cat': TTLocalizer.ChatGarblerCat,
-     'mouse': TTLocalizer.ChatGarblerMouse,
-     'horse': TTLocalizer.ChatGarblerHorse,
-     'rabbit': TTLocalizer.ChatGarblerRabbit,
-     'duck': TTLocalizer.ChatGarblerDuck,
-     'monkey': TTLocalizer.ChatGarblerMonkey,
-     'bear': TTLocalizer.ChatGarblerBear,
-     'pig': TTLocalizer.ChatGarblerPig,
-     'default': OTPLocalizer.ChatGarblerDefault}
+                    'cat': TTLocalizer.ChatGarblerCat,
+                    'mouse': TTLocalizer.ChatGarblerMouse,
+                    'horse': TTLocalizer.ChatGarblerHorse,
+                    'rabbit': TTLocalizer.ChatGarblerRabbit,
+                    'duck': TTLocalizer.ChatGarblerDuck,
+                    'monkey': TTLocalizer.ChatGarblerMonkey,
+                    'bear': TTLocalizer.ChatGarblerBear,
+                    'pig': TTLocalizer.ChatGarblerPig,
+                    'default': OTPLocalizer.ChatGarblerDefault}
 
     def garble(self, toon, message):
         newMessage = ''

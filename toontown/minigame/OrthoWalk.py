@@ -4,11 +4,13 @@ from direct.interval.IntervalGlobal import *
 from .OrthoDrive import *
 from direct.directnotify import DirectNotifyGlobal
 
+
 class OrthoWalk:
     notify = DirectNotifyGlobal.directNotify.newCategory('OrthoWalk')
     BROADCAST_POS_TASK = 'OrthoWalkBroadcastPos'
 
-    def __init__(self, orthoDrive, collisions = 1, broadcast = 1, broadcastPeriod = 0.2):
+    def __init__(self, orthoDrive, collisions=1,
+                 broadcast=1, broadcastPeriod=0.2):
         self.orthoDrive = orthoDrive
         self.collisions = collisions
         self.broadcast = broadcast
@@ -58,7 +60,10 @@ class OrthoWalk:
         lt.d_clearSmoothing()
         lt.sendCurrentPosition()
         taskMgr.remove(self.BROADCAST_POS_TASK)
-        taskMgr.add(self.doBroadcast, self.BROADCAST_POS_TASK, priority=self.priority)
+        taskMgr.add(
+            self.doBroadcast,
+            self.BROADCAST_POS_TASK,
+            priority=self.priority)
 
     def shutdownBroadcast(self):
         self.notify.debug('OrthoWalk shutdownBroadcast')

@@ -5,6 +5,7 @@ from otp.level import BasicEntities
 from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
 
+
 class BattleBlocker(BasicEntities.DistributedNodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('BattleBlocker')
 
@@ -40,7 +41,9 @@ class BattleBlocker(BasicEntities.DistributedNodePathEntity):
 
     def initCollisionGeom(self):
         self.cSphere = CollisionSphere(0, 0, 0, self.radius)
-        self.cSphereNode = CollisionNode('battleBlocker-%s-%s' % (self.level.getLevelId(), self.entId))
+        self.cSphereNode = CollisionNode(
+            'battleBlocker-%s-%s' %
+            (self.level.getLevelId(), self.entId))
         self.cSphereNode.addSolid(self.cSphere)
         self.cSphereNodePath = self.attachNewNode(self.cSphereNode)
         self.cSphereNode.setCollideMask(ToontownGlobals.WallBitmask)
@@ -64,23 +67,27 @@ class BattleBlocker(BasicEntities.DistributedNodePathEntity):
         if not self.active:
             return
         callback = None
-        if self.battleId != None and self.battleId in base.cr.doId2do:
+        if self.battleId is not None and self.battleId in base.cr.doId2do:
             battle = base.cr.doId2do.get(self.battleId)
             if battle:
-                self.notify.debug('act like we collided with battle %d' % self.battleId)
+                self.notify.debug(
+                    'act like we collided with battle %d' %
+                    self.battleId)
                 callback = battle.handleBattleBlockerCollision
         elif len(self.suitIds) > 0:
             for suitId in self.suitIds:
                 suit = base.cr.doId2do.get(suitId)
                 if suit:
-                    self.notify.debug('act like we collided with Suit %d ( in state %s )' % (suitId, suit.fsm.getCurrentState().getName()))
+                    self.notify.debug(
+                        'act like we collided with Suit %d ( in state %s )' %
+                        (suitId, suit.fsm.getCurrentState().getName()))
                     callback = suit.handleBattleBlockerCollision
                     break
 
         self.showReaction(callback)
         return
 
-    def showReaction(self, callback = None):
+    def showReaction(self, callback=None):
         if not base.localAvatar.wantBattles:
             return
         track = Sequence()

@@ -58,27 +58,33 @@ class MagicWord:
     notify = DirectNotifyGlobal.directNotify.newCategory('MagicWord')
 
     # Whether this Magic word should be considered "hidden"
-    # If your Toontown source has a page for Magic Words in the Sthickerbook, this will be useful for that
+    # If your Toontown source has a page for Magic Words in the Sthickerbook,
+    # this will be useful for that
     hidden = False
 
     # Whether this Magic Word is an administrative command or not
-    # Good for config settings where you want to disable cheaty Magic Words, but still want moderation ones
+    # Good for config settings where you want to disable cheaty Magic Words,
+    # but still want moderation ones
     administrative = False
 
     # List of names that will also invoke this word - a setHp magic word might have "hp", for example
-    # A Magic Word will always be callable with its class name, so you don't have to put that in the aliases
+    # A Magic Word will always be callable with its class name, so you don't
+    # have to put that in the aliases
     aliases = None
 
     # Description of the Magic Word
-    # If your Toontown source has a page for Magic Words in the Sthickerbook, this will be useful for that
+    # If your Toontown source has a page for Magic Words in the Sthickerbook,
+    # this will be useful for that
     desc = MagicWordConfig.MAGIC_WORD_DEFAULT_DESC
 
     # Advanced description that gives the user a lot more information than normal
-    # If your Toontown source has a page for Magic Words in the Sthickerbook, this will be useful for that
+    # If your Toontown source has a page for Magic Words in the Sthickerbook,
+    # this will be useful for that
     advancedDesc = MagicWordConfig.MAGIC_WORD_DEFAULT_ADV_DESC
 
     # Default example with for commands with no arguments set
-    # If your Toontown source has a page for Magic Words in the Sthickerbook, this will be useful for that
+    # If your Toontown source has a page for Magic Words in the Sthickerbook,
+    # this will be useful for that
     example = ""
 
     # The minimum access level required to use this Magic Word
@@ -86,13 +92,18 @@ class MagicWord:
 
     # A restriction on the Magic Word which sets what kind or set of Distributed Objects it can be used on
     # By default, a Magic Word can affect everyone
-    affectRange = [MagicWordConfig.AFFECT_SELF, MagicWordConfig.AFFECT_OTHER, MagicWordConfig.AFFECT_BOTH]
+    affectRange = [
+        MagicWordConfig.AFFECT_SELF,
+        MagicWordConfig.AFFECT_OTHER,
+        MagicWordConfig.AFFECT_BOTH]
 
-    # Where the magic word will be executed -- EXEC_LOC_CLIENT or EXEC_LOC_SERVER
+    # Where the magic word will be executed -- EXEC_LOC_CLIENT or
+    # EXEC_LOC_SERVER
     execLocation = MagicWordConfig.EXEC_LOC_INVALID
 
     # List of all arguments for this word, with the format [(type, isRequired), (type, isRequired)...]
-    # If the parameter is not required, you must provide a default argument: (type, False, default)
+    # If the parameter is not required, you must provide a default argument:
+    # (type, False, default)
     arguments = None
 
     # True if executes differently based on the alias
@@ -124,8 +135,10 @@ class MagicWord:
                 for arg in self.arguments:
                     argInfo = ""
                     if not arg[MagicWordConfig.ARGUMENT_REQUIRED]:
-                        argInfo += "(default: {0})".format(arg[MagicWordConfig.ARGUMENT_DEFAULT])
-                    self.example += "[{0}{1}] ".format(arg[MagicWordConfig.ARGUMENT_NAME], argInfo)
+                        argInfo += "(default: {0})".format(
+                            arg[MagicWordConfig.ARGUMENT_DEFAULT])
+                    self.example += "[{0}{1}] ".format(
+                        arg[MagicWordConfig.ARGUMENT_NAME], argInfo)
 
             self.__register()
         self.texViewer = None
@@ -133,7 +146,8 @@ class MagicWord:
     def __register(self):
         for wordName in self.aliases:
             if wordName in magicWordIndex:
-                self.notify.error('Duplicate Magic Word name or alias detected! Invalid name: {}'.format(wordName))
+                self.notify.error(
+                    'Duplicate Magic Word name or alias detected! Invalid name: {}'.format(wordName))
             magicWordIndex[wordName] = {'class': self,
                                         'classname': self.__class__.__name__,
                                         'hidden': self.hidden,
@@ -147,7 +161,8 @@ class MagicWord:
                                         'affectRange': self.affectRange,
                                         'args': self.arguments}
 
-    def loadWord(self, air=None, cr=None, invokerId=None, targets=None, args=None):
+    def loadWord(self, air=None, cr=None, invokerId=None,
+                 targets=None, args=None):
         self.air = air
         self.cr = cr
         self.invokerId = invokerId
@@ -203,8 +218,10 @@ class MagicWord:
             if not usedAlias:
                 executedWord = self.handleWord(invoker, avId, toon, *self.args)
             else:
-                executedWord = self.handleWordWithAlias(invoker, avId, toon, usedAlias, *self.args)
-            # make sure the process is an ai process before writing a server event
+                executedWord = self.handleWordWithAlias(
+                    invoker, avId, toon, usedAlias, *self.args)
+            # make sure the process is an ai process before writing a server
+            # event
             if game.process == 'ai':
                 self.air.writeServerEvent('magic-word-excuted',
                                           self.invokerId, invoker.getStaffAccess(),
@@ -214,8 +231,10 @@ class MagicWord:
 
         # darth you do know this thing is clientside right o_O
         with open('user/logs/magic-words/magic-words-log.txt', 'a') as magicWordLogFile:
-            magicWordLogFile.write(f"{now} | {self.invokerId}: {self.__class__.__name__}\n")
-        # If you're only using the Magic Word on one person and there is a response, return that response
+            magicWordLogFile.write(
+                f"{now} | {self.invokerId}: {self.__class__.__name__}\n")
+        # If you're only using the Magic Word on one person and there is a
+        # response, return that response
         if executedWord and len(self.targets) == 1:
             return executedWord
         # If the amount of targets is higher than one...
@@ -298,7 +317,8 @@ class SetHP(MagicWord):
                 toon.getName(), hp, toon.getMaxHp())
 
         if hp <= 0 and (toon.getImmortalMode()):
-            return "Can't set {0}'s laff to {1} because they are in Immortal Mode!".format(toon.getName(), hp)
+            return "Can't set {0}'s laff to {1} because they are in Immortal Mode!".format(
+                toon.getName(), hp)
 
         toon.b_setHp(hp)
         return "{}'s laff has been set to {}.".format(toon.getName(), hp)
@@ -320,7 +340,8 @@ class SetGMIcon(MagicWord):
         if id > 3 and staffAccess < 600:
             return "Your access level is too low to use this GM icon."
         else:
-            if (staffAccess < 400 and id > 2) or (staffAccess < 500 and id > 3):
+            if (staffAccess < 400 and id > 2) or (
+                    staffAccess < 500 and id > 3):
                 return "Your access level is too low to use this GM icon."
 
         if toon.isGM() and id != 0:
@@ -375,7 +396,8 @@ class SetMaxHP(MagicWord):
 
         toon.setMaxHp(maxhp)
         toon.toonUp(maxhp)
-        return "{}'s max laff has been set to {}.".format(toon.getName(), maxhp)
+        return "{}'s max laff has been set to {}.".format(
+            toon.getName(), maxhp)
 
 
 class ToggleSellbotCutscene(MagicWord):
@@ -424,35 +446,39 @@ class ToonUp(MagicWord):
         return 'Successfully healed the target.'
 
 
-
 class Unlocks(MagicWord):
     desc = "Unlocks the target's teleport access, emotions, and pet trick phrases."
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'COMMUNITY'
+
     def handleWord(self, invoker, avId, av, *args):
-        # Unlocks the target's teleport access, emotions, and pet trick phrases.
+        # Unlocks the target's teleport access, emotions, and pet trick
+        # phrases.
         av.b_setTeleportAccess(ToontownGlobals.HoodsForTeleportAll)
         av.b_setEmoteAccess(range(len(OTPLocalizer.EmoteFuncDict)))
         av.b_setPetTrickPhrases(range(len(OTPLocalizer.PetTrickPhrases)))
         return 'Successfully unlocked teleport access, emotions, and pet trick phrases.'
 
+
 class MaxGags(MagicWord):
     desc = "Gives your toon the max amount of every gag."
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
+
     def handleWord(self, invoker, avId, av, *args):
         av.b_setMaxCarry(255)
         experience = Experience.Experience(av.getExperience(), av)
         for i, track in enumerate(av.getTrackAccess()):
             if track:
                 experience.experience[i] = (
-                        Experience.MaxSkill - Experience.UberSkill)
+                    Experience.MaxSkill - Experience.UberSkill)
         av.b_setExperience(experience.makeNetString())
         av.inventory.maxOutInv(filterUberGags=0, filterPaidGags=0)
         av.b_setInventory(av.inventory.makeNetString())
-        # TODO give 255 of each gag 
+        # TODO give 255 of each gag
         return 'Successfully gave your toon the max amount of gags.'
-        
+
+
 class MaxToon(MagicWord):
     desc = "Maxes the toon to unlock everything."
     arguments = [("actuallyMaxGags", int, False, 0)]
@@ -467,7 +493,7 @@ class MaxToon(MagicWord):
         for i, track in enumerate(av.getTrackAccess()):
             if track:
                 experience.experience[i] = (
-                        Experience.MaxSkill - Experience.UberSkill)
+                    Experience.MaxSkill - Experience.UberSkill)
         av.b_setExperience(experience.makeNetString())
 
         av.inventory.zeroInv()
@@ -505,7 +531,9 @@ class MaxToon(MagicWord):
         for id in av.getQuests():
             av.removeQuest(id)
         av.b_setQuestCarryLimit(ToontownGlobals.MaxQuestCarryLimit)
-        av.b_setRewardHistory(Quests.LOOPING_FINAL_TIER, av.getRewardHistory()[1])
+        av.b_setRewardHistory(
+            Quests.LOOPING_FINAL_TIER,
+            av.getRewardHistory()[1])
 
         allFish = TTLocalizer.FishSpeciesNames
         fishLists = [[], [], []]
@@ -513,7 +541,9 @@ class MaxToon(MagicWord):
             for species in range(len(allFish[genus])):
                 fishLists[0].append(genus)
                 fishLists[1].append(species)
-                fishLists[2].append(FishGlobals.getRandomWeight(genus, species))
+                fishLists[2].append(
+                    FishGlobals.getRandomWeight(
+                        genus, species))
         av.b_setFishCollection(*fishLists)
         av.b_setFishingRod(FishGlobals.MaxRodId)
         av.b_setFishingTrophies(list(FishGlobals.TrophyDict.keys()))
@@ -527,6 +557,7 @@ class MaxToon(MagicWord):
 
         av.b_setGolfHistory([600] * (GolfGlobals.MaxHistoryIndex * 2))
         return 'Successfully maxed your toon.'
+
 
 class SkipMazeGame(MagicWord):
     aliases = ["skipmaze", "endmaze"]
@@ -623,7 +654,9 @@ class BadName(MagicWord):
     accessLevel = 'MODERATOR'
 
     def handleWord(self, invoker, avId, toon, *args):
-        self.notify.info("Renaming inappropriately named toon %s (doId %d)." % (toon._name, avId))
+        self.notify.info(
+            "Renaming inappropriately named toon %s (doId %d)." %
+            (toon._name, avId))
         pastName = toon.getName()
         color = TTLocalizer.NumToColor[toon.dna.headColor]
         animal = TTLocalizer.AnimalToSpecies[toon.dna.getAnimal()]
@@ -648,7 +681,13 @@ class fix(MagicWord):
 
 
 class ToggleGhost(MagicWord):
-    aliases = ['invisible', 'ghostmode', 'setghost', 'setghostmode', 'ghost', 'toggleghostmode']
+    aliases = [
+        'invisible',
+        'ghostmode',
+        'setghost',
+        'setghostmode',
+        'ghost',
+        'toggleghostmode']
     desc = "Toggles ghost mode for the invoker."
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'COMMUNITY'
@@ -683,7 +722,12 @@ class ToggleFPS(MagicWord):
 
 
 class allstuff(MagicWord):
-    aliases = ['restockinventory', 'restockinv', 'maxinv', 'maxinventory', 'restock']
+    aliases = [
+        'restockinventory',
+        'restockinv',
+        'maxinv',
+        'maxinventory',
+        'restock']
     desc = 'Gives target all the inventory they can carry.'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
@@ -801,7 +845,8 @@ class GivePies(MagicWord):
         if _type is not None:
             toon.b_setPieType(_type)
         toon.b_setNumPies(toon.numPies + count)
-        response = 'Set pies to {0} with num of {1}'.format(toon.getPieType(), toon.getNumPies())
+        response = 'Set pies to {0} with num of {1}'.format(
+            toon.getPieType(), toon.getNumPies())
         return response
 
 
@@ -837,7 +882,8 @@ class SetExp(MagicWord):
                     if not gotIncrement:
                         # No increment specified; the default is whatever
                         # it takes to get to the next track.
-                        increment = av.experience.getNextExpValue(trackIndex) - av.experience.getExp(trackIndex)
+                        increment = av.experience.getNextExpValue(
+                            trackIndex) - av.experience.getExp(trackIndex)
 
                     response = ("Adding %d to %s track for %s." % (
                         increment, ToontownBattleGlobals.Tracks[trackIndex], av._name))
@@ -846,7 +892,8 @@ class SetExp(MagicWord):
             if not gotIncrement:
                 # No increment specified; the default is whatever
                 # it takes to get to the next track.
-                increment = av.experience.getNextExpValue(trackIndex) - av.experience.getExp(trackIndex)
+                increment = av.experience.getNextExpValue(
+                    trackIndex) - av.experience.getExp(trackIndex)
 
             response = ("Adding %d to %s track for %s." % (
                 increment, ToontownBattleGlobals.Tracks[trackIndex], av._name))
@@ -891,7 +938,8 @@ class SetCheesyEffect(MagicWord):
          Pumpkin, BigWhite,
          SnowMan"""
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
-    arguments = [('ce', str, True), ('zoneId', int, False, 0), ('expiretime', int, False, 0)]
+    arguments = [('ce', str, True), ('zoneId', int, False, 0),
+                 ('expiretime', int, False, 0)]
     accessLevel = 'DEVELOPER'
 
     def handleWord(self, invoker, avId, toon, *args):
@@ -919,7 +967,8 @@ class SetCheesyEffect(MagicWord):
         # Let it expire in timeLimit minutes.
         expireTime = (int)(time.time() / 60 + 0.5) + timeLimit
         toon.b_setCheesyEffect(effect, hoodId, expireTime)
-        response = 'Set cheesy effect {0} for amount of time {1}'.format(effect, expireTime)
+        response = 'Set cheesy effect {0} for amount of time {1}'.format(
+            effect, expireTime)
 
 
 class CogTakeOver(MagicWord):
@@ -973,9 +1022,11 @@ class CogDoTakeOver(MagicWord):
                 level = random.choice(SuitBuildingGlobals.SuitBuildingInfo)
         try:
             invoker.findClosestDoor().cogdoTakeOver(level, 2, track)
-            return "Spawned a %s Field Office with a difficulty of %d!" % (track, level)
+            return "Spawned a %s Field Office with a difficulty of %d!" % (
+                track, level)
         except BaseException:
-            return "Unable to spawn a %s Field Office with a difficulty of %d." % (track, level)
+            return "Unable to spawn a %s Field Office with a difficulty of %d." % (
+                track, level)
 
 
 class ToonTakeOver(MagicWord):
@@ -990,7 +1041,8 @@ class ToonTakeOver(MagicWord):
         try:
             bm = self.air.buildingManagers[streetId]
         except KeyError:
-            return str(streetId) + " is not buildingManagers list for some reason :/"
+            return str(streetId) + \
+                " is not buildingManagers list for some reason :/"
 
         blocks = None
 
@@ -1011,7 +1063,8 @@ class ToonTakeOver(MagicWord):
             for i in blocks:
                 building = bm.getBuilding(i)
                 building.b_setVictorList([0, 0, 0, 0])
-                building.updateSavedBy([(toon.doId, toon._name, toon.dna.asTuple())])
+                building.updateSavedBy(
+                    [(toon.doId, toon._name, toon.dna.asTuple())])
                 building.toonTakeOver()
                 self.notify.debug("Toon take over %s %s" % (i, streetId))
 
@@ -1115,7 +1168,8 @@ class SetNextQuest(MagicWord):
         avTier = av.getRewardTier()
         tier = questDesc[Quests.QuestDictTierIndex]
         if tier != avTier:
-            return "Avatar not in that tier: %s. You can ~setQuestTier %s, if you want." % (tier, tier)
+            return "Avatar not in that tier: %s. You can ~setQuestTier %s, if you want." % (
+                tier, tier)
 
         # Make sure the av does not already have this quest
         for questDesc in av.quests:
@@ -1155,7 +1209,8 @@ class SetAssignedQuest(MagicWord):
         avTier = av.getRewardTier()
         tier = questDesc[Quests.QuestDictTierIndex]
         if tier != avTier:
-            return "Avatar not in that tier: %s. You can ~setQuestTier %s, if you want." % (tier, tier)
+            return "Avatar not in that tier: %s. You can ~setQuestTier %s, if you want." % (
+                tier, tier)
 
         # Make sure the av has room for this quest
         if not self.air.questManager.needsQuest(av):
@@ -1318,7 +1373,9 @@ class GetInvasion(MagicWord):
             cogName = SuitBattleGlobals.SuitAttributes[cogType]['name']
             if skeleton:
                 cogName = TTLocalizer.Skeleton + " " + cogName
-            response = ("Invasion is in progress: %s, %s remaining" % (cogName, numRemaining))
+            response = (
+                "Invasion is in progress: %s, %s remaining" %
+                (cogName, numRemaining))
         else:
             response = ("No invasion found.")
         return response
@@ -1328,7 +1385,8 @@ class StartInvasion(MagicWord):
     desc = 'Starts a cog invasion.'
     accessLevel = 'MODERATOR'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
-    arguments = [('cogType', str, True), ('numCogs', int, True), ('skelecog', bool, False, False)]
+    arguments = [('cogType', str, True), ('numCogs', int, True),
+                 ('skelecog', bool, False, False)]
 
     def handleWord(self, invoker, avId, av, *args):
         invMgr = self.air.suitInvasionManager
@@ -1337,7 +1395,9 @@ class StartInvasion(MagicWord):
             cogType = invMgr.getCogType()
             numRemaining = invMgr.getNumCogsRemaining()
             cogName = SuitBattleGlobals.SuitAttributes[cogType[0]]['name']
-            response = ("Invasion already in progress: %s, %s" % (cogName, numRemaining))
+            response = (
+                "Invasion already in progress: %s, %s" %
+                (cogName, numRemaining))
         else:
             if len(args) < 2 or len(args) > 3:
                 response = "Error: Must specify cogType and numCogs"
@@ -1354,9 +1414,13 @@ class StartInvasion(MagicWord):
                     if skeleton:
                         cogName = TTLocalizer.Skeleton + " " + cogName
                     if invMgr.startInvasion(cogType, numCogs, skeleton):
-                        response = ("Invasion started: %s, %s" % (cogName, numCogs))
+                        response = (
+                            "Invasion started: %s, %s" %
+                            (cogName, numCogs))
                     else:
-                        response = ("Invasion failed: %s, %s" % (cogName, numCogs))
+                        response = (
+                            "Invasion failed: %s, %s" %
+                            (cogName, numCogs))
                 else:
                     response = ("Unknown cogType: %s" % (cogType))
         return response
@@ -1549,7 +1613,7 @@ class SummonSuit(MagicWord):
             try:
                 int(name)
                 return 'Argument 1 cannot be an integer.'
-            except:
+            except BaseException:
 
                 name = args[0]
                 if name == 'x':
@@ -1575,7 +1639,8 @@ class SummonSuit(MagicWord):
             map = sp.getZoneIdToPointMap()
             canonicalZoneId = ZoneUtil.getCanonicalZoneId(zoneId)
             if canonicalZoneId not in map:
-                response = "Zone %d isn't near a suit point." % (canonicalZoneId)
+                response = "Zone %d isn't near a suit point." % (
+                    canonicalZoneId)
             else:
                 points = map[canonicalZoneId][:]
                 suit = sp.createNewSuit([], points,
@@ -1584,7 +1649,8 @@ class SummonSuit(MagicWord):
                                         skelecog=skelecog,
                                         revives=revives)
                 if suit:
-                    response = "Here comes %s." % (SuitBattleGlobals.SuitAttributes[suit.dna.name]['name'])
+                    response = "Here comes %s." % (
+                        SuitBattleGlobals.SuitAttributes[suit.dna.name]['name'])
                 else:
                     response = "Could not create suit."
 
@@ -1652,7 +1718,11 @@ class AIObjects(MagicWord):
 
 
 class RequestDeleted(MagicWord):
-    aliases = ['requestdeletedobjects', 'getdeletedobjects', 'getdeleted', 'deletedobjects']
+    aliases = [
+        'requestdeletedobjects',
+        'getdeletedobjects',
+        'getdeleted',
+        'deletedobjects']
     desc = 'Gets deleted AI objects.'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
@@ -1726,7 +1796,8 @@ class DNA(MagicWord):
         dna.makeFromNetString(invoker.getDNAString())
         part = args[0]
         value = args[1]
-        if part.endswith('size') or part.endswith('color') or part.endswith('tex'):
+        if part.endswith('size') or part.endswith(
+                'color') or part.endswith('tex'):
             value = int(value)
         if part in ('species', 'head', 'animal'):
             animalsList = ('dog', 'cat', 'horse', 'mouse', 'rabbit', 'duck', 'monkey', 'bear',
@@ -1764,7 +1835,8 @@ class DNA(MagicWord):
         if part == 'legs':
             value = int(value)
             if not 0 <= value <= len(ToonDNA.toonLegTypes):
-                return 'Legs index out of range (0-{0d}).'.format(len(ToonDNA.toonLegTypes))
+                return 'Legs index out of range (0-{0d}).'.format(
+                    len(ToonDNA.toonLegTypes))
             dna.legs = ToonDNA.toonLegTypes[value]
             invoker.b_setDNAString(dna.makeNetString())
             return 'Legs are now: {0}'.format(dna.legs)
@@ -1784,7 +1856,7 @@ class DNA(MagicWord):
             # if (value not in ToonDNA.defaultBoyColorList) and (dna.gender == 'm'):
             #   return 'Invalid male arm color index: {0}'.format(str(value))
             # if (value not in ToonDNA.defaultGirlColorList) and (dna.gender == 'f'):
-            #    return 'Invalid female arm color index: {0}'.format(str(value))
+            # return 'Invalid female arm color index: {0}'.format(str(value))
             if value not in ToonDNA.defaultColorList:
                 return f'Invalid arm color index : {value}'
             dna.armColor = value
@@ -1797,7 +1869,7 @@ class DNA(MagicWord):
             # if (value not in ToonDNA.defaultBoyColorList) and (dna.gender == 'm'):
             #       return 'Invalid male leg color index: {0}'.format(str(value))
             #   if (value not in ToonDNA.defaultGirlColorList) and (dna.gender == 'f'):
-            #     return 'Invalid female leg color index: {0}'.format(str(value))
+            # return 'Invalid female leg color index: {0}'.format(str(value))
             if value not in ToonDNA.defaultColorList:
                 return f'Invalid leg color index : {value}'
             dna.legColor = value
@@ -1809,7 +1881,7 @@ class DNA(MagicWord):
             #    if (value not in ToonDNA.defaultBoyColorList) and (dna.gender == 'm'):
             #        return 'Invalid male color index: {0}'.format(str(value))
             #    if (value not in ToonDNA.defaultGirlColorList) and (dna.gender == 'f'):
-            #        return 'Invalid female  color index: {0}'.format(str(value))
+            # return 'Invalid female  color index: {0}'.format(str(value))
             if value not in ToonDNA.defaultColorList:
                 return f'Invalid  color index : {value}'
             dna.headColor = value
@@ -1836,36 +1908,44 @@ class DNA(MagicWord):
 
         if part == 'toptex':
             if not -1 < value <= len(ToonDNA.Shirts):
-                return 'Top texture index out of range (0-{0}).'.format(len(ToonDNA.Shirts))
+                return 'Top texture index out of range (0-{0}).'.format(
+                    len(ToonDNA.Shirts))
             dna.topTex = value
             invoker.b_setDNAString(dna.makeNetString())
             return 'Top texture index set to: {0}'.format(str(dna.topTex))
 
         if part == 'toptexcolor':
             if not -1 < value <= len(ToonDNA.ClothesColors):
-                return 'Top texture color index out of range(0-{0}).'.format(len(ToonDNA.ClothesColors))
+                return 'Top texture color index out of range(0-{0}).'.format(
+                    len(ToonDNA.ClothesColors))
             dna.topTexColor = value
             invoker.b_setDNAString(dna.makeNetString())
-            return 'Top texture color index set to: {0}'.format(str(dna.topTexColor))
+            return 'Top texture color index set to: {0}'.format(
+                str(dna.topTexColor))
 
         if part == 'sleevetex':
             if not -1 < value <= len(ToonDNA.Sleeves):
-                return 'Sleeve texture index out of range(0-{0}).'.format(len(ToonDNA.Sleeves))
+                return 'Sleeve texture index out of range(0-{0}).'.format(
+                    len(ToonDNA.Sleeves))
             dna.sleeveTex = value
             invoker.b_setDNAString(dna.makeNetString())
-            return 'Sleeve texture index set to: {0}'.format(str(dna.sleeveTex))
+            return 'Sleeve texture index set to: {0}'.format(
+                str(dna.sleeveTex))
 
         if part == 'sleevetexcolor':
             if not -1 <= value <= len(ToonDNA.ClothesColors):
-                return 'Sleeve texture color index out of range(0-{0}).'.format(len(ToonDNA.ClothesColors))
+                return 'Sleeve texture color index out of range(0-{0}).'.format(
+                    len(ToonDNA.ClothesColors))
             dna.sleeveTexColor = value
             invoker.b_setDNAString(dna.makeNetString())
-            return 'Sleeve texture color index set to: {0}'.format((dna.sleeveTexColor))
+            return 'Sleeve texture color index set to: {0}'.format(
+                (dna.sleeveTexColor))
 
         if part == 'bottex':
             bottoms = ToonDNA.Bottoms
             if not -1 <= value <= len(bottoms):
-                return 'Bottom texture index out of range (0-{0}).'.format(len(bottoms))
+                return 'Bottom texture index out of range (0-{0}).'.format(
+                    len(bottoms))
             dna.botTex = value
             invoker.b_setDNAString(dna.makeNetString())
             return 'Bottom texture index set to:{0}'.format(str(dna.botTex))
@@ -1939,23 +2019,28 @@ class DNA(MagicWord):
             # TODO textures and colors for accessories
         if part == 'bottexcolor':
             if not -1 < value <= len(ToonDNA.ClothesColors):
-                return 'Bottom texture color index out of range(0-{0}).'.format(len(ToonDNA.ClothesColors))
+                return 'Bottom texture color index out of range(0-{0}).'.format(
+                    len(ToonDNA.ClothesColors))
             dna.botTexColor = value
             invoker.b_setDNAString(dna.makeNetString())
-            return 'Bottom texture color index set to: {0}'.format(str(dna.botTexColor))
+            return 'Bottom texture color index set to: {0}'.format(
+                str(dna.botTexColor))
 
         if part == 'save':
             backup = simbase.backups.load('toon', (invoker.doId,), default={})
             backup.setdefault('dna', {})[value] = invoker.getDNAString()
             simbase.backups.save('toon', (invoker.doId,), backup)
-            return 'Saved a DNA backup for {0} under : {1}'.format((invoker.getName(), value))
+            return 'Saved a DNA backup for {0} under : {1}'.format(
+                (invoker.getName(), value))
 
         if part == 'load':
             backup = simbase.backups.load('toon', (invoker.doId,), default={})
             if value not in backup.get('dna', {}):
-                return "Couldn't find a DNA backup for {0} under: {1}".format((invoker.getName(), value))
+                return "Couldn't find a DNA backup for {0} under: {1}".format(
+                    (invoker.getName(), value))
             invoker.b_setDNAString(backup['dna'][value])
-            return 'Restored a DNA backup for {0} under : {1}'.format((invoker.getName(), value))
+            return 'Restored a DNA backup for {0} under : {1}'.format(
+                (invoker.getName(), value))
 
         return 'Invalid part: ' + part
 
@@ -2092,7 +2177,9 @@ class SpawnFanfare(MagicWord):
     def handleWord(self, invoker, avId, av, *args):
         from toontown.battle import Fanfare
         go = Fanfare.makeFanfareWithMessageImage(0, base.localAvatar, 1, "You just did a ~fanfare.  Here's a rake.",
-                                                 Vec2(0, 0.2), 0.08, base.localAvatar.inventory.buttonLookup(1, 1),
+                                                 Vec2(
+                                                     0, 0.2), 0.08, base.localAvatar.inventory.buttonLookup(
+                                                     1, 1),
                                                  Vec3(0, 0, 0), 4)
         Sequence(go[0], Func(go[1].show),
                  LerpColorScaleInterval(go[1], duration=.5, startColorScale=Vec4(1, 1, 1, 0),
@@ -2257,7 +2344,8 @@ class Catalog(MagicWord):
                 dd = int(args[3])
 
             self.air.catalogManager.forceMonthlyCatalog(av, mm, dd)
-            response = "%s items for %d/%0d." % (len(av.monthlyCatalog), mm, dd)
+            response = "%s items for %d/%0d." % (
+                len(av.monthlyCatalog), mm, dd)
 
         elif (args[0] == "clear") or (args[0] == "reset"):
             # ~catalog clear: reset the catalog (and the back catalog)
@@ -2416,7 +2504,8 @@ class GivePart(MagicWord):
     aliases = ['part']
     accessLevel = 'DEVELOPER'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
-    arguments = [('dept', str, False, 'all'), ('factoryType', str, False, 'fullSuit')]
+    arguments = [('dept', str, False, 'all'),
+                 ('factoryType', str, False, 'fullSuit')]
 
     def handleWord(self, invoker, avId, toon, *args):
         depts = self.getDepts(args[0])
@@ -2473,7 +2562,8 @@ class Promote(MagicWord):
         for dept in depts:
             av.b_promote(dept)
 
-        return "Set cogTypes: %s and cogLevels: %s" % (av.getCogTypes(), av.getCogLevels())
+        return "Set cogTypes: %s and cogLevels: %s" % (
+            av.getCogTypes(), av.getCogLevels())
 
 
 class SetCogSuit(MagicWord):
@@ -2483,7 +2573,8 @@ class SetCogSuit(MagicWord):
     advancedDesc = """Sets the toon to the indicated cog type (e.g. 'gh' for Glad
     Hander) and level for the appropriate dept. If no arg is specified for cogtype, reset cog suits in all depts to the initial level."""
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
-    arguments = [('cogtype', str, False, 'clear'), ('dept', str, False, ''), ('level', int, False, 0)]
+    arguments = [('cogtype', str, False, 'clear'),
+                 ('dept', str, False, ''), ('level', int, False, 0)]
 
     def handleWord(self, invoker, avId, av, *args):
         if len(args) > 0:
@@ -2514,7 +2605,7 @@ class SetCogSuit(MagicWord):
                 return 'Invalid department'
 
             dept = SuitDNA.getSuitDept(cogType)
-            if dept == None:
+            if dept is None:
                 return "Unknown cog type: %s" % (cogType)
 
             deptIndex = SuitDNA.suitDepts.index(dept)
@@ -2530,7 +2621,8 @@ class SetCogSuit(MagicWord):
             if args[2] != 0:
                 level = int(args[2]) - 1
                 if level < minLevel or level > maxLevel:
-                    return "Invalid level for %s (should be %s to %s)" % (cogType, minLevel + 1, minLevel + 5)
+                    return "Invalid level for %s (should be %s to %s)" % (
+                        cogType, minLevel + 1, minLevel + 5)
             else:
                 level = minLevel
 
@@ -2541,7 +2633,8 @@ class SetCogSuit(MagicWord):
             av.b_setCogTypes(cogTypes)
             av.b_setCogLevels(cogLevels)
 
-        return "Set cogTypes: %s and cogLevels: %s" % (av.getCogTypes(), av.getCogLevels())
+        return "Set cogTypes: %s and cogLevels: %s" % (
+            av.getCogTypes(), av.getCogLevels())
 
 
 class SetPinkSlips(MagicWord):
@@ -2575,7 +2668,8 @@ class ToggleHoliday(MagicWord):
                    """
     accessLevel = 'ADMIN'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
-    arguments = [('holidayId', int, True), ('command', 'str', False, ''), ('extra', str, False, '')]
+    arguments = [('holidayId', int, True), ('command', 'str',
+                                            False, ''), ('extra', str, False, '')]
 
     def handleWord(self, invoker, avId, av, *args):
         holiday = 5
@@ -2605,7 +2699,8 @@ class ToggleHoliday(MagicWord):
                     'Arg 2 should be "start" or "end" or "end forever" or "phase"')
         if doPhase:
             result = self.air.holidayManager.forcePhase(holiday, doPhase)
-            return "succeeded=%s forcing holiday %d to phase %s" % (result, holiday, doPhase)
+            return "succeeded=%s forcing holiday %d to phase %s" % (
+                result, holiday, doPhase)
         elif fStart:
             self.air.holidayManager.startHoliday(holiday)
             return (
@@ -2780,7 +2875,6 @@ class ToggleCollisionsOff(MagicWord):
     execLocation = MagicWordConfig.EXEC_LOC_CLIENT
     accessLevel = 'COMMUNITY'
 
-
     def handleWord(self, invoker, avId, toon, *args):
         toon.collisionsOff()
 
@@ -2796,8 +2890,6 @@ class SetUnites(MagicWord):
         value = min(args[0], 32767)
         invoker.restockAllResistanceMessages(value)
         return "Restocked {0} unites!".format(value)
-
-
 
 
 class SkipVP(MagicWord):
@@ -2850,45 +2942,46 @@ class SkipVP(MagicWord):
 
 
 class SkipCFO(MagicWord):
-     desc = "Skips to the indicated round of the CFO."
-     execLocation = MagicWordConfig.EXEC_LOC_SERVER
-     arguments = [("round", str, False, "next")]
-     accessLevel = "DEVELOPER"
+    desc = "Skips to the indicated round of the CFO."
+    execLocation = MagicWordConfig.EXEC_LOC_SERVER
+    arguments = [("round", str, False, "next")]
+    accessLevel = "DEVELOPER"
 
-     def handleWord(self, invoker, avId, toon, *args):
-         battle = args[0]
+    def handleWord(self, invoker, avId, toon, *args):
+        battle = args[0]
 
-         from toontown.suit.DistributedCashbotBossAI import DistributedCashbotBossAI
-         boss = None
-         for do in simbase.air.doId2do.values():
-             if isinstance(do, DistributedCashbotBossAI):
-                 if invoker.doId in do.involvedToons:
-                     boss = do
-                     break
-         if not boss:
-             return "You aren't in a CFO!"
+        from toontown.suit.DistributedCashbotBossAI import DistributedCashbotBossAI
+        boss = None
+        for do in simbase.air.doId2do.values():
+            if isinstance(do, DistributedCashbotBossAI):
+                if invoker.doId in do.involvedToons:
+                    boss = do
+                    break
+        if not boss:
+            return "You aren't in a CFO!"
 
-         battle = battle.lower()
+        battle = battle.lower()
 
-         if battle == 'two':
-             if boss.state in ('PrepareBattleThree', 'BattleThree'):
-                 return "You can not return to previous rounds!"
-             else:
-                 boss.exitIntroduction()
-                 boss.b_setState('PrepareBattleThree')
-                 return "Skipping to last round..."
+        if battle == 'two':
+            if boss.state in ('PrepareBattleThree', 'BattleThree'):
+                return "You can not return to previous rounds!"
+            else:
+                boss.exitIntroduction()
+                boss.b_setState('PrepareBattleThree')
+                return "Skipping to last round..."
 
-         if battle == 'next':
-             if boss.state in ('PrepareBattleOne', 'BattleOne'):
-                 boss.exitIntroduction()
-                 boss.b_setState('PrepareBattleThree')
-                 return "Skipping current round..."
-             elif boss.state in ('PrepareBattleThree', 'BattleThree'):
-                 boss.exitIntroduction()
-                 boss.b_setState('Victory')
-                 return "Skipping final round..."
+        if battle == 'next':
+            if boss.state in ('PrepareBattleOne', 'BattleOne'):
+                boss.exitIntroduction()
+                boss.b_setState('PrepareBattleThree')
+                return "Skipping current round..."
+            elif boss.state in ('PrepareBattleThree', 'BattleThree'):
+                boss.exitIntroduction()
+                boss.b_setState('Victory')
+                return "Skipping final round..."
 
-# TODO add skipcj and skipcfo 
+# TODO add skipcj and skipcfo
+
 
 # Instantiate all classes defined here to register them.
 # A bit hacky, but better than the old system

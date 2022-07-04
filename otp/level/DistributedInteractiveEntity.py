@@ -4,12 +4,20 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM
 from . import DistributedEntity
 
+
 class DistributedInteractiveEntity(DistributedEntity.DistributedEntity):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedInteractiveEntity')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedInteractiveEntity')
 
     def __init__(self, cr):
         DistributedEntity.DistributedEntity.__init__(self, cr)
-        self.fsm = ClassicFSM.ClassicFSM('DistributedInteractiveEntity', [State.State('off', self.enterOff, self.exitOff, ['playing', 'attract']), State.State('attract', self.enterAttract, self.exitAttract, ['playing']), State.State('playing', self.enterPlaying, self.exitPlaying, ['attract'])], 'off', 'off')
+        self.fsm = ClassicFSM.ClassicFSM(
+            'DistributedInteractiveEntity', [
+                State.State(
+                    'off', self.enterOff, self.exitOff, [
+                        'playing', 'attract']), State.State(
+                    'attract', self.enterAttract, self.exitAttract, ['playing']), State.State(
+                        'playing', self.enterPlaying, self.exitPlaying, ['attract'])], 'off', 'off')
         self.fsm.enterInitialState()
 
     def generate(self):
@@ -31,16 +39,18 @@ class DistributedInteractiveEntity(DistributedEntity.DistributedEntity):
 
     def setState(self, state, timestamp):
         if self.isGenerated():
-            self.fsm.request(state, [globalClockDelta.localElapsedTime(timestamp)])
+            self.fsm.request(
+                state, [
+                    globalClockDelta.localElapsedTime(timestamp)])
         else:
             self.initialState = state
             self.initialStateTimestamp = timestamp
 
-    def enterTrigger(self, args = None):
+    def enterTrigger(self, args=None):
         messenger.send('DistributedInteractiveEntity_enterTrigger')
         self.sendUpdate('requestInteract')
 
-    def exitTrigger(self, args = None):
+    def exitTrigger(self, args=None):
         messenger.send('DistributedInteractiveEntity_exitTrigger')
         self.sendUpdate('requestExit')
 

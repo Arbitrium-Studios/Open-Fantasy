@@ -15,6 +15,7 @@ from direct.task import Task
 from . import LevelUtil
 import random
 
+
 class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLevel')
     WantVisibility = config.GetBool('level-visibility', 1)
@@ -30,8 +31,14 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
         self.lastToonZone = None
         self.lastCamZone = 0
         self.titleColor = (1, 1, 1, 1)
-        self.titleText = OnscreenText.OnscreenText('', fg=self.titleColor, shadow=(0, 0, 0, 1), font=ToontownGlobals.getSuitFont(), pos=(0, -0.5), scale=0.16, drawOrder=0, mayChange=1)
-        self.smallTitleText = OnscreenText.OnscreenText('', fg=self.titleColor, font=ToontownGlobals.getSuitFont(), pos=(0.65, 0.9), scale=0.08, drawOrder=0, mayChange=1, bg=(0.5, 0.5, 0.5, 0.5), align=TextNode.ARight)
+        self.titleText = OnscreenText.OnscreenText(
+            '', fg=self.titleColor, shadow=(
+                0, 0, 0, 1), font=ToontownGlobals.getSuitFont(), pos=(
+                0, -0.5), scale=0.16, drawOrder=0, mayChange=1)
+        self.smallTitleText = OnscreenText.OnscreenText(
+            '', fg=self.titleColor, font=ToontownGlobals.getSuitFont(), pos=(
+                0.65, 0.9), scale=0.08, drawOrder=0, mayChange=1, bg=(
+                0.5, 0.5, 0.5, 0.5), align=TextNode.ARight)
         self.titleTextSeq = None
         self.zonesEnteredList = []
         self.fColorZones = 0
@@ -67,7 +74,8 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
 
     def setStartTimestamp(self, timestamp):
         DistributedLevel.notify.debug('setStartTimestamp: %s' % timestamp)
-        self.startTime = globalClockDelta.networkToLocalTime(timestamp, bits=32)
+        self.startTime = globalClockDelta.networkToLocalTime(
+            timestamp, bits=32)
         self.privGotAllRequired()
 
     def privGotAllRequired(self):
@@ -79,14 +87,18 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
     def initializeLevel(self, levelSpec):
         if __dev__:
             self.candidateSpec = levelSpec
-            self.sendUpdate('requestCurrentLevelSpec', [levelSpec.stringHash(), levelSpec.entTypeReg.getHashStr()])
+            self.sendUpdate(
+                'requestCurrentLevelSpec', [
+                    levelSpec.stringHash(), levelSpec.entTypeReg.getHashStr()])
         else:
             self.privGotSpec(levelSpec)
 
     if __dev__:
 
         def reportModelSpecSyncError(self, msg):
-            DistributedLevel.notify.error('%s\n\nyour spec does not match the level model\nuse SpecUtil.updateSpec, then restart your AI and client' % msg)
+            DistributedLevel.notify.error(
+                '%s\n\nyour spec does not match the level model\nuse SpecUtil.updateSpec, then restart your AI and client' %
+                msg)
 
         def setSpecDeny(self, reason):
             DistributedLevel.notify.error(reason)
@@ -95,7 +107,7 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
             DistributedLevel.notify.debug('setSpecSenderDoId: %s' % doId)
             blobSender = base.cr.doId2do[doId]
 
-            def setSpecBlob(specBlob, blobSender = blobSender, self = self):
+            def setSpecBlob(specBlob, blobSender=blobSender, self=self):
                 blobSender.sendAck()
                 from .LevelSpec import LevelSpec
                 spec = eval(specBlob)
@@ -113,11 +125,14 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
                 self.acceptOnce(evtName, setSpecBlob)
 
     def privGotSpec(self, levelSpec):
-        Level.Level.initializeLevel(self, self.doId, levelSpec, self.scenarioIndex)
+        Level.Level.initializeLevel(
+            self, self.doId, levelSpec, self.scenarioIndex)
         modelZoneNums = self.zoneNums
         specZoneNums = list(self.zoneNum2zoneId.keys())
         if not sameElements(modelZoneNums, specZoneNums):
-            self.reportModelSpecSyncError('model zone nums (%s) do not match spec zone nums (%s)' % (modelZoneNums, specZoneNums))
+            self.reportModelSpecSyncError(
+                'model zone nums (%s) do not match spec zone nums (%s)' %
+                (modelZoneNums, specZoneNums))
         self.initVisibility()
         self.placeLocalToon()
 
@@ -125,12 +140,15 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
         DistributedLevel.notify.debug('announceLeaving')
         self.doneBarrier()
 
-    def placeLocalToon(self, moveLocalAvatar = True):
+    def placeLocalToon(self, moveLocalAvatar=True):
         initialZoneEnt = None
         if self.entranceId in self.entranceId2entity:
             epEnt = self.entranceId2entity[self.entranceId]
             if moveLocalAvatar:
-                epEnt.placeToon(base.localAvatar, self.avIdList.index(base.localAvatar.doId), len(self.avIdList))
+                epEnt.placeToon(
+                    base.localAvatar, self.avIdList.index(
+                        base.localAvatar.doId), len(
+                        self.avIdList))
             initialZoneEnt = self.getEntity(epEnt.getZoneEntId())
         elif self.EmulateEntrancePoint:
             self.notify.debug('unknown entranceId %s' % self.entranceId)
@@ -145,7 +163,8 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
                 zoneEntId = random.choice(zoneEntIds)
                 initialZoneEnt = self.getEntity(zoneEntId)
                 if moveLocalAvatar:
-                    base.localAvatar.setPos(render, initialZoneEnt.getZoneNode().getPos(render))
+                    base.localAvatar.setPos(
+                        render, initialZoneEnt.getZoneNode().getPos(render))
             else:
                 initialZoneEnt = self.getEntity(LevelConstants.UberZoneEntId)
                 if moveLocalAvatar:
@@ -184,7 +203,8 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
                     floorColls.append(coll)
 
             if len(floorColls) > 0:
-                floorCollName = '%s%s' % (DistributedLevel.FloorCollPrefix, zoneNum)
+                floorCollName = '%s%s' % (
+                    DistributedLevel.FloorCollPrefix, zoneNum)
                 others = zoneNode.findAllMatches('**/%s' % floorCollName)
                 for other in others:
                     other.setName('%s_renamed' % floorCollName)
@@ -192,7 +212,8 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
                 for floorColl in floorColls:
                     floorColl.setName(floorCollName)
 
-                def handleZoneEnter(collisionEntry, self = self, zoneNum = zoneNum):
+                def handleZoneEnter(
+                        collisionEntry, self=self, zoneNum=zoneNum):
                     self.toonEnterZone(zoneNum)
                     floorNode = collisionEntry.getIntoNode()
                     if floorNode.hasTag('ouch'):
@@ -201,7 +222,7 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
 
                 self.accept('enter%s' % floorCollName, handleZoneEnter)
 
-                def handleZoneExit(collisionEntry, self = self, zoneNum = zoneNum):
+                def handleZoneExit(collisionEntry, self=self, zoneNum=zoneNum):
                     floorNode = collisionEntry.getIntoNode()
                     if floorNode.hasTag('ouch'):
                         self.stopOuch()
@@ -240,7 +261,7 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
         DistributedObject.DistributedObject.delete(self)
         self.stopOuch()
 
-    def requestReparent(self, entity, parentId, wrt = False):
+    def requestReparent(self, entity, parentId, wrt=False):
         parent = self.getEntity(parentId)
         if parent is not None:
             if wrt:
@@ -248,15 +269,19 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
             else:
                 entity.reparentTo(parent.getNodePath())
         else:
-            DistributedLevel.notify.debug('entity %s requesting reparent to %s, not yet created' % (entity, parentId))
+            DistributedLevel.notify.debug(
+                'entity %s requesting reparent to %s, not yet created' %
+                (entity, parentId))
             entity.reparentTo(hidden)
             if parentId not in self.parent2pendingChildren:
                 self.parent2pendingChildren[parentId] = []
 
-                def doReparent(parentId = parentId, self = self, wrt = wrt):
+                def doReparent(parentId=parentId, self=self, wrt=wrt):
                     parent = self.getEntity(parentId)
                     for child in self.parent2pendingChildren[parentId]:
-                        DistributedLevel.notify.debug('performing pending reparent of %s to %s' % (child, parent))
+                        DistributedLevel.notify.debug(
+                            'performing pending reparent of %s to %s' %
+                            (child, parent))
                         if wrt:
                             child.wrtReparentTo(parent.getNodePath())
                         else:
@@ -301,7 +326,7 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
         else:
             zone.stash()
 
-    def setTransparency(self, alpha, zone = None):
+    def setTransparency(self, alpha, zone=None):
         self.geom.setTransparency(1)
         if zone is None:
             node = self.geom
@@ -317,15 +342,16 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
         self.visChangedThisFrame = 0
         self.fForceSetZoneThisFrame = 0
 
-        def handleCameraRayFloorCollision(collEntry, self = self):
+        def handleCameraRayFloorCollision(collEntry, self=self):
             name = collEntry.getIntoNode().getName()
             self.notify.debug('camera floor ray collided with: %s' % name)
             prefixLen = len(DistributedLevel.FloorCollPrefix)
             if name[:prefixLen] == DistributedLevel.FloorCollPrefix:
                 try:
                     zoneNum = int(name[prefixLen:])
-                except:
-                    DistributedLevel.notify.warning('Invalid zone floor collision node: %s' % name)
+                except BaseException:
+                    DistributedLevel.notify.warning(
+                        'Invalid zone floor collision node: %s' % name)
                 else:
                     self.camEnterZone(zoneNum)
 
@@ -335,13 +361,17 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
             zoneNums.remove(LevelConstants.UberZoneEntId)
             self.forceSetZoneThisFrame()
             self.setVisibility(zoneNums)
-        taskMgr.add(self.visChangeTask, self.uniqueName(DistributedLevel.VisChangeTaskName), priority=49)
+        taskMgr.add(
+            self.visChangeTask,
+            self.uniqueName(
+                DistributedLevel.VisChangeTaskName),
+            priority=49)
         return
 
     def shutdownVisibility(self):
         taskMgr.remove(self.uniqueName(DistributedLevel.VisChangeTaskName))
 
-    def toonEnterZone(self, zoneNum, ouchLevel = None):
+    def toonEnterZone(self, zoneNum, ouchLevel=None):
         DistributedLevel.notify.debug('toonEnterZone%s' % zoneNum)
         if zoneNum != self.lastToonZone:
             self.lastToonZone = zoneNum
@@ -356,7 +386,7 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
             self.smallTitleText.hide()
             self.spawnTitleText()
 
-    def lockVisibility(self, zoneNum = None, zoneId = None):
+    def lockVisibility(self, zoneNum=None, zoneId=None):
         if zoneId is not None:
             zoneNum = self.getZoneNumFromId(zoneId)
         self.notify.debug('lockVisibility to zoneNum %s' % zoneNum)
@@ -379,10 +409,12 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
         if zoneNum == self.curZoneNum:
             return
         if zoneNum not in self.zoneNumDict:
-            DistributedLevel.notify.error('no ZoneEntity for this zone (%s)!!' % zoneNum)
+            DistributedLevel.notify.error(
+                'no ZoneEntity for this zone (%s)!!' %
+                zoneNum)
         self.updateVisibility(zoneNum)
 
-    def updateVisibility(self, zoneNum = None):
+    def updateVisibility(self, zoneNum=None):
         if zoneNum is None:
             zoneNum = self.curZoneNum
             if zoneNum is None:
@@ -395,7 +427,9 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
         if not __debug__:
             if self.lastToonZone not in visibleZoneNums:
                 if self.lastToonZone is not None:
-                    self.notify.warning('adding zoneNum %s to visibility list because toon is standing in that zone!' % self.lastToonZone)
+                    self.notify.warning(
+                        'adding zoneNum %s to visibility list because toon is standing in that zone!' %
+                        self.lastToonZone)
                     visibleZoneNums.update(list2dict([self.lastToonZone]))
         zoneEntIds = list(self.entType2ids['zone'])
         zoneEntIds.remove(LevelConstants.UberZoneEntId)
@@ -477,7 +511,7 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
 
     def spawnTitleText(self):
 
-        def getDescription(zoneNum, self = self):
+        def getDescription(zoneNum, self=self):
             ent = self.entities.get(zoneNum)
             if ent and hasattr(ent, 'description'):
                 return ent.description
@@ -495,16 +529,39 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
             titleSeq = None
             if self.lastCamZone not in self.zonesEnteredList:
                 self.zonesEnteredList.append(self.lastCamZone)
-                titleSeq = Sequence(Func(self.hideSmallTitleText), Func(self.showTitleText), Wait(0.1), Wait(6.0), self.titleText.colorInterval(0.5, Vec4(self.titleColor[0], self.titleColor[1], self.titleColor[2], self.titleColor[3]), startColor=Vec4(self.titleColor[0], self.titleColor[1], self.titleColor[2], 0.0)))
-            smallTitleSeq = Sequence(Func(self.hideTitleText), Func(self.showSmallTitle))
+                titleSeq = Sequence(
+                    Func(
+                        self.hideSmallTitleText),
+                    Func(
+                        self.showTitleText),
+                    Wait(0.1),
+                    Wait(6.0),
+                    self.titleText.colorInterval(
+                        0.5,
+                        Vec4(
+                            self.titleColor[0],
+                            self.titleColor[1],
+                            self.titleColor[2],
+                            self.titleColor[3]),
+                        startColor=Vec4(
+                            self.titleColor[0],
+                            self.titleColor[1],
+                            self.titleColor[2],
+                            0.0)))
+            smallTitleSeq = Sequence(
+                Func(
+                    self.hideTitleText), Func(
+                    self.showSmallTitle))
             if titleSeq:
-                self.titleTextSeq = Sequence(titleSeq, smallTitleSeq, name=self.uniqueName('titleText'))
+                self.titleTextSeq = Sequence(
+                    titleSeq, smallTitleSeq, name=self.uniqueName('titleText'))
             else:
-                self.titleTextSeq = Sequence(smallTitleSeq, name=self.uniqueName('titleText'))
+                self.titleTextSeq = Sequence(
+                    smallTitleSeq, name=self.uniqueName('titleText'))
             self.titleTextSeq.start()
         return
 
-    def showInfoText(self, text = 'hello world'):
+    def showInfoText(self, text='hello world'):
         description = text
         if description and description != '':
             if self.titleTextSeq:
@@ -515,9 +572,28 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
             self.titleText.setColor(Vec4(*self.titleColor))
             self.titleText.setFg(self.titleColor)
             titleSeq = None
-            titleSeq = Sequence(Func(self.hideSmallTitleText), Func(self.showTitleText), Wait(0.1), Wait(3.0), self.titleText.colorInterval(0.5, Vec4(self.titleColor[0], self.titleColor[1], self.titleColor[2], self.titleColor[3]), startColor=Vec4(self.titleColor[0], self.titleColor[1], self.titleColor[2], 0.0)))
+            titleSeq = Sequence(
+                Func(
+                    self.hideSmallTitleText),
+                Func(
+                    self.showTitleText),
+                Wait(0.1),
+                Wait(3.0),
+                self.titleText.colorInterval(
+                    0.5,
+                    Vec4(
+                        self.titleColor[0],
+                        self.titleColor[1],
+                        self.titleColor[2],
+                        self.titleColor[3]),
+                    startColor=Vec4(
+                        self.titleColor[0],
+                        self.titleColor[1],
+                        self.titleColor[2],
+                        0.0)))
             if titleSeq:
-                self.titleTextSeq = Sequence(titleSeq, name=self.uniqueName('titleText'))
+                self.titleTextSeq = Sequence(
+                    titleSeq, name=self.uniqueName('titleText'))
             self.titleTextSeq.start()
         return
 
@@ -537,14 +613,15 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
         if self.smallTitleText:
             self.smallTitleText.hide()
 
-    def startOuch(self, ouchLevel, period = 2):
+    def startOuch(self, ouchLevel, period=2):
         self.notify.debug('startOuch %s' % ouchLevel)
         if not hasattr(self, 'doingOuch'):
 
-            def doOuch(task, self = self, ouchLevel = ouchLevel, period = period):
+            def doOuch(task, self=self, ouchLevel=ouchLevel, period=period):
                 self.b_setOuch(ouchLevel)
                 self.lastOuchTime = globalClock.getFrameTime()
-                taskMgr.doMethodLater(period, doOuch, DistributedLevel.OuchTaskName)
+                taskMgr.doMethodLater(
+                    period, doOuch, DistributedLevel.OuchTaskName)
 
             delay = 0
             if hasattr(self, 'lastOuchTime'):
@@ -553,7 +630,8 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
                 if timeSinceLastOuch < period:
                     delay = period - timeSinceLastOuch
             if delay > 0:
-                taskMgr.doMethodLater(period, doOuch, DistributedLevel.OuchTaskName)
+                taskMgr.doMethodLater(
+                    period, doOuch, DistributedLevel.OuchTaskName)
             else:
                 doOuch(None)
             self.doingOuch = 1
@@ -564,7 +642,7 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
             taskMgr.remove(DistributedLevel.OuchTaskName)
             del self.doingOuch
 
-    def b_setOuch(self, penalty, anim = None):
+    def b_setOuch(self, penalty, anim=None):
         self.notify.debug('b_setOuch %s' % penalty)
         av = base.localAvatar
         if not av.isStunned:
@@ -574,7 +652,7 @@ class DistributedLevel(DistributedObject.DistributedObject, Level.Level):
     def d_setOuch(self, penalty):
         self.sendUpdate('setOuch', [penalty])
 
-    def setOuch(self, penalty, anim = None):
+    def setOuch(self, penalty, anim=None):
         if anim == 'Squish':
             if base.cr.playGame.getPlace():
                 base.cr.playGame.getPlace().fsm.request('squished')

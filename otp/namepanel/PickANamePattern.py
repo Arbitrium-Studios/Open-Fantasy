@@ -42,8 +42,8 @@ class PickANamePattern:
             return
 
         for permutation in self._genWordListSplitPermutations(words[1:]):
-            yield [words[0]]+permutation
-            yield [(words[0] + ' ')+permutation[0]]+permutation[1:]
+            yield [words[0]] + permutation
+            yield [(words[0] + ' ') + permutation[0]] + permutation[1:]
 
     def _genNameSplitPermutations(self, name):
         for splitName in self._genWordListSplitPermutations(name.split()):
@@ -63,7 +63,7 @@ class PickANamePattern:
     def _getNameParts(self, gender):
         pass
 
-    def _recursiveCompute(self, words, nameParts, wi = 0, nwli = 0, pattern = None):
+    def _recursiveCompute(self, words, nameParts, wi=0, nwli=0, pattern=None):
         if wi >= len(words):
             return pattern
         if nwli >= len(nameParts):
@@ -74,7 +74,8 @@ class PickANamePattern:
             word2index = nameParts[nwli]
             newPattern = pattern[:]
             newPattern[nwli] = word2index[words[wi]]
-            result = self._recursiveCompute(words, nameParts, wi + 1, nwli + 1, newPattern)
+            result = self._recursiveCompute(
+                words, nameParts, wi + 1, nwli + 1, newPattern)
             if result:
                 return result
         return self._recursiveCompute(words, nameParts, wi, nwli + 1, pattern)

@@ -19,6 +19,7 @@ from toontown.toon import Toon
 from . import FriendHandle
 from otp.otpbase import OTPGlobals
 
+
 class FriendsListManager:
     notify = DirectNotifyGlobal.directNotify.newCategory('FriendsListManager')
 
@@ -30,7 +31,8 @@ class FriendsListManager:
         return
 
     def load(self):
-        base.cr.friendManager.setGameSpecificFunction(self.processQueuedRequests)
+        base.cr.friendManager.setGameSpecificFunction(
+            self.processQueuedRequests)
         self.accept(OTPGlobals.AvatarNewFriendAddEvent, self.__friendAdded)
 
     def unload(self):
@@ -59,7 +61,9 @@ class FriendsListManager:
         self.accept('avatarDetails', self.__handleAvatarDetails)
         self.accept('playerDetails', self.__handlePlayerDetails)
         self.accept('friendInvitation', self.__handleFriendInvitation)
-        self.accept(OTPGlobals.PlayerFriendInvitationEvent, self.__handlePlayerFriendInvitation)
+        self.accept(
+            OTPGlobals.PlayerFriendInvitationEvent,
+            self.__handlePlayerFriendInvitation)
         if base.cr.friendManager:
             base.cr.friendManager.setAvailable(1)
 
@@ -95,27 +99,30 @@ class FriendsListManager:
     def __openFriendsList(self):
         FriendsListPanel.showFriendsList()
 
-    def __handleClickedNametag(self, avatar, playerId = None):
+    def __handleClickedNametag(self, avatar, playerId=None):
         self.notify.debug('__handleClickedNametag. doId = %s' % avatar.doId)
         if avatar.isPet():
             self.avatarPanel = PetAvatarPanel.PetAvatarPanel(avatar)
         elif isinstance(avatar, Toon.Toon) or isinstance(avatar, FriendHandle.FriendHandle):
             if hasattr(self, 'avatarPanel'):
                 if self.avatarPanel:
-                    if not hasattr(self.avatarPanel, 'getAvId') or self.avatarPanel.getAvId() == avatar.doId:
+                    if not hasattr(
+                            self.avatarPanel, 'getAvId') or self.avatarPanel.getAvId() == avatar.doId:
                         if not self.avatarPanel.isHidden():
                             if self.avatarPanel.getType() == 'toon':
                                 return
-            self.avatarPanel = ToonAvatarPanel.ToonAvatarPanel(avatar, playerId)
+            self.avatarPanel = ToonAvatarPanel.ToonAvatarPanel(
+                avatar, playerId)
         else:
             self.avatarPanel = SuitAvatarPanel.SuitAvatarPanel(avatar)
 
-    def __handleClickedNametagPlayer(self, avatar, playerId, showType = 1):
+    def __handleClickedNametagPlayer(self, avatar, playerId, showType=1):
         self.notify.debug('__handleClickedNametagPlayer PlayerId%s' % playerId)
         if showType == 1:
             if hasattr(self, 'avatarPanel'):
                 if self.avatarPanel:
-                    if not hasattr(self.avatarPanel, 'getPlayerId') or self.avatarPanel.getPlayerId() == playerId:
+                    if not hasattr(
+                            self.avatarPanel, 'getPlayerId') or self.avatarPanel.getPlayerId() == playerId:
                         if not self.avatarPanel.isHidden():
                             if self.avatarPanel.getType() == 'player':
                                 return
@@ -123,11 +130,13 @@ class FriendsListManager:
         elif isinstance(avatar, Toon.Toon) or isinstance(avatar, FriendHandle.FriendHandle):
             if hasattr(self, 'avatarPanel'):
                 if self.avatarPanel:
-                    if not hasattr(self.avatarPanel, 'getAvId') or self.avatarPanel.getAvId() == avatar.doId:
+                    if not hasattr(
+                            self.avatarPanel, 'getAvId') or self.avatarPanel.getAvId() == avatar.doId:
                         if not self.avatarPanel.isHidden():
                             if self.avatarPanel.getType() == 'toon':
                                 return
-            self.avatarPanel = ToonAvatarPanel.ToonAvatarPanel(avatar, playerId)
+            self.avatarPanel = ToonAvatarPanel.ToonAvatarPanel(
+                avatar, playerId)
 
     def __handleGotoAvatar(self, avId, avName, avDisableName):
         ToonTeleportPanel.showTeleportPanel(avId, avName, avDisableName)
@@ -141,21 +150,24 @@ class FriendsListManager:
         if not base.cr.avatarFriendsManager.checkIgnored(avId):
             FriendInvitee.FriendInvitee(avId, avName, dna, context)
 
-    def __handlePlayerFriendInvitation(self, avId, avName, inviterDna = None, context = None):
+    def __handlePlayerFriendInvitation(
+            self, avId, avName, inviterDna=None, context=None):
         self.notify.debug('incoming switchboard friend event')
         self.friendsRequestQueue.append((avId,
-         avName,
-         inviterDna,
-         context))
+                                         avName,
+                                         inviterDna,
+                                         context))
         if base.cr.friendManager.getAvailable():
             self.processQueuedRequests()
 
     def processQueuedRequests(self):
         if len(self.friendsRequestQueue):
             request = self.friendsRequestQueue.pop(0)
-            self.__processFriendRequest(request[0], request[1], request[2], request[3])
+            self.__processFriendRequest(
+                request[0], request[1], request[2], request[3])
 
-    def __processFriendRequest(self, avId, avName, inviterDna = None, context = None):
+    def __processFriendRequest(
+            self, avId, avName, inviterDna=None, context=None):
         self.notify.debug('__handleAvatarFriendInvitation')
         askerToon = base.cr.doId2do.get(avId)
         if askerToon:
@@ -166,10 +178,10 @@ class FriendsListManager:
         else:
             self.notify.debug('no toon')
 
-    def __handleAvatarDetails(self, avId, avName, playerId = None):
+    def __handleAvatarDetails(self, avId, avName, playerId=None):
         ToonAvatarDetailPanel.showAvatarDetail(avId, avName, playerId)
 
-    def __handlePlayerDetails(self, avId, avName, playerId = None):
+    def __handlePlayerDetails(self, avId, avName, playerId=None):
         PlayerDetailPanel.showPlayerDetail(avId, avName, playerId)
 
     def preserveFriendsList(self):
@@ -177,12 +189,13 @@ class FriendsListManager:
         self._preserveFriendsList = True
 
     def __friendAdded(self, avId):
-        if FriendInviter.globalFriendInviter != None:
+        if FriendInviter.globalFriendInviter is not None:
             messenger.send('FriendsListManagerAddEvent', [avId])
         else:
             friendToon = base.cr.doId2do.get(avId)
             if friendToon:
                 print('got toon')
                 dna = friendToon.getStyle()
-                FriendNotifier.FriendNotifier(avId, friendToon.getName(), dna, None)
+                FriendNotifier.FriendNotifier(
+                    avId, friendToon.getName(), dna, None)
         return

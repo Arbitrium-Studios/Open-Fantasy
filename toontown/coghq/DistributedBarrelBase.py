@@ -5,8 +5,11 @@ from toontown.coghq import BarrelBase
 from otp.level import BasicEntities
 from direct.directnotify import DirectNotifyGlobal
 
-class DistributedBarrelBase(BasicEntities.DistributedNodePathEntity, BarrelBase.BarrelBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBarrelBase')
+
+class DistributedBarrelBase(
+        BasicEntities.DistributedNodePathEntity, BarrelBase.BarrelBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedBarrelBase')
 
     def __init__(self, cr):
         self.rewardPerGrabMax = 0
@@ -56,7 +59,9 @@ class DistributedBarrelBase(BasicEntities.DistributedNodePathEntity, BarrelBase.
         self.collNodePath = self.barrel.attachNewNode(self.collNode)
         self.collNodePath.hide()
         self.applyLabel()
-        self.accept(self.uniqueName('enterbarrelSphere'), self.handleEnterSphere)
+        self.accept(
+            self.uniqueName('enterbarrelSphere'),
+            self.handleEnterSphere)
 
     def loadModel(self):
         self.grabSound = base.loader.loadSfx(self.grabSoundPath)
@@ -70,7 +75,7 @@ class DistributedBarrelBase(BasicEntities.DistributedNodePathEntity, BarrelBase.
         self.gagNode.setPosHpr(0.0, -2.62, 4.0, 0, 0, 0)
         self.gagNode.setColorScale(0.7, 0.7, 0.6, 1)
 
-    def handleEnterSphere(self, collEntry = None):
+    def handleEnterSphere(self, collEntry=None):
         localAvId = base.localAvatar.getDoId()
         self.d_requestGrab()
 
@@ -89,7 +94,20 @@ class DistributedBarrelBase(BasicEntities.DistributedNodePathEntity, BarrelBase.
             self.animTrack.finish()
             self.animTrack = None
         flytime = 1.0
-        self.animTrack = Sequence(LerpScaleInterval(self.barrel, 0.2, 1.1 * self.barrelScale, blendType='easeInOut'), LerpScaleInterval(self.barrel, 0.2, self.barrelScale, blendType='easeInOut'), Func(self.resetBarrel), name=self.uniqueName('animTrack'))
+        self.animTrack = Sequence(
+            LerpScaleInterval(
+                self.barrel,
+                0.2,
+                1.1 * self.barrelScale,
+                blendType='easeInOut'),
+            LerpScaleInterval(
+                self.barrel,
+                0.2,
+                self.barrelScale,
+                blendType='easeInOut'),
+            Func(
+                self.resetBarrel),
+            name=self.uniqueName('animTrack'))
         self.animTrack.start()
         return
 
@@ -98,4 +116,6 @@ class DistributedBarrelBase(BasicEntities.DistributedNodePathEntity, BarrelBase.
 
     def resetBarrel(self):
         self.barrel.setScale(self.barrelScale)
-        self.accept(self.uniqueName('entertreasureSphere'), self.handleEnterSphere)
+        self.accept(
+            self.uniqueName('entertreasureSphere'),
+            self.handleEnterSphere)

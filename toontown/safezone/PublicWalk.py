@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from . import Walk
 from otp.otpbase import OTPGlobals
 
+
 class PublicWalk(Walk.Walk):
     notify = DirectNotifyGlobal.directNotify.newCategory('PublicWalk')
 
@@ -20,7 +21,7 @@ class PublicWalk(Walk.Walk):
         Walk.Walk.unload(self)
         del self.parentFSM
 
-    def enter(self, slowWalk = 0):
+    def enter(self, slowWalk=0):
         Walk.Walk.enter(self, slowWalk)
         base.localAvatar.book.showButton()
         self.accept(StickerBookHotkey, self.__handleStickerBookEntry)
@@ -33,7 +34,6 @@ class PublicWalk(Walk.Walk):
         # self.accept(f'{base.SPRINT}-up', self.stopSprint)
         self.accept('shift', self.startSprint)
         self.accept('shift-up', self.stopSprint)
-
 
     def exit(self):
         Walk.Walk.exit(self)
@@ -50,33 +50,31 @@ class PublicWalk(Walk.Walk):
         self.ignore('shift-up')
 
     def startSprint(self):
-         if hasattr(base, 'localAvatar'):
-             if base.localAvatar.getHp() <= 0:
+        if hasattr(base, 'localAvatar'):
+            if base.localAvatar.getHp() <= 0:
                 return
-             else:
-                 self.previousFOV = base.genFOV
+            else:
+                self.previousFOV = base.genFOV
 
-                 base.localAvatar.currentSpeed = OTPGlobals.ToonForwardSprintSpeed
-                 base.localAvatar.currentReverseSpeed = OTPGlobals.ToonReverseSprintSpeed
-                 base.localAvatar.controlManager.setSpeeds(
-                     OTPGlobals.ToonForwardSprintSpeed, OTPGlobals.ToonJumpForce, OTPGlobals.ToonReverseSprintSpeed, OTPGlobals.ToonRotateSpeed)
-                 self.isSprinting = 1
-                 base.localAvatar.lerpCameraFov(self.previousFOV + 20, 0.5)
+                base.localAvatar.currentSpeed = OTPGlobals.ToonForwardSprintSpeed
+                base.localAvatar.currentReverseSpeed = OTPGlobals.ToonReverseSprintSpeed
+                base.localAvatar.controlManager.setSpeeds(
+                    OTPGlobals.ToonForwardSprintSpeed, OTPGlobals.ToonJumpForce, OTPGlobals.ToonReverseSprintSpeed, OTPGlobals.ToonRotateSpeed)
+                self.isSprinting = 1
+                base.localAvatar.lerpCameraFov(self.previousFOV + 20, 0.5)
 
-
-
-         else:
-             if self.isSprinting == 1:
-                 self.stopSprint()
+        else:
+            if self.isSprinting == 1:
+                self.stopSprint()
 
     def stopSprint(self):
-         if hasattr(base, 'localAvatar'):
-             base.localAvatar.currentSpeed = OTPGlobals.ToonForwardSpeed
-             base.localAvatar.currentReverseSpeed = OTPGlobals.ToonReverseSpeed
-             base.localAvatar.controlManager.setSpeeds(
-                 OTPGlobals.ToonForwardSpeed, OTPGlobals.ToonJumpForce, OTPGlobals.ToonReverseSpeed, OTPGlobals.ToonRotateSpeed)
-             self.isSprinting = 0
-             base.localAvatar.lerpCameraFov(self.previousFOV, 1.0)
+        if hasattr(base, 'localAvatar'):
+            base.localAvatar.currentSpeed = OTPGlobals.ToonForwardSpeed
+            base.localAvatar.currentReverseSpeed = OTPGlobals.ToonReverseSpeed
+            base.localAvatar.controlManager.setSpeeds(
+                OTPGlobals.ToonForwardSpeed, OTPGlobals.ToonJumpForce, OTPGlobals.ToonReverseSpeed, OTPGlobals.ToonRotateSpeed)
+            self.isSprinting = 0
+            base.localAvatar.lerpCameraFov(self.previousFOV, 1.0)
 
     def __handleStickerBookEntry(self):
         currentState = base.localAvatar.animFSM.getCurrentState().getName()

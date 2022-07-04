@@ -3,6 +3,7 @@ from toontown.quest import Quests
 from toontown.toon import NPCToons
 TTSCToontaskMsgEvent = 'SCToontaskMsg'
 
+
 def decodeTTSCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex):
     q = Quests.getQuest(taskId)
     if q is None:
@@ -11,7 +12,7 @@ def decodeTTSCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex):
     if name is None:
         return
     msgs = q.getSCStrings(toNpcId, toonProgress)
-    if type(msgs) != type([]):
+    if not isinstance(msgs, type([])):
         msgs = [msgs]
     if msgIndex >= len(msgs):
         return
@@ -34,6 +35,6 @@ class TTSCToontaskTerminal(SCTerminal):
     def handleSelect(self):
         SCTerminal.handleSelect(self)
         messenger.send(self.getEventName(TTSCToontaskMsgEvent), [self.taskId,
-         self.toNpcId,
-         self.toonProgress,
-         self.msgIndex])
+                                                                 self.toNpcId,
+                                                                 self.toonProgress,
+                                                                 self.msgIndex])

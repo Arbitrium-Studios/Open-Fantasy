@@ -14,18 +14,26 @@ from toontown.toonbase import ToontownGlobals
 from direct.fsm import State
 import random
 
+
 class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBattleFinal')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedBattleFinal')
 
     def __init__(self, cr):
         townBattle = cr.playGame.hood.loader.townBattle
-        DistributedBattleBase.DistributedBattleBase.__init__(self, cr, townBattle)
+        DistributedBattleBase.DistributedBattleBase.__init__(
+            self, cr, townBattle)
         self.setupCollisions(self.uniqueBattleName('battle-collide'))
         self.bossCog = None
         self.bossCogRequest = None
         self.streetBattle = 0
         self.joiningSuitsName = self.uniqueBattleName('joiningSuits')
-        self.fsm.addState(State.State('ReservesJoining', self.enterReservesJoining, self.exitReservesJoining, ['WaitForJoin']))
+        self.fsm.addState(
+            State.State(
+                'ReservesJoining',
+                self.enterReservesJoining,
+                self.exitReservesJoining,
+                ['WaitForJoin']))
         offState = self.fsm.getStateNamed('Off')
         offState.addTransition('ReservesJoining')
         waitForJoinState = self.fsm.getStateNamed('WaitForJoin')
@@ -55,7 +63,8 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
             self.__gotBossCog([tempBossCog])
         else:
             self.notify.debug('doing relatedObjectMgr.request for bossCog')
-            self.bossCogRequest = base.cr.relatedObjectMgr.requestObjects([bossCogId], allCallback=self.__gotBossCog)
+            self.bossCogRequest = base.cr.relatedObjectMgr.requestObjects(
+                [bossCogId], allCallback=self.__gotBossCog)
 
     def __gotBossCog(self, bossCogList):
         self.bossCogRequest = None
@@ -71,10 +80,24 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
     def setBattleSide(self, battleSide):
         self.battleSide = battleSide
 
-    def setMembers(self, suits, suitsJoining, suitsPending, suitsActive, suitsLured, suitTraps, toons, toonsJoining, toonsPending, toonsActive, toonsRunning, timestamp):
+    def setMembers(self, suits, suitsJoining, suitsPending, suitsActive, suitsLured,
+                   suitTraps, toons, toonsJoining, toonsPending, toonsActive, toonsRunning, timestamp):
         if self.battleCleanedUp():
             return
-        oldtoons = DistributedBattleBase.DistributedBattleBase.setMembers(self, suits, suitsJoining, suitsPending, suitsActive, suitsLured, suitTraps, toons, toonsJoining, toonsPending, toonsActive, toonsRunning, timestamp)
+        oldtoons = DistributedBattleBase.DistributedBattleBase.setMembers(
+            self,
+            suits,
+            suitsJoining,
+            suitsPending,
+            suitsActive,
+            suitsLured,
+            suitTraps,
+            toons,
+            toonsJoining,
+            toonsPending,
+            toonsActive,
+            toonsRunning,
+            timestamp)
         if len(self.toons) == 4 and len(oldtoons) < 4:
             self.notify.debug('setMembers() - battle is now full of toons')
             self.closeBattleCollision()
@@ -88,7 +111,7 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
             self.d_joinDone(base.localAvatar.doId, suit.doId)
 
     def showSuitsJoining(self, suits, ts, name, callback):
-        if self.bossCog == None:
+        if self.bossCog is None:
             return
         if self.battleSide:
             openDoor = Func(self.bossCog.doorB.request, 'open')
@@ -112,7 +135,17 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
                 destHpr = VBase3(h, 0, 0)
             else:
                 destPos, destHpr = self.getActorPosHpr(suit, self.suits)
-            suitTrack.append(Track((delay, self.createAdjustInterval(suit, destPos, destHpr)), (delay + 1.5, suit.scaleInterval(1.5, 1))))
+            suitTrack.append(
+                Track(
+                    (delay,
+                     self.createAdjustInterval(
+                         suit,
+                         destPos,
+                         destHpr)),
+                    (delay + 1.5,
+                     suit.scaleInterval(
+                         1.5,
+                         1))))
             delay += 1
 
         if self.hasLocalToon():
@@ -130,14 +163,25 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
     def __playReward(self, ts, callback):
         toonTracks = Parallel()
         for toon in self.toons:
-            toonTracks.append(Sequence(Func(toon.loop, 'victory'), Wait(FLOOR_REWARD_TIMEOUT), Func(toon.loop, 'neutral')))
+            toonTracks.append(
+                Sequence(
+                    Func(
+                        toon.loop,
+                        'victory'),
+                    Wait(FLOOR_REWARD_TIMEOUT),
+                    Func(
+                        toon.loop,
+                        'neutral')))
 
         name = self.uniqueName('floorReward')
         track = Sequence(toonTracks, name=name)
         if self.hasLocalToon():
             camera.setPos(0, 0, 1)
             camera.setHpr(180, 10, 0)
-        track += [self.bossCog.makeEndOfBattleMovie(self.hasLocalToon()), Func(callback)]
+        track += [
+            self.bossCog.makeEndOfBattleMovie(
+                self.hasLocalToon()),
+            Func(callback)]
         self.storeInterval(track, name)
         track.start(ts)
 
@@ -161,7 +205,7 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
 
         return None
 
-    def enterResume(self, ts = 0):
+    def enterResume(self, ts=0):
         if self.hasLocalToon():
             self.removeLocalToon()
         self.fsm.requestFinalState()
@@ -169,9 +213,13 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
     def exitResume(self):
         return None
 
-    def enterReservesJoining(self, ts = 0):
+    def enterReservesJoining(self, ts=0):
         self.delayDeleteMembers()
-        self.showSuitsJoining(self.joiningSuits, ts, self.joiningSuitsName, self.__reservesJoiningDone)
+        self.showSuitsJoining(
+            self.joiningSuits,
+            ts,
+            self.joiningSuitsName,
+            self.__reservesJoiningDone)
 
     def __reservesJoiningDone(self):
         self._removeMembersKeep()
@@ -182,7 +230,7 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
 
     def enterNoLocalToon(self):
         self.notify.debug('enterNoLocalToon()')
-        if self.bossCog != None and self.bossCog.hasLocalToon():
+        if self.bossCog is not None and self.bossCog.hasLocalToon():
             self.enableCollision()
         else:
             self.disableCollision()

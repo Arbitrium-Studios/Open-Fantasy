@@ -3,6 +3,7 @@ from direct.showbase.MessengerGlobal import *
 from direct.task.TaskManagerGlobal import *
 from direct.task.Task import Task
 
+
 class DummyLauncherBase:
 
     def __init__(self):
@@ -20,7 +21,8 @@ class DummyLauncherBase:
 
     def startFakeDownload(self):
         if ConfigVariableBool('fake-downloads', 0).getValue():
-            duration = ConfigVariableDouble('fake-download-duration', 60).getValue()
+            duration = ConfigVariableDouble(
+                'fake-download-duration', 60).getValue()
             self.fakeDownload(duration)
         else:
             for phase in self.LauncherPhases:
@@ -85,12 +87,13 @@ class DummyLauncherBase:
         return None
 
     def fakeDownloadPhaseTask(self, task):
-        percentComplete = min(100, int(round(task.time / float(task.timePerPhase) * 100)))
+        percentComplete = min(
+            100, int(round(task.time / float(task.timePerPhase) * 100)))
         self.setPhaseComplete(task.phase, percentComplete)
         messenger.send('launcherPercentPhaseComplete', [task.phase,
-         percentComplete,
-         0,
-         0])
+                                                        percentComplete,
+                                                        0,
+                                                        0])
         if percentComplete >= 100.0:
             messenger.send('phaseComplete-' + repr((task.phase)))
             return Task.done
@@ -104,24 +107,26 @@ class DummyLauncherBase:
 
     def fakeDownload(self, timePerPhase):
         self.phaseComplete = {1: 100,
-         2: 100,
-         3: 0,
-         3.5: 0,
-         4: 0,
-         5: 0,
-         5.5: 0,
-         6: 0,
-         7: 0,
-         8: 0,
-         9: 0,
-         10: 0,
-         11: 0,
-         12: 0,
-         13: 0}
+                              2: 100,
+                              3: 0,
+                              3.5: 0,
+                              4: 0,
+                              5: 0,
+                              5.5: 0,
+                              6: 0,
+                              7: 0,
+                              8: 0,
+                              9: 0,
+                              10: 0,
+                              11: 0,
+                              12: 0,
+                              13: 0}
         phaseTaskList = []
         firstPhaseIndex = self.LauncherPhases.index(self.firstPhase)
         for phase in self.LauncherPhases[firstPhaseIndex:]:
-            phaseTask = Task(self.fakeDownloadPhaseTask, 'phaseDownload' + str(phase))
+            phaseTask = Task(
+                self.fakeDownloadPhaseTask,
+                'phaseDownload' + str(phase))
             phaseTask.timePerPhase = timePerPhase
             phaseTask.phase = phase
             phaseTaskList.append(phaseTask)

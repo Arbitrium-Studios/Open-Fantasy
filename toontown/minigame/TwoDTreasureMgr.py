@@ -5,6 +5,7 @@ from toontown.minigame import ToonBlitzGlobals
 from toontown.minigame import TwoDTreasure
 import random
 
+
 class TwoDTreasureMgr(DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('TwoDTreasureMgr')
 
@@ -40,11 +41,14 @@ class TwoDTreasureMgr(DirectObject):
         for index in range(len(self.enemyList)):
             self.createNewTreasure([pos], numPlayers, isEnemyGenerated=True)
 
-    def createNewTreasure(self, attrib, value, isEnemyGenerated = False, model = None):
+    def createNewTreasure(self, attrib, value,
+                          isEnemyGenerated=False, model=None):
         treasureId = self.section.getSectionizedId(len(self.treasures))
-        if model == None:
-            model = self.getModel(value, self.section.sectionMgr.game.assetMgr.treasureModelList)
-        newTreasure = TwoDTreasure.TwoDTreasure(self, treasureId, attrib[0], value, isEnemyGenerated, model)
+        if model is None:
+            model = self.getModel(
+                value, self.section.sectionMgr.game.assetMgr.treasureModelList)
+        newTreasure = TwoDTreasure.TwoDTreasure(
+            self, treasureId, attrib[0], value, isEnemyGenerated, model)
         newTreasure.model.reparentTo(self.treasuresNP)
         self.treasures.append(newTreasure)
         if isEnemyGenerated:

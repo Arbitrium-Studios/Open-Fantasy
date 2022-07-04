@@ -5,27 +5,36 @@ import time
 import math
 import re
 
+
 class OTPBase(ShowBase):
 
-    def __init__(self, windowType = None):
+    def __init__(self, windowType=None):
         self.wantEnviroDR = False
         ShowBase.__init__(self, windowType=windowType)
-        __builtins__['__astron__'] = ConfigVariableBool('astron-support', 1).value
-        __builtins__['__execWarnings__'] = ConfigVariableBool('want-exec-warnings', 0).value
+        __builtins__['__astron__'] = ConfigVariableBool(
+            'astron-support', 1).value
+        __builtins__['__execWarnings__'] = ConfigVariableBool(
+            'want-exec-warnings', 0).value
         OTPBase.notify.info('__astron__ == %s' % __astron__)
         if ConfigVariableBool('want-phase-checker', 0).value:
             from direct.showbase import Loader
             Loader.phaseChecker = self.loaderPhaseChecker
             self.errorAccumulatorBuffer = ''
-            taskMgr.add(self.delayedErrorCheck, 'delayedErrorCheck', priority=10000)
+            taskMgr.add(
+                self.delayedErrorCheck,
+                'delayedErrorCheck',
+                priority=10000)
         self.idTags = ConfigVariableBool('want-id-tags', 0).value
         if not self.idTags:
             del self.idTags
         self.wantNametags = ConfigVariableBool('want-nametags', 1).value
         self.slowCloseShard = ConfigVariableBool('slow-close-shard', 0).value
-        self.slowCloseShardDelay = ConfigVariableDouble('slow-close-shard-delay', 10.0).value
-        self.fillShardsToIdealPop = ConfigVariableBool('fill-shards-to-ideal-pop', 1).value
-        self.logPrivateInfo = ConfigVariableBool('log-private-info', __dev__).value
+        self.slowCloseShardDelay = ConfigVariableDouble(
+            'slow-close-shard-delay', 10.0).value
+        self.fillShardsToIdealPop = ConfigVariableBool(
+            'fill-shards-to-ideal-pop', 1).value
+        self.logPrivateInfo = ConfigVariableBool(
+            'log-private-info', __dev__).value
         self.wantDynamicShadows = 1
         self.stereoEnabled = False
         self.enviroDR = None
@@ -38,13 +47,18 @@ class OTPBase(ShowBase):
             if self.wantEnviroDR:
                 base.cam.node().setCameraMask(OTPRender.MainCameraBitmask)
             else:
-                base.cam.node().setCameraMask(OTPRender.MainCameraBitmask | OTPRender.EnviroCameraBitmask)
+                base.cam.node().setCameraMask(
+                    OTPRender.MainCameraBitmask | OTPRender.EnviroCameraBitmask)
         taskMgr.setupTaskChain('net')
         return
 
     def setTaskChainNetThreaded(self):
         if base.config.GetBool('want-threaded-network', 0):
-            taskMgr.setupTaskChain('net', numThreads=1, frameBudget=0.001, threadPriority=TPLow)
+            taskMgr.setupTaskChain(
+                'net',
+                numThreads=1,
+                frameBudget=0.001,
+                threadPriority=TPLow)
 
     def setTaskChainNetNonthreaded(self):
         taskMgr.setupTaskChain('net', numThreads=0, frameBudget=-1)
@@ -53,7 +67,10 @@ class OTPBase(ShowBase):
         self.stereoEnabled = not self.stereoEnabled
         if self.stereoEnabled:
             if not base.win.isStereo():
-                base.win.setRedBlueStereo(True, ColorWriteAttrib.CRed, ColorWriteAttrib.CGreen | ColorWriteAttrib.CBlue)
+                base.win.setRedBlueStereo(
+                    True,
+                    ColorWriteAttrib.CRed,
+                    ColorWriteAttrib.CGreen | ColorWriteAttrib.CBlue)
         if self.wantEnviroDR:
             self.setupEnviroCamera()
             return
@@ -157,7 +174,8 @@ class OTPBase(ShowBase):
         if d2:
             d = math.sqrt(d2)
             self.pixelZoomCamMovedList.append((now, d))
-        while self.pixelZoomCamMovedList and self.pixelZoomCamMovedList[0][0] < now - self.pixelZoomCamHistory:
+        while self.pixelZoomCamMovedList and self.pixelZoomCamMovedList[
+                0][0] < now - self.pixelZoomCamHistory:
             del self.pixelZoomCamMovedList[0]
 
         dist = sum([pair[1] for pair in self.pixelZoomCamMovedList])
@@ -166,7 +184,7 @@ class OTPBase(ShowBase):
             self.backgroundDrawable.setPixelZoom(4)
             self.pixelZoomStart = None
         elif speed > 10:
-            if self.pixelZoomStart == None:
+            if self.pixelZoomStart is None:
                 self.pixelZoomStart = now
             elapsed = now - self.pixelZoomStart
             if elapsed > 10:
@@ -205,7 +223,8 @@ class OTPBase(ShowBase):
             if 'dmodels' in path:
                 return
             else:
-                self.errorAccumulatorBuffer += 'file not in phase (%s, %s)\n' % (file, path)
+                self.errorAccumulatorBuffer += 'file not in phase (%s, %s)\n' % (
+                    file, path)
                 return
         basePhase = float(match.groups()[0])
         if not launcher.getPhaseComplete(basePhase):
@@ -219,7 +238,8 @@ class OTPBase(ShowBase):
                 if match:
                     texPhase = float(match.groups()[0])
                     if texPhase > basePhase:
-                        self.errorAccumulatorBuffer += 'texture phase is higher than the models (%s, %s)\n' % (path, texPath)
+                        self.errorAccumulatorBuffer += 'texture phase is higher than the models (%s, %s)\n' % (
+                            path, texPath)
 
     def getRepository(self):
         return self.cr
@@ -227,11 +247,12 @@ class OTPBase(ShowBase):
     def openMainWindow(self, *args, **kw):
         result = ShowBase.openMainWindow(self, *args, **kw)
         if result:
-            self.wantEnviroDR = not self.win.getGsg().isHardware() or ConfigVariableBool('want-background-region', 1).value
+            self.wantEnviroDR = not self.win.getGsg().isHardware(
+            ) or ConfigVariableBool('want-background-region', 1).value
             self.backgroundDrawable = self.win
         return result
 
     def isMainWindowOpen(self):
-        if self.win != None:
+        if self.win is not None:
             return self.win.isValid()
         return 0

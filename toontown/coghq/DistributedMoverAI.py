@@ -11,7 +11,9 @@ from toontown.coghq import LaserGameMineSweeper
 from toontown.coghq import LaserGameRoll
 import random
 
-class DistributedMoverAI(DistributedEntityAI.DistributedEntityAI, NodePath, BasicEntities.NodePathAttribs):
+
+class DistributedMoverAI(DistributedEntityAI.DistributedEntityAI,
+                         NodePath, BasicEntities.NodePathAttribs):
 
     def __init__(self, level, entId):
         DistributedEntityAI.DistributedEntityAI.__init__(self, level, entId)
@@ -38,7 +40,10 @@ class DistributedMoverAI(DistributedEntityAI.DistributedEntityAI, NodePath, Basi
     def generate(self):
         DistributedEntityAI.DistributedEntityAI.generate(self)
         if self.switchId != 0:
-            self.accept(self.getOutputEventName(self.switchId), self.reactToSwitch)
+            self.accept(
+                self.getOutputEventName(
+                    self.switchId),
+                self.reactToSwitch)
         self.timerName = 'mover %s' % self.doId
         self.setPos(self.pos)
         self.setHpr(self.hpr)
@@ -78,7 +83,8 @@ class DistributedMoverAI(DistributedEntityAI.DistributedEntityAI, NodePath, Basi
     def setTimes(self):
         self.moveTime = {}
         self.moveTime['return'] = self.pos0Move + self.pos1Wait + self.pos1Move
-        self.moveTime['loop'] = self.pos0Wait + self.pos0Move + self.pos1Wait + self.pos1Move
+        self.moveTime['loop'] = self.pos0Wait + \
+            self.pos0Move + self.pos1Wait + self.pos1Move
         self.moveTime['oneWay'] = self.pos0Move
         self.moveTime['linear'] = self.pos0Move * 8
 
@@ -94,7 +100,8 @@ class DistributedMoverAI(DistributedEntityAI.DistributedEntityAI, NodePath, Basi
         timeStamp = ClockDelta.globalClockDelta.getRealNetworkTime()
         if self.oK2Play:
             self.sendUpdate('startMove', [timeStamp])
-            taskMgr.doMethodLater(self.moveTime[self.cycleType], self.__resetTimer, self.timerName)
+            taskMgr.doMethodLater(
+                self.moveTime[self.cycleType], self.__resetTimer, self.timerName)
         self.oK2Play = 0
 
     def __resetTimer(self, taskMgrFooler=1):

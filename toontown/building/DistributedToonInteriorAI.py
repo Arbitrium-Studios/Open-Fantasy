@@ -9,6 +9,7 @@ from direct.fsm import State
 from toontown.toon import NPCToons
 from toontown.toon.ToonDNA import ToonDNA
 
+
 class DistributedToonInteriorAI(DistributedObjectAI.DistributedObjectAI):
 
     def __init__(self, block, air, zoneId, building):
@@ -18,10 +19,14 @@ class DistributedToonInteriorAI(DistributedObjectAI.DistributedObjectAI):
         self.building = building
         self.npcs = NPCToons.createNpcsInZone(air, zoneId)
         self.fsm = ClassicFSM.ClassicFSM('DistributedToonInteriorAI', [
-         State.State('toon', self.enterToon, self.exitToon, [
-          'beingTakenOver']),
-         State.State('beingTakenOver', self.enterBeingTakenOver, self.exitBeingTakenOver, []),
-         State.State('off', self.enterOff, self.exitOff, [])], 'toon', 'off')
+            State.State('toon', self.enterToon, self.exitToon, [
+                'beingTakenOver']),
+            State.State(
+                'beingTakenOver',
+                self.enterBeingTakenOver,
+                self.exitBeingTakenOver,
+                []),
+            State.State('off', self.enterOff, self.exitOff, [])], 'toon', 'off')
         self.fsm.enterInitialState()
 
     def delete(self):
@@ -36,7 +41,7 @@ class DistributedToonInteriorAI(DistributedObjectAI.DistributedObjectAI):
 
     def getZoneIdAndBlock(self):
         r = [
-         self.zoneId, self.block]
+            self.zoneId, self.block]
         return r
 
     def getSavedBy(self):
@@ -49,11 +54,13 @@ class DistributedToonInteriorAI(DistributedObjectAI.DistributedObjectAI):
 
     def getState(self):
         r = [
-         self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
+            self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
         return r
 
     def setState(self, state):
-        self.sendUpdate('setState', [state, globalClockDelta.getRealNetworkTime()])
+        self.sendUpdate(
+            'setState', [
+                state, globalClockDelta.getRealNetworkTime()])
         self.fsm.request(state)
 
     def enterOff(self):

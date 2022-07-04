@@ -5,8 +5,10 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.minigame import ToonBlitzGlobals, TwoDBlock
 from pandac.PandaModules import CardMaker
 
+
 class ToonBlitzAssetMgr(DirectObject):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedToonBlitzAssets')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedToonBlitzAssets')
 
     def __init__(self, game):
         self.__defineConstants()
@@ -18,13 +20,19 @@ class ToonBlitzAssetMgr(DirectObject):
 
     def load(self):
         self.world = NodePath('ToonBlitzWorld')
-        self.background = loader.loadModel('phase_4/models/minigames/toonblitz_game')
+        self.background = loader.loadModel(
+            'phase_4/models/minigames/toonblitz_game')
         self.background.reparentTo(self.world)
-        self.startingWall = loader.loadModel('phase_4/models/minigames/toonblitz_game_wall')
-        self.startingPipe = loader.loadModel('phase_4/models/minigames/toonblitz_game_start')
-        self.exitElevator = loader.loadModel('phase_4/models/minigames/toonblitz_game_elevator')
-        self.arrow = loader.loadModel('phase_4/models/minigames/toonblitz_game_arrow')
-        self.sprayProp = loader.loadModel('phase_4/models/minigames/prop_waterspray')
+        self.startingWall = loader.loadModel(
+            'phase_4/models/minigames/toonblitz_game_wall')
+        self.startingPipe = loader.loadModel(
+            'phase_4/models/minigames/toonblitz_game_start')
+        self.exitElevator = loader.loadModel(
+            'phase_4/models/minigames/toonblitz_game_elevator')
+        self.arrow = loader.loadModel(
+            'phase_4/models/minigames/toonblitz_game_arrow')
+        self.sprayProp = loader.loadModel(
+            'phase_4/models/minigames/prop_waterspray')
         self.treasureModelList = []
         salesIcon = loader.loadModel('phase_4/models/minigames/salesIcon')
         self.treasureModelList.append(salesIcon)
@@ -34,28 +42,40 @@ class ToonBlitzAssetMgr(DirectObject):
         self.treasureModelList.append(legalIcon)
         corpIcon = loader.loadModel('phase_4/models/minigames/corpIcon')
         self.treasureModelList.append(corpIcon)
-        self.particleGlow = loader.loadModel('phase_4/models/minigames/particleGlow')
+        self.particleGlow = loader.loadModel(
+            'phase_4/models/minigames/particleGlow')
         self.blockTypes = []
         for i in range(4):
-            blockType = loader.loadModel('phase_4/models/minigames/toonblitz_game_block0' + str(i))
+            blockType = loader.loadModel(
+                'phase_4/models/minigames/toonblitz_game_block0' + str(i))
             self.blockTypes.append(blockType)
 
-        self.stomper = loader.loadModel('phase_4/models/minigames/toonblitz_game_stomper')
+        self.stomper = loader.loadModel(
+            'phase_4/models/minigames/toonblitz_game_stomper')
         plane = CollisionPlane(Plane(Vec3(0, 0, 1), Point3(0, 0, -50)))
         dropPlane = CollisionNode('dropPlane')
         dropPlane.addSolid(plane)
         dropPlane.setCollideMask(ToontownGlobals.FloorBitmask)
         self.world.attachNewNode(dropPlane)
-        self.gameMusic = base.loader.loadMusic('phase_4/audio/bgm/MG_TwoDGame.ogg')
-        self.treasureGrabSound = loader.loadSfx('phase_4/audio/sfx/SZ_DD_treasure.ogg')
-        self.sndOof = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
-        self.soundJump = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_jump.ogg')
-        self.fallSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_fall.ogg')
-        self.watergunSound = base.loader.loadSfx('phase_4/audio/sfx/AA_squirt_seltzer_miss.ogg')
-        self.splashSound = base.loader.loadSfx('phase_4/audio/sfx/Seltzer_squirt_2dgame_hit.ogg')
-        self.threeSparkles = loader.loadSfx('phase_4/audio/sfx/threeSparkles.ogg')
+        self.gameMusic = base.loader.loadMusic(
+            'phase_4/audio/bgm/MG_TwoDGame.ogg')
+        self.treasureGrabSound = loader.loadSfx(
+            'phase_4/audio/sfx/SZ_DD_treasure.ogg')
+        self.sndOof = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
+        self.soundJump = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_jump.ogg')
+        self.fallSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_fall.ogg')
+        self.watergunSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/AA_squirt_seltzer_miss.ogg')
+        self.splashSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/Seltzer_squirt_2dgame_hit.ogg')
+        self.threeSparkles = loader.loadSfx(
+            'phase_4/audio/sfx/threeSparkles.ogg')
         self.sparkleSound = loader.loadSfx('phase_4/audio/sfx/sparkly.ogg')
-        self.headCollideSound = loader.loadSfx('phase_3.5/audio/sfx/AV_collision.ogg')
+        self.headCollideSound = loader.loadSfx(
+            'phase_3.5/audio/sfx/AV_collision.ogg')
         self.faceStartPos = Vec3(-0.8, 0, -0.87)
         self.faceEndPos = Vec3(0.8, 0, -0.87)
         self.aspect2dRoot = aspect2d.attachNewNode('TwoDGuiAspect2dRoot')
@@ -64,15 +84,26 @@ class ToonBlitzAssetMgr(DirectObject):
         self.cardMaker.reset()
         self.cardMaker.setName('ProgressLine')
         self.cardMaker.setFrame(-0.5, 0.5, -0.5, 0.5)
-        self.progressLine = self.aspect2dRoot.attachNewNode(self.cardMaker.generate())
-        self.progressLine.setScale(self.faceEndPos[0] - self.faceStartPos[0], 1, 0.01)
+        self.progressLine = self.aspect2dRoot.attachNewNode(
+            self.cardMaker.generate())
+        self.progressLine.setScale(
+            self.faceEndPos[0] - self.faceStartPos[0], 1, 0.01)
         self.progressLine.setPos(0, 0, self.faceStartPos[2])
         self.cardMaker.setName('RaceProgressLineHash')
-        for n in range(ToonBlitzGlobals.NumSections[self.game.getSafezoneId()] + 1):
+        for n in range(
+                ToonBlitzGlobals.NumSections[self.game.getSafezoneId()] + 1):
             hash = self.aspect2dRoot.attachNewNode(self.cardMaker.generate())
-            hash.setScale(self.progressLine.getScale()[2], 1, self.progressLine.getScale()[2] * 5)
-            t = float(n) / ToonBlitzGlobals.NumSections[self.game.getSafezoneId()]
-            hash.setPos(self.faceStartPos[0] * (1 - t) + self.faceEndPos[0] * t, self.faceStartPos[1], self.faceStartPos[2])
+            hash.setScale(
+                self.progressLine.getScale()[2],
+                1,
+                self.progressLine.getScale()[2] * 5)
+            t = float(n) / \
+                ToonBlitzGlobals.NumSections[self.game.getSafezoneId()]
+            hash.setPos(
+                self.faceStartPos[0] * (
+                    1 - t) + self.faceEndPos[0] * t,
+                self.faceStartPos[1],
+                self.faceStartPos[2])
 
     def destroy(self):
         while len(self.blockTypes):

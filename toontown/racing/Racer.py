@@ -26,4 +26,5 @@ class Racer:
     def setLapT(self, numLaps, t, timestamp):
         self.maxLap = numLaps
         self.lapT = t
-        self.totalTime = globalClockDelta.networkToLocalTime(timestamp) - self.baseTime
+        self.totalTime = globalClockDelta.networkToLocalTime(
+            timestamp) - self.baseTime

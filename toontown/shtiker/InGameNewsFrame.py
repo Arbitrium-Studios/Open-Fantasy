@@ -1,10 +1,11 @@
 import datetime
 from toontown.shtiker import HtmlView
 
+
 class InGameNewsFrame(HtmlView.HtmlView):
     TaskName = 'HtmlViewUpdateTask'
 
-    def __init__(self, parent = aspect2d):
+    def __init__(self, parent=aspect2d):
         HtmlView.HtmlView.__init__(self, parent)
         self.initialLoadDone = False
         self.accept('newsSnapshot', self.doSnapshot)

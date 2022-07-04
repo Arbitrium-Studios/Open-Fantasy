@@ -10,7 +10,9 @@ from toontown.cogdominium.DistCogdoCraneCogAI import DistCogdoCraneCogAI
 from toontown.suit.SuitDNA import SuitDNA
 import random
 
-class DistCogdoCraneGameAI(CogdoCraneGameBase, DistCogdoLevelGameAI, PM.NodePath):
+
+class DistCogdoCraneGameAI(
+        CogdoCraneGameBase, DistCogdoLevelGameAI, PM.NodePath):
     notify = directNotify.newCategory('DistCogdoCraneGameAI')
 
     def __init__(self, air, interior):
@@ -66,14 +68,21 @@ class DistCogdoCraneGameAI(CogdoCraneGameBase, DistCogdoLevelGameAI, PM.NodePath
             if self._moneyBags[i]:
                 self._moneyBags[i].request('Initial')
 
-        self._cog = DistCogdoCraneCogAI(self.air, self, self.getDroneCogDNA(), random.randrange(4), globalClock.getFrameTime())
+        self._cog = DistCogdoCraneCogAI(
+            self.air,
+            self,
+            self.getDroneCogDNA(),
+            random.randrange(4),
+            globalClock.getFrameTime())
         self._cog.generateWithRequired(self.zoneId)
         self._scheduleGameDone()
 
     def _scheduleGameDone(self):
-        timeLeft = GameConsts.Settings.GameDuration.get() - (globalClock.getRealTime() - self.getStartTime())
+        timeLeft = GameConsts.Settings.GameDuration.get(
+        ) - (globalClock.getRealTime() - self.getStartTime())
         if timeLeft > 0:
-            self._gameDoneEvent = taskMgr.doMethodLater(timeLeft, self._gameDoneDL, self.uniqueName('boardroomGameDone'))
+            self._gameDoneEvent = taskMgr.doMethodLater(
+                timeLeft, self._gameDoneDL, self.uniqueName('boardroomGameDone'))
         else:
             self._gameDoneDL()
 
@@ -83,13 +92,14 @@ class DistCogdoCraneGameAI(CogdoCraneGameBase, DistCogdoLevelGameAI, PM.NodePath
         taskMgr.remove(self._gameDoneEvent)
         self._gameDoneEvent = None
 
-    def _gameDoneDL(self, task = None):
+    def _gameDoneDL(self, task=None):
         self._handleGameFinished()
         return task.done
 
     def enterFinish(self):
         DistCogdoLevelGameAI.enterFinish(self)
-        self._finishDoneEvent = taskMgr.doMethodLater(10.0, self._finishDoneDL, self.uniqueName('boardroomFinishDone'))
+        self._finishDoneEvent = taskMgr.doMethodLater(
+            10.0, self._finishDoneDL, self.uniqueName('boardroomFinishDone'))
 
     def exitFinish(self):
         taskMgr.remove(self._finishDoneEvent)
@@ -102,6 +112,7 @@ class DistCogdoCraneGameAI(CogdoCraneGameBase, DistCogdoLevelGameAI, PM.NodePath
     if __dev__:
 
         def _handleGameDurationChanged(self, gameDuration):
-            if hasattr(self, '_gameDoneEvent') and self._gameDoneEvent != None:
+            if hasattr(
+                    self, '_gameDoneEvent') and self._gameDoneEvent is not None:
                 taskMgr.remove(self._gameDoneEvent)
                 self._scheduleGameDone()

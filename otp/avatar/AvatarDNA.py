@@ -5,6 +5,7 @@ from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.PyDatagramIterator import PyDatagramIterator
 notify = directNotify.newCategory('AvatarDNA')
 
+
 class AvatarDNA:
 
     def __str__(self):

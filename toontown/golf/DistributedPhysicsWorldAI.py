@@ -3,13 +3,17 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import ToontownGlobals
 from pandac.PandaModules import *
 from . import BuildGeometry
-import random, time
+import random
+import time
 from math import *
 import math
 from toontown.golf import PhysicsWorldBase
 
-class DistributedPhysicsWorldAI(DistributedObjectAI.DistributedObjectAI, PhysicsWorldBase.PhysicsWorldBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPhysicsWorldAI')
+
+class DistributedPhysicsWorldAI(
+        DistributedObjectAI.DistributedObjectAI, PhysicsWorldBase.PhysicsWorldBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedPhysicsWorldAI')
 
     def __init__(self, air):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
@@ -33,8 +37,10 @@ class DistributedPhysicsWorldAI(DistributedObjectAI.DistributedObjectAI, Physics
     def loadLevel(self):
         pass
 
-    def createCommonObject(self, type, pos, hpr, sizeX = 0, sizeY = 0, moveDistance = 0):
-        commonObjectDatam = PhysicsWorldBase.PhysicsWorldBase.createCommonObject(self, type, None, pos, hpr, sizeX, sizeY, moveDistance)
+    def createCommonObject(self, type, pos, hpr, sizeX=0,
+                           sizeY=0, moveDistance=0):
+        commonObjectDatam = PhysicsWorldBase.PhysicsWorldBase.createCommonObject(
+            self, type, None, pos, hpr, sizeX, sizeY, moveDistance)
         self.sendUpdate('clientCommonObject', commonObjectDatam)
         return
 

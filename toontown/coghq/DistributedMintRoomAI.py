@@ -8,11 +8,16 @@ from toontown.coghq import MintRoomBase, LevelSuitPlannerAI
 from toontown.coghq import DistributedMintBattleAI
 from toontown.suit import DistributedMintSuitAI
 
-class DistributedMintRoomAI(DistributedLevelAI.DistributedLevelAI, MintRoomBase.MintRoomBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMintRoomAI')
 
-    def __init__(self, air, mintId, mintDoId, zoneId, roomId, roomNum, avIds, battleExpAggreg):
-        DistributedLevelAI.DistributedLevelAI.__init__(self, air, zoneId, 0, avIds)
+class DistributedMintRoomAI(
+        DistributedLevelAI.DistributedLevelAI, MintRoomBase.MintRoomBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedMintRoomAI')
+
+    def __init__(self, air, mintId, mintDoId, zoneId,
+                 roomId, roomNum, avIds, battleExpAggreg):
+        DistributedLevelAI.DistributedLevelAI.__init__(
+            self, air, zoneId, 0, avIds)
         MintRoomBase.MintRoomBase.__init__(self)
         self.setMintId(mintId)
         self.setRoomId(roomId)
@@ -39,13 +44,23 @@ class DistributedMintRoomAI(DistributedLevelAI.DistributedLevelAI, MintRoomBase.
         DistributedLevelAI.DistributedLevelAI.generate(self, roomSpec)
         self.notify.debug('creating cogs')
         cogSpecModule = MintRoomSpecs.getCogSpecModule(self.roomId)
-        self.planner = LevelSuitPlannerAI.LevelSuitPlannerAI(self.air, self, DistributedMintSuitAI.DistributedMintSuitAI, DistributedMintBattleAI.DistributedMintBattleAI, cogSpecModule.CogData, cogSpecModule.ReserveCogData, cogSpecModule.BattleCells, battleExpAggreg=self.battleExpAggreg)
+        self.planner = LevelSuitPlannerAI.LevelSuitPlannerAI(
+            self.air,
+            self,
+            DistributedMintSuitAI.DistributedMintSuitAI,
+            DistributedMintBattleAI.DistributedMintBattleAI,
+            cogSpecModule.CogData,
+            cogSpecModule.ReserveCogData,
+            cogSpecModule.BattleCells,
+            battleExpAggreg=self.battleExpAggreg)
         suitHandles = self.planner.genSuits()
         messenger.send('plannerCreated-' + str(self.doId))
         self.suits = suitHandles['activeSuits']
         self.reserveSuits = suitHandles['reserveSuits']
         self.d_setSuits()
-        self.notify.debug('finish mint room %s %s creation' % (self.roomId, self.doId))
+        self.notify.debug(
+            'finish mint room %s %s creation' %
+            (self.roomId, self.doId))
 
     def delete(self):
         self.notify.debug('delete: %s' % self.doId)
@@ -94,7 +109,9 @@ class DistributedMintRoomAI(DistributedLevelAI.DistributedLevelAI, MintRoomBase.
 
     def d_setBossConfronted(self, toonId):
         if toonId not in self.avIdList:
-            self.notify.warning('d_setBossConfronted: %s not in list of participants' % toonId)
+            self.notify.warning(
+                'd_setBossConfronted: %s not in list of participants' %
+                toonId)
             return
         self.sendUpdate('setBossConfronted', [toonId])
 
@@ -112,7 +129,8 @@ class DistributedMintRoomAI(DistributedLevelAI.DistributedLevelAI, MintRoomBase.
             self.air.writeServerEvent('mintDefeated', avId, description)
 
         for toon in activeVictors:
-            simbase.air.questManager.toonDefeatedMint(toon, self.mintId, activeVictors)
+            simbase.air.questManager.toonDefeatedMint(
+                toon, self.mintId, activeVictors)
 
         return
 
@@ -127,11 +145,14 @@ class DistributedMintRoomAI(DistributedLevelAI.DistributedLevelAI, MintRoomBase.
         pass
 
     def allToonsGone(self, toonsThatCleared):
-        DistributedLevelAI.DistributedLevelAI.allToonsGone(self, toonsThatCleared)
+        DistributedLevelAI.DistributedLevelAI.allToonsGone(
+            self, toonsThatCleared)
         if self.roomNum == 0:
             mint = simbase.air.doId2do.get(self.mintDoId)
             if mint is not None:
                 mint.allToonsGone()
             else:
-                self.notify.warning('no mint %s in allToonsGone' % self.mintDoId)
+                self.notify.warning(
+                    'no mint %s in allToonsGone' %
+                    self.mintDoId)
         return

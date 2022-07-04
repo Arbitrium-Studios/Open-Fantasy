@@ -9,8 +9,10 @@ from direct.gui.DirectGui import DGG
 from otp.otpbase import OTPGlobals
 from toontown.toonbase import TTLocalizer
 
+
 class BoardingGroupInviterPanels:
-    notify = DirectNotifyGlobal.directNotify.newCategory('BoardingGroupInviterPanels')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'BoardingGroupInviterPanels')
 
     def __init__(self):
         self.__invitingPanel = None
@@ -25,13 +27,15 @@ class BoardingGroupInviterPanels:
         self.destroyInvitingPanel()
         self.destroyInvitationRejectedPanel()
         self.notify.debug('Creating Inviting Panel.')
-        self.__invitingPanel = BoardingGroupInvitingPanel(boardingParty, inviteeId, **kw)
+        self.__invitingPanel = BoardingGroupInvitingPanel(
+            boardingParty, inviteeId, **kw)
 
     def createInvitationRejectedPanel(self, boardingParty, inviteeId, **kw):
         self.destroyInvitingPanel()
         self.destroyInvitationRejectedPanel()
         self.notify.debug('Creating Invititation Rejected Panel.')
-        self.__invitationRejectedPanel = BoardingGroupInvitationRejectedPanel(boardingParty, inviteeId, **kw)
+        self.__invitationRejectedPanel = BoardingGroupInvitationRejectedPanel(
+            boardingParty, inviteeId, **kw)
 
     def destroyInvitingPanel(self):
         if self.isInvitingPanelUp():
@@ -50,7 +54,8 @@ class BoardingGroupInviterPanels:
             if inviteeId == self.__invitingPanel.avId:
                 return True
             else:
-                self.notify.warning('Got a response back from an invitee, but a different invitee panel was open. Maybe lag?')
+                self.notify.warning(
+                    'Got a response back from an invitee, but a different invitee panel was open. Maybe lag?')
         return False
 
     def isInvitingPanelUp(self):
@@ -78,7 +83,8 @@ class BoardingGroupInviterPanels:
 
 
 class BoardingGroupInviterPanelBase(ToonHeadDialog.ToonHeadDialog):
-    notify = DirectNotifyGlobal.directNotify.newCategory('BoardingGroupInviterPanelBase')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'BoardingGroupInviterPanelBase')
 
     def __init__(self, boardingParty, inviteeId, **kw):
         self.boardingParty = boardingParty
@@ -92,25 +98,26 @@ class BoardingGroupInviterPanelBase(ToonHeadDialog.ToonHeadDialog):
         self.defineParams()
         command = self.handleButton
         optiondefs = (('dialogName', self.dialogName, None),
-         ('text', self.inviterText, None),
-         ('style', self.panelStyle, None),
-         ('buttonTextList', self.buttonTextList, None),
-         ('command', command, None),
-         ('image_color', (1.0, 0.89, 0.77, 1.0), None),
-         ('geom_scale', 0.2, None),
-         ('geom_pos', (-0.1, 0, -0.025), None),
-         ('pad', (0.075, 0.075), None),
-         ('topPad', 0, None),
-         ('midPad', 0, None),
-         ('pos', (0.45, 0, 0.75), None),
-         ('scale', 0.75, None))
+                      ('text', self.inviterText, None),
+                      ('style', self.panelStyle, None),
+                      ('buttonTextList', self.buttonTextList, None),
+                      ('command', command, None),
+                      ('image_color', (1.0, 0.89, 0.77, 1.0), None),
+                      ('geom_scale', 0.2, None),
+                      ('geom_pos', (-0.1, 0, -0.025), None),
+                      ('pad', (0.075, 0.075), None),
+                      ('topPad', 0, None),
+                      ('midPad', 0, None),
+                      ('pos', (0.45, 0, 0.75), None),
+                      ('scale', 0.75, None))
         self.defineoptions(kw, optiondefs)
         ToonHeadDialog.ToonHeadDialog.__init__(self, avatarDNA)
         self.show()
         return
 
     def defineParams(self):
-        self.notify.error('setupParams: This method should not be called from the base class. Derived class should override this method')
+        self.notify.error(
+            'setupParams: This method should not be called from the base class. Derived class should override this method')
 
     def cleanup(self):
         self.notify.debug('Destroying Panel.')
@@ -124,10 +131,12 @@ class BoardingGroupInviterPanelBase(ToonHeadDialog.ToonHeadDialog):
 
 
 class BoardingGroupInvitingPanel(BoardingGroupInviterPanelBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('BoardingGroupInvitingPanel')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'BoardingGroupInvitingPanel')
 
     def __init__(self, boardingParty, inviteeId, **kw):
-        BoardingGroupInviterPanelBase.__init__(self, boardingParty, inviteeId, **kw)
+        BoardingGroupInviterPanelBase.__init__(
+            self, boardingParty, inviteeId, **kw)
         self.initialiseoptions(BoardingGroupInvitingPanel)
         self.setupUnexpectedExitHooks()
 
@@ -153,10 +162,12 @@ class BoardingGroupInvitingPanel(BoardingGroupInviterPanelBase):
 
 
 class BoardingGroupInvitationRejectedPanel(BoardingGroupInviterPanelBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('BoardingGroupInvitationRejectedPanel')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'BoardingGroupInvitationRejectedPanel')
 
     def __init__(self, boardingParty, inviteeId, **kw):
-        BoardingGroupInviterPanelBase.__init__(self, boardingParty, inviteeId, **kw)
+        BoardingGroupInviterPanelBase.__init__(
+            self, boardingParty, inviteeId, **kw)
         self.initialiseoptions(BoardingGroupInvitationRejectedPanel)
 
     def defineParams(self):

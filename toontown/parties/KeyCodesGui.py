@@ -6,15 +6,16 @@ from direct.task import Task
 from toontown.toonbase import ToontownGlobals
 from toontown.parties.KeyCodes import KeyCodes, KEYCODE_TIMEOUT_SECONDS
 KEY_TO_INDEX = {'u': 0,
- 'r': 1,
- 'd': 2,
- 'l': 3}
+                'r': 1,
+                'd': 2,
+                'l': 3}
+
 
 class KeyCodesGui(DirectObject):
     notify = directNotify.newCategory('KeyCodesGui')
     TIMEOUT_TASK = 'KeyCodeGui_TIMEOUT_TASK'
 
-    def __init__(self, keyCodes, yOffset = 0.55, keyToIndex = KEY_TO_INDEX):
+    def __init__(self, keyCodes, yOffset=0.55, keyToIndex=KEY_TO_INDEX):
         self._keyCodes = keyCodes
         self._keyToIndex = keyToIndex
         self._arrowWidth = 0.18
@@ -26,7 +27,8 @@ class KeyCodesGui(DirectObject):
         return
 
     def load(self):
-        matchingGameGui = loader.loadModel('phase_3.5/models/gui/matching_game_gui')
+        matchingGameGui = loader.loadModel(
+            'phase_3.5/models/gui/matching_game_gui')
         minnieArrow = matchingGameGui.find('**/minnieArrow')
         minnieArrow.setScale(0.6)
         minnieArrow.setZ(self._yOffset + 0.2)
@@ -36,7 +38,21 @@ class KeyCodesGui(DirectObject):
             self._arrowNodes.append(arrow)
 
         matchingGameGui.removeNode()
-        self._danceMoveLabel = OnscreenText(parent=aspect2d, text='', pos=(0, self._yOffset), scale=0.15, align=TextNode.ACenter, font=ToontownGlobals.getSignFont(), fg=Vec4(1, 1, 1, 1), mayChange=True)
+        self._danceMoveLabel = OnscreenText(
+            parent=aspect2d,
+            text='',
+            pos=(
+                0,
+                self._yOffset),
+            scale=0.15,
+            align=TextNode.ACenter,
+            font=ToontownGlobals.getSignFont(),
+            fg=Vec4(
+                1,
+                1,
+                1,
+                1),
+            mayChange=True)
         self._danceMoveLabel.hide()
         self.enable()
 
@@ -62,13 +78,13 @@ class KeyCodesGui(DirectObject):
         self.__stopTimeout()
         self.ignoreAll()
 
-    def hideArrows(self, startIndex = 0):
+    def hideArrows(self, startIndex=0):
         length = len(self._arrowNodes)
         if startIndex < length:
             for i in range(startIndex, length):
                 self._arrowNodes[i].reparentTo(hidden)
 
-    def hideAll(self, startIndex = 0):
+    def hideAll(self, startIndex=0):
         self.hideArrows(startIndex)
         if self._danceMoveLabel:
             self._danceMoveLabel.hide()
@@ -81,7 +97,7 @@ class KeyCodesGui(DirectObject):
         self.hideAll(index + 1)
         self.__startTimeout()
 
-    def showText(self, text = ''):
+    def showText(self, text=''):
         self.notify.debug('"Showing text "%s"' % text)
         self._danceMoveLabel['text'] = text
         self._danceMoveLabel.show()
@@ -94,7 +110,10 @@ class KeyCodesGui(DirectObject):
 
     def __startTimeout(self):
         self.__stopTimeout()
-        self.timeoutTask = taskMgr.doMethodLater(KEYCODE_TIMEOUT_SECONDS, self.__handleTimeoutTask, KeyCodesGui.TIMEOUT_TASK)
+        self.timeoutTask = taskMgr.doMethodLater(
+            KEYCODE_TIMEOUT_SECONDS,
+            self.__handleTimeoutTask,
+            KeyCodesGui.TIMEOUT_TASK)
 
     def __stopTimeout(self):
         if self.timeoutTask is not None:
@@ -109,7 +128,8 @@ class KeyCodesGui(DirectObject):
     def __centerArrows(self):
         length = self._keyCodes.getCurrentInputLength()
         for i in range(length):
-            x = -(length * self._arrowWidth * 0.5) + self._arrowWidth * (i + 0.5)
+            x = -(length * self._arrowWidth * 0.5) + \
+                self._arrowWidth * (i + 0.5)
             self._arrowNodes[i].setX(x)
 
     def __handleKeyDown(self, key, index):

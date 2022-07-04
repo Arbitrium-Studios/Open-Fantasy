@@ -6,6 +6,7 @@ from .CogdoGameMessageDisplay import CogdoGameMessageDisplay
 from .CogdoMemoGui import CogdoMemoGui
 from . import CogdoFlyingGameGlobals as Globals
 
+
 class CogdoFlyingGuiManager:
     ClearMessageDisplayEventName = 'ClearMessageDisplayEvent'
     EagleTargetingLocalPlayerEventName = 'EagleTargetingLocalPlayerEvent'
@@ -39,7 +40,8 @@ class CogdoFlyingGuiManager:
     def _initMessageDisplay(self):
         audioMgr = base.cogdoGameAudioMgr
         sound = audioMgr.createSfx('popupHelpText')
-        self._messageDisplay = CogdoGameMessageDisplay('CogdoFlyingMessageDisplay', self.root, sfx=sound)
+        self._messageDisplay = CogdoGameMessageDisplay(
+            'CogdoFlyingMessageDisplay', self.root, sfx=sound)
 
     def destroyTimer(self):
         if self._timer is not None:
@@ -54,16 +56,25 @@ class CogdoFlyingGuiManager:
         self._progressGui.hide()
 
     def presentProgressGui(self):
-        ToontownIntervals.start(ToontownIntervals.getPresentGuiIval(self._progressGui, 'present_progress_gui'))
+        ToontownIntervals.start(
+            ToontownIntervals.getPresentGuiIval(
+                self._progressGui,
+                'present_progress_gui'))
 
     def presentRefuelGui(self):
-        ToontownIntervals.start(ToontownIntervals.getPresentGuiIval(self._refuelGui, 'present_fuel_gui'))
+        ToontownIntervals.start(
+            ToontownIntervals.getPresentGuiIval(
+                self._refuelGui, 'present_fuel_gui'))
 
     def presentTimerGui(self):
-        ToontownIntervals.start(ToontownIntervals.getPresentGuiIval(self._timer, 'present_timer_gui'))
+        ToontownIntervals.start(
+            ToontownIntervals.getPresentGuiIval(
+                self._timer, 'present_timer_gui'))
 
     def presentMemoGui(self):
-        ToontownIntervals.start(ToontownIntervals.getPresentGuiIval(self._memoGui, 'present_memo_gui'))
+        ToontownIntervals.start(
+            ToontownIntervals.getPresentGuiIval(
+                self._memoGui, 'present_memo_gui'))
 
     def offstage(self):
         self.root.stash()
@@ -77,7 +88,8 @@ class CogdoFlyingGuiManager:
     def isTimeRunningOut(self):
         return self.getTimeLeft() < Globals.Gameplay.TimeRunningOutSeconds
 
-    def startTimer(self, duration, timerExpiredCallback = None, keepHidden = False):
+    def startTimer(self, duration, timerExpiredCallback=None,
+                   keepHidden=False):
         if self._timer is None:
             self._initTimer()
         self._timer.setTime(duration)
@@ -101,7 +113,7 @@ class CogdoFlyingGuiManager:
         self._timer.hide()
 
     def forceTimerDone(self):
-        if self._timer.countdownTask != None:
+        if self._timer.countdownTask is not None:
             self._timer.countdownTask.duration = 0
         return
 
@@ -111,10 +123,10 @@ class CogdoFlyingGuiManager:
     def hideRefuelGui(self):
         self._refuelGui.hide()
 
-    def setMessage(self, text, color = None, transition = 'fade'):
+    def setMessage(self, text, color=None, transition='fade'):
         self._messageDisplay.updateMessage(text, color, transition)
 
-    def setTemporaryMessage(self, text, duration = 3.0, color = None):
+    def setTemporaryMessage(self, text, duration=3.0, color=None):
         self._messageDisplay.showMessageTemporarily(text, duration, color)
 
     def setFuel(self, fuel):
@@ -143,7 +155,8 @@ class CogdoFlyingGuiManager:
 
     def update(self):
         if self.isTimeRunningOut() and not self.sentTimeRunningOutMessage:
-            messenger.send(CogdoFlyingGuiManager.StartRunningOutOfTimeMusicEventName)
+            messenger.send(
+                CogdoFlyingGuiManager.StartRunningOutOfTimeMusicEventName)
             self.sentTimeRunningOutMessage = True
         self._refuelGui.update()
         self._progressGui.update()

@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.suit import GoonPathData
 from otp.level import PathEntity
 
+
 class PathMasterEntity(PathEntity.PathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('PathMasterEntity')
 
@@ -15,13 +16,13 @@ class PathMasterEntity(PathEntity.PathEntity):
 
     def initPath(self):
         self.pathTargetList = [None,
-         None,
-         None,
-         None,
-         None,
-         None,
-         None,
-         None]
+                               None,
+                               None,
+                               None,
+                               None,
+                               None,
+                               None,
+                               None]
         if not hasattr(self, 'pathTarget0'):
             self.pathTarget0 = None
         else:
@@ -118,7 +119,8 @@ class PathMasterEntity(PathEntity.PathEntity):
 
     def setPathIndex(self, pathIndex):
         self.pathIndex = pathIndex
-        pathTableId = GoonPathData.taskZoneId2pathId[self.level.getTaskZoneId()]
+        pathTableId = GoonPathData.taskZoneId2pathId[self.level.getTaskZoneId(
+        )]
         if self.pathIndex in GoonPathData.Paths[pathTableId]:
             self.path = GoonPathData.Paths[pathTableId][self.pathIndex]
             if __dev__:
@@ -128,7 +130,8 @@ class PathMasterEntity(PathEntity.PathEntity):
             self.path = None
         return
 
-    def makePathTrack(self, node, velocity, name, turnTime = 1, lookAroundNode = None):
+    def makePathTrack(self, node, velocity, name,
+                      turnTime=1, lookAroundNode=None):
         track = Sequence(name=name)
         self.path = self.getReducedPath()
         if self.path is None or len(self.path) < 1:
@@ -145,11 +148,17 @@ class PathMasterEntity(PathEntity.PathEntity):
             track.append(LerpHprInterval(node, turnTime, Vec3(theta, 0, 0)))
             distance = Vec3(v).length()
             duration = distance / velocity
-            track.append(LerpPosInterval(node, duration=duration, pos=endPoint, startPos=startPoint))
+            track.append(
+                LerpPosInterval(
+                    node,
+                    duration=duration,
+                    pos=endPoint,
+                    startPos=startPoint))
 
         return track
 
-    def makePathTrackBak(self, node, velocity, name, turnTime = 1, lookAroundNode = None):
+    def makePathTrackBak(self, node, velocity, name,
+                         turnTime=1, lookAroundNode=None):
         track = Sequence(name=name)
         if self.path is None:
             track.append(WaitInterval(1.0))
@@ -165,7 +174,12 @@ class PathMasterEntity(PathEntity.PathEntity):
             track.append(LerpHprInterval(node, turnTime, Vec3(theta, 0, 0)))
             distance = Vec3(v).length()
             duration = distance / velocity
-            track.append(LerpPosInterval(node, duration=duration, pos=endPoint, startPos=startPoint))
+            track.append(
+                LerpPosInterval(
+                    node,
+                    duration=duration,
+                    pos=endPoint,
+                    startPos=startPoint))
 
         return track
 

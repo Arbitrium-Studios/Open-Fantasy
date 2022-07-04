@@ -5,16 +5,17 @@ from .SCElement import SCElement
 from .SCMenu import SCMenu
 import types
 
+
 class SCMenuHolder(SCElement):
     N = 0.9
     DefaultFrameColor = (0,
-     0,
-     0,
-     1.0 - N)
+                         0,
+                         0,
+                         1.0 - N)
     del N
     MenuColorScaleDown = 0.95
 
-    def __init__(self, title, menu = None):
+    def __init__(self, title, menu=None):
         SCElement.__init__(self)
         self.title = title
         scGui = loader.loadModel(SCMenu.GuiModelName)
@@ -89,12 +90,14 @@ class SCMenuHolder(SCElement):
             self.button.frameStyle[DGG.BUTTON_READY_STATE].setColor(r, g, b, a)
             self.button.updateFrameStyle()
         else:
-            self.notify.warning('SCMenuHolder has no button (has finalize been called?).')
+            self.notify.warning(
+                'SCMenuHolder has no button (has finalize been called?).')
 
     def exitActive(self):
         SCElement.exitActive(self)
         self.hideMenu()
-        self.button.frameStyle[DGG.BUTTON_READY_STATE].setColor(*SCMenuHolder.DefaultFrameColor)
+        self.button.frameStyle[DGG.BUTTON_READY_STATE].setColor(
+            *SCMenuHolder.DefaultFrameColor)
         self.button.updateFrameStyle()
 
     def getDisplayText(self):
@@ -132,7 +135,7 @@ class SCMenuHolder(SCElement):
             self.menu.invalidate()
         return
 
-    def finalize(self, dbArgs = {}):
+    def finalize(self, dbArgs={}):
         if not self.isDirty():
             return
         r, g, b = self.getColorScheme().getArrowColor()
@@ -144,14 +147,14 @@ class SCMenuHolder(SCElement):
             r, g, b = self.getColorScheme().getMenuHolderActiveColor()
             a = self.getColorScheme().getAlpha()
             frameColor = (r,
-             g,
-             b,
-             a)
+                          g,
+                          b,
+                          a)
         else:
             frameColor = SCMenuHolder.DefaultFrameColor
         args = {'image': self.scArrow,
-         'image_pos': (self.width - 0.5, 0, -self.height * 0.5),
-         'frameColor': frameColor}
+                'image_pos': (self.width - 0.5, 0, -self.height * 0.5),
+                'frameColor': frameColor}
         args.update(dbArgs)
         SCElement.finalize(self, dbArgs=args)
         return

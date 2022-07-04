@@ -6,11 +6,12 @@ from .SCObject import SCObject
 from direct.showbase.PythonUtil import boolEqual
 from otp.otpbase import OTPGlobals
 
+
 class SCElement(SCObject, NodePath):
     font = OTPGlobals.getInterfaceFont()
     SerialNum = 0
 
-    def __init__(self, parentMenu = None):
+    def __init__(self, parentMenu=None):
         SCObject.__init__(self)
         self.SerialNum = SCElement.SerialNum
         SCElement.SerialNum += 1
@@ -44,7 +45,8 @@ class SCElement(SCObject, NodePath):
         return self.parentMenu
 
     def getDisplayText(self):
-        self.notify.error('getDisplayText is pure virtual, derived class must override')
+        self.notify.error(
+            'getDisplayText is pure virtual, derived class must override')
 
     def onMouseEnter(self, event):
         if self.parentMenu is not None:
@@ -115,7 +117,7 @@ class SCElement(SCObject, NodePath):
 
     def privScheduleFinalize(self):
 
-        def finalizeElement(task, self = self):
+        def finalizeElement(task, self=self):
             if self.parentMenu is not None:
                 if self.parentMenu.isDirty():
                     return Task.done
@@ -123,12 +125,15 @@ class SCElement(SCObject, NodePath):
             return Task.done
 
         taskMgr.remove(self.FinalizeTaskName)
-        taskMgr.add(finalizeElement, self.FinalizeTaskName, priority=SCElementFinalizePriority)
+        taskMgr.add(
+            finalizeElement,
+            self.FinalizeTaskName,
+            priority=SCElementFinalizePriority)
 
     def privCancelFinalize(self):
         taskMgr.remove(self.FinalizeTaskName)
 
-    def finalize(self, dbArgs = {}):
+    def finalize(self, dbArgs={}):
         if not self.isDirty():
             return
         SCObject.finalize(self)
@@ -141,24 +146,24 @@ class SCElement(SCObject, NodePath):
             if dbArgs['text_align'] == TextNode.ACenter:
                 textX = self.width / 2.0
         args = {'text': self.getDisplayText(),
-         'frameColor': (0, 0, 0, 0),
-         'rolloverColor': self.getColorScheme().getRolloverColor() + (1,),
-         'pressedColor': self.getColorScheme().getPressedColor() + (1,),
-         'text_font': OTPGlobals.getInterfaceFont(),
-         'text_align': TextNode.ALeft,
-         'text_fg': self.getColorScheme().getTextColor() + (1,),
-         'text_pos': (textX, -.25 - halfHeight, 0),
-         'relief': DGG.FLAT,
-         'pressEffect': 0}
+                'frameColor': (0, 0, 0, 0),
+                'rolloverColor': self.getColorScheme().getRolloverColor() + (1,),
+                'pressedColor': self.getColorScheme().getPressedColor() + (1,),
+                'text_font': OTPGlobals.getInterfaceFont(),
+                'text_align': TextNode.ALeft,
+                'text_fg': self.getColorScheme().getTextColor() + (1,),
+                'text_pos': (textX, -.25 - halfHeight, 0),
+                'relief': DGG.FLAT,
+                'pressEffect': 0}
         args.update(dbArgs)
         rolloverColor = args['rolloverColor']
         pressedColor = args['pressedColor']
         del args['rolloverColor']
         del args['pressedColor']
         btn = DirectButton(parent=self, frameSize=(0,
-         self.width,
-         -self.height,
-         0), **args)
+                                                   self.width,
+                                                   -self.height,
+                                                   0), **args)
         btn.frameStyle[DGG.BUTTON_ROLLOVER_STATE].setColor(*rolloverColor)
         btn.frameStyle[DGG.BUTTON_DEPRESSED_STATE].setColor(*pressedColor)
         btn.updateFrameStyle()

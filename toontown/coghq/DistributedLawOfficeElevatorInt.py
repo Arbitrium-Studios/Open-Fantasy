@@ -11,7 +11,9 @@ from direct.fsm import State
 from toontown.hood import ZoneUtil
 from toontown.toonbase import TTLocalizer
 
-class DistributedLawOfficeElevatorInt(DistributedElevatorFloor.DistributedElevatorFloor):
+
+class DistributedLawOfficeElevatorInt(
+        DistributedElevatorFloor.DistributedElevatorFloor):
 
     def __init__(self, cr):
         DistributedElevatorFloor.DistributedElevatorFloor.__init__(self, cr)
@@ -36,7 +38,8 @@ class DistributedLawOfficeElevatorInt(DistributedElevatorFloor.DistributedElevat
             self.notify.error('Invalid entranceId: %s' % entranceId)
 
     def setupElevator(self):
-        self.elevatorModel = loader.loadModel('phase_4/models/modules/elevator')
+        self.elevatorModel = loader.loadModel(
+            'phase_4/models/modules/elevator')
         self.elevatorModel.reparentTo(render)
         self.elevatorModel.setScale(1.05)
         self.leftDoor = self.elevatorModel.find('**/left-door')
@@ -80,8 +83,8 @@ class DistributedLawOfficeElevatorInt(DistributedElevatorFloor.DistributedElevat
         if self.localToonOnBoard:
             hoodId = self.cr.playGame.hood.hoodId
             doneStatus = {'loader': 'cogHQLoader',
-             'where': 'factoryInterior',
-             'how': 'teleportIn',
-             'zoneId': zoneId,
-             'hoodId': hoodId}
+                          'where': 'factoryInterior',
+                          'how': 'teleportIn',
+                          'zoneId': zoneId,
+                          'hoodId': hoodId}
             self.cr.playGame.getPlace().elevator.signalDone(doneStatus)

@@ -1,11 +1,14 @@
 from . import PurchaseManagerAI
 
+
 class NewbiePurchaseManagerAI(PurchaseManagerAI.PurchaseManagerAI):
 
-    def __init__(self, air, newbieId, playerArray, mpArray, previousMinigameId, trolleyZone):
+    def __init__(self, air, newbieId, playerArray,
+                 mpArray, previousMinigameId, trolleyZone):
         self.ownedNewbieId = newbieId
         newbieList = []
-        PurchaseManagerAI.PurchaseManagerAI.__init__(self, air, playerArray, mpArray, previousMinigameId, trolleyZone, newbieList)
+        PurchaseManagerAI.PurchaseManagerAI.__init__(
+            self, air, playerArray, mpArray, previousMinigameId, trolleyZone, newbieList)
 
     def startCountdown(self):
         pass

@@ -1,6 +1,7 @@
 from pandac.PandaModules import *
 from direct.showbase import DirectObject
 
+
 class Impulse(DirectObject.DirectObject):
 
     def __init__(self):

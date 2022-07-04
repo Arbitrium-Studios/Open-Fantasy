@@ -6,12 +6,18 @@ from direct.interval.IntervalGlobal import LerpColorScaleInterval
 from direct.interval.IntervalGlobal import WaitInterval, ActorInterval, FunctionInterval
 from direct.fsm import ClassicFSM, State
 
-class WinterPartyCatchActivityToonSD(PartyCatchActivityToonSD.PartyCatchActivityToonSD):
-    notify = DirectNotifyGlobal.directNotify.newCategory('PartyCatchActivityToonSD')
+
+class WinterPartyCatchActivityToonSD(
+        PartyCatchActivityToonSD.PartyCatchActivityToonSD):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'PartyCatchActivityToonSD')
 
     def __init__(self, avId, activity):
-        WinterPartyCatchActivityToonSD.notify.debug('init : avId = %s, activity = %s ' % (avId, activity))
-        PartyCatchActivityToonSD.PartyCatchActivityToonSD.__init__(self, avId, activity)
+        WinterPartyCatchActivityToonSD.notify.debug(
+            'init : avId = %s, activity = %s ' %
+            (avId, activity))
+        PartyCatchActivityToonSD.PartyCatchActivityToonSD.__init__(
+            self, avId, activity)
 
     def enterEatFruit(self, fruitModel, handNode):
         self.notify.debug('enterEatFruit')
@@ -24,7 +30,22 @@ class WinterPartyCatchActivityToonSD(PartyCatchActivityToonSD.PartyCatchActivity
         fruitModel.setScale(render, renderScale)
         fruitModel.setTransparency(1)
         duration = self.toon.getDuration('catch-eatneutral')
-        self.eatIval = Sequence(Parallel(WaitInterval(duration), Sequence(LerpColorScaleInterval(fruitModel, duration / 2.0, Vec4(1.0, 1.0, 1.0, 0.0)))), Func(self.fsm.request, 'normal'), name=self.toon.uniqueName('eatingIval'))
+        self.eatIval = Sequence(
+            Parallel(
+                WaitInterval(duration),
+                Sequence(
+                    LerpColorScaleInterval(
+                        fruitModel,
+                        duration / 2.0,
+                        Vec4(
+                            1.0,
+                            1.0,
+                            1.0,
+                            0.0)))),
+            Func(
+                self.fsm.request,
+                'normal'),
+            name=self.toon.uniqueName('eatingIval'))
         self.eatIval.start()
 
     def exitEatFruit(self):

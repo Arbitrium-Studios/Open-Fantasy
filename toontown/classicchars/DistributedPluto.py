@@ -11,16 +11,23 @@ from direct.task import Task
 from toontown.toonbase import TTLocalizer
 from toontown.hood import MMHood
 
+
 class DistributedPluto(DistributedCCharBase.DistributedCCharBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPluto')
 
     def __init__(self, cr):
         try:
             self.DistributedPluto_initialized
-        except:
+        except BaseException:
             self.DistributedPluto_initialized = 1
-            DistributedCCharBase.DistributedCCharBase.__init__(self, cr, TTLocalizer.Pluto, 'p')
-            self.fsm = ClassicFSM.ClassicFSM('DistributedPluto', [State.State('Off', self.enterOff, self.exitOff, ['Neutral']), State.State('Neutral', self.enterNeutral, self.exitNeutral, ['Walk']), State.State('Walk', self.enterWalk, self.exitWalk, ['Neutral'])], 'Off', 'Off')
+            DistributedCCharBase.DistributedCCharBase.__init__(
+                self, cr, TTLocalizer.Pluto, 'p')
+            self.fsm = ClassicFSM.ClassicFSM(
+                'DistributedPluto', [
+                    State.State(
+                        'Off', self.enterOff, self.exitOff, ['Neutral']), State.State(
+                        'Neutral', self.enterNeutral, self.exitNeutral, ['Walk']), State.State(
+                        'Walk', self.enterWalk, self.exitWalk, ['Neutral'])], 'Off', 'Off')
             self.fsm.enterInitialState()
             self.handleHolidays()
 
@@ -40,7 +47,7 @@ class DistributedPluto(DistributedCCharBase.DistributedCCharBase):
     def delete(self):
         try:
             self.DistributedPluto_deleted
-        except:
+        except BaseException:
             self.DistributedPluto_deleted = 1
             del self.fsm
             DistributedCCharBase.DistributedCCharBase.delete(self)
@@ -48,14 +55,19 @@ class DistributedPluto(DistributedCCharBase.DistributedCCharBase):
     def generate(self):
         DistributedCCharBase.DistributedCCharBase.generate(self, self.diffPath)
         self.neutralDoneEvent = self.taskName('pluto-neutral-done')
-        self.neutral = CharStateDatas.CharNeutralState(self.neutralDoneEvent, self)
+        self.neutral = CharStateDatas.CharNeutralState(
+            self.neutralDoneEvent, self)
         self.walkDoneEvent = self.taskName('pluto-walk-done')
-        if self.diffPath == None:
+        if self.diffPath is None:
             self.walk = CharStateDatas.CharWalkState(self.walkDoneEvent, self)
         else:
-            self.walk = CharStateDatas.CharWalkState(self.walkDoneEvent, self, self.diffPath)
-        self.walkStartTrack = Sequence(self.actorInterval('stand'), Func(self.stand))
-        self.neutralStartTrack = Sequence(self.actorInterval('sit'), Func(self.sit))
+            self.walk = CharStateDatas.CharWalkState(
+                self.walkDoneEvent, self, self.diffPath)
+        self.walkStartTrack = Sequence(
+            self.actorInterval('stand'), Func(
+                self.stand))
+        self.neutralStartTrack = Sequence(
+            self.actorInterval('sit'), Func(self.sit))
         self.fsm.request('Neutral')
         return
 
@@ -108,11 +120,12 @@ class DistributedPluto(DistributedCCharBase.DistributedCCharBase):
         DistributedCCharBase.DistributedCCharBase.handleHolidays(self)
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds and isinstance(self.cr.playGame.hood, MMHood.MMHood):
+            if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds and isinstance(
+                    self.cr.playGame.hood, MMHood.MMHood):
                 self.diffPath = TTLocalizer.Minnie
 
     def getCCLocation(self):
-        if self.diffPath == None:
+        if self.diffPath is None:
             return 1
         else:
             return 0

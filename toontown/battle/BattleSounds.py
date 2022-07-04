@@ -1,13 +1,14 @@
 from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 
+
 class BattleSounds:
     notify = DirectNotifyGlobal.directNotify.newCategory('BattleSounds')
 
     def __init__(self):
         self.mgr = AudioManager.createAudioManager()
         self.isValid = 0
-        if self.mgr != None and self.mgr.isValid():
+        if self.mgr is not None and self.mgr.isValid():
             self.isValid = 1
             limit = ConfigVariableInt('battle-sound-cache-size', 15).value
             self.mgr.setCacheLimit(limit)
@@ -19,10 +20,14 @@ class BattleSounds:
         self.sfxSearchPath = DSearchPath()
         if __debug__:
             # In the dev environment, it will always be here:
-            self.sfxSearchPath.appendDirectory(Filename('resources/phase_3/audio/sfx'))
-            self.sfxSearchPath.appendDirectory(Filename('resources/phase_3.5/audio/sfx'))
-            self.sfxSearchPath.appendDirectory(Filename('resources/phase_4/audio/sfx'))
-            self.sfxSearchPath.appendDirectory(Filename('resources/phase_5/audio/sfx'))
+            self.sfxSearchPath.appendDirectory(
+                Filename('resources/phase_3/audio/sfx'))
+            self.sfxSearchPath.appendDirectory(
+                Filename('resources/phase_3.5/audio/sfx'))
+            self.sfxSearchPath.appendDirectory(
+                Filename('resources/phase_4/audio/sfx'))
+            self.sfxSearchPath.appendDirectory(
+                Filename('resources/phase_5/audio/sfx'))
 
     def clear(self):
         if self.isValid:

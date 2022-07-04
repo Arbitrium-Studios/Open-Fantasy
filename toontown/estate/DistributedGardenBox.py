@@ -9,8 +9,10 @@ from direct.distributed import DistributedNode
 from pandac.PandaModules import NodePath
 from pandac.PandaModules import Vec3
 
+
 class DistributedGardenBox(DistributedLawnDecor.DistributedLawnDecor):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGardenPlot')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedGardenPlot')
 
     def __init__(self, cr):
         DistributedLawnDecor.DistributedLawnDecor.__init__(self, cr)
@@ -47,10 +49,10 @@ class DistributedGardenBox(DistributedLawnDecor.DistributedLawnDecor):
         self.stick2Ground()
         return
 
-    def handleEnterPlot(self, entry = None):
+    def handleEnterPlot(self, entry=None):
         pass
 
-    def handleExitPlot(self, entry = None):
+    def handleExitPlot(self, entry=None):
         DistributedLawnDecor.DistributedLawnDecor.handleExitPlot(self, entry)
 
     def setTypeIndex(self, typeIndex):

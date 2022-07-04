@@ -9,12 +9,19 @@ from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM
 
+
 def nothing(self, track, subjectNodePath, duration):
     return track
 
 
 def irisInOut(self, track, subjectNodePath, duration):
-    track.append(Sequence(Func(base.transitions.irisOut, 0.5), Func(base.transitions.irisIn, 1.5), Wait(duration), Func(base.transitions.irisOut, 1.0), Func(base.transitions.irisIn, 0.5)))
+    track.append(
+        Sequence(
+            Func(
+                base.transitions.irisOut, 0.5), Func(
+                base.transitions.irisIn, 1.5), Wait(duration), Func(
+                    base.transitions.irisOut, 1.0), Func(
+                        base.transitions.irisIn, 0.5)))
     return track
 
 
@@ -24,22 +31,48 @@ def letterBox(self, track, subjectNodePath, duration):
 
 
 def foo1(self, track, subjectNodePath, duration):
-    track.append(Sequence(Func(base.localAvatar.stopUpdateSmartCamera), PosHprInterval(camera, other=subjectNodePath, pos=Point3(-2, -35, 7.5), hpr=VBase3(-7, 0, 0)), LerpPosHprInterval(nodePath=camera, other=subjectNodePath, duration=duration, pos=Point3(2, -22, 7.5), hpr=VBase3(4, 0, 0), blendType='easeInOut'), PosHprInterval(camera, other=subjectNodePath, pos=Point3(0, -28, 7.5), hpr=VBase3(0, 0, 0)), Func(base.localAvatar.startUpdateSmartCamera)))
+    track.append(
+        Sequence(
+            Func(
+                base.localAvatar.stopUpdateSmartCamera), PosHprInterval(
+                camera, other=subjectNodePath, pos=Point3(
+                    -2, -35, 7.5), hpr=VBase3(
+                        -7, 0, 0)), LerpPosHprInterval(
+                            nodePath=camera, other=subjectNodePath, duration=duration, pos=Point3(
+                                2, -22, 7.5), hpr=VBase3(
+                                    4, 0, 0), blendType='easeInOut'), PosHprInterval(
+                                        camera, other=subjectNodePath, pos=Point3(
+                                            0, -28, 7.5), hpr=VBase3(
+                                                0, 0, 0)), Func(
+                                                    base.localAvatar.startUpdateSmartCamera)))
     return track
 
 
 def doorUnlock(self, track, subjectNodePath, duration):
-    track.append(Sequence(Func(base.localAvatar.stopUpdateSmartCamera), PosHprInterval(camera, other=self, pos=Point3(-2, -35, 7.5), hpr=VBase3(-7, 0, 0)), LerpPosHprInterval(nodePath=camera, other=self, duration=duration, pos=Point3(2, -22, 7.5), hpr=VBase3(4, 0, 0), blendType='easeInOut'), PosHprInterval(camera, other=self, pos=Point3(0, -28, 7.5), hpr=VBase3(0, 0, 0)), Func(base.localAvatar.startUpdateSmartCamera)))
+    track.append(
+        Sequence(
+            Func(
+                base.localAvatar.stopUpdateSmartCamera), PosHprInterval(
+                camera, other=self, pos=Point3(
+                    -2, -35, 7.5), hpr=VBase3(
+                        -7, 0, 0)), LerpPosHprInterval(
+                            nodePath=camera, other=self, duration=duration, pos=Point3(
+                                2, -22, 7.5), hpr=VBase3(
+                                    4, 0, 0), blendType='easeInOut'), PosHprInterval(
+                                        camera, other=self, pos=Point3(
+                                            0, -28, 7.5), hpr=VBase3(
+                                                0, 0, 0)), Func(
+                                                    base.localAvatar.startUpdateSmartCamera)))
     return track
 
 
 class CutScene(BasicEntities.NodePathEntity, DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('CutScene')
     effects = {'nothing': nothing,
-     'irisInOut': irisInOut,
-     'letterBox': letterBox}
+               'irisInOut': irisInOut,
+               'letterBox': letterBox}
     motions = {'foo1': foo1,
-     'doorUnlock': doorUnlock}
+               'doorUnlock': doorUnlock}
 
     def __init__(self, level, entId):
         DirectObject.DirectObject.__init__(self)
@@ -77,8 +110,10 @@ class CutScene(BasicEntities.NodePathEntity, DirectObject.DirectObject):
                 self.track.finish()
                 self.track = None
             track = Parallel(name=trackName)
-            track = self.getEffect(self, track, self.subjectNodePath, self.duration)
-            track = self.getMotion(self, track, self.subjectNodePath, self.duration)
+            track = self.getEffect(
+                self, track, self.subjectNodePath, self.duration)
+            track = self.getMotion(
+                self, track, self.subjectNodePath, self.duration)
             track = Sequence(Wait(0.4), track)
             track.start(0.0)
             self.track = track

@@ -3,6 +3,7 @@ from direct.distributed.ClockDelta import globalClockDelta
 from .DistCogdoGameAI import DistCogdoGameAI
 from . import CogdoFlyingGameGlobals as Globals
 
+
 class DistCogdoFlyingGameAI(DistCogdoGameAI):
     notify = directNotify.newCategory('DistCogdoFlyingGameAI')
     EagleExitCooldownTaskName = 'CFG_EagleExitCooldownTask-%s'
@@ -21,9 +22,11 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
         self.broadcastedGameFinished = False
         self._gameState = False
         if __debug__ and simbase.config.GetBool('schellgames-dev', True):
-            self.accept('onCodeReload', self._DistCogdoFlyingGameAI__sgOnCodeReload)
+            self.accept(
+                'onCodeReload',
+                self._DistCogdoFlyingGameAI__sgOnCodeReload)
 
-    def getLegalEagleAttackRoundTime(self, fromCooldown = False):
+    def getLegalEagleAttackRoundTime(self, fromCooldown=False):
         time = 0.0
         time += Globals.LegalEagle.LiftOffTime
         time += Globals.LegalEagle.LockOnTime
@@ -100,13 +103,16 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
         if self._gameState:
             return True
         elif self.fsm.getCurrentState() not in ('Finish',):
-            self._reportSuspiciousEvent(senderId, 'Client %s has made a game action request from illegal state: %s.' % (senderId, self.fsm.getCurrentState()))
+            self._reportSuspiciousEvent(
+                senderId, 'Client %s has made a game action request from illegal state: %s.' %
+                (senderId, self.fsm.getCurrentState()))
 
         return False
 
     def requestAction(self, action, data):
         senderId = self.air.getAvatarIdFromSender()
-        if not self._validateSenderId(senderId) or not self._isPlayingGame(senderId):
+        if not self._validateSenderId(
+                senderId) or not self._isPlayingGame(senderId):
             return False
 
         av = simbase.air.doId2do.get(senderId)
@@ -116,14 +122,20 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
                 self.d_broadcastDoAction(action, senderId)
                 self.updateGotoWinState()
             else:
-                self._reportSuspiciousEvent(senderId, 'Client %s has landed on the win platform twice.' % senderId)
+                self._reportSuspiciousEvent(
+                    senderId,
+                    'Client %s has landed on the win platform twice.' %
+                    senderId)
         elif action == Globals.AI.GameActions.WinStateFinished:
             if senderId not in self.toonsInWinState:
                 self.toonsInWinState.append(senderId)
                 self.d_broadcastDoAction(action, senderId)
                 self.updateGameFinished()
             else:
-                self._reportSuspiciousEvent(senderId, 'Client %s wants to exit from the win state multiple times.' % senderId)
+                self._reportSuspiciousEvent(
+                    senderId,
+                    'Client %s wants to exit from the win state multiple times.' %
+                    senderId)
         elif action == Globals.AI.GameActions.HitWhirlwind:
             if Globals.Dev.Invincibility != True:
                 self.damageToon(av, Globals.AI.SafezoneId2WhirlwindDamage)
@@ -137,9 +149,11 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
                 self.damageToon(av, Globals.AI.SafezoneId2MinionDamage)
 
         elif action == Globals.AI.GameActions.RequestEnterEagleInterest:
-            self.b_toonSetAsEagleTarget(senderId, data, self.getCurrentNetworkTime())
+            self.b_toonSetAsEagleTarget(
+                senderId, data, self.getCurrentNetworkTime())
         elif action == Globals.AI.GameActions.RequestExitEagleInterest:
-            self.b_toonClearAsEagleTarget(senderId, data, self.getCurrentNetworkTime())
+            self.b_toonClearAsEagleTarget(
+                senderId, data, self.getCurrentNetworkTime())
         elif action == Globals.AI.GameActions.RanOutOfTimePenalty:
             self.memoCount = 0
         elif action == Globals.AI.GameActions.Died:
@@ -157,30 +171,39 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
                     senderId,
                     data])
             else:
-                self._reportSuspiciousEvent(senderId, "Client %s has requested a fuel state that doesn't exist:%s." % (senderId, data))
+                self._reportSuspiciousEvent(
+                    senderId, "Client %s has requested a fuel state that doesn't exist:%s." %
+                    (senderId, data))
         elif action == Globals.AI.GameActions.BladeLost:
             self.sendUpdate('toonBladeLost', [
                 senderId])
         else:
-            self._reportSuspiciousEvent(senderId, 'Client %s has made an illegal game action request: %s.' % (senderId, action))
+            self._reportSuspiciousEvent(
+                senderId, 'Client %s has made an illegal game action request: %s.' %
+                (senderId, action))
 
     def requestPickUp(self, pickupNum, pickupType):
         senderId = self.air.getAvatarIdFromSender()
-        if not self._validateSenderId(senderId) or not self._isPlayingGame(senderId):
+        if not self._validateSenderId(
+                senderId) or not self._isPlayingGame(senderId):
             return False
 
         if pickupType not in Globals.Level.GatherableTypes:
-            self._reportSuspiciousEvent(senderId, 'Client %s has requested an illegal pickup type: %s.' % (senderId, pickupType))
+            self._reportSuspiciousEvent(
+                senderId, 'Client %s has requested an illegal pickup type: %s.' %
+                (senderId, pickupType))
             return False
 
         if pickupType == Globals.Level.GatherableTypes.Memo:
             if pickupNum not in self.pickups:
                 self.pickups.append(pickupNum)
                 self.memoCount += 1
-                self.d_broadcastPickup(senderId, pickupNum, self.getCurrentNetworkTime())
+                self.d_broadcastPickup(
+                    senderId, pickupNum, self.getCurrentNetworkTime())
 
         else:
-            self.d_broadcastPickup(senderId, pickupNum, self.getCurrentNetworkTime())
+            self.d_broadcastPickup(
+                senderId, pickupNum, self.getCurrentNetworkTime())
             if pickupType == Globals.Level.GatherableTypes.LaffPowerup:
                 self.pickedUpLaffPowerup(senderId)
             elif pickupType == Globals.Level.GatherableTypes.InvulPowerup:
@@ -189,15 +212,17 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
     def damageToon(self, av, damageDict):
         safezoneId = self.getSafezoneId()
         if safezoneId in damageDict:
-            av.takeDamage(damageDict[safezoneId], quietly = 0)
+            av.takeDamage(damageDict[safezoneId], quietly=0)
         else:
-            self.notify.warning('Safezone Id: %s is not in flying game damage dictionary' % safezoneId)
+            self.notify.warning(
+                'Safezone Id: %s is not in flying game damage dictionary' %
+                safezoneId)
 
     def toonDied(self, av):
         if Globals.Dev.Invincibility != True:
             self.damageToon(av, Globals.AI.SafezoneId2DeathDamage)
 
-    def d_broadcastDoAction(self, action, data = 0):
+    def d_broadcastDoAction(self, action, data=0):
         self.sendUpdate('doAction', [
             action,
             data])
@@ -218,19 +243,26 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
             if av.hp > 0 and av.hp < av.maxHp:
                 safezoneId = self.getSafezoneId()
                 if safezoneId in Globals.Gameplay.SafezoneId2LaffPickupHealAmount:
-                    av.toonUp(Globals.Gameplay.SafezoneId2LaffPickupHealAmount[safezoneId])
+                    av.toonUp(
+                        Globals.Gameplay.SafezoneId2LaffPickupHealAmount[safezoneId])
                 else:
-                    self.notify.warning('Safezone Id: %s is not in SafezoneId2LaffPickupHealAmount' % safezoneId)
+                    self.notify.warning(
+                        'Safezone Id: %s is not in SafezoneId2LaffPickupHealAmount' %
+                        safezoneId)
 
     def pickedUpInvulPowerup(self, senderId):
-        taskMgr.remove(self.uniqueName(DistCogdoFlyingGameAI.InvulBuffRemoveTaskName % senderId))
+        taskMgr.remove(
+            self.uniqueName(
+                DistCogdoFlyingGameAI.InvulBuffRemoveTaskName %
+                senderId))
         self.addBuff(senderId, Globals.Level.GatherableTypes.InvulPowerup)
-        taskMgr.doMethodLater(Globals.Gameplay.InvulBuffTime, self.b_broadcastDebuffPowerup, self.uniqueName(DistCogdoFlyingGameAI.InvulBuffRemoveTaskName % senderId), extraArgs = [
+        taskMgr.doMethodLater(Globals.Gameplay.InvulBuffTime, self.b_broadcastDebuffPowerup, self.uniqueName(DistCogdoFlyingGameAI.InvulBuffRemoveTaskName % senderId), extraArgs=[
             senderId,
             Globals.Level.GatherableTypes.InvulPowerup])
 
     def forceDebuffAll(self):
-        tasks = taskMgr.getTasksMatching(DistCogdoFlyingGameAI.InvulBuffRemoveTaskName % '*')
+        tasks = taskMgr.getTasksMatching(
+            DistCogdoFlyingGameAI.InvulBuffRemoveTaskName % '*')
         for task in tasks:
             taskMgr.remove(task.getName())
 
@@ -249,8 +281,9 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
         if eagleId not in self.eagleId2targetIds:
             self.eagleId2targetIds[eagleId] = [
                 toonId]
-            if not taskMgr.hasTaskNamed(DistCogdoFlyingGameAI.EagleExitCooldownTaskName % eagleId):
-                taskMgr.doMethodLater(self.getLegalEagleAttackRoundTime(), self.d_broadcastEagleExitCooldown, self.uniqueName(DistCogdoFlyingGameAI.EagleExitCooldownTaskName % eagleId), extraArgs = [
+            if not taskMgr.hasTaskNamed(
+                    DistCogdoFlyingGameAI.EagleExitCooldownTaskName % eagleId):
+                taskMgr.doMethodLater(self.getLegalEagleAttackRoundTime(), self.d_broadcastEagleExitCooldown, self.uniqueName(DistCogdoFlyingGameAI.EagleExitCooldownTaskName % eagleId), extraArgs=[
                     eagleId])
 
             self.d_broadcastToonSetAsEagleTarget(toonId, eagleId, networkTime)
@@ -261,21 +294,26 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
         if eagleId in self.eagleId2targetIds:
             toonIds = self.eagleId2targetIds[eagleId]
             toonIds.remove(toonId)
-            self.d_broadcastToonClearAsEagleTarget(toonId, eagleId, networkTime)
+            self.d_broadcastToonClearAsEagleTarget(
+                toonId, eagleId, networkTime)
             if len(toonIds) == 0:
                 del self.eagleId2targetIds[eagleId]
             else:
                 index = random.randint(0, len(toonIds) - 1)
-                self.d_broadcastToonSetAsEagleTarget(toonIds[index], eagleId, networkTime)
+                self.d_broadcastToonSetAsEagleTarget(
+                    toonIds[index], eagleId, networkTime)
 
     def d_broadcastEagleExitCooldown(self, eagleId):
         self.sendUpdate('eagleExitCooldown', [
             eagleId,
             self.getCurrentNetworkTime()])
         if eagleId in self.eagleId2targetIds:
-            taskMgr.remove(self.uniqueName(DistCogdoFlyingGameAI.EagleExitCooldownTaskName % eagleId))
+            taskMgr.remove(
+                self.uniqueName(
+                    DistCogdoFlyingGameAI.EagleExitCooldownTaskName %
+                    eagleId))
             if eagleId in self.eagleId2targetIds:
-                taskMgr.doMethodLater(self.getLegalEagleAttackRoundTime(fromCooldown = True), self.d_broadcastEagleExitCooldown, self.uniqueName(DistCogdoFlyingGameAI.EagleExitCooldownTaskName % eagleId), extraArgs = [
+                taskMgr.doMethodLater(self.getLegalEagleAttackRoundTime(fromCooldown=True), self.d_broadcastEagleExitCooldown, self.uniqueName(DistCogdoFlyingGameAI.EagleExitCooldownTaskName % eagleId), extraArgs=[
                     eagleId])
 
     def d_broadcastToonSetAsEagleTarget(self, toonId, eagleId, networkTime):
@@ -326,8 +364,12 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
             taskMgr.remove(self._gameTimerExpiredTask)
             del self._gameTimerExpiredTask
 
-        taskMgr.removeTasksMatching(DistCogdoFlyingGameAI.InvulBuffRemoveTaskName % '*')
-        taskMgr.removeTasksMatching(DistCogdoFlyingGameAI.EagleExitCooldownTaskName % '*')
+        taskMgr.removeTasksMatching(
+            DistCogdoFlyingGameAI.InvulBuffRemoveTaskName %
+            '*')
+        taskMgr.removeTasksMatching(
+            DistCogdoFlyingGameAI.EagleExitCooldownTaskName %
+            '*')
         for toonId in self.toonId2buffList:
             del self.toonId2buffList[toonId][:]
 
@@ -340,7 +382,9 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
     def enterFinish(self):
         DistCogdoGameAI.enterFinish(self)
         self.ignoreAll()
-        self._announceGameDoneTask = taskMgr.doMethodLater(Globals.Gameplay.FinishDurationSeconds, self.announceGameDone, self.taskName(DistCogdoFlyingGameAI.AnnounceGameDoneTimerTaskName), [])
+        self._announceGameDoneTask = taskMgr.doMethodLater(
+            Globals.Gameplay.FinishDurationSeconds, self.announceGameDone, self.taskName(
+                DistCogdoFlyingGameAI.AnnounceGameDoneTimerTaskName), [])
 
     def exitFinish(self):
         DistCogdoGameAI.exitFinish(self)

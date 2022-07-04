@@ -23,7 +23,8 @@ class LawOfficeLayout:
         self.lawOfficeId = lawOfficeId
         self.floorIds = []
         if self.lawOfficeId in OfficeBuildingFloorSequences:
-            self.floorIds = OfficeBuildingFloorSequences[self.lawOfficeId][random.randint(0, len(OfficeBuildingFloorSequences[self.lawOfficeId])) - 1]
+            self.floorIds = OfficeBuildingFloorSequences[self.lawOfficeId][random.randint(
+                0, len(OfficeBuildingFloorSequences[self.lawOfficeId])) - 1]
         else:
             self.notify.warning('no layout for Law Office ID: using defaults')
             self.floorIds = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)

@@ -2,6 +2,7 @@ from pandac.PandaModules import *
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 
+
 class DeleteManager(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DeleteManager')
     neverDisable = 1

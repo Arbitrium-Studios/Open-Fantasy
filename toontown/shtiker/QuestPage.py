@@ -10,15 +10,16 @@ from toontown.toonbase import TTLocalizer
 from toontown.quest import QuestBookPoster
 from direct.directnotify import DirectNotifyGlobal
 
+
 class QuestPage(ShtikerPage.ShtikerPage):
     notify = DirectNotifyGlobal.directNotify.newCategory('QuestPage')
 
     def __init__(self):
         ShtikerPage.ShtikerPage.__init__(self)
         self.quests = {0: None,
-         1: None,
-         2: None,
-         3: None}
+                       1: None,
+                       2: None,
+                       3: None}
         self.textRolloverColor = Vec4(1, 1, 0, 1)
         self.textDownColor = Vec4(0.5, 0.9, 1, 1)
         self.textDisabledColor = Vec4(0.4, 0.8, 0.4, 1)
@@ -27,29 +28,39 @@ class QuestPage(ShtikerPage.ShtikerPage):
         return
 
     def load(self):
-        self.title = DirectLabel(parent=self, relief=None, text=TTLocalizer.QuestPageToonTasks, text_scale=0.12, textMayChange=0, pos=(0, 0, 0.6))
+        self.title = DirectLabel(
+            parent=self,
+            relief=None,
+            text=TTLocalizer.QuestPageToonTasks,
+            text_scale=0.12,
+            textMayChange=0,
+            pos=(
+                0,
+                0,
+                0.6))
         questFramePlaceList = ((-0.45,
-          0,
-          0.25,
-          0,
-          0,
-          0),
-         (-0.45,
-          0,
-          -0.35,
-          0,
-          0,
-          0),
-         (0.45, 0, 0.25, 0, 0, 0),
-         (0.45,
-          0,
-          -0.35,
-          0,
-          0,
-          0))
+                                0,
+                                0.25,
+                                0,
+                                0,
+                                0),
+                               (-0.45,
+                                0,
+                                -0.35,
+                                0,
+                                0,
+                                0),
+                               (0.45, 0, 0.25, 0, 0, 0),
+                               (0.45,
+                                0,
+                                -0.35,
+                                0,
+                                0,
+                                0))
         self.questFrames = []
         for i in range(ToontownGlobals.MaxQuestCarryLimit):
-            frame = QuestBookPoster.QuestBookPoster(reverse=i > 1, mapIndex=i + 1)
+            frame = QuestBookPoster.QuestBookPoster(
+                reverse=i > 1, mapIndex=i + 1)
             frame.reparentTo(self)
             frame.setPosHpr(*questFramePlaceList[i])
             frame.setScale(1.06)
@@ -85,7 +96,7 @@ class QuestPage(ShtikerPage.ShtikerPage):
 
     def getLowestUnusedIndex(self):
         for i in range(ToontownGlobals.MaxQuestCarryLimit):
-            if self.quests[i] == None:
+            if self.quests[i] is None:
                 return i
 
         return -1
@@ -169,7 +180,8 @@ class QuestPage(ShtikerPage.ShtikerPage):
         self.hide()
 
     def canDeleteQuest(self, questDesc):
-        return Quests.isQuestJustForFun(questDesc[0], questDesc[3]) and self.onscreen == 0
+        return Quests.isQuestJustForFun(
+            questDesc[0], questDesc[3]) and self.onscreen == 0
 
     def __deleteQuest(self, questDesc):
         base.localAvatar.d_requestDeleteQuest(questDesc)

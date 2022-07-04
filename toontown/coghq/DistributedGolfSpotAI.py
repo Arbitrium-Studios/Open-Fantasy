@@ -1,6 +1,7 @@
 from direct.distributed import DistributedObjectAI
 from direct.fsm import FSM
 
+
 class DistributedGolfSpotAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM):
 
     def __init__(self, air, boss, index):
@@ -49,7 +50,7 @@ class DistributedGolfSpotAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM):
             self.request('Free')
 
     def __getGolfSpotId(self, avId):
-        if self.boss and self.boss.golfSpots != None:
+        if self.boss and self.boss.golfSpots is not None:
             for golfSpot in self.boss.golfSpots:
                 if golfSpot.avId == avId:
                     return golfSpot.doId

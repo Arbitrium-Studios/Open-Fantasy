@@ -9,12 +9,13 @@ from toontown.classicchars import DistributedGoofySpeedwayAI
 if __debug__:
     import pdb
 
+
 class GSHoodDataAI(HoodDataAI.HoodDataAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('GSHoodDataAI')
 
     def __init__(self, air, zoneId=None):
         hoodId = ToontownGlobals.GoofySpeedway
-        if zoneId == None:
+        if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
         return
@@ -25,7 +26,8 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
         self.cycleDuration = 10
         self.createLeaderBoards()
         self.__cycleLeaderBoards()
-        self.classicChar = DistributedGoofySpeedwayAI.DistributedGoofySpeedwayAI(self.air)
+        self.classicChar = DistributedGoofySpeedwayAI.DistributedGoofySpeedwayAI(
+            self.air)
         self.classicChar.generateWithRequired(self.zoneId)
         self.classicChar.start()
         self.addDistObj(self.classicChar)
@@ -47,7 +49,8 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
     def createLeaderBoards(self):
         self.leaderBoards = []
         dnaStore = DNAStorage()
-        dnaData = simbase.air.loadDNAFileAI(dnaStore, simbase.air.lookupDNAFileName('goofy_speedway_sz.dna'))
+        dnaData = simbase.air.loadDNAFileAI(
+            dnaStore, simbase.air.lookupDNAFileName('goofy_speedway_sz.dna'))
         if isinstance(dnaData, DNAData):
             self.leaderBoards = self.air.findLeaderBoards(dnaData, self.zoneId)
         for distObj in self.leaderBoards:
@@ -67,7 +70,10 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
 
     def __cycleLeaderBoards(self, task=None):
         messenger.send('GS_LeaderBoardSwap' + str(self.zoneId))
-        taskMgr.doMethodLater(self.cycleDuration, self.__cycleLeaderBoards, str(self) + '_leaderBoardSwitch')
+        taskMgr.doMethodLater(
+            self.cycleDuration,
+            self.__cycleLeaderBoards,
+            str(self) + '_leaderBoardSwitch')
 
     def createStartingBlocks(self):
         self.racingPads = []
@@ -81,15 +87,18 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
             dnaData = self.air.dnaDataMap.get(zone[0], None)
             if isinstance(dnaData, DNAData):
                 area = ZoneUtil.getCanonicalZoneId(zoneId)
-                foundRacingPads, foundRacingPadGroups = self.air.findRacingPads(dnaData, zoneId, area)
-                foundViewingPads, foundViewingPadGroups = self.air.findRacingPads(dnaData, zoneId, area, type='viewing_pad')
+                foundRacingPads, foundRacingPadGroups = self.air.findRacingPads(
+                    dnaData, zoneId, area)
+                foundViewingPads, foundViewingPadGroups = self.air.findRacingPads(
+                    dnaData, zoneId, area, type='viewing_pad')
                 self.racingPads += foundRacingPads
                 self.foundRacingPadGroups += foundRacingPadGroups
                 self.viewingPads += foundViewingPads
                 self.foundViewingPadGroups += foundViewingPadGroups
 
         self.startingBlocks = []
-        for dnaGroup, distRacePad in zip(self.foundRacingPadGroups, self.racingPads):
+        for dnaGroup, distRacePad in zip(
+                self.foundRacingPadGroups, self.racingPads):
             startingBlocks = self.air.findStartingBlocks(dnaGroup, distRacePad)
             self.startingBlocks += startingBlocks
             for startingBlock in startingBlocks:
@@ -98,7 +107,8 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
         for distObj in self.startingBlocks:
             self.addDistObj(distObj)
 
-        for dnaGroup, distViewPad in zip(self.foundViewingPadGroups, self.viewingPads):
+        for dnaGroup, distViewPad in zip(
+                self.foundViewingPadGroups, self.viewingPads):
             viewingBlocks = self.air.findStartingBlocks(dnaGroup, distViewPad)
             self.viewingBlocks += viewingBlocks
             for viewingBlock in viewingBlocks:
@@ -121,4 +131,11 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
             if sb == startBlock:
                 if not sb.kartPad:
                     self.notify.warning('%s is in a broken state' % str(self))
-                    self.notify.warning('StartingBlocks: %d, RacePads: %s, ViewPads: %s, RacePadGroups: %s, ViewPadGroups: %s' % (len(self.startingBlocks), str(self.racingPads), str(self.viewingPads), str(self.foundRacingPadGroups), str(self.foundViewingPadGroups)))
+                    self.notify.warning(
+                        'StartingBlocks: %d, RacePads: %s, ViewPads: %s, RacePadGroups: %s, ViewPadGroups: %s' %
+                        (len(
+                            self.startingBlocks), str(
+                            self.racingPads), str(
+                            self.viewingPads), str(
+                            self.foundRacingPadGroups), str(
+                            self.foundViewingPadGroups)))

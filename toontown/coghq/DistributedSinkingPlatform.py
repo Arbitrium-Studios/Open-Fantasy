@@ -9,8 +9,10 @@ from direct.distributed import DistributedObject
 from . import SinkingPlatformGlobals
 from direct.directnotify import DirectNotifyGlobal
 
+
 class DistributedSinkingPlatform(BasicEntities.DistributedNodePathEntity):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedSinkingPlatform')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedSinkingPlatform')
 
     def __init__(self, cr):
         BasicEntities.DistributedNodePathEntity.__init__(self, cr)
@@ -20,7 +22,13 @@ class DistributedSinkingPlatform(BasicEntities.DistributedNodePathEntity):
     def generateInit(self):
         self.notify.debug('generateInit')
         BasicEntities.DistributedNodePathEntity.generateInit(self)
-        self.fsm = ClassicFSM.ClassicFSM('DistributedSinkingPlatform', [State.State('off', self.enterOff, self.exitOff, ['sinking']), State.State('sinking', self.enterSinking, self.exitSinking, ['rising']), State.State('rising', self.enterRising, self.exitRising, ['sinking', 'off'])], 'off', 'off')
+        self.fsm = ClassicFSM.ClassicFSM(
+            'DistributedSinkingPlatform', [
+                State.State(
+                    'off', self.enterOff, self.exitOff, ['sinking']), State.State(
+                    'sinking', self.enterSinking, self.exitSinking, ['rising']), State.State(
+                    'rising', self.enterRising, self.exitRising, [
+                        'sinking', 'off'])], 'off', 'off')
         self.fsm.enterInitialState()
 
     def generate(self):
@@ -54,16 +62,19 @@ class DistributedSinkingPlatform(BasicEntities.DistributedNodePathEntity):
         self.notify.debug('loadModel')
         model = loader.loadModel('phase_9/models/cogHQ/platform1')
         self.platform = MovingPlatform.MovingPlatform()
-        self.platform.setupCopyModel(self.getParentToken(), model, 'platformcollision')
+        self.platform.setupCopyModel(
+            self.getParentToken(), model, 'platformcollision')
         self.platform.reparentTo(self)
         self.platform.setPos(0, 0, 0)
 
     def localToonEntered(self):
-        ts = globalClockDelta.localToNetworkTime(globalClock.getFrameTime(), bits=32)
+        ts = globalClockDelta.localToNetworkTime(
+            globalClock.getFrameTime(), bits=32)
         self.sendUpdate('setOnOff', [1, ts])
 
     def localToonLeft(self):
-        ts = globalClockDelta.localToNetworkTime(globalClock.getFrameTime(), bits=32)
+        ts = globalClockDelta.localToNetworkTime(
+            globalClock.getFrameTime(), bits=32)
         self.sendUpdate('setOnOff', [0, ts])
 
     def enterOff(self):
@@ -72,7 +83,7 @@ class DistributedSinkingPlatform(BasicEntities.DistributedNodePathEntity):
     def exitOff(self):
         self.notify.debug('exitOff')
 
-    def enterSinking(self, ts = 0):
+    def enterSinking(self, ts=0):
         self.notify.debug('enterSinking')
         self.startMoving(SinkingPlatformGlobals.SINKING, ts)
 
@@ -84,7 +95,7 @@ class DistributedSinkingPlatform(BasicEntities.DistributedNodePathEntity):
             self.moveIval = None
         return
 
-    def enterRising(self, ts = 0):
+    def enterRising(self, ts=0):
         self.notify.debug('enterRising')
         self.startMoving(SinkingPlatformGlobals.RISING, ts)
 
@@ -127,6 +138,15 @@ class DistributedSinkingPlatform(BasicEntities.DistributedNodePathEntity):
         self.moveIval = Sequence()
         if pause is not None:
             self.moveIval.append(WaitInterval(pause))
-        self.moveIval.append(LerpPosInterval(moveNode, duration, endPos, startPos=moveNode.getPos(), blendType='easeInOut', name='%s-move' % self.platform.name, fluid=1))
+        self.moveIval.append(
+            LerpPosInterval(
+                moveNode,
+                duration,
+                endPos,
+                startPos=moveNode.getPos(),
+                blendType='easeInOut',
+                name='%s-move' %
+                self.platform.name,
+                fluid=1))
         self.moveIval.start()
         return

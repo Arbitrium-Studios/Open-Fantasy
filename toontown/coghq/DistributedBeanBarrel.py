@@ -4,6 +4,7 @@ from toontown.toonbase.ToontownGlobals import *
 from direct.directnotify import DirectNotifyGlobal
 from . import DistributedBarrelBase
 
+
 class DistributedBeanBarrel(DistributedBarrelBase.DistributedBarrelBase):
 
     def __init__(self, cr):

@@ -13,12 +13,19 @@ from direct.fsm import State
 from direct.fsm import ClassicFSM, State
 from toontown.toonbase import ToontownGlobals
 
+
 class DistributedStageBattle(DistributedLevelBattle.DistributedLevelBattle):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedStageBattle')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedStageBattle')
 
     def __init__(self, cr):
         DistributedLevelBattle.DistributedLevelBattle.__init__(self, cr)
-        self.fsm.addState(State.State('StageReward', self.enterStageReward, self.exitStageReward, ['Resume']))
+        self.fsm.addState(
+            State.State(
+                'StageReward',
+                self.enterStageReward,
+                self.exitStageReward,
+                ['Resume']))
         offState = self.fsm.getStateNamed('Off')
         offState.addTransition('StageReward')
         playMovieState = self.fsm.getStateNamed('PlayMovie')
@@ -32,7 +39,9 @@ class DistributedStageBattle(DistributedLevelBattle.DistributedLevelBattle):
             NametagGlobals.setMasterArrowsOn(0)
             if self.bossBattle:
                 messenger.send('localToonConfrontedStageBoss')
-        self.movie.playReward(ts, self.uniqueName('building-reward'), self.__handleStageRewardDone)
+        self.movie.playReward(ts,
+                              self.uniqueName('building-reward'),
+                              self.__handleStageRewardDone)
 
     def __handleStageRewardDone(self):
         self.notify.debug('stage reward done')

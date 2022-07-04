@@ -1,6 +1,7 @@
 from direct.distributed import DistributedObjectAI
 from direct.directnotify import DirectNotifyGlobal
 
+
 class DistributedPetshopInteriorAI(DistributedObjectAI.DistributedObjectAI):
 
     def __init__(self, block, air, zoneId):
@@ -13,5 +14,5 @@ class DistributedPetshopInteriorAI(DistributedObjectAI.DistributedObjectAI):
 
     def getZoneIdAndBlock(self):
         r = [
-         self.zoneId, self.block]
+            self.zoneId, self.block]
         return r

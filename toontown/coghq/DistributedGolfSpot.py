@@ -12,12 +12,13 @@ from toontown.golf import GolfGlobals
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 
+
 class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGolfSpot')
     positions = ((-45, 100, GolfGlobals.GOLF_BALL_RADIUS),
-     (-15, 100, GolfGlobals.GOLF_BALL_RADIUS),
-     (15, 100, GolfGlobals.GOLF_BALL_RADIUS),
-     (45, 100, GolfGlobals.GOLF_BALL_RADIUS))
+                 (-15, 100, GolfGlobals.GOLF_BALL_RADIUS),
+                 (15, 100, GolfGlobals.GOLF_BALL_RADIUS),
+                 (45, 100, GolfGlobals.GOLF_BALL_RADIUS))
     toonGolfOffsetPos = Point3(-2, 0, -GolfGlobals.GOLF_BALL_RADIUS)
     toonGolfOffsetHpr = Point3(-90, 0, 0)
     rotateSpeed = 20
@@ -158,14 +159,21 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         if self.fadeTrack:
             self.fadeTrack.finish()
             self.fadeTrack = None
-        self.restoreScaleTrack = Sequence(Wait(6), self.getRestoreScaleInterval(), name='restoreScaleTrack')
+        self.restoreScaleTrack = Sequence(
+            Wait(6),
+            self.getRestoreScaleInterval(),
+            name='restoreScaleTrack')
         self.restoreScaleTrack.start()
         if self.avId == localAvatar.doId:
             if not self.isDisabled():
                 self.ballModel.setAlphaScale(0.3)
                 self.ballModel.setTransparency(1)
                 taskMgr.doMethodLater(5, self.__allowDetect, self.triggerName)
-                self.fadeTrack = Sequence(Func(self.ballModel.setTransparency, 1), self.ballModel.colorScaleInterval(0.2, VBase4(1, 1, 1, 0.3)), name='fadeTrack-enterFree')
+                self.fadeTrack = Sequence(
+                    Func(
+                        self.ballModel.setTransparency, 1), self.ballModel.colorScaleInterval(
+                        0.2, VBase4(
+                            1, 1, 1, 0.3)), name='fadeTrack-enterFree')
                 self.fadeTrack.start()
         else:
             self.trigger.unstash()
@@ -213,9 +221,13 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
             self.swingInterval = None
         if not self.ballModel.isEmpty():
             if self.ballModel.isHidden():
-                self.notify.debug('ball is hidden scale =%s' % self.ballModel.getScale())
+                self.notify.debug(
+                    'ball is hidden scale =%s' %
+                    self.ballModel.getScale())
             else:
-                self.notify.debug('ball is showing scale=%s' % self.ballModel.getScale())
+                self.notify.debug(
+                    'ball is showing scale=%s' %
+                    self.ballModel.getScale())
         if self.toon and not self.toon.isDisabled():
             self.toon.startSmooth()
         self.releaseTrack = self.makeToonReleaseInterval(self.toon)
@@ -235,7 +247,10 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
     def __allowDetect(self, task):
         if self.fadeTrack:
             self.fadeTrack.finish()
-        self.fadeTrack = Sequence(self.ballModel.colorScaleInterval(0.2, self.ballColor), Func(self.ballModel.clearTransparency), name='fadeTrack-allowDetect')
+        self.fadeTrack = Sequence(
+            self.ballModel.colorScaleInterval(
+                0.2, self.ballColor), Func(
+                self.ballModel.clearTransparency), name='fadeTrack-allowDetect')
         self.fadeTrack.start()
         self.trigger.unstash()
         self.accept(self.triggerEvent, self.__hitTrigger)
@@ -264,8 +279,20 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         walkTime = 0.2
         reach = Sequence()
         if reach.getDuration() < walkTime:
-            reach = Sequence(ActorInterval(toon, 'walk', loop=1, duration=walkTime - reach.getDuration()), reach)
-        i = Sequence(Parallel(toon.posInterval(walkTime, newPos, origPos), toon.hprInterval(walkTime, newHpr, origHpr), reach), Func(toon.stopLookAround))
+            reach = Sequence(
+                ActorInterval(
+                    toon,
+                    'walk',
+                    loop=1,
+                    duration=walkTime -
+                    reach.getDuration()),
+                reach)
+        i = Sequence(
+            Parallel(
+                toon.posInterval(
+                    walkTime, newPos, origPos), toon.hprInterval(
+                    walkTime, newHpr, origHpr), reach), Func(
+                toon.stopLookAround))
         if toon == base.localAvatar:
             i.append(Func(self.switchToAnimState, 'GolfPuttLoop'))
         i.append(Func(self.startAdjustClubTask))
@@ -278,7 +305,7 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         toon.setHpr(self.toonGolfOffsetHpr)
         return Sequence()
 
-    def switchToAnimState(self, animStateName, forced = False):
+    def switchToAnimState(self, animStateName, forced=False):
         curAnimState = base.localAvatar.animFSM.getCurrentState()
         curAnimStateName = ''
         if curAnimState:
@@ -289,9 +316,9 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
     def __enableControlInterface(self):
         gui = loader.loadModel('phase_3.5/models/gui/avatar_panel_gui')
         self.closeButton = DirectButton(image=(gui.find('**/CloseBtn_UP'),
-         gui.find('**/CloseBtn_DN'),
-         gui.find('**/CloseBtn_Rllvr'),
-         gui.find('**/CloseBtn_UP')), relief=None, scale=2, text=TTLocalizer.BossbotGolfSpotLeave, text_scale=0.04, text_pos=(0, -0.07), text_fg=VBase4(1, 1, 1, 1), pos=(1.05, 0, -0.82), command=self.__exitGolfSpot)
+                                               gui.find('**/CloseBtn_DN'),
+                                               gui.find('**/CloseBtn_Rllvr'),
+                                               gui.find('**/CloseBtn_UP')), relief=None, scale=2, text=TTLocalizer.BossbotGolfSpotLeave, text_scale=0.04, text_pos=(0, -0.07), text_fg=VBase4(1, 1, 1, 1), pos=(1.05, 0, -0.82), command=self.__exitGolfSpot)
         self.accept('escape', self.__exitGolfSpot)
         self.accept('control', self.__controlPressed)
         self.accept('control-up', self.__controlReleased)
@@ -300,7 +327,10 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         self.accept('InputState-turnLeft', self.__leftArrow)
         self.accept('InputState-turnRight', self.__rightArrow)
         taskMgr.add(self.__watchControls, 'watchGolfSpotControls')
-        taskMgr.doMethodLater(5, self.__displayGolfSpotAdvice, self.golfSpotAdviceName)
+        taskMgr.doMethodLater(
+            5,
+            self.__displayGolfSpotAdvice,
+            self.golfSpotAdviceName)
         self.arrowVert = 0
         self.arrowHorz = 0
         if self.powerBar:
@@ -330,9 +360,9 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
 
     def setupPowerBar(self):
         self.powerBar = DirectWaitBar(pos=(0.0, 0, -0.94), relief=DGG.SUNKEN, frameSize=(-2.0,
-         2.0,
-         -0.2,
-         0.2), borderWidth=(0.02, 0.02), scale=0.25, range=100, sortOrder=50, frameColor=(0.5, 0.5, 0.5, 0.5), barColor=(1.0, 0.0, 0.0, 1.0), text='', text_scale=0.26, text_fg=(1, 1, 1, 1), text_align=TextNode.ACenter, text_pos=(0, -0.05))
+                                                                                         2.0,
+                                                                                         -0.2,
+                                                                                         0.2), borderWidth=(0.02, 0.02), scale=0.25, range=100, sortOrder=50, frameColor=(0.5, 0.5, 0.5, 0.5), barColor=(1.0, 0.0, 0.0, 1.0), text='', text_scale=0.26, text_fg=(1, 1, 1, 1), text_align=TextNode.ACenter, text_pos=(0, -0.05))
         self.power = 0
         self.powerBar['value'] = self.power
         self.powerBar.hide()
@@ -343,8 +373,11 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         self.powerBar['text'] = ''
 
     def __displayGolfSpotAdvice(self, task):
-        if self.golfSpotAdviceLabel == None:
-            self.golfSpotAdviceLabel = DirectLabel(text=TTLocalizer.BossbotGolfSpotAdvice, text_fg=VBase4(1, 1, 1, 1), text_align=TextNode.ACenter, relief=None, pos=(0, 0, 0.69), scale=0.1)
+        if self.golfSpotAdviceLabel is None:
+            self.golfSpotAdviceLabel = DirectLabel(
+                text=TTLocalizer.BossbotGolfSpotAdvice, text_fg=VBase4(
+                    1, 1, 1, 1), text_align=TextNode.ACenter, relief=None, pos=(
+                    0, 0, 0.69), scale=0.1)
         return
 
     def __cleanupGolfSpotAdvice(self):
@@ -357,7 +390,8 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
     def showExiting(self):
         if self.closeButton:
             self.closeButton.destroy()
-            self.closeButton = DirectLabel(relief=None, text=TTLocalizer.BossbotGolfSpotLeaving, pos=(1.05, 0, -0.88), text_pos=(0, 0), text_scale=0.06, text_fg=VBase4(1, 1, 1, 1))
+            self.closeButton = DirectLabel(relief=None, text=TTLocalizer.BossbotGolfSpotLeaving, pos=(
+                1.05, 0, -0.88), text_pos=(0, 0), text_scale=0.06, text_fg=VBase4(1, 1, 1, 1))
         self.__cleanupGolfSpotAdvice()
         return
 
@@ -424,7 +458,7 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         self.changeSeq = self.changeSeq + 1 & 255
 
     def __beginFireBall(self):
-        if self.aimStart != None:
+        if self.aimStart is not None:
             return
         if not self.state == 'Controlled':
             return
@@ -437,7 +471,7 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         return
 
     def __endFireBall(self):
-        if self.aimStart == None:
+        if self.aimStart is None:
             return
         if not self.state == 'Controlled':
             return
@@ -483,17 +517,25 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         self.b_clearSmoothing()
         self.d_sendGolfSpotPos()
         taskMgr.remove(taskName)
-        taskMgr.doMethodLater(self.__broadcastPeriod, self.__posHprBroadcast, taskName)
+        taskMgr.doMethodLater(
+            self.__broadcastPeriod,
+            self.__posHprBroadcast,
+            taskName)
 
     def __posHprBroadcast(self, task):
         self.d_sendGolfSpotPos()
         taskName = self.posHprBroadcastName
-        taskMgr.doMethodLater(self.__broadcastPeriod, self.__posHprBroadcast, taskName)
+        taskMgr.doMethodLater(
+            self.__broadcastPeriod,
+            self.__posHprBroadcast,
+            taskName)
         return Task.done
 
     def d_sendGolfSpotPos(self):
         timestamp = globalClockDelta.getFrameNetworkTime()
-        self.sendUpdate('setGolfSpotPos', [self.changeSeq, self.root.getH(), timestamp])
+        self.sendUpdate(
+            'setGolfSpotPos', [
+                self.changeSeq, self.root.getH(), timestamp])
 
     def setGolfSpotPos(self, changeSeq, h, timestamp):
         self.changeSeq = changeSeq
@@ -513,7 +555,7 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
     def d_clearSmoothing(self):
         self.sendUpdate('clearSmoothing', [0])
 
-    def clearSmoothing(self, bogus = None):
+    def clearSmoothing(self, bogus=None):
         self.golfSpotSmoother.clearPositions(1)
 
     def doSmoothTask(self, task):
@@ -537,23 +579,55 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
 
     def makeToonReleaseInterval(self, toon):
 
-        def getSlideToPos(toon = toon):
+        def getSlideToPos(toon=toon):
             return render.getRelativePoint(toon, Point3(0, -5, 0))
 
         if self.gotHitByBoss:
-            grabIval = Sequence(Func(self.detachClub), name='makeToonReleaseInterval-gotHitByBoss')
+            grabIval = Sequence(Func(self.detachClub),
+                                name='makeToonReleaseInterval-gotHitByBoss')
             if not toon.isEmpty():
-                toonIval = Sequence(Func(toon.wrtReparentTo, render), Parallel(ActorInterval(toon, 'slip-backward'), toon.posInterval(0.5, getSlideToPos, fluid=1)), name='makeToonReleaseInterval-toonIval')
+                toonIval = Sequence(
+                    Func(
+                        toon.wrtReparentTo,
+                        render),
+                    Parallel(
+                        ActorInterval(
+                            toon,
+                            'slip-backward'),
+                        toon.posInterval(
+                            0.5,
+                            getSlideToPos,
+                            fluid=1)),
+                    name='makeToonReleaseInterval-toonIval')
                 grabIval.append(toonIval)
         else:
             grabIval = Sequence(Func(self.detachClub))
             if not toon.isEmpty():
-                toonIval = Sequence(Parallel(ActorInterval(toon, 'walk', duration=1.0, playRate=-1.0), LerpPosInterval(toon, duration=1.0, pos=Point3(-10, 0, 0))), Func(toon.wrtReparentTo, render))
+                toonIval = Sequence(
+                    Parallel(
+                        ActorInterval(
+                            toon,
+                            'walk',
+                            duration=1.0,
+                            playRate=-1.0),
+                        LerpPosInterval(
+                            toon,
+                            duration=1.0,
+                            pos=Point3(
+                                -10,
+                                0,
+                                0))),
+                    Func(
+                        toon.wrtReparentTo,
+                        render))
                 grabIval.append(toonIval)
         if localAvatar.doId == toon.doId:
             if not self.goingToReward and toon.hp > 0:
                 grabIval.append(Func(self.goToFinalBattle))
-                grabIval.append(Func(self.notify.debug, 'goingToFinalBattlemode'))
+                grabIval.append(
+                    Func(
+                        self.notify.debug,
+                        'goingToFinalBattlemode'))
                 grabIval.append(Func(self.safeBossToFinalBattleMode))
         return grabIval
 
@@ -569,9 +643,11 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
                 if place.fsm.getCurrentState().getName() == 'crane':
                     place.setState('finalBattle')
                 else:
-                    self.notify.debug('NOT going to final battle, state=%s' % curState)
+                    self.notify.debug(
+                        'NOT going to final battle, state=%s' %
+                        curState)
 
-    def attachClub(self, avId, pointToBall = False):
+    def attachClub(self, avId, pointToBall=False):
         club = self.club
         if club:
             av = base.cr.doId2do.get(avId)
@@ -583,9 +659,12 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
                 netScale = club.getNetTransform().getScale()[1]
                 counterActToonScale = lHand.find('**/counteractToonScale')
                 if counterActToonScale.isEmpty():
-                    counterActToonScale = lHand.attachNewNode('counteractToonScale')
+                    counterActToonScale = lHand.attachNewNode(
+                        'counteractToonScale')
                     counterActToonScale.setScale(1 / netScale)
-                    self.notify.debug('creating counterActToonScale for %s' % av.getName())
+                    self.notify.debug(
+                        'creating counterActToonScale for %s' %
+                        av.getName())
                 club.reparentTo(counterActToonScale)
                 club.setX(-0.25 * netScale)
                 if pointToBall:
@@ -635,14 +714,31 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         t = 1.0 - t
         dist = 300 - 200 * t
         time = 1.5 + 0.5 * t
-        proj = ProjectileInterval(None, startPos=Point3(0, 0, 0), endPos=Point3(0, dist, 0), duration=time)
+        proj = ProjectileInterval(
+            None, startPos=Point3(
+                0, 0, 0), endPos=Point3(
+                0, dist, 0), duration=time)
         relVel = proj.startVel
 
-        def getVelocity(root = self.root, relVel = relVel):
+        def getVelocity(root=self.root, relVel=relVel):
             return render.getRelativeVector(root, relVel)
 
-        fly = Sequence(Func(flyBall.reparentTo, render), Func(flyBall.setPosHpr, self.root, 0, 0, 0, 0, 0, 0), Func(base.cTrav.addCollider, flyBallBubble, self.flyBallHandler), ProjectileInterval(flyBall, startVel=getVelocity, duration=3), Func(flyBall.detachNode), Func(base.cTrav.removeCollider, flyBallBubble), Func(self.notify.debug, 'removed collider'), Func(self.flyBallFinishedFlying, sequenceNum))
-        flyWithSound = Parallel(fly, SoundInterval(self.hitBallSfx, node=self.root), name='flyWithSound')
+        fly = Sequence(
+            Func(
+                flyBall.reparentTo, render), Func(
+                flyBall.setPosHpr, self.root, 0, 0, 0, 0, 0, 0), Func(
+                base.cTrav.addCollider, flyBallBubble, self.flyBallHandler), ProjectileInterval(
+                    flyBall, startVel=getVelocity, duration=3), Func(
+                        flyBall.detachNode), Func(
+                            base.cTrav.removeCollider, flyBallBubble), Func(
+                                self.notify.debug, 'removed collider'), Func(
+                                    self.flyBallFinishedFlying, sequenceNum))
+        flyWithSound = Parallel(
+            fly,
+            SoundInterval(
+                self.hitBallSfx,
+                node=self.root),
+            name='flyWithSound')
         self.notify.debug('starting flyball track')
         flyWithSound.start()
         self.flyBallTracks[sequenceNum] = flyWithSound
@@ -653,17 +749,53 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         self.swingInterval = Sequence()
         if av:
             self.stopAdjustClubTask()
-            self.swingInterval = Sequence(ActorInterval(av, 'swing-putt', startFrame=0, endFrame=GolfGlobals.BALL_CONTACT_FRAME), Func(self.startBallPlayback, power, angle, sequenceNum), Func(self.ballModel.hide), ActorInterval(av, 'swing-putt', startFrame=GolfGlobals.BALL_CONTACT_FRAME, endFrame=24), Func(self.ballModel.setScale, 0.1), Func(self.ballModel.show), LerpScaleInterval(self.ballModel, 1.0, Point3(1, 1, 1)), Func(self.enableControlKey))
+            self.swingInterval = Sequence(
+                ActorInterval(
+                    av,
+                    'swing-putt',
+                    startFrame=0,
+                    endFrame=GolfGlobals.BALL_CONTACT_FRAME),
+                Func(
+                    self.startBallPlayback,
+                    power,
+                    angle,
+                    sequenceNum),
+                Func(
+                    self.ballModel.hide),
+                ActorInterval(
+                    av,
+                    'swing-putt',
+                    startFrame=GolfGlobals.BALL_CONTACT_FRAME,
+                    endFrame=24),
+                Func(
+                    self.ballModel.setScale,
+                    0.1),
+                Func(
+                    self.ballModel.show),
+                LerpScaleInterval(
+                    self.ballModel,
+                    1.0,
+                    Point3(
+                        1,
+                        1,
+                        1)),
+                Func(
+                    self.enableControlKey))
             if av == localAvatar:
-                self.swingInterval.append(Func(self.switchToAnimState, 'GolfPuttLoop', True))
+                self.swingInterval.append(
+                    Func(
+                        self.switchToAnimState,
+                        'GolfPuttLoop',
+                        True))
         self.swingInterval.start()
 
     def getFlyBallBubble(self):
-        if self.__flyBallBubble == None:
+        if self.__flyBallBubble is None:
             bubble = CollisionSphere(0, 0, 0, GolfGlobals.GOLF_BALL_RADIUS)
             node = CollisionNode('flyBallBubble')
             node.addSolid(bubble)
-            node.setFromCollideMask(ToontownGlobals.PieBitmask | ToontownGlobals.CameraBitmask | ToontownGlobals.FloorBitmask)
+            node.setFromCollideMask(
+                ToontownGlobals.PieBitmask | ToontownGlobals.CameraBitmask | ToontownGlobals.FloorBitmask)
             node.setIntoCollideMask(BitMask32.allOff())
             self.__flyBallBubble = NodePath(node)
             self.flyBallHandler = CollisionHandlerEvent()
@@ -705,14 +837,15 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         pos = entry.getSurfacePoint(render)
         timestamp32 = globalClockDelta.getFrameNetworkTime(bits=32)
         throwerId = int(entry.getFromNodePath().getNetTag('throwerId'))
-        splat = self.getFlyBallSplatInterval(pos[0], pos[1], pos[2], flyBallCode, throwerId)
+        splat = self.getFlyBallSplatInterval(
+            pos[0], pos[1], pos[2], flyBallCode, throwerId)
         splat = Sequence(splat, Func(self.flyBallFinishedSplatting, sequence))
         self.splatTracks[sequence] = splat
         splat.start()
         self.notify.debug('doId=%d into=%s flyBallCode=%d, throwerId=%d' % (self.doId,
-         entry.getIntoNodePath(),
-         flyBallCode,
-         throwerId))
+                                                                            entry.getIntoNodePath(),
+                                                                            flyBallCode,
+                                                                            throwerId))
         if flyBallCode == ToontownGlobals.PieCodeBossCog and self.avId == localAvatar.doId and self.lastHitSequenceNum != self.__flyBallSequenceNum:
             self.lastHitSequenceNum = self.__flyBallSequenceNum
             self.boss.d_ballHitBoss(1)
@@ -720,7 +853,10 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
             self.lastHitSequenceNum = self.__flyBallSequenceNum
             avatarDoId = entry.getIntoNodePath().getNetTag('avatarDoId')
             if avatarDoId == '':
-                self.notify.warning('Toon %s has no avatarDoId tag.' % repr(entry.getIntoNodePath()))
+                self.notify.warning(
+                    'Toon %s has no avatarDoId tag.' %
+                    repr(
+                        entry.getIntoNodePath()))
                 return
             doId = int(avatarDoId)
             if doId != localAvatar.doId:
@@ -746,7 +882,13 @@ class DistributedGolfSpot(DistributedObject.DistributedObject, FSM.FSM):
         if flyBallCode == ToontownGlobals.PieCodeBossCog and localAvatar.doId == throwerId:
             vol = 1.0
             soundIval = SoundInterval(sound, node=localAvatar, volume=vol)
-        ival = Parallel(Func(splat.reparentTo, render), Func(splat.setPos, x, y, z), soundIval, Sequence(ActorInterval(splat, splatName), Func(splat.detachNode)))
+        ival = Parallel(
+            Func(
+                splat.reparentTo, render), Func(
+                splat.setPos, x, y, z), soundIval, Sequence(
+                ActorInterval(
+                    splat, splatName), Func(
+                        splat.detachNode)))
         return ival
 
     def setGoingToReward(self):

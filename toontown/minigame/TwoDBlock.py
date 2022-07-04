@@ -8,6 +8,7 @@ from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from toontown.minigame import ToonBlitzGlobals
 
+
 class TwoDBlock(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('TwoDBlock')
 
@@ -56,8 +57,16 @@ class TwoDBlock(DistributedObject.DistributedObject):
             self.platform.setupCopyModel(blockName, model)
             self.platform.reparentTo(self.model)
             self.clearMoveIval()
-            forwardIval = LerpPosInterval(self.model, posIvalDuration, pos=Point3(finalX, finalY, finalZ), startPos=Point3(initX, initY, initZ), name='%s-moveFront' % self.platform.name, fluid=1)
-            backwardIval = LerpPosInterval(self.model, posIvalDuration, pos=Point3(initX, initY, initZ), startPos=Point3(finalX, finalY, finalZ), name='%s-moveBack' % self.platform.name, fluid=1)
+            forwardIval = LerpPosInterval(
+                self.model, posIvalDuration, pos=Point3(
+                    finalX, finalY, finalZ), startPos=Point3(
+                    initX, initY, initZ), name='%s-moveFront' %
+                self.platform.name, fluid=1)
+            backwardIval = LerpPosInterval(
+                self.model, posIvalDuration, pos=Point3(
+                    initX, initY, initZ), startPos=Point3(
+                    finalX, finalY, finalZ), name='%s-moveBack' %
+                self.platform.name, fluid=1)
             self.moveIval = Sequence(forwardIval, backwardIval)
         else:
             self.platform = model.copyTo(self.model)

@@ -1,6 +1,7 @@
 from direct.distributed.DistributedObject import DistributedObject
 from direct.directnotify.DirectNotifyGlobal import directNotify
 
+
 class TTCodeRedemptionMgr(DistributedObject):
     neverDisable = 1
     notify = directNotify.newCategory('TTCodeRedemptionMgr')
@@ -30,6 +31,8 @@ class TTCodeRedemptionMgr(DistributedObject):
         self.sendUpdate('redeemCode', [context, code])
 
     def redeemCodeResult(self, context, result, awardMgrResult):
-        self.notify.debug('redeemCodeResult(%s, %s, %s)' % (context, result, awardMgrResult))
+        self.notify.debug(
+            'redeemCodeResult(%s, %s, %s)' %
+            (context, result, awardMgrResult))
         callback = self._context2callback.pop(context)
         callback(result, awardMgrResult)

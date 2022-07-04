@@ -8,29 +8,39 @@ import importlib
 if __dev__:
     import os
 
+
 class LevelSpec:
     notify = DirectNotifyGlobal.directNotify.newCategory('LevelSpec')
-    SystemEntIds = (LevelConstants.UberZoneEntId, LevelConstants.LevelMgrEntId, LevelConstants.EditMgrEntId)
+    SystemEntIds = (
+        LevelConstants.UberZoneEntId,
+        LevelConstants.LevelMgrEntId,
+        LevelConstants.EditMgrEntId)
 
-    def __init__(self, spec = None, scenario = 0):
+    def __init__(self, spec=None, scenario=0):
         newSpec = 0
-        if type(spec) is types.ModuleType:
+        if isinstance(spec, types.ModuleType):
             if __dev__:
                 importlib.reload(spec)
             self.specDict = spec.levelSpec
             if __dev__:
                 self.setFilename(spec.__file__)
-        elif type(spec) is dict:
+        elif isinstance(spec, dict):
             self.specDict = spec
         elif spec is None:
             if __dev__:
                 newSpec = 1
                 self.specDict = {'globalEntities': {},
-                 'scenarios': [{}]}
+                                 'scenarios': [{}]}
         self.entId2specDict = {}
-        self.entId2specDict.update(list2dict(self.getGlobalEntIds(), value=self.privGetGlobalEntityDict()))
+        self.entId2specDict.update(
+            list2dict(
+                self.getGlobalEntIds(),
+                value=self.privGetGlobalEntityDict()))
         for i in range(self.getNumScenarios()):
-            self.entId2specDict.update(list2dict(self.getScenarioEntIds(i), value=self.privGetScenarioEntityDict(i)))
+            self.entId2specDict.update(
+                list2dict(
+                    self.getScenarioEntIds(i),
+                    value=self.privGetScenarioEntityDict(i)))
 
         self.setScenario(scenario)
         if __dev__:
@@ -71,7 +81,7 @@ class LevelSpec:
     def getGlobalEntIds(self):
         return list(self.privGetGlobalEntityDict().keys())
 
-    def getScenarioEntIds(self, scenario = None):
+    def getScenarioEntIds(self, scenario=None):
         if scenario is None:
             scenario = self.scenario
         return list(self.privGetScenarioEntityDict(scenario).keys())
@@ -93,7 +103,9 @@ class LevelSpec:
     def getCopyOfSpec(self, spec):
         specCopy = {}
         if not __debug__ or __execWarnings__:
-            print('EXECWARNING LevelSpec exec: %s' % self.getSpecImportsModuleName())
+            print(
+                'EXECWARNING LevelSpec exec: %s' %
+                self.getSpecImportsModuleName())
             printStack()
         exec('from %s import *' % self.getSpecImportsModuleName())
         for key in list(spec.keys()):
@@ -174,20 +186,23 @@ class LevelSpec:
 
         def setAttribChange(self, entId, attrib, value, username):
             LevelSpec.notify.info('setAttribChange(%s): %s, %s = %s' % (username,
-             entId,
-             attrib,
-             repr(value)))
+                                                                        entId,
+                                                                        attrib,
+                                                                        repr(value)))
             self.doSetAttrib(entId, attrib, value)
             if self.hasLevel():
                 self.level.handleAttribChange(entId, attrib, value, username)
 
-        def insertEntity(self, entId, entType, parentEntId = 'unspecified'):
-            LevelSpec.notify.info('inserting entity %s (%s)' % (entId, entType))
+        def insertEntity(self, entId, entType, parentEntId='unspecified'):
+            LevelSpec.notify.info(
+                'inserting entity %s (%s)' %
+                (entId, entType))
             globalEnts = self.privGetGlobalEntityDict()
             self.entId2specDict[entId] = globalEnts
             globalEnts[entId] = {}
             spec = globalEnts[entId]
-            attribDescs = self.entTypeReg.getTypeDesc(entType).getAttribDescDict()
+            attribDescs = self.entTypeReg.getTypeDesc(
+                entType).getAttribDescDict()
             for name, desc in list(attribDescs.items()):
                 spec[name] = desc.getDefaultValue()
 
@@ -197,7 +212,8 @@ class LevelSpec:
             if self.hasLevel():
                 self.level.handleEntityInsert(entId)
             else:
-                LevelSpec.notify.warning('no level to be notified of insertion')
+                LevelSpec.notify.warning(
+                    'no level to be notified of insertion')
 
         def removeEntity(self, entId):
             LevelSpec.notify.info('removing entity %s' % entId)
@@ -231,7 +247,7 @@ class LevelSpec:
         def privGetBackupFilename(self, filename):
             return '%s.bak' % filename
 
-        def saveToDisk(self, filename = None, makeBackup = 1):
+        def saveToDisk(self, filename=None, makeBackup=1):
             if filename is None:
                 filename = self.filename
                 if filename.endswith('.pyc'):
@@ -242,7 +258,8 @@ class LevelSpec:
                     self.privRemoveFile(backupFilename)
                     os.rename(filename, backupFilename)
                 except OSError as e:
-                    LevelSpec.notify.warning('error during backup: %s' % str(e))
+                    LevelSpec.notify.warning(
+                        'error during backup: %s' % str(e))
 
             LevelSpec.notify.info("writing to '%s'" % filename)
             self.privRemoveFile(filename)
@@ -282,12 +299,12 @@ class LevelSpec:
             scenarioEntitiesName = 'Scenario%s'
             topLevelName = 'levelSpec'
 
-            def getPrettyEntityDictStr(name, dict, tabs = 0):
+            def getPrettyEntityDictStr(name, dict, tabs=0):
 
                 def t(n):
                     return (tabs + n) * tab
 
-                def sortList(lst, firstElements = []):
+                def sortList(lst, firstElements=[]):
                     elements = list(lst)
                     result = []
                     for el in firstElements:
@@ -300,28 +317,46 @@ class LevelSpec:
                     return result
 
                 firstTypes = ('levelMgr', 'editMgr', 'zone')
-                firstAttribs = ('type', 'name', 'comment', 'parentEntId', 'pos', 'x', 'y', 'z', 'hpr', 'h', 'p', 'r', 'scale', 'sx', 'sy', 'sz', 'color', 'model')
+                firstAttribs = (
+                    'type',
+                    'name',
+                    'comment',
+                    'parentEntId',
+                    'pos',
+                    'x',
+                    'y',
+                    'z',
+                    'hpr',
+                    'h',
+                    'p',
+                    'r',
+                    'scale',
+                    'sx',
+                    'sy',
+                    'sz',
+                    'color',
+                    'model')
                 str = t(0) + '%s = {\n' % name
                 entIds = list(dict.keys())
                 entType2ids = self.getEntType2ids(entIds)
                 types = sortList(list(entType2ids.keys()), firstTypes)
                 for type in types:
                     str += t(1) + '# %s\n' % string.upper(type)
-                    entIds = entType2ids[type]
-                    entIds.sort()
+                    entIds = sorted(entType2ids[type])
                     for entId in entIds:
                         str += t(1) + '%s: {\n' % entId
                         spec = dict[entId]
                         attribs = sortList(list(spec.keys()), firstAttribs)
                         for attrib in attribs:
-                            str += t(2) + "'%s': %s,\n" % (attrib, repr(spec[attrib]))
+                            str += t(2) + "'%s': %s,\n" % (attrib,
+                                                           repr(spec[attrib]))
 
                         str += t(2) + '}, # end entity %s\n' % entId
 
                 str += t(1) + '}\n'
                 return str
 
-            def getPrettyTopLevelDictStr(tabs = 0):
+            def getPrettyTopLevelDictStr(tabs=0):
 
                 def t(n):
                     return (tabs + n) * tab
@@ -338,11 +373,13 @@ class LevelSpec:
 
             str = 'from %s import *\n' % self.getSpecImportsModuleName()
             str += '\n'
-            str += getPrettyEntityDictStr('GlobalEntities', self.privGetGlobalEntityDict())
+            str += getPrettyEntityDictStr('GlobalEntities',
+                                          self.privGetGlobalEntityDict())
             str += '\n'
             numScenarios = self.getNumScenarios()
             for i in range(numScenarios):
-                str += getPrettyEntityDictStr('Scenario%s' % i, self.privGetScenarioEntityDict(i))
+                str += getPrettyEntityDictStr('Scenario%s' %
+                                              i, self.privGetScenarioEntityDict(i))
                 str += '\n'
 
             str += getPrettyTopLevelDictStr()
@@ -355,14 +392,16 @@ class LevelSpec:
             if set(dict1.keys()) != set(dict2.keys()):
                 return 0
             for key in dict1:
-                if type(dict1[key]) == type({}) and type(dict2[key]) == type({}):
+                if isinstance(dict1[key], type({})) and isinstance(
+                        dict2[key], type({})):
                     if not self._recurKeyTest(dict1[key], dict2[key]):
                         return 0
                 else:
                     strd1 = repr(dict1[key])
                     strd2 = repr(dict2[key])
                     if strd1 != strd2:
-                        s += '\nBAD VALUE(%s): %s != %s\n' % (key, strd1, strd2)
+                        s += '\nBAD VALUE(%s): %s != %s\n' % (key,
+                                                              strd1, strd2)
                         errorCount += 1
 
             print(s)
@@ -371,7 +410,7 @@ class LevelSpec:
             else:
                 return 0
 
-        def testPrettyString(self, prettyString = None):
+        def testPrettyString(self, prettyString=None):
             if prettyString is None:
                 prettyString = self.getPrettyString()
             if not isClient():
@@ -399,12 +438,16 @@ class LevelSpec:
                     attribDescs = typeDesc.getAttribDescDict()
                     for attrib in list(spec.keys()):
                         if attrib not in attribNames:
-                            LevelSpec.notify.warning("entId %s (%s): unknown attrib '%s', omitting" % (entId, spec['type'], attrib))
+                            LevelSpec.notify.warning(
+                                "entId %s (%s): unknown attrib '%s', omitting" %
+                                (entId, spec['type'], attrib))
                             del spec[attrib]
 
                     for attribName in attribNames:
                         if attribName not in spec:
-                            LevelSpec.notify.warning("entId %s (%s): missing attrib '%s'" % (entId, spec['type'], attribName))
+                            LevelSpec.notify.warning(
+                                "entId %s (%s): missing attrib '%s'" %
+                                (entId, spec['type'], attribName))
 
             return
 
@@ -420,4 +463,5 @@ class LevelSpec:
             return 'LevelSpec'
 
         def __repr__(self):
-            return 'LevelSpec(%s, scenario=%s)' % (repeatableRepr(self.specDict), repeatableRepr(self.scenario))
+            return 'LevelSpec(%s, scenario=%s)' % (repeatableRepr(
+                self.specDict), repeatableRepr(self.scenario))

@@ -19,6 +19,7 @@ OffScreen = 1
 Thought = 2
 ThoughtPrefix = '.'
 
+
 def isThought(message):
     if len(message) == 0:
         return 0
@@ -59,31 +60,95 @@ class ChatManager(DirectObject.DirectObject):
         self.problemActivatingChat = None
         self.leaveToPayDialog = None
         self.fsm = ClassicFSM.ClassicFSM('chatManager', [State.State('off', self.enterOff, self.exitOff),
-         State.State('mainMenu', self.enterMainMenu, self.exitMainMenu),
-         State.State('speedChat', self.enterSpeedChat, self.exitSpeedChat),
-         State.State('normalChat', self.enterNormalChat, self.exitNormalChat),
-         State.State('whisper', self.enterWhisper, self.exitWhisper),
-         State.State('whisperChat', self.enterWhisperChat, self.exitWhisperChat),
-         State.State('whisperChatPlayer', self.enterWhisperChatPlayer, self.exitWhisperChatPlayer),
-         State.State('whisperSpeedChat', self.enterWhisperSpeedChat, self.exitWhisperSpeedChat),
-         State.State('whisperSpeedChatPlayer', self.enterWhisperSpeedChatPlayer, self.exitWhisperSpeedChatPlayer),
-         State.State('openChatWarning', self.enterOpenChatWarning, self.exitOpenChatWarning),
-         State.State('leaveToPayDialog', self.enterLeaveToPayDialog, self.exitLeaveToPayDialog),
-         State.State('unpaidChatWarning', self.enterUnpaidChatWarning, self.exitUnpaidChatWarning),
-         State.State('noSecretChatAtAll', self.enterNoSecretChatAtAll, self.exitNoSecretChatAtAll),
-         State.State('noSecretChatAtAllAndNoWhitelist', self.enterNoSecretChatAtAllAndNoWhitelist, self.exitNoSecretChatAtAllAndNoWhitelist),
-         State.State('noSecretChatWarning', self.enterNoSecretChatWarning, self.exitNoSecretChatWarning),
-         State.State('noFriendsWarning', self.enterNoFriendsWarning, self.exitNoFriendsWarning),
-         State.State('otherDialog', self.enterOtherDialog, self.exitOtherDialog),
-         State.State('activateChat', self.enterActivateChat, self.exitActivateChat),
-         State.State('chatMoreInfo', self.enterChatMoreInfo, self.exitChatMoreInfo),
-         State.State('chatPrivacyPolicy', self.enterChatPrivacyPolicy, self.exitChatPrivacyPolicy),
-         State.State('secretChatActivated', self.enterSecretChatActivated, self.exitSecretChatActivated),
-         State.State('problemActivatingChat', self.enterProblemActivatingChat, self.exitProblemActivatingChat),
-         State.State('whiteListOpenChat', self.enterWhiteListOpenChat, self.exitWhiteListOpenChat),
-         State.State('whiteListAvatarChat', self.enterWhiteListAvatarChat, self.exitWhiteListAvatarChat),
-         State.State('whiteListPlayerChat', self.enterWhiteListPlayerChat, self.exitWhiteListPlayerChat),
-         State.State('trueFriendTeaserPanel', self.enterTrueFriendTeaserPanel, self.exitTrueFriendTeaserPanel)], 'off', 'off')
+                                                         State.State(
+            'mainMenu', self.enterMainMenu, self.exitMainMenu),
+            State.State('speedChat', self.enterSpeedChat, self.exitSpeedChat),
+            State.State(
+            'normalChat',
+            self.enterNormalChat,
+            self.exitNormalChat),
+            State.State('whisper', self.enterWhisper, self.exitWhisper),
+            State.State(
+            'whisperChat',
+            self.enterWhisperChat,
+            self.exitWhisperChat),
+            State.State(
+            'whisperChatPlayer',
+            self.enterWhisperChatPlayer,
+            self.exitWhisperChatPlayer),
+            State.State(
+            'whisperSpeedChat',
+            self.enterWhisperSpeedChat,
+            self.exitWhisperSpeedChat),
+            State.State(
+            'whisperSpeedChatPlayer',
+            self.enterWhisperSpeedChatPlayer,
+            self.exitWhisperSpeedChatPlayer),
+            State.State(
+            'openChatWarning',
+            self.enterOpenChatWarning,
+            self.exitOpenChatWarning),
+            State.State(
+            'leaveToPayDialog',
+            self.enterLeaveToPayDialog,
+            self.exitLeaveToPayDialog),
+            State.State(
+            'unpaidChatWarning',
+            self.enterUnpaidChatWarning,
+            self.exitUnpaidChatWarning),
+            State.State(
+            'noSecretChatAtAll',
+            self.enterNoSecretChatAtAll,
+            self.exitNoSecretChatAtAll),
+            State.State(
+            'noSecretChatAtAllAndNoWhitelist',
+            self.enterNoSecretChatAtAllAndNoWhitelist,
+            self.exitNoSecretChatAtAllAndNoWhitelist),
+            State.State(
+            'noSecretChatWarning',
+            self.enterNoSecretChatWarning,
+            self.exitNoSecretChatWarning),
+            State.State(
+            'noFriendsWarning',
+            self.enterNoFriendsWarning,
+            self.exitNoFriendsWarning),
+            State.State(
+            'otherDialog',
+            self.enterOtherDialog,
+            self.exitOtherDialog),
+            State.State(
+            'activateChat',
+            self.enterActivateChat,
+            self.exitActivateChat),
+            State.State(
+            'chatMoreInfo',
+            self.enterChatMoreInfo,
+            self.exitChatMoreInfo),
+            State.State(
+            'chatPrivacyPolicy',
+            self.enterChatPrivacyPolicy,
+            self.exitChatPrivacyPolicy),
+            State.State(
+            'secretChatActivated',
+            self.enterSecretChatActivated,
+            self.exitSecretChatActivated),
+            State.State(
+            'problemActivatingChat',
+            self.enterProblemActivatingChat,
+            self.exitProblemActivatingChat),
+            State.State(
+            'whiteListOpenChat',
+            self.enterWhiteListOpenChat,
+            self.exitWhiteListOpenChat),
+            State.State(
+            'whiteListAvatarChat',
+            self.enterWhiteListAvatarChat,
+            self.exitWhiteListAvatarChat),
+            State.State(
+            'whiteListPlayerChat',
+            self.enterWhiteListPlayerChat,
+            self.exitWhiteListPlayerChat),
+            State.State('trueFriendTeaserPanel', self.enterTrueFriendTeaserPanel, self.exitTrueFriendTeaserPanel)], 'off', 'off')
         self.fsm.enterInitialState()
         return
 
@@ -180,27 +245,33 @@ class ChatManager(DirectObject.DirectObject):
 
     def sendSCWhisperMessage(self, msgIndex, whisperAvatarId, toPlayer):
         if toPlayer:
-            base.talkAssistant.sendPlayerWhisperSpeedChat(1, msgIndex, whisperAvatarId)
+            base.talkAssistant.sendPlayerWhisperSpeedChat(
+                1, msgIndex, whisperAvatarId)
         else:
-            base.talkAssistant.sendAvatarWhisperSpeedChat(1, msgIndex, whisperAvatarId)
+            base.talkAssistant.sendAvatarWhisperSpeedChat(
+                1, msgIndex, whisperAvatarId)
 
     def sendSCCustomChatMessage(self, msgIndex):
         base.talkAssistant.sendOpenSpeedChat(3, msgIndex)
 
     def sendSCCustomWhisperMessage(self, msgIndex, whisperAvatarId, toPlayer):
         if toPlayer:
-            base.talkAssistant.sendPlayerWhisperSpeedChat(3, msgIndex, whisperAvatarId)
+            base.talkAssistant.sendPlayerWhisperSpeedChat(
+                3, msgIndex, whisperAvatarId)
         else:
-            base.talkAssistant.sendAvatarWhisperSpeedChat(3, msgIndex, whisperAvatarId)
+            base.talkAssistant.sendAvatarWhisperSpeedChat(
+                3, msgIndex, whisperAvatarId)
 
     def sendSCEmoteChatMessage(self, emoteId):
         base.talkAssistant.sendOpenSpeedChat(2, emoteId)
 
     def sendSCEmoteWhisperMessage(self, emoteId, whisperAvatarId, toPlayer):
         if toPlayer:
-            base.talkAssistant.sendPlayerWhisperSpeedChat(2, emoteId, whisperAvatarId)
+            base.talkAssistant.sendPlayerWhisperSpeedChat(
+                2, emoteId, whisperAvatarId)
         else:
-            base.talkAssistant.sendAvatarWhisperSpeedChat(2, emoteId, whisperAvatarId)
+            base.talkAssistant.sendAvatarWhisperSpeedChat(
+                2, emoteId, whisperAvatarId)
 
     def enterOff(self):
         self.scButton.hide()
@@ -215,7 +286,10 @@ class ChatManager(DirectObject.DirectObject):
         if self.localAvatar.canChat() or self.cr.wantMagicWords:
             if self.wantBackgroundFocus:
                 self.chatInputNormal.chatEntry['backgroundFocus'] = 1
-            self.acceptOnce('enterNormalChat', self.fsm.request, ['normalChat'])
+            self.acceptOnce(
+                'enterNormalChat',
+                self.fsm.request,
+                ['normalChat'])
 
     def checkObscurred(self):
         if not self.__scObscured:
@@ -230,7 +304,7 @@ class ChatManager(DirectObject.DirectObject):
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
 
-    def whisperTo(self, avatarName, avatarId, playerId = None):
+    def whisperTo(self, avatarName, avatarId, playerId=None):
         self.fsm.request('whisper', [avatarName, avatarId, playerId])
 
     def noWhisper(self):
@@ -251,7 +325,8 @@ class ChatManager(DirectObject.DirectObject):
     def enterWhiteListAvatarChat(self, receiverId):
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
-        base.localAvatar.chatMgr.chatInputWhiteList.activateByData(receiverId, 0)
+        base.localAvatar.chatMgr.chatInputWhiteList.activateByData(
+            receiverId, 0)
 
     def exitWhiteListAvatarChat(self):
         pass
@@ -259,12 +334,13 @@ class ChatManager(DirectObject.DirectObject):
     def enterWhiteListPlayerChat(self, receiverId):
         if self.wantBackgroundFocus:
             self.chatInputNormal.chatEntry['backgroundFocus'] = 0
-        base.localAvatar.chatMgr.chatInputWhiteList.activateByData(receiverId, 1)
+        base.localAvatar.chatMgr.chatInputWhiteList.activateByData(
+            receiverId, 1)
 
     def exitWhiteListPlayerChat(self):
         pass
 
-    def enterWhisper(self, avatarName, avatarId, playerId = None):
+    def enterWhisper(self, avatarName, avatarId, playerId=None):
         self.whisperScButton['extraArgs'] = [avatarName, avatarId, playerId]
         self.whisperButton['extraArgs'] = [avatarName, avatarId, playerId]
         playerName = None
@@ -283,11 +359,12 @@ class ChatManager(DirectObject.DirectObject):
         av = None
         if avatarId:
             av = self.cr.identifyAvatar(avatarId)
-        if av != None:
+        if av is not None:
             avatarUnderstandable = av.isUnderstandable()
         if playerId:
             if playerId in base.cr.playerFriendsManager.playerId2Info:
-                playerInfo = base.cr.playerFriendsManager.playerId2Info.get(playerId)
+                playerInfo = base.cr.playerFriendsManager.playerId2Info.get(
+                    playerId)
                 playerName = playerInfo.playerName
                 online = 1
                 playerUnderstandable = playerInfo.understandableYesNo
@@ -306,21 +383,31 @@ class ChatManager(DirectObject.DirectObject):
             self.disablewhisperButton()
         if online:
             self.whisperScButton['state'] = 'normal'
-            self.changeFrameText(OTPLocalizer.ChatManagerWhisperToName % chatName)
+            self.changeFrameText(
+                OTPLocalizer.ChatManagerWhisperToName %
+                chatName)
         else:
             self.whisperScButton['state'] = 'inactive'
-            self.changeFrameText(OTPLocalizer.ChatManagerWhisperOffline % chatName)
+            self.changeFrameText(
+                OTPLocalizer.ChatManagerWhisperOffline %
+                chatName)
         self.whisperFrame.show()
         self.refreshWhisperFrame()
         if avatarUnderstandable or playerUnderstandable:
             if playerId and not chatToToon:
                 if self.wantBackgroundFocus:
                     self.chatInputNormal.chatEntry['backgroundFocus'] = 1
-                self.acceptOnce('enterNormalChat', self.fsm.request, ['whisperChatPlayer', [avatarName, playerId]])
+                self.acceptOnce(
+                    'enterNormalChat', self.fsm.request, [
+                        'whisperChatPlayer', [
+                            avatarName, playerId]])
             elif online and chatToToon:
                 if self.wantBackgroundFocus:
                     self.chatInputNormal.chatEntry['backgroundFocus'] = 1
-                self.acceptOnce('enterNormalChat', self.fsm.request, ['whisperChat', [avatarName, avatarId]])
+                self.acceptOnce(
+                    'enterNormalChat', self.fsm.request, [
+                        'whisperChat', [
+                            avatarName, avatarId]])
         if ConfigVariableBool('force-typed-whisper-enabled', 0).value:
             self.whisperButton['state'] = 'normal'
             self.enablewhisperButton()
@@ -409,8 +496,9 @@ class ChatManager(DirectObject.DirectObject):
         self.notify.error('called exitOpenChatWarning() on parent class')
 
     def enterLeaveToPayDialog(self):
-        if self.leaveToPayDialog == None:
-            self.leaveToPayDialog = LeaveToPayDialog.LeaveToPayDialog(self.paidNoParentPassword)
+        if self.leaveToPayDialog is None:
+            self.leaveToPayDialog = LeaveToPayDialog.LeaveToPayDialog(
+                self.paidNoParentPassword)
             self.leaveToPayDialog.setCancel(self.__handleLeaveToPayCancel)
         self.leaveToPayDialog.show()
         return
@@ -434,10 +522,12 @@ class ChatManager(DirectObject.DirectObject):
         self.notify.error('called exitNoSecretChatAtAll() on parent class')
 
     def enterNoSecretChatAtAllAndNoWhitelist(self):
-        self.notify.error('called enterNoSecretChatAtAllAndNoWhitelist() on parent class')
+        self.notify.error(
+            'called enterNoSecretChatAtAllAndNoWhitelist() on parent class')
 
     def exitNoSecretChatAtAllAndNoWhitelist(self):
-        self.notify.error('called exitNoSecretChatAtAllAndNoWhitelist() on parent class')
+        self.notify.error(
+            'called exitNoSecretChatAtAllAndNoWhitelist() on parent class')
 
     def enterNoSecretChatWarning(self):
         self.notify.error('called enterNoSecretChatWarning() on parent class')
@@ -464,8 +554,9 @@ class ChatManager(DirectObject.DirectObject):
         pass
 
     def enterChatMoreInfo(self):
-        if self.chatMoreInfo == None:
-            self.chatMoreInfo = SecretFriendsInfoPanel.SecretFriendsInfoPanel('secretFriendsInfoDone')
+        if self.chatMoreInfo is None:
+            self.chatMoreInfo = SecretFriendsInfoPanel.SecretFriendsInfoPanel(
+                'secretFriendsInfoDone')
         self.chatMoreInfo.show()
         self.accept('secretFriendsInfoDone', self.__secretFriendsInfoDone)
         return
@@ -475,8 +566,9 @@ class ChatManager(DirectObject.DirectObject):
         self.ignore('secretFriendsInfoDone')
 
     def enterChatPrivacyPolicy(self):
-        if self.chatPrivacyPolicy == None:
-            self.chatPrivacyPolicy = PrivacyPolicyPanel.PrivacyPolicyPanel('privacyPolicyDone')
+        if self.chatPrivacyPolicy is None:
+            self.chatPrivacyPolicy = PrivacyPolicyPanel.PrivacyPolicyPanel(
+                'privacyPolicyDone')
         self.chatPrivacyPolicy.show()
         self.accept('privacyPolicyDone', self.__privacyPolicyDone)
         return
@@ -494,16 +586,19 @@ class ChatManager(DirectObject.DirectObject):
         self.notify.error('called exitSecretChatActivated() on parent class')
 
     def enterProblemActivatingChat(self):
-        self.notify.error('called enterProblemActivatingChat() on parent class')
+        self.notify.error(
+            'called enterProblemActivatingChat() on parent class')
 
     def exitProblemActivatingChat(self):
         self.notify.error('called exitProblemActivatingChat() on parent class')
 
     def enterTrueFriendTeaserPanel(self):
-        self.notify.error('called enterTrueFriendTeaserPanel () on parent class')
+        self.notify.error(
+            'called enterTrueFriendTeaserPanel () on parent class')
 
     def exitTrueFriendTeaserPanel(self):
-        self.notify.error('called exitTrueFriendTeaserPanel () on parent class')
+        self.notify.error(
+            'called exitTrueFriendTeaserPanel () on parent class')
 
     def __handleLeaveToPayCancel(self):
         self.fsm.request('mainMenu')

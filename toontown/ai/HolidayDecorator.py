@@ -3,6 +3,7 @@ from direct.interval.IntervalGlobal import Parallel, Sequence, Func, Wait
 from pandac.PandaModules import Vec4, CSDefault, TransformState, NodePath, TransparencyAttrib
 from panda3d.toontown import loadDNAFile
 
+
 class HolidayDecorator:
 
     def __init__(self):
@@ -40,7 +41,7 @@ class HolidayDecorator:
             for storageFile in hood.holidayStorageDNADict.get(holiday, []):
                 loadDNAFile(self.dnaStore, storageFile, CSDefault)
 
-    def getSwapVisibleIval(self, wait = 5.0, tFadeOut = 3.0, tFadeIn = 3.0):
+    def getSwapVisibleIval(self, wait=5.0, tFadeOut=3.0, tFadeIn=3.0):
         loader = base.cr.playGame.hood.loader
         npl = render.findAllMatches('**/=DNARoot=holiday_prop;+s')
         p = Parallel()
@@ -60,10 +61,22 @@ class HolidayDecorator:
             newNP.setTransparency(TransparencyAttrib.MDual, 1)
             if np.hasTag('transformIndex'):
                 index = int(np.getTag('transformIndex'))
-                transform = loader.holidayPropTransforms.get(index, TransformState.makeIdentity())
+                transform = loader.holidayPropTransforms.get(
+                    index, TransformState.makeIdentity())
                 newNP.setTransform(NodePath(), transform)
                 newNP.setTag('transformIndex', repr(index))
-            s = Sequence(Wait(wait), np.colorScaleInterval(tFadeOut, Vec4(1, 1, 1, 0), startColorScale=Vec4(1, 1, 1, 1), blendType='easeInOut'), Func(np.detachNode), Func(np.clearTransparency), newNP.colorScaleInterval(tFadeOut, Vec4(1, 1, 1, 1), startColorScale=Vec4(1, 1, 1, 0), blendType='easeInOut'), Func(newNP.clearTransparency), Func(newNP.clearColorScale))
+            s = Sequence(
+                Wait(wait), np.colorScaleInterval(
+                    tFadeOut, Vec4(
+                        1, 1, 1, 0), startColorScale=Vec4(
+                        1, 1, 1, 1), blendType='easeInOut'), Func(
+                    np.detachNode), Func(
+                        np.clearTransparency), newNP.colorScaleInterval(
+                            tFadeOut, Vec4(
+                                1, 1, 1, 1), startColorScale=Vec4(
+                                    1, 1, 1, 0), blendType='easeInOut'), Func(
+                                        newNP.clearTransparency), Func(
+                                            newNP.clearColorScale))
             p.append(s)
 
         return p

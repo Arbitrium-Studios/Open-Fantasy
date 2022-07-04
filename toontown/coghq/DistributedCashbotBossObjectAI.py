@@ -5,7 +5,9 @@ from otp.otpbase import OTPGlobals
 from direct.fsm import FSM
 from direct.task import Task
 
-class DistributedCashbotBossObjectAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, FSM.FSM):
+
+class DistributedCashbotBossObjectAI(
+        DistributedSmoothNodeAI.DistributedSmoothNodeAI, FSM.FSM):
     wantsWatchDrift = 1
 
     def __init__(self, air, boss):
@@ -83,7 +85,7 @@ class DistributedCashbotBossObjectAI(DistributedSmoothNodeAI.DistributedSmoothNo
         return
 
     def __getCraneAndObject(self, avId):
-        if self.boss and self.boss.cranes != None:
+        if self.boss and self.boss.cranes is not None:
             for crane in self.boss.cranes:
                 if crane.avId == avId:
                     return (crane.doId, crane.objectId)

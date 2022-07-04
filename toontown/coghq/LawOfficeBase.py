@@ -2,6 +2,7 @@ from . import FactorySpecs
 from otp.level import LevelSpec
 from toontown.toonbase import ToontownGlobals
 
+
 class LawOfficeBase:
 
     def __init__(self):

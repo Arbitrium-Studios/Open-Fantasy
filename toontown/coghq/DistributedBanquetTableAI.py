@@ -5,8 +5,11 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.coghq import BanquetTableBase
 from toontown.toonbase import ToontownGlobals
 
-class DistributedBanquetTableAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM, BanquetTableBase.BanquetTableBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBanquetTableAI')
+
+class DistributedBanquetTableAI(
+        DistributedObjectAI.DistributedObjectAI, FSM.FSM, BanquetTableBase.BanquetTableBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedBanquetTableAI')
 
     def __init__(self, air, boss, index, numDiners, dinerLevel):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
@@ -25,7 +28,7 @@ class DistributedBanquetTableAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM
             hungryDuration += random.uniform(-5, 5)
             eatingDuration += random.uniform(-5, 5)
             level = 12
-            if type(dinerLevel) == type(0):
+            if isinstance(dinerLevel, type(0)):
                 level = dinerLevel
             else:
                 level = random.choice(dinerLevel)
@@ -117,7 +120,11 @@ class DistributedBanquetTableAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM
         if chairIndex in self.transitionTasks:
             self.removeTask(self.transitionTasks[chairIndex])
         taskName = self.uniqueName('transition-%d' % chairIndex)
-        newTask = self.doMethodLater(eatingDur, self.finishedEating, taskName, extraArgs=[chairIndex])
+        newTask = self.doMethodLater(
+            eatingDur,
+            self.finishedEating,
+            taskName,
+            extraArgs=[chairIndex])
         self.transitionTasks[chairIndex] = newTask
 
     def finishedEating(self, chairIndex):
@@ -131,7 +138,11 @@ class DistributedBanquetTableAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM
             self.b_setDinerStatus(chairIndex, self.HUNGRY)
             taskName = self.uniqueName('transition-%d' % chairIndex)
             hungryDur = self.dinerInfo[chairIndex][0]
-            newTask = self.doMethodLater(hungryDur, self.finishedHungry, taskName, extraArgs=[chairIndex])
+            newTask = self.doMethodLater(
+                hungryDur,
+                self.finishedHungry,
+                taskName,
+                extraArgs=[chairIndex])
             self.transitionTasks[chairIndex] = newTask
 
     def incrementFoodEaten(self, chairIndex):
@@ -175,15 +186,21 @@ class DistributedBanquetTableAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM
                     self.b_setState('Controlled', avId)
 
     def forceControl(self, avId):
-        self.notify.debug('forceContrl  tableIndex=%d avId=%d' % (self.index, avId))
+        self.notify.debug(
+            'forceContrl  tableIndex=%d avId=%d' %
+            (self.index, avId))
         tableId = self.__getTableId(avId)
         if tableId == self.doId:
             if self.state == 'Flat':
                 self.b_setState('Controlled', avId)
             else:
-                self.notify.warning('invalid forceControl from state %s' % self.state)
+                self.notify.warning(
+                    'invalid forceControl from state %s' %
+                    self.state)
         else:
-            self.notify.warning('tableId %d  != self.doId %d ' % (tableId, self.doId))
+            self.notify.warning(
+                'tableId %d  != self.doId %d ' %
+                (tableId, self.doId))
 
     def requestFree(self, gotHitByBoss):
         avId = self.air.getAvatarIdFromSender()
@@ -193,10 +210,12 @@ class DistributedBanquetTableAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM
                 if self.boss:
                     self.boss.toonLeftTable(self.index)
             else:
-                self.notify.debug('requestFree denied in state %s' % self.state)
+                self.notify.debug(
+                    'requestFree denied in state %s' %
+                    self.state)
 
     def __getTableId(self, avId):
-        if self.boss and self.boss.tables != None:
+        if self.boss and self.boss.tables is not None:
             for table in self.boss.tables:
                 if table.avId == avId:
                     return table.doId

@@ -17,6 +17,7 @@ from toontown.toonbase import ToontownTimer
 from toontown.minigame import VineHeadFrame
 from toontown.minigame import VineBat
 
+
 class DistributedVineGame(DistributedMinigame):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedVineGame')
     UpdateLocalToonTask = 'VineGameUpdateLocalToonTask'
@@ -36,10 +37,17 @@ class DistributedVineGame(DistributedMinigame):
         self.TwoVineView = True
         self.ArrowToChangeFacing = True
         self.gameFSM = ClassicFSM.ClassicFSM('DistributedVineGame', [State.State('off', self.enterOff, self.exitOff, ['play']),
-         State.State('play', self.enterPlay, self.exitPlay, ['cleanup', 'showScores', 'waitShowScores']),
-         State.State('waitShowScores', self.enterWaitShowScores, self.exitWaitShowScores, ['cleanup', 'showScores']),
-         State.State('showScores', self.enterShowScores, self.exitShowScores, ['cleanup']),
-         State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
+                                                                     State.State('play', self.enterPlay, self.exitPlay, [
+                                                                                 'cleanup', 'showScores', 'waitShowScores']),
+                                                                     State.State(
+            'waitShowScores', self.enterWaitShowScores, self.exitWaitShowScores, [
+                'cleanup', 'showScores']),
+            State.State(
+            'showScores',
+            self.enterShowScores,
+            self.exitShowScores,
+            ['cleanup']),
+            State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
         self.addChildGameFSM(self.gameFSM)
         self.cameraTopView = (17.6, 6.18756, 43.9956, 0, -89, 0)
         self.cameraThreeQuarterView = (0, -63.2, 16.3, 0, 0, 0)
@@ -65,7 +73,8 @@ class DistributedVineGame(DistributedMinigame):
         self.endingTrackTaskNames = []
         self.sendNewVineTUpdateAsap = False
         self.lastNewVineTUpdate = 0
-        self.defaultMaxX = (VineGameGlobals.NumVines + 1) * VineGameGlobals.VineXIncrement
+        self.defaultMaxX = (VineGameGlobals.NumVines + 1) * \
+            VineGameGlobals.VineXIncrement
         return
 
     def getClimbDir(self, avId):
@@ -96,7 +105,8 @@ class DistributedVineGame(DistributedMinigame):
         DistributedMinigame.load(self)
         self.defineConstants()
         self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_Vine.ogg')
-        self.gameAssets = loader.loadModel('phase_4/models/minigames/vine_game')
+        self.gameAssets = loader.loadModel(
+            'phase_4/models/minigames/vine_game')
         self.gameBoard = self.gameAssets.find('**/background')
         self.gameBoard.reparentTo(render)
         self.gameBoard.show()
@@ -107,17 +117,26 @@ class DistributedVineGame(DistributedMinigame):
         self.gameBoard.hide(VineGameGlobals.RadarCameraBitmask)
         self.treasureModel = self.gameAssets.find('**/bananas')
         self.setupVineCourse()
-        self.grabSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_bananas.ogg')
-        self.jumpSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_jump.ogg')
-        self.catchSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_catch.ogg')
-        self.spiderHitSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_spider_hit.ogg')
-        self.batHitVineSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_bat_hit.ogg')
-        self.batHitMidairSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_bat_hit_midair.ogg')
-        self.winSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_finish.ogg')
-        self.fallSound = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_fall.ogg')
+        self.grabSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_bananas.ogg')
+        self.jumpSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_jump.ogg')
+        self.catchSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_catch.ogg')
+        self.spiderHitSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_spider_hit.ogg')
+        self.batHitVineSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_bat_hit.ogg')
+        self.batHitMidairSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_bat_hit_midair.ogg')
+        self.winSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_finish.ogg')
+        self.fallSound = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_fall.ogg')
         self.loadBats()
         self.createBatIvals()
-        bothPlatform = loader.loadModel('phase_4/models/minigames/vine_game_shelf')
+        bothPlatform = loader.loadModel(
+            'phase_4/models/minigames/vine_game_shelf')
         self.startPlatform = bothPlatform.find('**/start1')
         self.startPlatform.setPos(-16, 0, 15)
         self.startPlatform.reparentTo(render)
@@ -168,17 +187,25 @@ class DistributedVineGame(DistributedMinigame):
         self.notify.debug('onstage')
         DistributedMinigame.onstage(self)
         for avId in self.avIdList:
-            self.updateToonInfo(avId, vineIndex=0, vineT=VineGameGlobals.VineStartingT, posX=0, posZ=0, facingRight=0, climbDir=0, fallingInfo=self.FallingNot)
+            self.updateToonInfo(
+                avId,
+                vineIndex=0,
+                vineT=VineGameGlobals.VineStartingT,
+                posX=0,
+                posZ=0,
+                facingRight=0,
+                climbDir=0,
+                fallingInfo=self.FallingNot)
 
         self.scorePanels = []
         self.gameBoard.reparentTo(render)
         self.moveCameraToSide()
         self.arrowKeys = ArrowKeys.ArrowKeys()
         handlers = [self.upArrowKeyHandler,
-         self.downArrowKeyHandler,
-         self.leftArrowKeyHandler,
-         self.rightArrowKeyHandler,
-         None]
+                    self.downArrowKeyHandler,
+                    self.leftArrowKeyHandler,
+                    self.rightArrowKeyHandler,
+                    None]
         self.arrowKeys.setPressHandlers(handlers)
         self.numTreasures = len(self.vines) - 1
         self.treasures = []
@@ -186,7 +213,9 @@ class DistributedVineGame(DistributedMinigame):
             height = self.randomNumGen.randrange(10, 25)
             xPos = self.randomNumGen.randrange(12, 18)
             pos = Point3(self.vines[i].getX() + 15, 0, height)
-            self.treasures.append(VineTreasure.VineTreasure(self.treasureModel, pos, i, self.doId))
+            self.treasures.append(
+                VineTreasure.VineTreasure(
+                    self.treasureModel, pos, i, self.doId))
 
         gravityFN = ForceNode('world-forces')
         gravityFNP = render.attachNewNode(gravityFN)
@@ -243,14 +272,19 @@ class DistributedVineGame(DistributedMinigame):
             torsoCollNodepath.show()
         self.ltLegsCollNode.addSolid(CollisionSphere(0, 0, radius, radius))
         self.ltHeadCollNode.addSolid(CollisionSphere(0, 0, 0, radius))
-        self.ltLHandCollNode.addSolid(CollisionSphere(0, 0, 0, 2 * radius / 3.0))
-        self.ltRHandCollNode.addSolid(CollisionSphere(0, 0, 0, 2 * radius / 3.0))
-        self.ltTorsoCollNode.addSolid(CollisionSphere(0, 0, radius, radius * 2))
+        self.ltLHandCollNode.addSolid(
+            CollisionSphere(
+                0, 0, 0, 2 * radius / 3.0))
+        self.ltRHandCollNode.addSolid(
+            CollisionSphere(
+                0, 0, 0, 2 * radius / 3.0))
+        self.ltTorsoCollNode.addSolid(
+            CollisionSphere(0, 0, radius, radius * 2))
         self.toonCollNodes = [legsCollNodepath,
-         headCollNodepath,
-         lHandCollNodepath,
-         rHandCollNodepath,
-         torsoCollNodepath]
+                              headCollNodepath,
+                              lHandCollNodepath,
+                              rHandCollNodepath,
+                              torsoCollNodepath]
         for eventName in self.bodyColEventNames:
             self.accept(eventName, self.toonHitSomething)
 
@@ -306,7 +340,8 @@ class DistributedVineGame(DistributedMinigame):
         self.notify.debug('avatar ' + str(avId) + ' disabled')
         DistributedMinigame.handleDisabledAvatar(self, avId)
 
-    def updateToonInfo(self, avId, vineIndex = None, vineT = None, posX = None, posZ = None, facingRight = None, climbDir = None, velX = None, velZ = None, fallingInfo = None):
+    def updateToonInfo(self, avId, vineIndex=None, vineT=None, posX=None, posZ=None,
+                       facingRight=None, climbDir=None, velX=None, velZ=None, fallingInfo=None):
         newVineIndex = vineIndex
         newVineT = vineT
         newPosX = posX
@@ -319,23 +354,23 @@ class DistributedVineGame(DistributedMinigame):
         oldInfo = None
         if avId in self.toonInfo:
             oldInfo = self.toonInfo[avId]
-            if vineIndex == None:
+            if vineIndex is None:
                 newVineIndex = oldInfo[0]
-            if vineT == None:
+            if vineT is None:
                 newVineT = oldInfo[1]
-            if posX == None:
+            if posX is None:
                 newPosX = oldInfo[2]
-            if posZ == None:
+            if posZ is None:
                 newPosZ = oldInfo[3]
-            if facingRight == None:
+            if facingRight is None:
                 newFacingRight = oldInfo[4]
-            if climbDir == None:
+            if climbDir is None:
                 newClimbDir = oldInfo[5]
-            if velX == None:
+            if velX is None:
                 newVelX = oldInfo[6]
-            if velZ == None:
+            if velZ is None:
                 newVelZ = oldInfo[7]
-            if fallingInfo == None:
+            if fallingInfo is None:
                 newFallingInfo = oldInfo[8]
         if newVineIndex < -1 or newVineIndex >= len(self.vines):
             self.notify.warning('invalid vineIndex for %d, forcing 0' % avId)
@@ -343,7 +378,9 @@ class DistributedVineGame(DistributedMinigame):
         if newVineT < 0 or newVineT > 1:
             self.notify.warning('invalid vineT for %d, setting to 0' % avId)
         if not (newFacingRight == 0 or newFacingRight == 1):
-            self.notify.warning('invalid facingRight for %d, forcing to 1' % avId)
+            self.notify.warning(
+                'invalid facingRight for %d, forcing to 1' %
+                avId)
             newFacingRight = 1
         if newPosX < -1000 or newPosX > 2000:
             self.notify.warning('invalid posX for %d, forcing to 0' % avId)
@@ -352,23 +389,29 @@ class DistributedVineGame(DistributedMinigame):
             self.notify.warning('invalid posZ for %d, forcing to 0' % avId)
             newPosZ = 0
         if newVelX is not None and (newVelX < -1000 or newVelX > 1000):
-            self.notify.warning('invalid velX %s for %d, forcing to 0' % (newVelX, avId))
+            self.notify.warning(
+                'invalid velX %s for %d, forcing to 0' %
+                (newVelX, avId))
             newVelX = 0
         if newVelZ is not None and (newVelZ < -1000 or newVelZ > 1000):
-            self.notify.warning('invalid velZ %s for %d, forcing to 0' % (newVelZ, avId))
+            self.notify.warning(
+                'invalid velZ %s for %d, forcing to 0' %
+                (newVelZ, avId))
             newVelZ = 0
         if newFallingInfo < self.FallingNot or newFallingInfo > self.FallingBat:
-            self.notify.warning('invalid fallingInfo for %d, forcing to 0' % avId)
+            self.notify.warning(
+                'invalid fallingInfo for %d, forcing to 0' %
+                avId)
             newFallingInfo = 0
         newInfo = [newVineIndex,
-            newVineT,
-            newPosX,
-            newPosZ,
-            newFacingRight,
-            newClimbDir,
-            newVelX,
-            newVelZ,
-            newFallingInfo]
+                   newVineT,
+                   newPosX,
+                   newPosZ,
+                   newFacingRight,
+                   newClimbDir,
+                   newVelX,
+                   newVelZ,
+                   newFallingInfo]
         self.toonInfo[avId] = newInfo
         if oldInfo:
             self.applyToonInfoChange(avId, newInfo, oldInfo)
@@ -383,14 +426,16 @@ class DistributedVineGame(DistributedMinigame):
         if not oldVine == newVine:
             self.notify.debug('we have a vine change')
             if oldVine == -1:
-                self.notify.debug(' we were jumping and now attaching to a new vine')
+                self.notify.debug(
+                    ' we were jumping and now attaching to a new vine')
                 newVineT = newInfo[1]
                 newFacingRight = newInfo[4]
                 self.vines[newVine].attachToon(avId, newVineT, newFacingRight)
                 if newVine == VineGameGlobals.NumVines - 1:
                     self.doEndingTrackTask(avId)
             elif newVine == -1:
-                self.notify.debug('we were attached to a vine and we are now jumping')
+                self.notify.debug(
+                    'we were attached to a vine and we are now jumping')
                 curInfo = self.vines[oldVine].getAttachedToonInfo(avId)
                 self.vines[oldVine].detachToon(avId)
                 if not avId == self.localAvId:
@@ -400,13 +445,15 @@ class DistributedVineGame(DistributedMinigame):
                     velZ = newInfo[7]
                     self.makeOtherToonJump(avId, posX, posZ, velX, velZ)
             else:
-                self.notify.warning('should not happen directly going from one vine to another')
+                self.notify.warning(
+                    'should not happen directly going from one vine to another')
                 self.vines[oldVine].detachToon(avId)
                 newVineT = newInfo[1]
                 newFacingRight = newInfo[4]
                 self.vines[newVine].attachToon(avId, newVineT, newFacingRight)
         elif newVine == oldVine and newInfo[4] != oldInfo[4]:
-            self.notify.debug('# still on the same vine, but we changed facing')
+            self.notify.debug(
+                '# still on the same vine, but we changed facing')
             self.vines[newVine].changeAttachedToonFacing(avId, newInfo[4])
         elif newVine >= 0:
             self.vines[newVine].changeAttachedToonT(avId, newInfo[1])
@@ -418,7 +465,8 @@ class DistributedVineGame(DistributedMinigame):
                     posZ = newInfo[3]
                     velX = newInfo[6]
                     velZ = newInfo[7]
-                    self.makeOtherToonFallFromMidair(avId, posX, posZ, velX, velZ)
+                    self.makeOtherToonFallFromMidair(
+                        avId, posX, posZ, velX, velZ)
 
     def sanityCheck(self):
         if not self.isInPlayState():
@@ -434,9 +482,13 @@ class DistributedVineGame(DistributedMinigame):
                     foundVineIndex = curVine
 
             if len(foundVines) > 1:
-                self.notify.warning('toon %d is attached to vines %s' % (avId, foundVines))
+                self.notify.warning(
+                    'toon %d is attached to vines %s' %
+                    (avId, foundVines))
             if not foundVineIndex == myVineIndex and not myVineIndex == VineGameGlobals.NumVines - 1:
-                self.notify.warning('avId=%d foundVineIndex=%d != myVineIndex=%d' % (avId, foundVineIndex, myVineIndex))
+                self.notify.warning(
+                    'avId=%d foundVineIndex=%d != myVineIndex=%d' %
+                    (avId, foundVineIndex, myVineIndex))
 
     def getVineAndVineInfo(self, avId):
         retVine = -1
@@ -449,7 +501,9 @@ class DistributedVineGame(DistributedMinigame):
                 break
 
         if self.toonInfo[avId][0] != retVine:
-            self.notify.warning("getVineAndVineInfo don't agree, toonInfo[%d]=%s, retVine=%d" % (avId, self.toonInfo[avId][0], retVine))
+            self.notify.warning(
+                "getVineAndVineInfo don't agree, toonInfo[%d]=%s, retVine=%d" %
+                (avId, self.toonInfo[avId][0], retVine))
         return (retVine, curInfo)
 
     def setGameReady(self):
@@ -508,9 +562,11 @@ class DistributedVineGame(DistributedMinigame):
         for i in range(self.numPlayers):
             avId = self.avIdList[i]
             avName = self.getAvatarName(avId)
-            scorePanel = MinigameAvatarScorePanel.MinigameAvatarScorePanel(avId, avName)
+            scorePanel = MinigameAvatarScorePanel.MinigameAvatarScorePanel(
+                avId, avName)
             scorePanel.setScale(0.9)
-            scorePanel.setPos(0.75 - spacing * (self.numPlayers - 1 - i), 0.0, 0.85)
+            scorePanel.setPos(
+                0.75 - spacing * (self.numPlayers - 1 - i), 0.0, 0.85)
             scorePanel.makeTransparent(0.75)
             self.scorePanels.append(scorePanel)
 
@@ -523,9 +579,11 @@ class DistributedVineGame(DistributedMinigame):
             toon = self.getAvatar(avId)
             if toon:
                 if avId == self.localAvId:
-                    self.attachLocalToonToVine(0, VineGameGlobals.VineStartingT)
+                    self.attachLocalToonToVine(
+                        0, VineGameGlobals.VineStartingT)
                 else:
-                    self.vines[0].attachToon(avId, VineGameGlobals.VineStartingT, self.lastJumpFacingRight)
+                    self.vines[0].attachToon(
+                        avId, VineGameGlobals.VineStartingT, self.lastJumpFacingRight)
 
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.posInTopRightCorner()
@@ -565,19 +623,29 @@ class DistributedVineGame(DistributedMinigame):
         cX = 0
         rX = 0.5
         scorePanelLocs = (((cX, bY),),
-         ((lX, bY), (rX, bY)),
-         ((cX, tY), (lX, bY), (rX, bY)),
-         ((lX, tY),
-          (rX, tY),
-          (lX, bY),
-          (rX, bY)))
+                          ((lX, bY), (rX, bY)),
+                          ((cX, tY), (lX, bY), (rX, bY)),
+                          ((lX, tY),
+                           (rX, tY),
+                           (lX, bY),
+                           (rX, bY)))
         scorePanelLocs = scorePanelLocs[self.numPlayers - 1]
         for i in range(self.numPlayers):
             panel = self.scorePanels[i]
             pos = scorePanelLocs[i]
-            lerpTrack.append(Parallel(LerpPosInterval(panel, lerpDur, Point3(pos[0], 0, pos[1]), blendType='easeInOut'), LerpScaleInterval(panel, lerpDur, Vec3(panel.getScale()) * 2.0, blendType='easeInOut')))
+            lerpTrack.append(
+                Parallel(
+                    LerpPosInterval(
+                        panel, lerpDur, Point3(
+                            pos[0], 0, pos[1]), blendType='easeInOut'), LerpScaleInterval(
+                        panel, lerpDur, Vec3(
+                            panel.getScale()) * 2.0, blendType='easeInOut')))
 
-        self.showScoreTrack = Parallel(lerpTrack, Sequence(Wait(VineGameGlobals.ShowScoresDuration), Func(self.gameOver)))
+        self.showScoreTrack = Parallel(
+            lerpTrack, Sequence(
+                Wait(
+                    VineGameGlobals.ShowScoresDuration), Func(
+                    self.gameOver)))
         self.showScoreTrack.start()
 
     def exitShowScores(self):
@@ -670,7 +738,7 @@ class DistributedVineGame(DistributedMinigame):
             if vineIndex == -1:
                 continue
             climbDir = toonInfo[5]
-            if climbDir == None or climbDir == 0:
+            if climbDir is None or climbDir == 0:
                 continue
             curT = toonInfo[1]
             dt = globalClock.getDt()
@@ -736,7 +804,8 @@ class DistributedVineGame(DistributedMinigame):
                 climbDir = 1
             if not newT == curT:
                 self.vines[vineIndex].changeAttachedToonT(avId, newT)
-            if newT != curT or self.getClimbDir(avId) and not curT == 1.0 or oldClimbDir != climbDir:
+            if newT != curT or self.getClimbDir(
+                    avId) and not curT == 1.0 or oldClimbDir != climbDir:
                 if oldClimbDir != climbDir:
                     self.sendNewVineTUpdateAsap = True
                 self.b_setNewVineT(avId, newT, climbDir)
@@ -758,12 +827,14 @@ class DistributedVineGame(DistributedMinigame):
         self.treasureSphereName = 'treasureCollider'
         center = Point3(0, 0, 0)
         radius = VineTreasure.VineTreasure.RADIUS
-        self.treasureCollSphere = CollisionSphere(center[0], center[1], center[2], radius)
+        self.treasureCollSphere = CollisionSphere(
+            center[0], center[1], center[2], radius)
         self.treasureCollSphere.setTangible(0)
         self.treasureCollNode = CollisionNode(self.treasureSphereName)
         self.treasureCollNode.setFromCollideMask(ToontownGlobals.WallBitmask)
         self.treasureCollNode.addSolid(self.treasureCollSphere)
-        self.treasureCollNodePath = self.torso.attachNewNode(self.treasureCollNode)
+        self.treasureCollNodePath = self.torso.attachNewNode(
+            self.treasureCollNode)
         self.treasureHandler = CollisionHandlerEvent()
         self.treasureHandler.addInPattern('%fn-intoTreasure')
         base.cTrav.addCollider(self.treasureCollNodePath, self.treasureHandler)
@@ -783,7 +854,9 @@ class DistributedVineGame(DistributedMinigame):
                 retPos.setX(newX)
             elif vineIndex == VineGameGlobals.NumVines - 1:
                 nextVinePos = self.vines[vineIndex].getPos()
-                nextVinePos.setX(nextVinePos.getX() + VineGameGlobals.VineXIncrement)
+                nextVinePos.setX(
+                    nextVinePos.getX() +
+                    VineGameGlobals.VineXIncrement)
                 newX = (pos.getX() + nextVinePos.getX()) / 2.0
                 newX += self.cameraTwoVineAdj
                 retPos.setX(newX)
@@ -806,11 +879,15 @@ class DistributedVineGame(DistributedMinigame):
 
     def focusCameraOnVine(self, vineIndex):
         camera.setHpr(0, 0, 0)
-        newCameraPos = self.getFocusCameraPos(vineIndex, self.lastJumpFacingRight)
+        newCameraPos = self.getFocusCameraPos(
+            vineIndex, self.lastJumpFacingRight)
         camera.setPos(newCameraPos)
 
-    def attachLocalToonToVine(self, vineIndex, vineT, focusCameraImmediately = True, playSfx = False):
-        self.notify.debug('focusCameraImmediately = %s' % focusCameraImmediately)
+    def attachLocalToonToVine(self, vineIndex, vineT,
+                              focusCameraImmediately=True, playSfx=False):
+        self.notify.debug(
+            'focusCameraImmediately = %s' %
+            focusCameraImmediately)
         if playSfx:
             self.catchSound.play()
         self.clearLocalPhysics()
@@ -820,18 +897,24 @@ class DistributedVineGame(DistributedMinigame):
         self.lastJumpT = 0
         if focusCameraImmediately:
             self.focusCameraOnVine(vineIndex)
-        self.b_setNewVine(self.localAvId, vineIndex, vineT, self.lastJumpFacingRight)
+        self.b_setNewVine(
+            self.localAvId,
+            vineIndex,
+            vineT,
+            self.lastJumpFacingRight)
         return
 
     def setupJumpingTransitionIval(self, vineIndex):
         self.doingJumpTransition = False
-        self.localToonJumpAnimIval = self.createJumpingTransitionIval(vineIndex)
+        self.localToonJumpAnimIval = self.createJumpingTransitionIval(
+            vineIndex)
         if self.localToonJumpAnimIval:
             self.doingJumpTransition = True
 
     def createJumpingTransitionIval(self, vineIndex):
         retval = None
-        curInfo = self.vines[vineIndex].getAttachedToonInfo(base.localAvatar.doId)
+        curInfo = self.vines[vineIndex].getAttachedToonInfo(
+            base.localAvatar.doId)
         if curInfo:
             swingSeq = curInfo[6]
             if swingSeq:
@@ -841,7 +924,9 @@ class DistributedVineGame(DistributedMinigame):
                     actorIval = swingSeq[i]
                     if not actorIval.isStopped():
                         testFrame = actorIval.getCurrentFrame()
-                        self.notify.debug('actor ival is not stopped, testFrame=%f' % testFrame)
+                        self.notify.debug(
+                            'actor ival is not stopped, testFrame=%f' %
+                            testFrame)
                         if testFrame:
                             curFrame = testFrame
                             break
@@ -849,16 +934,32 @@ class DistributedVineGame(DistributedMinigame):
                 if curFrame > -1:
                     duration = 0.25
                     if curFrame > self.ToonMaxRightFrame:
-                        desiredFps = abs(self.JumpingFrame - curFrame) / duration
+                        desiredFps = abs(
+                            self.JumpingFrame - curFrame) / duration
                         playRate = desiredFps / 24.0
-                        retval = ActorInterval(base.localAvatar, 'swing', startFrame=curFrame, endFrame=self.JumpingFrame, playRate=playRate)
+                        retval = ActorInterval(
+                            base.localAvatar,
+                            'swing',
+                            startFrame=curFrame,
+                            endFrame=self.JumpingFrame,
+                            playRate=playRate)
                     else:
                         numFrames = curFrame + 1
                         numFrames += SwingVine.SwingVine.MaxNumberOfFramesInSwingAnim - self.JumpingFrame + 1
                         desiredFps = numFrames / duration
                         playRate = desiredFps / 24.0
-                        toonJump1 = ActorInterval(base.localAvatar, 'swing', startFrame=curFrame, endFrame=0, playRate=playRate)
-                        toonJump2 = ActorInterval(base.localAvatar, 'swing', startFrame=SwingVine.SwingVine.MaxNumberOfFramesInSwingAnim - 1, endFrame=self.JumpingFrame, playRate=playRate)
+                        toonJump1 = ActorInterval(
+                            base.localAvatar,
+                            'swing',
+                            startFrame=curFrame,
+                            endFrame=0,
+                            playRate=playRate)
+                        toonJump2 = ActorInterval(
+                            base.localAvatar,
+                            'swing',
+                            startFrame=SwingVine.SwingVine.MaxNumberOfFramesInSwingAnim - 1,
+                            endFrame=self.JumpingFrame,
+                            playRate=playRate)
                         retval = Sequence(toonJump1, toonJump2)
         return retval
 
@@ -874,7 +975,9 @@ class DistributedVineGame(DistributedMinigame):
         else:
             self.lastJumpPos = None
             self.lastJumpT = 0
-            self.notify.warning('vine %d failed get tooninfo %d' % (vineIndex, base.localAvatar.doId))
+            self.notify.warning(
+                'vine %d failed get tooninfo %d' %
+                (vineIndex, base.localAvatar.doId))
         self.setupJumpingTransitionIval(vineIndex)
         self.vines[vineIndex].detachToon(base.localAvatar.doId)
         return
@@ -888,7 +991,9 @@ class DistributedVineGame(DistributedMinigame):
             self.notify.debug('collided with %s, but returning' % name)
             return
         if not int(parts[1]) == self.doId:
-            self.notify.debug("collided with %s, but doId doesn't match" % name)
+            self.notify.debug(
+                "collided with %s, but doId doesn't match" %
+                name)
             return
         treasureNum = int(parts[2])
         self.__treasureGrabbed(treasureNum)
@@ -989,7 +1094,14 @@ class DistributedVineGame(DistributedMinigame):
             self.localToonJumpAnimIval.start()
         else:
             base.localAvatar.pose('swing', self.JumpingFrame)
-        self.b_setJumpingFromVine(self.localAvId, vineIndex, self.lastJumpFacingRight, pos[0], pos[2], velocity[0], velocity[2])
+        self.b_setJumpingFromVine(
+            self.localAvId,
+            vineIndex,
+            self.lastJumpFacingRight,
+            pos[0],
+            pos[2],
+            velocity[0],
+            velocity[2])
 
     def makeLocalToonFallFromVine(self, fallingInfo):
         self.clearAttachingToVineCamIval()
@@ -1015,12 +1127,21 @@ class DistributedVineGame(DistributedMinigame):
         velocity = Vec3(0, 0, -0.1)
         physObject.setVelocity(velocity)
         self.localPhysicsNP = anp
-        self.b_setFallingFromVine(self.localAvId, vineIndex, self.lastJumpFacingRight, pos[0], pos[2], velocity[0], velocity[2], fallingInfo)
+        self.b_setFallingFromVine(
+            self.localAvId,
+            vineIndex,
+            self.lastJumpFacingRight,
+            pos[0],
+            pos[2],
+            velocity[0],
+            velocity[2],
+            fallingInfo)
 
     def makeLocalToonFallFromMidair(self, fallingInfo):
         vineIndex, vineInfo = self.getVineAndVineInfo(self.localAvId)
         if not vineIndex == -1:
-            self.notify.warning(' makeLocalToonFallFromMidair we are still attached to a vine')
+            self.notify.warning(
+                ' makeLocalToonFallFromMidair we are still attached to a vine')
             return
         if not self.localPhysicsNP:
             self.notify.warning('self.localPhysicsNP is invalid')
@@ -1030,11 +1151,21 @@ class DistributedVineGame(DistributedMinigame):
         physObject = an.getPhysicsObject()
         velocity = Vec3(0, 0, -0.1)
         physObject.setVelocity(velocity)
-        self.b_setFallingFromMidair(self.localAvId, self.lastJumpFacingRight, pos[0], pos[2], velocity[0], velocity[2], fallingInfo)
+        self.b_setFallingFromMidair(
+            self.localAvId,
+            self.lastJumpFacingRight,
+            pos[0],
+            pos[2],
+            velocity[0],
+            velocity[2],
+            fallingInfo)
 
     def changeLocalToonFacing(self, vineIndex, swingVineInfo, newFacingRight):
         self.lastJumpFacingRight = newFacingRight
-        self.attachLocalToonToVine(vineIndex, swingVineInfo[0], focusCameraImmediately=False)
+        self.attachLocalToonToVine(
+            vineIndex,
+            swingVineInfo[0],
+            focusCameraImmediately=False)
         self.setupChangeFacingInterval(vineIndex, newFacingRight)
 
     def upArrowKeyHandler(self):
@@ -1046,7 +1177,8 @@ class DistributedVineGame(DistributedMinigame):
     def rightArrowKeyHandler(self):
         curInfo = None
         for vineIndex in range(len(self.vines)):
-            curInfo = self.vines[vineIndex].getAttachedToonInfo(base.localAvatar.doId)
+            curInfo = self.vines[vineIndex].getAttachedToonInfo(
+                base.localAvatar.doId)
             if curInfo:
                 break
 
@@ -1070,11 +1202,13 @@ class DistributedVineGame(DistributedMinigame):
     def leftArrowKeyHandler(self):
         curInfo = None
         for vineIndex in range(len(self.vines)):
-            curInfo = self.vines[vineIndex].getAttachedToonInfo(base.localAvatar.doId)
+            curInfo = self.vines[vineIndex].getAttachedToonInfo(
+                base.localAvatar.doId)
             if curInfo:
                 break
 
-        curInfo = self.vines[vineIndex].getAttachedToonInfo(base.localAvatar.doId)
+        curInfo = self.vines[vineIndex].getAttachedToonInfo(
+            base.localAvatar.doId)
         if not curInfo:
             return
         if vineIndex == 0:
@@ -1100,14 +1234,22 @@ class DistributedVineGame(DistributedMinigame):
         self.d_setNewVine(avId, vineIndex, vineT, facingRight)
 
     def d_setNewVine(self, avId, vineIndex, vineT, facingRight):
-        self.notify.debug('setNewVine avId=%d vineIndex=%s' % (avId, vineIndex))
+        self.notify.debug(
+            'setNewVine avId=%d vineIndex=%s' %
+            (avId, vineIndex))
         self.sendUpdate('setNewVine', [avId,
-         vineIndex,
-         vineT,
-         facingRight])
+                                       vineIndex,
+                                       vineT,
+                                       facingRight])
 
     def setNewVine(self, avId, vineIndex, vineT, facingRight):
-        self.updateToonInfo(avId, vineIndex=vineIndex, vineT=vineT, facingRight=facingRight, climbDir=0, fallingInfo=self.FallingNot)
+        self.updateToonInfo(
+            avId,
+            vineIndex=vineIndex,
+            vineT=vineT,
+            facingRight=facingRight,
+            climbDir=0,
+            fallingInfo=self.FallingNot)
 
     def b_setNewVineT(self, avId, vineT, climbDir):
         self.setNewVineT(avId, vineT, climbDir)
@@ -1128,54 +1270,123 @@ class DistributedVineGame(DistributedMinigame):
     def setNewVineT(self, avId, vineT, climbDir):
         self.updateToonInfo(avId, vineT=vineT, climbDir=climbDir)
 
-    def b_setJumpingFromVine(self, avId, vineIndex, facingRight, posX, posZ, velX, velZ):
-        self.setJumpingFromVine(avId, vineIndex, facingRight, posX, posZ, velX, velZ)
-        self.d_setJumpingFromVine(avId, vineIndex, facingRight, posX, posZ, velX, velZ)
+    def b_setJumpingFromVine(self, avId, vineIndex,
+                             facingRight, posX, posZ, velX, velZ):
+        self.setJumpingFromVine(
+            avId,
+            vineIndex,
+            facingRight,
+            posX,
+            posZ,
+            velX,
+            velZ)
+        self.d_setJumpingFromVine(
+            avId,
+            vineIndex,
+            facingRight,
+            posX,
+            posZ,
+            velX,
+            velZ)
 
-    def d_setJumpingFromVine(self, avId, vineIndex, facingRight, posX, posZ, velX, velZ):
+    def d_setJumpingFromVine(self, avId, vineIndex,
+                             facingRight, posX, posZ, velX, velZ):
         self.sendUpdate('setJumpingFromVine', [avId,
-         vineIndex,
-         facingRight,
-         posX,
-         posZ,
-         velX,
-         velZ])
+                                               vineIndex,
+                                               facingRight,
+                                               posX,
+                                               posZ,
+                                               velX,
+                                               velZ])
 
-    def setJumpingFromVine(self, avId, vineIndex, facingRight, posX, posZ, velX, velZ):
-        self.updateToonInfo(avId, vineIndex=-1, facingRight=facingRight, posX=posX, posZ=posZ, velX=velX, velZ=velZ)
+    def setJumpingFromVine(self, avId, vineIndex,
+                           facingRight, posX, posZ, velX, velZ):
+        self.updateToonInfo(
+            avId,
+            vineIndex=-1,
+            facingRight=facingRight,
+            posX=posX,
+            posZ=posZ,
+            velX=velX,
+            velZ=velZ)
 
-    def b_setFallingFromVine(self, avId, vineIndex, facingRight, posX, posZ, velX, velZ, fallingInfo):
-        self.setFallingFromVine(avId, vineIndex, facingRight, posX, posZ, velX, velZ, fallingInfo)
-        self.d_setFallingFromVine(avId, vineIndex, facingRight, posX, posZ, velX, velZ, fallingInfo)
+    def b_setFallingFromVine(self, avId, vineIndex,
+                             facingRight, posX, posZ, velX, velZ, fallingInfo):
+        self.setFallingFromVine(
+            avId,
+            vineIndex,
+            facingRight,
+            posX,
+            posZ,
+            velX,
+            velZ,
+            fallingInfo)
+        self.d_setFallingFromVine(
+            avId,
+            vineIndex,
+            facingRight,
+            posX,
+            posZ,
+            velX,
+            velZ,
+            fallingInfo)
 
-    def d_setFallingFromVine(self, avId, vineIndex, facingRight, posX, posZ, velX, velZ, fallingInfo):
+    def d_setFallingFromVine(self, avId, vineIndex,
+                             facingRight, posX, posZ, velX, velZ, fallingInfo):
         self.sendUpdate('setFallingFromVine', [avId,
-         vineIndex,
-         facingRight,
-         posX,
-         posZ,
-         velX,
-         velZ,
-         fallingInfo])
+                                               vineIndex,
+                                               facingRight,
+                                               posX,
+                                               posZ,
+                                               velX,
+                                               velZ,
+                                               fallingInfo])
 
-    def setFallingFromVine(self, avId, vineIndex, facingRight, posX, posZ, velX, velZ, fallingInfo):
-        self.updateToonInfo(avId, vineIndex=-1, facingRight=facingRight, posX=posX, posZ=posZ, velX=velX, velZ=velZ, fallingInfo=fallingInfo)
+    def setFallingFromVine(self, avId, vineIndex, facingRight,
+                           posX, posZ, velX, velZ, fallingInfo):
+        self.updateToonInfo(
+            avId,
+            vineIndex=-1,
+            facingRight=facingRight,
+            posX=posX,
+            posZ=posZ,
+            velX=velX,
+            velZ=velZ,
+            fallingInfo=fallingInfo)
 
-    def b_setFallingFromMidair(self, avId, facingRight, posX, posZ, velX, velZ, fallingInfo):
-        self.setFallingFromMidair(avId, facingRight, posX, posZ, velX, velZ, fallingInfo)
-        self.d_setFallingFromMidair(avId, facingRight, posX, posZ, velX, velZ, fallingInfo)
+    def b_setFallingFromMidair(
+            self, avId, facingRight, posX, posZ, velX, velZ, fallingInfo):
+        self.setFallingFromMidair(
+            avId,
+            facingRight,
+            posX,
+            posZ,
+            velX,
+            velZ,
+            fallingInfo)
+        self.d_setFallingFromMidair(
+            avId, facingRight, posX, posZ, velX, velZ, fallingInfo)
 
-    def d_setFallingFromMidair(self, avId, facingRight, posX, posZ, velX, velZ, fallingInfo):
+    def d_setFallingFromMidair(
+            self, avId, facingRight, posX, posZ, velX, velZ, fallingInfo):
         self.sendUpdate('setFallingFromMidair', [avId,
-         facingRight,
-         posX,
-         posZ,
-         velX,
-         velZ,
-         fallingInfo])
+                                                 facingRight,
+                                                 posX,
+                                                 posZ,
+                                                 velX,
+                                                 velZ,
+                                                 fallingInfo])
 
-    def setFallingFromMidair(self, avId, facingRight, posX, posZ, velX, velZ, fallingInfo):
-        self.updateToonInfo(avId=avId, facingRight=facingRight, posX=posX, posZ=posZ, velX=velX, velZ=velZ, fallingInfo=fallingInfo)
+    def setFallingFromMidair(self, avId, facingRight,
+                             posX, posZ, velX, velZ, fallingInfo):
+        self.updateToonInfo(
+            avId=avId,
+            facingRight=facingRight,
+            posX=posX,
+            posZ=posZ,
+            velX=velX,
+            velZ=velZ,
+            fallingInfo=fallingInfo)
 
     def d_setFallingPos(self, avId, posX, posZ):
         self.sendUpdate('setFallingPos', [avId, posX, posZ])
@@ -1231,8 +1442,10 @@ class DistributedVineGame(DistributedMinigame):
         self.changeFacingInterval = Sequence()
         if not (vineIndex == 0 or vineIndex == VineGameGlobals.NumVines - 1):
             destPos = self.getFocusCameraPos(vineIndex, newFacingRight)
-            self.changeFacingInterval.append(LerpPosInterval(base.camera, 0.5, destPos))
-            self.changeFacingInterval.append(Func(self.clearChangeFacingInterval))
+            self.changeFacingInterval.append(
+                LerpPosInterval(base.camera, 0.5, destPos))
+            self.changeFacingInterval.append(
+                Func(self.clearChangeFacingInterval))
         self.changeFacingInterval.start()
 
     def clearAttachingToVineCamIval(self):
@@ -1246,8 +1459,10 @@ class DistributedVineGame(DistributedMinigame):
         self.clearAttachingToVineCamIval()
         self.attachingToVineCamIval = Sequence()
         destPos = self.getFocusCameraPos(vineIndex, facingRight)
-        self.attachingToVineCamIval.append(LerpPosInterval(base.camera, 0.5, destPos))
-        self.attachingToVineCamIval.append(Func(self.clearAttachingToVineCamIval))
+        self.attachingToVineCamIval.append(
+            LerpPosInterval(base.camera, 0.5, destPos))
+        self.attachingToVineCamIval.append(
+            Func(self.clearAttachingToVineCamIval))
         self.attachingToVineCamIval.start()
 
     def createRadar(self):
@@ -1272,7 +1487,11 @@ class DistributedVineGame(DistributedMinigame):
         self.cDr.setClearColorActive(1)
         self.cDr.setClearColor(Vec4(0.85, 0.95, 0.95, 1))
         self.cDr.setCamera(self.cCam)
-        self.radarSeparator = DirectFrame(relief=None, image=DGG.getDefaultDialogGeom(), image_color=(0.2, 0.0, 0.8, 1), image_scale=(2.65, 1.0, 0.01), pos=(0, 0, -0.8125))
+        self.radarSeparator = DirectFrame(
+            relief=None, image=DGG.getDefaultDialogGeom(), image_color=(
+                0.2, 0.0, 0.8, 1), image_scale=(
+                2.65, 1.0, 0.01), pos=(
+                0, 0, -0.8125))
         self.oldBaseCameraMask = base.camNode.getCameraMask()
         base.camNode.setCameraMask(BitMask32.bit(0))
         return
@@ -1298,7 +1517,8 @@ class DistributedVineGame(DistributedMinigame):
                 newPoint = self.mapRadarToAspect2d(render, avPos)
                 if newPoint:
                     headFrameShown = True
-                    self.headFrames[avId].setPos(newPoint[0], newPoint[1], newPoint[2])
+                    self.headFrames[avId].setPos(
+                        newPoint[0], newPoint[1], newPoint[2])
             if headFrameShown:
                 self.headFrames[avId].show()
             else:
@@ -1324,7 +1544,8 @@ class DistributedVineGame(DistributedMinigame):
         self.notify.debug('toonHitSpider')
         if self.toonInfo[self.localAvId][0] == -1:
             fallingInfo = self.toonInfo[self.localAvId][8]
-            if not (fallingInfo == self.FallingBat or fallingInfo == self.FallingSpider):
+            if not (fallingInfo == self.FallingBat or fallingInfo ==
+                    self.FallingSpider):
                 self.spiderHitSound.play()
                 self.makeLocalToonFallFromMidair(self.FallingSpider)
         else:
@@ -1338,7 +1559,8 @@ class DistributedVineGame(DistributedMinigame):
         if self.toonInfo[self.localAvId][0] == -1:
             self.batHitMidairSound.play()
             fallingInfo = self.toonInfo[self.localAvId][8]
-            if not (fallingInfo == self.FallingBat or fallingInfo == self.FallingSpider):
+            if not (fallingInfo == self.FallingBat or fallingInfo ==
+                    self.FallingSpider):
                 self.makeLocalToonFallFromMidair(self.FallingBat)
         else:
             self.batHitVineSound.play()
@@ -1362,7 +1584,15 @@ class DistributedVineGame(DistributedMinigame):
             for vineInfo in VineGameGlobals.CourseSections[section]:
                 length, baseAngle, vinePeriod, spiderPeriod = vineInfo
                 posX = vineIndex * VineGameGlobals.VineXIncrement
-                newVine = SwingVine.SwingVine(vineIndex, posX, 0, VineGameGlobals.VineHeight, length=length, baseAngle=baseAngle, period=vinePeriod, spiderPeriod=spiderPeriod)
+                newVine = SwingVine.SwingVine(
+                    vineIndex,
+                    posX,
+                    0,
+                    VineGameGlobals.VineHeight,
+                    length=length,
+                    baseAngle=baseAngle,
+                    period=vinePeriod,
+                    spiderPeriod=spiderPeriod)
                 self.vines.append(newVine)
                 vineIndex += 1
 
@@ -1407,12 +1637,28 @@ class DistributedVineGame(DistributedMinigame):
         endX = -VineGameGlobals.VineXIncrement
         firstInterval = True
         while batIval.getDuration() < VineGameGlobals.GameDuration:
-            batHeight = self.randomNumGen.randrange(VineGameGlobals.BatMinHeight, VineGameGlobals.BatMaxHeight)
+            batHeight = self.randomNumGen.randrange(
+                VineGameGlobals.BatMinHeight, VineGameGlobals.BatMaxHeight)
             batIval.append(Func(self.bats[batIndex].startLap))
             if firstInterval:
-                newIval = LerpPosInterval(self.bats[batIndex], duration=timeToTraverseField * startMultiplier, pos=Point3(endX, 0, batHeight), startPos=Point3(startX * startMultiplier, 0, batHeight))
+                newIval = LerpPosInterval(
+                    self.bats[batIndex],
+                    duration=timeToTraverseField *
+                    startMultiplier,
+                    pos=Point3(
+                        endX,
+                        0,
+                        batHeight),
+                    startPos=Point3(
+                        startX *
+                        startMultiplier,
+                        0,
+                        batHeight))
             else:
-                newIval = LerpPosInterval(self.bats[batIndex], duration=timeToTraverseField, pos=Point3(endX, 0, batHeight), startPos=Point3(startX, 0, batHeight))
+                newIval = LerpPosInterval(
+                    self.bats[batIndex], duration=timeToTraverseField, pos=Point3(
+                        endX, 0, batHeight), startPos=Point3(
+                        startX, 0, batHeight))
             batIval.append(newIval)
             firstInterval = False
 
@@ -1441,44 +1687,100 @@ class DistributedVineGame(DistributedMinigame):
                 toonOffset = self.calcToonOffset(av)
                 platformPos = self.startPlatform.getPos()
                 endPos = self.vines[0].getPos()
-                endPos.setZ(endPos.getZ() - toonOffset.getZ() - VineGameGlobals.VineStartingT * self.vines[0].cableLength)
+                endPos.setZ(
+                    endPos.getZ() -
+                    toonOffset.getZ() -
+                    VineGameGlobals.VineStartingT *
+                    self.vines[0].cableLength)
                 xPos = platformPos[0] - 0.5
                 takeOffPos = Point3(xPos, platformPos[1], platformPos[2])
                 leftPos = Point3(xPos - 27, platformPos[1], platformPos[2])
-                self.notify.debug('leftPos = %s platformPos=%s' % (leftPos, platformPos))
+                self.notify.debug(
+                    'leftPos = %s platformPos=%s' %
+                    (leftPos, platformPos))
                 startRunningPos = Point3(takeOffPos)
                 startRunningPos.setX(startRunningPos.getX() - 7)
                 oneSeq.append(Func(av.dropShadow.show))
                 oneSeq.append(Func(av.setH, -90))
-                oneSeq.append(Func(av.setPos, takeOffPos[0], takeOffPos[1], takeOffPos[2]))
+                oneSeq.append(
+                    Func(
+                        av.setPos,
+                        takeOffPos[0],
+                        takeOffPos[1],
+                        takeOffPos[2]))
                 exclamationSfx = av.getDialogueSfx('exclamation', 0)
-                oneSeq.append(Parallel(ActorInterval(av, 'confused', duration=3)))
+                oneSeq.append(
+                    Parallel(
+                        ActorInterval(
+                            av,
+                            'confused',
+                            duration=3)))
                 questionSfx = av.getDialogueSfx('question', 0)
-                oneSeq.append(Parallel(ActorInterval(av, 'think', duration=3.0), SoundInterval(questionSfx, duration=3)))
+                oneSeq.append(
+                    Parallel(
+                        ActorInterval(
+                            av, 'think', duration=3.0), SoundInterval(
+                            questionSfx, duration=3)))
                 oneSeq.append(Func(av.setH, 90))
                 oneSeq.append(Func(av.setPlayRate, 1, 'walk'))
                 oneSeq.append(Func(av.loop, 'walk'))
-                oneSeq.append(Parallel(LerpPosInterval(av, pos=leftPos, duration=5.25), SoundInterval(av.soundWalk, loop=1, duration=5.25)))
+                oneSeq.append(
+                    Parallel(
+                        LerpPosInterval(
+                            av, pos=leftPos, duration=5.25), SoundInterval(
+                            av.soundWalk, loop=1, duration=5.25)))
                 oneSeq.append(Func(av.setH, -90))
                 oneSeq.append(Func(av.loop, 'run'))
-                oneSeq.append(Parallel(LerpPosInterval(av, pos=takeOffPos, duration=2.5), SoundInterval(av.soundRun, loop=1, duration=2.5)))
+                oneSeq.append(
+                    Parallel(
+                        LerpPosInterval(
+                            av, pos=takeOffPos, duration=2.5), SoundInterval(
+                            av.soundRun, loop=1, duration=2.5)))
                 oneSeq.append(Func(av.dropShadow.hide))
                 howlTime = oneSeq.getDuration()
-                oneSeq.append(Parallel(LerpPosInterval(av, pos=endPos, duration=0.5), Func(av.pose, 'swing', self.JumpingFrame)))
-                attachingToVineSeq = Sequence(ActorInterval(av, 'swing', startFrame=self.JumpingFrame, endFrame=143, playRate=2.0), ActorInterval(av, 'swing', startFrame=0, endFrame=86, playRate=2.0))
-                attachingToVine = Parallel(attachingToVineSeq, SoundInterval(self.catchSound))
+                oneSeq.append(
+                    Parallel(
+                        LerpPosInterval(
+                            av, pos=endPos, duration=0.5), Func(
+                            av.pose, 'swing', self.JumpingFrame)))
+                attachingToVineSeq = Sequence(
+                    ActorInterval(
+                        av,
+                        'swing',
+                        startFrame=self.JumpingFrame,
+                        endFrame=143,
+                        playRate=2.0),
+                    ActorInterval(
+                        av,
+                        'swing',
+                        startFrame=0,
+                        endFrame=86,
+                        playRate=2.0))
+                attachingToVine = Parallel(
+                    attachingToVineSeq, SoundInterval(
+                        self.catchSound))
                 if didCameraMove:
                     oneSeq.append(attachingToVine)
                 else:
-                    attachAndMoveCam = Parallel(attachingToVine, LerpPosInterval(base.camera, pos=self.getFocusCameraPos(0, True), duration=2))
+                    attachAndMoveCam = Parallel(
+                        attachingToVine, LerpPosInterval(
+                            base.camera, pos=self.getFocusCameraPos(
+                                0, True), duration=2))
                     oneSeq.append(attachAndMoveCam)
                 oneSeq.append(Func(av.setPos, 0, 0, 0))
                 oneSeq.append(Func(av.setH, 0))
-                oneSeq.append(Func(self.vines[0].attachToon, avId, VineGameGlobals.VineStartingT, self.lastJumpFacingRight, setupAnim=False))
+                oneSeq.append(
+                    Func(
+                        self.vines[0].attachToon,
+                        avId,
+                        VineGameGlobals.VineStartingT,
+                        self.lastJumpFacingRight,
+                        setupAnim=False))
                 oneSeq.append(Func(self.vines[0].updateAttachedToons))
                 howlSfx = av.getDialogueSfx('special', 0)
                 howlSeq = Sequence(Wait(howlTime), SoundInterval(howlSfx))
-                exclamationSeq = Sequence(Wait(0.5), SoundInterval(exclamationSfx))
+                exclamationSeq = Sequence(
+                    Wait(0.5), SoundInterval(exclamationSfx))
                 oneSeqAndHowl = Parallel(oneSeq, howlSeq, exclamationSeq)
             toonTakeoffs.append(oneSeqAndHowl)
 
@@ -1488,7 +1790,13 @@ class DistributedVineGame(DistributedMinigame):
     def doEndingTrackTask(self, avId):
         taskName = 'VineGameEnding-%s' % avId
         if avId not in self.endingTracks:
-            taskMgr.doMethodLater(0.5, self.setupEndingTrack, taskName, extraArgs=(avId,))
+            taskMgr.doMethodLater(
+                0.5,
+                self.setupEndingTrack,
+                taskName,
+                extraArgs=(
+                    avId,
+                ))
             self.endingTrackTaskNames.append(taskName)
 
     def debugCameraPos(self):
@@ -1496,7 +1804,9 @@ class DistributedVineGame(DistributedMinigame):
 
     def setupEndingTrack(self, avId):
         if avId in self.endingTracks:
-            self.notify.warning('setupEndingTrack duplicate call avId=%d' % avId)
+            self.notify.warning(
+                'setupEndingTrack duplicate call avId=%d' %
+                avId)
             return
         if len(self.vines) == 0:
             return
@@ -1509,7 +1819,9 @@ class DistributedVineGame(DistributedMinigame):
         av = base.cr.doId2do.get(avId)
         avPos = av.getPos(render)
         cameraPos = base.camera.getPos()
-        self.notify.debug('avPos=%s cameraPos=%s' % (avPos, base.camera.getPos()))
+        self.notify.debug(
+            'avPos=%s cameraPos=%s' %
+            (avPos, base.camera.getPos()))
         if av:
             midX = landingPos[0]
             midZ = platformPos[2] + 6
@@ -1518,7 +1830,16 @@ class DistributedVineGame(DistributedMinigame):
             endingTrack.append(Func(av.wrtReparentTo, render))
             endingTrack.append(Func(self.debugCameraPos))
             endingTrack.append(Func(av.loop, 'jump-idle'))
-            landingIval = Parallel(ProjectileInterval(av, startPos=av.getPos(render), endZ=landingPos[2], wayPoint=Point3(midX, 0, midZ), timeToWayPoint=1))
+            landingIval = Parallel(
+                ProjectileInterval(
+                    av,
+                    startPos=av.getPos(render),
+                    endZ=landingPos[2],
+                    wayPoint=Point3(
+                        midX,
+                        0,
+                        midZ),
+                    timeToWayPoint=1))
             endingTrack.append(landingIval)
             endingTrack.append(Func(av.dropShadow.show))
             endingTrack.append(Func(av.play, 'jump-land'))

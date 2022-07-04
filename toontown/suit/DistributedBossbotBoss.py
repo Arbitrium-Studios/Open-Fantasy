@@ -29,8 +29,10 @@ from toontown.effects import DustCloud
 OneBossCog = None
 TTL = TTLocalizer
 
+
 class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBossbotBoss')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedBossbotBoss')
     BallLaunchOffset = Point3(10.5, 8.5, -5)
 
     def __init__(self, cr):
@@ -67,7 +69,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.loadEnvironment()
         self.__makeResistanceToon()
         localAvatar.chatMgr.chatInputSpeedChat.addCEOMenu()
-        if OneBossCog != None:
+        if OneBossCog is not None:
             self.notify.warning('Multiple BossCogs visible.')
         OneBossCog = self
         render.setTag('pieCode', str(ToontownGlobals.PieCodeNotBossCog))
@@ -77,7 +79,9 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         targetNode.addSolid(target)
         targetNode.setCollideMask(ToontownGlobals.PieBitmask)
         self.targetNodePath = self.pelvis.attachNewNode(targetNode)
-        self.targetNodePath.setTag('pieCode', str(ToontownGlobals.PieCodeBossCog))
+        self.targetNodePath.setTag(
+            'pieCode', str(
+                ToontownGlobals.PieCodeBossCog))
         self.axle.getParent().setTag('pieCode', str(ToontownGlobals.PieCodeBossCog))
         disk = loader.loadModel('phase_9/models/char/bossCog-gearCollide')
         disk.find('**/+CollisionNode').setName('BossZap')
@@ -106,15 +110,29 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         demotedCeo.loop('neutral')
         demotedCeo.stash()
         self.demotedCeo = demotedCeo
-        self.bossClub = loader.loadModel('phase_12/models/char/bossbotBoss-golfclub')
-        overtimeOneClubSequence = Sequence(self.bossClub.colorScaleInterval(0.1, colorScale=VBase4(0, 1, 0, 1)), self.bossClub.colorScaleInterval(0.3, colorScale=VBase4(1, 1, 1, 1)))
-        overtimeTwoClubSequence = Sequence(self.bossClub.colorScaleInterval(0.1, colorScale=VBase4(1, 0, 0, 1)), self.bossClub.colorScaleInterval(0.3, colorScale=VBase4(1, 1, 1, 1)))
-        self.bossClubIntervals = [overtimeOneClubSequence, overtimeTwoClubSequence]
+        self.bossClub = loader.loadModel(
+            'phase_12/models/char/bossbotBoss-golfclub')
+        overtimeOneClubSequence = Sequence(
+            self.bossClub.colorScaleInterval(
+                0.1, colorScale=VBase4(
+                    0, 1, 0, 1)), self.bossClub.colorScaleInterval(
+                0.3, colorScale=VBase4(
+                    1, 1, 1, 1)))
+        overtimeTwoClubSequence = Sequence(
+            self.bossClub.colorScaleInterval(
+                0.1, colorScale=VBase4(
+                    1, 0, 0, 1)), self.bossClub.colorScaleInterval(
+                0.3, colorScale=VBase4(
+                    1, 1, 1, 1)))
+        self.bossClubIntervals = [
+            overtimeOneClubSequence,
+            overtimeTwoClubSequence]
         self.rightHandJoint = self.find('**/joint17')
         self.setPosHpr(*ToontownGlobals.BossbotBossBattleOnePosHpr)
         self.reparentTo(render)
         self.toonUpSfx = loader.loadSfx('phase_11/audio/sfx/LB_toonup.ogg')
-        self.warningSfx = loader.loadSfx('phase_5/audio/sfx/Skel_COG_VO_grunt.ogg')
+        self.warningSfx = loader.loadSfx(
+            'phase_5/audio/sfx/Skel_COG_VO_grunt.ogg')
         self.swingClubSfx = loader.loadSfx('phase_5/audio/sfx/SA_hardball.ogg')
         self.moveBossTaskName = 'CEOMoveTask'
         return
@@ -151,11 +169,14 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def loadEnvironment(self):
         self.notify.debug('----- loadEnvironment')
         DistributedBossCog.DistributedBossCog.loadEnvironment(self)
-        self.geom = loader.loadModel('phase_12/models/bossbotHQ/BanquetInterior_1')
+        self.geom = loader.loadModel(
+            'phase_12/models/bossbotHQ/BanquetInterior_1')
         self.elevatorEntrance = self.geom.find('**/elevator_origin')
-        elevatorModel = loader.loadModel('phase_12/models/bossbotHQ/BB_Inside_Elevator')
+        elevatorModel = loader.loadModel(
+            'phase_12/models/bossbotHQ/BB_Inside_Elevator')
         if not elevatorModel:
-            elevatorModel = loader.loadModel('phase_12/models/bossbotHQ/BB_Elevator')
+            elevatorModel = loader.loadModel(
+                'phase_12/models/bossbotHQ/BB_Elevator')
         elevatorModel.reparentTo(self.elevatorEntrance)
         self.setupElevator(elevatorModel)
         self.banquetDoor = self.geom.find('**/door3')
@@ -165,12 +186,18 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         planeNode.setCollideMask(ToontownGlobals.PieBitmask)
         self.geom.attachNewNode(planeNode)
         self.geom.reparentTo(render)
-        self.promotionMusic = base.loader.loadMusic('phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
-        self.betweenPhaseMusic = base.loader.loadMusic('phase_9/audio/bgm/encntr_toon_winning.ogg')
-        self.phaseTwoMusic = base.loader.loadMusic('phase_12/audio/bgm/BossBot_CEO_v1.ogg')
-        self.phaseFourMusic = base.loader.loadMusic('phase_12/audio/bgm/BossBot_CEO_v2.ogg')
-        self.pickupFoodSfx = loader.loadSfx('phase_6/audio/sfx/SZ_MM_gliss.ogg')
-        self.explodeSfx = loader.loadSfx('phase_4/audio/sfx/firework_distance_02.ogg')
+        self.promotionMusic = base.loader.loadMusic(
+            'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
+        self.betweenPhaseMusic = base.loader.loadMusic(
+            'phase_9/audio/bgm/encntr_toon_winning.ogg')
+        self.phaseTwoMusic = base.loader.loadMusic(
+            'phase_12/audio/bgm/BossBot_CEO_v1.ogg')
+        self.phaseFourMusic = base.loader.loadMusic(
+            'phase_12/audio/bgm/BossBot_CEO_v2.ogg')
+        self.pickupFoodSfx = loader.loadSfx(
+            'phase_6/audio/sfx/SZ_MM_gliss.ogg')
+        self.explodeSfx = loader.loadSfx(
+            'phase_4/audio/sfx/firework_distance_02.ogg')
 
     def unloadEnvironment(self):
         self.notify.debug('----- unloadEnvironment')
@@ -201,7 +228,8 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         npc.animFSM.request('neutral')
         npc.loop('neutral')
         self.resistanceToon = npc
-        self.resistanceToon.setPosHpr(*ToontownGlobals.BossbotRTIntroStartPosHpr)
+        self.resistanceToon.setPosHpr(
+            *ToontownGlobals.BossbotRTIntroStartPosHpr)
         state = random.getstate()
         random.seed(self.doId)
         self.resistanceToon.suitType = SuitDNA.getRandomSuitByDept('c')
@@ -256,11 +284,20 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
 
     def makeIntroductionMovie(self, delayDeletes):
         rToon = self.resistanceToon
-        rToonStartPos = Point3(ToontownGlobals.BossbotRTIntroStartPosHpr[0], ToontownGlobals.BossbotRTIntroStartPosHpr[1], ToontownGlobals.BossbotRTIntroStartPosHpr[2])
+        rToonStartPos = Point3(
+            ToontownGlobals.BossbotRTIntroStartPosHpr[0],
+            ToontownGlobals.BossbotRTIntroStartPosHpr[1],
+            ToontownGlobals.BossbotRTIntroStartPosHpr[2])
         rToonEndPos = rToonStartPos + Point3(40, 0, 0)
         elevCamPosHpr = ToontownGlobals.BossbotElevCamPosHpr
-        closeUpRTCamPos = Point3(elevCamPosHpr[0], elevCamPosHpr[1], elevCamPosHpr[2])
-        closeUpRTCamHpr = Point3(elevCamPosHpr[3], elevCamPosHpr[4], elevCamPosHpr[5])
+        closeUpRTCamPos = Point3(
+            elevCamPosHpr[0],
+            elevCamPosHpr[1],
+            elevCamPosHpr[2])
+        closeUpRTCamHpr = Point3(
+            elevCamPosHpr[3],
+            elevCamPosHpr[4],
+            elevCamPosHpr[5])
         closeUpRTCamPos.setY(closeUpRTCamPos.getY() + 20)
         closeUpRTCamPos.setZ(closeUpRTCamPos.getZ() + -2)
         closeUpRTCamHpr = Point3(0, 5, 0)
@@ -271,11 +308,15 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         waiterCamPos += Point3(-5, -10, 5)
         waiterCamHpr = Point3(-30, 0, 0)
         track = Sequence(Func(camera.reparentTo, render), Func(camera.setPosHpr, *elevCamPosHpr), Func(rToon.setChatAbsolute, TTL.BossbotRTWelcome, CFSpeech), LerpPosHprInterval(camera, 3, closeUpRTCamPos, closeUpRTCamHpr), Func(rToon.setChatAbsolute, TTL.BossbotRTRemoveSuit, CFSpeech), Wait(3), Func(self.clearChat), self.loseCogSuits(self.toonsA + self.toonsB, render, (loseSuitCamPos[0],
-         loseSuitCamPos[1],
-         loseSuitCamPos[2],
-         loseSuitCamHpr[0],
-         loseSuitCamHpr[1],
-         loseSuitCamHpr[2])), self.toonNormalEyes(self.involvedToons), Wait(2), Func(camera.setPosHpr, closeUpRTCamPos, closeUpRTCamHpr), Func(rToon.setChatAbsolute, TTL.BossbotRTFightWaiter, CFSpeech), Wait(1), LerpHprInterval(camera, 2, Point3(-15, 5, 0)), Sequence(Func(rToon.suit.loop, 'walk'), rToon.hprInterval(1, VBase3(270, 0, 0)), rToon.posInterval(2.5, rToonEndPos), Func(rToon.suit.loop, 'neutral')), Wait(3), Func(rToon.clearChat), Func(self.__hideResistanceToon))
+                                                                                                                                                                                                                                                                                                                                                                                     loseSuitCamPos[
+                                                                                                                                                                                                                                                                                                                                                                                         1],
+                                                                                                                                                                                                                                                                                                                                                                                     loseSuitCamPos[
+                                                                                                                                                                                                                                                                                                                                                                                         2],
+                                                                                                                                                                                                                                                                                                                                                                                     loseSuitCamHpr[
+                                                                                                                                                                                                                                                                                                                                                                                         0],
+                                                                                                                                                                                                                                                                                                                                                                                     loseSuitCamHpr[
+                                                                                                                                                                                                                                                                                                                                                                                         1],
+                                                                                                                                                                                                                                                                                                                                                                                     loseSuitCamHpr[2])), self.toonNormalEyes(self.involvedToons), Wait(2), Func(camera.setPosHpr, closeUpRTCamPos, closeUpRTCamHpr), Func(rToon.setChatAbsolute, TTL.BossbotRTFightWaiter, CFSpeech), Wait(1), LerpHprInterval(camera, 2, Point3(-15, 5, 0)), Sequence(Func(rToon.suit.loop, 'walk'), rToon.hprInterval(1, VBase3(270, 0, 0)), rToon.posInterval(2.5, rToonEndPos), Func(rToon.suit.loop, 'neutral')), Wait(3), Func(rToon.clearChat), Func(self.__hideResistanceToon))
         return track
 
     def enterFrolic(self):
@@ -297,7 +338,9 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.__arrangeToonsAroundResistanceToon()
         intervalName = 'PrepareBattleTwoMovie'
         delayDeletes = []
-        seq = Sequence(self.makePrepareBattleTwoMovie(delayDeletes), Func(self.__onToBattleTwo), name=intervalName)
+        seq = Sequence(
+            self.makePrepareBattleTwoMovie(delayDeletes), Func(
+                self.__onToBattleTwo), name=intervalName)
         seq.delayDeletes = delayDeletes
         seq.start()
         self.storeInterval(seq, intervalName)
@@ -307,23 +350,34 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         for toonId in self.involvedToons:
             toon = self.cr.doId2do.get(toonId)
             if toon:
-                delayDeletes.append(DelayDelete.DelayDelete(toon, 'BossbotBoss.makePrepareBattleTwoMovie'))
+                delayDeletes.append(
+                    DelayDelete.DelayDelete(
+                        toon, 'BossbotBoss.makePrepareBattleTwoMovie'))
 
         rToon = self.resistanceToon
-        rToonStartPos = Point3(ToontownGlobals.BossbotRTPreTwoPosHpr[0], ToontownGlobals.BossbotRTPreTwoPosHpr[1], ToontownGlobals.BossbotRTPreTwoPosHpr[2])
+        rToonStartPos = Point3(
+            ToontownGlobals.BossbotRTPreTwoPosHpr[0],
+            ToontownGlobals.BossbotRTPreTwoPosHpr[1],
+            ToontownGlobals.BossbotRTPreTwoPosHpr[2])
         rToonEndPos = rToonStartPos + Point3(-40, 0, 0)
-        bossPos = Point3(ToontownGlobals.BossbotBossPreTwoPosHpr[0], ToontownGlobals.BossbotBossPreTwoPosHpr[1], ToontownGlobals.BossbotBossPreTwoPosHpr[2])
-        bossEndPos = Point3(ToontownGlobals.BossbotBossBattleOnePosHpr[0], ToontownGlobals.BossbotBossBattleOnePosHpr[1], ToontownGlobals.BossbotBossBattleOnePosHpr[2])
+        bossPos = Point3(
+            ToontownGlobals.BossbotBossPreTwoPosHpr[0],
+            ToontownGlobals.BossbotBossPreTwoPosHpr[1],
+            ToontownGlobals.BossbotBossPreTwoPosHpr[2])
+        bossEndPos = Point3(
+            ToontownGlobals.BossbotBossBattleOnePosHpr[0],
+            ToontownGlobals.BossbotBossBattleOnePosHpr[1],
+            ToontownGlobals.BossbotBossBattleOnePosHpr[2])
         tempNode = self.attachNewNode('temp')
         tempNode.setPos(0, -40, 18)
 
-        def getCamBossPos(tempNode = tempNode):
+        def getCamBossPos(tempNode=tempNode):
             return tempNode.getPos(render)
 
         rNode = rToon.attachNewNode('temp2')
         rNode.setPos(-5, 25, 12)
 
-        def getCamRTPos(rNode = rNode):
+        def getCamRTPos(rNode=rNode):
             return rNode.getPos(render)
 
         track = Sequence(
@@ -332,7 +386,12 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             Func(camera.setHpr, 0, 0, 0),
             Func(rToon.setChatAbsolute, TTL.BossbotRTWearWaiter, CFSpeech),
             Wait(3.0),
-            self.wearCogSuits(self.toonsA + self.toonsB, render, None, waiter=True),
+            self.wearCogSuits(
+                self.toonsA +
+                self.toonsB,
+                render,
+                None,
+                waiter=True),
             Func(rToon.clearChat),
             Func(self.setPosHpr, bossPos, Point3(0, 0, 0)),
             Parallel(LerpHprInterval(self.banquetDoor, 2, Point3(90, 0, 0)),
@@ -380,15 +439,32 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 if hasattr(toon, 'suit') and toon.suit:
                     toon.suit.loop('neutral')
 
-            retval.append(Sequence(Wait(delay), Func(toon.wrtReparentTo, render), Func(toWalk, toon), Func(toon.headsUp, 0, 0, 0), LerpPosInterval(toon, 3, Point3(0, 0, 0)), Func(toon.headsUp, destPos), LerpPosInterval(toon, 3, destPos), LerpHprInterval(toon, 1, Point3(0, 0, 0)), Func(toNeutral, toon)))
+            retval.append(
+                Sequence(
+                    Wait(delay), Func(
+                        toon.wrtReparentTo, render), Func(
+                        toWalk, toon), Func(
+                        toon.headsUp, 0, 0, 0), LerpPosInterval(
+                        toon, 3, Point3(
+                            0, 0, 0)), Func(
+                                toon.headsUp, destPos), LerpPosInterval(
+                                    toon, 3, destPos), LerpHprInterval(
+                                        toon, 1, Point3(
+                                            0, 0, 0)), Func(
+                                                toNeutral, toon)))
             if toon == base.localAvatar:
-                retval.append(Sequence(Wait(delay), Func(camera.reparentTo, toon), Func(camera.setPos, toon.cameraPositions[0][0]), Func(camera.setHpr, 0, 0, 0)))
+                retval.append(
+                    Sequence(
+                        Wait(delay), Func(
+                            camera.reparentTo, toon), Func(
+                            camera.setPos, toon.cameraPositions[0][0]), Func(
+                            camera.setHpr, 0, 0, 0)))
             delay += 1.0
             index += 1
 
         return retval
 
-    def __onToBattleTwo(self, elapsedTime = 0):
+    def __onToBattleTwo(self, elapsedTime=0):
         self.doneBarrier('PrepareBattleTwo')
 
     def exitPrepareBattleTwo(self):
@@ -478,7 +554,9 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 self.notify.debug('looping tray-netural')
                 av.suit.loop('tray-neutral')
             else:
-                self.notify.warning("don't know what to do with anim=%s" % curAnim)
+                self.notify.warning(
+                    "don't know what to do with anim=%s" %
+                    curAnim)
 
     def removeFoodFromToon(self, avId):
         self.toonFoodStatus[avId] = None
@@ -505,7 +583,9 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             elif curAnim == 'tray-neutral':
                 av.suit.loop('neutral')
             else:
-                self.notify.warning("don't know what to do with anim=%s" % curAnim)
+                self.notify.warning(
+                    "don't know what to do with anim=%s" %
+                    curAnim)
         return cogFood
 
     def setTable(self, table, tableIndex):
@@ -513,7 +593,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
 
     def localToonTouchedChair(self, tableIndex, chairIndex):
         avId = base.localAvatar.doId
-        if avId in self.toonFoodStatus and self.toonFoodStatus[avId] != None:
+        if avId in self.toonFoodStatus and self.toonFoodStatus[avId] is not None:
             self.sendUpdate('requestServeFood', [tableIndex, chairIndex])
         return
 
@@ -535,7 +615,11 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 self.putToonInCogSuit(toon)
 
         intervalName = 'PrepareBattleThreeMovie'
-        seq = Sequence(self.makePrepareBattleThreeMovie(), Func(self.__onToBattleThree), name=intervalName)
+        seq = Sequence(
+            self.makePrepareBattleThreeMovie(),
+            Func(
+                self.__onToBattleThree),
+            name=intervalName)
         seq.start()
         self.storeInterval(seq, intervalName)
         base.playMusic(self.betweenPhaseMusic, looping=1, volume=0.9)
@@ -552,7 +636,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.clearInterval('PrepareBattleThreeMovie')
         self.betweenPhaseMusic.stop()
 
-    def __onToBattleThree(self, elapsedTime = 0):
+    def __onToBattleThree(self, elapsedTime=0):
         self.doneBarrier('PrepareBattleThree')
 
     def makePrepareBattleThreeMovie(self):
@@ -567,7 +651,10 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             Wait(3.0),
             Func(camera.setPosHpr, base.localAvatar, *loseSuitCamAngle),
             Wait(1.0),
-            self.loseCogSuits(self.toonsA + self.toonsB, base.localAvatar, loseSuitCamAngle),
+            self.loseCogSuits(
+                self.toonsA + self.toonsB,
+                base.localAvatar,
+                loseSuitCamAngle),
             self.toonNormalEyes(self.involvedToons),
             Wait(2),
             Func(camera.reparentTo, self),
@@ -613,7 +700,11 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def enterPrepareBattleFour(self):
         self.controlToons()
         intervalName = 'PrepareBattleFourMovie'
-        seq = Sequence(self.makePrepareBattleFourMovie(), Func(self.__onToBattleFour), name=intervalName)
+        seq = Sequence(
+            self.makePrepareBattleFourMovie(),
+            Func(
+                self.__onToBattleFour),
+            name=intervalName)
         seq.start()
         self.storeInterval(seq, intervalName)
         base.playMusic(self.phaseFourMusic, looping=1, volume=0.9)
@@ -651,7 +742,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             Func(self.clearChat))
         return track
 
-    def __onToBattleFour(self, elapsedTime = 0):
+    def __onToBattleFour(self, elapsedTime=0):
         self.doneBarrier('PrepareBattleFour')
 
     def enterBattleFour(self):
@@ -707,7 +798,11 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.raised = 1
         self.forward = 1
         intervalName = 'VictoryMovie'
-        seq = Sequence(self.makeVictoryMovie(), Func(self.__continueVictory), name=intervalName)
+        seq = Sequence(
+            self.makeVictoryMovie(),
+            Func(
+                self.__continueVictory),
+            name=intervalName)
         seq.start()
         self.storeInterval(seq, intervalName)
         base.playMusic(self.phaseFourMusic, looping=1, volume=0.9)
@@ -767,14 +862,17 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.controlToons()
         panelName = self.uniqueName('reward')
         self.rewardPanel = RewardPanel.RewardPanel(panelName)
-        victory, camVictory, skipper = MovieToonVictory.doToonVictory(1, self.involvedToons, self.toonRewardIds, self.toonRewardDicts, self.deathList, self.rewardPanel, allowGroupShot=0, uberList=self.uberList, noSkip=True)
+        victory, camVictory, skipper = MovieToonVictory.doToonVictory(
+            1, self.involvedToons, self.toonRewardIds, self.toonRewardDicts, self.deathList, self.rewardPanel, allowGroupShot=0, uberList=self.uberList, noSkip=True)
         ival = Sequence(Parallel(victory, camVictory), Func(self.__doneReward))
         intervalName = 'RewardMovie'
         delayDeletes = []
         for toonId in self.involvedToons:
             toon = self.cr.doId2do.get(toonId)
             if toon:
-                delayDeletes.append(DelayDelete.DelayDelete(toon, 'BossbotBoss.enterReward'))
+                delayDeletes.append(
+                    DelayDelete.DelayDelete(
+                        toon, 'BossbotBoss.enterReward'))
 
         ival.delayDeletes = delayDeletes
         ival.start()
@@ -817,7 +915,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.accept('doneChatPage', self.__doneEpilogue)
         base.playMusic(self.epilogueMusic, looping=1, volume=0.9)
 
-    def __doneEpilogue(self, elapsedTime = 0):
+    def __doneEpilogue(self, elapsedTime=0):
         self.notify.debug('----- __doneEpilogue')
         intervalName = 'EpilogueMovieToonAnim'
         self.clearInterval(intervalName)
@@ -834,18 +932,25 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def makeEpilogueMovie(self):
         epSpeech = TTLocalizer.BossbotRTCongratulations
         epSpeech = self.__talkAboutPromotion(epSpeech)
-        bossTrack = Sequence(Func(self.resistanceToon.animFSM.request, 'neutral'), Func(self.resistanceToon.setLocalPageChat, epSpeech, 0))
+        bossTrack = Sequence(
+            Func(
+                self.resistanceToon.animFSM.request, 'neutral'), Func(
+                self.resistanceToon.setLocalPageChat, epSpeech, 0))
         return bossTrack
 
     def __talkAboutPromotion(self, speech):
         if self.prevCogSuitLevel < ToontownGlobals.MaxCogSuitLevel:
-            newCogSuitLevel = localAvatar.getCogLevels()[CogDisguiseGlobals.dept2deptIndex(self.style.dept)]
+            newCogSuitLevel = localAvatar.getCogLevels()[
+                CogDisguiseGlobals.dept2deptIndex(
+                    self.style.dept)]
             if newCogSuitLevel == ToontownGlobals.MaxCogSuitLevel:
-                speech += TTLocalizer.BossbotRTLastPromotion % (ToontownGlobals.MaxCogSuitLevel + 1)
+                speech += TTLocalizer.BossbotRTLastPromotion % (
+                    ToontownGlobals.MaxCogSuitLevel + 1)
             if newCogSuitLevel in ToontownGlobals.CogSuitHPLevels:
                 speech += TTLocalizer.BossbotRTHPBoost
         else:
-            speech += TTLocalizer.BossbotRTMaxed % (ToontownGlobals.MaxCogSuitLevel + 1)
+            speech += TTLocalizer.BossbotRTMaxed % (
+                ToontownGlobals.MaxCogSuitLevel + 1)
         return speech
 
     def __arrangeToonsAroundResistanceToonForReward(self):
@@ -868,7 +973,8 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         toon = base.cr.doId2do.get(avId)
         if toon:
             distance = toon.getDistance(self)
-            gearRoot = self.rotateNode.attachNewNode('gearRoot-atk%d' % self.numAttacks)
+            gearRoot = self.rotateNode.attachNewNode(
+                'gearRoot-atk%d' % self.numAttacks)
             gearRoot.setZ(10)
             gearRoot.setTag('attackCode', str(attackCode))
             gearModel = self.getGearFrisbee()
@@ -898,15 +1004,38 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                         node.detachNode()
                     return Task.done
 
-                def detachNodeLater(node = node):
+                def detachNodeLater(node=node):
                     if node.isEmpty():
                         return
                     center = node.node().getBounds().getCenter()
                     node.node().setBounds(BoundingSphere(center, distance * 1.5))
                     node.node().setFinal(1)
-                    self.doMethodLater(0.005, detachNode, 'detach-%s-%s' % (gearRoot.getName(), node.getName()), extraArgs=[node])
+                    self.doMethodLater(
+                        0.005, detachNode, 'detach-%s-%s' %
+                        (gearRoot.getName(), node.getName()), extraArgs=[node])
 
-                gearTrack.append(Sequence(Wait(i * 0.15), Func(node.show), Parallel(node.posInterval(1, Point3(x, distance, z), fluid=1), node.hprInterval(1, VBase3(h, 0, 0), fluid=1)), Func(detachNodeLater)))
+                gearTrack.append(
+                    Sequence(
+                        Wait(
+                            i * 0.15),
+                        Func(
+                            node.show),
+                        Parallel(
+                            node.posInterval(
+                                1,
+                                Point3(
+                                    x,
+                                    distance,
+                                    z),
+                                fluid=1),
+                            node.hprInterval(
+                                1,
+                                VBase3(
+                                    h,
+                                    0,
+                                    0),
+                                fluid=1)),
+                        Func(detachNodeLater)))
 
             if not self.raised:
                 neutral1Anim = self.getAnim('down2Up')
@@ -919,17 +1048,28 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             if attackCode == ToontownGlobals.BossCogSlowDirectedAttack:
                 extraAnim = ActorInterval(self, neutral)
 
-            def detachGearRoot(task, gearRoot = gearRoot):
+            def detachGearRoot(task, gearRoot=gearRoot):
                 if not gearRoot.isEmpty():
                     gearRoot.detachNode()
                 return task.done
 
-            def detachGearRootLater(gearRoot = gearRoot):
+            def detachGearRootLater(gearRoot=gearRoot):
                 if gearRoot.isEmpty():
                     return
-                self.doMethodLater(0.01, detachGearRoot, 'detach-%s' % gearRoot.getName())
+                self.doMethodLater(
+                    0.01, detachGearRoot, 'detach-%s' %
+                    gearRoot.getName())
 
-            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(detachGearRootLater), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(throwAnim, neutral2Anim)))
+            seq = Sequence(
+                ParallelEndTogether(
+                    self.pelvis.hprInterval(
+                        1, VBase3(
+                            toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(
+                    Sequence(
+                        Wait(0.19), gearTrack, Func(detachGearRootLater), self.pelvis.hprInterval(
+                            0.2, VBase3(
+                                0, 0, 0))), Sequence(
+                                    throwAnim, neutral2Anim)))
             self.doAnimate(seq, now=1, raised=1)
 
     def setBattleDifficulty(self, diff):
@@ -950,7 +1090,8 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         toHpr.setX(toHpr.getX() - 180)
         foo.removeNode()
         reverse = False
-        moveTrack, hpr = self.moveBossToPoint(fromPos, fromHpr, toPos, toHpr, reverse)
+        moveTrack, hpr = self.moveBossToPoint(
+            fromPos, fromHpr, toPos, toHpr, reverse)
         self.moveTrack = moveTrack
         self.moveTrack.start()
         self.storeInterval(self.moveTrack, 'moveTrack')
@@ -960,7 +1101,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             self.moveTrack.pause()
         self.stopMoveTask()
 
-    def setAttackCode(self, attackCode, avId = 0):
+    def setAttackCode(self, attackCode, avId=0):
         if self.state != 'BattleFour':
             return
         self.numAttacks += 1
@@ -1046,7 +1187,8 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def getSpeedDamage(self):
         now = globalClock.getFrameTime()
         elapsed = now - self.speedRecoverStartTime
-        return max(self.speedDamage - self.speedRecoverRate * elapsed / 60.0, 0)
+        return max(self.speedDamage -
+                   self.speedRecoverRate * elapsed / 60.0, 0)
 
     def getFractionalSpeedDamage(self):
         result = self.getSpeedDamage() / self.maxSpeedDamage
@@ -1063,7 +1205,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         distance = vector.length()
         self.distanceToTravel = distance
         self.notify.debug('self.distanceToTravel = %s' % self.distanceToTravel)
-        if toHpr == None:
+        if toHpr is None:
             mat = Mat3(0, 0, 0, 0, 0, 0, 0, 0, 0)
             headsUp(mat, vector, CSDefault)
             scale = VBase3(0, 0, 0)
@@ -1090,19 +1232,33 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.fromPos = fromPos
         self.dirVector = self.toPos - self.fromPos
         self.dirVector.normalize()
-        track = Sequence(Func(self.setPos, fromPos), Func(self.headsUp, toPos), Parallel(self.hprInterval(turnTime, toHpr, fromHpr), self.rollLeftTreads(turnTime, leftRate), self.rollRightTreads(turnTime, -leftRate)), Func(self.startMoveTask))
+        track = Sequence(
+            Func(
+                self.setPos, fromPos), Func(
+                self.headsUp, toPos), Parallel(
+                self.hprInterval(
+                    turnTime, toHpr, fromHpr), self.rollLeftTreads(
+                        turnTime, leftRate), self.rollRightTreads(
+                            turnTime, -leftRate)), Func(
+                                self.startMoveTask))
         return (track, toHpr)
 
     def getCurTurnSpeed(self):
-        result = ToontownGlobals.BossbotTurnSpeedMax - (ToontownGlobals.BossbotTurnSpeedMax - ToontownGlobals.BossbotTurnSpeedMin) * self.getFractionalSpeedDamage()
+        result = ToontownGlobals.BossbotTurnSpeedMax - \
+            (ToontownGlobals.BossbotTurnSpeedMax -
+             ToontownGlobals.BossbotTurnSpeedMin) * self.getFractionalSpeedDamage()
         return result
 
     def getCurRollSpeed(self):
-        result = ToontownGlobals.BossbotRollSpeedMax - (ToontownGlobals.BossbotRollSpeedMax - ToontownGlobals.BossbotRollSpeedMin) * self.getFractionalSpeedDamage()
+        result = ToontownGlobals.BossbotRollSpeedMax - \
+            (ToontownGlobals.BossbotRollSpeedMax -
+             ToontownGlobals.BossbotRollSpeedMin) * self.getFractionalSpeedDamage()
         return result
 
     def getCurTreadSpeed(self):
-        result = ToontownGlobals.BossbotTreadSpeedMax - (ToontownGlobals.BossbotTreadSpeedMax - ToontownGlobals.BossbotTreadSpeedMin) * self.getFractionalSpeedDamage()
+        result = ToontownGlobals.BossbotTreadSpeedMax - \
+            (ToontownGlobals.BossbotTreadSpeedMax -
+             ToontownGlobals.BossbotTreadSpeedMin) * self.getFractionalSpeedDamage()
         return result
 
     def startMoveTask(self):
@@ -1117,7 +1273,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         diff = self.toPos - self.getPos()
         distanceLeft = diff.length()
 
-        def rollTexMatrix(t, object = object):
+        def rollTexMatrix(t, object=object):
             object.setTexOffset(TextureStage.getDefault(), t, 0)
 
         self.treadsLeftPos += dt * self.getCurTreadSpeed()
@@ -1133,7 +1289,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             self.setPos(newPos)
             return Task.cont
 
-    def doZapToon(self, toon, pos = None, hpr = None, ts = 0, fling = 1, shake = 1):
+    def doZapToon(self, toon, pos=None, hpr=None, ts=0, fling=1, shake=1):
         zapName = toon.uniqueName('zap')
         self.clearInterval(zapName)
         zapTrack = Sequence(name=zapName)
@@ -1144,14 +1300,15 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         else:
             zapTrack.append(Func(toon.stopSmooth))
 
-        def getSlideToPos(toon = toon):
+        def getSlideToPos(toon=toon):
             return render.getRelativePoint(toon, Point3(0, -5, 0))
 
-        if pos != None and hpr != None:
+        if pos is not None and hpr is not None:
             (zapTrack.append(Func(toon.setPosHpr, pos, hpr)),)
         toonTrack = Parallel()
         if shake and toon == localAvatar:
-            toonTrack.append(Sequence(Func(camera.setZ, camera, 1), Wait(0.15), Func(camera.setZ, camera, -2), Wait(0.15), Func(camera.setZ, camera, 1)))
+            toonTrack.append(Sequence(Func(camera.setZ, camera, 1), Wait(0.15), Func(
+                camera.setZ, camera, -2), Wait(0.15), Func(camera.setZ, camera, 1)))
         if fling:
             if self.isToonRoaming(toon.doId):
                 toonTrack += [ActorInterval(toon, 'slip-backward')]
@@ -1165,7 +1322,8 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             if currentState in ('BattleFour', 'BattleTwo'):
                 zapTrack.append(Func(self.toFinalBattleMode))
             else:
-                self.notify.warning('doZapToon going to walkMode, how did this happen?')
+                self.notify.warning(
+                    'doZapToon going to walkMode, how did this happen?')
                 zapTrack.append(Func(self.toWalkMode))
         else:
             zapTrack.append(Func(toon.startSmooth))
@@ -1175,19 +1333,22 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             zapTrack = Sequence(Wait(-ts), zapTrack)
             startTime = 0
         zapTrack.append(Func(self.clearInterval, zapName))
-        zapTrack.delayDelete = DelayDelete.DelayDelete(toon, 'BossbotBoss.doZapToon')
+        zapTrack.delayDelete = DelayDelete.DelayDelete(
+            toon, 'BossbotBoss.doZapToon')
         zapTrack.start(startTime)
         self.storeInterval(zapTrack, zapName)
         return
 
-    def zapLocalToon(self, attackCode, origin = None):
+    def zapLocalToon(self, attackCode, origin=None):
         if self.localToonIsSafe or localAvatar.ghostMode or localAvatar.isStunned:
             return
         if globalClock.getFrameTime() < self.lastZapLocalTime + 1.0:
             return
         else:
             self.lastZapLocalTime = globalClock.getFrameTime()
-        self.notify.debug('zapLocalToon frameTime=%s' % globalClock.getFrameTime())
+        self.notify.debug(
+            'zapLocalToon frameTime=%s' %
+            globalClock.getFrameTime())
         messenger.send('interrupt-pie')
         place = self.cr.playGame.getPlace()
         currentState = None
@@ -1203,7 +1364,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             fling = 0
             shake = 1
         if fling:
-            if origin == None:
+            if origin is None:
                 origin = self
             if self.isToonRoaming(toon.doId):
                 camera.wrtReparentTo(render)
@@ -1216,15 +1377,15 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         hpr = toon.getHpr()
         timestamp = globalClockDelta.getFrameNetworkTime()
         self.sendUpdate('zapToon', [pos[0],
-         pos[1],
-         pos[2],
-         hpr[0],
-         hpr[1],
-         hpr[2],
-         bp2d[0],
-         bp2d[1],
-         attackCode,
-         timestamp])
+                                    pos[1],
+                                    pos[2],
+                                    hpr[0],
+                                    hpr[1],
+                                    hpr[2],
+                                    bp2d[0],
+                                    bp2d[1],
+                                    attackCode,
+                                    timestamp])
         self.doZapToon(toon, fling=fling, shake=shake)
         return
 
@@ -1255,7 +1416,8 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         return result
 
     def isToonRoaming(self, toonId):
-        result = not self.isToonOnTable(toonId) and not self.isToonOnGolfSpot(toonId)
+        result = not self.isToonOnTable(
+            toonId) and not self.isToonOnGolfSpot(toonId)
         return result
 
     def getGolfBall(self):
@@ -1279,7 +1441,8 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         if toon:
             distance = toon.getDistance(self)
             self.notify.debug('distance = %s' % distance)
-            gearRoot = self.rotateNode.attachNewNode('gearRoot-atk%d' % self.numAttacks)
+            gearRoot = self.rotateNode.attachNewNode(
+                'gearRoot-atk%d' % self.numAttacks)
             gearRoot.setZ(10)
             gearRoot.setTag('attackCode', str(attackCode))
             gearModel = self.getGolfBall()
@@ -1315,14 +1478,39 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                         node.detachNode()
                     return Task.done
 
-                def detachNodeLater(node = node):
+                def detachNodeLater(node=node):
                     if node.isEmpty():
                         return
                     node.node().setBounds(BoundingSphere(Point3(0, 0, 0), distance * 1.5))
                     node.node().setFinal(1)
-                    self.doMethodLater(0.005, detachNode, 'detach-%s-%s' % (gearRoot.getName(), node.getName()), extraArgs=[node])
+                    self.doMethodLater(
+                        0.005, detachNode, 'detach-%s-%s' %
+                        (gearRoot.getName(), node.getName()), extraArgs=[node])
 
-                gearTrack.append(Sequence(Wait(26.0 / 24.0), Wait(i * 0.15), Func(node.show), Parallel(node.posInterval(1, Point3(x, y, z), fluid=1), node.hprInterval(1, VBase3(0, p, 0), fluid=1)), Func(detachNodeLater)))
+                gearTrack.append(
+                    Sequence(
+                        Wait(
+                            26.0 / 24.0),
+                        Wait(
+                            i * 0.15),
+                        Func(
+                            node.show),
+                        Parallel(
+                            node.posInterval(
+                                1,
+                                Point3(
+                                    x,
+                                    y,
+                                    z),
+                                fluid=1),
+                            node.hprInterval(
+                                1,
+                                VBase3(
+                                    0,
+                                    p,
+                                    0),
+                                fluid=1)),
+                        Func(detachNodeLater)))
 
             if not self.raised:
                 neutral1Anim = self.getAnim('down2Up')
@@ -1335,15 +1523,48 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             if attackCode == ToontownGlobals.BossCogSlowDirectedAttack:
                 extraAnim = ActorInterval(self, neutral)
 
-            def detachGearRoot(task, gearRoot = gearRoot):
+            def detachGearRoot(task, gearRoot=gearRoot):
                 if not gearRoot.isEmpty():
                     gearRoot.detachNode()
                 return task.done
 
-            def detachGearRootLater(gearRoot = gearRoot):
-                self.doMethodLater(0.01, detachGearRoot, 'detach-%s' % gearRoot.getName())
+            def detachGearRootLater(gearRoot=gearRoot):
+                self.doMethodLater(
+                    0.01, detachGearRoot, 'detach-%s' %
+                    gearRoot.getName())
 
-            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(detachGearRootLater), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(throwAnim, neutral2Anim), Sequence(Wait(0.85), SoundInterval(self.swingClubSfx, node=self, duration=0.45, cutOff=300, listenerNode=base.localAvatar))))
+            seq = Sequence(
+                ParallelEndTogether(
+                    self.pelvis.hprInterval(
+                        1,
+                        VBase3(
+                            toToonH,
+                            0,
+                            0)),
+                    neutral1Anim),
+                extraAnim,
+                Parallel(
+                    Sequence(
+                        Wait(0.19),
+                        gearTrack,
+                        Func(detachGearRootLater),
+                        self.pelvis.hprInterval(
+                            0.2,
+                            VBase3(
+                                0,
+                                0,
+                                0))),
+                    Sequence(
+                        throwAnim,
+                        neutral2Anim),
+                    Sequence(
+                        Wait(0.85),
+                        SoundInterval(
+                            self.swingClubSfx,
+                            node=self,
+                            duration=0.45,
+                            cutOff=300,
+                            listenerNode=base.localAvatar))))
             self.doAnimate(seq, now=1, raised=1)
 
     def doGolfAreaAttack(self):
@@ -1374,9 +1595,13 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         gearRoots = []
         allGearTracks = Parallel()
         for toon in toons:
-            gearRoot = self.rotateNode.attachNewNode('gearRoot-atk%d-%d' % (self.numAttacks, toons.index(toon)))
+            gearRoot = self.rotateNode.attachNewNode(
+                'gearRoot-atk%d-%d' %
+                (self.numAttacks, toons.index(toon)))
             gearRoot.setZ(10)
-            gearRoot.setTag('attackCode', str(ToontownGlobals.BossCogGolfAreaAttack))
+            gearRoot.setTag(
+                'attackCode', str(
+                    ToontownGlobals.BossCogGolfAreaAttack))
             gearRoot.lookAt(toon)
             ballLaunch = NodePath('')
             ballLaunch.reparentTo(gearRoot)
@@ -1407,33 +1632,81 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                         node.detachNode()
                     return Task.done
 
-                def detachNodeLater(node = node):
+                def detachNodeLater(node=node):
                     if node.isEmpty():
                         return
                     node.node().setBounds(BoundingSphere(Point3(0, 0, 0), distance * 1.5))
                     node.node().setFinal(1)
-                    self.doMethodLater(0.005, detachNode, 'detach-%s-%s' % (gearRoot.getName(), node.getName()), extraArgs=[node])
+                    self.doMethodLater(
+                        0.005, detachNode, 'detach-%s-%s' %
+                        (gearRoot.getName(), node.getName()), extraArgs=[node])
 
-                gearTrack.append(Sequence(Wait(26.0 / 24.0), Wait(i * 0.15), Func(node.show), Parallel(node.posInterval(1, Point3(x, y, z), fluid=1), node.hprInterval(1, VBase3(0, p, 0), fluid=1)), Func(detachNodeLater)))
+                gearTrack.append(
+                    Sequence(
+                        Wait(
+                            26.0 / 24.0),
+                        Wait(
+                            i * 0.15),
+                        Func(
+                            node.show),
+                        Parallel(
+                            node.posInterval(
+                                1,
+                                Point3(
+                                    x,
+                                    y,
+                                    z),
+                                fluid=1),
+                            node.hprInterval(
+                                1,
+                                VBase3(
+                                    0,
+                                    p,
+                                    0),
+                                fluid=1)),
+                        Func(detachNodeLater)))
 
             allGearTracks.append(gearTrack)
 
-        def detachGearRoots(gearRoots = gearRoots):
+        def detachGearRoots(gearRoots=gearRoots):
             for gearRoot in gearRoots:
 
-                def detachGearRoot(task, gearRoot = gearRoot):
+                def detachGearRoot(task, gearRoot=gearRoot):
                     if not gearRoot.isEmpty():
                         gearRoot.detachNode()
                     return task.done
 
                 if gearRoot.isEmpty():
                     continue
-                self.doMethodLater(0.01, detachGearRoot, 'detach-%s' % gearRoot.getName())
+                self.doMethodLater(
+                    0.01, detachGearRoot, 'detach-%s' %
+                    gearRoot.getName())
 
             gearRoots = []
 
-        rotateFire = Parallel(self.pelvis.hprInterval(2, VBase3(toToonH + 1440, 0, 0)), allGearTracks)
-        seq = Sequence(Func(base.playSfx, self.warningSfx), Func(self.saySomething, TTLocalizer.GolfAreaAttackTaunt), ParallelEndTogether(self.pelvis.hprInterval(2, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(rotateFire, Func(detachGearRoots), Func(self.pelvis.setHpr, VBase3(0, 0, 0))), Sequence(throwAnim, neutral2Anim), Sequence(Wait(0.85), SoundInterval(self.swingClubSfx, node=self, duration=0.45, cutOff=300, listenerNode=base.localAvatar))))
+        rotateFire = Parallel(
+            self.pelvis.hprInterval(
+                2,
+                VBase3(
+                    toToonH +
+                    1440,
+                    0,
+                    0)),
+            allGearTracks)
+        seq = Sequence(
+            Func(
+                base.playSfx, self.warningSfx), Func(
+                self.saySomething, TTLocalizer.GolfAreaAttackTaunt), ParallelEndTogether(
+                self.pelvis.hprInterval(
+                    2, VBase3(
+                        toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(
+                            Sequence(
+                                rotateFire, Func(detachGearRoots), Func(
+                                    self.pelvis.setHpr, VBase3(
+                                        0, 0, 0))), Sequence(
+                                            throwAnim, neutral2Anim), Sequence(
+                                                Wait(0.85), SoundInterval(
+                                                    self.swingClubSfx, node=self, duration=0.45, cutOff=300, listenerNode=base.localAvatar))))
         self.doAnimate(seq, now=1, raised=1)
 
     def saySomething(self, chatString):
@@ -1461,7 +1734,9 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         avId = base.localAvatar.doId
         doRequest = True
         if doRequest:
-            self.sendUpdate('requestGetToonup', [beltIndex, toonupIndex, toonupNum])
+            self.sendUpdate(
+                'requestGetToonup', [
+                    beltIndex, toonupIndex, toonupNum])
 
     def toonGotToonup(self, avId, beltIndex, toonupIndex, toonupNum):
         if self.belts[beltIndex]:
@@ -1503,7 +1778,29 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 x = random.uniform(-5, 5)
                 z = random.uniform(-3, 3)
                 h = random.uniform(-720, 720)
-                gearTrack.append(Sequence(Wait(i * 0.15), Func(node.show), Parallel(node.posInterval(1, Point3(x, distance, z), fluid=1), node.hprInterval(1, VBase3(h, 0, 0), fluid=1)), Func(node.detachNode)))
+                gearTrack.append(
+                    Sequence(
+                        Wait(
+                            i * 0.15),
+                        Func(
+                            node.show),
+                        Parallel(
+                            node.posInterval(
+                                1,
+                                Point3(
+                                    x,
+                                    distance,
+                                    z),
+                                fluid=1),
+                            node.hprInterval(
+                                1,
+                                VBase3(
+                                    h,
+                                    0,
+                                    0),
+                                fluid=1)),
+                        Func(
+                            node.detachNode)))
 
             if not self.raised:
                 neutral1Anim = self.getAnim('down2Up')
@@ -1515,7 +1812,21 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             extraAnim = Sequence()
             if attackCode == ToontownGlobals.BossCogSlowDirectedAttack:
                 extraAnim = ActorInterval(self, neutral)
-            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(gearRoot.detachNode), Func(self.explodeSfx.play), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(throwAnim, neutral2Anim)), Func(belt.request, 'Inactive'))
+            seq = Sequence(
+                ParallelEndTogether(
+                    self.pelvis.hprInterval(
+                        1, VBase3(
+                            toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(
+                    Sequence(
+                        Wait(0.19), gearTrack, Func(
+                            gearRoot.detachNode), Func(
+                                self.explodeSfx.play), self.pelvis.hprInterval(
+                                    0.2, VBase3(
+                                        0, 0, 0))), Sequence(
+                                            throwAnim, neutral2Anim)), Func(
+                                                belt.request, 'Inactive'))
             attackBelts.append(seq)
-        self.notify.debug('attackBelts duration= %.2f' % attackBelts.getDuration())
+        self.notify.debug(
+            'attackBelts duration= %.2f' %
+            attackBelts.getDuration())
         self.doAnimate(attackBelts, now=1, raised=1)

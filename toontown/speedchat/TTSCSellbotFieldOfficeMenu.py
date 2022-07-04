@@ -5,7 +5,13 @@ from otp.speedchat.SCStaticTextTerminal import SCStaticTextTerminal
 from toontown.speedchat.TTSCIndexedTerminal import TTSCIndexedTerminal
 from otp.otpbase import OTPLocalizer
 from toontown.cogdominium import CogdoInterior
-SellbotFieldOfficeMenu = [(OTPLocalizer.SellbotFieldOfficeMenuSections[0], list(range(30404, 30409))), (OTPLocalizer.SellbotFieldOfficeMenuSections[1], list(range(30409, 30419)))]
+SellbotFieldOfficeMenu = [
+    (OTPLocalizer.SellbotFieldOfficeMenuSections[0], list(
+        range(
+            30404, 30409))), (OTPLocalizer.SellbotFieldOfficeMenuSections[1], list(
+                range(
+                    30409, 30419)))]
+
 
 class TTSCSellbotFieldOfficeMenu(SCMenu):
 
@@ -24,14 +30,16 @@ class TTSCSellbotFieldOfficeMenu(SCMenu):
         self.clearMenu()
         try:
             lt = base.localAvatar
-        except:
+        except BaseException:
             return
 
         for section in SellbotFieldOfficeMenu:
             if section[0] == -1:
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print('warning: tried to link Winter phrase %s which does not seem to exist' % phrase)
+                        print(
+                            'warning: tried to link Winter phrase %s which does not seem to exist' %
+                            phrase)
                         break
                     self.append(SCStaticTextTerminal(phrase))
 
@@ -39,7 +47,9 @@ class TTSCSellbotFieldOfficeMenu(SCMenu):
                 menu = SCMenu()
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print('warning: tried to link Halloween phrase %s which does not seem to exist' % phrase)
+                        print(
+                            'warning: tried to link Halloween phrase %s which does not seem to exist' %
+                            phrase)
                         break
                     menu.append(SCStaticTextTerminal(phrase))
 

@@ -2,6 +2,7 @@ from pandac.PandaModules import *
 from direct.showbase import DirectObject
 from otp.otpbase import OTPLocalizer
 
+
 class SpeedChatGMHandler(DirectObject.DirectObject):
     scStructure = None
     scList = {}
@@ -20,9 +21,12 @@ class SpeedChatGMHandler(DirectObject.DirectObject):
             if categoryName == '':
                 continue
             categoryStructure = [categoryName]
-            numCategoryPhrases = base.config.GetInt('gm-category-%d-phrases' % i, 0)
+            numCategoryPhrases = base.config.GetInt(
+                'gm-category-%d-phrases' % i, 0)
             for j in range(0, numCategoryPhrases):
-                phrase = base.config.GetString('gm-category-%d-phrase-%d' % (i, j), '')
+                phrase = base.config.GetString(
+                    'gm-category-%d-phrase-%d' %
+                    (i, j), '')
                 if phrase != '':
                     idx = 'gm%d' % phraseCount
                     SpeedChatGMHandler.scList[idx] = phrase

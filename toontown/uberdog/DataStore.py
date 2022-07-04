@@ -7,22 +7,23 @@ import sys
 import dbm
 import time
 
+
 class DataStore:
     QueryTypes = []
     QueryTypes = dict(list(zip(QueryTypes, list(range(len(QueryTypes))))))
 
     @classmethod
     def addQueryTypes(cls, typeStrings):
-        superTypes = list(zip(list(cls.QueryTypes.values()), list(cls.QueryTypes.keys())))
-        superTypes.sort()
-        newTypes = [ item[1] for item in superTypes ] + typeStrings
+        superTypes = sorted(
+            zip(list(cls.QueryTypes.values()), list(cls.QueryTypes.keys())))
+        newTypes = [item[1] for item in superTypes] + typeStrings
         newTypes = dict(list(zip(newTypes, list(range(1 + len(newTypes))))))
         return newTypes
 
     notify = DirectNotifyGlobal.directNotify.newCategory('DataStore')
     wantAnyDbm = ConfigVariableBool('want-ds-anydbm', 1).getValue()
 
-    def __init__(self, filepath, writePeriod = 300, writeCountTrigger = 100):
+    def __init__(self, filepath, writePeriod=300, writeCountTrigger=100):
         self.filepath = filepath
         self.writePeriod = writePeriod
         self.writeCountTrigger = writeCountTrigger
@@ -31,7 +32,9 @@ class DataStore:
         self.className = self.__class__.__name__
         if self.wantAnyDbm:
             self.filepath += '-anydbm'
-            self.notify.debug('anydbm default module used: %s ' % dbm._defaultmod.__name__)
+            self.notify.debug(
+                'anydbm default module used: %s ' %
+                dbm._defaultmod.__name__)
         self.open()
         return
 
@@ -40,26 +43,38 @@ class DataStore:
             try:
                 if os.path.exists(self.filepath):
                     self.data = dbm.open(self.filepath, 'w')
-                    self.notify.debug('Opening existing anydbm database at: %s.' % (self.filepath,))
+                    self.notify.debug(
+                        'Opening existing anydbm database at: %s.' %
+                        (self.filepath,))
                 else:
                     self.data = dbm.open(self.filepath, 'c')
-                    self.notify.debug('Creating new anydbm database at: %s.' % (self.filepath,))
+                    self.notify.debug(
+                        'Creating new anydbm database at: %s.' %
+                        (self.filepath,))
             except dbm.error:
-                self.notify.warning('Cannot open anydbm database at: %s.' % (self.filepath,))
+                self.notify.warning(
+                    'Cannot open anydbm database at: %s.' %
+                    (self.filepath,))
 
         else:
             try:
                 file = open(self.filepath + '.bu', 'r')
-                self.notify.debug('Opening backup pickle data file at %s.' % (self.filepath + '.bu',))
+                self.notify.debug(
+                    'Opening backup pickle data file at %s.' %
+                    (self.filepath + '.bu',))
                 if os.path.exists(self.filepath):
                     os.remove(self.filepath)
             except IOError:
                 try:
                     file = open(self.filepath, 'r')
-                    self.notify.debug('Opening old pickle data file at %s..' % (self.filepath,))
+                    self.notify.debug(
+                        'Opening old pickle data file at %s..' %
+                        (self.filepath,))
                 except IOError:
                     file = None
-                    self.notify.debug('New pickle data file will be written to %s.' % (self.filepath,))
+                    self.notify.debug(
+                        'New pickle data file will be written to %s.' %
+                        (self.filepath,))
 
             if file:
                 data = pickle.load(file)
@@ -71,7 +86,9 @@ class DataStore:
 
     def writeDataToFile(self):
         if self.data is not None:
-            self.notify.debug('Data is now synced with disk at %s' % self.filepath)
+            self.notify.debug(
+                'Data is now synced with disk at %s' %
+                self.filepath)
             if self.wantAnyDbm:
                 self.data.sync()
             else:
@@ -142,9 +159,15 @@ class DataStore:
             if os.path.exists(self.filepath):
                 try:
                     os.rename(tail, newFileName)
-                    uber.air.writeServerEvent('Uberdog data store Info', 0, 'Creating backup of file: %s saving as: %s' % (tail, newFileName))
-                except:
-                    uber.air.writeServerEvent('Uberdog data store Info', 0, 'Unable to create backup of file: %s ' % tail)
+                    uber.air.writeServerEvent(
+                        'Uberdog data store Info', 0, 'Creating backup of file: %s saving as: %s' %
+                        (tail, newFileName))
+                except BaseException:
+                    uber.air.writeServerEvent(
+                        'Uberdog data store Info',
+                        0,
+                        'Unable to create backup of file: %s ' %
+                        tail)
 
             else:
                 files = os.listdir(head)
@@ -153,9 +176,16 @@ class DataStore:
                         filename, ext = os.path.splitext(file)
                         try:
                             os.rename(file, newFileName + ext)
-                            uber.air.writeServerEvent('Uberdog data store Info', 0, 'Creating backup of file: %s saving as: %s' % (file, newFileName + ext))
-                        except:
-                            uber.air.writeServerEvent('Uberdog data store Info', 0, 'Unable to create backup of file: %s ' % newFileName + ext)
+                            uber.air.writeServerEvent(
+                                'Uberdog data store Info', 0, 'Creating backup of file: %s saving as: %s' %
+                                (file, newFileName + ext))
+                        except BaseException:
+                            uber.air.writeServerEvent(
+                                'Uberdog data store Info',
+                                0,
+                                'Unable to create backup of file: %s ' %
+                                newFileName +
+                                ext)
 
         else:
             if os.path.exists(self.filepath + '.bu'):

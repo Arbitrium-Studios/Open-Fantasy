@@ -3,23 +3,39 @@ from pandac.PandaModules import CollisionSphere, CollisionNode, BitMask32, Colli
 from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 
+
 class CogdoFlyingCollisions(GravityWalker):
     wantFloorSphere = 0
 
     def __init__(self):
         GravityWalker.__init__(self, gravity=0.0)
 
-    def initializeCollisions(self, collisionTraverser, avatarNodePath, avatarRadius = 1.4, floorOffset = 1.0, reach = 1.0):
+    def initializeCollisions(self, collisionTraverser, avatarNodePath,
+                             avatarRadius=1.4, floorOffset=1.0, reach=1.0):
         self.cHeadSphereNodePath = None
         self.cFloorEventSphereNodePath = None
         self.setupHeadSphere(avatarNodePath)
-        self.setupFloorEventSphere(avatarNodePath, ToontownGlobals.FloorEventBitmask, avatarRadius)
-        GravityWalker.initializeCollisions(self, collisionTraverser, avatarNodePath, avatarRadius, floorOffset, reach)
+        self.setupFloorEventSphere(
+            avatarNodePath,
+            ToontownGlobals.FloorEventBitmask,
+            avatarRadius)
+        GravityWalker.initializeCollisions(
+            self,
+            collisionTraverser,
+            avatarNodePath,
+            avatarRadius,
+            floorOffset,
+            reach)
         return
 
     def setupWallSphere(self, bitmask, avatarRadius):
         self.avatarRadius = avatarRadius
-        cSphere = CollisionSphere(0.0, 0.0, self.avatarRadius + 0.75, self.avatarRadius)
+        cSphere = CollisionSphere(
+            0.0,
+            0.0,
+            self.avatarRadius +
+            0.75,
+            self.avatarRadius)
         cSphereNode = CollisionNode('Flyer.cWallSphereNode')
         cSphereNode.addSolid(cSphere)
         cSphereNodePath = self.avatarNodePath.attachNewNode(cSphereNode)
@@ -34,7 +50,13 @@ class CogdoFlyingCollisions(GravityWalker):
 
     def setupEventSphere(self, bitmask, avatarRadius):
         self.avatarRadius = avatarRadius
-        cSphere = CollisionSphere(0.0, 0.0, self.avatarRadius + 0.75, self.avatarRadius * 1.04)
+        cSphere = CollisionSphere(
+            0.0,
+            0.0,
+            self.avatarRadius +
+            0.75,
+            self.avatarRadius *
+            1.04)
         cSphere.setTangible(0)
         cSphereNode = CollisionNode('Flyer.cEventSphereNode')
         cSphereNode.addSolid(cSphere)
@@ -75,7 +97,9 @@ class CogdoFlyingCollisions(GravityWalker):
         self.headCollisionEvent = CollisionHandlerEvent()
         self.headCollisionEvent.addInPattern('%fn-enter-%in')
         self.headCollisionEvent.addOutPattern('%fn-exit-%in')
-        base.cTrav.addCollider(self.cHeadSphereNodePath, self.headCollisionEvent)
+        base.cTrav.addCollider(
+            self.cHeadSphereNodePath,
+            self.headCollisionEvent)
 
     def setupFloorEventSphere(self, avatarNodePath, bitmask, avatarRadius):
         cSphere = CollisionSphere(0.0, 0.0, 0.0, 0.75)
@@ -93,12 +117,12 @@ class CogdoFlyingCollisions(GravityWalker):
 
     def deleteCollisions(self):
         GravityWalker.deleteCollisions(self)
-        if self.cHeadSphereNodePath != None:
+        if self.cHeadSphereNodePath is not None:
             base.cTrav.removeCollider(self.cHeadSphereNodePath)
             self.cHeadSphereNodePath.detachNode()
             self.cHeadSphereNodePath = None
             self.headCollisionsEvent = None
-        if self.cFloorEventSphereNodePath != None:
+        if self.cFloorEventSphereNodePath is not None:
             base.cTrav.removeCollider(self.cFloorEventSphereNodePath)
             self.cFloorEventSphereNodePath.detachNode()
             self.cFloorEventSphereNodePath = None
@@ -109,16 +133,19 @@ class CogdoFlyingCollisions(GravityWalker):
         del self.cEventSphereNodePath
         return
 
-    def setCollisionsActive(self, active = 1):
+    def setCollisionsActive(self, active=1):
         if self.collisionsActive != active:
-            if self.cHeadSphereNodePath != None:
+            if self.cHeadSphereNodePath is not None:
                 base.cTrav.removeCollider(self.cHeadSphereNodePath)
                 if active:
-                    base.cTrav.addCollider(self.cHeadSphereNodePath, self.headCollisionEvent)
-            if self.cFloorEventSphereNodePath != None:
+                    base.cTrav.addCollider(
+                        self.cHeadSphereNodePath, self.headCollisionEvent)
+            if self.cFloorEventSphereNodePath is not None:
                 base.cTrav.removeCollider(self.cFloorEventSphereNodePath)
                 if active:
-                    base.cTrav.addCollider(self.cFloorEventSphereNodePath, self.floorCollisionEvent)
+                    base.cTrav.addCollider(
+                        self.cFloorEventSphereNodePath,
+                        self.floorCollisionEvent)
         GravityWalker.setCollisionsActive(self, active)
         return
 

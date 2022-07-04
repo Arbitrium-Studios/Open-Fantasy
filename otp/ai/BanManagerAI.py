@@ -1,11 +1,16 @@
-import urllib.request, urllib.parse, urllib.error
+import urllib.request
+import urllib.parse
+import urllib.error
 import os
 from pandac.PandaModules import HTTPClient, Ramfile
 from direct.directnotify import DirectNotifyGlobal
 
+
 class BanManagerAI:
     notify = DirectNotifyGlobal.directNotify.newCategory('BanManagerAI')
-    BanUrl = simbase.config.GetString('ban-base-url', 'http://vapps.disl.starwave.com:8005/dis-hold/action/event')
+    BanUrl = simbase.config.GetString(
+        'ban-base-url',
+        'http://vapps.disl.starwave.com:8005/dis-hold/action/event')
     App = simbase.config.GetString('ban-app-name', 'TTWorldAI')
     Product = simbase.config.GetString('ban-product', 'Toontown')
     EventName = simbase.config.GetString('ban-event-name', 'tthackattempt')
@@ -23,17 +28,20 @@ class BanManagerAI:
         parameters += '&event_name=%s' % self.EventName
         commentWithAvatarId = 'avId-%s ' % avatarId
         commentWithAvatarId += comment
-        parameters += '&comments=%s' % urllib.parse.quote(str(commentWithAvatarId))
+        parameters += '&comments=%s' % urllib.parse.quote(
+            str(commentWithAvatarId))
         baseUrlToUse = self.BanUrl
         osBaseUrl = os.getenv('BAN_URL')
         if osBaseUrl:
             baseUrlToUse = osBaseUrl
         fullUrl = baseUrlToUse + '?' + parameters
         self.notify.info('ban request %s dislid=%s comment=%s fullUrl=%s' % (self.curBanRequestNum,
-         dislid,
-         comment,
-         fullUrl))
-        simbase.air.writeServerEvent('ban_request', avatarId, '%s|%s|%s' % (dislid, comment, fullUrl))
+                                                                             dislid,
+                                                                             comment,
+                                                                             fullUrl))
+        simbase.air.writeServerEvent(
+            'ban_request', avatarId, '%s|%s|%s' %
+            (dislid, comment, fullUrl))
         if simbase.config.GetBool('do-actual-ban', True):
             newTaskName = 'ban-task-%d' % self.curBanRequestNum
             newTask = taskMgr.add(self.doBanUrlTask, newTaskName)
@@ -69,6 +77,8 @@ class BanManagerAI:
         ramfile = self.ramFiles.get(banReq)
         if ramfile:
             result = ramfile.getData()
-        self.notify.info('done processing ban request %s, ramFile=%s' % (banReq, result))
+        self.notify.info(
+            'done processing ban request %s, ramFile=%s' %
+            (banReq, result))
         self.cleanupBanReq(banReq)
         return task.done

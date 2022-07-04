@@ -11,7 +11,9 @@ from toontown.distributed import DelayDelete
 from toontown.toonbase import TTLocalizer
 from toontown.hood import ZoneUtil
 
-class DistributedKnockKnockDoor(DistributedAnimatedProp.DistributedAnimatedProp):
+
+class DistributedKnockKnockDoor(
+        DistributedAnimatedProp.DistributedAnimatedProp):
 
     def __init__(self, cr):
         DistributedAnimatedProp.DistributedAnimatedProp.__init__(self, cr)
@@ -27,7 +29,8 @@ class DistributedKnockKnockDoor(DistributedAnimatedProp.DistributedAnimatedProp)
 
     def announceGenerate(self):
         DistributedAnimatedProp.DistributedAnimatedProp.announceGenerate(self)
-        self.accept('exitKnockKnockDoorSphere_' + str(self.propId), self.exitTrigger)
+        self.accept('exitKnockKnockDoorSphere_' +
+                    str(self.propId), self.exitTrigger)
         self.acceptAvatar()
 
     def disable(self):
@@ -44,10 +47,12 @@ class DistributedKnockKnockDoor(DistributedAnimatedProp.DistributedAnimatedProp)
         return
 
     def acceptAvatar(self):
-        self.acceptOnce('enterKnockKnockDoorSphere_' + str(self.propId), self.enterTrigger)
+        self.acceptOnce('enterKnockKnockDoorSphere_' +
+                        str(self.propId), self.enterTrigger)
 
     def setAvatarInteract(self, avatarId):
-        DistributedAnimatedProp.DistributedAnimatedProp.setAvatarInteract(self, avatarId)
+        DistributedAnimatedProp.DistributedAnimatedProp.setAvatarInteract(
+            self, avatarId)
 
     def avatarExit(self, avatarId):
         if avatarId == self.avatarId:
@@ -58,10 +63,12 @@ class DistributedKnockKnockDoor(DistributedAnimatedProp.DistributedAnimatedProp)
             self.avatarTracks = []
 
     def knockKnockTrack(self, avatar, duration):
-        if avatar == None:
+        if avatar is None:
             return
-        self.rimshot = base.loader.loadSfx('phase_5/audio/sfx/AA_heal_telljoke.ogg')
-        self.knockSfx = base.loader.loadSfx('phase_5/audio/sfx/GUI_knock_3.ogg')
+        self.rimshot = base.loader.loadSfx(
+            'phase_5/audio/sfx/AA_heal_telljoke.ogg')
+        self.knockSfx = base.loader.loadSfx(
+            'phase_5/audio/sfx/GUI_knock_3.ogg')
         joke = KnockKnockJokes[self.propId % len(KnockKnockJokes)]
         place = base.cr.playGame.getPlace()
         if place:
@@ -71,19 +78,24 @@ class DistributedKnockKnockDoor(DistributedAnimatedProp.DistributedAnimatedProp)
                 if self.propId == 44:
                     joke = KnockKnockContestJokes[ToontownGlobals.SillyStreet]
             elif branch == ToontownGlobals.LoopyLane:
-                if self.propId in list(KnockKnockContestJokes[ToontownGlobals.LoopyLane].keys()):
+                if self.propId in list(
+                        KnockKnockContestJokes[ToontownGlobals.LoopyLane].keys()):
                     joke = KnockKnockContestJokes[ToontownGlobals.LoopyLane][self.propId]
             elif branch == ToontownGlobals.PunchlinePlace:
                 if self.propId == 1:
                     joke = KnockKnockContestJokes[ToontownGlobals.PunchlinePlace]
             elif branch == ToontownGlobals.PolarPlace:
-                if self.propId in list(KnockKnockContestJokes[ToontownGlobals.PolarPlace].keys()):
+                if self.propId in list(
+                        KnockKnockContestJokes[ToontownGlobals.PolarPlace].keys()):
                     joke = KnockKnockContestJokes[ToontownGlobals.PolarPlace][self.propId]
         self.nametag = None
         self.nametagNP = None
-        doorNP = render.find('**/KnockKnockDoorSphere_' + str(self.propId) + ';+s')
+        doorNP = render.find('**/KnockKnockDoorSphere_' +
+                             str(self.propId) + ';+s')
         if doorNP.isEmpty():
-            self.notify.warning('Could not find KnockKnockDoorSphere_%s' % self.propId)
+            self.notify.warning(
+                'Could not find KnockKnockDoorSphere_%s' %
+                self.propId)
             return
         self.nametag = NametagGroup()
         self.nametag.setAvatar(doorNP)
@@ -98,7 +110,47 @@ class DistributedKnockKnockDoor(DistributedAnimatedProp.DistributedAnimatedProp)
         pos = doorNP.node().getSolid(0).getCenter()
         self.nametagNP.setPos(pos + Vec3(0, 0, avatar.getHeight() + 2))
         d = duration * 0.125
-        track = Sequence(Parallel(Sequence(Wait(d * 0.5), SoundInterval(self.knockSfx)), Func(self.nametag.setChat, TTLocalizer.DoorKnockKnock, CFSpeech), Wait(d)), Func(avatar.setChatAbsolute, TTLocalizer.DoorWhosThere, CFSpeech | CFTimeout, openEnded=0), Wait(d), Func(self.nametag.setChat, joke[0], CFSpeech), Wait(d), Func(avatar.setChatAbsolute, joke[0] + TTLocalizer.DoorWhoAppendix, CFSpeech | CFTimeout, openEnded=0), Wait(d), Func(self.nametag.setChat, joke[1], CFSpeech), Parallel(SoundInterval(self.rimshot, startTime=2.0), Wait(d * 4)), Func(self.cleanupTrack))
+        track = Sequence(
+            Parallel(
+                Sequence(
+                    Wait(
+                        d * 0.5),
+                    SoundInterval(
+                        self.knockSfx)),
+                Func(
+                    self.nametag.setChat,
+                    TTLocalizer.DoorKnockKnock,
+                    CFSpeech),
+                Wait(d)),
+            Func(
+                avatar.setChatAbsolute,
+                TTLocalizer.DoorWhosThere,
+                CFSpeech | CFTimeout,
+                openEnded=0),
+            Wait(d),
+            Func(
+                self.nametag.setChat,
+                joke[0],
+                CFSpeech),
+            Wait(d),
+            Func(
+                avatar.setChatAbsolute,
+                joke[0] + TTLocalizer.DoorWhoAppendix,
+                CFSpeech | CFTimeout,
+                openEnded=0),
+            Wait(d),
+            Func(
+                self.nametag.setChat,
+                joke[1],
+                CFSpeech),
+            Parallel(
+                SoundInterval(
+                    self.rimshot,
+                    startTime=2.0),
+                Wait(
+                    d * 4)),
+            Func(
+                self.cleanupTrack))
         track.delayDelete = DelayDelete.DelayDelete(avatar, 'knockKnockTrack')
         return track
 
@@ -131,7 +183,7 @@ class DistributedKnockKnockDoor(DistributedAnimatedProp.DistributedAnimatedProp)
         if self.avatarId:
             avatar = self.cr.doId2do.get(self.avatarId, None)
             track = self.knockKnockTrack(avatar, 8)
-            if track != None:
+            if track is not None:
                 track.start(ts)
                 self.avatarTracks.append(track)
         return

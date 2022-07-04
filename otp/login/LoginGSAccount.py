@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from . import LoginBase
 from direct.distributed.PyDatagram import PyDatagram
 
+
 class LoginGSAccount(LoginBase.LoginBase):
 
     def __init__(self, cr):
@@ -55,7 +56,7 @@ class LoginGSAccount(LoginBase.LoginBase):
     def resendPlayToken(self):
         pass
 
-    def requestPwdReminder(self, email = None, acctName = None):
+    def requestPwdReminder(self, email=None, acctName=None):
         return 0
 
     def getAccountData(self, loginName, password):
@@ -67,7 +68,8 @@ class LoginGSAccount(LoginBase.LoginBase):
     def authenticateParentPassword(self, loginName, password, parentPassword):
         return (password == parentPassword, None)
 
-    def authenticateParentUsernameAndPassword(self, loginName, password, parentUsername, parentPassword):
+    def authenticateParentUsernameAndPassword(
+            self, loginName, password, parentUsername, parentPassword):
         return (password == parentPassword, None)
 
     def supportsAuthenticateDelete(self):
@@ -76,5 +78,6 @@ class LoginGSAccount(LoginBase.LoginBase):
     def authenticateDelete(self, loginName, password):
         return (password == self.cr.password, None)
 
-    def enableSecretFriends(self, loginName, password, parentPassword, enable = 1):
+    def enableSecretFriends(self, loginName, password,
+                            parentPassword, enable=1):
         return (password == parentPassword, None)

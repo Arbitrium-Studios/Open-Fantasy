@@ -3,8 +3,11 @@ from toontown.coghq import MoleFieldBase
 from direct.distributed.ClockDelta import globalClockDelta
 from direct.directnotify import DirectNotifyGlobal
 
-class DistributedMoleFieldAI(DistributedEntityAI.DistributedEntityAI, MoleFieldBase.MoleFieldBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMoleFieldAI')
+
+class DistributedMoleFieldAI(
+        DistributedEntityAI.DistributedEntityAI, MoleFieldBase.MoleFieldBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedMoleFieldAI')
 
     def __init__(self, level, entId):
         DistributedEntityAI.DistributedEntityAI.__init__(self, level, entId)
@@ -32,7 +35,11 @@ class DistributedMoleFieldAI(DistributedEntityAI.DistributedEntityAI, MoleFieldB
         if not hasattr(self, 'gameStartTime'):
             self.gameStartTime = globalClock.getRealTime()
         if not self.started:
-            self.b_setGameStart(globalClockDelta.localToNetworkTime(self.gameStartTime), self.moleTarget, self.timeToPlay)
+            self.b_setGameStart(
+                globalClockDelta.localToNetworkTime(
+                    self.gameStartTime),
+                self.moleTarget,
+                self.timeToPlay)
             self.started = 1
 
     def b_setGameStart(self, timestamp, moleTarget, timeToPlay):
@@ -52,7 +59,10 @@ class DistributedMoleFieldAI(DistributedEntityAI.DistributedEntityAI, MoleFieldB
         self.GameDuration = self.timeToPlay
         self.scheduleMoles()
         self.whackedMoles = {}
-        self.doMethodLater(self.timeToPlay, self.gameEndingTimeHit, self.moleFieldEndTimeTaskName)
+        self.doMethodLater(
+            self.timeToPlay,
+            self.gameEndingTimeHit,
+            self.moleFieldEndTimeTaskName)
 
     def whackedMole(self, moleIndex, popupNum):
         validMoleWhack = False
@@ -70,7 +80,9 @@ class DistributedMoleFieldAI(DistributedEntityAI.DistributedEntityAI, MoleFieldB
 
     def whackedBomb(self, moleIndex, popupNum, timestamp):
         senderId = self.air.getAvatarIdFromSender()
-        self.sendUpdate('reportToonHitByBomb', [senderId, moleIndex, timestamp])
+        self.sendUpdate(
+            'reportToonHitByBomb', [
+                senderId, moleIndex, timestamp])
 
     def checkForTargetReached(self):
         if self.numMolesWhacked >= self.moleTarget:
@@ -118,7 +130,11 @@ class DistributedMoleFieldAI(DistributedEntityAI.DistributedEntityAI, MoleFieldB
             return
         self.gameStartTime = globalClock.getRealTime()
         self.started = 0
-        self.b_setGameStart(globalClockDelta.localToNetworkTime(self.gameStartTime), self.moleTarget, self.timeToPlay)
+        self.b_setGameStart(
+            globalClockDelta.localToNetworkTime(
+                self.gameStartTime),
+            self.moleTarget,
+            self.timeToPlay)
 
     def getScore(self):
         return self.numMolesWhacked

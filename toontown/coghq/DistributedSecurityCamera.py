@@ -14,6 +14,7 @@ from toontown.coghq import BattleBlocker
 import random
 from math import *
 
+
 def circleX(angle, radius, centerX, centerY):
     x = radius * cos(angle) + centerX
     return x
@@ -24,21 +25,42 @@ def circleY(angle, radius, centerX, centerY):
     return y
 
 
-def getCirclePoints(segCount, centerX, centerY, radius, wideX = 1.0, wideY = 1.0):
+def getCirclePoints(segCount, centerX, centerY, radius, wideX=1.0, wideY=1.0):
     returnShape = []
     for seg in range(0, segCount):
-        coordX = wideX * circleX(pi * 2.0 * float(float(seg) / float(segCount)), radius, centerX, centerY)
-        coordY = wideY * circleY(pi * 2.0 * float(float(seg) / float(segCount)), radius, centerX, centerY)
+        coordX = wideX * \
+            circleX(
+                pi *
+                2.0 *
+                float(
+                    float(seg) /
+                    float(segCount)),
+                radius,
+                centerX,
+                centerY)
+        coordY = wideY * \
+            circleY(
+                pi *
+                2.0 *
+                float(
+                    float(seg) /
+                    float(segCount)),
+                radius,
+                centerX,
+                centerY)
         returnShape.append((coordX, coordY, 1))
 
-    coordX = wideX * circleX(pi * 2.0 * float(0 / segCount), radius, centerX, centerY)
-    coordY = wideY * circleY(pi * 2.0 * float(0 / segCount), radius, centerX, centerY)
+    coordX = wideX * circleX(pi * 2.0 * float(0 / segCount),
+                             radius, centerX, centerY)
+    coordY = wideY * circleY(pi * 2.0 * float(0 / segCount),
+                             radius, centerX, centerY)
     returnShape.append((coordX, coordY, 1))
     return returnShape
 
 
 class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedSecurityCamera')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedSecurityCamera')
     laserFieldModels = ['phase_9/models/cogHQ/square_stomper']
 
     def __init__(self, cr):
@@ -67,9 +89,9 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
         self.targetY = self.trackY
         self.target = 0
         self.trackTargetList = [None,
-         None,
-         None,
-         None]
+                                None,
+                                None,
+                                None]
         self.lastTime = 0.0
         self.currentTime = 0.0
         self.delta = 0.0
@@ -83,16 +105,36 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
         self.Alert['Green'] = 0.0
         self.Alert['Blue'] = 0.0
         self.Alert['Alpha'] = 1.0
-        self.attackSound = loader.loadSfx('phase_9/audio/sfx/CHQ_GOON_tractor_beam_alarmed.ogg')
-        self.onSound = loader.loadSfx('phase_11/audio/sfx/LB_camera_shutter_2.ogg')
-        self.attackTrack = Parallel(SoundInterval(self.attackSound, node=self, volume=0.8), SoundInterval(self.onSound, node=self, volume=0.8))
-        self.moveStartSound = loader.loadSfx('phase_11/audio/sfx/LB_laser_beam_on_2.ogg')
-        self.moveStartTrack = Parallel(SoundInterval(self.moveStartSound, node=self, volume=0.4))
-        self.moveLoopSound = loader.loadSfx('phase_11/audio/sfx/LB_laser_beam_hum_2.ogg')
+        self.attackSound = loader.loadSfx(
+            'phase_9/audio/sfx/CHQ_GOON_tractor_beam_alarmed.ogg')
+        self.onSound = loader.loadSfx(
+            'phase_11/audio/sfx/LB_camera_shutter_2.ogg')
+        self.attackTrack = Parallel(
+            SoundInterval(
+                self.attackSound, node=self, volume=0.8), SoundInterval(
+                self.onSound, node=self, volume=0.8))
+        self.moveStartSound = loader.loadSfx(
+            'phase_11/audio/sfx/LB_laser_beam_on_2.ogg')
+        self.moveStartTrack = Parallel(
+            SoundInterval(
+                self.moveStartSound,
+                node=self,
+                volume=0.4))
+        self.moveLoopSound = loader.loadSfx(
+            'phase_11/audio/sfx/LB_laser_beam_hum_2.ogg')
         self.moveLoopSound.setLoop()
-        self.moveLoopTrack = Parallel(SoundInterval(self.moveLoopSound, node=self, volume=0.4))
-        self.moveStopSound = loader.loadSfx('phase_11/audio/sfx/LB_laser_beam_off_2.ogg')
-        self.moveStopTrack = Parallel(SoundInterval(self.moveStopSound, node=self, volume=0.4))
+        self.moveLoopTrack = Parallel(
+            SoundInterval(
+                self.moveLoopSound,
+                node=self,
+                volume=0.4))
+        self.moveStopSound = loader.loadSfx(
+            'phase_11/audio/sfx/LB_laser_beam_off_2.ogg')
+        self.moveStopTrack = Parallel(
+            SoundInterval(
+                self.moveStopSound,
+                node=self,
+                volume=0.4))
         self.taskName = None
         return
 
@@ -111,14 +153,18 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
         self.trackBeamGN = GeomNode('tracking Beam')
         self.trackBeamNode.attachNewNode(self.trackBeamGN)
         self.trackBeamNode.setTransparency(TransparencyAttrib.MAlpha)
-        self.trackBeamNode.setAttrib(ColorBlendAttrib.make(ColorBlendAttrib.MAdd))
+        self.trackBeamNode.setAttrib(
+            ColorBlendAttrib.make(
+                ColorBlendAttrib.MAdd))
         self.trackBeamNode.setTwoSided(False)
         self.trackBeamNode.setDepthWrite(False)
         self.trackFloorNode = self.attachNewNode('tracking floor Node')
         self.trackFloorGN = GeomNode('tracking Floor')
         self.trackFloorNode.attachNewNode(self.trackFloorGN)
         self.trackFloorNode.setTransparency(TransparencyAttrib.MAlpha)
-        self.trackFloorNode.setAttrib(ColorBlendAttrib.make(ColorBlendAttrib.MAdd))
+        self.trackFloorNode.setAttrib(
+            ColorBlendAttrib.make(
+                ColorBlendAttrib.MAdd))
         self.trackFloorNode.setTwoSided(False)
         self.trackFloorNode.setDepthWrite(False)
         if not hasattr(self, 'trackTarget1'):
@@ -179,7 +225,8 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
         if self.gridScaleY > self.gridScaleX:
             greaterDim = self.gridScaleY
         if distance < greaterDim * 1.6:
-            if localAvatar.getPos(self)[0] > 0 and localAvatar.getPos(self)[0] < self.gridScaleX and localAvatar.getPos(self)[1] > 0 and localAvatar.getPos(self)[1] < self.gridScaleY:
+            if localAvatar.getPos(self)[0] > 0 and localAvatar.getPos(self)[0] < self.gridScaleX and localAvatar.getPos(
+                    self)[1] > 0 and localAvatar.getPos(self)[1] < self.gridScaleY:
                 self.__toonHit()
             else:
                 if self.isToonIn:
@@ -298,7 +345,7 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
             self.attackTrack.start()
         return Task.cont
 
-    def _resetDam(self, task = None):
+    def _resetDam(self, task=None):
         self.canDamage = 1
 
     def getDist(self, thing):
@@ -314,9 +361,11 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
         self.trackShape = []
         wideX = 1
         wideY = 1
-        self.trackShape = getCirclePoints(int(5 + draw * 12.0), 0.0, 0.0, self.radius, wideX, wideY)
+        self.trackShape = getCirclePoints(
+            int(5 + draw * 12.0), 0.0, 0.0, self.radius, wideX, wideY)
         self.trackShapeFloor = []
-        self.trackShapeFloor = getCirclePoints(int(5 + draw * 50.0), 0.0, 0.0, self.radius, wideX, wideY)
+        self.trackShapeFloor = getCirclePoints(
+            int(5 + draw * 50.0), 0.0, 0.0, self.radius, wideX, wideY)
         if self.trackBeamGN:
             self.trackBeamGN.removeAllGeoms()
         if self.trackFloorGN:
@@ -335,23 +384,40 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
         else:
             origin = self.Alert
         self.gFormat = GeomVertexFormat.getV3cp()
-        self.trackBeamVertexData = GeomVertexData('holds my vertices', self.gFormat, Geom.UHDynamic)
-        self.trackBeamVertexWriter = GeomVertexWriter(self.trackBeamVertexData, 'vertex')
-        self.trackBeamColorWriter = GeomVertexWriter(self.trackBeamVertexData, 'color')
-        self.trackFloorVertexData = GeomVertexData('holds my vertices', self.gFormat, Geom.UHDynamic)
-        self.trackFloorVertexWriter = GeomVertexWriter(self.trackFloorVertexData, 'vertex')
-        self.trackFloorColorWriter = GeomVertexWriter(self.trackFloorVertexData, 'color')
-        self.trackBeamVertexWriter.addData3f(self.projector[0], self.projector[1], self.projector[2])
-        self.trackBeamColorWriter.addData4f(origin['Red'], origin['Green'], origin['Blue'], origin['Alpha'])
-        self.trackFloorVertexWriter.addData3f(self.trackX, self.trackY, self.zFloat)
-        self.trackFloorColorWriter.addData4f(origin['Red'], origin['Green'], origin['Blue'], origin['Alpha'])
+        self.trackBeamVertexData = GeomVertexData(
+            'holds my vertices', self.gFormat, Geom.UHDynamic)
+        self.trackBeamVertexWriter = GeomVertexWriter(
+            self.trackBeamVertexData, 'vertex')
+        self.trackBeamColorWriter = GeomVertexWriter(
+            self.trackBeamVertexData, 'color')
+        self.trackFloorVertexData = GeomVertexData(
+            'holds my vertices', self.gFormat, Geom.UHDynamic)
+        self.trackFloorVertexWriter = GeomVertexWriter(
+            self.trackFloorVertexData, 'vertex')
+        self.trackFloorColorWriter = GeomVertexWriter(
+            self.trackFloorVertexData, 'color')
+        self.trackBeamVertexWriter.addData3f(
+            self.projector[0], self.projector[1], self.projector[2])
+        self.trackBeamColorWriter.addData4f(
+            origin['Red'],
+            origin['Green'],
+            origin['Blue'],
+            origin['Alpha'])
+        self.trackFloorVertexWriter.addData3f(
+            self.trackX, self.trackY, self.zFloat)
+        self.trackFloorColorWriter.addData4f(
+            origin['Red'], origin['Green'], origin['Blue'], origin['Alpha'])
         for vertex in self.trackShape:
-            self.trackBeamVertexWriter.addData3f(self.trackX + vertex[0], self.trackY + vertex[1], self.zFloat)
-            self.trackBeamColorWriter.addData4f(beamRed, beamGreen, beamBlue, beamAlpha)
+            self.trackBeamVertexWriter.addData3f(
+                self.trackX + vertex[0], self.trackY + vertex[1], self.zFloat)
+            self.trackBeamColorWriter.addData4f(
+                beamRed, beamGreen, beamBlue, beamAlpha)
 
         for vertex in self.trackShapeFloor:
-            self.trackFloorVertexWriter.addData3f(self.trackX + vertex[0], self.trackY + vertex[1], self.zFloat)
-            self.trackFloorColorWriter.addData4f(origin['Red'], origin['Green'], origin['Blue'], origin['Alpha'])
+            self.trackFloorVertexWriter.addData3f(
+                self.trackX + vertex[0], self.trackY + vertex[1], self.zFloat)
+            self.trackFloorColorWriter.addData4f(
+                origin['Red'], origin['Green'], origin['Blue'], origin['Alpha'])
 
         self.trackBeamTris = GeomTrifans(Geom.UHStatic)
         self.trackFloorTris = GeomTrifans(Geom.UHStatic)

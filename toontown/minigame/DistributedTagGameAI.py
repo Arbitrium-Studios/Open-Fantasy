@@ -6,16 +6,22 @@ from direct.task import Task
 import random
 from . import TagGameGlobals
 
+
 class DistributedTagGameAI(DistributedMinigameAI):
     DURATION = TagGameGlobals.DURATION
 
     def __init__(self, air, minigameId):
         try:
             self.DistributedTagGameAI_initialized
-        except:
+        except BaseException:
             self.DistributedTagGameAI_initialized = 1
             DistributedMinigameAI.__init__(self, air, minigameId)
-            self.gameFSM = ClassicFSM.ClassicFSM('DistributedTagGameAI', [State.State('inactive', self.enterInactive, self.exitInactive, ['play']), State.State('play', self.enterPlay, self.exitPlay, ['cleanup']), State.State('cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
+            self.gameFSM = ClassicFSM.ClassicFSM(
+                'DistributedTagGameAI', [
+                    State.State(
+                        'inactive', self.enterInactive, self.exitInactive, ['play']), State.State(
+                        'play', self.enterPlay, self.exitPlay, ['cleanup']), State.State(
+                        'cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
             self.addChildGameFSM(self.gameFSM)
             self.treasureScores = {}
             self.itAvId = None
@@ -59,8 +65,12 @@ class DistributedTagGameAI(DistributedMinigameAI):
     def enterPlay(self):
         self.notify.debug('enterPlay')
         self.b_setIt(random.choice(self.avIdList))
-        taskMgr.doMethodLater(self.DURATION, self.timerExpired, self.taskName('gameTimer'))
-        self.tagTreasurePlanner = TagTreasurePlannerAI(self.zoneId, self.treasureGrabCallback)
+        taskMgr.doMethodLater(
+            self.DURATION,
+            self.timerExpired,
+            self.taskName('gameTimer'))
+        self.tagTreasurePlanner = TagTreasurePlannerAI(
+            self.zoneId, self.treasureGrabCallback)
         self.tagTreasurePlanner.placeRandomTreasure()
         self.tagTreasurePlanner.placeRandomTreasure()
         self.tagTreasurePlanner.placeRandomTreasure()
@@ -89,10 +99,14 @@ class DistributedTagGameAI(DistributedMinigameAI):
 
     def treasureGrabCallback(self, avId):
         if avId not in self.avIdList:
-            self.air.writeServerEvent('suspicious', avId, 'TagGameAI.treasureGrabCallback non-player avId')
+            self.air.writeServerEvent(
+                'suspicious', avId, 'TagGameAI.treasureGrabCallback non-player avId')
             return
         self.treasureScores[avId] += 2
-        self.notify.debug('treasureGrabCallback: ' + str(avId) + ' grabbed a treasure, new score: ' + str(self.treasureScores[avId]))
+        self.notify.debug('treasureGrabCallback: ' +
+                          str(avId) +
+                          ' grabbed a treasure, new score: ' +
+                          str(self.treasureScores[avId]))
         self.scoreDict[avId] = self.treasureScores[avId]
         treasureScoreParams = []
         for avId in self.avIdList:
@@ -106,19 +120,30 @@ class DistributedTagGameAI(DistributedMinigameAI):
 
     def tag(self, taggedAvId):
         taggedAvatar = simbase.air.doId2do.get(taggedAvId)
-        if taggedAvatar == None:
-            self.air.writeServerEvent('suspicious', taggedAvId, 'TagGameAI.tag invalid taggedAvId')
+        if taggedAvatar is None:
+            self.air.writeServerEvent(
+                'suspicious',
+                taggedAvId,
+                'TagGameAI.tag invalid taggedAvId')
             return
         itAvId = self.air.getAvatarIdFromSender()
         if self.tagBack:
-            self.notify.debug('tag: ' + str(itAvId) + ' tagged: ' + str(taggedAvId))
+            self.notify.debug(
+                'tag: ' +
+                str(itAvId) +
+                ' tagged: ' +
+                str(taggedAvId))
             if self.itAvId == itAvId:
                 self.b_setIt(taggedAvId)
             else:
-                self.notify.warning('Got tag message from avatar that is not IT')
+                self.notify.warning(
+                    'Got tag message from avatar that is not IT')
                 return
             self.tagBack = 0
-            taskMgr.doMethodLater(2.0, self.clearTagBack, self.taskName('clearTagBack'))
+            taskMgr.doMethodLater(
+                2.0,
+                self.clearTagBack,
+                self.taskName('clearTagBack'))
         return
 
     def b_setIt(self, avId):

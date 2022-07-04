@@ -13,12 +13,19 @@ from direct.fsm import State
 from direct.fsm import ClassicFSM, State
 from toontown.toonbase import ToontownGlobals
 
+
 class DistributedMintBattle(DistributedLevelBattle.DistributedLevelBattle):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMintBattle')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedMintBattle')
 
     def __init__(self, cr):
         DistributedLevelBattle.DistributedLevelBattle.__init__(self, cr)
-        self.fsm.addState(State.State('MintReward', self.enterMintReward, self.exitMintReward, ['Resume']))
+        self.fsm.addState(
+            State.State(
+                'MintReward',
+                self.enterMintReward,
+                self.exitMintReward,
+                ['Resume']))
         offState = self.fsm.getStateNamed('Off')
         offState.addTransition('MintReward')
         playMovieState = self.fsm.getStateNamed('PlayMovie')
@@ -32,7 +39,10 @@ class DistributedMintBattle(DistributedLevelBattle.DistributedLevelBattle):
             NametagGlobals.setMasterArrowsOn(0)
             if self.bossBattle:
                 messenger.send('localToonConfrontedMintBoss')
-        self.movie.playReward(ts, self.uniqueName('building-reward'), self.__handleMintRewardDone)
+        self.movie.playReward(
+            ts,
+            self.uniqueName('building-reward'),
+            self.__handleMintRewardDone)
 
     def __handleMintRewardDone(self):
         self.notify.debug('mint reward done')

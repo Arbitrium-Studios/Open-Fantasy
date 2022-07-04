@@ -3,8 +3,11 @@ from otp.level import DistributedEntityAI
 from direct.task import Task
 from toontown.coghq import BarrelBase
 
-class DistributedBarrelBaseAI(DistributedEntityAI.DistributedEntityAI, BarrelBase.BarrelBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBarrelBaseAI')
+
+class DistributedBarrelBaseAI(
+        DistributedEntityAI.DistributedEntityAI, BarrelBase.BarrelBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedBarrelBaseAI')
 
     def __init__(self, level, entId):
         self.rewardPerGrabMax = 0

@@ -9,6 +9,7 @@ from toontown.toonbase import ToontownGlobals
 from . import CogdoFlyingGameGlobals as Globals
 INVERSE_E = 1.0 / math.e
 
+
 def smooth(old, new):
     return old * 0.7 + new * 0.3
 
@@ -30,7 +31,13 @@ class CogdoFlyingCameraManager:
         self._prevToonY = 0.0
         levelBounds = self._level.getBounds()
         l = Globals.Camera.LevelBoundsFactor
-        self._bounds = ((levelBounds[0][0] * l[0], levelBounds[0][1] * l[0]), (levelBounds[1][0] * l[1], levelBounds[1][1] * l[1]), (levelBounds[2][0] * l[2], levelBounds[2][1] * l[2]))
+        self._bounds = ((levelBounds[0][0] *
+                         l[0], levelBounds[0][1] *
+                         l[0]), (levelBounds[1][0] *
+                                 l[1], levelBounds[1][1] *
+                                 l[1]), (levelBounds[2][0] *
+                                         l[2], levelBounds[2][1] *
+                                         l[2]))
         self._lookAtZ = self._toon.getHeight() + Globals.Camera.LookAtToonHeightOffset
         self._camParent = NodePath('CamParent')
         self._camParent.reparentTo(self._parent)
@@ -41,7 +48,8 @@ class CogdoFlyingCameraManager:
         self._camera.lookAt(self._toon, 0, 0, self._lookAtZ)
         self._cameraLookAtNP = NodePath('CameraLookAt')
         self._cameraLookAtNP.reparentTo(self._camera.getParent())
-        self._cameraLookAtNP.setPosHpr(self._camera.getPos(), self._camera.getHpr())
+        self._cameraLookAtNP.setPosHpr(
+            self._camera.getPos(), self._camera.getHpr())
         self._levelBounds = self._level.getBounds()
         self._enabled = True
         self._frozen = False
@@ -51,7 +59,8 @@ class CogdoFlyingCameraManager:
         self._camCollRay = CollisionRay()
         camCollNode = CollisionNode('CameraToonRay')
         camCollNode.addSolid(self._camCollRay)
-        camCollNode.setFromCollideMask(OTPGlobals.WallBitmask | OTPGlobals.CameraBitmask | ToontownGlobals.FloorEventBitmask | ToontownGlobals.CeilingBitmask)
+        camCollNode.setFromCollideMask(OTPGlobals.WallBitmask | OTPGlobals.CameraBitmask |
+                                       ToontownGlobals.FloorEventBitmask | ToontownGlobals.CeilingBitmask)
         camCollNode.setIntoCollideMask(0)
         self._camCollNP = self._camera.attachNewNode(camCollNode)
         self._camCollNP.show()
@@ -98,7 +107,7 @@ class CogdoFlyingCameraManager:
         del self._frozen
         self._enabled = False
 
-    def update(self, dt = 0.0):
+    def update(self, dt=0.0):
         self._updateCam(dt)
         self._updateCollisions()
 
@@ -110,7 +119,8 @@ class CogdoFlyingCameraManager:
         toonWorldX = self._toon.getX(render)
         maxX = Globals.Camera.MaxSpinX
         toonWorldX = clamp(toonWorldX, -1.0 * maxX, maxX)
-        spinAngle = Globals.Camera.MaxSpinAngle * toonWorldX * toonWorldX / (maxX * maxX)
+        spinAngle = Globals.Camera.MaxSpinAngle * \
+            toonWorldX * toonWorldX / (maxX * maxX)
         newH = 180.0 + spinAngle
         self._camParent.setH(newH)
         spinAngle = spinAngle * (pi / 180.0)
@@ -127,7 +137,8 @@ class CogdoFlyingCameraManager:
         d = z - boundToonZ
         if d > Globals.Camera.MinLeewayZ:
             if self._player.velocity[2] >= 0 and toonPos[1] != self._prevToonY or self._player.velocity[2] > 0:
-                z = boundToonZ + d * INVERSE_E ** (dt * Globals.Camera.CatchUpRateZ)
+                z = boundToonZ + d * \
+                    INVERSE_E ** (dt * Globals.Camera.CatchUpRateZ)
             elif d > Globals.Camera.MaxLeewayZ:
                 z = boundToonZ + Globals.Camera.MaxLeewayZ
         elif d < -Globals.Camera.MinLeewayZ:
@@ -142,9 +153,13 @@ class CogdoFlyingCameraManager:
             if d >= Globals.Camera.MinLeewayZ:
                 self._cameraLookAtNP.lookAt(self._toon, 0, 0, self._lookAtZ)
             elif d <= -Globals.Camera.MinLeewayZ:
-                self._cameraLookAtNP.lookAt(self._camParent, 0, 0, self._lookAtZ)
+                self._cameraLookAtNP.lookAt(
+                    self._camParent, 0, 0, self._lookAtZ)
             self._cameraLookAtNP.setHpr(h, self._cameraLookAtNP.getP(), 0)
-            self._camera.setHpr(smooth(self._camera.getHpr(), self._cameraLookAtNP.getHpr()))
+            self._camera.setHpr(
+                smooth(
+                    self._camera.getHpr(),
+                    self._cameraLookAtNP.getHpr()))
         self._prevToonY = toonPos[1]
 
     def _updateCollisions(self):

@@ -16,14 +16,16 @@ from . import CCharChatter
 from . import CCharPaths
 import copy
 
+
 class DistributedCCharBase(DistributedChar.DistributedChar):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCCharBase')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedCCharBase')
 
     def __init__(self, cr, name, dnaName):
         try:
             self.DistributedCCharBase_initialized
             return
-        except:
+        except BaseException:
             self.DistributedCCharBase_initialized = 1
 
         DistributedChar.DistributedChar.__init__(self, cr)
@@ -32,7 +34,10 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
         self.setDNA(dna)
         self.setName(name)
         self.setTransparency(TransparencyAttrib.MDual, 1)
-        fadeIn = self.colorScaleInterval(0.5, Vec4(1, 1, 1, 1), startColorScale=Vec4(1, 1, 1, 0), blendType='easeInOut')
+        fadeIn = self.colorScaleInterval(
+            0.5, Vec4(
+                1, 1, 1, 1), startColorScale=Vec4(
+                1, 1, 1, 0), blendType='easeInOut')
         fadeIn.start()
         self.diffPath = None
         self.transitionToCostume = 0
@@ -47,8 +52,11 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
         self.cSphereNodePath = self.attachNewNode(self.cSphereNode)
         self.cSphereNodePath.hide()
         self.cSphereNode.setCollideMask(ToontownGlobals.WallBitmask)
-        self.acceptOnce('enter' + self.cSphereNode.getName(), self.__handleCollisionSphereEnter)
-        self.cRay = CollisionRay(0.0, 0.0, CollisionHandlerRayStart, 0.0, 0.0, -1.0)
+        self.acceptOnce(
+            'enter' + self.cSphereNode.getName(),
+            self.__handleCollisionSphereEnter)
+        self.cRay = CollisionRay(
+            0.0, 0.0, CollisionHandlerRayStart, 0.0, 0.0, -1.0)
         self.cRayNode = CollisionNode(self.getName() + 'cRay')
         self.cRayNode.addSolid(self.cRay)
         self.cRayNodePath = self.attachNewNode(self.cRayNode)
@@ -89,25 +97,37 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
     def delete(self):
         try:
             self.DistributedCCharBase_deleted
-        except:
+        except BaseException:
             self.setParent(NodePath('Temp'))
             self.DistributedCCharBase_deleted = 1
             self.__deleteCollisions()
             DistributedChar.DistributedChar.delete(self)
 
-    def generate(self, diffPath = None):
+    def generate(self, diffPath=None):
         DistributedChar.DistributedChar.generate(self)
-        if diffPath == None:
-            self.setPos(CCharPaths.getNodePos(CCharPaths.startNode, CCharPaths.getPaths(self.getName(), self.getCCLocation())))
+        if diffPath is None:
+            self.setPos(
+                CCharPaths.getNodePos(
+                    CCharPaths.startNode,
+                    CCharPaths.getPaths(
+                        self.getName(),
+                        self.getCCLocation())))
         else:
-            self.setPos(CCharPaths.getNodePos(CCharPaths.startNode, CCharPaths.getPaths(diffPath, self.getCCLocation())))
+            self.setPos(
+                CCharPaths.getNodePos(
+                    CCharPaths.startNode,
+                    CCharPaths.getPaths(
+                        diffPath,
+                        self.getCCLocation())))
         self.setHpr(0, 0, 0)
         self.setParent(ToontownGlobals.SPRender)
         self.startBlink()
         self.startEarTask()
         self.chatTrack = Sequence()
         self.chatterDialogue = None
-        self.acceptOnce('enter' + self.cSphereNode.getName(), self.__handleCollisionSphereEnter)
+        self.acceptOnce(
+            'enter' + self.cSphereNode.getName(),
+            self.__handleCollisionSphereEnter)
         self.accept('exitSafeZone', self.__handleExitSafeZone)
         return
 
@@ -123,7 +143,9 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
         self.accept('chatUpdateSCCustom', self.__handleChatUpdateSCCustom)
         self.accept('chatUpdateSCToontask', self.__handleChatUpdateSCToontask)
         self.nametag3d.setBin('transparent', 100)
-        self.acceptOnce('exit' + self.cSphereNode.getName(), self.__handleCollisionSphereExit)
+        self.acceptOnce(
+            'exit' + self.cSphereNode.getName(),
+            self.__handleCollisionSphereExit)
 
     def __handleCollisionSphereExit(self, collEntry):
         self.notify.debug('Exiting collision sphere...')
@@ -132,7 +154,9 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
         self.ignore('chatUpdateSC')
         self.ignore('chatUpdateSCCustom')
         self.ignore('chatUpdateSCToontask')
-        self.acceptOnce('enter' + self.cSphereNode.getName(), self.__handleCollisionSphereEnter)
+        self.acceptOnce(
+            'enter' + self.cSphereNode.getName(),
+            self.__handleCollisionSphereEnter)
 
     def __handleChatUpdate(self, msg, chatFlags):
         self.sendUpdate('setNearbyAvatarChat', [msg])
@@ -143,11 +167,12 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
     def __handleChatUpdateSCCustom(self, msgIndex):
         self.sendUpdate('setNearbyAvatarSCCustom', [msgIndex])
 
-    def __handleChatUpdateSCToontask(self, taskId, toNpcId, toonProgress, msgIndex):
+    def __handleChatUpdateSCToontask(
+            self, taskId, toNpcId, toonProgress, msgIndex):
         self.sendUpdate('setNearbyAvatarSCToontask', [taskId,
-         toNpcId,
-         toonProgress,
-         msgIndex])
+                                                      toNpcId,
+                                                      toonProgress,
+                                                      msgIndex])
 
     def makeTurnToHeadingTrack(self, heading):
         curHpr = self.getHpr()
@@ -161,14 +186,26 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
         time = abs(destHpr[0] - curHpr[0]) / turnSpeed
         turnTracks = Parallel()
         if time > 0.2:
-            turnTracks.append(Sequence(Func(self.loop, 'walk'), Wait(time), Func(self.loop, 'neutral')))
-        turnTracks.append(LerpHprInterval(self, time, destHpr, name='lerp' + self.getName() + 'Hpr'))
+            turnTracks.append(
+                Sequence(
+                    Func(
+                        self.loop, 'walk'), Wait(time), Func(
+                        self.loop, 'neutral')))
+        turnTracks.append(
+            LerpHprInterval(
+                self,
+                time,
+                destHpr,
+                name='lerp' +
+                self.getName() +
+                'Hpr'))
         return turnTracks
 
     def setChat(self, category, msg, avId):
         if avId in self.cr.doId2do:
             avatar = self.cr.doId2do[avId]
-            chatter = CCharChatter.getChatter(self.getName(), self.getCCChatter())
+            chatter = CCharChatter.getChatter(
+                self.getName(), self.getCCChatter())
             if category >= len(chatter):
                 self.notify.debug("Chatter's changed")
                 return
@@ -187,7 +224,8 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
                 destHpr = self.getHpr()
                 self.setHpr(curHpr)
                 track.append(self.makeTurnToHeadingTrack(destHpr[0]))
-            if self.getName() == Donald or self.getName() == WesternPluto or self.getName() == Pluto:
+            if self.getName() == Donald or self.getName(
+            ) == WesternPluto or self.getName() == Pluto:
                 chatFlags = CFThought | CFTimeout
                 if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
                     holidayIds = base.cr.newsManager.getHolidayIdList()
@@ -200,7 +238,12 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
             else:
                 chatFlags = CFTimeout | CFSpeech
             self.chatterDialogue = self.getChatterDialogue(category, msg)
-            track.append(Func(self.setChatAbsolute, str, chatFlags, self.chatterDialogue))
+            track.append(
+                Func(
+                    self.setChatAbsolute,
+                    str,
+                    chatFlags,
+                    self.chatterDialogue))
             self.chatTrack.finish()
             self.chatTrack = track
             self.chatTrack.start()
@@ -211,8 +254,9 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
     def walkSpeed(self):
         return 0.1
 
-    def enableRaycast(self, enable = 1):
-        if not self.cTrav or not hasattr(self, 'cRayNode') or not self.cRayNode:
+    def enableRaycast(self, enable=1):
+        if not self.cTrav or not hasattr(
+                self, 'cRayNode') or not self.cRayNode:
             self.notify.debug('raycast info not found for ' + self.getName())
             return
         self.cTrav.removeCollider(self.cRayNodePath)
@@ -268,11 +312,19 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
                 self.CCChatter = ToontownGlobals.SELLBOT_FIELD_OFFICE
 
     def fadeAway(self):
-        fadeOut = self.colorScaleInterval(0.5, Vec4(1, 1, 1, 0.5), startColorScale=Vec4(1, 1, 1, 1), blendType='easeInOut')
+        fadeOut = self.colorScaleInterval(
+            0.5, Vec4(
+                1, 1, 1, 0.5), startColorScale=Vec4(
+                1, 1, 1, 1), blendType='easeInOut')
         fadeOut.start()
         self.loop('neutral')
         if self.fsm:
-            self.fsm.addState(State.State('TransitionToCostume', self.enterTransitionToCostume, self.exitTransitionToCostume, ['Off']))
+            self.fsm.addState(
+                State.State(
+                    'TransitionToCostume',
+                    self.enterTransitionToCostume,
+                    self.exitTransitionToCostume,
+                    ['Off']))
             self.fsm.request('TransitionToCostume', force=1)
         self.ignoreAll()
 
@@ -284,7 +336,8 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
             dustCloud.setZ(4)
             dustCloud.setScale(0.6)
             dustCloud.createTrack()
-            return Sequence(Func(dustCloud.reparentTo, self), dustCloud.track, Func(dustCloud.destroy), name='dustCloadIval')
+            return Sequence(Func(dustCloud.reparentTo, self), dustCloud.track, Func(
+                dustCloud.destroy), name='dustCloadIval')
 
         dust = getDustCloudIval()
         dust.start()

@@ -5,16 +5,23 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.minigame import ToonBlitzGlobals
 from math import sqrt
 
+
 class DistributedTwoDGameAI(DistributedMinigameAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedTwoDGameAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedTwoDGameAI')
 
     def __init__(self, air, minigameId):
         try:
             self.DistributedTwoDGameAI_initialized
-        except:
+        except BaseException:
             self.DistributedTwoDGame_initialized = 1
             DistributedMinigameAI.__init__(self, air, minigameId)
-            self.gameFSM = ClassicFSM.ClassicFSM('DistributedTwoDGameAI', [State.State('inactive', self.enterInactive, self.exitInactive, ['play']), State.State('play', self.enterPlay, self.exitPlay, ['cleanup']), State.State('cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
+            self.gameFSM = ClassicFSM.ClassicFSM(
+                'DistributedTwoDGameAI', [
+                    State.State(
+                        'inactive', self.enterInactive, self.exitInactive, ['play']), State.State(
+                        'play', self.enterPlay, self.exitPlay, ['cleanup']), State.State(
+                        'cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
             self.addChildGameFSM(self.gameFSM)
             self.finishedBonusDict = {}
             self.finishedTimeLeftDict = {}
@@ -55,9 +62,9 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
             self.numHitByEnemyDict[avId] = 0
             self.numSquishDict[avId] = 0
             self.treasuresCollectedDict[avId] = [0,
-             0,
-             0,
-             0]
+                                                 0,
+                                                 0,
+                                                 0]
 
         for i in range(len(self.sectionsSelected)):
             sectionIndex = self.sectionsSelected[i][0]
@@ -105,31 +112,36 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
             finishedBonusList.append(self.finishedBonusDict[avId])
             timeLeftList.append(self.finishedTimeLeftDict[avId])
             treasureCollectedList.append(self.treasuresCollectedDict[avId])
-            playerError = [self.numFallDownDict[avId], self.numHitByEnemyDict[avId], self.numSquishDict[avId]]
+            playerError = [
+                self.numFallDownDict[avId],
+                self.numHitByEnemyDict[avId],
+                self.numSquishDict[avId]]
             playerErrorList.append(playerError)
             self.scoreDict[avId] = max(0, self.scoreDict[avId])
-            jellybeans = sqrt(self.scoreDict[avId] * ToonBlitzGlobals.ScoreToJellyBeansMultiplier)
+            jellybeans = sqrt(
+                self.scoreDict[avId] *
+                ToonBlitzGlobals.ScoreToJellyBeansMultiplier)
             self.scoreDict[avId] = max(1, int(jellybeans))
 
         self.air.writeServerEvent('minigame_twoD', self.doId, '%s|%s|%s|%s|%s|%s|%s|%s|%s' % (ToontownGlobals.TwoDGameId,
-         self.getSafezoneId(),
-         self.avIdList,
-         scoreList,
-         finishedBonusList,
-         timeLeftList,
-         treasureCollectedList,
-         playerErrorList,
-         self.sectionIndexList))
+                                                                                              self.getSafezoneId(),
+                                                                                              self.avIdList,
+                                                                                              scoreList,
+                                                                                              finishedBonusList,
+                                                                                              timeLeftList,
+                                                                                              treasureCollectedList,
+                                                                                              playerErrorList,
+                                                                                              self.sectionIndexList))
         self.notify.debug('minigame_twoD%s: %s|%s|%s|%s|%s|%s|%s|%s|%s' % (self.doId,
-         ToontownGlobals.TwoDGameId,
-         self.getSafezoneId(),
-         self.avIdList,
-         scoreList,
-         finishedBonusList,
-         timeLeftList,
-         treasureCollectedList,
-         playerErrorList,
-         self.sectionIndexList))
+                                                                           ToontownGlobals.TwoDGameId,
+                                                                           self.getSafezoneId(),
+                                                                           self.avIdList,
+                                                                           scoreList,
+                                                                           finishedBonusList,
+                                                                           timeLeftList,
+                                                                           treasureCollectedList,
+                                                                           playerErrorList,
+                                                                           self.sectionIndexList))
         self.gameFSM.request('cleanup')
         DistributedMinigameAI.gameOver(self)
 
@@ -142,17 +154,28 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
     def enterPlay(self):
         self.notify.debug('enterPlay')
 
-        def allToonsDone(self = self):
+        def allToonsDone(self=self):
             self.notify.debug('allToonsDone')
             self.sendUpdate('setEveryoneDone')
             if not ToonBlitzGlobals.EndlessGame:
                 self.gameOver()
 
-        def handleTimeout(avIds, self = self):
-            self.notify.debug('handleTimeout: avatars %s did not report "done"' % avIds)
+        def handleTimeout(avIds, self=self):
+            self.notify.debug(
+                'handleTimeout: avatars %s did not report "done"' %
+                avIds)
             self.setGameAbort()
 
-        self.doneBarrier = ToonBarrier('waitClientsDone', self.uniqueName('waitClientsDone'), self.avIdList, ToonBlitzGlobals.GameDuration[self.getSafezoneId()] + ToonBlitzGlobals.ShowScoresDuration + MinigameGlobals.latencyTolerance, allToonsDone, handleTimeout)
+        self.doneBarrier = ToonBarrier(
+            'waitClientsDone',
+            self.uniqueName('waitClientsDone'),
+            self.avIdList,
+            ToonBlitzGlobals.GameDuration[
+                self.getSafezoneId()] +
+            ToonBlitzGlobals.ShowScoresDuration +
+            MinigameGlobals.latencyTolerance,
+            allToonsDone,
+            handleTimeout)
 
     def exitPlay(self):
         pass
@@ -168,13 +191,24 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
 
     def claimTreasure(self, sectionIndex, treasureIndex):
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('treasure %s-%s claimed by %s' % (sectionIndex, treasureIndex, avId))
+        self.notify.debug(
+            'treasure %s-%s claimed by %s' %
+            (sectionIndex, treasureIndex, avId))
         if sectionIndex < 0 or sectionIndex >= len(self.sectionsSelected):
-            self.air.writeServerEvent('warning', sectionIndex, 'TwoDGameAI.claimTreasure sectionIndex out of range.')
+            self.air.writeServerEvent(
+                'warning',
+                sectionIndex,
+                'TwoDGameAI.claimTreasure sectionIndex out of range.')
             return
-        if treasureIndex < 0 or treasureIndex >= len(self.treasureTakenTable[sectionIndex]):
-            self.notify.warning('Treasure %s: TwoDGameAI.claimTreasure treasureIndex out of range.' % treasureIndex)
-            self.air.writeServerEvent('warning', treasureIndex, 'TwoDGameAI.claimTreasure treasureIndex out of range.')
+        if treasureIndex < 0 or treasureIndex >= len(
+                self.treasureTakenTable[sectionIndex]):
+            self.notify.warning(
+                'Treasure %s: TwoDGameAI.claimTreasure treasureIndex out of range.' %
+                treasureIndex)
+            self.air.writeServerEvent(
+                'warning',
+                treasureIndex,
+                'TwoDGameAI.claimTreasure treasureIndex out of range.')
             return
         if self.treasureTakenTable[sectionIndex][treasureIndex]:
             return
@@ -187,28 +221,40 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
         self.treasuresCollectedDict[avId][treasureValue - 1] += 1
         self.scoreDict[avId] += ToonBlitzGlobals.ScoreGainPerTreasure * treasureValue
         self.numTreasuresTaken += 1
-        self.sendUpdate('setTreasureGrabbed', [avId, sectionIndex, treasureIndex])
+        self.sendUpdate(
+            'setTreasureGrabbed', [
+                avId, sectionIndex, treasureIndex])
 
     def claimEnemyShot(self, sectionIndex, enemyIndex):
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('enemy %s-%s shot claimed by %s' % (sectionIndex, enemyIndex, avId))
+        self.notify.debug(
+            'enemy %s-%s shot claimed by %s' %
+            (sectionIndex, enemyIndex, avId))
         if sectionIndex < 0 or sectionIndex >= len(self.sectionsSelected):
-            self.air.writeServerEvent('warning', sectionIndex, 'TwoDGameAI.claimEnemyShot sectionIndex out of range.')
+            self.air.writeServerEvent(
+                'warning',
+                sectionIndex,
+                'TwoDGameAI.claimEnemyShot sectionIndex out of range.')
             return
-        if enemyIndex < 0 or enemyIndex >= len(self.sectionsSelected[sectionIndex][1]):
-            self.air.writeServerEvent('warning', enemyIndex, 'TwoDGameAI.claimEnemyShot enemyIndex out of range.')
+        if enemyIndex < 0 or enemyIndex >= len(
+                self.sectionsSelected[sectionIndex][1]):
+            self.air.writeServerEvent(
+                'warning',
+                enemyIndex,
+                'TwoDGameAI.claimEnemyShot enemyIndex out of range.')
             return
         if self.enemyHealthTable[sectionIndex][enemyIndex] > 0:
             self.enemyHealthTable[sectionIndex][enemyIndex] -= ToonBlitzGlobals.DamagePerBullet
             if self.enemyHealthTable[sectionIndex][enemyIndex] <= 0:
                 self.numEnemiesKilled += 1
             self.sendUpdate('setEnemyShot', [avId,
-             sectionIndex,
-             enemyIndex,
-             self.enemyHealthTable[sectionIndex][enemyIndex]])
+                                             sectionIndex,
+                                             enemyIndex,
+                                             self.enemyHealthTable[sectionIndex][enemyIndex]])
 
     def reportDone(self):
-        if self.gameFSM.getCurrentState() == None or self.gameFSM.getCurrentState().getName() != 'play':
+        if self.gameFSM.getCurrentState(
+        ) is None or self.gameFSM.getCurrentState().getName() != 'play':
             return
         avId = self.air.getAvatarIdFromSender()
         self.notify.debug('reportDone: avatar %s is done' % avId)
@@ -216,19 +262,23 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
         return
 
     def toonVictory(self, avId, timestamp):
-        if self.gameFSM.getCurrentState() == None or self.gameFSM.getCurrentState().getName() != 'play':
+        if self.gameFSM.getCurrentState(
+        ) is None or self.gameFSM.getCurrentState().getName() != 'play':
             msg = 'TwoDGameAI.toonVictory not in play state!'
             self.notify.warning('suspicious: ' + str(avId) + ' ' + msg)
             self.air.writeServerEvent('suspicious: ', avId, msg)
             return
         if avId not in list(self.scoreDict.keys()):
             self.notify.warning('Avatar %s not in list.' % avId)
-            self.air.writeServerEvent('suspicious: ', avId, 'TwoDGameAI.toonVictory toon not in list.')
+            self.air.writeServerEvent(
+                'suspicious: ', avId, 'TwoDGameAI.toonVictory toon not in list.')
             return
         curTime = self.getCurrentGameTime()
-        timeLeft = ToonBlitzGlobals.GameDuration[self.getSafezoneId()] - curTime
+        timeLeft = ToonBlitzGlobals.GameDuration[self.getSafezoneId(
+        )] - curTime
         self.notify.debug('curTime =%s timeLeft = %s' % (curTime, timeLeft))
-        addBonus = int(ToonBlitzGlobals.BaseBonusOnCompletion[self.getSafezoneId()] + ToonBlitzGlobals.BonusPerSecondLeft * timeLeft)
+        addBonus = int(ToonBlitzGlobals.BaseBonusOnCompletion[self.getSafezoneId(
+        )] + ToonBlitzGlobals.BonusPerSecondLeft * timeLeft)
         self.notify.debug('addBOnus = %d' % addBonus)
         if addBonus < 0:
             addBonus = 0
@@ -243,7 +293,8 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
     def toonFellDown(self, avId, timestamp):
         if avId not in list(self.scoreDict.keys()):
             self.notify.warning('Avatar %s not in list.' % avId)
-            self.air.writeServerEvent('warning', avId, 'TwoDGameAI.toonFellDown toon not in list.')
+            self.air.writeServerEvent(
+                'warning', avId, 'TwoDGameAI.toonFellDown toon not in list.')
             return
         self.numFallDownDict[avId] += 1
         self.scoreDict[avId] += ToonBlitzGlobals.ScoreLossPerFallDown[self.getSafezoneId()]
@@ -251,7 +302,8 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
     def toonHitByEnemy(self, avId, timestamp):
         if avId not in list(self.scoreDict.keys()):
             self.notify.warning('Avatar %s not in list.' % avId)
-            self.air.writeServerEvent('warning', avId, 'TwoDGameAI.toonHitByEnemy toon not in list.')
+            self.air.writeServerEvent(
+                'warning', avId, 'TwoDGameAI.toonHitByEnemy toon not in list.')
             return
         self.numHitByEnemyDict[avId] += 1
         self.scoreDict[avId] += ToonBlitzGlobals.ScoreLossPerEnemyCollision[self.getSafezoneId()]
@@ -259,7 +311,8 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
     def toonSquished(self, avId, timestamp):
         if avId not in list(self.scoreDict.keys()):
             self.notify.warning('Avatar %s not in list.' % avId)
-            self.air.writeServerEvent('warning', avId, 'TwoDGameAI.toonSquished toon not in list.')
+            self.air.writeServerEvent(
+                'warning', avId, 'TwoDGameAI.toonSquished toon not in list.')
             return
         self.numSquishDict[avId] += 1
         self.scoreDict[avId] += ToonBlitzGlobals.ScoreLossPerStomperSquish[self.getSafezoneId()]
@@ -273,17 +326,17 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
         sectionsPool = ToonBlitzGlobals.SectionsPool
         sectionTypes = ToonBlitzGlobals.SectionTypes
         sectionsPoolByDifficulty = [[],
-         [],
-         [],
-         [],
-         [],
-         []]
+                                    [],
+                                    [],
+                                    [],
+                                    [],
+                                    []]
         sectionsSelectedByDifficulty = [[],
-         [],
-         [],
-         [],
-         [],
-         []]
+                                        [],
+                                        [],
+                                        [],
+                                        [],
+                                        []]
         sectionIndicesSelected = []
         for weight in sectionWeights:
             difficulty, probability = weight
@@ -309,16 +362,19 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
                     if whileCount > 1:
                         break
             else:
-                sectionIndexChoice = random.choice(sectionsPoolByDifficulty[difficulty])
+                sectionIndexChoice = random.choice(
+                    sectionsPoolByDifficulty[difficulty])
                 sectionsSelectedByDifficulty[difficulty] += [sectionIndexChoice]
                 sectionsPoolByDifficulty[difficulty].remove(sectionIndexChoice)
 
             if whileCount > 1:
-                self.notify.debug('We need more sections than we have choices. We have to now repeat.')
+                self.notify.debug(
+                    'We need more sections than we have choices. We have to now repeat.')
 
         for i in range(len(sectionsSelectedByDifficulty)):
             for j in range(len(sectionsSelectedByDifficulty[i])):
-                sectionIndicesSelected.append(sectionsSelectedByDifficulty[i][j])
+                sectionIndicesSelected.append(
+                    sectionsSelectedByDifficulty[i][j])
 
         for i in range(len(sectionIndicesSelected)):
             sectionIndex = sectionIndicesSelected[i]
@@ -333,12 +389,13 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
             stompersPool = attribs[6]
             enemyIndicesPool = []
             enemyIndicesSelected = []
-            if enemiesPool != None:
+            if enemiesPool is not None:
                 minEnemies, maxEnemies = attribs[7]
                 for i in range(len(enemiesPool)):
                     enemyIndicesPool += [i]
 
-                numEnemies = maxEnemies * ToonBlitzGlobals.PercentMaxEnemies[szId] / 100
+                numEnemies = maxEnemies * \
+                    ToonBlitzGlobals.PercentMaxEnemies[szId] / 100
                 numEnemies = max(numEnemies, minEnemies)
                 for j in range(int(numEnemies)):
                     if len(enemyIndicesPool) == 0:
@@ -351,15 +408,17 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
             treasureIndicesPool = []
             treasureValuePool = []
             for value in range(1, 5):
-                treasureValuePool += [value] * ToonBlitzGlobals.TreasureValueProbability[value]
+                treasureValuePool += [value] * \
+                    ToonBlitzGlobals.TreasureValueProbability[value]
 
             treasureIndicesSelected = []
-            if treasuresPool != None:
+            if treasuresPool is not None:
                 minTreasures, maxTreasures = attribs[8]
                 for i in range(len(treasuresPool)):
                     treasureIndicesPool += [i]
 
-                numTreasures = maxTreasures * ToonBlitzGlobals.PercentMaxTreasures[szId] / 100
+                numTreasures = maxTreasures * \
+                    ToonBlitzGlobals.PercentMaxTreasures[szId] / 100
                 numTreasures = max(numTreasures, minTreasures)
                 for i in range(int(numTreasures)):
                     if len(treasureIndicesPool) == 0:
@@ -373,12 +432,13 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
                 treasureIndicesSelected.sort()
             spawnPointIndicesPool = []
             spawnPointIndicesSelected = []
-            if spawnPointsPool != None:
+            if spawnPointsPool is not None:
                 minSpawnPoints, maxSpawnPoints = attribs[9]
                 for i in range(len(spawnPointsPool)):
                     spawnPointIndicesPool += [i]
 
-                numSpawnPoints = maxSpawnPoints * ToonBlitzGlobals.PercentMaxSpawnPoints[szId] / 100
+                numSpawnPoints = maxSpawnPoints * \
+                    ToonBlitzGlobals.PercentMaxSpawnPoints[szId] / 100
                 numSpawnPoints = max(numSpawnPoints, minSpawnPoints)
                 for i in range(int(numSpawnPoints)):
                     if len(spawnPointIndicesPool) == 0:
@@ -390,12 +450,13 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
                 spawnPointIndicesSelected.sort()
             stomperIndicesPool = []
             stomperIndicesSelected = []
-            if stompersPool != None:
+            if stompersPool is not None:
                 minStompers, maxStompers = attribs[10]
                 for i in range(len(stompersPool)):
                     stomperIndicesPool += [i]
 
-                numStompers = maxStompers * ToonBlitzGlobals.PercentMaxStompers[szId] / 100
+                numStompers = maxStompers * \
+                    ToonBlitzGlobals.PercentMaxStompers[szId] / 100
                 numStompers = max(numStompers, minStompers)
                 for i in range(int(numStompers)):
                     if len(stomperIndicesPool) == 0:
@@ -406,10 +467,10 @@ class DistributedTwoDGameAI(DistributedMinigameAI):
 
                 stomperIndicesSelected.sort()
             sctionTuple = (sectionIndex,
-             enemyIndicesSelected,
-             treasureIndicesSelected,
-             spawnPointIndicesSelected,
-             stomperIndicesSelected)
+                           enemyIndicesSelected,
+                           treasureIndicesSelected,
+                           spawnPointIndicesSelected,
+                           stomperIndicesSelected)
             self.sectionsSelected.append(sctionTuple)
 
         return

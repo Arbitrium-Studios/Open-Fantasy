@@ -8,6 +8,7 @@ from toontown.toonbase.ToontownGlobals import *
 from toontown.toonbase import TTLocalizer
 from toontown.coghq import DistributedMintRoom, MintLayout, MintRoom
 
+
 class DistributedMint(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMint')
     ReadyPost = 'MintReady'
@@ -46,7 +47,10 @@ class DistributedMint(DistributedObject.DistributedObject):
 
     def setRoomDoIds(self, roomDoIds):
         self.roomDoIds = roomDoIds
-        self.roomWatcher = BulletinBoardWatcher.BulletinBoardWatcher('roomWatcher-%s' % self.doId, [ DistributedMintRoom.getMintRoomReadyPostName(doId) for doId in self.roomDoIds ], self.gotAllRooms)
+        self.roomWatcher = BulletinBoardWatcher.BulletinBoardWatcher(
+            'roomWatcher-%s' %
+            self.doId, [
+                DistributedMintRoom.getMintRoomReadyPostName(doId) for doId in self.roomDoIds], self.gotAllRooms)
 
     def gotAllRooms(self):
         self.notify.debug('mint %s: got all rooms' % self.doId)
@@ -57,7 +61,8 @@ class DistributedMint(DistributedObject.DistributedObject):
             self.rooms.append(base.cr.doId2do[doId])
             self.rooms[-1].setMint(self)
 
-        self.notify.info('mintId %s, floor %s, %s' % (self.mintId, self.floorNum, self.rooms[0].avIdList))
+        self.notify.info('mintId %s, floor %s, %s' %
+                         (self.mintId, self.floorNum, self.rooms[0].avIdList))
         rng = self.layout.getRng()
         numRooms = self.layout.getNumRooms()
         for i, room in enumerate(self.rooms):
@@ -77,7 +82,7 @@ class DistributedMint(DistributedObject.DistributedObject):
                 self.allRooms.append(hallway)
                 self.listenForFloorEvents(hallway)
 
-        def handleCameraRayFloorCollision(collEntry, self = self):
+        def handleCameraRayFloorCollision(collEntry, self=self):
             name = collEntry.getIntoNode().getName()
             self.notify.debug('camera floor ray collided with: %s' % name)
             prefix = MintRoom.MintRoom.FloorCollPrefix
@@ -85,8 +90,9 @@ class DistributedMint(DistributedObject.DistributedObject):
             if name[:prefixLen] == prefix:
                 try:
                     roomNum = int(name[prefixLen:])
-                except:
-                    DistributedLevel.notify.warning('Invalid zone floor collision node: %s' % name)
+                except BaseException:
+                    DistributedLevel.notify.warning(
+                        'Invalid zone floor collision node: %s' % name)
                 else:
                     self.camEnterRoom(roomNum)
 
@@ -112,7 +118,7 @@ class DistributedMint(DistributedObject.DistributedObject):
         roomNum = room.getRoomNum()
         floorCollName = room.getFloorCollName()
 
-        def handleZoneEnter(collisionEntry, self = self, roomNum = roomNum):
+        def handleZoneEnter(collisionEntry, self=self, roomNum=roomNum):
             self.toonEnterRoom(roomNum)
             floorNode = collisionEntry.getIntoNode()
             if floorNode.hasTag('ouch'):
@@ -122,7 +128,7 @@ class DistributedMint(DistributedObject.DistributedObject):
 
         self.accept('enter%s' % floorCollName, handleZoneEnter)
 
-        def handleZoneExit(collisionEntry, self = self, roomNum = roomNum):
+        def handleZoneExit(collisionEntry, self=self, roomNum=roomNum):
             floorNode = collisionEntry.getIntoNode()
             if floorNode.hasTag('ouch'):
                 self.allRooms[roomNum].stopOuch()
@@ -130,13 +136,16 @@ class DistributedMint(DistributedObject.DistributedObject):
         self.accept('exit%s' % floorCollName, handleZoneExit)
 
     def getAllRoomsTimeout(self):
-        self.notify.warning('mint %s: timed out waiting for room objs' % self.doId)
+        self.notify.warning(
+            'mint %s: timed out waiting for room objs' %
+            self.doId)
 
     def toonEnterRoom(self, roomNum):
         self.notify.debug('toonEnterRoom: %s' % roomNum)
         if roomNum != self.curToonRoomNum:
             if self.curToonRoomNum is not None:
-                self.allRooms[self.curToonRoomNum].localToonFSM.request('notPresent')
+                self.allRooms[self.curToonRoomNum].localToonFSM.request(
+                    'notPresent')
             self.allRooms[roomNum].localToonFSM.request('present')
             self.curToonRoomNum = roomNum
         return
@@ -161,7 +170,9 @@ class DistributedMint(DistributedObject.DistributedObject):
         av = base.cr.identifyFriend(avId)
         if av is None:
             return
-        base.localAvatar.setSystemMessage(avId, TTLocalizer.MintBossConfrontedMsg % av.getName())
+        base.localAvatar.setSystemMessage(
+            avId, TTLocalizer.MintBossConfrontedMsg %
+            av.getName())
         return
 
     def warpToRoom(self, roomId):
@@ -195,7 +206,8 @@ class DistributedMint(DistributedObject.DistributedObject):
             self.geom.removeNode()
             self.geom = None
         base.localAvatar.setCameraCollisionsCanMove(0)
-        if hasattr(self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
+        if hasattr(
+                self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
             self.cr.relatedObjectMgr.abortRequest(self.relatedObjectMgrRequest)
             del self.relatedObjectMgrRequest
         DistributedObject.DistributedObject.disable(self)
@@ -215,6 +227,8 @@ class DistributedMint(DistributedObject.DistributedObject):
         panel.setFactoryToonIdList(avIds)
 
     def handleScreenshot(self):
-        base.addScreenshotString('mintId: %s, floor (from 1): %s' % (self.mintId, self.floorNum + 1))
+        base.addScreenshotString(
+            'mintId: %s, floor (from 1): %s' %
+            (self.mintId, self.floorNum + 1))
         if hasattr(self, 'currentRoomName'):
             base.addScreenshotString('%s' % self.currentRoomName)

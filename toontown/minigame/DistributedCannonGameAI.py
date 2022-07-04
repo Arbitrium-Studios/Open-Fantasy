@@ -5,11 +5,17 @@ from direct.fsm import State
 from direct.task import Task
 from . import CannonGameGlobals
 
+
 class DistributedCannonGameAI(DistributedMinigameAI):
 
     def __init__(self, air, minigameId):
         DistributedMinigameAI.__init__(self, air, minigameId)
-        self.gameFSM = ClassicFSM.ClassicFSM('DistributedCannonGameAI', [State.State('inactive', self.enterInactive, self.exitInactive, ['play']), State.State('play', self.enterPlay, self.exitPlay, ['cleanup']), State.State('cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
+        self.gameFSM = ClassicFSM.ClassicFSM(
+            'DistributedCannonGameAI', [
+                State.State(
+                    'inactive', self.enterInactive, self.exitInactive, ['play']), State.State(
+                    'play', self.enterPlay, self.exitPlay, ['cleanup']), State.State(
+                    'cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
         self.addChildGameFSM(self.gameFSM)
 
     def delete(self):
@@ -46,7 +52,10 @@ class DistributedCannonGameAI(DistributedMinigameAI):
     def enterPlay(self):
         self.notify.debug('enterPlay')
         if not config.GetBool('endless-cannon-game', 0):
-            taskMgr.doMethodLater(CannonGameGlobals.GameTime, self.timerExpired, self.taskName('gameTimer'))
+            taskMgr.doMethodLater(
+                CannonGameGlobals.GameTime,
+                self.timerExpired,
+                self.taskName('gameTimer'))
 
     def timerExpired(self, task):
         self.notify.debug('timer expired')
@@ -56,19 +65,31 @@ class DistributedCannonGameAI(DistributedMinigameAI):
     def __playing(self):
         if not hasattr(self, 'gameFSM'):
             return False
-        if self.gameFSM.getCurrentState() == None:
+        if self.gameFSM.getCurrentState() is None:
             return False
         return self.gameFSM.getCurrentState().getName() == 'play'
 
     def _checkCannonRange(self, zRot, angle, avId):
         outOfRange = 0
         if zRot < CannonGameGlobals.CANNON_ROTATION_MIN or zRot > CannonGameGlobals.CANNON_ROTATION_MAX:
-            self.air.writeServerEvent('suspicious', avId, 'Cannon game z-rotation out of range: %s' % zRot)
-            self.notify.warning('av %s cannon z-rotation out of range: %s' % (avId, zRot))
+            self.air.writeServerEvent(
+                'suspicious',
+                avId,
+                'Cannon game z-rotation out of range: %s' %
+                zRot)
+            self.notify.warning(
+                'av %s cannon z-rotation out of range: %s' %
+                (avId, zRot))
             outOfRange = 1
         if angle < CannonGameGlobals.CANNON_ANGLE_MIN or angle > CannonGameGlobals.CANNON_ANGLE_MAX:
-            self.air.writeServerEvent('suspicious', avId, 'Cannon game vertical angle out of range: %s' % angle)
-            self.notify.warning('av %s cannon vertical angle out of range: %s' % (avId, angle))
+            self.air.writeServerEvent(
+                'suspicious',
+                avId,
+                'Cannon game vertical angle out of range: %s' %
+                angle)
+            self.notify.warning(
+                'av %s cannon vertical angle out of range: %s' %
+                (avId, angle))
             outOfRange = 1
         return outOfRange
 
@@ -77,7 +98,8 @@ class DistributedCannonGameAI(DistributedMinigameAI):
             self.notify.debug('ignoring setCannonPosition message')
             return
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('setCannonPosition: ' + str(avId) + ': zRot=' + str(zRot) + ', angle=' + str(angle))
+        self.notify.debug('setCannonPosition: ' + str(avId) +
+                          ': zRot=' + str(zRot) + ', angle=' + str(angle))
         if self._checkCannonRange(zRot, angle, avId):
             return
         self.sendUpdate('updateCannonPosition', [avId, zRot, angle])
@@ -87,14 +109,15 @@ class DistributedCannonGameAI(DistributedMinigameAI):
             self.notify.debug('ignoring setCannonLit message')
             return
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('setCannonLit: ' + str(avId) + ': zRot=' + str(zRot) + ', angle=' + str(angle))
+        self.notify.debug('setCannonLit: ' + str(avId) +
+                          ': zRot=' + str(zRot) + ', angle=' + str(angle))
         if self._checkCannonRange(zRot, angle, avId):
             return
         fireTime = self.getCurrentGameTime() + CannonGameGlobals.FUSE_TIME
         self.sendUpdate('setCannonWillFire', [avId,
-         fireTime,
-         zRot,
-         angle])
+                                              fireTime,
+                                              zRot,
+                                              angle])
 
     def setToonWillLandInWater(self, landTime):
         if not self.__playing():
@@ -105,10 +128,15 @@ class DistributedCannonGameAI(DistributedMinigameAI):
         for avId in self.avIdList:
             self.scoreDict[avId] = score
 
-        self.notify.debug('setToonWillLandInWater: time=%s, score=%s' % (landTime, score))
+        self.notify.debug(
+            'setToonWillLandInWater: time=%s, score=%s' %
+            (landTime, score))
         taskMgr.remove(self.taskName('gameTimer'))
         delay = max(0, landTime - self.getCurrentGameTime())
-        taskMgr.doMethodLater(delay, self.toonLandedInWater, self.taskName('game-over'))
+        taskMgr.doMethodLater(
+            delay,
+            self.toonLandedInWater,
+            self.taskName('game-over'))
         self.sendUpdate('announceToonWillLandInWater', [senderAvId, landTime])
 
     def toonLandedInWater(self, task):

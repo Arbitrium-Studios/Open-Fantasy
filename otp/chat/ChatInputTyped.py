@@ -5,10 +5,11 @@ from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 from otp.otpbase import OTPLocalizer
 
+
 class ChatInputTyped(DirectObject.DirectObject):
     ExecNamespace = None
 
-    def __init__(self, mainEntry = 0):
+    def __init__(self, mainEntry=0):
         self.whisperName = None
         self.whisperId = None
         self.toPlayer = 0
@@ -16,7 +17,8 @@ class ChatInputTyped(DirectObject.DirectObject):
         wantHistory = 0
         if __dev__:
             wantHistory = 1
-        self.wantHistory = base.config.GetBool('want-chat-history', wantHistory)
+        self.wantHistory = base.config.GetBool(
+            'want-chat-history', wantHistory)
         self.history = ['']
         self.historySize = base.config.GetInt('chat-history-size', 10)
         self.historyIndex = 0
@@ -36,7 +38,7 @@ class ChatInputTyped(DirectObject.DirectObject):
         del self.whisperLabel
         del self.chatMgr
 
-    def show(self, whisperId = None, toPlayer = 0):
+    def show(self, whisperId=None, toPlayer=0):
         self.toPlayer = toPlayer
         self.whisperId = whisperId
         self.whisperName = None
@@ -84,7 +86,8 @@ class ChatInputTyped(DirectObject.DirectObject):
         if self.whisperId:
             print('have id')
             if self.toPlayer:
-                if not base.talkAssistant.checkWhisperTypedChatPlayer(self.whisperId):
+                if not base.talkAssistant.checkWhisperTypedChatPlayer(
+                        self.whisperId):
                     messenger.send('Chat-Failed player typed chat test')
                     self.deactivate()
             elif not base.talkAssistant.checkWhisperTypedChatAvatar(self.whisperId):
@@ -127,7 +130,10 @@ class ChatInputTyped(DirectObject.DirectObject):
     def __execMessage(self, message):
         if not ChatInputTyped.ExecNamespace:
             ChatInputTyped.ExecNamespace = {}
-            exec('from pandac.PandaModules import *', globals(), self.ExecNamespace)
+            exec(
+                'from pandac.PandaModules import *',
+                globals(),
+                self.ExecNamespace)
             self.importExecNamespace()
         try:
             if not __debug__ or __execWarnings__:
@@ -141,7 +147,7 @@ class ChatInputTyped(DirectObject.DirectObject):
                     printStack()
                 exec(message, globals(), ChatInputTyped.ExecNamespace)
                 return 'ok'
-            except:
+            except BaseException:
                 exception = sys.exc_info()[0]
                 extraInfo = sys.exc_info()[1]
                 if extraInfo:
@@ -149,7 +155,7 @@ class ChatInputTyped(DirectObject.DirectObject):
                 else:
                     return str(exception)
 
-        except:
+        except BaseException:
             exception = sys.exc_info()[0]
             extraInfo = sys.exc_info()[1]
             if extraInfo:

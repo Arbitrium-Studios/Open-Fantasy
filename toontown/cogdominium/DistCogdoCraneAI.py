@@ -4,6 +4,7 @@ from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 from direct.fsm import FSM
 
+
 class DistCogdoCraneAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM):
 
     def __init__(self, air, craneGame, index):

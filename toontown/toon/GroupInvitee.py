@@ -9,6 +9,7 @@ from direct.gui.DirectGui import DGG
 from otp.otpbase import OTPGlobals
 from toontown.toonbase import TTLocalizer
 
+
 class GroupInvitee(ToonHeadDialog.ToonHeadDialog):
     notify = DirectNotifyGlobal.directNotify.newCategory('GroupInvitee')
 
@@ -24,21 +25,23 @@ class GroupInvitee(ToonHeadDialog.ToonHeadDialog):
         self.party = party
         text = TTLocalizer.BoardingInviteeMessage % self.avName
         style = TTDialog.TwoChoice
-        buttonTextList = [OTPLocalizer.FriendInviteeOK, OTPLocalizer.FriendInviteeNo]
+        buttonTextList = [
+            OTPLocalizer.FriendInviteeOK,
+            OTPLocalizer.FriendInviteeNo]
         command = self.__handleButton
         optiondefs = (('dialogName', 'GroupInvitee', None),
-         ('text', text, None),
-         ('style', style, None),
-         ('buttonTextList', buttonTextList, None),
-         ('command', command, None),
-         ('image_color', (1.0, 0.89, 0.77, 1.0), None),
-         ('geom_scale', 0.2, None),
-         ('geom_pos', (-0.1, 0, -0.025), None),
-         ('pad', (0.075, 0.075), None),
-         ('topPad', 0, None),
-         ('midPad', 0, None),
-         ('pos', (0.45, 0, 0.75), None),
-         ('scale', 0.75, None))
+                      ('text', text, None),
+                      ('style', style, None),
+                      ('buttonTextList', buttonTextList, None),
+                      ('command', command, None),
+                      ('image_color', (1.0, 0.89, 0.77, 1.0), None),
+                      ('geom_scale', 0.2, None),
+                      ('geom_pos', (-0.1, 0, -0.025), None),
+                      ('pad', (0.075, 0.075), None),
+                      ('topPad', 0, None),
+                      ('midPad', 0, None),
+                      ('pos', (0.45, 0, 0.75), None),
+                      ('scale', 0.75, None))
         self.defineoptions(kw, optiondefs)
         ToonHeadDialog.ToonHeadDialog.__init__(self, self.avDNA)
         self.initialiseoptions(GroupInvitee)

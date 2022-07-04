@@ -1,6 +1,7 @@
 from . import ActiveCellAI
 from direct.directnotify import DirectNotifyGlobal
 
+
 class CrusherCellAI(ActiveCellAI.ActiveCellAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('CrusherCellAI')
 
@@ -28,7 +29,9 @@ class CrusherCellAI(ActiveCellAI.ActiveCellAI):
         if entId in self.crushers:
             self.crushers.remove(entId)
             if not hasattr(self, 'level'):
-                self.notify.error("unregisterCrusher(%s): CrusherCellAI %s has no attrib 'level'" % (entId, self.entId))
+                self.notify.error(
+                    "unregisterCrusher(%s): CrusherCellAI %s has no attrib 'level'" %
+                    (entId, self.entId))
             ent = self.level.entities.get(entId, None)
             if ent:
                 self.ignore(ent.crushMsg)
@@ -50,7 +53,9 @@ class CrusherCellAI(ActiveCellAI.ActiveCellAI):
                 if crushObj:
                     crushObj.doCrush(crusherId, axis)
                 else:
-                    self.notify.warning("couldn't find crushable object %d" % self.occupantId)
+                    self.notify.warning(
+                        "couldn't find crushable object %d" %
+                        self.occupantId)
 
         return
 

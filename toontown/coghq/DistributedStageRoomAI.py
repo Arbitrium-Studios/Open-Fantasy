@@ -8,11 +8,16 @@ from toontown.coghq import StageRoomBase, LevelSuitPlannerAI
 from toontown.coghq import DistributedStageBattleAI
 from toontown.suit import DistributedStageSuitAI
 
-class DistributedStageRoomAI(DistributedLevelAI.DistributedLevelAI, StageRoomBase.StageRoomBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedStageRoomAI')
 
-    def __init__(self, air, stageId, stageDoId, zoneId, roomId, roomNum, avIds, battleExpAggreg):
-        DistributedLevelAI.DistributedLevelAI.__init__(self, air, zoneId, 0, avIds)
+class DistributedStageRoomAI(
+        DistributedLevelAI.DistributedLevelAI, StageRoomBase.StageRoomBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedStageRoomAI')
+
+    def __init__(self, air, stageId, stageDoId, zoneId,
+                 roomId, roomNum, avIds, battleExpAggreg):
+        DistributedLevelAI.DistributedLevelAI.__init__(
+            self, air, zoneId, 0, avIds)
         StageRoomBase.StageRoomBase.__init__(self)
         self.setStageId(stageId)
         self.setRoomId(roomId)
@@ -24,12 +29,15 @@ class DistributedStageRoomAI(DistributedLevelAI.DistributedLevelAI, StageRoomBas
         return FactoryEntityCreatorAI.FactoryEntityCreatorAI(level=self)
 
     def getBattleCreditMultiplier(self):
-        return ToontownBattleGlobals.getStageCreditMultiplier(self.getFloorNum())
+        return ToontownBattleGlobals.getStageCreditMultiplier(
+            self.getFloorNum())
 
     def getFloorNum(self):
         stage = self.air.getDo(self.stageDoId)
         if stage is None:
-            self.notify.warning('getFloorNum: could not find stage %s' % self.stageDoId)
+            self.notify.warning(
+                'getFloorNum: could not find stage %s' %
+                self.stageDoId)
             return 0
         return stage.floorNum
 
@@ -46,13 +54,23 @@ class DistributedStageRoomAI(DistributedLevelAI.DistributedLevelAI, StageRoomBas
         DistributedLevelAI.DistributedLevelAI.generate(self, roomSpec)
         self.notify.debug('creating cogs')
         cogSpecModule = StageRoomSpecs.getCogSpecModule(self.roomId)
-        self.planner = LevelSuitPlannerAI.LevelSuitPlannerAI(self.air, self, DistributedStageSuitAI.DistributedStageSuitAI, DistributedStageBattleAI.DistributedStageBattleAI, cogSpecModule.CogData, cogSpecModule.ReserveCogData, cogSpecModule.BattleCells, battleExpAggreg=self.battleExpAggreg)
+        self.planner = LevelSuitPlannerAI.LevelSuitPlannerAI(
+            self.air,
+            self,
+            DistributedStageSuitAI.DistributedStageSuitAI,
+            DistributedStageBattleAI.DistributedStageBattleAI,
+            cogSpecModule.CogData,
+            cogSpecModule.ReserveCogData,
+            cogSpecModule.BattleCells,
+            battleExpAggreg=self.battleExpAggreg)
         suitHandles = self.planner.genSuits()
         messenger.send('plannerCreated-' + str(self.doId))
         self.suits = suitHandles['activeSuits']
         self.reserveSuits = suitHandles['reserveSuits']
         self.d_setSuits()
-        self.notify.debug('finish stage room %s %s creation' % (self.roomId, self.doId))
+        self.notify.debug(
+            'finish stage room %s %s creation' %
+            (self.roomId, self.doId))
 
     def delete(self):
         self.notify.debug('delete: %s' % self.doId)
@@ -101,7 +119,9 @@ class DistributedStageRoomAI(DistributedLevelAI.DistributedLevelAI, StageRoomBas
 
     def d_setBossConfronted(self, toonId):
         if toonId not in self.avIdList:
-            self.notify.warning('d_setBossConfronted: %s not in list of participants' % toonId)
+            self.notify.warning(
+                'd_setBossConfronted: %s not in list of participants' %
+                toonId)
             return
         self.sendUpdate('setBossConfronted', [toonId])
 
@@ -119,7 +139,8 @@ class DistributedStageRoomAI(DistributedLevelAI.DistributedLevelAI, StageRoomBas
             self.air.writeServerEvent('stageDefeated', avId, description)
 
         for toon in activeVictors:
-            simbase.air.questManager.toonDefeatedStage(toon, self.stageId, activeVictors)
+            simbase.air.questManager.toonDefeatedStage(
+                toon, self.stageId, activeVictors)
 
         return
 
@@ -134,11 +155,14 @@ class DistributedStageRoomAI(DistributedLevelAI.DistributedLevelAI, StageRoomBas
         pass
 
     def allToonsGone(self, toonsThatCleared):
-        DistributedLevelAI.DistributedLevelAI.allToonsGone(self, toonsThatCleared)
+        DistributedLevelAI.DistributedLevelAI.allToonsGone(
+            self, toonsThatCleared)
         if self.roomNum == 0:
             stage = simbase.air.doId2do.get(self.stageDoId)
             if stage is not None:
                 stage.allToonsGone()
             else:
-                self.notify.warning('no stage %s in allToonsGone' % self.stageDoId)
+                self.notify.warning(
+                    'no stage %s in allToonsGone' %
+                    self.stageDoId)
         return

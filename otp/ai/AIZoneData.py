@@ -6,6 +6,7 @@ from direct.showbase import LeakDetectors
 from otp.otpbase import OTPGlobals
 import random
 
+
 class AIZoneData:
     notify = directNotify.newCategory('AIZoneData')
 
@@ -13,7 +14,8 @@ class AIZoneData:
         self._air = air
         self._parentId = parentId
         self._zoneId = zoneId
-        self._data = self._air.getZoneDataStore().getDataForZone(self._parentId, self._zoneId)
+        self._data = self._air.getZoneDataStore().getDataForZone(
+            self._parentId, self._zoneId)
 
     def destroy(self):
         del self._data
@@ -46,7 +48,8 @@ class AIZoneDataObj:
             totalTraversers += 1
             totalColliders += currCollTrav.getNumColliders()
 
-        output += 'Num traversers: %s  Num total colliders: %s' % (totalTraversers, totalColliders)
+        output += 'Num traversers: %s  Num total colliders: %s' % (
+            totalTraversers, totalColliders)
         return output
 
     def _incRefCount(self):
@@ -84,9 +87,12 @@ class AIZoneDataObj:
 
     def getRender(self):
         if not hasattr(self, '_render'):
-            self._render = NodePath('render-%s-%s' % (self._parentId, self._zoneId))
+            self._render = NodePath(
+                'render-%s-%s' %
+                (self._parentId, self._zoneId))
             if config.GetBool('leak-scene-graph', 0):
-                self._renderLeakDetector = LeakDetectors.SceneGraphLeakDetector(self._render)
+                self._renderLeakDetector = LeakDetectors.SceneGraphLeakDetector(
+                    self._render)
         return self._render
 
     def getNonCollidableParent(self):
@@ -101,37 +107,42 @@ class AIZoneDataObj:
         if not hasattr(self, '_parentMgr'):
             self._parentMgr = ParentMgr.ParentMgr()
             self._parentMgr.registerParent(OTPGlobals.SPHidden, hidden)
-            self._parentMgr.registerParent(OTPGlobals.SPRender, self.getRender())
+            self._parentMgr.registerParent(
+                OTPGlobals.SPRender, self.getRender())
         return self._parentMgr
 
-    def hasCollTrav(self, name = None):
+    def hasCollTrav(self, name=None):
         if name is None:
             name = AIZoneDataObj.DefaultCTravName
         return name in self._collTravs
 
-    def getCollTrav(self, name = None):
+    def getCollTrav(self, name=None):
         if name is None:
             name = AIZoneDataObj.DefaultCTravName
         if name not in self._collTravs:
-            self._collTravs[name] = CollisionTraverser('cTrav-%s-%s-%s' % (name, self._parentId, self._zoneId))
+            self._collTravs[name] = CollisionTraverser(
+                'cTrav-%s-%s-%s' %
+                (name, self._parentId, self._zoneId))
         return self._collTravs[name]
 
     def removeCollTrav(self, name):
         if name in self._collTravs:
             del self._collTravs[name]
 
-    def _getCTravTaskName(self, name = None):
+    def _getCTravTaskName(self, name=None):
         if name is None:
             name = AIZoneDataObj.DefaultCTravName
         return 'collTrav-%s-%s-%s' % (name, self._parentId, self._zoneId)
 
-    def _doCollisions(self, task = None, topNode = None, cTravName = None):
+    def _doCollisions(self, task=None, topNode=None, cTravName=None):
         render = self.getRender()
         curTime = globalClock.getFrameTime()
         render.setTag('lastTraverseTime', str(curTime))
         if topNode is not None:
             if not render.isAncestorOf(topNode):
-                self.notify.warning('invalid topNode for collision traversal in %s: %s' % (self.getLocation(), topNode))
+                self.notify.warning(
+                    'invalid topNode for collision traversal in %s: %s' %
+                    (self.getLocation(), topNode))
         else:
             topNode = render
         if cTravName is None:
@@ -142,37 +153,47 @@ class AIZoneDataObj:
         messenger.send('postColl-' + collTrav.getName())
         return Task.cont
 
-    def doCollTrav(self, topNode = None, cTravName = None):
+    def doCollTrav(self, topNode=None, cTravName=None):
         self.getCollTrav(cTravName)
         self._doCollisions(topNode=topNode, cTravName=cTravName)
 
-    def startCollTrav(self, respectPrevTransform = 1, cTravName = None):
+    def startCollTrav(self, respectPrevTransform=1, cTravName=None):
         if cTravName is None:
             cTravName = AIZoneDataObj.DefaultCTravName
         if cTravName not in self._collTravsStarted:
             self.getCollTrav(name=cTravName)
-            taskMgr.add(self._doCollisions, self._getCTravTaskName(name=cTravName), priority=OTPGlobals.AICollisionPriority, extraArgs=[self._zoneId])
+            taskMgr.add(
+                self._doCollisions,
+                self._getCTravTaskName(
+                    name=cTravName),
+                priority=OTPGlobals.AICollisionPriority,
+                extraArgs=[
+                    self._zoneId])
             self._collTravsStarted.add(cTravName)
         self.setRespectPrevTransform(respectPrevTransform, cTravName=cTravName)
         return
 
-    def stopCollTrav(self, cTravName = None):
+    def stopCollTrav(self, cTravName=None):
         if cTravName is None:
             cTravName = AIZoneDataObj.DefaultCTravName
-        self.notify.debug('stopCollTrav(%s, %s, %s)' % (cTravName, self._parentId, self._zoneId))
+        self.notify.debug(
+            'stopCollTrav(%s, %s, %s)' %
+            (cTravName, self._parentId, self._zoneId))
         if cTravName in self._collTravsStarted:
-            self.notify.info('removing %s collision traversal for (%s, %s)' % (cTravName, self._parentId, self._zoneId))
+            self.notify.info(
+                'removing %s collision traversal for (%s, %s)' %
+                (cTravName, self._parentId, self._zoneId))
             taskMgr.remove(self._getCTravTaskName(name=cTravName))
             self._collTravsStarted.remove(cTravName)
         return
 
-    def setRespectPrevTransform(self, flag, cTravName = None):
+    def setRespectPrevTransform(self, flag, cTravName=None):
         if cTravName is None:
             cTravName = AIZoneDataObj.DefaultCTravName
         self._collTravs[cTravName].setRespectPrevTransform(flag)
         return
 
-    def getRespectPrevTransform(self, cTravName = None):
+    def getRespectPrevTransform(self, cTravName=None):
         if cTravName is None:
             cTravName = AIZoneDataObj.DefaultCTravName
         return self._collTravs[cTravName].getRespectPrevTransform()
@@ -214,4 +235,6 @@ class AIZoneDataStore:
             self.printStats()
 
     def printStats(self):
-        self.notify.debug('%s zones have zone data allocated' % len(self._zone2data))
+        self.notify.debug(
+            '%s zones have zone data allocated' % len(
+                self._zone2data))

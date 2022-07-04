@@ -2,6 +2,7 @@ from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import TTLocalizer
 
+
 class DistributedBankMgr(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBankMgr')
     neverDisable = 1
@@ -10,7 +11,7 @@ class DistributedBankMgr(DistributedObject.DistributedObject):
         DistributedObject.DistributedObject.__init__(self, cr)
 
     def generate(self):
-        if base.cr.bankManager != None:
+        if base.cr.bankManager is not None:
             base.cr.bankManager.delete()
         base.cr.bankManager = self
         DistributedObject.DistributedObject.generate(self)

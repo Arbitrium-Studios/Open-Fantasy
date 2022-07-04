@@ -1,8 +1,10 @@
 from otp.level import DistributedEntityAI
 from direct.directnotify import DirectNotifyGlobal
 
+
 class DistributedCrusherEntityAI(DistributedEntityAI.DistributedEntityAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCrusherEntityAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedCrusherEntityAI')
 
     def __init__(self, level, entId):
         self.isCrusher = 0
@@ -21,7 +23,7 @@ class DistributedCrusherEntityAI(DistributedEntityAI.DistributedEntityAI):
 
     def destroy(self):
         self.notify.info('destroy entity %s' % self.entId)
-        if self.crushCell != None:
+        if self.crushCell is not None:
             self.crushCell.unregisterCrusher(self.entId)
             self.crushCell = None
         DistributedEntityAI.DistributedEntityAI.destroy(self)
@@ -29,10 +31,13 @@ class DistributedCrusherEntityAI(DistributedEntityAI.DistributedEntityAI):
 
     def setActiveCrushCell(self):
         self.notify.debug('setActiveCrushCell, entId: %d' % self.entId)
-        if self.crushCellId != None:
+        if self.crushCellId is not None:
             self.crushCell = self.level.entities.get(self.crushCellId, None)
-            if self.crushCell == None:
-                self.accept(self.level.getEntityCreateEvent(self.crushCellId), self.setActiveCrushCell)
+            if self.crushCell is None:
+                self.accept(
+                    self.level.getEntityCreateEvent(
+                        self.crushCellId),
+                    self.setActiveCrushCell)
             else:
                 self.isCrusher = 1
                 self.crushCell.registerCrusher(self.entId)

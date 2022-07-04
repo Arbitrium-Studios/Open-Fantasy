@@ -2,6 +2,7 @@ from otp.speedchat.SCTerminal import SCTerminal
 from otp.otpbase.OTPLocalizer import SpeedChatStaticText
 TTSCSingingMsgEvent = 'SCSingingMsg'
 
+
 def decodeSCStaticTextMsg(textId):
     return SpeedChatStaticText.get(textId, None)
 
@@ -19,6 +20,6 @@ class TTSCSingingTerminal(SCTerminal):
 
     def finalize(self):
         args = {'rolloverSound': None,
-         'clickSound': None}
+                'clickSound': None}
         SCTerminal.finalize(self, args)
         return

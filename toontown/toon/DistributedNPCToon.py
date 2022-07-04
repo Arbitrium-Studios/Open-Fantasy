@@ -8,6 +8,7 @@ from toontown.hood import ZoneUtil
 from toontown.toontowngui import TeaserPanel
 ChoiceTimeout = 20
 
+
 class DistributedNPCToon(DistributedNPCToonBase):
 
     def __init__(self, cr):
@@ -55,9 +56,9 @@ class DistributedNPCToon(DistributedNPCToonBase):
         if hasattr(place, 'id'):
             myHoodId = place.id
         if myHoodId in (ToontownGlobals.ToontownCentral,
-         ToontownGlobals.MyEstate,
-         ToontownGlobals.GoofySpeedway,
-         ToontownGlobals.Tutorial):
+                        ToontownGlobals.MyEstate,
+                        ToontownGlobals.GoofySpeedway,
+                        ToontownGlobals.Tutorial):
             return True
         return False
 
@@ -71,7 +72,8 @@ class DistributedNPCToon(DistributedNPCToonBase):
             place = base.cr.playGame.getPlace()
             if place:
                 place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(pageName='quests', doneFunc=self.handleOkTeaser)
+            self.dialog = TeaserPanel.TeaserPanel(
+                pageName='quests', doneFunc=self.handleOkTeaser)
 
     def handleOkTeaser(self):
         self.dialog.destroy()
@@ -101,12 +103,31 @@ class DistributedNPCToon(DistributedNPCToonBase):
         if mode == NPCToons.QUEST_MOVIE_QUEST_CHOICE or mode == NPCToons.QUEST_MOVIE_TRACK_CHOICE:
             quat = Quat()
             quat.setHpr((155, -2, 0))
-            self.lerpCameraSeq = camera.posQuatInterval(1, Point3(5, 9, self.getHeight() - 0.5), quat, other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
+            self.lerpCameraSeq = camera.posQuatInterval(
+                1,
+                Point3(
+                    5,
+                    9,
+                    self.getHeight() -
+                    0.5),
+                quat,
+                other=self,
+                blendType='easeOut',
+                name=self.uniqueName('lerpCamera'))
             self.lerpCameraSeq.start()
         else:
             quat = Quat()
             quat.setHpr((-150, -2, 0))
-            self.lerpCameraSeq = camera.posQuatInterval(1, Point3(-5, 9, self.getHeight() - 0.5), quat, other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
+            self.lerpCameraSeq = camera.posQuatInterval(
+                1,
+                Point3(
+                    -5,
+                    9,
+                    self.getHeight() - 0.5),
+                quat,
+                other=self,
+                blendType='easeOut',
+                name=self.uniqueName('lerpCamera'))
             self.lerpCameraSeq.start()
 
     def setMovie(self, mode, npcId, avId, quests, timestamp):
@@ -130,7 +151,8 @@ class DistributedNPCToon(DistributedNPCToonBase):
             return
         if mode == NPCToons.QUEST_MOVIE_REJECT:
             rejectString = Quests.chooseQuestDialogReject()
-            rejectString = Quests.fillInQuestNames(rejectString, avName=av._name)
+            rejectString = Quests.fillInQuestNames(
+                rejectString, avName=av._name)
             self.setChatAbsolute(rejectString, CFSpeech | CFTimeout)
             if isLocalToon:
                 base.localAvatar.posCamera(0, 0)
@@ -138,7 +160,8 @@ class DistributedNPCToon(DistributedNPCToonBase):
             return
         if mode == NPCToons.QUEST_MOVIE_TIER_NOT_DONE:
             rejectString = Quests.chooseQuestDialogTierNotDone()
-            rejectString = Quests.fillInQuestNames(rejectString, avName=av._name)
+            rejectString = Quests.fillInQuestNames(
+                rejectString, avName=av._name)
             self.setChatAbsolute(rejectString, CFSpeech | CFTimeout)
             if isLocalToon:
                 base.localAvatar.posCamera(0, 0)
@@ -151,7 +174,8 @@ class DistributedNPCToon(DistributedNPCToonBase):
             questId, rewardId, toNpcId = quests
             scriptId = 'quest_complete_' + str(questId)
             if QuestParser.questDefined(scriptId):
-                self.curQuestMovie = QuestParser.NPCMoviePlayer(scriptId, av, self)
+                self.curQuestMovie = QuestParser.NPCMoviePlayer(
+                    scriptId, av, self)
                 self.curQuestMovie.play()
                 return
             if isLocalToon:
@@ -159,7 +183,8 @@ class DistributedNPCToon(DistributedNPCToonBase):
             greetingString = Quests.chooseQuestDialog(questId, Quests.GREETING)
             if greetingString:
                 fullString += greetingString + '\x07'
-            fullString += Quests.chooseQuestDialog(questId, Quests.COMPLETE) + '\x07'
+            fullString += Quests.chooseQuestDialog(
+                questId, Quests.COMPLETE) + '\x07'
             if rewardId:
                 fullString += Quests.getReward(rewardId).getString()
             leavingString = Quests.chooseQuestDialog(questId, Quests.LEAVING)
@@ -177,7 +202,8 @@ class DistributedNPCToon(DistributedNPCToonBase):
                     self.curQuestMovie.timeout()
                     self.curQuestMovie.cleanup()
                     self.curQuestMovie = None
-                self.curQuestMovie = QuestParser.NPCMoviePlayer(scriptId, av, self)
+                self.curQuestMovie = QuestParser.NPCMoviePlayer(
+                    scriptId, av, self)
                 self.curQuestMovie.play()
                 return
             if isLocalToon:
@@ -197,7 +223,8 @@ class DistributedNPCToon(DistributedNPCToonBase):
                     self.curQuestMovie.timeout()
                     self.curQuestMovie.cleanup()
                     self.curQuestMovie = None
-                self.curQuestMovie = QuestParser.NPCMoviePlayer(scriptId, av, self)
+                self.curQuestMovie = QuestParser.NPCMoviePlayer(
+                    scriptId, av, self)
                 self.curQuestMovie.play()
                 return
             if isLocalToon:
@@ -222,10 +249,17 @@ class DistributedNPCToon(DistributedNPCToonBase):
             self.setChatAbsolute(TTLocalizer.QuestMovieTrackChoice, CFSpeech)
             if isLocalToon:
                 self.acceptOnce('chooseTrack', self.sendChooseTrack)
-                self.trackChoiceGui = TrackChoiceGui.TrackChoiceGui(tracks, ChoiceTimeout)
+                self.trackChoiceGui = TrackChoiceGui.TrackChoiceGui(
+                    tracks, ChoiceTimeout)
             return
-        fullString = Quests.fillInQuestNames(fullString, avName=av._name, fromNpcId=npcId, toNpcId=toNpcId)
-        self.acceptOnce(self.uniqueName('doneChatPage'), self.finishMovie, extraArgs=[av, isLocalToon])
+        fullString = Quests.fillInQuestNames(
+            fullString, avName=av._name, fromNpcId=npcId, toNpcId=toNpcId)
+        self.acceptOnce(
+            self.uniqueName('doneChatPage'),
+            self.finishMovie,
+            extraArgs=[
+                av,
+                isLocalToon])
         self.clearChat()
         self.setPageChat(avId, 0, fullString, 1)
         return

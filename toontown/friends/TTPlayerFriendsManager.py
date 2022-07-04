@@ -3,6 +3,7 @@ from direct.directnotify.DirectNotifyGlobal import directNotify
 from otp.otpbase import OTPGlobals
 from otp.friends.PlayerFriendsManager import PlayerFriendsManager
 
+
 class TTPlayerFriendsManager(PlayerFriendsManager):
 
     def __init__(self, cr):

@@ -2,6 +2,7 @@ from direct.directnotify import DirectNotifyGlobal
 from . import AttribDesc
 from direct.showbase.PythonUtil import mostDerivedLast
 
+
 class EntityTypeDesc:
     notify = DirectNotifyGlobal.directNotify.newCategory('EntityTypeDesc')
     output = None
@@ -44,7 +45,9 @@ class EntityTypeDesc:
         if '_attribDescs' in entTypeClass.__dict__:
             return
         c = entTypeClass
-        EntityTypeDesc.notify.debug('compiling attrib descriptors for %s' % c.__name__)
+        EntityTypeDesc.notify.debug(
+            'compiling attrib descriptors for %s' %
+            c.__name__)
         for base in c.__bases__:
             EntityTypeDesc.privCompileAttribDescs(base)
 
@@ -58,7 +61,9 @@ class EntityTypeDesc:
                     continue
                 for d in baseADs:
                     if desc.getName() == d.getName():
-                        EntityTypeDesc.notify.warning('%s inherits attrib %s from multiple bases' % (c.__name__, desc.getName()))
+                        EntityTypeDesc.notify.warning(
+                            '%s inherits attrib %s from multiple bases' %
+                            (c.__name__, desc.getName()))
                         break
                 else:
                     baseADs.append(desc)
@@ -68,7 +73,9 @@ class EntityTypeDesc:
             for attrib in c.attribs:
                 desc = AttribDesc.AttribDesc(*attrib)
                 if desc.getName() == 'type' and entTypeClass.__name__ != 'Entity':
-                    EntityTypeDesc.notify.error("(%s): '%s' is a reserved attribute name" % (entTypeClass.__name__, desc.getName()))
+                    EntityTypeDesc.notify.error(
+                        "(%s): '%s' is a reserved attribute name" %
+                        (entTypeClass.__name__, desc.getName()))
                 for ad in baseADs:
                     if ad.getName() == desc.getName():
                         baseADs.remove(ad)
@@ -82,4 +89,5 @@ class EntityTypeDesc:
         return str(self.__class__)
 
     def __repr__(self):
-        return str(self.__class__.__dict__.get('type', None)) + str(self.output) + str(self.attribDescDict)
+        return str(self.__class__.__dict__.get('type', None)) + \
+            str(self.output) + str(self.attribDescDict)

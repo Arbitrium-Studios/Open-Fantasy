@@ -4,6 +4,7 @@ from toontown.cogdominium.CogdoLevelMgrAI import CogdoLevelMgrAI
 from toontown.cogdominium import CogdoBoardroomGameConsts
 from toontown.cogdominium import CogdoCraneGameConsts
 
+
 class CogdoEntityCreatorAI(EntityCreatorAI.EntityCreatorAI):
 
     def __init__(self, level):

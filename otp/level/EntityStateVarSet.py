@@ -2,6 +2,7 @@ from direct.fsm.StatePush import StateVar
 from direct.showbase.PythonUtil import getSetterName
 from otp.level.Entity import Entity
 
+
 class EntityStateVarSet(Entity):
 
     def __init__(self, entType):

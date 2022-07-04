@@ -13,7 +13,9 @@ from toontown.toonbase import TTLocalizer
 from toontown.toontowngui import TTDialog
 from . import CogDisguiseGlobals
 
-class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
+
+class DistributedMintElevatorExt(
+        DistributedElevatorExt.DistributedElevatorExt):
 
     def __init__(self, cr):
         DistributedElevatorExt.DistributedElevatorExt.__init__(self, cr)
@@ -31,8 +33,8 @@ class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
     def setMintId(self, mintId):
         self.mintId = mintId
         mintId2originId = {ToontownGlobals.CashbotMintIntA: 1,
-         ToontownGlobals.CashbotMintIntB: 2,
-         ToontownGlobals.CashbotMintIntC: 0}
+                           ToontownGlobals.CashbotMintIntB: 2,
+                           ToontownGlobals.CashbotMintIntC: 0}
         originId = mintId2originId[self.mintId]
         geom = self.cr.playGame.hood.loader.geom
         locator = geom.find('**/elevator_origin_%s' % originId)
@@ -43,12 +45,14 @@ class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
         locator = geom.find('**/elevator_signorigin_%s' % originId)
         backgroundGeom = geom.find('**/ElevatorFrameFront_%d' % originId)
         backgroundGeom.node().setEffect(DecalEffect.make())
-        signText = DirectGui.OnscreenText(text=TextEncoder.upper(TTLocalizer.GlobalStreetNames[mintId][-1]), font=ToontownGlobals.getSuitFont(), scale=TTLocalizer.DMEEsignText, fg=(0.87, 0.87, 0.87, 1), mayChange=False, parent=backgroundGeom)
+        signText = DirectGui.OnscreenText(text=TextEncoder.upper(TTLocalizer.GlobalStreetNames[mintId][-1]), font=ToontownGlobals.getSuitFont(
+        ), scale=TTLocalizer.DMEEsignText, fg=(0.87, 0.87, 0.87, 1), mayChange=False, parent=backgroundGeom)
         signText.setPosHpr(locator, 0, 0, 0, 0, 0, 0)
         signText.setDepthWrite(0)
 
     def setupElevator(self):
-        self.elevatorModel = loader.loadModel('phase_10/models/cogHQ/mintElevator')
+        self.elevatorModel = loader.loadModel(
+            'phase_10/models/cogHQ/mintElevator')
         self.elevatorModel.reparentTo(render)
         self.leftDoor = self.elevatorModel.find('**/left_door')
         self.rightDoor = self.elevatorModel.find('**/right_door')
@@ -76,11 +80,11 @@ class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
             if bboard.has('mintIdOverride'):
                 mintId = bboard.get('mintIdOverride')
             doneStatus = {'loader': 'cogHQLoader',
-             'where': 'mintInterior',
-             'how': 'teleportIn',
-             'zoneId': zoneId,
-             'mintId': self.mintId,
-             'hoodId': hoodId}
+                          'where': 'mintInterior',
+                          'how': 'teleportIn',
+                          'zoneId': zoneId,
+                          'mintId': self.mintId,
+                          'hoodId': hoodId}
             self.cr.playGame.getPlace().elevator.signalDone(doneStatus)
 
     def setMintInteriorZoneForce(self, zoneId):
@@ -92,20 +96,25 @@ class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
             if bboard.has('mintIdOverride'):
                 mintId = bboard.get('mintIdOverride')
             doneStatus = {'loader': 'cogHQLoader',
-             'where': 'mintInterior',
-             'how': 'teleportIn',
-             'zoneId': zoneId,
-             'mintId': self.mintId,
-             'hoodId': hoodId}
+                          'where': 'mintInterior',
+                          'how': 'teleportIn',
+                          'zoneId': zoneId,
+                          'mintId': self.mintId,
+                          'hoodId': hoodId}
             if hasattr(place, 'elevator') and place.elevator:
                 place.elevator.signalDone(doneStatus)
             else:
-                self.notify.warning("setMintInteriorZoneForce: Couldn't find playGame.getPlace().elevator, zoneId: %s" % zoneId)
+                self.notify.warning(
+                    "setMintInteriorZoneForce: Couldn't find playGame.getPlace().elevator, zoneId: %s" %
+                    zoneId)
         else:
-            self.notify.warning("setMintInteriorZoneForce: Couldn't find playGame.getPlace(), zoneId: %s" % zoneId)
+            self.notify.warning(
+                "setMintInteriorZoneForce: Couldn't find playGame.getPlace(), zoneId: %s" %
+                zoneId)
 
-    def rejectBoard(self, avId, reason = 0):
-        DistributedElevatorExt.DistributedElevatorExt.rejectBoard(self, avId, reason)
+    def rejectBoard(self, avId, reason=0):
+        DistributedElevatorExt.DistributedElevatorExt.rejectBoard(
+            self, avId, reason)
 
     def __handleRejectAck(self):
         doneStatus = self.rejectDialog.doneStatus

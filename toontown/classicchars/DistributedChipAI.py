@@ -9,22 +9,24 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from . import CharStateDatasAI
 
+
 class DistributedChipAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedChipAI')
 
     def __init__(self, air):
-        DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(self, air, TTLocalizer.Chip)
+        DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(
+            self, air, TTLocalizer.Chip)
         self.fsm = ClassicFSM.ClassicFSM('DistributedChipAI', [
-         State.State('Off', self.enterOff, self.exitOff, [
-          'Lonely', 'TransitionToCostume']),
-         State.State('Lonely', self.enterLonely, self.exitLonely, [
-          'Chatty', 'Walk', 'TransitionToCostume']),
-         State.State('Chatty', self.enterChatty, self.exitChatty, [
-          'Lonely', 'Walk', 'TransitionToCostume']),
-         State.State('Walk', self.enterWalk, self.exitWalk, [
-          'Lonely', 'Chatty', 'TransitionToCostume']),
-         State.State('TransitionToCostume', self.enterTransitionToCostume, self.exitTransitionToCostume, [
-          'Off'])], 'Off', 'Off')
+            State.State('Off', self.enterOff, self.exitOff, [
+                'Lonely', 'TransitionToCostume']),
+            State.State('Lonely', self.enterLonely, self.exitLonely, [
+                'Chatty', 'Walk', 'TransitionToCostume']),
+            State.State('Chatty', self.enterChatty, self.exitChatty, [
+                'Lonely', 'Walk', 'TransitionToCostume']),
+            State.State('Walk', self.enterWalk, self.exitWalk, [
+                'Lonely', 'Chatty', 'TransitionToCostume']),
+            State.State('TransitionToCostume', self.enterTransitionToCostume, self.exitTransitionToCostume, [
+                'Off'])], 'Off', 'Off')
         self.fsm.enterInitialState()
         self.dale = None
         self.handleHolidays()
@@ -45,9 +47,11 @@ class DistributedChipAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         DistributedCCharBaseAI.DistributedCCharBaseAI.generate(self)
         name = self.getName()
         self.lonelyDoneEvent = self.taskName(name + '-lonely-done')
-        self.lonely = CharStateDatasAI.CharLonelyStateAI(self.lonelyDoneEvent, self)
+        self.lonely = CharStateDatasAI.CharLonelyStateAI(
+            self.lonelyDoneEvent, self)
         self.chattyDoneEvent = self.taskName(name + '-chatty-done')
-        self.chatty = CharStateDatasAI.ChipChattyStateAI(self.chattyDoneEvent, self)
+        self.chatty = CharStateDatasAI.ChipChattyStateAI(
+            self.chattyDoneEvent, self)
         self.walkDoneEvent = self.taskName(name + '-walk-done')
         self.walk = CharStateDatasAI.CharWalkStateAI(self.walkDoneEvent, self)
 
@@ -61,14 +65,18 @@ class DistributedChipAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         if self.transitionToCostume == 1:
             curWalkNode = self.walk.getDestNode()
             if simbase.air.holidayManager:
-                if ToontownGlobals.HALLOWEEN_COSTUMES in simbase.air.holidayManager.currentHolidays and simbase.air.holidayManager.currentHolidays[ToontownGlobals.HALLOWEEN_COSTUMES]:
-                    simbase.air.holidayManager.currentHolidays[ToontownGlobals.HALLOWEEN_COSTUMES].triggerSwitch(curWalkNode, self)
+                if ToontownGlobals.HALLOWEEN_COSTUMES in simbase.air.holidayManager.currentHolidays and simbase.air.holidayManager.currentHolidays[
+                        ToontownGlobals.HALLOWEEN_COSTUMES]:
+                    simbase.air.holidayManager.currentHolidays[ToontownGlobals.HALLOWEEN_COSTUMES].triggerSwitch(
+                        curWalkNode, self)
                     self.fsm.request('TransitionToCostume')
                     return
                 else:
-                    self.notify.warning('transitionToCostume == 1 but no costume holiday')
+                    self.notify.warning(
+                        'transitionToCostume == 1 but no costume holiday')
             else:
-                self.notify.warning('transitionToCostume == 1 but no holiday Manager')
+                self.notify.warning(
+                    'transitionToCostume == 1 but no holiday Manager')
         if doneStatus['state'] == 'lonely' and doneStatus['status'] == 'done':
             self.fsm.request('Walk')
         elif doneStatus['state'] == 'chatty' and doneStatus['status'] == 'done':
@@ -107,7 +115,10 @@ class DistributedChipAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         self.acceptOnce(self.chattyDoneEvent, self.__decideNextState)
         if self.dale:
             self.dale.chipEnteringState(self.fsm.getCurrentState().getName())
-        taskMgr.doMethodLater(CharStateDatasAI.CHATTY_DURATION + 10, self.forceLeaveChatty, self.taskName('forceLeaveChatty'))
+        taskMgr.doMethodLater(
+            CharStateDatasAI.CHATTY_DURATION + 10,
+            self.forceLeaveChatty,
+            self.taskName('forceLeaveChatty'))
 
     def forceLeaveChatty(self, task):
         self.notify.warning('Had to force change of state from Chatty state')
@@ -147,7 +158,8 @@ class DistributedChipAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
             else:
                 self.notify.debug('avatarEnterNextState: in walk state')
         else:
-            self.notify.debug('avatarEnterNextState: num avatars: ' + str(len(self.nearbyAvatars)))
+            self.notify.debug(
+                'avatarEnterNextState: num avatars: ' + str(len(self.nearbyAvatars)))
 
     def avatarExitNextState(self):
         if len(self.nearbyAvatars) == 0:

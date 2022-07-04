@@ -2,6 +2,7 @@ from direct.fsm.StatePush import FunctionCall
 from otp.level.EntityStateVarSet import EntityStateVarSet
 from otp.level.LevelSpec import LevelSpec
 
+
 class CogdoLevelGameBase:
 
     def getLevelSpec(self):
@@ -15,7 +16,9 @@ class CogdoLevelGameBase:
             for item in Consts.__dict__.values():
                 if isinstance(item, EntityStateVarSet):
                     for attribName in item._getAttributeNames():
-                        handler = getattr(self, '_handle%sChanged' % attribName, None)
+                        handler = getattr(
+                            self, '_handle%sChanged' %
+                            attribName, None)
                         if handler:
                             stateVar = getattr(item, attribName)
                             fcs.append(FunctionCall(handler, stateVar))

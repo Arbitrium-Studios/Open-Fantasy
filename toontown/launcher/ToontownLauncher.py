@@ -1,12 +1,17 @@
+from toontown.toonbase import TTLocalizer
+from panda3d.core import *
+from otp.otpbase import OTPLauncherGlobals
+from otp.launcher.LauncherBase import LauncherBase
 import os
 import sys
 import time
 
 ltime = 1 and time.localtime()
-logSuffix = '%02d%02d%02d_%02d%02d%02d' % (ltime[0] - 2000,  ltime[1], ltime[2],
+logSuffix = '%02d%02d%02d_%02d%02d%02d' % (ltime[0] - 2000, ltime[1], ltime[2],
                                            ltime[3], ltime[4], ltime[5])
 
 logfile = 'toontownD-' + logSuffix + '.log'
+
 
 class LogAndOutput:
     def __init__(self, orig, log):
@@ -23,6 +28,7 @@ class LogAndOutput:
         self.log.flush()
         self.orig.flush()
 
+
 log = open(logfile, 'a')
 logOut = LogAndOutput(sys.__stdout__, log)
 logErr = LogAndOutput(sys.__stderr__, log)
@@ -32,14 +38,16 @@ sys.stderr = logErr
 print('\n\nStarting Toontown...')
 
 if 1:
-    print('Current time: ' + time.asctime(time.localtime(time.time())) + ' ' + time.tzname[0])
+    print(
+        'Current time: ' +
+        time.asctime(
+            time.localtime(
+                time.time())) +
+        ' ' +
+        time.tzname[0])
     print('sys.path = ', sys.path)
     print('sys.argv = ', sys.argv)
 
-from otp.launcher.LauncherBase import LauncherBase
-from otp.otpbase import OTPLauncherGlobals
-from panda3d.core import *
-from toontown.toonbase import TTLocalizer
 
 class ToontownLauncher(LauncherBase):
     GameName = 'Toontown'
@@ -63,8 +71,10 @@ class ToontownLauncher(LauncherBase):
         self.game2DoneKey = 'GAME2_DONE'
         self.toontownRegistryKey = 'Software\\Disney\\Disney Online\\Toontown'
         if self.testServerFlag:
-            self.toontownRegistryKey = '%s%s' % (self.toontownRegistryKey, 'Test')
-        self.toontownRegistryKey = '%s%s' % (self.toontownRegistryKey, self.getProductName())
+            self.toontownRegistryKey = '%s%s' % (
+                self.toontownRegistryKey, 'Test')
+        self.toontownRegistryKey = '%s%s' % (
+            self.toontownRegistryKey, self.getProductName())
         LauncherBase.__init__(self)
         self.webAcctParams = 'WEB_ACCT_PARAMS'
         self.parseWebAcctParams()
@@ -73,7 +83,7 @@ class ToontownLauncher(LauncherBase):
     def getValue(self, key, default=None):
         try:
             return self.getRegistry(key, default)
-        except:
+        except BaseException:
             return self.getRegistry(key)
 
     def setValue(self, key, value):
@@ -109,8 +119,11 @@ class ToontownLauncher(LauncherBase):
         if 'secretsNeedsParentPassword' in dict:
             self.secretNeedsParentPasswordKey = dict['secretsNeedsParentPassword']
         else:
-            self.notify.warning('no secretNeedsParentPassword token in webAcctParams')
-        self.notify.info('secretNeedsParentPassword = %d' % self.secretNeedsParentPasswordKey)
+            self.notify.warning(
+                'no secretNeedsParentPassword token in webAcctParams')
+        self.notify.info(
+            'secretNeedsParentPassword = %d' %
+            self.secretNeedsParentPasswordKey)
 
         self.chatEligibleKey = 0
         if 'chatEligible' in dict:
@@ -141,32 +154,36 @@ class ToontownLauncher(LauncherBase):
         if t == int:
             WindowsRegistry.setIntValue(self.toontownRegistryKey, name, value)
         elif t == str:
-            WindowsRegistry.setStringValue(self.toontownRegistryKey, name, value)
+            WindowsRegistry.setStringValue(
+                self.toontownRegistryKey, name, value)
         else:
-            self.notify.warning('setRegistry: Invalid type for registry value: ' + repr(value))
+            self.notify.warning(
+                'setRegistry: Invalid type for registry value: ' +
+                repr(value))
 
     def getRegistry(self, name, missingValue=None):
         self.notify.info('getRegistry%s' % ((name, missingValue),))
         if not self.WIN32:
-            if missingValue == None:
+            if missingValue is None:
                 missingValue = ''
             value = os.environ.get(name, missingValue)
             try:
                 value = int(value)
-            except: pass
+            except BaseException:
+                pass
             return value
 
         t = WindowsRegistry.getKeyType(self.toontownRegistryKey, name)
         if t == WindowsRegistry.TInt:
-            if missingValue == None:
+            if missingValue is None:
                 missingValue = 0
             return WindowsRegistry.getIntValue(self.toontownRegistryKey,
-                                                name, missingValue)
+                                               name, missingValue)
         elif t == WindowsRegistry.TString:
-            if missingValue == None:
+            if missingValue is None:
                 missingValue = ''
             return WindowsRegistry.getStringValue(self.toontownRegistryKey,
-                                                    name, missingValue)
+                                                  name, missingValue)
         else:
             return missingValue
 
@@ -202,7 +219,8 @@ class ToontownLauncher(LauncherBase):
     def startGame(self):
         try:
             os.remove('Phase3.py')
-        except: pass
+        except BaseException:
+            pass
 
         import Phase3
 

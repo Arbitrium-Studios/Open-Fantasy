@@ -5,6 +5,7 @@ from toontown.coghq import StageLayout
 from direct.showbase import DirectObject
 import random
 
+
 class StageManagerAI(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('StageManagerAI')
     stageId = None
@@ -41,9 +42,12 @@ class StageManagerAI(DirectObject.DirectObject):
                 else:
                     from toontown.coghq import StageRoomSpecs
                     roomName = StageRoomSpecs.CashbotStageRoomId2RoomName[roomId]
-                    StageManagerAI.notify.warning('room %s (%s) not found in any floor of stage %s' % (roomId, roomName, stageId))
+                    StageManagerAI.notify.warning(
+                        'room %s (%s) not found in any floor of stage %s' %
+                        (roomId, roomName, stageId))
 
         stageZone = self.air.allocateZone()
-        stage = DistributedStageAI.DistributedStageAI(self.air, stageId, stageZone, floor, players)
+        stage = DistributedStageAI.DistributedStageAI(
+            self.air, stageId, stageZone, floor, players)
         stage.generateWithRequired(stageZone)
         return stageZone

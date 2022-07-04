@@ -1,5 +1,6 @@
 import math
 
+
 class GameSprite:
     colorRed = (1, 0, 0, 1)
     colorBlue = (0, 0, 1, 1)
@@ -11,7 +12,7 @@ class GameSprite:
     colorBlack = (0, 0, 0, 1.0)
     colorShadow = (0, 0, 0, 0.5)
 
-    def __init__(self, nodeObj, colorType = 0, foundation = 0):
+    def __init__(self, nodeObj, colorType=0, foundation=0):
         self.nodeObj = nodeObj
         self.foundation = foundation
         self.velX = 0

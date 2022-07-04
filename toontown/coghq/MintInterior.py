@@ -14,6 +14,7 @@ from toontown.toontowngui import TTDialog
 from toontown.toonbase import ToontownBattleGlobals
 from toontown.coghq import DistributedMint
 
+
 class MintInterior(BattlePlace.BattlePlace):
     notify = DirectNotifyGlobal.directNotify.newCategory('MintInterior')
 
@@ -22,47 +23,73 @@ class MintInterior(BattlePlace.BattlePlace):
         self.parentFSM = parentFSM
         self.zoneId = loader.mintId
         self.fsm = ClassicFSM.ClassicFSM('MintInterior', [State.State('start', self.enterStart, self.exitStart, ['walk', 'teleportIn', 'fallDown']),
-         State.State('walk', self.enterWalk, self.exitWalk, ['push',
-          'sit',
-          'stickerBook',
-          'WaitForBattle',
-          'battle',
-          'died',
-          'teleportOut',
-          'squished',
-          'DFA',
-          'fallDown',
-          'stopped']),
-         State.State('stopped', self.enterStopped, self.exitStopped, ['walk', 'teleportOut', 'stickerBook']),
-         State.State('sit', self.enterSit, self.exitSit, ['walk', 'died', 'teleportOut']),
-         State.State('push', self.enterPush, self.exitPush, ['walk', 'died', 'teleportOut']),
-         State.State('stickerBook', self.enterStickerBook, self.exitStickerBook, ['walk',
-          'battle',
-          'DFA',
-          'WaitForBattle',
-          'died',
-          'teleportOut']),
-         State.State('WaitForBattle', self.enterWaitForBattle, self.exitWaitForBattle, ['battle',
-          'walk',
-          'died',
-          'teleportOut']),
-         State.State('battle', self.enterBattle, self.exitBattle, ['walk', 'teleportOut', 'died']),
-         State.State('fallDown', self.enterFallDown, self.exitFallDown, ['walk', 'died', 'teleportOut']),
-         State.State('squished', self.enterSquished, self.exitSquished, ['walk', 'died', 'teleportOut']),
-         State.State('teleportIn', self.enterTeleportIn, self.exitTeleportIn, ['walk',
-          'teleportOut',
-          'quietZone',
-          'died']),
-         State.State('teleportOut', self.enterTeleportOut, self.exitTeleportOut, ['teleportIn',
-          'FLA',
-          'quietZone',
-          'WaitForBattle']),
-         State.State('DFA', self.enterDFA, self.exitDFA, ['DFAReject', 'teleportOut']),
-         State.State('DFAReject', self.enterDFAReject, self.exitDFAReject, ['walkteleportOut']),
-         State.State('died', self.enterDied, self.exitDied, ['teleportOut']),
-         State.State('FLA', self.enterFLA, self.exitFLA, ['quietZone']),
-         State.State('quietZone', self.enterQuietZone, self.exitQuietZone, ['teleportIn']),
-         State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
+                                                          State.State('walk', self.enterWalk, self.exitWalk, ['push',
+                                                                                                              'sit',
+                                                                                                              'stickerBook',
+                                                                                                              'WaitForBattle',
+                                                                                                              'battle',
+                                                                                                              'died',
+                                                                                                              'teleportOut',
+                                                                                                              'squished',
+                                                                                                              'DFA',
+                                                                                                              'fallDown',
+                                                                                                              'stopped']),
+                                                          State.State(
+            'stopped', self.enterStopped, self.exitStopped, [
+                'walk', 'teleportOut', 'stickerBook']),
+            State.State(
+            'sit', self.enterSit, self.exitSit, [
+                'walk', 'died', 'teleportOut']),
+            State.State(
+            'push', self.enterPush, self.exitPush, [
+                'walk', 'died', 'teleportOut']),
+            State.State('stickerBook', self.enterStickerBook, self.exitStickerBook, ['walk',
+                                                                                     'battle',
+                                                                                     'DFA',
+                                                                                     'WaitForBattle',
+                                                                                     'died',
+                                                                                     'teleportOut']),
+            State.State('WaitForBattle', self.enterWaitForBattle, self.exitWaitForBattle, ['battle',
+                                                                                           'walk',
+                                                                                           'died',
+                                                                                           'teleportOut']),
+            State.State(
+            'battle', self.enterBattle, self.exitBattle, [
+                'walk', 'teleportOut', 'died']),
+            State.State(
+            'fallDown', self.enterFallDown, self.exitFallDown, [
+                'walk', 'died', 'teleportOut']),
+            State.State(
+            'squished', self.enterSquished, self.exitSquished, [
+                'walk', 'died', 'teleportOut']),
+            State.State('teleportIn', self.enterTeleportIn, self.exitTeleportIn, ['walk',
+                                                                                  'teleportOut',
+                                                                                  'quietZone',
+                                                                                  'died']),
+            State.State('teleportOut', self.enterTeleportOut, self.exitTeleportOut, ['teleportIn',
+                                                                                     'FLA',
+                                                                                     'quietZone',
+                                                                                     'WaitForBattle']),
+            State.State(
+            'DFA', self.enterDFA, self.exitDFA, [
+                'DFAReject', 'teleportOut']),
+            State.State(
+            'DFAReject',
+            self.enterDFAReject,
+            self.exitDFAReject,
+            ['walkteleportOut']),
+            State.State(
+            'died',
+            self.enterDied,
+            self.exitDied,
+            ['teleportOut']),
+            State.State('FLA', self.enterFLA, self.exitFLA, ['quietZone']),
+            State.State(
+            'quietZone',
+            self.enterQuietZone,
+            self.exitQuietZone,
+            ['teleportIn']),
+            State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
 
     def load(self):
         self.parentFSM.getStateNamed('mintInterior').addChild(self.fsm)
@@ -83,7 +110,7 @@ class MintInterior(BattlePlace.BattlePlace):
         base.cr.forbidCheesyEffects(1)
         self._telemLimiter = TLGatherAllAvs('MintInterior', RotationLimitToH)
 
-        def commence(self = self):
+        def commence(self=self):
             NametagGlobals.setMasterArrowsOn(1)
             self.fsm.request(requestStatus['how'], [requestStatus])
             base.playMusic(self.music, looping=1, volume=0.8)
@@ -91,14 +118,19 @@ class MintInterior(BattlePlace.BattlePlace):
             mint = bboard.get(DistributedMint.DistributedMint.ReadyPost)
             self.loader.hood.spawnTitleText(mint.mintId, mint.floorNum)
 
-        self.mintReadyWatcher = BulletinBoardWatcher.BulletinBoardWatcher('MintReady', DistributedMint.DistributedMint.ReadyPost, commence)
+        self.mintReadyWatcher = BulletinBoardWatcher.BulletinBoardWatcher(
+            'MintReady', DistributedMint.DistributedMint.ReadyPost, commence)
         self.mintDefeated = 0
-        self.acceptOnce(DistributedMint.DistributedMint.WinEvent, self.handleMintWinEvent)
+        self.acceptOnce(
+            DistributedMint.DistributedMint.WinEvent,
+            self.handleMintWinEvent)
         if __debug__ and 0:
-            self.accept('f10', lambda : messenger.send(DistributedMint.DistributedMint.WinEvent))
+            self.accept(
+                'f10', lambda: messenger.send(
+                    DistributedMint.DistributedMint.WinEvent))
         self.confrontedBoss = 0
 
-        def handleConfrontedBoss(self = self):
+        def handleConfrontedBoss(self=self):
             self.confrontedBoss = 1
 
         self.acceptOnce('localToonConfrontedMintBoss', handleConfrontedBoss)
@@ -116,7 +148,7 @@ class MintInterior(BattlePlace.BattlePlace):
         self.ignoreAll()
         del self.mintReadyWatcher
 
-    def enterWalk(self, teleportIn = 0):
+    def enterWalk(self, teleportIn=0):
         BattlePlace.BattlePlace.enterWalk(self, teleportIn)
         self.ignore('teleportQuery')
         base.localAvatar.setTeleportAvailable(0)
@@ -147,7 +179,11 @@ class MintInterior(BattlePlace.BattlePlace):
     def enterTownBattle(self, event):
         mult = ToontownBattleGlobals.getMintCreditMultiplier(self.zoneId)
         base.localAvatar.inventory.setBattleCreditMultiplier(mult)
-        self.loader.townBattle.enter(event, self.fsm.getStateNamed('battle'), bldg=1, creditMultiplier=mult)
+        self.loader.townBattle.enter(
+            event,
+            self.fsm.getStateNamed('battle'),
+            bldg=1,
+            creditMultiplier=mult)
 
     def exitBattle(self):
         MintInterior.notify.debug('exitBattle')
@@ -155,7 +191,7 @@ class MintInterior(BattlePlace.BattlePlace):
         self.loader.music.stop()
         base.playMusic(self.music, looping=1, volume=0.8)
 
-    def enterStickerBook(self, page = None):
+    def enterStickerBook(self, page=None):
         BattlePlace.BattlePlace.enterStickerBook(self, page)
         self.ignore('teleportQuery')
         base.localAvatar.setTeleportAvailable(0)
@@ -170,7 +206,8 @@ class MintInterior(BattlePlace.BattlePlace):
 
     def enterTeleportOut(self, requestStatus):
         MintInterior.notify.debug('enterTeleportOut()')
-        BattlePlace.BattlePlace.enterTeleportOut(self, requestStatus, self.__teleportOutDone)
+        BattlePlace.BattlePlace.enterTeleportOut(
+            self, requestStatus, self.__teleportOutDone)
 
     def __processLeaveRequest(self, requestStatus):
         hoodId = requestStatus['hoodId']
@@ -204,16 +241,16 @@ class MintInterior(BattlePlace.BattlePlace):
             zoneId = ZoneUtil.getSafeZoneId(base.localAvatar.defaultZone)
         self.fsm.request('teleportOut', [{'loader': ZoneUtil.getLoaderName(zoneId),
                                          'where': ZoneUtil.getToonWhereName(zoneId),
-                                         'how': 'teleportIn',
-                                         'hoodId': zoneId,
-                                         'zoneId': zoneId,
-                                         'shardId': None,
-                                         'avId': -1}])
+                                          'how': 'teleportIn',
+                                          'hoodId': zoneId,
+                                          'zoneId': zoneId,
+                                          'shardId': None,
+                                          'avId': -1}])
 
-    def enterDied(self, requestStatus, callback = None):
+    def enterDied(self, requestStatus, callback=None):
         MintInterior.notify.debug('enterDied')
 
-        def diedDone(requestStatus, self = self, callback = callback):
+        def diedDone(requestStatus, self=self, callback=callback):
             if callback is not None:
                 callback()
             messenger.send('leavingMint')
@@ -225,9 +262,13 @@ class MintInterior(BattlePlace.BattlePlace):
 
     def enterFLA(self, requestStatus):
         MintInterior.notify.debug('enterFLA')
-        self.flaDialog = TTDialog.TTGlobalDialog(message=TTLocalizer.ForcedLeaveMintAckMsg, doneEvent='FLADone', style=TTDialog.Acknowledge, fadeScreen=1)
+        self.flaDialog = TTDialog.TTGlobalDialog(
+            message=TTLocalizer.ForcedLeaveMintAckMsg,
+            doneEvent='FLADone',
+            style=TTDialog.Acknowledge,
+            fadeScreen=1)
 
-        def continueExit(self = self, requestStatus = requestStatus):
+        def continueExit(self=self, requestStatus=requestStatus):
             self.__processLeaveRequest(requestStatus)
 
         self.accept('FLADone', continueExit)

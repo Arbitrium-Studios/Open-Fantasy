@@ -8,6 +8,7 @@ from toontown.minigame import TwoDTreasureMgr
 from toontown.minigame import TwoDSpawnPointMgr
 from toontown.minigame import TwoDStomperMgr
 
+
 class TwoDSection(DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('TwoDSection')
 
@@ -73,20 +74,25 @@ class TwoDSection(DirectObject):
         self.blocksNP = NodePath('Blocks')
         self.blocksNP.reparentTo(self.sectionNP)
         if self.blockList[0][1][0] != (0, 0, 12):
-            self.notify.warning('First block of section %s does not start at (0, 0, 12)' % self.sectionTypeNum)
+            self.notify.warning(
+                'First block of section %s does not start at (0, 0, 12)' %
+                self.sectionTypeNum)
         for index in range(0, len(self.blockList)):
             blockAttribs = self.blockList[index]
             fileName = ToonBlitzGlobals.BlockTypes[blockAttribs[0]][0]
             blockIndex = int(fileName[-1])
             blockType = self.sectionMgr.game.assetMgr.blockTypes[blockIndex]
             sectionizedId = self.getSectionizedId(index)
-            newBlock = TwoDBlock.TwoDBlock(blockType, sectionizedId, blockAttribs)
+            newBlock = TwoDBlock.TwoDBlock(
+                blockType, sectionizedId, blockAttribs)
             newBlock.model.reparentTo(self.blocksNP)
             self.blocks.append(newBlock)
 
         self.enemyMgr = TwoDEnemyMgr.TwoDEnemyMgr(self, self.enemyList)
-        self.treasureMgr = TwoDTreasureMgr.TwoDTreasureMgr(self, self.treasureList, self.enemyList)
-        self.spawnPointMgr = TwoDSpawnPointMgr.TwoDSpawnPointMgr(self, self.spawnPointList)
+        self.treasureMgr = TwoDTreasureMgr.TwoDTreasureMgr(
+            self, self.treasureList, self.enemyList)
+        self.spawnPointMgr = TwoDSpawnPointMgr.TwoDSpawnPointMgr(
+            self, self.spawnPointList)
         self.stomperMgr = TwoDStomperMgr.TwoDStomperMgr(self, self.stomperList)
         if self.sectionTypeNum == 'end':
             self.spawnPointMgr.setupLastSavePointHandle()

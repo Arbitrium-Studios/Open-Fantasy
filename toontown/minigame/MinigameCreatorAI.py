@@ -28,8 +28,10 @@ simbase.forcedMinigameId = simbase.config.GetInt('minigame-id', 0)
 RequestMinigame = {}
 MinigameZoneRefs = {}
 
-def createMinigame(air, playerArray, trolleyZone, minigameZone = None, previousGameId = ToontownGlobals.NoPreviousGameId, newbieIds = [], startingVotes = None, metagameRound = -1, desiredNextGame = None):
-    if minigameZone == None:
+
+def createMinigame(air, playerArray, trolleyZone, minigameZone=None, previousGameId=ToontownGlobals.NoPreviousGameId,
+                   newbieIds=[], startingVotes=None, metagameRound=-1, desiredNextGame=None):
+    if minigameZone is None:
         minigameZone = air.allocateZone()
     acquireMinigameZone(minigameZone)
     mgId = None
@@ -37,18 +39,19 @@ def createMinigame(air, playerArray, trolleyZone, minigameZone = None, previousG
     mgSzId = None
     for avId in playerArray:
         request = RequestMinigame.get(avId)
-        if request != None:
+        if request is not None:
             mgId, mgKeep, mgDiff, mgSzId = request
             if not mgKeep:
                 del RequestMinigame[avId]
             break
 
-    if mgId != None:
+    if mgId is not None:
         pass
     elif simbase.forcedMinigameId:
         mgId = simbase.forcedMinigameId
     else:
-        randomList = list(copy.copy(ToontownGlobals.MinigamePlayerMatrix[len(playerArray)]))
+        randomList = list(
+            copy.copy(ToontownGlobals.MinigamePlayerMatrix[len(playerArray)]))
         if simbase.air.useAllMinigames and len(playerArray) > 1:
             randomList = list(copy.copy(ToontownGlobals.MinigameIDs))
             for gameId in [ToontownGlobals.TravelGameId]:
@@ -70,23 +73,23 @@ def createMinigame(air, playerArray, trolleyZone, minigameZone = None, previousG
             elif desiredNextGame:
                 mgId = desiredNextGame
     mgCtors = {ToontownGlobals.RaceGameId: DistributedRaceGameAI.DistributedRaceGameAI,
-     ToontownGlobals.CannonGameId: DistributedCannonGameAI.DistributedCannonGameAI,
-     ToontownGlobals.TagGameId: DistributedTagGameAI.DistributedTagGameAI,
-     ToontownGlobals.PatternGameId: DistributedPatternGameAI.DistributedPatternGameAI,
-     ToontownGlobals.RingGameId: DistributedRingGameAI.DistributedRingGameAI,
-     ToontownGlobals.MazeGameId: DistributedMazeGameAI.DistributedMazeGameAI,
-     ToontownGlobals.TugOfWarGameId: DistributedTugOfWarGameAI.DistributedTugOfWarGameAI,
-     ToontownGlobals.CatchGameId: DistributedCatchGameAI.DistributedCatchGameAI,
-     ToontownGlobals.DivingGameId: DistributedDivingGameAI.DistributedDivingGameAI,
-     ToontownGlobals.TargetGameId: DistributedTargetGameAI.DistributedTargetGameAI,
-     ToontownGlobals.MinigameTemplateId: DistributedMinigameTemplateAI.DistributedMinigameTemplateAI,
-     ToontownGlobals.PairingGameId: DistributedPairingGameAI.DistributedPairingGameAI,
-     ToontownGlobals.VineGameId: DistributedVineGameAI.DistributedVineGameAI,
-     ToontownGlobals.IceGameId: DistributedIceGameAI.DistributedIceGameAI,
-     ToontownGlobals.CogThiefGameId: DistributedCogThiefGameAI.DistributedCogThiefGameAI,
-     ToontownGlobals.TwoDGameId: DistributedTwoDGameAI.DistributedTwoDGameAI,
-     ToontownGlobals.TravelGameId: DistributedTravelGameAI.DistributedTravelGameAI,
-     ToontownGlobals.PhotoGameId: DistributedPhotoGameAI.DistributedPhotoGameAI}
+               ToontownGlobals.CannonGameId: DistributedCannonGameAI.DistributedCannonGameAI,
+               ToontownGlobals.TagGameId: DistributedTagGameAI.DistributedTagGameAI,
+               ToontownGlobals.PatternGameId: DistributedPatternGameAI.DistributedPatternGameAI,
+               ToontownGlobals.RingGameId: DistributedRingGameAI.DistributedRingGameAI,
+               ToontownGlobals.MazeGameId: DistributedMazeGameAI.DistributedMazeGameAI,
+               ToontownGlobals.TugOfWarGameId: DistributedTugOfWarGameAI.DistributedTugOfWarGameAI,
+               ToontownGlobals.CatchGameId: DistributedCatchGameAI.DistributedCatchGameAI,
+               ToontownGlobals.DivingGameId: DistributedDivingGameAI.DistributedDivingGameAI,
+               ToontownGlobals.TargetGameId: DistributedTargetGameAI.DistributedTargetGameAI,
+               ToontownGlobals.MinigameTemplateId: DistributedMinigameTemplateAI.DistributedMinigameTemplateAI,
+               ToontownGlobals.PairingGameId: DistributedPairingGameAI.DistributedPairingGameAI,
+               ToontownGlobals.VineGameId: DistributedVineGameAI.DistributedVineGameAI,
+               ToontownGlobals.IceGameId: DistributedIceGameAI.DistributedIceGameAI,
+               ToontownGlobals.CogThiefGameId: DistributedCogThiefGameAI.DistributedCogThiefGameAI,
+               ToontownGlobals.TwoDGameId: DistributedTwoDGameAI.DistributedTwoDGameAI,
+               ToontownGlobals.TravelGameId: DistributedTravelGameAI.DistributedTravelGameAI,
+               ToontownGlobals.PhotoGameId: DistributedPhotoGameAI.DistributedPhotoGameAI}
     if ALLOW_TEMP_MINIGAMES:
         from .TempMinigameAI import TempMgCtors
         for key, value in list(TempMgCtors.items()):
@@ -101,7 +104,7 @@ def createMinigame(air, playerArray, trolleyZone, minigameZone = None, previousG
     mg.setNewbieIds(newbieIds)
     mg.setTrolleyZone(trolleyZone)
     mg.setDifficultyOverrides(mgDiff, mgSzId)
-    if startingVotes == None:
+    if startingVotes is None:
         for avId in playerArray:
             mg.setStartingVote(avId, TravelGameGlobals.DefaultStartingVotes)
 
@@ -110,7 +113,9 @@ def createMinigame(air, playerArray, trolleyZone, minigameZone = None, previousG
             avId = playerArray[index]
             votes = startingVotes[index]
             if votes < 0:
-                print('createMinigame negative votes, avId=%s votes=%s' % (avId, votes))
+                print(
+                    'createMinigame negative votes, avId=%s votes=%s' %
+                    (avId, votes))
                 votes = 0
             mg.setStartingVote(avId, votes)
 
@@ -119,7 +124,7 @@ def createMinigame(air, playerArray, trolleyZone, minigameZone = None, previousG
     toons = []
     for id in playerArray:
         toon = simbase.air.doId2do.get(id)
-        if toon != None:
+        if toon is not None:
             toons.append(toon)
 
     for toon in toons:
@@ -144,25 +149,26 @@ def releaseMinigameZone(zoneId):
         simbase.air.deallocateZone(zoneId)
 
 
-def removeUnreleasedMinigames(startList, increaseChanceOfNewGames = 0):
+def removeUnreleasedMinigames(startList, increaseChanceOfNewGames=0):
     randomList = startList[:]
     for gameId in ToontownGlobals.MinigameReleaseDates:
         dateTuple = ToontownGlobals.MinigameReleaseDates[gameId]
         currentTime = time.time()
         releaseTime = time.mktime((dateTuple[0],
-         dateTuple[1],
-         dateTuple[2],
-         0,
-         0,
-         0,
-         0,
-         0,
-         -1))
+                                   dateTuple[1],
+                                   dateTuple[2],
+                                   0,
+                                   0,
+                                   0,
+                                   0,
+                                   0,
+                                   -1))
         releaseTimePlus1Week = releaseTime + 7 * 24 * 60 * 60
         if currentTime < releaseTime:
             if gameId in randomList:
                 doRemove = True
-                if gameId == ToontownGlobals.CogThiefGameId and simbase.air.config.GetBool('force-allow-thief-game', 0):
+                if gameId == ToontownGlobals.CogThiefGameId and simbase.air.config.GetBool(
+                        'force-allow-thief-game', 0):
                     doRemove = False
                     if increaseChanceOfNewGames:
                         randomList += [gameId] * 4

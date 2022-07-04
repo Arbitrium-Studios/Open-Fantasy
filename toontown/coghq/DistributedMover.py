@@ -14,6 +14,7 @@ from toontown.coghq import BattleBlocker
 import random
 from math import *
 
+
 class DistributedMover(BasicEntities.DistributedNodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMover')
     laserFieldModels = ['phase_9/models/cogHQ/square_stomper']
@@ -111,7 +112,19 @@ class DistributedMover(BasicEntities.DistributedNodePathEntity):
             if self.cycleType in 'linear':
                 myBlend = 'noBlend'
             self.moverIval = Sequence()
-            firstIVal = LerpPosHprInterval(self.moverNode, timeJump, Vec3(target.getPos(self)[0], target.getPos(self)[1], target.getPos(self)[2]), Vec3(target.getHpr(self)[0], target.getHpr(self)[1], target.getHpr(self)[2]), blendType=myBlend, fluid=1)
+            firstIVal = LerpPosHprInterval(
+                self.moverNode,
+                timeJump,
+                Vec3(
+                    target.getPos(self)[0],
+                    target.getPos(self)[1],
+                    target.getPos(self)[2]),
+                Vec3(
+                    target.getHpr(self)[0],
+                    target.getHpr(self)[1],
+                    target.getHpr(self)[2]),
+                blendType=myBlend,
+                fluid=1)
             self.moverIval.append(firstIVal)
             if self.cycleType in 'linear':
                 for linearCycle in range(10):
@@ -119,7 +132,11 @@ class DistributedMover(BasicEntities.DistributedNodePathEntity):
 
             if self.cycleType != 'oneWay':
                 self.moverIval.append(Wait(self.pos1Wait))
-                self.moverIval.append(LerpPosHprInterval(self.moverNode, self.pos1Move, Vec3(0, 0, 0), Vec3(0, 0, 0), blendType=myBlend, fluid=1))
+                self.moverIval.append(
+                    LerpPosHprInterval(
+                        self.moverNode, self.pos1Move, Vec3(
+                            0, 0, 0), Vec3(
+                            0, 0, 0), blendType=myBlend, fluid=1))
             if self.cycleType == 'loop':
                 self.moverIval.append(Wait(self.pos0Wait))
             self.moverIval.start()

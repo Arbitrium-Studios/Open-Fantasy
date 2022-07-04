@@ -4,8 +4,11 @@ from . import SuitPlannerBase, SuitBase, SuitDNA
 from direct.directnotify import DirectNotifyGlobal
 from toontown.battle import SuitBattleGlobals
 
-class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.SuitBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedSuitBaseAI')
+
+class DistributedSuitBaseAI(
+        DistributedAvatarAI.DistributedAvatarAI, SuitBase.SuitBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedSuitBaseAI')
 
     def __init__(self, air, suitPlanner):
         DistributedAvatarAI.DistributedAvatarAI.__init__(self, air)
@@ -32,7 +35,7 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
         return
 
     def requestRemoval(self):
-        if self.sp != None:
+        if self.sp is not None:
             self.sp.removeSuit(self)
         else:
             self.requestDelete()
@@ -69,7 +72,9 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
         if self.dna:
             return self.dna.makeNetString()
         else:
-            self.notify.debug('No dna has been created for suit %d!' % self.getDoId())
+            self.notify.debug(
+                'No dna has been created for suit %d!' %
+                self.getDoId())
             return ''
 
     def b_setBrushOff(self, index):
@@ -87,7 +92,7 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
         self.sendUpdateToAvatarId(toonId, 'denyBattle', [])
 
     def b_setSkeleRevives(self, num):
-        if num == None:
+        if num is None:
             num = 0
         self.setSkeleRevives(num)
         self.d_setSkeleRevives(self.getSkeleRevives())
@@ -100,7 +105,7 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
         return self.skeleRevives
 
     def setSkeleRevives(self, num):
-        if num == None:
+        if num is None:
             num = 0
         self.skeleRevives = num
         if num > self.maxSkeleRevives:

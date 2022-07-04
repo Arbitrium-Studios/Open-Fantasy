@@ -1,6 +1,7 @@
 from .SCMenu import SCMenu
 from .SCEmoteTerminal import SCEmoteTerminal
 
+
 class SCEmoteMenu(SCMenu):
 
     def __init__(self):
@@ -15,7 +16,7 @@ class SCEmoteMenu(SCMenu):
         self.clearMenu()
         try:
             lt = base.localAvatar
-        except:
+        except BaseException:
             return
 
         for i in range(len(lt.emoteAccess)):

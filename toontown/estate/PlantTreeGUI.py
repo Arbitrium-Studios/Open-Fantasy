@@ -6,6 +6,7 @@ from direct.fsm import StateData
 from toontown.toonbase.ToontownBattleGlobals import gagIsPaidOnly
 from toontown.toontowngui.TeaserPanel import TeaserPanel
 
+
 class PlantTreeGUI(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('PlantTreeGUI')
 
@@ -36,7 +37,9 @@ class PlantTreeGUI(StateData.StateData):
         if base.localAvatar.inventory.numItem(track, level) > 0:
             messenger.send(self.doneEvent, [True, track, level])
         else:
-            self.notify.error("An item we don't have: track %s level %s was selected." % (track, level))
+            self.notify.error(
+                "An item we don't have: track %s level %s was selected." %
+                (track, level))
 
     def __handleCancel(self):
         messenger.send(self.doneEvent, [False, None, None])

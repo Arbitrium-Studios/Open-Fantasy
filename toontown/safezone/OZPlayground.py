@@ -11,6 +11,7 @@ from toontown.safezone import PicnicBasket
 from toontown.safezone import GolfKart
 from direct.task.Task import Task
 
+
 class OZPlayground(Playground.Playground):
     waterLevel = -0.53
 
@@ -20,7 +21,12 @@ class OZPlayground(Playground.Playground):
         self.picnicBasketBlockDoneEvent = 'picnicBasketBlockDone'
         self.cameraSubmerged = -1
         self.toonSubmerged = -1
-        self.fsm.addState(State.State('picnicBasketBlock', self.enterPicnicBasketBlock, self.exitPicnicBasketBlock, ['walk']))
+        self.fsm.addState(
+            State.State(
+                'picnicBasketBlock',
+                self.enterPicnicBasketBlock,
+                self.exitPicnicBasketBlock,
+                ['walk']))
         state = self.fsm.getStateNamed('walk')
         state.addTransition('picnicBasketBlock')
         self.picnicBasketDoneEvent = 'picnicBasketDone'
@@ -48,7 +54,9 @@ class OZPlayground(Playground.Playground):
         self.accept(doneEvent, self.enterDFACallback, [requestStatus])
         self.dfa = DownloadForceAcknowledge.DownloadForceAcknowledge(doneEvent)
         if requestStatus['hoodId'] == ToontownGlobals.MyEstate:
-            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.MyEstate))
+            self.dfa.enter(
+                base.cr.hoodMgr.getPhaseFromHood(
+                    ToontownGlobals.MyEstate))
         else:
             self.dfa.enter(5)
 
@@ -109,13 +117,22 @@ class OZPlayground(Playground.Playground):
         reason = requestStatus.get('reason')
         if reason == RaceGlobals.Exit_Barrier:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RaceTimeout, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RaceTimeout,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         elif reason == RaceGlobals.Exit_Slow:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RacerTooSlow, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RacerTooSlow,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         elif reason == RaceGlobals.Exit_BarrierNoRefund:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RaceTimeoutNoRefund, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RaceTimeoutNoRefund,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         self.toonSubmerged = -1
         taskMgr.remove('oz-check-toon-underwater')
         Playground.Playground.enterTeleportIn(self, requestStatus)
@@ -138,7 +155,12 @@ class OZPlayground(Playground.Playground):
         base.localAvatar.b_setAnimState('off', 1)
         base.localAvatar.cantLeaveGame = 1
         self.accept(self.picnicBasketDoneEvent, self.handlePicnicBasketDone)
-        self.trolley = PicnicBasket.PicnicBasket(self, self.fsm, self.picnicBasketDoneEvent, picnicBasket.getDoId(), picnicBasket.seatNumber)
+        self.trolley = PicnicBasket.PicnicBasket(
+            self,
+            self.fsm,
+            self.picnicBasketDoneEvent,
+            picnicBasket.getDoId(),
+            picnicBasket.seatNumber)
         self.trolley.load()
         self.trolley.enter()
 
@@ -164,7 +186,10 @@ class OZPlayground(Playground.Playground):
             self.doneStatus = doneStatus
             messenger.send(self.doneEvent)
         else:
-            self.notify.error('Unknown mode: ' + where + ' in handleStartingBlockDone')
+            self.notify.error(
+                'Unknown mode: ' +
+                where +
+                ' in handleStartingBlockDone')
 
     def handlePicnicBasketDone(self, doneStatus):
         self.notify.debug('handling picnic basket done event')
@@ -174,7 +199,10 @@ class OZPlayground(Playground.Playground):
         elif mode == 'exit':
             self.fsm.request('walk')
         else:
-            self.notify.error('Unknown mode: ' + mode + ' in handlePicnicBasketDone')
+            self.notify.error(
+                'Unknown mode: ' +
+                mode +
+                ' in handlePicnicBasketDone')
 
     def showPaths(self):
         from toontown.classicchars import CCharPaths

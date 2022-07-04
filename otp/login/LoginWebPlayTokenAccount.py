@@ -2,8 +2,10 @@ from pandac.PandaModules import *
 from direct.directnotify import DirectNotifyGlobal
 from . import LoginTTAccount
 
+
 class LoginWebPlayTokenAccount(LoginTTAccount.LoginTTAccount):
-    notify = DirectNotifyGlobal.directNotify.newCategory('LoginWebPlayTokenAccount')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'LoginWebPlayTokenAccount')
 
     def supportsRelogin(self):
         return 0
@@ -29,7 +31,7 @@ class LoginWebPlayTokenAccount(LoginTTAccount.LoginTTAccount):
     def changePassword(self, loginName, password, newPassword):
         pass
 
-    def requestPwdReminder(self, email = None, acctName = None):
+    def requestPwdReminder(self, email=None, acctName=None):
         pass
 
     def cancelAccount(self, loginName, password):

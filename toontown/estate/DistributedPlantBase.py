@@ -5,8 +5,10 @@ from direct.showbase.ShowBase import *
 from . import GardenGlobals
 from toontown.toonbase import TTLocalizer
 
+
 class DistributedPlantBase(DistributedLawnDecor.DistributedLawnDecor):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPlantBase')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedPlantBase')
 
     def __init__(self, cr):
         DistributedLawnDecor.DistributedLawnDecor.__init__(self, cr)
@@ -85,12 +87,12 @@ class DistributedPlantBase(DistributedLawnDecor.DistributedLawnDecor):
     def canBeHarvested(self):
         return True
 
-    def handleEnterPlot(self, colEntry = None):
+    def handleEnterPlot(self, colEntry=None):
         dist = self.getDistance(localAvatar)
         self.accept('water-plant', self.__handleWatering)
         base.localAvatar.addShovelRelatedDoId(self.doId)
 
-    def handleExitPlot(self, entry = None):
+    def handleExitPlot(self, entry=None):
         DistributedLawnDecor.DistributedLawnDecor.handleExitPlot(self, entry)
         base.localAvatar.removeShovelRelatedDoId(self.doId)
         self.ignore('water-plant')
@@ -198,12 +200,22 @@ class DistributedPlantBase(DistributedLawnDecor.DistributedLawnDecor):
         sound = loader.loadSfx('phase_5/audio/sfx/firehose_spray.ogg')
         sound.setPlayRate(0.75)
         waterTrack = Parallel()
-        waterTrack.append(Sequence(Parallel(ActorInterval(toon, 'water'), SoundInterval(sound, node=toon, volume=0.5)), Func(toon.loop, 'neutral')))
+        waterTrack.append(
+            Sequence(
+                Parallel(
+                    ActorInterval(
+                        toon, 'water'), SoundInterval(
+                        sound, node=toon, volume=0.5)), Func(
+                    toon.loop, 'neutral')))
         if hasattr(self, 'dropShadow') and self.dropShadow:
             newColor = self.dropShadow.getColor()
             alpha = min(1.0, newColor.getW() + 1 / 5.0)
             newColor.setW(alpha)
-            waterTrack.append(LerpColorInterval(self.dropShadow, 2.1, newColor))
+            waterTrack.append(
+                LerpColorInterval(
+                    self.dropShadow,
+                    2.1,
+                    newColor))
         return waterTrack
 
     def adjustWaterIndicator(self):

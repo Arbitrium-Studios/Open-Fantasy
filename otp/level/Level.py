@@ -4,6 +4,7 @@ from . import LevelConstants
 from direct.showbase.PythonUtil import lineInfo, uniqueElements
 import types
 
+
 class Level:
     notify = DirectNotifyGlobal.directNotify.newCategory('Level')
 
@@ -25,11 +26,16 @@ class Level:
         self.nonlocalEntIds = {}
         self.nothingEntIds = {}
         self.entityCreator = self.createEntityCreator()
-        self.entType2ids = self.levelSpec.getEntType2ids(self.levelSpec.getAllEntIds())
+        self.entType2ids = self.levelSpec.getEntType2ids(
+            self.levelSpec.getAllEntIds())
         for entType in self.entityCreator.getEntityTypes():
             self.entType2ids.setdefault(entType, [])
 
-        self.createAllEntities(priorityTypes=['levelMgr', 'zone', 'propSpinner'])
+        self.createAllEntities(
+            priorityTypes=[
+                'levelMgr',
+                'zone',
+                'propSpinner'])
         self.levelMgrEntity = self.getEntity(LevelConstants.LevelMgrEntId)
         self.uberZoneEntity = self.getEntity(LevelConstants.UberZoneEntId)
         self.initialized = 1
@@ -61,9 +67,11 @@ class Level:
             del self.levelSpec
 
     def createEntityCreator(self):
-        Level.notify.error('concrete Level class must override %s' % lineInfo()[2])
+        Level.notify.error(
+            'concrete Level class must override %s' %
+            lineInfo()[2])
 
-    def createAllEntities(self, priorityTypes = []):
+    def createAllEntities(self, priorityTypes=[]):
         self.entities = {}
         entTypes = self.entityCreator.getEntityTypes()
         self.onLevelPreCreate()
@@ -80,15 +88,25 @@ class Level:
         self.nonlocalEntIds = {}
         self.nothingEntIds = {}
         if not uniqueElements(self.createdEntIds):
-            Level.notify.warning('%s: self.createdEntIds is not unique: %s' % (getattr(self, 'doId', None), self.createdEntIds))
+            Level.notify.warning(
+                '%s: self.createdEntIds is not unique: %s' %
+                (getattr(
+                    self,
+                    'doId',
+                    None),
+                    self.createdEntIds))
         while len(self.createdEntIds) > 0:
             entId = self.createdEntIds.pop()
             entity = self.getEntity(entId)
             if entity is not None:
-                Level.notify.debug('destroying %s %s' % (self.getEntityType(entId), entId))
+                Level.notify.debug(
+                    'destroying %s %s' %
+                    (self.getEntityType(entId), entId))
                 entity.destroy()
             else:
-                Level.notify.error('trying to destroy entity %s, but it is already gone' % entId)
+                Level.notify.error(
+                    'trying to destroy entity %s, but it is already gone' %
+                    entId)
 
         return
 
@@ -186,7 +204,10 @@ class Level:
 
     def onEntityCreate(self, entId):
         messenger.send(self.getEntityCreateEvent(entId))
-        messenger.send(self.getEntityOfTypeCreateEvent(self.getEntityType(entId)), [entId])
+        messenger.send(
+            self.getEntityOfTypeCreateEvent(
+                self.getEntityType(entId)),
+            [entId])
         if entId in self.entId2createCallbacks:
             for callback in self.entId2createCallbacks[entId]:
                 callback()
@@ -231,14 +252,14 @@ class Level:
         def getRemoveEntityEventName(self):
             return 'removeEntity-%s' % self.levelId
 
-        def handleAttribChange(self, entId, attrib, value, username = None):
+        def handleAttribChange(self, entId, attrib, value, username=None):
             entity = self.getEntity(entId)
             if entity is not None:
                 entity.handleAttribChange(attrib, value)
             messenger.send(self.getAttribChangeEventName(), [entId,
-             attrib,
-             value,
-             username])
+                                                             attrib,
+                                                             value,
+                                                             username])
             return
 
         def setEntityCreatorUsername(self, entId, editUsername):

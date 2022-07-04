@@ -3,6 +3,7 @@ if __dev__:
     from direct.showbase.PythonUtil import list2dict
     from . import EditorGlobals
 
+
 class EditMgrAI(EditMgrBase.EditMgrBase):
     if __dev__:
 
@@ -29,7 +30,8 @@ class EditMgrAI(EditMgrBase.EditMgrBase):
             data.update({'entId': id})
             self.lastAllocatedEntId = id
             self.level.setAttribChange(self.entId, 'insertEntity', data)
-            self.level.levelSpec.doSetAttrib(self.entId, 'requestNewEntity', None)
+            self.level.levelSpec.doSetAttrib(
+                self.entId, 'requestNewEntity', None)
             return
 
         def getSpecSaveEvent(self):

@@ -3,10 +3,12 @@ from direct.distributed import ClockDelta
 from direct.task import Task
 import random
 
+
 class LaserGameAvoid(LaserGameBase.LaserGameBase):
 
     def __init__(self, funcSuccess, funcFail, funcSendGrid, funcSetGrid):
-        LaserGameBase.LaserGameBase.__init__(self, funcSuccess, funcFail, funcSendGrid, funcSetGrid)
+        LaserGameBase.LaserGameBase.__init__(
+            self, funcSuccess, funcFail, funcSendGrid, funcSetGrid)
         self.setGridSize(8, 8)
         self.blankGrid()
         self.cycleName = simbase.air.trueUniqueName('AvoidGame')
@@ -44,7 +46,7 @@ class LaserGameAvoid(LaserGameBase.LaserGameBase):
 
         taskMgr.doMethodLater(2.5, self.__cycle, self.cycleName)
 
-    def __cycle(self, taskMgrFooler = 0):
+    def __cycle(self, taskMgrFooler=0):
         if not hasattr(self, 'gridNumX'):
             return Task.done
 

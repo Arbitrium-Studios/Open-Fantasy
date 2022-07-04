@@ -3,10 +3,12 @@ from pandac.PandaModules import OdeWorld, OdeSimpleSpace, OdeJointGroup, OdeUtil
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.ClockDelta import globalClockDelta
 
-class MinigamePhysicsWorldBase:
-    notify = DirectNotifyGlobal.directNotify.newCategory('MinigamePhysicsWorldBase')
 
-    def __init__(self, canRender = 0):
+class MinigamePhysicsWorldBase:
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'MinigamePhysicsWorldBase')
+
+    def __init__(self, canRender=0):
         self.canRender = canRender
         self.world = OdeWorld()
         self.space = OdeSimpleSpace()
@@ -133,7 +135,13 @@ class MinigamePhysicsWorldBase:
             for count in range(self.jointMarkerCount):
                 pandaNodePathGeom = self.jointMarkers[count]
                 if count < self.colCount:
-                    pandaNodePathGeom.setPos(self.space.getContactData(count * 3 + 0), self.space.getContactData(count * 3 + 1), self.space.getContactData(count * 3 + 2))
+                    pandaNodePathGeom.setPos(
+                        self.space.getContactData(
+                            count * 3 + 0),
+                        self.space.getContactData(
+                            count * 3 + 1),
+                        self.space.getContactData(
+                            count * 3 + 2))
                 else:
                     pandaNodePathGeom.setPos(0.0, 0.0, -100.0)
 
@@ -164,7 +172,12 @@ class MinigamePhysicsWorldBase:
             odeBody = pair[1]
             if pandaNodePathGeom:
                 pandaNodePathGeom.setPos(odeBody.getPosition())
-                pandaNodePathGeom.setQuat(Quat(odeBody.getQuaternion()[0], odeBody.getQuaternion()[1], odeBody.getQuaternion()[2], odeBody.getQuaternion()[3]))
+                pandaNodePathGeom.setQuat(
+                    Quat(
+                        odeBody.getQuaternion()[0],
+                        odeBody.getQuaternion()[1],
+                        odeBody.getQuaternion()[2],
+                        odeBody.getQuaternion()[3]))
 
     def getOrderedContacts(self, entry):
         c0 = self.space.getCollideId(entry.getGeom1())

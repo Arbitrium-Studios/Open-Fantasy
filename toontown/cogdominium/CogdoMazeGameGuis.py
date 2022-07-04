@@ -11,10 +11,15 @@ from toontown.minigame.MazeMapGui import MazeMapGui
 from . import CogdoMazeGameGlobals as Globals
 from . import CogdoUtil
 
+
 class CogdoMazeMapGui(MazeMapGui):
 
     def __init__(self, mazeCollTable):
-        MazeMapGui.__init__(self, mazeCollTable, bgColor=Globals.MapGuiBgColor, fgColor=Globals.MapGuiFgColor)
+        MazeMapGui.__init__(
+            self,
+            mazeCollTable,
+            bgColor=Globals.MapGuiBgColor,
+            fgColor=Globals.MapGuiFgColor)
         self._suit2marker = {}
         self._initModel()
         self.setPos(*Globals.MapGuiPos)
@@ -112,7 +117,11 @@ class CogdoMazeMapGui(MazeMapGui):
 class CogdoMazeBossCodeFrame(DirectFrame):
 
     def __init__(self, id, code, modelToCopy):
-        DirectFrame.__init__(self, relief=None, state=DGG.NORMAL, sortOrder=DGG.BACKGROUND_SORT_INDEX)
+        DirectFrame.__init__(
+            self,
+            relief=None,
+            state=DGG.NORMAL,
+            sortOrder=DGG.BACKGROUND_SORT_INDEX)
         self._id = id
         self._model = modelToCopy.copyTo(self)
         self._model.setPos(0, 0, 0)
@@ -124,7 +133,23 @@ class CogdoMazeBossCodeFrame(DirectFrame):
         self._bg.hide()
         self._bossIcon.setBin('fixed', 2)
         self._bg.setBin('fixed', 3)
-        self._label = DirectLabel(parent=self._bg, relief=None, scale=Globals.BossCodeFrameLabelScale, text=code, pos=(0, 0, -0.03), text_align=TextNode.ACenter, text_fg=Globals.BossCodeFrameLabelNormalColor, text_shadow=(0, 0, 0, 0), text_font=ToontownGlobals.getSuitFont())
+        self._label = DirectLabel(
+            parent=self._bg,
+            relief=None,
+            scale=Globals.BossCodeFrameLabelScale,
+            text=code,
+            pos=(
+                0,
+                0,
+                -0.03),
+            text_align=TextNode.ACenter,
+            text_fg=Globals.BossCodeFrameLabelNormalColor,
+            text_shadow=(
+                0,
+                0,
+                0,
+                0),
+            text_font=ToontownGlobals.getSuitFont())
         return
 
     def destroy(self):
@@ -135,7 +160,14 @@ class CogdoMazeBossCodeFrame(DirectFrame):
         self.setHit(False)
         self._bossIconX.show()
         ToontownIntervals.cleanup('boss_code%i' % self._id)
-        ToontownIntervals.start(Sequence(Parallel(ToontownIntervals.getPresentGuiIval(self._bossIcon, '', startPos=(0, 0, -0.15))), Wait(1.0), ToontownIntervals.getPulseLargerIval(self._bg, ''), name='boss_code%i' % self._id))
+        ToontownIntervals.start(
+            Sequence(
+                Parallel(
+                    ToontownIntervals.getPresentGuiIval(
+                        self._bossIcon, '', startPos=(
+                            0, 0, -0.15))), Wait(1.0), ToontownIntervals.getPulseLargerIval(
+                    self._bg, ''), name='boss_code%i' %
+                self._id))
 
     def setHit(self, hit):
         if hit:
@@ -150,7 +182,11 @@ class CogdoMazeBossCodeFrame(DirectFrame):
 class CogdoMazeBossGui(DirectFrame):
 
     def __init__(self, code):
-        DirectFrame.__init__(self, relief=None, state=DGG.NORMAL, sortOrder=DGG.BACKGROUND_SORT_INDEX)
+        DirectFrame.__init__(
+            self,
+            relief=None,
+            state=DGG.NORMAL,
+            sortOrder=DGG.BACKGROUND_SORT_INDEX)
         self._code = str(code)
         self._codeLength = len(self._code)
         self._markersShown = 0
@@ -180,7 +216,24 @@ class CogdoMazeBossGui(DirectFrame):
         self._model.reparentTo(self)
         self._model.find('**/frame').setBin('fixed', 1)
         titleLabelPos = self._model.find('**/title_label_loc').getPos()
-        self._titleLabel = DirectLabel(parent=self, relief=None, scale=Globals.BossGuiTitleLabelScale, text=TTLocalizer.CogdoMazeGameBossGuiTitle.upper(), pos=titleLabelPos, text_align=TextNode.ACenter, text_fg=(0, 0, 0, 1), text_shadow=(0, 0, 0, 0), text_font=ToontownGlobals.getSuitFont())
+        self._titleLabel = DirectLabel(
+            parent=self,
+            relief=None,
+            scale=Globals.BossGuiTitleLabelScale,
+            text=TTLocalizer.CogdoMazeGameBossGuiTitle.upper(),
+            pos=titleLabelPos,
+            text_align=TextNode.ACenter,
+            text_fg=(
+                0,
+                0,
+                0,
+                1),
+            text_shadow=(
+                0,
+                0,
+                0,
+                0),
+            text_font=ToontownGlobals.getSuitFont())
         self._titleLabel.setBin('fixed', 1)
         bossCard = self._model.find('**/bossCard')
         self._openDoor = self._model.find('**/doorOpen')
@@ -207,7 +260,9 @@ class CogdoMazeBossGui(DirectFrame):
         if self._markersShown == self._codeLength:
             self._openDoor.unstash()
             self._closedDoor.stash()
-            ToontownIntervals.start(ToontownIntervals.getPulseLargerIval(self._openDoor, 'bosscodedoor'))
+            ToontownIntervals.start(
+                ToontownIntervals.getPulseLargerIval(
+                    self._openDoor, 'bosscodedoor'))
 
 
 class CogdoMazeHud:
@@ -218,7 +273,8 @@ class CogdoMazeHud:
         return
 
     def _initQuestArrow(self):
-        matchingGameGui = loader.loadModel('phase_3.5/models/gui/matching_game_gui')
+        matchingGameGui = loader.loadModel(
+            'phase_3.5/models/gui/matching_game_gui')
         arrow = matchingGameGui.find('**/minnieArrow')
         arrow.setScale(Globals.QuestArrowScale)
         arrow.setColor(*Globals.QuestArrowColor)
@@ -235,7 +291,7 @@ class CogdoMazeHud:
         self._questArrow = None
         return
 
-    def showQuestArrow(self, parent, nodeToPoint, offset = Point3(0, 0, 0)):
+    def showQuestArrow(self, parent, nodeToPoint, offset=Point3(0, 0, 0)):
         self._questArrowNodeToPoint = nodeToPoint
         self._questArrowParent = parent
         self._questArrowOffset = offset
@@ -261,6 +317,8 @@ class CogdoMazeHud:
 
     def _updateTask(self, task):
         if self._questArrowVisible:
-            self._questArrow.setPos(self._questArrowParent, self._questArrowOffset)
+            self._questArrow.setPos(
+                self._questArrowParent,
+                self._questArrowOffset)
             self._questArrow.lookAt(self._questArrowNodeToPoint)
         return Task.cont

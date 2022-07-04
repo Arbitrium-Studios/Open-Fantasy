@@ -20,6 +20,7 @@ from . import HouseGlobals
 from toontown.building import ToonInteriorColors
 from direct.showbase.MessengerGlobal import messenger
 
+
 class DistributedHouse(DistributedObject.DistributedObject):
     notify = directNotify.newCategory('DistributedHouse')
 
@@ -65,7 +66,7 @@ class DistributedHouse(DistributedObject.DistributedObject):
         return
 
     def clearNametag(self):
-        if self.nametag != None:
+        if self.nametag is not None:
             self.nametag.unmanage(base.marginManager)
             self.nametag.setAvatar(NodePath())
             self.nametag = None
@@ -75,12 +76,15 @@ class DistributedHouse(DistributedObject.DistributedObject):
         self.notify.debug('load')
         if not self.house_loaded:
             if self.housePosInd == 1:
-                houseModelIndex = base.config.GetInt('want-custom-house', HouseGlobals.HOUSE_DEFAULT)
+                houseModelIndex = base.config.GetInt(
+                    'want-custom-house', HouseGlobals.HOUSE_DEFAULT)
             else:
                 houseModelIndex = HouseGlobals.HOUSE_DEFAULT
-            houseModelIndex = base.config.GetInt('want-custom-house-all', houseModelIndex)
+            houseModelIndex = base.config.GetInt(
+                'want-custom-house-all', houseModelIndex)
             houseModel = self.cr.playGame.hood.loader.houseModels[houseModelIndex]
-            self.house = houseModel.copyTo(self.cr.playGame.hood.loader.houseNode[self.housePosInd])
+            self.house = houseModel.copyTo(
+                self.cr.playGame.hood.loader.houseNode[self.housePosInd])
             self.house_loaded = 1
             self.cr.playGame.hood.loader.houseId2house[self.doId] = self.house
             if houseModelIndex == HouseGlobals.HOUSE_DEFAULT:
@@ -114,7 +118,8 @@ class DistributedHouse(DistributedObject.DistributedObject):
         self.randomGenerator.seed(self.doId)
         houseColor = HouseGlobals.stairWood
         color = Vec4(houseColor[0], houseColor[1], houseColor[2], 1)
-        DNADoor.setupDoor(doorNP, door_origin, door_origin, self.dnaStore, str(self.doId), color)
+        DNADoor.setupDoor(doorNP, door_origin, door_origin,
+                          self.dnaStore, str(self.doId), color)
         self.__setupNamePlate()
         self.__setupFloorMat()
         self.__setupNametag()
@@ -166,7 +171,8 @@ class DistributedHouse(DistributedObject.DistributedObject):
         if self.name == '':
             return
         else:
-            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self.name)
+            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(
+                self.name)
         nameText.setText(houseName)
         self.nameText = nameText
         textHeight = nameText.getHeight() - 2
@@ -176,14 +182,22 @@ class DistributedHouse(DistributedObject.DistributedObject):
             xScale = 16.0 / textWidth
         sign_origin = self.house.find('**/sign_origin')
         pos = sign_origin.getPos()
-        sign_origin.setPosHpr(pos[0], pos[1], pos[2] + 0.15 * textHeight, 90, 0, 0)
+        sign_origin.setPosHpr(
+            pos[0],
+            pos[1],
+            pos[2] +
+            0.15 *
+            textHeight,
+            90,
+            0,
+            0)
         self.namePlate = sign_origin.attachNewNode(self.nameText)
         self.namePlate.setDepthWrite(0)
         self.namePlate.setPos(0, -0.05, 0)
         self.namePlate.setScale(xScale)
         return nameText
 
-    def __setupFloorMat(self, changeColor = True):
+    def __setupFloorMat(self, changeColor=True):
         if self.floorMat:
             self.floorMat.removeNode()
             del self.floorMat
@@ -206,7 +220,8 @@ class DistributedHouse(DistributedObject.DistributedObject):
         if self.name == '':
             return
         else:
-            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self.name)
+            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(
+                self.name)
         matText.setText(houseName)
         self.matText = matText
         textHeight = matText.getHeight() - 2
@@ -216,7 +231,8 @@ class DistributedHouse(DistributedObject.DistributedObject):
             xScale = 8.0 / textWidth
         mat_origin = self.house.find('**/mat_origin')
         pos = mat_origin.getPos()
-        mat_origin.setPosHpr(pos[0] - 0.15 * textHeight, pos[1], pos[2], 90, -90, 0)
+        mat_origin.setPosHpr(pos[0] - 0.15 * textHeight,
+                             pos[1], pos[2], 90, -90, 0)
         self.floorMat = mat_origin.attachNewNode(self.matText)
         self.floorMat.setDepthWrite(0)
         self.floorMat.setPos(0, -.025, 0)
@@ -229,7 +245,8 @@ class DistributedHouse(DistributedObject.DistributedObject):
         if self.name == '':
             houseName = ''
         else:
-            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self.name)
+            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(
+                self.name)
         self.nametag = NametagGroup()
         self.nametag.setFont(ToontownGlobals.getBuildingNametagFont())
         if TTLocalizer.BuildingNametagShadow:
@@ -250,7 +267,7 @@ class DistributedHouse(DistributedObject.DistributedObject):
         self.notify.debug('setHouseReady')
         try:
             self.House_initialized
-        except:
+        except BaseException:
             self.House_initialized = 1
             self.load()
 
@@ -356,7 +373,8 @@ class DistributedHouse(DistributedObject.DistributedObject):
         if self.name == '':
             return
         else:
-            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self.name)
+            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(
+                self.name)
         nameText.setText(houseName)
         self.nameText = nameText
         textHeight = nameText.getHeight() - 2
@@ -366,7 +384,15 @@ class DistributedHouse(DistributedObject.DistributedObject):
             xScale = 16.0 / textWidth
         sign_origin = self.house.find('**/sign_origin')
         pos = sign_origin.getPos()
-        sign_origin.setPosHpr(pos[0], pos[1], pos[2] + 0.15 * textHeight, 90, 0, 0)
+        sign_origin.setPosHpr(
+            pos[0],
+            pos[1],
+            pos[2] +
+            0.15 *
+            textHeight,
+            90,
+            0,
+            0)
         self.namePlate = sign_origin.attachNewNode(self.nameText)
         self.namePlate.setDepthWrite(0)
         self.namePlate.setPos(0, -0.05, 0)

@@ -4,6 +4,7 @@ from . import DistributedDoorAI, DistributedGagshopInteriorAI, FADoorCodes, Door
 from toontown.toon import NPCToons
 from toontown.quest import Quests
 
+
 class GagshopBuildingAI:
 
     def __init__(self, air, exteriorZone, interiorZone, blockNumber):
@@ -25,11 +26,14 @@ class GagshopBuildingAI:
         del self.interior
 
     def setup(self, blockNumber):
-        self.interior = DistributedGagshopInteriorAI.DistributedGagshopInteriorAI(blockNumber, self.air, self.interiorZone)
+        self.interior = DistributedGagshopInteriorAI.DistributedGagshopInteriorAI(
+            blockNumber, self.air, self.interiorZone)
         self.npcs = NPCToons.createNpcsInZone(self.air, self.interiorZone)
         self.interior.generateWithRequired(self.interiorZone)
-        door = DistributedDoorAI.DistributedDoorAI(self.air, blockNumber, DoorTypes.EXT_STANDARD)
-        insideDoor = DistributedDoorAI.DistributedDoorAI(self.air, blockNumber, DoorTypes.INT_STANDARD)
+        door = DistributedDoorAI.DistributedDoorAI(
+            self.air, blockNumber, DoorTypes.EXT_STANDARD)
+        insideDoor = DistributedDoorAI.DistributedDoorAI(
+            self.air, blockNumber, DoorTypes.INT_STANDARD)
         door.setOtherDoor(insideDoor)
         insideDoor.setOtherDoor(door)
         door.zoneId = self.exteriorZone

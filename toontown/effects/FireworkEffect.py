@@ -21,17 +21,21 @@ from toontown.effects.SkullBurst import SkullBurst
 from toontown.effects.SkullFlash import SkullFlash
 from toontown.effects.TrailExplosion import TrailExplosion
 from toontown.effects.IceCream import IceCream
-trailSfxNames = ['phase_4/audio/sfx/firework_whistle_01.ogg', 'phase_4/audio/sfx/firework_whistle_02.ogg']
+trailSfxNames = [
+    'phase_4/audio/sfx/firework_whistle_01.ogg',
+    'phase_4/audio/sfx/firework_whistle_02.ogg']
 burstSfxNames = ['phase_4/audio/sfx/firework_explosion_01.ogg',
- 'phase_4/audio/sfx/firework_explosion_02.ogg',
- 'phase_4/audio/sfx/firework_explosion_03.ogg',
- 'phase_4/audio/sfx/firework_distance_01.ogg',
- 'phase_4/audio/sfx/firework_distance_02.ogg',
- 'phase_4/audio/sfx/firework_distance_03.ogg']
+                 'phase_4/audio/sfx/firework_explosion_02.ogg',
+                 'phase_4/audio/sfx/firework_explosion_03.ogg',
+                 'phase_4/audio/sfx/firework_distance_01.ogg',
+                 'phase_4/audio/sfx/firework_distance_02.ogg',
+                 'phase_4/audio/sfx/firework_distance_03.ogg']
+
 
 class FireworkEffect(NodePath):
 
-    def __init__(self, burstEffectId, trailEffectId = FireworkTrailType.Default, velocity = Vec3(0, 0, 500), scale = 1.0, primaryColor = Vec4(1, 1, 1, 1), secondaryColor = None, burstDelay = 1.25):
+    def __init__(self, burstEffectId, trailEffectId=FireworkTrailType.Default, velocity=Vec3(
+            0, 0, 500), scale=1.0, primaryColor=Vec4(1, 1, 1, 1), secondaryColor=None, burstDelay=1.25):
         NodePath.__init__(self, 'FireworkEffect')
         self.burstTypeId = burstEffectId
         self.trailTypeId = trailEffectId
@@ -71,7 +75,13 @@ class FireworkEffect(NodePath):
         if not self.fireworkMainIval:
             self.fireworkMainIval = Parallel()
             self.fireworkMainIval.append(self.getTrailEffectsIval())
-            self.fireworkMainIval.append(Sequence(Wait(self.burstDelay), Func(self.cleanupTrailEffects), self.getBurstEffectsIval(), Func(self.cleanupBurstEffects), Func(self.cleanupEffect)))
+            self.fireworkMainIval.append(
+                Sequence(
+                    Wait(
+                        self.burstDelay), Func(
+                        self.cleanupTrailEffects), self.getBurstEffectsIval(), Func(
+                        self.cleanupBurstEffects), Func(
+                        self.cleanupEffect)))
         return self.fireworkMainIval
 
     def getTrailEffectsIval(self):
@@ -81,10 +91,16 @@ class FireworkEffect(NodePath):
                 self.trailEffectsIval = Wait(self.burstDelay)
                 return self.trailEffectsIval
             self.trailEffectsIval = Parallel()
-            self.trailEffectsIval.append(ProjectileInterval(self.effectsNode, startVel=self.velocity, duration=self.burstDelay, gravityMult=self.gravityMult))
+            self.trailEffectsIval.append(
+                ProjectileInterval(
+                    self.effectsNode,
+                    startVel=self.velocity,
+                    duration=self.burstDelay,
+                    gravityMult=self.gravityMult))
             if self.trailTypeId is None:
                 return self.trailEffectsIval
-            self.trailEffectsIval.append(Func(random.choice(self.trailSfx).play))
+            self.trailEffectsIval.append(
+                Func(random.choice(self.trailSfx).play))
             if base.config.GetInt('toontown-sfx-setting', 1) == 0:
                 if self.trailTypeId != FireworkTrailType.LongGlowSparkle:
                     self.trailTypeId = FireworkTrailType.Default
@@ -100,15 +116,15 @@ class FireworkEffect(NodePath):
                 r = 0.75
                 mColor = Vec4(1, 1, 1, 1)
                 vertex_list = [Vec4(r, 0.0, r, 1.0),
-                 Vec4(r, 0.0, -r, 1.0),
-                 Vec4(-r, 0.0, -r, 1.0),
-                 Vec4(-r, 0.0, r, 1.0),
-                 Vec4(r, 0.0, r, 1.0)]
+                               Vec4(r, 0.0, -r, 1.0),
+                               Vec4(-r, 0.0, -r, 1.0),
+                               Vec4(-r, 0.0, r, 1.0),
+                               Vec4(r, 0.0, r, 1.0)]
                 motion_color = [mColor,
-                 mColor,
-                 mColor,
-                 mColor,
-                 mColor]
+                                mColor,
+                                mColor,
+                                mColor,
+                                mColor]
                 trailEffect = PolyTrail(None, vertex_list, motion_color, 0.5)
                 trailEffect.setUnmodifiedVertexColors(motion_color)
                 trailEffect.reparentTo(self.effectsNode)
@@ -175,7 +191,8 @@ class FireworkEffect(NodePath):
                         trailEffect.setEffectColor(self.primaryColor)
                         trailEffect.setLifespan(1.0)
                         self.trailEffects.append(trailEffect)
-                        self.trailEffectsIval.append(Func(trailEffect.startLoop))
+                        self.trailEffectsIval.append(
+                            Func(trailEffect.startLoop))
         return self.trailEffectsIval
 
     def getBurstEffectsIval(self):
@@ -184,7 +201,8 @@ class FireworkEffect(NodePath):
             if self.burstTypeId is None:
                 return self.burstEffectsIval
             self.burstEffectsIval.append(Wait(0.5))
-            self.burstEffectsIval.append(Func(random.choice(self.burstSfx).play))
+            self.burstEffectsIval.append(
+                Func(random.choice(self.burstSfx).play))
             flash = FlashEffect()
             flash.reparentTo(self.effectsNode)
             flash.setEffectColor(self.primaryColor)
@@ -350,7 +368,8 @@ class FireworkEffect(NodePath):
                     explosion.reparentTo(self.effectsNode)
                     explosion.setEffectScale(self.scale)
                     explosion.setEffectColor(self.primaryColor)
-                    self.burstEffectsIval.append(Sequence(Wait(0.1), explosion.getTrack()))
+                    self.burstEffectsIval.append(
+                        Sequence(Wait(0.1), explosion.getTrack()))
                     self.burstEffects.append(explosion)
                 if base.config.GetInt('toontown-sfx-setting', 1) >= 1:
                     rays = RayBurst()
@@ -399,7 +418,8 @@ class FireworkEffect(NodePath):
                     explosion.reparentTo(self.effectsNode)
                     explosion.setEffectScale(self.scale)
                     explosion.setEffectColor(self.primaryColor)
-                    explosion.numTrails = 3 + base.config.GetInt('toontown-sfx-setting', 1)
+                    explosion.numTrails = 3 + \
+                        base.config.GetInt('toontown-sfx-setting', 1)
                     self.burstEffectsIval.append(explosion.getTrack())
                     self.burstEffects.append(explosion)
             elif self.burstTypeId == FireworkBurstType.IceCream:

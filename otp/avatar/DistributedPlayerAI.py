@@ -5,7 +5,9 @@ from otp.avatar import PlayerBase
 from otp.distributed.ClsendTracker import ClsendTracker
 from otp.otpbase import OTPGlobals
 
-class DistributedPlayerAI(DistributedAvatarAI.DistributedAvatarAI, PlayerBase.PlayerBase, ClsendTracker):
+
+class DistributedPlayerAI(
+        DistributedAvatarAI.DistributedAvatarAI, PlayerBase.PlayerBase, ClsendTracker):
 
     def __init__(self, air):
         DistributedAvatarAI.DistributedAvatarAI.__init__(self, air)
@@ -51,11 +53,16 @@ class DistributedPlayerAI(DistributedAvatarAI.DistributedAvatarAI, PlayerBase.Pl
         return True
 
     def setLocation(self, parentId, zoneId):
-        DistributedAvatarAI.DistributedAvatarAI.setLocation(self, parentId, zoneId)
+        DistributedAvatarAI.DistributedAvatarAI.setLocation(
+            self, parentId, zoneId)
         if self.isPlayerControlled():
             if not self.air._isValidPlayerLocation(parentId, zoneId):
-                self.notify.info('booting player %s for doing setLocation to (%s, %s)' % (self.doId, parentId, zoneId))
-                self.air.writeServerEvent('suspicious', self.doId, 'invalid setLocation: (%s, %s)' % (parentId, zoneId))
+                self.notify.info(
+                    'booting player %s for doing setLocation to (%s, %s)' %
+                    (self.doId, parentId, zoneId))
+                self.air.writeServerEvent(
+                    'suspicious', self.doId, 'invalid setLocation: (%s, %s)' %
+                    (parentId, zoneId))
                 self.requestDelete()
 
     def _doPlayerEnter(self):

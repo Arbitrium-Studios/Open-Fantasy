@@ -2,8 +2,10 @@ from toontown.battle import BattleManagerAI
 from direct.directnotify import DirectNotifyGlobal
 from toontown.coghq import BattleExperienceAggregatorAI
 
+
 class LevelBattleManagerAI(BattleManagerAI.BattleManagerAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('LevelBattleManagerAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'LevelBattleManagerAI')
 
     def __init__(self, air, level, battleCtor, battleExpAggreg=None):
         BattleManagerAI.BattleManagerAI.__init__(self, air)
@@ -29,16 +31,31 @@ class LevelBattleManagerAI(BattleManagerAI.BattleManagerAI):
         del self.battleExpAggreg
         return
 
-    def newBattle(self, cellId, zoneId, pos, suit, toonId, roundCallback=None, finishCallback=None, maxSuits=4):
+    def newBattle(self, cellId, zoneId, pos, suit, toonId,
+                  roundCallback=None, finishCallback=None, maxSuits=4):
         battle = self.cellId2battle.get(cellId, None)
-        if battle != None:
-            self.notify.debug('battle already created by battle blocker, add toon %d' % toonId)
+        if battle is not None:
+            self.notify.debug(
+                'battle already created by battle blocker, add toon %d' %
+                toonId)
             battle.signupToon(toonId, pos[0], pos[1], pos[2])
             return battle
         else:
-            battle = self.battleCtor(self.air, self, pos, suit, toonId, zoneId, self.level, cellId, roundCallback, finishCallback, maxSuits)
+            battle = self.battleCtor(
+                self.air,
+                self,
+                pos,
+                suit,
+                toonId,
+                zoneId,
+                self.level,
+                cellId,
+                roundCallback,
+                finishCallback,
+                maxSuits)
             self.battleExpAggreg.attachToBattle(battle)
-            battle.battleCalc.setSkillCreditMultiplier(self.level.getBattleCreditMultiplier())
+            battle.battleCalc.setSkillCreditMultiplier(
+                self.level.getBattleCreditMultiplier())
             battle.addToon(toonId)
             battle.generateWithRequired(zoneId)
             self.cellId2battle[cellId] = battle

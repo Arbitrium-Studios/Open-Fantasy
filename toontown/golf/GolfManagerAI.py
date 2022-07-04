@@ -6,6 +6,7 @@ from toontown.golf import DistributedGolfCourseAI
 from pandac.PandaModules import *
 RequestHole = {}
 
+
 def GolfManagerAI():
     if not hasattr(simbase, 'golf'):
         simbase.golf = __GolfManagerAI()
@@ -23,14 +24,17 @@ class __GolfManagerAI(DirectObject.DirectObject):
         DirectObject.DirectObject.delete(self)
 
     def readyGolfCourse(self, avIds, courseId=0):
-        self.notify.debug('readyGolfCourse avIds=%s courseId=%d' % (avIds, courseId))
+        self.notify.debug(
+            'readyGolfCourse avIds=%s courseId=%d' %
+            (avIds, courseId))
         golfZone = simbase.air.allocateZone()
         preferredHoleId = None
         for avId in avIds:
             if avId in RequestHole:
                 preferredHoleId = RequestHole[avId][0]
 
-        newCourse = DistributedGolfCourseAI.DistributedGolfCourseAI(golfZone, avIds, courseId, preferredHoleId)
+        newCourse = DistributedGolfCourseAI.DistributedGolfCourseAI(
+            golfZone, avIds, courseId, preferredHoleId)
         newCourse.generateWithRequired(golfZone)
         self.courseList.append(newCourse)
         golfZone = newCourse.getZoneId()

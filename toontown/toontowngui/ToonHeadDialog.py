@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from . import TTDialog
 from toontown.toon import ToonHead
 
+
 class ToonHeadDialog(TTDialog.TTDialog):
     notify = DirectNotifyGlobal.directNotify.newCategory('ToonHeadDialog')
 
@@ -17,12 +18,12 @@ class ToonHeadDialog(TTDialog.TTDialog):
         self.headModel.setName('headModel')
         self.headModel.startBlink()
         optiondefs = (('dialogName', 'ToonHeadDialog', None),
-         ('style', TTDialog.NoButtons, None),
-         ('geom', head, None),
-         ('geom_scale', 0.35, None),
-         ('geom_pos', (-0.25, 0, 0), None),
-         ('text_wordwrap', 9, None),
-         ('fadeScreen', 0, None))
+                      ('style', TTDialog.NoButtons, None),
+                      ('geom', head, None),
+                      ('geom_scale', 0.35, None),
+                      ('geom_pos', (-0.25, 0, 0), None),
+                      ('text_wordwrap', 9, None),
+                      ('fadeScreen', 0, None))
         self.defineoptions(kw, optiondefs)
         TTDialog.TTDialog.__init__(self, style=self['style'])
         self.initialiseoptions(ToonHeadDialog)

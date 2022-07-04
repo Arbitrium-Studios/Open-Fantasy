@@ -9,11 +9,13 @@ from direct.fsm import ClassicFSM, State
 from toontown.toonbase.ToontownGlobals import ToonHall
 from . import DistributedToonInteriorAI, DistributedToonHallInteriorAI, DistributedSuitInteriorAI, DistributedDoorAI, DoorTypes, DistributedElevatorExtAI, DistributedKnockKnockDoorAI, SuitPlannerInteriorAI, SuitBuildingGlobals, FADoorCodes
 from toontown.hood import ZoneUtil
-import random, time
+import random
+import time
 from toontown.cogdominium.DistributedCogdoInteriorAI import DistributedCogdoInteriorAI
 from toontown.cogdominium.SuitPlannerCogdoInteriorAI import SuitPlannerCogdoInteriorAI
 from toontown.cogdominium.CogdoLayout import CogdoLayout
 from toontown.cogdominium.DistributedCogdoElevatorExtAI import DistributedCogdoElevatorExtAI
+
 
 class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
     FieldOfficeNumFloors = 1
@@ -26,32 +28,32 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         self.trophyMgr = trophyMgr
         self.victorResponses = None
         self.fsm = ClassicFSM.ClassicFSM('DistributedBuildingAI', [
-         State.State('off', self.enterOff, self.exitOff, [
-          'waitForVictors', 'becomingToon', 'toon', 'clearOutToonInterior', 'becomingSuit', 'suit', 'clearOutToonInteriorForCogdo', 'becomingCogdo', 'becomingCogdoFromCogdo', 'cogdo']),
-         State.State('waitForVictors', self.enterWaitForVictors, self.exitWaitForVictors, [
-          'becomingToon']),
-         State.State('waitForVictorsFromCogdo', self.enterWaitForVictorsFromCogdo, self.exitWaitForVictorsFromCogdo, [
-          'becomingToonFromCogdo', 'becomingCogdoFromCogdo']),
-         State.State('becomingToon', self.enterBecomingToon, self.exitBecomingToon, [
-          'toon']),
-         State.State('becomingToonFromCogdo', self.enterBecomingToonFromCogdo, self.exitBecomingToonFromCogdo, [
-          'toon']),
-         State.State('toon', self.enterToon, self.exitToon, [
-          'clearOutToonInterior', 'clearOutToonInteriorForCogdo']),
-         State.State('clearOutToonInterior', self.enterClearOutToonInterior, self.exitClearOutToonInterior, [
-          'becomingSuit']),
-         State.State('becomingSuit', self.enterBecomingSuit, self.exitBecomingSuit, [
-          'suit']),
-         State.State('suit', self.enterSuit, self.exitSuit, [
-          'waitForVictors', 'becomingToon']),
-         State.State('clearOutToonInteriorForCogdo', self.enterClearOutToonInteriorForCogdo, self.exitClearOutToonInteriorForCogdo, [
-          'becomingCogdo']),
-         State.State('becomingCogdo', self.enterBecomingCogdo, self.exitBecomingCogdo, [
-          'cogdo']),
-         State.State('becomingCogdoFromCogdo', self.enterBecomingCogdoFromCogdo, self.exitBecomingCogdoFromCogdo, [
-          'cogdo']),
-         State.State('cogdo', self.enterCogdo, self.exitCogdo, [
-          'waitForVictorsFromCogdo', 'becomingToonFromCogdo'])], 'off', 'off')
+            State.State('off', self.enterOff, self.exitOff, [
+                'waitForVictors', 'becomingToon', 'toon', 'clearOutToonInterior', 'becomingSuit', 'suit', 'clearOutToonInteriorForCogdo', 'becomingCogdo', 'becomingCogdoFromCogdo', 'cogdo']),
+            State.State('waitForVictors', self.enterWaitForVictors, self.exitWaitForVictors, [
+                'becomingToon']),
+            State.State('waitForVictorsFromCogdo', self.enterWaitForVictorsFromCogdo, self.exitWaitForVictorsFromCogdo, [
+                'becomingToonFromCogdo', 'becomingCogdoFromCogdo']),
+            State.State('becomingToon', self.enterBecomingToon, self.exitBecomingToon, [
+                'toon']),
+            State.State('becomingToonFromCogdo', self.enterBecomingToonFromCogdo, self.exitBecomingToonFromCogdo, [
+                'toon']),
+            State.State('toon', self.enterToon, self.exitToon, [
+                'clearOutToonInterior', 'clearOutToonInteriorForCogdo']),
+            State.State('clearOutToonInterior', self.enterClearOutToonInterior, self.exitClearOutToonInterior, [
+                'becomingSuit']),
+            State.State('becomingSuit', self.enterBecomingSuit, self.exitBecomingSuit, [
+                'suit']),
+            State.State('suit', self.enterSuit, self.exitSuit, [
+                'waitForVictors', 'becomingToon']),
+            State.State('clearOutToonInteriorForCogdo', self.enterClearOutToonInteriorForCogdo, self.exitClearOutToonInteriorForCogdo, [
+                'becomingCogdo']),
+            State.State('becomingCogdo', self.enterBecomingCogdo, self.exitBecomingCogdo, [
+                'cogdo']),
+            State.State('becomingCogdoFromCogdo', self.enterBecomingCogdoFromCogdo, self.exitBecomingCogdoFromCogdo, [
+                'cogdo']),
+            State.State('cogdo', self.enterCogdo, self.exitCogdo, [
+                'waitForVictorsFromCogdo', 'becomingToonFromCogdo'])], 'off', 'off')
         self.fsm.enterInitialState()
         self.track = 'c'
         self.difficulty = 1
@@ -98,7 +100,7 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
             'numFloors': str(self.numFloors),
             'savedBy': self.savedBy,
             'becameSuitTime': self.becameSuitTime
-            }
+        }
         return buildingData
 
     def _getMinMaxFloors(self, difficulty):
@@ -108,9 +110,11 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         if not self.isToonBlock():
             return
         self.updateSavedBy([])
-        difficulty = min(difficulty, len(SuitBuildingGlobals.SuitBuildingInfo) - 1)
+        difficulty = min(
+            difficulty, len(
+                SuitBuildingGlobals.SuitBuildingInfo) - 1)
         minFloors, maxFloors = self._getMinMaxFloors(difficulty)
-        if buildingHeight == None:
+        if buildingHeight is None:
             numFloors = random.randint(minFloors, maxFloors)
         else:
             numFloors = buildingHeight + 1
@@ -161,15 +165,15 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
     def getBlock(self):
         dummy, interiorZoneId = self.getExteriorAndInteriorZoneId()
         return [
-         self.block, interiorZoneId]
+            self.block, interiorZoneId]
 
     def getSuitData(self):
         return [
-         ord(self.track), self.difficulty, self.numFloors]
+            ord(self.track), self.difficulty, self.numFloors]
 
     def getState(self):
         return [
-         self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
+            self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
 
     def setState(self, state, timestamp=0):
         self.fsm.request(state)
@@ -201,10 +205,12 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         zoneId = ZoneUtil.getTrueZoneId(zoneId, self.zoneId)
         interiorZoneId = zoneId - zoneId % 100 + 500 + blockNumber
         return (
-         zoneId, interiorZoneId)
+            zoneId, interiorZoneId)
 
     def d_setState(self, state):
-        self.sendUpdate('setState', [state, globalClockDelta.getRealNetworkTime()])
+        self.sendUpdate(
+            'setState', [
+                state, globalClockDelta.getRealNetworkTime()])
 
     def b_setVictorList(self, victorList):
         self.setVictorList(victorList)
@@ -225,8 +231,12 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
 
     def recordVictorResponse(self, avId):
         index = self.findVictorIndex(avId)
-        if index == None:
-            self.air.writeServerEvent('suspicious', avId, 'DistributedBuildingAI.setVictorReady from toon not in %s.' % self.victorList)
+        if index is None:
+            self.air.writeServerEvent(
+                'suspicious',
+                avId,
+                'DistributedBuildingAI.setVictorReady from toon not in %s.' %
+                self.victorList)
             return
         self.victorResponses[index] = avId
         return
@@ -239,8 +249,10 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
 
     def setVictorReady(self):
         avId = self.air.getAvatarIdFromSender()
-        if self.victorResponses == None:
-            self.air.writeServerEvent('suspicious', avId, 'DistributedBuildingAI.setVictorReady in state %s.' % self.fsm.getCurrentState().getName())
+        if self.victorResponses is None:
+            self.air.writeServerEvent(
+                'suspicious', avId, 'DistributedBuildingAI.setVictorReady in state %s.' %
+                self.fsm.getCurrentState().getName())
             return
         event = self.air.getAvatarExitEvent(avId)
         self.ignore(event)
@@ -261,15 +273,20 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         if self.allVictorsResponded():
             return
         if hasattr(self, 'interior'):
-            self.notify.info('victorsTimedOutTask: ejecting players by deleting interior.')
+            self.notify.info(
+                'victorsTimedOutTask: ejecting players by deleting interior.')
             self.interior.requestDelete()
             del self.interior
             task.delayTime = 15.0
             return task.again
-        self.notify.info('victorsTimedOutTask: suspicious players remaining, advancing state.')
+        self.notify.info(
+            'victorsTimedOutTask: suspicious players remaining, advancing state.')
         for i in range(len(self.victorList)):
             if self.victorList[i] and self.victorResponses[i] == 0:
-                self.air.writeServerEvent('suspicious', self.victorList[i], 'DistributedBuildingAI toon client refused to leave building.')
+                self.air.writeServerEvent(
+                    'suspicious',
+                    self.victorList[i],
+                    'DistributedBuildingAI toon client refused to leave building.')
                 self.recordVictorResponse(self.victorList[i])
                 event = self.air.getAvatarExitEvent(self.victorList[i])
                 self.ignore(event)
@@ -287,7 +304,9 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         if toonId in self.air.doId2do:
             return self.air.doId2do[toonId]
         else:
-            self.notify.warning('getToon() - toon: %d not in repository!' % toonId)
+            self.notify.warning(
+                'getToon() - toon: %d not in repository!' %
+                toonId)
         return None
 
     def updateSavedBy(self, savedBy):
@@ -308,20 +327,23 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
             toon = None
             if t:
                 toon = self.getToon(t)
-            if toon != None:
+            if toon is not None:
                 activeToons.append(toon)
 
         for t in victorList:
             toon = None
             if t:
                 toon = self.getToon(t)
-                self.air.writeServerEvent('buildingDefeated', t, '%s|%s|%s|%s' % (self.track, self.numFloors, self.zoneId, victorList))
-            if toon != None:
-                self.air.questManager.toonKilledBuilding(toon, self.track, self.difficulty, self.numFloors, self.zoneId, activeToons)
+                self.air.writeServerEvent(
+                    'buildingDefeated', t, '%s|%s|%s|%s' %
+                    (self.track, self.numFloors, self.zoneId, victorList))
+            if toon is not None:
+                self.air.questManager.toonKilledBuilding(
+                    toon, self.track, self.difficulty, self.numFloors, self.zoneId, activeToons)
 
         for i in range(0, 4):
             victor = victorList[i]
-            if victor == None or victor not in self.air.doId2do:
+            if victor is None or victor not in self.air.doId2do:
                 victorList[i] = 0
             else:
                 event = self.air.getAvatarExitEvent(victor)
@@ -330,7 +352,7 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         self.b_setVictorList(victorList)
         self.updateSavedBy(savedBy)
         self.victorResponses = [
-         0, 0, 0, 0]
+            0, 0, 0, 0]
         self.d_setState('waitForVictors')
         return
 
@@ -348,7 +370,7 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
             toon = None
             if t:
                 toon = self.getToon(t)
-            if toon != None:
+            if toon is not None:
                 activeToons.append(toon)
 
         self.buildingDefeated = len(savedBy) > 0
@@ -357,13 +379,16 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
                 toon = None
                 if t:
                     toon = self.getToon(t)
-                    self.air.writeServerEvent('buildingDefeated', t, '%s|%s|%s|%s' % (self.track, self.numFloors, self.zoneId, victorList))
-                if toon != None:
-                    self.air.questManager.toonKilledCogdo(toon, self.difficulty, self.numFloors, self.zoneId, activeToons)
+                    self.air.writeServerEvent(
+                        'buildingDefeated', t, '%s|%s|%s|%s' %
+                        (self.track, self.numFloors, self.zoneId, victorList))
+                if toon is not None:
+                    self.air.questManager.toonKilledCogdo(
+                        toon, self.difficulty, self.numFloors, self.zoneId, activeToons)
 
         for i in range(0, 4):
             victor = victorList[i]
-            if victor == None or victor not in self.air.doId2do:
+            if victor is None or victor not in self.air.doId2do:
                 victorList[i] = 0
             else:
                 event = self.air.getAvatarExitEvent(victor)
@@ -372,13 +397,15 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         self.b_setVictorList(victorList)
         self.updateSavedBy(savedBy)
         self.victorResponses = [
-         0, 0, 0, 0]
-        taskMgr.doMethodLater(30, self.victorsTimedOutTask, self.taskName(str(self.block) + '_waitForVictors-timer'))
+            0, 0, 0, 0]
+        taskMgr.doMethodLater(30, self.victorsTimedOutTask, self.taskName(
+            str(self.block) + '_waitForVictors-timer'))
         self.d_setState('waitForVictorsFromCogdo')
         return
 
     def exitWaitForVictorsFromCogdo(self):
-        taskMgr.remove(self.taskName(str(self.block) + '_waitForVictors-timer'))
+        taskMgr.remove(self.taskName(
+            str(self.block) + '_waitForVictors-timer'))
         self.victorResponses = None
         for victor in self.victorList:
             event = simbase.air.getAvatarExitEvent(victor)
@@ -389,7 +416,10 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
     def enterBecomingToon(self):
         self.d_setState('becomingToon')
         name = self.taskName(str(self.block) + '_becomingToon-timer')
-        taskMgr.doMethodLater(SuitBuildingGlobals.VICTORY_SEQUENCE_TIME, self.becomingToonTask, name)
+        taskMgr.doMethodLater(
+            SuitBuildingGlobals.VICTORY_SEQUENCE_TIME,
+            self.becomingToonTask,
+            name)
 
     def exitBecomingToon(self):
         name = self.taskName(str(self.block) + '_becomingToon-timer')
@@ -398,7 +428,10 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
     def enterBecomingToonFromCogdo(self):
         self.d_setState('becomingToonFromCogdo')
         name = self.taskName(str(self.block) + '_becomingToonFromCogdo-timer')
-        taskMgr.doMethodLater(SuitBuildingGlobals.VICTORY_SEQUENCE_TIME, self.becomingToonTask, name)
+        taskMgr.doMethodLater(
+            SuitBuildingGlobals.VICTORY_SEQUENCE_TIME,
+            self.becomingToonTask,
+            name)
 
     def exitBecomingToonFromCogdo(self):
         name = self.taskName(str(self.block) + '_becomingToonFromCogdo-timer')
@@ -412,13 +445,17 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
     def enterToon(self):
         self.d_setState('toon')
         exteriorZoneId, interiorZoneId = self.getExteriorAndInteriorZoneId()
-        if simbase.config.GetBool('want-new-toonhall', 1) and ZoneUtil.getCanonicalZoneId(interiorZoneId) == ToonHall:
-            self.interior = DistributedToonHallInteriorAI.DistributedToonHallInteriorAI(self.block, self.air, interiorZoneId, self)
+        if simbase.config.GetBool(
+                'want-new-toonhall', 1) and ZoneUtil.getCanonicalZoneId(interiorZoneId) == ToonHall:
+            self.interior = DistributedToonHallInteriorAI.DistributedToonHallInteriorAI(
+                self.block, self.air, interiorZoneId, self)
         else:
-            self.interior = DistributedToonInteriorAI.DistributedToonInteriorAI(self.block, self.air, interiorZoneId, self)
+            self.interior = DistributedToonInteriorAI.DistributedToonInteriorAI(
+                self.block, self.air, interiorZoneId, self)
         self.interior.generateWithRequired(interiorZoneId)
         door = self.createExteriorDoor()
-        insideDoor = DistributedDoorAI.DistributedDoorAI(self.air, self.block, DoorTypes.INT_STANDARD)
+        insideDoor = DistributedDoorAI.DistributedDoorAI(
+            self.air, self.block, DoorTypes.INT_STANDARD)
         door.setOtherDoor(insideDoor)
         insideDoor.setOtherDoor(door)
         door.zoneId = exteriorZoneId
@@ -428,12 +465,16 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         self.door = door
         self.insideDoor = insideDoor
         self.becameSuitTime = 0
-        self.knockKnock = DistributedKnockKnockDoorAI.DistributedKnockKnockDoorAI(self.air, self.block)
+        self.knockKnock = DistributedKnockKnockDoorAI.DistributedKnockKnockDoorAI(
+            self.air, self.block)
         self.knockKnock.generateWithRequired(exteriorZoneId)
-        self.air.writeServerEvent('building-toon', self.doId, '%s|%s' % (self.zoneId, self.block))
+        self.air.writeServerEvent(
+            'building-toon', self.doId, '%s|%s' %
+            (self.zoneId, self.block))
 
     def createExteriorDoor(self):
-        result = DistributedDoorAI.DistributedDoorAI(self.air, self.block, DoorTypes.EXT_STANDARD)
+        result = DistributedDoorAI.DistributedDoorAI(
+            self.air, self.block, DoorTypes.EXT_STANDARD)
         return result
 
     def exitToon(self):
@@ -444,7 +485,10 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         if hasattr(self, 'interior'):
             self.interior.setState('beingTakenOver')
         name = self.taskName(str(self.block) + '_clearOutToonInterior-timer')
-        taskMgr.doMethodLater(SuitBuildingGlobals.CLEAR_OUT_TOON_BLDG_TIME, self.clearOutToonInteriorTask, name)
+        taskMgr.doMethodLater(
+            SuitBuildingGlobals.CLEAR_OUT_TOON_BLDG_TIME,
+            self.clearOutToonInteriorTask,
+            name)
 
     def exitClearOutToonInterior(self):
         name = self.taskName(str(self.block) + '_clearOutToonInterior-timer')
@@ -456,10 +500,13 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
 
     def enterBecomingSuit(self):
         self.sendUpdate('setSuitData', [
-         ord(self.track), self.difficulty, self.numFloors])
+            ord(self.track), self.difficulty, self.numFloors])
         self.d_setState('becomingSuit')
         name = self.taskName(str(self.block) + '_becomingSuit-timer')
-        taskMgr.doMethodLater(SuitBuildingGlobals.TO_SUIT_BLDG_TIME, self.becomingSuitTask, name)
+        taskMgr.doMethodLater(
+            SuitBuildingGlobals.TO_SUIT_BLDG_TIME,
+            self.becomingSuitTask,
+            name)
 
     def exitBecomingSuit(self):
         name = self.taskName(str(self.block) + '_becomingSuit-timer')
@@ -481,14 +528,18 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
 
     def enterSuit(self):
         self.sendUpdate('setSuitData', [
-         ord(self.track), self.difficulty, self.numFloors])
+            ord(self.track), self.difficulty, self.numFloors])
         zoneId, interiorZoneId = self.getExteriorAndInteriorZoneId()
-        self.planner = SuitPlannerInteriorAI.SuitPlannerInteriorAI(self.numFloors, self.difficulty, self.track, interiorZoneId)
+        self.planner = SuitPlannerInteriorAI.SuitPlannerInteriorAI(
+            self.numFloors, self.difficulty, self.track, interiorZoneId)
         self.d_setState('suit')
         exteriorZoneId, interiorZoneId = self.getExteriorAndInteriorZoneId()
-        self.elevator = DistributedElevatorExtAI.DistributedElevatorExtAI(self.air, self)
+        self.elevator = DistributedElevatorExtAI.DistributedElevatorExtAI(
+            self.air, self)
         self.elevator.generateWithRequired(exteriorZoneId)
-        self.air.writeServerEvent('building-cog', self.doId, '%s|%s|%s|%s' % (self.zoneId, self.block, self.track, self.numFloors))
+        self.air.writeServerEvent(
+            'building-cog', self.doId, '%s|%s|%s|%s' %
+            (self.zoneId, self.block, self.track, self.numFloors))
 
     def exitSuit(self):
         del self.planner
@@ -500,11 +551,16 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         self.d_setState('clearOutToonInteriorForCogdo')
         if hasattr(self, 'interior'):
             self.interior.setState('beingTakenOver')
-        name = self.taskName(str(self.block) + '_clearOutToonInteriorForCogdo-timer')
-        taskMgr.doMethodLater(SuitBuildingGlobals.CLEAR_OUT_TOON_BLDG_TIME, self.clearOutToonInteriorForCogdoTask, name)
+        name = self.taskName(str(self.block) +
+                             '_clearOutToonInteriorForCogdo-timer')
+        taskMgr.doMethodLater(
+            SuitBuildingGlobals.CLEAR_OUT_TOON_BLDG_TIME,
+            self.clearOutToonInteriorForCogdoTask,
+            name)
 
     def exitClearOutToonInteriorForCogdo(self):
-        name = self.taskName(str(self.block) + '_clearOutToonInteriorForCogdo-timer')
+        name = self.taskName(str(self.block) +
+                             '_clearOutToonInteriorForCogdo-timer')
         taskMgr.remove(name)
 
     def clearOutToonInteriorForCogdoTask(self, task):
@@ -513,10 +569,13 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
 
     def enterBecomingCogdo(self):
         self.sendUpdate('setSuitData', [
-         ord(self.track), self.difficulty, self.numFloors])
+            ord(self.track), self.difficulty, self.numFloors])
         self.d_setState('becomingCogdo')
         name = self.taskName(str(self.block) + '_becomingCogdo-timer')
-        taskMgr.doMethodLater(SuitBuildingGlobals.TO_SUIT_BLDG_TIME, self.becomingCogdoTask, name)
+        taskMgr.doMethodLater(
+            SuitBuildingGlobals.TO_SUIT_BLDG_TIME,
+            self.becomingCogdoTask,
+            name)
 
     def exitBecomingCogdo(self):
         name = self.taskName(str(self.block) + '_becomingCogdo-timer')
@@ -534,7 +593,10 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
     def enterBecomingCogdoFromCogdo(self):
         self.d_setState('becomingCogdoFromCogdo')
         name = self.taskName(str(self.block) + '_becomingCogdoFromCogdo-timer')
-        taskMgr.doMethodLater(SuitBuildingGlobals.VICTORY_RUN_TIME, self.becomingCogdoTask, name)
+        taskMgr.doMethodLater(
+            SuitBuildingGlobals.VICTORY_RUN_TIME,
+            self.becomingCogdoTask,
+            name)
 
     def exitBecomingCogdoFromCogdo(self):
         self.fSkipElevatorOpening = True
@@ -548,16 +610,20 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
 
     def enterCogdo(self):
         self.sendUpdate('setSuitData', [
-         ord(self.track), self.difficulty, self.numFloors])
+            ord(self.track), self.difficulty, self.numFloors])
         zoneId, interiorZoneId = self.getExteriorAndInteriorZoneId()
         self._cogdoLayout = CogdoLayout(self.numFloors)
-        self.planner = SuitPlannerCogdoInteriorAI(self._cogdoLayout, self.difficulty, self.track, interiorZoneId)
+        self.planner = SuitPlannerCogdoInteriorAI(
+            self._cogdoLayout, self.difficulty, self.track, interiorZoneId)
         self.d_setState('cogdo')
         exteriorZoneId, interiorZoneId = self.getExteriorAndInteriorZoneId()
-        self.elevator = DistributedCogdoElevatorExtAI(self.air, self, fSkipOpening=self.fSkipElevatorOpening)
+        self.elevator = DistributedCogdoElevatorExtAI(
+            self.air, self, fSkipOpening=self.fSkipElevatorOpening)
         self.fSkipElevatorOpening = False
         self.elevator.generateWithRequired(exteriorZoneId)
-        self.air.writeServerEvent('building-cogdo', self.doId, '%s|%s|%s' % (self.zoneId, self.block, self.numFloors))
+        self.air.writeServerEvent(
+            'building-cogdo', self.doId, '%s|%s|%s' %
+            (self.zoneId, self.block, self.numFloors))
 
     def exitCogdo(self):
         del self.planner
@@ -569,7 +635,8 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         self.suitPlannerExt = planner
 
     def _createSuitInterior(self):
-        return DistributedSuitInteriorAI.DistributedSuitInteriorAI(self.air, self.elevator)
+        return DistributedSuitInteriorAI.DistributedSuitInteriorAI(
+            self.air, self.elevator)
 
     def _createCogdoInterior(self):
         return DistributedCogdoInteriorAI(self.air, self.elevator)

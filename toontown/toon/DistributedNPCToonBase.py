@@ -14,12 +14,13 @@ from toontown.quest import QuestChoiceGui
 from direct.interval.IntervalGlobal import *
 import random
 
+
 class DistributedNPCToonBase(DistributedToon.DistributedToon):
 
     def __init__(self, cr):
         try:
             self.DistributedNPCToon_initialized
-        except:
+        except BaseException:
             self.DistributedNPCToon_initialized = 1
             DistributedToon.DistributedToon.__init__(self, cr)
             self.__initCollisions()
@@ -33,7 +34,7 @@ class DistributedNPCToonBase(DistributedToon.DistributedToon):
     def delete(self):
         try:
             self.DistributedNPCToon_deleted
-        except:
+        except BaseException:
             self.DistributedNPCToon_deleted = 1
             self.__deleteCollisions()
             DistributedToon.DistributedToon.delete(self)
@@ -74,7 +75,8 @@ class DistributedNPCToonBase(DistributedToon.DistributedToon):
             self.reparentTo(npcOrigin)
             self.initPos()
         else:
-            self.notify.warning('announceGenerate: Could not find npc_origin_' + str(self.posIndex))
+            self.notify.warning(
+                'announceGenerate: Could not find npc_origin_' + str(self.posIndex))
         return
 
     def initPos(self):
@@ -84,7 +86,9 @@ class DistributedNPCToonBase(DistributedToon.DistributedToon):
         return 0
 
     def detectAvatars(self):
-        self.accept('enter' + self.cSphereNode.getName(), self.handleCollisionSphereEnter)
+        self.accept(
+            'enter' + self.cSphereNode.getName(),
+            self.handleCollisionSphereEnter)
 
     def ignoreAvatars(self):
         self.ignore('enter' + self.cSphereNode.getName())
@@ -93,7 +97,8 @@ class DistributedNPCToonBase(DistributedToon.DistributedToon):
         return 3.25
 
     def __initCollisions(self):
-        self.cSphere = CollisionTube(0.0, 1.0, 0.0, 0.0, 1.0, 5.0, self.getCollSphereRadius())
+        self.cSphere = CollisionTube(
+            0.0, 1.0, 0.0, 0.0, 1.0, 5.0, self.getCollSphereRadius())
         self.cSphere.setTangible(0)
         self.cSphereNode = CollisionNode('cSphereNode')
         self.cSphereNode.addSolid(self.cSphere)

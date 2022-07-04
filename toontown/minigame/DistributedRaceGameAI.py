@@ -7,18 +7,23 @@ import random
 from direct.task.Task import Task
 from . import RaceGameGlobals
 
+
 class DistributedRaceGameAI(DistributedMinigameAI):
 
     def __init__(self, air, minigameId):
         try:
             self.DistributedRaceGameAI_initialized
-        except:
+        except BaseException:
             self.DistributedRaceGameAI_initialized = 1
             DistributedMinigameAI.__init__(self, air, minigameId)
             self.gameFSM = ClassicFSM.ClassicFSM('DistributedRaceGameAI', [State.State('inactive', self.enterInactive, self.exitInactive, ['waitClientsChoices']),
-             State.State('waitClientsChoices', self.enterWaitClientsChoices, self.exitWaitClientsChoices, ['processChoices', 'cleanup']),
-             State.State('processChoices', self.enterProcessChoices, self.exitProcessChoices, ['waitClientsChoices', 'cleanup']),
-             State.State('cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
+                                                                           State.State(
+                'waitClientsChoices', self.enterWaitClientsChoices, self.exitWaitClientsChoices, [
+                    'processChoices', 'cleanup']),
+                State.State(
+                'processChoices', self.enterProcessChoices, self.exitProcessChoices, [
+                    'waitClientsChoices', 'cleanup']),
+                State.State('cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
             self.addChildGameFSM(self.gameFSM)
             self.avatarChoices = {}
             self.avatarPositions = {}
@@ -88,21 +93,27 @@ class DistributedRaceGameAI(DistributedMinigameAI):
         for avId in self.avIdList:
             pos = random.randint(5, RaceGameGlobals.NumberToWin - 1)
             self.chancePositions[avId] = pos
-            self.rewardDict[avId] = random.randint(0, len(RaceGameGlobals.ChanceRewards) - 1)
+            self.rewardDict[avId] = random.randint(
+                0, len(RaceGameGlobals.ChanceRewards) - 1)
             chancePositions.append(pos)
 
         self.sendUpdate('setChancePositions', [chancePositions])
 
     def setAvatarChoice(self, choice):
         avatarId = self.air.getAvatarIdFromSender()
-        self.notify.debug('setAvatarChoice: avatar: ' + str(avatarId) + ' chose: ' + str(choice))
+        self.notify.debug(
+            'setAvatarChoice: avatar: ' +
+            str(avatarId) +
+            ' chose: ' +
+            str(choice))
         self.avatarChoices[avatarId] = self.checkChoice(choice)
         self.sendUpdate('setAvatarChose', [avatarId])
         if self.allAvatarsChosen():
             self.notify.debug('setAvatarChoice: all avatars have chosen')
             self.gameFSM.request('processChoices')
         else:
-            self.notify.debug('setAvatarChoice: still waiting for more choices')
+            self.notify.debug(
+                'setAvatarChoice: still waiting for more choices')
 
     def enterInactive(self):
         self.notify.debug('enterInactive')
@@ -113,14 +124,19 @@ class DistributedRaceGameAI(DistributedMinigameAI):
     def enterWaitClientsChoices(self):
         self.notify.debug('enterWaitClientsChoices')
         self.resetChoices()
-        taskMgr.doMethodLater(RaceGameGlobals.InputTimeout, self.waitClientsChoicesTimeout, self.taskName('input-timeout'))
-        self.sendUpdate('setTimerStartTime', [globalClockDelta.getFrameNetworkTime()])
+        taskMgr.doMethodLater(
+            RaceGameGlobals.InputTimeout,
+            self.waitClientsChoicesTimeout,
+            self.taskName('input-timeout'))
+        self.sendUpdate('setTimerStartTime',
+                        [globalClockDelta.getFrameNetworkTime()])
 
     def exitWaitClientsChoices(self):
         taskMgr.remove(self.taskName('input-timeout'))
 
     def waitClientsChoicesTimeout(self, task):
-        self.notify.debug('waitClientsChoicesTimeout: did not hear from all clients')
+        self.notify.debug(
+            'waitClientsChoicesTimeout: did not hear from all clients')
         for avId in list(self.avatarChoices.keys()):
             if self.avatarChoices[avId] == -1:
                 self.avatarChoices[avId] = 0
@@ -155,9 +171,11 @@ class DistributedRaceGameAI(DistributedMinigameAI):
                     self.rewardArray += rewardList
                     for av in self.avIdList:
                         if av == avId:
-                            self.processChoice(av, RaceGameGlobals.ChanceRewards[reward][0][0])
+                            self.processChoice(
+                                av, RaceGameGlobals.ChanceRewards[reward][0][0])
                         else:
-                            self.processChoice(av, RaceGameGlobals.ChanceRewards[reward][0][1])
+                            self.processChoice(
+                                av, RaceGameGlobals.ChanceRewards[reward][0][1])
 
                     break
 
@@ -169,8 +187,12 @@ class DistributedRaceGameAI(DistributedMinigameAI):
 
         self.checkForWinners()
 
-    def processChoice(self, avId, choice, freq = 1):
-        self.notify.debug('processChoice: av = ' + str(avId) + ' choice = ' + str(choice))
+    def processChoice(self, avId, choice, freq=1):
+        self.notify.debug(
+            'processChoice: av = ' +
+            str(avId) +
+            ' choice = ' +
+            str(choice))
         if freq == 1:
             if choice != 0:
                 if self.avatarPositions[avId] < RaceGameGlobals.NumberToWin:
@@ -179,7 +201,11 @@ class DistributedRaceGameAI(DistributedMinigameAI):
                         self.avatarPositions[avId] = 0
         self.choiceArray.append(choice)
         self.positionArray.append(self.avatarPositions[avId])
-        self.notify.debug('Process choice (' + str(choice) + ') for av: ' + str(avId))
+        self.notify.debug(
+            'Process choice (' +
+            str(choice) +
+            ') for av: ' +
+            str(avId))
         self.notify.debug('      choiceArray: ' + str(self.choiceArray))
         self.notify.debug('    positionArray: ' + str(self.positionArray))
 
@@ -195,7 +221,9 @@ class DistributedRaceGameAI(DistributedMinigameAI):
 
     def checkForWinners(self):
         self.notify.debug('checkForWinners: ')
-        self.sendUpdate('setServerChoices', [self.choiceArray, self.positionArray, self.rewardArray])
+        self.sendUpdate(
+            'setServerChoices', [
+                self.choiceArray, self.positionArray, self.rewardArray])
         delay = 0.0
         for reward in self.rewardArray:
             if reward != -1:
@@ -215,11 +243,17 @@ class DistributedRaceGameAI(DistributedMinigameAI):
                         newJellybeans = newJellybeans - 3
                 self.scoreDict[avId] = self.scoreDict[avId] + newJellybeans
 
-            taskMgr.doMethodLater(delay, self.rewardTimeoutTaskGameOver, self.taskName('reward-timeout'))
+            taskMgr.doMethodLater(
+                delay,
+                self.rewardTimeoutTaskGameOver,
+                self.taskName('reward-timeout'))
         else:
-            taskMgr.doMethodLater(delay, self.rewardTimeoutTask, self.taskName('reward-timeout'))
+            taskMgr.doMethodLater(
+                delay,
+                self.rewardTimeoutTask,
+                self.taskName('reward-timeout'))
 
-    def oldEnterProcessChoices(self, recurse = 0):
+    def oldEnterProcessChoices(self, recurse=0):
         self.notify.debug('enterProcessChoices')
         if not recurse:
             self.choiceArray = []
@@ -236,7 +270,8 @@ class DistributedRaceGameAI(DistributedMinigameAI):
                         self.avatarPositions[avId] = 0
                     if self.avatarPositions[avId] == self.chancePositions[avId]:
                         reward = self.rewardDict[avId]
-                        self.scoreDict[avId] = self.scoreDict[avId] + RaceGameGlobals.ChanceRewards[reward][2]
+                        self.scoreDict[avId] = self.scoreDict[avId] + \
+                            RaceGameGlobals.ChanceRewards[reward][2]
                         self.chancePositions[avId] = -1
             self.choiceArray.append(choice)
             self.positionArray.append(self.avatarPositions[avId])
@@ -259,7 +294,9 @@ class DistributedRaceGameAI(DistributedMinigameAI):
             rewardIndex += 1
 
         if not recurse:
-            self.sendUpdate('setServerChoices', [self.choiceArray, self.positionArray, self.rewardArray])
+            self.sendUpdate(
+                'setServerChoices', [
+                    self.choiceArray, self.positionArray, self.rewardArray])
             delay = 0.0
             for reward in self.rewardArray:
                 if reward != -1:
@@ -279,9 +316,15 @@ class DistributedRaceGameAI(DistributedMinigameAI):
                             newJellybeans = newJellybeans - 3
                     self.scoreDict[avId] = self.scoreDict[avId] + newJellybeans
 
-                taskMgr.doMethodLater(delay, self.rewardTimeoutTaskGameOver, self.taskName('reward-timeout'))
+                taskMgr.doMethodLater(
+                    delay,
+                    self.rewardTimeoutTaskGameOver,
+                    self.taskName('reward-timeout'))
             else:
-                taskMgr.doMethodLater(delay, self.rewardTimeoutTask, self.taskName('reward-timeout'))
+                taskMgr.doMethodLater(
+                    delay,
+                    self.rewardTimeoutTask,
+                    self.taskName('reward-timeout'))
         return None
 
     def rewardTimeoutTaskGameOver(self, task):

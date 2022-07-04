@@ -1,5 +1,6 @@
 import random
 
+
 class BarrelBase:
 
     def getRng(self):
@@ -8,7 +9,8 @@ class BarrelBase:
     def getRewardPerGrab(self):
         if not hasattr(self, '_reward'):
             if self.rewardPerGrabMax > self.rewardPerGrab:
-                self._reward = self.getRng().randrange(self.rewardPerGrab, self.rewardPerGrabMax + 1)
+                self._reward = self.getRng().randrange(
+                    self.rewardPerGrab, self.rewardPerGrabMax + 1)
             else:
                 self._reward = self.rewardPerGrab
         return self._reward

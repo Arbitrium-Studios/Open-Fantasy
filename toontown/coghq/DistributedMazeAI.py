@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.ClockDelta import globalClockDelta
 from direct.task import Task
 
+
 class DistributedMazeAI(DistributedEntityAI.DistributedEntityAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMazeAI')
 
@@ -28,7 +29,9 @@ class DistributedMazeAI(DistributedEntityAI.DistributedEntityAI):
     def setClientTriggered(self):
         if not hasattr(self, 'gameStartTime'):
             self.gameStartTime = globalClock.getRealTime()
-            self.b_setGameStart(globalClockDelta.localToNetworkTime(self.gameStartTime))
+            self.b_setGameStart(
+                globalClockDelta.localToNetworkTime(
+                    self.gameStartTime))
 
     def b_setGameStart(self, timestamp):
         self.d_setGameStart(timestamp)
@@ -44,7 +47,10 @@ class DistributedMazeAI(DistributedEntityAI.DistributedEntityAI):
         self.prepareForGameStartOrRestart()
 
     def prepareForGameStartOrRestart(self):
-        self.doMethodLater(self.GameDuration, self.gameEndingTimeHit, self.mazeEndTimeTaskName)
+        self.doMethodLater(
+            self.GameDuration,
+            self.gameEndingTimeHit,
+            self.mazeEndTimeTaskName)
 
     def setFinishedMaze(self):
         senderId = self.air.getAvatarIdFromSender()
@@ -60,7 +66,10 @@ class DistributedMazeAI(DistributedEntityAI.DistributedEntityAI):
                     numToons = len(self.level.presentAvIds)
                     if numToons == len(self.finishedList) + 1:
                         lastToon = 1
-                self.sendUpdate('toonFinished', [senderId, len(self.finishedList), lastToon])
+                self.sendUpdate(
+                    'toonFinished', [
+                        senderId, len(
+                            self.finishedList), lastToon])
             self.finishedList.append(senderId)
 
     def gameEndingTimeHit(self, task):
