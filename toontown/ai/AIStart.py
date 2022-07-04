@@ -1,6 +1,4 @@
-from toontown.toonbase import TTLocalizer
-from toontown.ai.ToontownAIRepository import ToontownAIRepository
-from otp.ai.AIBaseGlobal import *
+
 from panda3d.core import *
 import builtins
 
@@ -54,8 +52,9 @@ class game:
 
 
 builtins.game = game
-
-
+from otp.ai.AIBaseGlobal import *
+from toontown.ai.ToontownAIRepository import ToontownAIRepository
+from toontown.toonbase import TTLocalizer
 simbase.air = ToontownAIRepository(
     ConfigVariableInt(
         'air-base-channel',

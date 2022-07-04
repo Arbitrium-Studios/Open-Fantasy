@@ -1,16 +1,4 @@
-from otp.distributed.OtpDoGlobals import *
-from toontown.distributed import ToontownClientRepository
-from direct.showbase.MessengerGlobal import *
-from .ToonBaseGlobal import *
-from direct.gui.DirectGui import *
-from otp.otpbase import OTPGlobals
-from . import TTLocalizer
-from . import ToonBase
-from . import ToontownGlobals
-from direct.gui import DirectGuiGlobals
-import sys
-import time
-from panda3d.core import *
+
 import builtins
 
 
@@ -20,6 +8,9 @@ class game:
 
 
 builtins.game = game()
+from panda3d.core import *
+import time
+import sys
 try:
     launcher
 except BaseException:
@@ -43,11 +34,15 @@ if launcher.isDummy():
 else:
     http = launcher.http
 tempLoader = Loader()
+from direct.gui import DirectGuiGlobals
+
 backgroundNode = tempLoader.loadSync(
     Filename('phase_3/models/gui/loading-background'))
+from . import ToontownGlobals
 print('ToontownStart: setting default font')
 DirectGuiGlobals.setDefaultFontFunc(ToontownGlobals.getInterfaceFont)
 launcher.setPandaErrorCode(7)
+from . import ToonBase
 ToonBase.ToonBase()
 if base.win is None:
     print('Unable to open window; aborting.')
@@ -70,6 +65,8 @@ DirectGuiGlobals.setDefaultClickSound(base.loader.loadSfx(
     'phase_3/audio/sfx/GUI_create_toon_fwd.ogg'))
 DirectGuiGlobals.setDefaultDialogGeom(
     loader.loadModel('phase_3/models/gui/dialog_box_gui'))
+from . import TTLocalizer
+from otp.otpbase import OTPGlobals
 OTPGlobals.setDefaultProductPrefix(TTLocalizer.ProductPrefix)
 if base.musicManagerIsValid:
     music = base.musicManager.getSound('phase_3/audio/bgm/tt_theme.ogg')
@@ -84,6 +81,7 @@ if base.musicManagerIsValid:
         base.loader.loadSfx('phase_3/audio/sfx/GUI_create_toon_fwd.ogg'))
 else:
     music = None
+from direct.gui.DirectGui import *
 serverVersion = ConfigVariableString('server-version', 'no_version_set').value
 print('ToontownStart: serverVersion: ', serverVersion)
 version = OnscreenText(
@@ -96,12 +94,16 @@ loader.beginBulkLoad(
     138,
     0,
     TTLocalizer.TIP_NONE)
+from .ToonBaseGlobal import *
+from direct.showbase.MessengerGlobal import *
+from toontown.distributed import ToontownClientRepository
 cr = ToontownClientRepository.ToontownClientRepository(serverVersion, launcher)
 cr.music = music
 del music
 base.initNametagGlobals()
 base.cr = cr
 loader.endBulkLoad('init')
+from otp.distributed.OtpDoGlobals import *
 cr.generateGlobalObject(OTP_DO_ID_FRIEND_MANAGER, 'FriendManager')
 if not launcher.isDummy():
     base.startShow(cr, launcher.getGameServer())

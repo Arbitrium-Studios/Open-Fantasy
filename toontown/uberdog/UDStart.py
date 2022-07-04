@@ -1,5 +1,4 @@
-from toontown.uberdog.ToontownUDRepository import ToontownUDRepository
-from otp.ai.AIBaseGlobal import *
+
 from panda3d.core import *
 import builtins
 
@@ -51,6 +50,8 @@ builtins.game = game
 
 loadPrcFile('etc/Configrc.prc')
 
+from otp.ai.AIBaseGlobal import *
+from toontown.uberdog.ToontownUDRepository import ToontownUDRepository
 
 simbase.air = ToontownUDRepository(
     ConfigVariableInt(
