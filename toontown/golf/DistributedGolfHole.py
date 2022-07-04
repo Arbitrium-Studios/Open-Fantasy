@@ -12,7 +12,7 @@ from direct.gui.DirectGui import DirectWaitBar, DGG, DirectLabel
 from direct.task import Task
 from direct.fsm.FSM import FSM
 from toontown.minigame import ArrowKeys
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from toontown.golf import BuildGeometry
 from toontown.golf import DistributedPhysicsWorld
 from toontown.golf import GolfGlobals

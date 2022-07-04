@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from .DistributedNPCToonBase import *
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
@@ -80,6 +80,8 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
         return
 
     def resetPetshopClerk(self):
+        if not self.isLocalToon:
+            return
         self.ignoreAll()
         taskMgr.remove(self.uniqueName('popupPetshopGUI'))
         if self.lerpCameraSeq:

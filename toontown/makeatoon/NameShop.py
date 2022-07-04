@@ -20,7 +20,7 @@ from otp.distributed import PotentialAvatar
 from otp.namepanel import NameCheck
 from toontown.toontowngui import TeaserPanel
 from direct.distributed.PyDatagram import PyDatagram
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from toontown.toon import NPCToons
 from direct.task import Task
 from toontown.makeatoon.TTPickANamePattern import TTPickANamePattern

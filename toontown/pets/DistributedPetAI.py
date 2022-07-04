@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.showbase.PythonUtil import weightedChoice, randFloat, lerp
 from direct.showbase.PythonUtil import contains, list2dict, clampScalar
 from direct.directnotify import DirectNotifyGlobal
@@ -64,7 +64,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, PetLooke
         self.__funcsToDelete = []
         self.__generateDistTraitFuncs()
         self.__generateDistMoodFuncs()
-        self.busy = 0
+        self.busy = []
         self.gaitFSM = ClassicFSM.ClassicFSM('petGaitFSM', [State.State('off', self.gaitEnterOff, self.gaitExitOff),
          State.State('neutral', self.gaitEnterNeutral, self.gaitExitNeutral),
          State.State('happy', self.gaitEnterHappy, self.gaitExitHappy),
@@ -933,7 +933,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, PetLooke
             self.notify.debug('freeing avatar!')
             self.freeAvatar(avId)
             return 0
-        self.busy = avId
+        self.busy.append(avId)
         self.notify.debug('sending update')
         self.sendUpdateToAvatarId(avId, 'avatarInteract', [avId])
         self.acceptOnce(self.air.getAvatarExitEvent(avId), self.__handleUnexpectedExit, extraArgs=[avId])
@@ -946,10 +946,11 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, PetLooke
         self.sendUpdate('setMovie', [flag, avId, ClockDelta.globalClockDelta.getRealNetworkTime()])
 
     def sendClearMovie(self, task = None):
+        avId = self.air.getAvatarIdFromSender()
         if self.air != None:
             self.ignore(self.air.getAvatarExitEvent(self.busy))
         taskMgr.remove(self.uniqueName('clearMovie'))
-        self.busy = 0
+        self.busy.remove(avId)
         self.d_setMovie(0, PetConstants.PET_MOVIE_CLEAR)
         return Task.done
 

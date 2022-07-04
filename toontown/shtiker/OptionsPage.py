@@ -8,7 +8,7 @@ from direct.task import Task
 from otp.speedchat import SpeedChat
 from otp.speedchat import SCColorScheme
 from otp.speedchat import SCStaticTextTerminal
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.directnotify import DirectNotifyGlobal
 speedChatStyles = ((2000,
   (200 / 255.0, 60 / 255.0, 229 / 255.0),

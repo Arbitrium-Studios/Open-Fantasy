@@ -14,7 +14,7 @@ from toontown.toontowngui import TTDialog
 from direct.directnotify import DirectNotifyGlobal
 from toontown.battle import BattleBase
 from toontown.toonbase import ToontownTimer
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from toontown.toonbase import TTLocalizer
 from toontown.pets import PetConstants
 from direct.gui.DirectGui import DGG

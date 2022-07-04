@@ -1,5 +1,5 @@
 from otp.ai.AIBaseGlobal import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from . import DistributedToonAI
 from direct.fsm import ClassicFSM
 from direct.fsm import State
@@ -15,7 +15,7 @@ class DistributedNPCToonBaseAI(DistributedToonAI.DistributedToonAI):
         DistributedToonAI.DistributedToonAI.__init__(self, air)
         self.air = air
         self.npcId = npcId
-        self.busy = 0
+        self.busy = []
         self.questCallback = questCallback
         self.givesQuests = 1
 
@@ -47,8 +47,9 @@ class DistributedNPCToonBaseAI(DistributedToonAI.DistributedToonAI):
     def avatarEnter(self):
         pass
 
-    def isBusy(self):
-        return self.busy > 0
+    def isBusy(self, avId):
+        # returns true if the npc is busy with the avatar
+        return avId in self.busy
 
     def getNpcId(self):
         return self.npcId

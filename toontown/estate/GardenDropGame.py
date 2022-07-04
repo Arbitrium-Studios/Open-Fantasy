@@ -18,7 +18,7 @@ from toontown.toonbase import TTLocalizer
 import random
 import random
 import pickle
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from . import GameSprite
 from math import pi
 from . import GardenProgressMeter

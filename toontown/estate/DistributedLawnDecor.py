@@ -9,7 +9,7 @@ from direct.task import Task
 from toontown.toonbase import ToontownGlobals
 from direct.distributed import DistributedObject
 from direct.distributed import DistributedNode
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from otp.avatar import ShadowCaster
 import random
 from otp.otpbase import OTPGlobals

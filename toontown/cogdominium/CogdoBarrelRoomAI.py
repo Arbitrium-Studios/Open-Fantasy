@@ -1,7 +1,7 @@
 import random
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObjectAI
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.task import Timer
 from direct.task.Task import Task
 from toontown.toonbase import ToontownGlobals

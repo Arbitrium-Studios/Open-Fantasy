@@ -1,7 +1,7 @@
 import math
 import random
 from pandac.PandaModules import Vec3
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.directnotify import DirectNotifyGlobal
 from direct.task.Task import Task
 from direct.interval.FunctionInterval import Wait

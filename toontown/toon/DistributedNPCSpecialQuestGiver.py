@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from .DistributedNPCToonBase import *
 from toontown.quest import QuestParser
 from toontown.quest import QuestChoiceGui
@@ -91,7 +91,8 @@ class DistributedNPCSpecialQuestGiver(DistributedNPCToonBase):
             place.fsm.request('walk')
 
     def finishMovie(self, av, isLocalToon, elapsedTime):
-        self.cleanupMovie()
+        if isLocalToon:
+            self.cleanupMovie()
         av.startLookAround()
         self.startLookAround()
         self.detectAvatars()
@@ -114,10 +115,11 @@ class DistributedNPCSpecialQuestGiver(DistributedNPCToonBase):
     def setMovie(self, mode, npcId, avId, quests, timestamp):
         timeStamp = ClockDelta.globalClockDelta.localElapsedTime(timestamp)
         isLocalToon = avId == base.localAvatar.doId
-        if mode == NPCToons.QUEST_MOVIE_CLEAR:
+        if mode == NPCToons.QUEST_MOVIE_CLEAR and isLocalToon:
+
             self.cleanupMovie()
             return
-        if mode == NPCToons.QUEST_MOVIE_TIMEOUT:
+        if mode == NPCToons.QUEST_MOVIE_TIMEOUT and isLocalToon:
             self.cleanupMovie()
             if isLocalToon:
                 self.freeAvatar()

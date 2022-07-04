@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from .DistributedNPCToonBase import *
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
@@ -62,6 +62,8 @@ class DistributedNPCTailor(DistributedNPCToonBase):
         return
 
     def resetTailor(self):
+        if not self.isLocalToon:
+            return
         self.ignoreAll()
         taskMgr.remove(self.uniqueName('popupPurchaseGUI'))
         if self.lerpCameraSeq:

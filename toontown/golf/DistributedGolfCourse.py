@@ -2,7 +2,7 @@ from direct.interval.IntervalGlobal import Sequence, Func, Wait, LerpColorScaleI
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from direct.task.Task import Task
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from toontown.distributed import DelayDelete
 from toontown.distributed.DelayDeletable import DelayDeletable
 from toontown.toonbase import ToontownGlobals

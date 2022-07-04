@@ -8,7 +8,7 @@ from . import DistributedHouseInterior
 from direct.actor import Actor
 from . import DistributedFurnitureItem
 from direct.distributed import ClockDelta
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.showutil import Rope
 from direct.directnotify.DirectNotifyGlobal import *
 from pandac.PandaModules import *

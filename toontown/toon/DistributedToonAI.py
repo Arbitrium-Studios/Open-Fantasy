@@ -17,7 +17,7 @@ from toontown.battle import SuitBattleGlobals
 from direct.task import Task
 from toontown.catalog import CatalogItemList
 from toontown.catalog import CatalogItem
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.distributed.ClockDelta import *
 from toontown.toonbase.ToontownGlobals import *
 import types

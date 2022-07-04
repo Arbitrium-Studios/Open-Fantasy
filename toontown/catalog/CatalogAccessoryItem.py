@@ -4,7 +4,7 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.toon import ToonDNA
 import random
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 

@@ -10,7 +10,7 @@ from direct.fsm import ClassicFSM, State
 from direct.task.Task import Task
 from toontown.toonbase import TTLocalizer
 import random
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from toontown.hood import Place
 from toontown.hood import SkyUtil
 from toontown.pets import PetTutorial

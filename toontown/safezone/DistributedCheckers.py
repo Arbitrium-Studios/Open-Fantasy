@@ -14,7 +14,7 @@ from toontown.toonbase.ToontownTimer import ToontownTimer
 from toontown.toonbase import ToontownGlobals
 from direct.distributed.ClockDelta import *
 from otp.otpbase import OTPGlobals
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 
 class DistributedCheckers(DistributedNode.DistributedNode):
 

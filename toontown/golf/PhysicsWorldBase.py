@@ -6,7 +6,7 @@ from math import *
 import math
 from direct.fsm.FSM import FSM
 from toontown.minigame import ArrowKeys
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.task import Task
 from direct.distributed.ClockDelta import *
 from . import BuildGeometry

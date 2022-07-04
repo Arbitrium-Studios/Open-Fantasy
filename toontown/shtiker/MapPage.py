@@ -1,6 +1,6 @@
 from . import ShtikerPage
 from toontown.toonbase import ToontownGlobals
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from otp.otpbase import PythonUtil as OTPPythonUtil
 from toontown.hood import ZoneUtil
 from direct.gui.DirectGui import *

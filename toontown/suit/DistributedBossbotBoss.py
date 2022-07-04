@@ -7,7 +7,7 @@ from direct.task import Task
 from direct.fsm import FSM
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.ClockDelta import globalClockDelta
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.task import Task
 from toontown.distributed import DelayDelete
 from toontown.toonbase import ToontownGlobals

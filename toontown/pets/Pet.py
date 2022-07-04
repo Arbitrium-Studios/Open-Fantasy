@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
 from direct.fsm.ClassicFSM import *
@@ -11,7 +11,7 @@ from toontown.pets import PetDNA
 from .PetDNA import HeadParts, EarParts, NoseParts, TailParts, BodyTypes, BodyTextures, AllPetColors, getColors, ColorScales, PetEyeColors, EarTextures, TailTextures, getFootTexture, getEarTexture, GiraffeTail, LeopardTail, PetGenders
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 import random
 Component2IconDict = {'boredom': 'Bored',
  'restlessness': None,

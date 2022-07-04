@@ -5,7 +5,7 @@ from direct.task import Task
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from otp.otpbase import OTPGlobals
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from otp.otpbase.PythonUtil import describeException
 from direct.showbase import GarbageReport
 import base64

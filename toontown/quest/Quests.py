@@ -9,7 +9,7 @@ import copy
 from toontown.hood import ZoneUtil
 from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import TTLocalizer
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 import time, types, random
 notify = DirectNotifyGlobal.directNotify.newCategory('Quests')
 ItemDict = TTLocalizer.QuestsItemDict

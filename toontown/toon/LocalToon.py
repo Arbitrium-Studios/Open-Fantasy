@@ -8,7 +8,7 @@ from direct.distributed.ClockDelta import *
 from direct.showbase.PythonUtil import *
 from direct.gui.DirectGui import *
 from direct.task import Task
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.directnotify import DirectNotifyGlobal
 from direct.gui import DirectGuiGlobals
 from pandac.PandaModules import *

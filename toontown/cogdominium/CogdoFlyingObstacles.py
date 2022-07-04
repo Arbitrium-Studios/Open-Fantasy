@@ -3,7 +3,7 @@ from direct.showbase.DirectObject import DirectObject
 from direct.interval.IntervalGlobal import LerpFunc, ActorInterval, LerpPosInterval
 from direct.interval.MetaInterval import Sequence
 from direct.directutil import Mopath
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from pandac.PandaModules import *
 from toontown.toonbase import ToontownGlobals
 from toontown.suit import Suit
