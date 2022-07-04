@@ -2,9 +2,6 @@
 
 title Open-Fantasy Game Launcher
 
-rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
-set /P PPYTHON_PATH=<PPYTHON_PATH
-
 echo Choose your connection method!
 echo.
 echo #1 - Offline Mode
