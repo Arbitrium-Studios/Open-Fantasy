@@ -37,6 +37,8 @@
 
 ### Contributors:
 * Battery on Discord for fixing the Tuple error!
+* DarthM on Discord for various features including Credits, Genderless Toons, etc.
+* TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
 
 [discordImg]: https://img.shields.io/badge/Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&colorB=7289DA&style=for-the-badge
 
