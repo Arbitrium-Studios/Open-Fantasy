@@ -79,7 +79,7 @@ class ToontownMagicWordManagerAI(DistributedObjectAI.DistributedObjectAI):
 
         # Same thing with the Toontorial. Magic Words are strictly forbidden here
         # Tell the user they can't use it because they're in the Toontorial
-        if avId in list(self.air.tutorialManager.avId2fsm.keys()):
+        if hasattr(self.air, 'tutorialManager') and avId in list(self.air.tutorialManager.avId2fsm.keys()):
             self.generateResponse(avId=avId, responseType="Tutorial")
             return
 
