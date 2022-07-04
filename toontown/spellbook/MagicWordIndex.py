@@ -556,7 +556,7 @@ class MaxToon(MagicWord):
         av.b_setTickets(99999)
 
         av.b_setGolfHistory([600] * (GolfGlobals.MaxHistoryIndex * 2))
-        return 'Successfully maxed your toon.'
+        return 'Successfully maxed your Toon.'
 
 
 class SkipMazeGame(MagicWord):
