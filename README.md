@@ -4,16 +4,11 @@
 
 # What is Toontown Fantasy?
  
-## Toontown Fantasy is a non-profit re-envisioning of Disney's Toontown Online! The game is built from the ground up using the latest technologies to make your experience more enjoyable and immersive!
+## Toontown Fantasy is a non-profit re-envisioning of Disney's Toontown Online! The game is built from the ground up using the latest technologies to make your experience more enjoyable and immersive! Come make your own Fantasy or play my idea of Toontown Fantasy for FREE today!
 
 ### Management Team:
 + THE PLAYER ZER0 aka Gracie T. Lovelight | Director/Owner
 + Pizza Taco Burger | Co-Owner
-
-### Community Team:
-
-+ THE PLAYER ZER0 aka Gracie T. Lovelight | Community Manager
-+ Redspade | Discord Moderator
 
 ### Technical Team:
 + The Professor | Developer
