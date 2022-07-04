@@ -12,5 +12,6 @@
 12. Implement Mobile Mode for Android users!
 13. Implement full Wide-Screen Support
 14. Implement in-engine Image Upscaling
+15. Add Credits to the game for everyone who is helping
 
 More soon!
