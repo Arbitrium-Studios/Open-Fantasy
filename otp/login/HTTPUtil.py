@@ -1,5 +1,6 @@
 from pandac.PandaModules import *
 
+
 class HTTPUtilException(Exception):
 
     def __init__(self, what):
@@ -19,13 +20,15 @@ class UnexpectedResponse(HTTPUtilException):
         HTTPUtilException.__init__(self, what)
 
 
-def getHTTPResponse(url, http, body = ''):
+def getHTTPResponse(url, http, body=''):
     if body:
         hd = http.postForm(url, body)
     else:
         hd = http.getDocument(url)
     if not hd.isValid():
-        raise ConnectionError('Unable to reach %s' % url.cStr(), hd.getStatusCode())
+        raise ConnectionError(
+            'Unable to reach %s' %
+            url.cStr(), hd.getStatusCode())
     stream = hd.openReadBody()
     sr = StreamReader(stream, 1)
     response = sr.readlines()

@@ -19,6 +19,7 @@ from toontown.hood import Place
 from . import Estate
 from . import HouseGlobals
 
+
 class DistributedGarden(DistributedObject.DistributedObject):
     notify = directNotify.newCategory('DistributedGarden')
 
@@ -64,27 +65,40 @@ class DistributedGarden(DistributedObject.DistributedObject):
     def sendNewProp(self, prop, x, y, z):
         self.notify.debug('sendNewProp')
         print('new prop (%d) = %s,%s,%s' % (prop,
-         x,
-         y,
-         z))
+                                            x,
+                                            y,
+                                            z))
         if prop == HouseGlobals.PROP_ICECUBE:
             model = loader.loadModel('phase_8/models/props/icecube.bam')
         elif prop == HouseGlobals.PROP_FLOWER:
-            model = loader.loadModel('phase_8/models/props/flower_treasure.bam')
+            model = loader.loadModel(
+                'phase_8/models/props/flower_treasure.bam')
         elif prop == HouseGlobals.PROP_SNOWFLAKE:
-            model = loader.loadModel('phase_8/models/props/snowflake_treasure.bam')
+            model = loader.loadModel(
+                'phase_8/models/props/snowflake_treasure.bam')
         model.reparentTo(hidden)
         model.setPos(x, y, z)
         model.setScale(0.2)
         model.setBillboardPointEye()
         model.reparentTo(render)
         self.props.append([model,
-         x,
-         y,
-         z])
+                           x,
+                           y,
+                           z])
 
     def getPropPos(self, i, j):
-        pos = [self.pos[0] - self.radius + 2 * self.radius * i, self.pos[1] - self.radius + 2 * self.radius * j, self.pos[2]]
+        pos = [
+            self.pos[0] -
+            self.radius +
+            2 *
+            self.radius *
+            i,
+            self.pos[1] -
+            self.radius +
+            2 *
+            self.radius *
+            j,
+            self.pos[2]]
         return pos
 
     def loadProp(self, prop, i, j):
@@ -92,9 +106,11 @@ class DistributedGarden(DistributedObject.DistributedObject):
         if prop == HouseGlobals.PROP_ICECUBE:
             model = loader.loadModel('phase_8/models/props/icecube.bam')
         elif prop == HouseGlobals.PROP_FLOWER:
-            model = loader.loadModel('phase_8/models/props/flower_treasure.bam')
+            model = loader.loadModel(
+                'phase_8/models/props/flower_treasure.bam')
         elif prop == HouseGlobals.PROP_SNOWFLAKE:
-            model = loader.loadModel('phase_8/models/props/snowflake_treasure.bam')
+            model = loader.loadModel(
+                'phase_8/models/props/snowflake_treasure.bam')
         else:
             self.notify.error('cant find prop: %s' % prop)
         model.reparentTo(hidden)

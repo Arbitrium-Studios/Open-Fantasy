@@ -3,8 +3,10 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObjectAI
 from toontown.cogdominium import CogdoBarrelRoomConsts
 
+
 class DistributedCogdoBarrelAI(DistributedObjectAI.DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCogdoBarrelAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedCogdoBarrelAI')
 
     def __init__(self, air, index, collectedCallback):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
@@ -38,7 +40,9 @@ class DistributedCogdoBarrelAI(DistributedObjectAI.DistributedObjectAI):
         avId = self.air.getAvatarIdFromSender()
         av = self.air.doId2do.get(avId)
         if not av:
-            self.notify.warning('requestGrab found no avatar with id %s' % avId)
+            self.notify.warning(
+                'requestGrab found no avatar with id %s' %
+                avId)
             return
 
         if self.__canGrab(av):
@@ -47,7 +51,8 @@ class DistributedCogdoBarrelAI(DistributedObjectAI.DistributedObjectAI):
             self.d_setReject()
 
     def __canGrab(self, av):
-        return self.state == CogdoBarrelRoomConsts.StateAvailable and self.interactive and not av.isToonedUp() and av.doId not in self.grabbedBy
+        return self.state == CogdoBarrelRoomConsts.StateAvailable and self.interactive and not av.isToonedUp(
+        ) and av.doId not in self.grabbedBy
 
     def d_setGrab(self, avId):
         self.collectedCallback(self, avId)

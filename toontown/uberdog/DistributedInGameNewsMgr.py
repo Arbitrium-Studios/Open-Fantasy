@@ -6,6 +6,7 @@ from direct.distributed.DistributedObject import DistributedObject
 from toontown.toonbase import ToontownGlobals
 from toontown.uberdog import InGameNewsResponses
 
+
 class DistributedInGameNewsMgr(DistributedObject):
     notify = directNotify.newCategory('InGameNewsMgr')
     neverDisable = 1
@@ -29,7 +30,8 @@ class DistributedInGameNewsMgr(DistributedObject):
 
     def setLatestIssueStr(self, issueStr):
         self.latestIssueStr = issueStr
-        self.latestIssue = base.cr.toontownTimeManager.convertUtcStrToToontownTime(issueStr)
+        self.latestIssue = base.cr.toontownTimeManager.convertUtcStrToToontownTime(
+            issueStr)
         messenger.send('newIssueOut')
         self.notify.info('latestIssue=%s' % self.latestIssue)
 

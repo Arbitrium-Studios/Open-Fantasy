@@ -5,6 +5,7 @@ from toontown.suit import Suit
 from toontown.toon import Toon
 from toontown.hood import ZoneUtil
 
+
 class TutorialTownLoader(TTTownLoader.TTTownLoader):
 
     def __init__(self, hood, parentFSM, doneEvent):

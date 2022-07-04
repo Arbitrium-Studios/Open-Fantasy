@@ -1,9 +1,10 @@
 from direct.interval.IntervalGlobal import *
 from pandac.PandaModules import *
 
+
 class BlinkingArrows:
 
-    def __init__(self, parent = aspect2d, otherNode = None):
+    def __init__(self, parent=aspect2d, otherNode=None):
         self.arrow1 = loader.loadModel('phase_3/models/props/arrow')
         self.arrow2 = loader.loadModel('phase_3/models/props/arrow')
         self.arrowTrack = None
@@ -18,7 +19,7 @@ class BlinkingArrows:
         del self.arrow1
         del self.arrow2
 
-    def arrowsOn(self, x1, y1, h1, x2, y2, h2, onTime = 0.75, offTime = 0.75):
+    def arrowsOn(self, x1, y1, h1, x2, y2, h2, onTime=0.75, offTime=0.75):
         self.stopArrowsFlashing()
         self.arrow1.setBin('gui-popup', 0)
         self.arrow2.setBin('gui-popup', 0)
@@ -46,9 +47,25 @@ class BlinkingArrows:
         self.arrow2.show()
         if self.otherNode:
             self.otherNode.show()
-            self.arrowTrack = Sequence(Parallel(self.arrow1.colorScaleInterval(self.onTime, onColor, offColor), self.arrow2.colorScaleInterval(self.onTime, onColor, offColor), self.otherNode.colorScaleInterval(self.onTime, onColor, offColor)), Parallel(self.arrow1.colorScaleInterval(self.offTime, offColor, onColor), self.arrow2.colorScaleInterval(self.offTime, offColor, onColor), self.otherNode.colorScaleInterval(self.offTime, offColor, onColor)))
+            self.arrowTrack = Sequence(
+                Parallel(
+                    self.arrow1.colorScaleInterval(
+                        self.onTime, onColor, offColor), self.arrow2.colorScaleInterval(
+                        self.onTime, onColor, offColor), self.otherNode.colorScaleInterval(
+                        self.onTime, onColor, offColor)), Parallel(
+                    self.arrow1.colorScaleInterval(
+                        self.offTime, offColor, onColor), self.arrow2.colorScaleInterval(
+                        self.offTime, offColor, onColor), self.otherNode.colorScaleInterval(
+                        self.offTime, offColor, onColor)))
         else:
-            self.arrowTrack = Sequence(Parallel(self.arrow1.colorScaleInterval(self.onTime, onColor, offColor), self.arrow2.colorScaleInterval(self.onTime, onColor, offColor)), Parallel(self.arrow1.colorScaleInterval(self.offTime, offColor, onColor), self.arrow2.colorScaleInterval(self.offTime, offColor, onColor)))
+            self.arrowTrack = Sequence(
+                Parallel(
+                    self.arrow1.colorScaleInterval(
+                        self.onTime, onColor, offColor), self.arrow2.colorScaleInterval(
+                        self.onTime, onColor, offColor)), Parallel(
+                    self.arrow1.colorScaleInterval(
+                        self.offTime, offColor, onColor), self.arrow2.colorScaleInterval(
+                            self.offTime, offColor, onColor)))
         self.arrowTrack.loop()
 
     def stopArrowsFlashing(self):

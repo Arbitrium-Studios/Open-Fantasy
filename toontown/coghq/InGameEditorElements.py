@@ -1,9 +1,10 @@
 from direct.showbase import DirectObject
 
+
 class InGameEditorElement(DirectObject.DirectObject):
     elementId = 0
 
-    def __init__(self, children = []):
+    def __init__(self, children=[]):
         self.elementId = InGameEditorElement.elementId
         InGameEditorElement.elementId += 1
         self.setChildren(children)

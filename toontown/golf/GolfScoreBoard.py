@@ -9,6 +9,7 @@ from toontown.golf import GolfGlobals
 from pandac.PandaModules import LineSegs
 AUTO_HIDE_TIMEOUT = 3
 
+
 class GolfScoreBoard:
     notify = directNotify.newCategory('GolfScoreBoard')
 
@@ -26,13 +27,41 @@ class GolfScoreBoard:
         self.setup()
 
     def setup(self):
-        self.scoreboard = DirectFrame(parent=aspect2d, relief=None, geom=DGG.getDefaultDialogGeom(), geom_color=ToontownGlobals.GlobalDialogColor, geom_scale=(1.9, 1, 1.05), pos=(0, 0, 0.375))
+        self.scoreboard = DirectFrame(
+            parent=aspect2d,
+            relief=None,
+            geom=DGG.getDefaultDialogGeom(),
+            geom_color=ToontownGlobals.GlobalDialogColor,
+            geom_scale=(
+                1.9,
+                1,
+                1.05),
+            pos=(
+                0,
+                0,
+                0.375))
         self.lines = LineSegs()
         self.lines.setColor(0, 0, 0, 1)
         self.lines.setThickness(2)
         guiModel = loader.loadModel('phase_6/models/golf/golf_gui')
         highlight = loader.loadModel('phase_6/models/golf/headPanel')
-        self.maximizeB = DirectButton(parent=aspect2d, pos=(1.2, 0, -0.85), relief=None, state=DGG.NORMAL, image=(guiModel.find('**/score_card_icon'), guiModel.find('**/score_card_icon_rollover'), guiModel.find('**/score_card_icon_rollover')), image_scale=(0.2, 1, 0.2), command=self.showBoard)
+        self.maximizeB = DirectButton(
+            parent=aspect2d,
+            pos=(
+                1.2,
+                0,
+                -0.85),
+            relief=None,
+            state=DGG.NORMAL,
+            image=(
+                guiModel.find('**/score_card_icon'),
+                guiModel.find('**/score_card_icon_rollover'),
+                guiModel.find('**/score_card_icon_rollover')),
+            image_scale=(
+                0.2,
+                1,
+                0.2),
+            command=self.showBoard)
         self.vertOffset = 0.13
         self.playaTop = 0.12
         horzOffset = 0.12
@@ -46,30 +75,170 @@ class GolfScoreBoard:
         self.lineVertOffset = 0.125
         self.lineVCenter = 0.025
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        self.minimizeB = DirectButton(parent=self.scoreboard, pos=(0, 0, self.lineHStart - 0.59), relief=None, state=DGG.NORMAL, image=(buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr')), image_scale=(1, 1, 1), command=self.hideBoard, extraArgs=[None])
-        self.exitCourseB = DirectButton(parent=self.scoreboard, pos=(0, 0, self.lineHStart - 0.59), relief=None, state=DGG.NORMAL, image=(buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr')), image_scale=(1, 1, 1), text=TTLocalizer.GolfExitCourse, text_scale=0.04, text_pos=TTLocalizer.GSBexitCourseBPos, command=self.exitCourse)
+        self.minimizeB = DirectButton(
+            parent=self.scoreboard,
+            pos=(
+                0,
+                0,
+                self.lineHStart - 0.59),
+            relief=None,
+            state=DGG.NORMAL,
+            image=(
+                buttons.find('**/CloseBtn_UP'),
+                buttons.find('**/CloseBtn_DN'),
+                buttons.find('**/CloseBtn_Rllvr')),
+            image_scale=(
+                1,
+                1,
+                1),
+            command=self.hideBoard,
+            extraArgs=[None])
+        self.exitCourseB = DirectButton(
+            parent=self.scoreboard,
+            pos=(
+                0,
+                0,
+                self.lineHStart - 0.59),
+            relief=None,
+            state=DGG.NORMAL,
+            image=(
+                buttons.find('**/CloseBtn_UP'),
+                buttons.find('**/CloseBtn_DN'),
+                buttons.find('**/CloseBtn_Rllvr')),
+            image_scale=(
+                1,
+                1,
+                1),
+            text=TTLocalizer.GolfExitCourse,
+            text_scale=0.04,
+            text_pos=TTLocalizer.GSBexitCourseBPos,
+            command=self.exitCourse)
         self.exitCourseB.hide()
-        self.highlightCur = DirectLabel(parent=self.scoreboard, relief=None, pos=(-0.003, 0, 0.038), image=highlight, image_scale=(1.82, 1, 0.135))
-        self.titleBar = DirectLabel(parent=self.scoreboard, relief=None, pos=(-0.003, 0, 0.166), color=(0.7, 0.7, 0.7, 0.3), image=highlight, image_scale=(1.82, 1, 0.195))
+        self.highlightCur = DirectLabel(parent=self.scoreboard, relief=None, pos=(
+            -0.003, 0, 0.038), image=highlight, image_scale=(1.82, 1, 0.135))
+        self.titleBar = DirectLabel(
+            parent=self.scoreboard,
+            relief=None,
+            pos=(
+                -0.003,
+                0,
+                0.166),
+            color=(
+                0.7,
+                0.7,
+                0.7,
+                0.3),
+            image=highlight,
+            image_scale=(
+                1.82,
+                1,
+                0.195))
         self.titleBar.show()
         self.highlightCur.show()
         buttons.removeNode()
         guiModel.removeNode()
-        title = GolfGlobals.getCourseName(self.golfCourse.courseId) + ' - ' + GolfGlobals.getHoleName(self.golfCourse.holeIds[self.golfCourse.curHoleIndex])
-        self.titleLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(0, 0, holeTop + 0.1), text_align=TextNode.ACenter, text=title, text_scale=TTLocalizer.GSBtitleLabel, text_font=ToontownGlobals.getSignFont(), text_fg=(0, 0.5, 0.125, 1))
-        self.playaLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(self.lineVStart - 0.23, 0, holeTop), text_align=TextNode.ACenter, text=TTLocalizer.GolfHole, text_font=ToontownGlobals.getMinnieFont(), text_scale=0.05)
+        title = GolfGlobals.getCourseName(self.golfCourse.courseId) + ' - ' + GolfGlobals.getHoleName(
+            self.golfCourse.holeIds[self.golfCourse.curHoleIndex])
+        self.titleLabel = DirectLabel(
+            parent=self.scoreboard,
+            relief=None,
+            pos=(
+                0,
+                0,
+                holeTop + 0.1),
+            text_align=TextNode.ACenter,
+            text=title,
+            text_scale=TTLocalizer.GSBtitleLabel,
+            text_font=ToontownGlobals.getSignFont(),
+            text_fg=(
+                0,
+                0.5,
+                0.125,
+                1))
+        self.playaLabel = DirectLabel(
+            parent=self.scoreboard,
+            relief=None,
+            pos=(
+                self.lineVStart - 0.23,
+                0,
+                holeTop),
+            text_align=TextNode.ACenter,
+            text=TTLocalizer.GolfHole,
+            text_font=ToontownGlobals.getMinnieFont(),
+            text_scale=0.05)
         for holeLIndex in range(self.golfCourse.numHoles):
-            holeLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(self.lineVStart + 0.055 + horzOffset * holeLIndex, 0, holeTop), text_align=TextNode.ACenter, text='%s' % (holeLIndex + 1), text_scale=0.05)
+            holeLabel = DirectLabel(
+                parent=self.scoreboard,
+                relief=None,
+                pos=(
+                    self.lineVStart +
+                    0.055 +
+                    horzOffset *
+                    holeLIndex,
+                    0,
+                    holeTop),
+                text_align=TextNode.ACenter,
+                text='%s' %
+                (holeLIndex +
+                 1),
+                text_scale=0.05)
             self.holeLabels.append(holeLabel)
 
-        self.totalLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(self.lineVStart + 0.1 + horzOffset * 9.5, 0, holeTop), text_align=TextNode.ACenter, text=TTLocalizer.GolfTotal, text_font=ToontownGlobals.getMinnieFont(), text_scale=0.05)
-        self.parTitleLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(self.lineVStart - 0.23, 0, holeTop - 0.1), text_align=TextNode.ACenter, text=TTLocalizer.GolfPar, text_font=ToontownGlobals.getMinnieFont(), text_scale=0.05)
+        self.totalLabel = DirectLabel(
+            parent=self.scoreboard,
+            relief=None,
+            pos=(
+                self.lineVStart +
+                0.1 +
+                horzOffset *
+                9.5,
+                0,
+                holeTop),
+            text_align=TextNode.ACenter,
+            text=TTLocalizer.GolfTotal,
+            text_font=ToontownGlobals.getMinnieFont(),
+            text_scale=0.05)
+        self.parTitleLabel = DirectLabel(
+            parent=self.scoreboard,
+            relief=None,
+            pos=(
+                self.lineVStart - 0.23,
+                0,
+                holeTop - 0.1),
+            text_align=TextNode.ACenter,
+            text=TTLocalizer.GolfPar,
+            text_font=ToontownGlobals.getMinnieFont(),
+            text_scale=0.05)
         for parHoleIndex in range(self.golfCourse.numHoles):
-            parLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(self.lineVStart + 0.055 + horzOffset * parHoleIndex, 0, holeTop - 0.1), text_align=TextNode.ACenter, text='%s' % GolfGlobals.HoleInfo[self.golfCourse.holeIds[parHoleIndex]]['par'], text_scale=0.05, text_wordwrap=10)
-            totPar = totPar + GolfGlobals.HoleInfo[self.golfCourse.holeIds[parHoleIndex]]['par']
+            parLabel = DirectLabel(parent=self.scoreboard,
+                                   relief=None,
+                                   pos=(self.lineVStart + 0.055 + horzOffset * parHoleIndex,
+                                        0,
+                                        holeTop - 0.1),
+                                   text_align=TextNode.ACenter,
+                                   text='%s' % GolfGlobals.HoleInfo[self.golfCourse.holeIds[parHoleIndex]]['par'],
+                                   text_scale=0.05,
+                                   text_wordwrap=10)
+            totPar = totPar + \
+                GolfGlobals.HoleInfo[self.golfCourse.holeIds[parHoleIndex]]['par']
             self.parLabels.append(parLabel)
 
-        parLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(self.lineVStart + 0.1 + horzOffset * 9.5, 0, holeTop - 0.1), text_align=TextNode.ACenter, text='%s' % totPar, text_scale=0.05, text_wordwrap=10)
+        parLabel = DirectLabel(
+            parent=self.scoreboard,
+            relief=None,
+            pos=(
+                self.lineVStart +
+                0.1 +
+                horzOffset *
+                9.5,
+                0,
+                holeTop -
+                0.1),
+            text_align=TextNode.ACenter,
+            text='%s' %
+            totPar,
+            text_scale=0.05,
+            text_wordwrap=10)
         self.parLabels.append(parLabel)
         vert = 0.0
         self.numPlayas = len(self.golfCourse.avIdList)
@@ -78,48 +247,144 @@ class GolfScoreBoard:
             av = base.cr.doId2do.get(self.golfCourse.avIdList[playaIndex])
             if av:
                 name = av.getName()
-            playaLabel = DirectLabel(parent=self.scoreboard, relief=None, text_align=TextNode.ACenter, text=name, text_scale=0.05, text_wordwrap=9)
+            playaLabel = DirectLabel(
+                parent=self.scoreboard,
+                relief=None,
+                text_align=TextNode.ACenter,
+                text=name,
+                text_scale=0.05,
+                text_wordwrap=9)
             self.playaTags.append(playaLabel)
             textN = playaLabel.component(playaLabel.components()[0])
-            if type(textN) == OnscreenText:
+            if isinstance(textN, OnscreenText):
                 try:
                     if textN.textNode.getWordwrappedWtext() != name:
                         vert = self.playaTop - self.vertOffset * playaIndex
                     else:
                         vert = self.playaTop - self.vertOffset * playaIndex - self.vCenter
-                except:
+                except BaseException:
                     vert = self.playaTop - self.vertOffset * playaIndex
 
             self.playaTags[playaIndex].setPos(self.lineVStart - 0.23, 0, vert)
-            self.notify.debug('self.text height = %f' % self.playaTags[playaIndex].getHeight())
+            self.notify.debug(
+                'self.text height = %f' %
+                self.playaTags[playaIndex].getHeight())
             holeIndex = 0
             for holeIndex in range(self.golfCourse.numHoles):
-                holeLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(self.lineVStart + 0.055 + horzOffset * holeIndex, 0, self.playaTop - self.vertOffset * playaIndex - self.vCenter), text_align=TextNode.ACenter, text='-', text_scale=0.05, text_wordwrap=10)
+                holeLabel = DirectLabel(
+                    parent=self.scoreboard,
+                    relief=None,
+                    pos=(
+                        self.lineVStart +
+                        0.055 +
+                        horzOffset *
+                        holeIndex,
+                        0,
+                        self.playaTop -
+                        self.vertOffset *
+                        playaIndex -
+                        self.vCenter),
+                    text_align=TextNode.ACenter,
+                    text='-',
+                    text_scale=0.05,
+                    text_wordwrap=10)
                 self.scoreTags.append(holeLabel)
 
-            holeLabel = DirectLabel(parent=self.scoreboard, relief=None, pos=(self.lineVStart + 0.1 + horzOffset * 9.5, 0, self.playaTop - self.vertOffset * playaIndex - self.vCenter), text_align=TextNode.ACenter, text='-', text_scale=0.05, text_wordwrap=10)
+            holeLabel = DirectLabel(
+                parent=self.scoreboard,
+                relief=None,
+                pos=(
+                    self.lineVStart +
+                    0.1 +
+                    horzOffset *
+                    9.5,
+                    0,
+                    self.playaTop -
+                    self.vertOffset *
+                    playaIndex -
+                    self.vCenter),
+                text_align=TextNode.ACenter,
+                text='-',
+                text_scale=0.05,
+                text_wordwrap=10)
             self.totalTags.append(holeLabel)
 
         self.lines.moveTo(self.lineVStart - 0.45, 0, self.lineHStart + 0.19)
-        self.lines.drawTo(self.lineVStart + 11 * self.lineVertOffset, 0, self.lineHStart + 0.19)
+        self.lines.drawTo(
+            self.lineVStart +
+            11 *
+            self.lineVertOffset,
+            0,
+            self.lineHStart +
+            0.19)
         self.lines.moveTo(self.lineVStart - 0.45, 0, self.lineHStart + 0.09)
-        self.lines.drawTo(self.lineVStart + 11 * self.lineVertOffset, 0, self.lineHStart + 0.09)
+        self.lines.drawTo(
+            self.lineVStart +
+            11 *
+            self.lineVertOffset,
+            0,
+            self.lineHStart +
+            0.09)
         self.lines.moveTo(self.lineVStart - 0.45, 0, self.lineHStart)
-        self.lines.drawTo(self.lineVStart + 11 * self.lineVertOffset, 0, self.lineHStart)
+        self.lines.drawTo(
+            self.lineVStart +
+            11 *
+            self.lineVertOffset,
+            0,
+            self.lineHStart)
         self.lines.moveTo(self.lineVStart - 0.45, 0, self.lineHStart + 0.19)
-        self.lines.drawTo(self.lineVStart - 0.45, 0, self.lineHStart - 4 * 0.13)
+        self.lines.drawTo(
+            self.lineVStart -
+            0.45,
+            0,
+            self.lineHStart -
+            4 *
+            0.13)
         self.lines.moveTo(self.lineVStart, 0, self.lineHStart + 0.19)
         self.lines.drawTo(self.lineVStart, 0, self.lineHStart - 4 * 0.13)
         for x in range(4):
-            self.lines.moveTo(self.lineVStart - 0.45, 0, self.lineHStart - (x + 1) * self.lineHorOffset)
-            self.lines.drawTo(self.lineVStart + 11 * self.lineVertOffset + 0.005, 0, self.lineHStart - (x + 1) * self.lineHorOffset)
+            self.lines.moveTo(self.lineVStart - 0.45, 0,
+                              self.lineHStart - (x + 1) * self.lineHorOffset)
+            self.lines.drawTo(self.lineVStart +
+                              11 *
+                              self.lineVertOffset +
+                              0.005, 0, self.lineHStart -
+                              (x +
+                               1) *
+                              self.lineHorOffset)
 
         for y in range(10):
-            self.lines.moveTo(self.lineVStart + y * self.lineVertOffset, 0, self.lineHStart + 0.19)
-            self.lines.drawTo(self.lineVStart + y * self.lineVertOffset, 0, self.lineHStart - 4 * 0.13)
+            self.lines.moveTo(
+                self.lineVStart +
+                y *
+                self.lineVertOffset,
+                0,
+                self.lineHStart +
+                0.19)
+            self.lines.drawTo(
+                self.lineVStart +
+                y *
+                self.lineVertOffset,
+                0,
+                self.lineHStart -
+                4 *
+                0.13)
 
-        self.lines.moveTo(self.lineVStart + 11 * self.lineVertOffset, 0, self.lineHStart + 0.19)
-        self.lines.drawTo(self.lineVStart + 11 * self.lineVertOffset, 0, self.lineHStart - 4 * 0.13)
+        self.lines.moveTo(
+            self.lineVStart +
+            11 *
+            self.lineVertOffset,
+            0,
+            self.lineHStart +
+            0.19)
+        self.lines.drawTo(
+            self.lineVStart +
+            11 *
+            self.lineVertOffset,
+            0,
+            self.lineHStart -
+            4 *
+            0.13)
         self.scoreboard.attachNewNode(self.lines.create())
         self.hide()
         return
@@ -137,7 +402,10 @@ class GolfScoreBoard:
 
     def update(self):
         self.showBoard()
-        taskMgr.doMethodLater(AUTO_HIDE_TIMEOUT, self.hideBoard, 'hide score board')
+        taskMgr.doMethodLater(
+            AUTO_HIDE_TIMEOUT,
+            self.hideBoard,
+            'hide score board')
 
     def hideBoard(self, task):
         self.hide()
@@ -146,12 +414,12 @@ class GolfScoreBoard:
         self.scoreboard.hide()
         self.maximizeB.show()
 
-    def showBoardFinal(self, task = None):
+    def showBoardFinal(self, task=None):
         self.exitCourseB.show()
         self.minimizeB.hide()
         self.showBoard()
 
-    def showBoard(self, task = None):
+    def showBoard(self, task=None):
         scoreDict = self.golfCourse.scores
         x = 0
         currentGolfer = self.golfCourse.getCurGolfer()
@@ -159,9 +427,11 @@ class GolfScoreBoard:
             if self.golfCourse.isGameDone():
                 self.playaTags[playaIndex].setColor(0, 0, 0, 1)
             elif currentGolfer == self.golfCourse.avIdList[playaIndex]:
-                self.highlightCur.setColor(*GolfGlobals.PlayerColors[playaIndex])
+                self.highlightCur.setColor(
+                    *GolfGlobals.PlayerColors[playaIndex])
                 self.highlightCur.setAlphaScale(0.4)
-                self.highlightCur.setPos(-0.003, 0, 0.038 - playaIndex * (self.lineVertOffset + 0.005))
+                self.highlightCur.setPos(-0.003, 0, 0.038 -
+                                         playaIndex * (self.lineVertOffset + 0.005))
                 self.highlightCur.show()
             else:
                 self.playaTags[playaIndex].setColor(0, 0, 0, 1)
@@ -175,7 +445,9 @@ class GolfScoreBoard:
                     self.playaTags[x].setColor(0.7, 0.7, 0.7, 1)
                     holeIndex = 0
                     for holeIndex in range(self.golfCourse.numHoles):
-                        self.getScoreLabel(self.avIdList[x], holeIndex).setColor(0.7, 0.7, 0.7, 1)
+                        self.getScoreLabel(
+                            self.avIdList[x], holeIndex).setColor(
+                            0.7, 0.7, 0.7, 1)
 
                     self.totalTags[x].setColor(0.7, 0.7, 0.7, 1)
                     playerExited = True
@@ -183,23 +455,36 @@ class GolfScoreBoard:
             if playerExited == False:
                 for holeIndex in range(self.golfCourse.numHoles):
                     if holeIndex <= self.golfCourse.curHoleIndex:
-                        self.getScoreLabel(avId, holeIndex)['text'] = '%s' % scoreDict[avId][holeIndex]
+                        self.getScoreLabel(avId, holeIndex)[
+                            'text'] = '%s' % scoreDict[avId][holeIndex]
                         totScore = totScore + scoreDict[avId][holeIndex]
                         if self.golfCourse.isGameDone() == False:
                             if holeIndex == self.golfCourse.curHoleIndex:
-                                self.getScoreLabel(avId, holeIndex).setColor(1, 0, 0, 1)
+                                self.getScoreLabel(
+                                    avId, holeIndex).setColor(
+                                    1, 0, 0, 1)
                                 self.holeLabels[holeIndex].setColor(1, 0, 0, 1)
                                 self.parLabels[holeIndex].setColor(1, 0, 0, 1)
-                                title = GolfGlobals.getCourseName(self.golfCourse.courseId) + ' - ' + GolfGlobals.getHoleName(self.golfCourse.holeIds[self.golfCourse.curHoleIndex])
+                                title = GolfGlobals.getCourseName(self.golfCourse.courseId) + ' - ' + GolfGlobals.getHoleName(
+                                    self.golfCourse.holeIds[self.golfCourse.curHoleIndex])
                                 self.titleLabel['text'] = title
                             else:
-                                self.getScoreLabel(avId, holeIndex).setColor(0, 0, 0, 1)
+                                self.getScoreLabel(
+                                    avId, holeIndex).setColor(
+                                    0, 0, 0, 1)
                                 self.holeLabels[holeIndex].setColor(0, 0, 0, 1)
                                 self.parLabels[holeIndex].setColor(0, 0, 0, 1)
 
                 self.totalTags[x]['text'] = '%s' % totScore
             if self.golfCourse.isGameDone():
-                self.getScoreLabel(avId, self.golfCourse.numHoles - 1).setColor(0, 0, 0, 1)
+                self.getScoreLabel(
+                    avId,
+                    self.golfCourse.numHoles -
+                    1).setColor(
+                    0,
+                    0,
+                    0,
+                    1)
                 self.totalTags[x].setColor(1, 0, 0, 1)
             x = x + 1
 

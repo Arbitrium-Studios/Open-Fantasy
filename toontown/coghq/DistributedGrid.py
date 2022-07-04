@@ -5,6 +5,7 @@ from .CrateGlobals import *
 from otp.level import BasicEntities
 from direct.directnotify import DirectNotifyGlobal
 
+
 class DistributedGrid(BasicEntities.DistributedNodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGrid')
 
@@ -50,7 +51,14 @@ class DistributedGrid(BasicEntities.DistributedNodePathEntity):
             h = 90
         self.model.setScale(scale * long, scale * short, 1)
         self.model.setHpr(h, 180, 0)
-        self.model.setPos(self.cellSize * self.numCol / 2.0, self.cellSize * self.numRow / 2.0, 0.025)
+        self.model.setPos(
+            self.cellSize *
+            self.numCol /
+            2.0,
+            self.cellSize *
+            self.numRow /
+            2.0,
+            0.025)
         self.model.setColor(0.588, 0.588, 0.459, 0.4)
 
     def unloadModel(self):

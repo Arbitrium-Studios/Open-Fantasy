@@ -6,19 +6,25 @@ from toontown.coghq import CountryClubRoomSpecs
 from direct.directnotify import DirectNotifyGlobal
 import random
 
+
 class CountryClubRoom(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('CountryClubRoom')
     FloorCollPrefix = 'mintFloorColl'
     CashbotMintDoorFrame = 'phase_10/models/cashbotHQ/DoorFrame'
 
-    def __init__(self, path = None):
+    def __init__(self, path=None):
         if path is not None:
             if path in CountryClubRoomSpecs.BossbotCountryClubConnectorRooms:
                 loadFunc = loader.loadModelCopy
             else:
                 loadFunc = loader.loadModel
             self.setGeom(loadFunc(path))
-        self.localToonFSM = ClassicFSM.ClassicFSM('CountryClubRoomLocalToonPresent', [State.State('off', self.enterLtOff, self.exitLtOff, ['notPresent']), State.State('notPresent', self.enterLtNotPresent, self.exitLtNotPresent, ['present']), State.State('present', self.enterLtPresent, self.exitLtPresent, ['notPresent'])], 'notPresent', 'notPresent')
+        self.localToonFSM = ClassicFSM.ClassicFSM(
+            'CountryClubRoomLocalToonPresent', [
+                State.State(
+                    'off', self.enterLtOff, self.exitLtOff, ['notPresent']), State.State(
+                    'notPresent', self.enterLtNotPresent, self.exitLtNotPresent, ['present']), State.State(
+                    'present', self.enterLtPresent, self.exitLtPresent, ['notPresent'])], 'notPresent', 'notPresent')
         self.localToonFSM.enterInitialState()
         return
 
@@ -38,7 +44,7 @@ class CountryClubRoom(DirectObject.DirectObject):
         return self.roomNum
 
     def setGeom(self, geom):
-        if geom == None:
+        if geom is None:
             import pdb
             pdb.set_trace()
         self.__geom = geom

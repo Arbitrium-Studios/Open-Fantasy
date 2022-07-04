@@ -4,6 +4,7 @@ from otp.otpbase import OTPLocalizer
 from toontown.toonbase import TTLocalizer
 notify = DirectNotifyGlobal.directNotify.newCategory('SuitDialog')
 
+
 def getBrushOffIndex(suitName):
     if suitName in SuitBrushOffs:
         brushoffs = SuitBrushOffs[suitName]

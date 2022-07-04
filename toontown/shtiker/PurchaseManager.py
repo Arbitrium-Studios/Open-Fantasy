@@ -5,6 +5,7 @@ from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from toontown.minigame import TravelGameGlobals
 
+
 class PurchaseManager(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('PurchaseManager')
 
@@ -52,20 +53,23 @@ class PurchaseManager(DistributedObject.DistributedObject):
             et = globalClockDelta.localElapsedTime(self.countdownTimestamp)
             remain = PURCHASE_COUNTDOWN_TIME - et
             self.acceptOnce('purchasePlayAgain', self.playAgainHandler)
-            self.acceptOnce('purchaseBackToToontown', self.backToToontownHandler)
+            self.acceptOnce(
+                'purchaseBackToToontown',
+                self.backToToontownHandler)
             self.acceptOnce('purchaseTimeout', self.setPurchaseExit)
             self.accept('boughtGag', self.__handleBoughtGag)
             base.cr.playGame.hood.fsm.request('purchase', [self.mpArray,
-             self.moneyArray,
-             self.playerIds,
-             self.playerStates,
-             remain,
-             self.metagameRound,
-             self.votesArray])
+                                                           self.moneyArray,
+                                                           self.playerIds,
+                                                           self.playerStates,
+                                                           remain,
+                                                           self.metagameRound,
+                                                           self.votesArray])
 
     def calcHasLocalToon(self):
         retval = base.localAvatar.doId not in self.newbieIds and base.localAvatar.doId in self.playerIds
-        if self.metagameRound > -1 and self.metagameRound < TravelGameGlobals.FinalMetagameRoundIndex:
+        if self.metagameRound > - \
+                1 and self.metagameRound < TravelGameGlobals.FinalMetagameRoundIndex:
             retval = base.localAvatar.doId in self.playerIds
         self.notify.debug('calcHasLocalToon returning %s' % retval)
         return retval
@@ -91,12 +95,18 @@ class PurchaseManager(DistributedObject.DistributedObject):
         self.sendUpdate('setInventory', [invString, money, done])
 
     def __handleBoughtGag(self):
-        self.d_setInventory(base.localAvatar.inventory.makeNetString(), base.localAvatar.getMoney(), 0)
+        self.d_setInventory(
+            base.localAvatar.inventory.makeNetString(),
+            base.localAvatar.getMoney(),
+            0)
 
     def setPurchaseExit(self):
         if self.hasLocalToon:
             self.ignore('boughtGag')
-            self.d_setInventory(base.localAvatar.inventory.makeNetString(), base.localAvatar.getMoney(), 1)
+            self.d_setInventory(
+                base.localAvatar.inventory.makeNetString(),
+                base.localAvatar.getMoney(),
+                1)
             messenger.send('purchaseOver', [self.playAgain])
 
     def setMetagameRound(self, round):

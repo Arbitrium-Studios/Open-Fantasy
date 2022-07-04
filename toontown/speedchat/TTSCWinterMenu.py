@@ -5,11 +5,12 @@ from otp.speedchat.SCStaticTextTerminal import SCStaticTextTerminal
 from toontown.speedchat.TTSCIndexedTerminal import TTSCIndexedTerminal
 from otp.otpbase import OTPLocalizer
 WinterMenu = [(OTPLocalizer.WinterMenuSections[0], {30200: 30220,
-   30201: 30221,
-   30202: 30222,
-   30203: 30223,
-   30204: 30224,
-   30205: 30225}), (OTPLocalizer.WinterMenuSections[1], [30275, 30276, 30277])]
+                                                    30201: 30221,
+                                                    30202: 30222,
+                                                    30203: 30223,
+                                                    30204: 30224,
+                                                    30205: 30225}), (OTPLocalizer.WinterMenuSections[1], [30275, 30276, 30277])]
+
 
 class TTSCWinterMenu(SCMenu):
 
@@ -27,7 +28,7 @@ class TTSCWinterMenu(SCMenu):
         self.clearMenu()
         try:
             lt = base.localAvatar
-        except:
+        except BaseException:
             return
 
         winterMenu = []
@@ -38,7 +39,9 @@ class TTSCWinterMenu(SCMenu):
             if section[0] == -1:
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print('warning: tried to link Winter phrase %s which does not seem to exist' % phrase)
+                        print(
+                            'warning: tried to link Winter phrase %s which does not seem to exist' %
+                            phrase)
                         break
                     self.append(SCStaticTextTerminal(phrase))
 
@@ -47,9 +50,14 @@ class TTSCWinterMenu(SCMenu):
                 for phrase in list(section[1].keys()):
                     blatherTxt = section[1][phrase]
                     if blatherTxt not in OTPLocalizer.SpeedChatStaticText:
-                        print('warning: tried to link Winter phrase %s which does not seem to exist' % phrase)
+                        print(
+                            'warning: tried to link Winter phrase %s which does not seem to exist' %
+                            phrase)
                         break
-                    menu.append(TTSCIndexedTerminal(OTPLocalizer.SpeedChatStaticText.get(phrase, None), blatherTxt))
+                    menu.append(
+                        TTSCIndexedTerminal(
+                            OTPLocalizer.SpeedChatStaticText.get(
+                                phrase, None), blatherTxt))
 
                 menuName = str(section[0])
                 self.append(SCMenuHolder(menuName, menu))

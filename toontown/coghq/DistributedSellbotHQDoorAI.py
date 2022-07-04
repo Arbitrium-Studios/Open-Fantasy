@@ -6,12 +6,17 @@ from toontown.toonbase import ToontownAccessAI
 from . import CogDisguiseGlobals
 from otp.otpbase import OTPGlobals
 
-class DistributedSellbotHQDoorAI(DistributedCogHQDoorAI.DistributedCogHQDoorAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedSellbotHQDoorAI')
 
-    def __init__(self, air, blockNumber, doorType, destinationZone, doorIndex = 0, lockValue = FADoorCodes.SB_DISGUISE_INCOMPLETE, swing = 3):
+class DistributedSellbotHQDoorAI(
+        DistributedCogHQDoorAI.DistributedCogHQDoorAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedSellbotHQDoorAI')
+
+    def __init__(self, air, blockNumber, doorType, destinationZone,
+                 doorIndex=0, lockValue=FADoorCodes.SB_DISGUISE_INCOMPLETE, swing=3):
         self.notify.debugStateCall(self)
-        DistributedCogHQDoorAI.DistributedCogHQDoorAI.__init__(self, air, blockNumber, doorType, destinationZone, doorIndex, lockValue, swing)
+        DistributedCogHQDoorAI.DistributedCogHQDoorAI.__init__(
+            self, air, blockNumber, doorType, destinationZone, doorIndex, lockValue, swing)
 
     def requestEnter(self):
         avatarID = self.air.getAvatarIdFromSender()
@@ -34,9 +39,11 @@ class DistributedSellbotHQDoorAI(DistributedCogHQDoorAI.DistributedCogHQDoorAI):
         if av:
             if self.doorType == DoorTypes.EXT_COGHQ and self.isLockedDoor():
                 parts = av.getCogParts()
-                dept = ToontownGlobals.cogHQZoneId2deptIndex(self.destinationZone)
+                dept = ToontownGlobals.cogHQZoneId2deptIndex(
+                    self.destinationZone)
                 if CogDisguiseGlobals.isPaidSuitComplete(av, parts, dept):
-                    if av.getCogMerits()[dept] >= CogDisguiseGlobals.getTotalMerits(av, dept):
+                    if av.getCogMerits()[dept] >= CogDisguiseGlobals.getTotalMerits(
+                            av, dept):
                         suitType = CogDisguiseGlobals.suitTypes.FullSuit
                     else:
                         suitType = CogDisguiseGlobals.suitTypes.NoMerits
@@ -49,7 +56,8 @@ class DistributedSellbotHQDoorAI(DistributedCogHQDoorAI.DistributedCogHQDoorAI):
             else:
                 allowed = 1
 
-        if not ToontownAccessAI.canAccess(avatarID, self.zoneId, 'DistributedSellbotHQDoorAI.__getAccessLevel'):
+        if not ToontownAccessAI.canAccess(
+                avatarID, self.zoneId, 'DistributedSellbotHQDoorAI.__getAccessLevel'):
             allowed = 0
 
         return (allowed, suitType)

@@ -6,21 +6,22 @@ from direct.fsm import ClassicFSM, State
 from direct.fsm import State
 from direct.task import Task
 
+
 class DistributedBoatAI(DistributedObjectAI.DistributedObjectAI):
 
     def __init__(self, air):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
         self.fsm = ClassicFSM.ClassicFSM('DistributedBoatAI', [
-         State.State('off', self.enterOff, self.exitOff, [
-          'DockedEast']),
-         State.State('DockedEast', self.enterDockedEast, self.exitDockedEast, [
-          'SailingWest']),
-         State.State('SailingWest', self.enterSailingWest, self.exitSailingWest, [
-          'DockedWest']),
-         State.State('DockedWest', self.enterDockedWest, self.exitDockedWest, [
-          'SailingEast']),
-         State.State('SailingEast', self.enterSailingEast, self.exitSailingEast, [
-          'DockedEast'])], 'off', 'off')
+            State.State('off', self.enterOff, self.exitOff, [
+                'DockedEast']),
+            State.State('DockedEast', self.enterDockedEast, self.exitDockedEast, [
+                'SailingWest']),
+            State.State('SailingWest', self.enterSailingWest, self.exitSailingWest, [
+                'DockedWest']),
+            State.State('DockedWest', self.enterDockedWest, self.exitDockedWest, [
+                'SailingEast']),
+            State.State('SailingEast', self.enterSailingEast, self.exitSailingEast, [
+                'DockedEast'])], 'off', 'off')
         self.fsm.enterInitialState()
         return None
 
@@ -29,12 +30,14 @@ class DistributedBoatAI(DistributedObjectAI.DistributedObjectAI):
         DistributedObjectAI.DistributedObjectAI.delete(self)
 
     def b_setState(self, state):
-        self.sendUpdate('setState', [state, globalClockDelta.getRealNetworkTime()])
+        self.sendUpdate(
+            'setState', [
+                state, globalClockDelta.getRealNetworkTime()])
         self.fsm.request(state)
 
     def getState(self):
         return [
-         self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
+            self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
 
     def start(self):
         self.b_setState('DockedEast')

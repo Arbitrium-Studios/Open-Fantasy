@@ -16,16 +16,19 @@ from toontown.coghq import BanquetTableBase
 from toontown.coghq import DinerStatusIndicator
 from toontown.battle import MovieUtil
 
-class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, BanquetTableBase.BanquetTableBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBanquetTable')
+
+class DistributedBanquetTable(
+        DistributedObject.DistributedObject, FSM.FSM, BanquetTableBase.BanquetTableBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedBanquetTable')
     rotationsPerSeatIndex = [90,
-     90,
-     0,
-     0,
-     -90,
-     -90,
-     180,
-     180]
+                             90,
+                             0,
+                             0,
+                             -90,
+                             -90,
+                             180,
+                             180]
     pitcherMinH = -360
     pitcherMaxH = 360
     rotateSpeed = 30
@@ -163,8 +166,11 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             self.dinerInfo[i] = (hungryDur, eatingDur, dinerLevel)
 
     def loadAssets(self):
-        self.tableGroup = loader.loadModel('phase_12/models/bossbotHQ/BanquetTableChairs')
-        tableLocator = self.boss.geom.find('**/TableLocator_%d' % (self.index + 1))
+        self.tableGroup = loader.loadModel(
+            'phase_12/models/bossbotHQ/BanquetTableChairs')
+        tableLocator = self.boss.geom.find(
+            '**/TableLocator_%d' %
+            (self.index + 1))
         if tableLocator.isEmpty():
             self.tableGroup.reparentTo(render)
             self.tableGroup.setPos(0, 75, 0)
@@ -173,11 +179,16 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         self.tableGeom = self.tableGroup.find('**/Geometry')
         self.setupDiners()
         self.setupChairCols()
-        self.squirtSfx = loader.loadSfx('phase_4/audio/sfx/AA_squirt_seltzer_miss.ogg')
-        self.hitBossSfx = loader.loadSfx('phase_5/audio/sfx/SA_watercooler_spray_only.ogg')
-        self.hitBossSoundInterval = SoundInterval(self.hitBossSfx, node=self.boss, volume=1.0)
-        self.serveFoodSfx = loader.loadSfx('phase_4/audio/sfx/MG_sfx_travel_game_bell_for_trolley.ogg')
-        self.pitcherMoveSfx = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_adjust.ogg')
+        self.squirtSfx = loader.loadSfx(
+            'phase_4/audio/sfx/AA_squirt_seltzer_miss.ogg')
+        self.hitBossSfx = loader.loadSfx(
+            'phase_5/audio/sfx/SA_watercooler_spray_only.ogg')
+        self.hitBossSoundInterval = SoundInterval(
+            self.hitBossSfx, node=self.boss, volume=1.0)
+        self.serveFoodSfx = loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_travel_game_bell_for_trolley.ogg')
+        self.pitcherMoveSfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_cannon_adjust.ogg')
 
     def setupDiners(self):
         for i in range(self.numDiners):
@@ -220,7 +231,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         self.serviceLocs[i] = newLoc
         base.serviceLoc = newLoc
         head = diner.find('**/joint_head')
-        newIndicator = DinerStatusIndicator.DinerStatusIndicator(parent=head, pos=Point3(0, 0, 3.5), scale=5.0)
+        newIndicator = DinerStatusIndicator.DinerStatusIndicator(
+            parent=head, pos=Point3(0, 0, 3.5), scale=5.0)
         newIndicator.wrtReparentTo(diner)
         self.dinerStatusIndicators[i] = newIndicator
         return diner
@@ -254,7 +266,22 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             if not tray.isEmpty():
                 tray.hide()
             ivalDuration = 1.5
-            foodMoveIval = Parallel(SoundInterval(self.serveFoodSfx, node=food), ProjectileInterval(food, duration=ivalDuration, startPos=food.getPos(serviceLoc), endPos=serviceLoc.getPos(serviceLoc)), LerpHprInterval(food, ivalDuration, Point3(0, -360, 0)))
+            foodMoveIval = Parallel(
+                SoundInterval(
+                    self.serveFoodSfx,
+                    node=food),
+                ProjectileInterval(
+                    food,
+                    duration=ivalDuration,
+                    startPos=food.getPos(serviceLoc),
+                    endPos=serviceLoc.getPos(serviceLoc)),
+                LerpHprInterval(
+                    food,
+                    ivalDuration,
+                    Point3(
+                        0,
+                        -360,
+                        0)))
             intervalName = 'serveFood-%d-%d' % (self.index, chairIndex)
             foodMoveIval.start()
             self.activeIntervals[intervalName] = foodMoveIval
@@ -296,7 +323,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         loopDuration = eatingDuration - eatInTime - eatOutTime - waitTime
         serviceLoc = self.serviceLocs[chairIndex]
 
-        def foodAttach(self = self, diner = diner):
+        def foodAttach(self=self, diner=diner):
             if not self.serviceLocs[chairIndex].getNumChildren():
                 return
             foodModel = self.serviceLocs[chairIndex].getChild(0)
@@ -314,7 +341,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             newScale = oldScale * scaleAdj
             foodModel.setScale(newScale)
 
-        def foodDetach(self = self, diner = diner):
+        def foodDetach(self=self, diner=diner):
             if not diner.getRightHand().getNumChildren():
                 return
             foodModel = diner.getRightHand().getChild(0)
@@ -329,7 +356,38 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             newScale = oldScale / scaleAdj
             foodModel.setScale(newScale)
 
-        eatIval = Sequence(ActorInterval(diner, 'sit', duration=waitTime), ActorInterval(diner, 'sit-eat-in', startFrame=0, endFrame=6), Func(foodAttach), ActorInterval(diner, 'sit-eat-in', startFrame=6, endFrame=32), ActorInterval(diner, 'sit-eat-loop', duration=loopDuration, loop=1), ActorInterval(diner, 'sit-eat-out', startFrame=0, endFrame=12), Func(foodDetach), ActorInterval(diner, 'sit-eat-out', startFrame=12, endFrame=21))
+        eatIval = Sequence(
+            ActorInterval(
+                diner,
+                'sit',
+                duration=waitTime),
+            ActorInterval(
+                diner,
+                'sit-eat-in',
+                startFrame=0,
+                endFrame=6),
+            Func(foodAttach),
+            ActorInterval(
+                diner,
+                'sit-eat-in',
+                startFrame=6,
+                endFrame=32),
+            ActorInterval(
+                diner,
+                'sit-eat-loop',
+                duration=loopDuration,
+                loop=1),
+            ActorInterval(
+                diner,
+                'sit-eat-out',
+                startFrame=0,
+                endFrame=12),
+            Func(foodDetach),
+            ActorInterval(
+                diner,
+                'sit-eat-out',
+                startFrame=12,
+                endFrame=21))
         eatIval.start()
         self.activeIntervals[intervalName] = eatIval
 
@@ -370,10 +428,45 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         deathSuit = diner
         locator = self.tableGroup.find('**/chair_%d' % (chairIndex + 1))
         deathSuit = diner.getLoseActor()
-        ival = Sequence(Func(self.notify.debug, 'before actorinterval sit-lose'), ActorInterval(diner, 'sit-lose'), Func(self.notify.debug, 'before deathSuit.setHpr'), Func(deathSuit.setHpr, diner.getHpr()), Func(self.notify.debug, 'before diner.hide'), Func(diner.hide), Func(self.notify.debug, 'before deathSuit.reparentTo'), Func(deathSuit.reparentTo, self.chairLocators[chairIndex]), Func(self.notify.debug, 'befor ActorInterval lose'), ActorInterval(deathSuit, 'lose', duration=MovieUtil.SUIT_LOSE_DURATION), Func(self.notify.debug, 'before remove deathsuit'), Func(removeDeathSuit, diner, deathSuit, name='remove-death-suit-%d-%d' % (chairIndex, self.index)), Func(self.notify.debug, 'diner.stash'), Func(diner.stash))
-        spinningSound = base.loader.loadSfx('phase_3.5/audio/sfx/Cog_Death.ogg')
-        deathSound = base.loader.loadSfx('phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
-        deathSoundTrack = Sequence(Wait(0.8), SoundInterval(spinningSound, duration=1.2, startTime=1.5, volume=0.2, node=deathSuit), SoundInterval(spinningSound, duration=3.0, startTime=0.6, volume=0.8, node=deathSuit), SoundInterval(deathSound, volume=0.32, node=deathSuit))
+        ival = Sequence(
+            Func(
+                self.notify.debug, 'before actorinterval sit-lose'), ActorInterval(
+                diner, 'sit-lose'), Func(
+                self.notify.debug, 'before deathSuit.setHpr'), Func(
+                    deathSuit.setHpr, diner.getHpr()), Func(
+                        self.notify.debug, 'before diner.hide'), Func(
+                            diner.hide), Func(
+                                self.notify.debug, 'before deathSuit.reparentTo'), Func(
+                                    deathSuit.reparentTo, self.chairLocators[chairIndex]), Func(
+                                        self.notify.debug, 'befor ActorInterval lose'), ActorInterval(
+                                            deathSuit, 'lose', duration=MovieUtil.SUIT_LOSE_DURATION), Func(
+                                                self.notify.debug, 'before remove deathsuit'), Func(
+                                                    removeDeathSuit, diner, deathSuit, name='remove-death-suit-%d-%d' %
+                                                    (chairIndex, self.index)), Func(
+                                                        self.notify.debug, 'diner.stash'), Func(
+                                                            diner.stash))
+        spinningSound = base.loader.loadSfx(
+            'phase_3.5/audio/sfx/Cog_Death.ogg')
+        deathSound = base.loader.loadSfx(
+            'phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
+        deathSoundTrack = Sequence(
+            Wait(0.8),
+            SoundInterval(
+                spinningSound,
+                duration=1.2,
+                startTime=1.5,
+                volume=0.2,
+                node=deathSuit),
+            SoundInterval(
+                spinningSound,
+                duration=3.0,
+                startTime=0.6,
+                volume=0.8,
+                node=deathSuit),
+            SoundInterval(
+                deathSound,
+                volume=0.32,
+                node=deathSuit))
         intervalName = 'dinerDie-%d-%d' % (self.index, chairIndex)
         deathIval = Parallel(ival, deathSoundTrack)
         deathIval.start()
@@ -400,7 +493,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
 
         self.activeIntervals = {}
 
-    def clearInterval(self, name, finish = 1):
+    def clearInterval(self, name, finish=1):
         if name in self.activeIntervals:
             ival = self.activeIntervals[name]
             if finish:
@@ -451,7 +544,11 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             self.tableGroup.setAlphaScale(0.3)
             self.tableGroup.setTransparency(1)
             taskMgr.doMethodLater(5, self.__allowDetect, self.triggerName)
-            self.fadeTrack = Sequence(Func(self.tableGroup.setTransparency, 1), self.tableGroup.colorScaleInterval(0.2, VBase4(1, 1, 1, 0.3)))
+            self.fadeTrack = Sequence(
+                Func(
+                    self.tableGroup.setTransparency, 1), self.tableGroup.colorScaleInterval(
+                    0.2, VBase4(
+                        1, 1, 1, 0.3)))
             self.fadeTrack.start()
             self.allowLocalRequestControl = False
         else:
@@ -478,7 +575,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
                     col = colChairs.getPath(i)
                     col.stash()
 
-                colChairs = self.tableGroup.findAllMatches('**/collision_chair*')
+                colChairs = self.tableGroup.findAllMatches(
+                    '**/collision_chair*')
                 for i in range(colChairs.getNumPaths()):
                     col = colChairs.getPath(i)
                     col.stash()
@@ -487,16 +585,19 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             colName = 'TableCol-%d' % self.index
             tableCol.setTag('tableIndex', str(self.index))
             tableCol.setName(colName)
-            tableCol.setCollideMask(ToontownGlobals.WallBitmask | ToontownGlobals.BanquetTableBitmask)
+            tableCol.setCollideMask(
+                ToontownGlobals.WallBitmask | ToontownGlobals.BanquetTableBitmask)
             self.accept('enter' + colName, self.touchedTable)
             self.preparedForPhaseFour = True
-            self.waterPitcherModel = loader.loadModel('phase_12/models/bossbotHQ/tt_m_ara_bhq_seltzerBottle')
+            self.waterPitcherModel = loader.loadModel(
+                'phase_12/models/bossbotHQ/tt_m_ara_bhq_seltzerBottle')
             lampNode = self.tableGroup.find('**/lamp_med_5')
             pos = lampNode.getPos(self.tableGroup)
             lampNode.hide()
             bottleLocator = self.tableGroup.find('**/bottle_locator')
             pos = bottleLocator.getPos(self.tableGroup)
-            self.waterPitcherNode = self.tableGroup.attachNewNode('pitcherNode')
+            self.waterPitcherNode = self.tableGroup.attachNewNode(
+                'pitcherNode')
             self.waterPitcherNode.setPos(pos)
             self.waterPitcherModel.reparentTo(self.waterPitcherNode)
             self.waterPitcherModel.ls()
@@ -525,7 +626,11 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             self.boss.toMovieMode()
             self.__enableControlInterface()
             self.startPosHprBroadcast()
-            self.grabTrack = Sequence(self.grabTrack, Func(camera.wrtReparentTo, localAvatar), LerpPosHprInterval(camera, 1, self.pitcherCamPos, self.pitcherCamHpr), Func(self.boss.toCraneMode))
+            self.grabTrack = Sequence(
+                self.grabTrack, Func(
+                    camera.wrtReparentTo, localAvatar), LerpPosHprInterval(
+                    camera, 1, self.pitcherCamPos, self.pitcherCamHpr), Func(
+                    self.boss.toCraneMode))
             if self.TugOfWarControls:
                 self.__spawnUpdateKeyPressRateTask()
             self.accept('exitCrane', self.gotBossZapped)
@@ -583,9 +688,29 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         toon.pose('leverNeutral', 0)
         toon.update()
         rightHandPos = toon.rightHand.getPos(toon)
-        self.toonPitcherPosition = Point3(self.handPos[0] - rightHandPos[0], self.handPos[1] - rightHandPos[1], 0)
+        self.toonPitcherPosition = Point3(
+            self.handPos[0] -
+            rightHandPos[0],
+            self.handPos[1] -
+            rightHandPos[1],
+            0)
         destZScale = rightHandPos[2] / self.handPos[2]
-        grabIval = Sequence(Func(toon.wrtReparentTo, self.waterPitcherNode), Func(toon.loop, 'neutral'), Parallel(ActorInterval(toon, 'jump'), Sequence(Wait(0.43), Parallel(ProjectileInterval(toon, duration=0.9, startPos=toon.getPos(self.waterPitcherNode), endPos=self.toonPitcherPosition), LerpHprInterval(toon, 0.9, Point3(0, 0, 0)), LerpScaleInterval(self.waterPitcherModel, 0.9, Point3(1, 1, destZScale))))), Func(toon.setPos, self.toonPitcherPosition), Func(toon.loop, 'leverNeutral'))
+        grabIval = Sequence(
+            Func(
+                toon.wrtReparentTo, self.waterPitcherNode), Func(
+                toon.loop, 'neutral'), Parallel(
+                ActorInterval(
+                    toon, 'jump'), Sequence(
+                        Wait(0.43), Parallel(
+                            ProjectileInterval(
+                                toon, duration=0.9, startPos=toon.getPos(
+                                    self.waterPitcherNode), endPos=self.toonPitcherPosition), LerpHprInterval(
+                                        toon, 0.9, Point3(
+                                            0, 0, 0)), LerpScaleInterval(
+                                                self.waterPitcherModel, 0.9, Point3(
+                                                    1, 1, destZScale))))), Func(
+                                                        toon.setPos, self.toonPitcherPosition), Func(
+                                                            toon.loop, 'leverNeutral'))
         return grabIval
 
     def makeToonReleaseInterval(self, toon):
@@ -598,14 +723,35 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         temp1.removeNode()
         temp2.removeNode()
 
-        def getSlideToPos(toon = toon):
+        def getSlideToPos(toon=toon):
             return render.getRelativePoint(toon, Point3(0, -10, 0))
 
         if self.gotHitByBoss:
             self.notify.debug('creating zap interval instead')
-            grabIval = Sequence(Func(toon.loop, 'neutral'), Func(toon.wrtReparentTo, render), Parallel(ActorInterval(toon, 'slip-backward'), toon.posInterval(0.5, getSlideToPos, fluid=1)))
+            grabIval = Sequence(
+                Func(
+                    toon.loop,
+                    'neutral'),
+                Func(
+                    toon.wrtReparentTo,
+                    render),
+                Parallel(
+                    ActorInterval(
+                        toon,
+                        'slip-backward'),
+                    toon.posInterval(
+                        0.5,
+                        getSlideToPos,
+                        fluid=1)))
         else:
-            grabIval = Sequence(Func(toon.loop, 'neutral'), Func(toon.wrtReparentTo, render), Parallel(ActorInterval(toon, 'jump'), Sequence(Wait(0.43), ProjectileInterval(toon, duration=0.9, startPos=startPos, endPos=endPos))))
+            grabIval = Sequence(
+                Func(
+                    toon.loop, 'neutral'), Func(
+                    toon.wrtReparentTo, render), Parallel(
+                    ActorInterval(
+                        toon, 'jump'), Sequence(
+                        Wait(0.43), ProjectileInterval(
+                            toon, duration=0.9, startPos=startPos, endPos=endPos))))
         return grabIval
 
     def b_clearSmoothing(self):
@@ -615,7 +761,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
     def d_clearSmoothing(self):
         self.sendUpdate('clearSmoothing', [0])
 
-    def clearSmoothing(self, bogus = None):
+    def clearSmoothing(self, bogus=None):
         self.pitcherSmoother.clearPositions(1)
 
     def doSmoothTask(self, task):
@@ -640,9 +786,9 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
     def __enableControlInterface(self):
         gui = loader.loadModel('phase_3.5/models/gui/avatar_panel_gui')
         self.closeButton = DirectButton(image=(gui.find('**/CloseBtn_UP'),
-         gui.find('**/CloseBtn_DN'),
-         gui.find('**/CloseBtn_Rllvr'),
-         gui.find('**/CloseBtn_UP')), relief=None, scale=2, text=TTLocalizer.BossbotPitcherLeave, text_scale=0.04, text_pos=(0, -0.07), text_fg=VBase4(1, 1, 1, 1), pos=(1.05, 0, -0.82), command=self.__exitPitcher)
+                                               gui.find('**/CloseBtn_DN'),
+                                               gui.find('**/CloseBtn_Rllvr'),
+                                               gui.find('**/CloseBtn_UP')), relief=None, scale=2, text=TTLocalizer.BossbotPitcherLeave, text_scale=0.04, text_pos=(0, -0.07), text_fg=VBase4(1, 1, 1, 1), pos=(1.05, 0, -0.82), command=self.__exitPitcher)
         self.accept('escape', self.__exitPitcher)
         self.accept('control', self.__controlPressed)
         self.accept('control-up', self.__controlReleased)
@@ -653,7 +799,10 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         self.accept('arrow_up', self.__upArrowKeyPressed)
         self.accept('arrow_down', self.__downArrowKeyPressed)
         taskMgr.add(self.__watchControls, self.watchControlsName)
-        taskMgr.doMethodLater(5, self.__displayPitcherAdvice, self.pitcherAdviceName)
+        taskMgr.doMethodLater(
+            5,
+            self.__displayPitcherAdvice,
+            self.pitcherAdviceName)
         self.arrowVert = 0
         self.arrowHorz = 0
         self.powerBar.show()
@@ -687,8 +836,11 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         return
 
     def __displayPitcherAdvice(self, task):
-        if self.pitcherAdviceLabel == None:
-            self.pitcherAdviceLabel = DirectLabel(text=TTLocalizer.BossbotPitcherAdvice, text_fg=VBase4(1, 1, 1, 1), text_align=TextNode.ACenter, relief=None, pos=(0, 0, 0.69), scale=0.1)
+        if self.pitcherAdviceLabel is None:
+            self.pitcherAdviceLabel = DirectLabel(
+                text=TTLocalizer.BossbotPitcherAdvice, text_fg=VBase4(
+                    1, 1, 1, 1), text_align=TextNode.ACenter, relief=None, pos=(
+                    0, 0, 0.69), scale=0.1)
         return
 
     def __cleanupPitcherAdvice(self):
@@ -701,7 +853,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
     def showExiting(self):
         if self.closeButton:
             self.closeButton.destroy()
-            self.closeButton = DirectLabel(relief=None, text=TTLocalizer.BossbotPitcherLeaving, pos=(1.05, 0, -0.88), text_pos=(0, 0), text_scale=0.06, text_fg=VBase4(1, 1, 1, 1))
+            self.closeButton = DirectLabel(relief=None, text=TTLocalizer.BossbotPitcherLeaving, pos=(
+                1.05, 0, -0.88), text_pos=(0, 0), text_scale=0.06, text_fg=VBase4(1, 1, 1, 1))
         self.__cleanupPitcherAdvice()
         return
 
@@ -768,17 +921,25 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         self.b_clearSmoothing()
         self.d_sendPitcherPos()
         taskMgr.remove(taskName)
-        taskMgr.doMethodLater(self.__broadcastPeriod, self.__posHprBroadcast, taskName)
+        taskMgr.doMethodLater(
+            self.__broadcastPeriod,
+            self.__posHprBroadcast,
+            taskName)
 
     def __posHprBroadcast(self, task):
         self.d_sendPitcherPos()
         taskName = self.posHprBroadcastName
-        taskMgr.doMethodLater(self.__broadcastPeriod, self.__posHprBroadcast, taskName)
+        taskMgr.doMethodLater(
+            self.__broadcastPeriod,
+            self.__posHprBroadcast,
+            taskName)
         return Task.done
 
     def d_sendPitcherPos(self):
         timestamp = globalClockDelta.getFrameNetworkTime()
-        self.sendUpdate('setPitcherPos', [self.changeSeq, self.waterPitcherNode.getH(), timestamp])
+        self.sendUpdate(
+            'setPitcherPos', [
+                self.changeSeq, self.waterPitcherNode.getH(), timestamp])
 
     def setPitcherPos(self, changeSeq, h, timestamp):
         self.changeSeq = changeSeq
@@ -803,10 +964,10 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         h = self.waterPitcherNode.getH() - xd * self.rotateSpeed * dt
         h %= 360
         self.notify.debug('rotSpeed=%.2f curH=%.2f  xd =%.2f, dt = %.2f, h=%.2f' % (self.rotateSpeed,
-         self.waterPitcherNode.getH(),
-         xd,
-         dt,
-         h))
+                                                                                    self.waterPitcherNode.getH(),
+                                                                                    xd,
+                                                                                    dt,
+                                                                                    h))
         limitH = h
         self.waterPitcherNode.setH(limitH)
         if xd:
@@ -822,7 +983,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             self.pitcherSmoother.applySmoothHpr(self.waterPitcherNode)
         self.pitcherSmoother.clearPositions(1)
 
-    def getSprayTrack(self, color, origin, target, dScaleUp, dHold, dScaleDown, horizScale = 1.0, vertScale = 1.0, parent = render):
+    def getSprayTrack(self, color, origin, target, dScaleUp, dHold,
+                      dScaleDown, horizScale=1.0, vertScale=1.0, parent=render):
         track = Sequence()
         SPRAY_LEN = 1.5
         sprayProp = MovieUtil.globalPropPool.getProp('spray')
@@ -847,19 +1009,39 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             sprayRot.setPos(origin)
             sprayRot.lookAt(Point3(target))
 
-        track.append(Func(showSpray, sprayScale, sprayRot, sprayProp, origin, target, parent))
+        track.append(
+            Func(
+                showSpray,
+                sprayScale,
+                sprayRot,
+                sprayProp,
+                origin,
+                target,
+                parent))
 
-        def calcTargetScale(target = target, origin = origin, horizScale = horizScale, vertScale = vertScale):
+        def calcTargetScale(target=target, origin=origin,
+                            horizScale=horizScale, vertScale=vertScale):
             if callable(target):
                 target = target()
             if callable(origin):
                 origin = origin()
             distance = Vec3(target - origin).length()
             yScale = distance / SPRAY_LEN
-            targetScale = Point3(yScale * horizScale, yScale, yScale * vertScale)
+            targetScale = Point3(
+                yScale * horizScale,
+                yScale,
+                yScale * vertScale)
             return targetScale
 
-        track.append(LerpScaleInterval(sprayScale, dScaleUp, calcTargetScale, startScale=Point3(0.01, 0.01, 0.01)))
+        track.append(
+            LerpScaleInterval(
+                sprayScale,
+                dScaleUp,
+                calcTargetScale,
+                startScale=Point3(
+                    0.01,
+                    0.01,
+                    0.01)))
         track.append(Func(self.checkHitObject))
         track.append(Wait(dHold))
 
@@ -871,8 +1053,21 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             sprayProp.setPos(Point3(0.0, -SPRAY_LEN, 0.0))
             spray.setPos(target)
 
-        track.append(Func(prepareToShrinkSpray, spray, sprayProp, origin, target))
-        track.append(LerpScaleInterval(sprayScale, dScaleDown, Point3(0.01, 0.01, 0.01)))
+        track.append(
+            Func(
+                prepareToShrinkSpray,
+                spray,
+                sprayProp,
+                origin,
+                target))
+        track.append(
+            LerpScaleInterval(
+                sprayScale,
+                dScaleDown,
+                Point3(
+                    0.01,
+                    0.01,
+                    0.01)))
 
         def hideSpray(spray, sprayScale, sprayRot, sprayProp, propPool):
             sprayProp.detachNode()
@@ -880,7 +1075,14 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             sprayRot.removeNode()
             sprayScale.removeNode()
 
-        track.append(Func(hideSpray, spray, sprayScale, sprayRot, sprayProp, MovieUtil.globalPropPool))
+        track.append(
+            Func(
+                hideSpray,
+                spray,
+                sprayScale,
+                sprayRot,
+                sprayProp,
+                MovieUtil.globalPropPool))
         return track
 
     def checkHitObject(self):
@@ -918,9 +1120,9 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
 
     def setupPowerBar(self):
         self.powerBar = DirectWaitBar(pos=(0.0, 0, -0.94), relief=DGG.SUNKEN, frameSize=(-2.0,
-         2.0,
-         -0.2,
-         0.2), borderWidth=(0.02, 0.02), scale=0.25, range=1, sortOrder=50, frameColor=(0.5, 0.5, 0.5, 0.5), barColor=(0.75, 0.75, 1.0, 0.8), text='', text_scale=0.26, text_fg=(1, 1, 1, 1), text_align=TextNode.ACenter, text_pos=(0, -0.05))
+                                                                                         2.0,
+                                                                                         -0.2,
+                                                                                         0.2), borderWidth=(0.02, 0.02), scale=0.25, range=1, sortOrder=50, frameColor=(0.5, 0.5, 0.5, 0.5), barColor=(0.75, 0.75, 1.0, 0.8), text='', text_scale=0.26, text_fg=(1, 1, 1, 1), text_align=TextNode.ACenter, text_pos=(0, -0.05))
         self.power = 0
         self.powerBar['value'] = self.power
         self.powerBar.hide()
@@ -934,7 +1136,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
     def __beginFireWater(self):
         if self.fireTrack and self.fireTrack.isPlaying():
             return
-        if self.aimStart != None:
+        if self.aimStart is not None:
             return
         if not self.state == 'Controlled':
             return
@@ -947,7 +1149,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         return
 
     def __endFireWater(self):
-        if self.aimStart == None:
+        if self.aimStart is None:
             return
         if not self.state == 'Controlled':
             return
@@ -967,10 +1169,17 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         self.lastPowerFired = self.power
         fireVector *= self.fireLength * self.power
         target = origin + fireVector
-        segment = CollisionSegment(origin[0], origin[1], origin[2], target[0], target[1], target[2])
+        segment = CollisionSegment(
+            origin[0],
+            origin[1],
+            origin[2],
+            target[0],
+            target[1],
+            target[2])
         fromObject = render.attachNewNode(CollisionNode('pitcherColNode'))
         fromObject.node().addSolid(segment)
-        fromObject.node().setFromCollideMask(ToontownGlobals.PieBitmask | ToontownGlobals.CameraBitmask | ToontownGlobals.FloorBitmask)
+        fromObject.node().setFromCollideMask(ToontownGlobals.PieBitmask |
+                                             ToontownGlobals.CameraBitmask | ToontownGlobals.FloorBitmask)
         fromObject.node().setIntoCollideMask(BitMask32.allOff())
         queue = CollisionHandlerQueue()
         base.cTrav.addCollider(fromObject, queue)
@@ -1016,11 +1225,11 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
 
     def d_firingWater(self, origin, target):
         self.sendUpdate('firingWater', [origin[0],
-         origin[1],
-         origin[2],
-         target[0],
-         target[1],
-         target[2]])
+                                        origin[1],
+                                        origin[2],
+                                        target[0],
+                                        target[1],
+                                        target[2]])
 
     def firingWater(self, startX, startY, startZ, endX, endY, endZ):
         origin = Point3(startX, startY, startZ)
@@ -1034,15 +1243,26 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         dScaleDown = 0.1
         horizScale = 0.1
         vertScale = 0.1
-        sprayTrack = self.getSprayTrack(color, origin, target, dScaleUp, dHold, dScaleDown, horizScale, vertScale)
+        sprayTrack = self.getSprayTrack(
+            color,
+            origin,
+            target,
+            dScaleUp,
+            dHold,
+            dScaleDown,
+            horizScale,
+            vertScale)
         duration = self.squirtSfx.length()
         if sprayTrack.getDuration() < duration:
             duration = sprayTrack.getDuration()
-        soundTrack = SoundInterval(self.squirtSfx, node=self.waterPitcherModel, duration=duration)
+        soundTrack = SoundInterval(
+            self.squirtSfx,
+            node=self.waterPitcherModel,
+            duration=duration)
         self.fireTrack = Parallel(sprayTrack, soundTrack)
         self.fireTrack.start()
 
-    def getPos(self, wrt = render):
+    def getPos(self, wrt=render):
         return self.tableGroup.getPos(wrt)
 
     def getLocator(self):
@@ -1059,7 +1279,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
                 toon.setZ(0)
         self.tableGroup.setScale(1, 1, 0.01)
         if self.avId and self.avId == localAvatar.doId:
-            localAvatar.b_squish(ToontownGlobals.BossCogDamageLevels[ToontownGlobals.BossCogMoveAttack])
+            localAvatar.b_squish(
+                ToontownGlobals.BossCogDamageLevels[ToontownGlobals.BossCogMoveAttack])
 
     def exitFlat(self):
         self.tableGroup.setScale(1.0)
@@ -1075,7 +1296,12 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
     def __allowDetect(self, task):
         if self.fadeTrack:
             self.fadeTrack.finish()
-        self.fadeTrack = Sequence(self.tableGroup.colorScaleInterval(0.2, VBase4(1, 1, 1, 1)), Func(self.tableGroup.clearColorScale), Func(self.tableGroup.clearTransparency))
+        self.fadeTrack = Sequence(
+            self.tableGroup.colorScaleInterval(
+                0.2, VBase4(
+                    1, 1, 1, 1)), Func(
+                self.tableGroup.clearColorScale), Func(
+                    self.tableGroup.clearTransparency))
         self.fadeTrack.start()
         self.allowLocalRequestControl = True
 
@@ -1099,7 +1325,9 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
 
     def __spawnUpdateKeyPressRateTask(self):
         taskMgr.remove(self.taskName(self.UPDATE_KEY_PRESS_RATE_TASK))
-        taskMgr.doMethodLater(0.1, self.__updateKeyPressRateTask, self.taskName(self.UPDATE_KEY_PRESS_RATE_TASK))
+        taskMgr.doMethodLater(
+            0.1, self.__updateKeyPressRateTask, self.taskName(
+                self.UPDATE_KEY_PRESS_RATE_TASK))
 
     def __killUpdateKeyPressRateTask(self):
         taskMgr.remove(self.taskName(self.UPDATE_KEY_PRESS_RATE_TASK))
@@ -1127,7 +1355,9 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             newPower = 1
         elif newPower < 0:
             newPower = 0
-        self.notify.debug('diffPower=%.2f keyRate = %d, newPower=%.2f' % (diffPower, self.keyRate, newPower))
+        self.notify.debug(
+            'diffPower=%.2f keyRate = %d, newPower=%.2f' %
+            (diffPower, self.keyRate, newPower))
         self.power = newPower
         self.powerBar['value'] = newPower
         if self.power < self.YELLOW_POWER_THRESHOLD:

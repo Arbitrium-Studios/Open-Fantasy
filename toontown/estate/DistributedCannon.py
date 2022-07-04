@@ -50,6 +50,7 @@ TOWER_X_RANGE = int(TOWER_Y_RANGE / 2.0)
 INITIAL_VELOCITY = 80.0
 WHISTLE_SPEED = INITIAL_VELOCITY * 0.35
 
+
 class DistributedCannon(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCannon')
     font = ToontownGlobals.getToonFont()
@@ -121,16 +122,25 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.nextKey = None
         self.cannonsActive = 0
         self.codeFSM = ClassicFSM.ClassicFSM('CannonCode', [State.State('init', self.enterInit, self.exitInit, ['u1', 'init']),
-         State.State('u1', self.enteru1, self.exitu1, ['u2', 'init']),
-         State.State('u2', self.enteru2, self.exitu2, ['d3', 'init']),
-         State.State('d3', self.enterd3, self.exitd3, ['d4', 'init']),
-         State.State('d4', self.enterd4, self.exitd4, ['l5', 'init']),
-         State.State('l5', self.enterl5, self.exitl5, ['r6', 'init']),
-         State.State('r6', self.enterr6, self.exitr6, ['l7', 'init']),
-         State.State('l7', self.enterl7, self.exitl7, ['r8', 'init']),
-         State.State('r8', self.enterr8, self.exitr8, ['acceptCode', 'init']),
-         State.State('acceptCode', self.enterAcceptCode, self.exitAcceptCode, ['init', 'final']),
-         State.State('final', self.enterFinal, self.exitFinal, [])], 'init', 'final')
+                                                            State.State('u1', self.enteru1, self.exitu1, [
+                                                                        'u2', 'init']),
+                                                            State.State('u2', self.enteru2, self.exitu2, [
+                                                                        'd3', 'init']),
+                                                            State.State('d3', self.enterd3, self.exitd3, [
+                                                                        'd4', 'init']),
+                                                            State.State('d4', self.enterd4, self.exitd4, [
+                                                                        'l5', 'init']),
+                                                            State.State('l5', self.enterl5, self.exitl5, [
+                                                                        'r6', 'init']),
+                                                            State.State('r6', self.enterr6, self.exitr6, [
+                                                                        'l7', 'init']),
+                                                            State.State('l7', self.enterl7, self.exitl7, [
+                                                                        'r8', 'init']),
+                                                            State.State('r8', self.enterr8, self.exitr8, [
+                                                                        'acceptCode', 'init']),
+                                                            State.State('acceptCode', self.enterAcceptCode,
+                                                                        self.exitAcceptCode, ['init', 'final']),
+                                                            State.State('final', self.enterFinal, self.exitFinal, [])], 'init', 'final')
         self.codeFSM.enterInitialState()
         self.curPinballScore = 0
         self.curPinballMultiplier = 1
@@ -192,7 +202,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.cannonsActive = 1
             self.onstage()
             self.nodePath.reparentTo(self.getParentNodePath())
-            self.accept(self.uniqueName('enterCannonSphere'), self.__handleEnterSphere)
+            self.accept(
+                self.uniqueName('enterCannonSphere'),
+                self.__handleEnterSphere)
 
     def deActivateCannons(self):
         if self.cannonsActive:
@@ -254,7 +266,8 @@ class DistributedCannon(DistributedObject.DistributedObject):
                 base.cr.playGame.getPlace().setState('fishing')
                 base.localAvatar.setTeleportAvailable(0)
                 base.localAvatar.collisionsOff()
-                base.setCellsAvailable([base.bottomCells[3], base.bottomCells[4]], 0)
+                base.setCellsAvailable(
+                    [base.bottomCells[3], base.bottomCells[4]], 0)
                 base.setCellsAvailable([base.rightCells[1]], 0)
                 self.localToonShooting = 1
                 self.__makeGui()
@@ -265,13 +278,18 @@ class DistributedCannon(DistributedObject.DistributedObject):
                 self.incrementPinballInfo(0, 0)
             if self.avId in self.cr.doId2do:
                 self.av = self.cr.doId2do[self.avId]
-                self.acceptOnce(self.av.uniqueName('disable'), self.__avatarGone)
+                self.acceptOnce(
+                    self.av.uniqueName('disable'),
+                    self.__avatarGone)
                 self.av.stopSmooth()
                 self.__createToonModels()
             else:
-                self.notify.warning('Unknown avatar %d in cannon %d' % (self.avId, self.doId))
+                self.notify.warning(
+                    'Unknown avatar %d in cannon %d' %
+                    (self.avId, self.doId))
         if wasLocalToon and not self.localToonShooting:
-            base.setCellsAvailable([base.bottomCells[3], base.bottomCells[4]], 1)
+            base.setCellsAvailable(
+                [base.bottomCells[3], base.bottomCells[4]], 1)
             base.setCellsAvailable([base.rightCells[1]], 1)
 
     def __avatarGone(self):
@@ -290,14 +308,21 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.splash = Splash.Splash(render)
         self.dustCloud = DustCloud.DustCloud(render)
         self.dustCloud.setBillboardPointEye()
-        self.sndCannonMove = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_adjust.ogg')
-        self.sndCannonFire = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
-        self.sndHitGround = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
-        self.sndHitTower = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_hit_tower.ogg')
-        self.sndHitWater = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_splash.ogg')
-        self.sndWhizz = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_whizz.ogg')
+        self.sndCannonMove = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_cannon_adjust.ogg')
+        self.sndCannonFire = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+        self.sndHitGround = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
+        self.sndHitTower = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_cannon_hit_tower.ogg')
+        self.sndHitWater = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_cannon_splash.ogg')
+        self.sndWhizz = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_cannon_whizz.ogg')
         self.sndWin = base.loader.loadSfx('phase_4/audio/sfx/MG_win.ogg')
-        self.sndHitHouse = base.loader.loadSfx('phase_5/audio/sfx/AA_drop_sandbag.ogg')
+        self.sndHitHouse = base.loader.loadSfx(
+            'phase_5/audio/sfx/AA_drop_sandbag.ogg')
         self.collSphere = CollisionSphere(0, 0, 0, self.getSphereRadius())
         self.collSphere.setTangible(1)
         self.collNode = CollisionNode(self.uniqueName('CannonSphere'))
@@ -308,7 +333,8 @@ class DistributedCannon(DistributedObject.DistributedObject):
 
     def setupMovingShadow(self):
         self.cTrav = base.cTrav
-        self.cRay = CollisionRay(0.0, 0.0, CollisionHandlerRayStart, 0.0, 0.0, -1.0)
+        self.cRay = CollisionRay(
+            0.0, 0.0, CollisionHandlerRayStart, 0.0, 0.0, -1.0)
         self.cRayNode = CollisionNode('cRayNode')
         self.cRayNode.addSolid(self.cRay)
         self.cRayNodePath = self.shadowNode.attachNewNode(self.cRayNode)
@@ -321,8 +347,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.lifter.setReach(20.0)
         self.enableRaycast(1)
 
-    def enableRaycast(self, enable = 1):
-        if not self.cTrav or not hasattr(self, 'cRayNode') or not self.cRayNode:
+    def enableRaycast(self, enable=1):
+        if not self.cTrav or not hasattr(
+                self, 'cRayNode') or not self.cRayNode:
             return
         self.notify.debug('-------enabling raycast--------')
         self.cTrav.removeCollider(self.cRayNodePath)
@@ -334,18 +361,101 @@ class DistributedCannon(DistributedObject.DistributedObject):
             return
         guiModel = 'phase_4/models/gui/cannon_game_gui'
         cannonGui = loader.loadModel(guiModel)
-        self.aimPad = DirectFrame(image=cannonGui.find('**/CannonFire_PAD'), relief=None, pos=(0.7, 0, -0.553333), scale=0.8)
+        self.aimPad = DirectFrame(image=cannonGui.find(
+            '**/CannonFire_PAD'), relief=None, pos=(0.7, 0, -0.553333), scale=0.8)
         cannonGui.removeNode()
-        self.fireButton = DirectButton(parent=self.aimPad, image=((guiModel, '**/Fire_Btn_UP'), (guiModel, '**/Fire_Btn_DN'), (guiModel, '**/Fire_Btn_RLVR')), relief=None, pos=(0.0115741, 0, 0.00505051), scale=1.0, command=self.__firePressed)
-        self.upButton = DirectButton(parent=self.aimPad, image=((guiModel, '**/Cannon_Arrow_UP'), (guiModel, '**/Cannon_Arrow_DN'), (guiModel, '**/Cannon_Arrow_RLVR')), relief=None, pos=(0.0115741, 0, 0.221717))
-        self.downButton = DirectButton(parent=self.aimPad, image=((guiModel, '**/Cannon_Arrow_UP'), (guiModel, '**/Cannon_Arrow_DN'), (guiModel, '**/Cannon_Arrow_RLVR')), relief=None, pos=(0.0136112, 0, -0.210101), image_hpr=(0, 0, 180))
-        self.leftButton = DirectButton(parent=self.aimPad, image=((guiModel, '**/Cannon_Arrow_UP'), (guiModel, '**/Cannon_Arrow_DN'), (guiModel, '**/Cannon_Arrow_RLVR')), relief=None, pos=(-0.199352, 0, -0.000505269), image_hpr=(0, 0, -90))
-        self.rightButton = DirectButton(parent=self.aimPad, image=((guiModel, '**/Cannon_Arrow_UP'), (guiModel, '**/Cannon_Arrow_DN'), (guiModel, '**/Cannon_Arrow_RLVR')), relief=None, pos=(0.219167, 0, -0.00101024), image_hpr=(0, 0, 90))
+        self.fireButton = DirectButton(
+            parent=self.aimPad,
+            image=(
+                (guiModel,
+                 '**/Fire_Btn_UP'),
+                (guiModel,
+                 '**/Fire_Btn_DN'),
+                (guiModel,
+                 '**/Fire_Btn_RLVR')),
+            relief=None,
+            pos=(
+                0.0115741,
+                0,
+                0.00505051),
+            scale=1.0,
+            command=self.__firePressed)
+        self.upButton = DirectButton(
+            parent=self.aimPad,
+            image=(
+                (guiModel,
+                 '**/Cannon_Arrow_UP'),
+                (guiModel,
+                 '**/Cannon_Arrow_DN'),
+                (guiModel,
+                 '**/Cannon_Arrow_RLVR')),
+            relief=None,
+            pos=(
+                0.0115741,
+                0,
+                0.221717))
+        self.downButton = DirectButton(
+            parent=self.aimPad,
+            image=(
+                (guiModel,
+                 '**/Cannon_Arrow_UP'),
+                (guiModel,
+                 '**/Cannon_Arrow_DN'),
+                (guiModel,
+                 '**/Cannon_Arrow_RLVR')),
+            relief=None,
+            pos=(
+                0.0136112,
+                0,
+                -0.210101),
+            image_hpr=(
+                0,
+                0,
+                180))
+        self.leftButton = DirectButton(
+            parent=self.aimPad,
+            image=(
+                (guiModel,
+                 '**/Cannon_Arrow_UP'),
+                (guiModel,
+                 '**/Cannon_Arrow_DN'),
+                (guiModel,
+                 '**/Cannon_Arrow_RLVR')),
+            relief=None,
+            pos=(
+                -0.199352,
+                0,
+                -0.000505269),
+            image_hpr=(
+                0,
+                0,
+                -90))
+        self.rightButton = DirectButton(
+            parent=self.aimPad,
+            image=(
+                (guiModel,
+                 '**/Cannon_Arrow_UP'),
+                (guiModel,
+                 '**/Cannon_Arrow_DN'),
+                (guiModel,
+                 '**/Cannon_Arrow_RLVR')),
+            relief=None,
+            pos=(
+                0.219167,
+                0,
+                -0.00101024),
+            image_hpr=(
+                0,
+                0,
+                90))
         self.aimPad.setColor(1, 1, 1, 0.9)
 
         def bindButton(button, upHandler, downHandler):
-            button.bind(DGG.B1PRESS, lambda x, handler = upHandler: handler())
-            button.bind(DGG.B1RELEASE, lambda x, handler = downHandler: handler())
+            button.bind(DGG.B1PRESS, lambda x, handler=upHandler: handler())
+            button.bind(
+                DGG.B1RELEASE,
+                lambda x,
+                handler=downHandler: handler())
 
         bindButton(self.upButton, self.__upPressed, self.__upReleased)
         bindButton(self.downButton, self.__downPressed, self.__downReleased)
@@ -383,13 +493,13 @@ class DistributedCannon(DistributedObject.DistributedObject):
         if self.cannon:
             self.cannon.removeNode()
             self.cannon = None
-        if self.shadowNode != None:
+        if self.shadowNode is not None:
             self.shadowNode.removeNode()
             del self.shadowNode
-        if self.splash != None:
+        if self.splash is not None:
             self.splash.destroy()
             del self.splash
-        if self.dustCloud != None:
+        if self.dustCloud is not None:
             self.dustCloud.destroy()
             del self.dustCloud
         del self.sndCannonMove
@@ -408,12 +518,12 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.av.setPlayRate(1.0, 'run')
             if hasattr(self.av, 'nametag'):
                 self.av.nametag.removeNametag(self.toonHead.tag)
-        if self.toonHead != None:
+        if self.toonHead is not None:
             self.toonHead.stopBlink()
             self.toonHead.stopLookAroundNow()
             self.toonHead.delete()
             self.toonHead = None
-        if self.toonModel != None:
+        if self.toonModel is not None:
             self.toonModel.removeNode()
             self.toonModel = None
         del self.toonScale
@@ -475,9 +585,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.dropShadow = self.shadowNode.copyTo(hidden)
 
     def __destroyToonModels(self):
-        if self.av != None:
+        if self.av is not None:
             self.av.dropShadow.show()
-            if self.dropShadow != None:
+            if self.dropShadow is not None:
                 self.dropShadow.removeNode()
                 self.dropShadow = None
             self.hitBumper = 0
@@ -493,13 +603,13 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.av = None
             self.lastWakeTime = 0
             self.localToonShooting = 0
-        if self.toonHead != None:
+        if self.toonHead is not None:
             self.toonHead.reparentTo(hidden)
             self.toonHead.stopBlink()
             self.toonHead.stopLookAroundNow()
             self.toonHead.delete()
             self.toonHead = None
-        if self.toonModel != None:
+        if self.toonModel is not None:
             self.toonModel.removeNode()
             self.toonModel = None
         self.model_Created = 0
@@ -511,9 +621,11 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.__updateCannonPosition(avId)
 
     def setCannonWillFire(self, avId, fireTime, zRot, angle, timestamp):
-        self.notify.debug('setCannonWillFire: ' + str(avId) + ': zRot=' + str(zRot) + ', angle=' + str(angle) + ', time=' + str(fireTime))
+        self.notify.debug('setCannonWillFire: ' + str(avId) + ': zRot=' +
+                          str(zRot) + ', angle=' + str(angle) + ', time=' + str(fireTime))
         if not self.model_Created:
-            self.notify.warning("We walked into the zone mid-flight, so we won't see it")
+            self.notify.warning(
+                "We walked into the zone mid-flight, so we won't see it")
             return
         self.cannonPosition[0] = zRot
         self.cannonPosition[1] = angle
@@ -626,7 +738,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.notify.debug('fire pressed')
         self.__broadcastLocalCannonPosition()
         self.__unmakeGui()
-        self.sendUpdate('setCannonLit', [self.cannonPosition[0], self.cannonPosition[1]])
+        self.sendUpdate(
+            'setCannonLit', [
+                self.cannonPosition[0], self.cannonPosition[1]])
 
     def __upPressed(self):
         self.notify.debug('up pressed')
@@ -721,7 +835,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         return Task.cont
 
     def __broadcastLocalCannonPosition(self):
-        self.sendUpdate('setCannonPosition', [self.cannonPosition[0], self.cannonPosition[1]])
+        self.sendUpdate(
+            'setCannonPosition', [
+                self.cannonPosition[0], self.cannonPosition[1]])
 
     def __updateCannonPosition(self, avId):
         self.cannon.setHpr(self.cannonPosition[0], 0.0, 0.0)
@@ -733,7 +849,8 @@ class DistributedCannon(DistributedObject.DistributedObject):
         shadow.setScale(1, yScale, 1)
 
     def __getCameraPositionBehindCannon(self):
-        return Point3(self.cannonLocationDict[self.localAvId][0], CANNON_Y - 5.0, CANNON_Z + 7)
+        return Point3(
+            self.cannonLocationDict[self.localAvId][0], CANNON_Y - 5.0, CANNON_Z + 7)
 
     def __putCameraBehindCannon(self):
         camera.setPos(self.__getCameraPositionBehindCannon())
@@ -772,11 +889,11 @@ class DistributedCannon(DistributedObject.DistributedObject):
         hitTreasures = self.__calcHitTreasures(trajectory)
         timeOfImpact, hitWhat = self.__calcToonImpact(trajectory)
         return {'startPos': startPos,
-         'startHpr': startHpr,
-         'startVel': startVel,
-         'trajectory': trajectory,
-         'timeOfImpact': 3 * timeOfImpact,
-         'hitWhat': hitWhat}
+                'startHpr': startHpr,
+                'startVel': startVel,
+                'trajectory': trajectory,
+                'timeOfImpact': 3 * timeOfImpact,
+                'hitWhat': hitWhat}
 
     def __fireCannonTask(self, task):
         launchTime = task.fireTime
@@ -795,7 +912,8 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.notify.debug('start velocity: ' + str(startVel))
         self.notify.debug('time of launch: ' + str(launchTime))
         self.notify.debug('time of impact: ' + str(timeOfImpact))
-        self.notify.debug('location of impact: ' + str(trajectory.getPos(timeOfImpact)))
+        self.notify.debug('location of impact: ' +
+                          str(trajectory.getPos(timeOfImpact)))
         if hitWhat == self.HIT_WATER:
             self.notify.debug('toon will land in the water')
         elif hitWhat == self.HIT_TOWER:
@@ -832,9 +950,11 @@ class DistributedCannon(DistributedObject.DistributedObject):
             camera.reparentTo(self.av)
             camera.setP(45.0)
             camera.setZ(-10.0)
-        self.flyColSphere = CollisionSphere(0, 0, self.av.getHeight() / 2.0, 1.0)
+        self.flyColSphere = CollisionSphere(
+            0, 0, self.av.getHeight() / 2.0, 1.0)
         self.flyColNode = CollisionNode(self.uniqueName('flySphere'))
-        self.flyColNode.setCollideMask(ToontownGlobals.WallBitmask | ToontownGlobals.FloorBitmask)
+        self.flyColNode.setCollideMask(
+            ToontownGlobals.WallBitmask | ToontownGlobals.FloorBitmask)
         self.flyColNode.addSolid(self.flyColSphere)
         self.flyColNodePath = self.av.attachNewNode(self.flyColNode)
         self.flyColNodePath.setColor(1, 0, 0, 1)
@@ -879,12 +999,12 @@ class DistributedCannon(DistributedObject.DistributedObject):
             placeState = place.fsm.getCurrentState().getName()
             print(placeState)
             if (self.inWater or place.toonSubmerged) and placeState != 'fishing':
-                if self.av != None:
+                if self.av is not None:
                     self.av.startSmooth()
                     self.__destroyToonModels()
                     return
         self.inWater = 0
-        if self.av != None:
+        if self.av is not None:
             self.__stopCollisionHandler(self.av)
             self.av.resetLOD()
             if self.av == base.localAvatar:
@@ -922,12 +1042,14 @@ class DistributedCannon(DistributedObject.DistributedObject):
         return
 
     def __handleCannonHit(self, collisionEntry):
-        if self.av == None or self.flyColNode == None:
+        if self.av is None or self.flyColNode is None:
             return
 
         hitNode = collisionEntry.getIntoNode().getName()
         self.notify.debug('hitNode = %s' % hitNode)
-        self.notify.debug('hitNodePath.getParent = %s' % collisionEntry.getIntoNodePath().getParent())
+        self.notify.debug(
+            'hitNodePath.getParent = %s' %
+            collisionEntry.getIntoNodePath().getParent())
 
         self.vel = self.trajectory.getVel(self.t)
         vel = self.trajectory.getVel(self.t)
@@ -939,7 +1061,8 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.notify.debug('normalized vel=%s' % vel)
 
         solid = collisionEntry.getInto()
-        intoNormal = collisionEntry.getSurfaceNormal(collisionEntry.getIntoNodePath())
+        intoNormal = collisionEntry.getSurfaceNormal(
+            collisionEntry.getIntoNodePath())
         self.notify.debug('old intoNormal = %s' % intoNormal)
         intoNormal = collisionEntry.getSurfaceNormal(render)
         self.notify.debug('new intoNormal = %s' % intoNormal)
@@ -955,7 +1078,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
                 self.notify.debug('hitPylonBelowWater = True')
 
         hitNormal = intoNormal
-        if (    hitNode.find('cSphere') == 0 or
+        if (hitNode.find('cSphere') == 0 or
                 hitNode.find('treasureSphere') == 0 or
                 hitNode.find('prop') == 0 or
                 hitNode.find('distAvatarCollNode') == 0 or
@@ -971,17 +1094,20 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.notify.debug('--------------hit and ignoring %s' % hitNode)
             return
 
-        if vel.dot(hitNormal) > 0 and not hitNode == 'collision_roof' and not hitNode == 'collision_fence':
-            self.notify.debug('--------------hit and ignoring backfacing %s, dot=%s' % (hitNode, vel.dot(hitNormal)))
+        if vel.dot(
+                hitNormal) > 0 and not hitNode == 'collision_roof' and not hitNode == 'collision_fence':
+            self.notify.debug(
+                '--------------hit and ignoring backfacing %s, dot=%s' %
+                (hitNode, vel.dot(hitNormal)))
             return
 
         intoNode = collisionEntry.getIntoNodePath()
         bumperNodes = ['collision_house',
-                        'collision_fence',
-                        'targetSphere',
-                        'collision_roof',
-                        'collision_cannon_bumper',
-                        'statuaryCol']
+                       'collision_fence',
+                       'targetSphere',
+                       'collision_roof',
+                       'collision_cannon_bumper',
+                       'statuaryCol']
         cloudBumpers = ['cloudSphere-0']
         bumperNodes += cloudBumpers
 
@@ -1007,7 +1133,8 @@ class DistributedCannon(DistributedObject.DistributedObject):
             elif hitNode == 'statuaryCol':
                 self.__hitStatuary(self.av, collisionEntry)
             else:
-                self.notify.debug('*************** hit something else ************')
+                self.notify.debug(
+                    '*************** hit something else ************')
             return
 
         if self.localToonShooting:
@@ -1054,9 +1181,15 @@ class DistributedCannon(DistributedObject.DistributedObject):
             track.append(Wait(2.0))
             track.append(Func(self.__setToonUpright, self.av, self.landingPos))
         elif hitNode.find('MovingPlatform') == 0 or hitNode.find('cloudSphere') == 0:
-            track.append(Func(self.__hitCloudPlatform, self.av, collisionEntry))
+            track.append(
+                Func(
+                    self.__hitCloudPlatform,
+                    self.av,
+                    collisionEntry))
         else:
-            self.notify.warning('************* unhandled hitNode=%s parent =%s' % (hitNode, collisionEntry.getIntoNodePath().getParent()))
+            self.notify.warning(
+                '************* unhandled hitNode=%s parent =%s' %
+                (hitNode, collisionEntry.getIntoNodePath().getParent()))
 
         track.append(Func(self.b_setLanded))
 
@@ -1069,7 +1202,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.hitTrack = track
             self.hitTrack.start()
 
-    def __hitGround(self, avatar, pos, extraArgs = []):
+    def __hitGround(self, avatar, pos, extraArgs=[]):
         hitP = avatar.getPos(render)
         self.notify.debug('hitGround pos = %s, hitP = %s' % (pos, hitP))
         self.notify.debug('avatar hpr = %s' % avatar.getHpr())
@@ -1077,33 +1210,57 @@ class DistributedCannon(DistributedObject.DistributedObject):
         avatar.setPos(pos[0], pos[1], pos[2] + avatar.getHeight() / 3.0)
         avatar.setHpr(h, -135, 0)
         self.notify.debug('parent = %s' % avatar.getParent())
-        self.notify.debug('pos = %s, hpr = %s' % (avatar.getPos(render), avatar.getHpr(render)))
-        self.dustCloud.setPos(render, pos[0], pos[1], pos[2] + avatar.getHeight() / 3.0)
+        self.notify.debug(
+            'pos = %s, hpr = %s' %
+            (avatar.getPos(render),
+             avatar.getHpr(render)))
+        self.dustCloud.setPos(
+            render,
+            pos[0],
+            pos[1],
+            pos[2] +
+            avatar.getHeight() /
+            3.0)
         self.dustCloud.setScale(0.35)
         self.dustCloud.play()
         base.playSfx(self.sndHitGround)
         avatar.setPlayRate(2.0, 'run')
         avatar.loop('run')
 
-    def __hitHouse(self, avatar, collisionEntry, extraArgs = []):
-        self.__hitBumper(avatar, collisionEntry, self.sndHitHouse, kr=0.2, angVel=3)
+    def __hitHouse(self, avatar, collisionEntry, extraArgs=[]):
+        self.__hitBumper(
+            avatar,
+            collisionEntry,
+            self.sndHitHouse,
+            kr=0.2,
+            angVel=3)
         pinballScore = ToontownGlobals.PinballScoring[ToontownGlobals.PinballHouse]
         self.incrementPinballInfo(pinballScore[0], pinballScore[1])
 
-    def __hitFence(self, avatar, collisionEntry, extraArgs = []):
-        self.__hitBumper(avatar, collisionEntry, self.sndHitHouse, kr=0.2, angVel=3)
+    def __hitFence(self, avatar, collisionEntry, extraArgs=[]):
+        self.__hitBumper(
+            avatar,
+            collisionEntry,
+            self.sndHitHouse,
+            kr=0.2,
+            angVel=3)
         pinballScore = ToontownGlobals.PinballScoring[ToontownGlobals.PinballFence]
         self.incrementPinballInfo(pinballScore[0], pinballScore[1])
 
-    def __hitTarget(self, avatar, collisionEntry, extraArgs = []):
-        self.__hitBumper(avatar, collisionEntry, self.sndHitHouse, kr=0.1, angVel=2)
+    def __hitTarget(self, avatar, collisionEntry, extraArgs=[]):
+        self.__hitBumper(
+            avatar,
+            collisionEntry,
+            self.sndHitHouse,
+            kr=0.1,
+            angVel=2)
         pinballScore = ToontownGlobals.PinballScoring[ToontownGlobals.PinballTarget]
         self.incrementPinballInfo(pinballScore[0], pinballScore[1])
         if self.localToonShooting:
             self.hitTarget = 1
             messenger.send('hitTarget', [self.avId, self.lastVel])
 
-    def __hitBumper(self, avatar, collisionEntry, sound, kr = 0.6, angVel = 1):
+    def __hitBumper(self, avatar, collisionEntry, sound, kr=0.6, angVel=1):
         self.hitBumper = 1
         base.playSfx(self.sndHitHouse)
         hitP = avatar.getPos(render)
@@ -1124,9 +1281,14 @@ class DistributedCannon(DistributedObject.DistributedObject):
         t = Sequence(Func(avatar.pose, 'lose', 110))
         t.start()
 
-    def __hitRoof(self, avatar, collisionEntry, extraArgs = []):
+    def __hitRoof(self, avatar, collisionEntry, extraArgs=[]):
         if True:
-            self.__hitBumper(avatar, collisionEntry, self.sndHitHouse, kr=0.3, angVel=3)
+            self.__hitBumper(
+                avatar,
+                collisionEntry,
+                self.sndHitHouse,
+                kr=0.3,
+                angVel=3)
             pinballScore = ToontownGlobals.PinballScoring[ToontownGlobals.PinballRoof]
             self.incrementPinballInfo(pinballScore[0], pinballScore[1])
             return
@@ -1137,12 +1299,16 @@ class DistributedCannon(DistributedObject.DistributedObject):
         vel = self.trajectory.getVel(self.t)
         vel.normalize()
         dot = normal.dot(vel)
-        self.notify.debug('--------------dot product = %s---------------' % dot)
+        self.notify.debug(
+            '--------------dot product = %s---------------' %
+            dot)
         temp = render.attachNewNode('temp')
         temp.setPosHpr(0, 0, 0, 0, 0, 0)
         temp.lookAt(Point3(normal))
         temp.reparentTo(roof)
-        self.notify.debug('avatar pos = %s, landingPos = %s' % (avatar.getPos(), self.landingPos))
+        self.notify.debug(
+            'avatar pos = %s, landingPos = %s' %
+            (avatar.getPos(), self.landingPos))
         temp.setPos(render, self.landingPos)
         avatar.reparentTo(temp)
         avatar.setPosHpr(0, 0.25, 0.5, 0, 270, 180)
@@ -1150,12 +1316,23 @@ class DistributedCannon(DistributedObject.DistributedObject):
         base.playSfx(self.sndHitHouse)
         avatar.setPlayRate(1.0, 'jump')
         h = self.barrel.getH(render)
-        t = Sequence(LerpPosInterval(avatar, 0.5, Point3(0, 0, -.5), blendType='easeInOut'), Func(avatar.clearColorScale), Func(avatar.wrtReparentTo, render), Wait(0.3), Parallel(Func(avatar.setP, 0), Func(avatar.play, 'jump', None, 19, 39), LerpHprInterval(avatar, 0.3, Vec3(h, 0, 0), blendType='easeOut')), Func(avatar.play, 'neutral'))
+        t = Sequence(
+            LerpPosInterval(
+                avatar, 0.5, Point3(
+                    0, 0, -.5), blendType='easeInOut'), Func(
+                avatar.clearColorScale), Func(
+                    avatar.wrtReparentTo, render), Wait(0.3), Parallel(
+                        Func(
+                            avatar.setP, 0), Func(
+                                avatar.play, 'jump', None, 19, 39), LerpHprInterval(
+                                    avatar, 0.3, Vec3(
+                                        h, 0, 0), blendType='easeOut')), Func(
+                                            avatar.play, 'neutral'))
         t.start()
         hitP = avatar.getPos(render)
         return
 
-    def __hitBridge(self, avatar, collisionEntry, extraArgs = []):
+    def __hitBridge(self, avatar, collisionEntry, extraArgs=[]):
         self.notify.debug('hit bridge')
         hitP = avatar.getPos(render)
         self.dustCloud.setPos(render, hitP[0], hitP[1], hitP[2] - 0.5)
@@ -1163,7 +1340,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.dustCloud.play()
         base.playSfx(self.sndHitGround)
 
-    def __hitWater(self, avatar, pos, collisionEntry, extraArgs = []):
+    def __hitWater(self, avatar, pos, collisionEntry, extraArgs=[]):
         hitP = avatar.getPos(render)
         if hitP[2] > ToontownGlobals.EstateWakeWaterHeight:
             self.notify.debug('we hit the ground before we hit water')
@@ -1182,13 +1359,23 @@ class DistributedCannon(DistributedObject.DistributedObject):
         place = base.cr.playGame.getPlace()
         self.notify.debug('hitWater: submerged = %s' % place.toonSubmerged)
 
-    def __hitCannonBumper(self, avatar, collisionEntry, extraArgs = []):
-        self.__hitBumper(avatar, collisionEntry, self.sndHitHouse, kr=0.4, angVel=5)
+    def __hitCannonBumper(self, avatar, collisionEntry, extraArgs=[]):
+        self.__hitBumper(
+            avatar,
+            collisionEntry,
+            self.sndHitHouse,
+            kr=0.4,
+            angVel=5)
         score, multiplier = ToontownGlobals.PinballScoring[ToontownGlobals.PinballCannonBumper]
         self.incrementPinballInfo(score, multiplier)
 
-    def __hitStatuary(self, avatar, collisionEntry, extraArgs = []):
-        self.__hitBumper(avatar, collisionEntry, self.sndHitHouse, kr=0.4, angVel=5)
+    def __hitStatuary(self, avatar, collisionEntry, extraArgs=[]):
+        self.__hitBumper(
+            avatar,
+            collisionEntry,
+            self.sndHitHouse,
+            kr=0.4,
+            angVel=5)
         score, multiplier = ToontownGlobals.PinballScoring[ToontownGlobals.PinballStatuary]
         intoNodePath = collisionEntry.getIntoNodePath()
         name = intoNodePath.getParent().getName()
@@ -1198,9 +1385,14 @@ class DistributedCannon(DistributedObject.DistributedObject):
             multiplier = int(splitParts[2])
         self.incrementPinballInfo(score, multiplier)
 
-    def __hitCloudPlatform(self, avatar, collisionEntry, extraArgs = []):
+    def __hitCloudPlatform(self, avatar, collisionEntry, extraArgs=[]):
         if True:
-            self.__hitBumper(avatar, collisionEntry, self.sndHitHouse, kr=0.4, angVel=5)
+            self.__hitBumper(
+                avatar,
+                collisionEntry,
+                self.sndHitHouse,
+                kr=0.4,
+                angVel=5)
             score, multiplier = ToontownGlobals.PinballScoring[ToontownGlobals.PinballCloudBumperLow]
             intoNodePath = collisionEntry.getIntoNodePath()
             name = intoNodePath.getParent().getName()
@@ -1215,7 +1407,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
         avatar.setPosHpr(0, 0, 0, h, 0, 0)
         messenger.send('hitCloud')
 
-    def __setToonUpright(self, avatar, pos = None):
+    def __setToonUpright(self, avatar, pos=None):
         if avatar:
             if self.inWater:
                 avatar.setP(0)
@@ -1254,7 +1446,8 @@ class DistributedCannon(DistributedObject.DistributedObject):
                     pos = t.pos
                     rad = 10.5
                     height = 10.0
-                    t_impact = trajectory.checkCollisionWithCylinderSides(pos, rad, height)
+                    t_impact = trajectory.checkCollisionWithCylinderSides(
+                        pos, rad, height)
                     if t_impact > 0:
                         self.hitTreasures.append([t_impact, t])
 
@@ -1271,7 +1464,14 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.smoke.setPos(0, 6, -3)
         self.smoke.setScale(0.5)
         self.smoke.wrtReparentTo(render)
-        track = Sequence(Parallel(LerpScaleInterval(self.smoke, 0.5, 3), LerpColorScaleInterval(self.smoke, 0.5, Vec4(2, 2, 2, 0))), Func(self.smoke.reparentTo, hidden), Func(self.smoke.clearColorScale))
+        track = Sequence(
+            Parallel(
+                LerpScaleInterval(
+                    self.smoke, 0.5, 3), LerpColorScaleInterval(
+                    self.smoke, 0.5, Vec4(
+                        2, 2, 2, 0))), Func(
+                self.smoke.reparentTo, hidden), Func(
+                            self.smoke.clearColorScale))
         track.start()
         return Task.done
 
@@ -1308,7 +1508,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
             toon.setHpr(self.cannon.getH(render), -90 + theta, 0)
             view = 2
         if pos.getZ() < -20 or pos.getZ() > 1000:
-            self.notify.debug('stopping fly task toon.getZ()=%.2f' % pos.getZ())
+            self.notify.debug(
+                'stopping fly task toon.getZ()=%.2f' %
+                pos.getZ())
             self.__resetToonToCannon(self.av)
             return Task.done
         lookAt = task.info['toon'].getPos(render)
@@ -1354,7 +1556,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.__resetToon(avatar)
         return
 
-    def __resetToon(self, avatar, pos = None):
+    def __resetToon(self, avatar, pos=None):
         self.notify.debug('__resetToon')
         if avatar:
             self.__stopCollisionHandler(avatar)
@@ -1468,55 +1670,60 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.curPinballScore += score
             self.curPinballMultiplier += multiplier
             self.notify.debug('score =%d multiplier=%d  curscore=%d curMult=%d' % (score,
-             multiplier,
-             self.curPinballScore,
-             self.curPinballMultiplier))
+                                                                                   multiplier,
+                                                                                   self.curPinballScore,
+                                                                                   self.curPinballMultiplier))
             self.d_setPinballInfo()
 
     def d_setPinballInfo(self):
-        self.notify.debug('d_setPinballInfo %d %d' % (self.curPinballScore, self.curPinballMultiplier))
+        self.notify.debug('d_setPinballInfo %d %d' %
+                          (self.curPinballScore, self.curPinballMultiplier))
         target = base.cr.doId2do[self.targetId]
-        target.b_setCurPinballScore(self.avId, self.curPinballScore, self.curPinballMultiplier)
+        target.b_setCurPinballScore(
+            self.avId,
+            self.curPinballScore,
+            self.curPinballMultiplier)
 
-    def createBlock(self, collisionName = None):
+    def createBlock(self, collisionName=None):
         gFormat = GeomVertexFormat.getV3c4()
-        myVertexData = GeomVertexData('Cannon bumper vertices', gFormat, Geom.UHDynamic)
+        myVertexData = GeomVertexData(
+            'Cannon bumper vertices', gFormat, Geom.UHDynamic)
         vertexWriter = GeomVertexWriter(myVertexData, 'vertex')
         colorWriter = GeomVertexWriter(myVertexData, 'color')
         vertices = [(-1, 1, 1),
-         (1, 1, 1),
-         (1, -1, 1),
-         (-1, -1, 1),
-         (-1, 1, -1),
-         (1, 1, -1),
-         (1, -1, -1),
-         (-1, -1, -1)]
+                    (1, 1, 1),
+                    (1, -1, 1),
+                    (-1, -1, 1),
+                    (-1, 1, -1),
+                    (1, 1, -1),
+                    (1, -1, -1),
+                    (-1, -1, -1)]
         colors = [(0, 0, 0, 1),
-         (0, 0, 1, 1),
-         (0, 1, 0, 1),
-         (0, 1, 1, 1),
-         (1, 0, 0, 1),
-         (1, 0, 1, 1),
-         (1, 1, 0, 1),
-         (1, 1, 1, 1)]
+                  (0, 0, 1, 1),
+                  (0, 1, 0, 1),
+                  (0, 1, 1, 1),
+                  (1, 0, 0, 1),
+                  (1, 0, 1, 1),
+                  (1, 1, 0, 1),
+                  (1, 1, 1, 1)]
         faces = [(0, 2, 1),
-         (0, 3, 2),
-         (7, 4, 5),
-         (6, 7, 5),
-         (2, 3, 7),
-         (2, 7, 6),
-         (4, 0, 1),
-         (5, 4, 1),
-         (0, 4, 3),
-         (3, 4, 7),
-         (1, 2, 6),
-         (1, 6, 5)]
+                 (0, 3, 2),
+                 (7, 4, 5),
+                 (6, 7, 5),
+                 (2, 3, 7),
+                 (2, 7, 6),
+                 (4, 0, 1),
+                 (5, 4, 1),
+                 (0, 4, 3),
+                 (3, 4, 7),
+                 (1, 2, 6),
+                 (1, 6, 5)]
         quads = [(3, 2, 1, 0),
-         (4, 5, 6, 7),
-         (3, 7, 6, 2),
-         (0, 1, 5, 4),
-         (0, 4, 7, 3),
-         (1, 2, 6, 5)]
+                 (4, 5, 6, 7),
+                 (3, 7, 6, 2),
+                 (0, 1, 5, 4),
+                 (0, 4, 7, 3),
+                 (1, 2, 6, 5)]
         for i in range(len(vertices)):
             vertex = vertices[i]
             vertexWriter.addData3f(vertex[0], vertex[1], vertex[2])
@@ -1538,7 +1745,11 @@ class DistributedCannon(DistributedObject.DistributedObject):
         else:
             colNode = CollisionNode('cubeCollision')
         for quad in quads:
-            colQuad = CollisionPolygon(Point3(*vertices[quad[0]]), Point3(*vertices[quad[1]]), Point3(*vertices[quad[2]]), Point3(*vertices[quad[3]]))
+            colQuad = CollisionPolygon(Point3(*
+                                              vertices[quad[0]]), Point3(*
+                                                                         vertices[quad[1]]), Point3(*
+                                                                                                    vertices[quad[2]]), Point3(*
+                                                                                                                               vertices[quad[3]]))
             colQuad.setTangible(0)
             colNode.addSolid(colQuad)
 
@@ -1548,15 +1759,21 @@ class DistributedCannon(DistributedObject.DistributedObject):
         return block
 
     def loadCannonBumper(self):
-        self.cannonBumper = loader.loadModel('phase_5.5/models/estate/bumper_cloud')
+        self.cannonBumper = loader.loadModel(
+            'phase_5.5/models/estate/bumper_cloud')
         self.cannonBumper.reparentTo(self.nodePath)
         self.cannonBumper.setScale(4.0)
         self.cannonBumper.setColor(0.52, 0.8, 0.98, 1)
         colCube = self.cannonBumper.find('**/collision')
         colCube.setName('cloudSphere-0')
         self.bumperCol = colCube
-        self.notify.debug('------------self.cannonBumper.setPos %.2f %.2f %.2f' % (ToontownGlobals.PinballCannonBumperInitialPos[0], ToontownGlobals.PinballCannonBumperInitialPos[1], ToontownGlobals.PinballCannonBumperInitialPos[2]))
-        self.cannonBumper.setPos(*ToontownGlobals.PinballCannonBumperInitialPos)
+        self.notify.debug(
+            '------------self.cannonBumper.setPos %.2f %.2f %.2f' %
+            (ToontownGlobals.PinballCannonBumperInitialPos[0],
+             ToontownGlobals.PinballCannonBumperInitialPos[1],
+             ToontownGlobals.PinballCannonBumperInitialPos[2]))
+        self.cannonBumper.setPos(
+            *ToontownGlobals.PinballCannonBumperInitialPos)
 
     def __bumperKeyPressed(self):
         self.notify.debug('__bumperKeyPressed')
@@ -1579,11 +1796,16 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.sendUpdate('requestBumperMove', [x, y, z])
 
     def setCannonBumperPos(self, x, y, z):
-        self.notify.debug('------------setCannonBumperPos %f %f %f' % (x, y, z))
+        self.notify.debug(
+            '------------setCannonBumperPos %f %f %f' %
+            (x, y, z))
         self.cannonBumper.setPos(x, y, z)
         self.bumperCol.setCollideMask(BitMask32.allOff())
-        taskMgr.doMethodLater(0.25, self.turnOnBumperCollision, self.uniqueName('BumperON'))
+        taskMgr.doMethodLater(
+            0.25,
+            self.turnOnBumperCollision,
+            self.uniqueName('BumperON'))
 
-    def turnOnBumperCollision(self, whatever = 0):
+    def turnOnBumperCollision(self, whatever=0):
         if self.bumperCol:
             self.bumperCol.setCollideMask(ToontownGlobals.WallBitmask)

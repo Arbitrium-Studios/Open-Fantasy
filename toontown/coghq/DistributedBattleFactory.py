@@ -13,12 +13,19 @@ from direct.fsm import State
 from direct.fsm import ClassicFSM, State
 from toontown.toonbase import ToontownGlobals
 
+
 class DistributedBattleFactory(DistributedLevelBattle.DistributedLevelBattle):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBattleFactory')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedBattleFactory')
 
     def __init__(self, cr):
         DistributedLevelBattle.DistributedLevelBattle.__init__(self, cr)
-        self.fsm.addState(State.State('FactoryReward', self.enterFactoryReward, self.exitFactoryReward, ['Resume']))
+        self.fsm.addState(
+            State.State(
+                'FactoryReward',
+                self.enterFactoryReward,
+                self.exitFactoryReward,
+                ['Resume']))
         offState = self.fsm.getStateNamed('Off')
         offState.addTransition('FactoryReward')
         playMovieState = self.fsm.getStateNamed('PlayMovie')
@@ -32,7 +39,9 @@ class DistributedBattleFactory(DistributedLevelBattle.DistributedLevelBattle):
             NametagGlobals.setMasterArrowsOn(0)
             if self.bossBattle:
                 messenger.send('localToonConfrontedForeman')
-        self.movie.playReward(ts, self.uniqueName('building-reward'), self.__handleFactoryRewardDone)
+        self.movie.playReward(ts,
+                              self.uniqueName('building-reward'),
+                              self.__handleFactoryRewardDone)
 
     def __handleFactoryRewardDone(self):
         self.notify.info('Factory reward done')

@@ -2,6 +2,7 @@ from . import TownLoader
 from . import BRStreet
 from toontown.suit import Suit
 
+
 class BRTownLoader(TownLoader.TownLoader):
 
     def __init__(self, hood, parentFSM, doneEvent):
@@ -14,7 +15,8 @@ class BRTownLoader(TownLoader.TownLoader):
     def load(self, zoneId):
         TownLoader.TownLoader.load(self, zoneId)
         Suit.loadSuits(3)
-        dnaFile = 'phase_8/dna/the_burrrgh_' + str(self.canonicalBranchZone) + '.dna'
+        dnaFile = 'phase_8/dna/the_burrrgh_' + \
+            str(self.canonicalBranchZone) + '.dna'
         self.createHood(dnaFile)
 
     def unload(self):

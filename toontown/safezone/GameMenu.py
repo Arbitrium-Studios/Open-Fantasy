@@ -7,6 +7,7 @@ from direct.gui.DirectGui import *
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 
+
 class GameMenu(DirectFrame):
 
     def __init__(self, picnicFunction, menuType):
@@ -38,27 +39,40 @@ class GameMenu(DirectFrame):
                 text_fg=(1, 0, 0, 1),
                 text_scale=0.09,
                 text_font=ToontownGlobals.getSignFont())
-        self.selectionButtons = loader.loadModel('phase_6/models/golf/picnic_game_menu.bam')
+        self.selectionButtons = loader.loadModel(
+            'phase_6/models/golf/picnic_game_menu.bam')
         btn1 = self.selectionButtons.find('**/Btn1')
         btn2 = self.selectionButtons.find('**/Btn2')
         btn3 = self.selectionButtons.find('**/Btn3')
         self.ChineseCheckers = DirectButton(
             self,
-            image=(btn1.find('**/checkersBtnUp'), btn1.find('**/checkersBtnDn'), btn1.find('**/checkersBtnHi'), btn1.find('**/checkersBtnUp')),
+            image=(
+                btn1.find('**/checkersBtnUp'),
+                btn1.find('**/checkersBtnDn'),
+                btn1.find('**/checkersBtnHi'),
+                btn1.find('**/checkersBtnUp')),
             scale=0.36,
             relief=0,
             pos=(0, 0, -0.7),
             command=self.checkersSelected)
         self.Checkers = DirectButton(
             self,
-            image=(btn2.find('**/regular_checkersBtnUp'), btn2.find('**/regular_checkersBtnDn'), btn2.find('**/regular_checkersBtnHi'), btn2.find('**/regular_checkersBtnUp')),
+            image=(
+                btn2.find('**/regular_checkersBtnUp'),
+                btn2.find('**/regular_checkersBtnDn'),
+                btn2.find('**/regular_checkersBtnHi'),
+                btn2.find('**/regular_checkersBtnUp')),
             scale=0.36,
             relief=0,
             pos=(0.8, 0, -0.7),
             command=self.regCheckersSelected)
         self.FindFour = DirectButton(
             self,
-            image=(btn3.find('**/findfourBtnUp'), btn3.find('**/findfourBtnDn'), btn3.find('**/findfourBtnHi'), btn3.find('**/findfourBtnUp')),
+            image=(
+                btn3.find('**/findfourBtnUp'),
+                btn3.find('**/findfourBtnDn'),
+                btn3.find('**/findfourBtnHi'),
+                btn3.find('**/findfourBtnUp')),
             scale=0.36,
             relief=0,
             pos=(-0.8, 0, -0.7),

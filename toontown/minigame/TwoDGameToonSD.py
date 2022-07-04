@@ -13,6 +13,7 @@ from toontown.minigame import TwoDBattleMgr
 from toontown.racing import RaceHeadFrame
 COLOR_RED = VBase4(1, 0, 0, 0.3)
 
+
 class TwoDGameToonSD(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('TwoDGameToonSD')
     FallBackAnim = 'slip-backward'
@@ -21,10 +22,10 @@ class TwoDGameToonSD(StateData.StateData):
     ShootGun = 'water-gun'
     Victory = 'victory'
     animList = [FallBackAnim,
-     NeutralAnim,
-     RunAnim,
-     ShootGun,
-     Victory]
+                NeutralAnim,
+                RunAnim,
+                ShootGun,
+                Victory]
     ScoreTextGenerator = TextNode('ScoreTextGenerator')
 
     def __init__(self, avId, game):
@@ -38,24 +39,37 @@ class TwoDGameToonSD(StateData.StateData):
         self.victoryIval = None
         self.squishIval = None
         self.fsm = ClassicFSM.ClassicFSM('TwoDGameAnimFSM-%s' % self.avId, [State.State('init', self.enterInit, self.exitInit, ['normal']),
-         State.State('normal', self.enterNormal, self.exitNormal, ['shootGun',
-          'fallBack',
-          'fallDown',
-          'victory',
-          'squish']),
-         State.State('shootGun', self.enterShootGun, self.exitShootGun, ['normal',
-          'fallBack',
-          'fallDown',
-          'victory',
-          'squish']),
-         State.State('fallBack', self.enterFallBack, self.exitFallBack, ['normal', 'fallDown', 'squish']),
-         State.State('fallDown', self.enterFallDown, self.exitFallDown, ['normal']),
-         State.State('squish', self.enterSquish, self.exitSquish, ['normal']),
-         State.State('victory', self.enterVictory, self.exitVictory, ['normal', 'fallDown']),
-         State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'init', 'cleanup')
+                                                                            State.State('normal', self.enterNormal, self.exitNormal, ['shootGun',
+                                                                                                                                      'fallBack',
+                                                                                                                                      'fallDown',
+                                                                                                                                      'victory',
+                                                                                                                                      'squish']),
+                                                                            State.State('shootGun', self.enterShootGun, self.exitShootGun, ['normal',
+                                                                                                                                            'fallBack',
+                                                                                                                                            'fallDown',
+                                                                                                                                            'victory',
+                                                                                                                                            'squish']),
+                                                                            State.State(
+            'fallBack', self.enterFallBack, self.exitFallBack, [
+                'normal', 'fallDown', 'squish']),
+            State.State(
+            'fallDown',
+            self.enterFallDown,
+            self.exitFallDown,
+            ['normal']),
+            State.State(
+            'squish',
+            self.enterSquish,
+            self.exitSquish,
+            ['normal']),
+            State.State(
+            'victory', self.enterVictory, self.exitVictory, [
+                'normal', 'fallDown']),
+            State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'init', 'cleanup')
         self.scoreText = None
         self.load()
-        self.progressLineLength = self.game.assetMgr.faceEndPos[0] - self.game.assetMgr.faceStartPos[0]
+        self.progressLineLength = self.game.assetMgr.faceEndPos[0] - \
+            self.game.assetMgr.faceStartPos[0]
         self.conversionRatio = self.progressLineLength / self.game.gameLength
         self.scoreTextSeq = None
         return
@@ -65,19 +79,22 @@ class TwoDGameToonSD(StateData.StateData):
             self.toon.pose(anim, 0)
 
         self.battleMgr = TwoDBattleMgr.TwoDBattleMgr(self.game, self.toon)
-        self.squishSound = base.loader.loadSfx('phase_3.5/audio/dial/AV_' + self.toon.style.getAnimal() + '_exclaim.ogg')
+        self.squishSound = base.loader.loadSfx(
+            'phase_3.5/audio/dial/AV_' +
+            self.toon.style.getAnimal() +
+            '_exclaim.ogg')
 
     def destroy(self):
-        if self.fallBackIval != None:
+        if self.fallBackIval is not None:
             self.fallBackIval.finish()
             self.fallBackIval = None
-        if self.fallDownIval != None:
+        if self.fallDownIval is not None:
             self.fallDownIval.finish()
             self.fallDownIval = None
-        if self.squishIval != None:
+        if self.squishIval is not None:
             self.squishIval.finish()
             self.squishIval = None
-        if self.victoryIval != None:
+        if self.victoryIval is not None:
             self.victoryIval.finish()
             self.victoryIval = None
         self.hideScoreText()
@@ -90,7 +107,7 @@ class TwoDGameToonSD(StateData.StateData):
     def enter(self):
         self.fsm.enterInitialState()
 
-    def exit(self, unexpectedExit = False):
+    def exit(self, unexpectedExit=False):
         self.unexpectedExit = unexpectedExit
         self.fsm.requestFinalState()
 
@@ -123,16 +140,44 @@ class TwoDGameToonSD(StateData.StateData):
         frameRate = self.toon.getFrameRate(animName)
         newRate = frames / duration
         playRate = newRate / frameRate
-        fallBackAnim = Sequence(ActorInterval(self.toon, animName, startTime=startFrame / newRate, endTime=endFrame / newRate, playRate=playRate), ActorInterval(self.toon, animName, startFrame=23, playRate=1), FunctionInterval(self.resume))
+        fallBackAnim = Sequence(
+            ActorInterval(
+                self.toon,
+                animName,
+                startTime=startFrame /
+                newRate,
+                endTime=endFrame /
+                newRate,
+                playRate=playRate),
+            ActorInterval(
+                self.toon,
+                animName,
+                startFrame=23,
+                playRate=1),
+            FunctionInterval(
+                self.resume))
         self.fallBackIval = Parallel(self.blinkRed, fallBackAnim)
         if self.isLocal:
             self.game.ignoreInputs()
             self.toon.controlManager.currentControls.lifter.setVelocity(12)
             if self.toon.getH() == 90:
-                endPoint = Point3(self.toon.getX() + fallBackDist, self.toon.getY(), self.toon.getZ())
+                endPoint = Point3(
+                    self.toon.getX() +
+                    fallBackDist,
+                    self.toon.getY(),
+                    self.toon.getZ())
             else:
-                endPoint = Point3(self.toon.getX() - fallBackDist, self.toon.getY(), self.toon.getZ())
-            enemyHitTrajectory = LerpFunc(self.toon.setX, fromData=self.toon.getX(), toData=endPoint.getX(), duration=0.75, name='enemyHitTrajectory')
+                endPoint = Point3(
+                    self.toon.getX() -
+                    fallBackDist,
+                    self.toon.getY(),
+                    self.toon.getZ())
+            enemyHitTrajectory = LerpFunc(
+                self.toon.setX,
+                fromData=self.toon.getX(),
+                toData=endPoint.getX(),
+                duration=0.75,
+                name='enemyHitTrajectory')
             self.fallBackIval.append(enemyHitTrajectory)
             base.playSfx(self.game.assetMgr.sndOof)
         self.fallBackIval.start()
@@ -164,7 +209,9 @@ class TwoDGameToonSD(StateData.StateData):
             self.game.ignoreInputs()
             base.playSfx(self.game.assetMgr.fallSound)
             pos = self.game.sectionMgr.getLastSpawnPoint()
-            toonRespawnIval = Sequence(Wait(1), Func(base.localAvatar.setPos, pos))
+            toonRespawnIval = Sequence(
+                Wait(1), Func(
+                    base.localAvatar.setPos, pos))
             self.fallDownIval.append(toonRespawnIval)
         self.fallDownIval.append(Func(self.resume))
         self.fallDownIval.append(self.blinkRed)
@@ -183,7 +230,10 @@ class TwoDGameToonSD(StateData.StateData):
         self.toon.stunToon()
         base.playSfx(self.squishSound, node=self.toon, volume=2)
         self.blinkRed = self.blinkColor(COLOR_RED, 3)
-        self.squishIval = Parallel(self.blinkRed, Sequence(Wait(2.5), Func(self.resume)))
+        self.squishIval = Parallel(
+            self.blinkRed, Sequence(
+                Wait(2.5), Func(
+                    self.resume)))
         self.squishIval.start()
 
     def exitSquish(self):
@@ -193,10 +243,22 @@ class TwoDGameToonSD(StateData.StateData):
 
     def enterVictory(self):
         self.notify.debug('enterVictory')
-        outsideElevatorPos = self.game.sectionMgr.exitElevator.find('**/loc_elevator_front').getPos(render)
-        insideElevatorPos = self.game.sectionMgr.exitElevator.find('**/loc_elevator_inside').getPos(render)
-        runToElevator = Parallel(LerpPosInterval(self.toon, self.game.timeToRunToElevator, outsideElevatorPos), ActorInterval(self.toon, self.RunAnim, loop=1, duration=self.game.timeToRunToElevator))
-        danceIval = Parallel(LerpPosInterval(self.toon, 2, insideElevatorPos), ActorInterval(self.toon, self.Victory, loop=1, duration=ToonBlitzGlobals.GameDuration[self.game.getSafezoneId()]))
+        outsideElevatorPos = self.game.sectionMgr.exitElevator.find(
+            '**/loc_elevator_front').getPos(render)
+        insideElevatorPos = self.game.sectionMgr.exitElevator.find(
+            '**/loc_elevator_inside').getPos(render)
+        runToElevator = Parallel(
+            LerpPosInterval(
+                self.toon,
+                self.game.timeToRunToElevator,
+                outsideElevatorPos),
+            ActorInterval(
+                self.toon,
+                self.RunAnim,
+                loop=1,
+                duration=self.game.timeToRunToElevator))
+        danceIval = Parallel(LerpPosInterval(self.toon, 2, insideElevatorPos), ActorInterval(
+            self.toon, self.Victory, loop=1, duration=ToonBlitzGlobals.GameDuration[self.game.getSafezoneId()]))
         waitToLand = 0.0
         if self.toon.getZ(render) > 13:
             waitToLand = 1
@@ -221,7 +283,12 @@ class TwoDGameToonSD(StateData.StateData):
         messenger.send('jumpLand')
 
     def blinkColor(self, color, duration):
-        blink = Sequence(LerpColorScaleInterval(self.toon, 0.5, color, startColorScale=VBase4(1, 1, 1, 1)), LerpColorScaleInterval(self.toon, 0.5, VBase4(1, 1, 1, 1), startColorScale=color))
+        blink = Sequence(
+            LerpColorScaleInterval(
+                self.toon, 0.5, color, startColorScale=VBase4(
+                    1, 1, 1, 1)), LerpColorScaleInterval(
+                self.toon, 0.5, VBase4(
+                    1, 1, 1, 1), startColorScale=color))
         track = Sequence(Func(blink.loop), Wait(duration), Func(blink.finish))
         return track
 
@@ -257,7 +324,7 @@ class TwoDGameToonSD(StateData.StateData):
         headFrameX = min(self.game.assetMgr.faceEndPos[0], headFrameX)
         self.headFrame.setX(headFrameX)
 
-    def showScoreText(self, number, scale = 1.25):
+    def showScoreText(self, number, scale=1.25):
         if not number == 0:
             if self.scoreText:
                 self.hideScoreText()
@@ -282,7 +349,23 @@ class TwoDGameToonSD(StateData.StateData):
             self.scoreText.setColor(r, g, b, a)
             self.scoreText.setDepthTest(0)
             self.scoreText.setDepthWrite(0)
-            self.scoreTextSeq = Sequence(self.scoreText.posInterval(0.5, Point3(0, 0, self.toon.height + 2), blendType='easeOut'), self.scoreText.colorInterval(0.25, Vec4(r, g, b, 0)), Func(self.hideScoreText))
+            self.scoreTextSeq = Sequence(
+                self.scoreText.posInterval(
+                    0.5,
+                    Point3(
+                        0,
+                        0,
+                        self.toon.height + 2),
+                    blendType='easeOut'),
+                self.scoreText.colorInterval(
+                    0.25,
+                    Vec4(
+                        r,
+                        g,
+                        b,
+                        0)),
+                Func(
+                    self.hideScoreText))
             self.scoreTextSeq.start()
 
     def hideScoreText(self):

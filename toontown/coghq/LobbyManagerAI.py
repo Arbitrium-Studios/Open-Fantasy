@@ -2,6 +2,7 @@ from direct.distributed import DistributedObjectAI
 from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import ToontownGlobals
 
+
 class LobbyManagerAI(DistributedObjectAI.DistributedObjectAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('LobbyManagerAI')
 
@@ -28,7 +29,10 @@ class LobbyManagerAI(DistributedObjectAI.DistributedObjectAI):
                 bossCog.addToon(avId)
 
         bossCog.generateWithRequired(bossZone)
-        self.acceptOnce(bossCog.uniqueName('BossDone'), self.destroyBossOffice, extraArgs=[bossCog])
+        self.acceptOnce(
+            bossCog.uniqueName('BossDone'),
+            self.destroyBossOffice,
+            extraArgs=[bossCog])
         bossCog.b_setState('WaitForToons')
         return bossZone
 

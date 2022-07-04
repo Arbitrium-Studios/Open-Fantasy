@@ -3,7 +3,8 @@ from direct.distributed.DistributedObjectAI import DistributedObjectAI
 
 
 class DistributedTrophyMgrAI(DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedTrophyMgrAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedTrophyMgrAI')
 
     def __init__(self, air):
         DistributedObjectAI.__init__(self, air)

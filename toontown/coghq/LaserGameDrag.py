@@ -3,10 +3,12 @@ from direct.distributed import ClockDelta
 from direct.task import Task
 import random
 
+
 class LaserGameDrag(LaserGameBase.LaserGameBase):
 
     def __init__(self, funcSuccess, funcFail, funcSendGrid, funcSetGrid):
-        LaserGameBase.LaserGameBase.__init__(self, funcSuccess, funcFail, funcSendGrid, funcSetGrid)
+        LaserGameBase.LaserGameBase.__init__(
+            self, funcSuccess, funcFail, funcSendGrid, funcSetGrid)
         self.setGridSize(6, 6)
         self.blankGrid()
         self.symbolList = [
@@ -57,7 +59,7 @@ class LaserGameDrag(LaserGameBase.LaserGameBase):
                 else:
                     finished = 1
 
-    def hit(self, hitX, hitY, oldx = -1, oldy = -1):
+    def hit(self, hitX, hitY, oldx=-1, oldy=-1):
         if self.finshed:
             return
 

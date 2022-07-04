@@ -9,20 +9,22 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from . import CharStateDatasAI
 
+
 class DistributedGoofyAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGoofyAI')
 
     def __init__(self, air):
-        DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(self, air, TTLocalizer.Goofy)
+        DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(
+            self, air, TTLocalizer.Goofy)
         self.fsm = ClassicFSM.ClassicFSM('DistributedGoofyAI', [
-         State.State('Off', self.enterOff, self.exitOff, [
-          'Lonely']),
-         State.State('Lonely', self.enterLonely, self.exitLonely, [
-          'Chatty', 'Walk']),
-         State.State('Chatty', self.enterChatty, self.exitChatty, [
-          'Lonely', 'Walk']),
-         State.State('Walk', self.enterWalk, self.exitWalk, [
-          'Lonely', 'Chatty'])], 'Off', 'Off')
+            State.State('Off', self.enterOff, self.exitOff, [
+                'Lonely']),
+            State.State('Lonely', self.enterLonely, self.exitLonely, [
+                'Chatty', 'Walk']),
+            State.State('Chatty', self.enterChatty, self.exitChatty, [
+                'Lonely', 'Walk']),
+            State.State('Walk', self.enterWalk, self.exitWalk, [
+                'Lonely', 'Chatty'])], 'Off', 'Off')
         self.fsm.enterInitialState()
 
     def delete(self):
@@ -40,9 +42,11 @@ class DistributedGoofyAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         DistributedCCharBaseAI.DistributedCCharBaseAI.generate(self)
         name = self.getName()
         self.lonelyDoneEvent = self.taskName(name + '-lonely-done')
-        self.lonely = CharStateDatasAI.CharLonelyStateAI(self.lonelyDoneEvent, self)
+        self.lonely = CharStateDatasAI.CharLonelyStateAI(
+            self.lonelyDoneEvent, self)
         self.chattyDoneEvent = self.taskName(name + '-chatty-done')
-        self.chatty = CharStateDatasAI.CharChattyStateAI(self.chattyDoneEvent, self)
+        self.chatty = CharStateDatasAI.CharChattyStateAI(
+            self.chattyDoneEvent, self)
         self.walkDoneEvent = self.taskName(name + '-walk-done')
         self.walk = CharStateDatasAI.CharWalkStateAI(self.walkDoneEvent, self)
 
@@ -85,7 +89,10 @@ class DistributedGoofyAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
     def enterChatty(self):
         self.chatty.enter()
         self.acceptOnce(self.chattyDoneEvent, self.__decideNextState)
-        taskMgr.doMethodLater(CharStateDatasAI.CHATTY_DURATION + 10, self.forceLeaveChatty, self.taskName('forceLeaveChatty'))
+        taskMgr.doMethodLater(
+            CharStateDatasAI.CHATTY_DURATION + 10,
+            self.forceLeaveChatty,
+            self.taskName('forceLeaveChatty'))
 
     def forceLeaveChatty(self, task):
         self.notify.warning('Had to force change of state from Chatty state')
@@ -119,7 +126,8 @@ class DistributedGoofyAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
             else:
                 self.notify.debug('avatarEnterNextState: in walk state')
         else:
-            self.notify.debug('avatarEnterNextState: num avatars: ' + str(len(self.nearbyAvatars)))
+            self.notify.debug(
+                'avatarEnterNextState: num avatars: ' + str(len(self.nearbyAvatars)))
 
     def avatarExitNextState(self):
         if len(self.nearbyAvatars) == 0:

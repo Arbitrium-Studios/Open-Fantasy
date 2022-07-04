@@ -13,12 +13,15 @@ from toontown.toonbase import TTLocalizer
 if __dev__:
     from otp.level import EditorGlobals
 
+
 def getStageRoomReadyPostName(doId):
     return 'stageRoomReady-%s' % doId
 
 
-class DistributedStageRoom(DistributedLevel.DistributedLevel, StageRoomBase.StageRoomBase, StageRoom.StageRoom):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedStageRoom')
+class DistributedStageRoom(DistributedLevel.DistributedLevel,
+                           StageRoomBase.StageRoomBase, StageRoom.StageRoom):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedStageRoom')
     EmulateEntrancePoint = False
 
     def __init__(self, cr):
@@ -145,7 +148,7 @@ class DistributedStageRoom(DistributedLevel.DistributedLevel, StageRoomBase.Stag
         if self.stage is not None:
             self.stage.currentRoomName = StageRoomSpecs.CashbotStageRoomId2RoomName[self.roomId]
 
-        def printPos(self = self):
+        def printPos(self=self):
             thisZone = self.getZoneNode(LevelConstants.UberZoneEntId)
             pos = base.localAvatar.getPos(thisZone)
             h = base.localAvatar.getH(thisZone)
@@ -155,7 +158,9 @@ class DistributedStageRoom(DistributedLevel.DistributedLevel, StageRoomBase.Stag
                 floorNum = self.stage.floorNum
             else:
                 floorNum = '???'
-            posStr = 'X: %.3f' % pos[0] + '\nY: %.3f' % pos[1] + '\nZ: %.3f' % pos[2] + '\nH: %.3f' % h + '\nstageId: %s' % self.stageId + '\nfloor: %s' % floorNum + '\nroomId: %s' % self.roomId + '\nroomName: %s' % roomName
+            posStr = 'X: %.3f' % pos[0] + '\nY: %.3f' % pos[1] + '\nZ: %.3f' % pos[2] + '\nH: %.3f' % h + \
+                '\nstageId: %s' % self.stageId + '\nfloor: %s' % floorNum + \
+                '\nroomId: %s' % self.roomId + '\nroomName: %s' % roomName
             base.localAvatar.setChatAbsolute(posStr, CFThought | CFTimeout)
             return
 
@@ -175,7 +180,8 @@ class DistributedStageRoom(DistributedLevel.DistributedLevel, StageRoomBase.Stag
         StageRoom.StageRoom.exit(self)
         if hasattr(self, 'suits'):
             del self.suits
-        if hasattr(self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
+        if hasattr(
+                self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
             self.cr.relatedObjectMgr.abortRequest(self.relatedObjectMgrRequest)
             del self.relatedObjectMgrRequest
         bboard.remove(self.getReadyPostName())
@@ -196,7 +202,8 @@ class DistributedStageRoom(DistributedLevel.DistributedLevel, StageRoomBase.Stag
                 for suit in suits:
                     suit.comeOutOfReserve()
 
-            self.relatedObjectMgrRequest = self.cr.relatedObjectMgr.requestObjects(newSuitIds, bringOutOfReserve)
+            self.relatedObjectMgrRequest = self.cr.relatedObjectMgr.requestObjects(
+                newSuitIds, bringOutOfReserve)
 
     def reservesJoining(self):
         pass
@@ -227,7 +234,8 @@ class DistributedStageRoom(DistributedLevel.DistributedLevel, StageRoomBase.Stag
 
     def __str__(self):
         if hasattr(self, 'roomId'):
-            return '%s %s: %s' % (self.__class__.__name__, self.roomId, StageRoomSpecs.CashbotStageRoomId2RoomName[self.roomId])
+            return '%s %s: %s' % (self.__class__.__name__, self.roomId,
+                                  StageRoomSpecs.CashbotStageRoomId2RoomName[self.roomId])
         else:
             return 'DistributedStageRoom'
 

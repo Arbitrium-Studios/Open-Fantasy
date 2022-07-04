@@ -1,13 +1,14 @@
 from toontown.toonbase.ToontownGlobals import *
 from otp.level import BasicEntities
 
+
 class MintProduct(BasicEntities.NodePathEntity):
     Models = {CashbotMintIntA: 'phase_10/models/cashbotHQ/MoneyBag',
-     CashbotMintIntB: 'phase_10/models/cashbotHQ/MoneyStackPallet',
-     CashbotMintIntC: 'phase_10/models/cashbotHQ/GoldBarStack'}
+              CashbotMintIntB: 'phase_10/models/cashbotHQ/MoneyStackPallet',
+              CashbotMintIntC: 'phase_10/models/cashbotHQ/GoldBarStack'}
     Scales = {CashbotMintIntA: 0.98,
-     CashbotMintIntB: 0.38,
-     CashbotMintIntC: 0.6}
+              CashbotMintIntB: 0.38,
+              CashbotMintIntC: 0.6}
 
     def __init__(self, level, entId):
         BasicEntities.NodePathEntity.__init__(self, level, entId)

@@ -18,6 +18,7 @@ from direct.controls.GravityWalker import GravityWalker
 from otp.distributed.TelemetryLimiter import RotationLimitToH, TLGatherAllAvs, TLNull
 from . import HouseGlobals
 
+
 class Estate(Place.Place):
     notify = DirectNotifyGlobal.directNotify.newCategory('Estate')
 
@@ -30,51 +31,80 @@ class Estate(Place.Place):
         self.cameraSubmerged = -1
         self.toonSubmerged = -1
         self.fsm = ClassicFSM.ClassicFSM('Estate', [State.State('init', self.enterInit, self.exitInit, ['final',
-          'teleportIn',
-          'doorIn',
-          'walk']),
-         State.State('petTutorial', self.enterPetTutorial, self.exitPetTutorial, ['walk']),
-         State.State('walk', self.enterWalk, self.exitWalk, ['final',
-          'sit',
-          'stickerBook',
-          'options',
-          'quest',
-          'fishing',
-          'mailbox',
-          'stopped',
-          'DFA',
-          'trialerFA',
-          'doorOut',
-          'push',
-          'pet']),
-         State.State('stopped', self.enterStopped, self.exitStopped, ['walk', 'teleportOut']),
-         State.State('sit', self.enterSit, self.exitSit, ['walk']),
-         State.State('push', self.enterPush, self.exitPush, ['walk']),
-         State.State('stickerBook', self.enterStickerBook, self.exitStickerBook, ['walk',
-          'sit',
-          'quest',
-          'fishing',
-          'mailbox',
-          'stopped',
-          'doorOut',
-          'push',
-          'pet',
-          'DFA',
-          'trialerFA']),
-         State.State('teleportIn', self.enterTeleportIn, self.exitTeleportIn, ['walk', 'petTutorial']),
-         State.State('teleportOut', self.enterTeleportOut, self.exitTeleportOut, ['teleportIn', 'walk', 'final']),
-         State.State('doorIn', self.enterDoorIn, self.exitDoorIn, ['walk']),
-         State.State('doorOut', self.enterDoorOut, self.exitDoorOut, ['final', 'walk']),
-         State.State('final', self.enterFinal, self.exitFinal, ['teleportIn']),
-         State.State('quest', self.enterQuest, self.exitQuest, ['walk']),
-         State.State('fishing', self.enterFishing, self.exitFishing, ['walk', 'stopped']),
-         State.State('mailbox', self.enterMailbox, self.exitMailbox, ['walk', 'stopped']),
-         State.State('stopped', self.enterStopped, self.exitStopped, ['walk']),
-         State.State('pet', self.enterPet, self.exitPet, ['walk', 'trialerFA']),
-         State.State('trialerFA', self.enterTrialerFA, self.exitTrialerFA, ['trialerFAReject', 'DFA']),
-         State.State('trialerFAReject', self.enterTrialerFAReject, self.exitTrialerFAReject, ['walk']),
-         State.State('DFA', self.enterDFA, self.exitDFA, ['DFAReject', 'teleportOut']),
-         State.State('DFAReject', self.enterDFAReject, self.exitDFAReject, ['walk'])], 'init', 'final')
+                                                                                                        'teleportIn',
+                                                                                                        'doorIn',
+                                                                                                        'walk']),
+                                                    State.State(
+            'petTutorial', self.enterPetTutorial, self.exitPetTutorial, ['walk']),
+            State.State('walk', self.enterWalk, self.exitWalk, ['final',
+                                                                'sit',
+                                                                'stickerBook',
+                                                                'options',
+                                                                'quest',
+                                                                'fishing',
+                                                                'mailbox',
+                                                                'stopped',
+                                                                'DFA',
+                                                                'trialerFA',
+                                                                'doorOut',
+                                                                'push',
+                                                                'pet']),
+            State.State(
+            'stopped', self.enterStopped, self.exitStopped, [
+                'walk', 'teleportOut']),
+            State.State('sit', self.enterSit, self.exitSit, ['walk']),
+            State.State('push', self.enterPush, self.exitPush, ['walk']),
+            State.State('stickerBook', self.enterStickerBook, self.exitStickerBook, ['walk',
+                                                                                     'sit',
+                                                                                     'quest',
+                                                                                     'fishing',
+                                                                                     'mailbox',
+                                                                                     'stopped',
+                                                                                     'doorOut',
+                                                                                     'push',
+                                                                                     'pet',
+                                                                                     'DFA',
+                                                                                     'trialerFA']),
+            State.State('teleportIn', self.enterTeleportIn,
+                        self.exitTeleportIn, ['walk', 'petTutorial']),
+            State.State(
+            'teleportOut', self.enterTeleportOut, self.exitTeleportOut, [
+                'teleportIn', 'walk', 'final']),
+            State.State('doorIn', self.enterDoorIn, self.exitDoorIn, ['walk']),
+            State.State('doorOut', self.enterDoorOut,
+                        self.exitDoorOut, ['final', 'walk']),
+            State.State(
+            'final',
+            self.enterFinal,
+            self.exitFinal,
+            ['teleportIn']),
+            State.State('quest', self.enterQuest, self.exitQuest, ['walk']),
+            State.State(
+            'fishing', self.enterFishing, self.exitFishing, [
+                'walk', 'stopped']),
+            State.State(
+            'mailbox', self.enterMailbox, self.exitMailbox, [
+                'walk', 'stopped']),
+            State.State(
+            'stopped',
+            self.enterStopped,
+            self.exitStopped,
+            ['walk']),
+            State.State(
+            'pet', self.enterPet, self.exitPet, [
+                'walk', 'trialerFA']),
+            State.State(
+            'trialerFA', self.enterTrialerFA, self.exitTrialerFA, [
+                'trialerFAReject', 'DFA']),
+            State.State(
+            'trialerFAReject',
+            self.enterTrialerFAReject,
+            self.exitTrialerFAReject,
+            ['walk']),
+            State.State(
+            'DFA', self.enterDFA, self.exitDFA, [
+                'DFAReject', 'teleportOut']),
+            State.State('DFAReject', self.enterDFAReject, self.exitDFAReject, ['walk'])], 'init', 'final')
         self.fsm.enterInitialState()
         self.doneEvent = doneEvent
         self.parentFSMState = parentFSMState
@@ -86,14 +116,17 @@ class Estate(Place.Place):
     def load(self):
         Place.Place.load(self)
         self.fog = Fog('EstateFog')
-        taskMgr.add(self.__checkCameraUnderwater, 'estate-check-cam-underwater')
+        taskMgr.add(
+            self.__checkCameraUnderwater,
+            'estate-check-cam-underwater')
         path = self.loader.geom.find('**/Path')
         path.setBin('ground', 10, 1)
         self.parentFSMState.addChild(self.fsm)
 
     def unload(self):
         self.ignoreAll()
-        self.notify.info('remove estate-check-toon-underwater to TaskMgr in unload()')
+        self.notify.info(
+            'remove estate-check-toon-underwater to TaskMgr in unload()')
         taskMgr.remove('estate-check-toon-underwater')
         taskMgr.remove('estate-check-cam-underwater')
         self.parentFSMState.removeChild(self.fsm)
@@ -114,15 +147,21 @@ class Estate(Place.Place):
         if newsManager:
             holidayIds = base.cr.newsManager.getDecorationHolidayId()
             if (ToontownGlobals.HALLOWEEN_COSTUMES in holidayIds or ToontownGlobals.SPOOKY_COSTUMES in holidayIds) and self.loader.hood.spookySkyFile:
-                lightsOff = Sequence(LerpColorScaleInterval(base.cr.playGame.hood.loader.geom, 0.1, Vec4(0.55, 0.55, 0.65, 1)), Func(self.loader.hood.startSpookySky))
+                lightsOff = Sequence(
+                    LerpColorScaleInterval(
+                        base.cr.playGame.hood.loader.geom, 0.1, Vec4(
+                            0.55, 0.55, 0.65, 1)), Func(
+                        self.loader.hood.startSpookySky))
                 lightsOff.start()
             else:
                 self.loader.hood.startSky()
-                lightsOn = LerpColorScaleInterval(base.cr.playGame.hood.loader.geom, 0.1, Vec4(1, 1, 1, 1))
+                lightsOn = LerpColorScaleInterval(
+                    base.cr.playGame.hood.loader.geom, 0.1, Vec4(1, 1, 1, 1))
                 lightsOn.start()
         else:
             self.loader.hood.startSky()
-            lightsOn = LerpColorScaleInterval(base.cr.playGame.hood.loader.geom, 0.1, Vec4(1, 1, 1, 1))
+            lightsOn = LerpColorScaleInterval(
+                base.cr.playGame.hood.loader.geom, 0.1, Vec4(1, 1, 1, 1))
             lightsOn.start()
         self.loader.hood.sky.setFogOff()
         self.__setFaintFog()
@@ -139,12 +178,16 @@ class Estate(Place.Place):
         self.fsm.request(requestStatus['how'], [requestStatus])
 
     def startAprilFoolsControls(self):
-        if isinstance(base.localAvatar.controlManager.currentControls, GravityWalker):
-            base.localAvatar.controlManager.currentControls.setGravity(32.174 * 0.75)
+        if isinstance(
+                base.localAvatar.controlManager.currentControls, GravityWalker):
+            base.localAvatar.controlManager.currentControls.setGravity(
+                32.174 * 0.75)
 
     def stopAprilFoolsControls(self):
-        if isinstance(base.localAvatar.controlManager.currentControls, GravityWalker):
-            base.localAvatar.controlManager.currentControls.setGravity(32.174 * 2.0)
+        if isinstance(
+                base.localAvatar.controlManager.currentControls, GravityWalker):
+            base.localAvatar.controlManager.currentControls.setGravity(
+                32.174 * 2.0)
 
     def exit(self):
         base.localAvatar.stopChat()
@@ -195,17 +238,21 @@ class Estate(Place.Place):
     def exitInit(self):
         pass
 
-    def enterPetTutorial(self, bDummy = True):
-        self.notify.info('remove estate-check-toon-underwater to TaskMgr in enterPetTutorial()')
+    def enterPetTutorial(self, bDummy=True):
+        self.notify.info(
+            'remove estate-check-toon-underwater to TaskMgr in enterPetTutorial()')
         taskMgr.remove('estate-check-toon-underwater')
         self.petTutorialDoneEvent = 'PetTutorialDone'
         self.acceptOnce(self.petTutorialDoneEvent, self.petTutorialDone)
         self.petTutorial = PetTutorial.PetTutorial(self.petTutorialDoneEvent)
 
     def exitPetTutorial(self):
-        self.notify.info('add estate-check-toon-underwater to TaskMgr in exitPetTutorial()')
+        self.notify.info(
+            'add estate-check-toon-underwater to TaskMgr in exitPetTutorial()')
         if hasattr(self, 'fsm'):
-            taskMgr.add(self.__checkToonUnderwater, 'estate-check-toon-underwater')
+            taskMgr.add(
+                self.__checkToonUnderwater,
+                'estate-check-toon-underwater')
         if hasattr(self, 'petTutorial') and self.petTutorial is not None:
             self.petTutorial.destroy()
         return
@@ -234,7 +281,8 @@ class Estate(Place.Place):
         self.disablePeriodTimer()
 
     def enterTeleportIn(self, requestStatus):
-        self._etiToken = self.addSetZoneCompleteCallback(Functor(self._teleportToHouse, requestStatus))
+        self._etiToken = self.addSetZoneCompleteCallback(
+            Functor(self._teleportToHouse, requestStatus))
         Place.Place.enterTeleportIn(self, requestStatus)
 
     def _teleportToHouse(self, requestStatus):
@@ -244,14 +292,15 @@ class Estate(Place.Place):
             pos = house.getPos(render)
             base.localAvatar.detachNode()
             base.localAvatar.setPosHpr(house, 17, 3, 0, 125, 0, 0)
-        except:
+        except BaseException:
             x, y, z, h, p, r = HouseGlobals.defaultEntryPoint
             base.localAvatar.detachNode()
             base.localAvatar.setPosHpr(render, x, y, z, h, p, r)
 
         base.localAvatar.setScale(1, 1, 1)
         self.toonSubmerged = -1
-        self.notify.info('remove estate-check-toon-underwater to TaskMgr in enterTeleportIn()')
+        self.notify.info(
+            'remove estate-check-toon-underwater to TaskMgr in enterTeleportIn()')
         taskMgr.remove('estate-check-toon-underwater')
         if base.wantPets:
             if base.localAvatar.hasPet() and not base.localAvatar.bPetTutorialDone:
@@ -261,9 +310,12 @@ class Estate(Place.Place):
         self.notify.debug('teleportInDone')
         self.toonSubmerged = -1
         if self.nextState != 'petTutorial':
-            self.notify.info('add estate-check-toon-underwater to TaskMgr in teleportInDone()')
+            self.notify.info(
+                'add estate-check-toon-underwater to TaskMgr in teleportInDone()')
             if hasattr(self, 'fsm'):
-                taskMgr.add(self.__checkToonUnderwater, 'estate-check-toon-underwater')
+                taskMgr.add(
+                    self.__checkToonUnderwater,
+                    'estate-check-toon-underwater')
         Place.Place.teleportInDone(self)
 
     def exitTeleportIn(self):
@@ -271,7 +323,8 @@ class Estate(Place.Place):
         Place.Place.exitTeleportIn(self)
 
     def enterTeleportOut(self, requestStatus):
-        Place.Place.enterTeleportOut(self, requestStatus, self.__teleportOutDone)
+        Place.Place.enterTeleportOut(
+            self, requestStatus, self.__teleportOutDone)
 
     def __teleportOutDone(self, requestStatus):
         if hasattr(self, 'fsm'):
@@ -280,9 +333,9 @@ class Estate(Place.Place):
         zoneId = requestStatus['zoneId']
         avId = requestStatus['avId']
         shardId = requestStatus['shardId']
-        if hoodId == ToontownGlobals.MyEstate and zoneId == self.getZoneId() and shardId == None:
+        if hoodId == ToontownGlobals.MyEstate and zoneId == self.getZoneId() and shardId is None:
             self.fsm.request('teleportIn', [requestStatus])
-        elif hoodId == ToontownGlobals.MyEstate and shardId == None:
+        elif hoodId == ToontownGlobals.MyEstate and shardId is None:
             self.doneStatus = requestStatus
             self.getEstateZoneAndGoHome(requestStatus)
         else:
@@ -303,9 +356,12 @@ class Estate(Place.Place):
 
     def exitDoorIn(self):
         self.toonSubmerged = -1
-        self.notify.info('add estate-check-toon-underwater to TaskMgr in exitDoorIn()')
+        self.notify.info(
+            'add estate-check-toon-underwater to TaskMgr in exitDoorIn()')
         if hasattr(self, 'fsm'):
-            taskMgr.add(self.__checkToonUnderwater, 'estate-check-toon-underwater')
+            taskMgr.add(
+                self.__checkToonUnderwater,
+                'estate-check-toon-underwater')
         Place.Place.exitDoorIn(self)
 
     def getZoneId(self):

@@ -3,9 +3,10 @@ from direct.interval.IntervalGlobal import *
 from direct.showbase import DirectObject
 from .DroppedGag import *
 types = ['',
- 'Pie',
- 'Banana',
- 'Anvil']
+         'Pie',
+         'Banana',
+         'Anvil']
+
 
 class RaceGag(DirectObject.DirectObject):
 
@@ -25,7 +26,8 @@ class RaceGag(DirectObject.DirectObject):
         self.slot = slot
         self.type = 0
         self.accept('imIn-' + self.name, self.hitGag)
-        self.pickupSound = base.loader.loadSfx('phase_6/audio/sfx/KART_getGag.ogg')
+        self.pickupSound = base.loader.loadSfx(
+            'phase_6/audio/sfx/KART_getGag.ogg')
         self.fadeout = None
         return
 
@@ -66,7 +68,10 @@ class RaceGag(DirectObject.DirectObject):
         self.type = 0
         if self.fadeout:
             self.fadeout.finish()
-        self.fadeout = Sequence(self.geom.scaleInterval(0.2, 0), Func(self.hideGeom))
+        self.fadeout = Sequence(
+            self.geom.scaleInterval(
+                0.2, 0), Func(
+                self.hideGeom))
         self.fadeout.start()
 
     def hitGag(self, cevent):

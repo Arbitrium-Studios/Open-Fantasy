@@ -2,6 +2,7 @@ from direct.directnotify.DirectNotifyGlobal import directNotify
 from otp.avatar import AvatarDetail
 from toontown.toon import DistributedToon
 
+
 class ToonDetail(AvatarDetail.AvatarDetail):
     notify = directNotify.newCategory('ToonDetail')
 

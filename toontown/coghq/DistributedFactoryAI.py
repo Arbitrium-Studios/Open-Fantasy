@@ -9,11 +9,15 @@ from toontown.suit import DistributedFactorySuitAI
 from toontown.toonbase import ToontownGlobals, ToontownBattleGlobals
 from toontown.coghq import DistributedBattleFactoryAI
 
-class DistributedFactoryAI(DistributedLevelAI.DistributedLevelAI, FactoryBase.FactoryBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedFactoryAI')
+
+class DistributedFactoryAI(
+        DistributedLevelAI.DistributedLevelAI, FactoryBase.FactoryBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedFactoryAI')
 
     def __init__(self, air, factoryId, zoneId, entranceId, avIds):
-        DistributedLevelAI.DistributedLevelAI.__init__(self, air, zoneId, entranceId, avIds)
+        DistributedLevelAI.DistributedLevelAI.__init__(
+            self, air, zoneId, entranceId, avIds)
         FactoryBase.FactoryBase.__init__(self)
         self.setFactoryId(factoryId)
 
@@ -25,7 +29,9 @@ class DistributedFactoryAI(DistributedLevelAI.DistributedLevelAI, FactoryBase.Fa
 
     def generate(self):
         self.notify.info('generate')
-        self.notify.info('start factory %s %s creation, frame=%s' % (self.factoryId, self.doId, globalClock.getFrameCount()))
+        self.notify.info(
+            'start factory %s %s creation, frame=%s' %
+            (self.factoryId, self.doId, globalClock.getFrameCount()))
         if __dev__:
             simbase.factory = self
         self.notify.info('loading spec')
@@ -39,18 +45,28 @@ class DistributedFactoryAI(DistributedLevelAI.DistributedLevelAI, FactoryBase.Fa
         DistributedLevelAI.DistributedLevelAI.generate(self, factorySpec)
         self.notify.info('creating cogs')
         cogSpecModule = FactorySpecs.getCogSpecModule(self.factoryId)
-        self.planner = LevelSuitPlannerAI.LevelSuitPlannerAI(self.air, self, DistributedFactorySuitAI.DistributedFactorySuitAI, DistributedBattleFactoryAI.DistributedBattleFactoryAI, cogSpecModule.CogData, cogSpecModule.ReserveCogData, cogSpecModule.BattleCells)
+        self.planner = LevelSuitPlannerAI.LevelSuitPlannerAI(
+            self.air,
+            self,
+            DistributedFactorySuitAI.DistributedFactorySuitAI,
+            DistributedBattleFactoryAI.DistributedBattleFactoryAI,
+            cogSpecModule.CogData,
+            cogSpecModule.ReserveCogData,
+            cogSpecModule.BattleCells)
         suitHandles = self.planner.genSuits()
         messenger.send('plannerCreated-' + str(self.doId))
         self.suits = suitHandles['activeSuits']
         self.reserveSuits = suitHandles['reserveSuits']
         self.d_setSuits()
         scenario = 0
-        description = '%s|%s|%s|%s' % (self.factoryId, self.entranceId, scenario, self.avIdList)
+        description = '%s|%s|%s|%s' % (
+            self.factoryId, self.entranceId, scenario, self.avIdList)
         for avId in self.avIdList:
             self.air.writeServerEvent('factoryEntered', avId, description)
 
-        self.notify.info('finish factory %s %s creation' % (self.factoryId, self.doId))
+        self.notify.info(
+            'finish factory %s %s creation' %
+            (self.factoryId, self.doId))
 
     def delete(self):
         self.notify.info('delete: %s' % self.doId)
@@ -80,7 +96,9 @@ class DistributedFactoryAI(DistributedLevelAI.DistributedLevelAI, FactoryBase.Fa
         if avId in self.avIdList:
             self.sendUpdate('setForemanConfronted', [avId])
         else:
-            self.notify.warning('%s: d_setForemanConfronted: av %s not in av list %s' % (self.doId, avId, self.avIdList))
+            self.notify.warning(
+                '%s: d_setForemanConfronted: av %s not in av list %s' %
+                (self.doId, avId, self.avIdList))
 
     def setVictors(self, victorIds):
         activeVictors = []
@@ -92,12 +110,14 @@ class DistributedFactoryAI(DistributedLevelAI.DistributedLevelAI, FactoryBase.Fa
                 activeVictorIds.append(victorId)
 
         scenario = 0
-        description = '%s|%s|%s|%s' % (self.factoryId, self.entranceId, scenario, activeVictorIds)
+        description = '%s|%s|%s|%s' % (
+            self.factoryId, self.entranceId, scenario, activeVictorIds)
         for avId in activeVictorIds:
             self.air.writeServerEvent('factoryDefeated', avId, description)
 
         for toon in activeVictors:
-            simbase.air.questManager.toonDefeatedFactory(toon, self.factoryId, activeVictors)
+            simbase.air.questManager.toonDefeatedFactory(
+                toon, self.factoryId, activeVictors)
 
         return
 

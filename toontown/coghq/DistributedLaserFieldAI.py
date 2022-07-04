@@ -13,7 +13,9 @@ from toontown.coghq import LaserGameAvoid
 from toontown.coghq import LaserGameDrag
 import random
 
-class DistributedLaserFieldAI(BattleBlockerAI.BattleBlockerAI, NodePath, BasicEntities.NodePathAttribs):
+
+class DistributedLaserFieldAI(
+        BattleBlockerAI.BattleBlockerAI, NodePath, BasicEntities.NodePathAttribs):
 
     def __init__(self, level, entId):
         BattleBlockerAI.BattleBlockerAI.__init__(self, level, entId)
@@ -22,7 +24,8 @@ class DistributedLaserFieldAI(BattleBlockerAI.BattleBlockerAI, NodePath, BasicEn
         if not hasattr(self, 'switchId'):
             self.switchId = 0
         self.gridScale = 1
-        self.game = LaserGameRoll.LaserGameRoll(self.trapDisable, self.trapFire, self.sendField, self.setGrid)
+        self.game = LaserGameRoll.LaserGameRoll(
+            self.trapDisable, self.trapFire, self.sendField, self.setGrid)
         if not hasattr(self, 'gridGame'):
             self.gridGame = 'Roll'
         self.enabled = 1
@@ -40,18 +43,23 @@ class DistributedLaserFieldAI(BattleBlockerAI.BattleBlockerAI, NodePath, BasicEn
             self.game.delete()
             self.game = None
         if gameName == 'Drag':
-            self.game = LaserGameDrag.LaserGameDrag(self.trapDisable, self.trapFire, self.sendField, self.setGrid)
+            self.game = LaserGameDrag.LaserGameDrag(
+                self.trapDisable, self.trapFire, self.sendField, self.setGrid)
         else:
             if gameName == 'MineSweeper':
-                self.game = LaserGameMineSweeper.LaserGameMineSweeper(self.trapDisable, self.trapFire, self.sendField, self.setGrid)
+                self.game = LaserGameMineSweeper.LaserGameMineSweeper(
+                    self.trapDisable, self.trapFire, self.sendField, self.setGrid)
             else:
                 if gameName == 'Roll':
-                    self.game = LaserGameRoll.LaserGameRoll(self.trapDisable, self.trapFire, self.sendField, self.setGrid)
+                    self.game = LaserGameRoll.LaserGameRoll(
+                        self.trapDisable, self.trapFire, self.sendField, self.setGrid)
                 else:
                     if gameName == 'Avoid':
-                        self.game = LaserGameAvoid.LaserGameAvoid(self.trapDisable, self.trapFire, self.sendField, self.setGrid)
+                        self.game = LaserGameAvoid.LaserGameAvoid(
+                            self.trapDisable, self.trapFire, self.sendField, self.setGrid)
                     else:
-                        self.game = LaserGameMineSweeper.LaserGameMineSweeper(self.trapDisable, self.trapFire, self.sendField, self.setGrid)
+                        self.game = LaserGameMineSweeper.LaserGameMineSweeper(
+                            self.trapDisable, self.trapFire, self.sendField, self.setGrid)
         self.game.startGrid()
         self.sendField()
         self.sendUpdate('setGridGame', [gameName])
@@ -60,7 +68,10 @@ class DistributedLaserFieldAI(BattleBlockerAI.BattleBlockerAI, NodePath, BasicEn
     def generate(self):
         BattleBlockerAI.BattleBlockerAI.generate(self)
         if self.switchId != 0:
-            self.accept(self.getOutputEventName(self.switchId), self.reactToSwitch)
+            self.accept(
+                self.getOutputEventName(
+                    self.switchId),
+                self.reactToSwitch)
         self.detectName = 'laserField %s' % self.doId
         taskMgr.doMethodLater(1.0, self.__detect, self.detectName)
         self.setPos(self.pos)
@@ -88,7 +99,7 @@ class DistributedLaserFieldAI(BattleBlockerAI.BattleBlockerAI, NodePath, BasicEn
 
     def getGrid(self):
         return (
-         self.game.gridNumX, self.game.gridNumY)
+            self.game.gridNumX, self.game.gridNumY)
 
     def getField(self):
         fieldData = []
@@ -129,7 +140,9 @@ class DistributedLaserFieldAI(BattleBlockerAI.BattleBlockerAI, NodePath, BasicEn
         self.gridNumX = random.randint(1, 4)
         self.gridNumY = random.randint(1, 4)
         self.gridScale = random.randint(1, 4)
-        self.sendUpdate('setGrid', [self.gridNumX, self.gridNumY, self.gridScale])
+        self.sendUpdate(
+            'setGrid', [
+                self.gridNumX, self.gridNumY, self.gridScale])
 
     def reactToSwitch(self, on):
         if on and self.canButton:

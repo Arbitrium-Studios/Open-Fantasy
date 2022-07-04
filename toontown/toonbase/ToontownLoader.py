@@ -4,6 +4,7 @@ from direct.directnotify.DirectNotifyGlobal import *
 from direct.showbase import Loader
 from toontown.toontowngui import ToontownLoadingScreen
 
+
 class ToontownLoader(Loader.Loader):
     TickPeriod = 0.2
 
@@ -23,7 +24,9 @@ class ToontownLoader(Loader.Loader):
         self._loadStartT = globalClock.getRealTime()
         Loader.Loader.notify.info("starting bulk load of block '%s'" % name)
         if self.inBulkBlock:
-            Loader.Loader.notify.warning("Tried to start a block ('%s'), but am already in a block ('%s')" % (name, self.blockName))
+            Loader.Loader.notify.warning(
+                "Tried to start a block ('%s'), but am already in a block ('%s')" %
+                (name, self.blockName))
             return None
         self.inBulkBlock = 1
         self._lastTickT = globalClock.getRealTime()
@@ -33,18 +36,22 @@ class ToontownLoader(Loader.Loader):
 
     def endBulkLoad(self, name):
         if not self.inBulkBlock:
-            Loader.Loader.notify.warning("Tried to end a block ('%s'), but not in one" % name)
+            Loader.Loader.notify.warning(
+                "Tried to end a block ('%s'), but not in one" %
+                name)
             return None
         if name != self.blockName:
-            Loader.Loader.notify.warning("Tried to end a block ('%s'), other then the current one ('%s')" % (name, self.blockName))
+            Loader.Loader.notify.warning(
+                "Tried to end a block ('%s'), other then the current one ('%s')" %
+                (name, self.blockName))
             return None
         self.inBulkBlock = None
         expectedCount, loadedCount = self.loadingScreen.end()
         now = globalClock.getRealTime()
         Loader.Loader.notify.info("At end of block '%s', expected %s, loaded %s, duration=%s" % (self.blockName,
-         expectedCount,
-         loadedCount,
-         now - self._loadStartT))
+                                                                                                 expectedCount,
+                                                                                                 loadedCount,
+                                                                                                 now - self._loadStartT))
         return
 
     def abortBulkLoad(self):
@@ -62,7 +69,7 @@ class ToontownLoader(Loader.Loader):
                 self.loadingScreen.tick()
                 try:
                     base.cr.considerHeartbeat()
-                except:
+                except BaseException:
                     pass
 
     def loadModel(self, *args, **kw):
@@ -75,8 +82,9 @@ class ToontownLoader(Loader.Loader):
         self.tick()
         return ret
 
-    def loadTexture(self, texturePath, alphaPath = None, okMissing = False):
-        ret = Loader.Loader.loadTexture(self, texturePath, alphaPath, okMissing=okMissing)
+    def loadTexture(self, texturePath, alphaPath=None, okMissing=False):
+        ret = Loader.Loader.loadTexture(
+            self, texturePath, alphaPath, okMissing=okMissing)
         self.tick()
         if alphaPath:
             self.tick()

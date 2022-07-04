@@ -5,6 +5,7 @@ from toontown.coghq import MintLayout
 from direct.showbase import DirectObject
 import random
 
+
 class MintManagerAI(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('MintManagerAI')
     mintId = None
@@ -41,9 +42,12 @@ class MintManagerAI(DirectObject.DirectObject):
                 else:
                     from toontown.coghq import MintRoomSpecs
                     roomName = MintRoomSpecs.CashbotMintRoomId2RoomName[roomId]
-                    MintManagerAI.notify.warning('room %s (%s) not found in any floor of mint %s' % (roomId, roomName, mintId))
+                    MintManagerAI.notify.warning(
+                        'room %s (%s) not found in any floor of mint %s' %
+                        (roomId, roomName, mintId))
 
         mintZone = self.air.allocateZone()
-        mint = DistributedMintAI.DistributedMintAI(self.air, mintId, mintZone, floor, players)
+        mint = DistributedMintAI.DistributedMintAI(
+            self.air, mintId, mintZone, floor, players)
         mint.generateWithRequired(mintZone)
         return mintZone

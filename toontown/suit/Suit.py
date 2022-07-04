@@ -15,117 +15,133 @@ SuitDialogArray = []
 SkelSuitDialogArray = []
 AllSuits = (('walk', 'walk'), ('run', 'walk'), ('neutral', 'neutral'))
 AllSuitsMinigame = (('victory', 'victory'),
- ('flail', 'flailing'),
- ('tug-o-war', 'tug-o-war'),
- ('slip-backward', 'slip-backward'),
- ('slip-forward', 'slip-forward'))
-AllSuitsTutorialBattle = (('lose', 'lose'), ('pie-small-react', 'pie-small'), ('squirt-small-react', 'squirt-small'))
+                    ('flail', 'flailing'),
+                    ('tug-o-war', 'tug-o-war'),
+                    ('slip-backward', 'slip-backward'),
+                    ('slip-forward', 'slip-forward'))
+AllSuitsTutorialBattle = (
+    ('lose',
+     'lose'),
+    ('pie-small-react',
+     'pie-small'),
+    ('squirt-small-react',
+     'squirt-small'))
 AllSuitsBattle = (('drop-react', 'anvil-drop'),
- ('flatten', 'drop'),
- ('sidestep-left', 'sidestep-left'),
- ('sidestep-right', 'sidestep-right'),
- ('squirt-large-react', 'squirt-large'),
- ('landing', 'landing'),
- ('reach', 'walknreach'),
- ('rake-react', 'rake'),
- ('hypnotized', 'hypnotize'),
- ('soak', 'soak'),
- ('magic1', 'magic1'),
- ('speak', 'speak'),
- ('magic2', 'magic2'),
- ('pickpocket', 'pickpocket'))
+                  ('flatten', 'drop'),
+                  ('sidestep-left', 'sidestep-left'),
+                  ('sidestep-right', 'sidestep-right'),
+                  ('squirt-large-react', 'squirt-large'),
+                  ('landing', 'landing'),
+                  ('reach', 'walknreach'),
+                  ('rake-react', 'rake'),
+                  ('hypnotized', 'hypnotize'),
+                  ('soak', 'soak'),
+                  ('magic1', 'magic1'),
+                  ('speak', 'speak'),
+                  ('magic2', 'magic2'),
+                  ('pickpocket', 'pickpocket'))
 SuitsCEOBattle = (('sit', 'sit'),
- ('sit-eat-in', 'sit-eat-in'),
- ('sit-eat-loop', 'sit-eat-loop'),
- ('sit-eat-out', 'sit-eat-out'),
- ('sit-angry', 'sit-angry'),
- ('sit-hungry-left', 'leftsit-hungry'),
- ('sit-hungry-right', 'rightsit-hungry'),
- ('sit-lose', 'sit-lose'),
- ('tray-walk', 'tray-walk'),
- ('tray-neutral', 'tray-neutral'),
- ('sit-lose', 'sit-lose'))
-f = (('throw-paper', 'throw-paper', 3.5), ('phone', 'phone', 3.5), ('shredder', 'shredder', 3.5))
+                  ('sit-eat-in', 'sit-eat-in'),
+                  ('sit-eat-loop', 'sit-eat-loop'),
+                  ('sit-eat-out', 'sit-eat-out'),
+                  ('sit-angry', 'sit-angry'),
+                  ('sit-hungry-left', 'leftsit-hungry'),
+                  ('sit-hungry-right', 'rightsit-hungry'),
+                  ('sit-lose', 'sit-lose'),
+                  ('tray-walk', 'tray-walk'),
+                  ('tray-neutral', 'tray-neutral'),
+                  ('sit-lose', 'sit-lose'))
+f = (('throw-paper', 'throw-paper', 3.5),
+     ('phone', 'phone', 3.5), ('shredder', 'shredder', 3.5))
 p = (('pencil-sharpener', 'pencil-sharpener', 5),
- ('pen-squirt', 'pen-squirt', 5),
- ('hold-eraser', 'hold-eraser', 5),
- ('finger-wag', 'finger-wag', 5),
- ('hold-pencil', 'hold-pencil', 5))
+     ('pen-squirt', 'pen-squirt', 5),
+     ('hold-eraser', 'hold-eraser', 5),
+     ('finger-wag', 'finger-wag', 5),
+     ('hold-pencil', 'hold-pencil', 5))
 ym = (('golf-club-swing', 'golf-club-swing', 5),
- ('magic3', 'magic3', 5),
- ('rubber-stamp', 'rubber-stamp', 5),
- ('smile', 'smile', 5))
-mm = (('effort', 'effort', 5), ('pen-squirt', 'fountain-pen', 5), ('finger-wag', 'finger-wag', 5))
+      ('magic3', 'magic3', 5),
+      ('rubber-stamp', 'rubber-stamp', 5),
+      ('smile', 'smile', 5))
+mm = (('effort', 'effort', 5), ('pen-squirt', 'fountain-pen', 5),
+      ('finger-wag', 'finger-wag', 5))
 ds = (('throw-paper', 'throw-paper', 5),)
 hh = (('pen-squirt', 'fountain-pen', 7),
- ('glower', 'glower', 5),
- ('throw-paper', 'throw-paper', 5),
- ('roll-o-dex', 'roll-o-dex', 5))
+      ('glower', 'glower', 5),
+      ('throw-paper', 'throw-paper', 5),
+      ('roll-o-dex', 'roll-o-dex', 5))
 cr = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5))
-tbc = (('cigar-smoke', 'cigar-smoke', 8), ('glower', 'glower', 5), ('golf-club-swing', 'golf-club-swing', 5))
-cc = (('glower', 'glower', 5), ('phone', 'phone', 3.5), ('watercooler', 'watercooler', 5))
+tbc = (('cigar-smoke', 'cigar-smoke', 8), ('glower', 'glower', 5),
+       ('golf-club-swing', 'golf-club-swing', 5))
+cc = (('glower', 'glower', 5), ('phone', 'phone', 3.5),
+      ('watercooler', 'watercooler', 5))
 tm = (('roll-o-dex', 'roll-o-dex', 5), ('phone', 'phone', 5))
 nd = (('roll-o-dex', 'roll-o-dex', 5),
- ('magic3', 'magic3', 5),
- ('smile', 'smile', 5),
- ('phone', 'phone', 5))
+      ('magic3', 'magic3', 5),
+      ('smile', 'smile', 5),
+      ('phone', 'phone', 5))
 gh = (('pen-squirt', 'fountain-pen', 5), ('rubber-stamp', 'rubber-stamp', 5))
 ms = (('effort', 'effort', 5), ('stomp', 'stomp', 5), ('quick-jump', 'jump', 6))
 tf = (('phone', 'phone', 5),
- ('throw-paper', 'throw-paper', 5),
- ('throw-object', 'throw-object', 5),
- ('glower', 'glower', 5))
+      ('throw-paper', 'throw-paper', 5),
+      ('throw-object', 'throw-object', 5),
+      ('glower', 'glower', 5))
 m = (('smile', 'smile', 5), ('golf-club-swing', 'golf-club-swing', 5))
 mh = (('smile', 'smile', 5),
- ('golf-club-swing', 'golf-club-swing', 5),
- ('song-and-dance', 'song-and-dance', 8))
+      ('golf-club-swing', 'golf-club-swing', 5),
+      ('song-and-dance', 'song-and-dance', 8))
 sc = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5))
-pp = (('throw-paper', 'throw-paper', 5), ('glower', 'glower', 5), ('finger-wag', 'fingerwag', 5))
-tw = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5), ('finger-wag', 'finger-wag', 5))
+pp = (('throw-paper', 'throw-paper', 5), ('glower',
+      'glower', 5), ('finger-wag', 'fingerwag', 5))
+tw = (('throw-paper', 'throw-paper', 3.5),
+      ('glower', 'glower', 5), ('finger-wag', 'finger-wag', 5))
 bc = (('phone', 'phone', 5), ('hold-pencil', 'hold-pencil', 5))
 nc = (('phone', 'phone', 5), ('throw-object', 'throw-object', 5))
 mb = (('throw-paper', 'throw-paper', 3.5),)
-ls = (('throw-paper', 'throw-paper', 5), ('throw-object', 'throw-object', 5), ('hold-pencil', 'hold-pencil', 5))
+ls = (('throw-paper', 'throw-paper', 5), ('throw-object',
+      'throw-object', 5), ('hold-pencil', 'hold-pencil', 5))
 rb = (('effort', 'effort', 6),)
-bf = (('throw-paper', 'throw-paper', 5), ('shredder', 'shredder', 3.5), ('watercooler', 'watercooler', 5))
+bf = (('throw-paper', 'throw-paper', 5), ('shredder',
+      'shredder', 3.5), ('watercooler', 'watercooler', 5))
 b = (('throw-paper', 'throw-paper', 5),)
-dt = (('rubber-stamp', 'rubber-stamp', 5), ('throw-paper', 'throw-paper', 5), ('finger-wag', 'fingerwag', 5))
+dt = (('rubber-stamp', 'rubber-stamp', 5), ('throw-paper',
+      'throw-paper', 5), ('finger-wag', 'fingerwag', 5))
 ac = (('throw-object', 'throw-object', 5),
- ('roll-o-dex', 'roll-o-dex', 5),
- ('stomp', 'stomp', 5),
- ('phone', 'phone', 5),
- ('throw-paper', 'throw-paper', 5))
+      ('roll-o-dex', 'roll-o-dex', 5),
+      ('stomp', 'stomp', 5),
+      ('phone', 'phone', 5),
+      ('throw-paper', 'throw-paper', 5))
 bs = (('throw-paper', 'throw-paper', 5), ('finger-wag', 'fingerwag', 5))
 sd = (('quick-jump', 'jump', 6),
- ('stomp', 'stomp', 5),
- ('magic3', 'magic3', 5),
- ('hold-pencil', 'hold-pencil', 5),
- ('throw-paper', 'throw-paper', 5))
+      ('stomp', 'stomp', 5),
+      ('magic3', 'magic3', 5),
+      ('hold-pencil', 'hold-pencil', 5),
+      ('throw-paper', 'throw-paper', 5))
 le = (('throw-object', 'throw-object', 5),
- ('glower', 'glower', 5),
- ('effort', 'effort', 6),
- ('throw-paper', 'throw-paper', 5))
+      ('glower', 'glower', 5),
+      ('effort', 'effort', 6),
+      ('throw-paper', 'throw-paper', 5))
 bw = (('finger-wag', 'fingerwag', 5),
- ('gavel', 'gavel', 8),
- ('throw-object', 'throw-object', 5),
- ('throw-paper', 'throw-paper', 5))
+      ('gavel', 'gavel', 8),
+      ('throw-object', 'throw-object', 5),
+      ('throw-paper', 'throw-paper', 5))
 if not ConfigVariableBool('want-new-cogs', 0).value:
     ModelDict = {'a': ('/models/char/suitA-', 4),
-     'b': ('/models/char/suitB-', 4),
-     'c': ('/models/char/suitC-', 3.5)}
+                 'b': ('/models/char/suitB-', 4),
+                 'c': ('/models/char/suitC-', 3.5)}
     TutorialModelDict = {'a': ('/models/char/suitA-', 4),
-     'b': ('/models/char/suitB-', 4),
-     'c': ('/models/char/suitC-', 3.5)}
+                         'b': ('/models/char/suitB-', 4),
+                         'c': ('/models/char/suitC-', 3.5)}
 else:
     ModelDict = {'a': ('/models/char/tt_a_ene_cga_', 4),
-     'b': ('/models/char/tt_a_ene_cgb_', 4),
-     'c': ('/models/char/tt_a_ene_cgc_', 3.5)}
+                 'b': ('/models/char/tt_a_ene_cgb_', 4),
+                 'c': ('/models/char/tt_a_ene_cgc_', 3.5)}
     TutorialModelDict = {'a': ('/models/char/tt_a_ene_cga_', 4),
-     'b': ('/models/char/tt_a_ene_cgb_', 4),
-     'c': ('/models/char/tt_a_ene_cgc_', 3.5)}
+                         'b': ('/models/char/tt_a_ene_cgb_', 4),
+                         'c': ('/models/char/tt_a_ene_cgc_', 3.5)}
 HeadModelDict = {'a': ('/models/char/suitA-', 4),
- 'b': ('/models/char/suitB-', 4),
- 'c': ('/models/char/suitC-', 3.5)}
+                 'b': ('/models/char/suitB-', 4),
+                 'c': ('/models/char/suitC-', 3.5)}
+
 
 def loadTutorialSuit():
     loader.loadModel('phase_3.5/models/char/suitC-mod').node()
@@ -142,7 +158,7 @@ def unloadSuits(level):
     unloadDialog(level)
 
 
-def loadSuitModelsAndAnims(level, flag = 0):
+def loadSuitModelsAndAnims(level, flag=0):
     for key in list(ModelDict.keys()):
         model, phase = ModelDict[key]
         if ConfigVariableBool('want-new-cogs', 0).value:
@@ -156,7 +172,11 @@ def loadSuitModelsAndAnims(level, flag = 0):
                     loader.loadModel(filepath).node()
             else:
                 loader.loadModel('phase_3.5' + model + 'mod').node()
-            loader.loadModel('phase_' + str(headPhase) + headModel + 'heads').node()
+            loader.loadModel(
+                'phase_' +
+                str(headPhase) +
+                headModel +
+                'heads').node()
         else:
             if ConfigVariableBool('want-new-cogs', 0).value:
                 filepath = 'phase_3.5' + model + 'zero'
@@ -179,7 +199,7 @@ def cogExists(filePrefix):
     return True
 
 
-def loadSuitAnims(suit, flag = 1):
+def loadSuitAnims(suit, flag=1):
     if suit in SuitDNA.suitHeadTypes:
         try:
             animList = eval(suit)
@@ -206,11 +226,13 @@ def loadDialog(level):
     else:
         loadPath = 'phase_3.5/audio/dial/'
         SuitDialogFiles = ['COG_VO_grunt',
-         'COG_VO_murmur',
-         'COG_VO_statement',
-         'COG_VO_question']
+                           'COG_VO_murmur',
+                           'COG_VO_statement',
+                           'COG_VO_question']
         for file in SuitDialogFiles:
-            SuitDialogArray.append(base.loader.loadSfx(loadPath + file + '.ogg'))
+            SuitDialogArray.append(
+                base.loader.loadSfx(
+                    loadPath + file + '.ogg'))
 
         SuitDialogArray.append(SuitDialogArray[2])
         SuitDialogArray.append(SuitDialogArray[2])
@@ -223,14 +245,15 @@ def loadSkelDialog():
     else:
         grunt = loader.loadSfx('phase_5/audio/sfx/Skel_COG_VO_grunt.ogg')
         murmur = loader.loadSfx('phase_5/audio/sfx/Skel_COG_VO_murmur.ogg')
-        statement = loader.loadSfx('phase_5/audio/sfx/Skel_COG_VO_statement.ogg')
+        statement = loader.loadSfx(
+            'phase_5/audio/sfx/Skel_COG_VO_statement.ogg')
         question = loader.loadSfx('phase_5/audio/sfx/Skel_COG_VO_question.ogg')
         SkelSuitDialogArray = [grunt,
-         murmur,
-         statement,
-         question,
-         statement,
-         statement]
+                               murmur,
+                               statement,
+                               question,
+                               statement,
+                               statement]
 
 
 def unloadDialog(level):
@@ -272,25 +295,25 @@ def attachSuitHead(node, suitName):
 
 class Suit(Avatar.Avatar):
     healthColors = (Vec4(0, 1, 0, 1),
-     Vec4(1, 1, 0, 1),
-     Vec4(1, 0.5, 0, 1),
-     Vec4(1, 0, 0, 1),
-     Vec4(0.3, 0.3, 0.3, 1))
+                    Vec4(1, 1, 0, 1),
+                    Vec4(1, 0.5, 0, 1),
+                    Vec4(1, 0, 0, 1),
+                    Vec4(0.3, 0.3, 0.3, 1))
     healthGlowColors = (Vec4(0.25, 1, 0.25, 0.5),
-     Vec4(1, 1, 0.25, 0.5),
-     Vec4(1, 0.5, 0.25, 0.5),
-     Vec4(1, 0.25, 0.25, 0.5),
-     Vec4(0.3, 0.3, 0.3, 0))
+                        Vec4(1, 1, 0.25, 0.5),
+                        Vec4(1, 0.5, 0.25, 0.5),
+                        Vec4(1, 0.25, 0.25, 0.5),
+                        Vec4(0.3, 0.3, 0.3, 0))
     medallionColors = {'c': Vec4(0.863, 0.776, 0.769, 1.0),
-     's': Vec4(0.843, 0.745, 0.745, 1.0),
-     'l': Vec4(0.749, 0.776, 0.824, 1.0),
-     'm': Vec4(0.749, 0.769, 0.749, 1.0)}
+                       's': Vec4(0.843, 0.745, 0.745, 1.0),
+                       'l': Vec4(0.749, 0.776, 0.824, 1.0),
+                       'm': Vec4(0.749, 0.769, 0.749, 1.0)}
 
     def __init__(self):
         try:
             self.Suit_initialized
             return
-        except:
+        except BaseException:
             self.Suit_initialized = 1
 
         Avatar.Avatar.__init__(self)
@@ -312,7 +335,7 @@ class Suit(Avatar.Avatar):
     def delete(self):
         try:
             self.Suit_deleted
-        except:
+        except BaseException:
             self.Suit_deleted = 1
             if self.leftHand:
                 self.leftHand.removeNode()
@@ -588,14 +611,16 @@ class Suit(Avatar.Avatar):
         animDict = {}
         filePrefix, bodyPhase = ModelDict[self.style.body]
         for anim in AllSuits:
-            animDict[anim[0]] = 'phase_' + str(bodyPhase) + filePrefix + anim[1]
+            animDict[anim[0]] = 'phase_' + \
+                str(bodyPhase) + filePrefix + anim[1]
 
         for anim in AllSuitsMinigame:
             animDict[anim[0]] = 'phase_4' + filePrefix + anim[1]
 
         for anim in AllSuitsTutorialBattle:
             filePrefix, bodyPhase = TutorialModelDict[self.style.body]
-            animDict[anim[0]] = 'phase_' + str(bodyPhase) + filePrefix + anim[1]
+            animDict[anim[0]] = 'phase_' + \
+                str(bodyPhase) + filePrefix + anim[1]
 
         for anim in AllSuitsBattle:
             animDict[anim[0]] = 'phase_5' + filePrefix + anim[1]
@@ -630,22 +655,29 @@ class Suit(Avatar.Avatar):
     def initializeBodyCollisions(self, collIdStr):
         Avatar.Avatar.initializeBodyCollisions(self, collIdStr)
         if not self.ghostMode:
-            self.collNode.setCollideMask(self.collNode.getIntoCollideMask() | ToontownGlobals.PieBitmask)
+            self.collNode.setCollideMask(
+                self.collNode.getIntoCollideMask() | ToontownGlobals.PieBitmask)
 
-    def setSuitClothes(self, modelRoot = None):
+    def setSuitClothes(self, modelRoot=None):
         if not modelRoot:
             modelRoot = self
         dept = self.style.dept
         phase = 3.5
 
         def __doItTheOldWay__():
-            torsoTex = loader.loadTexture('phase_%s/maps/%s_blazer.jpg' % (phase, dept))
+            torsoTex = loader.loadTexture(
+                'phase_%s/maps/%s_blazer.jpg' %
+                (phase, dept))
             torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
             torsoTex.setMagfilter(Texture.FTLinear)
-            legTex = loader.loadTexture('phase_%s/maps/%s_leg.jpg' % (phase, dept))
+            legTex = loader.loadTexture(
+                'phase_%s/maps/%s_leg.jpg' %
+                (phase, dept))
             legTex.setMinfilter(Texture.FTLinearMipmapLinear)
             legTex.setMagfilter(Texture.FTLinear)
-            armTex = loader.loadTexture('phase_%s/maps/%s_sleeve.jpg' % (phase, dept))
+            armTex = loader.loadTexture(
+                'phase_%s/maps/%s_sleeve.jpg' %
+                (phase, dept))
             armTex.setMinfilter(Texture.FTLinearMipmapLinear)
             armTex.setMagfilter(Texture.FTLinear)
             modelRoot.find('**/torso').setTexture(torsoTex, 1)
@@ -680,7 +712,7 @@ class Suit(Avatar.Avatar):
         else:
             __doItTheOldWay__()
 
-    def makeWaiter(self, modelRoot = None):
+    def makeWaiter(self, modelRoot=None):
         if not modelRoot:
             modelRoot = self
         self.isWaiter = 1
@@ -697,14 +729,18 @@ class Suit(Avatar.Avatar):
         modelRoot.find('**/arms').setTexture(armTex, 1)
         modelRoot.find('**/legs').setTexture(legTex, 1)
 
-    def makeRentalSuit(self, suitType, modelRoot = None):
+    def makeRentalSuit(self, suitType, modelRoot=None):
         if not modelRoot:
             modelRoot = self.getGeomNode()
         if suitType == 's':
-            torsoTex = loader.loadTexture('phase_3.5/maps/tt_t_ene_sellbotRental_blazer.jpg')
-            legTex = loader.loadTexture('phase_3.5/maps/tt_t_ene_sellbotRental_leg.jpg')
-            armTex = loader.loadTexture('phase_3.5/maps/tt_t_ene_sellbotRental_sleeve.jpg')
-            handTex = loader.loadTexture('phase_3.5/maps/tt_t_ene_sellbotRental_hand.jpg')
+            torsoTex = loader.loadTexture(
+                'phase_3.5/maps/tt_t_ene_sellbotRental_blazer.jpg')
+            legTex = loader.loadTexture(
+                'phase_3.5/maps/tt_t_ene_sellbotRental_leg.jpg')
+            armTex = loader.loadTexture(
+                'phase_3.5/maps/tt_t_ene_sellbotRental_sleeve.jpg')
+            handTex = loader.loadTexture(
+                'phase_3.5/maps/tt_t_ene_sellbotRental_hand.jpg')
         else:
             self.notify.warning('No rental suit for cog type %s' % suitType)
             return
@@ -719,17 +755,22 @@ class Suit(Avatar.Avatar):
             filePrefix, phase = HeadModelDict[self.style.body]
         else:
             filePrefix, phase = ModelDict[self.style.body]
-        headModel = loader.loadModel('phase_' + str(phase) + filePrefix + 'heads')
+        headModel = loader.loadModel(
+            'phase_' + str(phase) + filePrefix + 'heads')
         headReferences = headModel.findAllMatches('**/' + headType)
         for i in range(0, headReferences.getNumPaths()):
             if ConfigVariableBool('want-new-cogs', 0).value:
-                headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'to_head')
+                headPart = self.instance(
+                    headReferences.getPath(i), 'modelRoot', 'to_head')
                 if not headPart:
-                    headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'joint_head')
+                    headPart = self.instance(
+                        headReferences.getPath(i), 'modelRoot', 'joint_head')
             else:
-                headPart = self.instance(headReferences.getPath(i), 'modelRoot', 'joint_head')
+                headPart = self.instance(
+                    headReferences.getPath(i), 'modelRoot', 'joint_head')
             if self.headTexture:
-                headTex = loader.loadTexture('phase_' + str(phase) + '/maps/' + self.headTexture)
+                headTex = loader.loadTexture(
+                    'phase_' + str(phase) + '/maps/' + self.headTexture)
                 headTex.setMinfilter(Texture.FTLinearMipmapLinear)
                 headTex.setMagfilter(Texture.FTLinear)
                 headPart.setTexture(headTex, 1)
@@ -739,7 +780,7 @@ class Suit(Avatar.Avatar):
 
         headModel.removeNode()
 
-    def generateCorporateTie(self, modelPath = None):
+    def generateCorporateTie(self, modelPath=None):
         if not modelPath:
             modelPath = self
         dept = self.style.dept
@@ -776,7 +817,8 @@ class Suit(Avatar.Avatar):
             self.corpMedallion = icons.find('**/LegalIcon').copyTo(chestNull)
         elif dept == 'm':
             self.corpMedallion = icons.find('**/MoneyIcon').copyTo(chestNull)
-        self.corpMedallion.setPosHprScale(0.02, 0.05, 0.04, 180.0, 0.0, 0.0, 0.51, 0.51, 0.51)
+        self.corpMedallion.setPosHprScale(
+            0.02, 0.05, 0.04, 180.0, 0.0, 0.0, 0.51, 0.51, 0.51)
         self.corpMedallion.setColor(self.medallionColors[dept])
         icons.removeNode()
 
@@ -808,7 +850,7 @@ class Suit(Avatar.Avatar):
     def reseatHealthBarForSkele(self):
         self.healthBar.setPos(0.0, 0.1, 0.0)
 
-    def updateHealthBar(self, hp, forceUpdate = 0):
+    def updateHealthBar(self, hp, forceUpdate=0):
         if hp > self.currHP:
             hp = self.currHP
         self.currHP -= hp
@@ -827,16 +869,23 @@ class Suit(Avatar.Avatar):
             condition = 5
         if self.healthCondition != condition or forceUpdate:
             if condition == 4:
-                blinkTask = Task.loop(Task(self.__blinkRed), Task.pause(0.75), Task(self.__blinkGray), Task.pause(0.1))
+                blinkTask = Task.loop(
+                    Task(
+                        self.__blinkRed), Task.pause(0.75), Task(
+                        self.__blinkGray), Task.pause(0.1))
                 taskMgr.add(blinkTask, self.uniqueName('blink-task'))
             elif condition == 5:
                 if self.healthCondition == 4:
                     taskMgr.remove(self.uniqueName('blink-task'))
-                blinkTask = Task.loop(Task(self.__blinkRed), Task.pause(0.25), Task(self.__blinkGray), Task.pause(0.1))
+                blinkTask = Task.loop(
+                    Task(
+                        self.__blinkRed), Task.pause(0.25), Task(
+                        self.__blinkGray), Task.pause(0.1))
                 taskMgr.add(blinkTask, self.uniqueName('blink-task'))
             else:
                 self.healthBar.setColor(self.healthColors[condition], 1)
-                self.healthBarGlow.setColor(self.healthGlowColors[condition], 1)
+                self.healthBarGlow.setColor(
+                    self.healthGlowColors[condition], 1)
             self.healthCondition = condition
 
     def __blinkRed(self, task):
@@ -868,7 +917,7 @@ class Suit(Avatar.Avatar):
         if ConfigVariableBool('want-new-cogs', 0).value:
             if self.find('**/body'):
                 return self
-        if self.loseActor == None:
+        if self.loseActor is None:
             if not self.isSkeleton:
                 filePrefix, phase = TutorialModelDict[self.style.body]
                 loseModel = 'phase_' + str(phase) + filePrefix + 'lose-mod'
@@ -883,7 +932,8 @@ class Suit(Avatar.Avatar):
                 else:
                     self.setSuitClothes(self.loseActor)
             else:
-                loseModel = 'phase_5/models/char/cog' + self.style.body.upper() + '_robot-lose-mod'
+                loseModel = 'phase_5/models/char/cog' + \
+                    self.style.body.upper() + '_robot-lose-mod'
                 filePrefix, phase = TutorialModelDict[self.style.body]
                 loseAnim = 'phase_' + str(phase) + filePrefix + 'lose'
                 self.loseActor = Actor.Actor(loseModel, {'lose': loseAnim})
@@ -900,7 +950,7 @@ class Suit(Avatar.Avatar):
 
     def cleanupLoseActor(self):
         self.notify.debug('cleanupLoseActor()')
-        if self.loseActor != None:
+        if self.loseActor is not None:
             self.notify.debug('cleanupLoseActor() - got one')
             self.loseActor.cleanup()
         self.loseActor = None
@@ -928,8 +978,8 @@ class Suit(Avatar.Avatar):
 
         self.setName(TTLocalizer.Skeleton)
         nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self._name,
-         'dept': self.getStyleDept(),
-         'level': self.getActualLevel()}
+                                                        'dept': self.getStyleDept(),
+                                                        'level': self.getActualLevel()}
         self.setDisplayName(nameInfo)
         self.leftHand = self.find('**/joint_Lhold')
         self.rightHand = self.find('**/joint_Rhold')

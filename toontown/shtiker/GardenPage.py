@@ -14,6 +14,7 @@ GardenPage_Trophy = 2
 GardenPage_Specials = 3
 TROPHIES_PER_ROW = 5
 
+
 class GardenPage(ShtikerPage.ShtikerPage):
     notify = DirectNotifyGlobal.directNotify.newCategory('GardenPage')
 
@@ -30,7 +31,9 @@ class GardenPage(ShtikerPage.ShtikerPage):
         if not hasattr(self, 'title'):
             self.load()
         self.setMode(self.mode, 1)
-        self.accept(localAvatar.uniqueName('flowerBasketChange'), self.updatePage)
+        self.accept(
+            localAvatar.uniqueName('flowerBasketChange'),
+            self.updatePage)
         ShtikerPage.ShtikerPage.enter(self)
 
     def exit(self):
@@ -56,40 +59,194 @@ class GardenPage(ShtikerPage.ShtikerPage):
         trophyCase.find('glass1').reparentTo(trophyCase, -1)
         trophyCase.find('shelf').reparentTo(trophyCase, -1)
         self.trophyCase = trophyCase
-        self.title = DirectLabel(parent=self, relief=None, text='', text_scale=0.1, pos=(0, 0, 0.65))
+        self.title = DirectLabel(
+            parent=self,
+            relief=None,
+            text='',
+            text_scale=0.1,
+            pos=(
+                0,
+                0,
+                0.65))
         normalColor = (1, 1, 1, 1)
         clickColor = (0.8, 0.8, 0, 1)
         rolloverColor = (0.15, 0.82, 1.0, 1)
         diabledColor = (1.0, 0.98, 0.15, 1)
-        self.basketTab = DirectButton(parent=self, relief=None, text=TTLocalizer.GardenPageBasketTab, text_scale=TTLocalizer.GPbasketTab, text_align=TextNode.ALeft, image=gui.find('**/tabs/polySurface1'), image_pos=(0.55, 1, -0.91), image_hpr=(0, 0, -90), image_scale=(0.033, 0.033, 0.035), image_color=normalColor, image1_color=clickColor, image2_color=rolloverColor, image3_color=diabledColor, text_fg=Vec4(0.2, 0.1, 0, 1), command=self.setMode, extraArgs=[GardenPage_Basket], pos=(0.92, 0, 0.55))
-        self.collectionTab = DirectButton(parent=self, relief=None, text=TTLocalizer.GardenPageCollectionTab, text_scale=TTLocalizer.GPcollectionTab, text_align=TextNode.ALeft, image=gui.find('**/tabs/polySurface2'), image_pos=(0.12, 1, -0.91), image_hpr=(0, 0, -90), image_scale=(0.033, 0.033, 0.035), image_color=normalColor, image1_color=clickColor, image2_color=rolloverColor, image3_color=diabledColor, text_fg=Vec4(0.2, 0.1, 0, 1), command=self.setMode, extraArgs=[GardenPage_Collection], pos=(0.92, 0, 0.1))
-        self.trophyTab = DirectButton(parent=self, relief=None, text=TTLocalizer.GardenPageTrophyTab, text_scale=TTLocalizer.GPtrophyTab, text_align=TextNode.ALeft, image=gui.find('**/tabs/polySurface3'), image_pos=(-0.28, 1, -0.91), image_hpr=(0, 0, -90), image_scale=(0.033, 0.033, 0.035), image_color=normalColor, image1_color=clickColor, image2_color=rolloverColor, image3_color=diabledColor, text_fg=Vec4(0.2, 0.1, 0, 1), command=self.setMode, extraArgs=[GardenPage_Trophy], pos=(0.92, 0, -0.3))
-        self.specialsTab = DirectButton(parent=self, relief=None, text=TTLocalizer.GardenPageSpecialsTab, text_scale=TTLocalizer.GPspecialsTab, text_align=TextNode.ALeft, image=gui.find('**/tabs/polySurface3'), image_pos=(-0.28, 1, -0.91), image_hpr=(0, 0, -90), image_scale=(0.033, 0.033, 0.035), image_color=normalColor, image1_color=clickColor, image2_color=rolloverColor, image3_color=diabledColor, text_fg=Vec4(0.2, 0.1, 0, 1), command=self.setMode, extraArgs=[GardenPage_Specials], pos=(0.92, 0, -0.3))
+        self.basketTab = DirectButton(
+            parent=self,
+            relief=None,
+            text=TTLocalizer.GardenPageBasketTab,
+            text_scale=TTLocalizer.GPbasketTab,
+            text_align=TextNode.ALeft,
+            image=gui.find('**/tabs/polySurface1'),
+            image_pos=(
+                0.55,
+                1,
+                -0.91),
+            image_hpr=(
+                0,
+                0,
+                -90),
+            image_scale=(
+                0.033,
+                0.033,
+                0.035),
+            image_color=normalColor,
+            image1_color=clickColor,
+            image2_color=rolloverColor,
+            image3_color=diabledColor,
+            text_fg=Vec4(
+                0.2,
+                0.1,
+                0,
+                1),
+            command=self.setMode,
+            extraArgs=[GardenPage_Basket],
+            pos=(
+                0.92,
+                0,
+                0.55))
+        self.collectionTab = DirectButton(
+            parent=self,
+            relief=None,
+            text=TTLocalizer.GardenPageCollectionTab,
+            text_scale=TTLocalizer.GPcollectionTab,
+            text_align=TextNode.ALeft,
+            image=gui.find('**/tabs/polySurface2'),
+            image_pos=(
+                0.12,
+                1,
+                -0.91),
+            image_hpr=(
+                0,
+                0,
+                -90),
+            image_scale=(
+                0.033,
+                0.033,
+                0.035),
+            image_color=normalColor,
+            image1_color=clickColor,
+            image2_color=rolloverColor,
+            image3_color=diabledColor,
+            text_fg=Vec4(
+                0.2,
+                0.1,
+                0,
+                1),
+            command=self.setMode,
+            extraArgs=[GardenPage_Collection],
+            pos=(
+                0.92,
+                0,
+                0.1))
+        self.trophyTab = DirectButton(
+            parent=self,
+            relief=None,
+            text=TTLocalizer.GardenPageTrophyTab,
+            text_scale=TTLocalizer.GPtrophyTab,
+            text_align=TextNode.ALeft,
+            image=gui.find('**/tabs/polySurface3'),
+            image_pos=(
+                -0.28,
+                1,
+                -0.91),
+            image_hpr=(
+                0,
+                0,
+                -90),
+            image_scale=(
+                0.033,
+                0.033,
+                0.035),
+            image_color=normalColor,
+            image1_color=clickColor,
+            image2_color=rolloverColor,
+            image3_color=diabledColor,
+            text_fg=Vec4(
+                0.2,
+                0.1,
+                0,
+                1),
+            command=self.setMode,
+            extraArgs=[GardenPage_Trophy],
+            pos=(
+                0.92,
+                0,
+                -0.3))
+        self.specialsTab = DirectButton(
+            parent=self,
+            relief=None,
+            text=TTLocalizer.GardenPageSpecialsTab,
+            text_scale=TTLocalizer.GPspecialsTab,
+            text_align=TextNode.ALeft,
+            image=gui.find('**/tabs/polySurface3'),
+            image_pos=(
+                -0.28,
+                1,
+                -0.91),
+            image_hpr=(
+                0,
+                0,
+                -90),
+            image_scale=(
+                0.033,
+                0.033,
+                0.035),
+            image_color=normalColor,
+            image1_color=clickColor,
+            image2_color=rolloverColor,
+            image3_color=diabledColor,
+            text_fg=Vec4(
+                0.2,
+                0.1,
+                0,
+                1),
+            command=self.setMode,
+            extraArgs=[GardenPage_Specials],
+            pos=(
+                0.92,
+                0,
+                -0.3))
         self.basketTab.setPos(-0.75, 0, 0.775)
         self.collectionTab.setPos(-0.33, 0, 0.775)
         self.trophyTab.setPos(0.09, 0, 0.775)
         self.specialsTab.setPos(0.51, 0, 0.775)
         gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
         self.gardenSpecialsList = DirectScrolledList(parent=self, relief=None, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
-         gui.find('**/FndsLst_ScrollDN'),
-         gui.find('**/FndsLst_ScrollUp_Rllvr'),
-         gui.find('**/FndsLst_ScrollUp')), incButton_relief=None, incButton_pos=(0.0, 0.0, -1.1), incButton_image1_color=Vec4(1.0, 0.9, 0.4, 1.0), incButton_image3_color=Vec4(1.0, 1.0, 0.6, 0.5), incButton_scale=(1.0, 1.0, -1.0), decButton_image=(gui.find('**/FndsLst_ScrollUp'),
-         gui.find('**/FndsLst_ScrollDN'),
-         gui.find('**/FndsLst_ScrollUp_Rllvr'),
-         gui.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_pos=(0.0, 0.0, 0.117), decButton_image1_color=Vec4(1.0, 1.0, 0.6, 1.0), decButton_image3_color=Vec4(1.0, 1.0, 0.6, 0.6), itemFrame_pos=(-0.2, 0.0, 0.05), itemFrame_relief=None, numItemsVisible=18, items=[], pos=(-0.6, 0, 0.45))
+                                                                                                gui.find(
+                                                                                                    '**/FndsLst_ScrollDN'),
+                                                                                                gui.find(
+                                                                                                    '**/FndsLst_ScrollUp_Rllvr'),
+                                                                                                gui.find('**/FndsLst_ScrollUp')), incButton_relief=None, incButton_pos=(0.0, 0.0, -1.1), incButton_image1_color=Vec4(1.0, 0.9, 0.4, 1.0), incButton_image3_color=Vec4(1.0, 1.0, 0.6, 0.5), incButton_scale=(1.0, 1.0, -1.0), decButton_image=(gui.find('**/FndsLst_ScrollUp'),
+                                                                                                                                                                                                                                                                                                                                              gui.find(
+                                                                                                    '**/FndsLst_ScrollDN'),
+            gui.find('**/FndsLst_ScrollUp_Rllvr'),
+            gui.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_pos=(0.0, 0.0, 0.117), decButton_image1_color=Vec4(1.0, 1.0, 0.6, 1.0), decButton_image3_color=Vec4(1.0, 1.0, 0.6, 0.6), itemFrame_pos=(-0.2, 0.0, 0.05), itemFrame_relief=None, numItemsVisible=18, items=[], pos=(-0.6, 0, 0.45))
         self.gardenSpecialsList.hide()
-        self.specialsFrame = DirectFrame(parent=self, relief=None, pos=(0.45, 0.0, 0.25), text='', text_wordwrap=14.4, text_pos=(0, -0.46), text_scale=0.06)
-        self.specialsInfo = DirectLabel(parent=self.specialsFrame, relief=None, pos=(0.0, 0.0, -0.0), text=' ', text_wordwrap=12.4, text_pos=(0, -0.46), text_scale=0.06)
-        self.specialsPhoto = SpecialsPhoto.SpecialsPhoto(-1, parent=self.specialsFrame)
+        self.specialsFrame = DirectFrame(
+            parent=self, relief=None, pos=(
+                0.45, 0.0, 0.25), text='', text_wordwrap=14.4, text_pos=(
+                0, -0.46), text_scale=0.06)
+        self.specialsInfo = DirectLabel(parent=self.specialsFrame, relief=None, pos=(
+            0.0, 0.0, -0.0), text=' ', text_wordwrap=12.4, text_pos=(0, -0.46), text_scale=0.06)
+        self.specialsPhoto = SpecialsPhoto.SpecialsPhoto(
+            -1, parent=self.specialsFrame)
         self.specialsPhoto.setBackBounds(-0.3, 0.3, -0.235, 0.25)
         self.specialsPhoto.setBackColor(1.0, 1.0, 0.74901, 1.0)
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        okImageList = (buttons.find('**/ChtBx_OKBtn_UP'), buttons.find('**/ChtBx_OKBtn_DN'), buttons.find('**/ChtBx_OKBtn_Rllvr'))
-        self.useSpecialButton = DirectButton(parent=self, relief=None, image=okImageList, pos=(0.45, 0, -0.5), text=TTLocalizer.UseSpecial, text_scale=0.06, text_pos=(0, -0.1), command=self.__useSpecial)
+        okImageList = (
+            buttons.find('**/ChtBx_OKBtn_UP'),
+            buttons.find('**/ChtBx_OKBtn_DN'),
+            buttons.find('**/ChtBx_OKBtn_Rllvr'))
+        self.useSpecialButton = DirectButton(
+            parent=self, relief=None, image=okImageList, pos=(
+                0.45, 0, -0.5), text=TTLocalizer.UseSpecial, text_scale=0.06, text_pos=(
+                0, -0.1), command=self.__useSpecial)
         buttons.removeNode()
         return
 
-    def setMode(self, mode, updateAnyways = 0):
+    def setMode(self, mode, updateAnyways=0):
         messenger.send('wakeup')
         if not updateAnyways:
             if self.mode == mode:
@@ -168,19 +325,42 @@ class GardenPage(ShtikerPage.ShtikerPage):
         specialsList = localAvatar.getGardenSpecials()
         firstEntry = None
         if len(specialsList) == 0:
-            self.gardenSpecialsList['incButton_image1_color'] = Vec4(1.0, 0.9, 0.4, 0.0)
-            self.gardenSpecialsList['incButton_image3_color'] = Vec4(1.0, 0.9, 0.4, 0.0)
-            self.gardenSpecialsList['decButton_image1_color'] = Vec4(1.0, 0.9, 0.4, 0.0)
-            self.gardenSpecialsList['decButton_image3_color'] = Vec4(1.0, 0.9, 0.4, 0.0)
+            self.gardenSpecialsList['incButton_image1_color'] = Vec4(
+                1.0, 0.9, 0.4, 0.0)
+            self.gardenSpecialsList['incButton_image3_color'] = Vec4(
+                1.0, 0.9, 0.4, 0.0)
+            self.gardenSpecialsList['decButton_image1_color'] = Vec4(
+                1.0, 0.9, 0.4, 0.0)
+            self.gardenSpecialsList['decButton_image3_color'] = Vec4(
+                1.0, 0.9, 0.4, 0.0)
         else:
-            self.gardenSpecialsList['incButton_image1_color'] = Vec4(1.0, 0.9, 0.4, 1.0)
-            self.gardenSpecialsList['incButton_image3_color'] = Vec4(1.0, 0.9, 0.4, 1.0)
-            self.gardenSpecialsList['decButton_image1_color'] = Vec4(1.0, 0.9, 0.4, 1.0)
-            self.gardenSpecialsList['decButton_image3_color'] = Vec4(1.0, 0.9, 0.4, 1.0)
+            self.gardenSpecialsList['incButton_image1_color'] = Vec4(
+                1.0, 0.9, 0.4, 1.0)
+            self.gardenSpecialsList['incButton_image3_color'] = Vec4(
+                1.0, 0.9, 0.4, 1.0)
+            self.gardenSpecialsList['decButton_image1_color'] = Vec4(
+                1.0, 0.9, 0.4, 1.0)
+            self.gardenSpecialsList['decButton_image3_color'] = Vec4(
+                1.0, 0.9, 0.4, 1.0)
             for entry in specialsList:
                 if not firstEntry:
                     firstEntry = entry
-                someItem = DirectScrolledListItem(parent=self.gardenSpecialsList, text='%s x %s' % (GardenGlobals.Specials[entry[0]]['photoName'], entry[1]), text_align=TextNode.ALeft, text_fg=(0.0, 0.0, 0.0, 1), text_bg=(1.0, 1.0, 1, 0), text_scale=0.06, relief=None, command=self.showSpecialsPanel, extraArgs=[entry])
+                someItem = DirectScrolledListItem(parent=self.gardenSpecialsList,
+                                                  text='%s x %s' % (GardenGlobals.Specials[entry[0]]['photoName'],
+                                                                    entry[1]),
+                                                  text_align=TextNode.ALeft,
+                                                  text_fg=(0.0,
+                                                           0.0,
+                                                           0.0,
+                                                           1),
+                                                  text_bg=(1.0,
+                                                           1.0,
+                                                           1,
+                                                           0),
+                                                  text_scale=0.06,
+                                                  relief=None,
+                                                  command=self.showSpecialsPanel,
+                                                  extraArgs=[entry])
                 self.gardenSpecialsList.addItem(someItem)
                 self.specialsPhoto.show()
 
@@ -194,7 +374,8 @@ class GardenPage(ShtikerPage.ShtikerPage):
         self.specialsPhoto.hide()
         self.specialsPhoto.update(type)
         self.specialsPhoto.show()
-        self.specialsInfo['text'] = GardenGlobals.Specials[entry[0]]['description']
+        self.specialsInfo['text'] = GardenGlobals.Specials[entry[0]
+                                                           ]['description']
         self.selectedSpecial = type
         specialInfo = GardenGlobals.Specials[entry[0]]
         if 'useFromShtiker' in specialInfo and specialInfo['useFromShtiker']:
@@ -220,12 +401,16 @@ class GardenPage(ShtikerPage.ShtikerPage):
         if not hasattr(self, 'browser'):
             self.browser = FlowerBrowser.FlowerBrowser(self)
             self.browser.setScale(1.1)
-            self.collectedTotal = DirectLabel(parent=self.browser, relief=None, text='', text_scale=0.06, pos=(0, 0, -0.61))
+            self.collectedTotal = DirectLabel(
+                parent=self.browser, relief=None, text='', text_scale=0.06, pos=(
+                    0, 0, -0.61))
         return
 
     def createGardenTrophyFrame(self):
         if not hasattr(self, 'trophyFrame'):
-            self.trophyFrame = DirectFrame(parent=self, relief=None, image=self.trophyCase, image_pos=(0, 1, 0), image_scale=0.034)
+            self.trophyFrame = DirectFrame(
+                parent=self, relief=None, image=self.trophyCase, image_pos=(
+                    0, 1, 0), image_scale=0.034)
             self.trophyFrame.hide()
             self.trophies = []
             hOffset = -0.5
@@ -252,13 +437,13 @@ class GardenPage(ShtikerPage.ShtikerPage):
             self.FUDGE_FACTOR = 0.01
             self.barLength = 1.1
             self.shovelBar = DirectWaitBar(parent=self.picker, pos=(0.95, 0, -0.55), relief=DGG.SUNKEN, frameSize=(-0.65,
-             1.05,
-             -0.1,
-             0.1), borderWidth=(0.025, 0.025), scale=0.45, frameColor=(0.8, 0.8, 0.7, 1), barColor=(0.6, 0.4, 0.2, 1), range=self.barLength + self.FUDGE_FACTOR, value=self.barLength * 0.5 + self.FUDGE_FACTOR, text=' ' + TTLocalizer.Laff, text_scale=0.11, text_fg=(0.05, 0.14, 0.2, 1), text_align=TextNode.ALeft, text_pos=(-0.57, -0.035))
+                                                                                                                   1.05,
+                                                                                                                   -0.1,
+                                                                                                                   0.1), borderWidth=(0.025, 0.025), scale=0.45, frameColor=(0.8, 0.8, 0.7, 1), barColor=(0.6, 0.4, 0.2, 1), range=self.barLength + self.FUDGE_FACTOR, value=self.barLength * 0.5 + self.FUDGE_FACTOR, text=' ' + TTLocalizer.Laff, text_scale=0.11, text_fg=(0.05, 0.14, 0.2, 1), text_align=TextNode.ALeft, text_pos=(-0.57, -0.035))
             self.wateringCanBar = DirectWaitBar(parent=self.picker, pos=(0.95, 0, -0.75), relief=DGG.SUNKEN, frameSize=(-0.65,
-             1.05,
-             -0.1,
-             0.1), borderWidth=(0.025, 0.025), scale=0.45, frameColor=(0.8, 0.8, 0.7, 1), barColor=(0.4, 0.6, 1.0, 1), range=self.barLength + self.FUDGE_FACTOR, value=self.barLength * 0.5 + self.FUDGE_FACTOR, text=' ' + TTLocalizer.Laff, text_scale=0.11, text_fg=(0.05, 0.14, 0.2, 1), text_align=TextNode.ALeft, text_pos=(-0.57, -0.035))
+                                                                                                                        1.05,
+                                                                                                                        -0.1,
+                                                                                                                        0.1), borderWidth=(0.025, 0.025), scale=0.45, frameColor=(0.8, 0.8, 0.7, 1), barColor=(0.4, 0.6, 1.0, 1), range=self.barLength + self.FUDGE_FACTOR, value=self.barLength * 0.5 + self.FUDGE_FACTOR, text=' ' + TTLocalizer.Laff, text_scale=0.11, text_fg=(0.05, 0.14, 0.2, 1), text_align=TextNode.ALeft, text_pos=(-0.57, -0.035))
 
     def unload(self):
         print('gardenPage Unloading')
@@ -281,7 +466,8 @@ class GardenPage(ShtikerPage.ShtikerPage):
 
     def updatePage(self):
         if hasattr(self, 'collectedTotal'):
-            self.collectedTotal['text'] = TTLocalizer.GardenPageCollectedTotal % (len(base.localAvatar.flowerCollection), GardenGlobals.getNumberOfFlowerVarieties())
+            self.collectedTotal['text'] = TTLocalizer.GardenPageCollectedTotal % (len(
+                base.localAvatar.flowerCollection), GardenGlobals.getNumberOfFlowerVarieties())
         if hasattr(self, 'shovelBar'):
             shovel = base.localAvatar.shovel
             shovelName = TTLocalizer.ShovelNameDict[shovel]
@@ -295,12 +481,16 @@ class GardenPage(ShtikerPage.ShtikerPage):
             maxWateringCanSkill = GardenGlobals.WateringCanAttributes[wateringCan]['skillPts']
             if wateringCan == GardenGlobals.MAX_WATERING_CANS - 1:
                 maxWateringCanSkill -= 1
-            textToUse = TTLocalizer.GardenPageShovelInfo % (shovelName, curShovelSkill, maxShovelSkill)
+            textToUse = TTLocalizer.GardenPageShovelInfo % (
+                shovelName, curShovelSkill, maxShovelSkill)
             self.shovelBar['text'] = textToUse
-            self.shovelBar['value'] = float(curShovelSkill) / float(maxShovelSkill) * self.barLength + self.FUDGE_FACTOR
-            textToUse = TTLocalizer.GardenPageWateringCanInfo % (wateringCanName, curWateringCanSkill, maxWateringCanSkill)
+            self.shovelBar['value'] = float(
+                curShovelSkill) / float(maxShovelSkill) * self.barLength + self.FUDGE_FACTOR
+            textToUse = TTLocalizer.GardenPageWateringCanInfo % (
+                wateringCanName, curWateringCanSkill, maxWateringCanSkill)
             self.wateringCanBar['text'] = textToUse
-            self.wateringCanBar['value'] = float(curWateringCanSkill) / float(maxWateringCanSkill) * self.barLength + self.FUDGE_FACTOR
+            self.wateringCanBar['value'] = float(
+                curWateringCanSkill) / float(maxWateringCanSkill) * self.barLength + self.FUDGE_FACTOR
         else:
             print('no shovel bar')
         if self.mode == GardenPage_Collection:
@@ -341,9 +531,13 @@ class GardenPage(ShtikerPage.ShtikerPage):
             stringToShow = TTLocalizer.UseSpecialBadLocation
         else:
             stringToShow = 'Unknown response %s' % response
-        self.resultDialog = TTDialog.TTDialog(parent=aspect2dp, style=TTDialog.Acknowledge, text=stringToShow, command=self.cleanupResultDialog)
+        self.resultDialog = TTDialog.TTDialog(
+            parent=aspect2dp,
+            style=TTDialog.Acknowledge,
+            text=stringToShow,
+            command=self.cleanupResultDialog)
 
-    def cleanupResultDialog(self, value = None):
+    def cleanupResultDialog(self, value=None):
         if self.resultDialog:
             self.resultDialog.destroy()
             self.resultDialog = None
@@ -375,7 +569,8 @@ class GardenTrophy(DirectFrame):
         self.bowlBase = self.bowl.find('**/fishingTrophyBase')
         self.bowlBase.setScale(1.25, 1, 1)
         self.bowlBase.setColorScale(1, 1, 0.8, 1)
-        self.nameLabel = DirectLabel(parent=self, relief=None, pos=(0, 0, -0.15), text='Trophy Text', text_scale=0.125, text_fg=Vec4(0.9, 0.9, 0.4, 1))
+        self.nameLabel = DirectLabel(parent=self, relief=None, pos=(
+            0, 0, -0.15), text='Trophy Text', text_scale=0.125, text_fg=Vec4(0.9, 0.9, 0.4, 1))
         self.shadow = loader.loadModel('phase_3/models/props/drop_shadow')
         self.shadow.reparentTo(self)
         self.shadow.setColor(1, 1, 1, 0.2)
@@ -394,7 +589,8 @@ class GardenTrophy(DirectFrame):
             self.gardenTrophy = loader.loadModel(modelStr)
             self.gardenTrophy.setScale(scales[level])
             self.gardenTrophy.reparentTo(self)
-            self.metalTrophy = self.gardenTrophy.find('**/%s' % metalTrophy[level])
+            self.metalTrophy = self.gardenTrophy.find(
+                '**/%s' % metalTrophy[level])
         if level == -1:
             self.trophy.hide()
             self.bowl.hide()

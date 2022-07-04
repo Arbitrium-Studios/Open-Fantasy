@@ -3,6 +3,7 @@ from direct.interval.IntervalGlobal import *
 import math
 import random
 
+
 class GameSprite:
     colorRed = Vec4(1, 0.2, 0.2, 1)
     colorBlue = Vec4(0.7, 0.8, 1, 1)
@@ -29,27 +30,27 @@ class GameSprite:
     colorSteel = Vec4(0.5, 0.5, 0.5, 1.0)
     colorSteelDissolve = Vec4(0.5, 0.5, 0.5, 0.0)
     colorList = (colorRed,
-     colorBlue,
-     colorGreen,
-     colorWhite,
-     colorBlack,
-     colorPurple,
-     colorYellow,
-     colorOrange,
-     colorAqua,
-     colorSteel)
+                 colorBlue,
+                 colorGreen,
+                 colorWhite,
+                 colorBlack,
+                 colorPurple,
+                 colorYellow,
+                 colorOrange,
+                 colorAqua,
+                 colorSteel)
     disolveList = (colorDisolveRed,
-     colorDisolveBlue,
-     colorDisolveGreen,
-     colorDisolveWhite,
-     colorDisolveBlack,
-     colorDisolvePurple,
-     colorDisolveYellow,
-     colorDisolveOrange,
-     colorDisolveAqua,
-     colorSteelDissolve)
+                   colorDisolveBlue,
+                   colorDisolveGreen,
+                   colorDisolveWhite,
+                   colorDisolveBlack,
+                   colorDisolvePurple,
+                   colorDisolveYellow,
+                   colorDisolveOrange,
+                   colorDisolveAqua,
+                   colorSteelDissolve)
 
-    def __init__(self, spriteBase, size, colorType = 0, foundation = 0, facing = 0):
+    def __init__(self, spriteBase, size, colorType=0, foundation=0, facing=0):
         self.colorType = colorType
         self.spriteBase = spriteBase
         self.frame = self.spriteBase.getParent()
@@ -68,9 +69,9 @@ class GameSprite:
         self.holdType = None
         self.multiColor = 0
         self.multiColorList = [0,
-         1,
-         2,
-         6]
+                               1,
+                               2,
+                               6]
         self.multiColorIndex = 0
         self.multiColorNext = 1
         self.multiColorLevel = 0.0
@@ -91,7 +92,7 @@ class GameSprite:
         self.gridPosZ = None
         return
 
-    def setBallType(self, type, solidOverride = 0):
+    def setBallType(self, type, solidOverride=0):
         if not self.nodeObj or self.nodeObj.isEmpty():
             self.nodeObj = None
         else:
@@ -131,9 +132,9 @@ class GameSprite:
                 myColor = GameSprite.colorAqua
                 self.multiColor = 1
                 self.multiColorList = [0,
-                 1,
-                 2,
-                 6]
+                                       1,
+                                       2,
+                                       6]
                 self.multiColorIndex = 0
                 self.multiColorNext = 1
                 self.multiColorLevel = 0.0
@@ -175,9 +176,9 @@ class GameSprite:
             myColor = GameSprite.colorAqua
             self.multiColor = 1
             self.multiColorList = [0,
-             1,
-             2,
-             6]
+                                   1,
+                                   2,
+                                   6]
             self.multiColorIndex = 0
             self.multiColorNext = 1
             self.multiColorLevel = 0.0
@@ -243,7 +244,7 @@ class GameSprite:
             self.setZ(self.getZ() + self.velZ * timeDelta)
             self.velX = self.velX * (1 - timeDelta * 4)
             self.velZ = self.velZ * (1 - timeDelta * 4)
-            if self.accX != None:
+            if self.accX is not None:
                 self.velX = self.accX
                 self.velZ = self.accZ
         if self.nodeObj.isEmpty():
@@ -252,13 +253,13 @@ class GameSprite:
 
     def reflectX(self):
         self.velX = -self.velX
-        if self.accX != None:
+        if self.accX is not None:
             self.accX = -self.accX
         return
 
     def reflectZ(self):
         self.velZ = -self.velZ
-        if self.accZ != None:
+        if self.accZ is not None:
             self.accZ = -self.accZ
         return
 
@@ -268,7 +269,37 @@ class GameSprite:
         num3 = random.random() * 2.0
         curr = self.nodeObj.getPos()
         dest = Point3(0 + curr[0], 0 + curr[1], 1.0 + curr[2])
-        track = Sequence(Wait(num1 * 0.1), LerpPosInterval(self.nodeObj, num2 * 0.1, Point3(0.0, 0.0, 0.5)), LerpPosInterval(self.nodeObj, num3 * 0.1, Point3(0.0, 0.0, 0.0)), LerpPosInterval(self.nodeObj, num2 * 0.1, Point3(0.0, 0.0, 0.5)), LerpPosInterval(self.nodeObj, num1 * 0.1, Point3(0.0, 0.0, 0.0)))
+        track = Sequence(
+            Wait(
+                num1 * 0.1),
+            LerpPosInterval(
+                self.nodeObj,
+                num2 * 0.1,
+                Point3(
+                    0.0,
+                    0.0,
+                    0.5)),
+            LerpPosInterval(
+                self.nodeObj,
+                num3 * 0.1,
+                Point3(
+                    0.0,
+                    0.0,
+                    0.0)),
+            LerpPosInterval(
+                self.nodeObj,
+                num2 * 0.1,
+                Point3(
+                    0.0,
+                    0.0,
+                    0.5)),
+            LerpPosInterval(
+                self.nodeObj,
+                num1 * 0.1,
+                Point3(
+                    0.0,
+                    0.0,
+                    0.0)))
         track.start()
 
     def shake(self):
@@ -276,7 +307,21 @@ class GameSprite:
         num2 = random.random() * 1.0
         curr = self.nodeObj.getPos()
         dest = Point3(0 + curr[0], 0 + curr[1], 1.0 + curr[2])
-        track = Sequence(LerpPosInterval(self.nodeObj, num2 * 0.1, Point3(0.0, 0.0, 0.25)), LerpPosInterval(self.nodeObj, num1 * 0.1, Point3(0.0, 0.0, 0.0)))
+        track = Sequence(
+            LerpPosInterval(
+                self.nodeObj,
+                num2 * 0.1,
+                Point3(
+                    0.0,
+                    0.0,
+                    0.25)),
+            LerpPosInterval(
+                self.nodeObj,
+                num1 * 0.1,
+                Point3(
+                    0.0,
+                    0.0,
+                    0.0)))
         track.start()
 
     def deathEffect(self):
@@ -290,7 +335,18 @@ class GameSprite:
         curr = self.spriteBase.getPos()
         self.delayRemove = 1
         self.canCollide = 0
-        track = Sequence(Parallel(ProjectileInterval(self.spriteBase, startVel=Vec3(-20.0 + notNum3 * 40.0, -20.0 + num3 * 40.0, 30), duration=0.5 + num2 * 1.0, gravityMult=2.0), LerpColorScaleInterval(self.spriteBase, duration=0.5 + num2 * 1.0, startColorScale=GameSprite.colorList[self.colorType], colorScale=GameSprite.disolveList[self.colorType])), Func(self.removeDelay), Func(self.delete))
+        track = Sequence(Parallel(ProjectileInterval(self.spriteBase,
+                                                     startVel=Vec3(-20.0 + notNum3 * 40.0,
+                                                                   -20.0 + num3 * 40.0,
+                                                                   30),
+                                                     duration=0.5 + num2 * 1.0,
+                                                     gravityMult=2.0),
+                                  LerpColorScaleInterval(self.spriteBase,
+                                                         duration=0.5 + num2 * 1.0,
+                                                         startColorScale=GameSprite.colorList[self.colorType],
+                                                         colorScale=GameSprite.disolveList[self.colorType])),
+                         Func(self.removeDelay),
+                         Func(self.delete))
         track.start()
 
     def wildEffect(self):
@@ -303,7 +359,19 @@ class GameSprite:
         curr = self.spriteBase.getPos()
         self.delayRemove = 1
         self.canCollide = 0
-        track = Sequence(Parallel(LerpScaleInterval(self.spriteBase, 1.0, 1.5, startScale=1.0), LerpColorScaleInterval(self.spriteBase, duration=1.0, startColorScale=GameSprite.colorList[self.colorType], colorScale=Vec4(0, 0, 0, 0.0))), Func(self.removeDelay), Func(self.delete))
+        track = Sequence(Parallel(LerpScaleInterval(self.spriteBase,
+                                                    1.0,
+                                                    1.5,
+                                                    startScale=1.0),
+                                  LerpColorScaleInterval(self.spriteBase,
+                                                         duration=1.0,
+                                                         startColorScale=GameSprite.colorList[self.colorType],
+                                                         colorScale=Vec4(0,
+                                                                         0,
+                                                                         0,
+                                                                         0.0))),
+                         Func(self.removeDelay),
+                         Func(self.delete))
         track.start()
 
     def setActive(self, active):

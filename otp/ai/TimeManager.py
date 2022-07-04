@@ -14,6 +14,7 @@ import os
 import sys
 import re
 
+
 class TimeManager(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('TimeManager')
     neverDisable = 1
@@ -22,12 +23,16 @@ class TimeManager(DistributedObject.DistributedObject):
         DistributedObject.DistributedObject.__init__(self, cr)
         self.updateFreq = base.config.GetFloat('time-manager-freq', 1800)
         self.minWait = base.config.GetFloat('time-manager-min-wait', 10)
-        self.maxUncertainty = base.config.GetFloat('time-manager-max-uncertainty', 1)
+        self.maxUncertainty = base.config.GetFloat(
+            'time-manager-max-uncertainty', 1)
         self.maxAttempts = base.config.GetInt('time-manager-max-attempts', 5)
         self.extraSkew = base.config.GetInt('time-manager-extra-skew', 0)
         if self.extraSkew != 0:
-            self.notify.info('Simulating clock skew of %0.3f s' % self.extraSkew)
-        self.reportFrameRateInterval = base.config.GetDouble('report-frame-rate-interval', 300.0)
+            self.notify.info(
+                'Simulating clock skew of %0.3f s' %
+                self.extraSkew)
+        self.reportFrameRateInterval = base.config.GetDouble(
+            'report-frame-rate-interval', 300.0)
         self.talkResult = 0
         self.thisContext = -1
         self.nextContext = 0
@@ -39,14 +44,16 @@ class TimeManager(DistributedObject.DistributedObject):
 
     def generate(self):
         self._gotFirstTimeSync = False
-        if self.cr.timeManager != None:
+        if self.cr.timeManager is not None:
             self.cr.timeManager.delete()
         self.cr.timeManager = self
         DistributedObject.DistributedObject.generate(self)
         self.accept(OTPGlobals.SynchronizeHotkey, self.handleHotkey)
         self.accept('clock_error', self.handleClockError)
         if __dev__ and base.config.GetBool('enable-garbage-hotkey', 0):
-            self.accept(OTPGlobals.DetectGarbageHotkey, self.handleDetectGarbageHotkey)
+            self.accept(
+                OTPGlobals.DetectGarbageHotkey,
+                self.handleDetectGarbageHotkey)
         if self.updateFreq > 0:
             self.startTask()
         return
@@ -123,16 +130,24 @@ class TimeManager(DistributedObject.DistributedObject):
         end = globalClock.getRealTime()
         aiTimeSkew = timeOfDay - self.cr.getServerTimeOfDay()
         if context != self.thisContext:
-            self.notify.info('Ignoring TimeManager response for old context %d' % context)
+            self.notify.info(
+                'Ignoring TimeManager response for old context %d' %
+                context)
             return
         elapsed = end - self.start
         self.attemptCount += 1
-        self.notify.info('Clock sync roundtrip took %0.3f ms' % (elapsed * 1000.0))
-        self.notify.info('AI time delta is %s from server delta' % PythonUtil.formatElapsedSeconds(aiTimeSkew))
+        self.notify.info(
+            'Clock sync roundtrip took %0.3f ms' %
+            (elapsed * 1000.0))
+        self.notify.info(
+            'AI time delta is %s from server delta' %
+            PythonUtil.formatElapsedSeconds(aiTimeSkew))
         average = (self.start + end) / 2.0 - self.extraSkew
         uncertainty = (end - self.start) / 2.0 + abs(self.extraSkew)
         globalClockDelta.resynchronize(average, timestamp, uncertainty)
-        self.notify.info('Local clock uncertainty +/- %.3f s' % globalClockDelta.getUncertainty())
+        self.notify.info(
+            'Local clock uncertainty +/- %.3f s' %
+            globalClockDelta.getUncertainty())
         if globalClockDelta.getUncertainty() > self.maxUncertainty:
             if self.attemptCount < self.maxAttempts:
                 self.notify.info('Uncertainty is too high, trying again.')
@@ -141,7 +156,13 @@ class TimeManager(DistributedObject.DistributedObject):
                 return
             self.notify.info('Giving up on uncertainty requirement.')
         if self.talkResult:
-            base.localAvatar.setChatAbsolute('latency %0.0f ms, sync \xc2\xb1%0.0f ms' % (elapsed * 1000.0, globalClockDelta.getUncertainty() * 1000.0), CFSpeech | CFTimeout)
+            base.localAvatar.setChatAbsolute(
+                'latency %0.0f ms, sync \xc2\xb1%0.0f ms' %
+                (elapsed *
+                 1000.0,
+                 globalClockDelta.getUncertainty() *
+                 1000.0),
+                CFSpeech | CFTimeout)
         self._gotFirstTimeSync = True
         messenger.send('gotTimeSync')
 
@@ -190,15 +211,16 @@ class TimeManager(DistributedObject.DistributedObject):
             cacheStatus = ''
 
         ooghz = 1e-09
-        cpuSpeed = (di.getMaximumCpuFrequency() * ooghz, di.getCurrentCpuFrequency() * ooghz)
+        cpuSpeed = (di.getMaximumCpuFrequency() * ooghz,
+                    di.getCurrentCpuFrequency() * ooghz)
         numCpuCores = di.getNumCpuCores()
         numLogicalCpus = di.getNumLogicalCpus()
         info = '%s|%s|%d|%d|%s|%s cpus' % (di.getCpuVendorString(),
-         di.getCpuBrandString(),
-         di.getCpuVersionInformation(),
-         di.getCpuBrandIndex(),
-         '%0.03f,%0.03f' % cpuSpeed,
-         '%d,%d' % (numCpuCores, numLogicalCpus))
+                                           di.getCpuBrandString(),
+                                           di.getCpuVersionInformation(),
+                                           di.getCpuBrandIndex(),
+                                           '%0.03f,%0.03f' % cpuSpeed,
+                                           '%d,%d' % (numCpuCores, numLogicalCpus))
         print('cpu info: %s' % info)
         self.sendUpdate('setCpuInfo', [info, cacheStatus])
 
@@ -206,10 +228,15 @@ class TimeManager(DistributedObject.DistributedObject):
         if frameRateInterval == 0:
             return
         if not base.frameRateMeter:
-            maxFrameRateInterval = base.config.GetDouble('max-frame-rate-interval', 30.0)
-            globalClock.setAverageFrameRateInterval(min(frameRateInterval, maxFrameRateInterval))
+            maxFrameRateInterval = base.config.GetDouble(
+                'max-frame-rate-interval', 30.0)
+            globalClock.setAverageFrameRateInterval(
+                min(frameRateInterval, maxFrameRateInterval))
         taskMgr.remove('frameRateMonitor')
-        taskMgr.doMethodLater(frameRateInterval, self.frameRateMonitor, 'frameRateMonitor')
+        taskMgr.doMethodLater(
+            frameRateInterval,
+            self.frameRateMonitor,
+            'frameRateMonitor')
 
     def frameRateMonitor(self, task):
         from otp.avatar.Avatar import Avatar
@@ -220,9 +247,9 @@ class TimeManager(DistributedObject.DistributedObject):
         physicalMemory = 0
         pageFaultCount = 0
         osInfo = (os.name,
-         0,
-         0,
-         0)
+                  0,
+                  0,
+                  0)
         cpuSpeed = (0, 0)
         numCpuCores = 0
         numLogicalCpus = 0
@@ -239,62 +266,88 @@ class TimeManager(DistributedObject.DistributedObject):
             physicalMemory = di.getPhysicalMemory() * oomb
             pageFaultCount = di.getPageFaultCount() / 1000.0
             osInfo = (os.name,
-             di.getOsPlatformId(),
-             di.getOsVersionMajor(),
-             di.getOsVersionMinor())
+                      di.getOsPlatformId(),
+                      di.getOsVersionMajor(),
+                      di.getOsVersionMinor())
             if sys.platform == 'darwin':
                 osInfo = self.getMacOsInfo(osInfo)
             di.updateCpuFrequency(0)
             ooghz = 1e-09
-            cpuSpeed = (di.getMaximumCpuFrequency() * ooghz, di.getCurrentCpuFrequency() * ooghz)
+            cpuSpeed = (
+                di.getMaximumCpuFrequency() * ooghz,
+                di.getCurrentCpuFrequency() * ooghz)
             numCpuCores = di.getNumCpuCores()
             numLogicalCpus = di.getNumLogicalCpus()
             apiName = base.pipe.getInterfaceName()
-        self.d_setFrameRate(max(0, globalClock.getAverageFrameRate()), max(0, globalClock.calcFrameRateDeviation()), len(Avatar.ActiveAvatars), base.locationCode or '', max(0, time.time() - base.locationCodeChanged), max(0, globalClock.getRealTime()), base.gameOptionsCode, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, osInfo, cpuSpeed, numCpuCores, numLogicalCpus, apiName)
+        self.d_setFrameRate(max(0,
+                                globalClock.getAverageFrameRate()),
+                            max(0,
+                                globalClock.calcFrameRateDeviation()),
+                            len(Avatar.ActiveAvatars),
+                            base.locationCode or '',
+                            max(0,
+                                time.time() - base.locationCodeChanged),
+                            max(0,
+                                globalClock.getRealTime()),
+                            base.gameOptionsCode,
+                            vendorId,
+                            deviceId,
+                            processMemory,
+                            pageFileUsage,
+                            physicalMemory,
+                            pageFaultCount,
+                            osInfo,
+                            cpuSpeed,
+                            numCpuCores,
+                            numLogicalCpus,
+                            apiName)
         return task.again
 
-    def d_setFrameRate(self, fps, deviation, numAvs, locationCode, timeInLocation, timeInGame, gameOptionsCode, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, osInfo, cpuSpeed, numCpuCores, numLogicalCpus, apiName):
+    def d_setFrameRate(self, fps, deviation, numAvs, locationCode, timeInLocation, timeInGame, gameOptionsCode, vendorId, deviceId,
+                       processMemory, pageFileUsage, physicalMemory, pageFaultCount, osInfo, cpuSpeed, numCpuCores, numLogicalCpus, apiName):
         info = '%0.1f fps|%0.3fd|%s avs|%s|%d|%d|%s|0x%04x|0x%04x|%0.1fMB|%0.1fMB|%0.1fMB|%d|%s|%s|%s cpus|%s' % (fps,
-         deviation,
-         numAvs,
-         locationCode,
-         timeInLocation,
-         timeInGame,
-         gameOptionsCode,
-         vendorId,
-         deviceId,
-         processMemory,
-         pageFileUsage,
-         physicalMemory,
-         pageFaultCount,
-         '%s.%d.%d.%d' % osInfo,
-         '%0.03f,%0.03f' % cpuSpeed,
-         '%d,%d' % (numCpuCores, numLogicalCpus),
-         apiName)
+                                                                                                                  deviation,
+                                                                                                                  numAvs,
+                                                                                                                  locationCode,
+                                                                                                                  timeInLocation,
+                                                                                                                  timeInGame,
+                                                                                                                  gameOptionsCode,
+                                                                                                                  vendorId,
+                                                                                                                  deviceId,
+                                                                                                                  processMemory,
+                                                                                                                  pageFileUsage,
+                                                                                                                  physicalMemory,
+                                                                                                                  pageFaultCount,
+                                                                                                                  '%s.%d.%d.%d' % osInfo,
+                                                                                                                  '%0.03f,%0.03f' % cpuSpeed,
+                                                                                                                  '%d,%d' % (
+                                                                                                                      numCpuCores, numLogicalCpus),
+                                                                                                                  apiName)
         print('frame rate: %s' % info)
         self.sendUpdate('setFrameRate', [fps,
-         deviation,
-         numAvs,
-         locationCode,
-         timeInLocation,
-         timeInGame,
-         gameOptionsCode,
-         vendorId,
-         deviceId,
-         processMemory,
-         pageFileUsage,
-         physicalMemory,
-         pageFaultCount,
-         osInfo,
-         cpuSpeed,
-         numCpuCores,
-         numLogicalCpus,
-         apiName])
+                                         deviation,
+                                         numAvs,
+                                         locationCode,
+                                         timeInLocation,
+                                         timeInGame,
+                                         gameOptionsCode,
+                                         vendorId,
+                                         deviceId,
+                                         processMemory,
+                                         pageFileUsage,
+                                         physicalMemory,
+                                         pageFaultCount,
+                                         osInfo,
+                                         cpuSpeed,
+                                         numCpuCores,
+                                         numLogicalCpus,
+                                         apiName])
 
     if __dev__:
 
         def handleDetectGarbageHotkey(self):
-            self._numClientGarbage = GarbageReport.b_checkForGarbageLeaks(wantReply=True)
+            self._numClientGarbage = GarbageReport.b_checkForGarbageLeaks(
+                wantReply=True)
             if self._numClientGarbage:
                 s = '%s client garbage cycles found, see log' % self._numClientGarbage
             else:
@@ -306,7 +359,8 @@ class TimeManager(DistributedObject.DistributedObject):
 
         def setNumAIGarbageLeaks(self, numLeaks):
             if self._numClientGarbage and numLeaks:
-                s = '%s client and %s AI garbage cycles found, see logs' % (self._numClientGarbage, numLeaks)
+                s = '%s client and %s AI garbage cycles found, see logs' % (
+                    self._numClientGarbage, numLeaks)
             elif numLeaks:
                 s = '0 client and %s AI garbage cycles found, see log' % numLeaks
             else:
@@ -323,7 +377,10 @@ class TimeManager(DistributedObject.DistributedObject):
         except IOError:
             pass
         else:
-            key = re.search('<key>ProductUserVisibleVersion</key>\\s*' + '<string>(.*?)</string>', theFile.read())
+            key = re.search(
+                '<key>ProductUserVisibleVersion</key>\\s*' +
+                '<string>(.*?)</string>',
+                theFile.read())
             theFile.close()
             if key is not None:
                 try:
@@ -333,9 +390,9 @@ class TimeManager(DistributedObject.DistributedObject):
                     minor = int(parts[1])
                     bugfix = int(parts[2])
                     result = (sys.platform,
-                     bugfix,
-                     major,
-                     minor)
+                              bugfix,
+                              major,
+                              minor)
                 except Exception as e:
                     self.notify.debug('getMacOsInfo %s' % str(e))
 

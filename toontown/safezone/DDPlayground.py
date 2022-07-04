@@ -8,6 +8,7 @@ from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
 from toontown.hood import Place
 
+
 class DDPlayground(Playground.Playground):
     notify = DirectNotifyGlobal.directNotify.newCategory('DDPlayground')
 
@@ -15,7 +16,11 @@ class DDPlayground(Playground.Playground):
         Playground.Playground.__init__(self, loader, parentFSM, doneEvent)
         self.cameraSubmerged = -1
         self.toonSubmerged = -1
-        self.activityFsm = ClassicFSM.ClassicFSM('Activity', [State.State('off', self.enterOff, self.exitOff, ['OnBoat']), State.State('OnBoat', self.enterOnBoat, self.exitOnBoat, ['off'])], 'off', 'off')
+        self.activityFsm = ClassicFSM.ClassicFSM(
+            'Activity', [
+                State.State(
+                    'off', self.enterOff, self.exitOff, ['OnBoat']), State.State(
+                    'OnBoat', self.enterOnBoat, self.exitOnBoat, ['off'])], 'off', 'off')
         self.activityFsm.enterInitialState()
 
     def load(self):

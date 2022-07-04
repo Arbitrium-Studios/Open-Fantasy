@@ -4,6 +4,7 @@ from otp.otpbase import OTPGlobals
 from otp.avatar.Avatar import teleportNotify
 from otp.friends import FriendResponseCodes
 
+
 class PlayerFriendsManager(DistributedObjectGlobal):
     notify = directNotify.newCategory('PlayerFriendsManager')
 
@@ -56,20 +57,27 @@ class PlayerFriendsManager(DistributedObjectGlobal):
             toName = friendInfo.playerName
         elif toAc == localAvatar.DISLid:
             toName = localAvatar.getName()
-        base.talkAssistant.receiveAccountTalk(None, None, fromAc, fromName, toAc, toName, message)
+        base.talkAssistant.receiveAccountTalk(
+            None, None, fromAc, fromName, toAc, toName, message)
         return
 
     def invitationFrom(self, playerId, avatarName):
-        messenger.send(OTPGlobals.PlayerFriendInvitationEvent, [playerId, avatarName])
+        messenger.send(
+            OTPGlobals.PlayerFriendInvitationEvent, [
+                playerId, avatarName])
 
     def retractInvite(self, playerId):
         messenger.send(OTPGlobals.PlayerFriendRetractInviteEvent, [playerId])
 
     def rejectInvite(self, playerId, reason):
-        messenger.send(OTPGlobals.PlayerFriendRejectInviteEvent, [playerId, reason])
+        messenger.send(
+            OTPGlobals.PlayerFriendRejectInviteEvent, [
+                playerId, reason])
 
     def rejectRemove(self, playerId, reason):
-        messenger.send(OTPGlobals.PlayerFriendRejectRemoveEvent, [playerId, reason])
+        messenger.send(
+            OTPGlobals.PlayerFriendRejectRemoveEvent, [
+                playerId, reason])
 
     def secretResponse(self, secret):
         print('secretResponse %s' % secret)
@@ -85,28 +93,36 @@ class PlayerFriendsManager(DistributedObjectGlobal):
 
     def invitationResponse(self, playerId, respCode, context):
         if respCode == FriendResponseCodes.INVITATION_RESP_DECLINE:
-            messenger.send(OTPGlobals.PlayerFriendRejectInviteEvent, [playerId, respCode])
+            messenger.send(
+                OTPGlobals.PlayerFriendRejectInviteEvent, [
+                    playerId, respCode])
         elif respCode == FriendResponseCodes.INVITATION_RESP_NEW_FRIENDS:
             pass
 
     def updatePlayerFriend(self, id, info, isNewFriend):
-        self.notify.warning('updatePlayerFriend: %s, %s, %s' % (id, info, isNewFriend))
+        self.notify.warning(
+            'updatePlayerFriend: %s, %s, %s' %
+            (id, info, isNewFriend))
         info.calcUnderstandableYesNo()
         if info.playerName[0:5] == 'Guest':
             info.playerName = 'Guest ' + info.playerName[5:]
         if id not in self.playerFriendsList:
             self.playerFriendsList.add(id)
             self.playerId2Info[id] = info
-            messenger.send(OTPGlobals.PlayerFriendAddEvent, [id, info, isNewFriend])
+            messenger.send(
+                OTPGlobals.PlayerFriendAddEvent, [
+                    id, info, isNewFriend])
         elif id in self.playerId2Info:
             if not self.playerId2Info[id].onlineYesNo and info.onlineYesNo:
                 self.playerId2Info[id] = info
                 messenger.send('playerOnline', [id])
-                base.talkAssistant.receiveFriendAccountUpdate(id, info.playerName, info.onlineYesNo)
+                base.talkAssistant.receiveFriendAccountUpdate(
+                    id, info.playerName, info.onlineYesNo)
             elif self.playerId2Info[id].onlineYesNo and not info.onlineYesNo:
                 self.playerId2Info[id] = info
                 messenger.send('playerOffline', [id])
-                base.talkAssistant.receiveFriendAccountUpdate(id, info.playerName, info.onlineYesNo)
+                base.talkAssistant.receiveFriendAccountUpdate(
+                    id, info.playerName, info.onlineYesNo)
         if not self.askAvatarKnownHere(info.avatarId):
             self.requestAvatarInfo(info.avatarId)
         self.playerId2Info[id] = info

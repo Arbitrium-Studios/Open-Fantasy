@@ -2,6 +2,7 @@ from . import AnimatedProp
 from direct.actor import Actor
 from direct.interval.IntervalGlobal import *
 
+
 class PetShopFishAnimatedProp(AnimatedProp.AnimatedProp):
 
     def __init__(self, node):

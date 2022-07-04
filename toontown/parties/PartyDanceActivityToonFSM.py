@@ -4,12 +4,15 @@ from otp.otpbase import PythonUtil
 from direct.interval.MetaInterval import Sequence
 from toontown.parties.PartyGlobals import DanceReverseLoopAnims, ToonDancingStates
 
+
 class PartyDanceActivityToonFSM(FSM):
     notify = directNotify.newCategory('PartyDanceActivityToonFSM')
 
     def __init__(self, avId, activity, h):
         FSM.__init__(self, self.__class__.__name__)
-        self.notify.debug('init : avId = %s, activity = %s ' % (avId, activity))
+        self.notify.debug(
+            'init : avId = %s, activity = %s ' %
+            (avId, activity))
         self.avId = avId
         self.activity = activity
         self.isLocal = avId == base.localAvatar.doId
@@ -19,9 +22,9 @@ class PartyDanceActivityToonFSM(FSM):
         self.danceMoveSequence = None
         self.lastAnim = None
         self.defaultTransitions = {'Init': ['Run', 'DanceMove', 'Cleanup'],
-         'DanceMove': ['Run', 'DanceMove', 'Cleanup'],
-         'Run': ['Run', 'DanceMove', 'Cleanup'],
-         'Cleanup': []}
+                                   'DanceMove': ['Run', 'DanceMove', 'Cleanup'],
+                                   'Run': ['Run', 'DanceMove', 'Cleanup'],
+                                   'Cleanup': []}
         self.enteredAlready = False
         return
 
@@ -64,14 +67,17 @@ class PartyDanceActivityToonFSM(FSM):
     def exitCleanup(self):
         pass
 
-    def enterDanceMove(self, anim = ''):
+    def enterDanceMove(self, anim=''):
         if self.lastAnim is None and anim == '':
             self.toon.loop('victory', fromFrame=98, toFrame=122)
         else:
             if anim == '':
                 anim = self.lastAnim
             if anim in DanceReverseLoopAnims:
-                self.danceMoveSequence = Sequence(self.toon.actorInterval(anim, loop=0), self.toon.actorInterval(anim, loop=0, playRate=-1.0))
+                self.danceMoveSequence = Sequence(
+                    self.toon.actorInterval(
+                        anim, loop=0), self.toon.actorInterval(
+                        anim, loop=0, playRate=-1.0))
                 self.danceMoveSequence.loop()
             else:
                 self.toon.loop(anim)

@@ -7,7 +7,8 @@ from toontown.toonbase import TTLocalizer
 
 
 class DistributedLeaderBoardAI(DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLeaderBoardAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedLeaderBoardAI')
 
     def __init__(self, air, name, x, y, z, h, p, r):
         DistributedObjectAI.__init__(self, air)
@@ -20,7 +21,8 @@ class DistributedLeaderBoardAI(DistributedObjectAI):
     def announceGenerate(self):
         DistributedObjectAI.announceGenerate(self)
         self.accept('UpdateRaceRecord', self.handleUpdateRaceRecord)
-        self.accept('GS_LeaderBoardSwap' + str(self.zoneId), self.updateDisplay)
+        self.accept('GS_LeaderBoardSwap' +
+                    str(self.zoneId), self.updateDisplay)
 
     def getName(self):
         return self.name
@@ -39,7 +41,9 @@ class DistributedLeaderBoardAI(DistributedObjectAI):
         if trackId not in self.records:
             return
 
-        self.records[trackId][period] = [(x[0], x[3]) for x in self.air.raceMgr.getRecords(trackId, period)]
+        self.records[trackId][period] = [
+            (x[0], x[3]) for x in self.air.raceMgr.getRecords(
+                trackId, period)]
 
     def updateDisplay(self):
         self.currentIndex += 1
@@ -48,5 +52,9 @@ class DistributedLeaderBoardAI(DistributedObjectAI):
 
         trackName = TTLocalizer.KartRace_TrackNames[self.subscriptions[self.currentIndex][0]]
         periodName = TTLocalizer.RecordPeriodStrings[self.subscriptions[self.currentIndex][1]]
-        leaderList = self.records[self.subscriptions[self.currentIndex][0]][self.subscriptions[self.currentIndex][1]]
-        self.sendUpdate('setDisplay', [pickle.dumps((trackName, periodName, leaderList))])
+        leaderList = self.records[self.subscriptions[self.currentIndex]
+                                  [0]][self.subscriptions[self.currentIndex][1]]
+        self.sendUpdate(
+            'setDisplay', [
+                pickle.dumps(
+                    (trackName, periodName, leaderList))])

@@ -5,12 +5,15 @@ from direct.showbase.DirectObject import DirectObject
 from otp.chat.WhiteList import WhiteList
 from toontown.toonbase import TTLocalizer
 
+
 class TTWhiteList(WhiteList, DirectObject):
     RedownloadTaskName = 'RedownloadWhitelistTask'
     WhitelistBaseDir = ConfigVariableString('whitelist-base-dir', '').value
-    WhitelistStageDir = ConfigVariableString('whitelist-stage-dir', 'whitelist').value
+    WhitelistStageDir = ConfigVariableString(
+        'whitelist-stage-dir', 'whitelist').value
     WhitelistOverHttp = ConfigVariableBool('whitelist-over-http', False).value
-    WhitelistFileName = ConfigVariableString('whitelist-filename', 'twhitelist.dat').value
+    WhitelistFileName = ConfigVariableString(
+        'whitelist-filename', 'twhitelist.dat').value
 
     def __init__(self):
         DirectObject.__init__(self)
@@ -18,7 +21,8 @@ class TTWhiteList(WhiteList, DirectObject):
         self.startRedownload = datetime.datetime.now()
         self.endRedownload = datetime.datetime.now()
         self.percentDownloaded = 0.0
-        self.notify = DirectNotifyGlobal.directNotify.newCategory('TTWhiteList')
+        self.notify = DirectNotifyGlobal.directNotify.newCategory(
+            'TTWhiteList')
         vfs = VirtualFileSystem.getGlobalPtr()
         filename = Filename('twhitelist.dat')
         searchPath = DSearchPath()
@@ -76,27 +80,38 @@ class TTWhiteList(WhiteList, DirectObject):
             self.updateWhitelist()
 
     def getWhitelistUrl(self):
-        result = ConfigVariableString('fallback-whitelist-url', 'http://cdn.toontown.disney.go.com/toontown/en/').value
+        result = ConfigVariableString(
+            'fallback-whitelist-url',
+            'http://cdn.toontown.disney.go.com/toontown/en/').value
         override = ConfigVariableString('whitelist-url', '').value
         if override:
-            self.notify.info('got an override url,  using %s for the whitelist' % override)
+            self.notify.info(
+                'got an override url,  using %s for the whitelist' %
+                override)
             result = override
         else:
             try:
                 launcherUrl = base.launcher.getValue('GAME_WHITELIST_URL', '')
                 if launcherUrl:
                     result = launcherUrl
-                    self.notify.info('got GAME_WHITELIST_URL from launcher using %s' % result)
+                    self.notify.info(
+                        'got GAME_WHITELIST_URL from launcher using %s' %
+                        result)
                 else:
-                    self.notify.info('blank GAME_WHITELIST_URL from launcher, using %s' % result)
-            except:
-                self.notify.warning('got exception getting GAME_WHITELIST_URL from launcher, using %s' % result)
+                    self.notify.info(
+                        'blank GAME_WHITELIST_URL from launcher, using %s' %
+                        result)
+            except BaseException:
+                self.notify.warning(
+                    'got exception getting GAME_WHITELIST_URL from launcher, using %s' %
+                    result)
 
         return result
 
     def addDownloadingTextTask(self):
         self.removeDownloadingTextTask()
-        task = taskMgr.doMethodLater(1, self.loadingTextTask, 'WhitelistDownloadingTextTask')
+        task = taskMgr.doMethodLater(
+            1, self.loadingTextTask, 'WhitelistDownloadingTextTask')
         task.startTime = globalClock.getFrameTime()
         self.loadingTextTask(task)
 
@@ -105,7 +120,10 @@ class TTWhiteList(WhiteList, DirectObject):
 
     def loadingTextTask(self, task):
         timeIndex = int(globalClock.getFrameTime() - task.startTime) % 3
-        timeStrs = (TTLocalizer.NewsPageDownloadingNews0, TTLocalizer.NewsPageDownloadingNews1, TTLocalizer.NewsPageDownloadingNews2)
+        timeStrs = (
+            TTLocalizer.NewsPageDownloadingNews0,
+            TTLocalizer.NewsPageDownloadingNews1,
+            TTLocalizer.NewsPageDownloadingNews2)
         textToDisplay = timeStrs[timeIndex] % int(self.percentDownloaded * 100)
         return task.again
 

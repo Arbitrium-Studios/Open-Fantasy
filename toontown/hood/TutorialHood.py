@@ -4,10 +4,12 @@ from toontown.town import TutorialTownLoader
 from toontown.toonbase.ToontownGlobals import *
 from . import SkyUtil
 
+
 class TutorialHood(ToonHood.ToonHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
-        ToonHood.ToonHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
+        ToonHood.ToonHood.__init__(
+            self, parentFSM, doneEvent, dnaStore, hoodId)
         self.id = Tutorial
         self.townLoaderClass = TutorialTownLoader.TutorialTownLoader
         self.safeZoneLoaderClass = None

@@ -37,6 +37,7 @@ OffScreen = 1
 Thought = 2
 ThoughtPrefix = '.'
 
+
 def isThought(message):
     if len(message) == 0:
         return 0

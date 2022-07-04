@@ -3,6 +3,7 @@ from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from toontown.hood import ZoneUtil
 
+
 class TutorialManager(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('TutorialManager')
     neverDisable = 1
@@ -36,7 +37,12 @@ class TutorialManager(DistributedObject.DistributedObject):
 
     def enterTutorial(self, branchZone, streetZone, shopZone, hqZone):
         base.localAvatar.cantLeaveGame = 1
-        ZoneUtil.overrideOn(branch=branchZone, exteriorList=[streetZone], interiorList=[shopZone, hqZone])
+        ZoneUtil.overrideOn(
+            branch=branchZone,
+            exteriorList=[streetZone],
+            interiorList=[
+                shopZone,
+                hqZone])
         messenger.send('startTutorial', [shopZone])
         self.acceptOnce('stopTutorial', self.__handleStopTutorial)
         self.acceptOnce('toonArrivedTutorial', self.d_toonArrived)

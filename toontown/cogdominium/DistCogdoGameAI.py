@@ -6,6 +6,7 @@ from toontown.cogdominium import CogdoGameConsts
 from toontown.cogdominium.DistCogdoGameBase import DistCogdoGameBase
 from otp.ai.Barrier import Barrier
 
+
 class SadCallbackToken:
     pass
 
@@ -47,7 +48,9 @@ class DistCogdoGameAI(DistCogdoGameBase, DistributedObjectAI):
     def generate(self):
         DistributedObjectAI.generate(self)
         self._sadToken2callback = {}
-        self.notify.debug('difficulty: %s, safezoneId: %s' % (self.getDifficulty(), self.getSafezoneId()))
+        self.notify.debug(
+            'difficulty: %s, safezoneId: %s' %
+            (self.getDifficulty(), self.getSafezoneId()))
 
     def getInteriorId(self):
         return self._interior.doId
@@ -103,7 +106,8 @@ class DistCogdoGameAI(DistCogdoGameBase, DistributedObjectAI):
     def setDifficultyOverrides(self, difficultyOverride, exteriorZoneOverride):
         self.difficultyOverride = difficultyOverride
         if self.difficultyOverride is not None:
-            self.difficultyOverride = CogdoGameConsts.QuantizeDifficultyOverride(difficultyOverride)
+            self.difficultyOverride = CogdoGameConsts.QuantizeDifficultyOverride(
+                difficultyOverride)
 
         self.exteriorZoneOverride = exteriorZoneOverride
 
@@ -143,7 +147,8 @@ class DistCogdoGameAI(DistCogdoGameBase, DistributedObjectAI):
         if senderId in self.getToonIds():
             return True
 
-        self._reportSuspiciousEvent(senderId, 'Not currently playing CogDo Game.')
+        self._reportSuspiciousEvent(
+            senderId, 'Not currently playing CogDo Game.')
         return False
 
     def _reportSuspiciousEvent(self, senderId, message):
@@ -198,8 +203,14 @@ class DistCogdoGameAI(DistCogdoGameBase, DistributedObjectAI):
 
     def enterIntro(self):
         self.sendUpdate('setIntroStart', [])
-        self._introBarrier = Barrier('intro', self.uniqueName('intro'), self.getToonIds(), 1 << 20, doneFunc = self._handleIntroBarrierDone)
-        self._sadToken = self._registerSadCallback(self._handleSadToonDuringIntro)
+        self._introBarrier = Barrier(
+            'intro',
+            self.uniqueName('intro'),
+            self.getToonIds(),
+            1 << 20,
+            doneFunc=self._handleIntroBarrierDone)
+        self._sadToken = self._registerSadCallback(
+            self._handleSadToonDuringIntro)
 
     def exitIntro(self):
         self._unregisterSadCallback(self._sadToken)
@@ -213,7 +224,8 @@ class DistCogdoGameAI(DistCogdoGameBase, DistributedObjectAI):
     def setAvatarReady(self):
         senderId = self.air.getAvatarIdFromSender()
         if senderId not in self.getToonIds():
-            self.logSuspiciousEvent(senderId, 'CogdoGameAI.setAvatarReady: unknown avatar')
+            self.logSuspiciousEvent(
+                senderId, 'CogdoGameAI.setAvatarReady: unknown avatar')
             return
 
         if hasattr(self, '_introBarrier') and self._introBarrier:
@@ -230,7 +242,7 @@ class DistCogdoGameAI(DistCogdoGameBase, DistributedObjectAI):
     def exitGame(self):
         pass
 
-    def _handleGameFinished(self, overrideEndless = False):
+    def _handleGameFinished(self, overrideEndless=False):
         if overrideEndless or not (self.EndlessCogdoGames):
             self.fsm.request('Finish')
 
@@ -242,7 +254,7 @@ class DistCogdoGameAI(DistCogdoGameBase, DistributedObjectAI):
         if self.fsm.getCurrentState().getName() == 'Intro':
             self.fsm.request('Game')
 
-        self._handleGameFinished(overrideEndless = True)
+        self._handleGameFinished(overrideEndless=True)
         self.announceGameDone()
 
     def wasEnded(self):

@@ -32,9 +32,12 @@ class AstronLoginManager(DistributedObjectGlobal):
     def createAvatarResponse(self, avId):
         messenger.send('nameShopCreateAvatarDone', [avId])
 
-    def sendSetNamePattern(self, avId, p1, f1, p2, f2, p3, f3, p4, f4, callback):
+    def sendSetNamePattern(self, avId, p1, f1, p2, f2,
+                           p3, f3, p4, f4, callback):
         self._callback = callback
-        self.sendUpdate('setNamePattern', [avId, p1, f1, p2, f2, p3, f3, p4, f4])
+        self.sendUpdate(
+            'setNamePattern', [
+                avId, p1, f1, p2, f2, p3, f3, p4, f4])
 
     def namePatternAnswer(self, avId, status):
         self._callback(avId, status)

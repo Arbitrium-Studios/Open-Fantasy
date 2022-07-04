@@ -5,8 +5,11 @@ from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 from direct.fsm import FSM
 
-class DistributedLawbotBossGavelAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLawbotBossGavelAI')
+
+class DistributedLawbotBossGavelAI(
+        DistributedObjectAI.DistributedObjectAI, FSM.FSM):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedLawbotBossGavelAI')
 
     def __init__(self, air, boss, index):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
@@ -17,7 +20,8 @@ class DistributedLawbotBossGavelAI(DistributedObjectAI.DistributedObjectAI, FSM.
         cs = CollisionSphere(0, -6, 0, 6)
         cn.addSolid(cs)
         self.goonShield = NodePath(cn)
-        self.goonShield.setPosHpr(*ToontownGlobals.LawbotBossGavelPosHprs[self.index])
+        self.goonShield.setPosHpr(
+            *ToontownGlobals.LawbotBossGavelPosHprs[self.index])
         self.avId = 0
         self.objectId = 0
 
@@ -63,7 +67,7 @@ class DistributedLawbotBossGavelAI(DistributedObjectAI.DistributedObjectAI, FSM.
             self.request('Free')
 
     def __getCraneId(self, avId):
-        if self.boss and self.boss.cranes != None:
+        if self.boss and self.boss.cranes is not None:
             for crane in self.boss.cranes:
                 if crane.avId == avId:
                     return crane.doId

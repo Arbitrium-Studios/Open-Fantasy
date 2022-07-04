@@ -3,6 +3,7 @@ from direct.particles import ParticleEffect
 from direct.directnotify import DirectNotifyGlobal
 import os
 
+
 class Drift(NodePath):
 
     def __init__(self, parent, renderParent):
@@ -15,13 +16,20 @@ class Drift(NodePath):
         self.effect = ParticleEffect.ParticleEffect()
         particleSearchPath = DSearchPath()
         if __debug__:
-            particleSearchPath.appendDirectory(Filename('resources/phase_3.5/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_4/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_5/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_6/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_7/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_8/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_9/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_3.5/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_4/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_5/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_6/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_7/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_8/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_9/etc'))
         pfile = Filename('drift.ptf')
         found = vfs.resolveFilename(pfile, particleSearchPath)
         if not found:

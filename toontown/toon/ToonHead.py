@@ -9,71 +9,87 @@ from direct.fsm.State import State
 from direct.directnotify import DirectNotifyGlobal
 if not ConfigVariableBool('want-new-anims', 1).value:
     HeadDict = {'dls': '/models/char/dogMM_Shorts-head-',
-     'dss': '/models/char/dogMM_Skirt-head-',
-     'dsl': '/models/char/dogSS_Shorts-head-',
-     'dll': '/models/char/dogLL_Shorts-head-',
-     'c': '/models/char/cat-heads-',
-     'h': '/models/char/horse-heads-',
-     'm': '/models/char/mouse-heads-',
-     'r': '/models/char/rabbit-heads-',
-     'f': '/models/char/duck-heads-',
-     'p': '/models/char/monkey-heads-',
-     'b': '/models/char/bear-heads-',
-     's': '/models/char/pig-heads-'}
+                'dss': '/models/char/dogMM_Skirt-head-',
+                'dsl': '/models/char/dogSS_Shorts-head-',
+                'dll': '/models/char/dogLL_Shorts-head-',
+                'c': '/models/char/cat-heads-',
+                'h': '/models/char/horse-heads-',
+                'm': '/models/char/mouse-heads-',
+                'r': '/models/char/rabbit-heads-',
+                'f': '/models/char/duck-heads-',
+                'p': '/models/char/monkey-heads-',
+                'b': '/models/char/bear-heads-',
+                's': '/models/char/pig-heads-'}
 else:
     HeadDict = {'dls': '/models/char/tt_a_chr_dgm_shorts_head_',
-     'dss': '/models/char/tt_a_chr_dgm_skirt_head_',
-     'dsl': '/models/char/tt_a_chr_dgs_shorts_head_',
-     'dll': '/models/char/tt_a_chr_dgl_shorts_head_',
-     'c': '/models/char/cat-heads-',
-     'h': '/models/char/horse-heads-',
-     'm': '/models/char/mouse-heads-',
-     'r': '/models/char/rabbit-heads-',
-     'f': '/models/char/duck-heads-',
-     'p': '/models/char/monkey-heads-',
-     'b': '/models/char/bear-heads-',
-     's': '/models/char/pig-heads-'}
+                'dss': '/models/char/tt_a_chr_dgm_skirt_head_',
+                'dsl': '/models/char/tt_a_chr_dgs_shorts_head_',
+                'dll': '/models/char/tt_a_chr_dgl_shorts_head_',
+                'c': '/models/char/cat-heads-',
+                'h': '/models/char/horse-heads-',
+                'm': '/models/char/mouse-heads-',
+                'r': '/models/char/rabbit-heads-',
+                'f': '/models/char/duck-heads-',
+                'p': '/models/char/monkey-heads-',
+                'b': '/models/char/bear-heads-',
+                's': '/models/char/pig-heads-'}
 EyelashDict = {'d': '/models/char/dog-lashes',
- 'c': '/models/char/cat-lashes',
- 'h': '/models/char/horse-lashes',
- 'm': '/models/char/mouse-lashes',
- 'r': '/models/char/rabbit-lashes',
- 'f': '/models/char/duck-lashes',
- 'p': '/models/char/monkey-lashes',
- 'b': '/models/char/bear-lashes',
- 's': '/models/char/pig-lashes'}
+               'c': '/models/char/cat-lashes',
+               'h': '/models/char/horse-lashes',
+               'm': '/models/char/mouse-lashes',
+               'r': '/models/char/rabbit-lashes',
+               'f': '/models/char/duck-lashes',
+               'p': '/models/char/monkey-lashes',
+               'b': '/models/char/bear-lashes',
+               's': '/models/char/pig-lashes'}
 DogMuzzleDict = {'dls': '/models/char/dogMM_Shorts-headMuzzles-',
- 'dss': '/models/char/dogMM_Skirt-headMuzzles-',
- 'dsl': '/models/char/dogSS_Shorts-headMuzzles-',
- 'dll': '/models/char/dogLL_Shorts-headMuzzles-'}
+                 'dss': '/models/char/dogMM_Skirt-headMuzzles-',
+                 'dsl': '/models/char/dogSS_Shorts-headMuzzles-',
+                 'dll': '/models/char/dogLL_Shorts-headMuzzles-'}
+
 
 class ToonHead(Actor.Actor):
     notify = DirectNotifyGlobal.directNotify.newCategory('ToonHead')
-    EyesOpen = loader.loadTexture('phase_3/maps/eyes.jpg', 'phase_3/maps/eyes_a.rgb')
+    EyesOpen = loader.loadTexture(
+        'phase_3/maps/eyes.jpg',
+        'phase_3/maps/eyes_a.rgb')
     EyesOpen.setMinfilter(Texture.FTLinear)
     EyesOpen.setMagfilter(Texture.FTLinear)
-    EyesClosed = loader.loadTexture('phase_3/maps/eyesClosed.jpg', 'phase_3/maps/eyesClosed_a.rgb')
+    EyesClosed = loader.loadTexture(
+        'phase_3/maps/eyesClosed.jpg',
+        'phase_3/maps/eyesClosed_a.rgb')
     EyesClosed.setMinfilter(Texture.FTLinear)
     EyesClosed.setMagfilter(Texture.FTLinear)
-    EyesSadOpen = loader.loadTexture('phase_3/maps/eyesSad.jpg', 'phase_3/maps/eyesSad_a.rgb')
+    EyesSadOpen = loader.loadTexture(
+        'phase_3/maps/eyesSad.jpg',
+        'phase_3/maps/eyesSad_a.rgb')
     EyesSadOpen.setMinfilter(Texture.FTLinear)
     EyesSadOpen.setMagfilter(Texture.FTLinear)
-    EyesSadClosed = loader.loadTexture('phase_3/maps/eyesSadClosed.jpg', 'phase_3/maps/eyesSadClosed_a.rgb')
+    EyesSadClosed = loader.loadTexture(
+        'phase_3/maps/eyesSadClosed.jpg',
+        'phase_3/maps/eyesSadClosed_a.rgb')
     EyesSadClosed.setMinfilter(Texture.FTLinear)
     EyesSadClosed.setMagfilter(Texture.FTLinear)
-    EyesAngryOpen = loader.loadTexture('phase_3/maps/eyesAngry.jpg', 'phase_3/maps/eyesAngry_a.rgb')
+    EyesAngryOpen = loader.loadTexture(
+        'phase_3/maps/eyesAngry.jpg',
+        'phase_3/maps/eyesAngry_a.rgb')
     EyesAngryOpen.setMinfilter(Texture.FTLinear)
     EyesAngryOpen.setMagfilter(Texture.FTLinear)
-    EyesAngryClosed = loader.loadTexture('phase_3/maps/eyesAngryClosed.jpg', 'phase_3/maps/eyesAngryClosed_a.rgb')
+    EyesAngryClosed = loader.loadTexture(
+        'phase_3/maps/eyesAngryClosed.jpg',
+        'phase_3/maps/eyesAngryClosed_a.rgb')
     EyesAngryClosed.setMinfilter(Texture.FTLinear)
     EyesAngryClosed.setMagfilter(Texture.FTLinear)
-    EyesSurprised = loader.loadTexture('phase_3/maps/eyesSurprised.jpg', 'phase_3/maps/eyesSurprised_a.rgb')
+    EyesSurprised = loader.loadTexture(
+        'phase_3/maps/eyesSurprised.jpg',
+        'phase_3/maps/eyesSurprised_a.rgb')
     EyesSurprised.setMinfilter(Texture.FTLinear)
     EyesSurprised.setMagfilter(Texture.FTLinear)
     Muzzle = loader.loadTexture('phase_3/maps/muzzleShrtGeneric.jpg')
     Muzzle.setMinfilter(Texture.FTLinear)
     Muzzle.setMagfilter(Texture.FTLinear)
-    MuzzleSurprised = loader.loadTexture('phase_3/maps/muzzleShortSurprised.jpg')
+    MuzzleSurprised = loader.loadTexture(
+        'phase_3/maps/muzzleShortSurprised.jpg')
     MuzzleSurprised.setMinfilter(Texture.FTLinear)
     MuzzleSurprised.setMagfilter(Texture.FTLinear)
     LeftA = Point3(0.06, 0.0, 0.14)
@@ -84,15 +100,19 @@ class ToonHead(Actor.Actor):
     RightB = Point3(-0.06, 0.0, 0.14)
     RightC = Point3(-0.06, 0.0, 0.0)
     RightD = Point3(0.05, 0.0, 0.0)
-    LeftAD = Point3(LeftA[0] - LeftA[2] * (LeftD[0] - LeftA[0]) / (LeftD[2] - LeftA[2]), 0.0, 0.0)
-    LeftBC = Point3(LeftB[0] - LeftB[2] * (LeftC[0] - LeftB[0]) / (LeftC[2] - LeftB[2]), 0.0, 0.0)
-    RightAD = Point3(RightA[0] - RightA[2] * (RightD[0] - RightA[0]) / (RightD[2] - RightA[2]), 0.0, 0.0)
-    RightBC = Point3(RightB[0] - RightB[2] * (RightC[0] - RightB[0]) / (RightC[2] - RightB[2]), 0.0, 0.0)
+    LeftAD = Point3(LeftA[0] - LeftA[2] * (LeftD[0] -
+                    LeftA[0]) / (LeftD[2] - LeftA[2]), 0.0, 0.0)
+    LeftBC = Point3(LeftB[0] - LeftB[2] * (LeftC[0] -
+                    LeftB[0]) / (LeftC[2] - LeftB[2]), 0.0, 0.0)
+    RightAD = Point3(RightA[0] - RightA[2] * (RightD[0] -
+                     RightA[0]) / (RightD[2] - RightA[2]), 0.0, 0.0)
+    RightBC = Point3(RightB[0] - RightB[2] * (RightC[0] -
+                     RightB[0]) / (RightC[2] - RightB[2]), 0.0, 0.0)
 
     def __init__(self):
         try:
             self.ToonHead_initialized
-        except:
+        except BaseException:
             self.ToonHead_initialized = 1
             Actor.Actor.__init__(self)
             self.toonName = 'ToonHead-' + str(self.this)
@@ -119,9 +139,12 @@ class ToonHead(Actor.Actor):
             self.randGen = random.Random()
             self.randGen.seed(random.random())
             self.eyelids = ClassicFSM('eyelids', [State('off', self.enterEyelidsOff, self.exitEyelidsOff, ['open', 'closed', 'surprised']),
-             State('open', self.enterEyelidsOpen, self.exitEyelidsOpen, ['closed', 'surprised', 'off']),
-             State('surprised', self.enterEyelidsSurprised, self.exitEyelidsSurprised, ['open', 'closed', 'off']),
-             State('closed', self.enterEyelidsClosed, self.exitEyelidsClosed, ['open', 'surprised', 'off'])], 'off', 'off')
+                                                  State(
+                'open', self.enterEyelidsOpen, self.exitEyelidsOpen, [
+                    'closed', 'surprised', 'off']),
+                State('surprised', self.enterEyelidsSurprised,
+                      self.exitEyelidsSurprised, ['open', 'closed', 'off']),
+                State('closed', self.enterEyelidsClosed, self.exitEyelidsClosed, ['open', 'surprised', 'off'])], 'off', 'off')
             self.eyelids.enterInitialState()
             self.emote = None
             self.__stareAtNode = NodePath()
@@ -135,7 +158,7 @@ class ToonHead(Actor.Actor):
     def delete(self):
         try:
             self.ToonHead_deleted
-        except:
+        except BaseException:
             self.ToonHead_deleted = 1
             taskMgr.remove(self.__blinkName)
             taskMgr.remove(self.__lookName)
@@ -161,20 +184,23 @@ class ToonHead(Actor.Actor):
 
         return
 
-    def setupHead(self, dna, forGui = 0):
+    def setupHead(self, dna, forGui=0):
         self.__height = self.generateToonHead(1, dna, ('1000',), forGui)
         self.generateToonColor(dna)
         animalStyle = dna.getAnimal()
         bodyScale = ToontownGlobals.toonBodyScales[animalStyle]
         headScale = ToontownGlobals.toonHeadScales[animalStyle]
-        self.getGeomNode().setScale(headScale[0] * bodyScale * 1.3, headScale[1] * bodyScale * 1.3, headScale[2] * bodyScale * 1.3)
+        self.getGeomNode().setScale(
+            headScale[0] * bodyScale * 1.3,
+            headScale[1] * bodyScale * 1.3,
+            headScale[2] * bodyScale * 1.3)
         if forGui:
             self.getGeomNode().setDepthWrite(1)
             self.getGeomNode().setDepthTest(1)
         if dna.getAnimal() == 'dog':
             self.loop('neutral')
 
-    def fitAndCenterHead(self, maxDim, forGui = 0):
+    def fitAndCenterHead(self, maxDim, forGui=0):
         p1 = Point3()
         p2 = Point3()
         self.calcTightBounds(p1, p2)
@@ -199,19 +225,20 @@ class ToonHead(Actor.Actor):
 
     def getRandomForwardLookAtPoint(self):
         x = self.randGen.choice((-0.8,
-         -0.5,
-         0,
-         0.5,
-         0.8))
+                                 -0.5,
+                                 0,
+                                 0.5,
+                                 0.8))
         z = self.randGen.choice((-0.5,
-         0,
-         0.5,
-         0.8))
+                                 0,
+                                 0.5,
+                                 0.8))
         return Point3(x, 1.5, z)
 
     def findSomethingToLookAt(self):
-        if self.lookAtPositionCallbackArgs != None:
-            pnt = self.lookAtPositionCallbackArgs[0].getLookAtPosition(self.lookAtPositionCallbackArgs[1], self.lookAtPositionCallbackArgs[2])
+        if self.lookAtPositionCallbackArgs is not None:
+            pnt = self.lookAtPositionCallbackArgs[0].getLookAtPosition(
+                self.lookAtPositionCallbackArgs[1], self.lookAtPositionCallbackArgs[2])
             self.startStareAt(self, pnt)
             return
         if self.randGen.random() < 0.33:
@@ -221,7 +248,7 @@ class ToonHead(Actor.Actor):
         self.lerpLookAt(lookAtPnt, blink=1)
         return
 
-    def generateToonHead(self, copy, style, lods, forGui = 0):
+    def generateToonHead(self, copy, style, lods, forGui=0):
         headStyle = style.head
         fix = None
         if headStyle == 'dls':
@@ -359,13 +386,19 @@ class ToonHead(Actor.Actor):
         else:
             ToonHead.notify.error('unknown head style: %s' % headStyle)
         if len(lods) == 1:
-            self.loadModel('phase_3' + filePrefix + lods[0], 'head', 'lodRoot', copy)
+            self.loadModel(
+                'phase_3' +
+                filePrefix +
+                lods[0],
+                'head',
+                'lodRoot',
+                copy)
             if not forGui:
                 pLoaded = self.loadPumpkin(headStyle[1], None, copy)
                 self.loadSnowMan(headStyle[1], None, copy)
             if not copy:
                 self.showAllParts('head')
-            if fix != None:
+            if fix is not None:
                 fix(style, None, copy)
             if not forGui:
                 if pLoaded:
@@ -383,7 +416,7 @@ class ToonHead(Actor.Actor):
                     self.loadSnowMan(headStyle[1], lod, copy)
                 if not copy:
                     self.showAllParts('head', lod)
-                if fix != None:
+                if fix is not None:
                     fix(style, lod, copy)
                 if not forGui:
                     if pLoaded:
@@ -402,7 +435,8 @@ class ToonHead(Actor.Actor):
         return headHeight
 
     def loadPumpkin(self, headStyle, lod, copy):
-        if hasattr(base, 'launcher') and (not base.launcher or base.launcher and base.launcher.getPhaseComplete(4)):
+        if hasattr(base, 'launcher') and (
+                not base.launcher or base.launcher and base.launcher.getPhaseComplete(4)):
             if not hasattr(self, 'pumpkins'):
                 self.pumpkins = NodePathCollection()
             ppath = 'phase_4/models/estate/pumpkin_'
@@ -434,10 +468,12 @@ class ToonHead(Actor.Actor):
                 del self.pumpkins
                 return False
         else:
-            ToonHead.notify.debug('phase_4 not complete yet. Postponing pumpkin head load.')
+            ToonHead.notify.debug(
+                'phase_4 not complete yet. Postponing pumpkin head load.')
 
     def loadSnowMan(self, headStyle, lod, copy):
-        if hasattr(base, 'launcher') and (not base.launcher or base.launcher and base.launcher.getPhaseComplete(4)):
+        if hasattr(base, 'launcher') and (
+                not base.launcher or base.launcher and base.launcher.getPhaseComplete(4)):
             if not hasattr(self, 'snowMen'):
                 self.snowMen = NodePathCollection()
             snowManPath = 'phase_4/models/props/tt_m_efx_snowmanHead_'
@@ -462,8 +498,8 @@ class ToonHead(Actor.Actor):
         else:
             ToonHead.notify.debug('phase_4 not loaded yet.')
 
-    def __fixPumpkin(self, style, lodName = None, copy = 1):
-        if lodName == None:
+    def __fixPumpkin(self, style, lodName=None, copy=1):
+        if lodName is None:
             searchRoot = self
         else:
             searchRoot = self.find('**/' + str(lodName))
@@ -474,20 +510,22 @@ class ToonHead(Actor.Actor):
     def enablePumpkins(self, enable):
         if not hasattr(self, 'pumpkins'):
             if len(self.__lods) == 1:
-                pLoaded = self.loadPumpkin(self.__headStyle[1], None, self.__copy)
+                pLoaded = self.loadPumpkin(
+                    self.__headStyle[1], None, self.__copy)
                 if pLoaded:
                     self.__fixPumpkin(self.__style, None, self.__copy)
             else:
                 for lod in self.__lods:
-                    pLoaded = self.loadPumpkin(self.__headStyle[1], lod, self.__copy)
+                    pLoaded = self.loadPumpkin(
+                        self.__headStyle[1], lod, self.__copy)
                     if pLoaded:
                         self.__fixPumpkin(self.__style, lod, self.__copy)
 
             if hasattr(self, 'pumpkins'):
                 for x in ['__lods',
-                 '__style',
-                 '__headStyle',
-                 '__copy']:
+                          '__style',
+                          '__headStyle',
+                          '__copy']:
                     if hasattr(self, '_ToonHead' + x):
                         delattr(self, '_ToonHead' + x)
 
@@ -559,7 +597,7 @@ class ToonHead(Actor.Actor):
             parts = self.findAllMatches('**/ear?-*')
             parts.setColor(style.getHeadColor())
 
-    def __fixEyes(self, style, forGui = 0):
+    def __fixEyes(self, style, forGui=0):
         mode = -3
         if forGui:
             mode = -2
@@ -568,11 +606,14 @@ class ToonHead(Actor.Actor):
                 self.drawInFront('eyes*', 'head-front*', mode, lodName=lodName)
                 if ConfigVariableBool('want-new-anims', 1).value:
                     if not self.find('**/joint_pupil*').isEmpty():
-                        self.drawInFront('joint_pupil*', 'eyes*', -1, lodName=lodName)
+                        self.drawInFront(
+                            'joint_pupil*', 'eyes*', -1, lodName=lodName)
                     else:
-                        self.drawInFront('def_*_pupil', 'eyes*', -1, lodName=lodName)
+                        self.drawInFront(
+                            'def_*_pupil', 'eyes*', -1, lodName=lodName)
                 else:
-                    self.drawInFront('joint_pupil*', 'eyes*', -1, lodName=lodName)
+                    self.drawInFront(
+                        'joint_pupil*', 'eyes*', -1, lodName=lodName)
 
             self.__eyes = self.getLOD(1000).find('**/eyes*')
             self.__lod500Eyes = self.getLOD(500).find('**/eyes*')
@@ -583,28 +624,40 @@ class ToonHead(Actor.Actor):
                 self.__lod500Eyes.setColorOff()
                 if ConfigVariableBool('want-new-anims', 1).value:
                     if not self.find('**/joint_pupilL*').isEmpty():
-                        self.__lod500lPupil = self.__lod500Eyes.find('**/joint_pupilL*')
-                        self.__lod500rPupil = self.__lod500Eyes.find('**/joint_pupilR*')
+                        self.__lod500lPupil = self.__lod500Eyes.find(
+                            '**/joint_pupilL*')
+                        self.__lod500rPupil = self.__lod500Eyes.find(
+                            '**/joint_pupilR*')
                     else:
-                        self.__lod500lPupil = self.__lod500Eyes.find('**/def_left_pupil*')
-                        self.__lod500rPupil = self.__lod500Eyes.find('**/def_right_pupil*')
+                        self.__lod500lPupil = self.__lod500Eyes.find(
+                            '**/def_left_pupil*')
+                        self.__lod500rPupil = self.__lod500Eyes.find(
+                            '**/def_right_pupil*')
                 else:
-                    self.__lod500lPupil = self.__lod500Eyes.find('**/joint_pupilL*')
-                    self.__lod500rPupil = self.__lod500Eyes.find('**/joint_pupilR*')
+                    self.__lod500lPupil = self.__lod500Eyes.find(
+                        '**/joint_pupilL*')
+                    self.__lod500rPupil = self.__lod500Eyes.find(
+                        '**/joint_pupilR*')
             if self.__lod250Eyes.isEmpty():
                 self.__lod250Eyes = None
             else:
                 self.__lod250Eyes.setColorOff()
                 if ConfigVariableBool('want-new-anims', 1).value:
                     if not self.find('**/joint_pupilL*').isEmpty():
-                        self.__lod250lPupil = self.__lod250Eyes.find('**/joint_pupilL*')
-                        self.__lod250rPupil = self.__lod250Eyes.find('**/joint_pupilR*')
+                        self.__lod250lPupil = self.__lod250Eyes.find(
+                            '**/joint_pupilL*')
+                        self.__lod250rPupil = self.__lod250Eyes.find(
+                            '**/joint_pupilR*')
                     else:
-                        self.__lod250lPupil = self.__lod250Eyes.find('**/def_left_pupil*')
-                        self.__lod250rPupil = self.__lod250Eyes.find('**/def_right_pupil*')
+                        self.__lod250lPupil = self.__lod250Eyes.find(
+                            '**/def_left_pupil*')
+                        self.__lod250rPupil = self.__lod250Eyes.find(
+                            '**/def_right_pupil*')
                 else:
-                    self.__lod250lPupil = self.__lod250Eyes.find('**/joint_pupilL*')
-                    self.__lod250rPupil = self.__lod250Eyes.find('**/joint_pupilR*')
+                    self.__lod250lPupil = self.__lod250Eyes.find(
+                        '**/joint_pupilL*')
+                    self.__lod250rPupil = self.__lod250Eyes.find(
+                        '**/joint_pupilR*')
         else:
             self.drawInFront('eyes*', 'head-front*', mode)
             if ConfigVariableBool('want-new-anims', 1).value:
@@ -641,9 +694,15 @@ class ToonHead(Actor.Actor):
             else:
                 leye = self.__eyes.attachNewNode('leye')
                 reye = self.__eyes.attachNewNode('reye')
-                lmat = Mat4(0.802174, 0.59709, 0, 0, -0.586191, 0.787531, 0.190197, 0, 0.113565, -0.152571, 0.981746, 0, -0.233634, 0.418062, 0.0196875, 1)
+                lmat = Mat4(0.802174, 0.59709, 0, 0, -
+                            0.586191, 0.787531, 0.190197, 0, 0.113565, -
+                            0.152571, 0.981746, 0, -
+                            0.233634, 0.418062, 0.0196875, 1)
                 leye.setMat(lmat)
-                rmat = Mat4(0.786788, -0.617224, 0, 0, 0.602836, 0.768447, 0.214658, 0, -0.132492, -0.16889, 0.976689, 0, 0.233634, 0.418062, 0.0196875, 1)
+                rmat = Mat4(0.786788, -
+                            0.617224, 0, 0, 0.602836, 0.768447, 0.214658, 0, -
+                            0.132492, -
+                            0.16889, 0.976689, 0, 0.233634, 0.418062, 0.0196875, 1)
                 reye.setMat(rmat)
                 self.__lpupil = leye.attachNewNode('lpupil')
                 self.__rpupil = reye.attachNewNode('rpupil')
@@ -680,8 +739,14 @@ class ToonHead(Actor.Actor):
             left2 = self.LeftBC + (self.LeftB - self.LeftBC) * y2
             right1 = self.RightAD + (self.RightA - self.RightAD) * y2
             right2 = self.RightBC + (self.RightB - self.RightBC) * y2
-        left0 = Point3(0.0, 0.0, left1[2] - left1[0] * (left2[2] - left1[2]) / (left2[0] - left1[0]))
-        right0 = Point3(0.0, 0.0, right1[2] - right1[0] * (right2[2] - right1[2]) / (right2[0] - right1[0]))
+        left0 = Point3(0.0, 0.0, left1[2] - left1[0] *
+                       (left2[2] - left1[2]) / (left2[0] - left1[0]))
+        right0 = Point3(0.0, 0.0, right1[2] -
+                        right1[0] *
+                        (right2[2] -
+                         right1[2]) /
+                        (right2[0] -
+                         right1[0]))
         if x < 0.0:
             x2 = -x
             left = left0 + (left2 - left0) * x2
@@ -694,7 +759,7 @@ class ToonHead(Actor.Actor):
         self.__rpupil.setPos(right)
 
     def __lookPupilsAt(self, node, point):
-        if node != None:
+        if node is not None:
             mat = node.getMat(self.__eyes)
             point = mat.xformPoint(point)
         distance = 1.0
@@ -706,13 +771,13 @@ class ToonHead(Actor.Actor):
         self.__setPupilDirection(x, y)
         return
 
-    def __lookHeadAt(self, node, point, frac = 1.0, lod = None):
+    def __lookHeadAt(self, node, point, frac=1.0, lod=None):
         reachedTarget = 1
-        if lod == None:
+        if lod is None:
             head = self.getPart('head', self.getLODNames()[0])
         else:
             head = self.getPart('head', lod)
-        if node != None:
+        if node is not None:
             headParent = head.getParent()
             mat = node.getMat(headParent)
             point = mat.xformPoint(point)
@@ -721,12 +786,17 @@ class ToonHead(Actor.Actor):
         scale = VBase3(0, 0, 0)
         hpr = VBase3(0, 0, 0)
         if decomposeMatrix(rot, scale, hpr, CSDefault):
-            hpr = VBase3(min(max(hpr[0], -60), 60), min(max(hpr[1], -20), 30), 0)
+            hpr = VBase3(min(max(hpr[0], -60), 60),
+                         min(max(hpr[1], -20), 30), 0)
             if frac != 1:
                 currentHpr = head.getHpr()
-                reachedTarget = abs(hpr[0] - currentHpr[0]) < 1.0 and abs(hpr[1] - currentHpr[1]) < 1.0
+                reachedTarget = abs(
+                    hpr[0] -
+                    currentHpr[0]) < 1.0 and abs(
+                    hpr[1] -
+                    currentHpr[1]) < 1.0
                 hpr = currentHpr + (hpr - currentHpr) * frac
-            if lod == None:
+            if lod is None:
                 for lodName in self.getLODNames():
                     head = self.getPart('head', lodName)
                     head.setHpr(hpr)
@@ -762,12 +832,13 @@ class ToonHead(Actor.Actor):
                 openString = 'open-short'
                 closedString = 'closed-short'
             self.__eyelashOpen = model.find('**/' + openString).copyTo(head)
-            self.__eyelashClosed = model.find('**/' + closedString).copyTo(head)
+            self.__eyelashClosed = model.find(
+                '**/' + closedString).copyTo(head)
             model.removeNode()
         return
 
-    def __fixHeadLongLong(self, style, lodName = None, copy = 1):
-        if lodName == None:
+    def __fixHeadLongLong(self, style, lodName=None, copy=1):
+        if lodName is None:
             searchRoot = self
         else:
             searchRoot = self.find('**/' + str(lodName))
@@ -780,10 +851,10 @@ class ToonHead(Actor.Actor):
 
         return
 
-    def __fixHeadLongShort(self, style, lodName = None, copy = 1):
+    def __fixHeadLongShort(self, style, lodName=None, copy=1):
         animalType = style.getAnimal()
         headStyle = style.head
-        if lodName == None:
+        if lodName is None:
             searchRoot = self
         else:
             searchRoot = self.find('**/' + str(lodName))
@@ -833,10 +904,10 @@ class ToonHead(Actor.Actor):
 
         return
 
-    def __fixHeadShortLong(self, style, lodName = None, copy = 1):
+    def __fixHeadShortLong(self, style, lodName=None, copy=1):
         animalType = style.getAnimal()
         headStyle = style.head
-        if lodName == None:
+        if lodName is None:
             searchRoot = self
         else:
             searchRoot = self.find('**/' + str(lodName))
@@ -886,8 +957,8 @@ class ToonHead(Actor.Actor):
 
         return
 
-    def __fixHeadShortShort(self, style, lodName = None, copy = 1):
-        if lodName == None:
+    def __fixHeadShortShort(self, style, lodName=None, copy=1):
+        if lodName is None:
             searchRoot = self
         else:
             searchRoot = self.find('**/' + str(lodName))
@@ -916,14 +987,18 @@ class ToonHead(Actor.Actor):
             taskMgr.doMethodLater(4.0, self.__blinkCloseEyes, self.__blinkName)
         else:
             self.eyelids.request('closed')
-            taskMgr.doMethodLater(0.125, self.__blinkOpenEyes, self.__blinkName)
+            taskMgr.doMethodLater(
+                0.125, self.__blinkOpenEyes, self.__blinkName)
         return Task.done
 
     def startBlink(self):
         taskMgr.remove(self.__blinkName)
         if self.__eyes:
             self.openEyes()
-        taskMgr.doMethodLater(self.randGen.random() * 4.0 + 1, self.__blinkCloseEyes, self.__blinkName)
+        taskMgr.doMethodLater(
+            self.randGen.random() * 4.0 + 1,
+            self.__blinkCloseEyes,
+            self.__blinkName)
 
     def stopBlink(self):
         taskMgr.remove(self.__blinkName)
@@ -958,9 +1033,10 @@ class ToonHead(Actor.Actor):
 
     def __stareAt(self, task):
         frac = 2 * globalClock.getDt()
-        reachedTarget = self.__lookHeadAt(self.__stareAtNode, self.__stareAtPoint, frac)
+        reachedTarget = self.__lookHeadAt(
+            self.__stareAtNode, self.__stareAtPoint, frac)
         self.__lookPupilsAt(self.__stareAtNode, self.__stareAtPoint)
-        if reachedTarget and self.__stareAtNode == None:
+        if reachedTarget and self.__stareAtNode is None:
             return Task.done
         else:
             return Task.cont
@@ -979,7 +1055,7 @@ class ToonHead(Actor.Actor):
             self.lookAtTrack.finish()
             self.lookAtTrack = None
         self.__stareAtNode = node
-        if point != None:
+        if point is not None:
             self.__stareAtPoint = point
         else:
             self.__stareAtPoint = self.__defaultStarePoint
@@ -987,7 +1063,7 @@ class ToonHead(Actor.Actor):
         taskMgr.add(self.__stareAt, self.__stareAtName)
         return
 
-    def lerpLookAt(self, point, time = 1.0, blink = 0):
+    def lerpLookAt(self, point, time=1.0, blink=0):
         taskMgr.remove(self.__stareAtName)
         if self.lookAtTrack:
             self.lookAtTrack.finish()
@@ -1018,10 +1094,40 @@ class ToonHead(Actor.Actor):
         returnToEyeCenterTime = time - lookToTgtTime - 0.5
         origin = Point3(0, 0, 0)
         blendType = 'easeOut'
-        self.lookAtTrack = Parallel(Sequence(LerpPosInterval(self.__lpupil, lookToTgtTime, endLpupil, blendType=blendType), Wait(0.5), LerpPosInterval(self.__lpupil, returnToEyeCenterTime, origin, blendType=blendType)), Sequence(LerpPosInterval(self.__rpupil, lookToTgtTime, endRpupil, blendType=blendType), Wait(0.5), LerpPosInterval(self.__rpupil, returnToEyeCenterTime, origin, blendType=blendType)), name=self.__stareAtName)
+        self.lookAtTrack = Parallel(
+            Sequence(
+                LerpPosInterval(
+                    self.__lpupil,
+                    lookToTgtTime,
+                    endLpupil,
+                    blendType=blendType),
+                Wait(0.5),
+                LerpPosInterval(
+                    self.__lpupil,
+                    returnToEyeCenterTime,
+                    origin,
+                    blendType=blendType)),
+            Sequence(
+                LerpPosInterval(
+                    self.__rpupil,
+                    lookToTgtTime,
+                    endRpupil,
+                    blendType=blendType),
+                Wait(0.5),
+                LerpPosInterval(
+                    self.__rpupil,
+                    returnToEyeCenterTime,
+                    origin,
+                    blendType=blendType)),
+            name=self.__stareAtName)
         for lodName in self.getLODNames():
             head = self.getPart('head', lodName)
-            self.lookAtTrack.append(LerpHprInterval(head, time, endHpr, blendType='easeInOut'))
+            self.lookAtTrack.append(
+                LerpHprInterval(
+                    head,
+                    time,
+                    endHpr,
+                    blendType='easeInOut'))
 
         self.lookAtTrack.start()
         return 1
@@ -1168,21 +1274,37 @@ class ToonHead(Actor.Actor):
                     muzzle = self.find('**/' + lodName + '/**/muzzle*')
                     if lodName == '1000' or lodName == '500':
                         filePrefix = DogMuzzleDict[style.head]
-                        muzzles = loader.loadModel('phase_3' + filePrefix + lodName)
+                        muzzles = loader.loadModel(
+                            'phase_3' + filePrefix + lodName)
                         if ConfigVariableBool('want-new-anims', 1).value:
-                            if not self.find('**/' + lodName + '/**/__Actor_head/def_head').isEmpty():
-                                muzzles.reparentTo(self.find('**/' + lodName + '/**/__Actor_head/def_head'))
+                            if not self.find(
+                                    '**/' + lodName + '/**/__Actor_head/def_head').isEmpty():
+                                muzzles.reparentTo(
+                                    self.find(
+                                        '**/' +
+                                        lodName +
+                                        '/**/__Actor_head/def_head'))
                             else:
-                                muzzles.reparentTo(self.find('**/' + lodName + '/**/joint_toHead'))
+                                muzzles.reparentTo(
+                                    self.find(
+                                        '**/' +
+                                        lodName +
+                                        '/**/joint_toHead'))
                         elif self.find('**/' + lodName + '/**/joint_toHead'):
-                            muzzles.reparentTo(self.find('**/' + lodName + '/**/joint_toHead'))
-                surpriseMuzzle = self.find('**/' + lodName + '/**/muzzle*surprise')
+                            muzzles.reparentTo(
+                                self.find(
+                                    '**/' +
+                                    lodName +
+                                    '/**/joint_toHead'))
+                surpriseMuzzle = self.find(
+                    '**/' + lodName + '/**/muzzle*surprise')
                 angryMuzzle = self.find('**/' + lodName + '/**/muzzle*angry')
                 sadMuzzle = self.find('**/' + lodName + '/**/muzzle*sad')
                 smileMuzzle = self.find('**/' + lodName + '/**/muzzle*smile')
                 laughMuzzle = self.find('**/' + lodName + '/**/muzzle*laugh')
                 self.__muzzles.append(muzzle)
-                hideAddNonEmptyItemToList(surpriseMuzzle, self.__surpriseMuzzles)
+                hideAddNonEmptyItemToList(
+                    surpriseMuzzle, self.__surpriseMuzzles)
                 hideAddNonEmptyItemToList(angryMuzzle, self.__angryMuzzles)
                 hideAddNonEmptyItemToList(sadMuzzle, self.__sadMuzzles)
                 hideAddNonEmptyItemToList(smileMuzzle, self.__smileMuzzles)

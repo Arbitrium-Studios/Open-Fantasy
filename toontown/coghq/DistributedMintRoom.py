@@ -13,11 +13,13 @@ from toontown.toonbase import TTLocalizer
 if __dev__:
     from otp.level import EditorGlobals
 
+
 def getMintRoomReadyPostName(doId):
     return 'mintRoomReady-%s' % doId
 
 
-class DistributedMintRoom(DistributedLevel.DistributedLevel, MintRoomBase.MintRoomBase, MintRoom.MintRoom):
+class DistributedMintRoom(DistributedLevel.DistributedLevel,
+                          MintRoomBase.MintRoomBase, MintRoom.MintRoom):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMintRoom')
     EmulateEntrancePoint = False
 
@@ -145,7 +147,7 @@ class DistributedMintRoom(DistributedLevel.DistributedLevel, MintRoomBase.MintRo
         if self.mint is not None:
             self.mint.currentRoomName = MintRoomSpecs.CashbotMintRoomId2RoomName[self.roomId]
 
-        def printPos(self = self):
+        def printPos(self=self):
             thisZone = self.getZoneNode(LevelConstants.UberZoneEntId)
             pos = base.localAvatar.getPos(thisZone)
             h = base.localAvatar.getH(thisZone)
@@ -155,7 +157,9 @@ class DistributedMintRoom(DistributedLevel.DistributedLevel, MintRoomBase.MintRo
                 floorNum = self.mint.floorNum
             else:
                 floorNum = '???'
-            posStr = 'X: %.3f' % pos[0] + '\nY: %.3f' % pos[1] + '\nZ: %.3f' % pos[2] + '\nH: %.3f' % h + '\nmintId: %s' % self.mintId + '\nfloor: %s' % floorNum + '\nroomId: %s' % self.roomId + '\nroomName: %s' % roomName
+            posStr = 'X: %.3f' % pos[0] + '\nY: %.3f' % pos[1] + '\nZ: %.3f' % pos[2] + '\nH: %.3f' % h + \
+                '\nmintId: %s' % self.mintId + '\nfloor: %s' % floorNum + \
+                '\nroomId: %s' % self.roomId + '\nroomName: %s' % roomName
             base.localAvatar.setChatAbsolute(posStr, CFThought | CFTimeout)
             return
 
@@ -175,7 +179,8 @@ class DistributedMintRoom(DistributedLevel.DistributedLevel, MintRoomBase.MintRo
         MintRoom.MintRoom.exit(self)
         if hasattr(self, 'suits'):
             del self.suits
-        if hasattr(self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
+        if hasattr(
+                self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
             self.cr.relatedObjectMgr.abortRequest(self.relatedObjectMgrRequest)
             del self.relatedObjectMgrRequest
         bboard.remove(self.getReadyPostName())
@@ -215,7 +220,8 @@ class DistributedMintRoom(DistributedLevel.DistributedLevel, MintRoomBase.MintRo
 
     def __str__(self):
         if hasattr(self, 'roomId'):
-            return '%s %s: %s' % (self.__class__.__name__, self.roomId, MintRoomSpecs.CashbotMintRoomId2RoomName[self.roomId])
+            return '%s %s: %s' % (self.__class__.__name__, self.roomId,
+                                  MintRoomSpecs.CashbotMintRoomId2RoomName[self.roomId])
         else:
             return 'DistributedMintRoom'
 

@@ -5,6 +5,7 @@ from toontown.toonbase import ToontownGlobals
 from direct.task import Task
 SPIN_RATE = 1.25
 
+
 class DistributedDGFlower(DistributedObject.DistributedObject):
 
     def __init__(self, cr):
@@ -13,7 +14,8 @@ class DistributedDGFlower(DistributedObject.DistributedObject):
 
     def generate(self):
         DistributedObject.DistributedObject.generate(self)
-        self.bigFlower = loader.loadModel('phase_8/models/props/DG_flower-mod.bam')
+        self.bigFlower = loader.loadModel(
+            'phase_8/models/props/DG_flower-mod.bam')
         self.bigFlower.setPos(1.39, 92.91, 2.0)
         self.bigFlower.setScale(2.5)
         self.bigFlower.reparentTo(render)
@@ -60,5 +62,6 @@ class DistributedDGFlower(DistributedObject.DistributedObject):
 
     def setHeight(self, newHeight):
         pos = self.bigFlower.getPos()
-        self.flowerRaiseSeq = self.bigFlower.posInterval(0.5, (pos[0], pos[1], newHeight), name=self.taskName('DG-flowerRaise'))
+        self.flowerRaiseSeq = self.bigFlower.posInterval(
+            0.5, (pos[0], pos[1], newHeight), name=self.taskName('DG-flowerRaise'))
         self.flowerRaiseSeq.start()

@@ -13,8 +13,10 @@ import random
 import math
 from toontown.effects import Bubbles
 
+
 class DistributedFishingTarget(DistributedNode.DistributedNode):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedFishingTarget')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedFishingTarget')
     radius = 2.5
 
     def __init__(self, cr):
@@ -56,8 +58,10 @@ class DistributedFishingTarget(DistributedNode.DistributedNode):
     def setPondDoId(self, pondDoId):
         self.pond = base.cr.doId2do[pondDoId]
         self.pond.addTarget(self)
-        self.centerPoint = FishingTargetGlobals.getTargetCenter(self.pond.getArea())
-        self.maxRadius = FishingTargetGlobals.getTargetRadius(self.pond.getArea())
+        self.centerPoint = FishingTargetGlobals.getTargetCenter(
+            self.pond.getArea())
+        self.maxRadius = FishingTargetGlobals.getTargetRadius(
+            self.pond.getArea())
 
     def getDestPos(self, angle, radius):
         x = radius * math.cos(angle) + self.centerPoint[0]
@@ -70,7 +74,13 @@ class DistributedFishingTarget(DistributedNode.DistributedNode):
         pos = self.getDestPos(angle, radius)
         if self.track and self.track.isPlaying():
             self.track.finish()
-        self.track = Sequence(LerpPosInterval(self, time - ts, Point3(*pos), blendType='easeInOut'))
+        self.track = Sequence(
+            LerpPosInterval(
+                self,
+                time - ts,
+                Point3(
+                    *pos),
+                blendType='easeInOut'))
         self.track.start()
 
     def getRadius(self):

@@ -4,6 +4,7 @@ from toontown.toonbase.ToontownGlobals import *
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 
+
 class DistributedTreasure(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedTreasure')
 
@@ -43,9 +44,11 @@ class DistributedTreasure(DistributedObject.DistributedObject):
         self.loadModel(self.modelPath, self.modelFindString)
         self.startAnimation()
         self.nodePath.wrtReparentTo(render)
-        self.accept(self.uniqueName('entertreasureSphere'), self.handleEnterSphere)
+        self.accept(
+            self.uniqueName('entertreasureSphere'),
+            self.handleEnterSphere)
 
-    def handleEnterSphere(self, collEntry = None):
+    def handleEnterSphere(self, collEntry=None):
         localAvId = base.localAvatar.getDoId()
         if not self.fly:
             self.handleGrab(localAvId)
@@ -57,15 +60,15 @@ class DistributedTreasure(DistributedObject.DistributedObject):
     def getSphereRadius(self):
         return 2.0
 
-    def loadModel(self, modelPath, modelFindString = None):
+    def loadModel(self, modelPath, modelFindString=None):
         self.grabSound = base.loader.loadSfx(self.grabSoundPath)
         self.rejectSound = base.loader.loadSfx(self.rejectSoundPath)
-        if self.nodePath == None:
+        if self.nodePath is None:
             self.makeNodePath()
         else:
             self.treasure.getChildren().detach()
         model = loader.loadModel(modelPath)
-        if modelFindString != None:
+        if modelFindString is not None:
             model = model.find('**/' + modelFindString)
         model.instanceTo(self.treasure)
         return
@@ -78,7 +81,8 @@ class DistributedTreasure(DistributedObject.DistributedObject):
         self.treasure = self.nodePath.attachNewNode('treasure')
         if self.shadow:
             if not self.dropShadow:
-                self.dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
+                self.dropShadow = loader.loadModel(
+                    'phase_3/models/props/drop_shadow')
                 self.dropShadow.setColor(0, 0, 0, 0.5)
                 self.dropShadow.setPos(0, 0, 0.025)
                 self.dropShadow.setScale(0.4 * self.scale)
@@ -113,7 +117,14 @@ class DistributedTreasure(DistributedObject.DistributedObject):
             self.treasureFlyTrack.finish()
             self.treasureFlyTrack = None
         base.playSfx(self.rejectSound, node=self.nodePath)
-        self.treasureFlyTrack = Sequence(LerpColorScaleInterval(self.nodePath, 0.8, colorScale=VBase4(0, 0, 0, 0), startColorScale=VBase4(1, 1, 1, 1), blendType='easeIn'), LerpColorScaleInterval(self.nodePath, 0.2, colorScale=VBase4(1, 1, 1, 1), startColorScale=VBase4(0, 0, 0, 0), blendType='easeOut'), name=self.uniqueName('treasureFlyTrack'))
+        self.treasureFlyTrack = Sequence(
+            LerpColorScaleInterval(
+                self.nodePath, 0.8, colorScale=VBase4(
+                    0, 0, 0, 0), startColorScale=VBase4(
+                    1, 1, 1, 1), blendType='easeIn'), LerpColorScaleInterval(
+                self.nodePath, 0.2, colorScale=VBase4(
+                    1, 1, 1, 1), startColorScale=VBase4(
+                    0, 0, 0, 0), blendType='easeOut'), name=self.uniqueName('treasureFlyTrack'))
         self.treasureFlyTrack.start()
         return
 
@@ -138,16 +149,26 @@ class DistributedTreasure(DistributedObject.DistributedObject):
         avatarGoneName = self.av.uniqueName('disable')
         self.accept(avatarGoneName, self.handleUnexpectedExit)
         flytime = 1.0
-        track = Sequence(LerpPosInterval(self.nodePath, flytime, pos=Point3(0, 0, 3), startPos=self.nodePath.getPos(), blendType='easeInOut'), Func(self.nodePath.detachNode), Func(self.ignore, avatarGoneName))
+        track = Sequence(
+            LerpPosInterval(
+                self.nodePath, flytime, pos=Point3(
+                    0, 0, 3), startPos=self.nodePath.getPos(), blendType='easeInOut'), Func(
+                self.nodePath.detachNode), Func(
+                    self.ignore, avatarGoneName))
         if self.shadow:
-            self.treasureFlyTrack = Sequence(HideInterval(self.dropShadow), track, ShowInterval(self.dropShadow), name=self.uniqueName('treasureFlyTrack'))
+            self.treasureFlyTrack = Sequence(
+                HideInterval(
+                    self.dropShadow), track, ShowInterval(
+                    self.dropShadow), name=self.uniqueName('treasureFlyTrack'))
         else:
-            self.treasureFlyTrack = Sequence(track, name=self.uniqueName('treasureFlyTrack'))
+            self.treasureFlyTrack = Sequence(
+                track, name=self.uniqueName('treasureFlyTrack'))
         self.treasureFlyTrack.start()
         return
 
     def handleUnexpectedExit(self):
-        self.notify.warning('While getting treasure, ' + str(self.avId) + ' disconnected.')
+        self.notify.warning('While getting treasure, ' +
+                            str(self.avId) + ' disconnected.')
         if self.treasureFlyTrack:
             self.treasureFlyTrack.finish()
             self.treasureFlyTrack = None

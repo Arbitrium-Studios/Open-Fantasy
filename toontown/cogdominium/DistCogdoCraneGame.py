@@ -10,6 +10,7 @@ from toontown.toonbase import ToontownTimer
 from toontown.toonbase import TTLocalizer as TTL
 from toontown.toonbase import ToontownGlobals
 
+
 class DistCogdoCraneGame(CogdoCraneGameBase, DistCogdoLevelGame):
     notify = directNotify.newCategory('DistCogdoCraneGame')
 
@@ -39,10 +40,13 @@ class DistCogdoCraneGame(CogdoCraneGameBase, DistCogdoLevelGame):
 
     def enterLoaded(self):
         DistCogdoLevelGame.enterLoaded(self)
-        self.lightning = loader.loadModel('phase_10/models/cogHQ/CBLightning.bam')
+        self.lightning = loader.loadModel(
+            'phase_10/models/cogHQ/CBLightning.bam')
         self.magnet = loader.loadModel('phase_10/models/cogHQ/CBMagnet.bam')
-        self.craneArm = loader.loadModel('phase_10/models/cogHQ/CBCraneArm.bam')
-        self.controls = loader.loadModel('phase_10/models/cogHQ/CBCraneControls.bam')
+        self.craneArm = loader.loadModel(
+            'phase_10/models/cogHQ/CBCraneArm.bam')
+        self.controls = loader.loadModel(
+            'phase_10/models/cogHQ/CBCraneControls.bam')
         self.stick = loader.loadModel('phase_10/models/cogHQ/CBCraneStick.bam')
         self.cableTex = self.craneArm.findTexture('MagnetControl')
         self.moneyBag = loader.loadModel('phase_10/models/cashbotHQ/MoneyBag')
@@ -72,7 +76,8 @@ class DistCogdoCraneGame(CogdoCraneGameBase, DistCogdoLevelGame):
         self.endVault.findAllMatches('**/Safes').detach()
         self.endVault.findAllMatches('**/MagnetControlsAll').detach()
         cn = self.endVault.find('**/wallsCollision').node()
-        cn.setIntoCollideMask(OTPGlobals.WallBitmask | ToontownGlobals.PieBitmask | PM.BitMask32.lowerOn(3) << 21)
+        cn.setIntoCollideMask(
+            OTPGlobals.WallBitmask | ToontownGlobals.PieBitmask | PM.BitMask32.lowerOn(3) << 21)
         walls = self.endVault.find('**/RollUpFrameCillison')
         walls.detachNode()
         self.evWalls = self.replaceCollisionPolysWithPlanes(walls)
@@ -83,7 +88,11 @@ class DistCogdoCraneGame(CogdoCraneGameBase, DistCogdoLevelGame):
         self.evFloor = self.replaceCollisionPolysWithPlanes(floor)
         self.evFloor.reparentTo(self.endVault)
         self.evFloor.setName('floor')
-        plane = PM.CollisionPlane(PM.Plane(PM.Vec3(0, 0, 1), PM.Point3(0, 0, -50)))
+        plane = PM.CollisionPlane(
+            PM.Plane(
+                PM.Vec3(
+                    0, 0, 1), PM.Point3(
+                    0, 0, -50)))
         planeNode = PM.CollisionNode('dropPlane')
         planeNode.addSolid(plane)
         planeNode.setCollideMask(ToontownGlobals.PieBitmask)
@@ -108,7 +117,9 @@ class DistCogdoCraneGame(CogdoCraneGameBase, DistCogdoLevelGame):
                     plane = PM.Plane(solid.getPlane())
                     planes.append(plane)
                 else:
-                    self.notify.warning('Unexpected collision solid: %s' % repr(solid))
+                    self.notify.warning(
+                        'Unexpected collision solid: %s' %
+                        repr(solid))
                     newCollisionNode.addSolid(plane)
 
         newCollisionNode.setIntoCollideMask(newCollideMask)
@@ -116,7 +127,7 @@ class DistCogdoCraneGame(CogdoCraneGameBase, DistCogdoLevelGame):
         planes.sort(lambda p1, p2: p1.compareTo(p2, threshold))
         lastPlane = None
         for plane in planes:
-            if lastPlane == None or plane.compareTo(lastPlane, threshold) != 0:
+            if lastPlane is None or plane.compareTo(lastPlane, threshold) != 0:
                 cp = PM.CollisionPlane(plane)
                 newCollisionNode.addSolid(cp)
                 lastPlane = plane
@@ -148,7 +159,10 @@ class DistCogdoCraneGame(CogdoCraneGameBase, DistCogdoLevelGame):
 
     def enterGame(self):
         DistCogdoLevelGame.enterGame(self)
-        self._physicsTask = taskMgr.add(self._doPhysics, self.uniqueName('physics'), priority=25)
+        self._physicsTask = taskMgr.add(
+            self._doPhysics,
+            self.uniqueName('physics'),
+            priority=25)
         self.evWalls.stash()
         self._startTimer()
         if __dev__:

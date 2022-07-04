@@ -1,6 +1,7 @@
 from pandac.PandaModules import *
 from .DistributedNPCToon import *
 
+
 class DistributedNPCFlippyInToonHall(DistributedNPCToon):
 
     def __init__(self, cr):
@@ -24,4 +25,5 @@ class DistributedNPCFlippyInToonHall(DistributedNPCToon):
             place = base.cr.playGame.getPlace()
             if place:
                 place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(pageName='quests', doneFunc=self.handleOkTeaser)
+            self.dialog = TeaserPanel.TeaserPanel(
+                pageName='quests', doneFunc=self.handleOkTeaser)

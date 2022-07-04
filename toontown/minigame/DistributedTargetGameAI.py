@@ -6,10 +6,12 @@ from . import TargetGameGlobals
 import random
 import types
 
+
 def checkPlace(placeX, placeY, fillSize, placeList):
     goodPlacement = 1
     for place in placeList:
-        distance = math.sqrt((place[0] - placeX) * (place[0] - placeX) + (place[1] - placeY) * (place[1] - placeY))
+        distance = math.sqrt(
+            (place[0] - placeX) * (place[0] - placeX) + (place[1] - placeY) * (place[1] - placeY))
         distance = distance - (fillSize + place[2])
         if distance <= 0.0:
             goodPlacement = 0
@@ -23,15 +25,19 @@ class DistributedTargetGameAI(DistributedMinigameAI):
     def __init__(self, air, minigameId):
         try:
             self.DistributedTargetGameAI_initialized
-        except:
+        except BaseException:
             self.DistributedTargetGameAI_initialized = 1
             DistributedMinigameAI.__init__(self, air, minigameId)
             self.gameFSM = ClassicFSM.ClassicFSM('DistributedTargetGameAI', [State.State('inactive', self.enterInactive, self.exitInactive, ['fly']),
-             State.State('fly', self.enterFly, self.exitFly, ['cleanup', 'resetRound']),
-             State.State('resetRound', self.enterResetRound, self.exitResetRound, ['cleanup', 'fly']),
-             State.State('cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
+                                                                             State.State('fly', self.enterFly, self.exitFly, [
+                                                                                         'cleanup', 'resetRound']),
+                                                                             State.State(
+                'resetRound', self.enterResetRound, self.exitResetRound, [
+                    'cleanup', 'fly']),
+                State.State('cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
             self.addChildGameFSM(self.gameFSM)
-            self.__timeBase = globalClockDelta.localToNetworkTime(globalClock.getRealTime())
+            self.__timeBase = globalClockDelta.localToNetworkTime(
+                globalClock.getRealTime())
             self.round = 2
             self.barrierScore = None
             self.scoreTrack = []
@@ -62,7 +68,8 @@ class DistributedTargetGameAI(DistributedMinigameAI):
     def setupTargets(self):
         fieldWidth = TargetGameGlobals.ENVIRON_WIDTH * 3
         fieldLength = TargetGameGlobals.ENVIRON_LENGTH * 3.7
-        self.pattern = TargetGameGlobals.difficultyPatterns[self.getSafezoneId()]
+        self.pattern = TargetGameGlobals.difficultyPatterns[self.getSafezoneId(
+        )]
         self.targetList = self.pattern[0]
         self.targetValue = self.pattern[1]
         self.targetSize = self.pattern[2]
@@ -81,9 +88,11 @@ class DistributedTargetGameAI(DistributedMinigameAI):
                 goodPlacement = 0
                 while not goodPlacement:
                     placeX = random.random() * (fieldWidth * 0.6) - fieldWidth * 0.6 * 0.5
-                    placeY = (random.random() * 0.6 + (0.0 + 0.4 * (self.placeValue * 1.0 / (highestValue * 1.0)))) * fieldLength
+                    placeY = (random.random() * 0.6 + (0.0 + 0.4 *
+                              (self.placeValue * 1.0 / (highestValue * 1.0)))) * fieldLength
                     fillSize = self.targetSize[typeIndex]
-                    goodPlacement = checkPlace(placeX, placeY, fillSize, placeList)
+                    goodPlacement = checkPlace(
+                        placeX, placeY, fillSize, placeList)
 
                 placeList.append((placeX, placeY, fillSize))
                 subIndex = self.targetSubParts[typeIndex]
@@ -100,10 +109,11 @@ class DistributedTargetGameAI(DistributedMinigameAI):
         DistributedMinigameAI.setGameStart(self, timestamp)
         self.gameFSM.request('fly')
 
-    def setScore(self, scoreX, scoreY, other = None):
+    def setScore(self, scoreX, scoreY, other=None):
         avId = self.air.getAvatarIdFromSender()
         if avId not in self.avIdList:
-            self.air.writeServerEvent('suspicious', avId, 'RingGameAI.setScore: invalid avId')
+            self.air.writeServerEvent(
+                'suspicious', avId, 'RingGameAI.setScore: invalid avId')
             return
         topValue = 0
         hitTarget = None
@@ -148,15 +158,21 @@ class DistributedTargetGameAI(DistributedMinigameAI):
 
     def enterFly(self):
         self.notify.debug('enterFly')
-        self.barrierScore = ToonBarrier('waitClientsScore', self.uniqueName('waitClientsScore'), self.avIdList, 120, self.allAvatarsScore, self.handleTimeout)
+        self.barrierScore = ToonBarrier(
+            'waitClientsScore',
+            self.uniqueName('waitClientsScore'),
+            self.avIdList,
+            120,
+            self.allAvatarsScore,
+            self.handleTimeout)
 
     def exitFly(self):
         pass
 
-    def handleTimeout(self, other = None):
+    def handleTimeout(self, other=None):
         pass
 
-    def allAvatarsScore(self, other = None):
+    def allAvatarsScore(self, other=None):
         if self.round == 0:
             self.gameOver()
         else:
@@ -165,13 +181,13 @@ class DistributedTargetGameAI(DistributedMinigameAI):
 
     def getScoreList(self):
         scoreList = [0,
-         0,
-         0,
-         0]
+                     0,
+                     0,
+                     0]
         avList = [0,
-         0,
-         0,
-         0]
+                  0,
+                  0,
+                  0]
         scoreIndex = 0
         for avId in list(self.scoreDict.keys()):
             scoreList[scoreIndex] = self.scoreDict[avId]
@@ -191,7 +207,7 @@ class DistributedTargetGameAI(DistributedMinigameAI):
     def exitResetRound(self):
         pass
 
-    def gotoFly(self, extra = None):
+    def gotoFly(self, extra=None):
         if hasattr(self, 'gameFSM'):
             self.gameFSM.request('fly')
 
@@ -202,8 +218,8 @@ class DistributedTargetGameAI(DistributedMinigameAI):
     def exitCleanup(self):
         pass
 
-    def setPlayerDone(self, other = None):
-        if not hasattr(self, 'barrierScore') or self.barrierScore == None:
+    def setPlayerDone(self, other=None):
+        if not hasattr(self, 'barrierScore') or self.barrierScore is None:
             return
         avId = self.air.getAvatarIdFromSender()
         self.barrierScore.clear(avId)
@@ -220,7 +236,9 @@ class DistributedTargetGameAI(DistributedMinigameAI):
                 self.scoreDict[entry] = 1
 
         self.scoreTrack.append(self.getScoreList())
-        statMessage = 'MiniGame Stats : Target Game' + '\nScores' + '%s' % self.scoreTrack + '\nAvIds' + '%s' % list(self.scoreDict.keys()) + '\nSafeZone' + '%s' % self.getSafezoneId()
+        statMessage = 'MiniGame Stats : Target Game' + '\nScores' + '%s' % self.scoreTrack + \
+            '\nAvIds' + '%s' % list(self.scoreDict.keys()) + \
+            '\nSafeZone' + '%s' % self.getSafezoneId()
         self.air.writeServerEvent('MiniGame Stats', None, statMessage)
         self.sendUpdate('setGameDone', [])
         self.gameFSM.request('cleanup')

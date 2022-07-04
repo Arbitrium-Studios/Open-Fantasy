@@ -3,9 +3,10 @@ from direct.gui.DirectGui import DirectFrame, DirectLabel
 from direct.interval.IntervalGlobal import Func, Sequence, Wait
 from toontown.toonbase import ToontownGlobals
 
+
 class ServerTimeGui(DirectFrame):
 
-    def __init__(self, parent, pos = (0, 0, 0), hourCallback = None):
+    def __init__(self, parent, pos=(0, 0, 0), hourCallback=None):
         DirectFrame.__init__(self, parent=parent, pos=pos)
         self.createGuiObjects()
         self.hourCallback = hourCallback
@@ -15,11 +16,49 @@ class ServerTimeGui(DirectFrame):
     def createGuiObjects(self):
         textScale = 0.075
         timeFont = ToontownGlobals.getMinnieFont()
-        self.hourLabel = DirectLabel(parent=self, pos=(-0.015, 0, 0), relief=None, text='', text_scale=textScale, text_align=TextNode.ARight, text_font=timeFont)
-        self.colonLabel = DirectLabel(parent=self, relief=None, text=':', text_scale=textScale, text_align=TextNode.ACenter, text_font=timeFont)
-        self.minutesLabel = DirectLabel(relief=None, parent=self, pos=(0.015, 0, 0), text='', text_scale=textScale, text_align=TextNode.ALeft, text_font=timeFont)
-        self.amLabel = DirectLabel(relief=None, parent=self, pos=(0.14, 0, 0), text='', text_scale=textScale, text_align=TextNode.ALeft, text_font=timeFont)
-        self.ival = Sequence(Func(self.colonLabel.show), Wait(0.75), Func(self.colonLabel.hide), Wait(0.25), Func(self.updateTime))
+        self.hourLabel = DirectLabel(parent=self,
+                                     pos=(-0.015,
+                                          0,
+                                          0),
+                                     relief=None,
+                                     text='',
+                                     text_scale=textScale,
+                                     text_align=TextNode.ARight,
+                                     text_font=timeFont)
+        self.colonLabel = DirectLabel(
+            parent=self,
+            relief=None,
+            text=':',
+            text_scale=textScale,
+            text_align=TextNode.ACenter,
+            text_font=timeFont)
+        self.minutesLabel = DirectLabel(
+            relief=None,
+            parent=self,
+            pos=(
+                0.015,
+                0,
+                0),
+            text='',
+            text_scale=textScale,
+            text_align=TextNode.ALeft,
+            text_font=timeFont)
+        self.amLabel = DirectLabel(
+            relief=None,
+            parent=self,
+            pos=(
+                0.14,
+                0,
+                0),
+            text='',
+            text_scale=textScale,
+            text_align=TextNode.ALeft,
+            text_font=timeFont)
+        self.ival = Sequence(
+            Func(
+                self.colonLabel.show), Wait(0.75), Func(
+                self.colonLabel.hide), Wait(0.25), Func(
+                self.updateTime))
         self.ival.loop()
         return
 

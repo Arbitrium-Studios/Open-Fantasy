@@ -4,13 +4,16 @@ from direct.directnotify import DirectNotifyGlobal
 from . import LoginBase
 from direct.distributed.PyDatagram import PyDatagram
 
+
 class LoginTTAccount(LoginBase.LoginBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('LoginTTAcct')
 
     def __init__(self, cr):
         LoginBase.LoginBase.__init__(self, cr)
         self.useTTSpecificLogin = base.config.GetBool('tt-specific-login', 0)
-        self.notify.info('self.useTTSpecificLogin =%s' % self.useTTSpecificLogin)
+        self.notify.info(
+            'self.useTTSpecificLogin =%s' %
+            self.useTTSpecificLogin)
 
     def supportsRelogin(self):
         return 1

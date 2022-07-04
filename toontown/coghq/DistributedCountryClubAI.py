@@ -6,10 +6,13 @@ from toontown.coghq import CountryClubLayout, DistributedCountryClubRoomAI
 from toontown.coghq import BattleExperienceAggregatorAI
 from toontown.building import DistributedClubElevatorAI
 
-class DistributedCountryClubAI(DistributedObjectAI.DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCountryClubAI')
 
-    def __init__(self, air, countryClubId, zoneId, floorNum, avIds, layoutIndex, battleExpAggreg=None):
+class DistributedCountryClubAI(DistributedObjectAI.DistributedObjectAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedCountryClubAI')
+
+    def __init__(self, air, countryClubId, zoneId, floorNum,
+                 avIds, layoutIndex, battleExpAggreg=None):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
         self.countryClubId = countryClubId
         self.zoneId = zoneId
@@ -19,19 +22,30 @@ class DistributedCountryClubAI(DistributedObjectAI.DistributedObjectAI):
         self.blockedRooms = []
         self.elevatorList = []
         self.battleExpAggreg = battleExpAggreg
-        self.layout = CountryClubLayout.CountryClubLayout(self.countryClubId, self.floorNum, self.layoutIndex)
+        self.layout = CountryClubLayout.CountryClubLayout(
+            self.countryClubId, self.floorNum, self.layoutIndex)
         for i in range(self.layout.getNumRooms()):
             if i:
                 self.blockedRooms.append(i)
 
     def generate(self):
         DistributedObjectAI.DistributedObjectAI.generate(self)
-        self.notify.info('generate %s, id=%s, floor=%s' % (self.doId, self.countryClubId, self.floorNum))
+        self.notify.info(
+            'generate %s, id=%s, floor=%s' %
+            (self.doId, self.countryClubId, self.floorNum))
         self.rooms = []
         if self.battleExpAggreg is None:
             self.battleExpAggreg = BattleExperienceAggregatorAI.BattleExperienceAggregatorAI()
         for i in range(self.layout.getNumRooms()):
-            room = DistributedCountryClubRoomAI.DistributedCountryClubRoomAI(self.air, self.countryClubId, self.doId, self.zoneId, self.layout.getRoomId(i), i * 2, self.avIds, self.battleExpAggreg)
+            room = DistributedCountryClubRoomAI.DistributedCountryClubRoomAI(
+                self.air,
+                self.countryClubId,
+                self.doId,
+                self.zoneId,
+                self.layout.getRoomId(i),
+                i * 2,
+                self.avIds,
+                self.battleExpAggreg)
             room.generateWithRequired(self.zoneId)
             self.rooms.append(room)
 
@@ -43,7 +57,8 @@ class DistributedCountryClubAI(DistributedObjectAI.DistributedObjectAI):
         self.placeElevatorsOnMarkers()
         if __dev__:
             simbase.countryClub = self
-        description = '%s|%s|%s' % (self.countryClubId, self.floorNum, self.avIds)
+        description = '%s|%s|%s' % (
+            self.countryClubId, self.floorNum, self.avIds)
         for avId in self.avIds:
             self.air.writeServerEvent('countryClubEntered', avId, description)
 
@@ -104,17 +119,26 @@ class DistributedCountryClubAI(DistributedObjectAI.DistributedObjectAI):
             if room.entType2ids['elevatorMarker']:
                 for markerId in room.entType2ids['elevatorMarker']:
                     marker = room.getEntity(markerId)
-                    newElevator = DistributedClubElevatorAI.DistributedClubElevatorAI(self.air, self.doId, self, self.avIds, marker.doId)
+                    newElevator = DistributedClubElevatorAI.DistributedClubElevatorAI(
+                        self.air, self.doId, self, self.avIds, marker.doId)
                     newElevator.generateWithRequired(self.zoneId)
                     self.elevatorList.append(newElevator)
 
     def startNextFloor(self):
         floor = self.floorNum + 1
         countryClubZone = self.air.allocateZone()
-        countryClub = DistributedCountryClubAI(self.air, self.countryClubId, countryClubZone, floor, self.avIds, self.layoutIndex, self.battleExpAggreg)
+        countryClub = DistributedCountryClubAI(
+            self.air,
+            self.countryClubId,
+            countryClubZone,
+            floor,
+            self.avIds,
+            self.layoutIndex,
+            self.battleExpAggreg)
         countryClub.generateWithRequired(countryClubZone)
         for avId in self.avIds:
-            self.sendUpdateToAvatarId(avId, 'setCountryClubZone', [countryClubZone])
+            self.sendUpdateToAvatarId(
+                avId, 'setCountryClubZone', [countryClubZone])
 
         self.requestDelete()
 

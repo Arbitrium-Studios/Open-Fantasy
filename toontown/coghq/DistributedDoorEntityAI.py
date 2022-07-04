@@ -9,12 +9,15 @@ from direct.fsm import ClassicFSM
 from direct.fsm import State
 from direct.task import Task
 
-class Lock(DistributedDoorEntityBase.LockBase, DirectObject.DirectObject, FourStateAI.FourStateAI):
+
+class Lock(DistributedDoorEntityBase.LockBase,
+           DirectObject.DirectObject, FourStateAI.FourStateAI):
 
     def __init__(self, door, lockIndex, event, isUnlocked):
         self.door = door
         self.lockIndex = lockIndex
-        FourStateAI.FourStateAI.__init__(self, self.stateNames, durations=self.stateDurations)
+        FourStateAI.FourStateAI.__init__(
+            self, self.stateNames, durations=self.stateDurations)
         self.unlockEvent = None
         self.setUnlockEvent(event)
         self.setIsUnlocked(isUnlocked)
@@ -54,7 +57,8 @@ class Lock(DistributedDoorEntityBase.LockBase, DirectObject.DirectObject, FourSt
         return self.isOn()
 
 
-class DistributedDoorEntityAI(DistributedDoorEntityBase.DistributedDoorEntityBase, DistributedEntityAI.DistributedEntityAI, FourStateAI.FourStateAI):
+class DistributedDoorEntityAI(DistributedDoorEntityBase.DistributedDoorEntityBase,
+                              DistributedEntityAI.DistributedEntityAI, FourStateAI.FourStateAI):
 
     def __init__(self, level, entId, zoneId=None):
         self.entId = entId
@@ -62,14 +66,16 @@ class DistributedDoorEntityAI(DistributedDoorEntityBase.DistributedDoorEntityBas
         self.isOpenInput = None
         DistributedEntityAI.DistributedEntityAI.__init__(self, level, entId)
         self.stateDurations[2] = self.secondsOpen
-        FourStateAI.FourStateAI.__init__(self, self.stateNames, durations=self.stateDurations)
+        FourStateAI.FourStateAI.__init__(
+            self, self.stateNames, durations=self.stateDurations)
         self.setup()
         if zoneId is not None:
             self.generateWithRequired(zoneId)
         return
 
     def generateWithRequired(self, zoneId):
-        DistributedEntityAI.DistributedEntityAI.generateWithRequired(self, zoneId)
+        DistributedEntityAI.DistributedEntityAI.generateWithRequired(
+            self, zoneId)
         self._isGenerated = 1
 
     def delete(self):
@@ -80,7 +86,8 @@ class DistributedDoorEntityAI(DistributedDoorEntityBase.DistributedDoorEntityBas
     def getLocksState(self):
         stateBits = 0
         if hasattr(self, 'locks'):
-            stateBits = self.locks[0].getLockState() & 15 | self.locks[1].getLockState() << 4 & 240 | self.locks[2].getLockState() << 8 & 3840
+            stateBits = self.locks[0].getLockState() & 15 | self.locks[1].getLockState(
+            ) << 4 & 240 | self.locks[2].getLockState() << 8 & 3840
         return stateBits
 
     def sendLocksState(self):
@@ -89,7 +96,7 @@ class DistributedDoorEntityAI(DistributedDoorEntityBase.DistributedDoorEntityBas
 
     def getDoorState(self):
         r = (
-         self.stateIndex, globalClockDelta.getRealNetworkTime())
+            self.stateIndex, globalClockDelta.getRealNetworkTime())
         return r
 
     def getName(self):
@@ -112,7 +119,11 @@ class DistributedDoorEntityAI(DistributedDoorEntityBase.DistributedDoorEntityBas
             self.isLock2Unlocked = None
         if not hasattr(self, 'isLock3Unlocked'):
             self.isLock3Unlocked = None
-        self.locks = [Lock(self, 0, self.unlock0Event, self.isLock0Unlocked), Lock(self, 1, self.unlock1Event, self.isLock1Unlocked), Lock(self, 2, self.unlock2Event, self.isLock2Unlocked)]
+        self.locks = [
+            Lock(
+                self, 0, self.unlock0Event, self.isLock0Unlocked), Lock(
+                self, 1, self.unlock1Event, self.isLock1Unlocked), Lock(
+                self, 2, self.unlock2Event, self.isLock2Unlocked)]
         del self.unlock0Event
         del self.unlock1Event
         del self.unlock2Event
@@ -194,7 +205,8 @@ class DistributedDoorEntityAI(DistributedDoorEntityBase.DistributedDoorEntityBas
         pass
 
     def isUnlocked(self):
-        isUnlocked = self.locks[0].isUnlocked() and self.locks[1].isUnlocked() and self.locks[2].isUnlocked()
+        isUnlocked = self.locks[0].isUnlocked(
+        ) and self.locks[1].isUnlocked() and self.locks[2].isUnlocked()
         return isUnlocked
 
     def distributeStateChange(self):

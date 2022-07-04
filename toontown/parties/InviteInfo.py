@@ -3,6 +3,7 @@ from toontown.toonbase import ToontownGlobals
 from toontown.parties.PartyGlobals import InviteStatus
 from toontown.toonbase import TTLocalizer
 
+
 class InviteInfoBase:
 
     def __init__(self, inviteKey, partyId, status):
@@ -52,5 +53,5 @@ class InviteInfo(InviteInfoBase):
         else:
             return TTLocalizer.CatalogAcceptGeneralError % retcode
 
-    def output(self, store = -1):
+    def output(self, store=-1):
         return 'InviteInfo %s' % str(self)

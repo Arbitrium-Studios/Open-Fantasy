@@ -2,32 +2,46 @@ from otp.otpbase import PythonUtil
 from pandac.PandaModules import VBase4, Vec3, Point3
 from .CogdoUtil import VariableContainer, DevVariableContainer
 AI = VariableContainer()
-AI.GameActions = PythonUtil.Enum(('LandOnWinPlatform', 'WinStateFinished', 'GotoWinState', 'HitWhirlwind', 'HitLegalEagle', 'HitMinion', 'DebuffInvul', 'RequestEnterEagleInterest', 'RequestExitEagleInterest', 'RanOutOfTimePenalty', 'Died', 'Spawn', 'SetBlades', 'BladeLost'))
+AI.GameActions = PythonUtil.Enum(
+    ('LandOnWinPlatform',
+     'WinStateFinished',
+     'GotoWinState',
+     'HitWhirlwind',
+     'HitLegalEagle',
+     'HitMinion',
+     'DebuffInvul',
+     'RequestEnterEagleInterest',
+     'RequestExitEagleInterest',
+     'RanOutOfTimePenalty',
+     'Died',
+     'Spawn',
+     'SetBlades',
+     'BladeLost'))
 AI.BroadcastPeriod = 0.3
 AI.SafezoneId2DeathDamage = {2000: 1,
- 1000: 2,
- 5000: 4,
- 4000: 8,
- 3000: 12,
- 9000: 16}
+                             1000: 2,
+                             5000: 4,
+                             4000: 8,
+                             3000: 12,
+                             9000: 16}
 AI.SafezoneId2WhirlwindDamage = {2000: 1,
- 1000: 2,
- 5000: 4,
- 4000: 8,
- 3000: 12,
- 9000: 16}
+                                 1000: 2,
+                                 5000: 4,
+                                 4000: 8,
+                                 3000: 12,
+                                 9000: 16}
 AI.SafezoneId2LegalEagleDamage = {2000: 2,
- 1000: 4,
- 5000: 8,
- 4000: 16,
- 3000: 24,
- 9000: 32}
+                                  1000: 4,
+                                  5000: 8,
+                                  4000: 16,
+                                  3000: 24,
+                                  9000: 32}
 AI.SafezoneId2MinionDamage = {2000: 1,
- 1000: 2,
- 5000: 4,
- 4000: 8,
- 3000: 12,
- 9000: 16}
+                              1000: 2,
+                              5000: 4,
+                              4000: 8,
+                              3000: 12,
+                              9000: 16}
 Camera = VariableContainer()
 Camera.Angle = 12.5
 Camera.Distance = 20
@@ -48,26 +62,26 @@ Gameplay.IntroDurationSeconds = 24.0
 Gameplay.FinishDurationSeconds = 10.0
 Gameplay.GatherableFlashTime = 1.0
 Gameplay.ToonAcceleration = {'forward': 40.0,
- 'backward': 40.0,
- 'turning': 40.0,
- 'boostUp': 15.0,
- 'fall': 10.0,
- 'activeDropDown': 20.0,
- 'activeDropBack': 40.0,
- 'fan': 80.0}
+                             'backward': 40.0,
+                             'turning': 40.0,
+                             'boostUp': 15.0,
+                             'fall': 10.0,
+                             'activeDropDown': 20.0,
+                             'activeDropBack': 40.0,
+                             'fan': 80.0}
 Gameplay.ToonDeceleration = {'forward': 5.0,
- 'backward': 3.0,
- 'turning': 10.0,
- 'fan': 25.0}
+                             'backward': 3.0,
+                             'turning': 10.0,
+                             'fan': 25.0}
 Gameplay.ToonVelMax = {'forward': 15.0,
- 'backward': 6.0,
- 'turning': 10.0,
- 'boost': 5.5,
- 'fall': 10.0,
- 'fallNoFuel': 70.0,
- 'fan': 55.0}
+                       'backward': 6.0,
+                       'turning': 10.0,
+                       'boost': 5.5,
+                       'fall': 10.0,
+                       'fallNoFuel': 70.0,
+                       'fan': 55.0}
 Gameplay.ToonTurning = {'turningSpeed': 15.0,
- 'maxTurningAngle': 45.0}
+                        'maxTurningAngle': 45.0}
 Gameplay.RayPlatformCollisionThreshold = 0.2
 Gameplay.UseVariableFanPower = True
 Gameplay.FanMaxPower = 1.0
@@ -91,11 +105,11 @@ Gameplay.MemoCollisionRadius = 1.5
 Gameplay.MemoSpinRate = 60.0
 Gameplay.DoesToonDieWithFuel = True
 Gameplay.SafezoneId2LaffPickupHealAmount = {2000: 1,
- 1000: 2,
- 5000: 4,
- 4000: 8,
- 3000: 12,
- 9000: 16}
+                                            1000: 2,
+                                            5000: 4,
+                                            4000: 8,
+                                            3000: 12,
+                                            9000: 16}
 Gameplay.InvulBuffTime = 15.0
 Gameplay.InvulBlinkTime = 5.0
 Gameplay.InvulSingleBlinkTime = 0.5
@@ -106,7 +120,8 @@ Gameplay.DepleteFuelStates = ['FlyingUp']
 Gameplay.FuelNormalAmt = 1.0
 Gameplay.FuelLowAmt = 0.66
 Gameplay.FuelVeryLowAmt = 0.33
-Gameplay.FuelStates = PythonUtil.Enum(('FuelNoPropeller', 'FuelEmpty', 'FuelVeryLow', 'FuelLow', 'FuelNormal'))
+Gameplay.FuelStates = PythonUtil.Enum(
+    ('FuelNoPropeller', 'FuelEmpty', 'FuelVeryLow', 'FuelLow', 'FuelNormal'))
 Gameplay.RefuelPropSpeed = 5.0
 Gameplay.OverdrivePropSpeed = 2.5
 Gameplay.NormalPropSpeed = 1.5
@@ -116,12 +131,13 @@ Gameplay.TargetedWarningBlinkTime = 3.0
 Gameplay.HitKnockbackDist = 15.0
 Gameplay.HitKnockbackTime = 0.5
 Gameplay.HitCooldownTime = 2.0
-Gameplay.BackpackStates = PythonUtil.Enum(('Normal', 'Targeted', 'Attacked', 'Refuel'))
+Gameplay.BackpackStates = PythonUtil.Enum(
+    ('Normal', 'Targeted', 'Attacked', 'Refuel'))
 Gameplay.BackpackRefuelDuration = 4.0
 Gameplay.BackpackState2TextureName = {Gameplay.BackpackStates.Normal: 'tt_t_ara_cfg_propellerPack',
- Gameplay.BackpackStates.Targeted: 'tt_t_ara_cfg_propellerPack_eagleTarget',
- Gameplay.BackpackStates.Attacked: 'tt_t_ara_cfg_propellerPack_eagleAttack',
- Gameplay.BackpackStates.Refuel: 'tt_t_ara_cfg_propellerPack_flash'}
+                                      Gameplay.BackpackStates.Targeted: 'tt_t_ara_cfg_propellerPack_eagleTarget',
+                                      Gameplay.BackpackStates.Attacked: 'tt_t_ara_cfg_propellerPack_eagleAttack',
+                                      Gameplay.BackpackStates.Refuel: 'tt_t_ara_cfg_propellerPack_flash'}
 Gameplay.MinionDnaName = 'bf'
 Gameplay.MinionScale = 0.8
 Gui = VariableContainer()
@@ -129,9 +145,9 @@ Gui.FuelNumBladesPos2D = (-0.005, -0.017)
 Gui.FuelNumBladesScale = 0.07
 Gui.FuelPos2D = (-1.19, -0.24)
 Gui.NumBlades2FuelColor = {0: (0.9, 0.15, 0.15, 1.0),
- 1: (0.9, 0.15, 0.15, 1.0),
- 2: (0.9, 0.9, 0.15, 1.0),
- 3: (0.25, 0.65, 0.25, 1.0)}
+                           1: (0.9, 0.15, 0.15, 1.0),
+                           2: (0.9, 0.9, 0.15, 1.0),
+                           3: (0.25, 0.65, 0.25, 1.0)}
 Gui.FuelNormalColor = (0.25, 0.65, 0.25, 1.0)
 Gui.FuelLowColor = (0.9, 0.9, 0.15, 1.0)
 Gui.FuelVeryLowColor = (0.9, 0.15, 0.15, 1.0)
@@ -173,39 +189,41 @@ Dev.NoLegalEagleAttacks = False
 Audio = VariableContainer()
 Audio.Cutoff = 75.0
 Audio.MusicFiles = {'normal': 'phase_4/audio/bgm/MG_cannon_game.ogg',
- 'end': 'phase_4/audio/bgm/FF_safezone.ogg',
- 'waiting': 'phase_4/audio/bgm/m_match_bg2.ogg',
- 'invul': 'phase_4/audio/bgm/MG_CogThief.ogg',
- 'timeRunningOut': 'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg'}
+                    'end': 'phase_4/audio/bgm/FF_safezone.ogg',
+                    'waiting': 'phase_4/audio/bgm/m_match_bg2.ogg',
+                    'invul': 'phase_4/audio/bgm/MG_CogThief.ogg',
+                    'timeRunningOut': 'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg'}
 Audio.SfxFiles = {'propeller': 'phase_4/audio/sfx/TB_propeller.ogg',
- 'propeller_damaged': 'phase_5/audio/sfx/tt_s_ara_cfg_propellers_damaged.ogg',
- 'fan': 'phase_4/audio/sfx/target_wind_float_loop.ogg',
- 'getMemo': 'phase_4/audio/sfx/MG_maze_pickup.ogg',
- 'getLaff': 'phase_4/audio/sfx/avatar_emotion_laugh.ogg',
- 'getRedTape': 'phase_5/audio/sfx/SA_red_tape.ogg',
- 'invulBuff': 'phase_4/audio/sfx/ring_get.ogg',
- 'invulDebuff': 'phase_4/audio/sfx/ring_miss.ogg',
- 'refuel': 'phase_5/audio/sfx/LB_receive_evidence.ogg',
- 'bladeBreak': 'phase_5/audio/sfx/tt_s_ara_cfg_propellerBreaks.ogg',
- 'popupHelpText': 'phase_3/audio/sfx/GUI_balloon_popup.ogg',
- 'collide': 'phase_3.5/audio/sfx/AV_collision.ogg',
- 'whirlwind': 'phase_5/audio/sfx/tt_s_ara_cfg_whirlwind.ogg',
- 'toonInWhirlwind': 'phase_5/audio/sfx/tt_s_ara_cfg_toonInWhirlwind.ogg',
- 'death': 'phase_5/audio/sfx/tt_s_ara_cfg_toonFalls.ogg',
- 'legalEagleScream': 'phase_5/audio/sfx/tt_s_ara_cfg_eagleCry.ogg',
- 'toonHit': 'phase_5/audio/sfx/tt_s_ara_cfg_toonHit.ogg',
- 'lose': 'phase_4/audio/sfx/MG_lose.ogg',
- 'win': 'phase_4/audio/sfx/MG_win.ogg',
- 'refuelSpin': 'phase_4/audio/sfx/clock12.ogg',
- 'cogDialogue': 'phase_3.5/audio/dial/COG_VO_statement.ogg',
- 'toonDialogue': 'phase_3.5/audio/dial/AV_dog_long.ogg'}
+                  'propeller_damaged': 'phase_5/audio/sfx/tt_s_ara_cfg_propellers_damaged.ogg',
+                  'fan': 'phase_4/audio/sfx/target_wind_float_loop.ogg',
+                  'getMemo': 'phase_4/audio/sfx/MG_maze_pickup.ogg',
+                  'getLaff': 'phase_4/audio/sfx/avatar_emotion_laugh.ogg',
+                  'getRedTape': 'phase_5/audio/sfx/SA_red_tape.ogg',
+                  'invulBuff': 'phase_4/audio/sfx/ring_get.ogg',
+                  'invulDebuff': 'phase_4/audio/sfx/ring_miss.ogg',
+                  'refuel': 'phase_5/audio/sfx/LB_receive_evidence.ogg',
+                  'bladeBreak': 'phase_5/audio/sfx/tt_s_ara_cfg_propellerBreaks.ogg',
+                  'popupHelpText': 'phase_3/audio/sfx/GUI_balloon_popup.ogg',
+                  'collide': 'phase_3.5/audio/sfx/AV_collision.ogg',
+                  'whirlwind': 'phase_5/audio/sfx/tt_s_ara_cfg_whirlwind.ogg',
+                  'toonInWhirlwind': 'phase_5/audio/sfx/tt_s_ara_cfg_toonInWhirlwind.ogg',
+                  'death': 'phase_5/audio/sfx/tt_s_ara_cfg_toonFalls.ogg',
+                  'legalEagleScream': 'phase_5/audio/sfx/tt_s_ara_cfg_eagleCry.ogg',
+                  'toonHit': 'phase_5/audio/sfx/tt_s_ara_cfg_toonHit.ogg',
+                  'lose': 'phase_4/audio/sfx/MG_lose.ogg',
+                  'win': 'phase_4/audio/sfx/MG_win.ogg',
+                  'refuelSpin': 'phase_4/audio/sfx/clock12.ogg',
+                  'cogDialogue': 'phase_3.5/audio/dial/COG_VO_statement.ogg',
+                  'toonDialogue': 'phase_3.5/audio/dial/AV_dog_long.ogg'}
 Level = VariableContainer()
-Level.GatherableTypes = PythonUtil.Enum(('Memo', 'Propeller', 'LaffPowerup', 'InvulPowerup'))
+Level.GatherableTypes = PythonUtil.Enum(
+    ('Memo', 'Propeller', 'LaffPowerup', 'InvulPowerup'))
 Level.ObstacleTypes = PythonUtil.Enum(('Whirlwind', 'Fan', 'Minion'))
-Level.PlatformTypes = PythonUtil.Enum(('Platform', 'StartPlatform', 'EndPlatform'))
+Level.PlatformTypes = PythonUtil.Enum(
+    ('Platform', 'StartPlatform', 'EndPlatform'))
 Level.PlatformType2SpawnOffset = {Level.PlatformTypes.Platform: 2.5,
- Level.PlatformTypes.StartPlatform: 5.0,
- Level.PlatformTypes.EndPlatform: 5.0}
+                                  Level.PlatformTypes.StartPlatform: 5.0,
+                                  Level.PlatformTypes.EndPlatform: 5.0}
 Level.QuadLengthUnits = 170
 Level.QuadVisibilityAhead = 1
 Level.QuadVisibilityBehind = 0
@@ -219,14 +237,14 @@ Level.GatherablesDefaultSpread = 1.0
 Level.NumMemosInRing = 6
 Level.PropellerSpinDuration = 10.0
 Level.QuadsByDifficulty = {1: (2, 4, 5),
- 2: (1, 3, 7),
- 3: (6, 8)}
+                           2: (1, 3, 7),
+                           3: (6, 8)}
 Level.DifficultyOrder = {2000: (1, 1, 1, 2, 1),
- 1000: (1, 1, 2, 2, 1),
- 5000: (1, 2, 1, 2, 2),
- 4000: (1, 2, 1, 2, 3, 2),
- 3000: (1, 2, 2, 3, 2, 3),
- 9000: (2, 3, 2, 3, 2, 3, 2)}
+                         1000: (1, 1, 2, 2, 1),
+                         5000: (1, 2, 1, 2, 2),
+                         4000: (1, 2, 1, 2, 3, 2),
+                         3000: (1, 2, 2, 3, 2, 3),
+                         9000: (2, 3, 2, 3, 2, 3, 2)}
 Dev.WantTempLevel = True
 Dev.DevQuadsOrder = (1, 2, 3, 4, 5, 6, 7, 8)
 Level.AddSparkleToPowerups = True
@@ -239,15 +257,15 @@ Level.GatherablesPathName = 'gatherables_path*'
 Level.GatherablesRingName = 'gatherables_ring_path*'
 Level.PropellerName = '*propeller_loc*'
 Level.PowerupType2Loc = {Level.GatherableTypes.LaffPowerup: 'laff_powerup_loc*',
- Level.GatherableTypes.InvulPowerup: 'invul_powerup_loc*'}
+                         Level.GatherableTypes.InvulPowerup: 'invul_powerup_loc*'}
 Level.PowerupType2Model = {Level.GatherableTypes.LaffPowerup: 'legalEagleFeather',
- Level.GatherableTypes.InvulPowerup: 'redTapePickup'}
+                           Level.GatherableTypes.InvulPowerup: 'redTapePickup'}
 Level.PowerupType2Node = {Level.GatherableTypes.LaffPowerup: 'feather',
- Level.GatherableTypes.InvulPowerup: 'redTape'}
+                          Level.GatherableTypes.InvulPowerup: 'redTape'}
 Level.GatherableType2TextureName = {Level.GatherableTypes.LaffPowerup: 'tt_t_ara_cfg_legalEagleFeather_flash',
- Level.GatherableTypes.InvulPowerup: 'tt_t_ara_cfg_redTapePickup_flash',
- Level.GatherableTypes.Memo: 'tt_t_ara_csa_memo_flash',
- Level.GatherableTypes.Propeller: 'tt_t_ara_cfg_propellers_flash'}
+                                    Level.GatherableTypes.InvulPowerup: 'tt_t_ara_cfg_redTapePickup_flash',
+                                    Level.GatherableTypes.Memo: 'tt_t_ara_csa_memo_flash',
+                                    Level.GatherableTypes.Propeller: 'tt_t_ara_cfg_propellers_flash'}
 Level.WhirlwindName = '*whirlwindPlaceholder'
 Level.WhirlwindPathName = '_path*'
 Level.StreamerName = '*streamerPlaceholder'

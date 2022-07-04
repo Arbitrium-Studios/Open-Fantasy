@@ -13,11 +13,15 @@ from toontown.coghq import DistributedLawOfficeElevatorIntAI
 from direct.distributed import DistributedObjectAI
 from toontown.ai.ToonBarrier import *
 
-class DistributedLawOfficeFloorAI(DistributedLevelAI.DistributedLevelAI, LawOfficeBase.LawOfficeBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLawOfficeAI')
+
+class DistributedLawOfficeFloorAI(
+        DistributedLevelAI.DistributedLevelAI, LawOfficeBase.LawOfficeBase):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedLawOfficeAI')
 
     def __init__(self, air, lawOfficeId, zoneId, entranceId, avIds, spec):
-        DistributedLevelAI.DistributedLevelAI.__init__(self, air, zoneId, entranceId, avIds)
+        DistributedLevelAI.DistributedLevelAI.__init__(
+            self, air, zoneId, entranceId, avIds)
         LawOfficeBase.LawOfficeBase.__init__(self)
         self.setLawOfficeId(lawOfficeId)
         self.layout = None
@@ -30,11 +34,14 @@ class DistributedLawOfficeFloorAI(DistributedLevelAI.DistributedLevelAI, LawOffi
         return FactoryEntityCreatorAI.FactoryEntityCreatorAI(level=self)
 
     def getBattleCreditMultiplier(self):
-        return ToontownBattleGlobals.getFactoryCreditMultiplier(self.lawOfficeId)
+        return ToontownBattleGlobals.getFactoryCreditMultiplier(
+            self.lawOfficeId)
 
     def generate(self):
         self.notify.info('generate')
-        self.notify.info('start factory %s %s creation, frame=%s' % (self.lawOfficeId, self.doId, globalClock.getFrameCount()))
+        self.notify.info(
+            'start factory %s %s creation, frame=%s' %
+            (self.lawOfficeId, self.doId, globalClock.getFrameCount()))
         self.layout = LawOfficeLayout.LawOfficeLayout(self.lawOfficeId)
         self.startFloor()
 
@@ -49,18 +56,28 @@ class DistributedLawOfficeFloorAI(DistributedLevelAI.DistributedLevelAI, LawOffi
         DistributedLevelAI.DistributedLevelAI.generate(self, self.factorySpec)
         self.notify.info('creating cogs')
         cogSpecModule = FactorySpecs.getCogSpecModule(self.lawOfficeId)
-        self.planner = LevelSuitPlannerAI.LevelSuitPlannerAI(self.air, self, DistributedFactorySuitAI.DistributedFactorySuitAI, DistributedBattleFactoryAI.DistributedBattleFactoryAI, cogSpecModule.CogData, cogSpecModule.ReserveCogData, cogSpecModule.BattleCells)
+        self.planner = LevelSuitPlannerAI.LevelSuitPlannerAI(
+            self.air,
+            self,
+            DistributedFactorySuitAI.DistributedFactorySuitAI,
+            DistributedBattleFactoryAI.DistributedBattleFactoryAI,
+            cogSpecModule.CogData,
+            cogSpecModule.ReserveCogData,
+            cogSpecModule.BattleCells)
         suitHandles = self.planner.genSuits()
         messenger.send('plannerCreated-' + str(self.doId))
         self.suits = suitHandles['activeSuits']
         self.reserveSuits = suitHandles['reserveSuits']
         self.d_setSuits()
         scenario = 0
-        description = '%s|%s|%s|%s' % (self.lawOfficeId, self.entranceId, scenario, self.avIdList)
+        description = '%s|%s|%s|%s' % (
+            self.lawOfficeId, self.entranceId, scenario, self.avIdList)
         for avId in self.avIdList:
             self.air.writeServerEvent('DAOffice Entered', avId, description)
 
-        self.notify.info('finish factory %s %s creation' % (self.lawOfficeId, self.doId))
+        self.notify.info(
+            'finish factory %s %s creation' %
+            (self.lawOfficeId, self.doId))
 
     def delete(self):
         self.notify.info('delete: %s' % self.doId)
@@ -94,7 +111,9 @@ class DistributedLawOfficeFloorAI(DistributedLevelAI.DistributedLevelAI, LawOffi
         if avId in self.avIdList:
             self.sendUpdate('setForemanConfronted', [avId])
         else:
-            self.notify.warning('%s: d_setForemanConfronted: av %s not in av list %s' % (self.doId, avId, self.avIdList))
+            self.notify.warning(
+                '%s: d_setForemanConfronted: av %s not in av list %s' %
+                (self.doId, avId, self.avIdList))
 
     def setVictors(self, victorIds):
         activeVictors = []
@@ -106,12 +125,14 @@ class DistributedLawOfficeFloorAI(DistributedLevelAI.DistributedLevelAI, LawOffi
                 activeVictorIds.append(victorId)
 
         scenario = 0
-        description = '%s|%s|%s|%s' % (self.lawOfficeId, self.entranceId, scenario, activeVictorIds)
+        description = '%s|%s|%s|%s' % (
+            self.lawOfficeId, self.entranceId, scenario, activeVictorIds)
         for avId in activeVictorIds:
             self.air.writeServerEvent('DAOffice Defeated', avId, description)
 
         for toon in activeVictors:
-            simbase.air.questManager.toonDefeatedFactory(toon, self.lawOfficeId, activeVictors)
+            simbase.air.questManager.toonDefeatedFactory(
+                toon, self.lawOfficeId, activeVictors)
 
         return
 

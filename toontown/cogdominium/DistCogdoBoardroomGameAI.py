@@ -3,6 +3,7 @@ from toontown.cogdominium.CogdoBoardroomGameBase import CogdoBoardroomGameBase
 from toontown.cogdominium.DistCogdoLevelGameAI import DistCogdoLevelGameAI
 from toontown.cogdominium import CogdoBoardroomGameConsts as Consts
 
+
 class DistCogdoBoardroomGameAI(CogdoBoardroomGameBase, DistCogdoLevelGameAI):
     notify = directNotify.newCategory('DistCogdoBoardroomGameAI')
 
@@ -11,7 +12,10 @@ class DistCogdoBoardroomGameAI(CogdoBoardroomGameBase, DistCogdoLevelGameAI):
 
     def enterGame(self):
         DistCogdoLevelGameAI.enterGame(self)
-        self._gameDoneEvent = taskMgr.doMethodLater(Consts.GameDuration.get(), self._gameDoneDL, self.uniqueName('boardroomGameDone'))
+        self._gameDoneEvent = taskMgr.doMethodLater(
+            Consts.GameDuration.get(),
+            self._gameDoneDL,
+            self.uniqueName('boardroomGameDone'))
 
     def exitGame(self):
         taskMgr.remove(self._gameDoneEvent)
@@ -23,7 +27,10 @@ class DistCogdoBoardroomGameAI(CogdoBoardroomGameBase, DistCogdoLevelGameAI):
 
     def enterFinish(self):
         DistCogdoLevelGameAI.enterFinish(self)
-        self._finishDoneEvent = taskMgr.doMethodLater(Consts.FinishDuration.get(), self._finishDoneDL, self.uniqueName('boardroomFinishDone'))
+        self._finishDoneEvent = taskMgr.doMethodLater(
+            Consts.FinishDuration.get(),
+            self._finishDoneDL,
+            self.uniqueName('boardroomFinishDone'))
 
     def exitFinish(self):
         taskMgr.remove(self._finishDoneEvent)

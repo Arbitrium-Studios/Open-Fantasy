@@ -2,6 +2,7 @@ from .CatalogFurnitureItem import *
 FTAnimRate = 6
 AnimatedFurnitureItemKeys = (10020, 270, 990, 460, 470, 480, 490, 491, 492)
 
+
 class CatalogAnimatedFurnitureItem(CatalogFurnitureItem):
 
     def loadModel(self):
@@ -13,7 +14,7 @@ class CatalogAnimatedFurnitureItem(CatalogFurnitureItem):
         item = FurnitureTypes[self.furnitureType]
         if FTAnimRate < len(item):
             animRate = item[FTAnimRate]
-            if not animRate == None:
+            if not animRate is None:
                 return item[FTAnimRate]
             else:
                 return 1

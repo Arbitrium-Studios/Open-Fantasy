@@ -2,10 +2,11 @@ from toontown.toonbase.ToontownGlobals import *
 from direct.directnotify import DirectNotifyGlobal
 from . import BasicEntities
 
+
 class ModelEntity(BasicEntities.NodePathEntity):
     LoadFuncs = {'loadModelCopy': loader.loadModelCopy,
-     'loadModel': loader.loadModel,
-     'loadModelOnce': loader.loadModelOnce}
+                 'loadModel': loader.loadModel,
+                 'loadModelOnce': loader.loadModelOnce}
 
     def __init__(self, level, entId):
         self.collisionsOnly = False
@@ -42,7 +43,8 @@ class ModelEntity(BasicEntities.NodePathEntity):
                     self.model.hide()
             else:
                 self.model.show()
-            if self.modelPath in ('phase_9/models/cogHQ/woodCrateB.bam', 'phase_9/models/cogHQ/metal_crateB.bam', 'phase_10/models/cashbotHQ/CBMetalCrate.bam', 'phase_10/models/cogHQ/CBMetalCrate2.bam', 'phase_10/models/cashbotHQ/CBWoodCrate.bam', 'phase_11/models/lawbotHQ/LB_metal_crate.bam', 'phase_11/models/lawbotHQ/LB_metal_crate2.bam'):
+            if self.modelPath in ('phase_9/models/cogHQ/woodCrateB.bam', 'phase_9/models/cogHQ/metal_crateB.bam', 'phase_10/models/cashbotHQ/CBMetalCrate.bam', 'phase_10/models/cogHQ/CBMetalCrate2.bam',
+                                  'phase_10/models/cashbotHQ/CBWoodCrate.bam', 'phase_11/models/lawbotHQ/LB_metal_crate.bam', 'phase_11/models/lawbotHQ/LB_metal_crate2.bam'):
                 cNode = self.find('**/wall')
                 cNode.setZ(cNode, -.75)
                 colNode = self.find('**/collision')
@@ -51,7 +53,7 @@ class ModelEntity(BasicEntities.NodePathEntity):
                 floor2.setZ(floor2, -.75)
             if self.goonHatType != 'none':
                 self.goonType = {'hardhat': 'pg',
-                 'security': 'sg'}[self.goonHatType]
+                                 'security': 'sg'}[self.goonHatType]
                 self.hat = self.model
                 if self.goonType == 'pg':
                     self.hat.find('**/security_hat').hide()

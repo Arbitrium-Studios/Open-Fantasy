@@ -5,6 +5,7 @@ import random
 from toontown.hood import Place
 from toontown.toonbase import ToontownGlobals
 
+
 class BRPlayground(Playground.Playground):
     STILL = 1
     RUN = 2

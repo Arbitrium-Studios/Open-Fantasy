@@ -14,17 +14,25 @@ from pandac.PandaModules import DecalEffect, TextEncoder
 import random
 aspectSF = 0.7227
 
+
 class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
     notify = DirectNotifyGlobal.directNotify.newCategory('BossbotCogHQLoader')
 
     def __init__(self, hood, parentFSMState, doneEvent):
         CogHQLoader.CogHQLoader.__init__(self, hood, parentFSMState, doneEvent)
-        self.fsm.addState(State.State('countryClubInterior', self.enterCountryClubInterior, self.exitCountryClubInterior, ['quietZone', 'cogHQExterior']))
+        self.fsm.addState(
+            State.State(
+                'countryClubInterior', self.enterCountryClubInterior, self.exitCountryClubInterior, [
+                    'quietZone', 'cogHQExterior']))
         for stateName in ['start', 'cogHQExterior', 'quietZone']:
             state = self.fsm.getStateNamed(stateName)
             state.addTransition('countryClubInterior')
 
-        self.musicFile = random.choice(['phase_12/audio/bgm/Bossbot_Entry_v1.ogg', 'phase_12/audio/bgm/Bossbot_Entry_v2.ogg', 'phase_12/audio/bgm/Bossbot_Entry_v3.ogg'])
+        self.musicFile = random.choice(
+            [
+                'phase_12/audio/bgm/Bossbot_Entry_v1.ogg',
+                'phase_12/audio/bgm/Bossbot_Entry_v2.ogg',
+                'phase_12/audio/bgm/Bossbot_Entry_v3.ogg'])
         self.cogHQExteriorModelPath = 'phase_12/models/bossbotHQ/CogGolfHub'
         self.factoryExteriorModelPath = 'phase_11/models/lawbotHQ/LB_DA_Lobby'
         self.cogHQLobbyModelPath = 'phase_12/models/bossbotHQ/CogGolfCourtyard'
@@ -45,7 +53,9 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
     def loadPlaceGeom(self, zoneId):
         self.notify.info('loadPlaceGeom: %s' % zoneId)
         zoneId = zoneId - zoneId % 100
-        self.notify.debug('zoneId = %d ToontownGlobals.BossbotHQ=%d' % (zoneId, ToontownGlobals.BossbotHQ))
+        self.notify.debug(
+            'zoneId = %d ToontownGlobals.BossbotHQ=%d' %
+            (zoneId, ToontownGlobals.BossbotHQ))
         if zoneId == ToontownGlobals.BossbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
             gzLinkTunnel = self.geom.find('**/LinkTunnel1')
@@ -57,7 +67,9 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
         elif zoneId == ToontownGlobals.BossbotLobby:
             if base.config.GetBool('want-qa-regression', 0):
                 self.notify.info('QA-REGRESSION: COGHQ: Visit BossbotLobby')
-            self.notify.debug('cogHQLobbyModelPath = %s' % self.cogHQLobbyModelPath)
+            self.notify.debug(
+                'cogHQLobbyModelPath = %s' %
+                self.cogHQLobbyModelPath)
             self.geom = loader.loadModel(self.cogHQLobbyModelPath)
         else:
             self.notify.warning('loadPlaceGeom: unclassified zone %s' % zoneId)
@@ -69,7 +81,8 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
             top = self.geom.find('**/' + topStr)
             sign = top.find('**/' + signStr)
             locator = top.find('**/sign_origin')
-            signText = DirectGui.OnscreenText(text=TextEncoder.upper(TTLocalizer.GlobalStreetNames[textId][-1]), font=ToontownGlobals.getSuitFont(), scale=TTLocalizer.BCHQLsignText, fg=(0, 0, 0, 1), parent=sign)
+            signText = DirectGui.OnscreenText(text=TextEncoder.upper(
+                TTLocalizer.GlobalStreetNames[textId][-1]), font=ToontownGlobals.getSuitFont(), scale=TTLocalizer.BCHQLsignText, fg=(0, 0, 0, 1), parent=sign)
             signText.setPosHpr(locator, 0, -0.1, -0.25, 0, 0, 0)
             signText.setDepthWrite(0)
 
@@ -124,7 +137,9 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
 
     def enterCountryClubInterior(self, requestStatus):
         self.placeClass = CountryClubInterior.CountryClubInterior
-        self.notify.info('enterCountryClubInterior, requestStatus=%s' % requestStatus)
+        self.notify.info(
+            'enterCountryClubInterior, requestStatus=%s' %
+            requestStatus)
         self.countryClubId = requestStatus['countryClubId']
         self.enterPlace(requestStatus)
 

@@ -5,6 +5,7 @@ from direct.task.Task import Task
 import math
 import random
 
+
 class DistributedEFlyingTreasure(DistributedSZTreasure.DistributedSZTreasure):
 
     def __init__(self, cr):

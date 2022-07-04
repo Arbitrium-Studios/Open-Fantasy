@@ -53,10 +53,12 @@ import os
 
 
 class ToontownAIRepository(ToontownInternalRepository):
-    notify = DirectNotifyGlobal.directNotify.newCategory('ToontownAIRepository')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'ToontownAIRepository')
 
     def __init__(self, baseChannel, serverId, districtName):
-        ToontownInternalRepository.__init__(self, baseChannel, serverId, dcSuffix='AI')
+        ToontownInternalRepository.__init__(
+            self, baseChannel, serverId, dcSuffix='AI')
         self.districtName = districtName
         self.doLiveUpdates = config.GetBool('want-live-updates', True)
         self.wantCogdominiums = config.GetBool('want-cogdominiums', True)
@@ -105,7 +107,8 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.districtId = self.allocateChannel()
         self.district = ToontownDistrictAI(self)
         self.district.setName(self.districtName)
-        self.district.generateWithRequiredAndId(self.districtId, self.getGameDoId(), OTP_ZONE_ID_DISTRICTS)
+        self.district.generateWithRequiredAndId(
+            self.districtId, self.getGameDoId(), OTP_ZONE_ID_DISTRICTS)
 
         # Claim ownership of that district...
         self.notify.info('Declaring ownership...')
@@ -148,7 +151,9 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.suitInvasionManager = SuitInvasionManagerAI(self)
 
         # Create our zone allocator...
-        self.zoneAllocator = UniqueIdAllocator(ToontownGlobals.DynamicZonesBegin, ToontownGlobals.DynamicZonesEnd)
+        self.zoneAllocator = UniqueIdAllocator(
+            ToontownGlobals.DynamicZonesBegin,
+            ToontownGlobals.DynamicZonesEnd)
 
         # Create our quest manager...
         self.questManager = QuestManagerAI(self)
@@ -224,11 +229,13 @@ class ToontownAIRepository(ToontownInternalRepository):
         # Bossbot HQ doesn't use DNA, so we skip over that.
         if zoneId != ToontownGlobals.BossbotHQ:
             self.dnaStoreMap[zoneId] = DNAStorage()
-            self.dnaDataMap[zoneId] = loadDNAFileAI(self.dnaStoreMap[zoneId], self.genDNAFileName(zoneId))
+            self.dnaDataMap[zoneId] = loadDNAFileAI(
+                self.dnaStoreMap[zoneId], self.genDNAFileName(zoneId))
             if zoneId in ToontownGlobals.HoodHierarchy:
                 for streetId in ToontownGlobals.HoodHierarchy[zoneId]:
                     self.dnaStoreMap[streetId] = DNAStorage()
-                    self.dnaDataMap[streetId] = loadDNAFileAI(self.dnaStoreMap[streetId], self.genDNAFileName(streetId))
+                    self.dnaDataMap[streetId] = loadDNAFileAI(
+                        self.dnaStoreMap[streetId], self.genDNAFileName(streetId))
 
         hood = hoodConstructor(self, zoneId)
         hood.startup()
@@ -240,14 +247,17 @@ class ToontownAIRepository(ToontownInternalRepository):
 
         # Donald's Dock
         self.zoneTable[ToontownGlobals.DonaldsDock] = (
-            (ToontownGlobals.DonaldsDock, 1, 0), (ToontownGlobals.BarnacleBoulevard, 1, 1),
-            (ToontownGlobals.SeaweedStreet, 1, 1), (ToontownGlobals.LighthouseLane, 1, 1)
+            (ToontownGlobals.DonaldsDock, 1,
+             0), (ToontownGlobals.BarnacleBoulevard, 1, 1),
+            (ToontownGlobals.SeaweedStreet, 1,
+             1), (ToontownGlobals.LighthouseLane, 1, 1)
         )
         self.generateHood(DDHoodDataAI, ToontownGlobals.DonaldsDock)
 
         # Toontown Central
         self.zoneTable[ToontownGlobals.ToontownCentral] = (
-            (ToontownGlobals.ToontownCentral, 1, 0), (ToontownGlobals.SillyStreet, 1, 1),
+            (ToontownGlobals.ToontownCentral, 1,
+             0), (ToontownGlobals.SillyStreet, 1, 1),
             (ToontownGlobals.LoopyLane, 1, 1), (ToontownGlobals.PunchlinePlace, 1, 1)
         )
         self.generateHood(TTHoodDataAI, ToontownGlobals.ToontownCentral)
@@ -261,8 +271,10 @@ class ToontownAIRepository(ToontownInternalRepository):
 
         # Minnie's Melodyland
         self.zoneTable[ToontownGlobals.MinniesMelodyland] = (
-            (ToontownGlobals.MinniesMelodyland, 1, 0), (ToontownGlobals.AltoAvenue, 1, 1),
-            (ToontownGlobals.BaritoneBoulevard, 1, 1), (ToontownGlobals.TenorTerrace, 1, 1)
+            (ToontownGlobals.MinniesMelodyland, 1,
+             0), (ToontownGlobals.AltoAvenue, 1, 1),
+            (ToontownGlobals.BaritoneBoulevard, 1,
+             1), (ToontownGlobals.TenorTerrace, 1, 1)
         )
         self.generateHood(MMHoodDataAI, ToontownGlobals.MinniesMelodyland)
 
@@ -287,7 +299,8 @@ class ToontownAIRepository(ToontownInternalRepository):
 
         # Donald's Dreamland
         self.zoneTable[ToontownGlobals.DonaldsDreamland] = (
-            (ToontownGlobals.DonaldsDreamland, 1, 0), (ToontownGlobals.LullabyLane, 1, 1),
+            (ToontownGlobals.DonaldsDreamland, 1,
+             0), (ToontownGlobals.LullabyLane, 1, 1),
             (ToontownGlobals.PajamaPlace, 1, 1)
         )
         self.generateHood(DLHoodDataAI, ToontownGlobals.DonaldsDreamland)
@@ -300,7 +313,8 @@ class ToontownAIRepository(ToontownInternalRepository):
 
         # Sellbot HQ
         self.zoneTable[ToontownGlobals.SellbotHQ] = (
-            (ToontownGlobals.SellbotHQ, 0, 1), (ToontownGlobals.SellbotFactoryExt, 0, 1)
+            (ToontownGlobals.SellbotHQ, 0,
+             1), (ToontownGlobals.SellbotFactoryExt, 0, 1)
         )
         self.generateHood(CSHoodDataAI, ToontownGlobals.SellbotHQ)
 
@@ -360,7 +374,9 @@ class ToontownAIRepository(ToontownInternalRepository):
         filename = Filename(dnaFileName)
         found = vfs.resolveFilename(filename, searchPath)
         if not found:
-            self.notify.warning('lookupDNAFileName - %s not found on:' % dnaFileName)
+            self.notify.warning(
+                'lookupDNAFileName - %s not found on:' %
+                dnaFileName)
             print(searchPath)
         else:
             return filename.getFullpath()
@@ -374,7 +390,8 @@ class ToontownAIRepository(ToontownInternalRepository):
     def findPartyHats(self, dnaData, zoneId):
         return []  # TODO
 
-    def findRacingPads(self, dnaData, zoneId, area, type='racing_pad', overrideDNAZone=False):
+    def findRacingPads(self, dnaData, zoneId, area,
+                       type='racing_pad', overrideDNAZone=False):
         kartPads, kartPadGroups = [], []
         if type in dnaData.getName():
             if type == 'racing_pad':
@@ -383,7 +400,8 @@ class ToontownAIRepository(ToontownInternalRepository):
                 racePad.setArea(area)
                 racePad.index = int(nameSplit[2])
                 racePad.genre = nameSplit[3]
-                trackInfo = RaceGlobals.getNextRaceInfo(-1, racePad.genre, racePad.index)
+                trackInfo = RaceGlobals.getNextRaceInfo(
+                    -1, racePad.genre, racePad.index)
                 racePad.setTrackInfo([trackInfo[0], trackInfo[1]])
                 racePad.laps = trackInfo[2]
                 racePad.generateWithRequired(zoneId)
@@ -397,7 +415,8 @@ class ToontownAIRepository(ToontownInternalRepository):
                 kartPadGroups.append(dnaData)
 
         for i in range(dnaData.getNumChildren()):
-            foundKartPads, foundKartPadGroups = self.findRacingPads(dnaData.at(i), zoneId, area, type, overrideDNAZone)
+            foundKartPads, foundKartPadGroups = self.findRacingPads(
+                dnaData.at(i), zoneId, area, type, overrideDNAZone)
             kartPads.extend(foundKartPads)
             kartPadGroups.extend(foundKartPadGroups)
 
@@ -414,7 +433,8 @@ class ToontownAIRepository(ToontownInternalRepository):
                 x, y, z = block.getPos()
                 h, p, r = block.getHpr()
                 padLocationId = int(blockName[-1])
-                startingBlock = cls(self, kartPad, x, y, z, h, p, r, padLocationId)
+                startingBlock = cls(
+                    self, kartPad, x, y, z, h, p, r, padLocationId)
                 startingBlock.generateWithRequired(kartPad.zoneId)
                 startingBlocks.append(startingBlock)
 
@@ -425,7 +445,8 @@ class ToontownAIRepository(ToontownInternalRepository):
         if 'leaderBoard' in dnaData.getName():
             x, y, z = dnaData.getPos()
             h, p, r = dnaData.getHpr()
-            leaderBoard = DistributedLeaderBoardAI(self, dnaData.getName(), x, y, z, h, p, r)
+            leaderBoard = DistributedLeaderBoardAI(
+                self, dnaData.getName(), x, y, z, h, p, r)
             leaderBoard.generateWithRequired(zoneId)
             leaderBoards.append(leaderBoard)
 
@@ -442,16 +463,19 @@ class ToontownAIRepository(ToontownInternalRepository):
         return 'distObjDelete-%d' % avId
 
     def getAvatarDisconnectReason(self, avId):
-        return self.timeManager.avId2disconnectcode.get(avId, ToontownGlobals.DisconnectUnknown)
+        return self.timeManager.avId2disconnectcode.get(
+            avId, ToontownGlobals.DisconnectUnknown)
 
     def getZoneDataStore(self):
         return self.zoneDataStore
 
     def incrementPopulation(self):
-        self.districtStats.b_setAvatarCount(self.districtStats.getAvatarCount() + 1)
+        self.districtStats.b_setAvatarCount(
+            self.districtStats.getAvatarCount() + 1)
 
     def decrementPopulation(self):
-        self.districtStats.b_setAvatarCount(self.districtStats.getAvatarCount() - 1)
+        self.districtStats.b_setAvatarCount(
+            self.districtStats.getAvatarCount() - 1)
 
     def allocateZone(self, owner=None):
         zoneId = self.zoneAllocator.allocate()

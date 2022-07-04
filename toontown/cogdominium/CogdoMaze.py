@@ -7,6 +7,7 @@ from .CogdoMazeGameObjects import CogdoMazeWaterCooler
 from . import CogdoMazeData
 from . import CogdoUtil
 
+
 class CogdoMaze(MazeBase, DirectObject):
 
     def __init__(self, model, data, cellWidth):
@@ -28,7 +29,10 @@ class CogdoMaze(MazeBase, DirectObject):
         models = []
         for model in self.maze.findAllMatches('**/*waterCooler'):
             model.wrtReparentTo(render)
-            models.append((model.getPos(self.maze), model.getHpr(self.maze), model))
+            models.append(
+                (model.getPos(
+                    self.maze), model.getHpr(
+                    self.maze), model))
 
         models.sort()
         i = 0
@@ -77,9 +81,11 @@ class CogdoMaze(MazeBase, DirectObject):
 BARRIER_DATA_RIGHT = 1
 BARRIER_DATA_TOP = 1
 
+
 class CogdoMazeFactory:
 
-    def __init__(self, randomNumGen, width, height, frameWallThickness = Globals.FrameWallThickness, cogdoMazeData = CogdoMazeData):
+    def __init__(self, randomNumGen, width, height,
+                 frameWallThickness=Globals.FrameWallThickness, cogdoMazeData=CogdoMazeData):
         self._rng = RandomNumGen(randomNumGen)
         self.width = width
         self.height = height
@@ -93,7 +99,7 @@ class CogdoMazeFactory:
             self._generateMazeData()
         return self._data
 
-    def createCogdoMaze(self, flattenModel = True):
+    def createCogdoMaze(self, flattenModel=True):
         if not hasattr(self, '_maze'):
             self._loadAndBuildMazeModel(flatten=flattenModel)
         return CogdoMaze(self._model, self._data, self.cellWidth)
@@ -113,7 +119,8 @@ class CogdoMazeFactory:
             for x in range(self.width):
                 key = quadrantKeys[i]
                 collTable = self._cogdoMazeData.QuadrantCollisions[key]
-                angle = self._cogdoMazeData.QuadrantAngles[self._rng.randint(0, len(self._cogdoMazeData.QuadrantAngles) - 1)]
+                angle = self._cogdoMazeData.QuadrantAngles[self._rng.randint(
+                    0, len(self._cogdoMazeData.QuadrantAngles) - 1)]
                 self.quadrantData.append((key, collTable[angle], angle))
                 i += 1
                 if x * y >= self._cogdoMazeData.NumQuadrants:
@@ -139,15 +146,19 @@ class CogdoMazeFactory:
         dirLeft = 2
         dirRight = 3
 
-        def getAvailableDirections(ax, ay, ignore = None):
+        def getAvailableDirections(ax, ay, ignore=None):
             dirs = []
-            if ax - 1 >= 0 and data[ay][ax - 1][BARRIER_DATA_RIGHT] == 1 and (ax, ay) != ignore:
+            if ax - \
+                    1 >= 0 and data[ay][ax - 1][BARRIER_DATA_RIGHT] == 1 and (ax, ay) != ignore:
                 dirs.append(dirLeft)
-            if ax + 1 < self.width and data[ay][ax][BARRIER_DATA_RIGHT] == 1 and (ax, ay) != ignore:
+            if ax + \
+                    1 < self.width and data[ay][ax][BARRIER_DATA_RIGHT] == 1 and (ax, ay) != ignore:
                 dirs.append(dirRight)
-            if ay - 1 >= 0 and data[ay - 1][ax][BARRIER_DATA_TOP] == 1 and (ax, ay) != ignore:
+            if ay - \
+                    1 >= 0 and data[ay - 1][ax][BARRIER_DATA_TOP] == 1 and (ax, ay) != ignore:
                 dirs.append(dirDown)
-            if ay + 1 < self.height and data[ay][ax][BARRIER_DATA_TOP] == 1 and (ax, ay) != ignore:
+            if ay + \
+                    1 < self.height and data[ay][ax][BARRIER_DATA_TOP] == 1 and (ax, ay) != ignore:
                 dirs.append(dirUp)
             return dirs
 
@@ -199,12 +210,14 @@ class CogdoMazeFactory:
         if not hasattr(self, 'quadrantData'):
             self._gatherQuadrantData()
         self._data = {}
-        self._data['width'] = (self.width + 1) * self.frameWallThickness + self.width * self.quadrantSize
-        self._data['height'] = (self.height + 1) * self.frameWallThickness + self.height * self.quadrantSize
+        self._data['width'] = (
+            self.width + 1) * self.frameWallThickness + self.width * self.quadrantSize
+        self._data['height'] = (
+            self.height + 1) * self.frameWallThickness + self.height * self.quadrantSize
         self._data['originX'] = int(self._data['width'] / 2)
         self._data['originY'] = int(self._data['height'] / 2)
         collisionTable = []
-        horizontalWall = [ 1 for x in range(self._data['width']) ]
+        horizontalWall = [1 for x in range(self._data['width'])]
         collisionTable.append(horizontalWall)
         for i in range(0, len(self.quadrantData), self.width):
             for y in range(self.quadrantSize):
@@ -243,7 +256,7 @@ class CogdoMazeFactory:
 
         self._data['collisionTable'] = collisionTable
 
-    def _loadAndBuildMazeModel(self, flatten = False):
+    def _loadAndBuildMazeModel(self, flatten=False):
         self.getMazeData()
         self._model = NodePath('CogdoMazeModel')
         levelModel = CogdoUtil.loadMazeModel('level')
@@ -270,13 +283,15 @@ class CogdoMazeFactory:
                 i += 1
 
         quadrantHalfUnitSize = quadrantUnitSize * 0.5
-        barrierModel = CogdoUtil.loadMazeModel('grouping_blockerDivider').find('**/divider')
+        barrierModel = CogdoUtil.loadMazeModel(
+            'grouping_blockerDivider').find('**/divider')
         y = 3
         for x in range(self.width):
             if x == (self.width - 1) / 2:
                 continue
             ax = (x - halfWidth) * size
-            ay = (y - halfHeight) * size - quadrantHalfUnitSize - (self.cellWidth - 0.5)
+            ay = (y - halfHeight) * size - \
+                quadrantHalfUnitSize - (self.cellWidth - 0.5)
             b = NodePath('barrier')
             barrierModel.instanceTo(b)
             b.setPos(ax, ay, 0)
@@ -285,7 +300,8 @@ class CogdoMazeFactory:
         offset = self.cellWidth - 0.5
         for x in (0, 3):
             for y in range(self.height):
-                ax = (x - halfWidth) * size - quadrantHalfUnitSize - frameActualSize + offset
+                ax = (x - halfWidth) * size - \
+                    quadrantHalfUnitSize - frameActualSize + offset
                 ay = (y - halfHeight) * size
                 b = NodePath('barrier')
                 barrierModel.instanceTo(b)

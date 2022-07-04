@@ -5,10 +5,11 @@ from toontown.fishing import FishGlobals
 from . import GardenGlobals
 from direct.actor import Actor
 
+
 class DirectRegion(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory('DirectRegion')
 
-    def __init__(self, parent = aspect2d):
+    def __init__(self, parent=aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode('DirectRegion'))
 
@@ -49,10 +50,11 @@ class DirectRegion(NodePath):
             ll = render2d.getRelativePoint(card, newBounds[0])
             ur = render2d.getRelativePoint(card, newBounds[1])
             newBounds = [ll.getX(),
-             ur.getX(),
-             ll.getZ(),
-             ur.getZ()]
-            newBounds = [max(0.0, min(1.0, (x + 1.0) / 2.0)) for x in newBounds]
+                         ur.getX(),
+                         ll.getZ(),
+                         ur.getZ()]
+            newBounds = [max(0.0, min(1.0, (x + 1.0) / 2.0))
+                         for x in newBounds]
             self.cDr = base.win.makeDisplayRegion(*newBounds)
             self.cDr.setSort(10)
             self.cDr.setClearColor(card.getColor())
@@ -75,7 +77,7 @@ class DirectRegion(NodePath):
 class FlowerPhoto(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory('FlowerPhoto')
 
-    def __init__(self, species = None, variety = None, parent = aspect2d):
+    def __init__(self, species=None, variety=None, parent=aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode('FlowerPhoto'))
         self.species = species
@@ -155,12 +157,17 @@ class FlowerPhoto(NodePath):
             desat = bloom.find('**/*desat*')
             wilt.hide()
         if desat and not desat.isEmpty():
-            desat.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
+            desat.setColorScale(
+                colorTuple[0],
+                colorTuple[1],
+                colorTuple[2],
+                1.0)
         else:
-            nodePath.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
+            nodePath.setColorScale(
+                colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
         return nodePath
 
-    def show(self, showBackground = 0):
+    def show(self, showBackground=0):
         self.notify.debug('show')
         messenger.send('wakeup')
         if self.flowerFrame:
@@ -173,7 +180,8 @@ class FlowerPhoto(NodePath):
         self.flowerFrame = self.makeFlowerFrame(self.actor)
         if showBackground:
             if not hasattr(self, 'background'):
-                background = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+                background = loader.loadModel(
+                    'phase_3.5/models/gui/stickerbook_gui')
                 background = background.find('**/Fish_BG')
                 self.background = background
             self.background.setPos(0, 15, 0)

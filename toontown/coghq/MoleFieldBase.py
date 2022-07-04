@@ -4,6 +4,7 @@ HILL_BOMB = 1
 HILL_WHACKED = 2
 HILL_COGWHACKED = 3
 
+
 class MoleFieldBase:
     WHACKED = 1
     MoveUpTimeMax = 1
@@ -47,25 +48,29 @@ class MoleFieldBase:
             eligibleMoles.remove(moleIndex)
             usedMoles.append(moleIndex)
             moleType = randOb.choice([HILL_MOLE,
-             HILL_MOLE,
-             HILL_MOLE,
-             HILL_BOMB])
+                                      HILL_MOLE,
+                                      HILL_MOLE,
+                                      HILL_BOMB])
             self.schedule.append((curTime,
-             moleIndex,
-             curMoveUpTime,
-             curStayUpTime,
-             curMoveDownTime,
-             moleType))
+                                  moleIndex,
+                                  curMoveUpTime,
+                                  curStayUpTime,
+                                  curMoveDownTime,
+                                  moleType))
             curTime += curTimeBetweenPopup
             curMoveUpTime = self.calcNextMoveUpTime(curTime, curMoveUpTime)
             curStayUpTime = self.calcNextStayUpTime(curTime, curStayUpTime)
-            curMoveDownTime = self.calcNextMoveDownTime(curTime, curMoveDownTime)
-            curTimeBetweenPopup = self.calcNextTimeBetweenPopup(curTime, curTimeBetweenPopup)
+            curMoveDownTime = self.calcNextMoveDownTime(
+                curTime, curMoveDownTime)
+            curTimeBetweenPopup = self.calcNextTimeBetweenPopup(
+                curTime, curTimeBetweenPopup)
             self.endingTime = curTime + curMoveUpTime + curStayUpTime + curMoveDownTime
 
         self.schedule.pop()
-        self.endingTime = self.schedule[-1][0] + self.schedule[-1][2] + self.schedule[-1][3] + self.schedule[-1][4]
-        self.notify.debug('schedule length = %d, endingTime=%f' % (len(self.schedule), self.endingTime))
+        self.endingTime = self.schedule[-1][0] + self.schedule[-1][2] + \
+            self.schedule[-1][3] + self.schedule[-1][4]
+        self.notify.debug('schedule length = %d, endingTime=%f' %
+                          (len(self.schedule), self.endingTime))
 
     def calcNextMoveUpTime(self, curTime, curMoveUpTime):
         newMoveUpTime = curMoveUpTime * self.MoveUpTimeMultiplier

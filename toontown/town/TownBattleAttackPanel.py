@@ -6,6 +6,7 @@ from toontown.toontowngui.TeaserPanel import TeaserPanel
 from toontown.toonbase.ToontownBattleGlobals import gagIsPaidOnly
 AttackPanelHidden = 0
 
+
 def hideAttackPanel(flag):
     global AttackPanelHidden
     AttackPanelHidden = flag
@@ -13,7 +14,8 @@ def hideAttackPanel(flag):
 
 
 class TownBattleAttackPanel(StateData.StateData):
-    notify = DirectNotifyGlobal.directNotify.newCategory('TownBattleAttackPanel')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'TownBattleAttackPanel')
 
     def __init__(self, doneEvent):
         StateData.StateData.__init__(self, doneEvent)
@@ -77,7 +79,10 @@ class TownBattleAttackPanel(StateData.StateData):
             doneStatus['level'] = level
             messenger.send(self.doneEvent, [doneStatus])
         else:
-            self.notify.error("An item we don't have: track %s level %s was selected." % [track, level])
+            self.notify.error(
+                "An item we don't have: track %s level %s was selected." % [
+                    track,
+                    level])
 
     def __handleHide(self):
         if AttackPanelHidden:

@@ -6,15 +6,34 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from direct.directnotify import DirectNotifyGlobal
 
+
 class QuestChoiceGui(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('QuestChoiceGui')
 
     def __init__(self):
-        DirectFrame.__init__(self, relief=None, geom=DGG.getDefaultDialogGeom(), geom_color=Vec4(0.8, 0.6, 0.4, 1), geom_scale=(1.85, 1, 0.9), geom_hpr=(0, 0, -90), pos=(-0.85, 0, 0))
+        DirectFrame.__init__(self, relief=None, geom=DGG.getDefaultDialogGeom(), geom_color=Vec4(
+            0.8, 0.6, 0.4, 1), geom_scale=(1.85, 1, 0.9), geom_hpr=(0, 0, -90), pos=(-0.85, 0, 0))
         self.initialiseoptions(QuestChoiceGui)
         self.questChoicePosters = []
         guiButton = loader.loadModel('phase_3/models/gui/quit_button')
-        self.cancelButton = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')), image_scale=(0.7, 1, 1), text=TTLocalizer.QuestChoiceGuiCancel, text_scale=0.06, text_pos=(0, -0.02), command=self.chooseQuest, extraArgs=[0])
+        self.cancelButton = DirectButton(
+            parent=self,
+            relief=None,
+            image=(
+                guiButton.find('**/QuitBtn_UP'),
+                guiButton.find('**/QuitBtn_DN'),
+                guiButton.find('**/QuitBtn_RLVR')),
+            image_scale=(
+                0.7,
+                1,
+                1),
+            text=TTLocalizer.QuestChoiceGuiCancel,
+            text_scale=0.06,
+            text_pos=(
+                0,
+                -0.02),
+            command=self.chooseQuest,
+            extraArgs=[0])
         guiButton.removeNode()
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.reparentTo(self)
@@ -28,7 +47,12 @@ class QuestChoiceGui(DirectFrame):
             questId, rewardId, toNpcId = quests[i:i + 3]
             qp = QuestPoster.QuestPoster()
             qp.reparentTo(self)
-            qp.showChoicePoster(questId, fromNpcId, toNpcId, rewardId, self.chooseQuest)
+            qp.showChoicePoster(
+                questId,
+                fromNpcId,
+                toNpcId,
+                rewardId,
+                self.chooseQuest)
             self.questChoicePosters.append(qp)
 
         if len(quests) == 1 * 3:

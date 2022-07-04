@@ -6,6 +6,7 @@ from direct.gui import DirectGuiGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.parties import PartyUtils
 
+
 class JukeboxGui(DirectObject):
     notify = directNotify.newCategory('JukeboxGui')
     CLOSE_EVENT = 'JukeboxGui_CLOSE_EVENT'
@@ -26,32 +27,82 @@ class JukeboxGui(DirectObject):
             return
         guiNode = loader.loadModel('phase_13/models/parties/jukeboxGUI')
         self._timerGui = PartyUtils.getNewToontownTimer()
-        self._windowFrame = DirectFrame(image=guiNode.find('**/background'), relief=None, pos=(0, 0, 0), scale=0.7)
-        self._songFrame = DirectFrame(image=guiNode.find('**/songTitle_background'), parent=self._windowFrame, relief=None)
-        self._currentlyPlayingLabel = self.__createLabel(guiNode, 'currentlyPlaying', parent=self._windowFrame, text=TTLocalizer.JukeboxCurrentlyPlayingNothing, scale=TTLocalizer.JGcurrentlyPlayingLabel)
-        self._songNameLabel = self.__createLabel(guiNode, 'songName', parent=self._windowFrame, text=TTLocalizer.JukeboxCurrentSongNothing, scale=TTLocalizer.JGsongNameLabel)
-        self._queueList, self._queueLabel = self.__createLabeledScrolledList(guiNode, 'queue', label=TTLocalizer.JukeboxQueueLabel, parent=self._windowFrame)
-        self._songsList, self._songsLabel = self.__createLabeledScrolledList(guiNode, 'songs', label=TTLocalizer.JukeboxSongsLabel, parent=self._windowFrame)
+        self._windowFrame = DirectFrame(image=guiNode.find(
+            '**/background'), relief=None, pos=(0, 0, 0), scale=0.7)
+        self._songFrame = DirectFrame(
+            image=guiNode.find('**/songTitle_background'),
+            parent=self._windowFrame,
+            relief=None)
+        self._currentlyPlayingLabel = self.__createLabel(
+            guiNode,
+            'currentlyPlaying',
+            parent=self._windowFrame,
+            text=TTLocalizer.JukeboxCurrentlyPlayingNothing,
+            scale=TTLocalizer.JGcurrentlyPlayingLabel)
+        self._songNameLabel = self.__createLabel(
+            guiNode,
+            'songName',
+            parent=self._windowFrame,
+            text=TTLocalizer.JukeboxCurrentSongNothing,
+            scale=TTLocalizer.JGsongNameLabel)
+        self._queueList, self._queueLabel = self.__createLabeledScrolledList(
+            guiNode, 'queue', label=TTLocalizer.JukeboxQueueLabel, parent=self._windowFrame)
+        self._songsList, self._songsLabel = self.__createLabeledScrolledList(
+            guiNode, 'songs', label=TTLocalizer.JukeboxSongsLabel, parent=self._windowFrame)
         pos = guiNode.find('**/addButton_text_locator').getPos()
-        self._addSongButton = self.__createButton(guiNode, 'addSongButton', parent=self._windowFrame, command=self.__handleAddSongButtonClick, image3_color=Vec4(0.6, 0.6, 0.6, 0.6), text=TTLocalizer.JukeboxAddSong, text_align=TextNode.ACenter, text_pos=(pos[0], pos[2]), text_scale=TTLocalizer.JGaddSongButton)
-        self._closeButton = self.__createButton(guiNode, 'can_cancelButton', parent=self._windowFrame, command=self.__handleCloseButtonClick)
+        self._addSongButton = self.__createButton(
+            guiNode,
+            'addSongButton',
+            parent=self._windowFrame,
+            command=self.__handleAddSongButtonClick,
+            image3_color=Vec4(
+                0.6,
+                0.6,
+                0.6,
+                0.6),
+            text=TTLocalizer.JukeboxAddSong,
+            text_align=TextNode.ACenter,
+            text_pos=(
+                pos[0],
+                pos[2]),
+            text_scale=TTLocalizer.JGaddSongButton)
+        self._closeButton = self.__createButton(
+            guiNode,
+            'can_cancelButton',
+            parent=self._windowFrame,
+            command=self.__handleCloseButtonClick)
         pos = guiNode.find('**/close_text_locator').getPos()
-        self._closeButton = self.__createButton(guiNode, 'close', parent=self._windowFrame, command=self.__handleCloseButtonClick, text=TTLocalizer.JukeboxClose, text_align=TextNode.ACenter, text_pos=(pos[0], pos[2]), text_scale=0.08)
-        self._moveToTopButton = self.__createButton(guiNode, 'moveToTop', command=self.__handleMoveToTopButtonClick)
+        self._closeButton = self.__createButton(
+            guiNode,
+            'close',
+            parent=self._windowFrame,
+            command=self.__handleCloseButtonClick,
+            text=TTLocalizer.JukeboxClose,
+            text_align=TextNode.ACenter,
+            text_pos=(
+                pos[0],
+                pos[2]),
+            text_scale=0.08)
+        self._moveToTopButton = self.__createButton(
+            guiNode, 'moveToTop', command=self.__handleMoveToTopButtonClick)
         guiNode.removeNode()
         self._loaded = True
         return
 
-    def __createButton(self, guiNode, imagePrefix, parent = hidden, **kwargs):
-        return DirectButton(parent=parent, relief=None, image=(guiNode.find('**/%s_up' % imagePrefix), guiNode.find('**/%s_down' % imagePrefix), guiNode.find('**/%s_rollover' % imagePrefix)), **kwargs)
+    def __createButton(self, guiNode, imagePrefix, parent=hidden, **kwargs):
+        return DirectButton(parent=parent, relief=None, image=(guiNode.find('**/%s_up' % imagePrefix),
+                            guiNode.find('**/%s_down' % imagePrefix), guiNode.find('**/%s_rollover' % imagePrefix)), **kwargs)
 
-    def __createLabel(self, guiNode, locatorPrefix, parent = hidden, **kwargs):
-        return DirectLabel(parent=parent, relief=None, pos=guiNode.find('**/%s_text_locator' % locatorPrefix).getPos(), **kwargs)
+    def __createLabel(self, guiNode, locatorPrefix, parent=hidden, **kwargs):
+        return DirectLabel(parent=parent, relief=None, pos=guiNode.find(
+            '**/%s_text_locator' % locatorPrefix).getPos(), **kwargs)
 
-    def __createLabeledScrolledList(self, guiNode, namePrefix, label, parent = hidden, **kwargs):
-        return (DirectScrolledList(parent=parent, relief=None, incButton_image=(guiNode.find('**/%sButtonDown_up' % namePrefix), guiNode.find('**/%sButtonDown_down' % namePrefix), guiNode.find('**/%sButtonDown_rollover' % namePrefix)), incButton_relief=None, incButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), decButton_image=(guiNode.find('**/%sButtonUp_up' % namePrefix), guiNode.find('**/%sButtonUp_down' % namePrefix), guiNode.find('**/%sButtonUp_rollover' % namePrefix)), decButton_relief=None, decButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), image=guiNode.find('**/%s_background' % namePrefix), itemFrame_relief=None, itemFrame_pos=guiNode.find('**/%sList_locator' % namePrefix).getPos(), itemFrame_scale=0.07, numItemsVisible=TTLocalizer.JGnumItemsVisible, items=[], **kwargs), self.__createLabel(guiNode, namePrefix, parent=parent, text=label, text_fg=(0.5, 1.0, 1.0, 1.0), text_shadow=(0.0, 0.0, 0.0, 1.0), scale=0.12))
+    def __createLabeledScrolledList(
+            self, guiNode, namePrefix, label, parent=hidden, **kwargs):
+        return (DirectScrolledList(parent=parent, relief=None, incButton_image=(guiNode.find('**/%sButtonDown_up' % namePrefix), guiNode.find('**/%sButtonDown_down' % namePrefix), guiNode.find('**/%sButtonDown_rollover' % namePrefix)), incButton_relief=None, incButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), decButton_image=(guiNode.find('**/%sButtonUp_up' % namePrefix), guiNode.find('**/%sButtonUp_down' % namePrefix), guiNode.find('**/%sButtonUp_rollover' % namePrefix)),
+                decButton_relief=None, decButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), image=guiNode.find('**/%s_background' % namePrefix), itemFrame_relief=None, itemFrame_pos=guiNode.find('**/%sList_locator' % namePrefix).getPos(), itemFrame_scale=0.07, numItemsVisible=TTLocalizer.JGnumItemsVisible, items=[], **kwargs), self.__createLabel(guiNode, namePrefix, parent=parent, text=label, text_fg=(0.5, 1.0, 1.0, 1.0), text_shadow=(0.0, 0.0, 0.0, 1.0), scale=0.12))
 
-    def enable(self, timer = 0):
+    def enable(self, timer=0):
         if not self.isLoaded():
             self.load()
             phase = 13
@@ -94,7 +145,14 @@ class JukeboxGui(DirectObject):
         return self._loaded
 
     def addToSongList(self, text, phase, filename, length):
-        listItem = DirectScrolledListItem(relief=None, parent=self._songsList, text=text, text_align=TextNode.ALeft, text_pos=(0.0, 0.0, 0.0), text_scale=TTLocalizer.JGlistItem, text_fg=(0.0, 0.0, 0.0, 1.0), text1_fg=(1.0, 1.0, 1.0, 1.0), text1_bg=(0.0, 0.0, 1.0, 1.0), text2_fg=(0.0, 0.0, 1.0, 1.0), text3_bg=(0.0, 0.8, 0.0, 1.0), command=self.__handleSongListItemSelect, extraArgs=[])
+        listItem = DirectScrolledListItem(
+            relief=None, parent=self._songsList, text=text, text_align=TextNode.ALeft, text_pos=(
+                0.0, 0.0, 0.0), text_scale=TTLocalizer.JGlistItem, text_fg=(
+                0.0, 0.0, 0.0, 1.0), text1_fg=(
+                1.0, 1.0, 1.0, 1.0), text1_bg=(
+                    0.0, 0.0, 1.0, 1.0), text2_fg=(
+                        0.0, 0.0, 1.0, 1.0), text3_bg=(
+                            0.0, 0.8, 0.0, 1.0), command=self.__handleSongListItemSelect, extraArgs=[])
         listItem.setPythonTag('value', (phase, filename, length))
         self._songsList.addItem(listItem)
         return listItem
@@ -112,7 +170,9 @@ class JukeboxGui(DirectObject):
     def __handleAddSongButtonClick(self):
         if hasattr(self._songsList, 'currentSelected'):
             song = self._songsList.currentSelected
-            messenger.send(JukeboxGui.ADD_SONG_CLICK_EVENT, [song['text'], song.getPythonTag('value')])
+            messenger.send(
+                JukeboxGui.ADD_SONG_CLICK_EVENT, [
+                    song['text'], song.getPythonTag('value')])
 
     def disableAddSongButton(self):
         self._addSongButton['state'] = DirectGuiGlobals.DISABLED
@@ -120,8 +180,17 @@ class JukeboxGui(DirectObject):
     def enableAddSongButton(self):
         self._addSongButton['state'] = DirectGuiGlobals.NORMAL
 
-    def addSongToQueue(self, text, highlight = False, moveToTopButton = False):
-        listItem = DirectLabel(relief=None, parent=self._queueList, text=text, text_align=TextNode.ALeft, text_pos=(0.0, 0.0, 0.0), text_scale=TTLocalizer.JGlistItem)
+    def addSongToQueue(self, text, highlight=False, moveToTopButton=False):
+        listItem = DirectLabel(
+            relief=None,
+            parent=self._queueList,
+            text=text,
+            text_align=TextNode.ALeft,
+            text_pos=(
+                0.0,
+                0.0,
+                0.0),
+            text_scale=TTLocalizer.JGlistItem)
         self._queueList.addItem(listItem)
         if highlight:
             listItem['text_fg'] = (0.0, 0.5, 0.0, 1.0)

@@ -9,6 +9,7 @@ from toontown.toonbase import TTLocalizer
 from pandac.PandaModules import NodePath
 from pandac.PandaModules import Point3
 
+
 class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedStatuary')
 
@@ -75,7 +76,9 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
         yDiff = maxPt[1] - minPt[1]
         radius = (xDiff * xDiff + yDiff * yDiff) ** 0.5
         radius /= 3
-        self.notify.debug('xDiff=%s yDiff=%s radius = %s' % (xDiff, yDiff, radius))
+        self.notify.debug(
+            'xDiff=%s yDiff=%s radius = %s' %
+            (xDiff, yDiff, radius))
         self.colSphereNode.setScale(radius)
 
     def getShovelCommand(self):
@@ -84,7 +87,7 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
     def getShovelAction(self):
         return TTLocalizer.GardeningRemove
 
-    def handleEnterPlot(self, colEntry = None):
+    def handleEnterPlot(self, colEntry=None):
         if self.canBePicked():
             self.notify.debug('entering if')
             base.localAvatar.addShovelRelatedDoId(self.doId)
@@ -95,7 +98,11 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
     def handlePicking(self):
         fullName = self.name
         messenger.send('wakeup')
-        self.confirmDialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=TTLocalizer.ConfirmRemoveStatuary % {'item': fullName}, command=self.confirmCallback)
+        self.confirmDialog = TTDialog.TTDialog(
+            style=TTDialog.YesNo,
+            text=TTLocalizer.ConfirmRemoveStatuary % {
+                'item': fullName},
+            command=self.confirmCallback)
         self.confirmDialog.show()
         base.cr.playGame.getPlace().detectedGardenPlotUse()
 
@@ -116,7 +123,7 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
             return
         self.handleRemove()
 
-    def handleExitPlot(self, entry = None):
+    def handleExitPlot(self, entry=None):
         DistributedLawnDecor.DistributedLawnDecor.handleExitPlot(self, entry)
         base.localAvatar.removeShovelRelatedDoId(self.doId)
 
@@ -124,7 +131,10 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
         self.startInteraction()
         itemName = GardenGlobals.PlantAttributes[self.typeIndex]['name']
         stringToShow = TTLocalizer.getResultPlantedSomethingSentence(itemName)
-        self.resultDialog = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=stringToShow, command=self.resultsCallback)
+        self.resultDialog = TTDialog.TTDialog(
+            style=TTDialog.Acknowledge,
+            text=stringToShow,
+            command=self.resultsCallback)
 
     def resultsCallback(self, value):
         self.notify.debug('value=%d' % value)

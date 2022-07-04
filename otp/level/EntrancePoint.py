@@ -2,6 +2,7 @@ from toontown.toonbase.ToontownGlobals import *
 from direct.directnotify import DirectNotifyGlobal
 from . import BasicEntities
 
+
 class EntrancePoint(BasicEntities.NodePathEntity):
 
     def __init__(self, level, entId):
@@ -20,7 +21,8 @@ class EntrancePoint(BasicEntities.NodePathEntity):
 
     def placeToon(self, toon, toonIndex, numToons):
         self.placer.setY(-self.radius)
-        self.rotator.setH(-self.theta * (numToons - 1) * 0.5 + toonIndex * self.theta)
+        self.rotator.setH(-self.theta * (numToons - 1)
+                          * 0.5 + toonIndex * self.theta)
         toon.setPosHpr(self.placer, 0, 0, 0, 0, 0, 0)
 
     def initEntrancePoint(self):

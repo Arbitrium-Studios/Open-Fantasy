@@ -9,6 +9,7 @@ from toontown.pets import PetshopGUI
 from toontown.hood import ZoneUtil
 from toontown.toontowngui import TeaserPanel
 
+
 class DistributedNPCPetclerk(DistributedNPCToonBase):
 
     def __init__(self, cr):
@@ -53,7 +54,8 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
         return 4.0
 
     def allowedToEnter(self):
-        if hasattr(base, 'ttAccess') and base.ttAccess and base.ttAccess.canAccess():
+        if hasattr(
+                base, 'ttAccess') and base.ttAccess and base.ttAccess.canAccess():
             return True
         return False
 
@@ -72,7 +74,8 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
             place = base.cr.playGame.getPlace()
             if place:
                 place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(pageName='tricks', doneFunc=self.handleOkTeaser)
+            self.dialog = TeaserPanel.TeaserPanel(
+                pageName='tricks', doneFunc=self.handleOkTeaser)
 
     def __handleUnexpectedExit(self):
         self.notify.warning('unexpected exit')
@@ -129,7 +132,9 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
                 if self.petshopGui:
                     self.petshopGui.destroy()
                     self.petshopGui = None
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_TOOKTOOLONG, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_TOOKTOOLONG,
+                CFSpeech | CFTimeout)
             self.resetPetshopClerk()
         elif mode == NPCToons.SELL_MOVIE_START:
             self.av = base.cr.doId2do.get(avId)
@@ -137,25 +142,39 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
                 self.notify.warning('Avatar %d not found in doId' % avId)
                 return
             else:
-                self.accept(self.av.uniqueName('disable'), self.__handleUnexpectedExit)
+                self.accept(
+                    self.av.uniqueName('disable'),
+                    self.__handleUnexpectedExit)
             self.setupAvatars(self.av)
             if self.isLocalToon:
                 camera.wrtReparentTo(render)
-                self.lerpCameraSeq = camera.posQuatInterval(1, Point3(-5, 9, base.localAvatar.getHeight() - 0.5), Point3(-150, -2, 0), other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
+                self.lerpCameraSeq = camera.posQuatInterval(1, Point3(-5, 9, base.localAvatar.getHeight(
+                ) - 0.5), Point3(-150, -2, 0), other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
                 self.lerpCameraSeq.start()
             if self.isLocalToon:
-                taskMgr.doMethodLater(1.0, self.popupPetshopGUI, self.uniqueName('popupPetshopGUI'))
+                taskMgr.doMethodLater(
+                    1.0,
+                    self.popupPetshopGUI,
+                    self.uniqueName('popupPetshopGUI'))
         elif mode == NPCToons.SELL_MOVIE_COMPLETE:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_THANKSFISH_PETSHOP, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_THANKSFISH_PETSHOP,
+                CFSpeech | CFTimeout)
             self.resetPetshopClerk()
         elif mode == NPCToons.SELL_MOVIE_PETRETURNED:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_PETRETURNED, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_PETRETURNED,
+                CFSpeech | CFTimeout)
             self.resetPetshopClerk()
         elif mode == NPCToons.SELL_MOVIE_PETADOPTED:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_PETADOPTED, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_PETADOPTED,
+                CFSpeech | CFTimeout)
             self.resetPetshopClerk()
         elif mode == NPCToons.SELL_MOVIE_PETCANCELED:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_PETCANCELED, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_PETCANCELED,
+                CFSpeech | CFTimeout)
             self.resetPetshopClerk()
         elif mode == NPCToons.SELL_MOVIE_TROPHY:
             self.av = base.cr.doId2do.get(avId)
@@ -164,10 +183,14 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
                 return
             else:
                 numFish, totalNumFish = extraArgs
-                self.setChatAbsolute(TTLocalizer.STOREOWNER_TROPHY % (numFish, totalNumFish), CFSpeech | CFTimeout)
+                self.setChatAbsolute(
+                    TTLocalizer.STOREOWNER_TROPHY %
+                    (numFish, totalNumFish), CFSpeech | CFTimeout)
             self.resetPetshopClerk()
         elif mode == NPCToons.SELL_MOVIE_NOFISH:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_NOFISH, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_NOFISH,
+                CFSpeech | CFTimeout)
             self.resetPetshopClerk()
         elif mode == NPCToons.SELL_MOVIE_NO_MONEY:
             self.notify.warning('SELL_MOVIE_NO_MONEY should not be called')
@@ -190,7 +213,7 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
         self.ignore(self.eventDict['fishSold'])
         self.sendUpdate('fishSold')
 
-    def __handleGUIDone(self, bTimedOut = False):
+    def __handleGUIDone(self, bTimedOut=False):
         self.ignore(self.eventDict['guiDone'])
         self.petshopGui.destroy()
         self.petshopGui = None
@@ -205,6 +228,8 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
         self.setChatAbsolute('', CFSpeech)
         self.acceptOnce(self.eventDict['guiDone'], self.__handleGUIDone)
         self.acceptOnce(self.eventDict['petAdopted'], self.__handlePetAdopted)
-        self.acceptOnce(self.eventDict['petReturned'], self.__handlePetReturned)
+        self.acceptOnce(
+            self.eventDict['petReturned'],
+            self.__handlePetReturned)
         self.acceptOnce(self.eventDict['fishSold'], self.__handleFishSold)
         self.petshopGui = PetshopGUI.PetshopGUI(self.eventDict, self.petSeeds)

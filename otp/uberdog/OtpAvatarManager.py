@@ -3,6 +3,7 @@ from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 notify = DirectNotifyGlobal.directNotify.newCategory('AvatarManager')
 
+
 class OtpAvatarManager(DistributedObject.DistributedObject):
     notify = notify
     OnlineEvent = 'GlobalAvatarManagerOnline'
@@ -35,16 +36,16 @@ class OtpAvatarManager(DistributedObject.DistributedObject):
 
     def createAvatarResponse(self, avatarId, subId, access, founder):
         self.notify.info('new avatarId: %s subId: %s access: %s founder: %s' % (avatarId,
-         subId,
-         access,
-         founder))
+                                                                                subId,
+                                                                                access,
+                                                                                founder))
         messenger.send('createdNewAvatar', [avatarId, subId])
 
     def sendRequestRemoveAvatar(self, avatarId, subId, confirmPassword):
         self.sendUpdate('requestRemoveAvatar', [0,
-         avatarId,
-         subId,
-         confirmPassword])
+                                                avatarId,
+                                                subId,
+                                                confirmPassword])
 
     def rejectRemoveAvatar(self, reasonId):
         messenger.send('rejectRemoveAvatar', [reasonId])
@@ -54,9 +55,9 @@ class OtpAvatarManager(DistributedObject.DistributedObject):
 
     def sendRequestShareAvatar(self, avatarId, subId, shared):
         self.sendUpdate('requestShareAvatar', [0,
-         avatarId,
-         subId,
-         shared])
+                                               avatarId,
+                                               subId,
+                                               shared])
 
     def rejectShareAvatar(self, reasonId):
         messenger.send('rejectShareAvatar', [reasonId])
@@ -81,6 +82,6 @@ class OtpAvatarManager(DistributedObject.DistributedObject):
 
     def playAvatarResponse(self, avatarId, subId, access, founder):
         messenger.send('playAvatarResponse', [avatarId,
-         subId,
-         access,
-         founder])
+                                              subId,
+                                              access,
+                                              founder])

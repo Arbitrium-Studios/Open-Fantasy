@@ -6,8 +6,10 @@ from otp.otpbase import OTPGlobals
 from toontown.cogdominium.DistCogdoCraneObject import DistCogdoCraneObject
 from toontown.cogdominium import CogdoCraneGameConsts as GameConsts
 
+
 class DistCogdoCraneMoneyBag(DistCogdoCraneObject):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistCogdoCraneMoneyBag')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistCogdoCraneMoneyBag')
     grabPos = (0, 0, GameConsts.Settings.MoneyBagGrabHeight.get())
     craneFrictionCoef = 0.2
     craneSlideSpeed = 11
@@ -18,10 +20,25 @@ class DistCogdoCraneMoneyBag(DistCogdoCraneObject):
         DistCogdoCraneObject.__init__(self, cr)
         NodePath.__init__(self, 'object')
         self.index = None
-        self.flyToMagnetSfx = loader.loadSfx('phase_5/audio/sfx/TL_rake_throw_only.ogg')
-        self.hitMagnetSfx = loader.loadSfx('phase_5/audio/sfx/AA_drop_safe.ogg')
-        self.toMagnetSoundInterval = Parallel(SoundInterval(self.flyToMagnetSfx, duration=ToontownGlobals.CashbotBossToMagnetTime, node=self), Sequence(Wait(ToontownGlobals.CashbotBossToMagnetTime - 0.02), SoundInterval(self.hitMagnetSfx, duration=1.0, node=self)))
-        self.hitFloorSfx = loader.loadSfx('phase_5/audio/sfx/AA_drop_bigweight_miss.ogg')
+        self.flyToMagnetSfx = loader.loadSfx(
+            'phase_5/audio/sfx/TL_rake_throw_only.ogg')
+        self.hitMagnetSfx = loader.loadSfx(
+            'phase_5/audio/sfx/AA_drop_safe.ogg')
+        self.toMagnetSoundInterval = Parallel(
+            SoundInterval(
+                self.flyToMagnetSfx,
+                duration=ToontownGlobals.CashbotBossToMagnetTime,
+                node=self),
+            Sequence(
+                Wait(
+                    ToontownGlobals.CashbotBossToMagnetTime -
+                    0.02),
+                SoundInterval(
+                    self.hitMagnetSfx,
+                    duration=1.0,
+                    node=self)))
+        self.hitFloorSfx = loader.loadSfx(
+            'phase_5/audio/sfx/AA_drop_bigweight_miss.ogg')
         self.hitFloorSoundInterval = SoundInterval(self.hitFloorSfx, node=self)
         return
 

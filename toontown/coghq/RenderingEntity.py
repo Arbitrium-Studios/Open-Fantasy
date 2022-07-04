@@ -4,13 +4,18 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.suit import GoonPathData
 from otp.level import BasicEntities
 
+
 class RenderingEntity(BasicEntities.NodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('PathMasterEntity')
 
     def __init__(self, level, entId):
         BasicEntities.NodePathEntity.__init__(self, level, entId)
         if hasattr(self, 'colorR'):
-            self.setColorScale(self.colorR, self.colorG, self.colorB, self.colorA)
+            self.setColorScale(
+                self.colorR,
+                self.colorG,
+                self.colorB,
+                self.colorA)
         if hasattr(self, 'blending'):
             self.setBlending(self.blending)
         if hasattr(self, 'fogOn'):

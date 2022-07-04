@@ -9,7 +9,8 @@ from toontown.racing.RaceManagerAI import CircuitRaceHolidayMgr
 
 
 class DistributedRacePadAI(DistributedKartPadAI, FSM):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedRacePadAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedRacePadAI')
     defaultTransitions = {'Off': ['WaitEmpty'],
                           'WaitEmpty': ['WaitCountdown', 'Off'],
                           'WaitCountdown': ['WaitEmpty',
@@ -42,7 +43,9 @@ class DistributedRacePadAI(DistributedKartPadAI, FSM):
         self.state = state
 
     def d_setState(self, state):
-        self.sendUpdate('setState', [state, globalClockDelta.getRealNetworkTime()])
+        self.sendUpdate(
+            'setState', [
+                state, globalClockDelta.getRealNetworkTime()])
 
     def b_setState(self, state):
         self.setState(state)
@@ -65,28 +68,39 @@ class DistributedRacePadAI(DistributedKartPadAI, FSM):
         return self.trackInfo
 
     def enterWaitEmpty(self):
-        taskMgr.doMethodLater(RaceGlobals.TrackSignDuration, self.changeTrack, self.uniqueName('changeTrack'))
+        taskMgr.doMethodLater(
+            RaceGlobals.TrackSignDuration,
+            self.changeTrack,
+            self.uniqueName('changeTrack'))
 
     def exitWaitEmpty(self):
         taskMgr.remove(self.uniqueName('changeTrack'))
 
     def enterWaitCountdown(self):
-        taskMgr.doMethodLater(KartGlobals.COUNTDOWN_TIME, self.considerAllAboard, self.uniqueName('countdownTask'))
+        taskMgr.doMethodLater(
+            KartGlobals.COUNTDOWN_TIME,
+            self.considerAllAboard,
+            self.uniqueName('countdownTask'))
 
     def exitWaitCountdown(self):
         taskMgr.remove(self.uniqueName('countdownTask'))
 
     def enterAllAboard(self):
-        taskMgr.doMethodLater(KartGlobals.ENTER_RACE_TIME, self.enterRace, self.uniqueName('enterRaceTask'))
+        taskMgr.doMethodLater(
+            KartGlobals.ENTER_RACE_TIME,
+            self.enterRace,
+            self.uniqueName('enterRaceTask'))
 
     def exitAllAboard(self):
         self.avIds = []
         taskMgr.remove(self.uniqueName('enterRaceTask'))
 
     def changeTrack(self, task):
-        trackInfo = RaceGlobals.getNextRaceInfo(self.trackInfo[0], self.genre, self.index)
+        trackInfo = RaceGlobals.getNextRaceInfo(
+            self.trackInfo[0], self.genre, self.index)
         trackId, raceType = trackInfo[0], trackInfo[1]
-        if raceType == RaceGlobals.ToonBattle and bboard.get(CircuitRaceHolidayMgr.PostName):
+        if raceType == RaceGlobals.ToonBattle and bboard.get(
+                CircuitRaceHolidayMgr.PostName):
             raceType = RaceGlobals.Circuit
 
         self.b_setTrackInfo([trackId, raceType])
@@ -100,7 +114,8 @@ class DistributedRacePadAI(DistributedKartPadAI, FSM):
                     self.request('WaitBoarding')
                 return
 
-        if self.trackInfo[1] in (RaceGlobals.ToonBattle, RaceGlobals.Circuit) and len(self.avIds) < 2:
+        if self.trackInfo[1] in (RaceGlobals.ToonBattle,
+                                 RaceGlobals.Circuit) and len(self.avIds) < 2:
             for startingBlock in self.startingBlocks:
                 if startingBlock.avId != 0:
                     startingBlock.normalExit()
@@ -118,9 +133,16 @@ class DistributedRacePadAI(DistributedKartPadAI, FSM):
         if raceType == RaceGlobals.Circuit:
             circuitLoop = RaceGlobals.getCircuitLoop(trackId)
 
-        raceZone = self.air.raceMgr.createRace(trackId, raceType, self.laps, self.avIds, circuitLoop=circuitLoop[1:], circuitPoints={}, circuitTimes={})
+        raceZone = self.air.raceMgr.createRace(trackId,
+                                               raceType,
+                                               self.laps,
+                                               self.avIds,
+                                               circuitLoop=circuitLoop[1:],
+                                               circuitPoints={},
+                                               circuitTimes={})
         for startingBlock in self.startingBlocks:
-            self.sendUpdateToAvatarId(startingBlock.avId, 'setRaceZone', [raceZone])
+            self.sendUpdateToAvatarId(
+                startingBlock.avId, 'setRaceZone', [raceZone])
             startingBlock.raceExit()
 
         return task.done

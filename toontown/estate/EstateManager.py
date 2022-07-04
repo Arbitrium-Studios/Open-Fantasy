@@ -9,6 +9,7 @@ from toontown.toonbase import TTLocalizer
 from . import HouseGlobals
 from . import Estate
 
+
 class EstateManager(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('EstateManager')
     neverDisable = 1
@@ -65,12 +66,15 @@ class EstateManager(DistributedObject.DistributedObject):
 
     def leaveEstate(self):
         if self.isDisabled():
-            self.notify.warning('EstateManager disabled; unable to leave estate.')
+            self.notify.warning(
+                'EstateManager disabled; unable to leave estate.')
             return
         self.sendUpdate('exitEstate')
 
     def removeFriend(self, ownerId, avId):
-        self.notify.debug('removeFriend ownerId = %s, avId = %s' % (ownerId, avId))
+        self.notify.debug(
+            'removeFriend ownerId = %s, avId = %s' %
+            (ownerId, avId))
         self.sendUpdate('removeFriend', [ownerId, avId])
 
     def startAprilFools(self):

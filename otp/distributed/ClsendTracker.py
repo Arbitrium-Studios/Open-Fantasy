@@ -2,6 +2,7 @@ from pandac.PandaModules import StringStream
 from direct.distributed.PyDatagram import PyDatagram
 import random
 
+
 class ClsendTracker:
     clsendNotify = directNotify.newCategory('clsend')
     NumTrackersLoggingOverflow = 0
@@ -12,7 +13,8 @@ class ClsendTracker:
         if self.isPlayerControlled():
             if simbase.air.getTrackClsends():
                 if ClsendTracker.NumTrackersLoggingOverflow < ClsendTracker.MaxTrackersLoggingOverflow:
-                    self._logClsendOverflow = random.random() < 1.0 / config.GetFloat('clsend-log-one-av-in-every', choice(__dev__, 4, 50))
+                    self._logClsendOverflow = random.random(
+                    ) < 1.0 / config.GetFloat('clsend-log-one-av-in-every', choice(__dev__, 4, 50))
         if self._logClsendOverflow:
             ClsendTracker.NumTrackersLoggingOverflow += 1
         self._clsendMsgs = []
@@ -48,9 +50,9 @@ class ClsendTracker:
         PyDatagram(dataStr).dumpHex(sstream)
         hexDump = sstream.getData()
         self.clsendNotify.info('%s [%s]: %s%s' % (self.doId,
-         self._clsendCounter,
-         readableStr,
-         hexDump))
+                                                  self._clsendCounter,
+                                                  readableStr,
+                                                  hexDump))
 
     def dumpClientSentMsgs(self):
         for msg in self._clsendMsgs:

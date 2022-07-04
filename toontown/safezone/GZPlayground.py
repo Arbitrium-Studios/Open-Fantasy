@@ -9,13 +9,19 @@ from toontown.racing import RaceGlobals
 from direct.fsm import State
 from toontown.safezone import GolfKart
 
+
 class GZPlayground(Playground.Playground):
 
     def __init__(self, loader, parentFSM, doneEvent):
         Playground.Playground.__init__(self, loader, parentFSM, doneEvent)
         self.parentFSM = parentFSM
         self.golfKartBlockDoneEvent = 'golfKartBlockDone'
-        self.fsm.addState(State.State('golfKartBlock', self.enterGolfKartBlock, self.exitGolfKartBlock, ['walk']))
+        self.fsm.addState(
+            State.State(
+                'golfKartBlock',
+                self.enterGolfKartBlock,
+                self.exitGolfKartBlock,
+                ['walk']))
         state = self.fsm.getStateNamed('walk')
         state.addTransition('golfKartBlock')
         self.golfKartDoneEvent = 'golfKartDone'
@@ -25,7 +31,8 @@ class GZPlayground(Playground.Playground):
         self.hub = loader.loadModel('phase_6/models/golf/golf_hub2')
         self.hub.reparentTo(render)
         self.dnaroot = render.find('**/goofy_speedway_DNARoot')
-        self.dnaroot = base.cr.playGame.hood.loader.geom.find('**/goofy_speedway_DNARoot')
+        self.dnaroot = base.cr.playGame.hood.loader.geom.find(
+            '**/goofy_speedway_DNARoot')
         if not self.dnaroot.isEmpty():
             self.dnaroot.removeNode()
 
@@ -63,7 +70,9 @@ class GZPlayground(Playground.Playground):
         self.accept(doneEvent, self.enterDFACallback, [requestStatus])
         self.dfa = DownloadForceAcknowledge.DownloadForceAcknowledge(doneEvent)
         if requestStatus['hoodId'] == ToontownGlobals.MyEstate:
-            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.MyEstate))
+            self.dfa.enter(
+                base.cr.hoodMgr.getPhaseFromHood(
+                    ToontownGlobals.MyEstate))
         else:
             self.dfa.enter(5)
 
@@ -71,13 +80,22 @@ class GZPlayground(Playground.Playground):
         reason = requestStatus.get('reason')
         if reason == RaceGlobals.Exit_Barrier:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RaceTimeout, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RaceTimeout,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         elif reason == RaceGlobals.Exit_Slow:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RacerTooSlow, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RacerTooSlow,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         elif reason == RaceGlobals.Exit_BarrierNoRefund:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RaceTimeoutNoRefund, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RaceTimeoutNoRefund,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         Playground.Playground.enterTeleportIn(self, requestStatus)
 
     def __cleanupDialog(self, value):
@@ -92,7 +110,8 @@ class GZPlayground(Playground.Playground):
         base.localAvatar.laffMeter.start()
         base.localAvatar.b_setAnimState('off', 1)
         self.accept(self.golfKartDoneEvent, self.handleGolfKartDone)
-        self.trolley = GolfKart.GolfKart(self, self.fsm, self.golfKartDoneEvent, golfKart.getDoId())
+        self.trolley = GolfKart.GolfKart(
+            self, self.fsm, self.golfKartDoneEvent, golfKart.getDoId())
         self.trolley.load()
         self.trolley.enter()
 
@@ -119,7 +138,10 @@ class GZPlayground(Playground.Playground):
             self.doneStatus = doneStatus
             messenger.send(self.doneEvent)
         else:
-            self.notify.error('Unknown mode: ' + where + ' in handleStartingBlockDone')
+            self.notify.error(
+                'Unknown mode: ' +
+                where +
+                ' in handleStartingBlockDone')
 
     def handleGolfKartDone(self, doneStatus):
         self.notify.debug('handling golf kart  done event')
@@ -130,12 +152,15 @@ class GZPlayground(Playground.Playground):
             self.fsm.request('walk')
         elif mode == 'golfcourse':
             self.doneStatus = {'loader': 'golfcourse',
-             'where': 'golfcourse',
-             'hoodId': self.loader.hood.id,
-             'zoneId': doneStatus['zoneId'],
-             'shardId': None,
-             'courseId': doneStatus['courseId']}
+                               'where': 'golfcourse',
+                               'hoodId': self.loader.hood.id,
+                               'zoneId': doneStatus['zoneId'],
+                               'shardId': None,
+                               'courseId': doneStatus['courseId']}
             messenger.send(self.doneEvent)
         else:
-            self.notify.error('Unknown mode: ' + mode + ' in handleGolfKartDone')
+            self.notify.error(
+                'Unknown mode: ' +
+                mode +
+                ' in handleGolfKartDone')
         return

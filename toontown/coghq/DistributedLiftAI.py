@@ -6,6 +6,7 @@ from direct.fsm import ClassicFSM, State
 from direct.fsm import State
 from . import LiftConstants
 
+
 class DistributedLiftAI(DistributedEntityAI.DistributedEntityAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLiftAI')
 
@@ -23,12 +24,12 @@ class DistributedLiftAI(DistributedEntityAI.DistributedEntityAI):
         self.notify.debug('generate')
         DistributedEntityAI.DistributedEntityAI.generate(self)
         self.fsm = ClassicFSM.ClassicFSM('DistributedLiftAI', [
-         State.State('off', self.enterOff, self.exitOff, [
-          'waiting']),
-         State.State('waiting', self.enterWaiting, self.exitWaiting, [
-          'moving', 'waiting']),
-         State.State('moving', self.enterMoving, self.exitMoving, [
-          'waiting'])], 'off', 'off')
+            State.State('off', self.enterOff, self.exitOff, [
+                'waiting']),
+            State.State('waiting', self.enterWaiting, self.exitWaiting, [
+                'moving', 'waiting']),
+            State.State('moving', self.enterMoving, self.exitMoving, [
+                'waiting'])], 'off', 'off')
         self.fsm.enterInitialState()
         self.fsm.request('waiting')
 
@@ -46,7 +47,7 @@ class DistributedLiftAI(DistributedEntityAI.DistributedEntityAI):
 
     def d_setStateTransition(self, toState, fromState, arrivalTimestamp):
         self.sendUpdate('setStateTransition', [
-         toState, fromState, arrivalTimestamp])
+            toState, fromState, arrivalTimestamp])
 
     def setStateTransition(self, toState, fromState, arrivalTimestamp):
         self.state = toState
@@ -55,13 +56,14 @@ class DistributedLiftAI(DistributedEntityAI.DistributedEntityAI):
 
     def getStateTransition(self):
         return (
-         self.state, self.fromState, self.stateTimestamp)
+            self.state, self.fromState, self.stateTimestamp)
 
     def setAvatarEnter(self):
         avId = self.air.getAvatarIdFromSender()
         avatar = self.air.doId2do.get(avId)
         if not avatar:
-            self.air.writeServerEvent('suspicious', avId, 'LiftAI.setAvatarEnter avId not valid')
+            self.air.writeServerEvent(
+                'suspicious', avId, 'LiftAI.setAvatarEnter avId not valid')
             return
         self.notify.debug('setAvatarEnter: %s' % avId)
         if avId in self.boardedAvs:
@@ -73,7 +75,9 @@ class DistributedLiftAI(DistributedEntityAI.DistributedEntityAI):
                 self.notify.debug('avatar %s exited' % avId)
                 self.avatarLeft(avId)
 
-            self.acceptOnce(self.air.getAvatarExitEvent(avId), handleExitedAvatar)
+            self.acceptOnce(
+                self.air.getAvatarExitEvent(avId),
+                handleExitedAvatar)
             self.setMoveLater(self.moveDelay)
 
     def setAvatarLeave(self):
@@ -89,7 +93,9 @@ class DistributedLiftAI(DistributedEntityAI.DistributedEntityAI):
                 if self.fsm.getCurrentState().getName() == 'waiting':
                     self.fsm.request('waiting')
         else:
-            self.notify.warning('avatar %s tried to leave, but is not in list' % avId)
+            self.notify.warning(
+                'avatar %s tried to leave, but is not in list' %
+                avId)
 
     def setMoveLater(self, delay):
 
@@ -123,7 +129,13 @@ class DistributedLiftAI(DistributedEntityAI.DistributedEntityAI):
             self.notify.warning('already in state %s' % targetState)
             return
         arriveDelay = 1.0 + self.duration
-        self.b_setStateTransition(targetState, self.state, globalClockDelta.localToNetworkTime(globalClock.getFrameTime() + arriveDelay, bits=32))
+        self.b_setStateTransition(
+            targetState,
+            self.state,
+            globalClockDelta.localToNetworkTime(
+                globalClock.getFrameTime() +
+                arriveDelay,
+                bits=32))
 
         def doneMoving(task, self=self):
             self.fsm.request('waiting')

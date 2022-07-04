@@ -12,13 +12,20 @@ from . import LawbotHQBossBattle
 from . import LawbotOfficeExterior
 aspectSF = 0.7227
 
+
 class LawbotCogHQLoader(CogHQLoader.CogHQLoader):
     notify = DirectNotifyGlobal.directNotify.newCategory('LawbotCogHQLoader')
 
     def __init__(self, hood, parentFSMState, doneEvent):
         CogHQLoader.CogHQLoader.__init__(self, hood, parentFSMState, doneEvent)
-        self.fsm.addState(State.State('stageInterior', self.enterStageInterior, self.exitStageInterior, ['quietZone', 'cogHQExterior']))
-        self.fsm.addState(State.State('factoryExterior', self.enterFactoryExterior, self.exitFactoryExterior, ['quietZone', 'cogHQExterior']))
+        self.fsm.addState(
+            State.State(
+                'stageInterior', self.enterStageInterior, self.exitStageInterior, [
+                    'quietZone', 'cogHQExterior']))
+        self.fsm.addState(
+            State.State(
+                'factoryExterior', self.enterFactoryExterior, self.exitFactoryExterior, [
+                    'quietZone', 'cogHQExterior']))
         for stateName in ['start', 'cogHQExterior', 'quietZone']:
             state = self.fsm.getStateNamed(stateName)
             state.addTransition('stageInterior')
@@ -48,7 +55,9 @@ class LawbotCogHQLoader(CogHQLoader.CogHQLoader):
     def loadPlaceGeom(self, zoneId):
         self.notify.info('loadPlaceGeom: %s' % zoneId)
         zoneId = zoneId - zoneId % 100
-        self.notify.debug('zoneId = %d ToontownGlobals.LawbotHQ=%d' % (zoneId, ToontownGlobals.LawbotHQ))
+        self.notify.debug(
+            'zoneId = %d ToontownGlobals.LawbotHQ=%d' %
+            (zoneId, ToontownGlobals.LawbotHQ))
         if zoneId == ToontownGlobals.LawbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
             ug = self.geom.find('**/underground')
@@ -62,7 +71,9 @@ class LawbotCogHQLoader(CogHQLoader.CogHQLoader):
         elif zoneId == ToontownGlobals.LawbotLobby:
             if base.config.GetBool('want-qa-regression', 0):
                 self.notify.info('QA-REGRESSION: COGHQ: Visit LawbotLobby')
-            self.notify.debug('cogHQLobbyModelPath = %s' % self.cogHQLobbyModelPath)
+            self.notify.debug(
+                'cogHQLobbyModelPath = %s' %
+                self.cogHQLobbyModelPath)
             self.geom = loader.loadModel(self.cogHQLobbyModelPath)
             ug = self.geom.find('**/underground')
             ug.setBin('ground', -10)

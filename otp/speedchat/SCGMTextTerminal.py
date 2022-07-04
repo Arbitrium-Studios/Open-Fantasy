@@ -2,6 +2,7 @@ from .SCTerminal import SCTerminal
 from otp.speedchat import SpeedChatGMHandler
 SCGMTextMsgEvent = 'SCGMTextMsg'
 
+
 class SCGMTextTerminal(SCTerminal):
 
     def __init__(self, textId):

@@ -5,19 +5,26 @@ from toontown.toonbase import TTLocalizer
 from pandac.PandaModules import *
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieSOS')
 
+
 def doSOSs(calls):
     if len(calls) == 0:
         return (None, None)
 
     def callerFunc(toon, handle):
-        toon.setChatAbsolute(TTLocalizer.MovieSOSCallHelp % handle.getName(), CFSpeech | CFTimeout)
+        toon.setChatAbsolute(
+            TTLocalizer.MovieSOSCallHelp %
+            handle.getName(), CFSpeech | CFTimeout)
         handle.d_battleSOS(base.localAvatar.doId)
 
     def calleeFunc(toon, handle):
-        toon.setChatAbsolute(TTLocalizer.MovieSOSCallHelp % handle.getName(), CFSpeech | CFTimeout)
+        toon.setChatAbsolute(
+            TTLocalizer.MovieSOSCallHelp %
+            handle.getName(), CFSpeech | CFTimeout)
 
     def observerFunc(toon):
-        toon.setChatAbsolute(TTLocalizer.MovieSOSObserverHelp, CFSpeech | CFTimeout)
+        toon.setChatAbsolute(
+            TTLocalizer.MovieSOSObserverHelp,
+            CFSpeech | CFTimeout)
 
     mtrack = Sequence()
     for c in calls:

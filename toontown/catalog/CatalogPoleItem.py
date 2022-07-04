@@ -5,6 +5,7 @@ from direct.actor import Actor
 from toontown.toonbase import TTLocalizer
 from direct.interval.IntervalGlobal import *
 
+
 class CatalogPoleItem(CatalogItem.CatalogItem):
     sequenceNumber = 0
 
@@ -16,7 +17,8 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
         return 1
 
     def reachedPurchaseLimit(self, avatar):
-        return avatar.getFishingRod() >= self.rodId or self in avatar.onOrder or self in avatar.mailboxContents
+        return avatar.getFishingRod(
+        ) >= self.rodId or self in avatar.onOrder or self in avatar.mailboxContents
 
     def saveHistory(self):
         return 1
@@ -29,10 +31,14 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
 
     def recordPurchase(self, avatar, optional):
         if self.rodId < 0 or self.rodId > FishGlobals.MaxRodId:
-            self.notify.warning('Invalid fishing pole: %s for avatar %s' % (self.rodId, avatar.doId))
+            self.notify.warning(
+                'Invalid fishing pole: %s for avatar %s' %
+                (self.rodId, avatar.doId))
             return ToontownGlobals.P_InvalidIndex
         if self.rodId < avatar.getFishingRod():
-            self.notify.warning('Avatar already has pole: %s for avatar %s' % (self.rodId, avatar.doId))
+            self.notify.warning(
+                'Avatar already has pole: %s for avatar %s' %
+                (self.rodId, avatar.doId))
             return ToontownGlobals.P_ItemUnneeded
         avatar.b_setFishingRod(self.rodId)
         return ToontownGlobals.P_ItemAvailable
@@ -45,7 +51,9 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
 
     def getPicture(self, avatar):
         rodPath = FishGlobals.RodFileDict.get(self.rodId)
-        pole = Actor.Actor(rodPath, {'cast': 'phase_4/models/props/fishing-pole-chan'})
+        pole = Actor.Actor(
+            rodPath, {
+                'cast': 'phase_4/models/props/fishing-pole-chan'})
         pole.setPosHpr(1.47, 0, -1.67, 90, 55, -90)
         pole.setScale(0.8)
         pole.setDepthTest(1)
@@ -65,8 +73,9 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
             return TTLocalizer.CatalogAcceptPoleUnneeded
         return CatalogItem.CatalogItem.getAcceptItemErrorText(self, retcode)
 
-    def output(self, store = -1):
-        return 'CatalogPoleItem(%s%s)' % (self.rodId, self.formatOptionalData(store))
+    def output(self, store=-1):
+        return 'CatalogPoleItem(%s%s)' % (
+            self.rodId, self.formatOptionalData(store))
 
     def getFilename(self):
         return FishGlobals.RodFileDict.get(self.rodId)

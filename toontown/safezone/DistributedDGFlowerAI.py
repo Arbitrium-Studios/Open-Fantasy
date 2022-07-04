@@ -7,6 +7,7 @@ HEIGHT_DELTA = 0.5
 MAX_HEIGHT = 10.0
 MIN_HEIGHT = 2.0
 
+
 class DistributedDGFlowerAI(DistributedObjectAI.DistributedObjectAI):
 
     def __init__(self, air):

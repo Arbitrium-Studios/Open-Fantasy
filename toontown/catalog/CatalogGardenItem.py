@@ -7,10 +7,11 @@ from toontown.estate import GardenGlobals
 from direct.actor import Actor
 from pandac.PandaModules import NodePath
 
+
 class CatalogGardenItem(CatalogItem.CatalogItem):
     sequenceNumber = 0
 
-    def makeNewItem(self, itemIndex = 0, count = 3, tagCode = 1):
+    def makeNewItem(self, itemIndex=0, count=3, tagCode=1):
         self.gardenIndex = itemIndex
         self.numItems = count
         self.giftCode = tagCode
@@ -51,7 +52,8 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
     def getPicture(self, avatar):
         photoModel = GardenGlobals.Specials[self.gardenIndex]['photoModel']
         if 'photoAnimation' in GardenGlobals.Specials[self.gardenIndex]:
-            modelPath = photoModel + GardenGlobals.Specials[self.gardenIndex]['photoAnimation'][0]
+            modelPath = photoModel + \
+                GardenGlobals.Specials[self.gardenIndex]['photoAnimation'][0]
             animationName = GardenGlobals.Specials[self.gardenIndex]['photoAnimation'][1]
             animationPath = photoModel + animationName
             self.model = Actor.Actor()
@@ -83,8 +85,9 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
         self.model = None
         return
 
-    def output(self, store = -1):
-        return 'CatalogGardenItem(%s%s)' % (self.gardenIndex, self.formatOptionalData(store))
+    def output(self, store=-1):
+        return 'CatalogGardenItem(%s%s)' % (
+            self.gardenIndex, self.formatOptionalData(store))
 
     def compareTo(self, other):
         return 0
@@ -107,10 +110,12 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
         dg.addUint8(self.numItems)
 
     def getRequestPurchaseErrorText(self, retcode):
-        retval = CatalogItem.CatalogItem.getRequestPurchaseErrorText(self, retcode)
+        retval = CatalogItem.CatalogItem.getRequestPurchaseErrorText(
+            self, retcode)
         origText = retval
         if retval == TTLocalizer.CatalogPurchaseItemAvailable or retval == TTLocalizer.CatalogPurchaseItemOnOrder:
-            recipeKey = GardenGlobals.getRecipeKeyUsingSpecial(self.gardenIndex)
+            recipeKey = GardenGlobals.getRecipeKeyUsingSpecial(
+                self.gardenIndex)
             if not recipeKey == -1:
                 retval += GardenGlobals.getPlantItWithString(self.gardenIndex)
                 if self.gardenIndex == GardenGlobals.GardenAcceleratorSpecial:
@@ -160,7 +165,8 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
         result = False
         if canPlant < numBeansRequired:
             result = True
-        if not result and self.gardenIndex in GardenGlobals.Specials and 'minSkill' in GardenGlobals.Specials[self.gardenIndex]:
+        if not result and self.gardenIndex in GardenGlobals.Specials and 'minSkill' in GardenGlobals.Specials[
+                self.gardenIndex]:
             minSkill = GardenGlobals.Specials[self.gardenIndex]['minSkill']
             if avatar.shovelSkill < minSkill:
                 result = True

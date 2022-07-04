@@ -6,17 +6,24 @@ from . import RingGameGlobals
 import random
 import types
 
+
 class DistributedRingGameAI(DistributedMinigameAI):
 
     def __init__(self, air, minigameId):
         try:
             self.DistributedRingGameAI_initialized
-        except:
+        except BaseException:
             self.DistributedRingGameAI_initialized = 1
             DistributedMinigameAI.__init__(self, air, minigameId)
-            self.gameFSM = ClassicFSM.ClassicFSM('DistributedRingGameAI', [State.State('inactive', self.enterInactive, self.exitInactive, ['swimming']), State.State('swimming', self.enterSwimming, self.exitSwimming, ['cleanup']), State.State('cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
+            self.gameFSM = ClassicFSM.ClassicFSM(
+                'DistributedRingGameAI', [
+                    State.State(
+                        'inactive', self.enterInactive, self.exitInactive, ['swimming']), State.State(
+                        'swimming', self.enterSwimming, self.exitSwimming, ['cleanup']), State.State(
+                        'cleanup', self.enterCleanup, self.exitCleanup, ['inactive'])], 'inactive', 'inactive')
             self.addChildGameFSM(self.gameFSM)
-            self.__timeBase = globalClockDelta.localToNetworkTime(globalClock.getRealTime())
+            self.__timeBase = globalClockDelta.localToNetworkTime(
+                globalClock.getRealTime())
             self.selectColorIndices()
 
     def delete(self):
@@ -58,9 +65,9 @@ class DistributedRingGameAI(DistributedMinigameAI):
 
     def selectColorIndices(self):
         self.colorIndices = [None,
-         None,
-         None,
-         None]
+                             None,
+                             None,
+                             None]
         chooseFrom = RingGameGlobals.ringColorSelection[:]
         for i in range(0, 4):
             c = random.choice(chooseFrom)
@@ -99,18 +106,24 @@ class DistributedRingGameAI(DistributedMinigameAI):
     def setToonGotRing(self, success):
         avId = self.air.getAvatarIdFromSender()
         if avId not in self.avIdList:
-            self.air.writeServerEvent('suspicious', avId, 'RingGameAI.setToonGotRing: invalid avId')
+            self.air.writeServerEvent(
+                'suspicious', avId, 'RingGameAI.setToonGotRing: invalid avId')
             return
-        if self.gameFSM.getCurrentState() is None or self.gameFSM.getCurrentState().getName() != 'swimming':
-            self.air.writeServerEvent('suspicious', avId, 'RingGameAI.setToonGotRing: game not in swimming state')
+        if self.gameFSM.getCurrentState(
+        ) is None or self.gameFSM.getCurrentState().getName() != 'swimming':
+            self.air.writeServerEvent(
+                'suspicious', avId, 'RingGameAI.setToonGotRing: game not in swimming state')
             return
         ringGroupIndex = self.__nextRingGroup[avId]
         if ringGroupIndex >= RingGameGlobals.NUM_RING_GROUPS:
-            self.notify.warning('warning: got extra ToonGotRing msg from av %s' % avId)
+            self.notify.warning(
+                'warning: got extra ToonGotRing msg from av %s' %
+                avId)
             return
         self.__nextRingGroup[avId] += 1
         if not success:
-            self.__ringResultBitfield[ringGroupIndex] |= 1 << self.avIdList.index(avId)
+            self.__ringResultBitfield[ringGroupIndex] |= 1 << self.avIdList.index(
+                avId)
             self.perfectGames[avId] = 0
         else:
             self.scoreDict[avId] += 1
@@ -125,9 +138,9 @@ class DistributedRingGameAI(DistributedMinigameAI):
                 self.sendUpdate('setRingGroupResults', [bitfield])
             if ringGroupIndex >= RingGameGlobals.NUM_RING_GROUPS - 1:
                 perfectBonuses = {1: 5,
-                 2: 5,
-                 3: 10,
-                 4: 18}
+                                  2: 5,
+                                  3: 10,
+                                  4: 18}
                 numPerfectToons = 0
                 for avId in self.avIdList:
                     if self.perfectGames[avId]:

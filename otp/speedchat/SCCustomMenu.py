@@ -2,6 +2,7 @@ from .SCMenu import SCMenu
 from .SCCustomTerminal import SCCustomTerminal
 from otp.otpbase.OTPLocalizer import CustomSCStrings
 
+
 class SCCustomMenu(SCMenu):
 
     def __init__(self):
@@ -16,7 +17,7 @@ class SCCustomMenu(SCMenu):
         self.clearMenu()
         try:
             lt = base.localAvatar
-        except:
+        except BaseException:
             return
 
         for msgIndex in lt.customMessages:

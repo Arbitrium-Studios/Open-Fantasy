@@ -4,6 +4,7 @@ from toontown.hood import Place
 from toontown.hood import ZoneUtil
 from toontown.toonbase import ToontownGlobals
 
+
 class BattlePlace(Place.Place):
 
     def __init__(self, loader, doneEvent):
@@ -13,14 +14,18 @@ class BattlePlace(Place.Place):
         Place.Place.load(self)
         Toon.loadBattleAnims()
 
-    def setState(self, state, battleEvent = None):
+    def setState(self, state, battleEvent=None):
         if battleEvent:
             if not self.fsm.request(state, [battleEvent]):
-                self.notify.warning("fsm.request('%s') returned 0 (zone id %s, avatar pos %s)." % (state, self.zoneId, base.localAvatar.getPos(render)))
+                self.notify.warning(
+                    "fsm.request('%s') returned 0 (zone id %s, avatar pos %s)." %
+                    (state, self.zoneId, base.localAvatar.getPos(render)))
         elif not self.fsm.request(state):
-            self.notify.warning("fsm.request('%s') returned 0 (zone id %s, avatar pos %s)." % (state, self.zoneId, base.localAvatar.getPos(render)))
+            self.notify.warning(
+                "fsm.request('%s') returned 0 (zone id %s, avatar pos %s)." %
+                (state, self.zoneId, base.localAvatar.getPos(render)))
 
-    def enterWalk(self, flag = 0):
+    def enterWalk(self, flag=0):
         Place.Place.enterWalk(self, flag)
         self.accept('enterBattle', self.handleBattleEntry)
 
@@ -59,9 +64,12 @@ class BattlePlace(Place.Place):
     def handleBattleEntry(self):
         self.fsm.request('battle')
 
-    def enterFallDown(self, extraArgs = []):
+    def enterFallDown(self, extraArgs=[]):
         base.localAvatar.laffMeter.start()
-        base.localAvatar.b_setAnimState('FallDown', callback=self.handleFallDownDone, extraArgs=extraArgs)
+        base.localAvatar.b_setAnimState(
+            'FallDown',
+            callback=self.handleFallDownDone,
+            extraArgs=extraArgs)
 
     def handleFallDownDone(self):
         base.cr.playGame.getPlace().setState('walk')
@@ -72,9 +80,12 @@ class BattlePlace(Place.Place):
     def enterSquished(self):
         base.localAvatar.laffMeter.start()
         base.localAvatar.b_setAnimState('Squish')
-        taskMgr.doMethodLater(2.0, self.handleSquishDone, base.localAvatar.uniqueName('finishSquishTask'))
+        taskMgr.doMethodLater(
+            2.0,
+            self.handleSquishDone,
+            base.localAvatar.uniqueName('finishSquishTask'))
 
-    def handleSquishDone(self, extraArgs = []):
+    def handleSquishDone(self, extraArgs=[]):
         base.cr.playGame.getPlace().setState('walk')
 
     def exitSquished(self):
@@ -85,8 +96,10 @@ class BattlePlace(Place.Place):
         if isinstance(newZone, CollisionEntry):
             try:
                 newZoneId = int(newZone.getIntoNode().getName())
-            except:
-                self.notify.warning('Invalid floor collision node in street: %s' % newZone.getIntoNode().getName())
+            except BaseException:
+                self.notify.warning(
+                    'Invalid floor collision node in street: %s' %
+                    newZone.getIntoNode().getName())
                 return
 
         else:
@@ -95,12 +108,13 @@ class BattlePlace(Place.Place):
 
     def doEnterZone(self, newZoneId):
         if newZoneId != self.zoneId:
-            if newZoneId != None:
+            if newZoneId is not None:
                 if __astron__:
                     if hasattr(self, 'zoneVisDict'):
                         visList = self.zoneVisDict[newZoneId]
                     else:
-                        visList = base.cr.playGame.getPlace().loader.zoneVisDict[newZoneId]
+                        visList = base.cr.playGame.getPlace(
+                        ).loader.zoneVisDict[newZoneId]
 
                     if newZoneId not in visList:
                         visList.append(newZoneId)

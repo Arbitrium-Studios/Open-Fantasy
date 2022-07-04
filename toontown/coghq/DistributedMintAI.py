@@ -5,6 +5,7 @@ from toontown.toonbase import ToontownGlobals
 from toontown.coghq import MintLayout, DistributedMintRoomAI
 from toontown.coghq import BattleExperienceAggregatorAI
 
+
 class DistributedMintAI(DistributedObjectAI.DistributedObjectAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMintAI')
 
@@ -17,12 +18,22 @@ class DistributedMintAI(DistributedObjectAI.DistributedObjectAI):
 
     def generate(self):
         DistributedObjectAI.DistributedObjectAI.generate(self)
-        self.notify.info('generate %s, id=%s, floor=%s' % (self.doId, self.mintId, self.floorNum))
+        self.notify.info(
+            'generate %s, id=%s, floor=%s' %
+            (self.doId, self.mintId, self.floorNum))
         self.layout = MintLayout.MintLayout(self.mintId, self.floorNum)
         self.rooms = []
         self.battleExpAggreg = BattleExperienceAggregatorAI.BattleExperienceAggregatorAI()
         for i in range(self.layout.getNumRooms()):
-            room = DistributedMintRoomAI.DistributedMintRoomAI(self.air, self.mintId, self.doId, self.zoneId, self.layout.getRoomId(i), i * 2, self.avIds, self.battleExpAggreg)
+            room = DistributedMintRoomAI.DistributedMintRoomAI(
+                self.air,
+                self.mintId,
+                self.doId,
+                self.zoneId,
+                self.layout.getRoomId(i),
+                i * 2,
+                self.avIds,
+                self.battleExpAggreg)
             room.generateWithRequired(self.zoneId)
             self.rooms.append(room)
 

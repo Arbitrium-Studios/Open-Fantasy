@@ -2,6 +2,7 @@ from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from otp.level import BasicEntities
 
+
 class GoonClipPlane(BasicEntities.NodePathEntity):
 
     def __init__(self, level, entId):

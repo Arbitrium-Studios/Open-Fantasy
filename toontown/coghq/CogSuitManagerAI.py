@@ -4,6 +4,7 @@ import random
 from toontown.suit import SuitDNA
 from . import CogDisguiseGlobals
 
+
 class CogSuitManagerAI:
     notify = DirectNotifyGlobal.directNotify.newCategory('CogSuitManagerAI')
 
@@ -12,7 +13,7 @@ class CogSuitManagerAI:
 
     def recoverPart(self, av, factoryType, suitTrack, zoneId, avList):
         partsRecovered = [
-         0, 0, 0, 0]
+            0, 0, 0, 0]
         part = av.giveGenericCogPart(factoryType, suitTrack)
         if part:
             partsRecovered[CogDisguiseGlobals.dept2deptIndex(suitTrack)] = part

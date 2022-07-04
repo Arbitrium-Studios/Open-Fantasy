@@ -4,11 +4,12 @@ from otp.speedchat.SCMenuHolder import SCMenuHolder
 from otp.speedchat.SCStaticTextTerminal import SCStaticTextTerminal
 from otp.otpbase import OTPLocalizer
 SillyPhaseTwoMenu = [(OTPLocalizer.SillyHolidayMenuSections[1], [30310,
-   30311,
-   30312,
-   30313,
-   30314,
-   30315]), (OTPLocalizer.SillyHolidayMenuSections[2], [30316, 30317]), (OTPLocalizer.SillyHolidayMenuSections[0], [30309])]
+                                                                 30311,
+                                                                 30312,
+                                                                 30313,
+                                                                 30314,
+                                                                 30315]), (OTPLocalizer.SillyHolidayMenuSections[2], [30316, 30317]), (OTPLocalizer.SillyHolidayMenuSections[0], [30309])]
+
 
 class TTSCSillyPhaseTwoMenu(SCMenu):
 
@@ -27,14 +28,16 @@ class TTSCSillyPhaseTwoMenu(SCMenu):
         self.clearMenu()
         try:
             lt = base.localAvatar
-        except:
+        except BaseException:
             return
 
         for section in SillyPhaseTwoMenu:
             if section[0] == -1:
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print('warning: tried to link Silly PhaseTwo phrase %s which does not seem to exist' % phrase)
+                        print(
+                            'warning: tried to link Silly PhaseTwo phrase %s which does not seem to exist' %
+                            phrase)
                         break
                     self.append(SCStaticTextTerminal(phrase))
 
@@ -42,7 +45,9 @@ class TTSCSillyPhaseTwoMenu(SCMenu):
                 menu = SCMenu()
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print('warning: tried to link Silly PhaseTwo phrase %s which does not seem to exist' % phrase)
+                        print(
+                            'warning: tried to link Silly PhaseTwo phrase %s which does not seem to exist' %
+                            phrase)
                         break
                     menu.append(SCStaticTextTerminal(phrase))
 

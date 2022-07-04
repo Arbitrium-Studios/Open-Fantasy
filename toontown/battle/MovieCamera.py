@@ -9,6 +9,7 @@ import random
 from . import MovieUtil
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieCamera')
 
+
 def chooseHealShot(heals, attackDuration):
     isUber = 0
     for heal in heals:
@@ -20,18 +21,20 @@ def chooseHealShot(heals, attackDuration):
         openShot = chooseHealOpenShot(heals, attackDuration, isUber)
         openDuration = openShot.getDuration()
         openName = openShot.getName()
-        closeShot = chooseHealCloseShot(heals, openDuration, openName, attackDuration * 3, isUber)
+        closeShot = chooseHealCloseShot(
+            heals, openDuration, openName, attackDuration * 3, isUber)
         track = Sequence(closeShot)
     else:
         openShot = chooseHealOpenShot(heals, attackDuration, isUber)
         openDuration = openShot.getDuration()
         openName = openShot.getName()
-        closeShot = chooseHealCloseShot(heals, openDuration, openName, attackDuration, isUber)
+        closeShot = chooseHealCloseShot(
+            heals, openDuration, openName, attackDuration, isUber)
         track = Sequence(openShot, closeShot)
     return track
 
 
-def chooseHealOpenShot(heals, attackDuration, isUber = 0):
+def chooseHealOpenShot(heals, attackDuration, isUber=0):
     numHeals = len(heals)
     av = None
     duration = 2.8
@@ -42,7 +45,7 @@ def chooseHealOpenShot(heals, attackDuration, isUber = 0):
     return track
 
 
-def chooseHealMidShot(heals, attackDuration, isUber = 0):
+def chooseHealMidShot(heals, attackDuration, isUber=0):
     numHeals = len(heals)
     av = None
     duration = 2.1
@@ -53,7 +56,8 @@ def chooseHealMidShot(heals, attackDuration, isUber = 0):
     return track
 
 
-def chooseHealCloseShot(heals, openDuration, openName, attackDuration, isUber = 0):
+def chooseHealCloseShot(heals, openDuration, openName,
+                        attackDuration, isUber=0):
     av = None
     duration = attackDuration - openDuration
     shotChoices = [toonGroupShot]
@@ -63,12 +67,13 @@ def chooseHealCloseShot(heals, openDuration, openName, attackDuration, isUber = 
     return track
 
 
-def chooseTrapShot(traps, attackDuration, enterDuration = 0, exitDuration = 0):
+def chooseTrapShot(traps, attackDuration, enterDuration=0, exitDuration=0):
     enterShot = chooseNPCEnterShot(traps, enterDuration)
     openShot = chooseTrapOpenShot(traps, attackDuration)
     openDuration = openShot.getDuration()
     openName = openShot.getName()
-    closeShot = chooseTrapCloseShot(traps, openDuration, openName, attackDuration)
+    closeShot = chooseTrapCloseShot(
+        traps, openDuration, openName, attackDuration)
     exitShot = chooseNPCExitShot(traps, exitDuration)
     track = Sequence(enterShot, openShot, closeShot, exitShot)
     return track
@@ -91,12 +96,13 @@ def chooseTrapCloseShot(traps, openDuration, openName, attackDuration):
     return track
 
 
-def chooseLureShot(lures, attackDuration, enterDuration = 0.0, exitDuration = 0.0):
+def chooseLureShot(lures, attackDuration, enterDuration=0.0, exitDuration=0.0):
     enterShot = chooseNPCEnterShot(lures, enterDuration)
     openShot = chooseLureOpenShot(lures, attackDuration)
     openDuration = openShot.getDuration()
     openName = openShot.getName()
-    closeShot = chooseLureCloseShot(lures, openDuration, openName, attackDuration)
+    closeShot = chooseLureCloseShot(
+        lures, openDuration, openName, attackDuration)
     exitShot = chooseNPCExitShot(lures, exitDuration)
     track = Sequence(enterShot, openShot, closeShot, exitShot)
     return track
@@ -117,7 +123,8 @@ def chooseLureCloseShot(lures, openDuration, openName, attackDuration):
     hasTrainTrackTrap = False
     battle = lures[0]['battle']
     for suit in battle.suits:
-        if hasattr(suit, 'battleTrap') and suit.battleTrap == UBER_GAG_LEVEL_INDEX:
+        if hasattr(
+                suit, 'battleTrap') and suit.battleTrap == UBER_GAG_LEVEL_INDEX:
             hasTrainTrackTrap = True
 
     if hasTrainTrackTrap:
@@ -129,12 +136,18 @@ def chooseLureCloseShot(lures, openDuration, openName, attackDuration):
     return track
 
 
-def chooseSoundShot(sounds, targets, attackDuration, enterDuration = 0.0, exitDuration = 0.0):
+def chooseSoundShot(sounds, targets, attackDuration,
+                    enterDuration=0.0, exitDuration=0.0):
     enterShot = chooseNPCEnterShot(sounds, enterDuration)
     openShot = chooseSoundOpenShot(sounds, targets, attackDuration)
     openDuration = openShot.getDuration()
     openName = openShot.getName()
-    closeShot = chooseSoundCloseShot(sounds, targets, openDuration, openName, attackDuration)
+    closeShot = chooseSoundCloseShot(
+        sounds,
+        targets,
+        openDuration,
+        openName,
+        attackDuration)
     exitShot = chooseNPCExitShot(sounds, exitDuration)
     track = Sequence(enterShot, openShot, closeShot, exitShot)
     return track
@@ -153,9 +166,15 @@ def chooseSoundOpenShot(sounds, targets, attackDuration):
     if numSounds == 1:
         av = sounds[0]['toon']
         if isUber:
-            shotChoices = [avatarCloseUpThreeQuarterRightShotWide, allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
+            shotChoices = [
+                avatarCloseUpThreeQuarterRightShotWide,
+                allGroupLowShot,
+                suitGroupThreeQuarterLeftBehindShot]
         else:
-            shotChoices = [avatarCloseUpThreeQuarterRightShot, allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
+            shotChoices = [
+                avatarCloseUpThreeQuarterRightShot,
+                allGroupLowShot,
+                suitGroupThreeQuarterLeftBehindShot]
     elif numSounds >= 2 and numSounds <= 4:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -164,16 +183,17 @@ def chooseSoundOpenShot(sounds, targets, attackDuration):
     return track
 
 
-def chooseSoundCloseShot(sounds, targets, openDuration, openName, attackDuration):
+def chooseSoundCloseShot(sounds, targets, openDuration,
+                         openName, attackDuration):
     numSuits = len(targets)
     av = None
     duration = attackDuration - openDuration
     if numSuits == 1:
         av = targets[0]['suit']
         shotChoices = [avatarCloseUpThrowShot,
-         avatarCloseUpThreeQuarterLeftShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterLeftShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numSuits >= 2 and numSuits <= 4:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -186,7 +206,12 @@ def chooseThrowShot(throws, suitThrowsDict, attackDuration):
     openShot = chooseThrowOpenShot(throws, suitThrowsDict, attackDuration)
     openDuration = openShot.getDuration()
     openName = openShot.getName()
-    closeShot = chooseThrowCloseShot(throws, suitThrowsDict, openDuration, openName, attackDuration)
+    closeShot = chooseThrowCloseShot(
+        throws,
+        suitThrowsDict,
+        openDuration,
+        openName,
+        attackDuration)
     track = Sequence(openShot, closeShot)
     return track
 
@@ -198,10 +223,10 @@ def chooseThrowOpenShot(throws, suitThrowsDict, attackDuration):
     if numThrows == 1:
         av = throws[0]['toon']
         shotChoices = [avatarCloseUpThrowShot,
-         avatarCloseUpThreeQuarterRightShot,
-         avatarBehindShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterRightShot,
+                       avatarBehindShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numThrows >= 2 and numThrows <= 4:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -210,16 +235,17 @@ def chooseThrowOpenShot(throws, suitThrowsDict, attackDuration):
     return track
 
 
-def chooseThrowCloseShot(throws, suitThrowsDict, openDuration, openName, attackDuration):
+def chooseThrowCloseShot(throws, suitThrowsDict,
+                         openDuration, openName, attackDuration):
     numSuits = len(suitThrowsDict)
     av = None
     duration = attackDuration - openDuration
     if numSuits == 1:
         av = base.cr.doId2do[list(suitThrowsDict.keys())[0]]
         shotChoices = [avatarCloseUpThrowShot,
-         avatarCloseUpThreeQuarterLeftShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterLeftShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numSuits >= 2 and numSuits <= 4 or numSuits == 0:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -232,7 +258,12 @@ def chooseSquirtShot(squirts, suitSquirtsDict, attackDuration):
     openShot = chooseSquirtOpenShot(squirts, suitSquirtsDict, attackDuration)
     openDuration = openShot.getDuration()
     openName = openShot.getName()
-    closeShot = chooseSquirtCloseShot(squirts, suitSquirtsDict, openDuration, openName, attackDuration)
+    closeShot = chooseSquirtCloseShot(
+        squirts,
+        suitSquirtsDict,
+        openDuration,
+        openName,
+        attackDuration)
     track = Sequence(openShot, closeShot)
     return track
 
@@ -244,10 +275,10 @@ def chooseSquirtOpenShot(squirts, suitSquirtsDict, attackDuration):
     if numSquirts == 1:
         av = squirts[0]['toon']
         shotChoices = [avatarCloseUpThrowShot,
-         avatarCloseUpThreeQuarterRightShot,
-         avatarBehindShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterRightShot,
+                       avatarBehindShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numSquirts >= 2 and numSquirts <= 4:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -256,16 +287,17 @@ def chooseSquirtOpenShot(squirts, suitSquirtsDict, attackDuration):
     return track
 
 
-def chooseSquirtCloseShot(squirts, suitSquirtsDict, openDuration, openName, attackDuration):
+def chooseSquirtCloseShot(squirts, suitSquirtsDict,
+                          openDuration, openName, attackDuration):
     numSuits = len(suitSquirtsDict)
     av = None
     duration = attackDuration - openDuration
     if numSuits == 1:
         av = base.cr.doId2do[list(suitSquirtsDict.keys())[0]]
         shotChoices = [avatarCloseUpThrowShot,
-         avatarCloseUpThreeQuarterLeftShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterLeftShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numSuits >= 2 and numSuits <= 4:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -274,12 +306,18 @@ def chooseSquirtCloseShot(squirts, suitSquirtsDict, openDuration, openName, atta
     return track
 
 
-def chooseDropShot(drops, suitDropsDict, attackDuration, enterDuration = 0.0, exitDuration = 0.0):
+def chooseDropShot(drops, suitDropsDict, attackDuration,
+                   enterDuration=0.0, exitDuration=0.0):
     enterShot = chooseNPCEnterShot(drops, enterDuration)
     openShot = chooseDropOpenShot(drops, suitDropsDict, attackDuration)
     openDuration = openShot.getDuration()
     openName = openShot.getName()
-    closeShot = chooseDropCloseShot(drops, suitDropsDict, openDuration, openName, attackDuration)
+    closeShot = chooseDropCloseShot(
+        drops,
+        suitDropsDict,
+        openDuration,
+        openName,
+        attackDuration)
     exitShot = chooseNPCExitShot(drops, exitDuration)
     track = Sequence(enterShot, openShot, closeShot, exitShot)
     return track
@@ -292,10 +330,10 @@ def chooseDropOpenShot(drops, suitDropsDict, attackDuration):
     if numDrops == 1:
         av = drops[0]['toon']
         shotChoices = [avatarCloseUpThrowShot,
-         avatarCloseUpThreeQuarterRightShot,
-         avatarBehindShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterRightShot,
+                       avatarBehindShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numDrops >= 2 and numDrops <= 4 or numDrops == 0:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -304,16 +342,17 @@ def chooseDropOpenShot(drops, suitDropsDict, attackDuration):
     return track
 
 
-def chooseDropCloseShot(drops, suitDropsDict, openDuration, openName, attackDuration):
+def chooseDropCloseShot(drops, suitDropsDict,
+                        openDuration, openName, attackDuration):
     numSuits = len(suitDropsDict)
     av = None
     duration = attackDuration - openDuration
     if numSuits == 1:
         av = base.cr.doId2do[list(suitDropsDict.keys())[0]]
         shotChoices = [avatarCloseUpThrowShot,
-         avatarCloseUpThreeQuarterLeftShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterLeftShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numSuits >= 2 and numSuits <= 4 or numSuits == 0:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -349,11 +388,14 @@ def chooseSuitShot(attack, attackDuration):
     battle = attack['battle']
     camTrack = Sequence()
 
-    def defaultCamera(attack = attack, attackDuration = attackDuration, openShotDuration = 3.5, target = target):
+    def defaultCamera(attack=attack, attackDuration=attackDuration,
+                      openShotDuration=3.5, target=target):
         if attack['group'] == ATK_TGT_GROUP:
-            return randomGroupAttackCam(attack['suit'], target, attack['battle'], attackDuration, openShotDuration)
+            return randomGroupAttackCam(
+                attack['suit'], target, attack['battle'], attackDuration, openShotDuration)
         else:
-            return randomAttackCam(attack['suit'], target['toon'], attack['battle'], attackDuration, openShotDuration, 'suit')
+            return randomAttackCam(
+                attack['suit'], target['toon'], attack['battle'], attackDuration, openShotDuration, 'suit')
 
     if name == AUDIT:
         camTrack.append(defaultCamera())
@@ -448,7 +490,12 @@ def chooseSuitShot(attack, attackDuration):
     elif name == QUAKE:
         shakeIntensity = 5.15
         quake = 1
-        camTrack.append(suitCameraShakeShot(suit, attackDuration, shakeIntensity, quake))
+        camTrack.append(
+            suitCameraShakeShot(
+                suit,
+                attackDuration,
+                shakeIntensity,
+                quake))
     elif name == RAZZLE_DAZZLE:
         camTrack.append(defaultCamera(openShotDuration=2.2))
     elif name == RED_TAPE:
@@ -471,7 +518,11 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.8))
     elif name == SHAKE:
         shakeIntensity = 1.75
-        camTrack.append(suitCameraShakeShot(suit, attackDuration, shakeIntensity))
+        camTrack.append(
+            suitCameraShakeShot(
+                suit,
+                attackDuration,
+                shakeIntensity))
     elif name == SHRED:
         camTrack.append(defaultCamera(openShotDuration=4.1))
     elif name == SONG_AND_DANCE:
@@ -488,7 +539,11 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=4.5))
     elif name == TREMOR:
         shakeIntensity = 0.25
-        camTrack.append(suitCameraShakeShot(suit, attackDuration, shakeIntensity))
+        camTrack.append(
+            suitCameraShakeShot(
+                suit,
+                attackDuration,
+                shakeIntensity))
     elif name == UNDERGROUND_LIQUIDITY:
         camTrack.append(defaultCamera(openShotDuration=2.5))
     elif name == WATERCOOLER:
@@ -498,7 +553,9 @@ def chooseSuitShot(attack, attackDuration):
     elif name == WRITE_OFF:
         camTrack.append(defaultCamera())
     else:
-        notify.warning('unknown attack id in chooseSuitShot: %d using default cam' % name)
+        notify.warning(
+            'unknown attack id in chooseSuitShot: %d using default cam' %
+            name)
         camTrack.append(defaultCamera())
     pbpText = attack['playByPlayText']
     displayName = TTLocalizer.SuitAttackNames[attack['name']]
@@ -515,7 +572,9 @@ def chooseSuitCloseShot(attack, openDuration, openName, attackDuration):
     diedTrack = None
     if groupStatus == ATK_TGT_SINGLE:
         av = attack['target']['toon']
-        shotChoices = [avatarCloseUpThreeQuarterRightShot, suitGroupThreeQuarterLeftBehindShot]
+        shotChoices = [
+            avatarCloseUpThreeQuarterRightShot,
+            suitGroupThreeQuarterLeftBehindShot]
         died = attack['target']['died']
         if died != 0:
             pbpText = attack['playByPlayText']
@@ -543,7 +602,7 @@ def chooseSuitCloseShot(attack, openDuration, openName, attackDuration):
     else:
         notify.error('Bad groupStatus: %s' % groupStatus)
     track = random.choice(shotChoices)(*[av, duration])
-    if diedTrack == None:
+    if diedTrack is None:
         return track
     else:
         mtrack = Parallel(track, diedTrack)
@@ -551,14 +610,15 @@ def chooseSuitCloseShot(attack, openDuration, openName, attackDuration):
     return
 
 
-def makeShot(x, y, z, h, p, r, duration, other = None, name = 'makeShot'):
+def makeShot(x, y, z, h, p, r, duration, other=None, name='makeShot'):
     if other:
         return heldRelativeShot(other, x, y, z, h, p, r, duration, name)
     else:
         return heldShot(x, y, z, h, p, r, duration, name)
 
 
-def focusShot(x, y, z, duration, target, other = None, splitFocusPoint = None, name = 'focusShot'):
+def focusShot(x, y, z, duration, target, other=None,
+              splitFocusPoint=None, name='focusShot'):
     track = Sequence()
     if other:
         track.append(Func(camera.setPos, other, Point3(x, y, z)))
@@ -572,11 +632,11 @@ def focusShot(x, y, z, duration, target, other = None, splitFocusPoint = None, n
     return track
 
 
-def moveShot(x, y, z, h, p, r, duration, other = None, name = 'moveShot'):
+def moveShot(x, y, z, h, p, r, duration, other=None, name='moveShot'):
     return motionShot(x, y, z, h, p, r, duration, other, name)
 
 
-def focusMoveShot(x, y, z, duration, target, other = None, name = 'focusMoveShot'):
+def focusMoveShot(x, y, z, duration, target, other=None, name='focusMoveShot'):
     camera.setPos(Point3(x, y, z))
     camera.lookAt(target)
     hpr = camera.getHpr()
@@ -585,28 +645,28 @@ def focusMoveShot(x, y, z, duration, target, other = None, name = 'focusMoveShot
 
 def chooseSOSShot(av, duration):
     shotChoices = [avatarCloseUpThreeQuarterRightShot,
-     avatarBehindShot,
-     avatarBehindHighShot,
-     suitGroupThreeQuarterLeftBehindShot]
+                   avatarBehindShot,
+                   avatarBehindHighShot,
+                   suitGroupThreeQuarterLeftBehindShot]
     track = random.choice(shotChoices)(*[av, duration])
     return track
 
 
-def chooseRewardShot(av, duration, allowGroupShot = 1):
+def chooseRewardShot(av, duration, allowGroupShot=1):
 
     def chooseRewardShotNow(av):
         if av.playingAnim == 'victory' or not allowGroupShot:
             shotChoices = [(0,
-              8,
-              av.getHeight() * 0.66,
-              179,
-              15,
-              0), (5.2,
-              5.45,
-              av.getHeight() * 0.66,
-              131.5,
-              3.6,
-              0)]
+                            8,
+                            av.getHeight() * 0.66,
+                            179,
+                            15,
+                            0), (5.2,
+                                 5.45,
+                                 av.getHeight() * 0.66,
+                                 131.5,
+                                 3.6,
+                                 0)]
             shot = random.choice(shotChoices)
             camera.setPosHpr(av, *shot)
         else:
@@ -615,24 +675,29 @@ def chooseRewardShot(av, duration, allowGroupShot = 1):
     return Sequence(Func(chooseRewardShotNow, av), Wait(duration))
 
 
-def heldShot(x, y, z, h, p, r, duration, name = 'heldShot'):
+def heldShot(x, y, z, h, p, r, duration, name='heldShot'):
     track = Sequence(name=name)
     track.append(Func(camera.setPosHpr, x, y, z, h, p, r))
     track.append(Wait(duration))
     return track
 
 
-def heldRelativeShot(other, x, y, z, h, p, r, duration, name = 'heldRelativeShot'):
+def heldRelativeShot(other, x, y, z, h, p, r, duration,
+                     name='heldRelativeShot'):
     track = Sequence(name=name)
     track.append(Func(camera.setPosHpr, other, x, y, z, h, p, r))
     track.append(Wait(duration))
     return track
 
 
-def motionShot(x, y, z, h, p, r, duration, other = None, name = 'motionShot'):
+def motionShot(x, y, z, h, p, r, duration, other=None, name='motionShot'):
     if other:
-        posTrack = LerpPosInterval(camera, duration, pos=Point3(x, y, z), other=other)
-        hprTrack = LerpHprInterval(camera, duration, hpr=Point3(h, p, r), other=other)
+        posTrack = LerpPosInterval(
+            camera, duration, pos=Point3(
+                x, y, z), other=other)
+        hprTrack = LerpHprInterval(
+            camera, duration, hpr=Point3(
+                h, p, r), other=other)
     else:
         posTrack = LerpPosInterval(camera, duration, pos=Point3(x, y, z))
         hprTrack = LerpHprInterval(camera, duration, hpr=Point3(h, p, r))
@@ -664,7 +729,8 @@ def suitGroupShot(avatar, duration):
 
 
 def suitGroupLowLeftShot(avatar, duration):
-    return heldShot(8.4, -3.85, 2.75, 36.3, 3.25, 0, duration, 'suitGroupLowLeftShot')
+    return heldShot(8.4, -3.85, 2.75, 36.3, 3.25, 0,
+                    duration, 'suitGroupLowLeftShot')
 
 
 def suitGroupThreeQuarterLeftBehindShot(avatar, duration):
@@ -674,14 +740,15 @@ def suitGroupThreeQuarterLeftBehindShot(avatar, duration):
     else:
         x = -12.37
         h = -134.61
-    return heldShot(x, 11.5, 8.16, h, -22.7, 0, duration, 'suitGroupThreeQuarterLeftBehindShot')
+    return heldShot(x, 11.5, 8.16, h, -22.7, 0, duration,
+                    'suitGroupThreeQuarterLeftBehindShot')
 
 
 def suitWakeUpShot(avatar, duration):
     return heldShot(10, -5, 10, 65, -30, 0, duration, 'suitWakeUpShot')
 
 
-def suitCameraShakeShot(avatar, duration, shakeIntensity, quake = 0):
+def suitCameraShakeShot(avatar, duration, shakeIntensity, quake=0):
     track = Sequence(name='suitShakeCameraShot')
     if quake == 1:
         shakeDelay = 1.1
@@ -694,9 +761,54 @@ def suitCameraShakeShot(avatar, duration, shakeIntensity, quake = 0):
     shakeDuration = shakeTime * (1.0 / numShakes)
     shakeWaitInterval = shakeTime * ((numShakes - 1.0) / numShakes)
 
-    def shakeCameraTrack(intensity, shakeWaitInterval = shakeWaitInterval, quake = quake, shakeDuration = shakeDuration, numShakes = numShakes):
-        vertShakeTrack = Sequence(Wait(shakeWaitInterval), Func(camera.setZ, camera.getZ() + intensity / 2), Wait(shakeDuration / 2), Func(camera.setZ, camera.getZ() - intensity), Wait(shakeDuration / 2), Func(camera.setZ, camera.getZ() + intensity / 2))
-        horizShakeTrack = Sequence(Wait(shakeWaitInterval - shakeDuration / 2), Func(camera.setY, camera.getY() + intensity / 4), Wait(shakeDuration / 2), Func(camera.setY, camera.getY() - intensity / 2), Wait(shakeDuration / 2), Func(camera.setY, camera.getY() + intensity / 4), Wait(shakeDuration / 2), Func(camera.lookAt, Point3(0, 0, 0)))
+    def shakeCameraTrack(intensity, shakeWaitInterval=shakeWaitInterval,
+                         quake=quake, shakeDuration=shakeDuration, numShakes=numShakes):
+        vertShakeTrack = Sequence(
+            Wait(shakeWaitInterval),
+            Func(
+                camera.setZ,
+                camera.getZ() +
+                intensity /
+                2),
+            Wait(
+                shakeDuration /
+                2),
+            Func(
+                camera.setZ,
+                camera.getZ() -
+                intensity),
+            Wait(
+                shakeDuration /
+                2),
+            Func(
+                camera.setZ,
+                camera.getZ() +
+                intensity /
+                2))
+        horizShakeTrack = Sequence(
+            Wait(
+                shakeWaitInterval - shakeDuration / 2),
+            Func(
+                camera.setY,
+                camera.getY() + intensity / 4),
+            Wait(
+                shakeDuration / 2),
+            Func(
+                camera.setY,
+                camera.getY() - intensity / 2),
+            Wait(
+                shakeDuration / 2),
+            Func(
+                camera.setY,
+                camera.getY() + intensity / 4),
+            Wait(
+                shakeDuration / 2),
+            Func(
+                camera.lookAt,
+                Point3(
+                    0,
+                    0,
+                    0)))
         shakeTrack = Sequence()
         for i in range(0, numShakes):
             if quake == 0:
@@ -719,54 +831,86 @@ def suitCameraShakeShot(avatar, duration, shakeIntensity, quake = 0):
 
 
 def avatarCloseUpShot(avatar, duration):
-    return heldRelativeShot(avatar, 0, 8, avatar.getHeight() * 0.66, 179, 15, 0, duration, 'avatarCloseUpShot')
+    return heldRelativeShot(avatar, 0, 8, avatar.getHeight(
+    ) * 0.66, 179, 15, 0, duration, 'avatarCloseUpShot')
 
 
 def avatarCloseUpThrowShot(avatar, duration):
-    return heldRelativeShot(avatar, 3, 8, avatar.getHeight() * 0.66, 159, 3.6, 0, duration, 'avatarCloseUpThrowShot')
+    return heldRelativeShot(avatar, 3, 8, avatar.getHeight(
+    ) * 0.66, 159, 3.6, 0, duration, 'avatarCloseUpThrowShot')
 
 
 def avatarCloseUpThreeQuarterRightShot(avatar, duration):
-    return heldRelativeShot(avatar, 5.2, 5.45, avatar.getHeight() * 0.66, 131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterRightShot')
+    return heldRelativeShot(avatar, 5.2, 5.45, avatar.getHeight(
+    ) * 0.66, 131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterRightShot')
 
 
 def avatarCloseUpThreeQuarterRightShotWide(avatar, duration):
-    return heldRelativeShot(avatar, 7.2, 8.45, avatar.getHeight() * 0.66, 131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterRightShot')
+    return heldRelativeShot(avatar, 7.2, 8.45, avatar.getHeight(
+    ) * 0.66, 131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterRightShot')
 
 
 def avatarCloseUpThreeQuarterLeftShot(avatar, duration):
-    return heldRelativeShot(avatar, -5.2, 5.45, avatar.getHeight() * 0.66, -131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterLeftShot')
+    return heldRelativeShot(avatar, -5.2, 5.45, avatar.getHeight() *
+                            0.66, -131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterLeftShot')
 
 
 def avatarCloseUpThreeQuarterRightFollowShot(avatar, duration):
     track = Sequence(name='avatarCloseUpThreeQuarterRightFollowShot')
-    track.append(heldRelativeShot(avatar, 5.2, 5.45, avatar.getHeight() * 0.66, 131.5, 3.6, 0, duration * 0.65))
-    track.append(LerpHprInterval(nodePath=camera, other=avatar, duration=duration * 0.2, hpr=Point3(110, 3.6, 0), blendType='easeInOut'))
+    track.append(
+        heldRelativeShot(
+            avatar,
+            5.2,
+            5.45,
+            avatar.getHeight() *
+            0.66,
+            131.5,
+            3.6,
+            0,
+            duration *
+            0.65))
+    track.append(
+        LerpHprInterval(
+            nodePath=camera,
+            other=avatar,
+            duration=duration * 0.2,
+            hpr=Point3(
+                110,
+                3.6,
+                0),
+            blendType='easeInOut'))
     track.append(Wait(duration * 0.25))
     return track
 
 
 def avatarCloseUpZoomShot(avatar, duration):
     track = Sequence('avatarCloseUpZoomShot')
-    track.append(LerpPosHprInterval(nodePath=camera, other=avatar, duration=duration / 2, startPos=Point3(0, 10, avatar.getHeight()), startHpr=Point3(179, -10, 0), pos=Point3(0, 6, avatar.getHeight()), hpr=Point3(179, -10, 0), blendType='easeInOut'))
+    track.append(LerpPosHprInterval(nodePath=camera, other=avatar, duration=duration /
+                                    2, startPos=Point3(0, 10, avatar.getHeight()), startHpr=Point3(179, -
+                                                                                                   10, 0), pos=Point3(0, 6, avatar.getHeight()), hpr=Point3(179, -
+                                                                                                                                                            10, 0), blendType='easeInOut'))
     track.append(Wait(duration / 2))
     return track
 
 
 def avatarBehindShot(avatar, duration):
-    return heldRelativeShot(avatar, 5, -7, avatar.getHeight(), 40, -12, 0, duration, 'avatarBehindShot')
+    return heldRelativeShot(avatar, 5, -7, avatar.getHeight(),
+                            40, -12, 0, duration, 'avatarBehindShot')
 
 
 def avatarBehindHighShot(avatar, duration):
-    return heldRelativeShot(avatar, -4, -7, 5 + avatar.getHeight(), -30, -35, 0, duration, 'avatarBehindHighShot')
+    return heldRelativeShot(avatar, -4, -7, 5 + avatar.getHeight(), -
+                            30, -35, 0, duration, 'avatarBehindHighShot')
 
 
 def avatarBehindHighRightShot(avatar, duration):
-    return heldRelativeShot(avatar, 4, -7, 5 + avatar.getHeight(), 30, -35, 0, duration, 'avatarBehindHighShot')
+    return heldRelativeShot(avatar, 4, -7, 5 + avatar.getHeight(),
+                            30, -35, 0, duration, 'avatarBehindHighShot')
 
 
 def avatarBehindThreeQuarterRightShot(avatar, duration):
-    return heldRelativeShot(avatar, 7.67, -8.52, avatar.getHeight() * 0.66, 25, 7.5, 0, duration, 'avatarBehindThreeQuarterRightShot')
+    return heldRelativeShot(avatar, 7.67, -8.52, avatar.getHeight() *
+                            0.66, 25, 7.5, 0, duration, 'avatarBehindThreeQuarterRightShot')
 
 
 def avatarSideFollowAttack(suit, toon, duration, battle):
@@ -787,7 +931,8 @@ def avatarSideFollowAttack(suit, toon, duration, battle):
     if random.random() > 0.5:
         initialX = -initialX
         finalX = -finalX
-    return Sequence(focusShot(initialX, initialY, initialZ, windupDuration, suitCentralPoint), focusMoveShot(finalX, finalY, finalZ, projectDuration, toonCentralPoint), Wait(impactDuration))
+    return Sequence(focusShot(initialX, initialY, initialZ, windupDuration, suitCentralPoint), focusMoveShot(
+        finalX, finalY, finalZ, projectDuration, toonCentralPoint), Wait(impactDuration))
 
 
 def focusCameraBetweenPoints(point1, point2):
@@ -807,10 +952,12 @@ def focusCameraBetweenPoints(point1, point2):
 
 
 def randomCamera(suit, toon, battle, attackDuration, openShotDuration):
-    return randomAttackCam(suit, toon, battle, attackDuration, openShotDuration, 'suit')
+    return randomAttackCam(
+        suit, toon, battle, attackDuration, openShotDuration, 'suit')
 
 
-def randomAttackCam(suit, toon, battle, attackDuration, openShotDuration, attackerString = 'suit'):
+def randomAttackCam(suit, toon, battle, attackDuration,
+                    openShotDuration, attackerString='suit'):
     if openShotDuration > attackDuration:
         openShotDuration = attackDuration
     closeShotDuration = attackDuration - openShotDuration
@@ -824,31 +971,46 @@ def randomAttackCam(suit, toon, battle, attackDuration, openShotDuration, attack
         defenderString = 'suit'
     randomDouble = random.random()
     if randomDouble > 0.6:
-        openShot = randomActorShot(attacker, battle, openShotDuration, attackerString)
+        openShot = randomActorShot(
+            attacker,
+            battle,
+            openShotDuration,
+            attackerString)
     elif randomDouble > 0.2:
-        openShot = randomOverShoulderShot(suit, toon, battle, openShotDuration, focus=attackerString)
+        openShot = randomOverShoulderShot(
+            suit, toon, battle, openShotDuration, focus=attackerString)
     else:
-        openShot = randomSplitShot(attacker, defender, battle, openShotDuration)
+        openShot = randomSplitShot(
+            attacker, defender, battle, openShotDuration)
     randomDouble = random.random()
     if randomDouble > 0.6:
-        closeShot = randomActorShot(defender, battle, closeShotDuration, defenderString)
+        closeShot = randomActorShot(
+            defender, battle, closeShotDuration, defenderString)
     elif randomDouble > 0.2:
-        closeShot = randomOverShoulderShot(suit, toon, battle, closeShotDuration, focus=defenderString)
+        closeShot = randomOverShoulderShot(
+            suit, toon, battle, closeShotDuration, focus=defenderString)
     else:
-        closeShot = randomSplitShot(attacker, defender, battle, closeShotDuration)
+        closeShot = randomSplitShot(
+            attacker, defender, battle, closeShotDuration)
     return Sequence(openShot, closeShot)
 
 
-def randomGroupAttackCam(suit, targets, battle, attackDuration, openShotDuration):
+def randomGroupAttackCam(suit, targets, battle,
+                         attackDuration, openShotDuration):
     if openShotDuration > attackDuration:
         openShotDuration = attackDuration
     closeShotDuration = attackDuration - openShotDuration
-    openShot = randomActorShot(suit, battle, openShotDuration, 'suit', groupShot=0)
+    openShot = randomActorShot(
+        suit,
+        battle,
+        openShotDuration,
+        'suit',
+        groupShot=0)
     closeShot = randomToonGroupShot(targets, suit, closeShotDuration, battle)
     return Sequence(openShot, closeShot)
 
 
-def randomActorShot(actor, battle, duration, actorType, groupShot = 0):
+def randomActorShot(actor, battle, duration, actorType, groupShot=0):
     height = actor.getHeight()
     centralPoint = actor.getPos(battle)
     centralPoint.setZ(centralPoint.getZ() + height * 0.75)
@@ -883,7 +1045,8 @@ def randomSplitShot(suit, toon, battle, duration):
     z = suitHeight * 0.5 + random.random() * suitHeight
     if MovieUtil.shotDirection == 'left':
         x = -x
-    return focusShot(x, y, z, duration, toonCentralPoint, splitFocusPoint=suitCentralPoint)
+    return focusShot(x, y, z, duration, toonCentralPoint,
+                     splitFocusPoint=suitCentralPoint)
 
 
 def randomOverShoulderShot(suit, toon, battle, duration, focus):
@@ -902,20 +1065,25 @@ def randomOverShoulderShot(suit, toon, battle, duration, focus):
         z = toonHeight * 1.5
     if MovieUtil.shotDirection == 'left':
         x = -x
-    return focusShot(x, y, z, duration, toonCentralPoint, splitFocusPoint=suitCentralPoint)
+    return focusShot(x, y, z, duration, toonCentralPoint,
+                     splitFocusPoint=suitCentralPoint)
 
 
 def randomCameraSelection(suit, attack, attackDuration, openShotDuration):
     shotChoices = [avatarCloseUpThrowShot,
-     avatarCloseUpThreeQuarterLeftShot,
-     allGroupLowShot,
-     suitGroupLowLeftShot,
-     avatarBehindHighShot]
+                   avatarCloseUpThreeQuarterLeftShot,
+                   allGroupLowShot,
+                   suitGroupLowLeftShot,
+                   avatarBehindHighShot]
     if openShotDuration > attackDuration:
         openShotDuration = attackDuration
     closeShotDuration = attackDuration - openShotDuration
     openShot = random.choice(shotChoices)(*[suit, openShotDuration])
-    closeShot = chooseSuitCloseShot(attack, closeShotDuration, openShot.getName(), attackDuration)
+    closeShot = chooseSuitCloseShot(
+        attack,
+        closeShotDuration,
+        openShot.getName(),
+        attackDuration)
     return Sequence(openShot, closeShot)
 
 
@@ -945,7 +1113,12 @@ def chooseFireShot(throws, suitThrowsDict, attackDuration):
     openShot = chooseFireOpenShot(throws, suitThrowsDict, attackDuration)
     openDuration = openShot.getDuration()
     openName = openShot.getName()
-    closeShot = chooseFireCloseShot(throws, suitThrowsDict, openDuration, openName, attackDuration)
+    closeShot = chooseFireCloseShot(
+        throws,
+        suitThrowsDict,
+        openDuration,
+        openName,
+        attackDuration)
     track = Sequence(openShot, closeShot)
     return track
 
@@ -957,10 +1130,10 @@ def chooseFireOpenShot(throws, suitThrowsDict, attackDuration):
     if numThrows == 1:
         av = throws[0]['toon']
         shotChoices = [avatarCloseUpThrowShot,
-         avatarCloseUpThreeQuarterRightShot,
-         avatarBehindShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterRightShot,
+                       avatarBehindShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numThrows >= 2 and numThrows <= 4:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -971,16 +1144,17 @@ def chooseFireOpenShot(throws, suitThrowsDict, attackDuration):
     return track
 
 
-def chooseFireCloseShot(throws, suitThrowsDict, openDuration, openName, attackDuration):
+def chooseFireCloseShot(throws, suitThrowsDict,
+                        openDuration, openName, attackDuration):
     numSuits = len(suitThrowsDict)
     av = None
     duration = attackDuration - openDuration
     if numSuits == 1:
         av = base.cr.doId2do[list(suitThrowsDict.keys())[0]]
         shotChoices = [avatarCloseUpFireShot,
-         avatarCloseUpThreeQuarterLeftFireShot,
-         allGroupLowShot,
-         suitGroupThreeQuarterLeftBehindShot]
+                       avatarCloseUpThreeQuarterLeftFireShot,
+                       allGroupLowShot,
+                       suitGroupThreeQuarterLeftBehindShot]
     elif numSuits >= 2 and numSuits <= 4 or numSuits == 0:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
@@ -992,8 +1166,10 @@ def chooseFireCloseShot(throws, suitThrowsDict, openDuration, openName, attackDu
 
 
 def avatarCloseUpFireShot(avatar, duration):
-    return heldRelativeShot(avatar, 7, 17, avatar.getHeight() * 0.66, 159, 3.6, 0, duration, 'avatarCloseUpFireShot')
+    return heldRelativeShot(avatar, 7, 17, avatar.getHeight(
+    ) * 0.66, 159, 3.6, 0, duration, 'avatarCloseUpFireShot')
 
 
 def avatarCloseUpThreeQuarterLeftFireShot(avatar, duration):
-    return heldRelativeShot(avatar, -8.2, 8.45, avatar.getHeight() * 0.66, -131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterLeftShot')
+    return heldRelativeShot(avatar, -8.2, 8.45, avatar.getHeight() *
+                            0.66, -131.5, 3.6, 0, duration, 'avatarCloseUpThreeQuarterLeftShot')

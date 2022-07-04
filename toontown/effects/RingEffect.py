@@ -5,18 +5,24 @@ from .EffectController import EffectController
 from .PooledEffect import PooledEffect
 import random
 
+
 class RingEffect(PooledEffect, EffectController):
 
     def __init__(self):
         PooledEffect.__init__(self)
         EffectController.__init__(self)
-        model = loader.loadModel('phase_4/models/props/tt_m_efx_ext_fireworkCards')
+        model = loader.loadModel(
+            'phase_4/models/props/tt_m_efx_ext_fireworkCards')
         self.card = model.find('**/tt_t_efx_ext_particleSpark_soft')
         self.cardScale = 16.0
         self.effectModel = model.find('**/tt_t_efx_ext_particleStars')
         self.effectModel.reparentTo(self)
         self.effectModel.setColorScale(0, 0, 0, 0)
-        self.setAttrib(ColorBlendAttrib.make(ColorBlendAttrib.MAdd, ColorBlendAttrib.OIncomingAlpha, ColorBlendAttrib.OOne))
+        self.setAttrib(
+            ColorBlendAttrib.make(
+                ColorBlendAttrib.MAdd,
+                ColorBlendAttrib.OIncomingAlpha,
+                ColorBlendAttrib.OOne))
         self.setBillboardPointWorld()
         self.setDepthWrite(0)
         self.setLightOff()
@@ -57,14 +63,18 @@ class RingEffect(PooledEffect, EffectController):
         self.p0.factory.setTerminalVelocitySpread(0.0)
         self.p0.renderer.setAlphaMode(BaseParticleRenderer.PRALPHAINOUT)
         self.p0.renderer.setUserAlpha(1.0)
-        self.p0.renderer.setColorBlendMode(ColorBlendAttrib.MAdd, ColorBlendAttrib.OIncomingAlpha, ColorBlendAttrib.OOne)
+        self.p0.renderer.setColorBlendMode(
+            ColorBlendAttrib.MAdd,
+            ColorBlendAttrib.OIncomingAlpha,
+            ColorBlendAttrib.OOne)
         self.p0.renderer.setFromNode(self.card)
         self.p0.renderer.setColor(Vec4(1.0, 1.0, 1.0, 1.0))
         self.p0.renderer.setXScaleFlag(1)
         self.p0.renderer.setYScaleFlag(1)
         self.p0.renderer.setAnimAngleFlag(0)
         self.p0.renderer.setNonanimatedTheta(0.0)
-        self.p0.renderer.setAlphaBlendMethod(BaseParticleRenderer.PPBLENDLINEAR)
+        self.p0.renderer.setAlphaBlendMethod(
+            BaseParticleRenderer.PPBLENDLINEAR)
         self.p0.renderer.setAlphaDisable(0)
         self.p0.emitter.setEmissionType(BaseParticleEmitter.ETRADIATE)
         self.p0.emitter.setAmplitudeSpread(0.0)
@@ -78,10 +88,25 @@ class RingEffect(PooledEffect, EffectController):
     def createTrack(self):
         self.f.setP(random.randint(50, 100))
         self.effectModel.setR(random.randint(0, 90))
-        self.effectModel.setPos(random.randint(-20, 20), random.randint(-20, 20), random.randint(-20, 20))
-        fadeBlast = self.effectModel.colorScaleInterval(1.0, Vec4(0, 0, 0, 0), startColorScale=Vec4(self.effectColor), blendType='easeIn')
-        scaleBlast = self.effectModel.scaleInterval(1.0, 75 * self.effectScale, startScale=50 * self.effectScale, blendType='easeOut')
-        self.track = Sequence(Func(self.p0.setBirthRate, 0.15), Func(self.p0.clearToInitial), Func(self.f.start, self, self), Parallel(fadeBlast, scaleBlast), Func(self.p0.setBirthRate, 100.0), Wait(3.0), Func(self.cleanUpEffect))
+        self.effectModel.setPos(random.randint(-20, 20),
+                                random.randint(-20, 20), random.randint(-20, 20))
+        fadeBlast = self.effectModel.colorScaleInterval(
+            1.0, Vec4(
+                0, 0, 0, 0), startColorScale=Vec4(
+                self.effectColor), blendType='easeIn')
+        scaleBlast = self.effectModel.scaleInterval(
+            1.0,
+            75 * self.effectScale,
+            startScale=50 * self.effectScale,
+            blendType='easeOut')
+        self.track = Sequence(
+            Func(
+                self.p0.setBirthRate, 0.15), Func(
+                self.p0.clearToInitial), Func(
+                self.f.start, self, self), Parallel(
+                    fadeBlast, scaleBlast), Func(
+                        self.p0.setBirthRate, 100.0), Wait(3.0), Func(
+                            self.cleanUpEffect))
 
     def setEffectScale(self, scale):
         self.effectScale = scale

@@ -5,18 +5,24 @@ from toontown.toonbase import ToontownGlobals
 from toontown.coghq import StageRoomSpecs
 import random
 
+
 class StageRoom(DirectObject.DirectObject):
     FloorCollPrefix = 'stageFloorColl'
     CashbotStageDoorFrame = 'phase_10/models/cashbotHQ/DoorFrame'
 
-    def __init__(self, path = None):
+    def __init__(self, path=None):
         if path is not None:
             if path in StageRoomSpecs.CashbotStageConnectorRooms:
                 loadFunc = loader.loadModelCopy
             else:
                 loadFunc = loader.loadModel
             self.setGeom(loadFunc(path))
-        self.localToonFSM = ClassicFSM.ClassicFSM('StageRoomLocalToonPresent', [State.State('off', self.enterLtOff, self.exitLtOff, ['notPresent']), State.State('notPresent', self.enterLtNotPresent, self.exitLtNotPresent, ['present']), State.State('present', self.enterLtPresent, self.exitLtPresent, ['notPresent'])], 'notPresent', 'notPresent')
+        self.localToonFSM = ClassicFSM.ClassicFSM(
+            'StageRoomLocalToonPresent', [
+                State.State(
+                    'off', self.enterLtOff, self.exitLtOff, ['notPresent']), State.State(
+                    'notPresent', self.enterLtNotPresent, self.exitLtNotPresent, ['present']), State.State(
+                    'present', self.enterLtPresent, self.exitLtPresent, ['notPresent'])], 'notPresent', 'notPresent')
         self.localToonFSM.enterInitialState()
         return
 

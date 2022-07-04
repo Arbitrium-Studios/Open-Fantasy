@@ -2,6 +2,7 @@ from direct.interval.IntervalGlobal import *
 from .Entity import Entity
 from pandac.PandaModules import Vec3
 
+
 class PropSpinner(Entity):
 
     def __init__(self, level, entId):
@@ -26,7 +27,7 @@ class PropSpinner(Entity):
                 nameParts[3] = nameParts[3][1:]
             try:
                 rate = int(nameParts[3])
-            except:
+            except BaseException:
                 print('invalid prop rotate string: %s' % name)
 
             if neg:

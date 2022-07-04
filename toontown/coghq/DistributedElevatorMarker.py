@@ -11,8 +11,10 @@ from otp.level import BasicEntities
 from direct.task import Task
 from toontown.toonbase import ToontownGlobals
 
+
 class DistributedElevatorMarker(BasicEntities.DistributedNodePathEntity):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedElevatorMarker')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedElevatorMarker')
     elevatorMarkerModels = ['phase_9/models/cogHQ/square_stomper']
 
     def __init__(self, cr):
@@ -45,7 +47,8 @@ class DistributedElevatorMarker(BasicEntities.DistributedNodePathEntity):
         self.rotateNode = self.attachNewNode('rotate')
         self.model = None
         if __dev__:
-            self.model = loader.loadModel(self.elevatorMarkerModels[self.modelPath])
+            self.model = loader.loadModel(
+                self.elevatorMarkerModels[self.modelPath])
             self.model.reparentTo(self.rotateNode)
         return
 

@@ -8,6 +8,7 @@ from direct.fsm import ClassicFSM
 from direct.fsm import State
 from . import CatchGameGlobals
 
+
 class DivingGameToonSD(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('DivingGameToonSD')
     FallBackAnim = 'slip-backward'
@@ -18,11 +19,11 @@ class DivingGameToonSD(StateData.StateData):
     EatNRunAnim = 'catch-eatnrun'
     status = ''
     animList = [FallBackAnim,
-     FallFwdAnim,
-     CatchNeutralAnim,
-     CatchRunAnim,
-     EatNeutralAnim,
-     EatNRunAnim]
+                FallFwdAnim,
+                CatchNeutralAnim,
+                CatchRunAnim,
+                EatNeutralAnim,
+                EatNRunAnim]
 
     def __init__(self, avId, game):
         self.avId = avId
@@ -31,10 +32,17 @@ class DivingGameToonSD(StateData.StateData):
         self.toon = self.game.getAvatar(self.avId)
         self.unexpectedExit = False
         self.fsm = ClassicFSM.ClassicFSM('CatchGameAnimFSM-%s' % self.avId, [State.State('init', self.enterInit, self.exitInit, ['normal']),
-         State.State('normal', self.enterNormal, self.exitNormal, ['freeze', 'treasure']),
-         State.State('treasure', self.enterTreasure, self.exitTreasure, ['freeze', 'normal']),
-         State.State('freeze', self.enterFreeze, self.exitFreeze, ['normal']),
-         State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'init', 'cleanup')
+                                                                             State.State('normal', self.enterNormal, self.exitNormal, [
+                                                                                         'freeze', 'treasure']),
+                                                                             State.State(
+            'treasure', self.enterTreasure, self.exitTreasure, [
+                'freeze', 'normal']),
+            State.State(
+            'freeze',
+            self.enterFreeze,
+            self.exitFreeze,
+            ['normal']),
+            State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'init', 'cleanup')
 
     def load(self):
         self.setAnimState('off', 1.0)
@@ -49,7 +57,7 @@ class DivingGameToonSD(StateData.StateData):
     def enter(self):
         self.fsm.enterInitialState()
 
-    def exit(self, unexpectedExit = False):
+    def exit(self, unexpectedExit=False):
         self.unexpectedExit = unexpectedExit
         if not unexpectedExit:
             self.fsm.requestFinalState()
