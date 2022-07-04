@@ -1,5 +1,5 @@
 # Window Settings
-window-title Toontown
+window-title (Open-Fantasy) Toontown Fantasy
 icon-filename phase_3/models/gui/toontown.ico
 cursor-filename phase_3/models/gui/toonmono.cur
 
