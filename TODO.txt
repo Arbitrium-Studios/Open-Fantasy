@@ -26,7 +26,6 @@
 + Implement a new Toon Tip system that replaces the one on the loading screen
 + Add Accessories to the Toon Heads for Pick-A-Toon and the Friends system
 + Replace True Friends with ++ chat where you and anyone who you are Best Friends with, can see you swear
-+ Add more Magic Commands!
 + Add more areas for gaming!
 + Zoom out from the Toons in the Create-A-Toon section
 + Add more fonts for usage in Catalog
@@ -44,5 +43,9 @@
 + Add Jellybeans you can earn by completing Toontasks
 + Add Teleport Button to Toontasks
 + Overhaul Map Page to be able to scroll (or click down) to zoom into playgrounds to see streets, buildings, etc
++ Add a new street and have it lead outside of Toontown Central to an area called Toontropolis: https://github.com/DankMickey/Toontown-2.0-1
++ Implement this into Open-Fantasy: https://github.com/Toontown-Open-Source-Initiative/Toontown-VP-After-Death
++ Make this branch of Toontown Fantasy used for singleplayer and subsequently all Cog battles can be done in singleplayer
++ Rebalance fishing so it's more fun!
 
 More soon!
