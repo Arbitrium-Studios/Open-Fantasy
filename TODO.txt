@@ -9,9 +9,15 @@
 9. Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button.
 10. Add the ability to play with an Xbox, Play Station, or PC controllers. (Back to view map; right stick to control camera angle; left stick to control the movement of your character AND in battles, to move the highlighted box around each gag box; double flick the left stick upward to sprint, Y button to open Shticker Book, B to preform action, Xbox/Play Station/{Company name} Home button to bring up the pause menu; X (PS)/A to jump/select the gag selected in battle; D-Pad to select one of four party members; Left Trigger (LT) to use Elemental magic; Right Trigger (RT) to ???; Left Button (LB) ???; Right Button (RB) ???;)
 11. Add a touch screen mode which is enabled/disabled in the Shticker Book
-12. Implement Mobile Mode for Android users!
+12. Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
 13. Implement full Wide-Screen Support
 14. Implement in-engine Image Upscaling
 15. Add Credits to the game for everyone who is helping
+16. Put all logs, screenshots, etc. into a 'User/InsertUserHere' folder.
+17. Rename "Choose Your Type" under the Species list to "Choose Your Species"!
+18. Add TTR's Clothing Option for Create Your Toon
+19. Implement our version of Toontown House's Accessory Tab in the Clothing Page of the Create Your Toon part.
+20. Implement a new tab for Further Customization for which hand your Toon uses, etc.
+21. Auto-Approve Type-A-Name Names
 
 More soon!
