@@ -12,7 +12,7 @@
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObject
 
-from panda3d.otp import WhisperPopup
+from libotp import WhisperPopup
 from otp.otpbase.OTPGlobals import *
 
 from toontown.friends import FriendHandle
@@ -97,6 +97,11 @@ class ToontownMagicWordManager(DistributedObject.DistributedObject):
         if base.localAvatar.getTransitioning():
             self.generateResponse(responseType="Teleporting")
             return
+
+        # We're naughty, so no Magic Words for us -- From Toontown-Magic-Word-Manager
+        #if base.localAvatar.getLocked():
+            #self.generateResponse(responseType="Locked")
+            #return
 
         # We're allowed to use the Magic Word then, so let's proceed
         self.handleMagicWord(magicWord)
@@ -185,7 +190,7 @@ class ToontownMagicWordManager(DistributedObject.DistributedObject):
                 # It matches, woohoo!
                 if magicWordNoPrefix.startswith(str(level)):
                     # Sorry, I'm commenting this way after the fact, so not even I know why there is a try/except here
-                    # My guess is that sometimes this doesn't work for whatever reason, but I'm not too sure
+                    # My guess is that sometimes this  doesn't work for whatever reason, but I'm not too sure
                     # It typically works fine for me but I will keep it here just in-case
                     try:
                         int(magicWordNoPrefix[len(str(level)):][:1])
@@ -231,7 +236,7 @@ class ToontownMagicWordManager(DistributedObject.DistributedObject):
         elif magicWordInfo['execLocation'] in (EXEC_LOC_SERVER, EXEC_LOC_CLIENT):
             self.sendUpdate('requestExecuteMagicWord', [affectRange, affectType, affectExtra, self.lastClickedAvId,
                                                         magicWordNoPrefix])
-
+    
     def executeMagicWord(self, word, commandName, targetIds, args, affectRange, affectType, affectExtra, lastClickedAvId):
         # We have have a target avId and the affectRange isn't ourself, we want to execute this Magic Word on the target
         # This is alright, but we should only execute it on the target if they are visible on our client

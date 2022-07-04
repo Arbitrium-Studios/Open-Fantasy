@@ -39,6 +39,13 @@
 + DarthM on Discord for various features including Credits, Genderless Toons, etc.
 + TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
 + Rocket for helping me implement Wide-Screen Support
++ Benjamin Frisby for helping with the creation of Toontown-Magic-Word-Manager
++ John Cote for helping with the creation of Toontown-Magic-Word-Manager
++ Ruby Lord for helping with the creation of Toontown-Magic-Word-Manager
++ Frank for helping with the creation of Toontown-Magic-Word-Manager
++ Nick for helping with the creation of Toontown-Magic-Word-Manager
++ Little Cat for helping with the creation of Toontown-Magic-Word-Manager
++ Ooowoo for helping with the creation of Toontown-Magic-Word-Manager
 
 ## - If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
 
