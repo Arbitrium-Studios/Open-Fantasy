@@ -47,6 +47,6 @@ if %INPUT%==1 (
     "C:\Panda3D-1.11.0-x64\python\ppython.exe" -m toontown.launcher.QuickStartLauncher
 )
 
-goto main
-
 pause
+
+goto main
