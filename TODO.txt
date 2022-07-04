@@ -40,5 +40,9 @@
 40. Make The Cannon Game in the Estate function as the Party Cannons Do!
 41. Make everything run at 60 FPS as a default.
 42. Replace Whitelist with Blacklist where you can say anything that's NOT in a Blacklist using pip's Profanity-Filter!
+43. Add Experience Bar at the bottom of the screen!
+44. Add Jellybeans you can earn by completing Toontasks
+45. Add Teleport Button to Toontasks.
+46. Overhaul Map Page to be able to scroll (or click down) to zoom into playgrounds to see streets, buildings, etc.
 
 More soon!
