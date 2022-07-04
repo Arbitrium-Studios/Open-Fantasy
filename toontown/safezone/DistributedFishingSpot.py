@@ -337,6 +337,7 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
             self.poleNode.append(np.instanceTo(h))
 
         self.pole.reparentTo(self.poleNode[0])
+        self.pole.setBlend(frameBlend=base.smoothAnimations)
 
     def __dropPole(self):
         self.__hideBob()

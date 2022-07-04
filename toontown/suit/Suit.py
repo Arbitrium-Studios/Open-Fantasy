@@ -592,6 +592,7 @@ class Suit(Avatar.Avatar):
         self.getGeomNode().setScale(self.scale)
         self.generateHealthBar()
         self.generateCorporateMedallion()
+        self.setBlend(frameBlend=base.smoothAnimations)
         return
 
     def generateBody(self):
@@ -941,6 +942,7 @@ class Suit(Avatar.Avatar):
         self.loseActor.setScale(self.scale)
         self.loseActor.setPos(self.getPos())
         self.loseActor.setHpr(self.getHpr())
+        self.loseActor.setBlend(frameBlend=base.smoothAnimations)
         shadowJoint = self.loseActor.find('**/joint_shadow')
         dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
         dropShadow.setScale(0.45)

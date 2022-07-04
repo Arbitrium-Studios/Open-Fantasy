@@ -13,6 +13,8 @@ class HQTelescopeAnimatedProp(AnimatedProp.AnimatedProp):
         self.telescope.loadAnims(
             {'anim': 'phase_3.5/models/props/HQ_telescope-chan'})
         self.telescope.pose('anim', 0)
+        self.telescope.setBlend(frameBlend=base.smoothAnimations)
+
         self.node = self.telescope
         self.track = Sequence(
             Wait(5.0), self.telescope.actorInterval(

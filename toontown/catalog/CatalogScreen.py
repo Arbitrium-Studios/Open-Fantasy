@@ -957,6 +957,7 @@ class CatalogScreen(DirectFrame):
         switchboard.reparentTo(self.clarabelle)
         switchboard.setPos(0, -2, 0)
         self.clarabelle.reparentTo(self.cRender)
+        self.clarabelle.setBlend(frameBlend=base.smoothAnimations)
         self.clarabelle.setPosHprScale(-0.56, 6.43, -
                                        3.81, 121.61, 0.0, 0.0, 1.0, 1.0, 1.0)
         self.clarabelleFrame.setPosHprScale(-0.0,

@@ -1016,6 +1016,7 @@ class DistributedToonHallInterior(DistributedToonInterior):
 
     def exitFlat(self):
         self.sillyMeter.show()
+        self.sillyMeter.setBlend(frameBlend=base.smoothAnimations)
         self.flatSillyMeter.hide()
         self.flatDuck.hide()
         self.flatMonkey.hide()

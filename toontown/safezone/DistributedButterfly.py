@@ -64,6 +64,7 @@ class DistributedButterfly(DistributedObject.DistributedObject):
         if self.butterfly:
             return
         self.butterfly = Actor.Actor()
+        self.butterfly.setBlend(frameBlend=base.smoothAnimations)
         self.butterfly.loadModel('phase_4/models/props/SZ_butterfly-mod.bam')
         self.butterfly.loadAnims({'flutter': 'phase_4/models/props/SZ_butterfly-flutter.bam',
                                   'glide': 'phase_4/models/props/SZ_butterfly-glide.bam',
@@ -108,8 +109,10 @@ class DistributedButterfly(DistributedObject.DistributedObject):
         self.butterflyNode = NodePath(lodNode)
         self.butterfly2.setH(180.0)
         self.butterfly2.reparentTo(self.butterflyNode)
+        self.butterfly2.setBlend(frameBlend=base.smoothAnimations)
         self.butterfly.setH(180.0)
         self.butterfly.reparentTo(self.butterflyNode)
+        self.butterfly.setBlend(frameBlend=base.smoothAnimations)
         self.__initCollisions()
         self.dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
         self.dropShadow.setColor(0, 0, 0, 0.3)

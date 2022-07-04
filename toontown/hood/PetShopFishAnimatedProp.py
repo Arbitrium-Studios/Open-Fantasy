@@ -12,6 +12,7 @@ class PetShopFishAnimatedProp(AnimatedProp.AnimatedProp):
         self.fish.reparentTo(parent)
         self.fish.loadAnims({'swim': 'phase_4/models/props/exteriorfish-swim'})
         self.fish.pose('swim', 0)
+        self.fish.setBlend(frameBlend=base.smoothAnimations)
         self.node = self.fish
 
     def delete(self):

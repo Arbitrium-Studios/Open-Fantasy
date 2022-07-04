@@ -12,6 +12,7 @@ class HQPeriscopeAnimatedProp(AnimatedProp.AnimatedProp):
         self.periscope.reparentTo(parent)
         self.periscope.loadAnims(
             {'anim': 'phase_3.5/models/props/HQ_periscope-chan'})
+        self.periscope.setBlend(frameBlend=base.smoothAnimations)
         self.periscope.pose('anim', 0)
         self.node = self.periscope
         self.track = Sequence(

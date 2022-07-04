@@ -83,6 +83,7 @@ class Decoration(NodePath):
             self.globeSphereNode.addSolid(self.globeSphere)
             self.globeSphereNodePath = self.partyGlobe.attachNewNode(
                 self.globeSphereNode)
+            self.partyGlobe.setBlend(frameBlend=base.smoothAnimations)
             self.partyGlobe.loop('idle')
             self.partyGlobe.reparentTo(self)
         elif self.name == 'FlyingHeart':
@@ -106,6 +107,7 @@ class Decoration(NodePath):
             self.globeSphereNodePath = self.flyingHeart.attachNewNode(
                 self.globeSphereNode)
             self.globeSphereNodePath.reparentTo(wingsSeqNodeParent)
+            self.flyingHeart.setBlend(frameBlend=base.wantSmoothAnimations)
             wings = []
             wingsSeqNode = SequenceNode('wingsSeqNode')
             temp = NodePath('Empty')
@@ -149,6 +151,7 @@ class Decoration(NodePath):
             balloonRight.reparentTo(balloonRightLocator)
             self.heartBanner.loop('idle')
             self.heartBanner.reparentTo(self)
+            self.heartBanner.setBlend(frameBlend=base.smoothAniamtions)
         elif self.name == 'Hydra' or self.name == 'StageWinter':
             if self.name == 'StageWinter':
                 self.hydra = Actor.Actor(
@@ -176,6 +179,7 @@ class Decoration(NodePath):
             collisions.setPos(0, 0, -5)
             self.hydra.flattenStrong()
             self.hydra.reparentTo(self)
+            self.hydra.setBlend(frameBlend=base.smoothAnimations)
             if self.name == 'StageWinter':
                 stageBounds = self.hydra.find('**/stage').node().getBounds()
                 self.hydra.node().setBounds(stageBounds)
@@ -201,6 +205,7 @@ class Decoration(NodePath):
             self.animSeq.setT(st)
             self.tubeCog.flattenStrong()
             self.tubeCog.reparentTo(self)
+            self.tubeCog.setBlend(frameBlend=base.smoothAnimations)
         elif self.name == 'BannerVictory':
             self.bannerVictory = Actor.Actor(
                 'phase_13/models/parties/tt_m_ara_pty_bannerVictory_model', {
@@ -215,6 +220,7 @@ class Decoration(NodePath):
             balloonRight.reparentTo(balloonRightLocator)
             self.bannerVictory.loop('idle')
             self.bannerVictory.reparentTo(self)
+            self.bannerVictory.setBlend(frameBlend=base.smoothAnimations)
         elif self.name == 'CannonVictory':
             self.cannonVictory = Actor.Actor(
                 'phase_13/models/parties/tt_m_ara_pty_cannonVictory_model', {
@@ -229,6 +235,7 @@ class Decoration(NodePath):
             self.cannonVictory.flattenStrong()
             self.cannonVictory.loop('idle')
             self.cannonVictory.reparentTo(self)
+            self.cannonVictory.setBlend(frameBlend=base.smoothAnimations)
         elif self.name == 'CogStatueVictory':
             self.decorationModel = loader.loadModel(
                 'phase_13/models/parties/tt_m_ara_pty_cogDoodleVictory')

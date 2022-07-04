@@ -179,6 +179,7 @@ class BossCog(Avatar.Avatar):
         self.treadsRight = treadsModel.find('**/left_tread')
         self.doorA.request('Closed')
         self.doorB.request('Closed')
+        self.setBlend(frameBlend=base.smoothAnimations)
 
     def initializeBodyCollisions(self, collIdStr):
         Avatar.Avatar.initializeBodyCollisions(self, collIdStr)
