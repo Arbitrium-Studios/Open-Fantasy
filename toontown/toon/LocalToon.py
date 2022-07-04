@@ -152,11 +152,12 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.glitchOkay = 1
             self.tempGreySpacing = 0
             self.wantStatePrint = base.config.GetBool('want-statePrint', 0)
+            # These items related to the gardening estates expansion
             self.__gardeningGui = None
             self.__gardeningGuiFake = None
             self.__shovelButton = None
-            self.shovelRelatedDoId = 0
-            self.shovelAbility = ''
+            self.shovelRelatedDoId = 0 # this could be garden plot , a tree
+            self.shovelAbility = '' # this could be "Plant" or "Pick"
             self.plantToWater = 0
             self.shovelButtonActiveCount = 0
             self.wateringCanButtonActiveCount = 0
@@ -167,6 +168,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.guiConflict = 0
             self.lastElevatorLeft = 0
             self.elevatorNotifier = ElevatorNotifier.ElevatorNotifier()
+            # switchboard friends messages , can probably delete?
             self.accept(OTPGlobals.AvatarFriendAddEvent, self.sbFriendAdd)
             self.accept(
                 OTPGlobals.AvatarFriendUpdateEvent,
@@ -183,6 +185,9 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.systemMsgAckGui = None
             self.createSystemMsgAckGui()
             if not hasattr(base.cr, 'lastLoggedIn'):
+                # I'm not sure this will ever happen in test or on live
+                # but in the dev local environment this case hits after I've just created a new toon
+                # on a brand new account
                 base.cr.lastLoggedIn = self.cr.toontownTimeManager.convertStrToToontownTime(
                     '')
             self.setLastTimeReadNews(base.cr.lastLoggedIn)
@@ -191,6 +196,8 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
                 True) and base.config.GetBool(
                 'accepting-new-friends-default',
                 True)
+            # GMs have accepting-new-friends-default 0, which forces them to explicitly enable
+            # friend requests if they ever want it.
             self.acceptingNonFriendWhispers = base.settings.getSetting(
                 'accepting-non-friend-whispers',
                 True) and base.config.GetBool(
@@ -200,9 +207,19 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.oldPos = None
             self.questMap = None
             self.lerpFurnitureButton = None
+            self.isHidden = False
+            self.accept('f4', self.toggleAllGui)
 
     def wantLegacyLifter(self):
         return True
+
+    def toggleAllGui(self):
+        # This is a debug method to toggle all of the gui on and off
+        if self.isHidden:
+            aspect2d.show()
+        elif not self.isHidden:
+            aspect2d.hide()
+        self.isHidden = not self.isHidden
 
     def startGlitchKiller(self):
         if localAvatar.getZoneId() not in GlitchKillerZones:
