@@ -31,6 +31,11 @@ class ToonBase(OTPBase.OTPBase):
             sfx = self.settings.getSetting('sfx', True)
             toonChatSounds = self.settings.getSetting('toon-chat-sounds', True)
             res = self.settings.getSetting('resolution', (800, 600))
+            self.settings.updateSetting('windowed-mode', mode)
+            self.settings.updateSetting('music', music)
+            self.settings.updateSetting('sfx', sfx)
+            self.settings.updateSetting('toon-chat-sounds', toonChatSounds)
+            self.settings.updateSetting('resolution', res)
             if mode is None:
                 mode = 1
             if res is None:
@@ -186,6 +191,11 @@ class ToonBase(OTPBase.OTPBase):
         self.aspectRatio = float(self.oldX) / self.oldY
         self.calculatedFOV = self.genFOV = self.settings.getSetting(
             "fov", ToontownGlobals.DefaultCameraFov)
+        self.settings.updateSetting("fov", self.genFOV)
+        self.textureQuality = self.settings.getSetting('texture-quality', 'High')
+        self.settings.updateSetting('texture-quality', self.textureQuality)
+        self.setTextureQuality(self.textureQuality)
+        self.settings.writeSettings()
         return
 
     def windowEvent(self, win):
@@ -508,3 +518,18 @@ class ToonBase(OTPBase.OTPBase):
     def playMusic(self, music, looping=0, interrupt=1, volume=None, time=0.0):
         OTPBase.OTPBase.playMusic(
             self, music, looping, interrupt, volume, time)
+
+    def setTextureQuality(self, quality):
+        # set the texture quality to the specified value
+        # Credit to Mugendina for helping me with this code
+        # Limits the highest texture resolution for the player should help with old machines
+        # TODO add to settings gui
+        quality_to_res = {
+            'Very High' : -1,
+            'High': 1024,
+            'Medium': 512,
+            'Low': 256,
+            'Very Low': 128,
+        }
+        loadPrcFileData('', f'max-texture-dimension {quality_to_res[quality]}')
+        self.settings.updateSetting('texture-quality', quality)
