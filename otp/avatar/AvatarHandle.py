@@ -20,5 +20,13 @@ class AvatarHandle:
 
     def setTalkWhisper(self, fromAV, fromAC, avatarName, chat, mods, flags):
         newText, scrubbed = localAvatar.scrubTalk(chat, mods)
-        base.talkAssistant.receiveWhisperTalk(fromAV, avatarName, fromAC, None, self.avatarId, self.getName(), newText, scrubbed)
+        base.talkAssistant.receiveWhisperTalk(
+            fromAV,
+            avatarName,
+            fromAC,
+            None,
+            self.avatarId,
+            self.getName(),
+            newText,
+            scrubbed)
         return

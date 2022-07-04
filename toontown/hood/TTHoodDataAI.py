@@ -7,12 +7,13 @@ from toontown.classicchars import DistributedMickeyAI
 from toontown.safezone import ButterflyGlobals
 from direct.task import Task
 
+
 class TTHoodDataAI(HoodDataAI.HoodDataAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('TTHoodDataAI')
 
     def __init__(self, air, zoneId=None):
         hoodId = ToontownGlobals.ToontownCentral
-        if zoneId == None:
+        if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
         return
@@ -24,7 +25,8 @@ class TTHoodDataAI(HoodDataAI.HoodDataAI):
         trolley.start()
         self.addDistObj(trolley)
         self.trolley = trolley
-        self.treasurePlanner = TTTreasurePlannerAI.TTTreasurePlannerAI(self.zoneId)
+        self.treasurePlanner = TTTreasurePlannerAI.TTTreasurePlannerAI(
+            self.zoneId)
         self.treasurePlanner.start()
         self.classicChar = DistributedMickeyAI.DistributedMickeyAI(self.air)
         self.classicChar.generateWithRequired(self.zoneId)

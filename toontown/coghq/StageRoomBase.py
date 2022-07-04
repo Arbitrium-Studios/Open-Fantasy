@@ -1,5 +1,6 @@
 from toontown.toonbase import ToontownGlobals
 
+
 class StageRoomBase:
 
     def __init__(self):

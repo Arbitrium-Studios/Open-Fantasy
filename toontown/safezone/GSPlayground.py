@@ -8,13 +8,19 @@ from toontown.toonbase import TTLocalizer
 from toontown.racing import RaceGlobals
 from direct.fsm import State
 
+
 class GSPlayground(Playground.Playground):
 
     def __init__(self, loader, parentFSM, doneEvent):
         Playground.Playground.__init__(self, loader, parentFSM, doneEvent)
         self.parentFSM = parentFSM
         self.startingBlockDoneEvent = 'startingBlockDone'
-        self.fsm.addState(State.State('startingBlock', self.enterStartingBlock, self.exitStartingBlock, ['walk']))
+        self.fsm.addState(
+            State.State(
+                'startingBlock',
+                self.enterStartingBlock,
+                self.exitStartingBlock,
+                ['walk']))
         state = self.fsm.getStateNamed('walk')
         state.addTransition('startingBlock')
 
@@ -51,7 +57,9 @@ class GSPlayground(Playground.Playground):
         self.accept(doneEvent, self.enterDFACallback, [requestStatus])
         self.dfa = DownloadForceAcknowledge.DownloadForceAcknowledge(doneEvent)
         if requestStatus['hoodId'] == ToontownGlobals.MyEstate:
-            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.MyEstate))
+            self.dfa.enter(
+                base.cr.hoodMgr.getPhaseFromHood(
+                    ToontownGlobals.MyEstate))
         else:
             self.dfa.enter(5)
 
@@ -59,13 +67,22 @@ class GSPlayground(Playground.Playground):
         reason = requestStatus.get('reason')
         if reason == RaceGlobals.Exit_Barrier:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RaceTimeout, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RaceTimeout,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         elif reason == RaceGlobals.Exit_Slow:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RacerTooSlow, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RacerTooSlow,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         elif reason == RaceGlobals.Exit_BarrierNoRefund:
             requestStatus['nextState'] = 'popup'
-            self.dialog = TTDialog.TTDialog(text=TTLocalizer.KartRace_RaceTimeoutNoRefund, command=self.__cleanupDialog, style=TTDialog.Acknowledge)
+            self.dialog = TTDialog.TTDialog(
+                text=TTLocalizer.KartRace_RaceTimeoutNoRefund,
+                command=self.__cleanupDialog,
+                style=TTDialog.Acknowledge)
         Playground.Playground.enterTeleportIn(self, requestStatus)
 
     def __cleanupDialog(self, value):
@@ -80,7 +97,10 @@ class GSPlayground(Playground.Playground):
         import pdb
         pdb.set_trace()
         self.accept(self.startingBlockDoneEvent, self.handleStartingBlockDone)
-        self.startingBlock = Elevator.Elevator(self.fsm.getStateNamed('startingBlock'), self.startingBlockDoneEvent, distStartingBlock)
+        self.startingBlock = Elevator.Elevator(
+            self.fsm.getStateNamed('startingBlock'),
+            self.startingBlockDoneEvent,
+            distStartingBlock)
         distStartingBlock.elevatorFSM = self.startingBlock
         self.startingBlock.load()
         self.startingBlock.enter()
@@ -108,7 +128,10 @@ class GSPlayground(Playground.Playground):
             self.doneStatus = doneStatus
             messenger.send(self.doneEvent)
         else:
-            self.notify.error('Unknown mode: ' + where + ' in handleStartingBlockDone')
+            self.notify.error(
+                'Unknown mode: ' +
+                where +
+                ' in handleStartingBlockDone')
 
     def showPaths(self):
         from toontown.classicchars import CCharPaths

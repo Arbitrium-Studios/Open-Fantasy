@@ -5,6 +5,7 @@ from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 from otp.otpbase import OTPLocalizer
 
+
 class ChatInputNormal(DirectObject.DirectObject):
     ExecNamespace = None
 
@@ -18,7 +19,8 @@ class ChatInputNormal(DirectObject.DirectObject):
         wantHistory = 0
         if __dev__:
             wantHistory = 1
-        self.wantHistory = base.config.GetBool('want-chat-history', wantHistory)
+        self.wantHistory = base.config.GetBool(
+            'want-chat-history', wantHistory)
         self.history = ['']
         self.historySize = base.config.GetInt('chat-history-size', 10)
         self.historyIndex = 0
@@ -38,10 +40,11 @@ class ChatInputNormal(DirectObject.DirectObject):
         del self.whisperLabel
         del self.chatMgr
 
-    def activateByData(self, whisperAvatarId = None, toPlayer = 0):
+    def activateByData(self, whisperAvatarId=None, toPlayer=0):
         self.toPlayer = toPlayer
         self.whisperAvatarId = whisperAvatarId
-        self.whisperAvatarName = base.talkAssistant.findName(self.whisperAvatarId, self.toPlayer)
+        self.whisperAvatarName = base.talkAssistant.findName(
+            self.whisperAvatarId, self.toPlayer)
         if self.whisperAvatarId:
             self.chatFrame.setPos(self.whisperPos)
             self.whisperLabel['text'] = OTPLocalizer.ChatInputWhisperLabel % self.whisperAvatarName
@@ -87,7 +90,8 @@ class ChatInputNormal(DirectObject.DirectObject):
                 if self.chatMgr.execChat:
                     if text[0] == '>':
                         text = self.__execMessage(text[1:])
-                        base.localAvatar.setChatAbsolute(text, CFSpeech | CFTimeout)
+                        base.localAvatar.setChatAbsolute(
+                            text, CFSpeech | CFTimeout)
                         return
                 base.talkAssistant.sendOpenTalk(text)
                 if self.wantHistory:
@@ -114,7 +118,7 @@ class ChatInputNormal(DirectObject.DirectObject):
                     printStack()
                 exec(message, globals(), ChatInputNormal.ExecNamespace)
                 return 'ok'
-            except:
+            except BaseException:
                 exception = sys.exc_info()[0]
                 extraInfo = sys.exc_info()[1]
                 if extraInfo:
@@ -122,7 +126,7 @@ class ChatInputNormal(DirectObject.DirectObject):
                 else:
                     return str(exception)
 
-        except:
+        except BaseException:
             exception = sys.exc_info()[0]
             extraInfo = sys.exc_info()[1]
             if extraInfo:
@@ -154,7 +158,7 @@ class ChatInputNormal(DirectObject.DirectObject):
         self.historyIndex -= 1
         self.historyIndex %= len(self.history)
 
-    def setPos(self, posX, posY = None, posZ = None):
+    def setPos(self, posX, posY=None, posZ=None):
         if posX and posY and posZ:
             self.chatFrame.setPos(posX, posY, posZ)
         else:

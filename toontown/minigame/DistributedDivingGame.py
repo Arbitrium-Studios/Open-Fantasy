@@ -26,6 +26,7 @@ from otp.distributed.TelemetryLimiter import TelemetryLimiter, TLGatherAllAvs
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 
+
 class DivingGameRotationLimiter(TelemetryLimiter):
 
     def __init__(self, h, p):
@@ -48,7 +49,12 @@ class DistributedDivingGame(DistributedMinigame):
 
     def __init__(self, cr):
         DistributedMinigame.__init__(self, cr)
-        self.gameFSM = ClassicFSM.ClassicFSM('DistributedDivingGame', [State.State('off', self.enterOff, self.exitOff, ['swim']), State.State('swim', self.enterSwim, self.exitSwim, ['cleanup']), State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
+        self.gameFSM = ClassicFSM.ClassicFSM(
+            'DistributedDivingGame', [
+                State.State(
+                    'off', self.enterOff, self.exitOff, ['swim']), State.State(
+                    'swim', self.enterSwim, self.exitSwim, ['cleanup']), State.State(
+                    'cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
         self.addChildGameFSM(self.gameFSM)
         self.iCount = 0
         self.reachedFlag = 0
@@ -70,7 +76,8 @@ class DistributedDivingGame(DistributedMinigame):
         DistributedMinigame.load(self)
         loadBase = 'phase_4/models/minigames/'
         loadBaseShip = 'phase_5/models/props/'
-        self.sndAmbience = base.loader.loadSfx('phase_4/audio/sfx/AV_ambient_water.ogg')
+        self.sndAmbience = base.loader.loadSfx(
+            'phase_4/audio/sfx/AV_ambient_water.ogg')
         self.environModel = loader.loadModel(loadBase + 'diving_game.bam')
         self.boatModel = self.environModel.find('**/boat')
         self.skyModel = self.environModel.find('**/sky')
@@ -114,15 +121,22 @@ class DistributedDivingGame(DistributedMinigame):
         hitSoundPath = 'phase_4/audio/sfx/%s' % hitSoundName
         self.hitSound = loader.loadSfx(hitSoundPath)
         self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_Target.ogg')
-        self.addSound('dropGold', 'diving_treasure_drop_off.ogg', 'phase_4/audio/sfx/')
-        self.addSound('getGold', 'diving_treasure_pick_up.ogg', 'phase_4/audio/sfx/')
-        self.swimSound = loader.loadSfx('phase_4/audio/sfx/diving_swim_loop.ogg')
+        self.addSound(
+            'dropGold',
+            'diving_treasure_drop_off.ogg',
+            'phase_4/audio/sfx/')
+        self.addSound(
+            'getGold',
+            'diving_treasure_pick_up.ogg',
+            'phase_4/audio/sfx/')
+        self.swimSound = loader.loadSfx(
+            'phase_4/audio/sfx/diving_swim_loop.ogg')
         self.swimSound.setVolume(0.0)
         self.swimSound.setPlayRate(1.0)
         self.swimSound.setLoop(True)
         self.swimSound.play()
 
-    def addSound(self, name, soundName, path = None):
+    def addSound(self, name, soundName, path=None):
         if not hasattr(self, 'soundTable'):
             self.soundTable = {}
         if path:
@@ -130,7 +144,7 @@ class DistributedDivingGame(DistributedMinigame):
         soundSource = '%s%s' % (self.soundPath, soundName)
         self.soundTable[name] = loader.loadSfx(soundSource)
 
-    def playSound(self, name, volume = 1.0):
+    def playSound(self, name, volume=1.0):
         self.soundTable[name].setVolume(1.0)
         self.soundTable[name].play()
 
@@ -170,9 +184,9 @@ class DistributedDivingGame(DistributedMinigame):
             spawnId = int(name[3:len(name)])
             if spawnId in self.spawners[spawnerId].fishArray:
                 self.sendUpdate('handleFishCollision', [avId,
-                 spawnId,
-                 spawnerId,
-                 toonSD.status])
+                                                        spawnId,
+                                                        spawnerId,
+                                                        toonSD.status])
 
     def fishSpawn(self, timestamp, fishcode, spawnerId, offset):
         if self.dead == 1:
@@ -190,19 +204,131 @@ class DistributedDivingGame(DistributedMinigame):
         iName = '%s %s' % (fish.name, self.iCount)
         self.iCount += 1
         if fish.name == 'clown':
-            fish.moveLerp = Sequence(LerpPosInterval(fish, duration=8 * self.SPEEDMULT * self.LAG_COMP, startPos=self.spawners[spawnerId].position, pos=self.spawners[spawnerId].position + Point3(50 * self.spawners[spawnerId].direction, 0, (offset - 4) / 2.0), name=iName), func)
+            fish.moveLerp = Sequence(
+                LerpPosInterval(
+                    fish,
+                    duration=8 *
+                    self.SPEEDMULT *
+                    self.LAG_COMP,
+                    startPos=self.spawners[spawnerId].position,
+                    pos=self.spawners[spawnerId].position +
+                    Point3(
+                        50 *
+                        self.spawners[spawnerId].direction,
+                        0,
+                        (offset -
+                         4) /
+                        2.0),
+                    name=iName),
+                func)
             fish.specialLerp = Sequence()
         elif fish.name == 'piano':
-            fish.moveLerp = Sequence(LerpPosInterval(fish, duration=5 * self.SPEEDMULT * self.LAG_COMP, startPos=self.spawners[spawnerId].position, pos=self.spawners[spawnerId].position + Point3(50 * self.spawners[spawnerId].direction, 0, (offset - 4) / 2.0), name=iName), func)
+            fish.moveLerp = Sequence(
+                LerpPosInterval(
+                    fish,
+                    duration=5 *
+                    self.SPEEDMULT *
+                    self.LAG_COMP,
+                    startPos=self.spawners[spawnerId].position,
+                    pos=self.spawners[spawnerId].position +
+                    Point3(
+                        50 *
+                        self.spawners[spawnerId].direction,
+                        0,
+                        (offset -
+                         4) /
+                        2.0),
+                    name=iName),
+                func)
             fish.specialLerp = Sequence()
         elif fish.name == 'pbj':
-            fish.moveLerp = Sequence(LerpFunc(fish.setX, duration=12 * self.SPEEDMULT * self.LAG_COMP, fromData=self.spawners[spawnerId].position.getX(), toData=self.spawners[spawnerId].position.getX() + 50 * self.spawners[spawnerId].direction, name=iName), func)
-            fish.specialLerp = LerpFunc(self.pbjMove, duration=5 * self.SPEEDMULT * self.LAG_COMP, fromData=0, toData=2.0 * 3.14159, extraArgs=[fish, self.spawners[spawnerId].position.getZ()], blendType='easeInOut')
+            fish.moveLerp = Sequence(
+                LerpFunc(
+                    fish.setX,
+                    duration=12 *
+                    self.SPEEDMULT *
+                    self.LAG_COMP,
+                    fromData=self.spawners[spawnerId].position.getX(),
+                    toData=self.spawners[spawnerId].position.getX() +
+                    50 *
+                    self.spawners[spawnerId].direction,
+                    name=iName),
+                func)
+            fish.specialLerp = LerpFunc(
+                self.pbjMove,
+                duration=5 *
+                self.SPEEDMULT *
+                self.LAG_COMP,
+                fromData=0,
+                toData=2.0 *
+                3.14159,
+                extraArgs=[
+                    fish,
+                    self.spawners[spawnerId].position.getZ()],
+                blendType='easeInOut')
         elif fish.name == 'balloon':
-            fish.moveLerp = Sequence(LerpPosInterval(fish, duration=10 * self.SPEEDMULT * self.LAG_COMP, startPos=self.spawners[spawnerId].position, pos=self.spawners[spawnerId].position + Point3(50 * self.spawners[spawnerId].direction, 0, (offset - 4) / 2.0), name=iName), func)
-            fish.specialLerp = Sequence(Wait(offset / 10.0 * 2 + 1.5), Parallel(LerpScaleInterval(fish, duration=0.3, startScale=Vec3(2, 2, 2), scale=Vec3(5, 3, 5), blendType='easeInOut')), Wait(1.0), Parallel(LerpScaleInterval(fish, duration=0.4, startScale=Vec3(5, 3, 5), scale=Vec3(2, 2, 2), blendType='easeInOut')))
+            fish.moveLerp = Sequence(
+                LerpPosInterval(
+                    fish,
+                    duration=10 *
+                    self.SPEEDMULT *
+                    self.LAG_COMP,
+                    startPos=self.spawners[spawnerId].position,
+                    pos=self.spawners[spawnerId].position +
+                    Point3(
+                        50 *
+                        self.spawners[spawnerId].direction,
+                        0,
+                        (offset -
+                         4) /
+                        2.0),
+                    name=iName),
+                func)
+            fish.specialLerp = Sequence(
+                Wait(
+                    offset / 10.0 * 2 + 1.5),
+                Parallel(
+                    LerpScaleInterval(
+                        fish,
+                        duration=0.3,
+                        startScale=Vec3(
+                            2,
+                            2,
+                            2),
+                        scale=Vec3(
+                            5,
+                            3,
+                            5),
+                        blendType='easeInOut')),
+                Wait(1.0),
+                Parallel(
+                    LerpScaleInterval(
+                        fish,
+                        duration=0.4,
+                        startScale=Vec3(
+                            5,
+                            3,
+                            5),
+                        scale=Vec3(
+                            2,
+                            2,
+                            2),
+                        blendType='easeInOut')))
         elif fish.name == 'bear' or fish.name == 'nurse':
-            fish.moveLerp = Sequence(LerpPosInterval(fish, duration=20 * self.LAG_COMP, startPos=self.spawners[spawnerId].position, pos=self.spawners[spawnerId].position + Point3(50 * self.spawners[spawnerId].direction, 0, 0), name=iName), func)
+            fish.moveLerp = Sequence(
+                LerpPosInterval(
+                    fish,
+                    duration=20 *
+                    self.LAG_COMP,
+                    startPos=self.spawners[spawnerId].position,
+                    pos=self.spawners[spawnerId].position +
+                    Point3(
+                        50 *
+                        self.spawners[spawnerId].direction,
+                        0,
+                        0),
+                    name=iName),
+                func)
             fish.specialLerp = Sequence()
         fish.moveLerp.start(ts)
         fish.specialLerp.loop(ts)
@@ -214,9 +340,23 @@ class DistributedDivingGame(DistributedMinigame):
     def getIntroMovie(self):
         seq = Sequence()
         seq.append(Wait(2.0))
-        seq.append(LerpFunc(camera.setZ, duration=5, fromData=36, toData=-23, blendType='easeInOut', name='intro'))
+        seq.append(
+            LerpFunc(
+                camera.setZ,
+                duration=5,
+                fromData=36,
+                toData=-23,
+                blendType='easeInOut',
+                name='intro'))
         seq.append(Wait(2.0))
-        seq.append(LerpFunc(camera.setZ, duration=5, fromData=-23, toData=36 + 3, blendType='easeInOut', name='intro'))
+        seq.append(
+            LerpFunc(
+                camera.setZ,
+                duration=5,
+                fromData=-23,
+                toData=36 + 3,
+                blendType='easeInOut',
+                name='intro'))
         return seq
 
     def onstage(self):
@@ -268,7 +408,21 @@ class DistributedDivingGame(DistributedMinigame):
         self.boatNode = cSphereNode
         self.boatCNP = self.boatModel.attachNewNode(cSphereNode)
         self.accept('reach-boat', self.__boatReached)
-        self.boatTilt = Sequence(LerpFunc(self.boatModel.setR, duration=5, fromData=5, toData=-5, blendType='easeInOut', name='tilt'), LerpFunc(self.boatModel.setR, duration=5, fromData=-5, toData=5, blendType='easeInOut', name='tilt'))
+        self.boatTilt = Sequence(
+            LerpFunc(
+                self.boatModel.setR,
+                duration=5,
+                fromData=5,
+                toData=-5,
+                blendType='easeInOut',
+                name='tilt'),
+            LerpFunc(
+                self.boatModel.setR,
+                duration=5,
+                fromData=-5,
+                toData=5,
+                blendType='easeInOut',
+                name='tilt'))
         self.boatTilt.loop()
         self.mapScaleRatio = 40
         self.mapModel.reparentTo(aspect2d)
@@ -277,7 +431,7 @@ class DistributedDivingGame(DistributedMinigame):
         self.mapModel.setPos(1.15, -0.5, -0.125)
         self.mapModel.setColorScale(1, 1, 1, 0.7)
         self.mapModel.hide()
-        if None != self.sndAmbience:
+        if None is not self.sndAmbience:
             self.sndAmbience.setLoop(True)
             self.sndAmbience.play()
             self.sndAmbience.setVolume(0.01)
@@ -300,7 +454,7 @@ class DistributedDivingGame(DistributedMinigame):
         del self.arrowKeys
         self.environNode.removeNode()
         del self.environNode
-        if None != self.sndAmbience:
+        if None is not self.sndAmbience:
             self.sndAmbience.stop()
         for avId in self.avIdList:
             av = self.getAvatar(avId)
@@ -360,7 +514,8 @@ class DistributedDivingGame(DistributedMinigame):
         toon.setHpr(180, 180, 0)
 
     def getTelemetryLimiter(self):
-        return TLGatherAllAvs('DivingGame', Functor(DivingGameRotationLimiter, 180, 180))
+        return TLGatherAllAvs('DivingGame', Functor(
+            DivingGameRotationLimiter, 180, 180))
 
     def setGameReady(self):
         self.notify.debug('setGameReady')
@@ -370,36 +525,37 @@ class DistributedDivingGame(DistributedMinigame):
             return
         self.dead = 0
         self.difficultyPatterns = {ToontownGlobals.ToontownCentral: [1,
-                                           1.5,
-                                           65,
-                                           3],
-         ToontownGlobals.DonaldsDock: [1,
-                                       1.3,
-                                       65,
-                                       1],
-         ToontownGlobals.DaisyGardens: [2,
-                                        1.2,
-                                        65,
-                                        1],
-         ToontownGlobals.MinniesMelodyland: [2,
-                                             1.0,
-                                             65,
-                                             1],
-         ToontownGlobals.TheBrrrgh: [3,
-                                     1.0,
-                                     65,
-                                     1],
-         ToontownGlobals.DonaldsDreamland: [3,
-                                            1.0,
-                                            65,
-                                            1]}
+                                                                     1.5,
+                                                                     65,
+                                                                     3],
+                                   ToontownGlobals.DonaldsDock: [1,
+                                                                 1.3,
+                                                                 65,
+                                                                 1],
+                                   ToontownGlobals.DaisyGardens: [2,
+                                                                  1.2,
+                                                                  65,
+                                                                  1],
+                                   ToontownGlobals.MinniesMelodyland: [2,
+                                                                       1.0,
+                                                                       65,
+                                                                       1],
+                                   ToontownGlobals.TheBrrrgh: [3,
+                                                               1.0,
+                                                               65,
+                                                               1],
+                                   ToontownGlobals.DonaldsDreamland: [3,
+                                                                      1.0,
+                                                                      65,
+                                                                      1]}
         pattern = self.difficultyPatterns[self.getSafezoneId()]
         self.NUMCRABS = pattern[0]
         self.SPEEDMULT = pattern[1]
         self.TIME = pattern[2]
         loadBase = 'phase_4/models/char/'
         for i in range(self.NUMCRABS):
-            self.crabs.append(Actor.Actor(loadBase + 'kingCrab-zero.bam', {'anim': loadBase + 'kingCrab-swimLOOP.bam'}))
+            self.crabs.append(Actor.Actor(
+                loadBase + 'kingCrab-zero.bam', {'anim': loadBase + 'kingCrab-swimLOOP.bam'}))
 
         for i in range(len(self.crabs)):
             crab = self.crabs[i]
@@ -435,7 +591,8 @@ class DistributedDivingGame(DistributedMinigame):
         self.treasures = []
         self.chestIcons = {}
         for i in range(self.NUMTREASURES):
-            self.chestIcons[i] = loader.loadModel(loadBase + 'treasure_chest.bam')
+            self.chestIcons[i] = loader.loadModel(
+                loadBase + 'treasure_chest.bam')
             self.chestIcons[i].reparentTo(self.mapModel)
             self.chestIcons[i].setScale(1.5)
             treasure = DivingTreasure.DivingTreasure(i)
@@ -447,12 +604,18 @@ class DistributedDivingGame(DistributedMinigame):
         self.cTrav.traverse(render)
         spawnX = 24 * self.LAG_COMP
         spawnY = 0.6
-        self.spawners.append(DivingFishSpawn.DivingFishSpawn(0, 1, Point3(-spawnX, spawnY, 25), self.collHandEvent))
-        self.spawners.append(DivingFishSpawn.DivingFishSpawn(1, -1, Point3(spawnX, spawnY, 16), self.collHandEvent))
-        self.spawners.append(DivingFishSpawn.DivingFishSpawn(2, 1, Point3(-spawnX, spawnY, 6), self.collHandEvent))
-        self.spawners.append(DivingFishSpawn.DivingFishSpawn(3, -1, Point3(spawnX, spawnY, -4), self.collHandEvent))
-        self.spawners.append(DivingFishSpawn.DivingFishSpawn(4, 1, Point3(-spawnX, spawnY, -15), self.collHandEvent))
-        self.spawners.append(DivingFishSpawn.DivingFishSpawn(5, -1, Point3(spawnX, spawnY, -23), self.collHandEvent))
+        self.spawners.append(DivingFishSpawn.DivingFishSpawn(
+            0, 1, Point3(-spawnX, spawnY, 25), self.collHandEvent))
+        self.spawners.append(DivingFishSpawn.DivingFishSpawn(
+            1, -1, Point3(spawnX, spawnY, 16), self.collHandEvent))
+        self.spawners.append(DivingFishSpawn.DivingFishSpawn(
+            2, 1, Point3(-spawnX, spawnY, 6), self.collHandEvent))
+        self.spawners.append(DivingFishSpawn.DivingFishSpawn(
+            3, -1, Point3(spawnX, spawnY, -4), self.collHandEvent))
+        self.spawners.append(DivingFishSpawn.DivingFishSpawn(
+            4, 1, Point3(-spawnX, spawnY, -15), self.collHandEvent))
+        self.spawners.append(DivingFishSpawn.DivingFishSpawn(
+            5, -1, Point3(spawnX, spawnY, -23), self.collHandEvent))
         for spawner in self.spawners:
             spawner.lastSpawn = 0
 
@@ -552,13 +715,15 @@ class DistributedDivingGame(DistributedMinigame):
         for avId in self.remoteAvIdList:
             avatar = base.cr.doId2do.get(avId, False)
             if avatar != False:
-                self.mapAvatars[avId] = LaffMeter.LaffMeter(avatar.style, avatar.hp, avatar.maxHp)
+                self.mapAvatars[avId] = LaffMeter.LaffMeter(
+                    avatar.style, avatar.hp, avatar.maxHp)
                 self.mapAvatars[avId].reparentTo(self.mapModel)
                 self.mapAvatars[avId].setScale(avatarScale)
                 self.mapAvatars[avId].start()
 
         avatar = base.cr.doId2do[self.localAvId]
-        self.mapAvatars[self.localAvId] = LaffMeter.LaffMeter(avatar.style, avatar.hp, avatar.maxHp)
+        self.mapAvatars[self.localAvId] = LaffMeter.LaffMeter(
+            avatar.style, avatar.hp, avatar.maxHp)
         self.mapAvatars[self.localAvId].reparentTo(self.mapModel)
         self.mapAvatars[self.localAvId].setScale(avatarScale)
         self.mapAvatars[self.localAvId].start()
@@ -570,7 +735,9 @@ class DistributedDivingGame(DistributedMinigame):
     def __resetClock(self, tOffset):
         self.notify.debug('resetClock')
         self.gameStartTime += tOffset
-        self.timer.countdown(self.timer.currentTime + tOffset, self.timerExpired)
+        self.timer.countdown(
+            self.timer.currentTime + tOffset,
+            self.timerExpired)
 
     def timerExpired(self):
         self.notify.debug('local timer expired')
@@ -601,7 +768,8 @@ class DistributedDivingGame(DistributedMinigame):
 
     def __treasureBoundsTask(self, task):
         for i in range(self.NUMTREASURES):
-            self.chestIcons[i].setPos(self.treasures[i].chest.getPos(render) / self.MAP_DIV)
+            self.chestIcons[i].setPos(
+                self.treasures[i].chest.getPos(render) / self.MAP_DIV)
             self.chestIcons[i].setZ(self.chestIcons[i].getZ() + self.MAP_OFF)
             if self.treasures[i].treasureNode.getZ() < -36:
                 self.treasures[i].treasureNode.setZ(-36)
@@ -626,17 +794,65 @@ class DistributedDivingGame(DistributedMinigame):
                     self.treasures[i].treasureNode.wrtReparentTo(render)
                     self.treasures[i].grabbedId = 0
                     seq = Sequence()
-                    shrink = LerpScaleInterval(self.treasures[i].treasureNode, duration=1.0, startScale=self.treasures[i].treasureNode.getScale(), scale=Vec3(0.001, 0.001, 0.001), blendType='easeIn')
-                    shrinkIcon = LerpScaleInterval(self.chestIcons[i], duration=1.0, startScale=self.chestIcons[i].getScale(), scale=Vec3(0.001, 0.001, 0.001), blendType='easeIn')
-                    jump = ProjectileInterval(self.treasures[i].treasureNode, duration=1.0, startPos=self.treasures[i].treasureNode.getPos(), endPos=Point3(0, 0, 40), gravityMult=0.7)
+                    shrink = LerpScaleInterval(
+                        self.treasures[i].treasureNode,
+                        duration=1.0,
+                        startScale=self.treasures[i].treasureNode.getScale(),
+                        scale=Vec3(
+                            0.001,
+                            0.001,
+                            0.001),
+                        blendType='easeIn')
+                    shrinkIcon = LerpScaleInterval(
+                        self.chestIcons[i],
+                        duration=1.0,
+                        startScale=self.chestIcons[i].getScale(),
+                        scale=Vec3(
+                            0.001,
+                            0.001,
+                            0.001),
+                        blendType='easeIn')
+                    jump = ProjectileInterval(
+                        self.treasures[i].treasureNode,
+                        duration=1.0,
+                        startPos=self.treasures[i].treasureNode.getPos(),
+                        endPos=Point3(
+                            0,
+                            0,
+                            40),
+                        gravityMult=0.7)
                     shrinkJump = Parallel(shrink, shrinkIcon, jump)
                     toonSD.fsm.request('normal')
-                    grow = LerpScaleInterval(self.treasures[i].treasureNode, duration=1.0, scale=self.treasures[i].treasureNode.getScale(), startScale=Vec3(0.001, 0.001, 0.001), blendType='easeIn')
-                    growIcon = LerpScaleInterval(self.chestIcons[i], duration=1.0, scale=self.chestIcons[i].getScale(), startScale=Vec3(0.001, 0.001, 0.001), blendType='easeIn')
-                    place = Parallel(Func(self.treasures[i].treasureNode.setPos, Vec3(newSpot, 0.25, -36)), Func(self.treasures[i].treasureNode.setHpr, Vec3(0, 0, 0)))
+                    grow = LerpScaleInterval(
+                        self.treasures[i].treasureNode,
+                        duration=1.0,
+                        scale=self.treasures[i].treasureNode.getScale(),
+                        startScale=Vec3(
+                            0.001,
+                            0.001,
+                            0.001),
+                        blendType='easeIn')
+                    growIcon = LerpScaleInterval(
+                        self.chestIcons[i],
+                        duration=1.0,
+                        scale=self.chestIcons[i].getScale(),
+                        startScale=Vec3(
+                            0.001,
+                            0.001,
+                            0.001),
+                        blendType='easeIn')
+                    place = Parallel(Func(self.treasures[i].treasureNode.setPos, Vec3(
+                        newSpot, 0.25, -36)), Func(self.treasures[i].treasureNode.setHpr, Vec3(0, 0, 0)))
                     growItems = Parallel(grow, growIcon)
-                    resetChest = Func(self.treasures[i].chestNode.setIntoCollideMask, DivingGameGlobals.CollideMask)
-                    seq = Sequence(shrinkJump, Wait(1.5), place, growItems, resetChest)
+                    resetChest = Func(
+                        self.treasures[i].chestNode.setIntoCollideMask,
+                        DivingGameGlobals.CollideMask)
+                    seq = Sequence(
+                        shrinkJump,
+                        Wait(1.5),
+                        place,
+                        growItems,
+                        resetChest)
                     self.treasures[i].moveLerp.pause()
                     self.treasures[i].moveLerp = seq
                     self.treasures[i].moveLerp.start(ts)
@@ -668,10 +884,22 @@ class DistributedDivingGame(DistributedMinigame):
                 delta = dist / 72.0
                 dur = 10 * delta
                 self.treasures[i].treasureNode.wrtReparentTo(render)
-                self.treasures[i].chestNode.setIntoCollideMask(BitMask32.allOff())
-                resetChest = Func(self.treasures[i].chestNode.setIntoCollideMask, DivingGameGlobals.CollideMask)
+                self.treasures[i].chestNode.setIntoCollideMask(
+                    BitMask32.allOff())
+                resetChest = Func(
+                    self.treasures[i].chestNode.setIntoCollideMask,
+                    DivingGameGlobals.CollideMask)
                 self.treasures[i].moveLerp.pause()
-                self.treasures[i].moveLerp = Parallel(Sequence(Wait(1.0), resetChest), LerpFunc(self.treasures[i].treasureNode.setZ, duration=dur, fromData=self.treasures[i].treasureNode.getZ(render), toData=-36, blendType='easeIn'))
+                self.treasures[i].moveLerp = Parallel(
+                    Sequence(
+                        Wait(1.0),
+                        resetChest),
+                    LerpFunc(
+                        self.treasures[i].treasureNode.setZ,
+                        duration=dur,
+                        fromData=self.treasures[i].treasureNode.getZ(render),
+                        toData=-36,
+                        blendType='easeIn'))
                 self.treasures[i].moveLerp.start(ts)
 
     def performCrabCollision(self, avId, timestamp):
@@ -687,7 +915,10 @@ class DistributedDivingGame(DistributedMinigame):
             volume = (soundRange - distance) / soundRange
         if toonSD.status == 'normal' or toonSD.status == 'treasure':
             self.localLerp.finish()
-            self.localLerp = Sequence(Func(toonSD.fsm.request, 'freeze'), Wait(3.0), Func(toonSD.fsm.request, 'normal'))
+            self.localLerp = Sequence(
+                Func(
+                    toonSD.fsm.request, 'freeze'), Wait(3.0), Func(
+                    toonSD.fsm.request, 'normal'))
             self.localLerp.start(ts)
             self.hitSound.play()
             self.hitSound.setVolume(volume)
@@ -705,7 +936,10 @@ class DistributedDivingGame(DistributedMinigame):
             volume = (soundRange - distance) / soundRange
         if toonSD.status == 'normal' or toonSD.status == 'treasure':
             self.localLerp.finish()
-            self.localLerp = Sequence(Func(toonSD.fsm.request, 'freeze'), Wait(3.0), Func(toonSD.fsm.request, 'normal'))
+            self.localLerp = Sequence(
+                Func(
+                    toonSD.fsm.request, 'freeze'), Wait(3.0), Func(
+                    toonSD.fsm.request, 'normal'))
             self.localLerp.start(ts)
         if spawnId in self.spawners[spawnerId].fishArray:
             fish = self.spawners[spawnerId].fishArray[spawnId]
@@ -745,15 +979,44 @@ class DistributedDivingGame(DistributedMinigame):
                     endHpr = Vec3(180, 0, 0)
                 else:
                     endHpr = Vec3(0, 0, 0)
-                fish.moveLerp = Sequence(LerpHprInterval(fish, duration=0.4, startHpr=fish.getHpr(), hpr=endHpr), LerpFunc(fish.setX, duration=1.5, fromData=fish.getX(), toData=endX), Func(self.fishRemove, str(spawnerId) + str(spawnId)))
+                fish.moveLerp = Sequence(
+                    LerpHprInterval(
+                        fish, duration=0.4, startHpr=fish.getHpr(), hpr=endHpr), LerpFunc(
+                        fish.setX, duration=1.5, fromData=fish.getX(), toData=endX), Func(
+                        self.fishRemove, str(spawnerId) + str(spawnId)))
             elif fish.name == 'pbj':
-                fish.moveLerp = Sequence(LerpFunc(fish.setX, duration=2, fromData=fish.getX(), toData=endX), Func(self.fishRemove, str(spawnerId) + str(spawnId)))
+                fish.moveLerp = Sequence(
+                    LerpFunc(
+                        fish.setX,
+                        duration=2,
+                        fromData=fish.getX(),
+                        toData=endX),
+                    Func(
+                        self.fishRemove,
+                        str(spawnerId) +
+                        str(spawnId)))
             elif fish.name == 'balloon':
                 fish.specialLerp.pause()
                 anim = Func(fish.play, 'anim', fromFrame=110, toFrame=200)
                 fish.setH(180)
                 speed = Func(fish.setPlayRate, 3.0, 'anim')
-                fish.moveLerp = Sequence(Func(fish.stop, 'anim'), speed, anim, Wait(1.0), LerpScaleInterval(fish, duration=0.8, startScale=fish.getScale, scale=0.001, blendType='easeIn'), Func(self.fishRemove, str(spawnerId) + str(spawnId)))
+                fish.moveLerp = Sequence(
+                    Func(
+                        fish.stop,
+                        'anim'),
+                    speed,
+                    anim,
+                    Wait(1.0),
+                    LerpScaleInterval(
+                        fish,
+                        duration=0.8,
+                        startScale=fish.getScale,
+                        scale=0.001,
+                        blendType='easeIn'),
+                    Func(
+                        self.fishRemove,
+                        str(spawnerId) +
+                        str(spawnId)))
                 fish.sound.setTime(11.5)
             fish.moveLerp.start(ts)
 
@@ -782,11 +1045,14 @@ class DistributedDivingGame(DistributedMinigame):
             toonSD.fsm.request('treasure')
             self.treasures[chestId].moveLerp.pause()
             self.treasures[chestId].moveLerp = Sequence()
-            self.treasures[chestId].chestNode.setIntoCollideMask(BitMask32.allOff())
-            self.treasures[chestId].treasureNode.reparentTo(self.getAvatar(avId))
+            self.treasures[chestId].chestNode.setIntoCollideMask(
+                BitMask32.allOff())
+            self.treasures[chestId].treasureNode.reparentTo(
+                self.getAvatar(avId))
             headparts = self.getAvatar(avId).getHeadParts()
             pos = headparts[2].getPos()
-            self.treasures[chestId].treasureNode.setPos(pos + Point3(0, 0.2, 3))
+            self.treasures[chestId].treasureNode.setPos(
+                pos + Point3(0, 0.2, 3))
             self.treasures[chestId].grabbedId = avId
             timestamp = globalClockDelta.getFrameNetworkTime()
             self.playSound('getGold')
@@ -804,7 +1070,9 @@ class DistributedDivingGame(DistributedMinigame):
             if not crab.moveLerp.isPlaying():
                 crab.moveLerp = Wait(1.0)
                 crab.moveLerp.loop()
-                self.sendUpdate('getCrabMoving', [crab.crabId, crab.getX(), crab.direction])
+                self.sendUpdate(
+                    'getCrabMoving', [
+                        crab.crabId, crab.getX(), crab.direction])
                 return Task.cont
 
         return Task.cont
@@ -838,8 +1106,21 @@ class DistributedDivingGame(DistributedMinigame):
         soundRange = 25.0
         if distance < soundRange:
             crabVolume = (soundRange - distance) / soundRange
-        crabSoundInterval = SoundInterval(self.crabSound, loop=0, duration=1.6, startTime=0.0)
-        seq = Sequence(Wait(wait), LerpPosInterval(crab, duration=xTime, startPos=Point3(crabX, 0, -40), pos=Point3(goalX, 0, -40), blendType='easeIn'), Parallel(Func(self.grabCrapVolume, crab), LerpPosInterval(crab, duration=zTime, startPos=Point3(goalX, 0, -40), pos=Point3(goalX, 0, goalZ), blendType='easeOut')), LerpPosInterval(crab, duration=zTime, startPos=Point3(goalX, 0, goalZ), pos=Point3(goalX, 0, -40), blendType='easeInOut'))
+        crabSoundInterval = SoundInterval(
+            self.crabSound, loop=0, duration=1.6, startTime=0.0)
+        seq = Sequence(
+            Wait(wait), LerpPosInterval(
+                crab, duration=xTime, startPos=Point3(
+                    crabX, 0, -40), pos=Point3(
+                    goalX, 0, -40), blendType='easeIn'), Parallel(
+                Func(
+                    self.grabCrapVolume, crab), LerpPosInterval(
+                    crab, duration=zTime, startPos=Point3(
+                        goalX, 0, -40), pos=Point3(
+                        goalX, 0, goalZ), blendType='easeOut')), LerpPosInterval(
+                crab, duration=zTime, startPos=Point3(
+                    goalX, 0, goalZ), pos=Point3(
+                    goalX, 0, -40), blendType='easeInOut'))
         crab.moveLerp.pause()
         crab.moveLerp = seq
         crab.moveLerp.start(ts)
@@ -851,7 +1132,8 @@ class DistributedDivingGame(DistributedMinigame):
             soundRange = 25.0
             if distance < soundRange:
                 crabVolume = (soundRange - distance) / soundRange
-                crabSoundInterval = SoundInterval(self.crabSound, loop=0, duration=1.6, startTime=0.0, volume=crabVolume)
+                crabSoundInterval = SoundInterval(
+                    self.crabSound, loop=0, duration=1.6, startTime=0.0, volume=crabVolume)
                 crabSoundInterval.start()
 
     def __spawnUpdateLocalToonTask(self):
@@ -926,13 +1208,15 @@ class DistributedDivingGame(DistributedMinigame):
         base.localAvatar.setPos(pos[0], pos[1], pos[2])
         base.localAvatar.setHpr(hpr[0], hpr[1], hpr[2])
         posDiv = self.MAP_DIV
-        self.mapAvatars[self.localAvId].setPos(pos[0] / posDiv, pos[1] / posDiv, pos[2] / posDiv + self.MAP_OFF)
+        self.mapAvatars[self.localAvId].setPos(
+            pos[0] / posDiv, pos[1] / posDiv, pos[2] / posDiv + self.MAP_OFF)
         for avId in self.remoteAvIdList:
             toon = self.getAvatar(avId)
             if toon:
                 pos = toon.getPos()
                 self.mapAvatars[avId].setPos(pos / posDiv)
-                self.mapAvatars[avId].setZ(self.mapAvatars[avId].getZ() + self.MAP_OFF)
+                self.mapAvatars[avId].setZ(
+                    self.mapAvatars[avId].getZ() + self.MAP_OFF)
 
         self.cTrav.traverse(render)
         self.cTrav2.traverse(render)

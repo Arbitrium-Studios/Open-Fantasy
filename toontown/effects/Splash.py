@@ -4,10 +4,11 @@ from .Ripples import *
 from toontown.battle.BattleProps import globalPropPool
 from toontown.battle import BattleParticles
 
+
 class Splash(NodePath):
     splashCount = 0
 
-    def __init__(self, parent = hidden, wantParticles = 1):
+    def __init__(self, parent=hidden, wantParticles=1):
         NodePath.__init__(self, parent)
         self.assign(parent.attachNewNode('splash'))
         self.splashdown = globalPropPool.getProp('splashdown')
@@ -32,23 +33,38 @@ class Splash(NodePath):
         self.hide()
         return
 
-    def createTrack(self, rate = 1):
+    def createTrack(self, rate=1):
         self.ripples.createTrack(rate)
         self.splashdown.setPlayRate(rate, 'splashdown')
         animDuration = self.splashdown.getDuration('splashdown') * 0.65
-        rippleSequence = Sequence(Func(self.splashdown.show), Func(self.splashdown.play, 'splashdown'), Wait(animDuration), Func(self.splashdown.hide))
+        rippleSequence = Sequence(
+            Func(
+                self.splashdown.show), Func(
+                self.splashdown.play, 'splashdown'), Wait(animDuration), Func(
+                self.splashdown.hide))
         if self.wantParticles:
-            particleSequence = Sequence(Func(self.pSystem.show), Func(self.particles.induceLabor), Func(self.pSystem.start, self), Wait(2.2), Func(self.pSystem.hide), Func(self.pSystem.disable))
+            particleSequence = Sequence(
+                Func(
+                    self.pSystem.show), Func(
+                    self.particles.induceLabor), Func(
+                    self.pSystem.start, self), Wait(2.2), Func(
+                    self.pSystem.hide), Func(
+                        self.pSystem.disable))
         else:
             particleSequence = Sequence()
-        self.track = Sequence(Func(self.show), Parallel(self.ripples.track, rippleSequence, particleSequence), Func(self.hide), name='splashdown-%d-track' % self.trackId)
+        self.track = Sequence(
+            Func(
+                self.show), Parallel(
+                self.ripples.track, rippleSequence, particleSequence), Func(
+                self.hide), name='splashdown-%d-track' %
+            self.trackId)
 
-    def play(self, rate = 1):
+    def play(self, rate=1):
         self.stop()
         self.createTrack(rate)
         self.track.start()
 
-    def loop(self, rate = 1):
+    def loop(self, rate=1):
         self.stop()
         self.createTrack(rate)
         self.track.loop()

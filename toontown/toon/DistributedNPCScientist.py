@@ -2,11 +2,13 @@ from pandac.PandaModules import *
 from toontown.toonbase import TTLocalizer, ToontownGlobals
 from . import DistributedNPCToonBase
 
+
 class DistributedNPCScientist(DistributedNPCToonBase.DistributedNPCToonBase):
 
     def __init__(self, cr):
         DistributedNPCToonBase.DistributedNPCToonBase.__init__(self, cr)
-        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_HOLIDAY) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_HOLIDAY) or base.cr.newsManager.isHolidayRunning(
+                ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
             self.show()
         else:
             self.hide()
@@ -39,7 +41,8 @@ class DistributedNPCScientist(DistributedNPCToonBase.DistributedNPCToonBase):
 
     def announceGenerate(self):
         DistributedNPCToonBase.DistributedNPCToonBase.announceGenerate(self)
-        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_HOLIDAY) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_HOLIDAY) or base.cr.newsManager.isHolidayRunning(
+                ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
             self.show()
         else:
             self.hide()
@@ -63,7 +66,8 @@ class DistributedNPCScientist(DistributedNPCToonBase.DistributedNPCToonBase):
         self.__holeActors = []
         self.setupToonNodes()
         if self.style.getTorsoSize() == 'short' and self.style.getAnimal() == 'duck':
-            sillyReader = loader.loadModel('phase_4/models/props/tt_m_prp_acs_sillyReader')
+            sillyReader = loader.loadModel(
+                'phase_4/models/props/tt_m_prp_acs_sillyReader')
             for rHand in self.getRightHands():
                 placeholder = rHand.attachNewNode('SillyReader')
                 sillyReader.instanceTo(placeholder)
@@ -72,7 +76,8 @@ class DistributedNPCScientist(DistributedNPCToonBase.DistributedNPCToonBase):
                 placeholder.setPos(0, 0, 0.1)
 
         elif self.style.getTorsoSize() == 'long' and self.style.getAnimal() == 'monkey' or self.style.getTorsoSize() == 'medium' and self.style.getAnimal() == 'horse':
-            clipBoard = loader.loadModel('phase_4/models/props/tt_m_prp_acs_clipboard')
+            clipBoard = loader.loadModel(
+                'phase_4/models/props/tt_m_prp_acs_clipboard')
             for rHand in self.getRightHands():
                 placeholder = rHand.attachNewNode('ClipBoard')
                 clipBoard.instanceTo(placeholder)

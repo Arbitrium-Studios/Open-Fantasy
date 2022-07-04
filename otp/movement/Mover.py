@@ -5,6 +5,7 @@ from otp.movement.PyVec3 import PyVec3
 from otp.otpbase import PythonUtil
 import builtins
 
+
 class Mover(CMover):
     notify = DirectNotifyGlobal.directNotify.newCategory('Mover')
     SerialNum = 0
@@ -14,7 +15,7 @@ class Mover(CMover):
     PSCPy = 'App:Show code:moveObjects:MoverPy'
     PSCInt = 'App:Show code:moveObjects:MoverIntegrate'
 
-    def __init__(self, objNodePath, fwdSpeed = 1, rotSpeed = 1):
+    def __init__(self, objNodePath, fwdSpeed=1, rotSpeed=1):
         CMover.__init__(self, objNodePath, fwdSpeed, rotSpeed)
         self.serialNum = Mover.SerialNum
         Mover.SerialNum += 1
@@ -40,7 +41,9 @@ class Mover(CMover):
     def removeImpulse(self, name):
         if name not in self.impulses:
             if not CMover.removeCImpulse(self, name):
-                Mover.notify.warning("Mover.removeImpulse: unknown impulse '%s'" % name)
+                Mover.notify.warning(
+                    "Mover.removeImpulse: unknown impulse '%s'" %
+                    name)
             return
         self.impulses[name]._clearMover(self)
         del self.impulses[name]
@@ -48,15 +51,19 @@ class Mover(CMover):
     def getCollisionEventName(self):
         return 'moverCollision-%s' % self.serialNum
 
-    def move(self, dt = -1, profile = 0):
+    def move(self, dt=-1, profile=0):
         if Mover.Profile and not profile:
 
-            def func(doMove = self.move):
+            def func(doMove=self.move):
                 for i in range(10000):
                     doMove(dt, profile=1)
 
             builtins.func = func
-            PythonUtil.startProfile(cmd='func()', filename='profile', sorts=['cumulative'], callInfo=0)
+            PythonUtil.startProfile(
+                cmd='func()',
+                filename='profile',
+                sorts=['cumulative'],
+                callInfo=0)
             del builtins.func
             return
         if Mover.Pstats:

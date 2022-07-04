@@ -20,23 +20,43 @@ from toontown.toon import TTEmote
 from otp.avatar import Emote
 from otp.distributed.TelemetryLimiter import RotationLimitToH, TLGatherAllAvs
 
+
 class DistributedMinigame(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMinigame')
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
-        self.waitingStartLabel = DirectLabel(text=TTLocalizer.MinigameWaitingForOtherPlayers, text_fg=VBase4(1, 1, 1, 1), relief=None, pos=(-0.6, 0, -0.75), scale=0.075)
+        self.waitingStartLabel = DirectLabel(
+            text=TTLocalizer.MinigameWaitingForOtherPlayers, text_fg=VBase4(
+                1, 1, 1, 1), relief=None, pos=(
+                -0.6, 0, -0.75), scale=0.075)
         self.waitingStartLabel.hide()
         self.avIdList = []
         self.remoteAvIdList = []
         self.localAvId = base.localAvatar.doId
         self.frameworkFSM = ClassicFSM.ClassicFSM('DistributedMinigame', [State.State('frameworkInit', self.enterFrameworkInit, self.exitFrameworkInit, ['frameworkRules', 'frameworkCleanup', 'frameworkAvatarExited']),
-         State.State('frameworkRules', self.enterFrameworkRules, self.exitFrameworkRules, ['frameworkWaitServerStart', 'frameworkCleanup', 'frameworkAvatarExited']),
-         State.State('frameworkWaitServerStart', self.enterFrameworkWaitServerStart, self.exitFrameworkWaitServerStart, ['frameworkGame', 'frameworkCleanup', 'frameworkAvatarExited']),
-         State.State('frameworkGame', self.enterFrameworkGame, self.exitFrameworkGame, ['frameworkWaitServerFinish', 'frameworkCleanup', 'frameworkAvatarExited']),
-         State.State('frameworkWaitServerFinish', self.enterFrameworkWaitServerFinish, self.exitFrameworkWaitServerFinish, ['frameworkCleanup']),
-         State.State('frameworkAvatarExited', self.enterFrameworkAvatarExited, self.exitFrameworkAvatarExited, ['frameworkCleanup']),
-         State.State('frameworkCleanup', self.enterFrameworkCleanup, self.exitFrameworkCleanup, [])], 'frameworkInit', 'frameworkCleanup')
+                                                                          State.State(
+            'frameworkRules', self.enterFrameworkRules, self.exitFrameworkRules, [
+                'frameworkWaitServerStart', 'frameworkCleanup', 'frameworkAvatarExited']),
+            State.State('frameworkWaitServerStart',
+                        self.enterFrameworkWaitServerStart,
+                        self.exitFrameworkWaitServerStart,
+                        ['frameworkGame',
+                         'frameworkCleanup',
+                         'frameworkAvatarExited']),
+            State.State('frameworkGame', self.enterFrameworkGame, self.exitFrameworkGame, [
+                'frameworkWaitServerFinish', 'frameworkCleanup', 'frameworkAvatarExited']),
+            State.State(
+            'frameworkWaitServerFinish',
+            self.enterFrameworkWaitServerFinish,
+            self.exitFrameworkWaitServerFinish,
+            ['frameworkCleanup']),
+            State.State(
+            'frameworkAvatarExited',
+            self.enterFrameworkAvatarExited,
+            self.exitFrameworkAvatarExited,
+            ['frameworkCleanup']),
+            State.State('frameworkCleanup', self.enterFrameworkCleanup, self.exitFrameworkCleanup, [])], 'frameworkInit', 'frameworkCleanup')
         hoodMinigameState = self.cr.playGame.hood.fsm.getStateNamed('minigame')
         hoodMinigameState.addChild(self.frameworkFSM)
         self.rulesDoneEvent = 'rulesDone'
@@ -74,13 +94,14 @@ class DistributedMinigame(DistributedObject.DistributedObject):
         return TTLocalizer.DefaultMinigameInstructions
 
     def getMaxDuration(self):
-        raise Exception('Minigame implementer: you must override getMaxDuration()')
+        raise Exception(
+            'Minigame implementer: you must override getMaxDuration()')
 
     def __createRandomNumGen(self):
         self.notify.debug('BASE: self.doId=0x%08X' % self.doId)
         self.randomNumGen = RandomNumGen.RandomNumGen(self.doId)
 
-        def destroy(self = self):
+        def destroy(self=self):
             self.notify.debug('BASE: destroying random num gen')
             del self.randomNumGen
 
@@ -97,18 +118,21 @@ class DistributedMinigame(DistributedObject.DistributedObject):
             return
         self.notify.debug('BASE: handleAnnounceGenerate: send setAvatarJoined')
         if base.randomMinigameNetworkPlugPull and random.random() < 1.0 / 25:
-            print('*** DOING RANDOM MINIGAME NETWORK-PLUG-PULL BEFORE SENDING setAvatarJoined ***')
+            print(
+                '*** DOING RANDOM MINIGAME NETWORK-PLUG-PULL BEFORE SENDING setAvatarJoined ***')
             base.cr.pullNetworkPlug()
         self.sendUpdate('setAvatarJoined', [])
         self.normalExit = 1
         count = self.modelCount
-        loader.beginBulkLoad('minigame', TTLocalizer.HeadingToMinigameTitle % self.getTitle(), count, 1, TTLocalizer.TIP_MINIGAME)
+        loader.beginBulkLoad(
+            'minigame', TTLocalizer.HeadingToMinigameTitle %
+            self.getTitle(), count, 1, TTLocalizer.TIP_MINIGAME)
         self.load()
         loader.endBulkLoad('minigame')
         globalClock.syncFrameTime()
         self.onstage()
 
-        def cleanup(self = self):
+        def cleanup(self=self):
             self.notify.debug('BASE: cleanup: normalExit=%s' % self.normalExit)
             self.offstage()
             base.cr.renderFrame()
@@ -137,7 +161,8 @@ class DistributedMinigame(DistributedObject.DistributedObject):
             self.unload()
         self.ignoreAll()
         if self.cr.playGame.hood:
-            hoodMinigameState = self.cr.playGame.hood.fsm.getStateNamed('minigame')
+            hoodMinigameState = self.cr.playGame.hood.fsm.getStateNamed(
+                'minigame')
             hoodMinigameState.removeChild(self.frameworkFSM)
         self.waitingStartLabel.destroy()
         del self.waitingStartLabel
@@ -154,35 +179,51 @@ class DistributedMinigame(DistributedObject.DistributedObject):
     def onstage(self):
         self.notify.debug('BASE: onstage')
 
-        def calcMaxDuration(self = self):
-            return (self.getMaxDuration() + MinigameGlobals.rulesDuration) * 1.1
+        def calcMaxDuration(self=self):
+            return (self.getMaxDuration() +
+                    MinigameGlobals.rulesDuration) * 1.1
 
         if not base.cr.networkPlugPulled():
             if base.randomMinigameAbort:
                 maxDuration = calcMaxDuration()
                 self.randomAbortDelay = random.random() * maxDuration
-                taskMgr.doMethodLater(self.randomAbortDelay, self.doRandomAbort, self.uniqueName('random-abort'))
+                taskMgr.doMethodLater(
+                    self.randomAbortDelay,
+                    self.doRandomAbort,
+                    self.uniqueName('random-abort'))
             if base.randomMinigameDisconnect:
                 maxDuration = calcMaxDuration()
                 self.randomDisconnectDelay = random.random() * maxDuration
-                taskMgr.doMethodLater(self.randomDisconnectDelay, self.doRandomDisconnect, self.uniqueName('random-disconnect'))
+                taskMgr.doMethodLater(
+                    self.randomDisconnectDelay,
+                    self.doRandomDisconnect,
+                    self.uniqueName('random-disconnect'))
             if base.randomMinigameNetworkPlugPull:
                 maxDuration = calcMaxDuration()
                 self.randomNetPlugPullDelay = random.random() * maxDuration
-                taskMgr.doMethodLater(self.randomNetPlugPullDelay, self.doRandomNetworkPlugPull, self.uniqueName('random-netplugpull'))
+                taskMgr.doMethodLater(
+                    self.randomNetPlugPullDelay,
+                    self.doRandomNetworkPlugPull,
+                    self.uniqueName('random-netplugpull'))
 
     def doRandomAbort(self, task):
-        print('*** DOING RANDOM MINIGAME ABORT AFTER %.2f SECONDS ***' % self.randomAbortDelay)
+        print(
+            '*** DOING RANDOM MINIGAME ABORT AFTER %.2f SECONDS ***' %
+            self.randomAbortDelay)
         self.d_requestExit()
         return Task.done
 
     def doRandomDisconnect(self, task):
-        print('*** DOING RANDOM MINIGAME DISCONNECT AFTER %.2f SECONDS ***' % self.randomDisconnectDelay)
+        print(
+            '*** DOING RANDOM MINIGAME DISCONNECT AFTER %.2f SECONDS ***' %
+            self.randomDisconnectDelay)
         self.sendUpdate('setGameReady')
         return Task.done
 
     def doRandomNetworkPlugPull(self, task):
-        print('*** DOING RANDOM MINIGAME NETWORK-PLUG-PULL AFTER %.2f SECONDS ***' % self.randomNetPlugPullDelay)
+        print(
+            '*** DOING RANDOM MINIGAME NETWORK-PLUG-PULL AFTER %.2f SECONDS ***' %
+            self.randomNetPlugPullDelay)
         base.cr.pullNetworkPlug()
         return Task.done
 
@@ -206,7 +247,9 @@ class DistributedMinigame(DistributedObject.DistributedObject):
         self.numPlayers = len(self.avIdList)
         self.hasLocalToon = self.localAvId in self.avIdList
         if not self.hasLocalToon:
-            self.notify.warning('localToon (%s) not in list of minigame players: %s' % (self.localAvId, self.avIdList))
+            self.notify.warning(
+                'localToon (%s) not in list of minigame players: %s' %
+                (self.localAvId, self.avIdList))
             return
         self.notify.info('BASE: setParticipants: %s' % self.avIdList)
         self.remoteAvIdList = []
@@ -224,20 +267,25 @@ class DistributedMinigame(DistributedObject.DistributedObject):
         if not self.hasLocalToon:
             return
         if difficultyOverride != MinigameGlobals.NoDifficultyOverride:
-            self.difficultyOverride = difficultyOverride / float(MinigameGlobals.DifficultyOverrideMult)
+            self.difficultyOverride = difficultyOverride / \
+                float(MinigameGlobals.DifficultyOverrideMult)
         if trolleyZoneOverride != MinigameGlobals.NoTrolleyZoneOverride:
             self.trolleyZoneOverride = trolleyZoneOverride
 
     def setGameReady(self):
         if not self.hasLocalToon:
             return
-        self.notify.debug('BASE: setGameReady: Ready for game with avatars: %s' % self.avIdList)
+        self.notify.debug(
+            'BASE: setGameReady: Ready for game with avatars: %s' %
+            self.avIdList)
         self.notify.debug('  safezone: %s' % self.getSafezoneId())
         self.notify.debug('difficulty: %s' % self.getDifficulty())
         self.__serverFinished = 0
         for avId in self.remoteAvIdList:
             if avId not in self.cr.doId2do:
-                self.notify.warning('BASE: toon %s already left or has not yet arrived; waiting for server to abort the game' % avId)
+                self.notify.warning(
+                    'BASE: toon %s already left or has not yet arrived; waiting for server to abort the game' %
+                    avId)
                 return 1
 
         for avId in self.remoteAvIdList:
@@ -245,7 +293,7 @@ class DistributedMinigame(DistributedObject.DistributedObject):
             event = avatar.uniqueName('disable')
             self.acceptOnce(event, self.handleDisabledAvatar, [avId])
 
-            def ignoreToonDisable(self = self, event = event):
+            def ignoreToonDisable(self=self, event=event):
                 self.ignore(event)
 
             self.cleanupActions.append(ignoreToonDisable)
@@ -258,7 +306,7 @@ class DistributedMinigame(DistributedObject.DistributedObject):
                 if not self.usesLookAround:
                     avatar.stopLookAround()
 
-        def cleanupAvatars(self = self):
+        def cleanupAvatars(self=self):
             for avId in self.avIdList:
                 avatar = self.getAvatar(avId)
                 if avatar:
@@ -292,7 +340,9 @@ class DistributedMinigame(DistributedObject.DistributedObject):
         if avId in self.cr.doId2do:
             return self.cr.doId2do[avId]
         else:
-            self.notify.warning('BASE: getAvatar: No avatar in doId2do with id: ' + str(avId))
+            self.notify.warning(
+                'BASE: getAvatar: No avatar in doId2do with id: ' +
+                str(avId))
             return None
         return None
 
@@ -310,7 +360,9 @@ class DistributedMinigame(DistributedObject.DistributedObject):
             return 0
 
     def handleDisabledAvatar(self, avId):
-        self.notify.warning('BASE: handleDisabledAvatar: disabled avId: ' + str(avId))
+        self.notify.warning(
+            'BASE: handleDisabledAvatar: disabled avId: ' +
+            str(avId))
         self.frameworkFSM.request('frameworkAvatarExited')
 
     def d_requestExit(self):
@@ -328,7 +380,11 @@ class DistributedMinigame(DistributedObject.DistributedObject):
     def enterFrameworkRules(self):
         self.notify.debug('BASE: enterFrameworkRules')
         self.accept(self.rulesDoneEvent, self.handleRulesDone)
-        self.rulesPanel = MinigameRulesPanel.MinigameRulesPanel('MinigameRulesPanel', self.getTitle(), self.getInstructions(), self.rulesDoneEvent)
+        self.rulesPanel = MinigameRulesPanel.MinigameRulesPanel(
+            'MinigameRulesPanel',
+            self.getTitle(),
+            self.getInstructions(),
+            self.rulesDoneEvent)
         self.rulesPanel.load()
         self.rulesPanel.enter()
 
@@ -432,7 +488,9 @@ class DistributedMinigame(DistributedObject.DistributedObject):
 
     def setStartingVotes(self, startingVotesArray):
         if not len(startingVotesArray) == len(self.avIdList):
-            self.notify.error('length does not match, startingVotes=%s, avIdList=%s' % (startingVotesArray, self.avIdList))
+            self.notify.error(
+                'length does not match, startingVotes=%s, avIdList=%s' %
+                (startingVotesArray, self.avIdList))
             return
         for index in range(len(self.avIdList)):
             avId = self.avIdList[index]

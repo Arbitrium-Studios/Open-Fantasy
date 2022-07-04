@@ -11,8 +11,10 @@ from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 from direct.actor import Actor
 
+
 class DistributedLawbotBossGavel(DistributedObject.DistributedObject, FSM.FSM):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLawbotBossGavel')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedLawbotBossGavel')
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
@@ -50,13 +52,13 @@ class DistributedLawbotBossGavel(DistributedObject.DistributedObject, FSM.FSM):
         loader.unloadModel(self.modelPath)
         self.nodePath.removeNode()
 
-    def loadModel(self, modelPath, modelFindString = None):
-        if self.nodePath == None:
+    def loadModel(self, modelPath, modelFindString=None):
+        if self.nodePath is None:
             self.makeNodePath()
         else:
             self.gavel.getChildren().detach()
         model = loader.loadModel(modelPath)
-        if modelFindString != None:
+        if modelFindString is not None:
             modTel = model.find('**/' + modelFindString)
         parts = model.findAllMatches('**/gavel*')
         gavelTop = model.find('**/top*')
@@ -84,11 +86,22 @@ class DistributedLawbotBossGavel(DistributedObject.DistributedObject, FSM.FSM):
         handleBounds = gavelHandle.getBounds()
         handleCenter = handleBounds.getCenter()
         handleRadius = handleBounds.getRadius()
-        tube2 = CollisionTube(0, 0, handleCenter.getZ() + handleRadius, 0, 0, handleCenter.getZ() - handleRadius, 0.25)
+        tube2 = CollisionTube(
+            0,
+            0,
+            handleCenter.getZ() +
+            handleRadius,
+            0,
+            0,
+            handleCenter.getZ() -
+            handleRadius,
+            0.25)
         tube2.setTangible(0)
         handleCollNode = CollisionNode(self.uniqueName('gavelHandle'))
         handleCollNode.addSolid(tube2)
-        handleCollNode.setTag('attackCode', str(ToontownGlobals.BossCogGavelHandle))
+        handleCollNode.setTag(
+            'attackCode', str(
+                ToontownGlobals.BossCogGavelHandle))
         handleCollNode.setName('GavelHandleZap')
         self.handleCollNodePath = self.nodePath.attachNewNode(handleCollNode)
 
@@ -139,11 +152,33 @@ class DistributedLawbotBossGavel(DistributedObject.DistributedObject, FSM.FSM):
             nextIndex = index + 1
             if nextIndex == len(myHeadings):
                 nextIndex = 0
-            goingDown = self.nodePath.hprInterval(self.downTime, Point3(myHeadings[index] + self.origHpr[0], downAngle, self.origHpr[2]), startHpr=Point3(myHeadings[index] + self.origHpr[0], 0, self.origHpr[2]))
+            goingDown = self.nodePath.hprInterval(
+                self.downTime,
+                Point3(
+                    myHeadings[index] +
+                    self.origHpr[0],
+                    downAngle,
+                    self.origHpr[2]),
+                startHpr=Point3(
+                    myHeadings[index] +
+                    self.origHpr[0],
+                    0,
+                    self.origHpr[2]))
             self.ival.append(goingDown)
             self.ival.append(SoundInterval(self.gavelSfx, node=self.gavelTop))
             self.ival.append(Wait(self.stayDownTime))
-            goingUp = self.nodePath.hprInterval(self.upTime, Point3(myHeadings[nextIndex] + self.origHpr[0], 0, self.origHpr[2]), startHpr=Point3(myHeadings[index] + self.origHpr[0], downAngle, self.origHpr[2]))
+            goingUp = self.nodePath.hprInterval(
+                self.upTime,
+                Point3(
+                    myHeadings[nextIndex] +
+                    self.origHpr[0],
+                    0,
+                    self.origHpr[2]),
+                startHpr=Point3(
+                    myHeadings[index] +
+                    self.origHpr[0],
+                    downAngle,
+                    self.origHpr[2]))
             self.ival.append(goingUp)
 
         self.ival.loop()

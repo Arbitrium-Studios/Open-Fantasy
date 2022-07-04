@@ -19,13 +19,16 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 import time
 
-class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPondBingoManager')
+
+class DistributedPondBingoManager(
+        DistributedObject.DistributedObject, FSM.FSM):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedPondBingoManager')
     cardTypeDict = {BingoGlobals.NORMAL_CARD: NormalBingo.NormalBingo,
-     BingoGlobals.FOURCORNER_CARD: FourCornerBingo.FourCornerBingo,
-     BingoGlobals.DIAGONAL_CARD: DiagonalBingo.DiagonalBingo,
-     BingoGlobals.THREEWAY_CARD: ThreewayBingo.ThreewayBingo,
-     BingoGlobals.BLOCKOUT_CARD: BlockoutBingo.BlockoutBingo}
+                    BingoGlobals.FOURCORNER_CARD: FourCornerBingo.FourCornerBingo,
+                    BingoGlobals.DIAGONAL_CARD: DiagonalBingo.DiagonalBingo,
+                    BingoGlobals.THREEWAY_CARD: ThreewayBingo.ThreewayBingo,
+                    BingoGlobals.BLOCKOUT_CARD: BlockoutBingo.BlockoutBingo}
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
@@ -62,9 +65,9 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
 
     def d_cardUpdate(self, cellId, genus, species):
         self.sendUpdate('cardUpdate', [self.cardId,
-         cellId,
-         genus,
-         species])
+                                       cellId,
+                                       genus,
+                                       species])
 
     def d_bingoCall(self):
         self.sendUpdate('handleBingoCall', [self.cardId])
@@ -92,7 +95,8 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
                 self.pond.getLocalToonSpot().cleanupFishPanel()
                 self.pond.getLocalToonSpot().hideBootPanel()
         else:
-            self.notify.warning('CheckForWin: Attempt to Play Cell without a valid catch.')
+            self.notify.warning(
+                'CheckForWin: Attempt to Play Cell without a valid catch.')
         return
 
     def updateGameState(self, gameState, cellId):
@@ -111,9 +115,21 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         self.card.addGame(game)
         self.card.generateCard(self.tileSeed, self.pond.getArea())
         color = BingoGlobals.getColor(self.typeId)
-        self.card.setProp('image_color', VBase4(color[0], color[1], color[2], color[3]))
+        self.card.setProp(
+            'image_color',
+            VBase4(
+                color[0],
+                color[1],
+                color[2],
+                color[3]))
         color = BingoGlobals.getButtonColor(self.typeId)
-        self.card.bingo.setProp('image_color', VBase4(color[0], color[1], color[2], color[3]))
+        self.card.bingo.setProp(
+            'image_color',
+            VBase4(
+                color[0],
+                color[1],
+                color[2],
+                color[3]))
         if self.hasEntered:
             self.card.loadCard()
             self.card.show()
@@ -121,7 +137,8 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
             self.card.hide()
 
     def showCard(self):
-        if (self.state != 'Off' or self.state != 'CloseEvent') and self.card.getGame():
+        if (self.state != 'Off' or self.state !=
+                'CloseEvent') and self.card.getGame():
             self.card.loadCard()
             self.card.show()
         elif self.state == 'GameOver':
@@ -198,12 +215,14 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         elif request == 'Reward':
             return ('GameOver', args)
         else:
-            self.notify.debug('filterOff: Invalid State Transition from, Off to %s' % request)
+            self.notify.debug(
+                'filterOff: Invalid State Transition from, Off to %s' %
+                request)
 
     def exitOff(self):
         self.notify.debug('exitOff: Exit Off State')
 
-    def enterIntro(self, args = None):
+    def enterIntro(self, args=None):
         self.notify.debug('enterIntro: Enter Intro State')
         self.pond.setSpotGui()
         self.hasEntered = 1
@@ -212,14 +231,17 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         if request == 'WaitCountdown':
             return (request, args)
         else:
-            self.notify.debug('filterIntro: Invalid State Transition from Intro to %s' % request)
+            self.notify.debug(
+                'filterIntro: Invalid State Transition from Intro to %s' %
+                request)
 
     def exitIntro(self):
         self.notify.debug('exitIntro: Exit Intro State')
 
     def enterWaitCountdown(self, timeStamp):
         self.notify.debug('enterWaitCountdown: Enter WaitCountdown State')
-        time = BingoGlobals.TIMEOUT_SESSION - globalClockDelta.localElapsedTime(timeStamp[0])
+        time = BingoGlobals.TIMEOUT_SESSION - \
+            globalClockDelta.localElapsedTime(timeStamp[0])
         self.card.startNextGameCountdown(time)
         if self.hasEntered:
             self.card.showNextGameTimer(TTLocalizer.FishBingoNextGame)
@@ -228,7 +250,9 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         if request == 'Playing':
             return (request, args)
         else:
-            self.notify.debug('filterOff: Invalid State Transition from WaitCountdown to %s' % request)
+            self.notify.debug(
+                'filterOff: Invalid State Transition from WaitCountdown to %s' %
+                request)
 
     def exitWaitCountdown(self):
         self.notify.debug('exitWaitCountdown: Exit WaitCountdown State')
@@ -253,7 +277,9 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         elif request == 'GameOver':
             return (request, args)
         else:
-            self.notify.debug('filterOff: Invalid State Transition from Playing to %s' % request)
+            self.notify.debug(
+                'filterOff: Invalid State Transition from Playing to %s' %
+                request)
 
     def exitPlaying(self):
         self.notify.debug('exitPlaying: Exit Playing State')
@@ -280,7 +306,9 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         elif request == 'Off':
             return 'Off'
         else:
-            self.notify.debug('filterOff: Invalid State Transition from Reward to %s' % request)
+            self.notify.debug(
+                'filterOff: Invalid State Transition from Reward to %s' %
+                request)
 
     def exitReward(self):
         self.notify.debug('exitReward: Exit Reward State')
@@ -302,7 +330,9 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         elif request == 'Off':
             return 'Off'
         else:
-            self.notify.debug('filterOff: Invalid State Transition from GameOver to %s' % request)
+            self.notify.debug(
+                'filterOff: Invalid State Transition from GameOver to %s' %
+                request)
 
     def exitGameOver(self):
         self.notify.debug('exitGameOver: Exit GameOver State')
@@ -326,7 +356,9 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         elif request == 'Off':
             return 'Off'
         else:
-            self.notify.warning('filterOff: Invalid State Transition from GameOver to %s' % request)
+            self.notify.warning(
+                'filterOff: Invalid State Transition from GameOver to %s' %
+                request)
 
     def exitIntermission(self):
         self.notify.debug('enterIntermission: Exit Intermission State')
@@ -340,7 +372,9 @@ class DistributedPondBingoManager(DistributedObject.DistributedObject, FSM.FSM):
         if request == 'Off':
             return 'Off'
         else:
-            self.notify.warning('filterOff: Invalid State Transition from GameOver to %s' % request)
+            self.notify.warning(
+                'filterOff: Invalid State Transition from GameOver to %s' %
+                request)
 
     def exitCloseEvent(self):
         self.notify.debug('exitCloseEvent: Exit CloseEvent State')

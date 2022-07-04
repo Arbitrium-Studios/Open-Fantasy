@@ -16,6 +16,7 @@ FLPPlayers = 5
 FLPEnemies = 6
 globalFriendsList = None
 
+
 def determineFriendName(friendTuple):
     friendName = None
     if len(friendTuple) == 2:
@@ -53,21 +54,21 @@ def compareFriends(f1, f2):
 
 def showFriendsList():
     global globalFriendsList
-    if globalFriendsList == None:
+    if globalFriendsList is None:
         globalFriendsList = FriendsListPanel()
     globalFriendsList.enter()
     return
 
 
 def hideFriendsList():
-    if globalFriendsList != None:
+    if globalFriendsList is not None:
         globalFriendsList.exit()
     return
 
 
 def showFriendsListTutorial():
     global globalFriendsList
-    if globalFriendsList == None:
+    if globalFriendsList is None:
         globalFriendsList = FriendsListPanel()
     globalFriendsList.enter()
     if not base.cr.isPaid():
@@ -78,7 +79,7 @@ def showFriendsListTutorial():
 
 
 def hideFriendsListTutorial():
-    if globalFriendsList != None:
+    if globalFriendsList is not None:
         if hasattr(globalFriendsList, 'closeCommand'):
             globalFriendsList.close['command'] = globalFriendsList.closeCommand
         if not base.cr.isPaid():
@@ -88,14 +89,14 @@ def hideFriendsListTutorial():
 
 
 def isFriendsListShown():
-    if globalFriendsList != None:
+    if globalFriendsList is not None:
         return globalFriendsList.isEntered
     return 0
 
 
 def unloadFriendsList():
     global globalFriendsList
-    if globalFriendsList != None:
+    if globalFriendsList is not None:
         globalFriendsList.unload()
         globalFriendsList = None
     return
@@ -107,27 +108,27 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         self.leftmostPanel = FLPPets
         self.rightmostPanel = FLPPlayers
         if base.cr.productName in ['DisneyOnline-UK',
-         'DisneyOnline-AP',
-         'JP',
-         'FR',
-         'BR']:
+                                   'DisneyOnline-AP',
+                                   'JP',
+                                   'FR',
+                                   'BR']:
             self.rightmostPanel = FLPAll
         DirectFrame.__init__(self, relief=None)
         self.listScrollIndex = [0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0,
-         0]
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0]
         self.initialiseoptions(FriendsListPanel)
         StateData.StateData.__init__(self, 'friends-list-done')
         self.friends = {}
@@ -143,35 +144,86 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         self.isLoaded = 1
         gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
         auxGui = loader.loadModel('phase_3.5/models/gui/avatar_panel_gui')
-        self.title = DirectLabel(parent=self, relief=None, text='', text_scale=TTLocalizer.FLPtitle, text_fg=(0, 0.1, 0.4, 1), pos=(0.007, 0.0, 0.2))
+        self.title = DirectLabel(
+            parent=self, relief=None, text='', text_scale=TTLocalizer.FLPtitle, text_fg=(
+                0, 0.1, 0.4, 1), pos=(
+                0.007, 0.0, 0.2))
         background_image = gui.find('**/FriendsBox_Open')
         self['image'] = background_image
         self.setPos(1.1, 0, 0.54)
         self.scrollList = DirectScrolledList(parent=self, relief=None, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
-         gui.find('**/FndsLst_ScrollDN'),
-         gui.find('**/FndsLst_ScrollUp_Rllvr'),
-         gui.find('**/FndsLst_ScrollUp')), incButton_relief=None, incButton_pos=(0.0, 0.0, -0.316), incButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), incButton_scale=(1.0, 1.0, -1.0), decButton_image=(gui.find('**/FndsLst_ScrollUp'),
-         gui.find('**/FndsLst_ScrollDN'),
-         gui.find('**/FndsLst_ScrollUp_Rllvr'),
-         gui.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_pos=(0.0, 0.0, 0.117), decButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), itemFrame_pos=(-0.17, 0.0, 0.06), itemFrame_relief=None, numItemsVisible=8, items=[])
+                                                                                        gui.find(
+                                                                                            '**/FndsLst_ScrollDN'),
+                                                                                        gui.find(
+                                                                                            '**/FndsLst_ScrollUp_Rllvr'),
+                                                                                        gui.find('**/FndsLst_ScrollUp')), incButton_relief=None, incButton_pos=(0.0, 0.0, -0.316), incButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), incButton_scale=(1.0, 1.0, -1.0), decButton_image=(gui.find('**/FndsLst_ScrollUp'),
+                                                                                                                                                                                                                                                                                       gui.find(
+                                                                                            '**/FndsLst_ScrollDN'),
+            gui.find('**/FndsLst_ScrollUp_Rllvr'),
+            gui.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_pos=(0.0, 0.0, 0.117), decButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), itemFrame_pos=(-0.17, 0.0, 0.06), itemFrame_relief=None, numItemsVisible=8, items=[])
         clipper = PlaneNode('clipper')
         clipper.setPlane(Plane(Vec3(-1, 0, 0), Point3(0.2, 0, 0)))
         clipNP = self.scrollList.attachNewNode(clipper)
         self.scrollList.setClipPlane(clipNP)
-        self.close = DirectButton(parent=self, relief=None, image=(auxGui.find('**/CloseBtn_UP'), auxGui.find('**/CloseBtn_DN'), auxGui.find('**/CloseBtn_Rllvr')), pos=(0.01, 0, -0.38), command=self.__close)
+        self.close = DirectButton(
+            parent=self,
+            relief=None,
+            image=(
+                auxGui.find('**/CloseBtn_UP'),
+                auxGui.find('**/CloseBtn_DN'),
+                auxGui.find('**/CloseBtn_Rllvr')),
+            pos=(
+                0.01,
+                0,
+                -0.38),
+            command=self.__close)
         self.left = DirectButton(parent=self, relief=None, image=(gui.find('**/Horiz_Arrow_UP'),
-         gui.find('**/Horiz_Arrow_DN'),
-         gui.find('**/Horiz_Arrow_Rllvr'),
-         gui.find('**/Horiz_Arrow_UP')), image3_color=Vec4(0.6, 0.6, 0.6, 0.6), pos=(-0.15, 0.0, -0.38), scale=(-1.0, 1.0, 1.0), command=self.__left)
+                                                                  gui.find(
+                                                                      '**/Horiz_Arrow_DN'),
+                                                                  gui.find(
+                                                                      '**/Horiz_Arrow_Rllvr'),
+                                                                  gui.find('**/Horiz_Arrow_UP')), image3_color=Vec4(0.6, 0.6, 0.6, 0.6), pos=(-0.15, 0.0, -0.38), scale=(-1.0, 1.0, 1.0), command=self.__left)
         self.right = DirectButton(parent=self, relief=None, image=(gui.find('**/Horiz_Arrow_UP'),
-         gui.find('**/Horiz_Arrow_DN'),
-         gui.find('**/Horiz_Arrow_Rllvr'),
-         gui.find('**/Horiz_Arrow_UP')), image3_color=Vec4(0.6, 0.6, 0.6, 0.6), pos=(0.17, 0, -0.38), command=self.__right)
-        self.newFriend = DirectButton(parent=self, relief=None, pos=(-0.14, 0.0, 0.14), image=(auxGui.find('**/Frnds_Btn_UP'), auxGui.find('**/Frnds_Btn_DN'), auxGui.find('**/Frnds_Btn_RLVR')), text=('', TTLocalizer.FriendsListPanelNewFriend, TTLocalizer.FriendsListPanelNewFriend), text_scale=TTLocalizer.FLPnewFriend, text_fg=(0, 0, 0, 1), text_bg=(1, 1, 1, 1), text_pos=(0.1, -0.085), textMayChange=0, command=self.__newFriend)
+                                                                   gui.find(
+                                                                       '**/Horiz_Arrow_DN'),
+                                                                   gui.find(
+                                                                       '**/Horiz_Arrow_Rllvr'),
+                                                                   gui.find('**/Horiz_Arrow_UP')), image3_color=Vec4(0.6, 0.6, 0.6, 0.6), pos=(0.17, 0, -0.38), command=self.__right)
+        self.newFriend = DirectButton(
+            parent=self,
+            relief=None,
+            pos=(
+                -0.14,
+                0.0,
+                0.14),
+            image=(
+                auxGui.find('**/Frnds_Btn_UP'),
+                auxGui.find('**/Frnds_Btn_DN'),
+                auxGui.find('**/Frnds_Btn_RLVR')),
+            text=(
+                '',
+                TTLocalizer.FriendsListPanelNewFriend,
+                TTLocalizer.FriendsListPanelNewFriend),
+            text_scale=TTLocalizer.FLPnewFriend,
+            text_fg=(
+                0,
+                0,
+                0,
+                1),
+            text_bg=(
+                1,
+                1,
+                1,
+                1),
+            text_pos=(
+                0.1,
+                -0.085),
+            textMayChange=0,
+            command=self.__newFriend)
         self.secrets = DirectButton(parent=self, relief=None, pos=TTLocalizer.FLPsecretsPos, image=(auxGui.find('**/ChtBx_ChtBtn_UP'), auxGui.find('**/ChtBx_ChtBtn_DN'), auxGui.find('**/ChtBx_ChtBtn_RLVR')), text=('',
-         TTLocalizer.FriendsListPanelSecrets,
-         TTLocalizer.FriendsListPanelSecrets,
-         ''), text_scale=TTLocalizer.FLPsecrets, text_fg=(0, 0, 0, 1), text_bg=(1, 1, 1, 1), text_pos=(-0.04, -0.085), textMayChange=0, command=self.__secrets)
+                                                                                                                                                                                                                      TTLocalizer.FriendsListPanelSecrets,
+                                                                                                                                                                                                                      TTLocalizer.FriendsListPanelSecrets,
+                                                                                                                                                                                                                      ''), text_scale=TTLocalizer.FLPsecrets, text_fg=(0, 0, 0, 1), text_bg=(1, 1, 1, 1), text_pos=(-0.04, -0.085), textMayChange=0, command=self.__secrets)
         gui.removeNode()
         auxGui.removeNode()
         return
@@ -190,7 +242,7 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         DirectFrame.destroy(self)
         return None
 
-    def makeFriendButton(self, friendTuple, colorChoice = None, bold = 0):
+    def makeFriendButton(self, friendTuple, colorChoice=None, bold=0):
         playerName = None
         toonName = None
         if len(friendTuple) == 2:
@@ -205,7 +257,8 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         command = self.__choseFriend
         playerName = None
         if playerId:
-            playerInfo = base.cr.playerFriendsManager.playerId2Info.get(playerId, None)
+            playerInfo = base.cr.playerFriendsManager.playerId2Info.get(
+                playerId, None)
             if playerInfo:
                 playerName = playerInfo.playerName
         toonName = None
@@ -249,12 +302,43 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
             fontScale = 0.04
             colorS = 0.7
             bg = (colorChoice[0] * colorS,
-             colorChoice[1] * colorS,
-             colorChoice[2] * colorS,
-             colorChoice[3])
-        db = DirectButton(relief=None, text=friendName, text_scale=fontScale, text_align=TextNode.ALeft, text_fg=fg, text_shadow=bg, text1_bg=self.textDownColor, text2_bg=self.textRolloverColor, text3_fg=self.textDisabledColor, text_font=fontChoice, textMayChange=0, command=command, extraArgs=[thing, showType])
+                  colorChoice[1] * colorS,
+                  colorChoice[2] * colorS,
+                  colorChoice[3])
+        db = DirectButton(
+            relief=None,
+            text=friendName,
+            text_scale=fontScale,
+            text_align=TextNode.ALeft,
+            text_fg=fg,
+            text_shadow=bg,
+            text1_bg=self.textDownColor,
+            text2_bg=self.textRolloverColor,
+            text3_fg=self.textDisabledColor,
+            text_font=fontChoice,
+            textMayChange=0,
+            command=command,
+            extraArgs=[
+                thing,
+                showType])
         if playerId:
-            accountName = DirectLabel(parent=db, pos=Vec3(-0.02, 0, 0), text=rolloverName, text_fg=(0, 0, 0, 1), text_bg=(1, 1, 1, 1), text_pos=(0, 0), text_scale=0.045, text_align=TextNode.ARight)
+            accountName = DirectLabel(parent=db,
+                                      pos=Vec3(-0.02,
+                                               0,
+                                               0),
+                                      text=rolloverName,
+                                      text_fg=(0,
+                                               0,
+                                               0,
+                                               1),
+                                      text_bg=(1,
+                                               1,
+                                               1,
+                                               1),
+                                      text_pos=(0,
+                                                0),
+                                      text_scale=0.045,
+                                      text_align=TextNode.ARight)
             accountName.reparentTo(db.stateNodePath[2])
         return db
 
@@ -279,7 +363,9 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         self.accept('ignoreListChanged', self.__ignoreListChanged)
         self.accept('friendsMapComplete', self.__friendsListChanged)
         self.accept(OTPGlobals.PlayerFriendAddEvent, self.__friendsListChanged)
-        self.accept(OTPGlobals.PlayerFriendUpdateEvent, self.__friendsListChanged)
+        self.accept(
+            OTPGlobals.PlayerFriendUpdateEvent,
+            self.__friendsListChanged)
         return
 
     def exit(self):
@@ -324,35 +410,44 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
 
     def __secrets(self):
         messenger.send('wakeup')
-        ToontownFriendSecret.showFriendSecret(ToontownFriendSecret.AvatarSecret)
+        ToontownFriendSecret.showFriendSecret(
+            ToontownFriendSecret.AvatarSecret)
 
     def __newFriend(self):
         messenger.send('wakeup')
         messenger.send('friendAvatar', [None, None, None])
         return
 
-    def __choseFriend(self, friendId, showType = 0):
+    def __choseFriend(self, friendId, showType=0):
         messenger.send('wakeup')
         hasManager = hasattr(base.cr, 'playerFriendsManager')
         handle = base.cr.identifyFriend(friendId)
         if not handle and hasManager:
             handle = base.cr.playerFriendsManager.getAvHandleFromId(friendId)
-        if handle != None:
-            self.notify.info("Clicked on name in friend's list. doId = %s" % handle.doId)
+        if handle is not None:
+            self.notify.info(
+                "Clicked on name in friend's list. doId = %s" %
+                handle.doId)
             messenger.send('clickedNametag', [handle])
         return
 
-    def __chosePlayerFriend(self, friendId, showType = 1):
+    def __chosePlayerFriend(self, friendId, showType=1):
         messenger.send('wakeup')
         hasManager = hasattr(base.cr, 'playerFriendsManager')
         handle = None
-        playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(friendId)
+        playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(
+            friendId)
         handle = base.cr.identifyFriend(playerFriendInfo.avatarId)
         if not handle and hasManager:
-            handle = base.cr.playerFriendsManager.getAvHandleFromId(playerFriendInfo.avatarId)
-        if playerFriendInfo != None:
-            self.notify.info("Clicked on name in player friend's list. Id = %s" % friendId)
-            messenger.send('clickedNametagPlayer', [handle, friendId, showType])
+            handle = base.cr.playerFriendsManager.getAvHandleFromId(
+                playerFriendInfo.avatarId)
+        if playerFriendInfo is not None:
+            self.notify.info(
+                "Clicked on name in player friend's list. Id = %s" %
+                friendId)
+            messenger.send(
+                'clickedNametagPlayer', [
+                    handle, friendId, showType])
         return
 
     def __updateScrollList(self):
@@ -367,193 +462,206 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
             playerFriendList = base.cr.playerFriendsManager.playerFriendsList
             for playerFriendId in playerFriendList:
                 if playerFriendId in base.cr.playerFriendsManager.playerId2Info:
-                    playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(playerFriendId)
+                    playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(
+                        playerFriendId)
                     if playerFriendInfo.onlineYesNo:
                         if playerFriendInfo.understandableYesNo:
                             if playerFriendInfo.avatarId:
                                 freeChatDouble.insert(0, (playerFriendInfo.avatarId,
-                                 0,
-                                 playerFriendId,
-                                 1))
+                                                          0,
+                                                          playerFriendId,
+                                                          1))
                             else:
                                 freeChatOneRef.insert(0, (0,
-                                 0,
-                                 playerFriendId,
-                                 1))
+                                                          0,
+                                                          playerFriendId,
+                                                          1))
                         elif playerFriendInfo.avatarId:
                             speedChatDouble.insert(0, (playerFriendInfo.avatarId,
-                             0,
-                             playerFriendId,
-                             1))
+                                                       0,
+                                                       playerFriendId,
+                                                       1))
                         else:
                             speedChatOneRef.insert(0, (0,
-                             0,
-                             playerFriendId,
-                             1))
+                                                       0,
+                                                       playerFriendId,
+                                                       1))
                     elif playerFriendInfo.understandableYesNo:
                         freeChatOneRef.insert(0, (0,
-                         0,
-                         playerFriendId,
-                         1))
+                                                  0,
+                                                  playerFriendId,
+                                                  1))
                     else:
                         speedChatOneRef.insert(0, (0,
-                         0,
-                         playerFriendId,
-                         1))
+                                                   0,
+                                                   playerFriendId,
+                                                   1))
 
         if self.panelType == FLPOnlinePlayers:
             playerFriendList = base.cr.playerFriendsManager.playerFriendsList
             for playerFriendId in playerFriendList:
                 if playerFriendId in base.cr.playerFriendsManager.playerId2Info:
-                    playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(playerFriendId)
+                    playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(
+                        playerFriendId)
                     if playerFriendInfo.onlineYesNo:
                         if playerFriendInfo.understandableYesNo:
                             if playerFriendInfo.avatarId:
                                 freeChatDouble.insert(0, (playerFriendInfo.avatarId,
-                                 0,
-                                 playerFriendId,
-                                 1))
+                                                          0,
+                                                          playerFriendId,
+                                                          1))
                             else:
                                 freeChatOneRef.insert(0, (0,
-                                 0,
-                                 playerFriendId,
-                                 1))
+                                                          0,
+                                                          playerFriendId,
+                                                          1))
                         elif playerFriendInfo.avatarId:
                             speedChatDouble.insert(0, (playerFriendInfo.avatarId,
-                             0,
-                             playerFriendId,
-                             1))
+                                                       0,
+                                                       playerFriendId,
+                                                       1))
                         else:
                             speedChatOneRef.insert(0, (0,
-                             0,
-                             playerFriendId,
-                             1))
+                                                       0,
+                                                       playerFriendId,
+                                                       1))
 
         if self.panelType == FLPAll:
             if base.friendMode == 0:
                 for friendPair in base.localAvatar.friendsList:
                     playerId = 0
                     if hasattr(base.cr, 'playerFriendsManager'):
-                        playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(friendPair[0])
+                        playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(
+                            friendPair[0])
                         if playerId:
                             if friendPair[1] & ToontownGlobals.FriendChat:
                                 freeChatDouble.insert(0, (friendPair[0],
-                                 friendPair[1],
-                                 playerId,
-                                 0))
+                                                          friendPair[1],
+                                                          playerId,
+                                                          0))
                             else:
                                 speedChatDouble.insert(0, (friendPair[0],
-                                 friendPair[1],
-                                 playerId,
-                                 0))
+                                                           friendPair[1],
+                                                           playerId,
+                                                           0))
                         elif base.cr.isFriendOnline(friendPair[0]):
                             if friendPair[1] & ToontownGlobals.FriendChat:
                                 freeChatOneRef.insert(0, (friendPair[0],
-                                 friendPair[1],
-                                 0,
-                                 0))
+                                                          friendPair[1],
+                                                          0,
+                                                          0))
                             else:
                                 speedChatOneRef.insert(0, (friendPair[0],
-                                 friendPair[1],
-                                 0,
-                                 0))
+                                                           friendPair[1],
+                                                           0,
+                                                           0))
                         elif friendPair[1] & ToontownGlobals.FriendChat:
                             freeChatOneRef.insert(0, (friendPair[0],
-                             friendPair[1],
-                             0,
-                             0))
+                                                      friendPair[1],
+                                                      0,
+                                                      0))
                         else:
                             speedChatOneRef.insert(0, (friendPair[0],
-                             friendPair[1],
-                             0,
-                             0))
+                                                       friendPair[1],
+                                                       0,
+                                                       0))
                     else:
                         offlineFriends.append((friendPair[0],
-                         friendPair[1],
-                         playerId,
-                         0))
+                                               friendPair[1],
+                                               playerId,
+                                               0))
 
                 if hasattr(base.cr, 'playerFriendsManager'):
                     for avatarId in base.cr.playerFriendsManager.getAllOnlinePlayerAvatars():
-                        playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(avatarId)
-                        playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(playerId)
-                        if not base.cr.playerFriendsManager.askAvatarKnownElseWhere(avatarId):
+                        playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(
+                            avatarId)
+                        playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(
+                            playerId)
+                        if not base.cr.playerFriendsManager.askAvatarKnownElseWhere(
+                                avatarId):
                             if playerFriendInfo.understandableYesNo:
                                 freeChatDouble.insert(0, (avatarId,
-                                 0,
-                                 playerId,
-                                 0))
+                                                          0,
+                                                          playerId,
+                                                          0))
                             else:
                                 speedChatDouble.insert(0, (avatarId,
-                                 0,
-                                 playerId,
-                                 0))
+                                                           0,
+                                                           playerId,
+                                                           0))
 
             elif base.friendMode == 1:
                 for friendId in base.cr.avatarFriendsManager.avatarFriendsList:
-                    playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(friendId)
+                    playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(
+                        friendId)
                     newFriends.append((friendId,
-                     0,
-                     playerId,
-                     0))
+                                       0,
+                                       playerId,
+                                       0))
 
         if self.panelType == FLPOnline:
             if base.friendMode == 0:
                 for friendPair in base.localAvatar.friendsList:
-                    if hasattr(base.cr, 'playerFriendsManager') and base.cr.isFriendOnline(friendPair[0]):
-                        playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(friendPair[0])
+                    if hasattr(base.cr, 'playerFriendsManager') and base.cr.isFriendOnline(
+                            friendPair[0]):
+                        playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(
+                            friendPair[0])
                         if playerId:
                             if friendPair[1] & ToontownGlobals.FriendChat:
                                 freeChatDouble.insert(0, (friendPair[0],
-                                 friendPair[1],
-                                 playerId,
-                                 0))
+                                                          friendPair[1],
+                                                          playerId,
+                                                          0))
                             else:
                                 speedChatDouble.insert(0, (friendPair[0],
-                                 friendPair[1],
-                                 playerId,
-                                 0))
+                                                           friendPair[1],
+                                                           playerId,
+                                                           0))
                         elif friendPair[1] & ToontownGlobals.FriendChat:
                             freeChatOneRef.insert(0, (friendPair[0],
-                             friendPair[1],
-                             0,
-                             0))
+                                                      friendPair[1],
+                                                      0,
+                                                      0))
                         else:
                             speedChatOneRef.insert(0, (friendPair[0],
-                             friendPair[1],
-                             0,
-                             0))
+                                                       friendPair[1],
+                                                       0,
+                                                       0))
                     elif base.cr.isFriendOnline(friendPair[0]):
                         offlineFriends.append((friendPair[0],
-                         friendPair[1],
-                         0,
-                         0))
+                                               friendPair[1],
+                                               0,
+                                               0))
 
                 if hasattr(base.cr, 'playerFriendsManager'):
                     for avatarId in base.cr.playerFriendsManager.getAllOnlinePlayerAvatars():
-                        playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(avatarId)
-                        playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(playerId)
-                        if not base.cr.playerFriendsManager.askAvatarKnownElseWhere(avatarId):
+                        playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(
+                            avatarId)
+                        playerFriendInfo = base.cr.playerFriendsManager.playerId2Info.get(
+                            playerId)
+                        if not base.cr.playerFriendsManager.askAvatarKnownElseWhere(
+                                avatarId):
                             if playerFriendInfo.understandableYesNo:
                                 freeChatDouble.insert(0, (avatarId,
-                                 0,
-                                 playerId,
-                                 0))
+                                                          0,
+                                                          playerId,
+                                                          0))
                             else:
                                 speedChatDouble.insert(0, (avatarId,
-                                 0,
-                                 playerId,
-                                 0))
+                                                           0,
+                                                           playerId,
+                                                           0))
 
             elif base.friendMode == 1:
                 for friendId in base.cr.avatarFriendsManager.avatarFriendsList:
                     friendInfo = base.cr.avatarFriendsManager.avatarId2Info[friendId]
-                    playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(friendPair[0])
+                    playerId = base.cr.playerFriendsManager.findPlayerIdFromAvId(
+                        friendPair[0])
                     if friendInfo.onlineYesNo:
                         newFriends.insert(0, (friendId,
-                         0,
-                         playerId,
-                         0))
+                                              0,
+                                              playerId,
+                                              0))
 
         if self.panelType == FLPPets:
             for objId, obj in list(base.cr.doId2do.items()):
@@ -591,42 +699,48 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
 
         for friendPair in petFriends:
             if friendPair not in self.friends:
-                friendButton = self.makeFriendButton(friendPair, ToontownGlobals.ColorNoChat, 0)
+                friendButton = self.makeFriendButton(
+                    friendPair, ToontownGlobals.ColorNoChat, 0)
                 if friendButton:
                     self.scrollList.addItem(friendButton, refresh=0)
                     self.friends[friendPair] = friendButton
 
         for friendPair in freeChatDouble:
             if friendPair not in self.friends:
-                friendButton = self.makeFriendButton(friendPair, ToontownGlobals.ColorFreeChat, 1)
+                friendButton = self.makeFriendButton(
+                    friendPair, ToontownGlobals.ColorFreeChat, 1)
                 if friendButton:
                     self.scrollList.addItem(friendButton, refresh=0)
                     self.friends[friendPair] = friendButton
 
         for friendPair in freeChatOneRef:
             if friendPair not in self.friends:
-                friendButton = self.makeFriendButton(friendPair, ToontownGlobals.ColorFreeChat, 0)
+                friendButton = self.makeFriendButton(
+                    friendPair, ToontownGlobals.ColorFreeChat, 0)
                 if friendButton:
                     self.scrollList.addItem(friendButton, refresh=0)
                     self.friends[friendPair] = friendButton
 
         for friendPair in speedChatDouble:
             if friendPair not in self.friends:
-                friendButton = self.makeFriendButton(friendPair, ToontownGlobals.ColorSpeedChat, 1)
+                friendButton = self.makeFriendButton(
+                    friendPair, ToontownGlobals.ColorSpeedChat, 1)
                 if friendButton:
                     self.scrollList.addItem(friendButton, refresh=0)
                     self.friends[friendPair] = friendButton
 
         for friendPair in speedChatOneRef:
             if friendPair not in self.friends:
-                friendButton = self.makeFriendButton(friendPair, ToontownGlobals.ColorSpeedChat, 0)
+                friendButton = self.makeFriendButton(
+                    friendPair, ToontownGlobals.ColorSpeedChat, 0)
                 if friendButton:
                     self.scrollList.addItem(friendButton, refresh=0)
                     self.friends[friendPair] = friendButton
 
         for friendPair in offlineFriends:
             if friendPair not in self.friends:
-                friendButton = self.makeFriendButton(friendPair, ToontownGlobals.ColorNoChat, 0)
+                friendButton = self.makeFriendButton(
+                    friendPair, ToontownGlobals.ColorNoChat, 0)
                 if friendButton:
                     self.scrollList.addItem(friendButton, refresh=0)
                     self.friends[friendPair] = friendButton
@@ -671,7 +785,7 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         if self.panelType == FLPPlayers:
             self.__updateScrollList()
 
-    def __friendsListChanged(self, arg1 = None, arg2 = None):
+    def __friendsListChanged(self, arg1=None, arg2=None):
         if self.panelType != FLPEnemies:
             self.__updateScrollList()
 

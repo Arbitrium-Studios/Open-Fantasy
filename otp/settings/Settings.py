@@ -19,7 +19,7 @@ class Settings:
         try:
             with open(self.__filename, 'r') as f:
                 self.__settings = json.load(f)
-        except:
+        except BaseException:
             self.__settings = {}
 
     def writeSettings(self):

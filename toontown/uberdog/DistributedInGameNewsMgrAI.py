@@ -1,8 +1,10 @@
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 
+
 class DistributedInGameNewsMgrAI(DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedInGameNewsMgrAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedInGameNewsMgrAI')
 
     def __init__(self, air):
         DistributedObjectAI.__init__(self, air)

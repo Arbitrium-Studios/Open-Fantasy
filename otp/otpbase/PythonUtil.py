@@ -6,19 +6,32 @@ import time
 from html.parser import HTMLParser
 from direct.showbase.PythonUtil import *
 
-__all__ = ['enumerate', 'nonRepeatingRandomList', 'describeException', 'pdir', 'choice', 'cmp', 'lerp', 'triglerp', 'Enum']
+__all__ = [
+    'enumerate',
+    'nonRepeatingRandomList',
+    'describeException',
+    'pdir',
+    'choice',
+    'cmp',
+    'lerp',
+    'triglerp',
+    'Enum']
+
 
 class EnumIter:
     def __init__(self, enum):
         self._values = tuple(enum._stringTable.keys())
         self._index = 0
+
     def __iter__(self):
         return self
+
     def __next__(self):
         if self._index >= len(self._values):
             raise StopIteration
         self._index += 1
-        return self._values[self._index-1]
+        return self._values[self._index - 1]
+
 
 class Enum:
     """Pass in list of strings or string of comma-separated strings.
@@ -43,10 +56,10 @@ class Enum:
             import string
             invalidChars = string.whitespace + string.punctuation
             invalidChars = invalidChars.replace('_', '')
-            invalidFirstChars = invalidChars+string.digits
+            invalidFirstChars = invalidChars + string.digits
             if item[0] in invalidFirstChars:
                 raise SyntaxError("Enum '%s' contains invalid first char" %
-                                    item)
+                                  item)
             if not disjoint(item, invalidChars):
                 for char in item:
                     if char in invalidChars:
@@ -111,6 +124,7 @@ class Enum:
                 if hasattr(self, item):
                     return 0
             return 1
+
 
 if not hasattr(builtins, 'enumerate'):
     def enumerate(L):
@@ -678,7 +692,8 @@ class ParamObj:
                     Functor(setterStub, param, setterFunc), self, self.__class__))
                     """
 
-                def setterStub(self, value, param=param, origSetterName=origSetterName):
+                def setterStub(self, value, param=param,
+                               origSetterName=origSetterName):
                     # should we apply the value now or should we wait?
                     # if this obj's params are locked, we track which values have
                     # been set, and on unlock, we'll call the applyers for those
@@ -704,7 +719,9 @@ class ParamObj:
                         })
                         getattr(self, origSetterName)(value)
                         # call the applier, if there is one
-                        applier = getattr(self, getSetterName(param, 'apply'), None)
+                        applier = getattr(
+                            self, getSetterName(
+                                param, 'apply'), None)
                         if applier is not None:
                             self._curParamStack.append(param)
                             applier()

@@ -4,6 +4,7 @@ from direct.showbase.DirectObject import DirectObject
 from toontown.minigame import ToonBlitzGlobals
 from toontown.minigame import TwoDStomper
 
+
 class TwoDStomperMgr(DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('TwoDStomperMgr')
 
@@ -31,9 +32,9 @@ class TwoDStomperMgr(DirectObject):
             stomperAttribs = self.stomperList[index]
             self.createNewStomper(stomperAttribs)
 
-    def createNewStomper(self, attrib, model = None):
+    def createNewStomper(self, attrib, model=None):
         stomperId = self.section.getSectionizedId(len(self.stompers))
-        if model == None:
+        if model is None:
             model = self.section.sectionMgr.game.assetMgr.stomper
         newStomper = TwoDStomper.TwoDStomper(self, stomperId, attrib, model)
         newStomper.model.reparentTo(self.stompersNP)

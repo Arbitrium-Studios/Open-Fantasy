@@ -2,6 +2,7 @@ from otp.speedchat.SCTerminal import SCTerminal
 from toontown.chat import ResistanceChat
 TTSCResistanceMsgEvent = 'TTSCResistanceMsg'
 
+
 def decodeTTSCResistanceMsg(textId):
     return ResistanceChat.getChatText(textId)
 
@@ -19,4 +20,6 @@ class TTSCResistanceTerminal(SCTerminal):
 
     def handleSelect(self):
         SCTerminal.handleSelect(self)
-        messenger.send(self.getEventName(TTSCResistanceMsgEvent), [self.textId])
+        messenger.send(
+            self.getEventName(TTSCResistanceMsgEvent), [
+                self.textId])

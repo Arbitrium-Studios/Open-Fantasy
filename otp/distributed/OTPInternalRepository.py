@@ -6,10 +6,12 @@ from direct.distributed.PyDatagram import *
 # TODO: Remove Astron dependence.
 
 class OTPInternalRepository(AstronInternalRepository):
-    notify = DirectNotifyGlobal.directNotify.newCategory('OTPInternalRepository')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'OTPInternalRepository')
     dbId = 4003
 
-    def __init__(self, baseChannel, serverId, dcFileNames, dcSuffix, connectMethod, threadedNet):
+    def __init__(self, baseChannel, serverId, dcFileNames,
+                 dcSuffix, connectMethod, threadedNet):
         AstronInternalRepository.__init__(self, baseChannel, serverId=serverId, dcFileNames=dcFileNames,
                                           dcSuffix=dcSuffix, connectMethod=connectMethod, threadedNet=threadedNet)
 
@@ -28,7 +30,10 @@ class OTPInternalRepository(AstronInternalRepository):
 
     def setAllowClientSend(self, avId, distObj, fieldNameList=[]):
         dg = PyDatagram()
-        dg.addServerHeader(distObj.GetPuppetConnectionChannel(avId), self.ourChannel, CLIENTAGENT_SET_FIELDS_SENDABLE)
+        dg.addServerHeader(
+            distObj.GetPuppetConnectionChannel(avId),
+            self.ourChannel,
+            CLIENTAGENT_SET_FIELDS_SENDABLE)
         fieldIds = []
         for fieldName in fieldNameList:
             field = distObj.dclass.getFieldByName(fieldName)

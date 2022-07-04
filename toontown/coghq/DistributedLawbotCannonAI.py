@@ -5,6 +5,7 @@ from toontown.estate import DistributedCannonAI
 from toontown.estate import CannonGlobals
 from toontown.minigame import CannonGameGlobals
 
+
 class DistributedLawbotCannonAI(DistributedObjectAI.DistributedObjectAI):
     notify = directNotify.newCategory('DistributedLawbotCannonAI')
 
@@ -47,10 +48,19 @@ class DistributedLawbotCannonAI(DistributedObjectAI.DistributedObjectAI):
             self.avId = avId
             self.boss.toonEnteredCannon(self.avId, self.index)
             cannonBallsLeft = self.boss.getCannonBallsLeft(avId)
-            self.setMovie(CannonGlobals.CANNON_MOVIE_LOAD, self.avId, cannonBallsLeft)
-            self.acceptOnce(self.air.getAvatarExitEvent(avId), self.__handleUnexpectedExit, extraArgs=[avId])
+            self.setMovie(
+                CannonGlobals.CANNON_MOVIE_LOAD,
+                self.avId,
+                cannonBallsLeft)
+            self.acceptOnce(
+                self.air.getAvatarExitEvent(avId),
+                self.__handleUnexpectedExit,
+                extraArgs=[avId])
         else:
-            self.air.writeServerEvent('suspicious', avId, 'DistributedLawbotCannonAI.requestEnter cannon already occupied')
+            self.air.writeServerEvent(
+                'suspicious',
+                avId,
+                'DistributedLawbotCannonAI.requestEnter cannon already occupied')
             self.notify.warning('requestEnter() - cannon already occupied')
 
     def setMovie(self, mode, avId, extraInfo):
@@ -70,12 +80,14 @@ class DistributedLawbotCannonAI(DistributedObjectAI.DistributedObjectAI):
         if self.avId != 0:
             self.__doExit()
         else:
-            self.air.writeServerEvent('suspicious', avId, 'DistributedCannonAI.requestLeave cannon not occupied')
+            self.air.writeServerEvent(
+                'suspicious', avId, 'DistributedCannonAI.requestLeave cannon not occupied')
             self.notify.warning('requestLeave() - cannon not occupied')
 
     def setCannonPosition(self, zRot, angle):
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('setCannonPosition: ' + str(avId) + ': zRot=' + str(zRot) + ', angle=' + str(angle))
+        self.notify.debug('setCannonPosition: ' + str(avId) +
+                          ': zRot=' + str(zRot) + ', angle=' + str(angle))
         self.sendUpdate('updateCannonPosition', [avId, zRot, angle])
 
     def setLanded(self):
@@ -87,13 +99,20 @@ class DistributedLawbotCannonAI(DistributedObjectAI.DistributedObjectAI):
 
     def setCannonLit(self, zRot, angle):
         if not self.boss.state == 'BattleTwo':
-            self.notify.debug('ignoring setCannonList since boss in state %s' % self.boss.state)
+            self.notify.debug(
+                'ignoring setCannonList since boss in state %s' %
+                self.boss.state)
             return
         avId = self.air.getAvatarIdFromSender()
         if self.boss.getCannonBallsLeft(avId) == 0:
-            self.notify.debug('ignoring setCannonList since no balls left for %s' % avId)
+            self.notify.debug(
+                'ignoring setCannonList since no balls left for %s' %
+                avId)
             return
-        self.notify.debug('setCannonLit: ' + str(avId) + ': zRot=' + str(zRot) + ', angle=' + str(angle))
+        self.notify.debug('setCannonLit: ' + str(avId) +
+                          ': zRot=' + str(zRot) + ', angle=' + str(angle))
         fireTime = CannonGameGlobals.FUSE_TIME
-        self.sendUpdate('setCannonWillFire', [avId, fireTime, zRot, angle, globalClockDelta.getRealNetworkTime()])
+        self.sendUpdate(
+            'setCannonWillFire', [
+                avId, fireTime, zRot, angle, globalClockDelta.getRealNetworkTime()])
         self.boss.decrementCannonBallsLeft(avId)

@@ -4,6 +4,7 @@ from direct.distributed.DistributedObjectGlobal import DistributedObjectGlobal
 from direct.directnotify.DirectNotifyGlobal import directNotify
 from otp.otpbase import OTPLocalizer
 
+
 class StatusDatabase(DistributedObjectGlobal):
     notify = directNotify.newCategory('StatusDatabase')
 
@@ -27,7 +28,8 @@ class StatusDatabase(DistributedObjectGlobal):
         while taskMgr.hasTaskNamed(self.avatarRequestTaskName):
             taskMgr.remove(self.avatarRequestTaskName)
 
-        task = taskMgr.doMethodLater(1.0, self.requestAvatarQueue, self.avatarRequestTaskName)
+        task = taskMgr.doMethodLater(
+            1.0, self.requestAvatarQueue, self.avatarRequestTaskName)
 
     def requestAvatarQueue(self, task):
         self.sendUpdate('requestOfflineAvatarStatus', [self.avatarQueue])
@@ -35,12 +37,17 @@ class StatusDatabase(DistributedObjectGlobal):
 
     def recvOfflineAvatarStatus(self, avId, lastOnline):
         self.notify.debugCall()
-        self.notify.debug('Got an update for offline avatar %s who was last online %s' % (avId, self.lastOnlineString(lastOnline)))
+        self.notify.debug(
+            'Got an update for offline avatar %s who was last online %s' %
+            (avId, self.lastOnlineString(lastOnline)))
         self.avatarData[avId] = lastOnline
         while taskMgr.hasTaskNamed(self.avatarRetreiveTaskName):
             taskMgr.remove(self.avatarRetreiveTaskName)
 
-        task = taskMgr.doMethodLater(1.0, self.announceNewAvatarData, self.avatarRetreiveTaskName)
+        task = taskMgr.doMethodLater(
+            1.0,
+            self.announceNewAvatarData,
+            self.avatarRetreiveTaskName)
 
     def announceNewAvatarData(self, task):
         messenger.send(self.avatarDoneTaskName)

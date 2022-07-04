@@ -7,8 +7,10 @@ from pandac.PandaModules import Vec4, CSDefault, TransformState, NodePath, Trans
 from panda3d.toontown import loadDNAFile
 from toontown.hood import GSHood
 
+
 class CrashedLeaderBoardDecorator(HolidayDecorator.HolidayDecorator):
-    notify = DirectNotifyGlobal.directNotify.newCategory('CrashedLeaderBoardDecorator')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'CrashedLeaderBoardDecorator')
 
     def __init__(self):
         HolidayDecorator.HolidayDecorator.__init__(self)

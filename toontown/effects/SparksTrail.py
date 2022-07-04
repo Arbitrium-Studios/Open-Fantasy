@@ -4,19 +4,22 @@ from direct.particles import ParticleEffect, Particles, ForceGroup
 from .PooledEffect import PooledEffect
 from .EffectController import EffectController
 
+
 class SparksTrail(PooledEffect, EffectController):
 
     def __init__(self):
         PooledEffect.__init__(self)
         EffectController.__init__(self)
-        model = loader.loadModel('phase_4/models/props/tt_m_efx_ext_particleCards')
+        model = loader.loadModel(
+            'phase_4/models/props/tt_m_efx_ext_particleCards')
         self.card = model.find('**/tt_t_efx_ext_particleStars')
         self.cardScale = 64.0
         self.effectColor = Vec4(1, 1, 1, 1)
         self.effectScale = 1.0
         self.lifespan = 1.0
         if not SparksTrail.particleDummy:
-            SparksTrail.particleDummy = render.attachNewNode(ModelNode('SparksTrailParticleDummy'))
+            SparksTrail.particleDummy = render.attachNewNode(
+                ModelNode('SparksTrailParticleDummy'))
             SparksTrail.particleDummy.setDepthWrite(0)
             SparksTrail.particleDummy.setLightOff()
             SparksTrail.particleDummy.setFogOff()
@@ -53,9 +56,13 @@ class SparksTrail(PooledEffect, EffectController):
         self.p0.renderer.setYScaleFlag(1)
         self.p0.renderer.setAnimAngleFlag(1)
         self.p0.renderer.setNonanimatedTheta(0.0)
-        self.p0.renderer.setAlphaBlendMethod(BaseParticleRenderer.PPBLENDLINEAR)
+        self.p0.renderer.setAlphaBlendMethod(
+            BaseParticleRenderer.PPBLENDLINEAR)
         self.p0.renderer.setAlphaDisable(0)
-        self.p0.renderer.setColorBlendMode(ColorBlendAttrib.MAdd, ColorBlendAttrib.OIncomingAlpha, ColorBlendAttrib.OOne)
+        self.p0.renderer.setColorBlendMode(
+            ColorBlendAttrib.MAdd,
+            ColorBlendAttrib.OIncomingAlpha,
+            ColorBlendAttrib.OOne)
         self.p0.emitter.setEmissionType(BaseParticleEmitter.ETRADIATE)
         self.p0.emitter.setAmplitudeSpread(0.0)
         self.p0.emitter.setOffsetForce(Vec3(0.0, 0.0, -2.0))
@@ -64,8 +71,15 @@ class SparksTrail(PooledEffect, EffectController):
         self.setEffectScale(self.effectScale)
 
     def createTrack(self):
-        self.startEffect = Sequence(Func(self.p0.setBirthRate, 0.01), Func(self.p0.clearToInitial), Func(self.f.start, self, self.particleDummy))
-        self.endEffect = Sequence(Func(self.p0.setBirthRate, 100.0), Wait(1.0), Func(self.cleanUpEffect))
+        self.startEffect = Sequence(
+            Func(
+                self.p0.setBirthRate, 0.01), Func(
+                self.p0.clearToInitial), Func(
+                self.f.start, self, self.particleDummy))
+        self.endEffect = Sequence(
+            Func(
+                self.p0.setBirthRate, 100.0), Wait(1.0), Func(
+                self.cleanUpEffect))
         self.track = Sequence(self.startEffect, Wait(1.0), self.endEffect)
 
     def setEffectColor(self, color):

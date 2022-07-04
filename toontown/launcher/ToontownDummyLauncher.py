@@ -2,8 +2,10 @@ from direct.directnotify import DirectNotifyGlobal
 from otp.launcher.DummyLauncherBase import DummyLauncherBase
 from toontown.launcher.ToontownLauncher import ToontownLauncher
 
+
 class ToontownDummyLauncher(DummyLauncherBase, ToontownLauncher):
-    notify = DirectNotifyGlobal.directNotify.newCategory('ToontownDummyLauncher')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'ToontownDummyLauncher')
 
     def __init__(self):
         DummyLauncherBase.__init__(self)
@@ -24,7 +26,7 @@ class ToontownDummyLauncher(DummyLauncherBase, ToontownLauncher):
         print('setRegistry[%s] = %s' % (name, value))
         self.reg[name] = value
 
-    def getRegistry(self, name, defaultValue = None):
+    def getRegistry(self, name, defaultValue=None):
         if name in self.reg:
             value = self.reg[name]
         else:

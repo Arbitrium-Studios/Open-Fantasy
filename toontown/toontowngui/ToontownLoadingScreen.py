@@ -4,21 +4,40 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 import random
 
+
 class ToontownLoadingScreen:
 
     def __init__(self):
         self.__expectedCount = 0
         self.__count = 0
         self.gui = loader.loadModel('phase_3/models/gui/progress-background')
-        self.banner = loader.loadModel('phase_3/models/gui/toon_council').find('**/scroll')
+        self.banner = loader.loadModel(
+            'phase_3/models/gui/toon_council').find('**/scroll')
         self.banner.reparentTo(self.gui)
         self.banner.setScale(0.4, 0.4, 0.4)
-        self.tip = DirectLabel(guiId='ToontownLoadingScreenTip', parent=self.banner, relief=None, text='', text_scale=TTLocalizer.TLStip, textMayChange=1, pos=(-1.2, 0.0, 0.1), text_fg=(0.4, 0.3, 0.2, 1), text_wordwrap=13, text_align=TextNode.ALeft)
-        self.title = DirectLabel(guiId='ToontownLoadingScreenTitle', parent=self.gui, relief=None, pos=(-1.06, 0, -0.77), text='', textMayChange=1, text_scale=0.08, text_fg=(0, 0, 0.5, 1), text_align=TextNode.ALeft)
+        self.tip = DirectLabel(guiId='ToontownLoadingScreenTip',
+                               parent=self.banner,
+                               relief=None,
+                               text='',
+                               text_scale=TTLocalizer.TLStip,
+                               textMayChange=1,
+                               pos=(-1.2,
+                                    0.0,
+                                    0.1),
+                               text_fg=(0.4,
+                                        0.3,
+                                        0.2,
+                                        1),
+                               text_wordwrap=13,
+                               text_align=TextNode.ALeft)
+        self.title = DirectLabel(
+            guiId='ToontownLoadingScreenTitle', parent=self.gui, relief=None, pos=(
+                -1.06, 0, -0.77), text='', textMayChange=1, text_scale=0.08, text_fg=(
+                0, 0, 0.5, 1), text_align=TextNode.ALeft)
         self.waitBar = DirectWaitBar(guiId='ToontownLoadingScreenWaitBar', parent=self.gui, frameSize=(-1.06,
-         1.06,
-         -0.03,
-         0.03), pos=(0, 0, -0.85), text='')
+                                                                                                       1.06,
+                                                                                                       -0.03,
+                                                                                                       0.03), pos=(0, 0, -0.85), text='')
         return
 
     def destroy(self):
@@ -29,7 +48,8 @@ class ToontownLoadingScreen:
         self.gui.removeNode()
 
     def getTip(self, tipCategory):
-        return TTLocalizer.TipTitle + '\n' + random.choice(TTLocalizer.TipDict.get(tipCategory))
+        return TTLocalizer.TipTitle + '\n' + \
+            random.choice(TTLocalizer.TipDict.get(tipCategory))
 
     def begin(self, range, label, gui, tipCategory):
         self.waitBar['range'] = range
@@ -41,7 +61,8 @@ class ToontownLoadingScreen:
             self.waitBar.reparentTo(self.gui)
             self.title.reparentTo(self.gui)
             self.gui.reparentTo(aspect2dp, DGG.NO_FADE_SORT_INDEX)
-            self.gui.find('**/bg').setScale(aspect2dp, VBase3(base.getAspectRatio(), 1, 1))
+            self.gui.find('**/bg').setScale(aspect2dp,
+                                            VBase3(base.getAspectRatio(), 1, 1))
         else:
             self.waitBar.reparentTo(aspect2dp, DGG.NO_FADE_SORT_INDEX)
             self.title.reparentTo(aspect2dp, DGG.NO_FADE_SORT_INDEX)

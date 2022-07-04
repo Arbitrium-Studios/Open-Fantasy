@@ -10,6 +10,7 @@ CANNON_ANGLE_MIN = 10
 CANNON_ANGLE_MAX = 85
 CANNON_ANGLE_VEL = 15.0
 
+
 def calcScore(t):
     range = MAX_SCORE - MIN_SCORE
     score = MAX_SCORE - range * (float(t) / GameTime)

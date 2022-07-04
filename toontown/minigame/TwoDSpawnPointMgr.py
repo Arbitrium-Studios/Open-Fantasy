@@ -4,6 +4,7 @@ from direct.showbase.DirectObject import DirectObject
 from toontown.minigame import ToonBlitzGlobals
 from toontown.toonbase import ToontownGlobals
 
+
 class TwoDSpawnPointMgr(DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('TwoDSpawnPointMgr')
 
@@ -65,7 +66,10 @@ class TwoDSpawnPointMgr(DirectObject):
         collNodePath.setPos(posX, posY, posZ)
         self.collNPList.append(collNodePath)
         self.collDict[collNodePath.getName()] = index
-        self.accept(self.game.uniqueName('enter' + collSphereName), self.handleSavePointCollision)
+        self.accept(
+            self.game.uniqueName(
+                'enter' + collSphereName),
+            self.handleSavePointCollision)
 
     def handleSavePointCollision(self, cevent):
         savePointName = cevent.getIntoNodePath().getName()
@@ -77,11 +81,13 @@ class TwoDSpawnPointMgr(DirectObject):
             point = self.loadPoints[self.lastSavePoint]
             return Point3(point[0], point[1], point[2])
         else:
-            return Point3(ToonBlitzGlobals.ToonStartingPosition[0], ToonBlitzGlobals.ToonStartingPosition[1], ToonBlitzGlobals.ToonStartingPosition[2])
+            return Point3(
+                ToonBlitzGlobals.ToonStartingPosition[0], ToonBlitzGlobals.ToonStartingPosition[1], ToonBlitzGlobals.ToonStartingPosition[2])
 
     def setupLastSavePointHandle(self):
         if len(self.collNPList) > 0:
-            self.accept('enter' + self.collNPList[-1].getName(), self.handleLastSavePointCollision)
+            self.accept(
+                'enter' + self.collNPList[-1].getName(), self.handleLastSavePointCollision)
             self.gameEndX = self.collNPList[-1].getX(render)
 
     def handleLastSavePointCollision(self, cevent):

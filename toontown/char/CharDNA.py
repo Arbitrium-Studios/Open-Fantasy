@@ -7,30 +7,31 @@ from direct.distributed.PyDatagramIterator import PyDatagramIterator
 from otp.avatar import AvatarDNA
 notify = directNotify.newCategory('CharDNA')
 charTypes = ['mk',
- 'vmk',
- 'mn',
- 'wmn',
- 'g',
- 'sg',
- 'd',
- 'fd',
- 'dw',
- 'p',
- 'wp',
- 'cl',
- 'dd',
- 'shdd',
- 'ch',
- 'da',
- 'pch',
- 'jda']
+             'vmk',
+             'mn',
+             'wmn',
+             'g',
+             'sg',
+             'd',
+             'fd',
+             'dw',
+             'p',
+             'wp',
+             'cl',
+             'dd',
+             'shdd',
+             'ch',
+             'da',
+             'pch',
+             'jda']
+
 
 class CharDNA(AvatarDNA.AvatarDNA):
 
-    def __init__(self, str = None, type = None, dna = None, r = None, b = None, g = None):
-        if str != None:
+    def __init__(self, str=None, type=None, dna=None, r=None, b=None, g=None):
+        if str is not None:
             self.makeFromNetString(str)
-        elif type != None:
+        elif type is not None:
             if type == 'c':
                 self.newChar(dna)
         else:
@@ -68,8 +69,8 @@ class CharDNA(AvatarDNA.AvatarDNA):
         self.type = 'c'
         self.name = charTypes[0]
 
-    def newChar(self, name = None):
-        if name == None:
+    def newChar(self, name=None):
+        if name is None:
             self.__defaultChar()
         else:
             self.type = 'c'

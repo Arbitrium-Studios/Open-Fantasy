@@ -8,20 +8,23 @@ from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import ToontownBattleGlobals
 
+
 class NPCFriendPanel(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('NPCFriendPanel')
 
-    def __init__(self, parent = aspect2d, **kw):
+    def __init__(self, parent=aspect2d, **kw):
         optiondefs = (('relief', None, None), ('doneEvent', None, None))
         self.defineoptions(kw, optiondefs)
         DirectFrame.__init__(self, parent=parent)
         self.cardList = []
         self.updateLayout()
         self.initialiseoptions(NPCFriendPanel)
-        self.accept(localAvatar.uniqueName('maxNPCFriendsChange'), self.updateLayout)
+        self.accept(
+            localAvatar.uniqueName('maxNPCFriendsChange'),
+            self.updateLayout)
         return None
 
-    def update(self, friendDict, fCallable = 0):
+    def update(self, friendDict, fCallable=0):
         friendList = list(friendDict.keys())
         for i in range(self.maxNPCFriends):
             card = self.cardList[i]
@@ -53,10 +56,15 @@ class NPCFriendPanel(DirectFrame):
             yOffset = 3.5
             yOffset2 = -2.45
         else:
-            self.notify.error('got wrong max SOS cards %s' % self.maxNPCFriends)
+            self.notify.error(
+                'got wrong max SOS cards %s' %
+                self.maxNPCFriends)
         count = 0
         for i in range(self.maxNPCFriends):
-            card = NPCFriendCard(parent=self, rotateCard=rotateCard, doneEvent=self['doneEvent'])
+            card = NPCFriendCard(
+                parent=self,
+                rotateCard=rotateCard,
+                doneEvent=self['doneEvent'])
             self.cardList.append(card)
             card.setPos(xOffset, 1, yOffset)
             card.setScale(0.75)
@@ -72,15 +80,23 @@ class NPCFriendCard(DirectFrame):
     maxRarity = 5
     sosTracks = ToontownBattleGlobals.Tracks + ToontownBattleGlobals.NPCTracks
 
-    def __init__(self, parent = aspect2dp, rotateCard = False, **kw):
-        optiondefs = (('NPCID', 'Uninitialized', None), ('relief', None, None), ('doneEvent', None, None))
+    def __init__(self, parent=aspect2dp, rotateCard=False, **kw):
+        optiondefs = (('NPCID', 'Uninitialized', None),
+                      ('relief', None, None), ('doneEvent', None, None))
         self.defineoptions(kw, optiondefs)
         DirectFrame.__init__(self, parent=parent)
         self.initialiseoptions(NPCFriendCard)
         cardModel = loader.loadModel('phase_3.5/models/gui/playingCard')
-        self.front = DirectFrame(parent=self, relief=None, image=cardModel.find('**/card_front'))
+        self.front = DirectFrame(
+            parent=self,
+            relief=None,
+            image=cardModel.find('**/card_front'))
         self.front.hide()
-        self.back = DirectFrame(parent=self, relief=None, image=cardModel.find('**/card_back'), geom=cardModel.find('**/logo'))
+        self.back = DirectFrame(
+            parent=self,
+            relief=None,
+            image=cardModel.find('**/card_back'),
+            geom=cardModel.find('**/logo'))
         callButtonPosZ = -0.9
         textWordWrap = 16.0
         textScale = 0.35
@@ -96,8 +112,10 @@ class NPCFriendCard(DirectFrame):
         self.sosCountInfo2PosZ = -0.9
         self.sosCountInfo2Scale = 0.5
         if rotateCard:
-            self.front.component('image0').configure(pos=(0, 0, 0.22), hpr=(0, 0, -90), scale=1.35)
-            self.back.component('image0').configure(hpr=(0, 0, -90), scale=(-1.35, 1.35, 1.35))
+            self.front.component('image0').configure(
+                pos=(0, 0, 0.22), hpr=(0, 0, -90), scale=1.35)
+            self.back.component('image0').configure(
+                hpr=(0, 0, -90), scale=(-1.35, 1.35, 1.35))
             callButtonPosZ = -2.1
             textWordWrap = 7.0
             textScale = 0.5
@@ -112,23 +130,70 @@ class NPCFriendCard(DirectFrame):
             self.sosCountInfoScale = 0.4
             self.sosCountInfo2PosZ = -2.0
             self.sosCountInfo2Scale = 0.55
-        self.sosTypeInfo = DirectLabel(parent=self.front, relief=None, text='', text_font=ToontownGlobals.getMinnieFont(), text_fg=self.normalTextColor, text_scale=textScale, text_align=TextNode.ACenter, text_wordwrap=textWordWrap, pos=(0, 0, textPosZ))
+        self.sosTypeInfo = DirectLabel(
+            parent=self.front,
+            relief=None,
+            text='',
+            text_font=ToontownGlobals.getMinnieFont(),
+            text_fg=self.normalTextColor,
+            text_scale=textScale,
+            text_align=TextNode.ACenter,
+            text_wordwrap=textWordWrap,
+            pos=(
+                0,
+                0,
+                textPosZ))
         self.NPCHead = None
-        self.NPCName = DirectLabel(parent=self.front, relief=None, text='', text_fg=self.normalTextColor, text_scale=nameScale, text_align=TextNode.ACenter, text_wordwrap=8.0, pos=(0, 0, namePosZ))
+        self.NPCName = DirectLabel(
+            parent=self.front,
+            relief=None,
+            text='',
+            text_fg=self.normalTextColor,
+            text_scale=nameScale,
+            text_align=TextNode.ACenter,
+            text_wordwrap=8.0,
+            pos=(
+                0,
+                0,
+                namePosZ))
         buttonModels = loader.loadModel('phase_3.5/models/gui/inventory_gui')
         upButton = buttonModels.find('**/InventoryButtonUp')
         downButton = buttonModels.find('**/InventoryButtonDown')
         rolloverButton = buttonModels.find('**/InventoryButtonRollover')
         self.sosCallButton = DirectButton(parent=self.front, relief=None, text=TTLocalizer.NPCCallButtonLabel, text_fg=self.normalTextColor, text_scale=0.28, text_align=TextNode.ACenter, image=(upButton,
-         downButton,
-         rolloverButton,
-         upButton), image_color=(1.0, 0.2, 0.2, 1), image0_color=Vec4(1.0, 0.4, 0.4, 1), image3_color=Vec4(1.0, 0.4, 0.4, 0.4), image_scale=(4.4, 1, 3.6), image_pos=Vec3(0, 0, 0.08), pos=(-1.15, 0, callButtonPosZ), scale=1.25, command=self.__chooseNPCFriend)
+                                                                                                                                                                                                  downButton,
+                                                                                                                                                                                                  rolloverButton,
+                                                                                                                                                                                                  upButton), image_color=(1.0, 0.2, 0.2, 1), image0_color=Vec4(1.0, 0.4, 0.4, 1), image3_color=Vec4(1.0, 0.4, 0.4, 0.4), image_scale=(4.4, 1, 3.6), image_pos=Vec3(0, 0, 0.08), pos=(-1.15, 0, callButtonPosZ), scale=1.25, command=self.__chooseNPCFriend)
         self.sosCallButton.hide()
-        self.sosCountInfo = DirectLabel(parent=self.front, relief=None, text='', text_fg=self.normalTextColor, text_scale=0.75, text_align=TextNode.ALeft, textMayChange=1, pos=(0.0, 0, -1.0))
+        self.sosCountInfo = DirectLabel(
+            parent=self.front,
+            relief=None,
+            text='',
+            text_fg=self.normalTextColor,
+            text_scale=0.75,
+            text_align=TextNode.ALeft,
+            textMayChange=1,
+            pos=(
+                0.0,
+                0,
+                -1.0))
         star = loader.loadModel('phase_3.5/models/gui/name_star')
         self.rarityStars = []
         for i in range(self.maxRarity):
-            label = DirectLabel(parent=self.front, relief=None, image=star, image_scale=rarityScale, image_color=Vec4(0.502, 0.251, 0.251, 1.0), pos=(1.1 - i * 0.24, 0, rarityPosZ))
+            label = DirectLabel(
+                parent=self.front,
+                relief=None,
+                image=star,
+                image_scale=rarityScale,
+                image_color=Vec4(
+                    0.502,
+                    0.251,
+                    0.251,
+                    1.0),
+                pos=(
+                    1.1 - i * 0.24,
+                    0,
+                    rarityPosZ))
             label.hide()
             self.rarityStars.append(label)
 
@@ -147,7 +212,7 @@ class NPCFriendCard(DirectFrame):
             self.NPCHead.delete()
         DirectFrame.destroy(self)
 
-    def update(self, NPCID, count = 0, fCallable = 0):
+    def update(self, NPCID, count=0, fCallable=0):
         oldNPCID = self['NPCID']
         self['NPCID'] = NPCID
         if NPCID != oldNPCID:
@@ -160,7 +225,8 @@ class NPCFriendCard(DirectFrame):
             self.front.show()
             self.back.hide()
             self.NPCName['text'] = TTLocalizer.NPCToonNames[NPCID]
-            self.NPCHead = self.createNPCToonHead(NPCID, dimension=self.NPCHeadDim)
+            self.NPCHead = self.createNPCToonHead(
+                NPCID, dimension=self.NPCHeadDim)
             self.NPCHead.reparentTo(self.front)
             self.NPCHead.setZ(self.NPCHeadPosZ)
             track, level, hp, rarity = NPCToons.getNPCTrackLevelHpRarity(NPCID)
@@ -205,7 +271,7 @@ class NPCFriendCard(DirectFrame):
         self.front.hide()
         self.back.show()
 
-    def createNPCToonHead(self, NPCID, dimension = 0.5):
+    def createNPCToonHead(self, NPCID, dimension=0.5):
         NPCInfo = NPCToons.NPCToonDict[NPCID]
         dnaList = NPCInfo[2]
         gender = NPCInfo[3]
@@ -218,7 +284,7 @@ class NPCFriendCard(DirectFrame):
         self.fitGeometry(head, fFlip=1, dimension=dimension)
         return head
 
-    def fitGeometry(self, geom, fFlip = 0, dimension = 0.5):
+    def fitGeometry(self, geom, fFlip=0, dimension=0.5):
         p1 = Point3()
         p2 = Point3()
         geom.calcTightBounds(p1, p2)
@@ -234,5 +300,6 @@ class NPCFriendCard(DirectFrame):
         for child in geom.getChildren():
             child.reparentTo(geomXform)
 
-        geomXform.setPosHprScale(-mid[0], -mid[1] + 1, -mid[2], 180, 0, 0, s, s, s)
+        geomXform.setPosHprScale(-mid[0], -mid[1] +
+                                 1, -mid[2], 180, 0, 0, s, s, s)
         geomXform.reparentTo(geom)

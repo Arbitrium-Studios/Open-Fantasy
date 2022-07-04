@@ -8,10 +8,12 @@ import random
 from toontown.racing import Racer, RaceGlobals
 from direct.distributed.ClockDelta import *
 
+
 class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedRaceAI')
 
-    def __init__(self, air, trackId, zoneId, avIds, laps, raceType, racerFinishedFunc, raceDoneFunc, circuitLoop, circuitPoints, circuitTimes, qualTimes=[], circuitTimeList={}, circuitTotalBonusTickets={}):
+    def __init__(self, air, trackId, zoneId, avIds, laps, raceType, racerFinishedFunc, raceDoneFunc, circuitLoop,
+                 circuitPoints, circuitTimes, qualTimes=[], circuitTimeList={}, circuitTotalBonusTickets={}):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
         self.trackId = trackId
         self.direction = self.trackId % 2
@@ -42,7 +44,7 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
             self.gagList = []
         else:
             self.gagList = [
-             0] * len(RaceGlobals.TrackDict[trackId][4])
+                0] * len(RaceGlobals.TrackDict[trackId][4])
         self.circuitLoop = circuitLoop
         self.qualTimes = qualTimes
         self.circuitTimeList = circuitTimeList
@@ -54,10 +56,14 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
         DistributedObjectAI.DistributedObjectAI.generate(self)
         self.notify.debug('generate %s, id=%s, ' % (self.doId, self.trackId))
         trackFilepath = RaceGlobals.TrackDict[self.trackId][0]
-        taskMgr.doMethodLater(0.5, self.enableEntryBarrier, 'enableWaitingBarrier')
+        taskMgr.doMethodLater(
+            0.5,
+            self.enableEntryBarrier,
+            'enableWaitingBarrier')
 
     def enableEntryBarrier(self, task):
-        self.enterRaceBarrier = self.beginBarrier('waitingForJoin', self.avIds, 60, self.b_racersJoined)
+        self.enterRaceBarrier = self.beginBarrier(
+            'waitingForJoin', self.avIds, 60, self.b_racersJoined)
         self.notify.debug('Waiting for Joins!!!!')
         self.sendUpdate('waitingForJoin', [])
 
@@ -147,7 +153,8 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
                 racersOut.append(i)
 
         if len(avIds) == 0:
-            self.exitBarrier = self.beginBarrier('waitingForExit', self.avIds, 10, self.endRace)
+            self.exitBarrier = self.beginBarrier(
+                'waitingForExit', self.avIds, 10, self.endRace)
             for i in self.avIds:
                 self.d_kickRacer(i)
 
@@ -156,7 +163,8 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
             self.d_kickRacer(i)
 
         self.avIds = avIds
-        self.waitingForPrepBarrier = self.beginBarrier('waitingForPrep', self.avIds, 30, self.b_prepForRace)
+        self.waitingForPrepBarrier = self.beginBarrier(
+            'waitingForPrep', self.avIds, 30, self.b_prepForRace)
         avAndKarts = []
         for i in self.racers:
             avAndKarts.append([self.racers[i].avId, self.racers[i].kart.doId])
@@ -172,7 +180,8 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
                 racersOut.append(i)
 
         if len(avIds) == 0:
-            self.exitBarrier = self.beginBarrier('waitingForExit', self.avIds, 10, self.endRace)
+            self.exitBarrier = self.beginBarrier(
+                'waitingForExit', self.avIds, 10, self.endRace)
         for i in racersOut:
             self.d_kickRacer(i)
 
@@ -182,7 +191,8 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
         for i in range(len(self.gagList)):
             self.d_genGag(i)
 
-        self.waitingForReadyBarrier = self.beginBarrier('waitingForReady', self.avIds, 20, self.b_startTutorial)
+        self.waitingForReadyBarrier = self.beginBarrier(
+            'waitingForReady', self.avIds, 20, self.b_startTutorial)
         self.sendUpdate('prepForRace', [])
 
     def b_startTutorial(self, avIds):
@@ -193,7 +203,8 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
                 racersOut.append(i)
 
         if len(avIds) == 0:
-            self.exitBarrier = self.beginBarrier('waitingForExit', self.avIds, 10, self.endRace)
+            self.exitBarrier = self.beginBarrier(
+                'waitingForExit', self.avIds, 10, self.endRace)
         for i in racersOut:
             self.d_kickRacer(i)
 
@@ -202,20 +213,24 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
         for avId in avIds:
             av = self.air.doId2do.get(avId, None)
             if not av:
-                self.notify.warning('b_racersJoined: Avatar not found with id %s' % avId)
+                self.notify.warning(
+                    'b_racersJoined: Avatar not found with id %s' %
+                    avId)
             elif not self.raceType == RaceGlobals.Practice:
                 if self.isCircuit() and not self.isFirstRace():
                     continue
                 raceFee = RaceGlobals.getEntryFee(self.trackId, self.raceType)
                 avTickets = av.getTickets()
                 if avTickets < raceFee:
-                    self.notify.warning('b_racersJoined: Avatar %s does not own enough tickets for the race!')
+                    self.notify.warning(
+                        'b_racersJoined: Avatar %s does not own enough tickets for the race!')
                     av.b_setTickets(0)
                 else:
                     av.b_setTickets(avTickets - raceFee)
 
         self.avIds = avIds
-        self.readRulesBarrier = self.beginBarrier('readRules', self.avIds, 10, self.b_startRace)
+        self.readRulesBarrier = self.beginBarrier(
+            'readRules', self.avIds, 10, self.b_startRace)
         self.sendUpdate('startTutorial', [])
         return
 
@@ -230,10 +245,14 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
         for i in self.racers:
             self.racers[i].baseTime = self.baseTime
 
-        self.sendUpdate('startRace', [globalClockDelta.localToNetworkTime(self.baseTime)])
+        self.sendUpdate(
+            'startRace', [
+                globalClockDelta.localToNetworkTime(
+                    self.baseTime)])
         qualTime = RaceGlobals.getQualifyingTime(self.trackId)
         timeout = qualTime + 60 + 3
-        self.kickSlowRacersTask = taskMgr.doMethodLater(timeout, self.kickSlowRacers, 'kickSlowRacers')
+        self.kickSlowRacersTask = taskMgr.doMethodLater(
+            timeout, self.kickSlowRacers, 'kickSlowRacers')
 
     def kickSlowRacers(self, task):
         self.kickSlowRacersTask = None
@@ -250,7 +269,10 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
                 self.ignore(racer.exitEvent)
                 racer.exited = True
                 racer.finished = True
-                taskMgr.doMethodLater(10, self.removeObject, 'removeKart-%s' % racer.kart.doId, extraArgs=[racer.kart])
+                taskMgr.doMethodLater(
+                    10, self.removeObject, 'removeKart-%s' %
+                    racer.kart.doId, extraArgs=[
+                        racer.kart])
                 taskMgr.remove('make %s invincible' % avId)
                 self.racers[avId].anvilTarget = True
 
@@ -260,7 +282,8 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
     def d_kickRacer(self, avId, reason=RaceGlobals.Exit_Barrier):
         if avId not in self.kickedAvIds:
             self.kickedAvIds.append(avId)
-            if self.isCircuit() and not self.isFirstRace() and reason == RaceGlobals.Exit_Barrier:
+            if self.isCircuit() and not self.isFirstRace(
+            ) and reason == RaceGlobals.Exit_Barrier:
                 reason = RaceGlobals.Exit_BarrierNoRefund
             self.sendUpdate('goToSpeedway', [self.kickedAvIds, reason])
 
@@ -286,11 +309,17 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
             id = possibleTargets[0].avId
             if id != ownerId:
                 possibleTargets[0].anvilTarget = True
-                taskMgr.doMethodLater(4, setattr, 'make %s invincible' % id, extraArgs=[self.racers[id], 'anvilTarget', False])
-            self.sendUpdate('dropAnvilOn', [ownerId, id, globalClockDelta.getFrameNetworkTime()])
+                taskMgr.doMethodLater(
+                    4, setattr, 'make %s invincible' %
+                    id, extraArgs=[
+                        self.racers[id], 'anvilTarget', False])
+            self.sendUpdate(
+                'dropAnvilOn', [
+                    ownerId, id, globalClockDelta.getFrameNetworkTime()])
 
     def d_makeBanana(self, avId, x, y, z):
-        gag = DistributedGagAI.DistributedGagAI(simbase.air, avId, self, 3, x, y, z, 0)
+        gag = DistributedGagAI.DistributedGagAI(
+            simbase.air, avId, self, 3, x, y, z, 0)
         self.thrownGags.append(gag)
         gag.generateWithRequired(self.zoneId)
 
@@ -301,25 +330,30 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
         targetDist = 10000
         for iiId in self.racers:
             targetRacer = simbase.air.doId2do.get(iiId, None)
-            if not (targetRacer and targetRacer.kart and ownerRacer and ownerRacer.kart):
+            if not (
+                    targetRacer and targetRacer.kart and ownerRacer and ownerRacer.kart):
                 continue
-            if targetRacer.kart.getPos(ownerRacer.kart)[1] < 500 and targetRacer.kart.getPos(ownerRacer.kart)[1] >= 0 and abs(targetRacer.kart.getPos(ownerRacer.kart)[0]) < 50 and avId != iiId and targetDist > targetRacer.kart.getPos(ownerRacer.kart)[1]:
+            if targetRacer.kart.getPos(ownerRacer.kart)[1] < 500 and targetRacer.kart.getPos(ownerRacer.kart)[1] >= 0 and abs(
+                    targetRacer.kart.getPos(ownerRacer.kart)[0]) < 50 and avId != iiId and targetDist > targetRacer.kart.getPos(ownerRacer.kart)[1]:
                 targetId = iiId
                 targetDist = targetRacer.kart.getPos(ownerRacer.kart)[1]
 
         if targetId == 0:
             for iiId in self.racers:
                 targetRacer = simbase.air.doId2do.get(iiId, None)
-                if not (targetRacer and targetRacer.kart and ownerRacer and ownerRacer.kart):
+                if not (
+                        targetRacer and targetRacer.kart and ownerRacer and ownerRacer.kart):
                     continue
-                if targetRacer.kart.getPos(ownerRacer.kart)[1] > -80 and targetRacer.kart.getPos(ownerRacer.kart)[1] <= 0 and abs(targetRacer.kart.getPos(ownerRacer.kart)[0]) < 50 and avId != iiId:
+                if targetRacer.kart.getPos(ownerRacer.kart)[1] > -80 and targetRacer.kart.getPos(ownerRacer.kart)[
+                        1] <= 0 and abs(targetRacer.kart.getPos(ownerRacer.kart)[0]) < 50 and avId != iiId:
                     targetId = iiId
 
         self.sendUpdate('shootPiejectile', [avId, targetId, type])
         return
 
     def d_makePie(self, avId, x, y, z):
-        gag = DistributedProjectileAI.DistributedProjectileAI(simbase.air, self, avId)
+        gag = DistributedProjectileAI.DistributedProjectileAI(
+            simbase.air, self, avId)
         self.thrownGags.append(gag)
         gag.generateWithRequired(self.zoneId)
 
@@ -332,7 +366,12 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
         if avId in self.racers and avId == avIdFromClient:
             self.notify.debug('Removing %d from race %d' % (avId, self.doId))
             racer = self.racers[avId]
-            taskMgr.doMethodLater(10, self.removeObject, racer.kart.uniqueName('removeIt'), extraArgs=[racer.kart])
+            taskMgr.doMethodLater(
+                10,
+                self.removeObject,
+                racer.kart.uniqueName('removeIt'),
+                extraArgs=[
+                    racer.kart])
             if racer.avatar:
                 racer.avatar.kart = None
             self.racers[avId].exited = True
@@ -357,7 +396,12 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
                 return
             if self.gagList[slot] == index:
                 self.gagList[slot] = None
-                taskMgr.doMethodLater(5, self.d_genGag, 'remakeGag-' + str(slot), extraArgs=[slot])
+                taskMgr.doMethodLater(
+                    5,
+                    self.d_genGag,
+                    'remakeGag-' +
+                    str(slot),
+                    extraArgs=[slot])
                 self.racers[avId].hasGag = True
                 self.racers[avId].gagType = type
             else:
@@ -407,7 +451,8 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
                     taskMgr.remove(self.flushPendingTask)
                     self.flushPendingTask = None
                 if someoneIsClose:
-                    task = taskMgr.doMethodLater(3, self.flushPending, self.uniqueName('flushPending'))
+                    task = taskMgr.doMethodLater(
+                        3, self.flushPending, self.uniqueName('flushPending'))
                     self.flushPendingTask = task
                 else:
                     self.flushPending()
@@ -421,11 +466,25 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
         self.flushPendingTask = None
         return
 
-    def d_setPlace(self, avId, totalTime, place, entryFee, qualify, winnings, bonus, trophies, circuitPoints, circuitTime):
-        self.sendUpdate('setPlace', [avId, totalTime, place, entryFee, qualify, winnings, bonus, trophies, circuitPoints, circuitTime])
+    def d_setPlace(self, avId, totalTime, place, entryFee, qualify,
+                   winnings, bonus, trophies, circuitPoints, circuitTime):
+        self.sendUpdate('setPlace',
+                        [avId,
+                         totalTime,
+                         place,
+                         entryFee,
+                         qualify,
+                         winnings,
+                         bonus,
+                         trophies,
+                         circuitPoints,
+                         circuitTime])
 
-    def d_setCircuitPlace(self, avId, place, entryFee, winnings, bonus, trophies):
-        self.sendUpdate('setCircuitPlace', [avId, place, entryFee, winnings, bonus, trophies])
+    def d_setCircuitPlace(self, avId, place, entryFee,
+                          winnings, bonus, trophies):
+        self.sendUpdate(
+            'setCircuitPlace', [
+                avId, place, entryFee, winnings, bonus, trophies])
 
     def d_endCircuitRace(self):
         self.sendUpdate('endCircuitRace')
@@ -437,7 +496,10 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
             self.sendUpdate('racerDisconnected', [avId])
             self.ignore(racer.exitEvent)
             racer.exited = True
-            taskMgr.doMethodLater(10, self.removeObject, 'removeKart-%s' % racer.kart.doId, extraArgs=[racer.kart])
+            taskMgr.doMethodLater(
+                10, self.removeObject, 'removeKart-%s' %
+                racer.kart.doId, extraArgs=[
+                    racer.kart])
             taskMgr.remove('make %s invincible' % id)
             self.racers[avId].anvilTarget = True
             self.checkForEndOfRace()
@@ -456,7 +518,9 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
 
     def sendToonsToNextCircuitRace(self, raceZone, trackId):
         for avId in self.avIds:
-            self.notify.debug('Handling Circuit Race transisiton for avatar %s' % avId)
+            self.notify.debug(
+                'Handling Circuit Race transisiton for avatar %s' %
+                avId)
             self.sendUpdateToAvatarId(avId, 'setRaceZone', [raceZone, trackId])
 
     def isCircuit(self):

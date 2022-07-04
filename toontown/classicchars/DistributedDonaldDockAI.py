@@ -8,20 +8,23 @@ from toontown.classicchars import CharStateDatasAI
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 
+
 class DistributedDonaldDockAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedDonaldDockAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedDonaldDockAI')
 
     def __init__(self, air):
-        DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(self, air, TTLocalizer.DonaldDock)
+        DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(
+            self, air, TTLocalizer.DonaldDock)
         self.fsm = ClassicFSM.ClassicFSM('DistributedDonaldDockAI', [
-         State.State('Off', self.enterOff, self.exitOff, [
-          'Lonely', 'TransitionToCostume']),
-         State.State('Lonely', self.enterLonely, self.exitLonely, [
-          'Chatty', 'TransitionToCostume']),
-         State.State('Chatty', self.enterChatty, self.exitChatty, [
-          'Lonely', 'TransitionToCostume']),
-         State.State('TransitionToCostume', self.enterTransitionToCostume, self.exitTransitionToCostume, [
-          'Off'])], 'Off', 'Off')
+            State.State('Off', self.enterOff, self.exitOff, [
+                'Lonely', 'TransitionToCostume']),
+            State.State('Lonely', self.enterLonely, self.exitLonely, [
+                'Chatty', 'TransitionToCostume']),
+            State.State('Chatty', self.enterChatty, self.exitChatty, [
+                'Lonely', 'TransitionToCostume']),
+            State.State('TransitionToCostume', self.enterTransitionToCostume, self.exitTransitionToCostume, [
+                'Off'])], 'Off', 'Off')
         self.fsm.enterInitialState()
         self.handleHolidays()
 
@@ -37,9 +40,11 @@ class DistributedDonaldDockAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
     def generate(self):
         DistributedCCharBaseAI.DistributedCCharBaseAI.generate(self)
         self.lonelyDoneEvent = self.taskName('DonaldDock-lonely-done')
-        self.lonely = CharStateDatasAI.CharLonelyStateAI(self.lonelyDoneEvent, self)
+        self.lonely = CharStateDatasAI.CharLonelyStateAI(
+            self.lonelyDoneEvent, self)
         self.chattyDoneEvent = self.taskName('DonaldDock-chatty-done')
-        self.chatty = CharStateDatasAI.CharChattyStateAI(self.chattyDoneEvent, self)
+        self.chatty = CharStateDatasAI.CharChattyStateAI(
+            self.chattyDoneEvent, self)
 
     def start(self):
         self.fsm.request('Lonely')
@@ -83,7 +88,8 @@ class DistributedDonaldDockAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         if len(self.nearbyAvatars) == 1:
             self.fsm.request('Chatty')
         else:
-            self.notify.debug('avatarEnterNextState: num avatars: ' + str(len(self.nearbyAvatars)))
+            self.notify.debug(
+                'avatarEnterNextState: num avatars: ' + str(len(self.nearbyAvatars)))
 
     def avatarExitNextState(self):
         if len(self.nearbyAvatars) == 0:

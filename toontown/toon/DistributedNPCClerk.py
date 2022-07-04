@@ -8,6 +8,7 @@ from toontown.toonbase import TTLocalizer
 from toontown.hood import ZoneUtil
 from toontown.toontowngui import TeaserPanel
 
+
 class DistributedNPCClerk(DistributedNPCToonBase):
 
     def __init__(self, cr):
@@ -35,7 +36,8 @@ class DistributedNPCClerk(DistributedNPCToonBase):
         return
 
     def allowedToEnter(self):
-        if hasattr(base, 'ttAccess') and base.ttAccess and base.ttAccess.canAccess():
+        if hasattr(
+                base, 'ttAccess') and base.ttAccess and base.ttAccess.canAccess():
             return True
         return False
 
@@ -54,7 +56,8 @@ class DistributedNPCClerk(DistributedNPCToonBase):
             place = base.cr.playGame.getPlace()
             if place:
                 place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(pageName='otherGags', doneFunc=self.handleOkTeaser)
+            self.dialog = TeaserPanel.TeaserPanel(
+                pageName='otherGags', doneFunc=self.handleOkTeaser)
 
     def __handleUnexpectedExit(self):
         self.notify.warning('unexpected exit')
@@ -95,7 +98,9 @@ class DistributedNPCClerk(DistributedNPCToonBase):
                 self.ignore(self.purchaseDoneEvent)
             if self.purchase:
                 self.__handlePurchaseDone()
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_TOOKTOOLONG, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_TOOKTOOLONG,
+                CFSpeech | CFTimeout)
             self.resetClerk()
         elif mode == NPCToons.PURCHASE_MOVIE_START:
             self.av = base.cr.doId2do.get(avId)
@@ -103,20 +108,32 @@ class DistributedNPCClerk(DistributedNPCToonBase):
                 self.notify.warning('Avatar %d not found in doId' % avId)
                 return
             else:
-                self.accept(self.av.uniqueName('disable'), self.__handleUnexpectedExit)
+                self.accept(
+                    self.av.uniqueName('disable'),
+                    self.__handleUnexpectedExit)
             self.setupAvatars(self.av)
             if self.isLocalToon:
                 camera.wrtReparentTo(render)
-                self.lerpCameraSeq = camera.posQuatInterval(1, Point3(-5, 9, self.getHeight() - 0.5), Point3(-150, -2, 0), other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
+                self.lerpCameraSeq = camera.posQuatInterval(1, Point3(-5, 9, self.getHeight(
+                ) - 0.5), Point3(-150, -2, 0), other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
                 self.lerpCameraSeq.start()
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_GREETING, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_GREETING,
+                CFSpeech | CFTimeout)
             if self.isLocalToon:
-                taskMgr.doMethodLater(1.0, self.popupPurchaseGUI, self.uniqueName('popupPurchaseGUI'))
+                taskMgr.doMethodLater(
+                    1.0,
+                    self.popupPurchaseGUI,
+                    self.uniqueName('popupPurchaseGUI'))
         elif mode == NPCToons.PURCHASE_MOVIE_COMPLETE:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_GOODBYE, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_GOODBYE,
+                CFSpeech | CFTimeout)
             self.resetClerk()
         elif mode == NPCToons.PURCHASE_MOVIE_NO_MONEY:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_NEEDJELLYBEANS, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_NEEDJELLYBEANS,
+                CFSpeech | CFTimeout)
             self.resetClerk()
         return
 
@@ -124,17 +141,24 @@ class DistributedNPCClerk(DistributedNPCToonBase):
         self.setChatAbsolute('', CFSpeech)
         self.acceptOnce(self.purchaseDoneEvent, self.__handlePurchaseDone)
         self.accept('boughtGag', self.__handleBoughtGag)
-        self.purchase = ClerkPurchase.ClerkPurchase(base.localAvatar, self.remain, self.purchaseDoneEvent)
+        self.purchase = ClerkPurchase.ClerkPurchase(
+            base.localAvatar, self.remain, self.purchaseDoneEvent)
         self.purchase.load()
         self.purchase.enter()
         return Task.done
 
     def __handleBoughtGag(self):
-        self.d_setInventory(base.localAvatar.inventory.makeNetString(), base.localAvatar.getMoney(), 0)
+        self.d_setInventory(
+            base.localAvatar.inventory.makeNetString(),
+            base.localAvatar.getMoney(),
+            0)
 
     def __handlePurchaseDone(self):
         self.ignore('boughtGag')
-        self.d_setInventory(base.localAvatar.inventory.makeNetString(), base.localAvatar.getMoney(), 1)
+        self.d_setInventory(
+            base.localAvatar.inventory.makeNetString(),
+            base.localAvatar.getMoney(),
+            1)
         self.purchase.exit()
         self.purchase.unload()
         self.purchase = None

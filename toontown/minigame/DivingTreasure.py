@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
 from . import DivingGameGlobals
 
+
 class DivingTreasure(DirectObject):
 
     def __init__(self, i):

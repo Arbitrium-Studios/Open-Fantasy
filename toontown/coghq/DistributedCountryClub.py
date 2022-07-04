@@ -14,8 +14,10 @@ from direct.gui import OnscreenText
 from direct.task.Task import Task
 from direct.interval.IntervalGlobal import *
 
+
 class DistributedCountryClub(DistributedObject.DistributedObject):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCountryClub')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedCountryClub')
     ReadyPost = 'CountryClubReady'
     WinEvent = 'CountryClubWinEvent'
     doBlockRooms = base.config.GetBool('block-country-club-rooms', 1)
@@ -24,7 +26,10 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
         DistributedObject.DistributedObject.__init__(self, cr)
         self.lastCamEnterRoom = 0
         self.titleColor = (1, 1, 1, 1)
-        self.titleText = OnscreenText.OnscreenText('', fg=self.titleColor, shadow=(0, 0, 0, 1), font=ToontownGlobals.getSignFont(), pos=(0, -0.5), scale=0.1, drawOrder=0, mayChange=1)
+        self.titleText = OnscreenText.OnscreenText(
+            '', fg=self.titleColor, shadow=(
+                0, 0, 0, 1), font=ToontownGlobals.getSignFont(), pos=(
+                0, -0.5), scale=0.1, drawOrder=0, mayChange=1)
         self.titleSequence = None
         return
 
@@ -53,7 +58,8 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
         self.sky.reparentTo(camera)
         self.sky.setZ(0.0)
         self.sky.setHpr(0.0, 0.0, 0.0)
-        ce = CompassEffect.make(NodePath(), CompassEffect.PRot | CompassEffect.PZ)
+        ce = CompassEffect.make(NodePath(),
+                                CompassEffect.PRot | CompassEffect.PZ)
         self.sky.node().setEffect(ce)
         self.sky.setBin('background', 0)
 
@@ -83,7 +89,8 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
     def setFloorNum(self, num):
         DistributedCountryClub.notify.debug('floorNum: %s' % num)
         self.floorNum = num
-        self.layout = CountryClubLayout.CountryClubLayout(self.countryClubId, self.floorNum, self.layoutIndex)
+        self.layout = CountryClubLayout.CountryClubLayout(
+            self.countryClubId, self.floorNum, self.layoutIndex)
 
     def setLayoutIndex(self, layoutIndex):
         self.layoutIndex = layoutIndex
@@ -93,7 +100,10 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
 
     def setRoomDoIds(self, roomDoIds):
         self.roomDoIds = roomDoIds
-        self.roomWatcher = BulletinBoardWatcher.BulletinBoardWatcher('roomWatcher-%s' % self.doId, [ DistributedCountryClubRoom.getCountryClubRoomReadyPostName(doId) for doId in self.roomDoIds ], self.gotAllRooms)
+        self.roomWatcher = BulletinBoardWatcher.BulletinBoardWatcher(
+            'roomWatcher-%s' %
+            self.doId, [
+                DistributedCountryClubRoom.getCountryClubRoomReadyPostName(doId) for doId in self.roomDoIds], self.gotAllRooms)
 
     def gotAllRooms(self):
         self.notify.debug('countryClub %s: got all rooms' % self.doId)
@@ -104,7 +114,9 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
             self.rooms.append(base.cr.doId2do[doId])
             self.rooms[-1].setCountryClub(self)
 
-        self.notify.info('countryClubId %s, floor %s, %s' % (self.countryClubId, self.floorNum, self.rooms[0].avIdList))
+        self.notify.info(
+            'countryClubId %s, floor %s, %s' %
+            (self.countryClubId, self.floorNum, self.rooms[0].avIdList))
         rng = self.layout.getRng()
         numRooms = self.layout.getNumRooms()
         for i, room in enumerate(self.rooms):
@@ -115,7 +127,8 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
             self.allRooms.append(room)
             self.listenForFloorEvents(room)
             if i < numRooms - 1:
-                hallway = CountryClubRoom.CountryClubRoom(self.layout.getHallwayModel(i))
+                hallway = CountryClubRoom.CountryClubRoom(
+                    self.layout.getHallwayModel(i))
                 hallway.attachTo(room, rng)
                 hallway.setRoomNum(i * 2 + 1)
                 hallway.initFloorCollisions()
@@ -124,7 +137,7 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
                 self.allRooms.append(hallway)
                 self.listenForFloorEvents(hallway)
 
-        def handleCameraRayFloorCollision(collEntry, self = self):
+        def handleCameraRayFloorCollision(collEntry, self=self):
             name = collEntry.getIntoNode().getName()
             self.notify.debug('camera floor ray collided with: %s' % name)
             prefix = CountryClubRoom.CountryClubRoom.FloorCollPrefix
@@ -132,8 +145,9 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
             if name[:prefixLen] == prefix:
                 try:
                     roomNum = int(name[prefixLen:])
-                except:
-                    DistributedLevel.notify.warning('Invalid zone floor collision node: %s' % name)
+                except BaseException:
+                    DistributedLevel.notify.warning(
+                        'Invalid zone floor collision node: %s' % name)
                 else:
                     self.camEnterRoom(roomNum)
 
@@ -160,7 +174,7 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
         roomNum = room.getRoomNum()
         floorCollName = room.getFloorCollName()
 
-        def handleZoneEnter(collisionEntry, self = self, roomNum = roomNum):
+        def handleZoneEnter(collisionEntry, self=self, roomNum=roomNum):
             self.toonEnterRoom(roomNum)
             floorNode = collisionEntry.getIntoNode()
             if floorNode.hasTag('ouch'):
@@ -170,7 +184,7 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
 
         self.accept('enter%s' % floorCollName, handleZoneEnter)
 
-        def handleZoneExit(collisionEntry, self = self, roomNum = roomNum):
+        def handleZoneExit(collisionEntry, self=self, roomNum=roomNum):
             floorNode = collisionEntry.getIntoNode()
             if floorNode.hasTag('ouch'):
                 self.allRooms[roomNum].stopOuch()
@@ -178,13 +192,16 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
         self.accept('exit%s' % floorCollName, handleZoneExit)
 
     def getAllRoomsTimeout(self):
-        self.notify.warning('countryClub %s: timed out waiting for room objs' % self.doId)
+        self.notify.warning(
+            'countryClub %s: timed out waiting for room objs' %
+            self.doId)
 
     def toonEnterRoom(self, roomNum):
         self.notify.debug('toonEnterRoom: %s' % roomNum)
         if roomNum != self.curToonRoomNum:
             if self.curToonRoomNum is not None:
-                self.allRooms[self.curToonRoomNum].localToonFSM.request('notPresent')
+                self.allRooms[self.curToonRoomNum].localToonFSM.request(
+                    'notPresent')
             self.allRooms[roomNum].localToonFSM.request('present')
             self.curToonRoomNum = roomNum
         return
@@ -218,7 +235,9 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
         av = base.cr.identifyFriend(avId)
         if av is None:
             return
-        base.localAvatar.setSystemMessage(avId, TTLocalizer.CountryClubBossConfrontedMsg % av.getName())
+        base.localAvatar.setSystemMessage(
+            avId, TTLocalizer.CountryClubBossConfrontedMsg %
+            av.getName())
         return
 
     def warpToRoom(self, roomId):
@@ -256,7 +275,8 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
             self.geom.removeNode()
             self.geom = None
         base.localAvatar.setCameraCollisionsCanMove(0)
-        if hasattr(self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
+        if hasattr(
+                self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
             self.cr.relatedObjectMgr.abortRequest(self.relatedObjectMgrRequest)
             del self.relatedObjectMgrRequest
         DistributedObject.DistributedObject.disable(self)
@@ -279,7 +299,9 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
         panel.setFactoryToonIdList(avIds)
 
     def handleScreenshot(self):
-        base.addScreenshotString('countryClubId: %s, floor (from 1): %s' % (self.countryClubId, self.floorNum + 1))
+        base.addScreenshotString(
+            'countryClubId: %s, floor (from 1): %s' %
+            (self.countryClubId, self.floorNum + 1))
         if hasattr(self, 'currentRoomName'):
             base.addScreenshotString('%s' % self.currentRoomName)
 
@@ -307,7 +329,7 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
             name = base.cr.doId2do[avId].getName()
             self.showInfoText(TTLocalizer.CountryClubToonEnterElevator % name)
 
-    def showInfoText(self, text = 'hello world'):
+    def showInfoText(self, text='hello world'):
         description = text
         if description and description != '':
             self.titleText.setText(description)
@@ -317,7 +339,12 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
             if self.titleSequence:
                 self.titleSequence.finish()
             self.titleSequence = None
-            self.titleSequence = Sequence(Func(self.showTitleText), Wait(3.1), LerpColorScaleInterval(self.titleText, duration=0.5, colorScale=Vec4(1, 1, 1, 0.0)), Func(self.hideTitleText))
+            self.titleSequence = Sequence(
+                Func(
+                    self.showTitleText), Wait(3.1), LerpColorScaleInterval(
+                    self.titleText, duration=0.5, colorScale=Vec4(
+                        1, 1, 1, 0.0)), Func(
+                    self.hideTitleText))
             self.titleSequence.start()
         return
 

@@ -13,12 +13,20 @@ from direct.fsm import State
 from direct.fsm import ClassicFSM, State
 from toontown.toonbase import ToontownGlobals
 
-class DistributedCountryClubBattle(DistributedLevelBattle.DistributedLevelBattle):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCountryClubBattle')
+
+class DistributedCountryClubBattle(
+        DistributedLevelBattle.DistributedLevelBattle):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedCountryClubBattle')
 
     def __init__(self, cr):
         DistributedLevelBattle.DistributedLevelBattle.__init__(self, cr)
-        self.fsm.addState(State.State('CountryClubReward', self.enterCountryClubReward, self.exitCountryClubReward, ['Resume']))
+        self.fsm.addState(
+            State.State(
+                'CountryClubReward',
+                self.enterCountryClubReward,
+                self.exitCountryClubReward,
+                ['Resume']))
         offState = self.fsm.getStateNamed('Off')
         offState.addTransition('CountryClubReward')
         playMovieState = self.fsm.getStateNamed('PlayMovie')
@@ -32,7 +40,9 @@ class DistributedCountryClubBattle(DistributedLevelBattle.DistributedLevelBattle
             NametagGlobals.setMasterArrowsOn(0)
             if self.bossBattle:
                 messenger.send('localToonConfrontedCountryClubBoss')
-        self.movie.playReward(ts, self.uniqueName('building-reward'), self.__handleCountryClubRewardDone)
+        self.movie.playReward(ts,
+                              self.uniqueName('building-reward'),
+                              self.__handleCountryClubRewardDone)
 
     def __handleCountryClubRewardDone(self):
         self.notify.debug('countryClub reward done')

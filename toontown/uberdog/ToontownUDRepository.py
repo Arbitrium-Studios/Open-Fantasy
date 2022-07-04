@@ -11,10 +11,12 @@ from toontown.parties.ToontownTimeManager import ToontownTimeManager
 # TODO: Remove Astron dependence.
 
 class ToontownUDRepository(ToontownInternalRepository):
-    notify = DirectNotifyGlobal.directNotify.newCategory('ToontownUDRepository')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'ToontownUDRepository')
 
     def __init__(self, baseChannel, serverId):
-        ToontownInternalRepository.__init__(self, baseChannel, serverId, dcSuffix='UD')
+        ToontownInternalRepository.__init__(
+            self, baseChannel, serverId, dcSuffix='UD')
         self.toontownTimeManager = None
         self.astronLoginManager = None
 
@@ -44,4 +46,5 @@ class ToontownUDRepository(ToontownInternalRepository):
     def createGlobals(self):
         if __astron__:
             # Create our Astron login manager...
-            self.astronLoginManager = self.generateGlobalObject(OTP_DO_ID_ASTRON_LOGIN_MANAGER, 'AstronLoginManager')
+            self.astronLoginManager = self.generateGlobalObject(
+                OTP_DO_ID_ASTRON_LOGIN_MANAGER, 'AstronLoginManager')

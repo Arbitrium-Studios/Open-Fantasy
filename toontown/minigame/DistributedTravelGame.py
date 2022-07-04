@@ -14,38 +14,39 @@ from direct.interval.IntervalGlobal import *
 from . import VoteResultsPanel
 from . import VoteResultsTrolleyPanel
 IconDict = {ToontownGlobals.RaceGameId: 'mg_trolley_sign_race',
- ToontownGlobals.CannonGameId: 'mg_trolley_sign_cannon',
- ToontownGlobals.TagGameId: 'mg_trolley_sign_tag',
- ToontownGlobals.PatternGameId: 'mg_trolley_sign_minnie',
- ToontownGlobals.RingGameId: 'mg_trolley_sign_ring',
- ToontownGlobals.MazeGameId: 'mg_trolley_sign_maze',
- ToontownGlobals.TugOfWarGameId: 'mg_trolley_sign_tugawar',
- ToontownGlobals.CatchGameId: 'mg_trolley_sign_catch',
- ToontownGlobals.DivingGameId: 'mg_trolley_sign_dive',
- ToontownGlobals.TargetGameId: 'mg_trolley_sign_umbrella',
- ToontownGlobals.PairingGameId: 'mg_trolley_sign_card',
- ToontownGlobals.VineGameId: 'mg_trolley_sign_vine',
- ToontownGlobals.IceGameId: 'mg_trolley_sign_ice',
- ToontownGlobals.PhotoGameId: 'mg_trolley_sign_photo',
- ToontownGlobals.TwoDGameId: 'mg_trolley_sign_2d',
- ToontownGlobals.CogThiefGameId: 'mg_trolley_sign_theif'}
+            ToontownGlobals.CannonGameId: 'mg_trolley_sign_cannon',
+            ToontownGlobals.TagGameId: 'mg_trolley_sign_tag',
+            ToontownGlobals.PatternGameId: 'mg_trolley_sign_minnie',
+            ToontownGlobals.RingGameId: 'mg_trolley_sign_ring',
+            ToontownGlobals.MazeGameId: 'mg_trolley_sign_maze',
+            ToontownGlobals.TugOfWarGameId: 'mg_trolley_sign_tugawar',
+            ToontownGlobals.CatchGameId: 'mg_trolley_sign_catch',
+            ToontownGlobals.DivingGameId: 'mg_trolley_sign_dive',
+            ToontownGlobals.TargetGameId: 'mg_trolley_sign_umbrella',
+            ToontownGlobals.PairingGameId: 'mg_trolley_sign_card',
+            ToontownGlobals.VineGameId: 'mg_trolley_sign_vine',
+            ToontownGlobals.IceGameId: 'mg_trolley_sign_ice',
+            ToontownGlobals.PhotoGameId: 'mg_trolley_sign_photo',
+            ToontownGlobals.TwoDGameId: 'mg_trolley_sign_2d',
+            ToontownGlobals.CogThiefGameId: 'mg_trolley_sign_theif'}
 MinigameNameDict = {ToontownGlobals.RaceGameId: TTLocalizer.RaceGameTitle,
- ToontownGlobals.CannonGameId: TTLocalizer.CannonGameTitle,
- ToontownGlobals.TagGameId: TTLocalizer.TagGameTitle,
- ToontownGlobals.PatternGameId: TTLocalizer.PatternGameTitle,
- ToontownGlobals.RingGameId: TTLocalizer.RingGameTitle,
- ToontownGlobals.MazeGameId: TTLocalizer.MazeGameTitle,
- ToontownGlobals.TugOfWarGameId: TTLocalizer.TugOfWarGameTitle,
- ToontownGlobals.CatchGameId: TTLocalizer.CatchGameTitle,
- ToontownGlobals.DivingGameId: TTLocalizer.DivingGameTitle,
- ToontownGlobals.TargetGameId: TTLocalizer.TargetGameTitle,
- ToontownGlobals.PairingGameId: TTLocalizer.PairingGameTitle,
- ToontownGlobals.VineGameId: TTLocalizer.VineGameTitle,
- ToontownGlobals.TravelGameId: TTLocalizer.TravelGameTitle,
- ToontownGlobals.IceGameId: TTLocalizer.IceGameTitle,
- ToontownGlobals.PhotoGameId: TTLocalizer.PhotoGameTitle,
- ToontownGlobals.TwoDGameId: TTLocalizer.TwoDGameTitle,
- ToontownGlobals.CogThiefGameId: TTLocalizer.CogThiefGameTitle}
+                    ToontownGlobals.CannonGameId: TTLocalizer.CannonGameTitle,
+                    ToontownGlobals.TagGameId: TTLocalizer.TagGameTitle,
+                    ToontownGlobals.PatternGameId: TTLocalizer.PatternGameTitle,
+                    ToontownGlobals.RingGameId: TTLocalizer.RingGameTitle,
+                    ToontownGlobals.MazeGameId: TTLocalizer.MazeGameTitle,
+                    ToontownGlobals.TugOfWarGameId: TTLocalizer.TugOfWarGameTitle,
+                    ToontownGlobals.CatchGameId: TTLocalizer.CatchGameTitle,
+                    ToontownGlobals.DivingGameId: TTLocalizer.DivingGameTitle,
+                    ToontownGlobals.TargetGameId: TTLocalizer.TargetGameTitle,
+                    ToontownGlobals.PairingGameId: TTLocalizer.PairingGameTitle,
+                    ToontownGlobals.VineGameId: TTLocalizer.VineGameTitle,
+                    ToontownGlobals.TravelGameId: TTLocalizer.TravelGameTitle,
+                    ToontownGlobals.IceGameId: TTLocalizer.IceGameTitle,
+                    ToontownGlobals.PhotoGameId: TTLocalizer.PhotoGameTitle,
+                    ToontownGlobals.TwoDGameId: TTLocalizer.TwoDGameTitle,
+                    ToontownGlobals.CogThiefGameId: TTLocalizer.CogThiefGameTitle}
+
 
 def makeLabel(itemName, itemNum, *extraArgs):
     intVersion = int(itemName)
@@ -57,9 +58,9 @@ def makeLabel(itemName, itemNum, *extraArgs):
     else:
         textColor = Vec4(1, 0, 0, 1)
     return DirectLabel(text=str(intVersion), text_fg=textColor, relief=DGG.RIDGE, frameSize=(-1.2,
-     1.2,
-     -0.225,
-     0.8), scale=1.0)
+                                                                                             1.2,
+                                                                                             -0.225,
+                                                                                             0.8), scale=1.0)
 
 
 def map3dToAspect2d(node, point):
@@ -93,12 +94,23 @@ class DistributedTravelGame(DistributedMinigame):
     def __init__(self, cr):
         DistributedMinigame.__init__(self, cr)
         self.gameFSM = ClassicFSM.ClassicFSM('DistributedTravelGame', [State.State('off', self.enterOff, self.exitOff, ['inputChoice']),
-         State.State('inputChoice', self.enterInputChoice, self.exitInputChoice, ['waitServerChoices', 'displayVotes', 'cleanup']),
-         State.State('waitServerChoices', self.enterWaitServerChoices, self.exitWaitServerChoices, ['displayVotes', 'cleanup']),
-         State.State('displayVotes', self.enterDisplayVotes, self.exitDisplayVotes, ['moveTrolley', 'cleanup']),
-         State.State('moveTrolley', self.enterMoveTrolley, self.exitMoveTrolley, ['inputChoice', 'winMovie', 'cleanup']),
-         State.State('winMovie', self.enterWinMovie, self.exitWinMovie, ['cleanup']),
-         State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
+                                                                       State.State(
+            'inputChoice', self.enterInputChoice, self.exitInputChoice, [
+                'waitServerChoices', 'displayVotes', 'cleanup']),
+            State.State(
+            'waitServerChoices', self.enterWaitServerChoices, self.exitWaitServerChoices, [
+                'displayVotes', 'cleanup']),
+            State.State('displayVotes', self.enterDisplayVotes,
+                        self.exitDisplayVotes, ['moveTrolley', 'cleanup']),
+            State.State(
+            'moveTrolley', self.enterMoveTrolley, self.exitMoveTrolley, [
+                'inputChoice', 'winMovie', 'cleanup']),
+            State.State(
+            'winMovie',
+            self.enterWinMovie,
+            self.exitWinMovie,
+            ['cleanup']),
+            State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
         self.addChildGameFSM(self.gameFSM)
         self.currentVotes = {}
         self.cameraTopView = (100, -20, 280, 0, -89, 0)
@@ -109,12 +121,18 @@ class DistributedTravelGame(DistributedMinigame):
         self.minigameLabels = []
         self.minigameIcons = []
         self.bonusLabels = []
-        self.trolleyAwaySfx = base.loader.loadSfx('phase_4/audio/sfx/SZ_trolley_away.ogg')
-        self.trolleyBellSfx = base.loader.loadSfx('phase_4/audio/sfx/SZ_trolley_bell.ogg')
-        self.turntableRotateSfx = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_travel_game_turntble_rotate_2.ogg')
-        self.wonGameSfx = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_travel_game_bonus.ogg')
-        self.lostGameSfx = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_travel_game_no_bonus_2.ogg')
-        self.noWinnerSfx = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_travel_game_no_bonus.ogg')
+        self.trolleyAwaySfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/SZ_trolley_away.ogg')
+        self.trolleyBellSfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/SZ_trolley_bell.ogg')
+        self.turntableRotateSfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_travel_game_turntble_rotate_2.ogg')
+        self.wonGameSfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_travel_game_bonus.ogg')
+        self.lostGameSfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_travel_game_no_bonus_2.ogg')
+        self.noWinnerSfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_travel_game_no_bonus.ogg')
         self.boardIndex = 0
         self.avNames = []
         self.disconnectedAvIds = []
@@ -133,10 +151,12 @@ class DistributedTravelGame(DistributedMinigame):
         self.notify.debug('load')
         DistributedMinigame.load(self)
         self.sky = loader.loadModel('phase_3.5/models/props/TT_sky')
-        self.gameBoard = loader.loadModel('phase_4/models/minigames/toon_cannon_gameground')
+        self.gameBoard = loader.loadModel(
+            'phase_4/models/minigames/toon_cannon_gameground')
         self.gameBoard.setPosHpr(100, 0, 0, 0, 0, 0)
         self.gameBoard.setScale(1.0)
-        station = loader.loadModel('phase_4/models/modules/trolley_station_TT.bam')
+        station = loader.loadModel(
+            'phase_4/models/modules/trolley_station_TT.bam')
         self.trolleyCar = station.find('**/trolley_car')
         self.trolleyCar.reparentTo(hidden)
         self.trolleyCarOrigPos = self.trolleyCar.getPos()
@@ -184,12 +204,14 @@ class DistributedTravelGame(DistributedMinigame):
         self.trainTracks = {}
         self.tunnels = {}
         self.extraTrainTracks = []
-        turnTable = loader.loadModel('phase_4/models/minigames/trolley_game_turntable')
+        turnTable = loader.loadModel(
+            'phase_4/models/minigames/trolley_game_turntable')
         minPoint = Point3(0, 0, 0)
         maxPoint = Point3(0, 0, 0)
         turnTable.calcTightBounds(minPoint, maxPoint)
         self.fullLength = maxPoint[0]
-        for key in list(TravelGameGlobals.BoardLayouts[self.boardIndex].keys()):
+        for key in list(
+                TravelGameGlobals.BoardLayouts[self.boardIndex].keys()):
             info = TravelGameGlobals.BoardLayouts[self.boardIndex][key]
             switchModel = turnTable.find('**/turntable1').copyTo(render)
             switchModel.setPos(*info['pos'])
@@ -212,14 +234,17 @@ class DistributedTravelGame(DistributedMinigame):
         trainTrack = self.loadTrainTrack(startX, rootY, rootX, rootY)
         self.extraTrainTracks.append(trainTrack)
         tunnelX = None
-        for key in list(TravelGameGlobals.BoardLayouts[self.boardIndex].keys()):
+        for key in list(
+                TravelGameGlobals.BoardLayouts[self.boardIndex].keys()):
             if self.isLeaf(key):
                 info = TravelGameGlobals.BoardLayouts[self.boardIndex][key]
                 switchX, switchY, switchZ = info['pos']
                 endX = switchX + TravelGameGlobals.xInc
-                trainTrack = self.loadTrainTrack(switchX, switchY, endX, switchY)
+                trainTrack = self.loadTrainTrack(
+                    switchX, switchY, endX, switchY)
                 self.extraTrainTracks.append(trainTrack)
-                tempModel = loader.loadModel('phase_4/models/minigames/trolley_game_turntable')
+                tempModel = loader.loadModel(
+                    'phase_4/models/minigames/trolley_game_turntable')
                 tunnel = tempModel.find('**/tunnel1')
                 tunnel.reparentTo(render)
                 tempModel.removeNode()
@@ -239,14 +264,15 @@ class DistributedTravelGame(DistributedMinigame):
         self.flashWinningBeansTrack = None
         return
 
-    def loadTrainTrack(self, x1, y1, x2, y2, zAdj = 0):
-        turnTable = loader.loadModel('phase_4/models/minigames/trolley_game_turntable')
+    def loadTrainTrack(self, x1, y1, x2, y2, zAdj=0):
+        turnTable = loader.loadModel(
+            'phase_4/models/minigames/trolley_game_turntable')
         trainPart = turnTable.find('**/track_a2')
         trackHeight = 0.03
         trainTrack = render.attachNewNode('trainTrack%d%d%d%d' % (x1,
-         y1,
-         x2,
-         y2))
+                                                                  y1,
+                                                                  x2,
+                                                                  y2))
         trainTrack.setPos(x1, y1, trackHeight)
         xDiff = abs(x2 - x1)
         yDiff = abs(y2 - y1)
@@ -272,27 +298,90 @@ class DistributedTravelGame(DistributedMinigame):
     def loadGui(self):
         scoreText = [str(self.currentVotes[self.localAvId])]
         self.gui = DirectFrame()
-        self.remainingVotesFrame = DirectFrame(parent=self.gui, relief=None, geom=DGG.getDefaultDialogGeom(), geom_color=GlobalDialogColor, geom_scale=(7, 1, 1), pos=(-0.9, 0, 0.8), scale=0.1, text=TTLocalizer.TravelGameRemainingVotes, text_align=TextNode.ALeft, text_scale=TTLocalizer.DTGremainingVotesFrame, text_pos=(-3.4, -0.1, 0.0))
-        self.localVotesRemaining = DirectLabel(parent=self.remainingVotesFrame, relief=None, text=scoreText, text_fg=VBase4(0, 0.5, 0, 1), text_align=TextNode.ARight, text_scale=0.7, pos=(3.2, 0, -0.15))
+        self.remainingVotesFrame = DirectFrame(parent=self.gui,
+                                               relief=None,
+                                               geom=DGG.getDefaultDialogGeom(),
+                                               geom_color=GlobalDialogColor,
+                                               geom_scale=(7,
+                                                           1,
+                                                           1),
+                                               pos=(-0.9,
+                                                    0,
+                                                    0.8),
+                                               scale=0.1,
+                                               text=TTLocalizer.TravelGameRemainingVotes,
+                                               text_align=TextNode.ALeft,
+                                               text_scale=TTLocalizer.DTGremainingVotesFrame,
+                                               text_pos=(-3.4,
+                                                         -0.1,
+                                                         0.0))
+        self.localVotesRemaining = DirectLabel(
+            parent=self.remainingVotesFrame, relief=None, text=scoreText, text_fg=VBase4(
+                0, 0.5, 0, 1), text_align=TextNode.ARight, text_scale=0.7, pos=(
+                3.2, 0, -0.15))
         guiModel = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
-        self.choiceFrame = DirectFrame(parent=self.gui, relief=None, pos=(-0.55, 0, -0.85), image=DGG.getDefaultDialogGeom(), image_scale=(1.4, 1, 0.225), image_color=GlobalDialogColor)
-        self.useLabel = DirectLabel(text=TTLocalizer.TravelGameUse, parent=self.choiceFrame, pos=(-0.59, 0, -0.01), text_scale=TTLocalizer.DTGuseLabel, relief=None)
-        self.votesPeriodLabel = DirectLabel(text=TTLocalizer.TravelGameVotesWithPeriod, parent=self.choiceFrame, pos=(-0.21, 0, -0.01), text_scale=TTLocalizer.DTGvotesPeriodLabel, relief=None, text_align=TextNode.ALeft)
-        self.votesToGoLabel = DirectLabel(text=TTLocalizer.TravelGameVotesToGo, parent=self.choiceFrame, pos=(-0.21, 0, -0.01), text_scale=TTLocalizer.DTGvotesToGoLabel, relief=None, text_align=TextNode.ALeft)
-        self.upLabel = DirectLabel(text=TTLocalizer.TravelGameUp, parent=self.choiceFrame, pos=(0.31, 0, -0.01), text_scale=TTLocalizer.DTGupLabel, text_fg=Vec4(0, 0, 1, 1), relief=None, text_align=TextNode.ALeft)
-        self.downLabel = DirectLabel(text=TTLocalizer.TravelGameDown, parent=self.choiceFrame, pos=(0.31, 0, -0.01), text_scale=TTLocalizer.DTGdownLabel, text_fg=Vec4(1, 0, 0, 1), relief=None, text_align=TextNode.ALeft)
+        self.choiceFrame = DirectFrame(
+            parent=self.gui, relief=None, pos=(
+                -0.55, 0, -0.85), image=DGG.getDefaultDialogGeom(), image_scale=(
+                1.4, 1, 0.225), image_color=GlobalDialogColor)
+        self.useLabel = DirectLabel(
+            text=TTLocalizer.TravelGameUse, parent=self.choiceFrame, pos=(
+                -0.59, 0, -0.01), text_scale=TTLocalizer.DTGuseLabel, relief=None)
+        self.votesPeriodLabel = DirectLabel(
+            text=TTLocalizer.TravelGameVotesWithPeriod,
+            parent=self.choiceFrame,
+            pos=(
+                -0.21,
+                0,
+                -0.01),
+            text_scale=TTLocalizer.DTGvotesPeriodLabel,
+            relief=None,
+            text_align=TextNode.ALeft)
+        self.votesToGoLabel = DirectLabel(text=TTLocalizer.TravelGameVotesToGo, parent=self.choiceFrame, pos=(
+            -0.21, 0, -0.01), text_scale=TTLocalizer.DTGvotesToGoLabel, relief=None, text_align=TextNode.ALeft)
+        self.upLabel = DirectLabel(
+            text=TTLocalizer.TravelGameUp, parent=self.choiceFrame, pos=(
+                0.31, 0, -0.01), text_scale=TTLocalizer.DTGupLabel, text_fg=Vec4(
+                0, 0, 1, 1), relief=None, text_align=TextNode.ALeft)
+        self.downLabel = DirectLabel(
+            text=TTLocalizer.TravelGameDown, parent=self.choiceFrame, pos=(
+                0.31, 0, -0.01), text_scale=TTLocalizer.DTGdownLabel, text_fg=Vec4(
+                1, 0, 0, 1), relief=None, text_align=TextNode.ALeft)
         self.scrollList = DirectScrolledList(parent=self.choiceFrame, relief=None, pos=(-0.36, 0, -0.02), incButton_image=(guiModel.find('**/FndsLst_ScrollUp'),
-         guiModel.find('**/FndsLst_ScrollDN'),
-         guiModel.find('**/FndsLst_ScrollUp_Rllvr'),
-         guiModel.find('**/FndsLst_ScrollUp')), incButton_relief=None, incButton_pos=(0.0, 0.0, -0.04), incButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), incButton_scale=(1.0, 1.0, -1.0), decButton_image=(guiModel.find('**/FndsLst_ScrollUp'),
-         guiModel.find('**/FndsLst_ScrollDN'),
-         guiModel.find('**/FndsLst_ScrollUp_Rllvr'),
-         guiModel.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_pos=(0.0, 0.0, 0.095), decButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), itemFrame_pos=(0.0, 0.0, 0.0), itemFrame_relief=DGG.GROOVE, numItemsVisible=1, itemMakeFunction=makeLabel, items=[], scrollSpeed=3.0, itemFrame_scale=0.1, command=self.scrollChoiceChanged)
+                                                                                                                           guiModel.find(
+                                                                                                                               '**/FndsLst_ScrollDN'),
+                                                                                                                           guiModel.find(
+                                                                                                                               '**/FndsLst_ScrollUp_Rllvr'),
+                                                                                                                           guiModel.find('**/FndsLst_ScrollUp')), incButton_relief=None, incButton_pos=(0.0, 0.0, -0.04), incButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), incButton_scale=(1.0, 1.0, -1.0), decButton_image=(guiModel.find('**/FndsLst_ScrollUp'),
+                                                                                                                                                                                                                                                                                                                              guiModel.find(
+                                                                                                                               '**/FndsLst_ScrollDN'),
+            guiModel.find('**/FndsLst_ScrollUp_Rllvr'),
+            guiModel.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_pos=(0.0, 0.0, 0.095), decButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), itemFrame_pos=(0.0, 0.0, 0.0), itemFrame_relief=DGG.GROOVE, numItemsVisible=1, itemMakeFunction=makeLabel, items=[], scrollSpeed=3.0, itemFrame_scale=0.1, command=self.scrollChoiceChanged)
         self.putChoicesInScrollList()
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        okImageList = (buttons.find('**/ChtBx_OKBtn_UP'), buttons.find('**/ChtBx_OKBtn_DN'), buttons.find('**/ChtBx_OKBtn_Rllvr'))
-        self.voteButton = DirectButton(parent=self.choiceFrame, relief=None, image=okImageList, image_scale=3.0, pos=(0.85, 0, 0.0), text=TTLocalizer.TravelGameVoteWithExclamation, text_scale=TTLocalizer.DTGvoteButton, text_pos=(0, 0), command=self.handleInputChoice)
-        self.waitingChoicesLabel = DirectLabel(text=TTLocalizer.TravelGameWaitingChoices, text_fg=VBase4(1, 1, 1, 1), relief=None, pos=(-0.2, 0, -0.85), scale=0.075)
+        okImageList = (
+            buttons.find('**/ChtBx_OKBtn_UP'),
+            buttons.find('**/ChtBx_OKBtn_DN'),
+            buttons.find('**/ChtBx_OKBtn_Rllvr'))
+        self.voteButton = DirectButton(
+            parent=self.choiceFrame,
+            relief=None,
+            image=okImageList,
+            image_scale=3.0,
+            pos=(
+                0.85,
+                0,
+                0.0),
+            text=TTLocalizer.TravelGameVoteWithExclamation,
+            text_scale=TTLocalizer.DTGvoteButton,
+            text_pos=(
+                0,
+                0),
+            command=self.handleInputChoice)
+        self.waitingChoicesLabel = DirectLabel(
+            text=TTLocalizer.TravelGameWaitingChoices, text_fg=VBase4(
+                1, 1, 1, 1), relief=None, pos=(
+                -0.2, 0, -0.85), scale=0.075)
         self.waitingChoicesLabel.hide()
         self.gui.hide()
         return
@@ -454,7 +543,7 @@ class DistributedTravelGame(DistributedMinigame):
         NametagGlobals.setOnscreenChatForced(1)
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.hide()
-        if self.timerStartTime != None:
+        if self.timerStartTime is not None:
             self.startTimer()
         if base.localAvatar.laffMeter:
             base.localAvatar.laffMeter.stop()
@@ -464,7 +553,7 @@ class DistributedTravelGame(DistributedMinigame):
 
     def exitInputChoice(self):
         NametagGlobals.setOnscreenChatForced(0)
-        if self.timer != None:
+        if self.timer is not None:
             self.timer.destroy()
             self.timer = None
         self.timerStartTime = None
@@ -479,7 +568,8 @@ class DistributedTravelGame(DistributedMinigame):
     def exitWaitServerChoices(self):
         self.waitingChoicesLabel.hide()
 
-    def enterDisplayVotes(self, votes, directions, directionToGo, directionReason):
+    def enterDisplayVotes(self, votes, directions,
+                          directionToGo, directionReason):
         if self.UseTrolleyResultsPanel:
             self.moveCameraToTrolley()
             self.hideMinigamesAndBonuses()
@@ -498,8 +588,8 @@ class DistributedTravelGame(DistributedMinigame):
                 numVotes = votes[index]
                 directionTotals[dir] += numVotes
                 curStr = TTLocalizer.TravelGameOneToonVote % {'name': self.avNames[index],
-                 'numVotes': numVotes,
-                 'dir': TTLocalizer.TravelGameDirections[dir]}
+                                                              'numVotes': numVotes,
+                                                              'dir': TTLocalizer.TravelGameDirections[dir]}
                 if not (numVotes == 0 and avId in self.disconnectedAvIds):
                     self.resultsStr += curStr
 
@@ -516,33 +606,64 @@ class DistributedTravelGame(DistributedMinigame):
                 losingDirection = 1
             else:
                 losingDirection = 0
-            diffVotes = directionTotals[directionToGo] - directionTotals[losingDirection]
+            diffVotes = directionTotals[directionToGo] - \
+                directionTotals[losingDirection]
             reasonStr = ''
             if diffVotes > 1:
                 reasonStr = TTLocalizer.TravelGameReasonVotesPlural % {'dir': TTLocalizer.TravelGameDirections[directionToGo],
-                 'numVotes': diffVotes}
+                                                                       'numVotes': diffVotes}
             else:
                 reasonStr = TTLocalizer.TravelGameReasonVotesSingular % {'dir': TTLocalizer.TravelGameDirections[directionToGo],
-                 'numVotes': diffVotes}
+                                                                         'numVotes': diffVotes}
         elif directionReason == TravelGameGlobals.ReasonRandom:
             reasonStr = TTLocalizer.TravelGameReasonRandom % {'dir': TTLocalizer.TravelGameDirections[directionToGo],
-             'numVotes': directionTotals[directionToGo]}
+                                                              'numVotes': directionTotals[directionToGo]}
         elif directionReason == TravelGameGlobals.ReasonPlaceDecider:
             reasonStr = TravelGameReasonPlace % {'name': 'TODO NAME',
-             'dir': TTLocalizer.TravelGameDirections[directionToGo]}
+                                                 'dir': TTLocalizer.TravelGameDirections[directionToGo]}
         self.resultsStr += reasonStr
-        self.dialog = TTDialog.TTDialog(text=self.resultsStr, command=self.__cleanupDialog, style=TTDialog.NoButtons, pos=(0, 0, 1))
+        self.dialog = TTDialog.TTDialog(
+            text=self.resultsStr,
+            command=self.__cleanupDialog,
+            style=TTDialog.NoButtons,
+            pos=(
+                0,
+                0,
+                1))
         self.dialog.hide()
         if self.UseTrolleyResultsPanel:
-            self.votesPanel = VoteResultsTrolleyPanel.VoteResultsTrolleyPanel(len(self.avIdList), self.avIdList, votes, directions, self.avNames, self.disconnectedAvIds, directionToGo, directionReason, directionTotals)
+            self.votesPanel = VoteResultsTrolleyPanel.VoteResultsTrolleyPanel(
+                len(
+                    self.avIdList),
+                self.avIdList,
+                votes,
+                directions,
+                self.avNames,
+                self.disconnectedAvIds,
+                directionToGo,
+                directionReason,
+                directionTotals)
         else:
-            self.votesPanel = VoteResultsPanel.VoteResultsPanel(len(self.avIdList), self.avIdList, votes, directions, self.avNames, self.disconnectedAvIds, directionToGo, directionReason, directionTotals)
+            self.votesPanel = VoteResultsPanel.VoteResultsPanel(
+                len(
+                    self.avIdList),
+                self.avIdList,
+                votes,
+                directions,
+                self.avNames,
+                self.disconnectedAvIds,
+                directionToGo,
+                directionReason,
+                directionTotals)
         self.votesPanel.startMovie()
         numPlayers = len(self.avIdList)
         if TravelGameGlobals.SpoofFour:
             numPlayers = 4
         delay = TravelGameGlobals.DisplayVotesTimePerPlayer * (numPlayers + 1)
-        taskMgr.doMethodLater(delay, self.displayVotesTimeoutTask, self.taskName('displayVotes-timeout'))
+        taskMgr.doMethodLater(
+            delay,
+            self.displayVotesTimeoutTask,
+            self.taskName('displayVotes-timeout'))
         curSwitch = TravelGameGlobals.BoardLayouts[self.boardIndex][self.currentSwitch]
         self.destSwitch = curSwitch['links'][directionToGo]
         self.updateCurrentVotes()
@@ -558,9 +679,17 @@ class DistributedTravelGame(DistributedMinigame):
         self.notify.debug('enterMoveTrolley')
         camera.wrtReparentTo(render)
         keyAngle = round(self.TrolleyMoveDuration) * 360
-        dist = Vec3(self.trainSwitches[self.destSwitch].getPos() - self.trainSwitches[self.currentSwitch].getPos()).length()
+        dist = Vec3(self.trainSwitches[self.destSwitch].getPos(
+        ) - self.trainSwitches[self.currentSwitch].getPos()).length()
         wheelAngle = dist / (2.0 * math.pi * 0.95) * 360
-        trolleyAnimateInterval = LerpFunctionInterval(self.animateTrolley, duration=self.TrolleyMoveDuration, blendType='easeInOut', extraArgs=[keyAngle, wheelAngle], name='TrolleyAnimate')
+        trolleyAnimateInterval = LerpFunctionInterval(
+            self.animateTrolley,
+            duration=self.TrolleyMoveDuration,
+            blendType='easeInOut',
+            extraArgs=[
+                keyAngle,
+                wheelAngle],
+            name='TrolleyAnimate')
         moveTrolley = Sequence()
         moveTrolley.append(Func(self.resetAnimation))
         newPos = self.trainSwitches[self.destSwitch].getPos()
@@ -568,26 +697,44 @@ class DistributedTravelGame(DistributedMinigame):
         origHeading = self.trainTracks[linkKey].getH()
         heading = origHeading + 90
         firstTurn = Parallel()
-        firstTurn.append(LerpHprInterval(self.trolleyCar, 1, Vec3(heading, 0, 0)))
-        firstTurn.append(LerpHprInterval(self.trainSwitches[self.currentSwitch], 1, Vec3(origHeading, 0, 0)))
-        firstTurn.append(LerpHprInterval(self.trainSwitches[self.destSwitch], 1, Vec3(origHeading, 0, 0)))
+        firstTurn.append(
+            LerpHprInterval(
+                self.trolleyCar, 1, Vec3(
+                    heading, 0, 0)))
+        firstTurn.append(LerpHprInterval(
+            self.trainSwitches[self.currentSwitch], 1, Vec3(origHeading, 0, 0)))
+        firstTurn.append(LerpHprInterval(
+            self.trainSwitches[self.destSwitch], 1, Vec3(origHeading, 0, 0)))
         moveTrolley.append(firstTurn)
-        moveTrolley.append(Parallel(LerpPosInterval(self.trolleyCar, self.TrolleyMoveDuration, newPos, blendType='easeInOut'), trolleyAnimateInterval))
+        moveTrolley.append(
+            Parallel(
+                LerpPosInterval(
+                    self.trolleyCar,
+                    self.TrolleyMoveDuration,
+                    newPos,
+                    blendType='easeInOut'),
+                trolleyAnimateInterval))
         secondTurn = Parallel()
         secondTurn.append(LerpHprInterval(self.trolleyCar, 1, Vec3(90, 0, 0)))
-        secondTurn.append(LerpHprInterval(self.trainSwitches[self.currentSwitch], 1, Vec3(0, 0, 0)))
-        secondTurn.append(LerpHprInterval(self.trainSwitches[self.destSwitch], 1, Vec3(0, 0, 0)))
+        secondTurn.append(LerpHprInterval(
+            self.trainSwitches[self.currentSwitch], 1, Vec3(0, 0, 0)))
+        secondTurn.append(LerpHprInterval(
+            self.trainSwitches[self.destSwitch], 1, Vec3(0, 0, 0)))
         moveTrolley.append(secondTurn)
         soundTrack = Sequence()
-        trolleyExitBellInterval = Parallel(SoundInterval(self.trolleyBellSfx, duration=1), SoundInterval(self.turntableRotateSfx, duration=1, volume=0.5))
-        trolleyExitAwayInterval = SoundInterval(self.trolleyAwaySfx, duration=3)
+        trolleyExitBellInterval = Parallel(
+            SoundInterval(
+                self.trolleyBellSfx, duration=1), SoundInterval(
+                self.turntableRotateSfx, duration=1, volume=0.5))
+        trolleyExitAwayInterval = SoundInterval(
+            self.trolleyAwaySfx, duration=3)
         soundTrack.append(trolleyExitBellInterval)
         soundTrack.append(trolleyExitAwayInterval)
         soundTrack.append(trolleyExitBellInterval)
         self.moveTrolleyIval = Parallel(moveTrolley, soundTrack)
         duration = self.moveTrolleyIval.getDuration()
 
-        def focusOnTrolley(t, self = self):
+        def focusOnTrolley(t, self=self):
             pos = self.trolleyCar.getPos()
             pos.setZ(pos.getZ() + 7.5)
             camera.lookAt(pos)
@@ -597,15 +744,44 @@ class DistributedTravelGame(DistributedMinigame):
         if self.FlyCameraUp:
             setRightHprTime = 1.0
         camIval1 = Parallel()
-        camIval1.append(LerpFunc(focusOnTrolley, duration - setRightHprTime, name='focusOnTrolley'))
-        finalPos = Vec3(self.cameraTopView[0], self.cameraTopView[1], self.cameraTopView[2])
-        finalHpr = Vec3(self.cameraTopView[3], self.cameraTopView[4], self.cameraTopView[5])
+        camIval1.append(
+            LerpFunc(
+                focusOnTrolley,
+                duration -
+                setRightHprTime,
+                name='focusOnTrolley'))
+        finalPos = Vec3(
+            self.cameraTopView[0],
+            self.cameraTopView[1],
+            self.cameraTopView[2])
+        finalHpr = Vec3(
+            self.cameraTopView[3],
+            self.cameraTopView[4],
+            self.cameraTopView[5])
         if self.FlyCameraUp:
             if self.FocusOnTrolleyWhileMovingUp:
-                camIval1.append(LerpPosInterval(camera, duration - setRightHprTime, finalPos, name='cameraMove'))
-                camIval2 = Sequence(LerpHprInterval(camera, setRightHprTime, finalHpr, name='cameraHpr'))
+                camIval1.append(
+                    LerpPosInterval(
+                        camera,
+                        duration -
+                        setRightHprTime,
+                        finalPos,
+                        name='cameraMove'))
+                camIval2 = Sequence(
+                    LerpHprInterval(
+                        camera,
+                        setRightHprTime,
+                        finalHpr,
+                        name='cameraHpr'))
             else:
-                camIval2 = Sequence(LerpPosHprInterval(camera, setRightHprTime, finalPos, finalHpr, blendType='easeIn', name='cameraHpr'))
+                camIval2 = Sequence(
+                    LerpPosHprInterval(
+                        camera,
+                        setRightHprTime,
+                        finalPos,
+                        finalHpr,
+                        blendType='easeIn',
+                        name='cameraHpr'))
             camIval = Sequence(camIval1, camIval2)
         else:
             camIval = Sequence(camIval1)
@@ -616,7 +792,8 @@ class DistributedTravelGame(DistributedMinigame):
         if self.isLeaf(self.destSwitch):
             self.moveTrolleyIval.append(Func(self.gameFSM.request, 'winMovie'))
         else:
-            self.moveTrolleyIval.append(Func(self.gameFSM.request, 'inputChoice'))
+            self.moveTrolleyIval.append(
+                Func(self.gameFSM.request, 'inputChoice'))
         self.moveTrolleyIval.start()
 
     def exitMoveTrolley(self):
@@ -627,7 +804,8 @@ class DistributedTravelGame(DistributedMinigame):
         self.showMinigamesAndBonuses()
 
     def enterWinMovie(self):
-        resultStr = TTLocalizer.TravelGamePlaying % {'game': self.idToNames[self.switchToMinigameDict[self.currentSwitch]]}
+        resultStr = TTLocalizer.TravelGamePlaying % {
+            'game': self.idToNames[self.switchToMinigameDict[self.currentSwitch]]}
         numToons = 0
         for avId in self.avIdList:
             if avId not in self.disconnectedAvIds:
@@ -647,12 +825,17 @@ class DistributedTravelGame(DistributedMinigame):
                 if self.avIdBonuses[avId][0] == self.currentSwitch:
                     noWinner = False
                     reachedGoalStr = TTLocalizer.TravelGameGotBonus % {'name': name,
-                     'numBeans': self.avIdBonuses[avId][1]}
+                                                                       'numBeans': self.avIdBonuses[avId][1]}
                     if avId == base.localAvatar.doId:
                         if not TravelGameGlobals.ReverseWin:
                             self.wonGameSfx.play()
                             bonusLabel = self.switchToBonusLabelDict[self.currentSwitch]
-                            self.flashWinningBeansTrack = Sequence(LerpColorScaleInterval(bonusLabel, 0.75, Vec4(0.5, 1, 0.5, 1)), LerpColorScaleInterval(bonusLabel, 0.75, Vec4(1, 1, 1, 1)))
+                            self.flashWinningBeansTrack = Sequence(
+                                LerpColorScaleInterval(
+                                    bonusLabel, 0.75, Vec4(
+                                        0.5, 1, 0.5, 1)), LerpColorScaleInterval(
+                                    bonusLabel, 0.75, Vec4(
+                                        1, 1, 1, 1)))
                             self.flashWinningBeansTrack.loop()
                         else:
                             self.lostGameSfx.play()
@@ -668,24 +851,38 @@ class DistributedTravelGame(DistributedMinigame):
         if reachedGoalStr:
             resultStr += '\n\n'
             resultStr += reachedGoalStr
-        self.winDialog = TTDialog.TTDialog(text=resultStr, command=self.__cleanupWinDialog, style=TTDialog.NoButtons)
+        self.winDialog = TTDialog.TTDialog(
+            text=resultStr,
+            command=self.__cleanupWinDialog,
+            style=TTDialog.NoButtons)
         info = TravelGameGlobals.BoardLayouts[self.boardIndex][self.currentSwitch]
         leafX, leafY, leafZ = info['pos']
         endX = leafX + TravelGameGlobals.xInc
         heading = 90
         moveTrolley = Sequence()
-        moveTrolley.append(LerpHprInterval(self.trolleyCar, 1, Vec3(heading, 0, 0)))
-        moveTrolley.append(LerpPosInterval(self.trolleyCar, 3, Vec3(endX + 20, leafY, 0)))
+        moveTrolley.append(
+            LerpHprInterval(
+                self.trolleyCar, 1, Vec3(
+                    heading, 0, 0)))
+        moveTrolley.append(
+            LerpPosInterval(
+                self.trolleyCar, 3, Vec3(
+                    endX + 20, leafY, 0)))
         soundTrack = Sequence()
-        trolleyExitBellInterval = SoundInterval(self.trolleyBellSfx, duration=1)
-        trolleyExitAwayInterval = SoundInterval(self.trolleyAwaySfx, duration=3)
+        trolleyExitBellInterval = SoundInterval(
+            self.trolleyBellSfx, duration=1)
+        trolleyExitAwayInterval = SoundInterval(
+            self.trolleyAwaySfx, duration=3)
         soundTrack.append(trolleyExitBellInterval)
         soundTrack.append(trolleyExitAwayInterval)
         soundTrack.append(trolleyExitBellInterval)
         self.moveTrolleyIval = Parallel(moveTrolley, soundTrack)
         self.moveTrolleyIval.start()
         delay = 8
-        taskMgr.doMethodLater(delay, self.gameOverCallback, self.taskName('playMovie'))
+        taskMgr.doMethodLater(
+            delay,
+            self.gameOverCallback,
+            self.taskName('playMovie'))
         return
 
     def exitWinMovie(self):
@@ -700,7 +897,9 @@ class DistributedTravelGame(DistributedMinigame):
 
     def setStartingVotes(self, startingVotesArray):
         if not len(startingVotesArray) == len(self.avIdList):
-            self.notify.error('length does not match, startingVotes=%s, avIdList=%s' % (startingVotesArray, self.avIdList))
+            self.notify.error(
+                'length does not match, startingVotes=%s, avIdList=%s' %
+                (startingVotesArray, self.avIdList))
             return
         for index in range(len(self.avIdList)):
             avId = self.avIdList[index]
@@ -715,14 +914,16 @@ class DistributedTravelGame(DistributedMinigame):
         elapsed = now - self.timerStartTime
         self.timer.setPos(1.16, 0, -0.83)
         self.timer.setTime(TravelGameGlobals.InputTimeout)
-        self.timer.countdown(TravelGameGlobals.InputTimeout - elapsed, self.handleChoiceTimeout)
+        self.timer.countdown(
+            TravelGameGlobals.InputTimeout - elapsed,
+            self.handleChoiceTimeout)
         self.timer.show()
 
     def setTimerStartTime(self, timestamp):
         if not self.hasLocalToon:
             return
         self.timerStartTime = globalClockDelta.networkToLocalTime(timestamp)
-        if self.timer != None:
+        if self.timer is not None:
             self.startTimer()
         return
 
@@ -776,7 +977,8 @@ class DistributedTravelGame(DistributedMinigame):
         self.votesToGoLabel.hide()
         self.upLabel.hide()
         self.downLabel.hide()
-        if not hasattr(self, 'scrollList') or not hasattr(self, 'zeroVoteIndex'):
+        if not hasattr(self, 'scrollList') or not hasattr(
+                self, 'zeroVoteIndex'):
             return
         selectedIndex = self.scrollList.getSelectedIndex()
         if selectedIndex < self.zeroVoteIndex:
@@ -801,7 +1003,10 @@ class DistributedTravelGame(DistributedMinigame):
     def setAvatarChose(self, avId):
         if not self.hasLocalToon:
             return
-        self.notify.debug('setAvatarChose: avatar: ' + str(avId) + ' choose a number')
+        self.notify.debug(
+            'setAvatarChose: avatar: ' +
+            str(avId) +
+            ' choose a number')
 
     def handleInputChoice(self):
         numVotes = self.getAbsVoteChoice()
@@ -809,14 +1014,17 @@ class DistributedTravelGame(DistributedMinigame):
         self.sendUpdate('setAvatarChoice', [numVotes, direction])
         self.gameFSM.request('waitServerChoices')
 
-    def setServerChoices(self, votes, directions, directionToGo, directionReason):
+    def setServerChoices(self, votes, directions,
+                         directionToGo, directionReason):
         if not self.hasLocalToon:
             return
-        self.notify.debug('requesting displayVotes, curState=%s' % self.gameFSM.getCurrentState().getName())
+        self.notify.debug(
+            'requesting displayVotes, curState=%s' %
+            self.gameFSM.getCurrentState().getName())
         self.gameFSM.request('displayVotes', [votes,
-         directions,
-         directionToGo,
-         directionReason])
+                                              directions,
+                                              directionToGo,
+                                              directionReason])
 
     def __cleanupDialog(self, value):
         if self.dialog:
@@ -886,14 +1094,23 @@ class DistributedTravelGame(DistributedMinigame):
             if labelPos:
                 if useText:
                     labelPos.setZ(labelPos.getZ() - 0.1)
-                    label = DirectLabel(text=self.idToNames[minigame], relief=None, scale=0.1, pos=labelPos, text_fg=(1.0, 1.0, 1.0, 1.0))
+                    label = DirectLabel(
+                        text=self.idToNames[minigame],
+                        relief=None,
+                        scale=0.1,
+                        pos=labelPos,
+                        text_fg=(
+                            1.0,
+                            1.0,
+                            1.0,
+                            1.0))
                     label.hide()
                     self.minigameLabels.append(label)
                 else:
                     placeHolder = DirectButton(image=icon, relief=None, text=('',
-                     '',
-                     self.idToNames[minigame],
-                     ''), text_scale=0.3, text_pos=(0, -0.7, 0), text_fg=(1, 1, 1, 1), clickSound=None, pressEffect=0)
+                                                                              '',
+                                                                              self.idToNames[minigame],
+                                                                              ''), text_scale=0.3, text_pos=(0, -0.7, 0), text_fg=(1, 1, 1, 1), clickSound=None, pressEffect=0)
                     placeHolder.setPos(labelPos)
                     placeHolder.setScale(0.2)
                     placeHolder.hide()
@@ -938,8 +1155,11 @@ class DistributedTravelGame(DistributedMinigame):
                 if labelPos:
                     labelPos.setX(labelPos.getX() + 0.1)
                     labelPos.setZ(labelPos.getZ() - 0.02)
-                    bonusStr = TTLocalizer.TravelGameBonusBeans % {'numBeans': beans}
-                    label = DirectLabel(text=bonusStr, relief=None, scale=0.1, pos=labelPos, text_fg=(1.0, 1.0, 1.0, 1.0), text_align=TextNode.ALeft)
+                    bonusStr = TTLocalizer.TravelGameBonusBeans % {
+                        'numBeans': beans}
+                    label = DirectLabel(
+                        text=bonusStr, relief=None, scale=0.1, pos=labelPos, text_fg=(
+                            1.0, 1.0, 1.0, 1.0), text_align=TextNode.ALeft)
                     label.hide()
                     self.bonusLabels.append(label)
                     self.switchToBonusLabelDict[switch] = label
@@ -961,7 +1181,9 @@ class DistributedTravelGame(DistributedMinigame):
         self.loadBonuses()
 
     def handleDisabledAvatar(self, avId):
-        self.notify.warning('DistrbutedTravelGame: handleDisabledAvatar: disabled avId: ' + str(avId))
+        self.notify.warning(
+            'DistrbutedTravelGame: handleDisabledAvatar: disabled avId: ' +
+            str(avId))
         self.disconnectedAvIds.append(avId)
 
     def setBoardIndex(self, boardIndex):
@@ -974,11 +1196,20 @@ class DistributedTravelGame(DistributedMinigame):
         heading = 90
         moveTrolley = Sequence()
         moveTrolley.append(Func(self.trolleyCar.setH, 90))
-        moveTrolley.append(LerpPosInterval(self.trolleyCar, 3, Vec3(rootX, rootY, 0), startPos=Vec3(startX, rootY, 0)))
-        moveTrolley.append(LerpHprInterval(self.trolleyCar, 1, Vec3(heading, 0, 0)))
+        moveTrolley.append(
+            LerpPosInterval(
+                self.trolleyCar, 3, Vec3(
+                    rootX, rootY, 0), startPos=Vec3(
+                    startX, rootY, 0)))
+        moveTrolley.append(
+            LerpHprInterval(
+                self.trolleyCar, 1, Vec3(
+                    heading, 0, 0)))
         soundTrack = Sequence()
-        trolleyExitAwayInterval = SoundInterval(self.trolleyAwaySfx, duration=3)
-        trolleyExitBellInterval = SoundInterval(self.trolleyBellSfx, duration=1)
+        trolleyExitAwayInterval = SoundInterval(
+            self.trolleyAwaySfx, duration=3)
+        trolleyExitBellInterval = SoundInterval(
+            self.trolleyBellSfx, duration=1)
         soundTrack.append(trolleyExitAwayInterval)
         soundTrack.append(trolleyExitBellInterval)
         retval = Parallel(moveTrolley, soundTrack)

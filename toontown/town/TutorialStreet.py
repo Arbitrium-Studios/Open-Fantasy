@@ -1,9 +1,14 @@
 from . import TTStreet
 
+
 class TutorialStreet(TTStreet.TTStreet):
 
     def enter(self, requestStatus):
-        TTStreet.TTStreet.enter(self, requestStatus, visibilityFlag=0, arrowsOn=0)
+        TTStreet.TTStreet.enter(
+            self,
+            requestStatus,
+            visibilityFlag=0,
+            arrowsOn=0)
 
     def exit(self):
         TTStreet.TTStreet.exit(self, visibilityFlag=0)
@@ -12,7 +17,8 @@ class TutorialStreet(TTStreet.TTStreet):
         TTStreet.TTStreet.enterTeleportIn(self, requestStatus)
 
     def enterTownBattle(self, event):
-        self.loader.townBattle.enter(event, self.fsm.getStateNamed('battle'), tutorialFlag=1)
+        self.loader.townBattle.enter(
+            event, self.fsm.getStateNamed('battle'), tutorialFlag=1)
 
     def handleEnterTunnel(self, requestStatus, collEntry):
         messenger.send('stopTutorial')

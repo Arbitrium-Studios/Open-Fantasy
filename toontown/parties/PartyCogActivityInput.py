@@ -6,6 +6,7 @@ FORWARD_KEY = 'arrow_up'
 BACKWARDS_KEY = 'arrow_down'
 THROW_PIE_KEYS = ['control', 'delete', 'insert']
 
+
 class PartyCogActivityInput(DirectObject):
     notify = directNotify.newCategory('PartyCogActivityInput')
     leftPressed = 0
@@ -85,7 +86,8 @@ class PartyCogActivityInput(DirectObject):
         self.ignore(FORWARD_KEY + '-up')
         self.ignore(BACKWARDS_KEY + '-up')
         base.mouseWatcherNode.setModifierButtons(self._prevModifierButtons)
-        base.buttonThrowers[0].node().setModifierButtons(self._prevModifierButtons)
+        base.buttonThrowers[0].node().setModifierButtons(
+            self._prevModifierButtons)
 
     def __handleLeftKeyPressed(self):
         self.ignore(ROTATE_LEFT_KEY)

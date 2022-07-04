@@ -2,12 +2,13 @@ from direct.directnotify import DirectNotifyGlobal
 from pandac.PandaModules import *
 from math import *
 
+
 class Trajectory:
     notify = DirectNotifyGlobal.directNotify.newCategory('Trajectory')
     gravity = 32.0
     __radius = 2.0
 
-    def __init__(self, startTime, startPos, startVel, gravMult = 1.0):
+    def __init__(self, startTime, startPos, startVel, gravMult=1.0):
         self.setStartTime(startTime)
         self.setStartPos(startPos)
         self.setStartVel(startVel)
@@ -30,9 +31,11 @@ class Trajectory:
 
     def __str__(self):
         return 'startTime: %s, startPos: %s, startVel: %s, zAcc: %s' % (self.__startTime,
-         repr(self.__startPos),
-         repr(self.__startVel),
-         self.__zAcc)
+                                                                        repr(
+                                                                            self.__startPos),
+                                                                        repr(
+                                                                            self.__startVel),
+                                                                        self.__zAcc)
 
     def __calcTimeOfHighestPoint(self):
         t = -self.__startVel[2] / self.__zAcc
@@ -40,7 +43,7 @@ class Trajectory:
             t = 0
         return t + self.__startTime
 
-    def calcTimeOfImpactOnPlane(self, height = 0):
+    def calcTimeOfImpactOnPlane(self, height=0):
         a = self.__zAcc * 0.5
         b = self.__startVel[2]
         c = self.__startPos[2] - height
@@ -57,7 +60,8 @@ class Trajectory:
 
     def calcZ(self, t):
         tt = t - self.__startTime
-        return self.__startPos[2] + self.__startVel[2] * tt + 0.5 * self.__zAcc * tt * tt
+        return self.__startPos[2] + self.__startVel[2] * \
+            tt + 0.5 * self.__zAcc * tt * tt
 
     def __reachesHeight(self, height):
         if self.calcZ(self.__calcTimeOfHighestPoint()) < height:
@@ -66,16 +70,18 @@ class Trajectory:
 
     def getPos(self, t):
         tt = t - self.__startTime
-        return Point3(self.__startPos[0] + self.__startVel[0] * tt, self.__startPos[1] + self.__startVel[1] * tt, self.calcZ(t))
+        return Point3(self.__startPos[0] + self.__startVel[0] * tt,
+                      self.__startPos[1] + self.__startVel[1] * tt, self.calcZ(t))
 
     def getVel(self, t):
         tt = t - self.__startTime
-        return Vec3(self.__startVel[0], self.__startVel[1], self.__startVel[2] + self.__zAcc * tt)
+        return Vec3(self.__startVel[0], self.__startVel[1],
+                    self.__startVel[2] + self.__zAcc * tt)
 
     def getStartTime(self):
         return self.__startTime
 
-    def checkCollisionWithGround(self, height = 0):
+    def checkCollisionWithGround(self, height=0):
         return self.calcTimeOfImpactOnPlane(height)
 
     def checkCollisionWithDisc(self, discCenter, discRadius):
@@ -115,7 +121,8 @@ class Trajectory:
         t2 = t2 / mag
         return (t1 + self.__startTime, t2 + self.__startTime)
 
-    def checkCollisionWithCylinderSides(self, cylBottomCenter, cylRadius, cylHeight):
+    def checkCollisionWithCylinderSides(
+            self, cylBottomCenter, cylRadius, cylHeight):
         if self.__reachesHeight(cylBottomCenter[2]) == 0:
             return -1.0
         t1, t2 = self.calcEnterAndLeaveCylinderXY(cylBottomCenter, cylRadius)

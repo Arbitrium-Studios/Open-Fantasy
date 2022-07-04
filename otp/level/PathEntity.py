@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from . import BasicEntities
 from toontown.suit import GoonPathData
 
+
 class PathEntity(BasicEntities.NodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('PathEntity')
 
@@ -17,7 +18,8 @@ class PathEntity(BasicEntities.NodePathEntity):
 
     def setPathIndex(self, pathIndex):
         self.pathIndex = pathIndex
-        pathTableId = GoonPathData.taskZoneId2pathId[self.level.getTaskZoneId()]
+        pathTableId = GoonPathData.taskZoneId2pathId[self.level.getTaskZoneId(
+        )]
         if self.pathIndex in GoonPathData.Paths[pathTableId]:
             self.path = GoonPathData.Paths[pathTableId][self.pathIndex]
             if __dev__:
@@ -27,7 +29,8 @@ class PathEntity(BasicEntities.NodePathEntity):
             self.path = None
         return
 
-    def makePathTrack(self, node, velocity, name, turnTime = 1, lookAroundNode = None):
+    def makePathTrack(self, node, velocity, name,
+                      turnTime=1, lookAroundNode=None):
         track = Sequence(name=name)
         if self.path is None:
             track.append(WaitInterval(1.0))
@@ -43,7 +46,12 @@ class PathEntity(BasicEntities.NodePathEntity):
             track.append(LerpHprInterval(node, turnTime, Vec3(theta, 0, 0)))
             distance = Vec3(v).length()
             duration = distance / velocity
-            track.append(LerpPosInterval(node, duration=duration, pos=endPoint, startPos=startPoint))
+            track.append(
+                LerpPosInterval(
+                    node,
+                    duration=duration,
+                    pos=endPoint,
+                    startPos=startPoint))
 
         return track
 

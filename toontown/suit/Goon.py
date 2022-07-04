@@ -8,16 +8,17 @@ from . import GoonGlobals
 from . import SuitDNA
 import math
 AnimDict = {'pg': (('walk', '-walk'), ('collapse', '-collapse'), ('recovery', '-recovery')),
- 'sg': (('walk', '-walk'), ('collapse', '-collapse'), ('recovery', '-recovery'))}
+            'sg': (('walk', '-walk'), ('collapse', '-collapse'), ('recovery', '-recovery'))}
 ModelDict = {'pg': 'phase_9/models/char/Cog_Goonie',
- 'sg': 'phase_9/models/char/Cog_Goonie'}
+             'sg': 'phase_9/models/char/Cog_Goonie'}
+
 
 class Goon(Avatar.Avatar):
 
-    def __init__(self, dnaName = None):
+    def __init__(self, dnaName=None):
         try:
             self.Goon_initialized
-        except:
+        except BaseException:
             self.Goon_initialized = 1
             Avatar.Avatar.__init__(self)
             self.ignore('nametagAmbientLightChanged')
@@ -42,12 +43,13 @@ class Goon(Avatar.Avatar):
     def initializeBodyCollisions(self, collIdStr):
         Avatar.Avatar.initializeBodyCollisions(self, collIdStr)
         if not self.ghostMode:
-            self.collNode.setCollideMask(self.collNode.getIntoCollideMask() | ToontownGlobals.PieBitmask)
+            self.collNode.setCollideMask(
+                self.collNode.getIntoCollideMask() | ToontownGlobals.PieBitmask)
 
     def delete(self):
         try:
             self.Goon_deleted
-        except:
+        except BaseException:
             self.Goon_deleted = 1
             filePrefix = ModelDict[self.style.name]
             loader.unloadModel(filePrefix + '-zero')

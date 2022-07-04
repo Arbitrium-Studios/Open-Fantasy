@@ -6,13 +6,40 @@ from direct.directnotify import DirectNotifyGlobal
 from otp.otpbase import OTPLocalizer
 from otp.otpgui import OTPDialog
 
-class PrivacyPolicyTextPanel(getGlobalDialogClass()):
-    notify = DirectNotifyGlobal.directNotify.newCategory('PrivacyPolicyTextPanel')
 
-    def __init__(self, doneEvent, hidePageNum = 0, pageChangeCallback = None, textList = []):
+class PrivacyPolicyTextPanel(getGlobalDialogClass()):
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'PrivacyPolicyTextPanel')
+
+    def __init__(self, doneEvent, hidePageNum=0,
+                 pageChangeCallback=None, textList=[]):
         dialogClass = getGlobalDialogClass()
-        dialogClass.__init__(self, parent=aspect2d, dialogName='privacyPolicyTextDialog', doneEvent=doneEvent, okButtonText=OTPLocalizer.PrivacyPolicyClose, style=OTPDialog.Acknowledge, text='', topPad=1.5, sidePad=1.2, pos=(0, 0, -.55), scale=0.9)
-        self.privacyPolicyText = MultiPageTextFrame(parent=self, textList=textList, hidePageNum=hidePageNum, pageChangeCallback=pageChangeCallback, pos=(0, 0, 0.7), width=2.4, height=1.5)
+        dialogClass.__init__(
+            self,
+            parent=aspect2d,
+            dialogName='privacyPolicyTextDialog',
+            doneEvent=doneEvent,
+            okButtonText=OTPLocalizer.PrivacyPolicyClose,
+            style=OTPDialog.Acknowledge,
+            text='',
+            topPad=1.5,
+            sidePad=1.2,
+            pos=(
+                0,
+                0,
+                -.55),
+            scale=0.9)
+        self.privacyPolicyText = MultiPageTextFrame(
+            parent=self,
+            textList=textList,
+            hidePageNum=hidePageNum,
+            pageChangeCallback=pageChangeCallback,
+            pos=(
+                0,
+                0,
+                0.7),
+            width=2.4,
+            height=1.5)
         self['image'] = self['image']
         self['image_pos'] = (0, 0, 0.65)
         self['image_scale'] = (2.7, 1, 1.9)
@@ -23,25 +50,136 @@ class PrivacyPolicyTextPanel(getGlobalDialogClass()):
 class PrivacyPolicyPanel(getGlobalDialogClass()):
     notify = DirectNotifyGlobal.directNotify.newCategory('PrivacyPolicyPanel')
 
-    def __init__(self, doneEvent, hidePageNum = 0, pageChangeCallback = None, textList = 1):
+    def __init__(self, doneEvent, hidePageNum=0,
+                 pageChangeCallback=None, textList=1):
         dialogClass = getGlobalDialogClass()
-        dialogClass.__init__(self, parent=aspect2d, dialogName='privacyPolicyDialog', doneEvent=doneEvent, okButtonText=OTPLocalizer.PrivacyPolicyClose, style=OTPDialog.Acknowledge, text='', topPad=1.5, sidePad=1.2, pos=(0, 0, -.15), scale=0.6)
+        dialogClass.__init__(
+            self,
+            parent=aspect2d,
+            dialogName='privacyPolicyDialog',
+            doneEvent=doneEvent,
+            okButtonText=OTPLocalizer.PrivacyPolicyClose,
+            style=OTPDialog.Acknowledge,
+            text='',
+            topPad=1.5,
+            sidePad=1.2,
+            pos=(
+                0,
+                0,
+                -.15),
+            scale=0.6)
         self.chatPrivacyPolicy = None
         self.fsm = ClassicFSM.ClassicFSM('privacyPolicyPanel', [State.State('off', self.enterOff, self.exitOff),
-         State.State('version1Adult', self.enterVersion1Adult, self.exitPrivacyPolicy),
-         State.State('version1Kids', self.enterVersion1Kids, self.exitPrivacyPolicy),
-         State.State('version2Adult', self.enterVersion2Adult, self.exitPrivacyPolicy),
-         State.State('version2Kids', self.enterVersion2Kids, self.exitPrivacyPolicy)], 'off', 'off')
+                                                                State.State(
+            'version1Adult', self.enterVersion1Adult, self.exitPrivacyPolicy),
+            State.State(
+            'version1Kids',
+            self.enterVersion1Kids,
+            self.exitPrivacyPolicy),
+            State.State(
+            'version2Adult',
+            self.enterVersion2Adult,
+            self.exitPrivacyPolicy),
+            State.State('version2Kids', self.enterVersion2Kids, self.exitPrivacyPolicy)], 'off', 'off')
         self.fsm.enterInitialState()
         guiButton = loader.loadModel('phase_3/models/gui/quit_button')
-        moreButtonImage = (guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR'))
-        DirectFrame(self, pos=(-0.4, 0.1, 0.4), relief=None, text=OTPLocalizer.PrivacyPolicyText_Intro, text_align=TextNode.ALeft, text_wordwrap=28, text_scale=0.09, text_pos=(-0.82, 1.0), textMayChange=0)
+        moreButtonImage = (
+            guiButton.find('**/QuitBtn_UP'),
+            guiButton.find('**/QuitBtn_DN'),
+            guiButton.find('**/QuitBtn_RLVR'))
+        DirectFrame(self,
+                    pos=(-0.4,
+                         0.1,
+                         0.4),
+                    relief=None,
+                    text=OTPLocalizer.PrivacyPolicyText_Intro,
+                    text_align=TextNode.ALeft,
+                    text_wordwrap=28,
+                    text_scale=0.09,
+                    text_pos=(-0.82,
+                              1.0),
+                    textMayChange=0)
         textScale = 0.05
-        buttonFrame = DirectFrame(self, pos=(0.0, 0.1, 0.0), scale=1.4, relief=None)
-        DirectButton(buttonFrame, image=moreButtonImage, image_scale=(1.75, 1.0, 1.0), relief=None, text=OTPLocalizer.ActivateChatPrivacyPolicy_Button1A, text_scale=textScale, text_pos=(0, -0.01), textMayChange=0, pos=(-0.45, 0.0, 0.4), command=self.__handlePrivacyPolicy, extraArgs=['version1Adult'])
-        DirectButton(buttonFrame, image=moreButtonImage, image_scale=(1.75, 1.0, 1.0), relief=None, text=OTPLocalizer.ActivateChatPrivacyPolicy_Button1K, text_scale=textScale, text_pos=(0, -0.01), textMayChange=0, pos=(-0.45, 0.0, 0.2), command=self.__handlePrivacyPolicy, extraArgs=['version1Kids'])
-        DirectButton(buttonFrame, image=moreButtonImage, image_scale=(1.75, 1.0, 1.0), relief=None, text=OTPLocalizer.ActivateChatPrivacyPolicy_Button2A, text_scale=textScale, text_pos=(0, -0.01), textMayChange=0, pos=(0.45, 0.0, 0.4), command=self.__handlePrivacyPolicy, extraArgs=['version2Adult'])
-        DirectButton(buttonFrame, image=moreButtonImage, image_scale=(1.75, 1.0, 1.0), relief=None, text=OTPLocalizer.ActivateChatPrivacyPolicy_Button2K, text_scale=textScale, text_pos=(0, -0.01), textMayChange=0, pos=(0.45, 0.0, 0.2), command=self.__handlePrivacyPolicy, extraArgs=['version2Kids'])
+        buttonFrame = DirectFrame(
+            self,
+            pos=(
+                0.0,
+                0.1,
+                0.0),
+            scale=1.4,
+            relief=None)
+        DirectButton(buttonFrame,
+                     image=moreButtonImage,
+                     image_scale=(1.75,
+                                  1.0,
+                                  1.0),
+                     relief=None,
+                     text=OTPLocalizer.ActivateChatPrivacyPolicy_Button1A,
+                     text_scale=textScale,
+                     text_pos=(0,
+                               -0.01),
+                     textMayChange=0,
+                     pos=(-0.45,
+                          0.0,
+                          0.4),
+                     command=self.__handlePrivacyPolicy,
+                     extraArgs=['version1Adult'])
+        DirectButton(buttonFrame,
+                     image=moreButtonImage,
+                     image_scale=(1.75,
+                                  1.0,
+                                  1.0),
+                     relief=None,
+                     text=OTPLocalizer.ActivateChatPrivacyPolicy_Button1K,
+                     text_scale=textScale,
+                     text_pos=(0,
+                               -0.01),
+                     textMayChange=0,
+                     pos=(-0.45,
+                          0.0,
+                          0.2),
+                     command=self.__handlePrivacyPolicy,
+                     extraArgs=['version1Kids'])
+        DirectButton(
+            buttonFrame,
+            image=moreButtonImage,
+            image_scale=(
+                1.75,
+                1.0,
+                1.0),
+            relief=None,
+            text=OTPLocalizer.ActivateChatPrivacyPolicy_Button2A,
+            text_scale=textScale,
+            text_pos=(
+                0,
+                -0.01),
+            textMayChange=0,
+            pos=(
+                0.45,
+                0.0,
+                0.4),
+            command=self.__handlePrivacyPolicy,
+            extraArgs=['version2Adult'])
+        DirectButton(
+            buttonFrame,
+            image=moreButtonImage,
+            image_scale=(
+                1.75,
+                1.0,
+                1.0),
+            relief=None,
+            text=OTPLocalizer.ActivateChatPrivacyPolicy_Button2K,
+            text_scale=textScale,
+            text_pos=(
+                0,
+                -0.01),
+            textMayChange=0,
+            pos=(
+                0.45,
+                0.0,
+                0.2),
+            command=self.__handlePrivacyPolicy,
+            extraArgs=['version2Kids'])
         self['image'] = self['image']
         self['image_pos'] = (0, 0, 0.65)
         self['image_scale'] = (2.7, 1, 1.9)
@@ -64,8 +202,9 @@ class PrivacyPolicyPanel(getGlobalDialogClass()):
         self.exitPrivacyPolicy()
 
     def enterPrivacyPolicy(self, textList):
-        if self.chatPrivacyPolicy == None:
-            self.chatPrivacyPolicy = PrivacyPolicyTextPanel('privacyPolicyTextDone', textList=textList)
+        if self.chatPrivacyPolicy is None:
+            self.chatPrivacyPolicy = PrivacyPolicyTextPanel(
+                'privacyPolicyTextDone', textList=textList)
         self.chatPrivacyPolicy.show()
         self.acceptOnce('privacyPolicyTextDone', self.__privacyPolicyTextDone)
         return

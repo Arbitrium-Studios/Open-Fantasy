@@ -1,6 +1,7 @@
 from direct.distributed.ClockDelta import globalClockDelta
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 
+
 class DistCogdoCraneCogAI(DistributedObjectAI):
 
     def __init__(self, air, game, dna, entranceId, spawnTime):
@@ -17,4 +18,5 @@ class DistCogdoCraneCogAI(DistributedObjectAI):
         return self._dna.makeNetString()
 
     def getSpawnInfo(self):
-        return (self._entranceId, globalClockDelta.localToNetworkTime(self._spawnTime))
+        return (self._entranceId,
+                globalClockDelta.localToNetworkTime(self._spawnTime))

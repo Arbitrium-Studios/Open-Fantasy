@@ -7,6 +7,7 @@ from toontown.toonbase import TTLocalizer
 from toontown.racing.KartShopGui import *
 from toontown.racing.KartShopGlobals import *
 
+
 class DistributedNPCKartClerk(DistributedNPCToonBase):
 
     def __init__(self, cr):
@@ -55,7 +56,7 @@ class DistributedNPCKartClerk(DistributedNPCToonBase):
     def resetKartShopClerk(self):
         if not self.isLocalToon:
             return
-        
+
         self.ignoreAll()
         taskMgr.remove(self.uniqueName('popupKartShopGUI'))
         if self.lerpCameraSeq:
@@ -94,7 +95,9 @@ class DistributedNPCKartClerk(DistributedNPCToonBase):
                 if self.kartShopGui:
                     self.kartShopGui.destroy()
                     self.kartShopGui = None
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_TOOKTOOLONG, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_TOOKTOOLONG,
+                CFSpeech | CFTimeout)
             self.resetKartShopClerk()
         elif mode == NPCToons.SELL_MOVIE_START:
             self.av = base.cr.doId2do.get(avId)
@@ -102,19 +105,29 @@ class DistributedNPCKartClerk(DistributedNPCToonBase):
                 self.notify.warning('Avatar %d not found in doId' % avId)
                 return
             else:
-                self.accept(self.av.uniqueName('disable'), self.__handleUnexpectedExit)
+                self.accept(
+                    self.av.uniqueName('disable'),
+                    self.__handleUnexpectedExit)
             self.setupAvatars(self.av)
             if self.isLocalToon:
                 camera.wrtReparentTo(render)
-                self.lerpCameraSeq = camera.posQuatInterval(1, Point3(-5, 9, base.localAvatar.getHeight() - 0.5), Point3(-150, -2, 0), other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
+                self.lerpCameraSeq = camera.posQuatInterval(1, Point3(-5, 9, base.localAvatar.getHeight(
+                ) - 0.5), Point3(-150, -2, 0), other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
                 self.lerpCameraSeq.start()
             if self.isLocalToon:
-                taskMgr.doMethodLater(1.0, self.popupKartShopGUI, self.uniqueName('popupKartShopGUI'))
+                taskMgr.doMethodLater(
+                    1.0,
+                    self.popupKartShopGUI,
+                    self.uniqueName('popupKartShopGUI'))
         elif mode == NPCToons.SELL_MOVIE_COMPLETE:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_GOODBYE, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_GOODBYE,
+                CFSpeech | CFTimeout)
             self.resetKartShopClerk()
         elif mode == NPCToons.SELL_MOVIE_PETCANCELED:
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_GOODBYE, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_GOODBYE,
+                CFSpeech | CFTimeout)
             self.resetKartShopClerk()
         elif mode == NPCToons.SELL_MOVIE_NO_MONEY:
             self.notify.warning('SELL_MOVIE_NO_MONEY should not be called')
@@ -127,9 +140,9 @@ class DistributedNPCKartClerk(DistributedNPCToonBase):
     def __handleBuyAccessory(self, accID):
         self.sendUpdate('buyAccessory', [accID])
 
-    def __handleGuiDone(self, bTimedOut = False):
+    def __handleGuiDone(self, bTimedOut=False):
         self.ignoreAll()
-        if hasattr(self, 'kartShopGui') and self.kartShopGui != None:
+        if hasattr(self, 'kartShopGui') and self.kartShopGui is not None:
             self.kartShopGui.destroy()
             self.kartShopGui = None
         if not bTimedOut:
@@ -138,7 +151,11 @@ class DistributedNPCKartClerk(DistributedNPCToonBase):
 
     def popupKartShopGUI(self, task):
         self.setChatAbsolute('', CFSpeech)
-        self.accept(KartShopGlobals.EVENTDICT['buyAccessory'], self.__handleBuyAccessory)
+        self.accept(
+            KartShopGlobals.EVENTDICT['buyAccessory'],
+            self.__handleBuyAccessory)
         self.accept(KartShopGlobals.EVENTDICT['buyKart'], self.__handleBuyKart)
-        self.acceptOnce(KartShopGlobals.EVENTDICT['guiDone'], self.__handleGuiDone)
+        self.acceptOnce(
+            KartShopGlobals.EVENTDICT['guiDone'],
+            self.__handleGuiDone)
         self.kartShopGui = KartShopGuiMgr(KartShopGlobals.EVENTDICT)

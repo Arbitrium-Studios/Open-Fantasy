@@ -3,11 +3,14 @@ from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 from . import DistributedCashbotBossObjectAI
 
-class DistributedCashbotBossSafeAI(DistributedCashbotBossObjectAI.DistributedCashbotBossObjectAI):
+
+class DistributedCashbotBossSafeAI(
+        DistributedCashbotBossObjectAI.DistributedCashbotBossObjectAI):
     wantsWatchDrift = 0
 
     def __init__(self, air, boss, index):
-        DistributedCashbotBossObjectAI.DistributedCashbotBossObjectAI.__init__(self, air, boss)
+        DistributedCashbotBossObjectAI.DistributedCashbotBossObjectAI.__init__(
+            self, air, boss)
         self.index = index
         self.avoidHelmet = 0
         cn = CollisionNode('sphere')
@@ -24,14 +27,18 @@ class DistributedCashbotBossSafeAI(DistributedCashbotBossObjectAI.DistributedCas
 
     def hitBoss(self, impact):
         avId = self.air.getAvatarIdFromSender()
-        self.validate(avId, impact <= 1.0, 'invalid hitBoss impact %s' % impact)
+        self.validate(
+            avId,
+            impact <= 1.0,
+            'invalid hitBoss impact %s' %
+            impact)
         if avId not in self.boss.involvedToons:
             return
         if self.state != 'Dropped' and self.state != 'Grabbed':
             return
         if self.avoidHelmet or self == self.boss.heldObject:
             return
-        if self.boss.heldObject == None:
+        if self.boss.heldObject is None:
             if self.boss.attackCode == ToontownGlobals.BossCogDizzy:
                 damage = int(impact * 50)
                 self.boss.recordHit(max(damage, 2))
@@ -53,7 +60,8 @@ class DistributedCashbotBossSafeAI(DistributedCashbotBossObjectAI.DistributedCas
             self.demand('Initial')
 
     def enterGrabbed(self, avId, craneId):
-        DistributedCashbotBossObjectAI.DistributedCashbotBossObjectAI.enterGrabbed(self, avId, craneId)
+        DistributedCashbotBossObjectAI.DistributedCashbotBossObjectAI.enterGrabbed(
+            self, avId, craneId)
         self.avoidHelmet = 0
 
     def enterInitial(self):
@@ -68,5 +76,6 @@ class DistributedCashbotBossSafeAI(DistributedCashbotBossObjectAI.DistributedCas
             self.unstash()
 
     def enterFree(self):
-        DistributedCashbotBossObjectAI.DistributedCashbotBossObjectAI.enterFree(self)
+        DistributedCashbotBossObjectAI.DistributedCashbotBossObjectAI.enterFree(
+            self)
         self.avoidHelmet = 0

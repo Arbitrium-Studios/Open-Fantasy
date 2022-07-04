@@ -2,6 +2,7 @@ from direct.distributed import ClockDelta
 from direct.task import Task
 import random
 
+
 class LaserGameBase:
 
     def __init__(self, funcSuccess, funcFail, funcSendGrid, funcSetGrid):
@@ -42,7 +43,7 @@ class LaserGameBase:
     def startGrid(self):
         self.blankGrid()
 
-    def hit(self, hitX, hitY, oldx = -1, oldy = -1):
+    def hit(self, hitX, hitY, oldx=-1, oldy=-1):
         if self.finshed:
             return
 

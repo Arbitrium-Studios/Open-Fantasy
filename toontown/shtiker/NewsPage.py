@@ -13,8 +13,9 @@ if UseDirectNewsFrame:
 else:
     try:
         from toontown.shtiker import InGameNewsFrame
-    except:
+    except BaseException:
         HaveNewsFrame = False
+
 
 class NewsPage(ShtikerPage.ShtikerPage):
     notify = DirectNotifyGlobal.directNotify.newCategory('NewsPage')
@@ -23,14 +24,19 @@ class NewsPage(ShtikerPage.ShtikerPage):
         ShtikerPage.ShtikerPage.__init__(self)
 
     def load(self):
-        self.noNewsLabel = DirectLabel(parent=self, relief=None, text=TTLocalizer.NewsPageImportError, text_scale=0.12)
+        self.noNewsLabel = DirectLabel(
+            parent=self,
+            relief=None,
+            text=TTLocalizer.NewsPageImportError,
+            text_scale=0.12)
         if HaveNewsFrame:
             if UseDirectNewsFrame:
                 import datetime
                 start = datetime.datetime.now()
                 self.newsFrame = DirectNewsFrame.DirectNewsFrame(parent=self)
                 ending = datetime.datetime.now()
-                self.notify.info('time to load news = %s' % str(ending - start))
+                self.notify.info('time to load news = %s' %
+                                 str(ending - start))
             else:
                 self.newsFrame = InGameNewsFrame.InGameNewsFrame(parent=self)
                 self.newsFrame.activate()
@@ -58,7 +64,8 @@ class NewsPage(ShtikerPage.ShtikerPage):
             base.setCellsAvailable(base.leftCells, 0)
             base.setCellsAvailable([base.rightCells[1]], 0)
             localAvatar.book.bookCloseButton.hide()
-            localAvatar.setLastTimeReadNews(base.cr.toontownTimeManager.getCurServerDateTime())
+            localAvatar.setLastTimeReadNews(
+                base.cr.toontownTimeManager.getCurServerDateTime())
 
     def exit(self):
         self.clearPage()

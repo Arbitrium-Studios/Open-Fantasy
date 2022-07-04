@@ -20,48 +20,68 @@ from .DistributedPartyActivity import DistributedPartyActivity
 from .activityFSMs import FireworksActivityFSM
 from . import PartyGlobals
 
-class DistributedPartyFireworksActivity(DistributedPartyActivity, FireworkShowMixin):
+
+class DistributedPartyFireworksActivity(
+        DistributedPartyActivity, FireworkShowMixin):
     notify = directNotify.newCategory('DistributedPartyFireworksActivity')
 
     def __init__(self, cr):
         DistributedPartyFireworksActivity.notify.debug('__init__')
-        DistributedPartyActivity.__init__(self, cr, ActivityIds.PartyFireworks, ActivityTypes.HostInitiated, wantLever=True)
-        FireworkShowMixin.__init__(self, restorePlaygroundMusic=True, startDelay=FireworksPostLaunchDelay)
+        DistributedPartyActivity.__init__(
+            self,
+            cr,
+            ActivityIds.PartyFireworks,
+            ActivityTypes.HostInitiated,
+            wantLever=True)
+        FireworkShowMixin.__init__(
+            self,
+            restorePlaygroundMusic=True,
+            startDelay=FireworksPostLaunchDelay)
 
     def setEventId(self, eventId):
-        DistributedPartyFireworksActivity.notify.debug('setEventId( %s )' % FireworkShows.getString(eventId))
+        DistributedPartyFireworksActivity.notify.debug(
+            'setEventId( %s )' % FireworkShows.getString(eventId))
         self.eventId = eventId
 
     def setShowStyle(self, showStyle):
-        DistributedPartyFireworksActivity.notify.debug('setShowStyle( %d )' % showStyle)
+        DistributedPartyFireworksActivity.notify.debug(
+            'setShowStyle( %d )' % showStyle)
         self.showStyle = showStyle
 
     def load(self):
         DistributedPartyFireworksActivity.notify.debug('load')
         DistributedPartyActivity.load(self)
         self.eventId = PartyGlobals.FireworkShows.Summer
-        self.launchPadModel = loader.loadModel('phase_13/models/parties/launchPad')
+        self.launchPadModel = loader.loadModel(
+            'phase_13/models/parties/launchPad')
         self.launchPadModel.setH(90.0)
         self.launchPadModel.setPos(0.0, -18.0, 0.0)
         self.launchPadModel.reparentTo(self.root)
-        railingsCollection = self.launchPadModel.findAllMatches('**/launchPad_mesh/*railing*')
+        railingsCollection = self.launchPadModel.findAllMatches(
+            '**/launchPad_mesh/*railing*')
         for i in range(railingsCollection.getNumPaths()):
-            railingsCollection[i].setAttrib(AlphaTestAttrib.make(RenderAttrib.MGreater, 0.75))
+            railingsCollection[i].setAttrib(
+                AlphaTestAttrib.make(
+                    RenderAttrib.MGreater, 0.75))
 
         leverLocator = self.launchPadModel.find('**/RocketLever_locator')
         self.lever.setPosHpr(Vec3.zero(), Vec3.zero())
         self.lever.reparentTo(leverLocator)
         self.toonPullingLeverInterval = None
-        self.sign.reparentTo(self.launchPadModel.find('**/launchPad_sign_locator'))
-        self.rocketActor = Actor('phase_13/models/parties/rocket_model', {'launch': 'phase_13/models/parties/rocket_launch'})
+        self.sign.reparentTo(
+            self.launchPadModel.find('**/launchPad_sign_locator'))
+        self.rocketActor = Actor('phase_13/models/parties/rocket_model',
+                                 {'launch': 'phase_13/models/parties/rocket_launch'})
         rocketLocator = self.launchPadModel.find('**/rocket_locator')
         self.rocketActor.reparentTo(rocketLocator)
         self.rocketActor.node().setBound(OmniBoundingVolume())
         self.rocketActor.node().setFinal(True)
         effectsLocator = self.rocketActor.find('**/joint1')
-        self.rocketExplosionEffect = RocketExplosion(effectsLocator, rocketLocator)
+        self.rocketExplosionEffect = RocketExplosion(
+            effectsLocator, rocketLocator)
         self.rocketParticleSeq = None
-        self.launchSound = base.loader.loadSfx('phase_13/audio/sfx/rocket_launch.ogg')
+        self.launchSound = base.loader.loadSfx(
+            'phase_13/audio/sfx/rocket_launch.ogg')
         self.activityFSM = FireworksActivityFSM(self)
         self.activityFSM.request('Idle')
         return
@@ -88,7 +108,8 @@ class DistributedPartyFireworksActivity(DistributedPartyActivity, FireworkShowMi
 
     def _leverPulled(self, collEntry):
         DistributedPartyFireworksActivity.notify.debug('_leverPulled')
-        hostPulledLever = DistributedPartyActivity._leverPulled(self, collEntry)
+        hostPulledLever = DistributedPartyActivity._leverPulled(
+            self, collEntry)
         if self.activityFSM.getCurrentOrNextState() == 'Active':
             self.showMessage(TTLocalizer.PartyFireworksAlreadyActive)
         elif self.activityFSM.getCurrentOrNextState() == 'Disabled':
@@ -96,15 +117,19 @@ class DistributedPartyFireworksActivity(DistributedPartyActivity, FireworkShowMi
         elif self.activityFSM.getCurrentOrNextState() == 'Idle':
             if hostPulledLever:
                 base.cr.playGame.getPlace().fsm.request('activity')
-                self.toonPullingLeverInterval = self.getToonPullingLeverInterval(base.localAvatar)
-                self.toonPullingLeverInterval.append(Func(self.d_toonJoinRequest))
-                self.toonPullingLeverInterval.append(Func(base.cr.playGame.getPlace().fsm.request, 'walk'))
+                self.toonPullingLeverInterval = self.getToonPullingLeverInterval(
+                    base.localAvatar)
+                self.toonPullingLeverInterval.append(
+                    Func(self.d_toonJoinRequest))
+                self.toonPullingLeverInterval.append(
+                    Func(base.cr.playGame.getPlace().fsm.request, 'walk'))
                 self.toonPullingLeverInterval.start()
             else:
                 self.showMessage(TTLocalizer.PartyOnlyHostLeverPull)
 
     def setState(self, newState, timestamp):
-        DistributedPartyFireworksActivity.notify.debug('setState( newState=%s, ... )' % newState)
+        DistributedPartyFireworksActivity.notify.debug(
+            'setState( newState=%s, ... )' % newState)
         DistributedPartyActivity.setState(self, newState, timestamp)
         if newState == 'Active':
             self.activityFSM.request(newState, timestamp)
@@ -126,12 +151,19 @@ class DistributedPartyFireworksActivity(DistributedPartyActivity, FireworkShowMi
             self.startShow(self.eventId, self.showStyle, showStartTimestamp)
         else:
             self.rocketActor.play('launch')
-            self.rocketParticleSeq = Sequence(Wait(RocketSoundDelay), Func(base.playSfx, self.launchSound), Func(self.rocketExplosionEffect.start), Wait(RocketDirectionDelay), LerpHprInterval(self.rocketActor, 4.0, Vec3(0, 0, -60)), Func(self.rocketExplosionEffect.end), Func(self.rocketActor.hide))
+            self.rocketParticleSeq = Sequence(
+                Wait(RocketSoundDelay), Func(
+                    base.playSfx, self.launchSound), Func(
+                    self.rocketExplosionEffect.start), Wait(RocketDirectionDelay), LerpHprInterval(
+                    self.rocketActor, 4.0, Vec3(
+                        0, 0, -60)), Func(
+                        self.rocketExplosionEffect.end), Func(
+                            self.rocketActor.hide))
             self.rocketParticleSeq.start()
             taskMgr.doMethodLater(FireworksPostLaunchDelay, self.startShow, self.taskName('delayedStartShow'), extraArgs=[self.eventId,
-             self.showStyle,
-             showStartTimestamp,
-             self.root])
+                                                                                                                          self.showStyle,
+                                                                                                                          showStartTimestamp,
+                                                                                                                          self.root])
 
     def finishActive(self):
         self.rocketParticleSeq = None

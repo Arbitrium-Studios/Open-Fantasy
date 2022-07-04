@@ -13,29 +13,43 @@ from . import ButterflyGlobals
 from direct.showbase import RandomNumGen
 import random
 
+
 class DistributedButterfly(DistributedObject.DistributedObject):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedButterfly')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedButterfly')
     id = 0
-    wingTypes = ('wings_1', 'wings_2', 'wings_3', 'wings_4', 'wings_5', 'wings_6')
+    wingTypes = (
+        'wings_1',
+        'wings_2',
+        'wings_3',
+        'wings_4',
+        'wings_5',
+        'wings_6')
     yellowColors = (Vec4(1, 1, 1, 1), Vec4(0.2, 0, 1, 1), Vec4(0.8, 0, 1, 1))
     whiteColors = (Vec4(0.8, 0, 0.8, 1),
-     Vec4(0, 0.8, 0.8, 1),
-     Vec4(0.9, 0.4, 0.6, 1),
-     Vec4(0.9, 0.4, 0.4, 1),
-     Vec4(0.8, 0.5, 0.9, 1),
-     Vec4(0.4, 0.1, 0.7, 1))
+                   Vec4(0, 0.8, 0.8, 1),
+                   Vec4(0.9, 0.4, 0.6, 1),
+                   Vec4(0.9, 0.4, 0.4, 1),
+                   Vec4(0.8, 0.5, 0.9, 1),
+                   Vec4(0.4, 0.1, 0.7, 1))
     paleYellowColors = (Vec4(0.8, 0, 0.8, 1),
-     Vec4(0.6, 0.6, 0.9, 1),
-     Vec4(0.7, 0.6, 0.9, 1),
-     Vec4(0.8, 0.6, 0.9, 1),
-     Vec4(0.9, 0.6, 0.9, 1),
-     Vec4(1, 0.6, 0.9, 1))
+                        Vec4(0.6, 0.6, 0.9, 1),
+                        Vec4(0.7, 0.6, 0.9, 1),
+                        Vec4(0.8, 0.6, 0.9, 1),
+                        Vec4(0.9, 0.6, 0.9, 1),
+                        Vec4(1, 0.6, 0.9, 1))
     shadowScaleBig = Point3(0.07, 0.07, 0.07)
     shadowScaleSmall = Point3(0.01, 0.01, 0.01)
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
-        self.fsm = ClassicFSM.ClassicFSM('DistributedButterfly', [State.State('off', self.enterOff, self.exitOff, ['Flying', 'Landed']), State.State('Flying', self.enterFlying, self.exitFlying, ['Landed']), State.State('Landed', self.enterLanded, self.exitLanded, ['Flying'])], 'off', 'off')
+        self.fsm = ClassicFSM.ClassicFSM(
+            'DistributedButterfly', [
+                State.State(
+                    'off', self.enterOff, self.exitOff, [
+                        'Flying', 'Landed']), State.State(
+                    'Flying', self.enterFlying, self.exitFlying, ['Landed']), State.State(
+                        'Landed', self.enterLanded, self.exitLanded, ['Flying'])], 'off', 'off')
         self.butterfly = None
         self.butterflyNode = None
         self.curIndex = 0
@@ -52,8 +66,8 @@ class DistributedButterfly(DistributedObject.DistributedObject):
         self.butterfly = Actor.Actor()
         self.butterfly.loadModel('phase_4/models/props/SZ_butterfly-mod.bam')
         self.butterfly.loadAnims({'flutter': 'phase_4/models/props/SZ_butterfly-flutter.bam',
-         'glide': 'phase_4/models/props/SZ_butterfly-glide.bam',
-         'land': 'phase_4/models/props/SZ_butterfly-land.bam'})
+                                  'glide': 'phase_4/models/props/SZ_butterfly-glide.bam',
+                                  'land': 'phase_4/models/props/SZ_butterfly-land.bam'})
         index = self.doId % len(self.wingTypes)
         chosenType = self.wingTypes[index]
         node = self.butterfly.getGeomNode()
@@ -63,11 +77,13 @@ class DistributedButterfly(DistributedObject.DistributedObject):
                 wing.removeNode()
             else:
                 if index == 0 or index == 1:
-                    color = self.yellowColors[self.doId % len(self.yellowColors)]
+                    color = self.yellowColors[self.doId %
+                                              len(self.yellowColors)]
                 elif index == 2 or index == 3:
                     color = self.whiteColors[self.doId % len(self.whiteColors)]
                 elif index == 4:
-                    color = self.paleYellowColors[self.doId % len(self.paleYellowColors)]
+                    color = self.paleYellowColors[self.doId % len(
+                        self.paleYellowColors)]
                 else:
                     color = Vec4(1, 1, 1, 1)
                 wing.setColor(color)
@@ -103,7 +119,7 @@ class DistributedButterfly(DistributedObject.DistributedObject):
 
     def disable(self):
         self.butterflyNode.reparentTo(hidden)
-        if self.ival != None:
+        if self.ival is not None:
             self.ival.finish()
         self.__ignoreAvatars()
         DistributedObject.DistributedObject.disable(self)
@@ -126,7 +142,9 @@ class DistributedButterfly(DistributedObject.DistributedObject):
         return name + '-%d' % DistributedButterfly.id
 
     def __detectAvatars(self):
-        self.accept('enter' + self.cSphereNode.getName(), self.__handleCollisionSphereEnter)
+        self.accept(
+            'enter' + self.cSphereNode.getName(),
+            self.__handleCollisionSphereEnter)
 
     def __ignoreAvatars(self):
         self.ignore('enter' + self.cSphereNode.getName())
@@ -134,9 +152,11 @@ class DistributedButterfly(DistributedObject.DistributedObject):
     def __initCollisions(self):
         self.cSphere = CollisionSphere(0.0, 1.0, 0.0, 3.0)
         self.cSphere.setTangible(0)
-        self.cSphereNode = CollisionNode(self.uniqueButterflyName('cSphereNode'))
+        self.cSphereNode = CollisionNode(
+            self.uniqueButterflyName('cSphereNode'))
         self.cSphereNode.addSolid(self.cSphere)
-        self.cSphereNodePath = self.butterflyNode.attachNewNode(self.cSphereNode)
+        self.cSphereNodePath = self.butterflyNode.attachNewNode(
+            self.cSphereNode)
         self.cSphereNodePath.hide()
         self.cSphereNode.setCollideMask(ToontownGlobals.WallBitmask)
 
@@ -157,15 +177,17 @@ class DistributedButterfly(DistributedObject.DistributedObject):
         self.curIndex = curIndex
         self.destIndex = destIndex
         self.time = time
-        self.fsm.request(ButterflyGlobals.states[stateIndex], [globalClockDelta.localElapsedTime(timestamp)])
+        self.fsm.request(
+            ButterflyGlobals.states[stateIndex], [
+                globalClockDelta.localElapsedTime(timestamp)])
 
-    def enterOff(self, ts = 0.0):
-        if self.butterflyNode != None:
+    def enterOff(self, ts=0.0):
+        if self.butterflyNode is not None:
             self.butterflyNode.reparentTo(hidden)
         return
 
     def exitOff(self):
-        if self.butterflyNode != None:
+        if self.butterflyNode is not None:
             self.butterflyNode.reparentTo(render)
         return
 
@@ -173,11 +195,14 @@ class DistributedButterfly(DistributedObject.DistributedObject):
         self.__detectAvatars()
         curPos = ButterflyGlobals.ButterflyPoints[self.playground][self.area][self.curIndex]
         destPos = ButterflyGlobals.ButterflyPoints[self.playground][self.area][self.destIndex]
-        flyHeight = max(curPos[2], destPos[2]) + ButterflyGlobals.BUTTERFLY_HEIGHT[self.playground]
+        flyHeight = max(curPos[2], destPos[2]) + \
+            ButterflyGlobals.BUTTERFLY_HEIGHT[self.playground]
         curPosHigh = Point3(curPos[0], curPos[1], flyHeight)
         destPosHigh = Point3(destPos[0], destPos[1], flyHeight)
         if ts <= self.time:
-            flyTime = self.time - (ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground] + ButterflyGlobals.BUTTERFLY_LANDING[self.playground])
+            flyTime = self.time - \
+                (ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground] +
+                 ButterflyGlobals.BUTTERFLY_LANDING[self.playground])
             self.butterflyNode.setPos(curPos)
             self.dropShadow.show()
             self.dropShadow.setScale(self.shadowScaleBig)
@@ -185,10 +210,54 @@ class DistributedButterfly(DistributedObject.DistributedObject):
             self.butterflyNode.headsUp(destPos)
             newHpr = self.butterflyNode.getHpr()
             self.butterflyNode.setHpr(oldHpr)
-            takeoffShadowT = 0.2 * ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground]
-            landShadowT = 0.2 * ButterflyGlobals.BUTTERFLY_LANDING[self.playground]
+            takeoffShadowT = 0.2 * \
+                ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground]
+            landShadowT = 0.2 * \
+                ButterflyGlobals.BUTTERFLY_LANDING[self.playground]
             self.butterfly2.loop('flutter')
-            self.ival = Sequence(Parallel(LerpPosHprInterval(self.butterflyNode, ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground], curPosHigh, newHpr), LerpAnimInterval(self.butterfly, ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground], 'land', 'flutter'), LerpAnimInterval(self.butterfly, ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground], None, 'glide', startWeight=0, endWeight=self.glideWeight), Sequence(LerpScaleInterval(self.dropShadow, takeoffShadowT, self.shadowScaleSmall, startScale=self.shadowScaleBig), HideInterval(self.dropShadow))), LerpPosInterval(self.butterflyNode, flyTime, destPosHigh), Parallel(LerpPosInterval(self.butterflyNode, ButterflyGlobals.BUTTERFLY_LANDING[self.playground], destPos), LerpAnimInterval(self.butterfly, ButterflyGlobals.BUTTERFLY_LANDING[self.playground], 'flutter', 'land'), LerpAnimInterval(self.butterfly, ButterflyGlobals.BUTTERFLY_LANDING[self.playground], None, 'glide', startWeight=self.glideWeight, endWeight=0), Sequence(Wait(ButterflyGlobals.BUTTERFLY_LANDING[self.playground] - landShadowT), ShowInterval(self.dropShadow), LerpScaleInterval(self.dropShadow, landShadowT, self.shadowScaleBig, startScale=self.shadowScaleSmall))), name=self.uniqueName('Butterfly'))
+            self.ival = Sequence(Parallel(LerpPosHprInterval(self.butterflyNode,
+                                                             ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground],
+                                                             curPosHigh,
+                                                             newHpr),
+                                          LerpAnimInterval(self.butterfly,
+                                 ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground],
+                                 'land',
+                                                           'flutter'),
+                                          LerpAnimInterval(self.butterfly,
+                                                           ButterflyGlobals.BUTTERFLY_TAKEOFF[self.playground],
+                                                           None,
+                                                           'glide',
+                                                           startWeight=0,
+                                                           endWeight=self.glideWeight),
+                                          Sequence(LerpScaleInterval(self.dropShadow,
+                                                                     takeoffShadowT,
+                                                                     self.shadowScaleSmall,
+                                                                     startScale=self.shadowScaleBig),
+                                                   HideInterval(self.dropShadow))),
+                                 LerpPosInterval(self.butterflyNode,
+                                                 flyTime,
+                                                 destPosHigh),
+                                 Parallel(LerpPosInterval(self.butterflyNode,
+                                                          ButterflyGlobals.BUTTERFLY_LANDING[self.playground],
+                                                          destPos),
+                                          LerpAnimInterval(self.butterfly,
+                                          ButterflyGlobals.BUTTERFLY_LANDING[self.playground],
+                                          'flutter',
+                                                           'land'),
+                                          LerpAnimInterval(self.butterfly,
+                                          ButterflyGlobals.BUTTERFLY_LANDING[self.playground],
+                                          None,
+                                          'glide',
+                                                           startWeight=self.glideWeight,
+                                                           endWeight=0),
+                                          Sequence(Wait(ButterflyGlobals.BUTTERFLY_LANDING[self.playground] - landShadowT),
+                                                   ShowInterval(
+                                                       self.dropShadow),
+                                                   LerpScaleInterval(self.dropShadow,
+                                                                     landShadowT,
+                                                                     self.shadowScaleBig,
+                                                                     startScale=self.shadowScaleSmall))),
+                                 name=self.uniqueName('Butterfly'))
             self.ival.start(ts)
         else:
             self.ival = None
@@ -201,7 +270,7 @@ class DistributedButterfly(DistributedObject.DistributedObject):
 
     def exitFlying(self):
         self.__ignoreAvatars()
-        if self.ival != None:
+        if self.ival is not None:
             self.ival.finish()
             self.ival = None
         return
@@ -215,7 +284,9 @@ class DistributedButterfly(DistributedObject.DistributedObject):
         self.butterfly.setControlEffect('land', 1.0)
         self.butterfly.setControlEffect('flutter', 0.0)
         self.butterfly.setControlEffect('glide', 0.0)
-        self.butterfly2.pose('land', random.randrange(self.butterfly2.getNumFrames('land')))
+        self.butterfly2.pose(
+            'land', random.randrange(
+                self.butterfly2.getNumFrames('land')))
         return None
 
     def exitLanded(self):

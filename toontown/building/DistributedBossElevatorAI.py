@@ -9,10 +9,13 @@ from direct.task import Task
 from direct.directnotify import DirectNotifyGlobal
 from toontown.suit import DistributedSellbotBossAI
 
-class DistributedBossElevatorAI(DistributedElevatorExtAI.DistributedElevatorExtAI):
+
+class DistributedBossElevatorAI(
+        DistributedElevatorExtAI.DistributedElevatorExtAI):
 
     def __init__(self, air, bldg, zone, antiShuffle=0, minLaff=0):
-        DistributedElevatorExtAI.DistributedElevatorExtAI.__init__(self, air, bldg, numSeats=8, antiShuffle=antiShuffle, minLaff=minLaff)
+        DistributedElevatorExtAI.DistributedElevatorExtAI.__init__(
+            self, air, bldg, numSeats=8, antiShuffle=antiShuffle, minLaff=minLaff)
         self.zone = zone
         self.type = ELEVATOR_VP
         self.countdownTime = ElevatorData[self.type]['countdown']
@@ -25,7 +28,7 @@ class DistributedBossElevatorAI(DistributedElevatorExtAI.DistributedElevatorExtA
                 avId = self.seats[seatIndex]
                 if avId:
                     self.sendUpdateToAvatarId(avId, 'setBossOfficeZone', [
-                     bossZone])
+                        bossZone])
                     self.clearFullNow(seatIndex)
 
         else:
@@ -38,11 +41,12 @@ class DistributedBossElevatorAI(DistributedElevatorExtAI.DistributedElevatorExtA
             for avId in avIdList:
                 if avId:
                     self.sendUpdateToAvatarId(avId, 'setBossOfficeZoneForce', [
-                     bossZone])
+                        bossZone])
 
     def enterClosing(self):
         DistributedElevatorAI.DistributedElevatorAI.enterClosing(self)
-        taskMgr.doMethodLater(ElevatorData[self.type]['closeTime'], self.elevatorClosedTask, self.uniqueName('closing-timer'))
+        taskMgr.doMethodLater(ElevatorData[self.type]['closeTime'],
+                              self.elevatorClosedTask, self.uniqueName('closing-timer'))
 
     def enterClosed(self):
         DistributedElevatorExtAI.DistributedElevatorExtAI.enterClosed(self)
@@ -50,7 +54,8 @@ class DistributedBossElevatorAI(DistributedElevatorExtAI.DistributedElevatorExtA
 
     def enterOpening(self):
         DistributedElevatorAI.DistributedElevatorAI.enterOpening(self)
-        taskMgr.doMethodLater(ElevatorData[self.type]['openTime'], self.waitEmptyTask, self.uniqueName('opening-timer'))
+        taskMgr.doMethodLater(
+            ElevatorData[self.type]['openTime'], self.waitEmptyTask, self.uniqueName('opening-timer'))
 
     def checkBoard(self, av):
         dept = ToontownGlobals.cogHQZoneId2deptIndex(self.zone)
@@ -72,4 +77,6 @@ class DistributedBossElevatorAI(DistributedElevatorExtAI.DistributedElevatorExtA
             else:
                 self.rejectingBoardersHandler(*newArgs)
         else:
-            self.notify.warning('avid: %s does not exist, but tried to board an elevator' % avId)
+            self.notify.warning(
+                'avid: %s does not exist, but tried to board an elevator' %
+                avId)

@@ -5,6 +5,7 @@ from direct.showbase.PythonUtil import randFloat, lerp
 from toontown.pets import PetConstants
 import random
 
+
 class PetGoalMgr(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('PetGoalMgr')
 
@@ -15,9 +16,12 @@ class PetGoalMgr(DirectObject.DirectObject):
         self.primaryGoal = None
         self.primaryStartT = 0
         if __dev__:
-            self.pscSetup = PStatCollector('App:Show code:petThink:UpdatePriorities:Setup')
-            self.pscFindPrimary = PStatCollector('App:Show code:petThink:UpdatePriorities:FindPrimary')
-            self.pscSetPrimary = PStatCollector('App:Show code:petThink:UpdatePriorities:SetPrimary')
+            self.pscSetup = PStatCollector(
+                'App:Show code:petThink:UpdatePriorities:Setup')
+            self.pscFindPrimary = PStatCollector(
+                'App:Show code:petThink:UpdatePriorities:FindPrimary')
+            self.pscSetPrimary = PStatCollector(
+                'App:Show code:petThink:UpdatePriorities:SetPrimary')
         return
 
     def destroy(self):
@@ -63,7 +67,10 @@ class PetGoalMgr(DirectObject.DirectObject):
             candidates = [self.primaryGoal]
             decayDur = PetConstants.PrimaryGoalDecayDur
             priFactor = PetConstants.PrimaryGoalScale
-            elapsed = min(decayDur, globalClock.getFrameTime() - self.primaryStartT)
+            elapsed = min(
+                decayDur,
+                globalClock.getFrameTime() -
+                self.primaryStartT)
             highestPriority *= lerp(priFactor, 1.0, elapsed / decayDur)
         if __dev__:
             self.pscSetup.stop()
@@ -84,7 +91,9 @@ class PetGoalMgr(DirectObject.DirectObject):
             self.pscSetPrimary.start()
         newPrimary = random.choice(candidates)
         if self.primaryGoal != newPrimary:
-            self.pet.notify.debug('new goal: %s, priority=%s' % (newPrimary.__class__.__name__, highestPriority))
+            self.pet.notify.debug(
+                'new goal: %s, priority=%s' %
+                (newPrimary.__class__.__name__, highestPriority))
             self._setPrimaryGoal(newPrimary)
         if __dev__:
             self.pscSetPrimary.stop()

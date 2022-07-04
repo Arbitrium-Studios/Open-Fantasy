@@ -2,10 +2,23 @@ from . import Entity
 from . import DistributedEntity
 from pandac.PandaModules import NodePath
 
+
 class NodePathEntityBase:
 
-    def initNodePathAttribs(self, doReparent = 1):
-        self.callSetters('pos', 'x', 'y', 'z', 'hpr', 'h', 'p', 'r', 'scale', 'sx', 'sy', 'sz')
+    def initNodePathAttribs(self, doReparent=1):
+        self.callSetters(
+            'pos',
+            'x',
+            'y',
+            'z',
+            'hpr',
+            'h',
+            'p',
+            'r',
+            'scale',
+            'sx',
+            'sy',
+            'sz')
         if doReparent:
             self.callSetters('parentEntId')
         self.getNodePath().setName('%s-%s' % (self.__class__.__name__, self.entId))
@@ -23,7 +36,7 @@ class NodePathEntityBase:
 
 class NodePathAttribs(NodePathEntityBase):
 
-    def initNodePathAttribs(self, doReparent = 1):
+    def initNodePathAttribs(self, doReparent=1):
         NodePathEntityBase.initNodePathAttribs(self, doReparent)
 
     def destroy(self):
@@ -39,7 +52,7 @@ class NodePathAndAttribs(NodePathEntityBase, NodePath):
         node = hidden.attachNewNode('EntityNodePath')
         NodePath.__init__(self, node)
 
-    def initNodePathAttribs(self, doReparent = 1):
+    def initNodePathAttribs(self, doReparent=1):
         NodePathEntityBase.initNodePathAttribs(self, doReparent)
 
     def destroy(self):
@@ -52,7 +65,7 @@ class NodePathAndAttribs(NodePathEntityBase, NodePath):
 
 class NodePathAttribsProxy(NodePathEntityBase):
 
-    def initNodePathAttribs(self, doReparent = 1):
+    def initNodePathAttribs(self, doReparent=1):
         NodePathEntityBase.initNodePathAttribs(self, doReparent)
 
     def destroy(self):
@@ -112,7 +125,8 @@ class NodePathEntity(Entity.Entity, NodePath, NodePathAttribs):
         self.removeNode()
 
 
-class DistributedNodePathEntity(DistributedEntity.DistributedEntity, NodePath, NodePathAttribs):
+class DistributedNodePathEntity(
+        DistributedEntity.DistributedEntity, NodePath, NodePathAttribs):
 
     def __init__(self, cr):
         DistributedEntity.DistributedEntity.__init__(self, cr)

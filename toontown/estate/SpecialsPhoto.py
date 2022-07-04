@@ -6,10 +6,11 @@ from . import GardenGlobals
 from direct.actor import Actor
 import random
 
+
 class DirectRegion(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory('DirectRegion')
 
-    def __init__(self, parent = aspect2d):
+    def __init__(self, parent=aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode('DirectRegion'))
 
@@ -50,10 +51,11 @@ class DirectRegion(NodePath):
             ll = render2d.getRelativePoint(card, newBounds[0])
             ur = render2d.getRelativePoint(card, newBounds[1])
             newBounds = [ll.getX(),
-             ur.getX(),
-             ll.getZ(),
-             ur.getZ()]
-            newBounds = [max(0.0, min(1.0, (x + 1.0) / 2.0)) for x in newBounds]
+                         ur.getX(),
+                         ll.getZ(),
+                         ur.getZ()]
+            newBounds = [max(0.0, min(1.0, (x + 1.0) / 2.0))
+                         for x in newBounds]
             self.cDr = base.win.makeDisplayRegion(*newBounds)
             self.cDr.setSort(10)
             self.cDr.setClearColor(card.getColor())
@@ -76,7 +78,7 @@ class DirectRegion(NodePath):
 class SpecialsPhoto(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory('SpecialsPhoto')
 
-    def __init__(self, type = None, parent = aspect2d):
+    def __init__(self, type=None, parent=aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode('SpecialsPhoto'))
         self.type = type
@@ -92,7 +94,8 @@ class SpecialsPhoto(NodePath):
         if hasattr(self, 'background'):
             self.background.destroy()
             del self.background
-        if hasattr(self, 'specialsFrame') and hasattr(self.specialsFrame, 'destroy'):
+        if hasattr(self, 'specialsFrame') and hasattr(
+                self.specialsFrame, 'destroy'):
             self.specialsFrame.destroy()
         if hasattr(self, 'toonStatuary'):
             if self.toonStatuary.toon:
@@ -142,14 +145,16 @@ class SpecialsPhoto(NodePath):
             return nodePath
         if specialsIndex >= 105 and specialsIndex <= 108:
             from toontown.estate import DistributedToonStatuary
-            self.toonStatuary = DistributedToonStatuary.DistributedToonStatuary(None)
+            self.toonStatuary = DistributedToonStatuary.DistributedToonStatuary(
+                None)
             self.toonStatuary.setupStoneToon(base.localAvatar.style)
             self.toonStatuary.poseToonFromSpecialsIndex(specialsIndex)
             self.toonStatuary.toon.setH(180)
             pedestalModelPath = GardenGlobals.Specials[specialsIndex]['photoModel']
             pedestal = loader.loadModel(pedestalModelPath)
             self.toonStatuary.toon.reparentTo(pedestal)
-            pedestal.setScale(GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.5)
+            pedestal.setScale(
+                GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.5)
             return pedestal
         elif specialsIndex == 135:
             model = Actor.Actor()
@@ -160,7 +165,8 @@ class SpecialsPhoto(NodePath):
             model.loadAnims(dict([[anims[1], animPath]]))
             frameNo = random.randint(1, 2)
             model.pose(anims[1], 1)
-            model.setScale(GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.1)
+            model.setScale(
+                GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.1)
             return model
         else:
             modelName = GardenGlobals.Specials[specialsIndex]['photoModel']
@@ -168,14 +174,17 @@ class SpecialsPhoto(NodePath):
             desat = None
             colorTuple = (1, 1, 1)
             if desat and not desat.isEmpty():
-                desat.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
+                desat.setColorScale(
+                    colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
             else:
-                nodePath.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
-            nodePath.setScale(GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.5)
+                nodePath.setColorScale(
+                    colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
+            nodePath.setScale(
+                GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.5)
             return nodePath
         return
 
-    def show(self, showBackground = 0):
+    def show(self, showBackground=0):
         self.notify.debug('show')
         messenger.send('wakeup')
         if self.specialsFrame:
@@ -188,7 +197,8 @@ class SpecialsPhoto(NodePath):
         self.specialsFrame = self.makeSpecialsFrame(self.actor)
         if showBackground:
             if not hasattr(self, 'background'):
-                background = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+                background = loader.loadModel(
+                    'phase_3.5/models/gui/stickerbook_gui')
                 background = background.find('**/Fish_BG')
                 self.background = background
             self.background.setPos(0, 15, 0)

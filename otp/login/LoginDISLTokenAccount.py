@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from . import LoginBase
 from direct.distributed.PyDatagram import PyDatagram
 
+
 class LoginDISLTokenAccount(LoginBase.LoginBase):
 
     def __init__(self, cr):

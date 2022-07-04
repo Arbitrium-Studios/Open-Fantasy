@@ -11,61 +11,89 @@ from direct.directnotify import DirectNotifyGlobal
 EmoteSleepIndex = 4
 EmoteClear = -1
 
-def doVictory(toon, volume = 1):
+
+def doVictory(toon, volume=1):
     duration = toon.getDuration('victory', 'legs')
     sfx = base.loader.loadSfx('phase_3.5/audio/sfx/ENC_Win.ogg')
     sfxDuration = duration - 1.0
-    sfxTrack = SoundInterval(sfx, loop=1, duration=sfxDuration, node=toon, volume=volume)
+    sfxTrack = SoundInterval(
+        sfx,
+        loop=1,
+        duration=sfxDuration,
+        node=toon,
+        volume=volume)
     track = Sequence(Func(toon.play, 'victory'), sfxTrack, duration=0)
     return (track, duration, None)
 
 
-def doJump(toon, volume = 1):
+def doJump(toon, volume=1):
     track = Sequence(Func(toon.play, 'jump'))
     return (track, 0, None)
 
 
-def doDead(toon, volume = 1):
+def doDead(toon, volume=1):
     toon.animFSM.request('Sad')
     return (None, 0, None)
 
 
-def doAnnoyed(toon, volume = 1):
+def doAnnoyed(toon, volume=1):
     duration = toon.getDuration('angry', 'torso')
     sfx = None
     if toon.style.getAnimal() == 'bear':
         sfx = base.loader.loadSfx('phase_3.5/audio/dial/AV_bear_exclaim.ogg')
     else:
-        sfx = base.loader.loadSfx('phase_3.5/audio/sfx/avatar_emotion_angry.ogg')
+        sfx = base.loader.loadSfx(
+            'phase_3.5/audio/sfx/avatar_emotion_angry.ogg')
 
     def playSfx():
         base.playSfx(sfx, volume=volume, node=toon)
 
-    track = Sequence(Func(toon.angryEyes), Func(toon.blinkEyes), Func(toon.play, 'angry'), Func(playSfx))
+    track = Sequence(
+        Func(
+            toon.angryEyes), Func(
+            toon.blinkEyes), Func(
+                toon.play, 'angry'), Func(playSfx))
     exitTrack = Sequence(Func(toon.normalEyes), Func(toon.blinkEyes))
     return (track, duration, exitTrack)
 
 
-def doAngryEyes(toon, volume = 1):
-    track = Sequence(Func(toon.angryEyes), Func(toon.blinkEyes), Wait(10.0), Func(toon.normalEyes))
+def doAngryEyes(toon, volume=1):
+    track = Sequence(
+        Func(
+            toon.angryEyes), Func(
+            toon.blinkEyes), Wait(10.0), Func(
+                toon.normalEyes))
     return (track, 0.1, None)
 
 
-def doHappy(toon, volume = 1):
-    track = Sequence(Func(toon.play, 'jump'), Func(toon.normalEyes), Func(toon.blinkEyes))
+def doHappy(toon, volume=1):
+    track = Sequence(
+        Func(
+            toon.play, 'jump'), Func(
+            toon.normalEyes), Func(
+                toon.blinkEyes))
     duration = toon.getDuration('jump', 'legs')
     return (track, duration, None)
 
 
-def doSad(toon, volume = 1):
+def doSad(toon, volume=1):
     track = Sequence(Func(toon.sadEyes), Func(toon.blinkEyes))
     exitTrack = Sequence(Func(toon.normalEyes), Func(toon.blinkEyes))
     return (track, 3, exitTrack)
 
 
-def doSleep(toon, volume = 1):
+def doSleep(toon, volume=1):
     duration = 4
-    track = Sequence(Func(toon.stopLookAround), Func(toon.stopBlink), Func(toon.closeEyes), Func(toon.lerpLookAt, Point3(0, 1, -4)), Func(toon.loop, 'neutral'), Func(toon.setPlayRate, 0.4, 'neutral'), Func(toon.setChatAbsolute, TTLocalizer.ToonSleepString, CFThought))
+    track = Sequence(
+        Func(
+            toon.stopLookAround), Func(
+            toon.stopBlink), Func(
+                toon.closeEyes), Func(
+                    toon.lerpLookAt, Point3(
+                        0, 1, -4)), Func(
+                            toon.loop, 'neutral'), Func(
+                                toon.setPlayRate, 0.4, 'neutral'), Func(
+                                    toon.setChatAbsolute, TTLocalizer.ToonSleepString, CFThought))
 
     def wakeUpFromSleepEmote():
         toon.startLookAround()
@@ -80,31 +108,81 @@ def doSleep(toon, volume = 1):
     return (track, duration, exitTrack)
 
 
-def doYes(toon, volume = 1):
+def doYes(toon, volume=1):
     tracks = Parallel(autoFinish=1)
     for lod in toon.getLODNames():
         h = toon.getPart('head', lod)
-        tracks.append(Sequence(LerpHprInterval(h, 0.1, Vec3(0, -30, 0)), LerpHprInterval(h, 0.15, Vec3(0, 20, 0)), LerpHprInterval(h, 0.15, Vec3(0, -20, 0)), LerpHprInterval(h, 0.15, Vec3(0, 20, 0)), LerpHprInterval(h, 0.15, Vec3(0, -20, 0)), LerpHprInterval(h, 0.15, Vec3(0, 20, 0)), LerpHprInterval(h, 0.1, Vec3(0, 0, 0))))
+        tracks.append(
+            Sequence(
+                LerpHprInterval(
+                    h, 0.1, Vec3(
+                        0, -30, 0)), LerpHprInterval(
+                    h, 0.15, Vec3(
+                        0, 20, 0)), LerpHprInterval(
+                            h, 0.15, Vec3(
+                                0, -20, 0)), LerpHprInterval(
+                                    h, 0.15, Vec3(
+                                        0, 20, 0)), LerpHprInterval(
+                                            h, 0.15, Vec3(
+                                                0, -20, 0)), LerpHprInterval(
+                                                    h, 0.15, Vec3(
+                                                        0, 20, 0)), LerpHprInterval(
+                                                            h, 0.1, Vec3(
+                                                                0, 0, 0))))
 
     tracks.start()
     return (None, 0, None)
 
 
-def doNo(toon, volume = 1):
+def doNo(toon, volume=1):
     tracks = Parallel(autoFinish=1)
     for lod in toon.getLODNames():
         h = toon.getPart('head', lod)
-        tracks.append(Sequence(LerpHprInterval(h, 0.1, Vec3(40, 0, 0)), LerpHprInterval(h, 0.15, Vec3(-40, 0, 0)), LerpHprInterval(h, 0.15, Vec3(40, 0, 0)), LerpHprInterval(h, 0.15, Vec3(-40, 0, 0)), LerpHprInterval(h, 0.15, Vec3(20, 0, 0)), LerpHprInterval(h, 0.15, Vec3(-20, 0, 0)), LerpHprInterval(h, 0.1, Vec3(0, 0, 0))))
+        tracks.append(Sequence(LerpHprInterval(h,
+                                               0.1,
+                                               Vec3(40,
+                                                    0,
+                                                    0)),
+                               LerpHprInterval(h,
+                                               0.15,
+                                               Vec3(-40,
+                                                    0,
+                                                    0)),
+                               LerpHprInterval(h,
+                                               0.15,
+                                               Vec3(40,
+                                                    0,
+                                                    0)),
+                               LerpHprInterval(h,
+                                               0.15,
+                                               Vec3(-40,
+                                                    0,
+                                                    0)),
+                               LerpHprInterval(h,
+                                               0.15,
+                                               Vec3(20,
+                                                    0,
+                                                    0)),
+                               LerpHprInterval(h,
+                                               0.15,
+                                               Vec3(-20,
+                                                    0,
+                                                    0)),
+                               LerpHprInterval(h,
+                                               0.1,
+                                               Vec3(0,
+                                                    0,
+                                                    0))))
 
     tracks.start()
     return (None, 0, None)
 
 
-def doOk(toon, volume = 1):
+def doOk(toon, volume=1):
     return (None, 0, None)
 
 
-def doShrug(toon, volume = 1):
+def doShrug(toon, volume=1):
     sfx = base.loader.loadSfx('phase_3.5/audio/sfx/avatar_emotion_shrug.ogg')
 
     def playSfx():
@@ -115,13 +193,13 @@ def doShrug(toon, volume = 1):
     return (track, duration, None)
 
 
-def doWave(toon, volume = 1):
+def doWave(toon, volume=1):
     track = Sequence(Func(toon.play, 'wave'))
     duration = toon.getDuration('wave', 'torso')
     return (track, duration, None)
 
 
-def doApplause(toon, volume = 1):
+def doApplause(toon, volume=1):
     sfx = base.loader.loadSfx('phase_4/audio/sfx/avatar_emotion_applause.ogg')
 
     def playSfx():
@@ -132,7 +210,7 @@ def doApplause(toon, volume = 1):
     return (track, duration, None)
 
 
-def doConfused(toon, volume = 1):
+def doConfused(toon, volume=1):
     sfx = base.loader.loadSfx('phase_4/audio/sfx/avatar_emotion_confused.ogg')
 
     def playSfx():
@@ -143,19 +221,24 @@ def doConfused(toon, volume = 1):
     return (track, duration, None)
 
 
-def doSlipForward(toon, volume = 1):
+def doSlipForward(toon, volume=1):
     sfx = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
 
     def playSfx():
         base.playSfx(sfx, volume=volume, node=toon)
 
     sfxDelay = 0.7
-    track = Sequence(Func(toon.play, 'slip-forward'), Wait(sfxDelay), Func(playSfx))
+    track = Sequence(
+        Func(
+            toon.play,
+            'slip-forward'),
+        Wait(sfxDelay),
+        Func(playSfx))
     duration = toon.getDuration('slip-forward', 'torso') - sfxDelay
     return (track, duration, None)
 
 
-def doBored(toon, volume = 1):
+def doBored(toon, volume=1):
     sfx = base.loader.loadSfx('phase_4/audio/sfx/avatar_emotion_bored.ogg')
 
     def playSfx():
@@ -167,7 +250,7 @@ def doBored(toon, volume = 1):
     return (track, duration, None)
 
 
-def doBow(toon, volume = 1):
+def doBow(toon, volume=1):
     if toon.style.torso[1] == 'd':
         track = Sequence(Func(toon.play, 'curtsy'))
         duration = toon.getDuration('curtsy', 'torso')
@@ -177,48 +260,83 @@ def doBow(toon, volume = 1):
     return (track, duration, None)
 
 
-def doSlipBackward(toon, volume = 1):
+def doSlipBackward(toon, volume=1):
     sfx = base.loader.loadSfx('phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
 
     def playSfx():
         base.playSfx(sfx, volume=volume, node=toon)
 
     sfxDelay = 0.7
-    track = Sequence(Func(toon.play, 'slip-backward'), Wait(sfxDelay), Func(playSfx))
+    track = Sequence(
+        Func(
+            toon.play,
+            'slip-backward'),
+        Wait(sfxDelay),
+        Func(playSfx))
     duration = toon.getDuration('slip-backward', 'torso') - sfxDelay
     return (track, duration, None)
 
 
-def doThink(toon, volume = 1):
+def doThink(toon, volume=1):
     duration = 47.0 / 24.0 * 2
-    animTrack = Sequence(ActorInterval(toon, 'think', startFrame=0, endFrame=46), ActorInterval(toon, 'think', startFrame=46, endFrame=0))
+    animTrack = Sequence(
+        ActorInterval(
+            toon,
+            'think',
+            startFrame=0,
+            endFrame=46),
+        ActorInterval(
+            toon,
+            'think',
+            startFrame=46,
+            endFrame=0))
     track = Sequence(animTrack, duration=0)
     return (track, duration, None)
 
 
-def doCringe(toon, volume = 1):
+def doCringe(toon, volume=1):
     track = Sequence(Func(toon.play, 'cringe'))
     duration = toon.getDuration('cringe', 'torso')
     return (track, duration, None)
 
 
-def doResistanceSalute(toon, volume = 1):
+def doResistanceSalute(toon, volume=1):
     playRate = 0.75
     duration = 10.0 / 24.0 * (1 / playRate) * 2
-    animTrack = Sequence(Func(toon.setChatAbsolute, OTPLocalizer.CustomSCStrings[4020], CFSpeech | CFTimeout), Func(toon.setPlayRate, playRate, 'victory'), ActorInterval(toon, 'victory', playRate=playRate, startFrame=0, endFrame=9), ActorInterval(toon, 'victory', playRate=playRate, startFrame=9, endFrame=0))
+    animTrack = Sequence(
+        Func(
+            toon.setChatAbsolute,
+            OTPLocalizer.CustomSCStrings[4020],
+            CFSpeech | CFTimeout),
+        Func(
+            toon.setPlayRate,
+            playRate,
+            'victory'),
+        ActorInterval(
+            toon,
+            'victory',
+            playRate=playRate,
+            startFrame=0,
+            endFrame=9),
+        ActorInterval(
+            toon,
+            'victory',
+            playRate=playRate,
+            startFrame=9,
+            endFrame=0))
     track = Sequence(animTrack, duration=0)
     return (track, duration, None)
 
 
-def doNothing(toon, volume = 1):
+def doNothing(toon, volume=1):
     return (None, 0, None)
 
 
-def doSurprise(toon, volume = 1):
+def doSurprise(toon, volume=1):
     sfx = None
     sfx = base.loader.loadSfx('phase_4/audio/sfx/avatar_emotion_surprise.ogg')
 
-    def playSfx(volume = 1):
+    def playSfx(volume=1):
         base.playSfx(sfx, volume=volume, node=toon)
 
     def playAnim(anim):
@@ -229,17 +347,40 @@ def doSurprise(toon, volume = 1):
         toon.stop()
         sfx.stop()
 
-    anim = Sequence(ActorInterval(toon, 'conked', startFrame=9, endFrame=50), ActorInterval(toon, 'conked', startFrame=70, endFrame=101))
-    track = Sequence(Func(toon.stopBlink), Func(toon.surpriseEyes), Func(toon.showSurpriseMuzzle), Parallel(Func(playAnim, anim), Func(playSfx, volume)))
-    exitTrack = Sequence(Func(toon.hideSurpriseMuzzle), Func(toon.openEyes), Func(toon.startBlink), Func(stopAnim, anim))
+    anim = Sequence(
+        ActorInterval(
+            toon,
+            'conked',
+            startFrame=9,
+            endFrame=50),
+        ActorInterval(
+            toon,
+            'conked',
+            startFrame=70,
+            endFrame=101))
+    track = Sequence(
+        Func(
+            toon.stopBlink), Func(
+            toon.surpriseEyes), Func(
+                toon.showSurpriseMuzzle), Parallel(
+                    Func(
+                        playAnim, anim), Func(
+                            playSfx, volume)))
+    exitTrack = Sequence(
+        Func(
+            toon.hideSurpriseMuzzle), Func(
+            toon.openEyes), Func(
+                toon.startBlink), Func(
+                    stopAnim, anim))
     return (track, 3.0, exitTrack)
 
 
-def doUpset(toon, volume = 1):
+def doUpset(toon, volume=1):
     sfx = None
-    sfx = base.loader.loadSfx('phase_4/audio/sfx/avatar_emotion_very_sad_1.ogg')
+    sfx = base.loader.loadSfx(
+        'phase_4/audio/sfx/avatar_emotion_very_sad_1.ogg')
 
-    def playSfx(volume = 1):
+    def playSfx(volume=1):
         base.playSfx(sfx, volume=volume, node=toon)
 
     def playAnim(anim):
@@ -250,17 +391,40 @@ def doUpset(toon, volume = 1):
         toon.stop()
         sfx.stop()
 
-    anim = Sequence(ActorInterval(toon, 'bad-putt', startFrame=29, endFrame=59, playRate=-0.75), ActorInterval(toon, 'bad-putt', startFrame=29, endFrame=59, playRate=0.75))
-    track = Sequence(Func(toon.sadEyes), Func(toon.blinkEyes), Func(toon.showSadMuzzle), Parallel(Func(playAnim, anim), Func(playSfx, volume)))
-    exitTrack = Sequence(Func(toon.hideSadMuzzle), Func(toon.normalEyes), Func(stopAnim, anim))
+    anim = Sequence(
+        ActorInterval(
+            toon,
+            'bad-putt',
+            startFrame=29,
+            endFrame=59,
+            playRate=-0.75),
+        ActorInterval(
+            toon,
+            'bad-putt',
+            startFrame=29,
+            endFrame=59,
+            playRate=0.75))
+    track = Sequence(
+        Func(
+            toon.sadEyes), Func(
+            toon.blinkEyes), Func(
+                toon.showSadMuzzle), Parallel(
+                    Func(
+                        playAnim, anim), Func(
+                            playSfx, volume)))
+    exitTrack = Sequence(
+        Func(
+            toon.hideSadMuzzle), Func(
+            toon.normalEyes), Func(
+                stopAnim, anim))
     return (track, 4.0, exitTrack)
 
 
-def doDelighted(toon, volume = 1):
+def doDelighted(toon, volume=1):
     sfx = None
     sfx = base.loader.loadSfx('phase_4/audio/sfx/delighted_06.ogg')
 
-    def playSfx(volume = 1):
+    def playSfx(volume=1):
         base.playSfx(sfx, volume=volume, node=toon)
 
     def playAnim(anim):
@@ -271,30 +435,53 @@ def doDelighted(toon, volume = 1):
         toon.stop()
         sfx.stop()
 
-    anim = Sequence(ActorInterval(toon, 'left'), Wait(1), ActorInterval(toon, 'left', playRate=-1))
-    track = Sequence(Func(toon.blinkEyes), Func(toon.showSmileMuzzle), Parallel(Func(playAnim, anim), Func(playSfx, volume)))
-    exitTrack = Sequence(Func(toon.hideSmileMuzzle), Func(toon.blinkEyes), Func(stopAnim, anim))
+    anim = Sequence(
+        ActorInterval(
+            toon, 'left'), Wait(1), ActorInterval(
+            toon, 'left', playRate=-1))
+    track = Sequence(
+        Func(
+            toon.blinkEyes), Func(
+            toon.showSmileMuzzle), Parallel(
+                Func(
+                    playAnim, anim), Func(
+                        playSfx, volume)))
+    exitTrack = Sequence(
+        Func(
+            toon.hideSmileMuzzle), Func(
+            toon.blinkEyes), Func(
+                stopAnim, anim))
     return (track, 2.5, exitTrack)
 
 
-def doFurious(toon, volume = 1):
+def doFurious(toon, volume=1):
     duration = toon.getDuration('angry', 'torso')
     sfx = None
     sfx = base.loader.loadSfx('phase_4/audio/sfx/furious_03.ogg')
 
-    def playSfx(volume = 1):
+    def playSfx(volume=1):
         base.playSfx(sfx, volume=volume, node=toon)
 
-    track = Sequence(Func(toon.angryEyes), Func(toon.blinkEyes), Func(toon.showAngryMuzzle), Func(toon.play, 'angry'), Func(playSfx, volume))
-    exitTrack = Sequence(Func(toon.normalEyes), Func(toon.blinkEyes), Func(toon.hideAngryMuzzle))
+    track = Sequence(
+        Func(
+            toon.angryEyes), Func(
+            toon.blinkEyes), Func(
+                toon.showAngryMuzzle), Func(
+                    toon.play, 'angry'), Func(
+                        playSfx, volume))
+    exitTrack = Sequence(
+        Func(
+            toon.normalEyes), Func(
+            toon.blinkEyes), Func(
+                toon.hideAngryMuzzle))
     return (track, duration, exitTrack)
 
 
-def doLaugh(toon, volume = 1):
+def doLaugh(toon, volume=1):
     sfx = None
     sfx = base.loader.loadSfx('phase_4/audio/sfx/avatar_emotion_laugh.ogg')
 
-    def playSfx(volume = 1):
+    def playSfx(volume=1):
         base.playSfx(sfx, volume=volume, node=toon)
 
     def playAnim():
@@ -304,20 +491,33 @@ def doLaugh(toon, volume = 1):
     def stopAnim():
         toon.setPlayRate(1, 'neutral')
 
-    track = Sequence(Func(toon.blinkEyes), Func(toon.showLaughMuzzle), Func(playAnim), Func(playSfx, volume))
-    exitTrack = Sequence(Func(toon.hideLaughMuzzle), Func(toon.blinkEyes), Func(stopAnim))
+    track = Sequence(
+        Func(
+            toon.blinkEyes), Func(
+            toon.showLaughMuzzle), Func(playAnim), Func(
+                playSfx, volume))
+    exitTrack = Sequence(
+        Func(
+            toon.hideLaughMuzzle), Func(
+            toon.blinkEyes), Func(stopAnim))
     return (track, 2, exitTrack)
 
 
-def getSingingNote(toon, note, volume = 1):
+def getSingingNote(toon, note, volume=1):
     sfx = None
     filePath = 'phase_3.5/audio/dial/'
     filePrefix = 'tt_s_dlg_sng_'
     fileSuffix = '.ogg'
     speciesName = ToonDNA.getSpeciesName(toon.style.head)
-    sfx = base.loader.loadSfx(filePath + filePrefix + speciesName + '_' + note + fileSuffix)
+    sfx = base.loader.loadSfx(
+        filePath +
+        filePrefix +
+        speciesName +
+        '_' +
+        note +
+        fileSuffix)
 
-    def playSfx(volume = 1):
+    def playSfx(volume=1):
         base.playSfx(sfx, volume=volume, node=toon)
 
     def playAnim():
@@ -326,7 +526,11 @@ def getSingingNote(toon, note, volume = 1):
     def stopAnim():
         toon.setPlayRate(1, 'neutral')
 
-    track = Sequence(Func(toon.showSurpriseMuzzle), Parallel(Func(playAnim), Func(playSfx, volume)))
+    track = Sequence(
+        Func(
+            toon.showSurpriseMuzzle), Parallel(
+            Func(playAnim), Func(
+                playSfx, volume)))
     exitTrack = Sequence(Func(toon.hideSurpriseMuzzle), Func(stopAnim))
     return (track, 0.1, exitTrack)
 
@@ -339,7 +543,7 @@ def stopSinginAnim(toon):
     pass
 
 
-def singNote1(toon, volume = 1):
+def singNote1(toon, volume=1):
     if base.config.GetBool('want-octaves', True):
         if toon.style.getTorsoSize() == 'short':
             return getSingingNote(toon, 'g1')
@@ -349,7 +553,7 @@ def singNote1(toon, volume = 1):
             return getSingingNote(toon, 'g3')
 
 
-def singNote2(toon, volume = 1):
+def singNote2(toon, volume=1):
     if base.config.GetBool('want-octaves', True):
         if toon.style.getTorsoSize() == 'short':
             return getSingingNote(toon, 'a1')
@@ -359,7 +563,7 @@ def singNote2(toon, volume = 1):
             return getSingingNote(toon, 'a3')
 
 
-def singNote3(toon, volume = 1):
+def singNote3(toon, volume=1):
     if base.config.GetBool('want-octaves', True):
         if toon.style.getTorsoSize() == 'short':
             return getSingingNote(toon, 'b1')
@@ -369,7 +573,7 @@ def singNote3(toon, volume = 1):
             return getSingingNote(toon, 'b3')
 
 
-def singNote4(toon, volume = 1):
+def singNote4(toon, volume=1):
     if base.config.GetBool('want-octaves', True):
         if toon.style.getTorsoSize() == 'short':
             return getSingingNote(toon, 'c1')
@@ -379,7 +583,7 @@ def singNote4(toon, volume = 1):
             return getSingingNote(toon, 'c3')
 
 
-def singNote5(toon, volume = 1):
+def singNote5(toon, volume=1):
     if base.config.GetBool('want-octaves', True):
         if toon.style.getTorsoSize() == 'short':
             return getSingingNote(toon, 'd1')
@@ -389,7 +593,7 @@ def singNote5(toon, volume = 1):
             return getSingingNote(toon, 'd3')
 
 
-def singNote6(toon, volume = 1):
+def singNote6(toon, volume=1):
     if base.config.GetBool('want-octaves', True):
         if toon.style.getTorsoSize() == 'short':
             return getSingingNote(toon, 'e1')
@@ -399,7 +603,7 @@ def singNote6(toon, volume = 1):
             return getSingingNote(toon, 'e3')
 
 
-def singNote7(toon, volume = 1):
+def singNote7(toon, volume=1):
     if base.config.GetBool('want-octaves', True):
         if toon.style.getTorsoSize() == 'short':
             return getSingingNote(toon, 'f1')
@@ -409,7 +613,7 @@ def singNote7(toon, volume = 1):
             return getSingingNote(toon, 'f3')
 
 
-def singNote8(toon, volume = 1):
+def singNote8(toon, volume=1):
     if base.config.GetBool('want-octaves', True):
         if toon.style.getTorsoSize() == 'short':
             return getSingingNote(toon, 'g2')
@@ -419,7 +623,7 @@ def singNote8(toon, volume = 1):
             return getSingingNote(toon, 'g4')
 
 
-def singNoteEmpty(toon, volume = 0):
+def singNoteEmpty(toon, volume=0):
     track = Sequence()
     return (track, 0.1, None)
 
@@ -434,30 +638,31 @@ def returnToLastAnim(toon):
 
 
 EmoteFunc = [[doWave, 0],
- [doHappy, 0],
- [doSad, 0],
- [doAnnoyed, 0],
- [doSleep, 0],
- [doShrug, 0],
- [doVictory, 0],
- [doThink, 0],
- [doBored, 0],
- [doApplause, 0],
- [doCringe, 0],
- [doConfused, 0],
- [doSlipForward, 0],
- [doBow, 0],
- [doSlipBackward, 0],
- [doResistanceSalute, 0],
- [doNothing, 0],
- [doYes, 0],
- [doNo, 0],
- [doOk, 0],
- [doSurprise, 0],
- [doUpset, 0],
- [doDelighted, 0],
- [doFurious, 0],
- [doLaugh, 0]]
+             [doHappy, 0],
+             [doSad, 0],
+             [doAnnoyed, 0],
+             [doSleep, 0],
+             [doShrug, 0],
+             [doVictory, 0],
+             [doThink, 0],
+             [doBored, 0],
+             [doApplause, 0],
+             [doCringe, 0],
+             [doConfused, 0],
+             [doSlipForward, 0],
+             [doBow, 0],
+             [doSlipBackward, 0],
+             [doResistanceSalute, 0],
+             [doNothing, 0],
+             [doYes, 0],
+             [doNo, 0],
+             [doOk, 0],
+             [doSurprise, 0],
+             [doUpset, 0],
+             [doDelighted, 0],
+             [doFurious, 0],
+             [doLaugh, 0]]
+
 
 class TTEmote(Emote.Emote):
     notify = DirectNotifyGlobal.directNotify.newCategory('TTEmote')
@@ -466,31 +671,32 @@ class TTEmote(Emote.Emote):
     def __init__(self):
         self.emoteFunc = EmoteFunc
         self.bodyEmotes = [0,
-         1,
-         3,
-         4,
-         5,
-         6,
-         7,
-         8,
-         9,
-         10,
-         11,
-         12,
-         13,
-         14,
-         15,
-         20,
-         21,
-         22,
-         23,
-         24]
+                           1,
+                           3,
+                           4,
+                           5,
+                           6,
+                           7,
+                           8,
+                           9,
+                           10,
+                           11,
+                           12,
+                           13,
+                           14,
+                           15,
+                           20,
+                           21,
+                           22,
+                           23,
+                           24]
         self.headEmotes = [2,
-         17,
-         18,
-         19]
+                           17,
+                           18,
+                           19]
         if len(self.emoteFunc) != len(OTPLocalizer.EmoteList):
-            self.notify.error('Emote.EmoteFunc and OTPLocalizer.EmoteList are different lengths.')
+            self.notify.error(
+                'Emote.EmoteFunc and OTPLocalizer.EmoteList are different lengths.')
         self.track = None
         self.stateChangeMsgLocks = 0
         self.stateHasChanged = 0
@@ -514,32 +720,32 @@ class TTEmote(Emote.Emote):
         else:
             messenger.send(self.EmoteEnableStateChanged)
 
-    def disableAll(self, toon, msg = None):
+    def disableAll(self, toon, msg=None):
         if toon != base.localAvatar:
             return
         self.disableGroup(list(range(len(self.emoteFunc))), toon)
 
-    def releaseAll(self, toon, msg = None):
+    def releaseAll(self, toon, msg=None):
         if toon != base.localAvatar:
             return
         self.enableGroup(list(range(len(self.emoteFunc))), toon)
 
-    def disableBody(self, toon, msg = None):
+    def disableBody(self, toon, msg=None):
         if toon != base.localAvatar:
             return
         self.disableGroup(self.bodyEmotes, toon)
 
-    def releaseBody(self, toon, msg = None):
+    def releaseBody(self, toon, msg=None):
         if toon != base.localAvatar:
             return
         self.enableGroup(self.bodyEmotes, toon)
 
-    def disableHead(self, toon, msg = None):
+    def disableHead(self, toon, msg=None):
         if toon != base.localAvatar:
             return
         self.disableGroup(self.headEmotes, toon)
 
-    def releaseHead(self, toon, msg = None):
+    def releaseHead(self, toon, msg=None):
         if toon != base.localAvatar:
             return
         self.enableGroup(self.headEmotes, toon)
@@ -577,10 +783,10 @@ class TTEmote(Emote.Emote):
             if self.emoteFunc[index][1] == 0:
                 self.emoteEnableStateChanged()
 
-    def doEmote(self, toon, emoteIndex, ts = 0, volume = 1):
+    def doEmote(self, toon, emoteIndex, ts=0, volume=1):
         try:
             func = self.emoteFunc[emoteIndex][0]
-        except:
+        except BaseException:
             print('Error in finding emote func %s' % emoteIndex)
             return (None, None)
 
@@ -593,19 +799,25 @@ class TTEmote(Emote.Emote):
             track, duration, exitTrack = func(toon)
         else:
             track, duration, exitTrack = func(toon, volume)
-        if track != None:
+        if track is not None:
             track = Sequence(Func(self.disableAll, toon, 'doEmote'), track)
             if duration > 0:
                 track = Sequence(track, Wait(duration))
-            if exitTrack != None:
+            if exitTrack is not None:
                 track = Sequence(track, exitTrack)
             if duration > 0:
                 track = Sequence(track, Func(returnToLastAnim, toon))
-            track = Sequence(track, Func(self.releaseAll, toon, 'doEmote'), autoFinish=1)
+            track = Sequence(
+                track,
+                Func(
+                    self.releaseAll,
+                    toon,
+                    'doEmote'),
+                autoFinish=1)
             if toon.isLocal():
                 track = Sequence(track, Func(clearEmoteTrack))
-        if track != None:
-            if toon.emote != None:
+        if track is not None:
+            if toon.emote is not None:
                 toon.emote.finish()
                 toon.emote = None
             toon.emote = track

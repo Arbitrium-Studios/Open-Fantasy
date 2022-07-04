@@ -7,9 +7,18 @@ from direct.task import Task
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm.FSM import FSM
 
+
 class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedElevatorFSMAI')
-    defaultTransitions = {'Off': ['Opening', 'Closed'], 'Opening': ['WaitEmpty', 'WaitCountdown', 'Opening', 'Closing'], 'WaitEmpty': ['WaitCountdown', 'Closing'], 'WaitCountdown': ['WaitEmpty', 'AllAboard', 'Closing'], 'AllAboard': ['WaitEmpty', 'Closing'], 'Closing': ['Closed', 'WaitEmpty', 'Closing', 'Opening'], 'Closed': ['Opening']}
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedElevatorFSMAI')
+    defaultTransitions = {
+        'Off': [
+            'Opening', 'Closed'], 'Opening': [
+            'WaitEmpty', 'WaitCountdown', 'Opening', 'Closing'], 'WaitEmpty': [
+                'WaitCountdown', 'Closing'], 'WaitCountdown': [
+                    'WaitEmpty', 'AllAboard', 'Closing'], 'AllAboard': [
+                        'WaitEmpty', 'Closing'], 'Closing': [
+                            'Closed', 'WaitEmpty', 'Closing', 'Opening'], 'Closed': ['Opening']}
     id = 0
 
     def __init__(self, air, bldg, numSeats=4, antiShuffle=0, minLaff=0):
@@ -49,7 +58,7 @@ class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
 
     def findAvailableSeat(self):
         for i in range(len(self.seats)):
-            if self.seats[i] == None:
+            if self.seats[i] is None:
                 return i
 
         return
@@ -72,7 +81,7 @@ class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
     def countOpenSeats(self):
         openSeats = 0
         for i in range(len(self.seats)):
-            if self.seats[i] == None:
+            if self.seats[i] is None:
                 openSeats += 1
 
         return openSeats
@@ -86,7 +95,7 @@ class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
     def acceptingBoardersHandler(self, avId, reason=0):
         self.notify.debug('acceptingBoardersHandler')
         seatIndex = self.findAvailableSeat()
-        if seatIndex == None:
+        if seatIndex is None:
             self.rejectBoarder(avId, REJECT_NOSEAT)
         else:
             self.acceptBoarder(avId, seatIndex)
@@ -94,12 +103,12 @@ class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
 
     def acceptBoarder(self, avId, seatIndex):
         self.notify.debug('acceptBoarder')
-        if self.findAvatar(avId) != None:
+        if self.findAvatar(avId) is not None:
             return
         self.seats[seatIndex] = avId
         self.timeOfBoarding = globalClock.getRealTime()
         self.sendUpdate('fillSlot' + str(seatIndex), [
-         avId])
+            avId])
         return
 
     def rejectingExitersHandler(self, avId):
@@ -113,21 +122,26 @@ class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
 
     def clearEmptyNow(self, seatIndex):
         self.sendUpdate('emptySlot' + str(seatIndex), [
-         0, 0, globalClockDelta.getRealNetworkTime()])
+            0, 0, globalClockDelta.getRealNetworkTime()])
 
     def clearFullNow(self, seatIndex):
         avId = self.seats[seatIndex]
-        if avId == None:
-            self.notify.warning('Clearing an empty seat index: ' + str(seatIndex) + ' ... Strange...')
+        if avId is None:
+            self.notify.warning(
+                'Clearing an empty seat index: ' +
+                str(seatIndex) +
+                ' ... Strange...')
         else:
             self.seats[seatIndex] = None
             self.sendUpdate('fillSlot' + str(seatIndex), [
-             0])
+                0])
             self.ignore(self.air.getAvatarExitEvent(avId))
         return
 
     def d_setState(self, state):
-        self.sendUpdate('setState', [state, globalClockDelta.getRealNetworkTime()])
+        self.sendUpdate(
+            'setState', [
+                state, globalClockDelta.getRealNetworkTime()])
 
     def getState(self):
         return self.state
@@ -143,13 +157,15 @@ class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
     def requestBoard(self, *args):
         self.notify.debug('requestBoard')
         avId = self.air.getAvatarIdFromSender()
-        if self.findAvatar(avId) != None:
-            self.notify.warning('Ignoring multiple requests from %s to board.' % avId)
+        if self.findAvatar(avId) is not None:
+            self.notify.warning(
+                'Ignoring multiple requests from %s to board.' %
+                avId)
             return
         av = self.air.doId2do.get(avId)
         if av:
             newArgs = (
-             avId,) + args
+                avId,) + args
             boardResponse = self.checkBoard(av)
             newArgs = (avId,) + args + (boardResponse,)
             if boardResponse == 0:
@@ -157,7 +173,9 @@ class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
             else:
                 self.rejectingBoardersHandler(*newArgs)
         else:
-            self.notify.warning('avid: %s does not exist, but tried to board an elevator' % avId)
+            self.notify.warning(
+                'avid: %s does not exist, but tried to board an elevator' %
+                avId)
         return
 
     def requestExit(self, *args):
@@ -167,13 +185,15 @@ class DistributedElevatorFSMAI(DistributedObjectAI.DistributedObjectAI, FSM):
             av = self.air.doId2do.get(avId)
             if av:
                 newArgs = (
-                 avId,) + args
+                    avId,) + args
                 if self.accepting:
                     self.acceptingExitersHandler(*newArgs)
                 else:
                     self.rejectingExitersHandler(*newArgs)
             else:
-                self.notify.warning('avId: %s does not exist, but tried to exit an elevator' % avId)
+                self.notify.warning(
+                    'avId: %s does not exist, but tried to exit an elevator' %
+                    avId)
 
     def start(self):
         self.open()

@@ -1,6 +1,7 @@
 from . import Entity
 from direct.directnotify import DirectNotifyGlobal
 
+
 class EditMgrBase(Entity.Entity):
     notify = DirectNotifyGlobal.directNotify.newCategory('EditMgr')
 
@@ -14,8 +15,10 @@ class EditMgrBase(Entity.Entity):
     if __dev__:
 
         def setInsertEntity(self, data):
-            self.level.setEntityCreatorUsername(data['entId'], data['username'])
-            self.level.levelSpec.insertEntity(data['entId'], data['entType'], data['parentEntId'])
+            self.level.setEntityCreatorUsername(
+                data['entId'], data['username'])
+            self.level.levelSpec.insertEntity(
+                data['entId'], data['entType'], data['parentEntId'])
             self.level.levelSpec.doSetAttrib(self.entId, 'insertEntity', None)
             return
 

@@ -2,6 +2,7 @@ from direct.showbase import DirectObject
 from direct.directnotify import DirectNotifyGlobal
 from . import Entity
 
+
 def andTest(self, a, b):
     if b:
         messenger.send(self.getOutputEventName(), [a])
@@ -33,11 +34,11 @@ def xnorTest(self, a, b):
 class LogicGate(Entity.Entity, DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('LogicGate')
     logicTests = {'and': andTest,
-     'or': orTest,
-     'xor': xorTest,
-     'nand': nandTest,
-     'nor': norTest,
-     'xnor': xnorTest}
+                  'or': orTest,
+                  'xor': xorTest,
+                  'nand': nandTest,
+                  'nor': norTest,
+                  'xnor': xnorTest}
 
     def __init__(self, level, entId):
         self.input1Event = None

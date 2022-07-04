@@ -12,13 +12,17 @@ from direct.directutil import Mopath
 from toontown.toonbase import ToontownGlobals
 from direct.actor import Actor
 
+
 class Train(DirectObject):
     notify = directNotify.newCategory('Train')
     nameId = 0
     Sfx_TrainPass = 'phase_10/audio/sfx/CBHQ_TRAIN_pass.ogg'
     Sfx_TrainStopStart = 'phase_10/audio/sfx/CBHQ_TRAIN_stopstart.ogg'
     LocomotiveFile = 'phase_10/models/cogHQ/CashBotLocomotive'
-    CarFiles = ['phase_10/models/cogHQ/CashBotBoxCar', 'phase_10/models/cogHQ/CashBotTankCar', 'phase_10/models/cogHQ/CashBotFlatCar']
+    CarFiles = [
+        'phase_10/models/cogHQ/CashBotBoxCar',
+        'phase_10/models/cogHQ/CashBotTankCar',
+        'phase_10/models/cogHQ/CashBotFlatCar']
     CarLength = 88
     MarkDelta = 15
 
@@ -52,10 +56,11 @@ class Train(DirectObject):
             self.locomotive.reparentTo(render)
 
     def __networkTimeInSeconds(self):
-        time = globalClockDelta.getRealNetworkTime(bits=32) / NetworkTimePrecision
+        time = globalClockDelta.getRealNetworkTime(
+            bits=32) / NetworkTimePrecision
         return time
 
-    def doNextRun(self, bFirstRun = False):
+    def doNextRun(self, bFirstRun=False):
         if self.locomotive:
             if bFirstRun:
                 nextMark = self.lastMark
@@ -104,7 +109,9 @@ class Train(DirectObject):
             self.cars.append(car)
 
     def __showStart(self):
-        self.notify.debug('Starting train %s at %s.' % (self.trainId, self.__networkTimeInSeconds()))
+        self.notify.debug(
+            'Starting train %s at %s.' %
+            (self.trainId, self.__networkTimeInSeconds()))
 
     def __getNextRun(self):
         self.__getCars()
@@ -116,7 +123,28 @@ class Train(DirectObject):
             sfxStopTime = 4.3
             halfway = (self.trackStartPos + self.trackEndPos) / 2
             halfway.setX(150)
-            nextRun.append(Parallel(Sequence(Wait(totalTime - sfxStopTime), SoundInterval(self.trainStopStartSfx, volume=0.5)), Sequence(LerpPosInterval(self.locomotive, totalTime, halfway, self.trackStartPos, blendType='easeInOut'), WaitInterval(waitTime), LerpPosInterval(self.locomotive, totalTime, self.trackEndPos, halfway, blendType='easeIn'))))
+            nextRun.append(
+                Parallel(
+                    Sequence(
+                        Wait(
+                            totalTime - sfxStopTime),
+                        SoundInterval(
+                            self.trainStopStartSfx,
+                            volume=0.5)),
+                    Sequence(
+                        LerpPosInterval(
+                            self.locomotive,
+                            totalTime,
+                            halfway,
+                            self.trackStartPos,
+                            blendType='easeInOut'),
+                        WaitInterval(waitTime),
+                        LerpPosInterval(
+                            self.locomotive,
+                            totalTime,
+                            self.trackEndPos,
+                            halfway,
+                            blendType='easeIn'))))
         else:
             totalTime = random.randrange(6, self.MarkDelta - 1)
             sfxTime = 7
@@ -125,7 +153,18 @@ class Train(DirectObject):
                 sfxStartTime -= 1
             else:
                 sfxStartTime += 1
-            nextRun.append(Parallel(Sequence(Wait(sfxStartTime), SoundInterval(self.trainPassingSfx, volume=0.5)), LerpPosInterval(self.locomotive, totalTime, self.trackEndPos, self.trackStartPos)))
+            nextRun.append(
+                Parallel(
+                    Sequence(
+                        Wait(sfxStartTime),
+                        SoundInterval(
+                            self.trainPassingSfx,
+                            volume=0.5)),
+                    LerpPosInterval(
+                        self.locomotive,
+                        totalTime,
+                        self.trackEndPos,
+                        self.trackStartPos)))
         nextRun.append(Func(self.doNextRun))
         return nextRun
 
@@ -153,10 +192,12 @@ class Train(DirectObject):
             collNode.setName(self.collNodeName)
             collNode.setCollideMask(ToontownGlobals.WallBitmask)
 
-        self.accept('enter' + self.collNodeName, self.__handleCollisionSphereEnter)
+        self.accept(
+            'enter' + self.collNodeName,
+            self.__handleCollisionSphereEnter)
 
     def __disableCollisions(self):
         self.ignore('enter' + self.collNodeName)
 
-    def __handleCollisionSphereEnter(self, collEntry = None):
+    def __handleCollisionSphereEnter(self, collEntry=None):
         base.localAvatar.b_squish(10)

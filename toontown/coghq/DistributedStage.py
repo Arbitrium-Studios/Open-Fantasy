@@ -13,6 +13,7 @@ import random
 from direct.task.Task import Task
 from direct.interval.IntervalGlobal import *
 
+
 class DistributedStage(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedStage')
     ReadyPost = 'StageReady'
@@ -22,7 +23,10 @@ class DistributedStage(DistributedObject.DistributedObject):
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
         self.titleColor = (1, 1, 1, 1)
-        self.titleText = OnscreenText.OnscreenText('', fg=self.titleColor, shadow=(0, 0, 0, 1), font=ToontownGlobals.getSuitFont(), pos=(0, -0.5), scale=0.1, drawOrder=0, mayChange=1)
+        self.titleText = OnscreenText.OnscreenText(
+            '', fg=self.titleColor, shadow=(
+                0, 0, 0, 1), font=ToontownGlobals.getSuitFont(), pos=(
+                0, -0.5), scale=0.1, drawOrder=0, mayChange=1)
         self.titleSequence = None
         self.pendingZoneChange = 0
         return
@@ -68,11 +72,15 @@ class DistributedStage(DistributedObject.DistributedObject):
         DistributedStage.notify.debug('floorNum: %s' % num)
         self.floorNum = num
         bboard.post(DistributedStage.FloorNum, num)
-        self.layout = StageLayout.StageLayout(self.stageId, self.floorNum, self.layoutIndex)
+        self.layout = StageLayout.StageLayout(
+            self.stageId, self.floorNum, self.layoutIndex)
 
     def setRoomDoIds(self, roomDoIds):
         self.roomDoIds = roomDoIds
-        self.roomWatcher = BulletinBoardWatcher.BulletinBoardWatcher('roomWatcher-%s' % self.doId, [ DistributedStageRoom.getStageRoomReadyPostName(doId) for doId in self.roomDoIds ], self.gotAllRooms)
+        self.roomWatcher = BulletinBoardWatcher.BulletinBoardWatcher(
+            'roomWatcher-%s' %
+            self.doId, [
+                DistributedStageRoom.getStageRoomReadyPostName(doId) for doId in self.roomDoIds], self.gotAllRooms)
 
     def gotAllRooms(self):
         self.notify.debug('stage %s: got all rooms' % self.doId)
@@ -83,7 +91,8 @@ class DistributedStage(DistributedObject.DistributedObject):
             self.rooms.append(base.cr.doId2do[doId])
             self.rooms[-1].setStage(self)
 
-        self.notify.info('stageId %s, floor %s, %s' % (self.stageId, self.floorNum, self.rooms[0].avIdList))
+        self.notify.info('stageId %s, floor %s, %s' %
+                         (self.stageId, self.floorNum, self.rooms[0].avIdList))
         rng = self.layout.getRng()
         numRooms = self.layout.getNumRooms()
         for i, room in enumerate(self.rooms):
@@ -105,7 +114,7 @@ class DistributedStage(DistributedObject.DistributedObject):
 
         self.placeToon()
 
-        def handleCameraRayFloorCollision(collEntry, self = self):
+        def handleCameraRayFloorCollision(collEntry, self=self):
             name = collEntry.getIntoNode().getName()
             self.notify.debug('camera floor ray collided with: %s' % name)
             prefix = StageRoom.StageRoom.FloorCollPrefix
@@ -113,8 +122,9 @@ class DistributedStage(DistributedObject.DistributedObject):
             if name[:prefixLen] == prefix:
                 try:
                     roomNum = int(name[prefixLen:])
-                except:
-                    DistributedLevel.notify.warning('Invalid zone floor collision node: %s' % name)
+                except BaseException:
+                    DistributedLevel.notify.warning(
+                        'Invalid zone floor collision node: %s' % name)
                 else:
                     self.camEnterRoom(roomNum)
                     print(collEntry)
@@ -140,13 +150,13 @@ class DistributedStage(DistributedObject.DistributedObject):
         taskMgr.doMethodLater(0.25, self._delayedInit, 'delayedInit')
         return
 
-    def _delayedInit(self, taskFooler = 0):
+    def _delayedInit(self, taskFooler=0):
         self.camEnterRoom(0)
         base.localAvatar.unpauseGlitchKiller()
         try:
             fsm = base.cr.playGame.getPlace().fsm
             fsm.forceTransition('walk')
-        except:
+        except BaseException:
             pass
 
         return Task.done
@@ -155,7 +165,7 @@ class DistributedStage(DistributedObject.DistributedObject):
         roomNum = room.getRoomNum()
         floorCollName = room.getFloorCollName()
 
-        def handleZoneEnter(collisionEntry, self = self, roomNum = roomNum):
+        def handleZoneEnter(collisionEntry, self=self, roomNum=roomNum):
             self.toonEnterRoom(roomNum)
             floorNode = collisionEntry.getIntoNode()
             if floorNode.hasTag('ouch'):
@@ -165,7 +175,7 @@ class DistributedStage(DistributedObject.DistributedObject):
 
         self.accept('enter%s' % floorCollName, handleZoneEnter)
 
-        def handleZoneExit(collisionEntry, self = self, roomNum = roomNum):
+        def handleZoneExit(collisionEntry, self=self, roomNum=roomNum):
             floorNode = collisionEntry.getIntoNode()
             if floorNode.hasTag('ouch'):
                 self.allRooms[roomNum].stopOuch()
@@ -173,13 +183,16 @@ class DistributedStage(DistributedObject.DistributedObject):
         self.accept('exit%s' % floorCollName, handleZoneExit)
 
     def getAllRoomsTimeout(self):
-        self.notify.warning('stage %s: timed out waiting for room objs' % self.doId)
+        self.notify.warning(
+            'stage %s: timed out waiting for room objs' %
+            self.doId)
 
     def toonEnterRoom(self, roomNum):
         self.notify.debug('toonEnterRoom: %s' % roomNum)
         if roomNum != self.curToonRoomNum:
             if self.curToonRoomNum is not None:
-                self.allRooms[self.curToonRoomNum].localToonFSM.request('notPresent')
+                self.allRooms[self.curToonRoomNum].localToonFSM.request(
+                    'notPresent')
             self.allRooms[roomNum].localToonFSM.request('present')
             self.curToonRoomNum = roomNum
         return
@@ -187,7 +200,9 @@ class DistributedStage(DistributedObject.DistributedObject):
     def camEnterRoom(self, roomNum):
         self.notify.debug('camEnterRoom: %s' % roomNum)
         self.notify.info('CAMENTERROOM doID%s num%s' % (self.doId, roomNum))
-        self.notify.info('av: %s, cam: %s' % (localAvatar.getPos(), camera.getPos()))
+        self.notify.info(
+            'av: %s, cam: %s' %
+            (localAvatar.getPos(), camera.getPos()))
         if roomNum % 2 == 1:
             minVis = roomNum - 2
             maxVis = roomNum + 2
@@ -206,7 +221,9 @@ class DistributedStage(DistributedObject.DistributedObject):
         av = base.cr.identifyFriend(avId)
         if av is None:
             return
-        base.localAvatar.setSystemMessage(avId, TTLocalizer.StageBossConfrontedMsg % av.getName())
+        base.localAvatar.setSystemMessage(
+            avId, TTLocalizer.StageBossConfrontedMsg %
+            av.getName())
         return
 
     def warpToRoom(self, roomId):
@@ -246,7 +263,8 @@ class DistributedStage(DistributedObject.DistributedObject):
             self.geom.removeNode()
             self.geom = None
         base.localAvatar.setCameraCollisionsCanMove(0)
-        if hasattr(self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
+        if hasattr(
+                self, 'relatedObjectMgrRequest') and self.relatedObjectMgrRequest:
             self.cr.relatedObjectMgr.abortRequest(self.relatedObjectMgrRequest)
             del self.relatedObjectMgrRequest
         DistributedObject.DistributedObject.disable(self)
@@ -266,7 +284,9 @@ class DistributedStage(DistributedObject.DistributedObject):
         panel.setFactoryToonIdList(avIds)
 
     def handleScreenshot(self):
-        base.addScreenshotString('stageId: %s, floor (from 1): %s' % (self.stageId, self.floorNum + 1))
+        base.addScreenshotString(
+            'stageId: %s, floor (from 1): %s' %
+            (self.stageId, self.floorNum + 1))
         if hasattr(self, 'currentRoomName'):
             base.addScreenshotString('%s' % self.currentRoomName)
 
@@ -276,7 +296,7 @@ class DistributedStage(DistributedObject.DistributedObject):
         scale = base.localAvatar.getScale()
         base.camera.setScale(scale)
 
-    def showInfoText(self, text = 'hello world'):
+    def showInfoText(self, text='hello world'):
         description = text
         if description and description != '':
             self.titleText.setText(description)
@@ -286,7 +306,12 @@ class DistributedStage(DistributedObject.DistributedObject):
             if self.titleSequence:
                 self.titleSequence.finish()
             self.titleSequence = None
-            self.titleSequence = Sequence(Func(self.showTitleText), Wait(3.1), LerpColorScaleInterval(self.titleText, duration=0.5, colorScale=Vec4(1, 1, 1, 0.0)), Func(self.hideTitleText))
+            self.titleSequence = Sequence(
+                Func(
+                    self.showTitleText), Wait(3.1), LerpColorScaleInterval(
+                    self.titleText, duration=0.5, colorScale=Vec4(
+                        1, 1, 1, 0.0)), Func(
+                    self.hideTitleText))
             self.titleSequence.start()
         return
 

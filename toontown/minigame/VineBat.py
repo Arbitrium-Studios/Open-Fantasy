@@ -5,6 +5,7 @@ from pandac.PandaModules import *
 from . import VineGameGlobals
 from direct.interval.SoundInterval import SoundInterval
 
+
 class VineBat(NodePath, DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('VineBat')
     notify.setDebug(True)
@@ -42,7 +43,8 @@ class VineBat(NodePath, DirectObject):
         self.setPos(-100, 0, 0)
         center = Point3(0, 0, 0)
         self.sphereName = 'batSphere-%s-%s' % (gameId, self.serialNum)
-        self.collSphere = CollisionSphere(center[0], center[1], center[2], self.RADIUS)
+        self.collSphere = CollisionSphere(
+            center[0], center[1], center[2], self.RADIUS)
         self.collSphere.setTangible(0)
         self.collNode = CollisionNode(self.sphereName)
         self.collNode.setIntoCollideMask(VineGameGlobals.SpiderBitmask)
@@ -50,11 +52,19 @@ class VineBat(NodePath, DirectObject):
         self.collNodePath = self.attachNewNode(self.collNode)
         self.collNodePath.hide()
         self.accept('enter' + self.sphereName, self.__handleEnterSphere)
-        self.screechSfx = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_bat_shriek_3.ogg')
-        self.flySfx = base.loader.loadSfx('phase_4/audio/sfx/MG_sfx_vine_game_bat_flying_lp.ogg')
+        self.screechSfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_bat_shriek_3.ogg')
+        self.flySfx = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_sfx_vine_game_bat_flying_lp.ogg')
         self.oldCutoffDistance = base.sfxPlayer.getCutoffDistance()
         base.sfxPlayer.setCutoffDistance(240)
-        self.soundInterval = SoundInterval(self.flySfx, node=self, listenerNode=base.localAvatar, seamlessLoop=True, volume=0.5, cutOff=240)
+        self.soundInterval = SoundInterval(
+            self.flySfx,
+            node=self,
+            listenerNode=base.localAvatar,
+            seamlessLoop=True,
+            volume=0.5,
+            cutOff=240)
         self.reparentTo(render)
         self.startedFlying = False
         self.warnedForThisLap = False

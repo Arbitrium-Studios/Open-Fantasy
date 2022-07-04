@@ -7,8 +7,10 @@ from toontown.toonbase import ToontownGlobals
 import random
 import functools
 
+
 class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCCharBaseAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedCCharBaseAI')
 
     def __init__(self, air, name):
         DistributedAvatarAI.DistributedAvatarAI.__init__(self, air)
@@ -21,7 +23,9 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
     def generate(self):
         DistributedAvatarAI.DistributedAvatarAI.generate(self)
         if config.GetBool('classic-char-client-spam', 0):
-            self._ccharSpamTask = taskMgr.add(self._simSpam, 'cchar-spam-%s' % serialNum())
+            self._ccharSpamTask = taskMgr.add(
+                self._simSpam, 'cchar-spam-%s' %
+                serialNum())
 
     def _simSpam(self, task):
         AvEnter = 'avatarEnter'
@@ -47,7 +51,7 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
             else:
                 avId = fixedAvId
         savedIdFunc = self.air.getAvatarIdFromSender
-        self.air.getAvatarIdFromSender = lambda : avId
+        self.air.getAvatarIdFromSender = lambda: avId
         rrange = random.randrange
         if msg is AvEnter:
             self.avatarEnter()
@@ -69,7 +73,12 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
                         self.setNearbyAvatarSCCustom(rrange(1 << 16))
                     else:
                         if msg is SetSCToontask:
-                            self.setNearbyAvatarSCToontask(rrange(1 << 32), rrange(1 << 32), rrange(1 << 32), rrange(1 << 8))
+                            self.setNearbyAvatarSCToontask(
+                                rrange(
+                                    1 << 32), rrange(
+                                    1 << 32), rrange(
+                                    1 << 32), rrange(
+                                    1 << 8))
         self.air.getAvatarIdFromSender = savedIdFunc
         return task.cont
 
@@ -88,23 +97,35 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
     def avatarEnter(self):
         avId = self.air.getAvatarIdFromSender()
         if avId not in self.air.doId2do:
-            self.air.writeServerEvent('suspicious', avId, 'CCharBaseAI.avatarEnter from unknown avId')
+            self.air.writeServerEvent(
+                'suspicious', avId, 'CCharBaseAI.avatarEnter from unknown avId')
             return
         av = self.air.getDo(avId)
         if not isinstance(av, DistributedPlayerAI):
-            self.air.writeServerEvent('suspicious', avId, 'CCharBaseAI.avatarEnter from non-player object to cchar %s' % self.doId)
+            self.air.writeServerEvent(
+                'suspicious',
+                avId,
+                'CCharBaseAI.avatarEnter from non-player object to cchar %s' %
+                self.doId)
             return
         if av.zoneId != self.zoneId:
-            self.air.writeServerEvent('suspicious', avId, 'CCharBaseAI.avatarEnter from av in zone %s, my zone is %s' % (av.zoneId, self.zoneId))
+            self.air.writeServerEvent(
+                'suspicious', avId, 'CCharBaseAI.avatarEnter from av in zone %s, my zone is %s' %
+                (av.zoneId, self.zoneId))
             return
-        self.notify.debug('adding avatar ' + str(avId) + ' to the nearby avatar list')
+        self.notify.debug(
+            'adding avatar ' +
+            str(avId) +
+            ' to the nearby avatar list')
         if avId not in self.nearbyAvatars:
             self.nearbyAvatars.append(avId)
         else:
-            self.air.writeServerEvent('suspicious', avId, 'CCharBase.avatarEnter')
+            self.air.writeServerEvent(
+                'suspicious', avId, 'CCharBase.avatarEnter')
             self.notify.warning('Avatar %s already in nearby avatars!' % avId)
         self.nearbyAvatarInfoDict[avId] = {}
-        self.nearbyAvatarInfoDict[avId]['enterTime'] = globalClock.getRealTime()
+        self.nearbyAvatarInfoDict[avId]['enterTime'] = globalClock.getRealTime(
+        )
         self.nearbyAvatarInfoDict[avId]['lastChatTime'] = 0
         self.sortNearbyAvatars()
         self.__interestingAvatarEventOccured()
@@ -118,9 +139,15 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
 
     def __doAvatarExit(self, avId):
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('removing avatar ' + str(avId) + ' from the nearby avatar list')
+        self.notify.debug(
+            'removing avatar ' +
+            str(avId) +
+            ' from the nearby avatar list')
         if avId not in self.nearbyAvatars:
-            self.notify.debug('avatar ' + str(avId) + ' not in the nearby avatar list')
+            self.notify.debug(
+                'avatar ' +
+                str(avId) +
+                ' not in the nearby avatar list')
         else:
             avExitEvent = self.air.getAvatarExitEvent(avId)
             self.ignore(avExitEvent)
@@ -165,7 +192,7 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
         self.__avatarTimeoutBase = 0
 
     def __interestingAvatarEventOccured(self, t=None):
-        if t == None:
+        if t is None:
             t = globalClock.getRealTime()
         self.__avatarTimeoutBase = t
         return
@@ -181,22 +208,33 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
 
     def setNearbyAvatarChat(self, msg):
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('setNearbyAvatarChat: avatar ' + str(avId) + ' said ' + str(msg))
+        self.notify.debug(
+            'setNearbyAvatarChat: avatar ' +
+            str(avId) +
+            ' said ' +
+            str(msg))
         self.__avatarSpoke(avId)
 
     def setNearbyAvatarSC(self, msgIndex):
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('setNearbyAvatarSC: avatar %s said SpeedChat phrase %s' % (avId, msgIndex))
+        self.notify.debug(
+            'setNearbyAvatarSC: avatar %s said SpeedChat phrase %s' %
+            (avId, msgIndex))
         self.__avatarSpoke(avId)
 
     def setNearbyAvatarSCCustom(self, msgIndex):
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('setNearbyAvatarSCCustom: avatar %s said custom SpeedChat phrase %s' % (avId, msgIndex))
+        self.notify.debug(
+            'setNearbyAvatarSCCustom: avatar %s said custom SpeedChat phrase %s' %
+            (avId, msgIndex))
         self.__avatarSpoke(avId)
 
-    def setNearbyAvatarSCToontask(self, taskId, toNpcId, toonProgress, msgIndex):
+    def setNearbyAvatarSCToontask(
+            self, taskId, toNpcId, toonProgress, msgIndex):
         avId = self.air.getAvatarIdFromSender()
-        self.notify.debug('setNearbyAvatarSCToontask: avatar %s said %s' % (avId, (taskId, toNpcId, toonProgress, msgIndex)))
+        self.notify.debug(
+            'setNearbyAvatarSCToontask: avatar %s said %s' %
+            (avId, (taskId, toNpcId, toonProgress, msgIndex)))
         self.__avatarSpoke(avId)
 
     def getWalk(self):

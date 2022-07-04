@@ -4,28 +4,29 @@ from otp.speedchat.SCMenuHolder import SCMenuHolder
 from otp.speedchat.SCStaticTextTerminal import SCStaticTextTerminal
 from otp.otpbase import OTPLocalizer
 GolfMenuGuide = [(OTPLocalizer.GolfMenuSections[1], [4100,
-   4101,
-   4102,
-   4103,
-   4104,
-   4105]),
- (OTPLocalizer.GolfMenuSections[2], [4200,
-   4201,
-   4202,
-   4203,
-   4204,
-   4205,
-   4206,
-   4207]),
- (OTPLocalizer.GolfMenuSections[3], [4300,
-   4301,
-   4302,
-   4303,
-   4304,
-   4305,
-   4306,
-   4307]),
- (OTPLocalizer.GolfMenuSections[0], [4000, 4001, 4002])]
+                                                     4101,
+                                                     4102,
+                                                     4103,
+                                                     4104,
+                                                     4105]),
+                 (OTPLocalizer.GolfMenuSections[2], [4200,
+                                                     4201,
+                                                     4202,
+                                                     4203,
+                                                     4204,
+                                                     4205,
+                                                     4206,
+                                                     4207]),
+                 (OTPLocalizer.GolfMenuSections[3], [4300,
+                                                     4301,
+                                                     4302,
+                                                     4303,
+                                                     4304,
+                                                     4305,
+                                                     4306,
+                                                     4307]),
+                 (OTPLocalizer.GolfMenuSections[0], [4000, 4001, 4002])]
+
 
 class TTSCGolfMenu(SCMenu):
 
@@ -45,14 +46,16 @@ class TTSCGolfMenu(SCMenu):
         self.clearMenu()
         try:
             lt = base.localAvatar
-        except:
+        except BaseException:
             return
 
         for section in GolfMenuGuide:
             if section[0] == -1:
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print('warning: tried to link golf phrase %s which does not seem to exist' % phrase)
+                        print(
+                            'warning: tried to link golf phrase %s which does not seem to exist' %
+                            phrase)
                         break
                     self.append(SCStaticTextTerminal(phrase))
 
@@ -60,7 +63,9 @@ class TTSCGolfMenu(SCMenu):
                 menu = SCMenu()
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print('warning: tried to link golf phrase %s which does not seem to exist' % phrase)
+                        print(
+                            'warning: tried to link golf phrase %s which does not seem to exist' %
+                            phrase)
                         break
                     menu.append(SCStaticTextTerminal(phrase))
 

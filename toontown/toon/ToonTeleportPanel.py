@@ -12,9 +12,10 @@ from toontown.toonbase import TTLocalizer
 from toontown.hood import ZoneUtil
 globalTeleport = None
 
+
 def showTeleportPanel(avId, avName, avDisableName):
     global globalTeleport
-    if globalTeleport != None:
+    if globalTeleport is not None:
         globalTeleport.cleanup()
         globalTeleport = None
     globalTeleport = ToonTeleportPanel(avId, avName, avDisableName)
@@ -23,7 +24,7 @@ def showTeleportPanel(avId, avName, avDisableName):
 
 def hideTeleportPanel():
     global globalTeleport
-    if globalTeleport != None:
+    if globalTeleport is not None:
         globalTeleport.cleanup()
         globalTeleport = None
     return
@@ -31,7 +32,7 @@ def hideTeleportPanel():
 
 def unloadTeleportPanel():
     global globalTeleport
-    if globalTeleport != None:
+    if globalTeleport is not None:
         globalTeleport.cleanup()
         globalTeleport = None
     return
@@ -41,7 +42,11 @@ class ToonTeleportPanel(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('ToonTeleportPanel')
 
     def __init__(self, avId, avName, avDisableName):
-        DirectFrame.__init__(self, pos=(0.3, 0.1, 0.65), image_color=ToontownGlobals.GlobalDialogColor, image_scale=(1.0, 1.0, 0.6), text='', text_wordwrap=13.5, text_scale=0.06, text_pos=(0.0, 0.18))
+        DirectFrame.__init__(
+            self, pos=(
+                0.3, 0.1, 0.65), image_color=ToontownGlobals.GlobalDialogColor, image_scale=(
+                1.0, 1.0, 0.6), text='', text_wordwrap=13.5, text_scale=0.06, text_pos=(
+                0.0, 0.18))
         messenger.send('releaseDirector')
         self['image'] = DGG.getDefaultDialogGeom()
         self.avId = avId
@@ -49,53 +54,113 @@ class ToonTeleportPanel(DirectFrame):
         self.avDisableName = avDisableName
         self.fsm = ClassicFSM.ClassicFSM('ToonTeleportPanel', [
             State.State('off',
-                self.enterOff,
-                self.exitOff),
+                        self.enterOff,
+                        self.exitOff),
             State.State('begin',
-                self.enterBegin,
-                self.exitBegin),
+                        self.enterBegin,
+                        self.exitBegin),
             State.State('checkAvailability',
-                self.enterCheckAvailability,
-                self.exitCheckAvailability),
+                        self.enterCheckAvailability,
+                        self.exitCheckAvailability),
             State.State('notAvailable',
-                self.enterNotAvailable,
-                self.exitNotAvailable),
+                        self.enterNotAvailable,
+                        self.exitNotAvailable),
             State.State('ignored',
-                self.enterIgnored,
-                self.exitIgnored),
+                        self.enterIgnored,
+                        self.exitIgnored),
             State.State('notOnline',
-                self.enterNotOnline,
-                self.exitNotOnline),
+                        self.enterNotOnline,
+                        self.exitNotOnline),
             State.State('wentAway',
-                self.enterWentAway,
-                self.exitWentAway),
+                        self.enterWentAway,
+                        self.exitWentAway),
             State.State('self',
-                self.enterSelf,
-                self.exitSelf),
+                        self.enterSelf,
+                        self.exitSelf),
             State.State('unknownHood',
-                self.enterUnknownHood,
-                self.exitUnknownHood),
+                        self.enterUnknownHood,
+                        self.exitUnknownHood),
             State.State('unavailableHood',
-                self.enterUnavailableHood,
-                self.exitUnavailableHood),
+                        self.enterUnavailableHood,
+                        self.exitUnavailableHood),
             State.State('otherShard',
-                self.enterOtherShard,
-                self.exitOtherShard),
+                        self.enterOtherShard,
+                        self.exitOtherShard),
             State.State('teleport',
-                self.enterTeleport,
-                self.exitTeleport)],
+                        self.enterTeleport,
+                        self.exitTeleport)],
             'off', 'off')
         from toontown.friends import FriendInviter
         FriendInviter.hideFriendInviter()
         ToonAvatarDetailPanel.hideAvatarDetail()
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        self.bOk = DirectButton(self, image=(buttons.find('**/ChtBx_OKBtn_UP'), buttons.find('**/ChtBx_OKBtn_DN'), buttons.find('**/ChtBx_OKBtn_Rllvr')), relief=None, text=TTLocalizer.TeleportPanelOK, text_scale=0.05, text_pos=(0.0, -0.1), pos=(0.0, 0.0, -0.1), command=self.__handleOk)
+        self.bOk = DirectButton(
+            self,
+            image=(
+                buttons.find('**/ChtBx_OKBtn_UP'),
+                buttons.find('**/ChtBx_OKBtn_DN'),
+                buttons.find('**/ChtBx_OKBtn_Rllvr')),
+            relief=None,
+            text=TTLocalizer.TeleportPanelOK,
+            text_scale=0.05,
+            text_pos=(
+                0.0,
+                -0.1),
+            pos=(
+                0.0,
+                0.0,
+                -0.1),
+            command=self.__handleOk)
         self.bOk.hide()
-        self.bCancel = DirectButton(self, image=(buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr')), relief=None, text=TTLocalizer.TeleportPanelCancel, text_scale=0.05, text_pos=(0.0, -0.1), pos=(0.0, 0.0, -0.1), command=self.__handleCancel)
+        self.bCancel = DirectButton(
+            self,
+            image=(
+                buttons.find('**/CloseBtn_UP'),
+                buttons.find('**/CloseBtn_DN'),
+                buttons.find('**/CloseBtn_Rllvr')),
+            relief=None,
+            text=TTLocalizer.TeleportPanelCancel,
+            text_scale=0.05,
+            text_pos=(
+                0.0,
+                -0.1),
+            pos=(
+                0.0,
+                0.0,
+                -0.1),
+            command=self.__handleCancel)
         self.bCancel.hide()
-        self.bYes = DirectButton(self, image=(buttons.find('**/ChtBx_OKBtn_UP'), buttons.find('**/ChtBx_OKBtn_DN'), buttons.find('**/ChtBx_OKBtn_Rllvr')), relief=None, text=TTLocalizer.TeleportPanelYes, text_scale=0.05, text_pos=(0.0, -0.1), pos=(-0.15, 0.0, -0.15), command=self.__handleYes)
+        self.bYes = DirectButton(self,
+                                 image=(buttons.find('**/ChtBx_OKBtn_UP'),
+                                        buttons.find('**/ChtBx_OKBtn_DN'),
+                                        buttons.find('**/ChtBx_OKBtn_Rllvr')),
+                                 relief=None,
+                                 text=TTLocalizer.TeleportPanelYes,
+                                 text_scale=0.05,
+                                 text_pos=(0.0,
+                                           -0.1),
+                                 pos=(-0.15,
+                                      0.0,
+                                      -0.15),
+                                 command=self.__handleYes)
         self.bYes.hide()
-        self.bNo = DirectButton(self, image=(buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr')), relief=None, text=TTLocalizer.TeleportPanelNo, text_scale=0.05, text_pos=(0.0, -0.1), pos=(0.15, 0.0, -0.15), command=self.__handleNo)
+        self.bNo = DirectButton(
+            self,
+            image=(
+                buttons.find('**/CloseBtn_UP'),
+                buttons.find('**/CloseBtn_DN'),
+                buttons.find('**/CloseBtn_Rllvr')),
+            relief=None,
+            text=TTLocalizer.TeleportPanelNo,
+            text_scale=0.05,
+            text_pos=(
+                0.0,
+                -0.1),
+            pos=(
+                0.15,
+                0.0,
+                -0.15),
+            command=self.__handleNo)
         self.bNo.hide()
         buttons.removeNode()
         self.accept(self.avDisableName, self.__handleDisableAvatar)
@@ -184,14 +249,16 @@ class ToonTeleportPanel(DirectFrame):
         self.bOk.hide()
 
     def enterUnknownHood(self, hoodId):
-        self['text'] = TTLocalizer.TeleportPanelUnknownHood % base.cr.hoodMgr.getFullnameFromId(hoodId)
+        self['text'] = TTLocalizer.TeleportPanelUnknownHood % base.cr.hoodMgr.getFullnameFromId(
+            hoodId)
         self.bOk.show()
 
     def exitUnknownHood(self):
         self.bOk.hide()
 
     def enterUnavailableHood(self, hoodId):
-        self['text'] = TTLocalizer.TeleportPanelUnavailableHood % base.cr.hoodMgr.getFullnameFromId(hoodId)
+        self['text'] = TTLocalizer.TeleportPanelUnavailableHood % base.cr.hoodMgr.getFullnameFromId(
+            hoodId)
         self.bOk.show()
 
     def exitUnavailableHood(self):
@@ -216,12 +283,14 @@ class ToonTeleportPanel(DirectFrame):
                 pop = shard[2]
 
         if pop and pop > localAvatar.shardPage.midPop:
-            self.notify.warning('Entering full shard: issuing performance warning')
-            self['text'] = TTLocalizer.TeleportPanelBusyShard % {'avName': self.avName}
+            self.notify.warning(
+                'Entering full shard: issuing performance warning')
+            self['text'] = TTLocalizer.TeleportPanelBusyShard % {
+                'avName': self.avName}
         else:
             self['text'] = TTLocalizer.TeleportPanelOtherShard % {'avName': self.avName,
-             'shardName': shardName,
-             'myShardName': myShardName}
+                                                                  'shardName': shardName,
+                                                                  'myShardName': myShardName}
         self.bYes.show()
         self.bNo.show()
         self.shardId = shardId
@@ -276,10 +345,10 @@ class ToonTeleportPanel(DirectFrame):
 
     def __teleportResponse(self, avId, available, shardId, hoodId, zoneId):
         teleportNotify.debug('__teleportResponse%s' % ((avId,
-          available,
-          shardId,
-          hoodId,
-          zoneId),))
+                                                        available,
+                                                        shardId,
+                                                        hoodId,
+                                                        zoneId),))
         if avId != self.avId:
             return
         if available == 0:

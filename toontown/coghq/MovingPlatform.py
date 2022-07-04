@@ -4,6 +4,7 @@ from direct.showbase import DirectObject
 from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
 
+
 class MovingPlatform(DirectObject.DirectObject, NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory('MovingPlatform')
 
@@ -12,10 +13,11 @@ class MovingPlatform(DirectObject.DirectObject, NodePath):
         DirectObject.DirectObject.__init__(self)
         NodePath.__init__(self)
 
-    def setupCopyModel(self, parentToken, model, floorNodeName = None, parentingNode = None):
+    def setupCopyModel(self, parentToken, model,
+                       floorNodeName=None, parentingNode=None):
         if floorNodeName is None:
             floorNodeName = 'floor'
-        if type(parentToken) == int:
+        if isinstance(parentToken, int):
             parentToken = ToontownGlobals.SPDynamic + parentToken
         self.parentToken = parentToken
         self._name = 'MovingPlatform-%s' % parentToken
@@ -29,7 +31,7 @@ class MovingPlatform(DirectObject.DirectObject, NodePath):
         for floor in floorList:
             floor.setName(self._name)
 
-        if parentingNode == None:
+        if parentingNode is None:
             parentingNode = self
         base.cr.parentMgr.registerParent(self.parentToken, parentingNode)
         self.parentingNode = parentingNode

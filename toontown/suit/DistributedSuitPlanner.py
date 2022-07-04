@@ -3,26 +3,32 @@ from direct.distributed import DistributedObject
 from . import SuitPlannerBase
 from toontown.toonbase import ToontownGlobals
 
-class DistributedSuitPlanner(DistributedObject.DistributedObject, SuitPlannerBase.SuitPlannerBase):
+
+class DistributedSuitPlanner(
+        DistributedObject.DistributedObject, SuitPlannerBase.SuitPlannerBase):
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
         SuitPlannerBase.SuitPlannerBase.__init__(self)
         self.suitList = []
         self.buildingList = [0,
-         0,
-         0,
-         0]
+                             0,
+                             0,
+                             0]
         self.pathViz = None
         return
 
     def generate(self):
-        self.notify.info('DistributedSuitPlanner %d: generating' % self.getDoId())
+        self.notify.info(
+            'DistributedSuitPlanner %d: generating' %
+            self.getDoId())
         DistributedObject.DistributedObject.generate(self)
         base.cr.currSuitPlanner = self
 
     def disable(self):
-        self.notify.info('DistributedSuitPlanner %d: disabling' % self.getDoId())
+        self.notify.info(
+            'DistributedSuitPlanner %d: disabling' %
+            self.getDoId())
         self.hidePaths()
         DistributedObject.DistributedObject.disable(self)
         base.cr.currSuitPlanner = None
@@ -53,7 +59,8 @@ class DistributedSuitPlanner(DistributedObject.DistributedObject, SuitPlannerBas
         vizNode = GeomNode(self.uniqueName('PathViz'))
         lines = LineSegs()
         self.pathViz = render.attachNewNode(vizNode)
-        points = self.frontdoorPointList + self.sidedoorPointList + self.cogHQDoorPointList + self.streetPointList
+        points = self.frontdoorPointList + self.sidedoorPointList + \
+            self.cogHQDoorPointList + self.streetPointList
         while len(points) > 0:
             self.__doShowPoints(vizNode, lines, None, points)
 
@@ -62,13 +69,14 @@ class DistributedSuitPlanner(DistributedObject.DistributedObject, SuitPlannerBas
         for zoneId, cellPos in list(self.battlePosDict.items()):
             cnode.addSolid(CollisionSphere(cellPos, 9))
             text = '%s' % zoneId
-            self.__makePathVizText(text, cellPos[0], cellPos[1], cellPos[2] + 9, (1, 1, 1, 1))
+            self.__makePathVizText(
+                text, cellPos[0], cellPos[1], cellPos[2] + 9, (1, 1, 1, 1))
 
         self.pathViz.attachNewNode(cnode).show()
         return
 
     def __doShowPoints(self, vizNode, lines, p, points):
-        if p == None:
+        if p is None:
             pi = len(points) - 1
             if pi < 0:
                 return

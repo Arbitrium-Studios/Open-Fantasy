@@ -1,6 +1,7 @@
 from . import Entity
 from . import LevelConstants
 
+
 class ZoneEntityBase(Entity.Entity):
 
     def __init__(self, level, entId):

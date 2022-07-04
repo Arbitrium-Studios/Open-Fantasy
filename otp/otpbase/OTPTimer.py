@@ -4,16 +4,21 @@ from direct.task import Task
 from direct.showbase.PythonUtil import bound
 from otp.otpbase import OTPGlobals
 
+
 class OTPTimer(DirectFrame):
     ClockImage = None
     TimerId = 0
 
-    def __init__(self, useImage = True, highlightNearEnd = True):
+    def __init__(self, useImage=True, highlightNearEnd=True):
         if useImage:
             image = self.getImage()
         else:
             image = None
-        DirectFrame.__init__(self, state=DGG.DISABLED, relief=None, scale=0.45, image=image, image_pos=(0, 0, 0), text='0', text_fg=(0, 0, 0, 1), text_font=OTPGlobals.getInterfaceFont(), text_pos=(-0.01, -0.15), text_scale=0.35)
+        DirectFrame.__init__(
+            self, state=DGG.DISABLED, relief=None, scale=0.45, image=image, image_pos=(
+                0, 0, 0), text='0', text_fg=(
+                0, 0, 0, 1), text_font=OTPGlobals.getInterfaceFont(), text_pos=(
+                -0.01, -0.15), text_scale=0.35)
         self.initialiseoptions(OTPTimer)
         self.timerId = OTPTimer.TimerId
         OTPTimer.TimerId += 1
@@ -28,7 +33,7 @@ class OTPTimer(DirectFrame):
         self.vFontColor = vColor
 
     def getImage(self):
-        if OTPTimer.ClockImage == None:
+        if OTPTimer.ClockImage is None:
             model = loader.loadModel('phase_3.5/models/gui/clock_gui')
             OTPTimer.ClockImage = model.find('**/alarm_clock')
             model.removeNode()
@@ -52,7 +57,8 @@ class OTPTimer(DirectFrame):
         timeStrLen = len(timeStr)
         if timeStrLen == 1:
             if time <= 5 and self.highlightNearEnd:
-                self.setTimeStr(timeStr, 0.34, (-0.025, -0.125), Vec4(1, 0, 0, 1))
+                self.setTimeStr(
+                    timeStr, 0.34, (-0.025, -0.125), Vec4(1, 0, 0, 1))
             else:
                 self.setTimeStr(timeStr, 0.34, (-0.025, -0.125))
         elif timeStrLen == 2:
@@ -60,7 +66,7 @@ class OTPTimer(DirectFrame):
         elif timeStrLen == 3:
             self.setTimeStr(timeStr, 0.2, (-0.01, -0.08))
 
-    def setTimeStr(self, timeStr, scale = 0.2, pos = (-0.01, -0.08), fg = None):
+    def setTimeStr(self, timeStr, scale=0.2, pos=(-0.01, -0.08), fg=None):
         self['text'] = ''
         self['text_fg'] = fg or self.vFontColor
         self['text_scale'] = scale
@@ -82,7 +88,7 @@ class OTPTimer(DirectFrame):
         else:
             return Task.cont
 
-    def countdown(self, duration, callback = None):
+    def countdown(self, duration, callback=None):
         self.countdownTask = Task.Task(self._timerTask)
         self.countdownTask.duration = duration
         self.countdownTask.callback = callback

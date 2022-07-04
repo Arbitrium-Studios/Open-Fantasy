@@ -4,6 +4,7 @@ from otp.otpbase import OTPGlobals
 from toontown.cogdominium.DistCogdoCraneObjectAI import DistCogdoCraneObjectAI
 from toontown.cogdominium import CogdoCraneGameConsts as GameConsts
 
+
 class DistCogdoCraneMoneyBagAI(DistCogdoCraneObjectAI):
     wantsWatchDrift = 0
 
@@ -25,7 +26,11 @@ class DistCogdoCraneMoneyBagAI(DistCogdoCraneObjectAI):
 
     def hitBoss(self, impact):
         avId = self.air.getAvatarIdFromSender()
-        self.validate(avId, impact <= 1.0, 'invalid hitBoss impact %s' % impact)
+        self.validate(
+            avId,
+            impact <= 1.0,
+            'invalid hitBoss impact %s' %
+            impact)
         if avId not in self.boss.involvedToons:
             return
 
@@ -35,7 +40,7 @@ class DistCogdoCraneMoneyBagAI(DistCogdoCraneObjectAI):
         if self.avoidHelmet or self == self.boss.heldObject:
             return
 
-        if self.boss.heldObject == None:
+        if self.boss.heldObject is None:
             if self.boss.attackCode == ToontownGlobals.BossCogDizzy:
                 damage = int(impact * 50)
                 self.boss.recordHit(max(damage, 2))

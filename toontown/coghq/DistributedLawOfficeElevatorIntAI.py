@@ -8,10 +8,13 @@ from direct.fsm import ClassicFSM
 from direct.fsm import State
 from direct.task import Task
 
-class DistributedLawOfficeElevatorIntAI(DistributedElevatorFloorAI.DistributedElevatorFloorAI):
+
+class DistributedLawOfficeElevatorIntAI(
+        DistributedElevatorFloorAI.DistributedElevatorFloorAI):
 
     def __init__(self, air, lawOfficeId, bldg, avIds):
-        DistributedElevatorFloorAI.DistributedElevatorFloorAI.__init__(self, air, bldg, avIds)
+        DistributedElevatorFloorAI.DistributedElevatorFloorAI.__init__(
+            self, air, bldg, avIds)
         self.lawOfficeId = lawOfficeId
 
     def getEntranceId(self):
@@ -42,7 +45,9 @@ class DistributedLawOfficeElevatorIntAI(DistributedElevatorFloorAI.DistributedEl
         return
 
     def enterClosed(self):
-        print('DistributedLawOfficeElevatorIntAI.elevatorClosed %s' % self.doId)
+        print(
+            'DistributedLawOfficeElevatorIntAI.elevatorClosed %s' %
+            self.doId)
         DistributedElevatorFloorAI.DistributedElevatorFloorAI.enterClosed(self)
         if not self.hasOpenedLocked or not self.isLocked:
             self.fsm.request('opening')

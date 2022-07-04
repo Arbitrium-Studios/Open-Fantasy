@@ -1,6 +1,7 @@
 from otp.level import DistributedEntityAI
 from direct.directnotify import DirectNotifyGlobal
 
+
 class ActiveCellAI(DistributedEntityAI.DistributedEntityAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('ActiveCellAI')
 
@@ -48,8 +49,10 @@ class ActiveCellAI(DistributedEntityAI.DistributedEntityAI):
         else:
             try:
                 self.occupantIds.remove(objId)
-            except:
-                self.notify.warning("couldn't remove %s from active cell" % objId)
+            except BaseException:
+                self.notify.warning(
+                    "couldn't remove %s from active cell" %
+                    objId)
 
     def getRowCol(self):
         return [self.row, self.col]

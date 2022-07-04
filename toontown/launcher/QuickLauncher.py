@@ -4,6 +4,7 @@ from panda3d.core import *
 from otp.launcher.LauncherBase import LauncherBase
 from toontown.toonbase import TTLocalizer
 
+
 class QuickLauncher(LauncherBase):
     GameName = 'Toontown'
     Localizer = TTLocalizer
@@ -12,7 +13,8 @@ class QuickLauncher(LauncherBase):
         print('Running: ToontownQuickLauncher')
         self.toontownBlueKey = 'TOONTOWN_BLUE'
         LauncherBase.__init__(self)
-        self.useTTSpecificLogin = ConfigVariableBool('tt-specific-login', 0).value
+        self.useTTSpecificLogin = ConfigVariableBool(
+            'tt-specific-login', 0).value
         if self.useTTSpecificLogin:
             self.toontownPlayTokenKey = 'LOGIN_TOKEN'
         else:
@@ -24,7 +26,7 @@ class QuickLauncher(LauncherBase):
         self.maybeStartGame()
         self.mainLoop()
 
-    def getValue(self, key, default = None):
+    def getValue(self, key, default=None):
         return os.environ.get(key, default)
 
     def setValue(self, key, value):
@@ -56,15 +58,15 @@ class QuickLauncher(LauncherBase):
     def setRegistry(self, name, value):
         pass
 
-    def getRegistry(self, name, missingValue = None):
+    def getRegistry(self, name, missingValue=None):
         self.notify.info('getRegistry %s' % ((name, missingValue),))
         self.notify.info('checking env' % os.environ)
-        if missingValue == None:
+        if missingValue is None:
             missingValue = ''
         value = os.environ.get(name, missingValue)
         try:
             value = int(value)
-        except:
+        except BaseException:
             pass
 
         return value
@@ -80,7 +82,7 @@ class QuickLauncher(LauncherBase):
                     return True
                 else:
                     return False
-            except:
+            except BaseException:
                 return True
 
         else:
@@ -94,7 +96,7 @@ class QuickLauncher(LauncherBase):
                     return True
                 else:
                     return False
-            except:
+            except BaseException:
                 return False
 
         else:

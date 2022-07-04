@@ -4,8 +4,10 @@ from direct.directnotify import DirectNotifyGlobal
 from . import LoginTTAccount
 from direct.distributed.PyDatagram import PyDatagram
 
+
 class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
-    notify = DirectNotifyGlobal.directNotify.newCategory('LoginTTSpecificDevAccount')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'LoginTTSpecificDevAccount')
 
     def __init__(self, cr):
         LoginTTAccount.LoginTTAccount.__init__(self, cr)
@@ -42,7 +44,9 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         elif access == 'VELVET':
             access = 'VELVET_ROPE'
         else:
-            self.notify.error("don't know what to do with force-paid-status %s" % access)
+            self.notify.error(
+                "don't know what to do with force-paid-status %s" %
+                access)
         tokenString += 'TOONTOWN_ACCESS=%s&' % access
         tokenString += 'TOONTOWN_GAME_KEY=%s&' % self.loginName
         wlChatEnabled = 'YES'
@@ -95,7 +99,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
     def resendPlayToken(self):
         pass
 
-    def requestPwdReminder(self, email = None, acctName = None):
+    def requestPwdReminder(self, email=None, acctName=None):
         return 0
 
     def getAccountData(self, loginName, password):
@@ -107,7 +111,8 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
     def supportsAuthenticateDelete(self):
         return 1
 
-    def enableSecretFriends(self, loginName, password, parentPassword, enable = 1):
+    def enableSecretFriends(self, loginName, password,
+                            parentPassword, enable=1):
         return (password == parentPassword, None)
 
     def needToSetParentPassword(self):

@@ -8,6 +8,7 @@ import os
 import string
 import importlib
 
+
 class EntityTypeRegistry:
     notify = DirectNotifyGlobal.directNotify.newCategory('EntityTypeRegistry')
 
@@ -28,14 +29,16 @@ class EntityTypeRegistry:
         hv.hashString(string.join(fileLines, ''))
         s = str(hv.asHex())
         s += '.'
-        fileLines = file(getPyExtVersion(self.entTypeModule.__file__)).readlines()
+        fileLines = file(
+            getPyExtVersion(
+                self.entTypeModule.__file__)).readlines()
         hv.hashString(string.join(fileLines, ''))
         s += str(hv.asHex())
         self.hashStr = s
         getPyExtVersion = None
         classes = []
         for key, value in list(entityTypeModule.__dict__.items()):
-            if type(value) is type:
+            if isinstance(value, type):
                 if issubclass(value, EntityTypeDesc.EntityTypeDesc):
                     classes.append(value)
 
@@ -44,7 +47,8 @@ class EntityTypeRegistry:
         for c in classes:
             if 'type' in c.__dict__:
                 if c.type in self.entTypeName2typeDesc:
-                    EntityTypeRegistry.notify.debug("replacing %s with %s for entity type '%s'" % (self.entTypeName2typeDesc[c.type].__class__, c, c.type))
+                    EntityTypeRegistry.notify.debug("replacing %s with %s for entity type '%s'" % (
+                        self.entTypeName2typeDesc[c.type].__class__, c, c.type))
                 self.entTypeName2typeDesc[c.type] = c()
 
         self.output2typeNames = {}

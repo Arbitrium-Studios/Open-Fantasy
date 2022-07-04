@@ -10,6 +10,7 @@ from pandac.PandaModules import *
 from panda3d.otp import *
 from panda3d.toontown import *
 
+
 class FactoryExterior(BattlePlace.BattlePlace):
     notify = DirectNotifyGlobal.directNotify.newCategory('FactoryExterior')
 
@@ -20,37 +21,66 @@ class FactoryExterior(BattlePlace.BattlePlace):
 
     def load(self):
         self.fsm = ClassicFSM.ClassicFSM('FactoryExterior', [State.State('start', self.enterStart, self.exitStart, ['walk',
-          'tunnelIn',
-          'teleportIn',
-          'doorIn']),
-         State.State('walk', self.enterWalk, self.exitWalk, ['stickerBook',
-          'teleportOut',
-          'tunnelOut',
-          'DFA',
-          'doorOut',
-          'elevator',
-          'stopped',
-          'WaitForBattle',
-          'battle']),
-         State.State('stopped', self.enterStopped, self.exitStopped, ['walk', 'teleportOut', 'elevator']),
-         State.State('stickerBook', self.enterStickerBook, self.exitStickerBook, ['walk',
-          'DFA',
-          'WaitForBattle',
-          'battle',
-          'elevator']),
-         State.State('WaitForBattle', self.enterWaitForBattle, self.exitWaitForBattle, ['battle', 'walk']),
-         State.State('battle', self.enterBattle, self.exitBattle, ['walk', 'teleportOut', 'died']),
-         State.State('DFA', self.enterDFA, self.exitDFA, ['DFAReject', 'teleportOut', 'tunnelOut']),
-         State.State('DFAReject', self.enterDFAReject, self.exitDFAReject, ['walk']),
-         State.State('teleportIn', self.enterTeleportIn, self.exitTeleportIn, ['walk']),
-         State.State('teleportOut', self.enterTeleportOut, self.exitTeleportOut, ['teleportIn', 'final', 'WaitForBattle']),
-         State.State('doorIn', self.enterDoorIn, self.exitDoorIn, ['walk']),
-         State.State('doorOut', self.enterDoorOut, self.exitDoorOut, ['walk']),
-         State.State('died', self.enterDied, self.exitDied, ['quietZone']),
-         State.State('tunnelIn', self.enterTunnelIn, self.exitTunnelIn, ['walk']),
-         State.State('tunnelOut', self.enterTunnelOut, self.exitTunnelOut, ['final']),
-         State.State('elevator', self.enterElevator, self.exitElevator, ['walk', 'stopped']),
-         State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
+                                                                                                                    'tunnelIn',
+                                                                                                                    'teleportIn',
+                                                                                                                    'doorIn']),
+                                                             State.State('walk', self.enterWalk, self.exitWalk, ['stickerBook',
+                                                                                                                 'teleportOut',
+                                                                                                                 'tunnelOut',
+                                                                                                                 'DFA',
+                                                                                                                 'doorOut',
+                                                                                                                 'elevator',
+                                                                                                                 'stopped',
+                                                                                                                 'WaitForBattle',
+                                                                                                                 'battle']),
+                                                             State.State(
+            'stopped', self.enterStopped, self.exitStopped, [
+                'walk', 'teleportOut', 'elevator']),
+            State.State('stickerBook', self.enterStickerBook, self.exitStickerBook, ['walk',
+                                                                                     'DFA',
+                                                                                     'WaitForBattle',
+                                                                                     'battle',
+                                                                                     'elevator']),
+            State.State('WaitForBattle', self.enterWaitForBattle,
+                        self.exitWaitForBattle, ['battle', 'walk']),
+            State.State(
+            'battle', self.enterBattle, self.exitBattle, [
+                'walk', 'teleportOut', 'died']),
+            State.State('DFA', self.enterDFA, self.exitDFA, [
+                'DFAReject', 'teleportOut', 'tunnelOut']),
+            State.State(
+            'DFAReject',
+            self.enterDFAReject,
+            self.exitDFAReject,
+            ['walk']),
+            State.State(
+            'teleportIn',
+            self.enterTeleportIn,
+            self.exitTeleportIn,
+            ['walk']),
+            State.State(
+            'teleportOut', self.enterTeleportOut, self.exitTeleportOut, [
+                'teleportIn', 'final', 'WaitForBattle']),
+            State.State('doorIn', self.enterDoorIn, self.exitDoorIn, ['walk']),
+            State.State(
+            'doorOut',
+            self.enterDoorOut,
+            self.exitDoorOut,
+            ['walk']),
+            State.State('died', self.enterDied, self.exitDied, ['quietZone']),
+            State.State(
+            'tunnelIn',
+            self.enterTunnelIn,
+            self.exitTunnelIn,
+            ['walk']),
+            State.State(
+            'tunnelOut',
+            self.enterTunnelOut,
+            self.exitTunnelOut,
+            ['final']),
+            State.State('elevator', self.enterElevator,
+                        self.exitElevator, ['walk', 'stopped']),
+            State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
         self.parentFSM.getStateNamed('factoryExterior').addChild(self.fsm)
         BattlePlace.BattlePlace.load(self)
 
@@ -67,11 +97,13 @@ class FactoryExterior(BattlePlace.BattlePlace):
         self.loader.geom.reparentTo(render)
         self.nodeList = [self.loader.geom]
         self.loader.hood.startSky()
-        self._telemLimiter = TLGatherAllAvs('FactoryExterior', RotationLimitToH)
+        self._telemLimiter = TLGatherAllAvs(
+            'FactoryExterior', RotationLimitToH)
         self.accept('doorDoneEvent', self.handleDoorDoneEvent)
         self.accept('DistributedDoor_doorTrigger', self.handleDoorTrigger)
         NametagGlobals.setMasterArrowsOn(1)
-        self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.nodeList, self.zoneId)
+        self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(
+            self, self.nodeList, self.zoneId)
         how = requestStatus['how']
         self.fsm.request(how, [requestStatus])
         if __astron__ and self.zoneId != ToontownGlobals.LawbotOfficeExt:
@@ -93,7 +125,8 @@ class FactoryExterior(BattlePlace.BattlePlace):
 
     def enterTunnelOut(self, requestStatus):
         fromZoneId = self.zoneId - self.zoneId % 100
-        tunnelName = base.cr.hoodMgr.makeLinkTunnelName(self.loader.hood.id, fromZoneId)
+        tunnelName = base.cr.hoodMgr.makeLinkTunnelName(
+            self.loader.hood.id, fromZoneId)
         requestStatus['tunnelName'] = tunnelName
         BattlePlace.BattlePlace.enterTunnelOut(self, requestStatus)
 
@@ -102,14 +135,15 @@ class FactoryExterior(BattlePlace.BattlePlace):
         BattlePlace.BattlePlace.enterTeleportIn(self, requestStatus)
 
     def enterTeleportOut(self, requestStatus):
-        BattlePlace.BattlePlace.enterTeleportOut(self, requestStatus, self.__teleportOutDone)
+        BattlePlace.BattlePlace.enterTeleportOut(
+            self, requestStatus, self.__teleportOutDone)
 
     def __teleportOutDone(self, requestStatus):
         hoodId = requestStatus['hoodId']
         zoneId = requestStatus['zoneId']
         avId = requestStatus['avId']
         shardId = requestStatus['shardId']
-        if hoodId == self.loader.hood.hoodId and zoneId == self.zoneId and shardId == None:
+        if hoodId == self.loader.hood.hoodId and zoneId == self.zoneId and shardId is None:
             self.fsm.request('teleportIn', [requestStatus])
         elif hoodId == ToontownGlobals.MyEstate:
             self.getEstateZoneAndGoHome(requestStatus)
@@ -121,9 +155,12 @@ class FactoryExterior(BattlePlace.BattlePlace):
     def exitTeleportOut(self):
         BattlePlace.BattlePlace.exitTeleportOut(self)
 
-    def enterElevator(self, distElevator, skipDFABoard = 0):
+    def enterElevator(self, distElevator, skipDFABoard=0):
         self.accept(self.elevatorDoneEvent, self.handleElevatorDone)
-        self.elevator = Elevator.Elevator(self.fsm.getStateNamed('elevator'), self.elevatorDoneEvent, distElevator)
+        self.elevator = Elevator.Elevator(
+            self.fsm.getStateNamed('elevator'),
+            self.elevatorDoneEvent,
+            distElevator)
         if skipDFABoard:
             self.elevator.skipDFABoard = 1
         distElevator.elevatorFSM = self.elevator
@@ -143,7 +180,8 @@ class FactoryExterior(BattlePlace.BattlePlace):
         self.notify.debug('handling elevator done event')
         where = doneStatus['where']
         if where == 'reject':
-            if hasattr(base.localAvatar, 'elevatorNotifier') and base.localAvatar.elevatorNotifier.isNotifierOpen():
+            if hasattr(
+                    base.localAvatar, 'elevatorNotifier') and base.localAvatar.elevatorNotifier.isNotifierOpen():
                 pass
             else:
                 self.fsm.request('walk')
@@ -156,7 +194,10 @@ class FactoryExterior(BattlePlace.BattlePlace):
             self.doneStatus = doneStatus
             messenger.send(self.doneEvent)
         else:
-            self.notify.error('Unknown mode: ' + where + ' in handleElevatorDone')
+            self.notify.error(
+                'Unknown mode: ' +
+                where +
+                ' in handleElevatorDone')
 
     if __astron__:
         def handleInterests(self):
@@ -170,7 +211,8 @@ class FactoryExterior(BattlePlace.BattlePlace):
             for i in range(dnaStore.getNumDNAVisGroupsAI()):
                 visGroup = dnaStore.getDNAVisGroupAI(i)
                 groupFullName = visGroup.getName()
-                visZoneId = int(base.cr.hoodMgr.extractGroupName(groupFullName))
+                visZoneId = int(
+                    base.cr.hoodMgr.extractGroupName(groupFullName))
                 visZoneId = ZoneUtil.getTrueZoneId(visZoneId, self.zoneId)
                 visibles = []
                 for i in range(visGroup.getNumVisibles()):
@@ -179,7 +221,8 @@ class FactoryExterior(BattlePlace.BattlePlace):
                 visibles.append(ZoneUtil.getBranchZone(visZoneId))
                 self.zoneVisDict[visZoneId] = visibles
 
-            # Finally, we want interest in all visgroups due to this being a Cog HQ.
+            # Finally, we want interest in all visgroups due to this being a
+            # Cog HQ.
             visList = list(self.zoneVisDict.values())[0]
             if self.zoneId not in visList:
                 visList.append(self.zoneId)

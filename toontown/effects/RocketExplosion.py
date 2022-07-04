@@ -3,11 +3,13 @@ from direct.particles import ParticleEffect
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
 
+
 class RocketExplosion(NodePath):
 
     def __init__(self, parent, smokeParent):
         NodePath.__init__(self)
-        notify = DirectNotifyGlobal.directNotify.newCategory('RocketExplosionParticles')
+        notify = DirectNotifyGlobal.directNotify.newCategory(
+            'RocketExplosionParticles')
         self.effectNode = parent.attachNewNode('RocketExplosion')
         self.effectNode.setBin('fixed', 1)
         self.effectNode.setDepthWrite(1)
@@ -18,13 +20,20 @@ class RocketExplosion(NodePath):
         self.smokeEffect = ParticleEffect.ParticleEffect('RocketSmoke')
         particleSearchPath = DSearchPath()
         if __debug__:
-            particleSearchPath.appendDirectory(Filename('resources/phase_3.5/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_4/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_5/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_6/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_7/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_8/etc'))
-            particleSearchPath.appendDirectory(Filename('resources/phase_9/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_3.5/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_4/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_5/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_6/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_7/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_8/etc'))
+            particleSearchPath.appendDirectory(
+                Filename('resources/phase_9/etc'))
         pfile = Filename('tt_p_efx_rocketLaunchFire.ptf')
         found = vfs.resolveFilename(pfile, particleSearchPath)
         if not found:
@@ -33,7 +42,8 @@ class RocketExplosion(NodePath):
         notify.debug('Loading particle file: %s' % pfile)
         self.effect.loadConfig(pfile)
         ren = self.effect.getParticlesNamed('particles-1').getRenderer()
-        ren.setTextureFromNode('phase_4/models/props/tt_m_efx_fireball', '**/*')
+        ren.setTextureFromNode(
+            'phase_4/models/props/tt_m_efx_fireball', '**/*')
         pfile = Filename('tt_p_efx_rocketLaunchSmoke.ptf')
         found = vfs.resolveFilename(pfile, particleSearchPath)
         if not found:
@@ -59,7 +69,11 @@ class RocketExplosion(NodePath):
             pass
 
     def end(self):
-        self.endSeq = Sequence(LerpColorScaleInterval(self.smokeEffectNode, 2.0, Vec4(1, 1, 1, 0)), Func(self.destroy))
+        self.endSeq = Sequence(
+            LerpColorScaleInterval(
+                self.smokeEffectNode, 2.0, Vec4(
+                    1, 1, 1, 0)), Func(
+                self.destroy))
         self.endSeq.start()
 
     def destroy(self):

@@ -13,265 +13,275 @@ from . import RaceGameGlobals
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 
+
 class DistributedRaceGame(DistributedMinigame):
 
     def __init__(self, cr):
         DistributedMinigame.__init__(self, cr)
         self.gameFSM = ClassicFSM.ClassicFSM('DistributedRaceGame', [State.State('off', self.enterOff, self.exitOff, ['inputChoice']),
-         State.State('inputChoice', self.enterInputChoice, self.exitInputChoice, ['waitServerChoices', 'moveAvatars', 'cleanup']),
-         State.State('waitServerChoices', self.enterWaitServerChoices, self.exitWaitServerChoices, ['moveAvatars', 'cleanup']),
-         State.State('moveAvatars', self.enterMoveAvatars, self.exitMoveAvatars, ['inputChoice', 'winMovie', 'cleanup']),
-         State.State('winMovie', self.enterWinMovie, self.exitWinMovie, ['cleanup']),
-         State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
+                                                                     State.State(
+            'inputChoice', self.enterInputChoice, self.exitInputChoice, [
+                'waitServerChoices', 'moveAvatars', 'cleanup']),
+            State.State('waitServerChoices', self.enterWaitServerChoices,
+                        self.exitWaitServerChoices, ['moveAvatars', 'cleanup']),
+            State.State(
+            'moveAvatars', self.enterMoveAvatars, self.exitMoveAvatars, [
+                'inputChoice', 'winMovie', 'cleanup']),
+            State.State(
+            'winMovie',
+            self.enterWinMovie,
+            self.exitWinMovie,
+            ['cleanup']),
+            State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
         self.addChildGameFSM(self.gameFSM)
         self.posHprArray = (((-9.03,
-           0.06,
-           0.025,
-           -152.9),
-          (-7.43,
-           -2.76,
-           0.025,
-           -152.68),
-          (-6.02,
-           -5.48,
-           0.025,
-           -157.54),
-          (-5.01,
-           -8.32,
-           0.025,
-           -160.66),
-          (-4.05,
-           -11.36,
-           0.025,
-           -170.22),
-          (-3.49,
-           -14.18,
-           0.025,
-           -175.76),
-          (-3.12,
-           -17.15,
-           0.025,
-           -177.73),
-          (-3.0,
-           -20.32,
-           0.025,
-           178.49),
-          (-3.09,
-           -23.44,
-           0.025,
-           176.59),
-          (-3.43,
-           -26.54,
-           0.025,
-           171.44),
-          (-4.07,
-           -29.44,
-           0.025,
-           163.75),
-          (-5.09,
-           -32.27,
-           0.025,
-           158.2),
-          (-6.11,
-           -35.16,
-           0.025,
-           154.98),
-          (-7.57,
-           -37.78,
-           0.025,
-           154.98),
-          (-9.28,
-           -40.65,
-           0.025,
-           150.41)),
-         ((-6.12,
-           1.62,
-           0.025,
-           -152.9),
-          (-4.38,
-           -1.35,
-           0.025,
-           -150.92),
-          (-3.08,
-           -4.3,
-           0.025,
-           -157.9),
-          (-1.85,
-           -7.26,
-           0.025,
-           -162.54),
-          (-0.93,
-           -10.49,
-           0.025,
-           -167.71),
-          (-0.21,
-           -13.71,
-           0.025,
-           -171.79),
-          (0.21,
-           -17.08,
-           0.025,
-           -174.92),
-          (0.31,
-           -20.2,
-           0.025,
-           177.1),
-          (0.17,
-           -23.66,
-           0.025,
-           174.82),
-          (-0.23,
-           -26.91,
-           0.025,
-           170.51),
-          (-0.99,
-           -30.2,
-           0.025,
-           162.54),
-          (-2.02,
-           -33.28,
-           0.025,
-           160.48),
-          (-3.28,
-           -36.38,
-           0.025,
-           157.96),
-          (-4.67,
-           -39.17,
-           0.025,
-           154.13),
-          (-6.31,
-           -42.15,
-           0.025,
-           154.13)),
-         ((-2.99,
-           3.09,
-           0.025,
-           -154.37),
-          (-1.38,
-           -0.05,
-           0.025,
-           -154.75),
-          (-0.19,
-           -3.29,
-           0.025,
-           -159.22),
-          (1.17,
-           -6.51,
-           0.025,
-           -162.74),
-          (2.28,
-           -9.8,
-           0.025,
-           -168.73),
-          (3.09,
-           -13.28,
-           0.025,
-           -173.49),
-          (3.46,
-           -16.63,
-           0.025,
-           -176.81),
-          (3.69,
-           -20.38,
-           0.025,
-           179.14),
-          (3.61,
-           -24.12,
-           0.025,
-           175.78),
-          (3.0,
-           -27.55,
-           0.025,
-           170.87),
-          (2.15,
-           -30.72,
-           0.025,
-           167.41),
-          (1.04,
-           -34.26,
-           0.025,
-           162.11),
-          (-0.15,
-           -37.44,
-           0.025,
-           158.59),
-          (-1.64,
-           -40.52,
-           0.025,
-           153.89),
-          (-3.42,
-           -43.63,
-           0.025,
-           153.89)),
-         ((0.0,
-           4.35,
-           0.025,
-           -154.37),
-          (1.52,
-           1.3,
-           0.025,
-           -155.67),
-          (3.17,
-           -2.07,
-           0.025,
-           -155.67),
-          (4.47,
-           -5.41,
-           0.025,
-           -163.0),
-          (5.56,
-           -9.19,
-           0.025,
-           -168.89),
-          (6.22,
-           -12.66,
-           0.025,
-           -171.67),
-          (6.67,
-           -16.56,
-           0.025,
-           -176.53),
-          (6.93,
-           -20.33,
-           0.025,
-           179.87),
-          (6.81,
-           -24.32,
-           0.025,
-           175.19),
-          (6.22,
-           -27.97,
-           0.025,
-           170.81),
-          (5.59,
-           -31.73,
-           0.025,
-           167.54),
-          (4.48,
-           -35.42,
-           0.025,
-           161.92),
-          (3.06,
-           -38.82,
-           0.025,
-           158.56),
-          (1.4,
-           -42.0,
-           0.025,
-           154.32),
-          (-0.71,
-           -45.17,
-           0.025,
-           153.27)))
+                              0.06,
+                              0.025,
+                              -152.9),
+                             (-7.43,
+                              -2.76,
+                              0.025,
+                              -152.68),
+                             (-6.02,
+                              -5.48,
+                              0.025,
+                              -157.54),
+                             (-5.01,
+                              -8.32,
+                              0.025,
+                              -160.66),
+                             (-4.05,
+                              -11.36,
+                              0.025,
+                              -170.22),
+                             (-3.49,
+                              -14.18,
+                              0.025,
+                              -175.76),
+                             (-3.12,
+                              -17.15,
+                              0.025,
+                              -177.73),
+                             (-3.0,
+                              -20.32,
+                              0.025,
+                              178.49),
+                             (-3.09,
+                              -23.44,
+                              0.025,
+                              176.59),
+                             (-3.43,
+                              -26.54,
+                              0.025,
+                              171.44),
+                             (-4.07,
+                              -29.44,
+                              0.025,
+                              163.75),
+                             (-5.09,
+                              -32.27,
+                              0.025,
+                              158.2),
+                             (-6.11,
+                              -35.16,
+                              0.025,
+                              154.98),
+                             (-7.57,
+                              -37.78,
+                              0.025,
+                              154.98),
+                             (-9.28,
+                              -40.65,
+                              0.025,
+                              150.41)),
+                            ((-6.12,
+                              1.62,
+                              0.025,
+                              -152.9),
+                             (-4.38,
+                                -1.35,
+                                0.025,
+                                -150.92),
+                             (-3.08,
+                                -4.3,
+                                0.025,
+                                -157.9),
+                             (-1.85,
+                                -7.26,
+                                0.025,
+                                -162.54),
+                             (-0.93,
+                                -10.49,
+                                0.025,
+                                -167.71),
+                             (-0.21,
+                                -13.71,
+                                0.025,
+                                -171.79),
+                             (0.21,
+                                -17.08,
+                                0.025,
+                                -174.92),
+                             (0.31,
+                                -20.2,
+                                0.025,
+                                177.1),
+                             (0.17,
+                                -23.66,
+                                0.025,
+                                174.82),
+                             (-0.23,
+                                -26.91,
+                                0.025,
+                                170.51),
+                             (-0.99,
+                                -30.2,
+                                0.025,
+                                162.54),
+                             (-2.02,
+                                -33.28,
+                                0.025,
+                                160.48),
+                             (-3.28,
+                                -36.38,
+                                0.025,
+                                157.96),
+                             (-4.67,
+                                -39.17,
+                                0.025,
+                                154.13),
+                             (-6.31,
+                                -42.15,
+                                0.025,
+                                154.13)),
+                            ((-2.99,
+                              3.09,
+                              0.025,
+                              -154.37),
+                             (-1.38,
+                                -0.05,
+                                0.025,
+                                -154.75),
+                             (-0.19,
+                                -3.29,
+                                0.025,
+                                -159.22),
+                             (1.17,
+                                -6.51,
+                                0.025,
+                                -162.74),
+                             (2.28,
+                                -9.8,
+                                0.025,
+                                -168.73),
+                             (3.09,
+                                -13.28,
+                                0.025,
+                                -173.49),
+                             (3.46,
+                                -16.63,
+                                0.025,
+                                -176.81),
+                             (3.69,
+                                -20.38,
+                                0.025,
+                                179.14),
+                             (3.61,
+                                -24.12,
+                                0.025,
+                                175.78),
+                             (3.0,
+                                -27.55,
+                                0.025,
+                                170.87),
+                             (2.15,
+                                -30.72,
+                                0.025,
+                                167.41),
+                             (1.04,
+                                -34.26,
+                                0.025,
+                                162.11),
+                             (-0.15,
+                                -37.44,
+                                0.025,
+                                158.59),
+                             (-1.64,
+                                -40.52,
+                                0.025,
+                                153.89),
+                             (-3.42,
+                                -43.63,
+                                0.025,
+                                153.89)),
+                            ((0.0,
+                              4.35,
+                              0.025,
+                              -154.37),
+                             (1.52,
+                                1.3,
+                                0.025,
+                                -155.67),
+                             (3.17,
+                                -2.07,
+                                0.025,
+                                -155.67),
+                             (4.47,
+                                -5.41,
+                                0.025,
+                                -163.0),
+                             (5.56,
+                                -9.19,
+                                0.025,
+                                -168.89),
+                             (6.22,
+                                -12.66,
+                                0.025,
+                                -171.67),
+                             (6.67,
+                                -16.56,
+                                0.025,
+                                -176.53),
+                             (6.93,
+                                -20.33,
+                                0.025,
+                                179.87),
+                             (6.81,
+                                -24.32,
+                                0.025,
+                                175.19),
+                             (6.22,
+                                -27.97,
+                                0.025,
+                                170.81),
+                             (5.59,
+                                -31.73,
+                                0.025,
+                                167.54),
+                             (4.48,
+                                -35.42,
+                                0.025,
+                                161.92),
+                             (3.06,
+                                -38.82,
+                                0.025,
+                                158.56),
+                             (1.4,
+                                -42.0,
+                                0.025,
+                                154.32),
+                             (-0.71,
+                                -45.17,
+                                0.025,
+                                153.27)))
         self.avatarPositions = {}
         self.modelCount = 8
         self.cameraTopView = (-22.78,
-         -41.65,
-         31.53,
-         -51.55,
-         -42.68,
-         -2.96)
+                              -41.65,
+                              31.53,
+                              -51.55,
+                              -42.68,
+                              -2.96)
         self.timer = None
         self.timerStartTime = None
         self.walkSeqs = {}
@@ -299,12 +309,15 @@ class DistributedRaceGame(DistributedMinigame):
         self.dice3 = self.dice.find('**/dice_button3')
         self.dice4 = self.dice.find('**/dice_button4')
         self.diceList = [self.dice1,
-         self.dice2,
-         self.dice3,
-         self.dice4]
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/minigame_race.ogg')
-        self.posBuzzer = base.loader.loadSfx('phase_4/audio/sfx/MG_pos_buzzer.ogg')
-        self.negBuzzer = base.loader.loadSfx('phase_4/audio/sfx/MG_neg_buzzer.ogg')
+                         self.dice2,
+                         self.dice3,
+                         self.dice4]
+        self.music = base.loader.loadMusic(
+            'phase_4/audio/bgm/minigame_race.ogg')
+        self.posBuzzer = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_pos_buzzer.ogg')
+        self.negBuzzer = base.loader.loadSfx(
+            'phase_4/audio/sfx/MG_neg_buzzer.ogg')
         self.winSting = base.loader.loadSfx('phase_4/audio/sfx/MG_win.ogg')
         self.loseSting = base.loader.loadSfx('phase_4/audio/sfx/MG_lose.ogg')
         self.diceButtonList = []
@@ -313,19 +326,28 @@ class DistributedRaceGame(DistributedMinigame):
             button_down = self.dice.find('**/dice_button' + str(i) + '_down')
             button_ro = self.dice.find('**/dice_button' + str(i) + '_ro')
             diceButton = DirectButton(image=(button,
-             button_down,
-             button_ro,
-             None), relief=None, pos=(-0.9 + (i - 1) * 0.2, 0.0, -0.85), scale=0.25, command=self.handleInputChoice, extraArgs=[i])
+                                             button_down,
+                                             button_ro,
+                                             None), relief=None, pos=(-0.9 + (i - 1) * 0.2, 0.0, -0.85), scale=0.25, command=self.handleInputChoice, extraArgs=[i])
             diceButton.hide()
             self.diceButtonList.append(diceButton)
 
-        self.waitingChoicesLabel = DirectLabel(text=TTLocalizer.RaceGameWaitingChoices, text_fg=VBase4(1, 1, 1, 1), relief=None, pos=(-0.6, 0, -0.75), scale=0.075)
+        self.waitingChoicesLabel = DirectLabel(
+            text=TTLocalizer.RaceGameWaitingChoices, text_fg=VBase4(
+                1, 1, 1, 1), relief=None, pos=(
+                -0.6, 0, -0.75), scale=0.075)
         self.waitingChoicesLabel.hide()
-        self.chanceMarker = loader.loadModel('phase_4/models/minigames/question_mark')
-        self.chanceCard = loader.loadModel('phase_4/models/minigames/chance_card')
-        self.chanceCardText = OnscreenText('', fg=(1.0, 0, 0, 1), scale=0.14, font=ToontownGlobals.getSignFont(), wordwrap=14, pos=(0.0, 0.2), mayChange=1)
+        self.chanceMarker = loader.loadModel(
+            'phase_4/models/minigames/question_mark')
+        self.chanceCard = loader.loadModel(
+            'phase_4/models/minigames/chance_card')
+        self.chanceCardText = OnscreenText(
+            '', fg=(
+                1.0, 0, 0, 1), scale=0.14, font=ToontownGlobals.getSignFont(), wordwrap=14, pos=(
+                0.0, 0.2), mayChange=1)
         self.chanceCardText.hide()
-        self.cardSound = base.loader.loadSfx('phase_3.5/audio/sfx/GUI_stickerbook_turn.ogg')
+        self.cardSound = base.loader.loadSfx(
+            'phase_3.5/audio/sfx/GUI_stickerbook_turn.ogg')
         self.chanceMarkers = []
         return
 
@@ -422,7 +444,7 @@ class DistributedRaceGame(DistributedMinigame):
 
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.hide()
-        if self.timerStartTime != None:
+        if self.timerStartTime is not None:
             self.startTimer()
         return
 
@@ -431,14 +453,16 @@ class DistributedRaceGame(DistributedMinigame):
         elapsed = now - self.timerStartTime
         self.timer.posInTopRightCorner()
         self.timer.setTime(RaceGameGlobals.InputTimeout)
-        self.timer.countdown(RaceGameGlobals.InputTimeout - elapsed, self.handleChoiceTimeout)
+        self.timer.countdown(
+            RaceGameGlobals.InputTimeout - elapsed,
+            self.handleChoiceTimeout)
         self.timer.show()
 
     def setTimerStartTime(self, timestamp):
         if not self.hasLocalToon:
             return
         self.timerStartTime = globalClockDelta.networkToLocalTime(timestamp)
-        if self.timer != None:
+        if self.timer is not None:
             self.startTimer()
         return
 
@@ -446,7 +470,7 @@ class DistributedRaceGame(DistributedMinigame):
         for button in self.diceButtonList:
             button.hide()
 
-        if self.timer != None:
+        if self.timer is not None:
             self.timer.destroy()
             self.timer = None
         self.timerStartTime = None
@@ -564,10 +588,10 @@ class DistributedRaceGame(DistributedMinigame):
                 mat.name = 'moveAvatars'
                 if i == 0:
                     tasks += [Task.pause(0.75),
-                     mat,
-                     Task.pause(0.75),
-                     Task(self.hideNumbers),
-                     Task.pause(longestLerpTime - 0.5)]
+                              mat,
+                              Task.pause(0.75),
+                              Task(self.hideNumbers),
+                              Task.pause(longestLerpTime - 0.5)]
                 else:
                     mat.chance = 1
                     tasks += [mat, Task.pause(longestLerpTime)]
@@ -602,7 +626,8 @@ class DistributedRaceGame(DistributedMinigame):
                 newPosition = self.positionList[i]
                 self.avatarPositionsCopy[self.avIdList[i]] = newPosition
                 squares_walked = abs(newPosition - oldPosition)
-                longestTime = max(longestTime, self.getWalkDuration(squares_walked))
+                longestTime = max(
+                    longestTime, self.getWalkDuration(squares_walked))
 
         return longestTime
 
@@ -628,7 +653,14 @@ class DistributedRaceGame(DistributedMinigame):
                     stt.sound = self.posBuzzer
                 stt.picker = self.avIdList[index]
                 rct = Task(self.resetChanceCard)
-                task = Task.sequence(hcc, sct, Task.pause(1.0), stt, Task.pause(3.0), rct, Task.pause(0.25))
+                task = Task.sequence(
+                    hcc,
+                    sct,
+                    Task.pause(1.0),
+                    stt,
+                    Task.pause(3.0),
+                    rct,
+                    Task.pause(0.25))
                 tasks.append(task)
 
         return tasks
@@ -638,7 +670,8 @@ class DistributedRaceGame(DistributedMinigame):
         self.chanceCard.reparentTo(render)
         quat = Quat()
         quat.setHpr((270, 0, -85.24))
-        self.chanceCard.posQuatInterval(1.0, (19.62, 13.41, 13.14), quat, other=camera, name='cardLerp').start()
+        self.chanceCard.posQuatInterval(
+            1.0, (19.62, 13.41, 13.14), quat, other=camera, name='cardLerp').start()
         return Task.done
 
     def hideChanceMarker(self, task):
@@ -655,7 +688,7 @@ class DistributedRaceGame(DistributedMinigame):
             if rewardEntry[2] > 0:
                 rewardstr_fmt = TTLocalizer.RaceGameCardTextBeans
             cardText = rewardstr_fmt % {'name': name,
-             'reward': rewardEntry[1]}
+                                        'reward': rewardEntry[1]}
         else:
             rewardstr_fmt = TTLocalizer.RaceGameCardTextHi1
             cardText = rewardstr_fmt % {'name': name}
@@ -705,7 +738,9 @@ class DistributedRaceGame(DistributedMinigame):
         CamHeight = 10.0 * race_fraction + (1.0 - race_fraction) * 22.0
         CamPos = Vec3(camposX, camposY, pos2[2] + CamHeight)
         camera.setPos(CamPos)
-        camera_lookat_idx = min(RaceGameGlobals.NumberToWin - 6, localToonPosition)
+        camera_lookat_idx = min(
+            RaceGameGlobals.NumberToWin - 6,
+            localToonPosition)
         posLookAt = self.posHprArray[self.localAvLane][camera_lookat_idx]
         camera.lookAt(posLookAt[0], posLookAt[1], posLookAt[2])
         CamQuat = Quat()
@@ -743,7 +778,8 @@ class DistributedRaceGame(DistributedMinigame):
                         if squares_walked > 4:
                             self.notify.debug('running')
                             avatar.setPlayRate(1.0, 'run')
-                            self.runInPlace(avatar, i, oldPosition, position, self.getWalkDuration(squares_walked))
+                            self.runInPlace(
+                                avatar, i, oldPosition, position, self.getWalkDuration(squares_walked))
                         else:
                             if choice > 0:
                                 self.notify.debug('walking forwards')
@@ -751,7 +787,8 @@ class DistributedRaceGame(DistributedMinigame):
                             else:
                                 self.notify.debug('walking backwards')
                                 avatar.setPlayRate(-1.0, 'walk')
-                            self.walkInPlace(avatar, i, position, self.getWalkDuration(squares_walked))
+                            self.walkInPlace(
+                                avatar, i, position, self.getWalkDuration(squares_walked))
 
         return Task.done
 
@@ -804,24 +841,39 @@ class DistributedRaceGame(DistributedMinigame):
     def positionInPlace(self, avatar, lane, place):
         place = min(place, len(self.posHprArray[lane]) - 1)
         posH = self.posHprArray[lane][place]
-        avatar.setPosHpr(self.raceBoard, posH[0], posH[1], posH[2], posH[3], 0, 0)
+        avatar.setPosHpr(
+            self.raceBoard,
+            posH[0],
+            posH[1],
+            posH[2],
+            posH[3],
+            0,
+            0)
 
     def walkInPlace(self, avatar, lane, place, time):
         place = min(place, len(self.posHprArray[lane]) - 1)
         posH = self.posHprArray[lane][place]
 
-        def stopWalk(raceBoard = self.raceBoard, posH = posH):
+        def stopWalk(raceBoard=self.raceBoard, posH=posH):
             avatar.setAnimState('neutral', 1)
             if raceBoard.isEmpty():
                 avatar.setPosHpr(0, 0, 0, 0, 0, 0)
             else:
-                avatar.setPosHpr(raceBoard, posH[0], posH[1], posH[2], posH[3], 0, 0)
+                avatar.setPosHpr(
+                    raceBoard,
+                    posH[0],
+                    posH[1],
+                    posH[2],
+                    posH[3],
+                    0,
+                    0)
 
         posQuat = Quat()
         posQuat.setHpr((posH[3], 0, 0))
         walkSeq = Sequence(Func(avatar.setAnimState, 'walk', 1),
-                           avatar.posQuatInterval(time, (posH[0], posH[1], posH[2]), posQuat, other=self.raceBoard),
-                           Func(stopWalk))
+                           avatar.posQuatInterval(
+            time, (posH[0], posH[1], posH[2]), posQuat, other=self.raceBoard),
+            Func(stopWalk))
         self.walkSeqs[str(lane)] = walkSeq
         walkSeq.start()
 
@@ -832,9 +884,16 @@ class DistributedRaceGame(DistributedMinigame):
         pos2 = self.posHprArray[lane][currentPlace + 2 * step]
         pos3 = self.posHprArray[lane][place]
 
-        def stopRun(raceBoard = self.raceBoard, pos3 = pos3):
+        def stopRun(raceBoard=self.raceBoard, pos3=pos3):
             avatar.setAnimState('neutral', 1)
-            avatar.setPosHpr(raceBoard, pos3[0], pos3[1], pos3[2], pos3[3], 0, 0)
+            avatar.setPosHpr(
+                raceBoard,
+                pos3[0],
+                pos3[1],
+                pos3[2],
+                pos3[3],
+                0,
+                0)
 
         pos1Quat = Quat()
         pos1Quat.setHpr((pos1[3], 0, 0))
@@ -843,10 +902,13 @@ class DistributedRaceGame(DistributedMinigame):
         pos3Quat = Quat()
         pos3Quat.setHpr((pos3[3], 0, 0))
         runSeq = Sequence(Func(avatar.setAnimState, 'run', 1),
-                          avatar.posQuatInterval(time / 3.0, (pos1[0], pos1[1], pos1[2]), pos1Quat, other=self.raceBoard),
-                          avatar.posQuatInterval(time / 3.0, (pos2[0], pos2[1], pos2[2]), pos2Quat, other=self.raceBoard),
-                          avatar.posQuatInterval(time / 3.0, (pos3[0], pos3[1], pos3[2]), pos3Quat, other=self.raceBoard),
-                          Func(stopRun))
+                          avatar.posQuatInterval(
+            time / 3.0, (pos1[0], pos1[1], pos1[2]), pos1Quat, other=self.raceBoard),
+            avatar.posQuatInterval(
+            time / 3.0, (pos2[0], pos2[1], pos2[2]), pos2Quat, other=self.raceBoard),
+            avatar.posQuatInterval(
+            time / 3.0, (pos3[0], pos3[1], pos3[2]), pos3Quat, other=self.raceBoard),
+            Func(stopRun))
         self.runSeqs[str(lane)] = runSeq
         runSeq.start()
 
@@ -856,7 +918,10 @@ class DistributedRaceGame(DistributedMinigame):
     def setAvatarChose(self, avId):
         if not self.hasLocalToon:
             return
-        self.notify.debug('setAvatarChose: avatar: ' + str(avId) + ' choose a number')
+        self.notify.debug(
+            'setAvatarChose: avatar: ' +
+            str(avId) +
+            ' choose a number')
 
     def setChancePositions(self, positions):
         if not self.hasLocalToon:
@@ -865,7 +930,14 @@ class DistributedRaceGame(DistributedMinigame):
         for pos in positions:
             marker = self.chanceMarker.copyTo(render)
             posHpr = self.posHprArray[row][pos]
-            marker.setPosHpr(self.raceBoard, posHpr[0], posHpr[1], posHpr[2], posHpr[3] + 180, 0, 0.025)
+            marker.setPosHpr(
+                self.raceBoard,
+                posHpr[0],
+                posHpr[1],
+                posHpr[2],
+                posHpr[3] + 180,
+                0,
+                0.025)
             marker.setScale(0.7)
             marker.setDepthOffset(1)
             self.chanceMarkers.append(marker)
@@ -880,7 +952,9 @@ class DistributedRaceGame(DistributedMinigame):
             if positions[i] < 0:
                 positions[i] = 0
 
-        self.notify.debug('setServerChoices: %s positions: %s rewards: %s ' % (choices, positions, rewards))
+        self.notify.debug(
+            'setServerChoices: %s positions: %s rewards: %s ' %
+            (choices, positions, rewards))
         self.gameFSM.request('moveAvatars', [choices, positions, rewards])
 
     def resetPositions(self):

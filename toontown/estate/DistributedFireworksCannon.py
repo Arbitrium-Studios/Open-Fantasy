@@ -9,7 +9,9 @@ from pandac.PandaModules import CollisionSphere
 from pandac.PandaModules import CollisionNode
 from . import FireworksGui
 
-class DistributedFireworksCannon(DistributedFireworkShow.DistributedFireworkShow):
+
+class DistributedFireworksCannon(
+        DistributedFireworkShow.DistributedFireworkShow):
     notify = directNotify.newCategory('DistributedFireworksCannon')
 
     def __init__(self, cr):
@@ -86,8 +88,11 @@ class DistributedFireworksCannon(DistributedFireworkShow.DistributedFireworkShow
         elif mode == FIREWORKS_MOVIE_GUI:
             self.notify.debug('setMovie: gui')
             if isLocalToon:
-                self.fireworksGui = FireworksGui.FireworksGui(self.fireworksGuiDoneEvent, self.shootEvent)
-                self.accept(self.fireworksGuiDoneEvent, self.__handleFireworksDone)
+                self.fireworksGui = FireworksGui.FireworksGui(
+                    self.fireworksGuiDoneEvent, self.shootEvent)
+                self.accept(
+                    self.fireworksGuiDoneEvent,
+                    self.__handleFireworksDone)
                 self.accept(self.shootEvent, self.localShootFirework)
             return
         else:

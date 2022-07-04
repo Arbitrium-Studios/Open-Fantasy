@@ -5,12 +5,13 @@ from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.PyDatagramIterator import PyDatagramIterator
 from otp.otpbase import OTPGlobals
 
+
 class Experience:
     notify = DirectNotifyGlobal.directNotify.newCategory('Experience')
 
-    def __init__(self, expStr = None, owner = None):
+    def __init__(self, expStr=None, owner=None):
         self.owner = owner
-        if expStr == None:
+        if expStr is None:
             self.experience = []
             for track in range(0, len(Tracks)):
                 self.experience.append(StartingLevel)
@@ -40,8 +41,8 @@ class Experience:
 
         return dataList
 
-    def addExp(self, track, amount = 1):
-        if type(track) == type(''):
+    def addExp(self, track, amount=1):
+        if isinstance(track, type('')):
             track = Tracks.index(track)
         self.notify.debug('adding %d exp to track %d' % (amount, track))
         if self.owner.getGameAccess() == OTPGlobals.AccessFull:
@@ -71,8 +72,11 @@ class Experience:
     def makeExpRegular(self):
         import random
         for track in range(0, len(Tracks)):
-            rank = random.choice((0, int(random.random() * 1500.0), int(random.random() * 2000.0)))
-            self.experience[track] = Levels[track][len(Levels[track]) - 1] - rank
+            rank = random.choice((0,
+                                  int(random.random() * 1500.0),
+                                  int(random.random() * 2000.0)))
+            self.experience[track] = Levels[track][len(
+                Levels[track]) - 1] - rank
 
     def zeroOutExp(self):
         for track in range(0, len(Tracks)):
@@ -83,17 +87,17 @@ class Experience:
             self.experience[track] = num
 
     def getExp(self, track):
-        if type(track) == type(''):
+        if isinstance(track, type('')):
             track = Tracks.index(track)
         return self.experience[track]
 
     def setExp(self, track, exp):
-        if type(track) == type(''):
+        if isinstance(track, type('')):
             track = Tracks.index(track)
         self.experience[track] = exp
 
     def getExpLevel(self, track):
-        if type(track) == type(''):
+        if isinstance(track, type('')):
             track = Tracks.index(track)
         level = 0
         for amount in Levels[track]:
@@ -109,8 +113,8 @@ class Experience:
 
         return total
 
-    def getNextExpValue(self, track, curSkill = None):
-        if curSkill == None:
+    def getNextExpValue(self, track, curSkill=None):
+        if curSkill is None:
             curSkill = self.experience[track]
         retVal = Levels[track][len(Levels[track]) - 1]
         for amount in Levels[track]:

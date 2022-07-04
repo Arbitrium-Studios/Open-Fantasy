@@ -23,23 +23,24 @@ lineDict = {}
 globalVarDict = {}
 curId = None
 
+
 def init():
     globalVarDict.update({'render': render,
-     'camera': camera,
-     'hidden': hidden,
-     'aspect2d': aspect2d,
-     'localToon': base.localAvatar,
-     'laffMeter': base.localAvatar.laffMeter,
-     'inventory': base.localAvatar.inventory,
-     'bFriendsList': base.localAvatar.bFriendsList,
-     'book': base.localAvatar.book,
-     'bookPrevArrow': base.localAvatar.book.prevArrow,
-     'bookNextArrow': base.localAvatar.book.nextArrow,
-     'bookOpenButton': base.localAvatar.book.bookOpenButton,
-     'bookCloseButton': base.localAvatar.book.bookCloseButton,
-     'chatNormalButton': base.localAvatar.chatMgr.normalButton,
-     'chatScButton': base.localAvatar.chatMgr.scButton,
-     'arrows': BlinkingArrows.BlinkingArrows()})
+                          'camera': camera,
+                          'hidden': hidden,
+                          'aspect2d': aspect2d,
+                          'localToon': base.localAvatar,
+                          'laffMeter': base.localAvatar.laffMeter,
+                          'inventory': base.localAvatar.inventory,
+                          'bFriendsList': base.localAvatar.bFriendsList,
+                          'book': base.localAvatar.book,
+                          'bookPrevArrow': base.localAvatar.book.prevArrow,
+                          'bookNextArrow': base.localAvatar.book.nextArrow,
+                          'bookOpenButton': base.localAvatar.book.bookOpenButton,
+                          'bookCloseButton': base.localAvatar.book.bookCloseButton,
+                          'chatNormalButton': base.localAvatar.chatMgr.normalButton,
+                          'chatScButton': base.localAvatar.chatMgr.scButton,
+                          'arrows': BlinkingArrows.BlinkingArrows()})
 
 
 def clear():
@@ -88,7 +89,8 @@ def getLineOfTokens(gen):
         elif token[0] == tokenize.NAME:
             tokens.append(token[1])
         else:
-            notify.warning('Ignored token type: %s on line: %s' % (tokenize.tok_name[token[0]], token[2][0]))
+            notify.warning('Ignored token type: %s on line: %s' %
+                           (tokenize.tok_name[token[0]], token[2][0]))
         token = next(gen)
 
     return tokens
@@ -119,7 +121,9 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         self.privateVarDict = {}
         self.toonHeads = {}
         self.chars = []
-        self.uniqueId = 'scriptMovie_' + str(self.scriptId) + '_' + str(toon.getDoId()) + '_' + str(npc.getDoId())
+        self.uniqueId = 'scriptMovie_' + \
+            str(self.scriptId) + '_' + \
+            str(toon.getDoId()) + '_' + str(npc.getDoId())
         self.setVar('toon', self.toon)
         self.setVar('npc', self.npc)
         self.chapterDict = {}
@@ -133,7 +137,9 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         elif varName in globalVarDict:
             return globalVarDict[varName]
         elif varName.find('tomDialogue') > -1 or varName.find('harryDialogue') > -1:
-            notify.warning('%s getting referenced. Tutorial Ack: %d                                  Place: %s' % (varName, base.localAvatar.tutorialAck, base.cr.playGame.hood))
+            notify.warning(
+                '%s getting referenced. Tutorial Ack: %d                                  Place: %s' %
+                (varName, base.localAvatar.tutorialAck, base.cr.playGame.hood))
             return None
         else:
             notify.error('Variable not defined: %s' % varName)
@@ -177,7 +183,7 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         char.delete()
         self.chars.remove(char)
 
-    def timeout(self, fFinish = 0):
+    def timeout(self, fFinish=0):
         if self.timeoutTrack:
             if fFinish:
                 self.timeoutTrack.finish()
@@ -187,7 +193,7 @@ class NPCMoviePlayer(DirectObject.DirectObject):
     def finishMovie(self):
         self.npc.finishMovie(self.toon, self.isLocalToon, 0.0)
 
-    def playNextChapter(self, eventName, timeStamp = 0.0):
+    def playNextChapter(self, eventName, timeStamp=0.0):
         trackList = self.chapterDict[eventName]
         if trackList:
             self.currentTrack = trackList.pop(0)
@@ -238,11 +244,17 @@ class NPCMoviePlayer(DirectObject.DirectObject):
                 continue
             elif command == 'CHAT_CONFIRM':
                 if uponTimeout:
-                    self.notify.error('CHAT_CONFIRM not allowed in an UPON_TIMEOUT')
+                    self.notify.error(
+                        'CHAT_CONFIRM not allowed in an UPON_TIMEOUT')
                 avatarName = line[1]
                 avatar = self.getVar(avatarName)
                 nextEvent = avatar.uniqueName('doneChatPage')
-                iList.append(Func(self.acceptOnce, nextEvent, self.playNextChapter, [nextEvent]))
+                iList.append(
+                    Func(
+                        self.acceptOnce,
+                        nextEvent,
+                        self.playNextChapter,
+                        [nextEvent]))
                 iList.append(self.parseChatConfirm(line))
                 self.closePreviousChapter(iList)
                 chapterList = []
@@ -250,11 +262,17 @@ class NPCMoviePlayer(DirectObject.DirectObject):
                 continue
             elif command == 'LOCAL_CHAT_CONFIRM':
                 if uponTimeout:
-                    self.notify.error('LOCAL_CHAT_CONFIRM not allowed in an UPON_TIMEOUT')
+                    self.notify.error(
+                        'LOCAL_CHAT_CONFIRM not allowed in an UPON_TIMEOUT')
                 avatarName = line[1]
                 avatar = self.getVar(avatarName)
                 nextEvent = avatar.uniqueName('doneChatPage')
-                iList.append(Func(self.acceptOnce, nextEvent, self.playNextChapter, [nextEvent]))
+                iList.append(
+                    Func(
+                        self.acceptOnce,
+                        nextEvent,
+                        self.playNextChapter,
+                        [nextEvent]))
                 iList.append(self.parseLocalChatConfirm(line))
                 self.closePreviousChapter(iList)
                 chapterList = []
@@ -265,11 +283,17 @@ class NPCMoviePlayer(DirectObject.DirectObject):
                 continue
             elif command == 'LOCAL_CHAT_TO_CONFIRM':
                 if uponTimeout:
-                    self.notify.error('LOCAL_CHAT_TO_CONFIRM not allowed in an UPON_TIMEOUT')
+                    self.notify.error(
+                        'LOCAL_CHAT_TO_CONFIRM not allowed in an UPON_TIMEOUT')
                 avatarName = line[1]
                 avatar = self.getVar(avatarName)
                 nextEvent = avatar.uniqueName('doneChatPage')
-                iList.append(Func(self.acceptOnce, nextEvent, self.playNextChapter, [nextEvent]))
+                iList.append(
+                    Func(
+                        self.acceptOnce,
+                        nextEvent,
+                        self.playNextChapter,
+                        [nextEvent]))
                 iList.append(self.parseLocalChatToConfirm(line))
                 self.closePreviousChapter(iList)
                 chapterList = []
@@ -277,11 +301,17 @@ class NPCMoviePlayer(DirectObject.DirectObject):
                 continue
             elif command == 'CC_CHAT_CONFIRM':
                 if uponTimeout:
-                    self.notify.error('CC_CHAT_CONFIRM not allowed in an UPON_TIMEOUT')
+                    self.notify.error(
+                        'CC_CHAT_CONFIRM not allowed in an UPON_TIMEOUT')
                 avatarName = line[1]
                 avatar = self.getVar(avatarName)
                 nextEvent = avatar.uniqueName('doneChatPage')
-                iList.append(Func(self.acceptOnce, nextEvent, self.playNextChapter, [nextEvent]))
+                iList.append(
+                    Func(
+                        self.acceptOnce,
+                        nextEvent,
+                        self.playNextChapter,
+                        [nextEvent]))
                 iList.append(self.parseCCChatConfirm(line))
                 self.closePreviousChapter(iList)
                 chapterList = []
@@ -289,11 +319,17 @@ class NPCMoviePlayer(DirectObject.DirectObject):
                 continue
             elif command == 'CC_CHAT_TO_CONFIRM':
                 if uponTimeout:
-                    self.notify.error('CC_CHAT_TO_CONFIRM not allowed in an UPON_TIMEOUT')
+                    self.notify.error(
+                        'CC_CHAT_TO_CONFIRM not allowed in an UPON_TIMEOUT')
                 avatarName = line[1]
                 avatar = self.getVar(avatarName)
                 nextEvent = avatar.uniqueName('doneChatPage')
-                iList.append(Func(self.acceptOnce, nextEvent, self.playNextChapter, [nextEvent]))
+                iList.append(
+                    Func(
+                        self.acceptOnce,
+                        nextEvent,
+                        self.playNextChapter,
+                        [nextEvent]))
                 iList.append(self.parseCCChatToConfirm(line))
                 self.closePreviousChapter(iList)
                 chapterList = []
@@ -420,33 +456,47 @@ class NPCMoviePlayer(DirectObject.DirectObject):
                     iList.append(self.parseBlackCatListen(line))
                 elif command == 'SHOW_THROW_SQUIRT_PREVIEW':
                     if uponTimeout:
-                        self.notify.error('SHOW_THROW_SQUIRT_PREVIEW not allowed in an UPON_TIMEOUT')
+                        self.notify.error(
+                            'SHOW_THROW_SQUIRT_PREVIEW not allowed in an UPON_TIMEOUT')
                     nextEvent = 'doneThrowSquirtPreview'
-                    iList.append(Func(self.acceptOnce, nextEvent, self.playNextChapter, [nextEvent]))
+                    iList.append(
+                        Func(
+                            self.acceptOnce,
+                            nextEvent,
+                            self.playNextChapter,
+                            [nextEvent]))
                     iList.append(self.parseThrowSquirtPreview(line))
                     self.closePreviousChapter(iList)
                     chapterList = []
                     self.currentEvent = nextEvent
                 elif command == 'WAIT_EVENT':
                     if uponTimeout:
-                        self.notify.error('WAIT_EVENT not allowed in an UPON_TIMEOUT')
+                        self.notify.error(
+                            'WAIT_EVENT not allowed in an UPON_TIMEOUT')
                     nextEvent = self.parseWaitEvent(line)
 
-                    def proceed(self = self, nextEvent = nextEvent):
+                    def proceed(self=self, nextEvent=nextEvent):
                         self.playNextChapter(nextEvent)
 
                     def handleEvent(*args):
                         proceed = args[0]
                         proceed()
 
-                    iList.append(Func(self.acceptOnce, nextEvent, handleEvent, [proceed]))
+                    iList.append(
+                        Func(
+                            self.acceptOnce,
+                            nextEvent,
+                            handleEvent,
+                            [proceed]))
                     self.closePreviousChapter(iList)
                     chapterList = []
                     self.currentEvent = nextEvent
                 elif command == 'SET_MUSIC_VOLUME':
                     iList.append(self.parseSetMusicVolume(line))
                 else:
-                    notify.warning('Unknown command token: %s for scriptId: %s on line: %s' % (command, self.scriptId, lineNum))
+                    notify.warning(
+                        'Unknown command token: %s for scriptId: %s on line: %s' %
+                        (command, self.scriptId, lineNum))
 
         self.closePreviousChapter(chapterList)
         if timeoutList:
@@ -477,7 +527,9 @@ class NPCMoviePlayer(DirectObject.DirectObject):
     def parseLoadDialogue(self, line):
         token, varName, fileName = line
         if varName == 'tomDialogue_01':
-            notify.debug('VarName tomDialogue getting added. Tutorial Ack: %d' % base.localAvatar.tutorialAck)
+            notify.debug(
+                'VarName tomDialogue getting added. Tutorial Ack: %d' %
+                base.localAvatar.tutorialAck)
         if base.config.GetString('language', 'english') == 'japanese':
             dialogue = base.loader.loadSfx(fileName)
         else:
@@ -555,10 +607,12 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         return Func(nmp.play)
 
     def parseLockLocalToon(self, line):
-        return Sequence(Func(self.toon.detachCamera), Func(self.toon.collisionsOff), Func(self.toon.disableAvatarControls), Func(self.toon.stopTrackAnimToSpeed), Func(self.toon.stopUpdateSmartCamera))
+        return Sequence(Func(self.toon.detachCamera), Func(self.toon.collisionsOff), Func(
+            self.toon.disableAvatarControls), Func(self.toon.stopTrackAnimToSpeed), Func(self.toon.stopUpdateSmartCamera))
 
     def parseFreeLocalToon(self, line):
-        return Sequence(Func(self.toon.attachCamera), Func(self.toon.startTrackAnimToSpeed), Func(self.toon.collisionsOn), Func(self.toon.enableAvatarControls), Func(self.toon.startUpdateSmartCamera))
+        return Sequence(Func(self.toon.attachCamera), Func(self.toon.startTrackAnimToSpeed), Func(
+            self.toon.collisionsOn), Func(self.toon.enableAvatarControls), Func(self.toon.startUpdateSmartCamera))
 
     def parseDebug(self, line):
         token, str = line
@@ -640,7 +694,8 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         avatar = self.getVar(avatarName)
         chatString = eval('TTLocalizer.' + line[2])
         chatFlags = CFSpeech | CFTimeout
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(line[3:])
+        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
+            line[3:])
         if extraChatFlags:
             chatFlags |= extraChatFlags
         if len(dialogueList) > 0:
@@ -661,9 +716,9 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         extraChatFlags = None
         dialogueList = []
         for arg in args:
-            if type(arg) == type(0):
+            if isinstance(arg, type(0)):
                 quitButton = arg
-            elif type(arg) == type(''):
+            elif isinstance(arg, type('')):
                 if len(arg) > 2 and arg[:2] == 'CF':
                     extraChatFlags = eval(arg)
                 else:
@@ -679,23 +734,28 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         avatarName = line[1]
         avatar = self.getVar(avatarName)
         chatString = eval('TTLocalizer.' + line[2])
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(line[3:])
-        return Func(avatar.setPageChat, toonId, 0, chatString, quitButton, extraChatFlags, dialogueList)
+        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
+            line[3:])
+        return Func(avatar.setPageChat, toonId, 0, chatString,
+                    quitButton, extraChatFlags, dialogueList)
 
     def parseLocalChatConfirm(self, line):
         lineLength = len(line)
         avatarName = line[1]
         avatar = self.getVar(avatarName)
         chatString = eval('TTLocalizer.' + line[2])
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(line[3:])
-        return Func(avatar.setLocalPageChat, chatString, quitButton, extraChatFlags, dialogueList)
+        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
+            line[3:])
+        return Func(avatar.setLocalPageChat, chatString,
+                    quitButton, extraChatFlags, dialogueList)
 
     def parseLocalChatPersist(self, line):
         lineLength = len(line)
         avatarName = line[1]
         avatar = self.getVar(avatarName)
         chatString = eval('TTLocalizer.' + line[2])
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(line[3:])
+        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
+            line[3:])
         if len(dialogueList) > 0:
             dialogue = dialogueList[0]
         else:
@@ -712,8 +772,10 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         toAvatarName = eval('TTLocalizer.' + localizerAvatarName)
         chatString = eval('TTLocalizer.' + line[3])
         chatString = chatString.replace('%s', toAvatarName)
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(line[4:])
-        return Func(avatar.setLocalPageChat, chatString, quitButton, extraChatFlags, dialogueList)
+        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
+            line[4:])
+        return Func(avatar.setLocalPageChat, chatString,
+                    quitButton, extraChatFlags, dialogueList)
 
     def parseCCChatConfirm(self, line):
         lineLength = len(line)
@@ -723,8 +785,10 @@ class NPCMoviePlayer(DirectObject.DirectObject):
             chatString = eval('TTLocalizer.' + line[2] % 'Mickey')
         else:
             chatString = eval('TTLocalizer.' + line[2] % 'Minnie')
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(line[3:])
-        return Func(avatar.setLocalPageChat, chatString, quitButton, extraChatFlags, dialogueList)
+        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
+            line[3:])
+        return Func(avatar.setLocalPageChat, chatString,
+                    quitButton, extraChatFlags, dialogueList)
 
     def parseCCChatToConfirm(self, line):
         lineLength = len(line)
@@ -739,8 +803,10 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         else:
             chatString = eval('TTLocalizer.' + line[3] % 'Minnie')
         chatString = chatString.replace('%s', toAvatarName)
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(line[4:])
-        return Func(avatar.setLocalPageChat, chatString, quitButton, extraChatFlags, dialogueList)
+        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
+            line[4:])
+        return Func(avatar.setLocalPageChat, chatString,
+                    quitButton, extraChatFlags, dialogueList)
 
     def parsePlaySfx(self, line):
         if len(line) == 2:
@@ -767,7 +833,8 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         else:
             notify.error('invalid number of arguments')
         actor = self.getVar(actorName)
-        return Sequence(Func(actor.setPlayRate, playRate, animName), Func(actor.play, animName))
+        return Sequence(Func(actor.setPlayRate, playRate,
+                        animName), Func(actor.play, animName))
 
     def parseLoopAnim(self, line):
         if len(line) == 3:
@@ -778,37 +845,44 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         else:
             notify.error('invalid number of arguments')
         actor = self.getVar(actorName)
-        return Sequence(Func(actor.setPlayRate, playRate, animName), Func(actor.loop, animName))
+        return Sequence(Func(actor.setPlayRate, playRate,
+                        animName), Func(actor.loop, animName))
 
     def parseLerpPos(self, line):
         token, nodeName, x, y, z, t = line
         node = self.getVar(nodeName)
-        return Sequence(LerpPosInterval(node, t, Point3(x, y, z), blendType='easeInOut'), duration=0.0)
+        return Sequence(LerpPosInterval(node, t, Point3(
+            x, y, z), blendType='easeInOut'), duration=0.0)
 
     def parseLerpHpr(self, line):
         token, nodeName, h, p, r, t = line
         node = self.getVar(nodeName)
-        return Sequence(LerpHprInterval(node, t, VBase3(h, p, r), blendType='easeInOut'), duration=0.0)
+        return Sequence(LerpHprInterval(node, t, VBase3(
+            h, p, r), blendType='easeInOut'), duration=0.0)
 
     def parseLerpScale(self, line):
         token, nodeName, x, y, z, t = line
         node = self.getVar(nodeName)
-        return Sequence(LerpScaleInterval(node, t, VBase3(x, y, z), blendType='easeInOut'), duration=0.0)
+        return Sequence(LerpScaleInterval(node, t, VBase3(
+            x, y, z), blendType='easeInOut'), duration=0.0)
 
     def parseLerpPosHprScale(self, line):
         token, nodeName, x, y, z, h, p, r, sx, sy, sz, t = line
         node = self.getVar(nodeName)
-        return Sequence(LerpPosHprScaleInterval(node, t, VBase3(x, y, z), VBase3(h, p, r), VBase3(sx, sy, sz), blendType='easeInOut'), duration=0.0)
+        return Sequence(LerpPosHprScaleInterval(node, t, VBase3(x, y, z), VBase3(
+            h, p, r), VBase3(sx, sy, sz), blendType='easeInOut'), duration=0.0)
 
     def parseLerpColor(self, line):
         token, nodeName, sr, sg, sb, sa, er, eg, eb, ea, t = line
         node = self.getVar(nodeName)
-        return Sequence(LerpColorInterval(node, t, VBase4(er, eg, eb, ea), startColorScale=VBase4(sr, sg, sb, sa), blendType='easeInOut'), duration=0.0)
+        return Sequence(LerpColorInterval(node, t, VBase4(er, eg, eb, ea), startColorScale=VBase4(
+            sr, sg, sb, sa), blendType='easeInOut'), duration=0.0)
 
     def parseLerpColorScale(self, line):
         token, nodeName, sr, sg, sb, sa, er, eg, eb, ea, t = line
         node = self.getVar(nodeName)
-        return Sequence(LerpColorScaleInterval(node, t, VBase4(er, eg, eb, ea), startColorScale=VBase4(sr, sg, sb, sa), blendType='easeInOut'), duration=0.0)
+        return Sequence(LerpColorScaleInterval(node, t, VBase4(er, eg, eb, ea), startColorScale=VBase4(
+            sr, sg, sb, sa), blendType='easeInOut'), duration=0.0)
 
     def parseDepthWriteOn(self, line):
         token, nodeName, depthWrite = line
@@ -877,13 +951,16 @@ class NPCMoviePlayer(DirectObject.DirectObject):
     def parseAddInventory(self, line):
         token, track, level, number = line
         inventory = self.getVar('inventory')
-        countSound = base.loader.loadSfx('phase_3.5/audio/sfx/tick_counter.ogg')
-        return Sequence(Func(base.playSfx, countSound), Func(inventory.buttonBoing, track, level), Func(inventory.addItems, track, level, number), Func(inventory.updateGUI, track, level))
+        countSound = base.loader.loadSfx(
+            'phase_3.5/audio/sfx/tick_counter.ogg')
+        return Sequence(Func(base.playSfx, countSound), Func(inventory.buttonBoing, track, level), Func(
+            inventory.addItems, track, level, number), Func(inventory.updateGUI, track, level))
 
     def parseSetInventory(self, line):
         token, track, level, number = line
         inventory = self.getVar('inventory')
-        return Sequence(Func(inventory.setItem, track, level, number), Func(inventory.updateGUI, track, level))
+        return Sequence(Func(inventory.setItem, track, level, number), Func(
+            inventory.updateGUI, track, level))
 
     def parseSetInventoryYPos(self, line):
         token, track, level, yPos = line
@@ -918,7 +995,8 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         return Func(FriendsListPanel.hideFriendsListTutorial)
 
     def parseShowBook(self, line):
-        return Sequence(Func(self.toon.book.setPage, self.toon.mapPage), Func(self.toon.book.enter), Func(self.toon.book.disableBookCloseButton))
+        return Sequence(Func(self.toon.book.setPage, self.toon.mapPage), Func(
+            self.toon.book.enter), Func(self.toon.book.disableBookCloseButton))
 
     def parseEnableCloseBook(self, line):
         return Sequence(Func(self.toon.book.enableBookCloseButton))
@@ -948,7 +1026,19 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         node = self.getVar(nodeName)
         startCScale = Point4(r, g, b, a)
         destCScale = Point4(r2, g2, b2, a2)
-        self.throbIval = Sequence(LerpColorScaleInterval(node, t / 2.0, destCScale, startColorScale=startCScale, blendType='easeInOut'), LerpColorScaleInterval(node, t / 2.0, startCScale, startColorScale=destCScale, blendType='easeInOut'))
+        self.throbIval = Sequence(
+            LerpColorScaleInterval(
+                node,
+                t / 2.0,
+                destCScale,
+                startColorScale=startCScale,
+                blendType='easeInOut'),
+            LerpColorScaleInterval(
+                node,
+                t / 2.0,
+                startCScale,
+                startColorScale=destCScale,
+                blendType='easeInOut'))
         return Func(self.throbIval.loop)
 
     def parseStopThrob(self, line):
@@ -970,7 +1060,8 @@ class NPCMoviePlayer(DirectObject.DirectObject):
             self.toonHeads[toonId] = toonHeadFrame
             self.setVar('%sToonHead' % toonName, toonHeadFrame)
         if toggle:
-            return Sequence(Func(toonHeadFrame.setPos, x, 0, z), Func(toonHeadFrame.setScale, scale), Func(toonHeadFrame.show))
+            return Sequence(Func(toonHeadFrame.setPos, x, 0, z), Func(
+                toonHeadFrame.setScale, scale), Func(toonHeadFrame.show))
         else:
             return Func(toonHeadFrame.hide)
 
@@ -988,10 +1079,12 @@ class NPCMoviePlayer(DirectObject.DirectObject):
             def phraseSaid(phraseId):
                 toontastic = 315
                 if phraseId == toontastic:
-                    messenger.send(DistributedBlackCatMgr.DistributedBlackCatMgr.ActivateEvent)
+                    messenger.send(
+                        DistributedBlackCatMgr.DistributedBlackCatMgr.ActivateEvent)
 
             def enableBlackCatListen():
-                self.acceptOnce(SpeedChatGlobals.SCStaticTextMsgEvent, phraseSaid)
+                self.acceptOnce(
+                    SpeedChatGlobals.SCStaticTextMsgEvent, phraseSaid)
 
             return Func(enableBlackCatListen)
         else:
@@ -1004,30 +1097,32 @@ class NPCMoviePlayer(DirectObject.DirectObject):
     def parseThrowSquirtPreview(self, line):
         oldTrackAccess = [None]
 
-        def grabCurTrackAccess(oldTrackAccess = oldTrackAccess):
-            oldTrackAccess[0] = copy.deepcopy(base.localAvatar.getTrackAccess())
+        def grabCurTrackAccess(oldTrackAccess=oldTrackAccess):
+            oldTrackAccess[0] = copy.deepcopy(
+                base.localAvatar.getTrackAccess())
 
-        def restoreTrackAccess(oldTrackAccess = oldTrackAccess):
+        def restoreTrackAccess(oldTrackAccess=oldTrackAccess):
             base.localAvatar.setTrackAccess(oldTrackAccess[0])
 
         minGagLevel = ToontownBattleGlobals.MIN_LEVEL_INDEX + 1
         maxGagLevel = ToontownBattleGlobals.MAX_LEVEL_INDEX + 1
         curGagLevel = minGagLevel
 
-        def updateGagLevel(t, curGagLevel = curGagLevel):
+        def updateGagLevel(t, curGagLevel=curGagLevel):
             newGagLevel = int(round(t))
             if newGagLevel == curGagLevel:
                 return
             curGagLevel = newGagLevel
             base.localAvatar.setTrackAccess([0,
-             0,
-             0,
-             0,
-             curGagLevel,
-             curGagLevel,
-             0])
+                                             0,
+                                             0,
+                                             0,
+                                             curGagLevel,
+                                             curGagLevel,
+                                             0])
 
-        return Sequence(Func(grabCurTrackAccess), LerpFunctionInterval(updateGagLevel, fromData=1, toData=7, duration=0.3), WaitInterval(3.5), LerpFunctionInterval(updateGagLevel, fromData=7, toData=1, duration=0.3), Func(restoreTrackAccess), Func(messenger.send, 'doneThrowSquirtPreview'))
+        return Sequence(Func(grabCurTrackAccess), LerpFunctionInterval(updateGagLevel, fromData=1, toData=7, duration=0.3), WaitInterval(
+            3.5), LerpFunctionInterval(updateGagLevel, fromData=7, toData=1, duration=0.3), Func(restoreTrackAccess), Func(messenger.send, 'doneThrowSquirtPreview'))
 
     def parseSetMusicVolume(self, line):
         if base.config.GetString('language', 'english') == 'japanese':
@@ -1057,7 +1152,8 @@ class NPCMoviePlayer(DirectObject.DirectObject):
                     def setVolume(level):
                         music.setVolume(level)
 
-                    return LerpFunctionInterval(setVolume, fromData=fromLevel, toData=level, duration=duration)
+                    return LerpFunctionInterval(
+                        setVolume, fromData=fromLevel, toData=level, duration=duration)
             except AttributeError:
                 pass
 

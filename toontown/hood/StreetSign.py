@@ -3,11 +3,15 @@ from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObject
 
+
 class StreetSign(DistributedObject.DistributedObject):
     RedownloadTaskName = 'RedownloadStreetSign'
-    StreetSignFileName = config.GetString('street-sign-filename', 'texture.jpg')
+    StreetSignFileName = config.GetString(
+        'street-sign-filename', 'texture.jpg')
     StreetSignBaseDir = config.GetString('street-sign-base-dir', 'sign')
-    StreetSignUrl = base.config.GetString('street-sign-url', 'http://cdn.toontown.disney.go.com/toontown/en/street-signs/img/')
+    StreetSignUrl = base.config.GetString(
+        'street-sign-url',
+        'http://cdn.toontown.disney.go.com/toontown/en/street-signs/img/')
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
@@ -30,7 +34,9 @@ class StreetSign(DistributedObject.DistributedObject):
         http = HTTPClient.getGlobalPtr()
         self.url = self.StreetSignUrl + self.StreetSignFileName
         self.ch = http.makeChannel(True)
-        localFilename = Filename(self.StreetSignBaseDir, self.StreetSignFileName)
+        localFilename = Filename(
+            self.StreetSignBaseDir,
+            self.StreetSignFileName)
         self.ch.getHeader(DocumentSpec(self.url))
         size = self.ch.getFileSize()
         doc = self.ch.getDocumentSpec()

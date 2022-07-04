@@ -11,6 +11,7 @@ from . import GuiScreen
 from otp.otpbase import OTPGlobals
 from direct.distributed.MsgTypes import *
 
+
 class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
     notify = DirectNotifyGlobal.directNotify.newCategory('CreateAccountScreen')
     ActiveEntryColor = Vec4(1, 1, 1, 1)
@@ -23,7 +24,13 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         GuiScreen.GuiScreen.__init__(self)
         self.cr = cr
         self.loginInterface = self.cr.loginInterface
-        self.fsm = ClassicFSM.ClassicFSM('CreateAccountScreen', [State.State('off', self.enterOff, self.exitOff, ['create']), State.State('create', self.enterCreate, self.exitCreate, ['waitForLoginResponse', 'create']), State.State('waitForLoginResponse', self.enterWaitForLoginResponse, self.exitWaitForLoginResponse, ['create'])], 'off', 'off')
+        self.fsm = ClassicFSM.ClassicFSM(
+            'CreateAccountScreen', [
+                State.State(
+                    'off', self.enterOff, self.exitOff, ['create']), State.State(
+                    'create', self.enterCreate, self.exitCreate, [
+                        'waitForLoginResponse', 'create']), State.State(
+                        'waitForLoginResponse', self.enterWaitForLoginResponse, self.exitWaitForLoginResponse, ['create'])], 'off', 'off')
         self.fsm.enterInitialState()
 
     def load(self):
@@ -38,26 +45,134 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         self.frame.hide()
         linePos = 0.5
         linePos -= lineHeight
-        self.nameLabel = DirectLabel(parent=self.frame, relief=None, pos=(-0.21, 0, linePos), text=OTPLocalizer.CreateAccountScreenUserName, text_scale=textScale, text_align=TextNode.ARight, text_fg=self.labelFg, text_shadow=(0, 0, 0, 1), text_shadowOffset=(0.08, 0.08))
-        self.nameEntry = DirectEntry(parent=self.frame, relief=DGG.SUNKEN, borderWidth=(0.1, 0.1), scale=entryScale, pos=(-0.125, 0.0, linePos), width=OTPGlobals.maxLoginWidth, numLines=1, focus=0, cursorKeys=1)
+        self.nameLabel = DirectLabel(
+            parent=self.frame,
+            relief=None,
+            pos=(
+                -0.21,
+                0,
+                linePos),
+            text=OTPLocalizer.CreateAccountScreenUserName,
+            text_scale=textScale,
+            text_align=TextNode.ARight,
+            text_fg=self.labelFg,
+            text_shadow=(
+                0,
+                0,
+                0,
+                1),
+            text_shadowOffset=(
+                0.08,
+                0.08))
+        self.nameEntry = DirectEntry(parent=self.frame,
+                                     relief=DGG.SUNKEN,
+                                     borderWidth=(0.1,
+                                                  0.1),
+                                     scale=entryScale,
+                                     pos=(-0.125,
+                                          0.0,
+                                          linePos),
+                                     width=OTPGlobals.maxLoginWidth,
+                                     numLines=1,
+                                     focus=0,
+                                     cursorKeys=1)
         self.nameEntry.label = self.nameLabel
         linePos -= lineHeight
-        self.passwordLabel = DirectLabel(parent=self.frame, relief=None, pos=(-0.21, 0, linePos), text=OTPLocalizer.CreateAccountScreenPassword, text_scale=textScale, text_align=TextNode.ARight, text_fg=self.labelFg, text_shadow=(0, 0, 0, 1), text_shadowOffset=(0.08, 0.08))
-        self.passwordEntry = DirectEntry(parent=self.frame, relief=DGG.SUNKEN, borderWidth=(0.1, 0.1), scale=entryScale, pos=(-0.125, 0.0, linePos), width=OTPGlobals.maxLoginWidth, numLines=1, focus=0, cursorKeys=1, obscured=1)
+        self.passwordLabel = DirectLabel(
+            parent=self.frame,
+            relief=None,
+            pos=(
+                -0.21,
+                0,
+                linePos),
+            text=OTPLocalizer.CreateAccountScreenPassword,
+            text_scale=textScale,
+            text_align=TextNode.ARight,
+            text_fg=self.labelFg,
+            text_shadow=(
+                0,
+                0,
+                0,
+                1),
+            text_shadowOffset=(
+                0.08,
+                0.08))
+        self.passwordEntry = DirectEntry(
+            parent=self.frame,
+            relief=DGG.SUNKEN,
+            borderWidth=(
+                0.1,
+                0.1),
+            scale=entryScale,
+            pos=(
+                -0.125,
+                0.0,
+                linePos),
+            width=OTPGlobals.maxLoginWidth,
+            numLines=1,
+            focus=0,
+            cursorKeys=1,
+            obscured=1)
         self.passwordEntry.label = self.passwordLabel
         linePos -= lineHeight
-        self.passwordConfirmLabel = DirectLabel(parent=self.frame, relief=None, pos=(-0.21, 0, linePos), text=OTPLocalizer.CreateAccountScreenConfirmPassword, text_scale=textScale, text_align=TextNode.ARight, text_fg=self.labelFg, text_shadow=(0, 0, 0, 1), text_shadowOffset=(0.08, 0.08))
-        self.passwordConfirmEntry = DirectEntry(parent=self.frame, relief=DGG.SUNKEN, borderWidth=(0.1, 0.1), scale=entryScale, pos=(-0.125, 0.0, linePos), width=OTPGlobals.maxLoginWidth, numLines=1, focus=0, cursorKeys=1, obscured=1)
+        self.passwordConfirmLabel = DirectLabel(
+            parent=self.frame,
+            relief=None,
+            pos=(
+                -0.21,
+                0,
+                linePos),
+            text=OTPLocalizer.CreateAccountScreenConfirmPassword,
+            text_scale=textScale,
+            text_align=TextNode.ARight,
+            text_fg=self.labelFg,
+            text_shadow=(
+                0,
+                0,
+                0,
+                1),
+            text_shadowOffset=(
+                0.08,
+                0.08))
+        self.passwordConfirmEntry = DirectEntry(
+            parent=self.frame,
+            relief=DGG.SUNKEN,
+            borderWidth=(
+                0.1,
+                0.1),
+            scale=entryScale,
+            pos=(
+                -0.125,
+                0.0,
+                linePos),
+            width=OTPGlobals.maxLoginWidth,
+            numLines=1,
+            focus=0,
+            cursorKeys=1,
+            obscured=1)
         self.passwordConfirmEntry.label = self.passwordConfirmLabel
         linePos -= lineHeight
         linePos -= lineHeight
-        self.submitButton = DirectButton(parent=self.frame, relief=DGG.RAISED, borderWidth=(0.01, 0.01), pos=(0, 0, linePos), scale=buttonScale, text=OTPLocalizer.CreateAccountScreenSubmit, text_scale=0.06, text_pos=(0, -0.02), command=self.__handleSubmit)
+        self.submitButton = DirectButton(
+            parent=self.frame, relief=DGG.RAISED, borderWidth=(
+                0.01, 0.01), pos=(
+                0, 0, linePos), scale=buttonScale, text=OTPLocalizer.CreateAccountScreenSubmit, text_scale=0.06, text_pos=(
+                0, -0.02), command=self.__handleSubmit)
         linePos -= buttonLineHeight
-        self.cancelButton = DirectButton(parent=self.frame, relief=DGG.RAISED, borderWidth=(0.01, 0.01), pos=(0, 0, linePos), scale=buttonScale, text=OTPLocalizer.CreateAccountScreenCancel, text_scale=0.06, text_pos=(0, -0.02), command=self.__handleCancel)
+        self.cancelButton = DirectButton(
+            parent=self.frame, relief=DGG.RAISED, borderWidth=(
+                0.01, 0.01), pos=(
+                0, 0, linePos), scale=buttonScale, text=OTPLocalizer.CreateAccountScreenCancel, text_scale=0.06, text_pos=(
+                0, -0.02), command=self.__handleCancel)
         linePos -= buttonLineHeight
         self.dialogDoneEvent = 'createAccountDialogAck'
         dialogClass = OTPGlobals.getGlobalDialogClass()
-        self.dialog = dialogClass(dialogName='createAccountDialog', doneEvent=self.dialogDoneEvent, message='', style=OTPDialog.Acknowledge, sortOrder=NO_FADE_SORT_INDEX + 100)
+        self.dialog = dialogClass(
+            dialogName='createAccountDialog',
+            doneEvent=self.dialogDoneEvent,
+            message='',
+            style=OTPDialog.Acknowledge,
+            sortOrder=NO_FADE_SORT_INDEX + 100)
         self.dialog.hide()
         return
 
@@ -94,8 +209,13 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
             self.userName = ''
             self.nameEntry.set(self.userName)
         self.__firstTime = 0
-        self.focusList = [self.nameEntry, self.passwordEntry, self.passwordConfirmEntry]
-        self.startFocusMgmt(overrides={}, globalFocusHandler=self.__handleFocusChange)
+        self.focusList = [
+            self.nameEntry,
+            self.passwordEntry,
+            self.passwordConfirmEntry]
+        self.startFocusMgmt(
+            overrides={},
+            globalFocusHandler=self.__handleFocusChange)
 
     def exitCreate(self):
         self.stopFocusMgmt()
@@ -116,19 +236,25 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         minNameLength = self.cr.accountServerConstants.getInt('minNameLength')
         minPwdLength = self.cr.accountServerConstants.getInt('minPwLength')
         if self.userName == '':
-            self.dialog.setMessage(OTPLocalizer.CreateAccountScreenNoAccountName)
+            self.dialog.setMessage(
+                OTPLocalizer.CreateAccountScreenNoAccountName)
             self.dialog.show()
             self.acceptOnce(self.dialogDoneEvent, self.__handleUsernameAck)
         elif len(self.userName) < minNameLength:
-            self.dialog.setMessage(OTPLocalizer.CreateAccountScreenAccountNameTooShort % minNameLength)
+            self.dialog.setMessage(
+                OTPLocalizer.CreateAccountScreenAccountNameTooShort %
+                minNameLength)
             self.dialog.show()
             self.acceptOnce(self.dialogDoneEvent, self.__handleUsernameAck)
         elif len(self.password) < minPwdLength:
-            self.dialog.setMessage(OTPLocalizer.CreateAccountScreenPasswordTooShort % minPwdLength)
+            self.dialog.setMessage(
+                OTPLocalizer.CreateAccountScreenPasswordTooShort %
+                minPwdLength)
             self.dialog.show()
             self.acceptOnce(self.dialogDoneEvent, self.__handlePasswordAck)
         elif self.password != passwordConfirm:
-            self.dialog.setMessage(OTPLocalizer.CreateAccountScreenPasswordMismatch)
+            self.dialog.setMessage(
+                OTPLocalizer.CreateAccountScreenPasswordMismatch)
             self.dialog.show()
             self.acceptOnce(self.dialogDoneEvent, self.__handlePasswordAck)
         else:
@@ -155,7 +281,8 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         referrer = launcher.getReferrerCode()
         if referrer is not None:
             data['referrer'] = referrer
-        error = self.loginInterface.createAccount(self.userName, self.password, data)
+        error = self.loginInterface.createAccount(
+            self.userName, self.password, data)
         if error:
             self.notify.info(error)
             self.dialog.setMessage(error)
@@ -164,7 +291,8 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
         else:
             self.cr.logAccountInfo()
             self.loginInterface.sendLoginMsg()
-            self.waitForDatabaseTimeout(requestName='CreateAccountWaitForLoginResponse')
+            self.waitForDatabaseTimeout(
+                requestName='CreateAccountWaitForLoginResponse')
         return
 
     def exitWaitForLoginResponse(self):
@@ -208,17 +336,22 @@ class CreateAccountScreen(StateData.StateData, GuiScreen.GuiScreen):
             self.__handleLoginSuccess()
         elif returnCode == 12:
             self.notify.info('Bad password')
-            self.dialog.setMessage(OTPLocalizer.CreateAccountScreenUserNameTaken)
+            self.dialog.setMessage(
+                OTPLocalizer.CreateAccountScreenUserNameTaken)
             self.dialog.show()
             self.acceptOnce(self.dialogDoneEvent, self.__handleBadPasswordAck)
         elif returnCode == 14:
             self.notify.info('Bad word in user name')
-            self.dialog.setMessage(OTPLocalizer.CreateAccountScreenInvalidUserName)
+            self.dialog.setMessage(
+                OTPLocalizer.CreateAccountScreenInvalidUserName)
             self.dialog.show()
-            self.acceptOnce(self.dialogDoneEvent, self.__handleBadWordInUserName)
+            self.acceptOnce(
+                self.dialogDoneEvent,
+                self.__handleBadWordInUserName)
         elif returnCode == 129:
             self.notify.info('Username not found')
-            self.dialog.setMessage(OTPLocalizer.CreateAccountScreenUserNameNotFound)
+            self.dialog.setMessage(
+                OTPLocalizer.CreateAccountScreenUserNameNotFound)
             self.dialog.show()
             self.acceptOnce(self.dialogDoneEvent, self.__handleBadAccountAck)
         else:

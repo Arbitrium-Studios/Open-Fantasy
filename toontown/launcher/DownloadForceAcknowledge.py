@@ -3,6 +3,7 @@ from toontown.toontowngui import TTDialog
 from toontown.toonbase import TTLocalizer
 import random
 
+
 class DownloadForceAcknowledge:
 
     def __init__(self, doneEvent):
@@ -18,7 +19,7 @@ class DownloadForceAcknowledge:
         else:
             try:
                 base.localAvatar.b_setAnimState('neutral', 1)
-            except:
+            except BaseException:
                 pass
 
             doneStatus['mode'] = 'incomplete'
@@ -27,8 +28,9 @@ class DownloadForceAcknowledge:
             phaseName = TTLocalizer.LauncherPhaseNames[phase]
             verb = random.choice(TTLocalizer.DownloadForceAcknowledgeVerbList)
             msg = TTLocalizer.DownloadForceAcknowledgeMsg % {'phase': phaseName,
-             'verb': verb}
-            self.dialog = TTDialog.TTDialog(text=msg, command=self.handleOk, style=TTDialog.Acknowledge)
+                                                             'verb': verb}
+            self.dialog = TTDialog.TTDialog(
+                text=msg, command=self.handleOk, style=TTDialog.Acknowledge)
             self.dialog.show()
 
     def exit(self):

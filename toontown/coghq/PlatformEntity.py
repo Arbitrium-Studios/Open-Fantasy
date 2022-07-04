@@ -3,6 +3,7 @@ from direct.interval.IntervalGlobal import *
 from otp.level import BasicEntities
 from . import MovingPlatform
 
+
 class PlatformEntity(BasicEntities.NodePathEntity):
 
     def __init__(self, level, entId):
@@ -22,16 +23,48 @@ class PlatformEntity(BasicEntities.NodePathEntity):
         model.setScale(self.modelScale)
         model.flattenMedium()
         self.platform = MovingPlatform.MovingPlatform()
-        self.platform.setupCopyModel(self.getParentToken(), model, self.floorName)
+        self.platform.setupCopyModel(
+            self.getParentToken(), model, self.floorName)
         self.platform.reparentTo(self)
         startPos = Point3(0, 0, 0)
         endPos = self.offset
         distance = Vec3(self.offset).length()
         waitDur = self.period * self.waitPercent
         moveDur = self.period - waitDur
-        self.moveIval = Sequence(WaitInterval(waitDur * 0.5), LerpPosInterval(self.platform, moveDur * 0.5, endPos, startPos=startPos, name='platformOut%s' % self.entId, blendType=self.motion, fluid=1), WaitInterval(waitDur * 0.5), LerpPosInterval(self.platform, moveDur * 0.5, startPos, startPos=endPos, name='platformBack%s' % self.entId, blendType=self.motion, fluid=1), name=self.getUniqueName('platformIval'))
+        self.moveIval = Sequence(
+            WaitInterval(
+                waitDur *
+                0.5),
+            LerpPosInterval(
+                self.platform,
+                moveDur *
+                0.5,
+                endPos,
+                startPos=startPos,
+                name='platformOut%s' %
+                self.entId,
+                blendType=self.motion,
+                fluid=1),
+            WaitInterval(
+                waitDur *
+                0.5),
+            LerpPosInterval(
+                self.platform,
+                moveDur *
+                0.5,
+                startPos,
+                startPos=endPos,
+                name='platformBack%s' %
+                self.entId,
+                blendType=self.motion,
+                fluid=1),
+            name=self.getUniqueName('platformIval'))
         self.moveIval.loop()
-        self.moveIval.setT(globalClock.getFrameTime() - self.level.startTime + self.period * self.phaseShift)
+        self.moveIval.setT(
+            globalClock.getFrameTime() -
+            self.level.startTime +
+            self.period *
+            self.phaseShift)
         return
 
     def stop(self):

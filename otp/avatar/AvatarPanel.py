@@ -4,10 +4,11 @@ from direct.showbase import DirectObject
 from . import Avatar
 from direct.distributed import DistributedObject
 
+
 class AvatarPanel(DirectObject.DirectObject):
     currentAvatarPanel = None
 
-    def __init__(self, avatar, FriendsListPanel = None):
+    def __init__(self, avatar, FriendsListPanel=None):
         if AvatarPanel.currentAvatarPanel:
             AvatarPanel.currentAvatarPanel.cleanup()
         AvatarPanel.currentAvatarPanel = self

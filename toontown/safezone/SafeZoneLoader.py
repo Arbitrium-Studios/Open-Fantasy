@@ -17,6 +17,7 @@ from toontown.toonbase.ToontownGlobals import *
 from toontown.building import ToonInterior
 from toontown.hood import QuietZoneState
 
+
 class SafeZoneLoader(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('SafeZoneLoader')
 
@@ -25,11 +26,20 @@ class SafeZoneLoader(StateData.StateData):
         self.hood = hood
         self.parentFSMState = parentFSMState
         self.fsm = ClassicFSM.ClassicFSM('SafeZoneLoader', [State.State('start', self.enterStart, self.exitStart, ['quietZone', 'playground', 'toonInterior']),
-         State.State('playground', self.enterPlayground, self.exitPlayground, ['quietZone']),
-         State.State('toonInterior', self.enterToonInterior, self.exitToonInterior, ['quietZone']),
-         State.State('quietZone', self.enterQuietZone, self.exitQuietZone, ['playground', 'toonInterior']),
-         State.State('golfcourse', self.enterGolfcourse, self.exitGolfcourse, ['quietZone', 'playground']),
-         State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
+                                                            State.State(
+            'playground', self.enterPlayground, self.exitPlayground, ['quietZone']),
+            State.State(
+            'toonInterior',
+            self.enterToonInterior,
+            self.exitToonInterior,
+            ['quietZone']),
+            State.State(
+            'quietZone', self.enterQuietZone, self.exitQuietZone, [
+                'playground', 'toonInterior']),
+            State.State(
+            'golfcourse', self.enterGolfcourse, self.exitGolfcourse, [
+                'quietZone', 'playground']),
+            State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
         self.placeDoneEvent = 'placeDone'
         self.place = None
         self.playgroundClass = None
@@ -136,8 +146,11 @@ class SafeZoneLoader(StateData.StateData):
 
     def handlePlaygroundDone(self):
         status = self.place.doneStatus
-        teleportDebug(status, 'handlePlaygroundDone, doneStatus=%s' % (status,))
-        if ZoneUtil.getBranchZone(status['zoneId']) == self.hood.hoodId and status['shardId'] == None:
+        teleportDebug(
+            status, 'handlePlaygroundDone, doneStatus=%s' %
+            (status,))
+        if ZoneUtil.getBranchZone(
+                status['zoneId']) == self.hood.hoodId and status['shardId'] is None:
             teleportDebug(status, 'same branch')
             self.fsm.request('quietZone', [status])
         else:
@@ -148,7 +161,8 @@ class SafeZoneLoader(StateData.StateData):
 
     def enterToonInterior(self, requestStatus):
         self.acceptOnce(self.placeDoneEvent, self.handleToonInteriorDone)
-        self.place = ToonInterior.ToonInterior(self, self.fsm.getStateNamed('toonInterior'), self.placeDoneEvent)
+        self.place = ToonInterior.ToonInterior(
+            self, self.fsm.getStateNamed('toonInterior'), self.placeDoneEvent)
         base.cr.playGame.setPlace(self.place)
         self.place.load()
         self.place.enter(requestStatus)
@@ -163,7 +177,8 @@ class SafeZoneLoader(StateData.StateData):
 
     def handleToonInteriorDone(self):
         status = self.place.doneStatus
-        if ZoneUtil.getBranchZone(status['zoneId']) == self.hood.hoodId and status['shardId'] == None:
+        if ZoneUtil.getBranchZone(
+                status['zoneId']) == self.hood.hoodId and status['shardId'] is None:
             self.fsm.request('quietZone', [status])
         else:
             self.doneStatus = status
@@ -173,7 +188,8 @@ class SafeZoneLoader(StateData.StateData):
     def enterQuietZone(self, requestStatus):
         self.quietZoneDoneEvent = uniqueName('quietZoneDone')
         self.acceptOnce(self.quietZoneDoneEvent, self.handleQuietZoneDone)
-        self.quietZoneStateData = QuietZoneState.QuietZoneState(self.quietZoneDoneEvent)
+        self.quietZoneStateData = QuietZoneState.QuietZoneState(
+            self.quietZoneDoneEvent)
         self.quietZoneStateData.load()
         self.quietZoneStateData.enter(requestStatus)
 

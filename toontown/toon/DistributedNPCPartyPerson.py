@@ -12,6 +12,7 @@ from toontown.parties import PartyGlobals
 from toontown.toonbase import ToontownGlobals
 from toontown.toontowngui import TeaserPanel
 
+
 class DistributedNPCPartyPerson(DistributedNPCToonBase):
 
     def __init__(self, cr):
@@ -49,7 +50,13 @@ class DistributedNPCPartyPerson(DistributedNPCToonBase):
     def announceGenerate(self):
         DistributedNPCToonBase.announceGenerate(self)
         self.planPartyQuestionGuiDoneEvent = 'planPartyQuestionDone'
-        self.askGui = TTDialog.TTGlobalDialog(dialogName=self.uniqueName('askGui'), doneEvent=self.planPartyQuestionGuiDoneEvent, message=TTLocalizer.PartyDoYouWantToPlan, style=TTDialog.YesNo, okButtonText=OTPLocalizer.DialogYes, cancelButtonText=OTPLocalizer.DialogNo)
+        self.askGui = TTDialog.TTGlobalDialog(
+            dialogName=self.uniqueName('askGui'),
+            doneEvent=self.planPartyQuestionGuiDoneEvent,
+            message=TTLocalizer.PartyDoYouWantToPlan,
+            style=TTDialog.YesNo,
+            okButtonText=OTPLocalizer.DialogYes,
+            cancelButtonText=OTPLocalizer.DialogNo)
         self.askGui.hide()
 
     def initToonState(self):
@@ -58,12 +65,15 @@ class DistributedNPCPartyPerson(DistributedNPCToonBase):
             side = 'left'
         else:
             side = 'right'
-        npcOrigin = self.cr.playGame.hood.loader.geom.find('**/party_person_%s;+s' % side)
+        npcOrigin = self.cr.playGame.hood.loader.geom.find(
+            '**/party_person_%s;+s' % side)
         if not npcOrigin.isEmpty():
             self.reparentTo(npcOrigin)
             self.clearMat()
         else:
-            self.notify.warning('announceGenerate: Could not find party_person_%s' % side)
+            self.notify.warning(
+                'announceGenerate: Could not find party_person_%s' %
+                side)
         return
 
     def getCollSphereRadius(self):
@@ -120,7 +130,9 @@ class DistributedNPCPartyPerson(DistributedNPCToonBase):
                 if self.askGui:
                     self.askGui.hide()
                     self.ignore(self.planPartyQuestionGuiDoneEvent)
-            self.setChatAbsolute(TTLocalizer.STOREOWNER_TOOKTOOLONG, CFSpeech | CFTimeout)
+            self.setChatAbsolute(
+                TTLocalizer.STOREOWNER_TOOKTOOLONG,
+                CFSpeech | CFTimeout)
             self.resetPartyPerson()
         elif mode == NPCToons.PARTY_MOVIE_START:
             self.av = base.cr.doId2do.get(avId)
@@ -128,17 +140,31 @@ class DistributedNPCPartyPerson(DistributedNPCToonBase):
                 self.notify.warning('Avatar %d not found in doId' % avId)
                 return
             else:
-                self.accept(self.av.uniqueName('disable'), self.__handleUnexpectedExit)
+                self.accept(
+                    self.av.uniqueName('disable'),
+                    self.__handleUnexpectedExit)
             self.setupAvatars(self.av)
             if self.isInteractingWithLocalToon:
                 camera.wrtReparentTo(render)
                 quat = Quat()
                 quat.setHpr((-150, -2, 0))
-                self.lerpCameraSeq = camera.posQuatInterval(1, Point3(-5, 9, base.localAvatar.getHeight() - 0.5), quat, other=self, blendType='easeOut', name=self.uniqueName('lerpCamera'))
+                self.lerpCameraSeq = camera.posQuatInterval(
+                    1,
+                    Point3(
+                        -5,
+                        9,
+                        base.localAvatar.getHeight() - 0.5),
+                    quat,
+                    other=self,
+                    blendType='easeOut',
+                    name=self.uniqueName('lerpCamera'))
                 self.lerpCameraSeq.start()
-                taskMgr.doMethodLater(1.0, self.popupAskGUI, self.uniqueName('popupAskGUI'))
+                taskMgr.doMethodLater(
+                    1.0, self.popupAskGUI, self.uniqueName('popupAskGUI'))
             else:
-                self.setChatAbsolute(TTLocalizer.PartyDoYouWantToPlan, CFSpeech | CFTimeout)
+                self.setChatAbsolute(
+                    TTLocalizer.PartyDoYouWantToPlan,
+                    CFSpeech | CFTimeout)
         elif mode == NPCToons.PARTY_MOVIE_COMPLETE:
             chatStr = TTLocalizer.PartyPlannerOnYourWay
             self.setChatAbsolute(chatStr, CFSpeech | CFTimeout)
@@ -154,12 +180,12 @@ class DistributedNPCPartyPerson(DistributedNPCToonBase):
                 avId = -1
                 place = base.cr.playGame.getPlace()
                 requestStatus = {'loader': loaderId,
-                 'where': whereId,
-                 'how': 'teleportIn',
-                 'hoodId': hoodId,
-                 'zoneId': zoneId,
-                 'shardId': None,
-                 'avId': avId}
+                                 'where': whereId,
+                                 'how': 'teleportIn',
+                                 'hoodId': hoodId,
+                                 'zoneId': zoneId,
+                                 'shardId': None,
+                                 'avId': avId}
                 place.requestLeave(requestStatus)
         elif mode == NPCToons.PARTY_MOVIE_MAYBENEXTTIME:
             self.av = base.cr.doId2do.get(avId)
@@ -167,7 +193,9 @@ class DistributedNPCPartyPerson(DistributedNPCToonBase):
                 self.notify.warning('Avatar %d not found in doId' % avId)
                 return
             else:
-                self.setChatAbsolute(TTLocalizer.PartyPlannerMaybeNextTime, CFSpeech | CFTimeout)
+                self.setChatAbsolute(
+                    TTLocalizer.PartyPlannerMaybeNextTime,
+                    CFSpeech | CFTimeout)
             self.resetPartyPerson()
         elif mode == NPCToons.PARTY_MOVIE_ALREADYHOSTING:
             chatStr = TTLocalizer.PartyPlannerHostingTooMany
@@ -197,7 +225,8 @@ class DistributedNPCPartyPerson(DistributedNPCToonBase):
                 place = base.cr.playGame.getPlace()
                 if place:
                     place.fsm.request('stopped', force=1)
-                self.teaserDialog = TeaserPanel.TeaserPanel(pageName='parties', doneFunc=self.handleOkTeaser)
+                self.teaserDialog = TeaserPanel.TeaserPanel(
+                    pageName='parties', doneFunc=self.handleOkTeaser)
         else:
             wantsToPlan = 0
         self.sendUpdate('answer', [wantsToPlan])
@@ -205,7 +234,9 @@ class DistributedNPCPartyPerson(DistributedNPCToonBase):
 
     def popupAskGUI(self, task):
         self.setChatAbsolute('', CFSpeech)
-        self.acceptOnce(self.planPartyQuestionGuiDoneEvent, self.__handleAskDone)
+        self.acceptOnce(
+            self.planPartyQuestionGuiDoneEvent,
+            self.__handleAskDone)
         self.askGui.show()
 
     def handleOkTeaser(self):

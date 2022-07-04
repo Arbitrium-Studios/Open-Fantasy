@@ -7,6 +7,7 @@ from direct.showbase.PythonUtil import lerp
 from toontown.pets import PetTricks
 from toontown.toon import DistributedToonAI
 
+
 class PetActionFSM(FSM.FSM):
     notify = DirectNotifyGlobal.directNotify.newCategory('PetActionFSM')
 
@@ -87,9 +88,11 @@ class PetActionFSM(FSM.FSM):
         PetActionFSM.notify.debug('enterTrick')
         if not self.pet.isLockedDown():
             self.pet.lockPet()
-        self.pet.sendUpdate('doTrick', [trickId, globalClockDelta.getRealNetworkTime()])
+        self.pet.sendUpdate(
+            'doTrick', [
+                trickId, globalClockDelta.getRealNetworkTime()])
 
-        def finish(avatar = avatar, trickId = trickId, self = self):
+        def finish(avatar=avatar, trickId=trickId, self=self):
             if hasattr(self.pet, 'brain'):
                 healRange = PetTricks.TrickHeals[trickId]
                 aptitude = self.pet.getTrickAptitude(trickId)
@@ -98,7 +101,8 @@ class PetActionFSM(FSM.FSM):
                     for avId in self.pet.brain.getAvIdsLookingAtUs():
                         av = self.pet.air.doId2do.get(avId)
                         if av:
-                            if isinstance(av, DistributedToonAI.DistributedToonAI):
+                            if isinstance(
+                                    av, DistributedToonAI.DistributedToonAI):
                                 av.toonUp(healAmt)
 
                 self.pet._handleDidTrick(trickId)
@@ -106,9 +110,15 @@ class PetActionFSM(FSM.FSM):
                     self.pet.unlockPet()
                 messenger.send(self.getTrickDoneEvent())
 
-        self.trickDoneEvent = 'trickDone-%s-%s' % (self.pet.doId, self.trickSerialNum)
+        self.trickDoneEvent = 'trickDone-%s-%s' % (
+            self.pet.doId, self.trickSerialNum)
         self.trickSerialNum += 1
-        self.trickFinishIval = Sequence(WaitInterval(PetTricks.TrickLengths[trickId]), Func(finish), name='petTrickFinish-%s' % self.pet.doId)
+        self.trickFinishIval = Sequence(
+            WaitInterval(
+                PetTricks.TrickLengths[trickId]),
+            Func(finish),
+            name='petTrickFinish-%s' %
+            self.pet.doId)
         self.trickFinishIval.start()
 
     def getTrickDoLaterName(self):

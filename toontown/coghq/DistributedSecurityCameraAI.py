@@ -11,7 +11,9 @@ from toontown.coghq import LaserGameMineSweeper
 from toontown.coghq import LaserGameRoll
 import random
 
-class DistributedSecurityCameraAI(DistributedEntityAI.DistributedEntityAI, NodePath, BasicEntities.NodePathAttribs):
+
+class DistributedSecurityCameraAI(
+        DistributedEntityAI.DistributedEntityAI, NodePath, BasicEntities.NodePathAttribs):
 
     def __init__(self, level, entId):
         DistributedEntityAI.DistributedEntityAI.__init__(self, level, entId)
@@ -28,7 +30,10 @@ class DistributedSecurityCameraAI(DistributedEntityAI.DistributedEntityAI, NodeP
     def generate(self):
         DistributedEntityAI.DistributedEntityAI.generate(self)
         if self.switchId != 0:
-            self.accept(self.getOutputEventName(self.switchId), self.reactToSwitch)
+            self.accept(
+                self.getOutputEventName(
+                    self.switchId),
+                self.reactToSwitch)
         self.detectName = 'laserField %s' % self.doId
         taskMgr.doMethodLater(3.0, self.__detect, self.detectName)
         self.setPos(self.pos)

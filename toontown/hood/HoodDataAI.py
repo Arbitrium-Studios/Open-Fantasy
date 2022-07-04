@@ -8,6 +8,7 @@ from pandac.PandaModules import *
 from panda3d.toontown import *
 from toontown.toon import NPCToons
 
+
 class HoodDataAI:
     notify = DirectNotifyGlobal.directNotify.newCategory('HoodDataAI')
 
@@ -84,7 +85,8 @@ class HoodDataAI:
             dnaData = self.air.dnaDataMap.get(zone[0], None)
             if isinstance(dnaData, DNAData):
                 area = ZoneUtil.getCanonicalZoneId(zoneId)
-                foundFishingPonds, foundFishingPondGroups = self.air.findFishingPonds(dnaData, zoneId, area)
+                foundFishingPonds, foundFishingPondGroups = self.air.findFishingPonds(
+                    dnaData, zoneId, area)
                 self.fishingPonds += foundFishingPonds
                 fishingPondGroups += foundFishingPondGroups
 
@@ -108,7 +110,8 @@ class HoodDataAI:
             if zone[1]:
                 zoneId = ZoneUtil.getTrueZoneId(zone[0], self.zoneId)
                 dnaStore = self.air.dnaStoreMap[zone[0]]
-                mgr = DistributedBuildingMgrAI.DistributedBuildingMgrAI(self.air, zoneId, dnaStore, self.air.trophyMgr)
+                mgr = DistributedBuildingMgrAI.DistributedBuildingMgrAI(
+                    self.air, zoneId, dnaStore, self.air.trophyMgr)
                 self.buildingManagers.append(mgr)
                 self.air.buildingManagers[zoneId] = mgr
 
@@ -116,7 +119,8 @@ class HoodDataAI:
         for zone in self.air.zoneTable[self.canonicalHoodId]:
             if zone[2]:
                 zoneId = ZoneUtil.getTrueZoneId(zone[0], self.zoneId)
-                sp = DistributedSuitPlannerAI.DistributedSuitPlannerAI(self.air, zoneId)
+                sp = DistributedSuitPlannerAI.DistributedSuitPlannerAI(
+                    self.air, zoneId)
                 sp.generateWithRequired(zoneId)
                 sp.d_setZoneId(zoneId)
                 sp.initTasks()
@@ -127,7 +131,8 @@ class HoodDataAI:
         ButterflyGlobals.generateIndexes(self.zoneId, playground)
         for i in range(0, ButterflyGlobals.NUM_BUTTERFLY_AREAS[playground]):
             for j in range(0, ButterflyGlobals.NUM_BUTTERFLIES[playground]):
-                bfly = DistributedButterflyAI.DistributedButterflyAI(self.air, playground, i, self.zoneId)
+                bfly = DistributedButterflyAI.DistributedButterflyAI(
+                    self.air, playground, i, self.zoneId)
                 bfly.generateWithRequired(self.zoneId)
                 bfly.start()
                 self.addDistObj(bfly)
@@ -140,10 +145,10 @@ class HoodDataAI:
             self.replacementHood[0].redirectingToMe.append(self)
 
     def hasRedirect(self):
-        return self.replacementHood != None
+        return self.replacementHood is not None
 
     def getRedirect(self):
-        if self.replacementHood == None:
+        if self.replacementHood is None:
             return self
         else:
             return self.replacementHood[0].getRedirect()

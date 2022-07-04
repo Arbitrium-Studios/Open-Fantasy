@@ -9,6 +9,7 @@ from direct.actor import Actor
 from . import ToonInteriorColors
 from toontown.hood import ZoneUtil
 
+
 class DistributedPetshopInterior(DistributedObject.DistributedObject):
 
     def __init__(self, cr):
@@ -44,15 +45,20 @@ class DistributedPetshopInterior(DistributedObject.DistributedObject):
                 if key2 == 'r':
                     self.replaceRandomInModel(newNP)
             elif key1 == 't':
-                texture = self.randomDNAItem(category, self.dnaStore.findTexture)
+                texture = self.randomDNAItem(
+                    category, self.dnaStore.findTexture)
                 np.setTexture(texture, 100)
                 newNP = np
             if key2 == 'c':
                 if category == 'TI_wallpaper' or category == 'TI_wallpaper_border':
                     self.randomGenerator.seed(self.zoneId)
-                    newNP.setColorScale(self.randomGenerator.choice(self.colors[category]))
+                    newNP.setColorScale(
+                        self.randomGenerator.choice(
+                            self.colors[category]))
                 else:
-                    newNP.setColorScale(self.randomGenerator.choice(self.colors[category]))
+                    newNP.setColorScale(
+                        self.randomGenerator.choice(
+                            self.colors[category]))
 
     def setZoneIdAndBlock(self, zoneId, block):
         self.zoneId = zoneId
@@ -71,9 +77,11 @@ class DistributedPetshopInterior(DistributedObject.DistributedObject):
         self.dnaStore = base.cr.playGame.dnaStore
         self.randomGenerator = random.Random()
         self.randomGenerator.seed(self.zoneId)
-        self.interior = loader.loadModel('phase_4/models/modules/PetShopInterior')
+        self.interior = loader.loadModel(
+            'phase_4/models/modules/PetShopInterior')
         self.interior.reparentTo(render)
-        self.fish = Actor.Actor('phase_4/models/props/interiorfish-zero', {'swim': 'phase_4/models/props/interiorfish-swim'})
+        self.fish = Actor.Actor('phase_4/models/props/interiorfish-zero',
+                                {'swim': 'phase_4/models/props/interiorfish-swim'})
         self.fish.reparentTo(self.interior)
         self.fish.setColorScale(0.8, 0.9, 1, 0.8)
         self.fish.setScale(0.8)
@@ -89,7 +97,8 @@ class DistributedPetshopInterior(DistributedObject.DistributedObject):
         doorOrigin.setScale(0.8, 0.8, 0.8)
         doorOrigin.setPos(doorOrigin, 0, -0.25, 0)
         doorColor = self.randomGenerator.choice(self.colors['TI_door'])
-        DNADoor.setupDoor(doorNP, self.interior, doorOrigin, self.dnaStore, str(self.block), doorColor)
+        DNADoor.setupDoor(doorNP, self.interior, doorOrigin,
+                          self.dnaStore, str(self.block), doorColor)
         doorFrame = doorNP.find('door_*_flat')
         doorFrame.wrtReparentTo(self.interior)
         doorFrame.setColor(doorColor)

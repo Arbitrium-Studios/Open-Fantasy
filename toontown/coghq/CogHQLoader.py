@@ -9,6 +9,7 @@ from toontown.town import TownBattle
 from toontown.suit import Suit
 from pandac.PandaModules import *
 
+
 class CogHQLoader(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('CogHQLoader')
 
@@ -19,17 +20,26 @@ class CogHQLoader(StateData.StateData):
         self.placeDoneEvent = 'cogHQLoaderPlaceDone'
         self.townBattleDoneEvent = 'town-battle-done'
         self.fsm = ClassicFSM.ClassicFSM('CogHQLoader', [State.State('start', None, None, ['quietZone', 'cogHQExterior', 'cogHQBossBattle']),
-         State.State('cogHQExterior', self.enterCogHQExterior, self.exitCogHQExterior, ['quietZone', 'cogHQLobby']),
-         State.State('cogHQLobby', self.enterCogHQLobby, self.exitCogHQLobby, ['quietZone', 'cogHQExterior', 'cogHQBossBattle']),
-         State.State('cogHQBossBattle', self.enterCogHQBossBattle, self.exitCogHQBossBattle, ['quietZone']),
-         State.State('quietZone', self.enterQuietZone, self.exitQuietZone, ['cogHQExterior', 'cogHQLobby', 'cogHQBossBattle']),
-         State.State('final', None, None, ['start'])], 'start', 'final')
+                                                         State.State(
+            'cogHQExterior', self.enterCogHQExterior, self.exitCogHQExterior, [
+                'quietZone', 'cogHQLobby']),
+            State.State('cogHQLobby', self.enterCogHQLobby, self.exitCogHQLobby, [
+                        'quietZone', 'cogHQExterior', 'cogHQBossBattle']),
+            State.State(
+            'cogHQBossBattle',
+            self.enterCogHQBossBattle,
+            self.exitCogHQBossBattle,
+            ['quietZone']),
+            State.State('quietZone', self.enterQuietZone, self.exitQuietZone, [
+                'cogHQExterior', 'cogHQLobby', 'cogHQBossBattle']),
+            State.State('final', None, None, ['start'])], 'start', 'final')
         return
 
     def load(self, zoneId):
         self.parentFSMState.addChild(self.fsm)
         self.music = base.loader.loadMusic(self.musicFile)
-        self.battleMusic = base.loader.loadMusic('phase_9/audio/bgm/encntr_suit_winning.ogg')
+        self.battleMusic = base.loader.loadMusic(
+            'phase_9/audio/bgm/encntr_suit_winning.ogg')
         self.townBattle = TownBattle.TownBattle(self.townBattleDoneEvent)
         self.townBattle.load()
         Suit.loadSuits(3)
@@ -66,7 +76,8 @@ class CogHQLoader(StateData.StateData):
     def enterQuietZone(self, requestStatus):
         self.quietZoneDoneEvent = uniqueName('quietZoneDone')
         self.acceptOnce(self.quietZoneDoneEvent, self.handleQuietZoneDone)
-        self.quietZoneStateData = QuietZoneState.QuietZoneState(self.quietZoneDoneEvent)
+        self.quietZoneStateData = QuietZoneState.QuietZoneState(
+            self.quietZoneDoneEvent)
         self.quietZoneStateData.load()
         self.quietZoneStateData.enter(requestStatus)
 
@@ -100,7 +111,7 @@ class CogHQLoader(StateData.StateData):
     def placeDone(self):
         self.requestStatus = self.place.doneStatus
         status = self.place.doneStatus
-        if status.get('shardId') == None and self.isInThisHq(status):
+        if status.get('shardId') is None and self.isInThisHq(status):
             self.unloadPlaceGeom()
             zoneId = status['zoneId']
             self.loadPlaceGeom(zoneId)

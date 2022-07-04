@@ -5,10 +5,17 @@ from direct.task.Task import Task
 from direct.showbase.DirectObject import DirectObject
 from direct.showbase.ShadowPlacer import ShadowPlacer
 
+
 class CogdoFlyingShadowPlacer(ShadowPlacer):
 
-    def __init__(self, cTrav, shadowNodePath, wallCollideMask, floorCollideMask, name):
-        ShadowPlacer.__init__(self, cTrav, shadowNodePath, wallCollideMask, floorCollideMask)
+    def __init__(self, cTrav, shadowNodePath,
+                 wallCollideMask, floorCollideMask, name):
+        ShadowPlacer.__init__(
+            self,
+            cTrav,
+            shadowNodePath,
+            wallCollideMask,
+            floorCollideMask)
         self.name = name
 
     def setup(self, cTrav, shadowNodePath, wallCollideMask, floorCollideMask):
@@ -51,7 +58,9 @@ class CogdoFlyingShadowPlacer(ShadowPlacer):
         self.cRayNodePath.reparentTo(self.shadowNodePath.getParent())
         self.cTrav.addCollider(self.cRayNodePath, self.queue)
         self.isActive = 1
-        taskMgr.add(self.update, 'ShadowPlacer.update.%s' % self.name, -45, extraArgs=[])
+        taskMgr.add(
+            self.update, 'ShadowPlacer.update.%s' %
+            self.name, -45, extraArgs=[])
 
     def off(self):
         if not self.isActive:

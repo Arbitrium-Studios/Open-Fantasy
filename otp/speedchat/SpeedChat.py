@@ -4,9 +4,11 @@ from .SCSettings import SCSettings
 from .SCTerminal import SCWhisperModeChangeEvent
 from otp.otpbase import OTPLocalizer
 
+
 class SpeedChat(SCMenu):
 
-    def __init__(self, name = '', structure = None, backgroundModelName = None, guiModelName = None):
+    def __init__(self, name='', structure=None,
+                 backgroundModelName=None, guiModelName=None):
         SCMenu.BackgroundModelName = backgroundModelName
         SCMenu.GuiModelName = guiModelName
         SCMenu.__init__(self)
@@ -46,7 +48,9 @@ class SpeedChat(SCMenu):
     def setWhisperMode(self, whisperMode):
         if not boolEqual(self.settings.whisperMode, whisperMode):
             self.settings.whisperMode = whisperMode
-            messenger.send(self.getEventName(SCWhisperModeChangeEvent), [whisperMode])
+            messenger.send(
+                self.getEventName(SCWhisperModeChangeEvent),
+                [whisperMode])
 
     def setColorScheme(self, colorScheme):
         self.settings.colorScheme = colorScheme

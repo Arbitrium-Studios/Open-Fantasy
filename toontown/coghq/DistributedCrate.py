@@ -9,16 +9,20 @@ from . import MovingPlatform
 from direct.task.Task import Task
 from . import DistributedCrushableEntity
 
+
 class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCrate')
     UP_KEY = 'arrow_up'
     DOWN_KEY = 'arrow_down'
     LEFT_KEY = 'arrow_left'
     RIGHT_KEY = 'arrow_right'
-    ModelPaths = ('phase_9/models/cogHQ/woodCrateB', 'phase_10/models/cashbotHQ/CBWoodCrate')
+    ModelPaths = (
+        'phase_9/models/cogHQ/woodCrateB',
+        'phase_10/models/cashbotHQ/CBWoodCrate')
 
     def __init__(self, cr):
-        DistributedCrushableEntity.DistributedCrushableEntity.__init__(self, cr)
+        DistributedCrushableEntity.DistributedCrushableEntity.__init__(
+            self, cr)
         self.initNodePath()
         self.modelType = 0
         self.crate = None
@@ -34,8 +38,10 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
         self.stuckToCrate = 0
         self.upPressed = 0
         self.isPushing = 0
-        self.creakSound = loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_crate_effort.ogg')
-        self.pushSound = loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_crate_sliding.ogg')
+        self.creakSound = loader.loadSfx(
+            'phase_9/audio/sfx/CHQ_FACT_crate_effort.ogg')
+        self.pushSound = loader.loadSfx(
+            'phase_9/audio/sfx/CHQ_FACT_crate_sliding.ogg')
         return
 
     def disable(self):
@@ -68,14 +74,16 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
         del self.pushSound
 
     def generateInit(self):
-        DistributedCrushableEntity.DistributedCrushableEntity.generateInit(self)
+        DistributedCrushableEntity.DistributedCrushableEntity.generateInit(
+            self)
 
     def generate(self):
         DistributedCrushableEntity.DistributedCrushableEntity.generate(self)
 
     def announceGenerate(self):
         self.notify.debug('announceGenerate')
-        DistributedCrushableEntity.DistributedCrushableEntity.announceGenerate(self)
+        DistributedCrushableEntity.DistributedCrushableEntity.announceGenerate(
+            self)
         self.loadModel()
         self.modCrateCollisions()
         if self.pushable:
@@ -104,7 +112,8 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
             self.__resetStick()
 
     def loadModel(self):
-        crateModel = loader.loadModel(DistributedCrate.ModelPaths[self.modelType])
+        crateModel = loader.loadModel(
+            DistributedCrate.ModelPaths[self.modelType])
         self.crate = MovingPlatform.MovingPlatform()
         self.crate.setupCopyModel(self.getParentToken(), crateModel, 'floor')
         self.setScale(1.0)
@@ -118,14 +127,16 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
 
     def __listenForCollisions(self, on):
         if on:
-            self.accept(self.uniqueName('entercrateCollision'), self.handleCollision)
+            self.accept(
+                self.uniqueName('entercrateCollision'),
+                self.handleCollision)
         else:
             self.ignore(self.uniqueName('entercrateCollision'))
 
     def setPosition(self, x, y, z):
         self.setPos(x, y, z)
 
-    def handleCollision(self, collEntry = None):
+    def handleCollision(self, collEntry=None):
         if not self.upPressed:
             return
         crateNormal = Vec3(collEntry.getSurfaceNormal(self))
@@ -136,7 +147,9 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
         offsetVec = Vec3(base.localAvatar.getPos(render) - self.getPos(render))
         offsetVec.normalize()
         offsetDot = offsetVec[0] * worldVec[0] + offsetVec[1] * worldVec[1]
-        self.notify.debug('offsetDot = %s, world = %s, rel = %s' % (offsetDot, worldVec, offsetVec))
+        self.notify.debug(
+            'offsetDot = %s, world = %s, rel = %s' %
+            (offsetDot, worldVec, offsetVec))
         if relativeVec.getY() < -0.7 and offsetDot > 0.9 and offsetVec.getZ() < 0.05:
             self.getCrateSide(crateNormal)
             self.tContact = globalClock.getFrameTime()
@@ -177,7 +190,12 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
             h = lToon.getH(self)
             h = fitSrcAngle2Dest(h, newHpr[0])
             startHpr = Vec3(h, 0, 0)
-            self.avPushTrack = Sequence(LerpPosHprInterval(lToon, 0.25, newPos, newHpr, startHpr=startHpr, other=self, blendType='easeInOut'), Func(place.fsm.request, 'push'), Func(self.__sendPushRequest, task.crateNormal), SoundInterval(self.creakSound, node=self))
+            self.avPushTrack = Sequence(
+                LerpPosHprInterval(
+                    lToon, 0.25, newPos, newHpr, startHpr=startHpr, other=self, blendType='easeInOut'), Func(
+                    place.fsm.request, 'push'), Func(
+                    self.__sendPushRequest, task.crateNormal), SoundInterval(
+                    self.creakSound, node=self))
             self.avPushTrack.start()
             return Task.done
         else:
@@ -193,7 +211,7 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
 
     def __sendPushRequest(self, crateNormal):
         self.notify.debug('__sendPushRequest')
-        if self.crateSide != None:
+        if self.crateSide is not None:
             self.sentRequest = 1
             self.sendUpdate('requestPush', [self.crateSide])
         else:
@@ -222,7 +240,12 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
         if self.moveTrack:
             self.moveTrack.finish()
             self.moveTrack = None
-        self.moveTrack = Parallel(Sequence(LerpPosInterval(self, T_PUSH, endPos, startPos=startPos, fluid=1)), SoundInterval(self.creakSound, node=self), SoundInterval(self.pushSound, node=self, duration=T_PUSH, volume=0.2))
+        self.moveTrack = Parallel(
+            Sequence(
+                LerpPosInterval(
+                    self, T_PUSH, endPos, startPos=startPos, fluid=1)), SoundInterval(
+                self.creakSound, node=self), SoundInterval(
+                    self.pushSound, node=self, duration=T_PUSH, volume=0.2))
         self.moveTrack.start()
         return
 
@@ -239,7 +262,14 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
             crateWidth = 2.75 * self.scale
             offset = crateWidth + 1.5 + TorsoToOffset[av.style.torso]
             toonOffset = crateNormal * offset
-            avMoveTrack.append(Sequence(LerpPosInterval(av, T_PUSH, toonOffset, startPos=toonOffset, other=self)))
+            avMoveTrack.append(
+                Sequence(
+                    LerpPosInterval(
+                        av,
+                        T_PUSH,
+                        toonOffset,
+                        startPos=toonOffset,
+                        other=self)))
             self.avMoveTrack = avMoveTrack
             self.avMoveTrack.start()
         return
@@ -268,7 +298,13 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
     def playCrushMovie(self, crusherId, axis):
         self.notify.debug('playCrushMovie')
         taskMgr.remove(self.taskName('crushTask'))
-        taskMgr.add(self.crushTask, self.taskName('crushTask'), extraArgs=(crusherId, axis), priority=25)
+        taskMgr.add(
+            self.crushTask,
+            self.taskName('crushTask'),
+            extraArgs=(
+                crusherId,
+                axis),
+            priority=25)
 
     def crushTask(self, crusherId, axis):
         crusher = self.level.entities.get(crusherId, None)
@@ -281,7 +317,13 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
             if crusherHeight < maxHeight and crusherHeight >= minHeight:
                 if crusherHeight == minHeight:
                     self.setScale(Vec3(1.2, 1.2, minScale))
-                    taskMgr.doMethodLater(2, self.setScale, 'resetScale', extraArgs=(1,))
+                    taskMgr.doMethodLater(
+                        2,
+                        self.setScale,
+                        'resetScale',
+                        extraArgs=(
+                            1,
+                        ))
                     return Task.done
                 else:
                     k = crusherHeight / maxHeight
@@ -295,6 +337,15 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
             self.crushTrack.finish()
             del self.crushTrack
             self.crushTrack = None
-        self.crushTrack = Sequence(LerpScaleInterval(self, tSquash, VBase3(1.2, 1.2, 0.25), blendType='easeInOut'), LerpColorScaleInterval(self, 2.0, VBase4(1, 1, 1, 0), blendType='easeInOut'), Wait(2.0), LerpScaleInterval(self, 0.1, VBase3(1, 1, 1), blendType='easeInOut'), LerpColorScaleInterval(self, 0.1, VBase4(1, 1, 1, 0), blendType='easeInOut'))
+        self.crushTrack = Sequence(
+            LerpScaleInterval(
+                self, tSquash, VBase3(
+                    1.2, 1.2, 0.25), blendType='easeInOut'), LerpColorScaleInterval(
+                self, 2.0, VBase4(
+                    1, 1, 1, 0), blendType='easeInOut'), Wait(2.0), LerpScaleInterval(
+                        self, 0.1, VBase3(
+                            1, 1, 1), blendType='easeInOut'), LerpColorScaleInterval(
+                                self, 0.1, VBase4(
+                                    1, 1, 1, 0), blendType='easeInOut'))
         self.crushTrack.start()
         return

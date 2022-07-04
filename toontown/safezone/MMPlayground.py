@@ -5,11 +5,16 @@ from direct.fsm import ClassicFSM, State
 from direct.actor import Actor
 from toontown.toonbase import ToontownGlobals
 
+
 class MMPlayground(Playground.Playground):
 
     def __init__(self, loader, parentFSM, doneEvent):
         Playground.Playground.__init__(self, loader, parentFSM, doneEvent)
-        self.activityFsm = ClassicFSM.ClassicFSM('Activity', [State.State('off', self.enterOff, self.exitOff, ['OnPiano']), State.State('OnPiano', self.enterOnPiano, self.exitOnPiano, ['off'])], 'off', 'off')
+        self.activityFsm = ClassicFSM.ClassicFSM(
+            'Activity', [
+                State.State(
+                    'off', self.enterOff, self.exitOff, ['OnPiano']), State.State(
+                    'OnPiano', self.enterOnPiano, self.exitOnPiano, ['off'])], 'off', 'off')
         self.activityFsm.enterInitialState()
 
     def load(self):

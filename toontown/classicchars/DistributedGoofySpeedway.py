@@ -8,16 +8,24 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.hood import DLHood
 
+
 class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGoofySpeedway')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedGoofySpeedway')
 
     def __init__(self, cr):
         try:
             self.DistributedGoofySpeedway_initialized
-        except:
+        except BaseException:
             self.DistributedGoofySpeedway_initialized = 1
-            DistributedCCharBase.DistributedCCharBase.__init__(self, cr, TTLocalizer.Goofy, 'g')
-            self.fsm = ClassicFSM.ClassicFSM(self.getName(), [State.State('Off', self.enterOff, self.exitOff, ['Neutral']), State.State('Neutral', self.enterNeutral, self.exitNeutral, ['Walk']), State.State('Walk', self.enterWalk, self.exitWalk, ['Neutral'])], 'Off', 'Off')
+            DistributedCCharBase.DistributedCCharBase.__init__(
+                self, cr, TTLocalizer.Goofy, 'g')
+            self.fsm = ClassicFSM.ClassicFSM(
+                self.getName(), [
+                    State.State(
+                        'Off', self.enterOff, self.exitOff, ['Neutral']), State.State(
+                        'Neutral', self.enterNeutral, self.exitNeutral, ['Walk']), State.State(
+                        'Walk', self.enterWalk, self.exitWalk, ['Neutral'])], 'Off', 'Off')
             self.fsm.enterInitialState()
 
         self.handleHolidays()
@@ -34,7 +42,7 @@ class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
     def delete(self):
         try:
             self.DistributedGoofySpeedway_deleted
-        except:
+        except BaseException:
             del self.fsm
             self.DistributedGoofySpeedway_deleted = 1
             DistributedCCharBase.DistributedCCharBase.delete(self)
@@ -43,12 +51,14 @@ class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
         DistributedCCharBase.DistributedCCharBase.generate(self, self.diffPath)
         name = self.getName()
         self.neutralDoneEvent = self.taskName(name + '-neutral-done')
-        self.neutral = CharStateDatas.CharNeutralState(self.neutralDoneEvent, self)
+        self.neutral = CharStateDatas.CharNeutralState(
+            self.neutralDoneEvent, self)
         self.walkDoneEvent = self.taskName(name + '-walk-done')
-        if self.diffPath == None:
+        if self.diffPath is None:
             self.walk = CharStateDatas.CharWalkState(self.walkDoneEvent, self)
         else:
-            self.walk = CharStateDatas.CharWalkState(self.walkDoneEvent, self, self.diffPath)
+            self.walk = CharStateDatas.CharWalkState(
+                self.walkDoneEvent, self, self.diffPath)
         self.fsm.request('Neutral')
         return
 
@@ -89,11 +99,12 @@ class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
         DistributedCCharBase.DistributedCCharBase.handleHolidays(self)
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds and isinstance(self.cr.playGame.hood, DLHood.DLHood):
+            if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds and isinstance(
+                    self.cr.playGame.hood, DLHood.DLHood):
                 self.diffPath = TTLocalizer.Donald
 
     def getCCLocation(self):
-        if self.diffPath == None:
+        if self.diffPath is None:
             return 1
         else:
             return 0

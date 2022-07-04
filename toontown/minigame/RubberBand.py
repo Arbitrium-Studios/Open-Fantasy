@@ -10,10 +10,11 @@ import math
 from math import *
 import random
 
+
 class RubberBand:
     SomeCounter = 0
 
-    def __init__(self, heldObject = None, heldOffset = None, taskPriority = 0):
+    def __init__(self, heldObject=None, heldOffset=None, taskPriority=0):
         self.heldObject = heldObject
         self.heldOffset = heldOffset
         self.bandNumber = self.SomeCounter
@@ -30,7 +31,8 @@ class RubberBand:
         targetNode = CollisionNode('thing')
         targetNode.addSolid(target)
         targetNodePath = self.baseNode.attachNewNode(targetNode)
-        self.slingModel = loader.loadModel('phase_4/models/minigames/slingshot_game_sling.bam')
+        self.slingModel = loader.loadModel(
+            'phase_4/models/minigames/slingshot_game_sling.bam')
         self.slingModel.reparentTo(self.baseNode)
         self.slingModel.setScale(1.0)
         self.slingModel.setZ(-1.0)
@@ -42,7 +44,11 @@ class RubberBand:
         self.bandHeight = 1.0
         self.post1Pos = Point3(-width, 0, height)
         self.post2Pos = Point3(width, 0, height)
-        taskMgr.add(self.redraw, 'recreateBand %s' % self.bandNumber, priority=self._taskPriority)
+        taskMgr.add(
+            self.redraw,
+            'recreateBand %s' %
+            self.bandNumber,
+            priority=self._taskPriority)
         self.colorRelax = {}
         self.colorRelax['Red'] = 1.0
         self.colorRelax['Green'] = 0.3
@@ -71,7 +77,8 @@ class RubberBand:
         self.bandGN.removeAllGeoms()
         objPosX = self.heldObject.getX(self.baseNode) + self.heldOffset[0]
         objPosY = self.heldObject.getY(self.baseNode) + self.heldOffset[1]
-        objPosZ = self.heldObject.getZ(self.baseNode) + self.heldOffset[2] + 1.5
+        objPosZ = self.heldObject.getZ(
+            self.baseNode) + self.heldOffset[2] + 1.5
         if objPosY > 0:
             objPosY = 0
             objPosX = 0
@@ -87,10 +94,14 @@ class RubberBand:
             bandThickness = 0.2
         colorProp = bandThickness / self.bandHeight
         color = {}
-        color['Red'] = colorProp * self.colorRelax['Red'] + (1 - colorProp) * self.colorStrecth['Red']
-        color['Green'] = colorProp * self.colorRelax['Green'] + (1 - colorProp) * self.colorStrecth['Green']
-        color['Blue'] = colorProp * self.colorRelax['Blue'] + (1 - colorProp) * self.colorStrecth['Blue']
-        color['Alpha'] = colorProp * self.colorRelax['Alpha'] + (1 - colorProp) * self.colorStrecth['Alpha']
+        color['Red'] = colorProp * self.colorRelax['Red'] + \
+            (1 - colorProp) * self.colorStrecth['Red']
+        color['Green'] = colorProp * self.colorRelax['Green'] + \
+            (1 - colorProp) * self.colorStrecth['Green']
+        color['Blue'] = colorProp * self.colorRelax['Blue'] + \
+            (1 - colorProp) * self.colorStrecth['Blue']
+        color['Alpha'] = colorProp * self.colorRelax['Alpha'] + \
+            (1 - colorProp) * self.colorStrecth['Alpha']
         bandBottomOrigin = self.post1Pos[2] - 0.5 * bandThickness
         bandTopOrigin = self.post1Pos[2] + 0.5 * bandThickness
         bandBottomHeld = objPosZ - 0.5 * bandThickness
@@ -100,14 +111,23 @@ class RubberBand:
         colorHigh = 1.0
         colorLow = 0.5
         shapeVertexs = []
-        shapeVertexs.append((self.post1Pos[0], self.post1Pos[1], bandBottomOrigin + 0.45))
-        shapeVertexs.append((self.post1Pos[0], self.post1Pos[1], bandTopOrigin + 0.45))
+        shapeVertexs.append(
+            (self.post1Pos[0],
+             self.post1Pos[1],
+             bandBottomOrigin + 0.45))
+        shapeVertexs.append(
+            (self.post1Pos[0],
+             self.post1Pos[1],
+             bandTopOrigin + 0.45))
         colorMultList.append(colorLow)
         colorMultList.append(colorHigh)
         s2 = pow(2, 0.5)
         s2dif = s2 - 1
         objPosXSecondary = objPosX - 0.5
-        shapeVertexs.append((objPosXSecondary, objPosYSecondary, bandBottomHeld))
+        shapeVertexs.append(
+            (objPosXSecondary,
+             objPosYSecondary,
+             bandBottomHeld))
         shapeVertexs.append((objPosXSecondary, objPosYSecondary, bandTopHeld))
         colorMultList.append(colorLow)
         colorMultList.append(colorHigh)
@@ -116,21 +136,38 @@ class RubberBand:
         colorMultList.append(colorLow)
         colorMultList.append(colorHigh)
         objPosXSecondary = objPosX + 0.5
-        shapeVertexs.append((objPosXSecondary, objPosYSecondary, bandBottomHeld))
+        shapeVertexs.append(
+            (objPosXSecondary,
+             objPosYSecondary,
+             bandBottomHeld))
         shapeVertexs.append((objPosXSecondary, objPosYSecondary, bandTopHeld))
         colorMultList.append(colorLow)
         colorMultList.append(colorHigh)
-        shapeVertexs.append((self.post2Pos[0], self.post2Pos[1], bandBottomOrigin + 0.45))
-        shapeVertexs.append((self.post2Pos[0], self.post2Pos[1], bandTopOrigin + 0.45))
+        shapeVertexs.append(
+            (self.post2Pos[0],
+             self.post2Pos[1],
+             bandBottomOrigin + 0.45))
+        shapeVertexs.append(
+            (self.post2Pos[0],
+             self.post2Pos[1],
+             bandTopOrigin + 0.45))
         colorMultList.append(colorLow)
         colorMultList.append(colorHigh)
         gFormat = GeomVertexFormat.getV3cp()
-        bandVertexData = GeomVertexData('holds my vertices', gFormat, Geom.UHDynamic)
+        bandVertexData = GeomVertexData(
+            'holds my vertices', gFormat, Geom.UHDynamic)
         bandVertexWriter = GeomVertexWriter(bandVertexData, 'vertex')
         bandColorWriter = GeomVertexWriter(bandVertexData, 'color')
         for index in range(len(shapeVertexs)):
-            bandVertexWriter.addData3f(shapeVertexs[index][0], shapeVertexs[index][1], shapeVertexs[index][2])
-            bandColorWriter.addData4f(color['Red'] * colorMultList[index], color['Green'] * colorMultList[index], color['Blue'] * colorMultList[index], color['Alpha'] * colorMultList[index])
+            bandVertexWriter.addData3f(
+                shapeVertexs[index][0],
+                shapeVertexs[index][1],
+                shapeVertexs[index][2])
+            bandColorWriter.addData4f(
+                color['Red'] * colorMultList[index],
+                color['Green'] * colorMultList[index],
+                color['Blue'] * colorMultList[index],
+                color['Alpha'] * colorMultList[index])
 
         bandTris = GeomTristrips(Geom.UHStatic)
         for index in range(len(shapeVertexs)):

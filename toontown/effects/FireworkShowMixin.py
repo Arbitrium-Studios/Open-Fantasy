@@ -9,10 +9,11 @@ from . import FireworkShows
 from .FireworkGlobals import skyTransitionDuration, preShowPauseDuration, postShowPauseDuration, preNormalMusicPauseDuration
 from toontown.effects.FireworkShow import FireworkShow
 
+
 class FireworkShowMixin:
     notify = DirectNotifyGlobal.directNotify.newCategory('FireworkShowMixin')
 
-    def __init__(self, restorePlaygroundMusic = True, startDelay = 0.0):
+    def __init__(self, restorePlaygroundMusic=True, startDelay=0.0):
         self.currentShow = None
         self.restorePlaygroundMusic = restorePlaygroundMusic
         self.startDelay = startDelay
@@ -48,14 +49,15 @@ class FireworkShowMixin:
     def startMusic(self):
         if self.timestamp:
             self.getLoader().music.stop()
-            t = globalClockDelta.localElapsedTime(self.timestamp) - self.startDelay
+            t = globalClockDelta.localElapsedTime(
+                self.timestamp) - self.startDelay
             base.playMusic(self.showMusic, 0, 1, 0.8, max(0, t))
 
     def shootFirework(self, x, y, z, style, color1, color2):
         amp = 5
         Fireworks.shootFirework(style, x, y, z, color1, color2, amp)
 
-    def startShow(self, eventId, style, timestamp, root = render):
+    def startShow(self, eventId, style, timestamp, root=render):
         t = globalClockDelta.localElapsedTime(timestamp) - self.startDelay
         self.timestamp = timestamp
         self.showMusic = None
@@ -71,7 +73,8 @@ class FireworkShowMixin:
             preShow = self.preShow(eventId, t)
             postShow = self.postShow(eventId)
             beginFireworkShow = Func(self.beginFireworkShow, max(0, t), root)
-            self.currentShow = Sequence(preShow, beginFireworkShow, Wait(max(0, self.fireworkShow.getShowDuration() - max(0, t))), postShow)
+            self.currentShow = Sequence(preShow, beginFireworkShow, Wait(
+                max(0, self.fireworkShow.getShowDuration() - max(0, t))), postShow)
             self.currentShow.start()
         return
 
@@ -97,7 +100,8 @@ class FireworkShowMixin:
             endMessage = TTLocalizer.FireworksComboEnding
             musicFile = 'phase_4/audio/bgm/tt_party2.ogg'
         else:
-            FireworkShowMixin.notify.warning('Invalid fireworks event ID: %d' % eventId)
+            FireworkShowMixin.notify.warning(
+                'Invalid fireworks event ID: %d' % eventId)
             return None
         self.showMusic = loader.loadMusic(musicFile)
         self.showMusic.setVolume(1)
@@ -110,16 +114,20 @@ class FireworkShowMixin:
                 if not self.__checkStreetValidity():
                     return
                 else:
-                    place.halloweenLights = list(base.cr.playGame.getPlace().loader.geom.findAllMatches('**/*light*'))
-                    place.halloweenLights.extend(list(base.cr.playGame.getPlace().loader.geom.findAllMatches('**/*lamp*')))
+                    place.halloweenLights = list(
+                        base.cr.playGame.getPlace().loader.geom.findAllMatches('**/*light*'))
+                    place.halloweenLights.extend(
+                        list(base.cr.playGame.getPlace().loader.geom.findAllMatches('**/*lamp*')))
                     for light in place.halloweenLights:
                         light.setColorScaleOff(0)
 
             elif not self.__checkHoodValidity():
                 return
             else:
-                place.loader.hood.halloweenLights = list(base.cr.playGame.hood.loader.geom.findAllMatches('**/*light*'))
-                place.loader.hood.halloweenLights.extend(list(base.cr.playGame.hood.loader.geom.findAllMatches('**/*lamp*')))
+                place.loader.hood.halloweenLights = list(
+                    base.cr.playGame.hood.loader.geom.findAllMatches('**/*light*'))
+                place.loader.hood.halloweenLights.extend(
+                    list(base.cr.playGame.hood.loader.geom.findAllMatches('**/*lamp*')))
                 for light in base.cr.playGame.hood.halloweenLights:
                     light.setColorScaleOff(0)
 
@@ -127,8 +135,27 @@ class FireworkShowMixin:
                 self.fireworkShow.setColorScaleOff(0)
             return
 
-        if self.__checkHoodValidity() and hasattr(base.cr.playGame, 'hood') and base.cr.playGame.hood and hasattr(base.cr.playGame.hood, 'sky') and base.cr.playGame.hood.sky:
-            preShow = Sequence(Func(base.localAvatar.setSystemMessage, 0, startMessage), Parallel(LerpColorScaleInterval(base.cr.playGame.hood.sky, 2.5, Vec4(0.0, 0.0, 0.0, 1.0)), LerpColorScaleInterval(base.cr.playGame.hood.loader.geom, 2.5, Vec4(0.25, 0.25, 0.35, 1)), LerpColorScaleInterval(base.localAvatar, 2.5, Vec4(0.85, 0.85, 0.85, 1)), Func(__lightDecorationOn__)), Func(base.setBackgroundColor, Vec4(0, 0, 0, 1)), Func(self.__checkDDFog), Func(base.camLens.setFar, 1000.0), Func(base.cr.playGame.hood.sky.hide), Func(base.localAvatar.setSystemMessage, 0, instructionMessage), Func(self.getLoader().music.stop), Wait(2.0), Func(base.playMusic, self.showMusic, 0, 1, 0.8, max(0, startT)))
+        if self.__checkHoodValidity() and hasattr(base.cr.playGame, 'hood') and base.cr.playGame.hood and hasattr(
+                base.cr.playGame.hood, 'sky') and base.cr.playGame.hood.sky:
+            preShow = Sequence(
+                Func(
+                    base.localAvatar.setSystemMessage, 0, startMessage), Parallel(
+                    LerpColorScaleInterval(
+                        base.cr.playGame.hood.sky, 2.5, Vec4(
+                            0.0, 0.0, 0.0, 1.0)), LerpColorScaleInterval(
+                        base.cr.playGame.hood.loader.geom, 2.5, Vec4(
+                            0.25, 0.25, 0.35, 1)), LerpColorScaleInterval(
+                                base.localAvatar, 2.5, Vec4(
+                                    0.85, 0.85, 0.85, 1)), Func(__lightDecorationOn__)), Func(
+                                        base.setBackgroundColor, Vec4(
+                                            0, 0, 0, 1)), Func(
+                                                self.__checkDDFog), Func(
+                                                    base.camLens.setFar, 1000.0), Func(
+                                                        base.cr.playGame.hood.sky.hide), Func(
+                                                            base.localAvatar.setSystemMessage, 0, instructionMessage), Func(
+                                                                self.getLoader().music.stop), Wait(2.0), Func(
+                                                                    base.playMusic, self.showMusic, 0, 1, 0.8, max(
+                                                                        0, startT)))
             return preShow
         return None
 
@@ -152,13 +179,35 @@ class FireworkShowMixin:
         elif eventId == COMBO_FIREWORKS:
             endMessage = TTLocalizer.FireworksComboEnding
         else:
-            FireworkShowMixin.notify.warning('Invalid fireworks event ID: %d' % eventId)
+            FireworkShowMixin.notify.warning(
+                'Invalid fireworks event ID: %d' % eventId)
             return None
-        if self.__checkHoodValidity() and hasattr(base.cr.playGame.hood, 'sky') and base.cr.playGame.hood.sky:
-            postShow = Sequence(Func(base.cr.playGame.hood.sky.show), Parallel(LerpColorScaleInterval(base.cr.playGame.hood.sky, 2.5, Vec4(1, 1, 1, 1)), LerpColorScaleInterval(base.cr.playGame.hood.loader.geom, 2.5, Vec4(1, 1, 1, 1)), LerpColorScaleInterval(base.localAvatar, 2.5, Vec4(1, 1, 1, 1))), Func(self.__restoreDDFog), Func(self.restoreCameraLens), Func(base.setBackgroundColor, DefaultBackgroundColor), Func(self.showMusic.stop), Func(base.localAvatar.setSystemMessage, 0, endMessage))
+        if self.__checkHoodValidity() and hasattr(base.cr.playGame.hood,
+                                                  'sky') and base.cr.playGame.hood.sky:
+            postShow = Sequence(
+                Func(
+                    base.cr.playGame.hood.sky.show), Parallel(
+                    LerpColorScaleInterval(
+                        base.cr.playGame.hood.sky, 2.5, Vec4(
+                            1, 1, 1, 1)), LerpColorScaleInterval(
+                        base.cr.playGame.hood.loader.geom, 2.5, Vec4(
+                            1, 1, 1, 1)), LerpColorScaleInterval(
+                                base.localAvatar, 2.5, Vec4(
+                                    1, 1, 1, 1))), Func(
+                                        self.__restoreDDFog), Func(
+                                            self.restoreCameraLens), Func(
+                                                base.setBackgroundColor, DefaultBackgroundColor), Func(
+                                                    self.showMusic.stop), Func(
+                                                        base.localAvatar.setSystemMessage, 0, endMessage))
         if self.restorePlaygroundMusic:
             postShow.append(Wait(2.0))
-            postShow.append(Func(base.playMusic, self.getLoader().music, 1, 1, 0.8))
+            postShow.append(
+                Func(
+                    base.playMusic,
+                    self.getLoader().music,
+                    1,
+                    1,
+                    0.8))
         return postShow
 
     def createFireworkShow(self):
@@ -209,7 +258,8 @@ class FireworkShowMixin:
     def getFireworkShowIval(self, eventId, index, startT):
         show = FireworkShows.getShow(eventId, index)
         if show is None:
-            FireworkShowMixin.notify.warning('could not find firework show: index: %s' % index)
+            FireworkShowMixin.notify.warning(
+                'could not find firework show: index: %s' % index)
             return
         preShow = self.preShow(eventId, startT)
         mainShow = Sequence()
@@ -220,7 +270,16 @@ class FireworkShowMixin:
                 currentT += waitTime
                 mainShow.append(Wait(waitTime))
             if currentT >= startT:
-                mainShow.append(Func(Fireworks.shootFirework, style, x, y, z, colorIndex1, colorIndex2, amp))
+                mainShow.append(
+                    Func(
+                        Fireworks.shootFirework,
+                        style,
+                        x,
+                        y,
+                        z,
+                        colorIndex1,
+                        colorIndex2,
+                        amp))
 
         postShow = self.postShow(eventId)
         return Sequence(preShow, mainShow, postShow)
@@ -232,12 +291,12 @@ class FireworkShowMixin:
             self.getSky().clearColorScale()
 
     def getLoader(self):
-        if base.cr.playGame.hood != None:
+        if base.cr.playGame.hood is not None:
             return base.cr.playGame.hood.loader
         return
 
     def getHood(self):
-        if base.cr.playGame.hood != None:
+        if base.cr.playGame.hood is not None:
             return base.cr.playGame.hood
         return
 
@@ -270,13 +329,15 @@ class FireworkShowMixin:
                     self.getHood().setWhiteFog()
 
     def __checkStreetValidity(self):
-        if hasattr(base.cr.playGame, 'getPlace') and base.cr.playGame.getPlace() and hasattr(base.cr.playGame.getPlace(), 'loader') and base.cr.playGame.getPlace().loader and hasattr(base.cr.playGame.getPlace().loader, 'geom') and base.cr.playGame.getPlace().loader.geom:
+        if hasattr(base.cr.playGame, 'getPlace') and base.cr.playGame.getPlace() and hasattr(base.cr.playGame.getPlace(), 'loader') and base.cr.playGame.getPlace(
+        ).loader and hasattr(base.cr.playGame.getPlace().loader, 'geom') and base.cr.playGame.getPlace().loader.geom:
             return True
         else:
             return False
 
     def __checkHoodValidity(self):
-        if hasattr(base.cr.playGame, 'hood') and base.cr.playGame.hood and hasattr(base.cr.playGame.hood, 'loader') and base.cr.playGame.hood.loader and hasattr(base.cr.playGame.hood.loader, 'geom') and base.cr.playGame.hood.loader.geom:
+        if hasattr(base.cr.playGame, 'hood') and base.cr.playGame.hood and hasattr(base.cr.playGame.hood,
+                                                                                   'loader') and base.cr.playGame.hood.loader and hasattr(base.cr.playGame.hood.loader, 'geom') and base.cr.playGame.hood.loader.geom:
             return True
         else:
             return False

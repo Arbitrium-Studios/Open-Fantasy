@@ -1,6 +1,7 @@
 from otp.level import DistributedEntityAI
 from direct.directnotify import DirectNotifyGlobal
 
+
 class BattleBlockerAI(DistributedEntityAI.DistributedEntityAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('BattleBlockerAI')
 
@@ -16,7 +17,8 @@ class BattleBlockerAI(DistributedEntityAI.DistributedEntityAI):
 
     def generate(self):
         DistributedEntityAI.DistributedEntityAI.generate(self)
-        self.accept('plannerCreated-' + str(self.level.doId), self.registerBlocker)
+        self.accept('plannerCreated-' +
+                    str(self.level.doId), self.registerBlocker)
 
     def registerBlocker(self):
         if hasattr(self.level, 'planner'):
@@ -39,7 +41,7 @@ class BattleBlockerAI(DistributedEntityAI.DistributedEntityAI):
         try:
             self.suitIds.remove(suit.doId)
             self.d_setSuits()
-        except:
+        except BaseException:
             self.notify.debug("didn't have suitId %d" % suit.doId)
 
     def d_setSuits(self):
@@ -75,6 +77,8 @@ class BattleBlockerAI(DistributedEntityAI.DistributedEntityAI):
                     self.suitIds.append(suit.doId)
 
             else:
-                self.notify.warning("Couldn't find battle cell id %d in battleCellId2suits" % self.cellId)
+                self.notify.warning(
+                    "Couldn't find battle cell id %d in battleCellId2suits" %
+                    self.cellId)
             self.d_setSuits()
             self.registerBlocker()

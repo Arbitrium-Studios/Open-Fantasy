@@ -4,6 +4,7 @@ from direct.directnotify import DirectNotifyGlobal
 from pandac.PandaModules import *
 from . import VineGameGlobals
 
+
 class VineSpider(NodePath, DirectObject):
     RADIUS = 1.7
 
@@ -35,7 +36,8 @@ class VineSpider(NodePath, DirectObject):
         self.setPos(-100, 0, 0)
         center = Point3(0, 0, 0)
         self.sphereName = 'spiderSphere-%s-%s' % (gameId, self.serialNum)
-        self.collSphere = CollisionSphere(center[0], center[1], center[2], self.RADIUS)
+        self.collSphere = CollisionSphere(
+            center[0], center[1], center[2], self.RADIUS)
         self.collSphere.setTangible(0)
         self.collNode = CollisionNode(self.sphereName)
         self.collNode.setIntoCollideMask(VineGameGlobals.SpiderBitmask)

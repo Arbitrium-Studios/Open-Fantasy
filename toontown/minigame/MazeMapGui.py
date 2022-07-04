@@ -9,11 +9,17 @@ MAP_RESOLUTION = 320
 MazeRevealType = Enum(('SmoothCircle', 'HardCircle', 'Square'))
 MAZE_REVEAL_TYPE = MazeRevealType.SmoothCircle
 
+
 class MazeMapGui(DirectFrame):
     notify = directNotify.newCategory('MazeMapGui')
 
-    def __init__(self, mazeCollTable, maskResolution = None, radiusRatio = None, bgColor = (0.8, 0.8, 0.8), fgColor = (0.5, 0.5, 0.5, 1.0)):
-        DirectFrame.__init__(self, relief=None, state=DGG.NORMAL, sortOrder=DGG.BACKGROUND_SORT_INDEX)
+    def __init__(self, mazeCollTable, maskResolution=None, radiusRatio=None,
+                 bgColor=(0.8, 0.8, 0.8), fgColor=(0.5, 0.5, 0.5, 1.0)):
+        DirectFrame.__init__(
+            self,
+            relief=None,
+            state=DGG.NORMAL,
+            sortOrder=DGG.BACKGROUND_SORT_INDEX)
         self.hide()
         self._bgColor = bgColor
         self._fgColor = fgColor
@@ -32,8 +38,8 @@ class MazeMapGui(DirectFrame):
                 self._revealedCells[y].append(False)
 
         self._revealFunctions = {MazeRevealType.SmoothCircle: self._revealSmoothCircle,
-         MazeRevealType.HardCircle: self._revealHardCircle,
-         MazeRevealType.Square: self._revealSquare}
+                                 MazeRevealType.HardCircle: self._revealHardCircle,
+                                 MazeRevealType.Square: self._revealSquare}
         self._revealFunction = MAZE_REVEAL_TYPE
         self.map = self._createMapTextureCard()
         self.map.reparentTo(self)
@@ -41,7 +47,8 @@ class MazeMapGui(DirectFrame):
         self.mask = self._createMaskTextureCard()
         self.mask.reparentTo(self)
         self.visibleLayer = self.attachNewNode('visibleLayer')
-        self._laffMeterModel = loader.loadModel('phase_3/models/gui/laff_o_meter')
+        self._laffMeterModel = loader.loadModel(
+            'phase_3/models/gui/laff_o_meter')
         self._toon2marker = {}
         return
 
@@ -58,7 +65,13 @@ class MazeMapGui(DirectFrame):
                     self._drawSquare(mapImage, int(ax), int(ay), 10, fgColor)
 
         mapTexture = Texture('mapTexture')
-        mapTexture.setupTexture(Texture.TT2dTexture, self._maskResolution, self._maskResolution, 1, Texture.TUnsignedByte, Texture.FRgba)
+        mapTexture.setupTexture(
+            Texture.TT2dTexture,
+            self._maskResolution,
+            self._maskResolution,
+            1,
+            Texture.TUnsignedByte,
+            Texture.FRgba)
         mapTexture.setMinfilter(Texture.FTLinear)
         mapTexture.load(mapImage)
         mapTexture.setWrapU(Texture.WMClamp)
@@ -72,13 +85,20 @@ class MazeMapGui(DirectFrame):
         return map
 
     def _createMaskTextureCard(self):
-        self._maskImage = PNMImage(self._maskResolution, self._maskResolution, 4)
+        self._maskImage = PNMImage(
+            self._maskResolution, self._maskResolution, 4)
         for x in range(self._maskResolution):
             for y in range(self._maskResolution):
                 self._maskImage.setXelA(x, y, 0, 0, 0, 1)
 
         self.maskTexture = Texture('maskTexture')
-        self.maskTexture.setupTexture(Texture.TT2dTexture, self._maskResolution, self._maskResolution, 1, Texture.TUnsignedByte, Texture.FRgba)
+        self.maskTexture.setupTexture(
+            Texture.TT2dTexture,
+            self._maskResolution,
+            self._maskResolution,
+            1,
+            Texture.TUnsignedByte,
+            Texture.FRgba)
         self.maskTexture.setMinfilter(Texture.FTLinear)
         self.maskTexture.setWrapU(Texture.WMClamp)
         self.maskTexture.setWrapV(Texture.WMClamp)
@@ -128,7 +148,11 @@ class MazeMapGui(DirectFrame):
     def _revealSmoothCircle(self, x, y, center):
         length = (Vec2(x, y) - center).length()
         goalAlpha = max(0.0, length / float(self._radius) - 0.5)
-        self._maskImage.setXelA(x, y, VBase4F(0.0, 0.0, 0.0, min(self._maskImage.getAlpha(x, y), goalAlpha * 2.0)))
+        self._maskImage.setXelA(
+            x, y, VBase4F(
+                0.0, 0.0, 0.0, min(
+                    self._maskImage.getAlpha(
+                        x, y), goalAlpha * 2.0)))
 
     def _revealHardCircle(self, x, y, center):
         length = (Vec2(x, y) - center).length()
@@ -155,7 +179,7 @@ class MazeMapGui(DirectFrame):
         self.maskTexture.load(self._maskImage)
         self.mask.setTexture(self.maskTexture, 1)
 
-    def _createSimpleMarker(self, size, color = (1, 1, 1)):
+    def _createSimpleMarker(self, size, color=(1, 1, 1)):
         halfSize = size * 0.5
         cm = CardMaker('mazemap_simple_marker')
         cm.setFrame(-halfSize, halfSize, -halfSize, halfSize)
@@ -174,7 +198,8 @@ class MazeMapGui(DirectFrame):
         return (ax, ay)
 
     def gui2pos(self, x, y):
-        return (x / self._maskResolution * 2.0 - 0.97, 0, y / self._maskResolution * -2.0 + 1.02)
+        return (x / self._maskResolution * 2.0 - 0.97, 0,
+                y / self._maskResolution * -2.0 + 1.02)
 
     def _getToonMarker(self, toon):
         hType = toon.style.getType()
@@ -209,18 +234,29 @@ class MazeMapGui(DirectFrame):
         if tY < 0 or tY >= len(self._revealedCells):
             self.notify.warning('updateToon earlying out:')
             self.notify.warning('(tX, tY): (%s, %s)' % (tX, tY))
-            self.notify.warning('len(_revealedCells): %s' % (len(self._revealedCells),))
+            self.notify.warning('len(_revealedCells): %s' %
+                                (len(self._revealedCells),))
             if len(self._revealedCells) > 0:
-                self.notify.warning('len(_revealedCells[0]): %s' % (len(self._revealedCells[0]),))
+                self.notify.warning(
+                    'len(_revealedCells[0]): %s' %
+                    (len(
+                        self._revealedCells[0]),))
             return
         if tX < 0 or tX >= len(self._revealedCells[tY]):
             self.notify.warning('updateToon earlying out:')
             self.notify.warning('(tX, tY): (%s, %s)' % (tX, tY))
-            self.notify.warning('len(_revealedCells): %s' % (len(self._revealedCells),))
+            self.notify.warning('len(_revealedCells): %s' %
+                                (len(self._revealedCells),))
             if tY < len(self._revealedCells):
-                self.notify.warning('len(_revealedCells[tY]): %s' % (len(self._revealedCells[tY]),))
+                self.notify.warning(
+                    'len(_revealedCells[tY]): %s' %
+                    (len(
+                        self._revealedCells[tY]),))
             elif len(self._revealedCells) > 0:
-                self.notify.warning('len(_revealedCells[0]): %s' % (len(self._revealedCells[0]),))
+                self.notify.warning(
+                    'len(_revealedCells[0]): %s' %
+                    (len(
+                        self._revealedCells[0]),))
             return
         if not self._revealedCells[tY][tX]:
             self._drawHole(x, y)

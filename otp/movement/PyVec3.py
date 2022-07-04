@@ -2,6 +2,7 @@ from pandac.PandaModules import *
 import types
 import math
 
+
 class PyVec3:
     Epsilon = 0.0001
     ScalarTypes = (float, int)
@@ -71,7 +72,8 @@ class PyVec3:
         return self.x * other.getX() + self.y * other.getY() + self.z * other.getZ()
 
     def _crossResults(self, other):
-        return (self.y * other.getZ() - self.z * other.getY(), self.z * other.getX() - self.x * other.getZ(), self.x * other.getY() - self.y * other.getX())
+        return (self.y * other.getZ() - self.z * other.getY(), self.z * other.getX() -
+                self.x * other.getZ(), self.x * other.getY() - self.y * other.getX())
 
     def cross(self, other):
         return PyVec3(*self._crossResults(other))
@@ -98,10 +100,12 @@ class PyVec3:
         return a.length() > b.length()
 
     def __add__(a, b):
-        return PyVec3(a.getX() + b.getX(), a.getY() + b.getY(), a.getZ() + b.getZ())
+        return PyVec3(a.getX() + b.getX(), a.getY() +
+                      b.getY(), a.getZ() + b.getZ())
 
     def __sub__(a, b):
-        return PyVec3(a.getX() - b.getX(), a.getY() - b.getY(), a.getZ() - b.getZ())
+        return PyVec3(a.getX() - b.getX(), a.getY() -
+                      b.getY(), a.getZ() - b.getZ())
 
     def __mul__(a, s):
         return PyVec3(a.getX() * s, a.getY() * s, a.getZ() * s)

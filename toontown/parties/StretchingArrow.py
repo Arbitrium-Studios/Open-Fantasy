@@ -2,6 +2,7 @@ import math
 from direct.gui.DirectGui import DirectFrame
 from pandac.PandaModules import Point3
 
+
 class StretchingArrow(DirectFrame):
     notify = directNotify.newCategory('StretchingArrow')
     arrowMoving = 0
@@ -10,7 +11,7 @@ class StretchingArrow(DirectFrame):
     body = None
     head = None
 
-    def __init__(self, parent, useColor = 'blue', autoload = True):
+    def __init__(self, parent, useColor='blue', autoload=True):
         DirectFrame.__init__(self, parent)
         self.useColor = useColor
         self.endOffset = 1.5
@@ -42,7 +43,7 @@ class StretchingArrow(DirectFrame):
     def reset(self):
         self.ratioDrawn = 0.0
 
-    def draw(self, fromPoint, toPoint, rotation = 0, animate = True):
+    def draw(self, fromPoint, toPoint, rotation=0, animate=True):
         arrowlength = 2.72
         if self.body is None or self.head is None:
             return
@@ -59,13 +60,20 @@ class StretchingArrow(DirectFrame):
         if self.ratioDrawn >= 1.0:
             result = StretchingArrow.arrowComplete
             self.ratioDrawn = -downTime
-        if cmp(oldRatio, 0) != cmp(self.ratioDrawn, 0) and result != StretchingArrow.arrowComplete:
+        if cmp(oldRatio, 0) != cmp(self.ratioDrawn,
+                                   0) and result != StretchingArrow.arrowComplete:
             result = StretchingArrow.arrowBegin
         if not animate:
             self.ratioDrawn = 1.0
-        normal = Point3(actualDifference.getX(), actualDifference.getY(), actualDifference.getZ())
+        normal = Point3(
+            actualDifference.getX(),
+            actualDifference.getY(),
+            actualDifference.getZ())
         normal.normalize()
-        rotation = math.degrees(math.atan2(actualDifference.getY(), actualDifference.getX()))
+        rotation = math.degrees(
+            math.atan2(
+                actualDifference.getY(),
+                actualDifference.getX()))
         endPoint = toPoint + normal * self.endOffset
         startPoint = fromPoint - normal * self.startOffset
         newlength = (endPoint - startPoint).length() / arrowlength

@@ -8,6 +8,7 @@ from direct.showbase.DirectObject import DirectObject
 from direct.task.MiniTask import MiniTaskManager
 from direct.directnotify.DirectNotifyGlobal import *
 
+
 class LogAndOutput:
 
     def __init__(self, orig, log):
@@ -46,11 +47,11 @@ class LauncherBase(DirectObject):
         self.pandaErrorCode = 0
         ltime = time.localtime()
         logSuffix = '%02d%02d%02d_%02d%02d%02d' % (ltime[0] - 2000,
-            ltime[1],
-            ltime[2],
-            ltime[3],
-            ltime[4],
-            ltime[5])
+                                                   ltime[1],
+                                                   ltime[2],
+                                                   ltime[3],
+                                                   ltime[4],
+                                                   ltime[5])
         logPrefix = self.getLogFileName() + '-'
         if not os.path.exists('logs/'):
             os.makedirs('logs/')
@@ -62,7 +63,13 @@ class LauncherBase(DirectObject):
         sys.stdout = logOut
         sys.stderr = logErr
         print('\n\nStarting %s...' % self.GameName)
-        print('Current time: ' + time.asctime(time.localtime(time.time())) + ' ' + time.tzname[0])
+        print(
+            'Current time: ' +
+            time.asctime(
+                time.localtime(
+                    time.time())) +
+            ' ' +
+            time.tzname[0])
         print('sys.path = ', sys.path)
         print('sys.argv = ', sys.argv)
         if ConfigVariableBool('log-private-info', 0).value:
@@ -86,7 +93,8 @@ class LauncherBase(DirectObject):
         self.setRegistry(self.GameLogFilenameKey, logfile)
         self.showPhase = 3.5
         self.currentPhase = 4
-        serverVersion = ConfigVariableString('server-version', 'no_version_set').value
+        serverVersion = ConfigVariableString(
+            'server-version', 'no_version_set').value
         if serverVersion == 'no_version_set':
             self.setPandaErrorCode(10)
             self.notify.info('Aborting, config did not load!')
@@ -153,13 +161,14 @@ class LauncherBase(DirectObject):
                 base.destroy()
             self.notify.info('Normal exit.')
             raise
-        except:
+        except BaseException:
             self.setPandaErrorCode(12)
             self.notify.warning('Handling Python exception.')
             if hasattr(builtins, 'base') and getattr(base, 'cr', None):
                 if base.cr.timeManager:
                     from otp.otpbase import OTPGlobals
-                    base.cr.timeManager.setDisconnectReason(OTPGlobals.DisconnectPythonError)
+                    base.cr.timeManager.setDisconnectReason(
+                        OTPGlobals.DisconnectPythonError)
                     base.cr.timeManager.setExceptionInfo()
                 base.cr.sendDisconnect()
             if hasattr(builtins, 'base'):
@@ -209,7 +218,9 @@ class LauncherBase(DirectObject):
         self.disconnectMsg = 'normal'
 
     def setDisconnectDetails(self, newCode, newMsg):
-        self.notify.info('New Disconnect Details: %s - %s ' % (newCode, newMsg))
+        self.notify.info(
+            'New Disconnect Details: %s - %s ' %
+            (newCode, newMsg))
         self.disconnectCode = newCode
         self.disconnectMsg = newMsg
 

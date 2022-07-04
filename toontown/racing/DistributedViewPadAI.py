@@ -6,7 +6,8 @@ from toontown.racing.KartShopGlobals import KartGlobals
 
 
 class DistributedViewPadAI(DistributedKartPadAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedViewPadAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'DistributedViewPadAI')
 
     def __init__(self, air):
         DistributedKartPadAI.__init__(self, air)

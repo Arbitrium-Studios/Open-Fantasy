@@ -2,10 +2,11 @@ from direct.showbase.DirectObject import DirectObject
 from direct.showbase.PythonUtil import lineInfo
 from direct.directnotify import DirectNotifyGlobal
 
+
 class Entity(DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('Entity')
 
-    def __init__(self, level = None, entId = None):
+    def __init__(self, level=None, entId=None):
         self.initializeEntity(level, entId)
 
     def initializeEntity(self, level, entId):
@@ -17,7 +18,8 @@ class Entity(DirectObject):
 
     def __str__(self):
         if hasattr(self, 'level') and self.level:
-            return 'ent%s(%s)' % (self.entId, self.level.getEntityType(self.entId))
+            return 'ent%s(%s)' % (
+                self.entId, self.level.getEntityType(self.entId))
         elif hasattr(self, 'name'):
             return self.name
         elif hasattr(self, 'entId'):
@@ -31,12 +33,14 @@ class Entity(DirectObject):
             if self.level.isInitialized():
                 self.level.onEntityDestroy(self.entId)
             else:
-                Entity.notify.warning('Entity %s destroyed after level??' % self.entId)
+                Entity.notify.warning(
+                    'Entity %s destroyed after level??' %
+                    self.entId)
         self.ignoreAll()
         del self.level
         del self.entId
 
-    def getUniqueName(self, name, entId = None):
+    def getUniqueName(self, name, entId=None):
         if entId is None:
             entId = self.entId
         return '%s-%s-%s' % (name, self.level.levelId, entId)
@@ -44,7 +48,7 @@ class Entity(DirectObject):
     def getParentToken(self):
         return self.level.getParentTokenForEntity(self.entId)
 
-    def getOutputEventName(self, entId = None):
+    def getOutputEventName(self, entId=None):
         if entId is None:
             entId = self.entId
         return self.getUniqueName('entityOutput', entId)

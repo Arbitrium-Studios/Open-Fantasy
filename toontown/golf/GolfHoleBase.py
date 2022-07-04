@@ -9,9 +9,10 @@ from toontown.golf import GolfGlobals
 import random
 import math
 
+
 class GolfHoleBase:
 
-    def __init__(self, canRender = 0):
+    def __init__(self, canRender=0):
         self.canRender = canRender
         self.recording = []
         self.aVRecording = []
@@ -47,7 +48,8 @@ class GolfHoleBase:
             self.geomDataList.append(terrainGeomOde)
             terrainGeomOde.setCollideBits(BitMask32(4026531840))
             terrainGeomOde.setCategoryBits(BitMask32(240))
-            self.space.setSurfaceType(terrainGeomOde, GolfGlobals.GRASS_SURFACE)
+            self.space.setSurfaceType(
+                terrainGeomOde, GolfGlobals.GRASS_SURFACE)
             self.space.setCollideId(terrainGeomOde, 2)
 
         slickData = terrainData.findAllMatches('**/slick*')
@@ -60,8 +62,10 @@ class GolfHoleBase:
             self.geomDataList.append(terrainGeomOde)
             terrainGeomOde.setCollideBits(BitMask32(4026531840))
             terrainGeomOde.setCategoryBits(BitMask32(240))
-            self.space.setSurfaceType(terrainGeomOde, GolfGlobals.SLICK_SURFACE)
-            self.space.setCollideId(terrainGeomOde, GolfGlobals.SLICK_COLLIDE_ID)
+            self.space.setSurfaceType(
+                terrainGeomOde, GolfGlobals.SLICK_SURFACE)
+            self.space.setCollideId(
+                terrainGeomOde, GolfGlobals.SLICK_COLLIDE_ID)
 
         cupData = terrainData.find('**/hole*')
         cupData = OdeTriMeshData(cupData)
@@ -75,7 +79,8 @@ class GolfHoleBase:
         if self.canRender:
             self.golfBarrier = self.terrainModel.find('**/collision1')
             if not self.golfBarrier.isEmpty():
-                golfBarrierCollection = self.terrainModel.findAllMatches('**/collision?')
+                golfBarrierCollection = self.terrainModel.findAllMatches(
+                    '**/collision?')
                 for i in range(golfBarrierCollection.getNumPaths()):
                     oneBarrier = golfBarrierCollection.getPath(i)
                     if oneBarrier != self.golfBarrier:
@@ -193,11 +198,14 @@ class GolfHoleBase:
                 if dist < radius:
                     if not smallestDist or smallestDist[1] > dist:
                         smallestDist = [radius, dist]
-                        self.notify.debug('Ball Pos %s\nMover Pos %s' % (ball.getPosition(), mover.getPosition()))
+                        self.notify.debug(
+                            'Ball Pos %s\nMover Pos %s' %
+                            (ball.getPosition(), mover.getPosition()))
 
         return smallestDist
 
-    def trackRecordBodyFlight(self, ball, cycleTime, power, startPos, dirX, dirY):
+    def trackRecordBodyFlight(self, ball, cycleTime,
+                              power, startPos, dirX, dirY):
         self.notify.debug('trackRecordBodyFlight')
         self.ballInHoleFrame = 0
         self.ballTouchedHoleFrame = 0
@@ -212,7 +220,10 @@ class GolfHoleBase:
         startFrame = int(startTime * self.FPS)
         for frame in range(startFrame):
             self.simulate()
-            self.setTimeIntoCycle(self.swingTime + float(frameCount) * self.DTAStep)
+            self.setTimeIntoCycle(
+                self.swingTime +
+                float(frameCount) *
+                self.DTAStep)
             frameCount += 1
 
         forceMove = 1500
@@ -227,7 +238,17 @@ class GolfHoleBase:
         self.simulate()
         self.postStep()
         ball.enable()
-        ball.addForce(Vec3(dirX * forceMove * power / 100.0, dirY * forceMove * power / 100.0, lift))
+        ball.addForce(
+            Vec3(
+                dirX *
+                forceMove *
+                power /
+                100.0,
+                dirY *
+                forceMove *
+                power /
+                100.0,
+                lift))
         self.initRecord()
         self.llv = None
         self.lastSkyContactPoint = None
@@ -240,15 +261,20 @@ class GolfHoleBase:
         lastFrameEnabled = 0
         checkFrames = self.FPS * (self.timingCycleLength + 1.0)
         hasPrinted = 0
-        while ball.isEnabled() and len(self.recording) < 2100 or self.comObjNeedPass or len(self.recording) < 10:
+        while ball.isEnabled() and len(
+                self.recording) < 2100 or self.comObjNeedPass or len(self.recording) < 10:
             ran = 1
             if len(self.recording) > 2100 and not hasPrinted:
-                self.notify.debug('recording too long %s' % len(self.recording))
+                self.notify.debug('recording too long %s' %
+                                  len(self.recording))
                 hasPrinted = 1
                 ball.disable()
             self.preStep()
             self.simulate()
-            self.setTimeIntoCycle(self.swingTime + float(frameCount) * self.DTAStep)
+            self.setTimeIntoCycle(
+                self.swingTime +
+                float(frameCount) *
+                self.DTAStep)
             frameCount += 1
             self.postStep()
             self.record(ball)
@@ -257,11 +283,13 @@ class GolfHoleBase:
                     firstDisabled = self.frame
                     self.notify.debug('firstDisabled %s' % firstDisabled)
                     check = self.checkInRadius(ball)
-                    if check == None:
+                    if check is None:
                         self.comObjNeedPass = 0
                         self.notify.debug('out radius')
                     else:
-                        self.notify.debug('in radius %s dist %s' % (check[0], check[1]))
+                        self.notify.debug(
+                            'in radius %s dist %s' %
+                            (check[0], check[1]))
                 elif ball.isEnabled() and firstDisabled != -1 and not reEnabled:
                     reEnabled = self.frame
                     self.notify.debug('reEnabled %s' % reEnabled)
@@ -287,9 +315,9 @@ class GolfHoleBase:
         self.processRecording()
         self.processAVRecording()
         self.notify.debug('Recording End time %s cycle %s len %s avLen %s' % (self.timingSimTime,
-         self.getCycleTime(),
-         len(self.recording),
-         len(self.aVRecording)))
+                                                                              self.getCycleTime(),
+                                                                              len(self.recording),
+                                                                              len(self.aVRecording)))
         length = len(self.recording) - 1
         x = self.recording[length][1]
         y = self.recording[length][2]
@@ -299,22 +327,22 @@ class GolfHoleBase:
         self.doingRecording = 0
         fpsTime = self.frame / diffTime
         self.notify.debug('Time Start %s Mid %s End %s Diff %s Fps %s frames %s' % (startTime,
-         midTime,
-         endTime,
-         diffTime,
-         fpsTime,
-         self.frame))
+                                                                                    midTime,
+                                                                                    endTime,
+                                                                                    diffTime,
+                                                                                    fpsTime,
+                                                                                    self.frame))
         return Vec3(x, y, z)
 
     def record(self, ball):
         self.recording.append((self.frame,
-         ball.getPosition()[0],
-         ball.getPosition()[1],
-         ball.getPosition()[2]))
+                               ball.getPosition()[0],
+                               ball.getPosition()[1],
+                               ball.getPosition()[2]))
         self.aVRecording.append((self.frame,
-         ball.getAngularVel()[0],
-         ball.getAngularVel()[1],
-         ball.getAngularVel()[2]))
+                                 ball.getAngularVel()[0],
+                                 ball.getAngularVel()[1],
+                                 ball.getAngularVel()[2]))
         if self.frame > 50 and not self.frame % 13:
             curFrame = self.recording[self.frame]
             pastFrame5 = self.recording[self.frame - 11]
@@ -324,7 +352,8 @@ class GolfHoleBase:
             past10PosA = Vec3(pastFrame10[1], pastFrame10[2], pastFrame10[3])
             displacement1 = currPosA - past5PosA
             displacement2 = currPosA - past10PosA
-            if displacement1.lengthSquared() < 0.002 and displacement2.lengthSquared() < 0.002 and not self.grayCount and not self.onSlick:
+            if displacement1.lengthSquared() < 0.002 and displacement2.lengthSquared(
+            ) < 0.002 and not self.grayCount and not self.onSlick:
                 ball.disable()
         self.frame += 1
 
@@ -358,7 +387,8 @@ class GolfHoleBase:
                 rayCount += 1
                 if self.canRender:
                     if self.currentGolfer:
-                        self.ballShadowDict[self.currentGolfer].setPos(x, y, z + 0.1)
+                        self.ballShadowDict[self.currentGolfer].setPos(
+                            x, y, z + 0.1)
                 if c1 == GolfGlobals.GRASS_COLLIDE_ID or c1 == GolfGlobals.HARD_COLLIDE_ID:
                     if self.curGolfBall().getPosition()[2] < z + 0.2:
                         ballRayHitPos = Vec3(x, y, z)
@@ -368,7 +398,8 @@ class GolfHoleBase:
                 self.onSlick = 1
             if c0 == GolfGlobals.GRASS_COLLIDE_ID and c1 == GolfGlobals.SKY_RAY_COLLIDE_ID:
                 self.lastSkyContactPoint = (x, y, z)
-                if self.curGolfBall().getPosition()[2] < z + 0.2 and rayCount == 0:
+                if self.curGolfBall().getPosition()[
+                        2] < z + 0.2 and rayCount == 0:
                     if self.skyContact in [1, 2]:
                         skyRayHitPos = Vec3(x, y, z)
                         self.skyContact += 1
@@ -386,12 +417,15 @@ class GolfHoleBase:
                             self.ballInHoleFrame = self.frame
                     if self.ballFirstTouchedHoleFrame < self.ballLastTouchedGrass:
                         self.ballFirstTouchedHoleFrame = self.frame
-                    if self.isBallInHole(self.curGolfBall()) and self.didHoleBreak == 0:
+                    if self.isBallInHole(
+                            self.curGolfBall()) and self.didHoleBreak == 0:
                         self.comObjNeedPass = 0
                         ballLV = self.curGolfBall().getLinearVel()
                         ballAV = self.curGolfBall().getAngularVel()
-                        self.curGolfBall().setLinearVel(0.5 * ballLV[0], 0.5 * ballLV[1], 0.5 * ballLV[2])
-                        self.curGolfBall().setAngularVel(0.5 * ballAV[0], 0.5 * ballAV[1], 0.5 * ballAV[2])
+                        self.curGolfBall().setLinearVel(
+                            0.5 * ballLV[0], 0.5 * ballLV[1], 0.5 * ballLV[2])
+                        self.curGolfBall().setAngularVel(
+                            0.5 * ballAV[0], 0.5 * ballAV[1], 0.5 * ballAV[2])
                         self.notify.debug('BALL IN THE HOLE!!! FOO!')
                         self.didHoleBreak = 1
                         return
@@ -403,10 +437,12 @@ class GolfHoleBase:
             elif self.canRender:
                 if c0 == GolfGlobals.TOON_RAY_COLLIDE_ID or c1 == GolfGlobals.TOON_RAY_COLLIDE_ID:
                     self.toonRayCollisionCallback(x, y, z)
-                if GolfGlobals.CAMERA_RAY_COLLIDE_ID in [c0, c1] and GolfGlobals.WINDMILL_BASE_COLLIDE_ID in [c0, c1]:
+                if GolfGlobals.CAMERA_RAY_COLLIDE_ID in [
+                        c0, c1] and GolfGlobals.WINDMILL_BASE_COLLIDE_ID in [c0, c1]:
                     self.translucentCurFrame.append(self.windmillFanNodePath)
                     self.translucentCurFrame.append(self.windmillBaseNodePath)
-                if GolfGlobals.BALL_COLLIDE_ID in [c0, c1] and GolfGlobals.GRASS_COLLIDE_ID not in [c0, c1]:
+                if GolfGlobals.BALL_COLLIDE_ID in [
+                        c0, c1] and GolfGlobals.GRASS_COLLIDE_ID not in [c0, c1]:
                     self.handleBallHitNonGrass(c0, c1)
 
         if not self.curGolfBall().isEnabled():
@@ -417,7 +453,8 @@ class GolfHoleBase:
             self.outCommon = self.getCommonObjectData()
             self.inCount = 0
             if skyRayHitPos:
-                self.curGolfBall().setPosition(skyRayHitPos[0], skyRayHitPos[1], skyRayHitPos[2] + 0.27)
+                self.curGolfBall().setPosition(
+                    skyRayHitPos[0], skyRayHitPos[1], skyRayHitPos[2] + 0.27)
                 self.notify.debug('SKY RAY ADJUST?')
         else:
             if self.grayCount > 1:
@@ -425,7 +462,8 @@ class GolfHoleBase:
             self.grayCount = 0
             self.inCount += 1
             if ballRayHitPos:
-                self.curGolfBall().setPosition(ballRayHitPos[0], ballRayHitPos[1], ballRayHitPos[2] + 0.245)
+                self.curGolfBall().setPosition(
+                    ballRayHitPos[0], ballRayHitPos[1], ballRayHitPos[2] + 0.245)
                 ballRayHitPos = None
                 if self.doingRecording:
                     self.notify.debug('BALL RAY ADJUST!')
@@ -433,7 +471,8 @@ class GolfHoleBase:
         if self.ballRocket > 0 and self.inCount > 1:
             self.ballRocket -= 1
             rocketVel = self.curGolfBall().getLinearVel()
-            self.curGolfBall().setLinearVel(2.0 * rocketVel[0], 2.0 * rocketVel[1], 2.0 * rocketVel[2])
+            self.curGolfBall().setLinearVel(
+                2.0 * rocketVel[0], 2.0 * rocketVel[1], 2.0 * rocketVel[2])
             self.notify.debug('ROCKET!!!!')
         if self.grayCount > self.backAmount and self.doingRecording:
             if self.greenIn > 2:
@@ -443,18 +482,25 @@ class GolfHoleBase:
             if self.greenIn < 0 or self.hasReset > 3:
                 self.greenIn = 0
             self.hasReset += 1
-            self.notify.debug('BALL RESET frame %s greenIn %s resetAt %s' % (self.frame, self.greenIn, self.resetAt))
+            self.notify.debug(
+                'BALL RESET frame %s greenIn %s resetAt %s' %
+                (self.frame, self.greenIn, self.resetAt))
             self.useCommonObjectData(self.outCommon)
-            self.curGolfBall().setPosition(self.recording[self.greenIn][1], self.recording[self.greenIn][2], self.recording[self.greenIn][3] + 0.27)
+            self.curGolfBall().setPosition(
+                self.recording[self.greenIn][1], self.recording[self.greenIn][2], self.recording[self.greenIn][3] + 0.27)
             self.curGolfBall().setAngularVel(0, 0, 0)
             if self.hasReset < 3 and self.llv:
                 self.ballRocket += 1
                 self.notify.debug(' BRAKE!!!!')
-                self.curGolfBall().setLinearVel(0.5 * self.llv[0], 0.5 * self.llv[1], 0.5 * self.llv[2])
+                self.curGolfBall().setLinearVel(
+                    0.5 * self.llv[0], 0.5 * self.llv[1], 0.5 * self.llv[2])
             else:
                 self.notify.debug('back disable %s' % self.frame)
                 if self.lastSkyContactPoint:
-                    self.curGolfBall().setPosition(self.lastSkyContactPoint[0], self.lastSkyContactPoint[1], self.lastSkyContactPoint[2] + 0.27)
+                    self.curGolfBall().setPosition(
+                        self.lastSkyContactPoint[0],
+                        self.lastSkyContactPoint[1],
+                        self.lastSkyContactPoint[2] + 0.27)
                 self.curGolfBall().setLinearVel(0, 0, 0)
                 self.curGolfBall().disable()
             self.recording = self.recording[:self.greenIn]
@@ -463,13 +509,15 @@ class GolfHoleBase:
             self.resetAt = self.greenIn
             self.grayCount = 0
             if self.ballFirstTouchedHoleFrame > self.frame:
-                self.notify.debug('reseting first touched hole, self.frame=%d self.ballFirstTouchedHoleFrame=%d' % (self.frame, self.ballFirstTouchedHoleFrame))
+                self.notify.debug(
+                    'reseting first touched hole, self.frame=%d self.ballFirstTouchedHoleFrame=%d' %
+                    (self.frame, self.ballFirstTouchedHoleFrame))
                 self.ballFirstTouchedHoleFrame = 0
             if self.ballLastTouchedGrass > self.frame:
                 self.ballLastTouchedGrass = 0
         return
 
-    def processRecording(self, errorMult = 1.0):
+    def processRecording(self, errorMult=1.0):
         self.notify.debug('processRecording')
         lastFrame = self.recording[len(self.recording) - 1][0]
         countRemovals = 0
@@ -492,7 +540,7 @@ class GolfHoleBase:
             for frame in self.recording:
                 pass
 
-    def processAVRecording(self, errorMult = 1.0, trials = 0):
+    def processAVRecording(self, errorMult=1.0, trials=0):
         self.notify.debug('processAVRecording')
         lastFrame = self.recording[len(self.recording) - 1][0]
         countRemovals = 0
@@ -518,7 +566,7 @@ class GolfHoleBase:
             for frame in self.aVRecording:
                 pass
 
-    def predict(self, frame, sourceFrame, destFrame, errorMult = 1.0):
+    def predict(self, frame, sourceFrame, destFrame, errorMult=1.0):
         tXY = 0.05 * errorMult
         tZ = 0.05 * errorMult
         projLength = destFrame[0] - sourceFrame[0]
@@ -536,7 +584,7 @@ class GolfHoleBase:
         else:
             return 1
 
-    def predictAV(self, frame, sourceFrame, destFrame, errorMult = 1.0):
+    def predictAV(self, frame, sourceFrame, destFrame, errorMult=1.0):
         tXYZ = 1.5 * errorMult
         projLength = destFrame[0] - sourceFrame[0]
         projPen = destFrame[0] - frame[0]

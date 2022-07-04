@@ -8,6 +8,7 @@ from toontown.toonbase import ToontownGlobals
 ChangeDirectionDebounce = 1.0
 ChangeDirectionTime = 1.0
 
+
 class DistributedMMPiano(DistributedObject.DistributedObject):
 
     def __init__(self, cr):
@@ -26,12 +27,19 @@ class DistributedMMPiano(DistributedObject.DistributedObject):
 
     def generate(self):
         self.piano = base.cr.playGame.hood.loader.piano
-        base.cr.parentMgr.registerParent(ToontownGlobals.SPMinniesPiano, self.piano)
-        self.accept('enterlarge_round_keyboard_collisions', self.__handleOnFloor)
-        self.accept('exitlarge_round_keyboard_collisions', self.__handleOffFloor)
+        base.cr.parentMgr.registerParent(
+            ToontownGlobals.SPMinniesPiano, self.piano)
+        self.accept(
+            'enterlarge_round_keyboard_collisions',
+            self.__handleOnFloor)
+        self.accept(
+            'exitlarge_round_keyboard_collisions',
+            self.__handleOffFloor)
         self.accept('entero7', self.__handleChangeDirectionButton)
-        self.speedUpSound = base.loader.loadSfx('phase_6/audio/sfx/SZ_MM_gliss.ogg')
-        self.changeDirectionSound = base.loader.loadSfx('phase_6/audio/sfx/SZ_MM_cymbal.ogg')
+        self.speedUpSound = base.loader.loadSfx(
+            'phase_6/audio/sfx/SZ_MM_gliss.ogg')
+        self.changeDirectionSound = base.loader.loadSfx(
+            'phase_6/audio/sfx/SZ_MM_cymbal.ogg')
         self.__setupSpin()
         DistributedObject.DistributedObject.generate(self)
 
@@ -71,7 +79,8 @@ class DistributedMMPiano(DistributedObject.DistributedObject):
         timestamp = globalClockDelta.networkToLocalTime(timestamp)
         degreesPerSecond = rpm / 60.0 * 360.0
         now = globalClock.getFrameTime()
-        oldHeading = self.degreesPerSecond * (now - self.spinStartTime) + self.offset
+        oldHeading = self.degreesPerSecond * \
+            (now - self.spinStartTime) + self.offset
         oldHeading = oldHeading % 360.0
         oldOffset = oldHeading - degreesPerSecond * (now - timestamp)
         self.rpm = rpm

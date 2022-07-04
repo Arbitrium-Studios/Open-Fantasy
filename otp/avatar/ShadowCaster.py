@@ -5,6 +5,7 @@ from direct.showbase.ShadowPlacer import ShadowPlacer
 from otp.otpbase import OTPGlobals
 globalDropShadowFlag = 1
 
+
 def setGlobalDropShadowFlag(flag):
     global globalDropShadowFlag
     if flag != globalDropShadowFlag:
@@ -13,6 +14,7 @@ def setGlobalDropShadowFlag(flag):
 
 
 globalDropShadowGrayLevel = 0.5
+
 
 def setGlobalDropShadowGrayLevel(grayLevel):
     global globalDropShadowGrayLevel
@@ -24,7 +26,7 @@ def setGlobalDropShadowGrayLevel(grayLevel):
 class ShadowCaster:
     notify = DirectNotifyGlobal.directNotify.newCategory('ShadowCaster')
 
-    def __init__(self, squareShadow = False):
+    def __init__(self, squareShadow=False):
         if squareShadow:
             self.shadowFileName = 'phase_3/models/props/square_drop_shadow'
         else:
@@ -35,8 +37,14 @@ class ShadowCaster:
         self.wantsActive = 1
         self.storedActiveState = 0
         if hasattr(base, 'wantDynamicShadows') and base.wantDynamicShadows:
-            messenger.accept('globalDropShadowFlagChanged', self, self.__globalDropShadowFlagChanged)
-            messenger.accept('globalDropShadowGrayLevelChanged', self, self.__globalDropShadowGrayLevelChanged)
+            messenger.accept(
+                'globalDropShadowFlagChanged',
+                self,
+                self.__globalDropShadowFlagChanged)
+            messenger.accept(
+                'globalDropShadowGrayLevelChanged',
+                self,
+                self.__globalDropShadowGrayLevelChanged)
         return
 
     def delete(self):
@@ -47,7 +55,7 @@ class ShadowCaster:
         self.shadowJoint = None
         return
 
-    def initializeDropShadow(self, hasGeomNode = True):
+    def initializeDropShadow(self, hasGeomNode=True):
         self.deleteDropShadow()
         if hasGeomNode:
             self.getGeomNode().setTag('cam', 'caster')
@@ -56,7 +64,11 @@ class ShadowCaster:
         dropShadow.flattenMedium()
         dropShadow.setBillboardAxis(2)
         dropShadow.setColor(0.0, 0.0, 0.0, globalDropShadowGrayLevel, 1)
-        self.shadowPlacer = ShadowPlacer(base.shadowTrav, dropShadow, OTPGlobals.WallBitmask, OTPGlobals.FloorBitmask)
+        self.shadowPlacer = ShadowPlacer(
+            base.shadowTrav,
+            dropShadow,
+            OTPGlobals.WallBitmask,
+            OTPGlobals.FloorBitmask)
         self.dropShadow = dropShadow
         if not globalDropShadowFlag:
             self.dropShadow.hide()
@@ -80,11 +92,11 @@ class ShadowCaster:
             self.dropShadow = None
         return
 
-    def setActiveShadow(self, isActive = 1):
+    def setActiveShadow(self, isActive=1):
         isActive = isActive and self.wantsActive
         if not globalDropShadowFlag:
             self.storedActiveState = isActive
-        if self.shadowPlacer != None:
+        if self.shadowPlacer is not None:
             isActive = isActive and globalDropShadowFlag
             if self.activeShadow != isActive:
                 self.activeShadow = isActive
@@ -118,7 +130,7 @@ class ShadowCaster:
             self.dropShadow.show()
 
     def __globalDropShadowFlagChanged(self):
-        if self.dropShadow != None:
+        if self.dropShadow is not None:
             if globalDropShadowFlag == 0:
                 if self.activeShadow == 1:
                     self.storedActiveState = 1
@@ -129,6 +141,7 @@ class ShadowCaster:
         return
 
     def __globalDropShadowGrayLevelChanged(self):
-        if self.dropShadow != None:
-            self.dropShadow.setColor(0.0, 0.0, 0.0, globalDropShadowGrayLevel, 1)
+        if self.dropShadow is not None:
+            self.dropShadow.setColor(
+                0.0, 0.0, 0.0, globalDropShadowGrayLevel, 1)
         return

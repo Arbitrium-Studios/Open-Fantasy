@@ -5,17 +5,18 @@ from direct.fsm import ClassicFSM, State
 from direct.distributed import DistributedObjectAI
 from direct.fsm import State
 
+
 class DistributedAnimatedPropAI(DistributedObjectAI.DistributedObjectAI):
 
     def __init__(self, air, propId):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
         self.fsm = ClassicFSM.ClassicFSM('DistributedAnimatedPropAI', [
-         State.State('off', self.enterOff, self.exitOff, [
-          'playing']),
-         State.State('attract', self.enterAttract, self.exitAttract, [
-          'playing']),
-         State.State('playing', self.enterPlaying, self.exitPlaying, [
-          'attract'])], 'off', 'off')
+            State.State('off', self.enterOff, self.exitOff, [
+                'playing']),
+            State.State('attract', self.enterAttract, self.exitAttract, [
+                'playing']),
+            State.State('playing', self.enterPlaying, self.exitPlaying, [
+                'attract'])], 'off', 'off')
         self.fsm.enterInitialState()
         self.propId = propId
         self.avatarId = 0
@@ -33,7 +34,7 @@ class DistributedAnimatedPropAI(DistributedObjectAI.DistributedObjectAI):
 
     def getInitialState(self):
         return [
-         self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
+            self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
 
     def getOwnerDoId(self):
         return self.ownerDoId
@@ -58,10 +59,12 @@ class DistributedAnimatedPropAI(DistributedObjectAI.DistributedObjectAI):
 
     def getState(self):
         return [
-         self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
+            self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
 
     def d_setState(self, state):
-        self.sendUpdate('setState', [state, globalClockDelta.getRealNetworkTime()])
+        self.sendUpdate(
+            'setState', [
+                state, globalClockDelta.getRealNetworkTime()])
 
     def enterOff(self):
         pass

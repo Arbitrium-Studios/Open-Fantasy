@@ -6,19 +6,26 @@ import random
 from . import PatternGameGlobals
 import copy
 
+
 class DistributedPatternGameAI(DistributedMinigameAI):
 
     def __init__(self, air, minigameId):
         try:
             self.DistributedPatternGameAI_initialized
-        except:
+        except BaseException:
             self.DistributedPatternGameAI_initialized = 1
             DistributedMinigameAI.__init__(self, air, minigameId)
             self.gameFSM = ClassicFSM.ClassicFSM('DistributedPatternGameAI', [State.State('off', self.enterInactive, self.exitInactive, ['waitClientsReady', 'cleanup']),
-             State.State('waitClientsReady', self.enterWaitClientsReady, self.exitWaitClientsReady, ['generatePattern', 'cleanup']),
-             State.State('generatePattern', self.enterGeneratePattern, self.exitGeneratePattern, ['waitForResults', 'cleanup']),
-             State.State('waitForResults', self.enterWaitForResults, self.exitWaitForResults, ['waitClientsReady', 'cleanup']),
-             State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
+                                                                              State.State(
+                'waitClientsReady', self.enterWaitClientsReady, self.exitWaitClientsReady, [
+                    'generatePattern', 'cleanup']),
+                State.State(
+                'generatePattern', self.enterGeneratePattern, self.exitGeneratePattern, [
+                    'waitForResults', 'cleanup']),
+                State.State(
+                'waitForResults', self.enterWaitForResults, self.exitWaitForResults, [
+                    'waitClientsReady', 'cleanup']),
+                State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
             self.addChildGameFSM(self.gameFSM)
 
     def delete(self):
@@ -65,7 +72,13 @@ class DistributedPatternGameAI(DistributedMinigameAI):
 
     def enterWaitClientsReady(self):
         self.notify.debug('enterWaitClientsReady')
-        self.nextRoundBarrier = ToonBarrier('nextRoundReady', self.uniqueName('nextRoundReady'), self.avIdList, PatternGameGlobals.ClientsReadyTimeout, self.__allPlayersReady, self.__clientsReadyTimeout)
+        self.nextRoundBarrier = ToonBarrier(
+            'nextRoundReady',
+            self.uniqueName('nextRoundReady'),
+            self.avIdList,
+            PatternGameGlobals.ClientsReadyTimeout,
+            self.__allPlayersReady,
+            self.__clientsReadyTimeout)
         for avId in self.readyClients:
             self.nextRoundBarrier.clear(avId)
 
@@ -74,7 +87,9 @@ class DistributedPatternGameAI(DistributedMinigameAI):
             return
         avId = self.air.getAvatarIdFromSender()
         if avId not in self.avIdList:
-            self.notify.warning('Got reportPlayerReady from an avId: %s not in our list: %s' % (avId, self.avIdList))
+            self.notify.warning(
+                'Got reportPlayerReady from an avId: %s not in our list: %s' %
+                (avId, self.avIdList))
         else:
             self.readyClients.append(avId)
             self.nextRoundBarrier.clear(avId)
@@ -84,7 +99,9 @@ class DistributedPatternGameAI(DistributedMinigameAI):
         self.gameFSM.request('generatePattern')
 
     def __clientsReadyTimeout(self, avIds):
-        self.notify.debug('__clientsReadyTimeout: clients %s have not responded' % avIds)
+        self.notify.debug(
+            '__clientsReadyTimeout: clients %s have not responded' %
+            avIds)
         self.setGameAbort()
 
     def exitWaitClientsReady(self):
@@ -94,7 +111,8 @@ class DistributedPatternGameAI(DistributedMinigameAI):
     def enterGeneratePattern(self):
         self.notify.debug('enterGeneratePattern')
         self.round += 1
-        targetLen = PatternGameGlobals.INITIAL_ROUND_LENGTH + PatternGameGlobals.ROUND_LENGTH_INCREMENT * (self.round - 1)
+        targetLen = PatternGameGlobals.INITIAL_ROUND_LENGTH + \
+            PatternGameGlobals.ROUND_LENGTH_INCREMENT * (self.round - 1)
         count = targetLen - len(self.pattern)
         for i in range(0, count):
             self.pattern.append(random.randint(0, 3))
@@ -110,7 +128,15 @@ class DistributedPatternGameAI(DistributedMinigameAI):
         self.results = [None] * self.numPlayers
         self.fastestTime = PatternGameGlobals.InputTime * 2
         self.fastestAvId = 0
-        self.resultsBarrier = ToonBarrier('results', self.uniqueName('results'), self.avIdList, PatternGameGlobals.InputTimeout + 1.0 * self.round, self.__gotAllPatterns, self.__resultsTimeout)
+        self.resultsBarrier = ToonBarrier(
+            'results',
+            self.uniqueName('results'),
+            self.avIdList,
+            PatternGameGlobals.InputTimeout +
+            1.0 *
+            self.round,
+            self.__gotAllPatterns,
+            self.__resultsTimeout)
         return
 
     def reportButtonPress(self, index, wrong):
@@ -118,13 +144,16 @@ class DistributedPatternGameAI(DistributedMinigameAI):
             return
         avId = self.air.getAvatarIdFromSender()
         if avId not in self.avIdList:
-            self.air.writeServerEvent('suspicious', avId, 'PatternGameAI.reportButtonPress avId not on list')
+            self.air.writeServerEvent(
+                'suspicious', avId, 'PatternGameAI.reportButtonPress avId not on list')
             return
         if index < 0 or index > 3:
-            self.air.writeServerEvent('warning', index, 'PatternGameAI.reportButtonPress got bad index')
+            self.air.writeServerEvent(
+                'warning', index, 'PatternGameAI.reportButtonPress got bad index')
             return
         if wrong not in [0, 1]:
-            self.air.writeServerEvent('warning', wrong, "PatternGameAI.reportButtonPress got bad 'wrong'")
+            self.air.writeServerEvent(
+                'warning', wrong, "PatternGameAI.reportButtonPress got bad 'wrong'")
             return
         self.sendUpdate('remoteButtonPressed', [avId, index, wrong])
 
@@ -132,7 +161,8 @@ class DistributedPatternGameAI(DistributedMinigameAI):
         self.notify.debug('__resultsTimeout: %s' % avIds)
         for avId in avIds:
             index = self.avIdList.index(avId)
-            self.__acceptPlayerPattern(avId, [], PatternGameGlobals.InputTime * 2)
+            self.__acceptPlayerPattern(
+                avId, [], PatternGameGlobals.InputTime * 2)
 
         self.__gotAllPatterns()
 
@@ -145,7 +175,7 @@ class DistributedPatternGameAI(DistributedMinigameAI):
 
     def __acceptPlayerPattern(self, avId, pattern, totalTime):
         index = self.avIdList.index(avId)
-        if self.results[index] != None:
+        if self.results[index] is not None:
             return
         self.results[index] = pattern
         if totalTime < self.fastestTime and pattern == self.pattern:

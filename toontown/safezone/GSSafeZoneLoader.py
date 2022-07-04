@@ -12,6 +12,7 @@ import random
 if (__debug__):
     import pdb
 
+
 class GSSafeZoneLoader(SafeZoneLoader):
 
     def __init__(self, hood, parentFSM, doneEvent):
@@ -22,11 +23,20 @@ class GSSafeZoneLoader(SafeZoneLoader):
         self.safeZoneStorageDNAFile = 'phase_6/dna/storage_GS_sz.dna'
         del self.fsm
         self.fsm = ClassicFSM.ClassicFSM('SafeZoneLoader', [State.State('start', self.enterStart, self.exitStart, ['quietZone', 'playground', 'toonInterior']),
-         State.State('playground', self.enterPlayground, self.exitPlayground, ['quietZone', 'racetrack']),
-         State.State('toonInterior', self.enterToonInterior, self.exitToonInterior, ['quietZone']),
-         State.State('quietZone', self.enterQuietZone, self.exitQuietZone, ['playground', 'toonInterior', 'racetrack']),
-         State.State('racetrack', self.enterRacetrack, self.exitRacetrack, ['quietZone', 'playground']),
-         State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
+                                                            State.State(
+            'playground', self.enterPlayground, self.exitPlayground, [
+                'quietZone', 'racetrack']),
+            State.State(
+            'toonInterior',
+            self.enterToonInterior,
+            self.exitToonInterior,
+            ['quietZone']),
+            State.State('quietZone', self.enterQuietZone, self.exitQuietZone, [
+                'playground', 'toonInterior', 'racetrack']),
+            State.State(
+            'racetrack', self.enterRacetrack, self.exitRacetrack, [
+                'quietZone', 'playground']),
+            State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
         self.smoke = None
         return
 
@@ -36,11 +46,14 @@ class GSSafeZoneLoader(SafeZoneLoader):
             holidayIds = base.cr.newsManager.getDecorationHolidayId()
             if ToontownGlobals.CRASHED_LEADERBOARD in holidayIds:
                 self.startSmokeEffect()
-        self.birdSound = list(map(base.loader.loadSfx, ['phase_4/audio/sfx/SZ_TC_bird1.ogg', 'phase_4/audio/sfx/SZ_TC_bird2.ogg', 'phase_4/audio/sfx/SZ_TC_bird3.ogg']))
+        self.birdSound = list(map(base.loader.loadSfx,
+                                  ['phase_4/audio/sfx/SZ_TC_bird1.ogg',
+                                   'phase_4/audio/sfx/SZ_TC_bird2.ogg',
+                                   'phase_4/audio/sfx/SZ_TC_bird3.ogg']))
 
     def unload(self):
         del self.birdSound
-        if self.smoke != None:
+        if self.smoke is not None:
             self.stopSmokeEffect()
         SafeZoneLoader.unload(self)
         return
@@ -58,10 +71,10 @@ class GSSafeZoneLoader(SafeZoneLoader):
 
     def handlePlaygroundDone(self):
         status = self.place.doneStatus
-        if self.enteringARace(status) and status.get('shardId') == None:
+        if self.enteringARace(status) and status.get('shardId') is None:
             zoneId = status['zoneId']
             self.fsm.request('quietZone', [status])
-        elif ZoneUtil.getBranchZone(status['zoneId']) == self.hood.hoodId and status['shardId'] == None:
+        elif ZoneUtil.getBranchZone(status['zoneId']) == self.hood.hoodId and status['shardId'] is None:
             self.fsm.request('quietZone', [status])
         else:
             self.doneStatus = status
@@ -90,11 +103,11 @@ class GSSafeZoneLoader(SafeZoneLoader):
 
     def handleLeftRace(self):
         req = {'loader': 'safeZoneLoader',
-         'where': 'playground',
-         'how': 'teleportIn',
-         'zoneId': 8000,
-         'hoodId': 8000,
-         'shardId': None}
+               'where': 'playground',
+               'how': 'teleportIn',
+               'zoneId': 8000,
+               'hoodId': 8000,
+               'shardId': None}
         self.fsm.request('quietZone', [req])
         return
 
@@ -102,14 +115,14 @@ class GSSafeZoneLoader(SafeZoneLoader):
         if base.config.GetBool('want-crashedLeaderBoard-Smoke', 1):
             leaderBoard = self.geom.find('**/*crashed*')
             locator = leaderBoard.find('**/*locator_smoke*')
-            if locator != None:
+            if locator is not None:
                 self.smoke = CarSmoke(locator)
                 self.smoke.start()
         return
 
     def stopSmokeEffect(self):
         if base.config.GetBool('want-crashedLeaderBoard-Smoke', 1):
-            if self.smoke != None:
+            if self.smoke is not None:
                 self.smoke.stop()
                 self.smoke.destroy()
                 self.smoke = None

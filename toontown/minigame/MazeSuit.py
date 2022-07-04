@@ -10,6 +10,7 @@ from toontown.toonbase import ToontownGlobals
 from . import MazeGameGlobals
 import functools
 
+
 class MazeSuit(DirectObject):
     COLL_SPHERE_NAME = 'MazeSuitSphere'
     COLLISION_EVENT_NAME = 'MazeSuitCollision'
@@ -19,17 +20,18 @@ class MazeSuit(DirectObject):
     DIR_LEFT = 2
     DIR_RIGHT = 3
     oppositeDirections = [DIR_DOWN,
-     DIR_UP,
-     DIR_RIGHT,
-     DIR_LEFT]
+                          DIR_UP,
+                          DIR_RIGHT,
+                          DIR_LEFT]
     directionHs = [0,
-     180,
-     90,
-     270]
+                   180,
+                   90,
+                   270]
     DEFAULT_SPEED = 4.0
     SUIT_Z = 0.1
 
-    def __init__(self, serialNum, maze, randomNumGen, cellWalkPeriod, difficulty, suitDnaName = 'f', startTile = None, ticFreq = MazeGameGlobals.SUIT_TIC_FREQ, walkSameDirectionProb = MazeGameGlobals.WALK_SAME_DIRECTION_PROB, walkTurnAroundProb = MazeGameGlobals.WALK_TURN_AROUND_PROB, uniqueRandomNumGen = True, walkAnimName = None):
+    def __init__(self, serialNum, maze, randomNumGen, cellWalkPeriod, difficulty, suitDnaName='f', startTile=None, ticFreq=MazeGameGlobals.SUIT_TIC_FREQ,
+                 walkSameDirectionProb=MazeGameGlobals.WALK_SAME_DIRECTION_PROB, walkTurnAroundProb=MazeGameGlobals.WALK_TURN_AROUND_PROB, uniqueRandomNumGen=True, walkAnimName=None):
         self.serialNum = serialNum
         self.maze = maze
         if uniqueRandomNumGen:
@@ -46,7 +48,11 @@ class MazeSuit(DirectObject):
         self.suit.setDNA(d)
         if startTile is None:
             defaultStartPos = MazeGameGlobals.SUIT_START_POSITIONS[self.serialNum]
-            self.startTile = (defaultStartPos[0] * self.maze.width, defaultStartPos[1] * self.maze.height)
+            self.startTile = (
+                defaultStartPos[0] *
+                self.maze.width,
+                defaultStartPos[1] *
+                self.maze.height)
         else:
             self.startTile = startTile
         self.ticFreq = ticFreq
@@ -88,7 +94,11 @@ class MazeSuit(DirectObject):
         self.collNode.addSolid(self.collSphere)
         self.collNodePath = self.suit.attachNewNode(self.collNode)
         self.collNodePath.hide()
-        self.accept(self.uniqueName('enter' + self.COLL_SPHERE_NAME), self.handleEnterSphere)
+        self.accept(
+            self.uniqueName(
+                'enter' +
+                self.COLL_SPHERE_NAME),
+            self.handleEnterSphere)
 
     def shutdownCollisions(self):
         self.ignore(self.uniqueName('enter' + self.COLL_SPHERE_NAME))
@@ -161,19 +171,21 @@ class MazeSuit(DirectObject):
 
     def __chooseNewWalkDirection(self, unwalkables):
         if not self.rng.randrange(self._walkSameDirectionProb):
-            newTX, newTY = self.__applyDirection(self.direction, self.TX, self.TY)
+            newTX, newTY = self.__applyDirection(
+                self.direction, self.TX, self.TY)
             if self.maze.isWalkable(newTX, newTY, unwalkables):
                 return self.direction
         if self.difficulty >= 0.5:
             if not self.rng.randrange(self._walkTurnAroundProb):
                 oppositeDir = self.oppositeDirections[self.direction]
-                newTX, newTY = self.__applyDirection(oppositeDir, self.TX, self.TY)
+                newTX, newTY = self.__applyDirection(
+                    oppositeDir, self.TX, self.TY)
                 if self.maze.isWalkable(newTX, newTY, unwalkables):
                     return oppositeDir
         candidateDirs = [self.DIR_UP,
-         self.DIR_DOWN,
-         self.DIR_LEFT,
-         self.DIR_RIGHT]
+                         self.DIR_DOWN,
+                         self.DIR_LEFT,
+                         self.DIR_RIGHT]
         candidateDirs.remove(self.oppositeDirections[self.direction])
         while len(candidateDirs):
             dir = self.rng.choice(candidateDirs)
@@ -200,14 +212,21 @@ class MazeSuit(DirectObject):
         self.TY = self.nextTY
         self.lastDirection = self.direction
         self.direction = self.__chooseNewWalkDirection(unwalkables)
-        self.nextTX, self.nextTY = self.__applyDirection(self.direction, self.TX, self.TY)
+        self.nextTX, self.nextTY = self.__applyDirection(
+            self.direction, self.TX, self.TY)
         self.occupiedTiles = [(self.TX, self.TY), (self.nextTX, self.nextTY)]
         if curTic == self.lastTicBeforeRender:
             fromCoords = self.maze.tile2world(self.TX, self.TY)
             toCoords = self.maze.tile2world(self.nextTX, self.nextTY)
             self.fromPos.set(fromCoords[0], fromCoords[1], self.SUIT_Z)
             self.toPos.set(toCoords[0], toCoords[1], self.SUIT_Z)
-            self.moveIval = LerpPosInterval(self.suit, self.cellWalkDuration, self.toPos, startPos=self.fromPos, name=self.uniqueName(self.MOVE_IVAL_NAME))
+            self.moveIval = LerpPosInterval(
+                self.suit,
+                self.cellWalkDuration,
+                self.toPos,
+                startPos=self.fromPos,
+                name=self.uniqueName(
+                    self.MOVE_IVAL_NAME))
             if self.direction != self.lastDirection:
                 self.fromH = self.directionHs[self.lastDirection]
                 toH = self.directionHs[self.direction]
@@ -217,8 +236,15 @@ class MazeSuit(DirectObject):
                     self.fromH = 360
                 self.fromHpr.set(self.fromH, 0, 0)
                 self.toHpr.set(toH, 0, 0)
-                turnIval = LerpHprInterval(self.suit, self.turnDuration, self.toHpr, startHpr=self.fromHpr, name=self.uniqueName('turnMazeSuit'))
-                self.moveIval = Parallel(self.moveIval, turnIval, name=self.uniqueName(self.MOVE_IVAL_NAME))
+                turnIval = LerpHprInterval(
+                    self.suit,
+                    self.turnDuration,
+                    self.toHpr,
+                    startHpr=self.fromHpr,
+                    name=self.uniqueName('turnMazeSuit'))
+                self.moveIval = Parallel(
+                    self.moveIval, turnIval, name=self.uniqueName(
+                        self.MOVE_IVAL_NAME))
             else:
                 self.suit.setH(self.directionHs[self.direction])
             moveStartT = float(self.nextThinkTic) / float(self.ticFreq)
@@ -226,7 +252,7 @@ class MazeSuit(DirectObject):
         self.nextThinkTic += self.ticPeriod
 
     @staticmethod
-    def thinkSuits(suitList, startTime, ticFreq = MazeGameGlobals.SUIT_TIC_FREQ):
+    def thinkSuits(suitList, startTime, ticFreq=MazeGameGlobals.SUIT_TIC_FREQ):
         curT = globalClock.getFrameTime() - startTime
         curTic = int(curT * float(ticFreq))
         suitUpdates = []

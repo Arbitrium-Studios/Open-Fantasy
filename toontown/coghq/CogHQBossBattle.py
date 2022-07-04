@@ -12,6 +12,7 @@ from toontown.battle import BattlePlace
 from toontown.suit import Suit
 import math
 
+
 class CogHQBossBattle(BattlePlace.BattlePlace):
     notify = DirectNotifyGlobal.directNotify.newCategory('CogHQBossBattle')
 
@@ -21,67 +22,89 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
         self.bossCog = None
         self.teleportInPosHpr = (0, 0, 0, 0, 0, 0)
         self.fsm = ClassicFSM.ClassicFSM('CogHQBossBattle', [State.State('start', self.enterStart, self.exitStart, ['walk',
-          'tunnelIn',
-          'teleportIn',
-          'movie']),
-         State.State('battle', self.enterBattle, self.exitBattle, ['walk', 'died', 'movie']),
-         State.State('finalBattle', self.enterFinalBattle, self.exitFinalBattle, ['walk',
-          'stickerBook',
-          'teleportOut',
-          'died',
-          'tunnelOut',
-          'DFA',
-          'battle',
-          'movie',
-          'ouch',
-          'crane',
-          'WaitForBattle',
-          'squished']),
-         State.State('movie', self.enterMovie, self.exitMovie, ['walk',
-          'battle',
-          'finalBattle',
-          'died',
-          'teleportOut']),
-         State.State('ouch', self.enterOuch, self.exitOuch, ['walk',
-          'battle',
-          'finalBattle',
-          'died',
-          'crane']),
-         State.State('crane', self.enterCrane, self.exitCrane, ['walk',
-          'battle',
-          'finalBattle',
-          'died',
-          'ouch',
-          'squished']),
-         State.State('walk', self.enterWalk, self.exitWalk, ['stickerBook',
-          'teleportOut',
-          'died',
-          'tunnelOut',
-          'DFA',
-          'battle',
-          'movie',
-          'ouch',
-          'crane',
-          'finalBattle',
-          'WaitForBattle']),
-         State.State('stickerBook', self.enterStickerBook, self.exitStickerBook, ['walk',
-          'DFA',
-          'WaitForBattle',
-          'movie',
-          'battle']),
-         State.State('WaitForBattle', self.enterWaitForBattle, self.exitWaitForBattle, ['battle', 'walk', 'movie']),
-         State.State('DFA', self.enterDFA, self.exitDFA, ['DFAReject', 'teleportOut', 'tunnelOut']),
-         State.State('DFAReject', self.enterDFAReject, self.exitDFAReject, ['walk']),
-         State.State('teleportIn', self.enterTeleportIn, self.exitTeleportIn, ['walk']),
-         State.State('teleportOut', self.enterTeleportOut, self.exitTeleportOut, ['teleportIn', 'final', 'WaitForBattle']),
-         State.State('died', self.enterDied, self.exitDied, ['final']),
-         State.State('tunnelIn', self.enterTunnelIn, self.exitTunnelIn, ['walk']),
-         State.State('tunnelOut', self.enterTunnelOut, self.exitTunnelOut, ['final']),
-         State.State('squished', self.enterSquished, self.exitSquished, ['finalBattle',
-          'crane',
-          'died',
-          'teleportOut']),
-         State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
+                                                                                                                    'tunnelIn',
+                                                                                                                    'teleportIn',
+                                                                                                                    'movie']),
+                                                             State.State(
+            'battle', self.enterBattle, self.exitBattle, [
+                'walk', 'died', 'movie']),
+            State.State('finalBattle', self.enterFinalBattle, self.exitFinalBattle, ['walk',
+                                                                                     'stickerBook',
+                                                                                     'teleportOut',
+                                                                                     'died',
+                                                                                     'tunnelOut',
+                                                                                     'DFA',
+                                                                                     'battle',
+                                                                                     'movie',
+                                                                                     'ouch',
+                                                                                     'crane',
+                                                                                     'WaitForBattle',
+                                                                                     'squished']),
+            State.State('movie', self.enterMovie, self.exitMovie, ['walk',
+                                                                   'battle',
+                                                                   'finalBattle',
+                                                                   'died',
+                                                                   'teleportOut']),
+            State.State('ouch', self.enterOuch, self.exitOuch, ['walk',
+                                                                'battle',
+                                                                'finalBattle',
+                                                                'died',
+                                                                'crane']),
+            State.State('crane', self.enterCrane, self.exitCrane, ['walk',
+                                                                   'battle',
+                                                                   'finalBattle',
+                                                                   'died',
+                                                                   'ouch',
+                                                                   'squished']),
+            State.State('walk', self.enterWalk, self.exitWalk, ['stickerBook',
+                                                                'teleportOut',
+                                                                'died',
+                                                                'tunnelOut',
+                                                                'DFA',
+                                                                'battle',
+                                                                'movie',
+                                                                'ouch',
+                                                                'crane',
+                                                                'finalBattle',
+                                                                'WaitForBattle']),
+            State.State('stickerBook', self.enterStickerBook, self.exitStickerBook, ['walk',
+                                                                                     'DFA',
+                                                                                     'WaitForBattle',
+                                                                                     'movie',
+                                                                                     'battle']),
+            State.State('WaitForBattle', self.enterWaitForBattle,
+                        self.exitWaitForBattle, ['battle', 'walk', 'movie']),
+            State.State('DFA', self.enterDFA, self.exitDFA, [
+                'DFAReject', 'teleportOut', 'tunnelOut']),
+            State.State(
+            'DFAReject',
+            self.enterDFAReject,
+            self.exitDFAReject,
+            ['walk']),
+            State.State(
+            'teleportIn',
+            self.enterTeleportIn,
+            self.exitTeleportIn,
+            ['walk']),
+            State.State(
+            'teleportOut', self.enterTeleportOut, self.exitTeleportOut, [
+                'teleportIn', 'final', 'WaitForBattle']),
+            State.State('died', self.enterDied, self.exitDied, ['final']),
+            State.State(
+            'tunnelIn',
+            self.enterTunnelIn,
+            self.exitTunnelIn,
+            ['walk']),
+            State.State(
+            'tunnelOut',
+            self.enterTunnelOut,
+            self.exitTunnelOut,
+            ['final']),
+            State.State('squished', self.enterSquished, self.exitSquished, ['finalBattle',
+                                                                            'crane',
+                                                                            'died',
+                                                                            'teleportOut']),
+            State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
         return
 
     def load(self):
@@ -110,7 +133,8 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
         self.bossCog = bossCog
         if self.bossCog:
             self.bossCog.d_avatarEnter()
-        self._telemLimiter = TLGatherAllAvs('CogHQBossBattle', RotationLimitToH)
+        self._telemLimiter = TLGatherAllAvs(
+            'CogHQBossBattle', RotationLimitToH)
         NametagGlobals.setMasterArrowsOn(1)
         base.localAvatar.inventory.setRespectInvasions(0)
         self.fsm.request(requestStatus['how'], [requestStatus])
@@ -129,8 +153,13 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
     def enterBattle(self, event):
         mult = 1
         if self.bossCog:
-            mult = ToontownBattleGlobals.getBossBattleCreditMultiplier(self.bossCog.battleNumber)
-        self.townBattle.enter(event, self.fsm.getStateNamed('battle'), bldg=1, creditMultiplier=mult)
+            mult = ToontownBattleGlobals.getBossBattleCreditMultiplier(
+                self.bossCog.battleNumber)
+        self.townBattle.enter(
+            event,
+            self.fsm.getStateNamed('battle'),
+            bldg=1,
+            creditMultiplier=mult)
         base.localAvatar.b_setAnimState('off', 1)
         base.localAvatar.setTeleportAvailable(0)
         base.localAvatar.cantLeaveGame = 1
@@ -153,7 +182,7 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
         self.walkStateData.exit()
         base.localAvatar.setTeleportAllowed(1)
 
-    def enterMovie(self, requestStatus = None):
+    def enterMovie(self, requestStatus=None):
         base.localAvatar.setTeleportAvailable(0)
 
     def exitMovie(self):
@@ -175,7 +204,7 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
         base.localAvatar.collisionsOff()
         base.localAvatar.laffMeter.stop()
 
-    def enterWalk(self, teleportIn = 0):
+    def enterWalk(self, teleportIn=0):
         BattlePlace.BattlePlace.enterWalk(self, teleportIn)
         self.ignore('teleportQuery')
         base.localAvatar.setTeleportAvailable(0)
@@ -190,7 +219,7 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
         BattlePlace.BattlePlace.exitWalk(self)
         base.localAvatar.setTeleportAllowed(1)
 
-    def enterStickerBook(self, page = None):
+    def enterStickerBook(self, page=None):
         BattlePlace.BattlePlace.enterStickerBook(self, page)
         self.ignore('teleportQuery')
         base.localAvatar.setTeleportAvailable(0)
@@ -206,7 +235,8 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
         BattlePlace.BattlePlace.enterTeleportIn(self, requestStatus)
 
     def enterTeleportOut(self, requestStatus):
-        BattlePlace.BattlePlace.enterTeleportOut(self, requestStatus, self.__teleportOutDone)
+        BattlePlace.BattlePlace.enterTeleportOut(
+            self, requestStatus, self.__teleportOutDone)
 
     def __teleportOutDone(self, requestStatus):
         hoodId = requestStatus['hoodId']
@@ -220,7 +250,7 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
         base.localAvatar.laffMeter.start()
         base.localAvatar.b_setAnimState('Flattened')
 
-    def handleSquishDone(self, extraArgs = []):
+    def handleSquishDone(self, extraArgs=[]):
         base.cr.playGame.getPlace().setState('walk')
 
     def exitSquished(self):

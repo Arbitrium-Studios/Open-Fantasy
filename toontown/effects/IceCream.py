@@ -4,6 +4,7 @@ from direct.particles import ParticleEffect, Particles, ForceGroup
 from .EffectController import EffectController
 from .PooledEffect import PooledEffect
 
+
 class IceCream(PooledEffect, EffectController):
 
     def __init__(self):
@@ -55,7 +56,8 @@ class IceCream(PooledEffect, EffectController):
         self.p0.renderer.setYScaleFlag(2)
         self.p0.renderer.setAnimAngleFlag(1)
         self.p0.renderer.setNonanimatedTheta(0.0)
-        self.p0.renderer.setAlphaBlendMethod(BaseParticleRenderer.PPBLENDLINEAR)
+        self.p0.renderer.setAlphaBlendMethod(
+            BaseParticleRenderer.PPBLENDLINEAR)
         self.p0.renderer.setAlphaDisable(0)
         self.p0.emitter.setEmissionType(BaseParticleEmitter.ETRADIATE)
         self.p0.emitter.setOffsetForce(Vec3(0.0, 0.0, 0.0))
@@ -65,7 +67,13 @@ class IceCream(PooledEffect, EffectController):
         self.setEffectColor(self.effectColor)
 
     def createTrack(self):
-        self.track = Sequence(Func(self.p0.setBirthRate, 0.04), Func(self.p0.clearToInitial), Func(self.f.start, self, self), Wait(0.2), Func(self.p0.setBirthRate, 100.0), Wait(4.0), Func(self.cleanUpEffect))
+        self.track = Sequence(
+            Func(
+                self.p0.setBirthRate, 0.04), Func(
+                self.p0.clearToInitial), Func(
+                self.f.start, self, self), Wait(0.2), Func(
+                    self.p0.setBirthRate, 100.0), Wait(4.0), Func(
+                        self.cleanUpEffect))
 
     def setEffectScale(self, scale):
         self.effectScale = scale

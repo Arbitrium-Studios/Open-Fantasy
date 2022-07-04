@@ -11,6 +11,7 @@ from toontown.parties.PartyInfo import PartyInfo
 from toontown.parties import PartyGlobals
 from toontown.ai.NewsManager import NewsManager
 
+
 def myStrftime(myTime):
     result = ''
     result = myTime.strftime('%I')
@@ -24,7 +25,8 @@ class CalendarGuiDay(DirectFrame):
     notify = directNotify.newCategory('CalendarGuiDay')
     ScrollListTextSize = 0.03
 
-    def __init__(self, parent, myDate, startDate, dayClickCallback = None, onlyFutureDaysClickable = False):
+    def __init__(self, parent, myDate, startDate,
+                 dayClickCallback=None, onlyFutureDaysClickable=False):
         self.origParent = parent
         self.startDate = startDate
         self.myDate = myDate
@@ -53,7 +55,8 @@ class CalendarGuiDay(DirectFrame):
         self.selectedLocator.setZ(-0.06)
 
     def load(self):
-        dayAsset = loader.loadModel('phase_4/models/parties/tt_m_gui_sbk_calendar_box')
+        dayAsset = loader.loadModel(
+            'phase_4/models/parties/tt_m_gui_sbk_calendar_box')
         dayAsset.reparentTo(self)
         self.dayButtonLocator = self.find('**/loc_origin')
         self.numberLocator = self.find('**/loc_number')
@@ -70,7 +73,7 @@ class CalendarGuiDay(DirectFrame):
         self.scrollUpLocator = self.find('**/loc_scrollUp')
         self.attachMarker(self.scrollUpLocator)
 
-    def attachMarker(self, parent, scale = 0.005, color = (1, 0, 0)):
+    def attachMarker(self, parent, scale=0.005, color=(1, 0, 0)):
         if self.showMarkers:
             marker = loader.loadModel('phase_3/models/misc/sphere')
             marker.reparentTo(parent)
@@ -78,14 +81,35 @@ class CalendarGuiDay(DirectFrame):
             marker.setColor(*color)
 
     def createGuiObjects(self):
-        self.dayButton = DirectButton(parent=self.dayButtonLocator, image=self.selectedFrame, relief=None, command=self.__clickedOnDay, pressEffect=1, rolloverSound=None, clickSound=None)
-        self.numberWidget = DirectLabel(parent=self.numberLocator, relief=None, text=str(self.myDate.day), text_scale=0.04, text_align=TextNode.ACenter, text_font=ToontownGlobals.getInterfaceFont(), text_fg=Vec4(110 / 255.0, 126 / 255.0, 255 / 255.0, 1))
+        self.dayButton = DirectButton(
+            parent=self.dayButtonLocator,
+            image=self.selectedFrame,
+            relief=None,
+            command=self.__clickedOnDay,
+            pressEffect=1,
+            rolloverSound=None,
+            clickSound=None)
+        self.numberWidget = DirectLabel(
+            parent=self.numberLocator,
+            relief=None,
+            text=str(
+                self.myDate.day),
+            text_scale=0.04,
+            text_align=TextNode.ACenter,
+            text_font=ToontownGlobals.getInterfaceFont(),
+            text_fg=Vec4(
+                110 / 255.0,
+                126 / 255.0,
+                255 / 255.0,
+                1))
         self.attachMarker(self.numberLocator)
         self.listXorigin = 0
-        self.listFrameSizeX = self.scrollBottomRightLocator.getX() - self.scrollLocator.getX()
+        self.listFrameSizeX = self.scrollBottomRightLocator.getX() - \
+            self.scrollLocator.getX()
         self.scrollHeight = self.scrollLocator.getZ() - self.scrollBottomRightLocator.getZ()
         self.listZorigin = self.scrollBottomRightLocator.getZ()
-        self.listFrameSizeZ = self.scrollLocator.getZ() - self.scrollBottomRightLocator.getZ()
+        self.listFrameSizeZ = self.scrollLocator.getZ(
+        ) - self.scrollBottomRightLocator.getZ()
         self.arrowButtonXScale = 1
         self.arrowButtonZScale = 1
         self.itemFrameXorigin = 0
@@ -101,12 +125,12 @@ class CalendarGuiDay(DirectFrame):
         arrowDown = self.find('**/downScroll_down')
         arrowHover = self.find('**/downScroll_hover')
         self.scrollList = DirectScrolledList(parent=self.scrollLocator, relief=None, pos=(0, 0, 0), incButton_image=(arrowUp,
-         arrowDown,
-         arrowHover,
-         arrowUp), incButton_relief=None, incButton_scale=(self.arrowButtonXScale, 1, self.arrowButtonZScale), incButton_pos=incButtonPos, incButton_image3_color=Vec4(1, 1, 1, 0.2), decButton_image=(arrowUp,
-         arrowDown,
-         arrowHover,
-         arrowUp), decButton_relief=None, decButton_scale=(self.arrowButtonXScale, 1, -self.arrowButtonZScale), decButton_pos=decButtonPos, decButton_image3_color=Vec4(1, 1, 1, 0.2), itemFrame_pos=(self.itemFrameXorigin, 0, -0.03), numItemsVisible=4, incButtonCallback=self.scrollButtonPressed, decButtonCallback=self.scrollButtonPressed)
+                                                                                                                     arrowDown,
+                                                                                                                     arrowHover,
+                                                                                                                     arrowUp), incButton_relief=None, incButton_scale=(self.arrowButtonXScale, 1, self.arrowButtonZScale), incButton_pos=incButtonPos, incButton_image3_color=Vec4(1, 1, 1, 0.2), decButton_image=(arrowUp,
+                                                                                                                                                                                                                                                                                                                   arrowDown,
+                                                                                                                                                                                                                                                                                                                   arrowHover,
+                                                                                                                                                                                                                                                                                                                   arrowUp), decButton_relief=None, decButton_scale=(self.arrowButtonXScale, 1, -self.arrowButtonZScale), decButton_pos=decButtonPos, decButton_image3_color=Vec4(1, 1, 1, 0.2), itemFrame_pos=(self.itemFrameXorigin, 0, -0.03), numItemsVisible=4, incButtonCallback=self.scrollButtonPressed, decButtonCallback=self.scrollButtonPressed)
         itemFrameParent = self.scrollList.itemFrame.getParent()
         self.scrollList.incButton.reparentTo(self.scrollDownLocator)
         self.scrollList.decButton.reparentTo(self.scrollUpLocator)
@@ -151,8 +175,10 @@ class CalendarGuiDay(DirectFrame):
         self.notify.debug('desroying %s' % self.myDate)
         try:
             for item in self.scrollList['items']:
-                if hasattr(item, 'description') and item.description and hasattr(item.description, 'destroy'):
-                    self.notify.debug('desroying description of item %s' % item)
+                if hasattr(item, 'description') and item.description and hasattr(
+                        item.description, 'destroy'):
+                    self.notify.debug(
+                        'desroying description of item %s' % item)
                     item.unbind(DGG.ENTER)
                     item.unbind(DGG.EXIT)
                     item.description.destroy()
@@ -170,7 +196,8 @@ class CalendarGuiDay(DirectFrame):
         if not self.filter == ToontownGlobals.CalendarFilterShowAll and not self.filter == ToontownGlobals.CalendarFilterShowOnlyHolidays:
             return
         if base.cr.newsManager:
-            holidays = base.cr.newsManager.getHolidaysForWeekday(self.myDate.weekday())
+            holidays = base.cr.newsManager.getHolidaysForWeekday(
+                self.myDate.weekday())
             holidayName = ''
             holidayDesc = ''
             for holidayId in holidays:
@@ -183,17 +210,33 @@ class CalendarGuiDay(DirectFrame):
 
             self.scrollList.refresh()
         if base.config.GetBool('calendar-test-items', 0):
-            if self.myDate.date() + datetime.timedelta(days=-1) == base.cr.toontownTimeManager.getCurServerDateTime().date():
-                testItems = ('1:00 AM Party', '2:00 AM CEO', '11:15 AM Party', '5:30 PM CJ', '11:00 PM Party', 'Really Really Long String')
+            if self.myDate.date() + datetime.timedelta(days=-
+                                                       1) == base.cr.toontownTimeManager.getCurServerDateTime().date():
+                testItems = (
+                    '1:00 AM Party',
+                    '2:00 AM CEO',
+                    '11:15 AM Party',
+                    '5:30 PM CJ',
+                    '11:00 PM Party',
+                    'Really Really Long String')
                 for text in testItems:
-                    newItem = DirectLabel(relief=None, text=text, text_scale=self.ScrollListTextSize, text_align=TextNode.ALeft)
+                    newItem = DirectLabel(
+                        relief=None,
+                        text=text,
+                        text_scale=self.ScrollListTextSize,
+                        text_align=TextNode.ALeft)
                     self.scrollList.addItem(newItem)
 
-            if self.myDate.date() + datetime.timedelta(days=-2) == base.cr.toontownTimeManager.getCurServerDateTime().date():
+            if self.myDate.date() + datetime.timedelta(days=-
+                                                       2) == base.cr.toontownTimeManager.getCurServerDateTime().date():
                 testItems = ('1:00 AM Party', '3:00 AM CFO', '11:00 AM Party')
                 textSize = self.ScrollListTextSize
                 for text in testItems:
-                    newItem = DirectLabel(relief=None, text=text, text_scale=textSize, text_align=TextNode.ALeft)
+                    newItem = DirectLabel(
+                        relief=None,
+                        text=text,
+                        text_scale=textSize,
+                        text_align=TextNode.ALeft)
                     self.scrollList.addItem(newItem)
 
     def updateArrowButtons(self):
@@ -223,8 +266,10 @@ class CalendarGuiDay(DirectFrame):
                     self.hostedPartiesToday.append(party)
                     self.timedEvents.append((party.startTime.time(), party))
 
-        if base.cr.newsManager and (self.filter == ToontownGlobals.CalendarFilterShowAll or self.filter == ToontownGlobals.CalendarFilterShowOnlyHolidays):
-            yearlyHolidays = base.cr.newsManager.getYearlyHolidaysForDate(self.myDate)
+        if base.cr.newsManager and (
+                self.filter == ToontownGlobals.CalendarFilterShowAll or self.filter == ToontownGlobals.CalendarFilterShowOnlyHolidays):
+            yearlyHolidays = base.cr.newsManager.getYearlyHolidaysForDate(
+                self.myDate)
             for holiday in yearlyHolidays:
                 holidayId = holiday[1]
                 holidayStart = holiday[2]
@@ -238,7 +283,8 @@ class CalendarGuiDay(DirectFrame):
                     self.notify.error('holiday is not today %s' % holiday)
                 self.timedEvents.append((myTime, holiday))
 
-            oncelyHolidays = base.cr.newsManager.getOncelyHolidaysForDate(self.myDate)
+            oncelyHolidays = base.cr.newsManager.getOncelyHolidaysForDate(
+                self.myDate)
             for holiday in oncelyHolidays:
                 holidayId = holiday[1]
                 holidayStart = holiday[2]
@@ -252,7 +298,8 @@ class CalendarGuiDay(DirectFrame):
                     self.notify.error('holiday is not today %s' % holiday)
                 self.timedEvents.append((myTime, holiday))
 
-            multipleStartHolidays = base.cr.newsManager.getMultipleStartHolidaysForDate(self.myDate)
+            multipleStartHolidays = base.cr.newsManager.getMultipleStartHolidaysForDate(
+                self.myDate)
             for holiday in multipleStartHolidays:
                 holidayId = holiday[1]
                 holidayStart = holiday[2]
@@ -266,7 +313,8 @@ class CalendarGuiDay(DirectFrame):
                     self.notify.error('holiday is not today %s' % holiday)
                 self.timedEvents.append((myTime, holiday))
 
-            relativelyHolidays = base.cr.newsManager.getRelativelyHolidaysForDate(self.myDate)
+            relativelyHolidays = base.cr.newsManager.getRelativelyHolidaysForDate(
+                self.myDate)
             for holiday in relativelyHolidays:
                 holidayId = holiday[1]
                 holidayStart = holiday[2]
@@ -309,10 +357,14 @@ class CalendarGuiDay(DirectFrame):
         holidayText = ''
         startTime = datetime.time(holidayStart[2], holidayStart[3])
         endTime = datetime.time(holidayEnd[2], holidayEnd[3])
-        startDate = datetime.date(self.myDate.year, holidayStart[0], holidayStart[1])
+        startDate = datetime.date(
+            self.myDate.year,
+            holidayStart[0],
+            holidayStart[1])
         endDate = datetime.date(self.myDate.year, holidayEnd[0], holidayEnd[1])
         if endDate < startDate:
-            endDate = datetime.date(endDate.year + 1, endDate.month, endDate.day)
+            endDate = datetime.date(
+                endDate.year + 1, endDate.month, endDate.day)
         if holidayId in TTLocalizer.HolidayNamesInCalendar:
             holidayName = TTLocalizer.HolidayNamesInCalendar[holidayId][0]
             holidayDesc = TTLocalizer.HolidayNamesInCalendar[holidayId][1]
@@ -322,17 +374,22 @@ class CalendarGuiDay(DirectFrame):
         if holidayStart[0] == holidayEnd[0] and holidayStart[1] == holidayEnd[1]:
             holidayText = myStrftime(startTime)
             holidayText += ' ' + holidayName
-            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + myStrftime(endTime)
+            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + \
+                myStrftime(endTime)
         elif self.myDate.month == holidayStart[0] and self.myDate.day == holidayStart[1]:
             holidayText = myStrftime(startTime)
             holidayText += ' ' + holidayName
             holidayDesc = holidayName + '. ' + holidayDesc
-            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + endDate.strftime(TTLocalizer.HolidayFormat) + myStrftime(endTime)
+            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + \
+                endDate.strftime(TTLocalizer.HolidayFormat) + \
+                myStrftime(endTime)
         elif self.myDate.month == holidayEnd[0] and self.myDate.day == holidayEnd[1]:
             holidayText = myStrftime(endTime)
             holidayText += ' ' + TTLocalizer.CalendarEndDash + holidayName
             holidayDesc = TTLocalizer.CalendarEndOf + holidayName
-            holidayDesc += '. ' + TTLocalizer.CalendarStartedOn + startDate.strftime(TTLocalizer.HolidayFormat) + myStrftime(startTime)
+            holidayDesc += '. ' + TTLocalizer.CalendarStartedOn + \
+                startDate.strftime(
+                    TTLocalizer.HolidayFormat) + myStrftime(startTime)
         else:
             self.notify.error('unhandled case')
         self.addTitleAndDescToScrollList(holidayText, holidayDesc)
@@ -345,10 +402,14 @@ class CalendarGuiDay(DirectFrame):
         holidayText = ''
         startTime = datetime.time(holidayStart[3], holidayStart[4])
         endTime = datetime.time(holidayEnd[3], holidayEnd[4])
-        startDate = datetime.date(holidayStart[0], holidayStart[1], holidayStart[2])
+        startDate = datetime.date(
+            holidayStart[0],
+            holidayStart[1],
+            holidayStart[2])
         endDate = datetime.date(holidayStart[0], holidayEnd[1], holidayEnd[2])
         if endDate < startDate:
-            endDate = datetime.date(endDate.year + 1, endDate.month, endDate.day)
+            endDate = datetime.date(
+                endDate.year + 1, endDate.month, endDate.day)
         if holidayId in TTLocalizer.HolidayNamesInCalendar:
             holidayName = TTLocalizer.HolidayNamesInCalendar[holidayId][0]
             holidayDesc = TTLocalizer.HolidayNamesInCalendar[holidayId][1]
@@ -359,17 +420,22 @@ class CalendarGuiDay(DirectFrame):
             holidayText = myStrftime(startTime)
             holidayText += ' ' + holidayName
             holidayDesc = holidayName + '. ' + holidayDesc
-            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + myStrftime(endTime)
+            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + \
+                myStrftime(endTime)
         elif self.myDate.year == holidayStart[0] and self.myDate.month == holidayStart[1] and self.myDate.day == holidayStart[2]:
             holidayText = myStrftime(startTime)
             holidayText += ' ' + holidayName
             holidayDesc = holidayName + '. ' + holidayDesc
-            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + endDate.strftime(TTLocalizer.HolidayFormat) + myStrftime(endTime)
+            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + \
+                endDate.strftime(TTLocalizer.HolidayFormat) + \
+                myStrftime(endTime)
         elif self.myDate.year == holidayEnd[0] and self.myDate.month == holidayEnd[1] and self.myDate.day == holidayEnd[2]:
             holidayText = myStrftime(endTime)
             holidayText += ' ' + TTLocalizer.CalendarEndDash + holidayName
             holidayDesc = TTLocalizer.CalendarEndOf + holidayName
-            holidayDesc += '. ' + TTLocalizer.CalendarStartedOn + startDate.strftime(TTLocalizer.HolidayFormat) + myStrftime(startTime)
+            holidayDesc += '. ' + TTLocalizer.CalendarStartedOn + \
+                startDate.strftime(
+                    TTLocalizer.HolidayFormat) + myStrftime(startTime)
         else:
             self.notify.error('unhandled case')
         self.addTitleAndDescToScrollList(holidayText, holidayDesc)
@@ -385,7 +451,10 @@ class CalendarGuiDay(DirectFrame):
         holidayText = ''
         startTime = datetime.time(holidayStart[2], holidayStart[3])
         endTime = datetime.time(holidayEnd[2], holidayEnd[3])
-        startDate = datetime.date(self.myDate.year, holidayStart[0], holidayStart[1])
+        startDate = datetime.date(
+            self.myDate.year,
+            holidayStart[0],
+            holidayStart[1])
         endDate = datetime.date(self.myDate.year, holidayEnd[0], holidayEnd[1])
         if endDate < startDate:
             endDate.year += 1
@@ -398,17 +467,22 @@ class CalendarGuiDay(DirectFrame):
         if holidayStart[0] == holidayEnd[0] and holidayStart[1] == holidayEnd[1]:
             holidayText = myStrftime(startTime)
             holidayText += ' ' + holidayName
-            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + myStrftime(endTime)
+            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + \
+                myStrftime(endTime)
         elif self.myDate.month == holidayStart[0] and self.myDate.day == holidayStart[1]:
             holidayText = myStrftime(startTime)
             holidayText += ' ' + holidayName
             holidayDesc = holidayName + '. ' + holidayDesc
-            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + endDate.strftime(TTLocalizer.HolidayFormat) + myStrftime(endTime)
+            holidayDesc += ' ' + TTLocalizer.CalendarEndsAt + \
+                endDate.strftime(TTLocalizer.HolidayFormat) + \
+                myStrftime(endTime)
         elif self.myDate.month == holidayEnd[0] and self.myDate.day == holidayEnd[1]:
             holidayText = myStrftime(endTime)
             holidayText += ' ' + TTLocalizer.CalendarEndDash + holidayName
             holidayDesc = TTLocalizer.CalendarEndOf + holidayName
-            holidayDesc += '. ' + TTLocalizer.CalendarStartedOn + startDate.strftime(TTLocalizer.HolidayFormat) + myStrftime(startTime)
+            holidayDesc += '. ' + TTLocalizer.CalendarStartedOn + \
+                startDate.strftime(
+                    TTLocalizer.HolidayFormat) + myStrftime(startTime)
         else:
             self.notify.error('unhandled case')
         self.addTitleAndDescToScrollList(holidayText, holidayDesc)
@@ -416,17 +490,44 @@ class CalendarGuiDay(DirectFrame):
     def addTitleAndDescToScrollList(self, title, desc):
         textSize = self.ScrollListTextSize
         descTextSize = 0.05
-        newItem = DirectButton(relief=None, text=title, text_scale=textSize, text_align=TextNode.ALeft, rolloverSound=None, clickSound=None, pressEffect=0, command=self.__clickedOnScrollItem)
+        newItem = DirectButton(
+            relief=None,
+            text=title,
+            text_scale=textSize,
+            text_align=TextNode.ALeft,
+            rolloverSound=None,
+            clickSound=None,
+            pressEffect=0,
+            command=self.__clickedOnScrollItem)
         scrollItemHeight = newItem.getHeight()
         descUnderItemZAdjust = scrollItemHeight * descTextSize / textSize
         descUnderItemZAdjust = max(0.0534, descUnderItemZAdjust)
         descUnderItemZAdjust = -descUnderItemZAdjust
         descZAdjust = descUnderItemZAdjust
-        newItem.description = DirectLabel(parent=newItem, pos=(0.115, 0, descZAdjust), text='', text_wordwrap=15, pad=(0.02, 0.02), text_scale=descTextSize, text_align=TextNode.ACenter, textMayChange=0)
+        newItem.description = DirectLabel(
+            parent=newItem,
+            pos=(
+                0.115,
+                0,
+                descZAdjust),
+            text='',
+            text_wordwrap=15,
+            pad=(
+                0.02,
+                0.02),
+            text_scale=descTextSize,
+            text_align=TextNode.ACenter,
+            textMayChange=0)
         newItem.description.checkedHeight = False
         newItem.description.setBin('gui-popup', 0)
         newItem.description.hide()
-        newItem.bind(DGG.ENTER, self.enteredTextItem, extraArgs=[newItem, desc, descUnderItemZAdjust])
+        newItem.bind(
+            DGG.ENTER,
+            self.enteredTextItem,
+            extraArgs=[
+                newItem,
+                desc,
+                descUnderItemZAdjust])
         newItem.bind(DGG.EXIT, self.exitedTextItem, extraArgs=[newItem])
         self.scrollList.addItem(newItem)
         return
@@ -434,7 +535,8 @@ class CalendarGuiDay(DirectFrame):
     def exitedTextItem(self, newItem, mousepos):
         newItem.description.hide()
 
-    def enteredTextItem(self, newItem, descText, descUnderItemZAdjust, mousePos):
+    def enteredTextItem(self, newItem, descText,
+                        descUnderItemZAdjust, mousePos):
         if not newItem.description.checkedHeight:
             newItem.description.checkedHeight = True
             newItem.description['text'] = descText
@@ -442,11 +544,13 @@ class CalendarGuiDay(DirectFrame):
             descHeight = newItem.description.getHeight()
             scrollItemHeight = newItem.getHeight()
             descOverItemZAdjust = descHeight - scrollItemHeight / 2.0
-            descZPos = self.getPos(aspect2d)[2] + descUnderItemZAdjust - descHeight
+            descZPos = self.getPos(aspect2d)[
+                2] + descUnderItemZAdjust - descHeight
             if descZPos < -1.0:
                 newItem.description.setZ(descOverItemZAdjust)
             descWidth = newItem.description.getWidth()
-            brightFrame = loader.loadModel('phase_4/models/parties/tt_m_gui_sbk_calendar_popUp_bg')
+            brightFrame = loader.loadModel(
+                'phase_4/models/parties/tt_m_gui_sbk_calendar_popUp_bg')
             newItem.description['geom'] = brightFrame
             newItem.description['geom_scale'] = (descWidth, 1, descHeight)
             descGeomZ = (bounds[2] - bounds[3]) / 2.0
@@ -461,7 +565,15 @@ class CalendarGuiDay(DirectFrame):
         partyTitle = partyTitle + ' ' + TTLocalizer.EventsPageCalendarTabParty
         textSize = self.ScrollListTextSize
         descTextSize = 0.05
-        newItem = DirectButton(relief=None, text=partyTitle, text_scale=textSize, text_align=TextNode.ALeft, rolloverSound=None, clickSound=None, pressEffect=0, command=self.__clickedOnScrollItem)
+        newItem = DirectButton(
+            relief=None,
+            text=partyTitle,
+            text_scale=textSize,
+            text_align=TextNode.ALeft,
+            rolloverSound=None,
+            clickSound=None,
+            pressEffect=0,
+            command=self.__clickedOnScrollItem)
         scrollItemHeight = newItem.getHeight()
         descUnderItemZAdjust = scrollItemHeight * descTextSize / textSize
         descUnderItemZAdjust = max(0.0534, descUnderItemZAdjust)
@@ -471,7 +583,13 @@ class CalendarGuiDay(DirectFrame):
         newItem.description = MiniInviteVisual(newItem, party)
         newItem.description.setBin('gui-popup', 0)
         newItem.description.hide()
-        newItem.bind(DGG.ENTER, self.enteredTextItem, extraArgs=[newItem, newItem.description, descUnderItemZAdjust])
+        newItem.bind(
+            DGG.ENTER,
+            self.enteredTextItem,
+            extraArgs=[
+                newItem,
+                newItem.description,
+                descUnderItemZAdjust])
         newItem.bind(DGG.EXIT, self.exitedTextItem, extraArgs=[newItem])
         return
 
@@ -532,18 +650,25 @@ class MiniInviteVisual(DirectFrame):
         self.checkedHeight = True
         self.partyInfo = partyInfo
         self._parent = parent
-        self.inviteBackgrounds = loader.loadModel('phase_4/models/parties/partyStickerbook')
+        self.inviteBackgrounds = loader.loadModel(
+            'phase_4/models/parties/partyStickerbook')
         backgrounds = ['calendar_popup_birthday',
-         'calendar_popup_fun',
-         'calendar_popup_cupcake',
-         'tt_t_gui_sbk_calendar_popup_racing',
-         'tt_t_gui_sbk_calendar_popup_valentine1',
-         'tt_t_gui_sbk_calendar_popup_victoryParty',
-         'tt_t_gui_sbk_calendar_popup_winter1']
-        self.background = DirectFrame(parent=self, relief=None, geom=self.inviteBackgrounds.find('**/%s' % backgrounds[self.partyInfo.inviteTheme]), scale=(0.7, 1.0, 0.23), pos=(0.0, 0.0, -0.1))
-        self.whosePartyLabel = DirectLabel(parent=self, relief=None, pos=(0.07, 0.0, -0.04), text=' ', text_scale=0.04, text_wordwrap=8, textMayChange=True)
-        self.whenTextLabel = DirectLabel(parent=self, relief=None, text=' ', pos=(0.07, 0.0, -0.13), text_scale=0.04, textMayChange=True)
-        self.partyStatusLabel = DirectLabel(parent=self, relief=None, text=' ', pos=(0.07, 0.0, -0.175), text_scale=0.04, textMayChange=True)
+                       'calendar_popup_fun',
+                       'calendar_popup_cupcake',
+                       'tt_t_gui_sbk_calendar_popup_racing',
+                       'tt_t_gui_sbk_calendar_popup_valentine1',
+                       'tt_t_gui_sbk_calendar_popup_victoryParty',
+                       'tt_t_gui_sbk_calendar_popup_winter1']
+        self.background = DirectFrame(parent=self, relief=None, geom=self.inviteBackgrounds.find(
+            '**/%s' % backgrounds[self.partyInfo.inviteTheme]), scale=(0.7, 1.0, 0.23), pos=(0.0, 0.0, -0.1))
+        self.whosePartyLabel = DirectLabel(parent=self, relief=None, pos=(
+            0.07, 0.0, -0.04), text=' ', text_scale=0.04, text_wordwrap=8, textMayChange=True)
+        self.whenTextLabel = DirectLabel(
+            parent=self, relief=None, text=' ', pos=(
+                0.07, 0.0, -0.13), text_scale=0.04, textMayChange=True)
+        self.partyStatusLabel = DirectLabel(
+            parent=self, relief=None, text=' ', pos=(
+                0.07, 0.0, -0.175), text_scale=0.04, textMayChange=True)
         return
 
     def show(self):

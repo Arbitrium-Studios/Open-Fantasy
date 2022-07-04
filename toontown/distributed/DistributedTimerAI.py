@@ -5,6 +5,7 @@ from pandac.PandaModules import *
 from direct.distributed.ClockDelta import *
 import time
 
+
 class DistributedTimerAI(DistributedObjectAI.DistributedObjectAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedTimerAI')
 

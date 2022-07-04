@@ -1,7 +1,9 @@
 from direct.directnotify import DirectNotifyGlobal
 
+
 class SuitInvasionManagerAI:
-    notify = DirectNotifyGlobal.directNotify.newCategory('SuitInvasionManagerAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory(
+        'SuitInvasionManagerAI')
 
     def __init__(self, air):
         self.air = air

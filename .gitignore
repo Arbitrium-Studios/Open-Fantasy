@@ -20,3 +20,5 @@ libotp/
 libtoontown/
 news/
 *.egg
+setup.cfg
+Housekeeper/

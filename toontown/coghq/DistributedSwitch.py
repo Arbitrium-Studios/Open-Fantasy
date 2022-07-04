@@ -10,11 +10,19 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM, State
 from otp.level import DistributedEntity
 
-class DistributedSwitch(DistributedSwitchBase.DistributedSwitchBase, BasicEntities.DistributedNodePathEntity):
+
+class DistributedSwitch(DistributedSwitchBase.DistributedSwitchBase,
+                        BasicEntities.DistributedNodePathEntity):
 
     def __init__(self, cr):
         BasicEntities.DistributedNodePathEntity.__init__(self, cr)
-        self.fsm = ClassicFSM.ClassicFSM('DistributedSwitch', [State.State('off', self.enterOff, self.exitOff, ['playing', 'attract']), State.State('attract', self.enterAttract, self.exitAttract, ['playing']), State.State('playing', self.enterPlaying, self.exitPlaying, ['attract'])], 'off', 'off')
+        self.fsm = ClassicFSM.ClassicFSM(
+            'DistributedSwitch', [
+                State.State(
+                    'off', self.enterOff, self.exitOff, [
+                        'playing', 'attract']), State.State(
+                    'attract', self.enterAttract, self.exitAttract, ['playing']), State.State(
+                        'playing', self.enterPlaying, self.exitPlaying, ['attract'])], 'off', 'off')
         self.fsm.enterInitialState()
         self.node = None
         self.triggerName = ''
@@ -80,15 +88,17 @@ class DistributedSwitch(DistributedSwitchBase.DistributedSwitchBase, BasicEntiti
 
     def setState(self, state, timestamp):
         if self.isGenerated():
-            self.fsm.request(state, [globalClockDelta.localElapsedTime(timestamp)])
+            self.fsm.request(
+                state, [
+                    globalClockDelta.localElapsedTime(timestamp)])
         else:
             self.initialState = state
             self.initialStateTimestamp = timestamp
 
-    def enterTrigger(self, args = None):
+    def enterTrigger(self, args=None):
         self.sendUpdate('requestInteract')
 
-    def exitTrigger(self, args = None):
+    def exitTrigger(self, args=None):
         self.sendUpdate('requestExit')
 
     def enterOff(self):
