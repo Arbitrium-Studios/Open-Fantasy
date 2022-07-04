@@ -5,7 +5,7 @@ from pandac.PandaModules import *
 from direct.directnotify import DirectNotifyGlobal
 from . import TTDialog
 from toontown.toonbase import TTLocalizer
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.showbase.DirectObject import DirectObject
 from otp.login import LeaveToPayDialog
 Pages = {'otherHoods': (TTLocalizer.TeaserOtherHoods,),

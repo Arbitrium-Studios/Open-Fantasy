@@ -3,7 +3,7 @@ from direct.interval.IntervalGlobal import *
 from otp.otpbase import OTPLocalizer
 from toontown.toonbase import TTLocalizer
 from otp.otpbase import OTPLocalizer
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from pandac.PandaModules import *
 from panda3d.otp import *
 from otp.avatar import Emote

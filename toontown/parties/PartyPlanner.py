@@ -6,7 +6,7 @@ from otp.otpbase import OTPLocalizer
 from direct.gui.DirectGui import DirectFrame, DirectButton, DirectLabel, DirectScrolledList, DirectCheckButton
 from direct.gui import DirectGuiGlobals
 from direct.showbase import DirectObject
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.fsm.FSM import FSM
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer

@@ -2,7 +2,7 @@ from datetime import datetime
 import calendar
 from direct.gui.DirectGui import DirectFrame, DirectLabel
 from toontown.toonbase import TTLocalizer
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.fsm.FSM import FSM
 from toontown.parties import PartyGlobals
 from toontown.parties import PartyUtils

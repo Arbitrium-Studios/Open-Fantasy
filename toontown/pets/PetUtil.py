@@ -1,6 +1,6 @@
 from toontown.pets import PetDNA, PetTraits, PetConstants
 from toontown.pets import PetNameGenerator
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 import random
 
 def getPetInfoFromSeed(seed, safezoneId):

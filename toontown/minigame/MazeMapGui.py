@@ -1,4 +1,4 @@
-from direct.showbase.PythonUtil import Enum
+from otp.otpbase.PythonUtil import Enum
 from direct.gui.DirectGui import DirectFrame, DGG
 from pandac.PandaModules import Vec2, VBase4F
 from pandac.PandaModules import CardMaker, NodePath

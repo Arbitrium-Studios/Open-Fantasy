@@ -5,7 +5,7 @@ from direct.distributed.ClockDelta import *
 from direct.fsm import FSM
 from direct.distributed import DistributedObject
 from direct.showutil import Rope
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.task import Task
 from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals

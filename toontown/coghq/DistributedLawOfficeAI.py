@@ -15,7 +15,7 @@ from toontown.coghq import DistributedLawOfficeElevatorIntAI
 from toontown.building import DistributedElevatorFloorAI
 from toontown.ai.ToonBarrier import *
 from direct.distributed.DistributedObjectAI import *
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 
 class DistributedLawOfficeAI(DistributedObjectAI, LawOfficeBase.LawOfficeBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLawOfficeAI')

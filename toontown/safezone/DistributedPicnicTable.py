@@ -15,7 +15,7 @@ from direct.fsm import StateData
 from toontown.distributed import DelayDelete
 from toontown.toonbase.ToontownTimer import ToontownTimer
 from toontown.toonbase import ToontownGlobals
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from otp.otpbase import OTPGlobals
 
 class DistributedPicnicTable(DistributedNode.DistributedNode):

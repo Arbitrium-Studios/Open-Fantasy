@@ -5,7 +5,7 @@ from direct.distributed import DistributedNode
 from direct.actor.DistributedActor import DistributedActor
 from direct.interval.IntervalGlobal import *
 from direct.task import Task
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from panda3d.otp import Nametag
 from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer

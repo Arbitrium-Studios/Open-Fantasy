@@ -21,7 +21,7 @@ from toontown.toon import Toon
 from toontown.toon import ToonDNA
 from direct.interval.IntervalGlobal import *
 import random
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 import math
 import time
 from toontown.makeatoon import NameGenerator

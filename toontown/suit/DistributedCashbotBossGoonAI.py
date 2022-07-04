@@ -7,7 +7,7 @@ from direct.task.Task import Task
 from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 from toontown.coghq import DistributedCashbotBossObjectAI
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from toontown.suit import DistributedGoonAI
 import math, random
 

@@ -9,7 +9,7 @@ from direct.fsm import StateData
 from toontown.toontowngui import TTDialog
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 
 class PicnicBasket(StateData.StateData):
 

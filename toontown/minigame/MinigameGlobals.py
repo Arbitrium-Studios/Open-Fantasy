@@ -1,4 +1,4 @@
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from toontown.toonbase import ToontownGlobals
 from toontown.hood import ZoneUtil
 latencyTolerance = 10.0

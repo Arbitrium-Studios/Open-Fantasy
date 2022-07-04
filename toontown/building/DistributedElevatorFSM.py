@@ -3,7 +3,7 @@ from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
 from .ElevatorConstants import *
 from .ElevatorUtils import *
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM
 from direct.distributed import DistributedObject

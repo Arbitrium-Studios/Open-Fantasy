@@ -20,7 +20,7 @@ from toontown.effects import DustCloud
 from toontown.toonbase import TTLocalizer
 from toontown.friends import FriendsListManager
 from direct.controls.ControlManager import CollisionHandlerRayStart
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 import random
 
 class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):

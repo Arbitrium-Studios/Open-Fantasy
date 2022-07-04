@@ -3,7 +3,7 @@ from direct.interval.IntervalGlobal import SoundInterval, LerpScaleInterval, Ler
 from direct.interval.IntervalGlobal import Wait, Func
 from direct.interval.MetaInterval import Sequence, Parallel
 from direct.gui.DirectGui import DirectWaitBar, DGG
-from direct.showbase import PythonUtil
+from otp.otpbase import PythonUtil
 from direct.fsm import ClassicFSM, State
 from direct.showbase import RandomNumGen
 from direct.task.Task import Task
