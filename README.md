@@ -36,7 +36,7 @@
 * Jesse Schell for fighting for Toontown Online's Official Return
 
 ### Contributors:
-* Battery on Discord for fixing the Tuple error!
+* Battery on Discord for helping me fix the Tuple error!
 * DarthM on Discord for various features including Credits, Genderless Toons, etc.
 * TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
 
