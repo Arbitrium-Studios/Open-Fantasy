@@ -1,48 +1,48 @@
-1. Create a in-game launcher like ODS using the Anesidora files
-2. Add the capability for higher FPS and higher quality textures (upscale them up to 8k)
-3. Patch as many bugs as possible.
-4. Move to the latest version of Python if it hasn't been done already.
-5. Implement custom shaders for everyone to use!
-6. Import the default controls for PotCO as Toontown Fantasy's default controls
-7. Add custom keybinds with as many custom key options as possible!
-8. Implement free, 360 degree camera to fit free roam
-9. Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button.
-10. Add the ability to play with an Xbox, Play Station, or PC controllers. (Back to view map; right stick to control camera angle; left stick to control the movement of your character AND in battles, to move the highlighted box around each gag box; double flick the left stick upward to sprint, Y button to open Shticker Book, B to preform action, Xbox/Play Station/{Company name} Home button to bring up the pause menu; X (PS)/A to jump/select the gag selected in battle; D-Pad to select one of four party members; Left Trigger (LT) to use Elemental magic; Right Trigger (RT) to ???; Left Button (LB) ???; Right Button (RB) ???;)
-11. Add a touch screen mode which is enabled/disabled in the Shticker Book
-12. Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
-13. Implement full Wide-Screen Support
-14. Implement in-engine Image Upscaling
-15. Add Credits to the game for everyone who is helping
-16. Put all logs, screenshots, etc. into a 'User/InsertUserHere' folder.
-17. Rename "Choose Your Type" under the Species list to "Choose Your Species"!
-18. Add TTR's Clothing Option for Create Your Toon
-19. Implement our version of Toontown House's Accessory Tab in the Clothing Page of the Create Your Toon part.
-20. Implement a new tab for Further Customization for which hand your Toon uses, etc.
-21. Auto-Approve Type-A-Name Names.
-22. Type-A-Name for Doodles.
-23. Doodle Rebalance
-24. Fix racing
-25. Fix fishing
-26. Implement a new Toon Tip system that replaces the one on the loading screen.
-27. Add Accessories to the Toon Heads for Pick-A-Toon and the Friends system
-28. Replace True Friends with 18+ chat where you and anyone who you are Best Friends with, can see you swear.
-29. Add more Magic Commands!
-30. Add more areas for gaming!
-31. Zoom out from the Toons in the Create-A-Toon section.
-32. Add more fonts for usage in Catalog
-33. Add Font Colors to the Catalog
-34. Add the option to disable Disney Characters.
-35. Overhaul the Choose Your Color page Hex Color to allow for Classic or Hex Colors.
-36. Add Black, White, and Gray to the Classic Colors.
-37. Make ALL textures HD
-38. Toon Rewrite (That INCLUDES Species Rewrite and Name)
-39. Remove time limits for Emotes and other items
-40. Make The Cannon Game in the Estate function as the Party Cannons Do!
-41. Make everything run at 60 FPS as a default.
-42. Replace Whitelist with Blacklist where you can say anything that's NOT in a Blacklist using pip's Profanity-Filter!
-43. Add Experience Bar at the bottom of the screen!
-44. Add Jellybeans you can earn by completing Toontasks
-45. Add Teleport Button to Toontasks.
-46. Overhaul Map Page to be able to scroll (or click down) to zoom into playgrounds to see streets, buildings, etc.
++ Create a in-game launcher like ODS using the Anesidora files
++ Add the capability for higher FPS and higher quality textures (upscale them up to k)
++ Patch as many bugs as possible
++ Move to the latest version of Python if it hasn't been done already
++ Implement custom shaders for everyone to use!
++ Import the default controls for PotCO as Toontown Fantasy's default controls
++ Add custom keybinds with as many custom key options as possible!
++ Implement free,  degree camera to fit free roam
++ Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button
++ Add the ability to play with an Xbox, Play Station, or PC controllers (Back to view map; right stick to control camera angle; left stick to control the movement of your character AND in battles, to move the highlighted box around each gag box; double flick the left stick upward to sprint, Y button to open Shticker Book, B to preform action, Xbox/Play Station/{Company name} Home button to bring up the pause menu; X (PS)/A to jump/select the gag selected in battle; D-Pad to select one of four party members; Left Trigger (LT) to use Elemental magic; Right Trigger (RT) to ???; Left Button (LB) ???; Right Button (RB) ???;)
++ Add a touch screen mode which is enabled/disabled in the Shticker Book
++ Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
++ Implement full Wide-Screen Support
++ Implement in-engine Image Upscaling
++ Add Credits to the game for everyone who is helping
++ Put all logs, screenshots, etc into a 'User/InsertUserHere' folder
++ Rename "Choose Your Type" under the Species list to "Choose Your Species"!
++ Add TTR's Clothing Option for Create Your Toon
++ Implement our version of Toontown House's Accessory Tab in the Clothing Page of the Create Your Toon part
++ Implement a new tab for Further Customization for which hand your Toon uses, etc
++ Auto-Approve Type-A-Name Names
++ Type-A-Name for Doodles
++ Doodle Rebalance
++ Fix racing
++ Fix fishing
++ Implement a new Toon Tip system that replaces the one on the loading screen
++ Add Accessories to the Toon Heads for Pick-A-Toon and the Friends system
++ Replace True Friends with ++ chat where you and anyone who you are Best Friends with, can see you swear
++ Add more Magic Commands!
++ Add more areas for gaming!
++ Zoom out from the Toons in the Create-A-Toon section
++ Add more fonts for usage in Catalog
++ Add Font Colors to the Catalog
++ Add the option to disable Disney Characters
++ Overhaul the Choose Your Color page Hex Color to allow for Classic or Hex Colors
++ Add Black, White, and Gray to the Classic Colors
++ Make ALL textures HD
++ Toon Rewrite (That INCLUDES Species Rewrite and Name)
++ Remove time limits for Emotes and other items
++ Make The Cannon Game in the Estate function as the Party Cannons Do!
++ Make everything run at  FPS as a default
++ Replace Whitelist with Blacklist where you can say anything that's NOT in a Blacklist using pip's Profanity-Filter!
++ Add Experience Bar at the bottom of the screen!
++ Add Jellybeans you can earn by completing Toontasks
++ Add Teleport Button to Toontasks
++ Overhaul Map Page to be able to scroll (or click down) to zoom into playgrounds to see streets, buildings, etc
 
 More soon!
