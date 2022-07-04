@@ -882,14 +882,14 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
     def lerpCameraFov(self, fov, time):
         taskMgr.remove('cam-fov-lerp-play')
         oldFov = base.camLens.getHfov()
-        if abs(fov - oldFov) > 0.1:
-
-            def setCamFov(fov):
-                base.camLens.setFov(fov)
-
-            self.camLerpInterval = LerpFunctionInterval(
-                setCamFov, fromData=oldFov, toData=fov, duration=time, name='cam-fov-lerp')
-            self.camLerpInterval.start()
+        if fov and oldFov:
+             if (abs(fov - oldFov) > 0.1):
+                 def setCamFov(fov):
+                     base.camLens.setFov(fov)
+                 self.camLerpInterval = LerpFunctionInterval(setCamFov,
+                     fromData=oldFov, toData=fov, duration=time,
+                     name='cam-fov-lerp')
+                 self.camLerpInterval.start()
 
     def setCameraFov(self, fov):
         self.fov = fov
