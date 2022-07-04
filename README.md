@@ -17,7 +17,6 @@
 
 ### Technical Team:
 + The Professor | Developer
-+ ComradeNapCal | Developer
 + Something Random | Developer
 + Sighost | Developer
 + THE PLAYER ZER0 aka Gracie T. Lovelight | Developer
