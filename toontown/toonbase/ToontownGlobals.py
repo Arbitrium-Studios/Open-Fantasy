@@ -1677,3 +1677,18 @@ AV_TOUCH_CHECK_DIST_Z = 5.0
 AV_TOUCH_CHECK_TIMELIMIT_CL = 0.002
 AV_TOUCH_COUNT_LIMIT = 5
 AV_TOUCH_COUNT_TIME = 300
+
+BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'
+
+# TELEPORT_BUTTON_DEFAULT_COST = 50
+# TELEPORT_BUTTON_COSTS = {
+#  ToontownCentral: 5,
+#  DonaldsDock: 15,
+#  DaisyGardens: 30,
+#  MinniesMelodyland: 45,
+#  TheBrrrgh: 60,
+#  DonaldsDreamland: 75
+# }
+
+# def getTeleportButtonCost(hoodId):
+#     return TELEPORT_BUTTON_COSTS.get(hoodId, TELEPORT_BUTTON_DEFAULT_COST)
