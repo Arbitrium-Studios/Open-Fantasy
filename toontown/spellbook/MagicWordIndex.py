@@ -316,7 +316,7 @@ class SetHP(MagicWord):
             return "Can't set {0}'s laff to {1}! Specify a value between -100 and {0}'s max laff ({2}).".format(
                 toon.getName(), hp, toon.getMaxHp())
 
-        if hp <= 0 and (toon.getImmortalMode()):
+        if hp <= 0 and (toon.immortalMode):
             return "Can't set {0}'s laff to {1} because they are in Immortal Mode!".format(
                 toon.getName(), hp)
 
@@ -1678,7 +1678,7 @@ class ToggleImmortality(MagicWord):
     affectRange = [MagicWordConfig.AFFECT_SELF]
 
     def handleWord(self, invoker, avId, toon, *args):
-        immortal = not toon.getImmortalMode()
+        immortal = not toon.immortalMode
         toon.setImmortalMode(immortal)
         if toon.immortalMode:
             response = 'immortality ON'
