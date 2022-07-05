@@ -464,9 +464,7 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,
                                       (60, 65, 75, 85, 90),
                                       (25, 25, 25, 25, 25)),
                                      ('SensoryOverload',  # This move would reduce a Toon's accuracy.
-                                      # This is where the accuracy reduction should probably
-                                      # go.
-                                      (0, 0, 0, 0, 0),
+                                      (0, 0, 0, 0, 0), # This is where the accuracy reduction should probably go.
                                       (75, 75, 75, 75, 75),
                                       (0, 0, 0, 0, 0)))},
                   'm': {'name': TTLocalizer.SuitTheMingler,
