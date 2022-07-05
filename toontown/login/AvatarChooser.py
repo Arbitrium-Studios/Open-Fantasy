@@ -105,7 +105,7 @@ class AvatarChooser(StateData.StateData):
         self.pickAToonBG = newGui.find('**/tt_t_gui_pat_background')
         self.pickAToonBG.reparentTo(hidden)
         self.pickAToonBG.setPos(0.0, 2.73, 0.0)
-        self.pickAToonBG.setScale(1, 1, 1)
+        self.pickAToonBG.setScale(2, 1, 1)
         self.title = OnscreenText(
             TTLocalizer.AvatarChooserPickAToon,
             scale=TTLocalizer.ACtitle,
