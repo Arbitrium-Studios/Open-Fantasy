@@ -27,6 +27,7 @@ Phase 2 - The Overhaul Versions:
     + Have SirDapperPenguin & any other modelers begin overhauling the playgrounds and their buildings.
     + Continue working on the new storyline with any help we have at that time.
     + Have Darth and any other helpers to implement Testing Keys to give away once people have reached Level 25 according to THE R0YAL B0T!
+    + Begin working on the more indepth Character Creation Menus.
 
     Goal: To begin Alpha Testing Toontown Fantasy.
 
