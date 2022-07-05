@@ -808,6 +808,7 @@ class OptionsTabPage(DirectFrame):
     def confirmBugReport(self, value):
         if value > 0:
             webbrowser.open(ToontownGlobals.BugReportSite, new=2, autoraise=True)
+        self.dialog.hide()
         return
 
 class CodesTabPage(DirectFrame):
