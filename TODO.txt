@@ -57,5 +57,7 @@
 + When a Toon jumps into the water, the Fish dots should swim away from the source.
 + Add Gag Training Fridays, Double Merit Mondays, etc. to the Calendar and what we could use.
 + Add the date when you get your next Catalog to the Calendar Page.
++ Add Refresh Audio Source Button so when you switch audio channels, you can click it or press a hot key, and it checks for working audio source.
++ Add a randomization of the Wrench Model, Golf Ball, etc. across Toontown Stadium's Playground as Treasures to heal your Toon!
 
 More soon!
