@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.otp import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed.ClockDelta import *
@@ -54,6 +54,8 @@ from toontown.distributed import DelayDelete
 from otp.otpbase import OTPLocalizer
 import random
 import copy
+from . import LaffMeter
+
 if base.wantKarts:
     from toontown.racing.KartDNA import *
 if (__debug__):
@@ -195,6 +197,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
         self.gmNameTagColor = 'whiteGM'
         self.gmNameTagString = ''
         self.transitioning = False
+        self.laffMeterOverHead = None
         return
 
     def disable(self):
@@ -297,7 +300,12 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
         self.setGlasses(*oldGlasses)
         self.setBackpack(*oldBackpack)
         self.setShoes(*oldShoes)
-
+        
+     ### Overhead Laff Meter ###
+    def setHp(self, hp):
+        DistributedPlayer.DistributedPlayer.setHp(self, hp)
+        if self.isLocal():
+            self.updateOverHeadLaffMeter()
     def setHat(self, idx, textureIdx, colorIdx):
         Toon.Toon.setHat(self, idx, textureIdx, colorIdx)
 
@@ -2825,3 +2833,23 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
 
     def getTransitioning(self):
         return self.transitioning
+
+    def updateOverHeadLaffMeter(self):
+        # TODO make the hp check a player choice thing
+        if (self.hp < self.maxHp and base.wantLaffMeterOverHead
+                and not self.laffMeterOverHead):
+            # Setup the laff meter
+            self.laffMeterOverHead = LaffMeter.LaffMeter(self.style, self.hp, self.maxHp)
+            self.laffMeterOverHead.setAvatar(self)
+            # Set the laff meter above the toon's head
+            self.laffMeterOverHead.setZ(4)
+            self.laffMeterOverHead.reparentTo(self.nametag.getNameIcon())
+            self.laffMeterOverHead.setScale(1.2)
+            self.laffMeterOverHead.start()
+            self.notify.info('Starting laff meter ')
+        elif ((not base.wantLaffMeterOverHead and self.laffMeterOverHead)
+                or (self.hp >= self.maxHp and self.laffMeterOverHead)):
+            # Disable the laff meter
+            self.laffMeterOverHead.stop()
+            self.laffMeterOverHead.destroy()
+            self.laffMeterOverHead = None

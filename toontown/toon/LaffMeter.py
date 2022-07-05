@@ -130,7 +130,15 @@ class LaffMeter(DirectFrame):
                               0.5,
                               0.666666,
                               0.833333]
+            self.eyes.setY(-0.2)
+            self.frown.setY(-0.2)
+            self.smile.setY(-0.2)
+            self.hpLabel.setY(-0.2)
+            self.maxLabel.setY(-0.2)
+            for tooth in self.teeth:
+                 tooth.setY(-0.2)
         gui.removeNode()
+
         return
 
     def destroy(self):

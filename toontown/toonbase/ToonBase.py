@@ -190,6 +190,8 @@ class ToonBase(OTPBase.OTPBase):
         self.settings.updateSetting('smooth-animations', self.smoothAnimations)
         self.showFPS = self.settings.getSetting('show-fps', False)
         self.settings.updateSetting('show-fps', self.showFPS)
+        self.wantLaffMeterOverHead = self.settings.getSetting('want-laff-meter-over-head', True)
+        self.settings.updateSetting('want-laff-meter-over-head', self.wantLaffMeterOverHead)
         self.toggleFPS(self.showFPS)
         self.settings.writeSettings()
         return
