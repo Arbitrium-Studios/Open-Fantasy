@@ -23,26 +23,26 @@ fireworkShowTypes = [ToontownGlobals.JULY4_FIREWORKS,
 
 class FireworkShow(NodePath):
 
-    def r():
+    def r(self):
         return random.randint(8, 12) / 10.0
 
-    def rV():
+    def rV(self):
         return Vec3(random.randint(-60, 60),
                     random.randint(10, 30), random.randint(125, 150))
 
-    def rP():
+    def rP(self):
         return Point3(0, 0, 0)
 
-    def rS():
+    def rS(self):
         return 1.0 + random.random() / 2.0
 
-    def rC():
+    def rC(self):
         return random.choice(colors)
 
-    def rT():
+    def rT(self):
         return random.randint(12, 20) / 10.0
 
-    def rD():
+    def rD(self):
         return random.randint(1, 20) / 10.0
 
     showData = {ToontownGlobals.JULY4_FIREWORKS: [[FireworkType.GlowFlare,

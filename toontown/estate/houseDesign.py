@@ -1357,7 +1357,7 @@ class ObjectManager(NodePath, DirectObject):
         picker.scrollTo(selectedIndex)
         return picker
 
-    def reset():
+    def reset(self):
         self.destroy()
         furnitureMenu.destroy()
 

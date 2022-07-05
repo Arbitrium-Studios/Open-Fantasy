@@ -154,10 +154,10 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
             del self.nearbyAvatarInfoDict[avId]
             self.nearbyAvatars.remove(avId)
 
-    def avatarEnterNextState():
+    def avatarEnterNextState(self):
         pass
 
-    def avatarExitNextState():
+    def avatarExitNextState(self):
         pass
 
     def __clearNearbyAvatars(self):
