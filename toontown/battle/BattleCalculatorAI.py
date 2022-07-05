@@ -1591,7 +1591,7 @@ class BattleCalculatorAI:
             self.__printSuitAtkStats()
         return
 
-    def __calculateFiredCogs():
+    def __calculateFiredCogs(self):
         import pdb
         pdb.set_trace()
 
