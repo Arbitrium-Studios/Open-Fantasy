@@ -1528,7 +1528,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
                 3.6,
                 0)
         else:
-            camera.wrtReparentTo(base.localAvatar)
+            # camera.wrtReparentTo(base.localAvatar)
             messenger.send('localToonLeftBattle')
         base.camLens.setFov(ToontownGlobals.DefaultCameraFov)
         return

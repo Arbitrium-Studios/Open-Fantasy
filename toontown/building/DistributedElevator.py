@@ -276,6 +276,7 @@ class DistributedElevator(DistributedObject.DistributedObject):
             toon.headsUp(
                 self.getElevatorModel(), Point3(
                     *self.elevatorPoints[index]))
+            toon.orbitalCamera.setGeomNodeH(0)
             track = Sequence(
                 animInFunc,
                 LerpPosInterval(
