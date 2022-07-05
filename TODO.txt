@@ -23,7 +23,7 @@ Phase 1 - The Presentability Versions:
 
 Phase 2 - The Overhaul Versions:
 
-    + Create an Opening Cutscene like what TTR had but with Voice Over and such that explains the plot swiftly but easily. You should be able to skip this Cutscene.
+    + Create a playable Opening Toontorial like ODS but done my way: Outside of Toontown in a kingdom, things are going well and you are introduced to the main character who has weird magical abilities that you can use. Once you've gone through that, you hear a bell ringing outside the castle and you run to look. You see Cogs marching up the path toward the castle. They are damaging property and so you run outside to protect your servants. You are introduced to some real-time fighting mechanics where you fight off cogs in a similar fashion to TTR's Doomsday. Wave after wave, you push back the Cogs as you help your people escape from the Cogs. Once your people escape, you go to the only sancuary left in the world, the Toontown Playgrounds to begin work for the Toontown Resistance.
     + Have SirDapperPenguin & any other modelers begin overhauling the playgrounds and their buildings.
     + Continue working on the new storyline with any help we have at that time.
     + Have Darth and any other helpers to implement Testing Keys to give away once people have reached Level 25 according to THE R0YAL B0T!
