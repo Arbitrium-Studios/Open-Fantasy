@@ -5,7 +5,6 @@ from direct.distributed import ClockDelta
 from direct.task import Task
 from otp.level import DistributedEntityAI
 from otp.level import BasicEntities
-from direct.directnotify import DirectNotifyGlobal
 from toontown.coghq import BattleBlockerAI
 from toontown.coghq import LaserGameMineSweeper
 from toontown.coghq import LaserGameRoll

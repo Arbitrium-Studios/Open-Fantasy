@@ -6,7 +6,6 @@ from .ElevatorConstants import *
 from .ElevatorUtils import *
 from .SuitBuildingGlobals import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM, State

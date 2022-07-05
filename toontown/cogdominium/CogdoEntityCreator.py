@@ -2,7 +2,6 @@ from otp.level import EntityCreator
 from toontown.cogdominium import CogdoCraneGameConsts
 from toontown.cogdominium.CogdoLevelMgr import CogdoLevelMgr
 from toontown.cogdominium import CogdoBoardroomGameConsts
-from toontown.cogdominium import CogdoCraneGameConsts
 
 
 class CogdoEntityCreator(EntityCreator.EntityCreator):

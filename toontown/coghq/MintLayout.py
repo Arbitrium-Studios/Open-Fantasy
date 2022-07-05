@@ -25,7 +25,6 @@ def printAllCashbotInfo():
 
 
 def iterateCashbotMints(func):
-    from toontown.toonbase import ToontownGlobals
     for mintId in [ToontownGlobals.CashbotMintIntA,
                    ToontownGlobals.CashbotMintIntB, ToontownGlobals.CashbotMintIntC]:
         for floorNum in range(ToontownGlobals.MintNumFloors[mintId]):

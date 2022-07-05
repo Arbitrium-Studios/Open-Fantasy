@@ -2,7 +2,7 @@ from toontown.toonbase import ToontownGlobals
 from toontown.coghq import DistributedLevelBattleAI
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import State
-from direct.fsm import ClassicFSM, State
+from direct.fsm import ClassicFSM, 
 from toontown.battle.BattleBase import *
 from . import CogDisguiseGlobals
 from toontown.toonbase.ToontownBattleGlobals import getCountryClubCreditMultiplier

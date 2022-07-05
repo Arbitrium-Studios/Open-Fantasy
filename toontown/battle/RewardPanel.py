@@ -1,6 +1,5 @@
 from pandac.PandaModules import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from toontown.toonbase import ToontownBattleGlobals
 from . import BattleBase

@@ -6,7 +6,6 @@ from . import ClosetGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 from toontown.toontowngui import TTDialog
-from toontown.toonbase import TTLocalizer
 
 
 class ClosetGUI(ClothesGUI.ClothesGUI):
