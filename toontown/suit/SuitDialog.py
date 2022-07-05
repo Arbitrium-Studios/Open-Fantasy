@@ -6,10 +6,7 @@ notify = DirectNotifyGlobal.directNotify.newCategory('SuitDialog')
 
 
 def getBrushOffIndex(suitName):
-    if suitName in SuitBrushOffs:
-        brushoffs = SuitBrushOffs[suitName]
-    else:
-        brushoffs = SuitBrushOffs[None]
+    brushoffs = SuitBrushOffs.get(suitName, SuitBrushOffs[None])
     num = len(brushoffs)
     chunk = 100 / num
     randNum = random.randint(0, 99)
@@ -24,10 +21,7 @@ def getBrushOffIndex(suitName):
 
 
 def getBrushOffText(suitName, index):
-    if suitName in SuitBrushOffs:
-        brushoffs = SuitBrushOffs[suitName]
-    else:
-        brushoffs = SuitBrushOffs[None]
+    brushoffs = SuitBrushOffs.get(suitName, SuitBrushOffs[None])
     return brushoffs[index]
 
 

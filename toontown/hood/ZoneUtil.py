@@ -175,8 +175,7 @@ def getHoodId(zoneId):
 
 def getSafeZoneId(zoneId):
     hoodId = getHoodId(zoneId)
-    if hoodId in HQToSafezone:
-        hoodId = HQToSafezone[hoodId]
+    hoodId = HQToSafezone.get(hoodId)
     return hoodId
 
 

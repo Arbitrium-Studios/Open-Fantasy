@@ -1061,10 +1061,7 @@ WRITE_OFF = list(SuitAttacks.keys()).index('WriteOff')
 
 
 def getFaceoffTaunt(suitName, doId):
-    if suitName in SuitFaceoffTaunts:
-        taunts = SuitFaceoffTaunts[suitName]
-    else:
-        taunts = TTLocalizer.SuitFaceoffDefaultTaunts
+    taunts = SuitFaceoffTaunts.get(suitName, TTLocalizer.SuitFaceoffDefaultTaunts)
     return taunts[doId % len(taunts)]
 
 
@@ -1085,10 +1082,7 @@ def getAttackTauntIndex(attackName):
 
 
 def getAttackTaunt(attackName, index=None):
-    if attackName in SuitAttackTaunts:
-        taunts = SuitAttackTaunts[attackName]
-    else:
-        taunts = TTLocalizer.SuitAttackDefaultTaunts
+    taunts = SuitAttackTaunts.get(attackName, TTLocalizer.SuitAttackDefaultTaunts)
     if index is not None:
         if index >= len(taunts):
             notify.warning(
