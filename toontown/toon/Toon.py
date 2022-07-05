@@ -802,6 +802,7 @@ class Toon(Avatar.Avatar, ToonHead):
         self.rescaleToon()
         self.resetHeight()
         self.setupToonNodes()
+        self.setBlend(frameBlend=base.smoothAnimations)
 
     def setupToonNodes(self):
         rightHand = NodePath('rightHand')

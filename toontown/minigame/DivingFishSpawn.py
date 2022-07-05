@@ -59,6 +59,7 @@ class DivingFishSpawn(DirectObject):
         fish.code = str(self.spawnId) + str(idCode)
         self.fishArray[idCode] = fish
         fish.reparentTo(render)
+        fish.setBlend(frameBlend=base.smoothAnimations)
         fish.setScale(1)
         fish.moveLerp = Sequence()
         if fish.name == 'clown':

@@ -83,6 +83,7 @@ class DistributedPetshopInterior(DistributedObject.DistributedObject):
         self.fish = Actor.Actor('phase_4/models/props/interiorfish-zero',
                                 {'swim': 'phase_4/models/props/interiorfish-swim'})
         self.fish.reparentTo(self.interior)
+        self.fish.setBlend(frameBlend=base.smoothAnimations)
         self.fish.setColorScale(0.8, 0.9, 1, 0.8)
         self.fish.setScale(0.8)
         self.fish.setPos(0, 6, -4)

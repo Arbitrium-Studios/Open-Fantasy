@@ -560,6 +560,7 @@ class DistributedDivingGame(DistributedMinigame):
         for i in range(len(self.crabs)):
             crab = self.crabs[i]
             crab.reparentTo(render)
+            crab.setBlend(frameBlend=base.smoothAnimations)
             crab.name = 'king'
             crab.crabId = i
             cSphere = CollisionSphere(0.0, 0.0, 1, 1.3)

@@ -556,6 +556,7 @@ class DistributedStartingBlock(DistributedObject.DistributedObject, FSM):
                 Func(hole.setDepthWrite, 0),
                 Func(hole.reparentTo, holeParent),
                 Func(hole.setPos, holeParent, Point3(0, 0.0, -.6)),
+                Func(hole.setBlend, frameBlend=base.smoothAnimations),
                 ActorInterval(hole, 'hole', startTime=3.4, endTime=3.1),
                 Wait(0.4),
                 ActorInterval(hole, 'hole', startTime=3.1, endTime=3.4))

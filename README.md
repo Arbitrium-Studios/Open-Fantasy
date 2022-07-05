@@ -34,6 +34,7 @@
 + DarthM on Discord for various features including Credits, Genderless Toons, etc.
 + TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
 + Rocket for helping me implement Wide-Screen Support
++ DTM1218
 
 ## - If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
 

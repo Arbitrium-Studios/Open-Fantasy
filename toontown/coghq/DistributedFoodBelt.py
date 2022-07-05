@@ -181,6 +181,7 @@ class DistributedFoodBelt(
                 self.beltActor.loadAnims(
                     {'idle': 'phase_12/models/bossbotHQ/food_belt2'})
             self.beltActor.reparentTo(render)
+            self.beltActor.setBlend(frameBlend=base.smoothAnimations)
             self.beltActor.setPlayRate(self.BeltActorPlayRate, 'idle')
             mesh = self.beltActor.find('**/mesh_tide1')
             joint = self.beltActor.find('**/uvj_WakeWhiteTide1')

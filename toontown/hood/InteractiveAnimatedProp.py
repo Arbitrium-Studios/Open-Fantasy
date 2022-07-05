@@ -76,6 +76,7 @@ class InteractiveAnimatedProp(
         self.idleInterval = None
         anim = node.getTag('DNAAnim')
         self.trashcan = Actor.Actor(node, copy=0)
+        self.trashcan.setBlend(frameBlend=base.smoothAnimations)
         self.trashcan.reparentTo(node)
         animDict = {}
         animDict['anim'] = '%s/%s' % (self.path, anim)

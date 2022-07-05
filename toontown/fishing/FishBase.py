@@ -50,6 +50,7 @@ class FishBase:
         from direct.actor import Actor
         actor = Actor.Actor(prefix + fileInfo[1], {'intro': prefix + fileInfo[2],
                                                    'swim': prefix + fileInfo[3]})
+        actor.setBlend(frameBlend=base.smoothAnimations)
         return actor
 
     def getSound(self):

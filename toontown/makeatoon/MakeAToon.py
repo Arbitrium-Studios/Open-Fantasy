@@ -218,6 +218,7 @@ class MakeAToon(StateData.StateData):
         self.roomDropActor.loadAnims(
             {'drop': 'phase_3/models/makeatoon/roomAnim_roomDrop'})
         self.roomDropActor.reparentTo(render)
+        self.roomDropActor.setBlend(frameBlend=base.smoothAnimations)
         self.dropJoint = self.roomDropActor.find('**/droppingJoint')
         self.roomSquishActor = Actor()
         self.roomSquishActor.loadModel(
@@ -225,6 +226,7 @@ class MakeAToon(StateData.StateData):
         self.roomSquishActor.loadAnims(
             {'squish': 'phase_3/models/makeatoon/roomAnim_roomSquish'})
         self.roomSquishActor.reparentTo(render)
+        self.roomSquishActor.setBlend(frameBlend=base.smoothAnimations)
         self.squishJoint = self.roomSquishActor.find('**/scalingJoint')
         self.propSquishActor = Actor()
         self.propSquishActor.loadModel(
@@ -232,6 +234,7 @@ class MakeAToon(StateData.StateData):
         self.propSquishActor.loadAnims(
             {'propSquish': 'phase_3/models/makeatoon/roomAnim_propSquish'})
         self.propSquishActor.reparentTo(render)
+        self.propSquishActor.setBlend(frameBlend=base.smoothAnimations)
         self.propSquishActor.pose('propSquish', 0)
         self.propJoint = self.propSquishActor.find('**/propJoint')
         self.spotlightActor = Actor()
@@ -240,6 +243,7 @@ class MakeAToon(StateData.StateData):
         self.spotlightActor.loadAnims(
             {'spotlightShake': 'phase_3/models/makeatoon/roomAnim_spotlightShake'})
         self.spotlightActor.reparentTo(render)
+        self.spotlightActor.setBlend(frameBlend=base.smoothAnimations)
         self.spotlightJoint = self.spotlightActor.find('**/spotlightJoint')
         ee = DirectFrame(pos=(-1, 1, 1), frameSize=(-.01, 0.01, -.01,
                          0.01), frameColor=(0, 0, 0, 0.05), state='normal')

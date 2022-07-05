@@ -102,6 +102,7 @@ class DistributedPhone(DistributedFurnitureItem.DistributedFurnitureItem):
         mount = loader.loadModel('phase_5.5/models/estate/phoneMount-mod')
         mount.setTransparency(0, 1)
         self.model.reparentTo(mount)
+        self.model.setBlend(frameBlend=base.smoothAnimations)
         self.ringSfx = loader.loadSfx('phase_3.5/audio/sfx/telephone_ring.ogg')
         self.handleSfx = loader.loadSfx(
             'phase_5.5/audio/sfx/telephone_handle2.ogg')

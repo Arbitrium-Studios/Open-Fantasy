@@ -1788,7 +1788,7 @@ class DistributedGolfHole(
 
         base.transitions.noIris()
         self.flyOverActor.reparentTo(render)
-        self.flyOverActor.setBlend(frameBlend=True)
+        self.flyOverActor.setBlend(frameBlend=base.smoothAnimations)
         flyOverJoint = self.flyOverActor.find('**/camera1')
         children = flyOverJoint.getChildren()
         numChild = children.getNumPaths()

@@ -186,6 +186,12 @@ class ToonBase(OTPBase.OTPBase):
         self.aspectRatio = float(self.oldX) / self.oldY
         self.calculatedFOV = self.genFOV = self.settings.getSetting(
             "fov", ToontownGlobals.DefaultCameraFov)
+        self.smoothAnimations = self.settings.getSetting('smooth-animations', False)
+        self.settings.updateSetting('smooth-animations', self.smoothAnimations)
+        self.showFPS = self.settings.getSetting('show-fps', False)
+        self.settings.updateSetting('show-fps', self.showFPS)
+        self.toggleFPS(self.showFPS)
+        self.settings.writeSettings()
         return
 
     def windowEvent(self, win):
@@ -508,3 +514,6 @@ class ToonBase(OTPBase.OTPBase):
     def playMusic(self, music, looping=0, interrupt=1, volume=None, time=0.0):
         OTPBase.OTPBase.playMusic(
             self, music, looping, interrupt, volume, time)
+
+    def toggleFPS(self, toggle):
+        base.setFrameRateMeter(toggle)

@@ -60,6 +60,7 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
         pole.setDepthWrite(1)
         frame = self.makeFrame()
         frame.attachNewNode(pole.node())
+        pole.setBlend(frameBlend=base.smoothAnimations)
         name = 'pole-item-%s' % self.sequenceNumber
         CatalogPoleItem.sequenceNumber += 1
         track = Sequence(Func(pole.pose, 'cast', 130), Wait(100), name=name)

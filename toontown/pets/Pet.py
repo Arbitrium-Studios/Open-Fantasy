@@ -477,6 +477,7 @@ class Pet(Avatar.Avatar):
         if not self.teleportHole:
             self.teleportHole = Actor.Actor(
                 'phase_3.5/models/props/portal-mod', {'hole': 'phase_3.5/models/props/portal-chan'})
+            self.teleportHole.setBlend(frameBlend=base.smoothAnimations)
         track = Sequence(
             Wait(1.0), Parallel(
                 self.getTeleportInSoundInterval(), Sequence(
@@ -503,6 +504,7 @@ class Pet(Avatar.Avatar):
         if not self.teleportHole:
             self.teleportHole = Actor.Actor(
                 'phase_3.5/models/props/portal-mod', {'hole': 'phase_3.5/models/props/portal-chan'})
+            self.teleportHole.setBlend(frameBlend=base.smoothAnimations)
         track = Sequence(
             Wait(1.0), Parallel(
                 self.getTeleportOutSoundInterval(), Sequence(
