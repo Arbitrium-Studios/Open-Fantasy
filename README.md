@@ -35,6 +35,7 @@
 + TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
 + Rocket for helping me implement Wide-Screen Support
 + DTM1218
++ ToonJoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
 
 ## - If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
 
