@@ -28,7 +28,7 @@
 + Toontown Rewritten for reviving the spirit of Toontown and its community!
 + Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
 + Jesse Schell for fighting for Toontown Online's Official Return
-
++ toonjoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
 ### Contributors:
 + Battery on Discord for helping me fix the Tuple error!
 + DarthM on Discord for various features including Credits, Genderless Toons, etc.
