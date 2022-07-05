@@ -445,11 +445,10 @@ class OptionsTabPage(DirectFrame):
                 textRowHeight *
                 5),
             command=self.__doDisplaySettings)
-        self.BugReportButton = DirectButton(parent=self, relief=None, text="Report Bug", text_pos=(0, -0.01), text_fg=(0, 0, 0, 1), text_scale=(0.045), image=(gui.find('**/Horiz_Arrow_UP'),
-                                                                                     gui.find(
-                                                                                         '**/Horiz_Arrow_DN'),
-                                                                                     gui.find(
-                                                                                         '**/Horiz_Arrow_Rllvr')), image3_color=Vec4(1, 1, 1, 0.5), scale=(1.0, 1.0, 1.0), pos=(0.25, 0, buttonbase_ycoord - textRowHeight * 6), command=self.showReportNotice)
+        self.BugReportButton = DirectButton(parent=self, relief=None, text="Report Bug", text_pos=(0, -0.01), text_fg=(0, 0, 0, 1), text_scale=(0.045), image=(
+                                                                                     guiButton.find('**/QuitBtn_UP'),
+                guiButton.find('**/QuitBtn_DN'),
+                guiButton.find('**/QuitBtn_RLVR')), image3_color=Vec4(1, 1, 1, 0.5), scale=(1.0, 1.0, 1.0), pos=(-0.5, 0.5, buttonbase_ycoord - textRowHeight * 7), command=self.showReportNotice)
         self.speedChatStyleLeftArrow = DirectButton(parent=self, relief=None, image=(gui.find('**/Horiz_Arrow_UP'),
                                                                                      gui.find(
                                                                                          '**/Horiz_Arrow_DN'),
@@ -530,9 +529,6 @@ class OptionsTabPage(DirectFrame):
                 self.DisplaySettingsTaskName)
 
     def unload(self):
-        closeButtonGui.removeNode()
-        cdrGui.removeNode()
-        submitButtonGui.removeNode()
         self.writeDisplaySettings()
         taskMgr.remove(self.DisplaySettingsTaskName)
         if self.displaySettings is not None:
@@ -549,7 +545,6 @@ class OptionsTabPage(DirectFrame):
         self.speedChatStyleRightArrow.destroy()
         self.BugReportButton.destroy()
         del self.exitButton
-        del self.confirmBugReport
         del self.SoundFX_Label
         del self.Music_Label
         del self.Friends_Label
@@ -565,6 +560,8 @@ class OptionsTabPage(DirectFrame):
         self.speedChatStyleText.destroy()
         del self.speedChatStyleText
         self.currentSizeIndex = None
+        if self.dialog:
+            self.dialog.hide()
         return
 
     def __doToggleMusic(self):
@@ -951,9 +948,6 @@ class CodesTabPage(DirectFrame):
                 1,
                 1),
             command=self.__hideResultPanel)
-        closeButtonGui.removeNode()
-        cdrGui.removeNode()
-        submitButtonGui.removeNode()
         return
 
     def enter(self):
