@@ -94,7 +94,7 @@ class DistCogdoCraneGameAI(
 
     def _gameDoneDL(self, task=None):
         self._handleGameFinished()
-        return task.done
+        return Task.done
 
     def enterFinish(self):
         DistCogdoLevelGameAI.enterFinish(self)
@@ -107,7 +107,7 @@ class DistCogdoCraneGameAI(
 
     def _finishDoneDL(self, task):
         self.announceGameDone()
-        return task.done
+        return Task.done
 
     if __dev__:
 

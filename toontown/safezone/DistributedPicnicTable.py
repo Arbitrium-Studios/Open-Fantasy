@@ -139,7 +139,7 @@ class DistributedPicnicTable(DistributedNode.DistributedNode):
             self.gameMenu.picnicFunction = None
             self.gameMenu = None
         if task is not None:
-            task.done
+            return Task.done
         return
 
     def disable(self):

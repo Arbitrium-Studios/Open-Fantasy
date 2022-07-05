@@ -75,7 +75,7 @@ class DistributedPhotoGameAI(DistributedMinigameAI,
         self.calculateScores()
         self.gameOver()
         if task:
-            return task.done
+            return Task.done
 
     def __playing(self):
         if not hasattr(self, 'gameFSM'):

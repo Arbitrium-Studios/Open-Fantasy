@@ -2825,7 +2825,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
 
     def b_announceBingo(self):
         self.d_announceBingo()
-        self.announceBingo
+        self.announceBingo()
 
     def d_announceBingo(self):
         self.sendUpdate('announceBingo', [])

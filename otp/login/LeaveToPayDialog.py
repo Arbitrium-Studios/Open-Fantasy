@@ -108,7 +108,6 @@ class LeaveToPayDialog:
         if self.dialog:
             self.dialog.hide()
             self.dialog.destroy()
-        self.destructorHook
         self.dialog = None
         self.okHandler = None
         self.cancelHandler = None

@@ -2808,7 +2808,7 @@ class DestroyAllGoons(MagicWord):
                 break
         if not bossCog:
             return "You aren't in a CFO!"
-        bossCog.destroyAllGoons
+        bossCog.destroyAllGoons()
         return 'Destroyed all goons'
 
 

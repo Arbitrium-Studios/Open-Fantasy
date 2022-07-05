@@ -95,7 +95,7 @@ class DistributedPartyManager(DistributedObject):
             if base.localAvatar.doId == hostId:
                 for partyInfo in base.localAvatar.hostedParties:
                     if partyInfo.partyId == partyId:
-                        partyInfo.status == PartyGlobals.PartyStatus.Started
+                        partyInfo.status = PartyGlobals.PartyStatus.Started
 
         messenger.send('requestPartyZoneComplete', [hostId, partyId, zoneId])
 

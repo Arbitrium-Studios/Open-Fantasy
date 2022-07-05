@@ -1200,7 +1200,7 @@ class DistributedBanquetTable(
     def __updateWaterPower(self, task):
         if not self.powerBar:
             print('### no power bar!!!')
-            return task.done
+            return Task.done
         newPower = self.__getWaterPower(globalClock.getFrameTime())
         self.power = newPower
         self.powerBar['value'] = newPower

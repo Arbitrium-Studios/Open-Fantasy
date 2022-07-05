@@ -142,10 +142,10 @@ class TTWhiteList(WhiteList, DirectObject):
         if not self.ch.isValid():
             self.notify.warning('Unable to download %s' % self.url)
             self.redownloadingWhitelist = False
-            return task.done
+            return Task.done
         self.notify.info('Done downloading whitelist file')
         self.updateWhitelist()
-        return task.done
+        return Task.done
 
     def updateWhitelist(self):
         localFilename = Filename(self.whitelistDir, 'twhitelist.dat')

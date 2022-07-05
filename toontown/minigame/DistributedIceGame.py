@@ -844,7 +844,7 @@ class DistributedIceGame(DistributedMinigame.DistributedMinigame,
 
     def __aimTask(self, task):
         if not hasattr(self, 'arrowKeys'):
-            return task.done
+            return Task.done
         dt = globalClock.getDt()
         headingMomentumChange = dt * 60.0
         forceMomentumChange = dt * 160.0
@@ -947,7 +947,7 @@ class DistributedIceGame(DistributedMinigame.DistributedMinigame,
         if self.areAllTiresDisabled():
             self.sendTirePositions()
             self.gameFSM.request('synch')
-            return task.done
+            return Task.done
         return task.cont
 
     def sendTirePositions(self):

@@ -121,12 +121,12 @@ class DistributedGolfGreenGameAI(
             1.0,
             self.__printTime,
             self.taskName('GolfGreenGameTimeout Print'))
-        return task.done
+        return Task.done
 
     def __handleTimeOut(self, task=None):
         taskMgr.remove(self.taskName('GolfGreenGameTimeout'))
         self.__handleFinsihed(0)
-        return task.done
+        return Task.done
 
     def getTimeLeft(self):
         if self.startTime is None:

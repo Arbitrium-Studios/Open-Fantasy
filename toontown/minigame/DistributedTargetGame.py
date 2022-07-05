@@ -1735,7 +1735,7 @@ class DistributedTargetGame(DistributedMinigame):
 
     def __gameDone(self, task=None):
         self.signalDone()
-        return task.done
+        return Task.done
 
     def setGameDone(self, extra=None):
         self.gameOver()

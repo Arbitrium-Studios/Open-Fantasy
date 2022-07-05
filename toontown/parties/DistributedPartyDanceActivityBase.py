@@ -315,7 +315,7 @@ class DistributedPartyDanceActivityBase(DistributedPartyActivity):
                 node2.setPos(Point3(0, 15, 10))
                 node2.lookAt(camNode)
                 h = node2.getH() * (camera.getH(camNode) / abs(camera.getH(camNode)))
-                node2.removeNode
+                node2.removeNode()
                 del node2
                 hpr = camera.getHpr()
                 pos = camera.getPos()

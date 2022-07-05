@@ -201,7 +201,7 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
     def _cleanupAfterLastToonWentDis(self, task):
         self._disCleanupTask = None
         self.bldg.deleteCogdoInterior()
-        return task.done
+        return Task.done
 
     def _handleToonWentSad(self, toonId):
         self.notify.info('toon: %d went sad' % toonId)
@@ -224,7 +224,7 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
     def _cleanupAfterLastToonWentSad(self, task):
         self._sadCleanupTask = None
         self.bldg.deleteCogdoInterior()
-        return task.done
+        return Task.done
 
     def __addToon(self, toonId):
         if toonId not in self.air.doId2do:
@@ -876,7 +876,7 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
 
     def _battleIntroDone(self, task):
         self.b_setState('Battle')
-        return task.done
+        return Task.done
 
     def exitBattleIntro(self):
         taskMgr.remove(self._battleIntroTaskName)

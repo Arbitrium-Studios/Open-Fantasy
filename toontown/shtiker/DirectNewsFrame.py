@@ -303,7 +303,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
         if not self.ch.isValid():
             self.notify.warning('Unable to download %s' % self.url)
             self.redownloadingNews = False
-            return task.done
+            return Task.done
         self.newsFiles = []
         filename = self.rf.readline()
         while filename:
@@ -346,7 +346,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
             self.redownloadingNews = False
             if self.active:
                 self.parseNewsContent()
-            return task.done
+            return Task.done
         self.percentDownloaded = float(
             self.nextNewsFile) / float(len(self.newsFiles))
         self.filename = self.newsFiles[self.nextNewsFile]

@@ -72,7 +72,7 @@ class BanManagerAI:
         else:
             self.notify.warning('no channel for ban req %s' % banReq)
             self.cleanupBanReq(banReq)
-            return task.done
+            return Task.done
         result = ''
         ramfile = self.ramFiles.get(banReq)
         if ramfile:
@@ -81,4 +81,4 @@ class BanManagerAI:
             'done processing ban request %s, ramFile=%s' %
             (banReq, result))
         self.cleanupBanReq(banReq)
-        return task.done
+        return Task.done

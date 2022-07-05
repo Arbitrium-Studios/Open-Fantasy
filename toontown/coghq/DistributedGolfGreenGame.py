@@ -1555,7 +1555,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
     def gameCountDown(self, task):
         self.timeLeft = self.timeTotal - \
             globalClockDelta.localElapsedTime(self.timeStart)
-        return task.done
+        return Task.done
 
     def scoreData(self, total=2, closed=1, scoreList='hello world'):
         self.boardsLeft = total - closed

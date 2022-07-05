@@ -214,7 +214,7 @@ class DistributedMoleField(DistributedNodePathEntity,
         if self.schedule:
             return task.cont
         else:
-            return task.done
+            return Task.done
 
     def handleEnterHill(self, colEntry):
         if not self.gameStarted:

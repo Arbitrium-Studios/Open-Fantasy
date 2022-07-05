@@ -1931,7 +1931,6 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         DistributedToon.DistributedToon.setFlowerBasket(
             self, speciesList, varietyList)
         self.numFlowers = len(self.flowerBasket.flowerList)
-        self.maxFlowerBasket
         if hasattr(self, 'basketButton'):
             self.basketText = '%s / %s' % (self.numFlowers,
                                            self.maxFlowerBasket)

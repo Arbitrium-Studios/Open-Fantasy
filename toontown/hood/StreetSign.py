@@ -63,6 +63,6 @@ class StreetSign(DistributedObject.DistributedObject):
             date = doc.getDate().getString()
         if not self.ch.isValid():
             self.redownloadingStreetSign = False
-            return task.done
+            return Task.done
         self.notify.info('Down downloading street sign')
-        return task.done
+        return Task.done

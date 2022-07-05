@@ -157,7 +157,7 @@ class ChineseTutorial(DirectFrame, FSM.FSM):
         self.forceTransition('Quit')
         self.doneFunction()
         if task is not None:
-            task.done
+            return Task.done
         return
 
 
@@ -334,5 +334,5 @@ class CheckersTutorial(DirectFrame, FSM.FSM):
         base.cr.playGame.getPlace().setState('walk')
         self.doneFunction()
         if task is not None:
-            task.done
+            return Task.done
         return

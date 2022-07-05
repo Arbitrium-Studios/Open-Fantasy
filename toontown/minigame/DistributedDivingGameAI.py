@@ -16,7 +16,6 @@ class DistributedDivingGameAI(DistributedMinigameAI):
         fishProportions.append([])
 
     n = 100
-    fishProportions[0]
     fishProportions[0].append(([0, 0.8],
                                [0.8, 0.9],
                                [0.9, 1],
@@ -53,7 +52,6 @@ class DistributedDivingGameAI(DistributedMinigameAI):
                                [n, n],
                                [n, n],
                                [n, n]))
-    fishProportions[1]
     fishProportions[1].append(([0, 0.8],
                                [0.8, 0.9],
                                [0.9, 1],
@@ -90,7 +88,6 @@ class DistributedDivingGameAI(DistributedMinigameAI):
                                [n, n],
                                [n, n],
                                [0.6, 1]))
-    fishProportions[2]
     fishProportions[2].append(([0, 0.7],
                                [0.7, 0.9],
                                [0.9, 1],
@@ -127,7 +124,6 @@ class DistributedDivingGameAI(DistributedMinigameAI):
                                [0.6, 0.8],
                                [n, n],
                                [0.8, 1]))
-    fishProportions[3]
     fishProportions[3].append(([0, 0.7],
                                [0.7, 0.9],
                                [0.9, 1],
@@ -164,7 +160,6 @@ class DistributedDivingGameAI(DistributedMinigameAI):
                                [0.6, 0.8],
                                [n, n],
                                [0.8, 1]))
-    fishProportions[4]
     fishProportions[4].append(([0, 0.7],
                                [0.7, 0.9],
                                [0.9, 1],
@@ -201,7 +196,6 @@ class DistributedDivingGameAI(DistributedMinigameAI):
                                [0, 0.4],
                                [n, n],
                                [0.6, 1]))
-    fishProportions[5]
     fishProportions[5].append(([0, 0.7],
                                [0.7, 0.9],
                                [0.9, 1],

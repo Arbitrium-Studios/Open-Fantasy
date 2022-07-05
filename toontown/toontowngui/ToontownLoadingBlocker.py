@@ -167,7 +167,7 @@ class ToontownLoadingBlocker(TTDialog.TTDialog):
 
     def __canChangeLoadingTextTask(self, task):
         self.canChangeLoadingText = True
-        return task.done
+        return Task.done
 
     def __createToonTip(self):
         self.toonTipText = DirectLabel(

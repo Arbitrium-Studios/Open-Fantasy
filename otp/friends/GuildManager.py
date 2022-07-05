@@ -68,7 +68,7 @@ class GuildManager(DistributedObjectGlobal):
 
     def _allowMemberList(self, task):
         self.spamGateOpen = True
-        return task.done
+        return Task.done
 
     def memberList(self):
         if self.spamGateOpen:

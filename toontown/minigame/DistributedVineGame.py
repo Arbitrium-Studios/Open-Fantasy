@@ -1854,7 +1854,7 @@ class DistributedVineGame(DistributedMinigame):
             taskMgr.remove(taskName)
 
         for endingTrack in list(self.endingTracks.values()):
-            endingTrack.finish
+            endingTrack.finish()
             del endingTrack
 
         self.endingTracks = {}

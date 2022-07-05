@@ -204,7 +204,7 @@ class DistributedFindFour(DistributedNode.DistributedNode):
         if self.fsm.getCurrentState().getName() == 'waitingToBegin':
             self.exitButtonPushed()
         if task is not None:
-            task.done
+            return Task.done
         return
 
     def setTableDoId(self, doId):

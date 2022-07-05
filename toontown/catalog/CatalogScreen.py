@@ -255,7 +255,7 @@ class CatalogScreen(DirectFrame):
         self.pageIndex = self.pageIndex + 1
         if self.viewing is None:
             self.modeNewCatalog()
-            self.viewing == 'New'
+            self.viewing = 'New'
         if self.viewing == 'New' and self.pageIndex > self.maxPageIndex and self.numBackPages > 0:
             self.showBackorderItems()
         if self.viewing == 'New' and self.pageIndex > self.maxPageIndex and self.numLoyaltyPages > 0:

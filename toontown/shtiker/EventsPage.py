@@ -1247,7 +1247,7 @@ class EventsPage(ShtikerPage.ShtikerPage):
 
         self.newsStatusLabel['text'] = ''
         self.gotArticles = True
-        return task.done
+        return Task.done
 
     def displayArticle(self, img, articleText):
         self.displayArticleImage(img)

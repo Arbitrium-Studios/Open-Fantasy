@@ -626,7 +626,7 @@ class DistributedCogThiefGame(DistributedMinigame):
 
     def updateSuitsTask(self, task):
         if self.gameIsEnding:
-            return task.done
+            return Task.done
         for cogIndex in self.cogInfo:
             suit = self.cogInfo[cogIndex]['suit']
             suit.think()

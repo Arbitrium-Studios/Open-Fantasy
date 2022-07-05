@@ -125,7 +125,7 @@ class DistributedRacePadAI(DistributedKartPadAI, FSM):
 
         self.request('AllAboard')
         if task:
-            return task.done
+            return Task.done
 
     def enterRace(self, task):
         trackId, raceType = self.trackInfo
@@ -145,7 +145,7 @@ class DistributedRacePadAI(DistributedKartPadAI, FSM):
                 startingBlock.avId, 'setRaceZone', [raceZone])
             startingBlock.raceExit()
 
-        return task.done
+        return Task.done
 
     def addAvBlock(self, avId, startingBlock, paid):
         av = self.air.doId2do.get(avId)

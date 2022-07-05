@@ -852,7 +852,7 @@ class DistributedGolfHole(
 
     def __chooseTeeTask(self, task):
         if self.localAvatarChosenTee:
-            return task.done
+            return Task.done
         if self.arrowKeys.jumpPressed():
             if self.flyOverInterval and self.flyOverInterval.isPlaying():
                 pass

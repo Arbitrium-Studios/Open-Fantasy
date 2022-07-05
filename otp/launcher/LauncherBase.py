@@ -143,7 +143,7 @@ class LauncherBase(DirectObject):
             return task.cont
         self.notify.info('Stopping mini task manager.')
         self.miniTaskMgr = None
-        return task.done
+        return Task.done
 
     def newTaskManager(self):
         self.taskMgrStarted = True

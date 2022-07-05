@@ -1051,7 +1051,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             def detachGearRoot(task, gearRoot=gearRoot):
                 if not gearRoot.isEmpty():
                     gearRoot.detachNode()
-                return task.done
+                return Task.done
 
             def detachGearRootLater(gearRoot=gearRoot):
                 if gearRoot.isEmpty():
@@ -1526,7 +1526,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             def detachGearRoot(task, gearRoot=gearRoot):
                 if not gearRoot.isEmpty():
                     gearRoot.detachNode()
-                return task.done
+                return Task.done
 
             def detachGearRootLater(gearRoot=gearRoot):
                 self.doMethodLater(
@@ -1674,7 +1674,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 def detachGearRoot(task, gearRoot=gearRoot):
                     if not gearRoot.isEmpty():
                         gearRoot.detachNode()
-                    return task.done
+                    return Task.done
 
                 if gearRoot.isEmpty():
                     continue

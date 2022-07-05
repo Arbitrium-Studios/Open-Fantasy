@@ -184,7 +184,7 @@ class OZSafeZoneLoader(SafeZoneLoader):
                 timeToNextGeyser,
                 self.doGeyser,
                 'geyser Task')
-        return task.done
+        return Task.done
 
     def restoreLocal(self, task=None):
         place = base.cr.playGame.getPlace()
