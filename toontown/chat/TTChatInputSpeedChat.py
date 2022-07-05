@@ -9,7 +9,6 @@ from toontown.speedchat import TTSCSingingTerminal
 from toontown.speedchat import TTSCIndexedTerminal
 from direct.showbase import DirectObject
 from direct.fsm import ClassicFSM, State
-from direct.fsm import State
 import string
 from otp.otpbase import OTPLocalizer
 from otp.otpbase import OTPGlobals

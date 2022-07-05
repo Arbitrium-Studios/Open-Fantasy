@@ -10,7 +10,7 @@ from direct.task import Task
 from direct.directnotify import DirectNotifyGlobal
 import random
 from direct.fsm import State
-from direct.fsm import ClassicFSM, State
+from direct.fsm import ClassicFSM, 
 from otp.otpbase import PythonUtil
 
 

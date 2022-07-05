@@ -1202,7 +1202,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.hitTrack = track
             self.hitTrack.start()
 
-    def __hitGround(self, avatar, pos, extraArgs=[]):
+    def __hitGround(self, avatar, pos, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         hitP = avatar.getPos(render)
         self.notify.debug('hitGround pos = %s, hitP = %s' % (pos, hitP))
         self.notify.debug('avatar hpr = %s' % avatar.getHpr())
@@ -1227,7 +1229,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         avatar.setPlayRate(2.0, 'run')
         avatar.loop('run')
 
-    def __hitHouse(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitHouse(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.__hitBumper(
             avatar,
             collisionEntry,
@@ -1237,7 +1241,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         pinballScore = ToontownGlobals.PinballScoring[ToontownGlobals.PinballHouse]
         self.incrementPinballInfo(pinballScore[0], pinballScore[1])
 
-    def __hitFence(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitFence(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.__hitBumper(
             avatar,
             collisionEntry,
@@ -1247,7 +1253,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         pinballScore = ToontownGlobals.PinballScoring[ToontownGlobals.PinballFence]
         self.incrementPinballInfo(pinballScore[0], pinballScore[1])
 
-    def __hitTarget(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitTarget(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.__hitBumper(
             avatar,
             collisionEntry,
@@ -1281,7 +1289,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         t = Sequence(Func(avatar.pose, 'lose', 110))
         t.start()
 
-    def __hitRoof(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitRoof(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         if True:
             self.__hitBumper(
                 avatar,
@@ -1332,7 +1342,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         hitP = avatar.getPos(render)
         return
 
-    def __hitBridge(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitBridge(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.notify.debug('hit bridge')
         hitP = avatar.getPos(render)
         self.dustCloud.setPos(render, hitP[0], hitP[1], hitP[2] - 0.5)
@@ -1340,7 +1352,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.dustCloud.play()
         base.playSfx(self.sndHitGround)
 
-    def __hitWater(self, avatar, pos, collisionEntry, extraArgs=[]):
+    def __hitWater(self, avatar, pos, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         hitP = avatar.getPos(render)
         if hitP[2] > ToontownGlobals.EstateWakeWaterHeight:
             self.notify.debug('we hit the ground before we hit water')
@@ -1359,7 +1373,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         place = base.cr.playGame.getPlace()
         self.notify.debug('hitWater: submerged = %s' % place.toonSubmerged)
 
-    def __hitCannonBumper(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitCannonBumper(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.__hitBumper(
             avatar,
             collisionEntry,
@@ -1369,7 +1385,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
         score, multiplier = ToontownGlobals.PinballScoring[ToontownGlobals.PinballCannonBumper]
         self.incrementPinballInfo(score, multiplier)
 
-    def __hitStatuary(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitStatuary(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.__hitBumper(
             avatar,
             collisionEntry,
@@ -1385,7 +1403,9 @@ class DistributedCannon(DistributedObject.DistributedObject):
             multiplier = int(splitParts[2])
         self.incrementPinballInfo(score, multiplier)
 
-    def __hitCloudPlatform(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitCloudPlatform(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         if True:
             self.__hitBumper(
                 avatar,

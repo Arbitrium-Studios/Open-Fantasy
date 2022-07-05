@@ -468,7 +468,9 @@ class DistributedPetProxyAI(DistributedObjectAI.DistributedObjectAI):
             self.b_setLastSeenTimestamp(self.getCurEpochTimestamp())
             return 1
 
-    def handleMoodChange(self, components=[], distribute=1):
+    def handleMoodChange(self, components=None, distribute=1):
+        if components is None:
+            components = []
         if len(components) == 0:
             components = PetMood.PetMood.Components
         if distribute:

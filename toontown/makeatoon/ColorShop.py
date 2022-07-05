@@ -25,7 +25,9 @@ class ColorShop(StateData.StateData):
         else:
             return ToonDNA.defaultGirlColorList
 
-    def enter(self, toon, shopsVisited=[]):
+    def enter(self, toon, shopsVisited=None):
+        if shopsVisited is None:
+            shopsVisited = []
         base.disableMouse()
         self.toon = toon
         self.dna = toon.getStyle()

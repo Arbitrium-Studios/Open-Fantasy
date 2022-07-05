@@ -12,7 +12,9 @@ class PrivacyPolicyTextPanel(getGlobalDialogClass()):
         'PrivacyPolicyTextPanel')
 
     def __init__(self, doneEvent, hidePageNum=0,
-                 pageChangeCallback=None, textList=[]):
+                 pageChangeCallback=None, textList=None):
+        if textList is None:
+            textList = []
         dialogClass = getGlobalDialogClass()
         dialogClass.__init__(
             self,

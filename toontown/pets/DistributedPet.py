@@ -89,7 +89,9 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
         onScreenDebug.removeAllWithPrefix(self.getDisplayPrefix())
         return 1
 
-    def moodComponentChanged(self, components=[]):
+    def moodComponentChanged(self, components=None):
+        if components is None:
+            components = []
         if len(components) == 0:
             components = PetMood.PetMood.Components
         for comp in components:

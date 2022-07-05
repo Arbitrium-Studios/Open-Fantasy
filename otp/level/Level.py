@@ -71,7 +71,9 @@ class Level:
             'concrete Level class must override %s' %
             lineInfo()[2])
 
-    def createAllEntities(self, priorityTypes=[]):
+    def createAllEntities(self, priorityTypes=None):
+        if priorityTypes is None:
+            priorityTypes = []
         self.entities = {}
         entTypes = self.entityCreator.getEntityTypes()
         self.onLevelPreCreate()

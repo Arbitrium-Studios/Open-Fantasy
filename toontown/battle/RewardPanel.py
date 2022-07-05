@@ -1,6 +1,5 @@
 from pandac.PandaModules import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from toontown.toonbase import ToontownBattleGlobals
 from . import BattleBase
@@ -734,7 +733,9 @@ class RewardPanel(DirectFrame):
         return intervalList
 
     def getQuestIntervalList(
-            self, toon, deathList, toonList, origQuestsList, itemList, helpfulToonsList=[]):
+            self, toon, deathList, toonList, origQuestsList, itemList, helpfulToonsList=None):
+        if helpfulToonsList is None:
+            helpfulToonsList = []
         avId = toon.getDoId()
         tickDelay = 0.2
         intervalList = []
@@ -973,7 +974,9 @@ class RewardPanel(DirectFrame):
             track.append(Func(self.cleanupEndTrack))
         return track
 
-    def testMovie(self, otherToons=[]):
+    def testMovie(self, otherToons=None):
+        if otherToons is None:
+            otherToons = []
         track = Sequence()
         track.append(Func(self.show))
         expTrack = self.getExpTrack(base.localAvatar, [1999,

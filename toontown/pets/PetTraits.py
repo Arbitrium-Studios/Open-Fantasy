@@ -182,7 +182,9 @@ class PetTraits:
                                                   self.quality),
                                               self.howExtreme)
 
-    def __init__(self, traitSeed, safeZoneId, traitValueList=[]):
+    def __init__(self, traitSeed, safeZoneId, traitValueList=None):
+        if traitValueList is None:
+            traitValueList = []
         self.traitSeed = traitSeed
         self.safeZoneId = safeZoneId
         self.rng = random.Random(self.traitSeed)

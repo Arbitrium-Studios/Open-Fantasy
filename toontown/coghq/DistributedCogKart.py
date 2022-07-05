@@ -1,13 +1,12 @@
 import math
 from pandac.PandaModules import CollisionSphere, CollisionNode, Vec3, Point3, deg2Rad
-from direct.interval.IntervalGlobal import Sequence, Func, Parallel, ActorInterval, Wait, Parallel, LerpHprInterval, ProjectileInterval, LerpPosInterval
+from direct.interval.IntervalGlobal import Sequence, Func, ActorInterval, Wait, Parallel, LerpHprInterval, ProjectileInterval, LerpPosInterval
 from direct.directnotify import DirectNotifyGlobal
 from toontown.building import ElevatorConstants
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.safezone import DistributedGolfKart
 from toontown.building import DistributedElevatorExt
-from toontown.building import ElevatorConstants
 from toontown.distributed import DelayDelete
 from otp.otpbase import PythonUtil
 from toontown.building import BoardingGroupShow

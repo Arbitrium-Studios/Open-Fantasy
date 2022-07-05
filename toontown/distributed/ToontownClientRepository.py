@@ -1023,7 +1023,6 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
 
     def cleanPetsFromFriendsMap(self):
         for objId, obj in list(self.friendsMap.items()):
-            from toontown.pets import DistributedPet
             if isinstance(obj, DistributedPet.DistributedPet):
                 print(
                     'Removing %s reference from the friendsMap' %

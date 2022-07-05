@@ -15,7 +15,9 @@ class TrialerForceAcknowledge:
     def enter(self, destHood):
         doneStatus = {}
 
-        def letThrough(self=self, doneStatus=doneStatus):
+        def letThrough(self=self, doneStatus=None):
+            if doneStatus is None:
+                doneStatus = doneStatus
             doneStatus['mode'] = 'pass'
             messenger.send(self.doneEvent, [doneStatus])
 

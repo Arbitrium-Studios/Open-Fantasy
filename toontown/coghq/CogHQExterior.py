@@ -1,7 +1,6 @@
 from direct.directnotify import DirectNotifyGlobal
 from toontown.battle import BattlePlace
 from direct.fsm import ClassicFSM, State
-from direct.fsm import State
 from toontown.toonbase import ToontownGlobals
 from toontown.hood import ZoneUtil
 from pandac.PandaModules import *
@@ -166,7 +165,9 @@ class CogHQExterior(BattlePlace.BattlePlace):
             self.handleSquishDone,
             base.localAvatar.uniqueName('finishSquishTask'))
 
-    def handleSquishDone(self, extraArgs=[]):
+    def handleSquishDone(self, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         base.cr.playGame.getPlace().setState('walk')
 
     def exitSquished(self):

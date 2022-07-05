@@ -21,8 +21,10 @@ class GuiScreen:
         self.suppressClickSound = 0
         return
 
-    def startFocusMgmt(self, startFocus=0, enterPressBehavior=DGG.ENTERPRESS_ADVANCE_IFNOTEMPTY, overrides={
-    }, globalFocusHandler=None):
+    def startFocusMgmt(self, startFocus=0, enterPressBehavior=DGG.ENTERPRESS_ADVANCE_IFNOTEMPTY, overrides=None, globalFocusHandler=None):
+        if overrides is None:
+            overrides = {
+            }
         GuiScreen.notify.debug(
             'startFocusMgmt:\nstartFocus=%s,\nenterPressBehavior=%s\noverrides=%s' %
             (startFocus, enterPressBehavior, overrides))

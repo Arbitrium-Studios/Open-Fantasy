@@ -375,7 +375,6 @@ class Movie(DirectObject.DirectObject):
 
     def playTutorialReward_3(self, value):
         self.tutRewardDialog_2.cleanup()
-        from toontown.toon import Toon
         from toontown.toon import ToonDNA
 
         def doneChat1(page, elapsed=0):

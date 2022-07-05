@@ -1,5 +1,4 @@
 from pandac.PandaModules import *
-from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from otp.level import BasicEntities
 from toontown.toonbase import ToontownGlobals

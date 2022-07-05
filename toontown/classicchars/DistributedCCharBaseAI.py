@@ -154,10 +154,10 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
             del self.nearbyAvatarInfoDict[avId]
             self.nearbyAvatars.remove(avId)
 
-    def avatarEnterNextState():
+    def avatarEnterNextState(self):
         pass
 
-    def avatarExitNextState():
+    def avatarExitNextState(self):
         pass
 
     def __clearNearbyAvatars(self):
@@ -166,7 +166,9 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
 
     def sortNearbyAvatars(self):
 
-        def nAv_compare(a, b, nAvIDict=self.nearbyAvatarInfoDict):
+        def nAv_compare(a, b, nAvIDict=None):
+            if nAvIDict is None:
+                nAvIDict = self.nearbyAvatarInfoDict
             tsA = nAvIDict[a]['enterTime']
             tsB = nAvIDict[b]['enterTime']
             if tsA == tsB:

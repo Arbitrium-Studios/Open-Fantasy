@@ -534,8 +534,12 @@ class DistributedRingGame(DistributedMinigame):
         safezone = self.getSafezoneId()
         numGroupsPerDifficulty = difficultyDistributions[safezone]
 
-        def patternsAreValid(difficultyPatterns=difficultyPatterns,
-                             difficultyDistributions=difficultyDistributions):
+        def patternsAreValid(difficultyPatterns=None,
+                             difficultyDistributions=None):
+            if difficultyPatterns is None:
+                difficultyPatterns = difficultyPatterns
+            if difficultyDistributions is None:
+                difficultyDistributions = difficultyDistributions
             for sz in list(difficultyPatterns.keys()):
                 for pattern in difficultyPatterns[sz]:
                     for difficulty in [0, 1, 2]:

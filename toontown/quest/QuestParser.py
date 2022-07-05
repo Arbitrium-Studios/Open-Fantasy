@@ -1097,11 +1097,15 @@ class NPCMoviePlayer(DirectObject.DirectObject):
     def parseThrowSquirtPreview(self, line):
         oldTrackAccess = [None]
 
-        def grabCurTrackAccess(oldTrackAccess=oldTrackAccess):
+        def grabCurTrackAccess(oldTrackAccess=None):
+            if oldTrackAccess is None:
+                oldTrackAccess = oldTrackAccess
             oldTrackAccess[0] = copy.deepcopy(
                 base.localAvatar.getTrackAccess())
 
-        def restoreTrackAccess(oldTrackAccess=oldTrackAccess):
+        def restoreTrackAccess(oldTrackAccess=None):
+            if oldTrackAccess is None:
+                oldTrackAccess = oldTrackAccess
             base.localAvatar.setTrackAccess(oldTrackAccess[0])
 
         minGagLevel = ToontownBattleGlobals.MIN_LEVEL_INDEX + 1

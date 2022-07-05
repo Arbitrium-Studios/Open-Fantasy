@@ -891,7 +891,9 @@ class DistributedCatchGame(DistributedMinigame):
         lerpNP = render.attachNewNode('catchGameSuitParent')
 
         def setup(self=self, startPos=startPos, stopPos=stopPos,
-                  data=data, lerpNP=lerpNP, rng=rng):
+                  data=None, lerpNP=lerpNP, rng=rng):
+            if data is None:
+                data = data
             if len(self.suits) == 0:
                 return
             suit = rng.choice(self.suits)
@@ -907,7 +909,9 @@ class DistributedCatchGame(DistributedMinigame):
             lerpNP.setPos(startPos)
             suit.lookAt(stopPos)
 
-        def cleanup(self=self, data=data, lerpNP=lerpNP):
+        def cleanup(self=self, data=None, lerpNP=lerpNP):
+            if data is None:
+                data = data
             if 'suit' in data:
                 suit = data['suit']
                 suit.reparentTo(hidden)

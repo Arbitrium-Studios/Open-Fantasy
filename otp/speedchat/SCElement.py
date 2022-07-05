@@ -133,7 +133,9 @@ class SCElement(SCObject, NodePath):
     def privCancelFinalize(self):
         taskMgr.remove(self.FinalizeTaskName)
 
-    def finalize(self, dbArgs={}):
+    def finalize(self, dbArgs=None):
+        if dbArgs is None:
+            dbArgs = {}
         if not self.isDirty():
             return
         SCObject.finalize(self)

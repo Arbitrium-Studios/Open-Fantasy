@@ -13,7 +13,13 @@ class DistributedRaceAI(DistributedObjectAI.DistributedObjectAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedRaceAI')
 
     def __init__(self, air, trackId, zoneId, avIds, laps, raceType, racerFinishedFunc, raceDoneFunc, circuitLoop,
-                 circuitPoints, circuitTimes, qualTimes=[], circuitTimeList={}, circuitTotalBonusTickets={}):
+                 circuitPoints, circuitTimes, qualTimes=None, circuitTimeList=None, circuitTotalBonusTickets=None):
+        if qualTimes is None:
+            qualTimes = []
+        if circuitTimeList is None:
+            circuitTimeList = {}
+        if circuitTotalBonusTickets is None:
+            circuitTotalBonusTickets = {}
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
         self.trackId = trackId
         self.direction = self.trackId % 2

@@ -659,7 +659,9 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
                 'toonBarrelRoomIntroDone from %s in invalid state' %
                 avId)
 
-    def __brIntroDone(self, clearedAvIds=[]):
+    def __brIntroDone(self, clearedAvIds=None):
+        if clearedAvIds is None:
+            clearedAvIds = []
         self.b_setState('CollectBarrels')
 
     def enterBarrelRoomIntro(self):
@@ -747,7 +749,9 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
                 'toonBarrelRoomRewardDone from %s in invalid state' %
                 avId)
 
-    def __brRewardDone(self, clearedAvIds=[]):
+    def __brRewardDone(self, clearedAvIds=None):
+        if clearedAvIds is None:
+            clearedAvIds = []
         if len(self.toons) > 0:
             if not self.isBossFloor(self.currentFloor):
                 self._populateFloorSuits()

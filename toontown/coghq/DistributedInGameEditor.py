@@ -650,7 +650,9 @@ class DistributedInGameEditor(
             oldAttribs.append((attrib, value))
 
         def setNewEntityId(
-                entId, self=self, removeAction=removeAction, oldAttribs=oldAttribs):
+                entId, self=self, removeAction=removeAction, oldAttribs=None):
+            if oldAttribs is None:
+                oldAttribs = oldAttribs
             removeAction[2]['entId'] = entId
             for attrib, value in list(spec.items()):
                 self.privSendAttribEdit(entId, attrib, value)
@@ -793,7 +795,9 @@ class DistributedInGameEditor(
                             del spec[attribName]
 
                 def handleEntityInsertComplete(
-                        newEntId, oldEntId=entId, oldEntId2new=oldEntId2new, spec=spec, treeEntry=treeEntry, addEntities=addEntities):
+                        newEntId, oldEntId=entId, oldEntId2new=None, spec=spec, treeEntry=treeEntry, addEntities=addEntities):
+                    if oldEntId2new is None:
+                        oldEntId2new = oldEntId2new
                     oldEntId2new[oldEntId] = newEntId
 
                     def assignAttribs(

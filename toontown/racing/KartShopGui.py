@@ -1105,7 +1105,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
         if not dialogType == MENUS.TeaserPanel:
             self.lastMenu = dialogType
 
-    def __handleMainMenuDlg(self, exitType, args=[]):
+    def __handleMainMenuDlg(self, exitType, args=None):
+        if args is None:
+            args = []
         self.notify.debug(
             '__handleMainMenuDlg: Handling MainMenu Dialog Selection.')
         if exitType == MM_OPTIONS.Cancel:
@@ -1132,7 +1134,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
     def __handleTeaserPanelDlg(self):
         self.__doDialog(MENUS.TeaserPanel)
 
-    def __handleBuyKartDlg(self, exitType, args=[]):
+    def __handleBuyKartDlg(self, exitType, args=None):
+        if args is None:
+            args = []
         self.notify.debug(
             '__handleBuyKartDlg: Handling BuyKart Dialog Selection.')
         if exitType == BK_OPTIONS.Cancel:
@@ -1144,7 +1148,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
             else:
                 self.__doDialog(MENUS.ConfirmBuyKart)
 
-    def __handleBuyAccessoryDlg(self, exitType, args=[]):
+    def __handleBuyAccessoryDlg(self, exitType, args=None):
+        if args is None:
+            args = []
         self.notify.debug(
             '__handleBuyKartDlg: Handling BuyKart Dialog Selection.')
         if exitType == BA_OPTIONS.Cancel:
@@ -1153,7 +1159,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
             self.accID = exitType
             self.__doDialog(MENUS.ConfirmBuyAccessory)
 
-    def __handleReturnKartDlg(self, exitType, args=[]):
+    def __handleReturnKartDlg(self, exitType, args=None):
+        if args is None:
+            args = []
         self.notify.debug(
             '__handleReturnKartDlg: Handling ReturnKart Dialog Selection.')
         if exitType == RK_OPTIONS.Cancel:
@@ -1161,7 +1169,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
         elif exitType == RK_OPTIONS.ReturnKart:
             self.__doDialog(MENUS.ConfirmBuyKart)
 
-    def __handleConfirmBuyAccessoryDlg(self, exitType, args=[]):
+    def __handleConfirmBuyAccessoryDlg(self, exitType, args=None):
+        if args is None:
+            args = []
         self.notify.debug(
             '__handleConfirmBuyAccessoryDlg: Handling ConfirmBuyAccessory Dialog Selection.')
         if exitType == CBA_OPTIONS.Cancel:
@@ -1180,7 +1190,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
             self.accID = -1
             self.__doDialog(MENUS.BuyAccessory)
 
-    def __handleConfirmBuyKartDlg(self, exitType, args=[]):
+    def __handleConfirmBuyKartDlg(self, exitType, args=None):
+        if args is None:
+            args = []
         self.notify.debug(
             '__handleConfirmBuyKartDlg: Handling ConfirmBuyKart Dialog Selection.')
         if exitType == CBK_OPTIONS.Cancel:
@@ -1213,7 +1225,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
                             KartShopGlobals.EVENTDICT)
                     return
 
-                def __handleGuiDone(self, args=[]):
+                def __handleGuiDone(self, args=None):
+                    if args is None:
+                        args = []
                     if hasattr(
                             self, 'kartShopGui') and self.kartShopGui is not None:
                         self.ignoreAll()

@@ -5,7 +5,6 @@ from direct.interval.IntervalGlobal import *
 from .BattleBase import *
 from .BattleProps import *
 from toontown.suit.SuitDNA import *
-from .BattleBase import *
 from .BattleSounds import *
 from . import MovieCamera
 from direct.directnotify import DirectNotifyGlobal
@@ -527,7 +526,9 @@ def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
             taunt,
             CFSpeech | CFTimeout))
 
-    def reparentTrap(suit=suit, battle=battle, trapStorage=trapStorage):
+    def reparentTrap(suit=suit, battle=battle, trapStorage=None):
+        if trapStorage is None:
+            trapStorage = trapStorage
         trapProp = suit.battleTrapProp
         if trapProp is not None:
             trapProp.wrtReparentTo(battle)
@@ -547,7 +548,9 @@ def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
     origPos, origHpr = battle.getActorPosHpr(suit)
     track.append(Func(suit.setHpr, battle, origHpr))
 
-    def returnTrapToSuit(suit=suit, trapStorage=trapStorage):
+    def returnTrapToSuit(suit=suit, trapStorage=None):
+        if trapStorage is None:
+            trapStorage = trapStorage
         trapProp = trapStorage['trap']
         if trapProp is not None:
             if trapProp.getName() == 'traintrack':
@@ -786,8 +789,12 @@ def getPropAppearTrack(prop, parent, posPoints, appearDelay, scaleUpPoint=Point3
     return propTrack
 
 
-def getPropThrowTrack(attack, prop, hitPoints=[], missPoints=[], hitDuration=0.5, missDuration=0.5, hitPointNames='none',
+def getPropThrowTrack(attack, prop, hitPoints=None, missPoints=None, hitDuration=0.5, missDuration=0.5, hitPointNames='none',
                       missPointNames='none', lookAt='none', groundPointOffSet=0, missScaleDown=None, parent=render):
+    if hitPoints is None:
+        hitPoints = []
+    if missPoints is None:
+        missPoints = []
     target = attack['target']
     toon = target['toon']
     dmg = target['hp']
@@ -843,8 +850,10 @@ def getThrowTrack(object, target, duration=1.0,
                   parent=render, gravity=-32.144):
     values = {}
 
-    def calcOriginAndVelocity(object=object, target=target, values=values,
+    def calcOriginAndVelocity(object=object, target=target, values=None,
                               duration=duration, parent=parent, gravity=gravity):
+        if values is None:
+            values = values
         if callable(target):
             target = target()
         object.wrtReparentTo(parent)

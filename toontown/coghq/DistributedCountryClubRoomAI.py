@@ -1,7 +1,6 @@
 from otp.level import DistributedLevelAI, LevelSpec
 from direct.directnotify import DirectNotifyGlobal
 from direct.task import Task
-from otp.level import LevelSpec
 from toontown.toonbase import ToontownGlobals, ToontownBattleGlobals
 from toontown.coghq import FactoryEntityCreatorAI, CountryClubRoomSpecs
 from toontown.coghq import CountryClubRoomBase, LevelSuitPlannerAI

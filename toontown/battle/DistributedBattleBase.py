@@ -6,7 +6,6 @@ from direct.distributed.ClockDelta import *
 from toontown.toonbase import ToontownBattleGlobals
 from direct.distributed import DistributedNode
 from direct.fsm import ClassicFSM, State
-from direct.fsm import State
 from direct.task.Task import Task
 from direct.directnotify import DirectNotifyGlobal
 from . import Movie
@@ -332,7 +331,9 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
             self.needAdjustTownBattle = 1
         return None
 
-    def getActorPosHpr(self, actor, actorList=[]):
+    def getActorPosHpr(self, actor, actorList=None):
+        if actorList is None:
+            actorList = []
         if isinstance(actor, Suit.Suit):
             if actorList == []:
                 actorList = self.activeSuits

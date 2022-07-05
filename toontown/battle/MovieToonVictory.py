@@ -74,7 +74,11 @@ class ToonVictorySkipper(DirectObject):
 
 
 def doToonVictory(localToonActive, toons, rewardToonIds, rewardDicts, deathList,
-                  rpanel, allowGroupShot=1, uberList=[], helpfulToonsList=[], noSkip=False):
+                  rpanel, allowGroupShot=1, uberList=None, helpfulToonsList=None, noSkip=False):
+    if uberList is None:
+        uberList = []
+    if helpfulToonsList is None:
+        helpfulToonsList = []
     track = Sequence()
     if localToonActive == 1:
         track.append(Func(rpanel.show))
