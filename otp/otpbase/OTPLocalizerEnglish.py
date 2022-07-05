@@ -2,15 +2,15 @@ from pandac.PandaModules import TextPropertiesManager
 from pandac.PandaModules import TextProperties
 import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
-lTheBrrrgh = 'The Brrrgh'
-lDaisyGardens = 'Daisy Gardens'
-lDonaldsDock = "Donald's Dock"
-lDonaldsDreamland = "Donald's Dreamland"
-lMinniesMelodyland = "Minnie's Melodyland"
+lTheBrrrgh = 'Tundra Wonderland'
+lDaisyGardens = 'Flowering Grove'
+lDonaldsDock = "Toontown Docks"
+lDonaldsDreamland = "Drowsy Dreamland"
+lMinniesMelodyland = "The Land of Melody"
 lToontownCentral = 'Toontown Central'
-lGoofySpeedway = 'Goofy Speedway'
-lOutdoorZone = "Chip 'n Dale's Acorn Acres"
-lGolfZone = "Chip 'n Dale's MiniGolf"
+lGoofySpeedway = 'Toontwon Speedway'
+lOutdoorZone = "Acorn Acres"
+lGolfZone = "Toontown's MiniGolf"
 lCancel = 'Cancel'
 lClose = 'Close'
 lOK = 'OK'
@@ -997,20 +997,20 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1111: "Let's go to %s!" % lGoofySpeedway,
                                1112: "Let's go to my house!",
                                1113: "Let's go to your house!",
-                               1114: "Let's go to Sellbot HQ!",
+                               1114: "Let's go to Sellbot Headquarters!",
                                1115: "Let's go fight the VP!",
                                1116: "Let's go in the Factory!",
                                1117: "Let's go fishing!",
                                1118: "Let's go fishing at my house!",
-                               1119: "Let's go to Cashbot HQ!",
+                               1119: "Let's go to Cashbot Headquarters!",
                                1120: "Let's go fight the CFO!",
                                1121: "Let's go in the Mint!",
-                               1122: "Let's go to Lawbot HQ!",
+                               1122: "Let's go to Lawbot Headquarters!",
                                1123: "Let's go fight the Chief Justice!",
                                1124: "Let's go in the District Attorney's Office!",
                                1125: "Let's go to %s!" % lOutdoorZone,
                                1126: "Let's go to %s!" % lGolfZone,
-                               1127: "Let's go to Bossbot HQ!",
+                               1127: "Let's go to Bossbot Headquarters!",
                                1128: "Let's go fight the CEO!",
                                1129: "Let's go in the Cog Golf Courses!",
                                1130: "Let's go take over a Field Office!",
@@ -2506,7 +2506,7 @@ CustomSCStrings = {10: 'Oh, well.',
                    3530: "You're too much!",
                    4000: 'Toons rule!',
                    4010: 'Cogs drool!',
-                   4020: 'Toons of the world unite!',
+                   4020: 'Toons of the World, Unite!',
                    4030: 'Howdy, partner!',
                    4040: 'Much obliged.',
                    4050: 'Get along, little doggie.',
