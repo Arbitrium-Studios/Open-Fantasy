@@ -1683,7 +1683,7 @@ class Toon(Avatar.Avatar, ToonHead):
                                     ('sad-walk', 1.2),
                                     ('sad-walk', 1.2),
                                     ('sad-walk', -1.0))
-        self.setSpeed(0, 0)
+        self.setSpeed(0, 0, 0)
         Emote.globalEmote.disableBody(self, 'toon, enterSad')
         self.setActiveShadow(1)
         if self.isLocal():
