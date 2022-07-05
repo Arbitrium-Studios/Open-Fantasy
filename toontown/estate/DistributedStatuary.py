@@ -5,7 +5,6 @@ from . import GardenGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 from toontown.toontowngui import TTDialog
-from toontown.toonbase import TTLocalizer
 from pandac.PandaModules import NodePath
 from pandac.PandaModules import Point3
 

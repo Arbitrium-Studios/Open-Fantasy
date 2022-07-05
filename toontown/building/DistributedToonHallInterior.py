@@ -9,7 +9,6 @@ from .DistributedToonInterior import DistributedToonInterior
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM, State
 from direct.distributed import DistributedObject
-from direct.fsm import State
 from direct.actor import Actor
 import random
 import time

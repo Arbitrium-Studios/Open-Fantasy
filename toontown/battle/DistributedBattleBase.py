@@ -6,7 +6,6 @@ from direct.distributed.ClockDelta import *
 from toontown.toonbase import ToontownBattleGlobals
 from direct.distributed import DistributedNode
 from direct.fsm import ClassicFSM, State
-from direct.fsm import State
 from direct.task.Task import Task
 from direct.directnotify import DirectNotifyGlobal
 from . import Movie

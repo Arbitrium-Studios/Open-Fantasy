@@ -10,7 +10,7 @@ from toontown.battle import SuitBattleGlobals
 import random
 from toontown.suit import SuitDNA
 from direct.fsm import State
-from direct.fsm import ClassicFSM, State
+from direct.fsm import ClassicFSM, 
 from toontown.toonbase import ToontownGlobals
 
 

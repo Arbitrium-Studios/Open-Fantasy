@@ -2,7 +2,6 @@ from otp.ai.AIBaseGlobal import *
 from . import DistributedCCharBaseAI
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM, State
-from direct.fsm import State
 from direct.task import Task
 import random
 from toontown.toonbase import ToontownGlobals

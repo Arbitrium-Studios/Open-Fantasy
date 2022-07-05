@@ -3,7 +3,6 @@ from direct.interval.IntervalGlobal import *
 from . import DistributedCCharBase
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM, State
-from direct.fsm import State
 from . import CharStateDatas
 from . import CCharChatter
 from toontown.toonbase import ToontownGlobals

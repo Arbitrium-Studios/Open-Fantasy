@@ -8,7 +8,6 @@ from toontown.launcher import DownloadForceAcknowledge
 from . import House
 from . import Estate
 from . import HouseGlobals
-import random
 import math
 from toontown.coghq import MovingPlatform
 from direct.directnotify import DirectNotifyGlobal

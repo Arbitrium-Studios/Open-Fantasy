@@ -5,7 +5,6 @@ from direct.interval.IntervalGlobal import *
 from .BattleBase import *
 from .BattleProps import *
 from toontown.suit.SuitDNA import *
-from .BattleBase import *
 from .BattleSounds import *
 from . import MovieCamera
 from direct.directnotify import DirectNotifyGlobal
