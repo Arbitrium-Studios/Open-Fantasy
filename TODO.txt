@@ -47,5 +47,15 @@
 + Implement this into Open-Fantasy: https://github.com/Toontown-Open-Source-Initiative/Toontown-VP-After-Death
 + Make this branch of Toontown Fantasy used for singleplayer and subsequently all Cog battles can be done in singleplayer
 + Rebalance fishing so it's more fun!
++ Add the playground nametag Depth Mines over the Hills next to Toontown Stadium, TLOM, and CBHQ!
++ Add Street name to the Untitled Tunnel in Acorn Acres that leads to Funny Farm.
++ Add button to switch between maps like what Tooniversal Studios has.
++ Add Gag Shop, Pet Shop, Fishing Pier, Fishermen, Trolley, etc. to Acorn Acres.
++ Add the word Playground underneath Acorn Acres since I'll be turning it into a playground!
++ Add Butterflies to Acorn Acres, birds chirping, and fish hopping across the pond.
++ When you jump into a shallow pool of water, it use make the splash effect.
++ When a Toon jumps into the water, the Fish dots should swim away from the source.
++ Add Gag Training Fridays, Double Merit Mondays, etc. to the Calendar and what we could use.
++ Add the date when you get your next Catalog to the Calendar Page.
 
 More soon!
