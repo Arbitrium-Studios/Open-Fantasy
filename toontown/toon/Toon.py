@@ -536,6 +536,7 @@ class Toon(Avatar.Avatar, ToonHead):
         ToonHead.__init__(self)
         self.forwardSpeed = 0.0
         self.rotateSpeed = 0.0
+        self.slideSpeed = 0.0
         self.avatarType = 'toon'
         self.motion = Motion.Motion(self)
         self.standWalkRunReverse = None
@@ -1557,16 +1558,33 @@ class Toon(Avatar.Avatar, ToonHead):
             self.jar = None
         return
 
-    def setSpeed(self, forwardSpeed, rotateSpeed):
+    def setSpeed(self, forwardSpeed, rotateSpeed, slideSpeed):
+        """setSpeed(self, float forwardSpeed, float rotateSpeed)
+
+         Sets the indicated forward velocity and rotational velocities
+         Sets the indicated forward velocity, strafe velocity,  and rotational velocities
+         of the toon.  This is used when in the Happy and Sad states to
+         determine which animation to play.
+         
+
+         The return value is one of RUN_INDEX, WALK_INDEX, etc., or
+         None if the animation does not specialize for the various
+         actions.
+         """
         self.forwardSpeed = forwardSpeed
         self.rotateSpeed = rotateSpeed
+        self.slideSpeed = slideSpeed
         action = None
         if self.standWalkRunReverse is not None:
             if forwardSpeed >= ToontownGlobals.RunCutOff:
+                # Running 
                 action = OTPGlobals.RUN_INDEX
+            # TODO implement strafing when wasd support is added
             elif forwardSpeed > ToontownGlobals.WalkCutOff:
+                # Walking
                 action = OTPGlobals.WALK_INDEX
             elif forwardSpeed < -ToontownGlobals.WalkCutOff:
+                # Backwards walking
                 action = OTPGlobals.REVERSE_INDEX
             elif rotateSpeed != 0.0:
                 action = OTPGlobals.WALK_INDEX
@@ -1575,6 +1593,7 @@ class Toon(Avatar.Avatar, ToonHead):
             anim, rate = self.standWalkRunReverse[action]
             self.motion.enter()
             self.motion.setState(anim, rate)
+            self.orbitalCamera.setGeomNodeH(0)
             if anim != self.playingAnim:
                 self.playingAnim = anim
                 self.playingRate = rate
@@ -1647,7 +1666,7 @@ class Toon(Avatar.Avatar, ToonHead):
                                     ('walk', 1.0),
                                     ('run', 1.0),
                                     ('walk', -1.0))
-        self.setSpeed(self.forwardSpeed, self.rotateSpeed)
+        self.setSpeed(self.forwardSpeed, self.rotateSpeed, self.slideSpeed)
         self.setActiveShadow(1)
         return
 
@@ -1688,7 +1707,7 @@ class Toon(Avatar.Avatar, ToonHead):
                                     ('catch-run', 1.0),
                                     ('catch-run', 1.0),
                                     ('catch-run', -1.0))
-        self.setSpeed(self.forwardSpeed, self.rotateSpeed)
+        self.setSpeed(self.forwardSpeed, self.rotateSpeed, self.slideSpeed)
         self.setActiveShadow(1)
         return
 
@@ -1706,7 +1725,7 @@ class Toon(Avatar.Avatar, ToonHead):
                                     ('catch-eatnrun', 1.0),
                                     ('catch-eatnrun', 1.0),
                                     ('catch-eatnrun', -1.0))
-        self.setSpeed(self.forwardSpeed, self.rotateSpeed)
+        self.setSpeed(self.forwardSpeed, self.rotateSpeed, self.slideSpeed)
         self.setActiveShadow(0)
         return
 
@@ -2387,7 +2406,7 @@ class Toon(Avatar.Avatar, ToonHead):
                                     ('walk', 1.0),
                                     ('run', 1.0),
                                     ('walk', -1.0))
-        self.setSpeed(self.forwardSpeed, self.rotateSpeed)
+        self.setSpeed(self.forwardSpeed, self.rotateSpeed, self.slideSpeed)
         if self.isLocal() and emoteIndex != Emote.globalEmote.EmoteSleepIndex:
             if self.sleepFlag:
                 self.b_setAnimState('Happy', self.animMultiplier)
@@ -3493,7 +3512,7 @@ class Toon(Avatar.Avatar, ToonHead):
                                     ('run', 1.0),
                                     ('run', 1.0),
                                     ('run', -1.0))
-        self.setSpeed(self.forwardSpeed, self.rotateSpeed)
+        self.setSpeed(self.forwardSpeed, self.rotateSpeed, self.slideSpeed)
         self.setActiveShadow(1)
         return
 

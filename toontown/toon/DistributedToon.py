@@ -1372,6 +1372,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
     def doSmoothTask(self, task):
         self.smoother.computeAndApplySmoothPosHpr(self, self)
         self.setSpeed(self.smoother.getSmoothForwardVelocity(),
+                      self.smoother.getSmoothLateralVelocity(),
                       self.smoother.getSmoothRotationalVelocity())
         return Task.cont
 

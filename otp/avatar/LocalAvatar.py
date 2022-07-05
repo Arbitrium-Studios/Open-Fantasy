@@ -18,6 +18,7 @@ from direct.controls.GravityWalker import GravityWalker
 from direct.controls.ObserverWalker import ObserverWalker
 from direct.controls.SwimWalker import SwimWalker
 from direct.controls.TwoDWalker import TwoDWalker
+from toontown.toon.OrbitalCamera import OrbitCamera
 
 
 class LocalAvatar(DistributedAvatar.DistributedAvatar,
@@ -85,6 +86,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         self.showNametag2d()
         self.setPickable(0)
         self.posCameraSeq = None
+        self.orbitalCamera = OrbitCamera(self)
         return
 
     def useSwimControls(self):
@@ -513,11 +515,11 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
                                  Point3(0.0, camHeight, camHeight * 4.0),
                                  Point3(0.0, camHeight, camHeight * -1.0),
                                  0),
-                                (Point3(0.0, 0.5, camHeight),
-                                 defLookAt,
-                                 Point3(0.0, camHeight, camHeight * 1.33),
-                                 Point3(0.0, camHeight, camHeight * 0.66),
-                                 1),
+                                # (Point3(0.0, 0.5, camHeight),
+                                #  defLookAt,
+                                #  Point3(0.0, camHeight, camHeight * 1.33),
+                                #  Point3(0.0, camHeight, camHeight * 0.66),
+                                #  1),
                                 (Point3(5.7 * heightScaleFactor, 7.65 * heightScaleFactor, camHeight + 2.0),
                                  Point3(0.0, 1.0, camHeight),
                                  Point3(0.0, 1.0, camHeight * 4.0),
@@ -747,6 +749,11 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         self.__geom = geom
 
     def startUpdateSmartCamera(self, push=1):
+        """
+         Spawn a task to update the smart camera every frame
+         """
+        self.orbitalCamera.start()
+        return
         if self._smartCamEnabled:
             LocalAvatar.notify.warning(
                 'redundant call to startUpdateSmartCamera')
@@ -757,6 +764,17 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         self.recalcCameraSphere()
         self.initCameraPositions()
         self.setCameraPositionByIndex(self.cameraIndex)
+        # self.orbitalCamera.start()
+        self.cTrav.addCollider(self.ccSphereNodePath, self.camPusher)
+        # activate the on-floor ray
+        self.ccTravOnFloor.addCollider(self.ccRay2NodePath,
+                                       self.camFloorCollisionBroadcaster)
+        taskName = self.taskName("updateSmartCamera")
+        taskMgr.remove(taskName)
+        taskMgr.add(self.updateSmartCamera, taskName, priority=47)
+
+        self.enableSmartCameraViews()
+        return
         self.posCamera(0, 0.0)
         self.__instantaneousCamPos = camera.getPos()
         if push:
@@ -774,11 +792,14 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         self.enableSmartCameraViews()
 
     def stopUpdateSmartCamera(self):
+        self.orbitalCamera.stop()
+        return
         if not self._smartCamEnabled:
             LocalAvatar.notify.warning(
                 'redundant call to stopUpdateSmartCamera')
             return
         self.disableSmartCameraViews()
+
         self.cTrav.removeCollider(self.ccSphereNodePath)
         self.ccTravOnFloor.removeCollider(self.ccRay2NodePath)
         if not base.localAvatar.isEmpty():
@@ -1151,7 +1172,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
                 self.lastNeedH = needH
         else:
             self.lastNeedH = None
-        action = self.setSpeed(speed, rotSpeed)
+        action = self.setSpeed(speed, rotSpeed, slideSpeed)
         if action != self.lastAction:
             self.lastAction = action
             if self.emoteTrack:
@@ -1294,3 +1315,6 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
 
     def canChat(self):
         return 0
+
+    def getGeom(self):
+         return self.__geom

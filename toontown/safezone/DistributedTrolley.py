@@ -288,6 +288,7 @@ class DistributedTrolley(DistributedObject.DistributedObject):
                 toon.wrtReparentTo(self.trolleyCar)
                 toon.setAnimState('run', 1.0)
                 toon.headsUp(-5, -4.5 + index * 3, 1.4)
+                toon.orbitalCamera.setGeomNodeH(0)
                 sitStartDuration = toon.getDuration('sit-start')
                 track = Sequence(
                     LerpPosInterval(
