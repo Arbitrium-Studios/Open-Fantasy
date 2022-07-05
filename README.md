@@ -23,12 +23,6 @@
 + AiGenics | Story Writer
 + THE PLAYER ZER0 aka Gracie T. Lovelight | Story Writer
 
-### Special Thanks To:
-+ Satire6 for releasing Pandora & Anesidora to the public!
-+ Toontown Rewritten for reviving the spirit of Toontown and its community!
-+ Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
-+ Jesse Schell for fighting for Toontown Online's Official Return
-
 ### Contributors:
 + Battery on Discord for helping me fix the Tuple error!
 + DarthM on Discord for various features including Credits, Genderless Toons, etc.
@@ -36,6 +30,12 @@
 + Rocket for helping me implement Wide-Screen Support
 + DTM1218
 + ToonJoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
+
+### Special Thanks To:
++ Satire6 for releasing Pandora & Anesidora to the public!
++ Toontown Rewritten for reviving the spirit of Toontown and its community!
++ Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
++ Jesse Schell for fighting for Toontown Online's Official Return
 
 ## - If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
 
