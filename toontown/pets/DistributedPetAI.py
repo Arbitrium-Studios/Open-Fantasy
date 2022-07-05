@@ -803,7 +803,9 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI,
         for mood, factor in list(mood2factor.items()):
             self.lerpMood(mood, factor)
 
-    def handleMoodChange(self, components=[], distribute=1):
+    def handleMoodChange(self, components=None, distribute=1):
+        if components is None:
+            components = []
         if len(components) == 0:
             components = PetMood.PetMood.Components
         if distribute:

@@ -258,7 +258,9 @@ def createTrainTrackAppearTrack(dyingSuit, toon, battle, npcs):
     return retval
 
 
-def createSuitReviveTrack(suit, toon, battle, npcs=[]):
+def createSuitReviveTrack(suit, toon, battle, npcs=None):
+    if npcs is None:
+        npcs = []
     suitTrack = Sequence()
     suitPos, suitHpr = battle.getActorPosHpr(suit)
     if hasattr(suit, 'battleTrapProp') and suit.battleTrapProp and suit.battleTrapProp.getName(
@@ -393,7 +395,9 @@ def createSuitReviveTrack(suit, toon, battle, npcs=[]):
                     gears1Track, gears2MTrack, toonMTrack)
 
 
-def createSuitDeathTrack(suit, toon, battle, npcs=[]):
+def createSuitDeathTrack(suit, toon, battle, npcs=None):
+    if npcs is None:
+        npcs = []
     suitTrack = Sequence()
     suitPos, suitHpr = battle.getActorPosHpr(suit)
     if hasattr(suit, 'battleTrapProp') and suit.battleTrapProp and suit.battleTrapProp.getName(

@@ -166,7 +166,9 @@ class CogHQExterior(BattlePlace.BattlePlace):
             self.handleSquishDone,
             base.localAvatar.uniqueName('finishSquishTask'))
 
-    def handleSquishDone(self, extraArgs=[]):
+    def handleSquishDone(self, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         base.cr.playGame.getPlace().setState('walk')
 
     def exitSquished(self):

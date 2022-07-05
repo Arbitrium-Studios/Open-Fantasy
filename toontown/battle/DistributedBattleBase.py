@@ -332,7 +332,9 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
             self.needAdjustTownBattle = 1
         return None
 
-    def getActorPosHpr(self, actor, actorList=[]):
+    def getActorPosHpr(self, actor, actorList=None):
+        if actorList is None:
+            actorList = []
         if isinstance(actor, Suit.Suit):
             if actorList == []:
                 actorList = self.activeSuits

@@ -225,7 +225,11 @@ class DistributedGridAI(DistributedEntityAI.DistributedEntityAI):
 
         self.__setChangedActiveCells(onList, offList, objId)
 
-    def __setChangedActiveCells(self, onList=[], offList=[], objId=None):
+    def __setChangedActiveCells(self, onList=None, offList=None, objId=None):
+        if onList is None:
+            onList = []
+        if offList is None:
+            offList = []
         for cell in self.activeCellList:
             self.notify.debug(
                 'onList = %s, offList = %s, cell = %s' %

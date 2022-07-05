@@ -426,7 +426,9 @@ class Avatar(Actor, ShadowCaster):
             messenger.send('clickedNametag', [self])
 
     def setPageChat(self, addressee, paragraph, message, quitButton,
-                    extraChatFlags=None, dialogueList=[], pageButton=True):
+                    extraChatFlags=None, dialogueList=None, pageButton=True):
+        if dialogueList is None:
+            dialogueList = []
         self.__chatAddressee = addressee
         self.__chatPageNumber = None
         self.__chatParagraph = paragraph
@@ -450,7 +452,9 @@ class Avatar(Actor, ShadowCaster):
         return
 
     def setLocalPageChat(self, message, quitButton,
-                         extraChatFlags=None, dialogueList=[]):
+                         extraChatFlags=None, dialogueList=None):
+        if dialogueList is None:
+            dialogueList = []
         self.__chatAddressee = base.localAvatar.doId
         self.__chatPageNumber = None
         self.__chatParagraph = None

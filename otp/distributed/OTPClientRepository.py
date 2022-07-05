@@ -579,8 +579,10 @@ class OTPClientRepository(ClientRepositoryBase):
         return
 
     @report(types=['args', 'deltaStamp'], dConfigParam='teleport')
-    def enterCreateAccount(self, createAccountDoneData={'back': 'login',
-                                                        'backArgs': []}):
+    def enterCreateAccount(self, createAccountDoneData=None):
+        if createAccountDoneData is None:
+            createAccountDoneData = {'back': 'login',
+                                                                'backArgs': []}
         self.createAccountDoneData = createAccountDoneData
         self.createAccountDoneEvent = 'createAccountDone'
         self.createAccountScreen = None
@@ -2682,5 +2684,7 @@ class OTPClientRepository(ClientRepositoryBase):
     ITAG_GAME = 'game'
 
     def addTaggedInterest(self, parentId, zoneId, mainTag,
-                          desc, otherTags=[], event=None):
+                          desc, otherTags=None, event=None):
+        if otherTags is None:
+            otherTags = []
         return self.addInterest(parentId, zoneId, desc, event)

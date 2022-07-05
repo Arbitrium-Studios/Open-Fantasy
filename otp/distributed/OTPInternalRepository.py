@@ -28,7 +28,9 @@ class OTPInternalRepository(AstronInternalRepository):
         distObj.setLocation(distObj.parentId, zoneId)
         self.sendSetLocation(distObj, distObj.parentId, zoneId)
 
-    def setAllowClientSend(self, avId, distObj, fieldNameList=[]):
+    def setAllowClientSend(self, avId, distObj, fieldNameList=None):
+        if fieldNameList is None:
+            fieldNameList = []
         dg = PyDatagram()
         dg.addServerHeader(
             distObj.GetPuppetConnectionChannel(avId),

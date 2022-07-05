@@ -2,7 +2,9 @@
 
 class AttribDesc:
 
-    def __init__(self, name, default, datatype='string', params={}):
+    def __init__(self, name, default, datatype='string', params=None):
+        if params is None:
+            params = {}
         self.name = name
         self.default = default
         self.datatype = datatype

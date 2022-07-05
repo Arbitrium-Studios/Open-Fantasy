@@ -34,7 +34,9 @@ class SCEmoteTerminal(SCTerminal):
             return 1
         return Emote.globalEmote.isEnabled(self.emoteId)
 
-    def finalize(self, dbArgs={}):
+    def finalize(self, dbArgs=None):
+        if dbArgs is None:
+            dbArgs = {}
         if not self.isDirty():
             return
         args = {}

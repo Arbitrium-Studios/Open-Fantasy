@@ -15,7 +15,9 @@ class KeyCodesGui(DirectObject):
     notify = directNotify.newCategory('KeyCodesGui')
     TIMEOUT_TASK = 'KeyCodeGui_TIMEOUT_TASK'
 
-    def __init__(self, keyCodes, yOffset=0.55, keyToIndex=KEY_TO_INDEX):
+    def __init__(self, keyCodes, yOffset=0.55, keyToIndex=None):
+        if keyToIndex is None:
+            keyToIndex = KEY_TO_INDEX
         self._keyCodes = keyCodes
         self._keyToIndex = keyToIndex
         self._arrowWidth = 0.18

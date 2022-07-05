@@ -30,7 +30,9 @@ MinigameZoneRefs = {}
 
 
 def createMinigame(air, playerArray, trolleyZone, minigameZone=None, previousGameId=ToontownGlobals.NoPreviousGameId,
-                   newbieIds=[], startingVotes=None, metagameRound=-1, desiredNextGame=None):
+                   newbieIds=None, startingVotes=None, metagameRound=-1, desiredNextGame=None):
+    if newbieIds is None:
+        newbieIds = []
     if minigameZone is None:
         minigameZone = air.allocateZone()
     acquireMinigameZone(minigameZone)
