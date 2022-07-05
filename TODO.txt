@@ -1,4 +1,36 @@
-+ Create a in-game launcher like ODS using the Anesidora files
+The Road to Fantasy:
+
+
+Phase 1 - The Presentability Versions:
+
+    + Make Shtiker Book, Friends List, etc. accessible during battle but grey out the button so people can't flee.
+    + Make an Advanced Custom Controls Menu with Controller Options
+    + Figure out how to make NPCs do emotes during Toontask Dialog
+    + Reimplement all missing features from Open-Toontown
+    + Using the Fantasy-Launcher, create an update checker for Open-Fantasy
+    + Create an in-game launcher like ODS using the Anesidora files that boots you into the game!
+    + Figure out how to give Jellybeans and items for completing Toontasks, 
+    + Add a new tab under Quests for Side Quests and Daily Quests.
+    + Add an Inventory Page to the Shtiker Book where you can look at your Gags, Suit, Avatar, Enter Codes, etc.
+    + Experience/Leveling System like TTCCs
+    + Begin working on the custom Storyline myself.
+    + Have SirDapperPenguin beggin replacing all 2D Models with 3D versions of themselves.
+    + Have Darth begin working on the Realistic Shaders Option.
+    + Finish working on the leveling system for THE R0YAL B0T.
+    + Patch all Open-Toontown, Open-Fantasy, & TTO Bugs there are to be patched
+
+    + Goal: To show off Toontown Fantasy at the First ever PLAYER ZER0 STUDIOS Gaming Showcase AND to release the demo for Toontown Fantasy to attract people to helping out with Toontown Fantasy
+
+Phase 2 - The Overhaul Versions:
+
+    + Create an Opening Cutscene like what TTR had but with Voice Over and such that explains the plot swiftly but easily. You should be able to skip this Cutscene.
+    + Have SirDapperPenguin & any other modelers begin overhauling the playgrounds and their buildings.
+    + Continue working on the new storyline with any help we have at that time.
+    + Have Darth and any other helpers to implement Testing Keys to give away once people have reached Level 25 according to THE R0YAL B0T!
+
+    Goal: To begin Alpha Testing Toontown Fantasy.
+
++ Create an in-game launcher like ODS using the Anesidora files
 + Add the capability for higher FPS and higher quality textures (upscale them up to 8k)
 + Patch as many bugs as possible
 + Move to the latest version of Python if it hasn't been done already
