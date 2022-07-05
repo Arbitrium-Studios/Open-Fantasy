@@ -59,5 +59,6 @@
 + Add the date when you get your next Catalog to the Calendar Page.
 + Add Refresh Audio Source Button so when you switch audio channels, you can click it or press a hot key, and it checks for working audio source.
 + Add a randomization of the Wrench Model, Golf Ball, etc. across Toontown Stadium's Playground as Treasures to heal your Toon!
++ Replace the old playground function names with new functions using the current playground names (i.e. "lGoofySpeedway" >>> "lToontownStadium")
 
 More soon!
