@@ -98,7 +98,9 @@ class DistributedLeaderBoard(DistributedObject.DistributedObject):
         self.surface.flattenLight()
 
     def display(self, pTrackTitle='Track Title',
-                pPeriodTitle='Period Title', pLeaderList=[]):
+                pPeriodTitle='Period Title', pLeaderList=None):
+        if pLeaderList is None:
+            pLeaderList = []
         self.titleTextNode.setText(pPeriodTitle)
         self.trackNameNode.setText(pTrackTitle)
         self.updateCount += 1

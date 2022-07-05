@@ -966,7 +966,9 @@ class DistributedLawbotCannon(DistributedObject.DistributedObject):
     def __stopFlyTask(self, avId):
         taskMgr.remove(self.taskName('flyingToon') + '-' + str(avId))
 
-    def __hitGround(self, avatar, pos, extraArgs=[]):
+    def __hitGround(self, avatar, pos, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         hitP = avatar.getPos(render)
         h = self.barrel.getH(render)
         avatar.setPos(pos[0], pos[1], pos[2] + avatar.getHeight() / 3.0)
@@ -983,7 +985,9 @@ class DistributedLawbotCannon(DistributedObject.DistributedObject):
         base.playSfx(self.sndHitGround)
         avatar.hide()
 
-    def __hitChair(self, avatar, pos, extraArgs=[]):
+    def __hitChair(self, avatar, pos, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         hitP = avatar.getPos(render)
         h = self.barrel.getH(render)
         avatar.setPos(pos[0], pos[1], pos[2] + avatar.getHeight() / 3.0)

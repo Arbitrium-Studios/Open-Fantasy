@@ -569,15 +569,19 @@ def createThrowingTrack(object, target, duration=1.0,
     values['origin'] = None
     values['velocity'] = None
 
-    def calcOriginAndVelocity(object=object, target=target, values=values,
+    def calcOriginAndVelocity(object=object, target=target, values=None,
                               duration=duration, parent=parent, gravity=gravity):
+        if values is None:
+            values = values
         object.wrtReparentTo(parent)
         values['origin'] = object.getPos(parent)
         origin = object.getPos(parent)
         values['velocity'] = (target[2] - origin[2] -
                               0.5 * gravity * duration * duration) / duration
 
-    def throwPos(t, object, duration, target, values=values, gravity=-32.144):
+    def throwPos(t, object, duration, target, values=None, gravity=-32.144):
+        if values is None:
+            values = values
         if values['origin'] is not None:
             origin = values['origin']
         else:

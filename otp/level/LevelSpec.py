@@ -304,7 +304,9 @@ class LevelSpec:
                 def t(n):
                     return (tabs + n) * tab
 
-                def sortList(lst, firstElements=[]):
+                def sortList(lst, firstElements=None):
+                    if firstElements is None:
+                        firstElements = []
                     elements = list(lst)
                     result = []
                     for el in firstElements:

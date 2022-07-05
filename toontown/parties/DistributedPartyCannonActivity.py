@@ -934,7 +934,9 @@ class DistributedPartyCannonActivity(DistributedPartyActivity):
         t = Sequence(Func(avatar.pose, 'lose', 110))
         t.start()
 
-    def __hitGround(self, avatar, pos, extraArgs=[]):
+    def __hitGround(self, avatar, pos, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.notify.debug('__hitGround')
         hitP = avatar.getPos(render)
         self.notify.debug('hitGround pos = %s, hitP = %s' % (pos, hitP))
@@ -962,7 +964,9 @@ class DistributedPartyCannonActivity(DistributedPartyActivity):
         self.dustCloud.setScale(0.35)
         self.dustCloud.play()
 
-    def __hitFence(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitFence(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.notify.debug('__hitFence')
         self.__hitBumper(
             avatar,
@@ -971,7 +975,9 @@ class DistributedPartyCannonActivity(DistributedPartyActivity):
             kr=0.2,
             angVel=3)
 
-    def __hitWater(self, avatar, pos, collisionEntry, extraArgs=[]):
+    def __hitWater(self, avatar, pos, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         hitP = avatar.getPos(render)
         if hitP[2] > ToontownGlobals.EstateWakeWaterHeight:
             self.notify.debug('we hit the ground before we hit water')
@@ -987,7 +993,9 @@ class DistributedPartyCannonActivity(DistributedPartyActivity):
         base.playSfx(self.sndHitWater)
         place = base.cr.playGame.getPlace()
 
-    def __hitStatuary(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitStatuary(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         self.__hitBumper(
             avatar,
             collisionEntry,
@@ -1017,7 +1025,9 @@ class DistributedPartyCannonActivity(DistributedPartyActivity):
         else:
             self.notify.debug('Could not find cloud-%d' % cloudNumber)
 
-    def __hitCloudPlatform(self, avatar, collisionEntry, extraArgs=[]):
+    def __hitCloudPlatform(self, avatar, collisionEntry, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         if not self.hitBumper and not self.hitCloud:
             self.hitCloud = 1
             self.__hitBumper(

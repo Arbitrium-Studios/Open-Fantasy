@@ -64,7 +64,9 @@ class BattlePlace(Place.Place):
     def handleBattleEntry(self):
         self.fsm.request('battle')
 
-    def enterFallDown(self, extraArgs=[]):
+    def enterFallDown(self, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         base.localAvatar.laffMeter.start()
         base.localAvatar.b_setAnimState(
             'FallDown',
@@ -85,7 +87,9 @@ class BattlePlace(Place.Place):
             self.handleSquishDone,
             base.localAvatar.uniqueName('finishSquishTask'))
 
-    def handleSquishDone(self, extraArgs=[]):
+    def handleSquishDone(self, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         base.cr.playGame.getPlace().setState('walk')
 
     def exitSquished(self):

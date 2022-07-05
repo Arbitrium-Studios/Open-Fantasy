@@ -22,7 +22,9 @@ class BodyShop(StateData.StateData):
         self.speciesChoice = 0
         return
 
-    def enter(self, toon, shopsVisited=[]):
+    def enter(self, toon, shopsVisited=None):
+        if shopsVisited is None:
+            shopsVisited = []
         base.disableMouse()
         self.toon = toon
         self.dna = self.toon.getStyle()

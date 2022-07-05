@@ -250,7 +250,9 @@ class CogHQBossBattle(BattlePlace.BattlePlace):
         base.localAvatar.laffMeter.start()
         base.localAvatar.b_setAnimState('Flattened')
 
-    def handleSquishDone(self, extraArgs=[]):
+    def handleSquishDone(self, extraArgs=None):
+        if extraArgs is None:
+            extraArgs = []
         base.cr.playGame.getPlace().setState('walk')
 
     def exitSquished(self):

@@ -178,7 +178,9 @@ def __createFishingPoleMultiTrack(lure, dollar, dollarName):
 
 
 def __createMagnetMultiTrack(
-        lure, magnet, pos, hpr, scale, isSmallMagnet=1, npcs=[]):
+        lure, magnet, pos, hpr, scale, isSmallMagnet=1, npcs=None):
+    if npcs is None:
+        npcs = []
     toon = lure['toon']
     if 'npc' in lure:
         toon = lure['npc']
@@ -306,7 +308,9 @@ def __createMagnetMultiTrack(
     return tracks
 
 
-def __createHypnoGogglesMultiTrack(lure, npcs=[]):
+def __createHypnoGogglesMultiTrack(lure, npcs=None):
+    if npcs is None:
+        npcs = []
     toon = lure['toon']
     if 'npc' in lure:
         toon = lure['npc']
@@ -406,7 +410,9 @@ def __lureOneDollar(lure):
     return __createFishingPoleMultiTrack(lure, dollar, dollarProp)
 
 
-def __lureSmallMagnet(lure, npcs=[]):
+def __lureSmallMagnet(lure, npcs=None):
+    if npcs is None:
+        npcs = []
     magnet = globalPropPool.getProp('small-magnet')
     pos = Point3(-0.27, 0.19, 0.29)
     hpr = Point3(-90.0, 84.17, -180.0)
@@ -421,7 +427,9 @@ def __lureFiveDollar(lure):
     return __createFishingPoleMultiTrack(lure, dollar, dollarProp)
 
 
-def __lureLargeMagnet(lure, npcs=[]):
+def __lureLargeMagnet(lure, npcs=None):
+    if npcs is None:
+        npcs = []
     magnet = globalPropPool.getProp('big-magnet')
     pos = Point3(-0.27, 0.08, 0.29)
     hpr = Point3(-90.0, 84.17, -180)
@@ -436,7 +444,9 @@ def __lureTenDollar(lure):
     return __createFishingPoleMultiTrack(lure, dollar, dollarProp)
 
 
-def __lureHypnotize(lure, npcs=[]):
+def __lureHypnotize(lure, npcs=None):
+    if npcs is None:
+        npcs = []
     return __createHypnoGogglesMultiTrack(lure, npcs)
 
 
@@ -916,7 +926,9 @@ def createIncomingTrainInterval(battle, suit, hp, lure, trapProp):
     return retval
 
 
-def __createSlideshowMultiTrack(lure, npcs=[]):
+def __createSlideshowMultiTrack(lure, npcs=None):
+    if npcs is None:
+        npcs = []
     toon = lure['toon']
     battle = lure['battle']
     sidestep = lure['sidestep']

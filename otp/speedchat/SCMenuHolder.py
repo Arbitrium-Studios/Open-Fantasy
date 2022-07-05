@@ -135,7 +135,9 @@ class SCMenuHolder(SCElement):
             self.menu.invalidate()
         return
 
-    def finalize(self, dbArgs={}):
+    def finalize(self, dbArgs=None):
+        if dbArgs is None:
+            dbArgs = {}
         if not self.isDirty():
             return
         r, g, b = self.getColorScheme().getArrowColor()

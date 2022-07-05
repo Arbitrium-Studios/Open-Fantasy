@@ -15,8 +15,10 @@ class KeyCodes(DirectObject):
     KEY_UP_EVENT = 'KeyCodes-KEY_UP_EVENT'
     CLEAR_CODE_EVENT = 'KeyCodes-CLEAR_CODE_EVENT'
 
-    def __init__(self, keyMap=ARROW_KEYCODE_MAP, patterns=None,
+    def __init__(self, keyMap=None, patterns=None,
                  timeout=KEYCODE_TIMEOUT_SECONDS):
+        if keyMap is None:
+            keyMap = ARROW_KEYCODE_MAP
         self._keyMap = keyMap
         self._timeout = timeout
         self._keyCode = ''

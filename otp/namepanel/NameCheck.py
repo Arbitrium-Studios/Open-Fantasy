@@ -46,7 +46,9 @@ def wordList(str):
     return result
 
 
-def checkName(name, otherCheckFuncs=[], font=None):
+def checkName(name, otherCheckFuncs=None, font=None):
+    if otherCheckFuncs is None:
+        otherCheckFuncs = []
 
     def longEnough(name):
         if len(name) < 2:
@@ -66,7 +68,9 @@ def checkName(name, otherCheckFuncs=[], font=None):
 
     validAsciiChars = set(".,'-" + string.ascii_letters + string.whitespace)
 
-    def _validCharacter(c, validAsciiChars=validAsciiChars, font=font):
+    def _validCharacter(c, validAsciiChars=None, font=font):
+        if validAsciiChars is None:
+            validAsciiChars = validAsciiChars
         if c in validAsciiChars:
             return True
         if c.isalpha() or c.isspace():

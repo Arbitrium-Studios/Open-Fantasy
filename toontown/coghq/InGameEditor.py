@@ -1115,8 +1115,10 @@ class InGameEditor(AppShell):
 
 class LevelVisZonesEditor(Pmw.MegaToplevel):
 
-    def __init__(self, editor, entId, visible, modelZones=[],
+    def __init__(self, editor, entId, visible, modelZones=None,
                  updateCommand=None, parent=None, **kw):
+        if modelZones is None:
+            modelZones = []
         DGG.INITOPT = Pmw_INITOPT
         optiondefs = (('title', 'Level Vis-Zone Editor', None),)
         self.defineoptions(kw, optiondefs)

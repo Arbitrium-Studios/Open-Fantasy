@@ -149,7 +149,9 @@ class PetMood:
     def getDominantMoodChangeEvent(self):
         return 'petDominantMoodChange-%s' % self.serialNum
 
-    def announceChange(self, components=[]):
+    def announceChange(self, components=None):
+        if components is None:
+            components = []
         oldMood = self.dominantMood
         if hasattr(self, 'dominantMood'):
             del self.dominantMood
