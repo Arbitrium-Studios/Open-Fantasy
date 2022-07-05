@@ -120,7 +120,7 @@ GlobalStreetNames = {20000: ('to', 'on', 'Tutorial Terrace'),
                      12500: ('to the', 'in the', 'Cashbot Coin Mint'),
                      12600: ('to the', 'in the', 'Cashbot Dollar Mint'),
                      12700: ('to the', 'in the', 'Cashbot Bullion Mint'),
-                     13000: ('to', 'in', 'Lawbot HQ Courtyard'),
+                     13000: ('to', 'in', 'Lawbot Headquarters Courtyard'),
                      13100: ('to the', 'in the', 'Courthouse Lobby'),
                      13200: ('to the', 'in the', "DA's Office Lobby"),
                      13300: ('to the', 'in the', 'Lawbot A Office'),
@@ -139,7 +139,7 @@ DonaldsDreamland = ('to', 'in', lDonaldsDreamland)
 BossbotHQ = ('to', 'in', 'Bossbot Headquarters')
 SellbotHQ = ('to', 'in', 'Sellbot Headquarters')
 CashbotHQ = ('to', 'in', 'Cashbot Headquarters')
-LawbotHQ = ('to', 'in', 'Lawbot HQ')
+LawbotHQ = ('to', 'in', 'Lawbot Headquarters')
 Tutorial = ('to the', 'in the', 'Toon-torial')
 MyEstate = ('to', 'in', 'your house')
 WelcomeValley = ('to', 'in', 'Welcome Valley')
@@ -8590,7 +8590,7 @@ TipDict = {TIP_NONE: ('',),
                        'Cashbots manufacture and distribute their currency, Cogbucks, in three Mints - Coin, Dollar and Bullion.',
                        'Wait until the C.F.O. is dizzy to throw a safe, or he will use it as a helmet! Hit the helmet with another safe to knock it off.',
                        'Earn Lawbot disguise suit parts as rewards for completing ToonTasks for Professor Flake.',
-                       "It pays to be puzzled: the virtual Cogs in Lawbot HQ won't reward you with Jury Notices."),
+                       "It pays to be puzzled: the virtual Cogs in Lawbot Headquarters won't reward you with Jury Notices."),
            TIP_ESTATE: ('Doodles can understand some SpeedChat phrases. Try them!',
                         'Use the "Pet" SpeedChat menu to ask your Doodle to do tricks.',
                         "You can teach Doodles tricks with training lessons from Clarabelle's Cattlelog.",
