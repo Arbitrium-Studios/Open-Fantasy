@@ -18,7 +18,7 @@ The Road to Fantasy:
         + Finish working on the leveling system for THE R0YAL B0T.
         + Patch all Open-Toontown, Open-Fantasy, & TTO Bugs there are to be patched
 
-        + Goal: To show off Toontown Fantasy at the First ever PLAYER ZER0 STUDIOS Gaming Showcase AND to release the demo for Toontown Fantasy to attract people to helping out with Toontown Fantasy
+    + Goal: To show off Toontown Fantasy at the First ever PLAYER ZER0 STUDIOS Gaming Showcase AND to release the demo for Toontown Fantasy to attract people to helping out with Toontown Fantasy
 
     Phase 2 - The Overhaul Versions:
 
@@ -28,7 +28,7 @@ The Road to Fantasy:
         + Have Darth and any other helpers to implement Testing Keys to give away once people have reached Level 25 according to THE R0YAL B0T!
         + Begin working on the more indepth Character Creation Menus.
 
-    Goal: To begin Alpha Testing Toontown Fantasy.
+    + Goal: To begin Alpha Testing Toontown Fantasy.
 
     Implemented Content:
 
@@ -117,7 +117,9 @@ The Road to Fantasy:
         + Add a randomization of the Wrench Model, Golf Ball, etc. across Toontown Stadium's Playground as Treasures to heal your Toon!
         + Replace the old playground function names with new functions using the current playground names (i.e. "lGoofySpeedway" >>> "lToontownStadium")
         + New types of Toon Attacks!
-            + Elemental Magic as an ability set to decrease damage and such learned from the Witch of the Mountain
+            + Elemental Magic as an ability set to decrease damage and such learned from the Witch of the Acorn Mountains
             + Natural Attacks like Bite and such.
+        + Toontown Time based where the continent of Toontown would be located in my universe aka around the South Indian Ocean!
+        + 24-hour Day-Night Cycle
 
-    More soon!
+        + More soon!
