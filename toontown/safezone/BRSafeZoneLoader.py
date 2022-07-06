@@ -26,7 +26,7 @@ class BRSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
         self.wind3Sound = base.loader.loadSfx(
             'phase_8/audio/sfx/SZ_TB_wind_3.ogg')
         self.snow = BattleParticles.loadParticleFile('snowdisk.ptf')
-        #self.snow.setPos(0, 0, 5)
+        self.snow.setPos(0, 0, 5)
         self.snowRender = self.geom.attachNewNode('snowRender')
         self.snowRender.setDepthWrite(0)
         self.snowRender.setBin('fixed', 1)
@@ -43,15 +43,11 @@ class BRSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
 
     def enter(self, requestStatus):
         SafeZoneLoader.SafeZoneLoader.enter(self, requestStatus)
-        #self.snow.start(camera, self.snowRender)
-        # self.accept('enterigloo-interior', self.enterIgloo)
-        # self.accept('exitigloo-interior', self.exitIgloo)
+        self.snow.start(camera, self.snowRender)
 
     def exit(self):
-        #self.ignore('enterigloo-interior')
-        #self.ignore('exitigloo-interior')
-        # self.resetSnowLerp()
-        #self.snow.cleanup()
+        self.resetSnowLerp()
+        self.snow.cleanup()
         SafeZoneLoader.SafeZoneLoader.exit(self)
 
     def fadeInSnow(self):

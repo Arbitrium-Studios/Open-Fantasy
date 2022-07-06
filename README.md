@@ -4,7 +4,7 @@
 
 # What is Toontown Fantasy?
  
-## Toontown Fantasy is a singleplayer, non-profit, re-envisioning of Disney's Toontown Online built using Open-Toontown which is expected to have fantasy aspects to capture the 'Disney Magic', more of an open-world/adventure aspect to the gameplay, updated graphic/graphics engine, much better story-line to truly capture the magic of Toontown that Disney couldn't capture back in the day. This version is one you can change to your own liking for a Fantasy of your own! The future of Toontown is in YOUR fingertips! What will you create? Only time will tell!
+## Toontown Fantasy is a singleplayer, non-profit, re-envisioning of Disney's Toontown Online built using Open-Toontown which is expected to have fantasy aspects to capture the 'Disney Magic', more of an open-world/adventure aspect to the gameplay, new graphics, better gameplay, much better story-line to truly capture the magic of Toontown that Disney couldn't capture back in the day, and so much more! This version is one you can change to your own liking for a Fantasy of your own! The future of Toontown is in YOUR fingertips! What will you create? Only time will tell!
 
 ### Management Team:
 + Gracie "THE PLAYER ZER0" Lovelight | Director/Owner
