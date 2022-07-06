@@ -1,91 +1,123 @@
 The Road to Fantasy:
 
+    Phase 1 - The Presentability Versions:
 
-Phase 1 - The Presentability Versions:
+        + Make Shtiker Book, Friends List, etc. accessible during battle but grey out the button so people can't flee.
+        + Make an Advanced Custom Controls Menu with Controller Options
+        + Figure out how to make NPCs do emotes during Toontask Dialog
+        + Reimplement all missing features from Open-Toontown
+        + Using the Fantasy-Launcher, create an update checker for Open-Fantasy
+        + Create an in-game launcher like ODS using the Anesidora files that boots you into the game!
+        + Figure out how to give Jellybeans and items for completing Toontasks, 
+        + Add a new tab under Quests for Side Quests and Daily Quests.
+        + Add an Inventory Page to the Shtiker Book where you can look at your Gags, Suit, Avatar, Enter Codes, etc.
+        + Experience/Leveling System like TTCCs
+        + Begin working on the custom Storyline myself.
+        + Have SirDapperPenguin beggin replacing all 2D Models with 3D versions of themselves.
+        + Have Darth begin working on the Realistic Shaders Option.
+        + Finish working on the leveling system for THE R0YAL B0T.
+        + Patch all Open-Toontown, Open-Fantasy, & TTO Bugs there are to be patched
 
-    + Make Shtiker Book, Friends List, etc. accessible during battle but grey out the button so people can't flee.
-    + Make an Advanced Custom Controls Menu with Controller Options
-    + Figure out how to make NPCs do emotes during Toontask Dialog
-    + Reimplement all missing features from Open-Toontown
-    + Using the Fantasy-Launcher, create an update checker for Open-Fantasy
-    + Create an in-game launcher like ODS using the Anesidora files that boots you into the game!
-    + Figure out how to give Jellybeans and items for completing Toontasks, 
-    + Add a new tab under Quests for Side Quests and Daily Quests.
-    + Add an Inventory Page to the Shtiker Book where you can look at your Gags, Suit, Avatar, Enter Codes, etc.
-    + Experience/Leveling System like TTCCs
-    + Begin working on the custom Storyline myself.
-    + Have SirDapperPenguin beggin replacing all 2D Models with 3D versions of themselves.
-    + Have Darth begin working on the Realistic Shaders Option.
-    + Finish working on the leveling system for THE R0YAL B0T.
-    + Patch all Open-Toontown, Open-Fantasy, & TTO Bugs there are to be patched
+        + Goal: To show off Toontown Fantasy at the First ever PLAYER ZER0 STUDIOS Gaming Showcase AND to release the demo for Toontown Fantasy to attract people to helping out with Toontown Fantasy
 
-    + Goal: To show off Toontown Fantasy at the First ever PLAYER ZER0 STUDIOS Gaming Showcase AND to release the demo for Toontown Fantasy to attract people to helping out with Toontown Fantasy
+    Phase 2 - The Overhaul Versions:
 
-Phase 2 - The Overhaul Versions:
-
-    + Create a playable Opening Toontorial like ODS but done my way: Outside of Toontown in a kingdom, things are going well and you are introduced to the main character who has weird magical abilities that you can use. Once you've gone through that, you hear a bell ringing outside the castle and you run to look. You see Cogs marching up the path toward the castle. They are damaging property and so you run outside to protect your servants. You are introduced to some real-time fighting mechanics where you fight off cogs in a similar fashion to TTR's Doomsday. Wave after wave, you push back the Cogs as you help your people escape from the Cogs. Once your people escape, you go to the only sancuary left in the world, the Toontown Playgrounds to begin work for the Toontown Resistance.
-    + Have SirDapperPenguin & any other modelers begin overhauling the playgrounds and their buildings.
-    + Continue working on the new storyline with any help we have at that time.
-    + Have Darth and any other helpers to implement Testing Keys to give away once people have reached Level 25 according to THE R0YAL B0T!
-    + Begin working on the more indepth Character Creation Menus.
+        + Create a playable Opening Toontorial like ODS but done my way: Outside of Toontown in a kingdom, things are going well and you are introduced to the main character who has weird magical abilities that you can use. Once you've gone through that, you hear a bell ringing outside the castle and you run to look. You see Cogs marching up the path toward the castle. They are damaging property and so you run outside to protect your servants. You are introduced to some real-time fighting mechanics where you fight off cogs in a similar fashion to TTR's Doomsday. Wave after wave, you push back the Cogs as you help your people escape from the Cogs. Once your people escape, you go to the only sancuary left in the world, the Toontown Playgrounds to begin work for the Toontown Resistance.
+        + Have SirDapperPenguin & any other modelers begin overhauling the playgrounds and their buildings.
+        + Continue working on the new storyline with any help we have at that time.
+        + Have Darth and any other helpers to implement Testing Keys to give away once people have reached Level 25 according to THE R0YAL B0T!
+        + Begin working on the more indepth Character Creation Menus.
 
     Goal: To begin Alpha Testing Toontown Fantasy.
 
-+ Create an in-game launcher like ODS using the Anesidora files
-+ Patch as many bugs as possible
-+ Implement custom shaders for everyone to use!
-+ Add custom keybinds with as many custom key options as possible!
-+ Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button
-+ Add the ability to play with an Xbox, Play Station, or PC controllers (Back to view map; right stick to control camera angle; left stick to control the movement of your character AND in battles, to move the highlighted box around each gag box; double flick the left stick upward to sprint, Y button to open Shticker Book, B to preform action, Xbox/Play Station/{Company name} Home button to bring up the pause menu; X (PS)/A to jump/select the gag selected in battle; D-Pad to select one of four party members; Left Trigger (LT) to use Elemental magic; Right Trigger (RT) to ???; Left Button (LB) ???; Right Button (RB) ???;)
-+ Add a touch screen mode which is enabled/disabled in the Shticker Book
-+ Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
-+ Implement full Wide-Screen Support
-+ Put all logs, screenshots, etc into a 'User/' folder
-+ Rename "Choose Your Type" under the Species list to "Choose Your Species"!
-+ Add TTR's Clothing Option for Create Your Toon
-+ Implement our version of Toontown House's Accessory Tab in the Clothing Page of the Create Your Toon part
-+ Implement a new tab for Further Customization for which hand your Toon uses, etc
-+ Auto-Approve Type-A-Name Names
-+ Type-A-Name for Doodles
-+ Doodle Rebalance
-+ Fix racing
-+ Fix fishing
-+ Implement a new Toon Tip system that replaces the one on the loading screen
-+ Add Accessories to the Toon Heads for Pick-A-Toon and the Friends system
-+ Replace True Friends with 18+ chat where you and anyone who you are Best Friends with, can see you swear
-+ Add more areas for gaming!
-+ Zoom out from the Toons in the Create-A-Toon section
-+ Add more fonts for usage in Catalog
-+ Add Font Colors to the Catalog
-+ Add the option to disable Disney Characters
-+ Overhaul the Choose Your Color page Hex Color to allow for Classic or Hex Colors
-+ Add Black, White, and Gray to the Classic Colors
-+ Make ALL textures HD
-+ Toon Rewrite (That INCLUDES Species Rewrite and Name)
-+ Remove time limits for Emotes and other items
-+ Make The Cannon Game in the Estate function as the Party Cannons Do!
-+ Make everything run at  FPS as a default
-+ Replace Whitelist with Blacklist where you can say anything that's NOT in a Blacklist using pip's Profanity-Filter!
-+ Add Experience Bar at the bottom of the screen!
-+ Add Jellybeans you can earn by completing Toontasks
-+ Add Teleport Button to Toontasks
-+ Overhaul Map Page to be able to scroll (or click down) to zoom into playgrounds to see streets, buildings, etc
-+ Add a new street and have it lead outside of Toontown Central to an area called Toontropolis: https://github.com/DankMickey/Toontown-2.0-1
-+ Implement this into Open-Fantasy: https://github.com/Toontown-Open-Source-Initiative/Toontown-VP-After-Death
-+ Make this branch of Toontown Fantasy used for singleplayer and subsequently all Cog battles can be done in singleplayer
-+ Rebalance fishing so it's more fun!
-+ Add the playground nametag Depth Mines over the Hills next to Toontown Stadium, TLOM, and CBHQ!
-+ Add Street name to the Untitled Tunnel in Acorn Acres that leads to Funny Farm.
-+ Add button to switch between maps like what Tooniversal Studios has.
-+ Add Gag Shop, Pet Shop, Fishing Pier, Fishermen, Trolley, etc. to Acorn Acres.
-+ Add the word Playground underneath Acorn Acres since I'll be turning it into a playground!
-+ Add Butterflies to Acorn Acres, birds chirping, and fish hopping across the pond.
-+ When you jump into a shallow pool of water, it use make the splash effect.
-+ When a Toon jumps into the water, the Fish dots should swim away from the source.
-+ Add Gag Training Fridays, Double Merit Mondays, etc. to the Calendar and what we could use.
-+ Add the date when you get your next Catalog to the Calendar Page.
-+ Add Refresh Audio Source Button so when you switch audio channels, you can click it or press a hot key, and it checks for working audio source.
-+ Add a randomization of the Wrench Model, Golf Ball, etc. across Toontown Stadium's Playground as Treasures to heal your Toon!
-+ Replace the old playground function names with new functions using the current playground names (i.e. "lGoofySpeedway" >>> "lToontownStadium")
+    Implemented Content:
 
-More soon!
+        + New Playground Names
+        + Wide Screen Support
+        + Sprinting
+        + Oribital Camera
+        + HD Textures
+        + Bug Reporting
+        + Credits Button
+        + Discord Button
+        + Magic Commands
+
+    Currently Being Developed:
+
+        + Straifing
+        + Complete Wide-Screen Support
+        + Chatlog
+
+    Confirmed Content:
+
+        + Taskline Rewrite
+        + Acorn Acres Playground Revamp
+        + Controller Support
+        + Advanced Custom Controls
+        + More Options for playing Toontown Fantasy like Multiplayer and friend servers!
+
+    Wishlist:
+
+        + Community Voice Acting
+        + Virtual Reality Support!
+        + Create an in-game launcher like ODS using the Anesidora files
+        + Patch as many bugs as possible
+        + Implement custom shaders for everyone to use!
+        + Add custom keybinds with as many custom key options as possible!
+        + Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button
+        + Add the ability to play with an Xbox, Play Station, or PC controllers (Back to view map; right stick to control camera angle; left stick to control the movement of your character AND in battles, to move the highlighted box around each gag box; double flick the left stick upward to sprint, Y button to open Shticker Book, B to preform action, Xbox/Play Station/{Company name} Home button to bring up the pause menu; X (PS)/A to jump/select the gag selected in battle; D-Pad to select one of four party members; Left Trigger (LT) to use Elemental magic; Right Trigger (RT) to ???; Left Button (LB) ???; Right Button (RB) ???;)
+        + Add a touch screen mode which is enabled/disabled in the Shticker Book
+        + Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
+        + Implement full Wide-Screen Support
+        + Put all logs, screenshots, etc into a 'User/' folder
+        + Rename "Choose Your Type" under the Species list to "Choose Your Species"!
+        + Add TTR's Clothing Option for Create Your Toon
+        + Implement our version of Toontown House's Accessory Tab in the Clothing Page of the Create Your Toon part
+        + Implement a new tab for Further Customization for which hand your Toon uses, etc
+        + Auto-Approve Type-A-Name Names
+        + Type-A-Name for Doodles
+        + Doodle Rebalance
+        + Fix racing
+        + Fix fishing
+        + Implement a new Toon Tip system that replaces the one on the loading screen
+        + Add Accessories to the Toon Heads for Pick-A-Toon and the Friends system
+        + Replace True Friends with 18        + chat where you and anyone who you are Best Friends with, can see you swear
+        + Add more areas for gaming!
+        + Zoom out from the Toons in the Create-A-Toon section
+        + Add more fonts for usage in Catalog
+        + Add Font Colors to the Catalog
+        + Add the option to disable Disney Characters
+        + Overhaul the Choose Your Color page Hex Color to allow for Classic or Hex Colors
+        + Add Black, White, and Gray to the Classic Colors
+        + Make ALL textures HD
+        + Toon Rewrite (That INCLUDES Species Rewrite and Name)
+        + Remove time limits for Emotes and other items
+        + Make The Cannon Game in the Estate function as the Party Cannons Do!
+        + Make everything run at  FPS as a default
+        + Replace Whitelist with Blacklist where you can say anything that's NOT in a Blacklist using pip's Profanity-Filter!
+        + Add Experience Bar at the bottom of the screen!
+        + Add Jellybeans you can earn by completing Toontasks
+        + Add Teleport Button to Toontasks
+        + Overhaul Map Page to be able to scroll (or click down) to zoom into playgrounds to see streets, buildings, etc
+        + Add a new street and have it lead outside of Toontown Central to an area called Toontropolis: https://github.com/DankMickey/Toontown-2.0-1
+        + Implement this into Open-Fantasy: https://github.com/Toontown-Open-Source-Initiative/Toontown-VP-After-Death
+        + Make this branch of Toontown Fantasy used for singleplayer and subsequently all Cog battles can be done in singleplayer
+        + Rebalance fishing so it's more fun!
+        + Add the playground nametag Depth Mines over the Hills next to Toontown Stadium, TLOM, and CBHQ!
+        + Add Street name to the Untitled Tunnel in Acorn Acres that leads to Funny Farm.
+        + Add button to switch between maps like what Tooniversal Studios has.
+        + Add Gag Shop, Pet Shop, Fishing Pier, Fishermen, Trolley, etc. to Acorn Acres.
+        + Add the word Playground underneath Acorn Acres since I'll be turning it into a playground!
+        + Add Butterflies to Acorn Acres, birds chirping, and fish hopping across the pond.
+        + When you jump into a shallow pool of water, it use make the splash effect.
+        + When a Toon jumps into the water, the Fish dots should swim away from the source.
+        + Add Gag Training Fridays, Double Merit Mondays, etc. to the Calendar and what we could use.
+        + Add the date when you get your next Catalog to the Calendar Page.
+        + Add Refresh Audio Source Button so when you switch audio channels, you can click it or press a hot key, and it checks for working audio source.
+        + Add a randomization of the Wrench Model, Golf Ball, etc. across Toontown Stadium's Playground as Treasures to heal your Toon!
+        + Replace the old playground function names with new functions using the current playground names (i.e. "lGoofySpeedway" >>> "lToontownStadium")
+        + New types of Toon Attacks!
+            + Elemental Magic as an ability set to decrease damage and such learned from the Witch of the Mountain
+            + Natural Attacks like Bite and such.
+
+    More soon!
