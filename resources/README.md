@@ -42,4 +42,4 @@
 
 [discordImg]: https://img.shields.io/badge/Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&colorB=7289DA&style=for-the-badge
 
-[discordLink]: https://discord.com/invite/9fgW8jAaf6/
+[discordLink]: https://discord.gg/9fgW8jAaf6
