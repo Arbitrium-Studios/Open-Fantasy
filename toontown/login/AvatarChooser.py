@@ -72,8 +72,6 @@ class AvatarChooser(StateData.StateData):
         self.quitButton.show()
         self.discordButton.show()
         self.creditsButton.show()
-        if base.cr.loginInterface.supportsRelogin():
-            self.logoutButton.show()
         self.pickAToonBG.setBin('backround', 1)
         self.pickAToonBG.reparentTo(aspect2d)
         base.setBackgroundColor(Vec4(0.145, 0.368, 0.78, 1))
@@ -95,7 +93,6 @@ class AvatarChooser(StateData.StateData):
         self.quitButton.hide()
         self.discordButton.hide()
         self.creditsButton.hide()
-        self.logoutButton.hide()
         self.pickAToonBG.reparentTo(hidden)
         base.setBackgroundColor(ToontownGlobals.DefaultBackgroundColor)
         return None
@@ -115,37 +112,10 @@ class AvatarChooser(StateData.StateData):
         quitHover = gui.find('**/QuitBtn_RLVR')
         self.quitButton = DirectButton(image=(quitHover, quitHover, quitHover), relief=None, text=TTLocalizer.AvatarChooserQuit, text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_pos=TTLocalizer.ACquitButtonPos, text_scale=TTLocalizer.ACquitButton, image_scale=1, image1_scale=1.05, image2_scale=1.05, scale=1.05, pos=(-0.25, 0, 0.075), command=self.__handleQuit)
         self.quitButton.reparentTo(base.a2dBottomRight)
-        self.discordButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text='Discord', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), text_pos=(0, -0.025), pos=(1.05, 0, -0.9275), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openDiscord)
+        self.discordButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text='Discord', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), text_pos=(0, -0.025), pos=(-0.65, 0, -0.914), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openDiscord)
         self.discordButton.hide()
-        self.creditsButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text='Credits', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), text_pos=(0, -0.025), pos=(0.56, 0, -0.9275), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openCredits)
+        self.creditsButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text='Credits', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), text_pos=(0, -0.025), pos=(-1.17, 0, -0.914), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openCredits)
         self.creditsButton.hide()
-        self.logoutButton = DirectButton(
-            relief=None,
-            image=(
-                quitHover,
-                quitHover,
-                quitHover),
-            text=TTLocalizer.OptionsPageLogout,
-            text_font=ToontownGlobals.getSignFont(),
-            text_fg=(
-                0.977,
-                0.816,
-                0.133,
-                1),
-            text_scale=TTLocalizer.AClogoutButton,
-            text_pos=(
-                0,
-                -0.035),
-            pos=(
-                -1.17,
-                0,
-                -0.914),
-            image_scale=1.15,
-            image1_scale=1.15,
-            image2_scale=1.18,
-            scale=0.5,
-            command=self.__handleLogoutWithoutConfirm)
-        self.logoutButton.hide()
         gui.removeNode()
         gui2.removeNode()
         newGui.removeNode()
@@ -269,8 +239,6 @@ class AvatarChooser(StateData.StateData):
         del self.title
         self.quitButton.destroy()
         del self.quitButton
-        self.logoutButton.destroy()
-        del self.logoutButton
         self.pickAToonBG.removeNode()
         del self.pickAToonBG
         del self.avatarList
@@ -343,9 +311,6 @@ class AvatarChooser(StateData.StateData):
                         self.doneStatus]))
         else:
             self.fsm.request('Choose')
-
-    def __handleLogoutWithoutConfirm(self):
-        base.cr.loginFSM.request('login')
 
 
     def openDiscord(self):
