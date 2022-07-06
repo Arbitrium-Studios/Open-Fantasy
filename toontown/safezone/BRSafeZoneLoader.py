@@ -75,3 +75,8 @@ class BRSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
                 duration=self.SnowFadeLerpTime)]
         self.snowFade = Track(ivals, 'snow-fade')
         self.snowFade.play()
+
+    def resetSnowLerp(self):
+        if self.snowFade != None:
+            self.snowFade.stop()
+            self.snowFade = None
