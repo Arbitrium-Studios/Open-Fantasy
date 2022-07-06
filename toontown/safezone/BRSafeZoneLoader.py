@@ -48,10 +48,10 @@ class BRSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
         # self.accept('exitigloo-interior', self.exitIgloo)
 
     def exit(self):
-        self.ignore('enterigloo-interior')
-        self.ignore('exitigloo-interior')
-        self.resetSnowLerp()
-        self.snow.cleanup()
+        #self.ignore('enterigloo-interior')
+        #self.ignore('exitigloo-interior')
+        # self.resetSnowLerp()
+        #self.snow.cleanup()
         SafeZoneLoader.SafeZoneLoader.exit(self)
 
     def fadeInSnow(self):
