@@ -112,6 +112,7 @@ class AvatarChooser(StateData.StateData):
         quitHover = gui.find('**/QuitBtn_RLVR')
         self.quitButton = DirectButton(image=(quitHover, quitHover, quitHover), relief=None, text=TTLocalizer.AvatarChooserQuit, text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_pos=TTLocalizer.ACquitButtonPos, text_scale=TTLocalizer.ACquitButton, image_scale=1, image1_scale=1.05, image2_scale=1.05, scale=1.05, pos=(-0.25, 0, 0.075), command=self.__handleQuit)
         self.quitButton.reparentTo(base.a2dBottomRight)
+        self.settingsButton = DirectButton(image=(quitHover, quitHover, quitHover), relief=None, text='Settings', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_pos=(0, -0.025), text_scale=(0.075), image_scale=1, image1_scale=1.05, image2_scale=1.05, scale=1.25, pos=(0.55, 0, -0.914), command=self.openSettings)
         self.discordButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text='Discord', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), text_pos=(0, -0.025), pos=(-0.50, 0, -0.914), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openDiscord)
         self.discordButton.hide()
         self.creditsButton = DirectButton(image=(quitHover, quitHover, quitHover), relief=None, text='Credits', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), image_scale=1, image1_scale=1.05, image2_scale=1.05, scale=1.05, text_pos=(0, -0.025), pos=(-1, 0, -0.914), command=self.openCredits)
@@ -319,3 +320,7 @@ class AvatarChooser(StateData.StateData):
     def openCredits(self):
         from toontown.toontowngui import Credits
         Credits.Credits()
+
+    def openSettings(self):
+        from toontown.controls import ControlManager
+        ControlManager.ControlManager()
