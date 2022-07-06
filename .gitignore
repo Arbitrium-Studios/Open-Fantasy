@@ -18,8 +18,12 @@ errorCode
 screenshots/
 libotp/
 libtoontown/
-news/
 *.egg
 Housekeeper/
 *.txt
 *.cfg
+sign/
+*.mf
+*.yaml
+phase_3/maps/news
+news/
