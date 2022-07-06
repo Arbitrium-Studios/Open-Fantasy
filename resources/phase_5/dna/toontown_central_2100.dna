@@ -9571,31 +9571,19 @@ group "toontownCentral" [
       width [ 45.2059 ]
       height [ 45.2059 ]
       text [
-       letters [ "F" ]
+       letters [ "D" ]
       ]
       text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "W" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "R" ]
+       letters [ "A" ]
       ]
       text [
        letters [ "I" ]
       ]
       text [
-       letters [ "N" ]
+       letters [ "S" ]
       ]
       text [
-       letters [ "G" ]
+       letters [ "Y" ]
       ]
       text [
        letters [ " " ]
@@ -9604,16 +9592,22 @@ group "toontownCentral" [
        letters [ "G" ]
       ]
       text [
+       letters [ "A" ]
+      ]
+      text [
        letters [ "R" ]
       ]
       text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "V" ]
+       letters [ "D" ]
       ]
       text [
        letters [ "E" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
      ]
     ]

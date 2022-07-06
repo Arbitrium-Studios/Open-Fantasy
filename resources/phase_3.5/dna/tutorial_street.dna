@@ -1671,13 +1671,11 @@ group "toontownCentralTutorial" [
       color [ 0.21 0.73 0.31 1 ]
      ]
     ]
-    /*
     prop "cloth_DNARoot" [
      code [ "cloth" ]
      pos [ 13.0524 -4.36687 -0.203286 ]
      hpr [ 0 0 0 ]
     ]
-    */
    ]
    flat_building "tb0:random_DNARoot" [
     pos [ 75 100 0 ]
@@ -1716,17 +1714,12 @@ group "toontownCentralTutorial" [
       color [ 0.79 0.36 0.19 1 ]
      ]
     ]
-    /*
     prop "house_needs_DNARoot" [
      code [ "house_needs" ]
      pos [ 6.26776 -4.66185 1.69415 ]
      hpr [ 0 0 0 ]
     ]
-    */
    ]
-/*
- comment out buildings since joe doesnt want to download
- glass window textures in phase 3.5 instead of phase 5
    prop "prop_facade_b_DNARoot" [
     code [ "prop_facade_b" ]
     pos [ 106 77 0 ]
@@ -1754,7 +1747,6 @@ group "toontownCentralTutorial" [
     hpr [ 0 1.51015 0 ]
     scale [ 1.24024 1.24024 1.24024 ]
    ]
-*/
    flat_building "tb0:random_DNARoot" [
     pos [ 30 70 0 ]
     hpr [ 90 0 0 ]
@@ -1835,14 +1827,12 @@ group "toontownCentralTutorial" [
      ]
     ]
    ]
-/*
    prop "prop_facade_a_DNARoot" [
     code [ "prop_facade_a" ]
     pos [ 158 -7 0 ]
     hpr [ -180 0 0 ]
     scale [ 1.10176 1.10176 1.10176 ]
    ]
-*/
    prop "prop_tree_small_ur_DNARoot" [
     code [ "prop_tree_small_ur" ]
     pos [ 96 -5 0 ]
@@ -1900,13 +1890,11 @@ group "toontownCentralTutorial" [
       color [ 0.21 0.73 0.31 1 ]
      ]
     ]
-    /*
     prop "flower_shop_DNARoot" [
      code [ "flower_shop" ]
      pos [ 6.91632 -5.09789 1.01734 ]
      hpr [ 180 0 0 ]
     ]
-    */
    ]
    prop "prop_tree_large_ur_DNARoot" [
     code [ "prop_tree_large_ur" ]
@@ -2021,13 +2009,11 @@ group "toontownCentralTutorial" [
     hpr [ 0 0 0 ]
     scale [ 1.19204 1.19204 1.19204 ]
    ]
-/*
    prop "prop_facade_c_DNARoot" [
     code [ "prop_facade_e" ]
     pos [ 157 56.7 0 ]
     hpr [ 0 0 0 ]
    ]
-*/
    prop "prop_cellar_door_DNARoot" [
     code [ "prop_cellar_door" ]
     pos [ 187 -9.99993 0 ]
@@ -2076,7 +2062,6 @@ group "toontownCentralTutorial" [
     pos [ 45 35 0 ]
     hpr [ -90 0 0 ]
    ]
-/*
    prop "music_inst_DNARoot" [
     code [ "music_inst" ]
     pos [ 94.8372 -57.3556 0.025013 ]
@@ -2099,7 +2084,6 @@ group "toontownCentralTutorial" [
     hpr [ 180 0 0 ]
     scale [ 0.728917 0.728917 0.728917 ]
    ]
-*/
   ]
  ]
  prop "prop_wood_fence_DNARoot" [

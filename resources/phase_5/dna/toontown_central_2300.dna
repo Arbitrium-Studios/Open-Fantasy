@@ -13814,10 +13814,7 @@ group "toontownCentral" [
       width [ 36.3888 ]
       height [ 36.3888 ]
       text [
-       letters [ "T" ]
-      ]
-      text [
-       letters [ "O" ]
+       letters [ "D" ]
       ]
       text [
        letters [ "O" ]
@@ -13826,16 +13823,19 @@ group "toontownCentral" [
        letters [ "N" ]
       ]
       text [
-       letters [ "T" ]
+       letters [ "A" ]
       ]
       text [
-       letters [ "O" ]
+       letters [ "L" ]
       ]
       text [
-       letters [ "W" ]
+       letters [ "D" ]
       ]
       text [
-       letters [ "N" ]
+       letters [ "'" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
       text [
        letters [ " " ]
@@ -13851,9 +13851,6 @@ group "toontownCentral" [
       ]
       text [
        letters [ "K" ]
-      ]
-      text [
-       letters [ "S" ]
       ]
      ]
     ]

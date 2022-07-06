@@ -781,59 +781,38 @@ group "theBurrrgh" [
       color [ 0 0.501961 0.752941 1 ]
       pos [ 0 0 -2 ]
       nhpr [ 0 0 2 ]
-      scale [ 1 1 1 ]
+      scale [ 0.8 1 0.8 ]
       width [ 45.7101 ]
       height [ 45.7101 ]
       text [
        letters [ "T" ]
       ]
       text [
-       letters [ "U" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "R" ]
-      ]
-      text [
-       letters [ "A" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "W" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
+       letters [ "H" ]
       ]
       text [
        letters [ "E" ]
       ]
       text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "B" ]
+      ]
+      text [
        letters [ "R" ]
       ]
       text [
-       letters [ "L" ]
+       letters [ "R" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "R" ]
       ]
       text [
-       letters [ "N" ]
+       letters [ "G" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "H" ]
       ]
      ]
      baseline [
@@ -899,62 +878,41 @@ group "theBurrrgh" [
      ]
      baseline [
       code [ "mickey" ]
-      color [ 0 0.501961 0.752941 1 ]
-      pos [ 0 0 -2 ]
-      nhpr [ 0 0 2 ]
-      scale [ 1 1 1 ]
-      width [ 45.7101 ]
-      height [ 45.7101 ]
+      color [ 0 0.501961 1 1 ]
+      pos [ 0 0 -1.93 ]
+      nhpr [ 0 0 1 ]
+      scale [ 0.8 1 0.8 ]
+      width [ 31.6636 ]
+      height [ 31.6636 ]
       text [
        letters [ "T" ]
       ]
       text [
-       letters [ "U" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "R" ]
-      ]
-      text [
-       letters [ "A" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "W" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
+       letters [ "H" ]
       ]
       text [
        letters [ "E" ]
       ]
       text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "B" ]
+      ]
+      text [
        letters [ "R" ]
       ]
       text [
-       letters [ "L" ]
+       letters [ "R" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "R" ]
       ]
       text [
-       letters [ "N" ]
+       letters [ "G" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "H" ]
       ]
      ]
      baseline [
@@ -1129,62 +1087,44 @@ group "theBurrrgh" [
      baseline [
       code [ "mickey" ]
       color [ 0 0.501961 0.752941 1 ]
-      pos [ 0 0 -2 ]
-      nhpr [ 0 0 2 ]
-      scale [ 1 1 1 ]
-      width [ 45.7101 ]
-      height [ 45.7101 ]
+      pos [ 0.11 0 -1.85129 ]
+      scale [ 1.04591 1 1.17771 ]
+      kern [ 0.02 ]
+      wiggle [ 0.30413 ]
+      stumble [ 0.004736 ]
+      stomp [ 0.04 ]
+      width [ 37.4411 ]
+      height [ 37.4411 ]
       flags [ "d" ]
       text [
        letters [ "T" ]
       ]
       text [
-       letters [ "U" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "R" ]
-      ]
-      text [
-       letters [ "A" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "W" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
+       letters [ "H" ]
       ]
       text [
        letters [ "E" ]
       ]
       text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "B" ]
+      ]
+      text [
        letters [ "R" ]
       ]
       text [
-       letters [ "L" ]
+       letters [ "R" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "R" ]
       ]
       text [
-       letters [ "N" ]
+       letters [ "G" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "H" ]
       ]
      ]
      baseline [

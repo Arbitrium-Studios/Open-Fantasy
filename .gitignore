@@ -3,7 +3,6 @@
 *.pyd
 *.log
 screenshots/
-resources/
 *.so
 *.DS_Store
 .idea

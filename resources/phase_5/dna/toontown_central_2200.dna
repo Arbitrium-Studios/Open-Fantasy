@@ -302,16 +302,49 @@ group "toontownCentral" [
       width [ 45.996 ]
       height [ 45.996 ]
       text [
-       letters [ "T" ]
+       letters [ "M" ]
       ]
       text [
-       letters [ "H" ]
+       letters [ "I" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "I" ]
       ]
       text [
        letters [ "E" ]
       ]
       text [
+       letters [ "'" ]
+      ]
+      text [
+       letters [ "S" ]
+      ]
+      text [
        letters [ " " ]
+      ]
+      text [
+       letters [ "M" ]
+      ]
+      text [
+       letters [ "E" ]
+      ]
+      text [
+       letters [ "L" ]
+      ]
+      text [
+       letters [ "O" ]
+      ]
+      text [
+       letters [ "D" ]
+      ]
+      text [
+       letters [ "Y" ]
       ]
       text [
        letters [ "L" ]
@@ -324,34 +357,6 @@ group "toontownCentral" [
       ]
       text [
        letters [ "D" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      
-      text [
-       letters [ "F" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "U" ]
-      ]
-      text [
-       letters [ "S" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "C" ]
       ]
      ]
      baseline [
