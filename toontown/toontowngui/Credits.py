@@ -1,4 +1,4 @@
-from panda3d.core import Vec4, TransparencyAttrib, Point3, VBase3, VBase4, TextNode
+from panda3d.core import Vec4, TransparencyAttrib, Point3, VBase3, VBase4, TextNode, CardMaker
 from direct.interval.IntervalGlobal import *
 from toontown.toon import Toon, ToonDNA
 from direct.actor.Actor import Actor
