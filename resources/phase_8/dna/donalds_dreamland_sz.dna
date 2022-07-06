@@ -430,31 +430,19 @@ group "donaldsDreamland" [
         letters [ "D" ]
        ]
        text [
+        letters [ "R" ]
+       ]
+       text [
         letters [ "O" ]
        ]
        text [
-        letters [ "N" ]
-       ]
-       text [
-        letters [ "A" ]
-       ]
-       text [
-        letters [ "L" ]
-       ]
-       text [
-        letters [ "D" ]
-       ]
-       text [
-        letters [ "'" ]
+        letters [ "W" ]
        ]
        text [
         letters [ "S" ]
        ]
        text [
-        letters [ " " ]
-       ]
-       text [
-        letters [ " " ]
+        letters [ "Y" ]
        ]
        text [
         letters [ "D" ]
@@ -956,31 +944,19 @@ group "donaldsDreamland" [
         letters [ "D" ]
        ]
        text [
+        letters [ "R" ]
+       ]
+       text [
         letters [ "O" ]
        ]
        text [
-        letters [ "N" ]
-       ]
-       text [
-        letters [ "A" ]
-       ]
-       text [
-        letters [ "L" ]
-       ]
-       text [
-        letters [ "D" ]
-       ]
-       text [
-        letters [ "'" ]
+        letters [ "W" ]
        ]
        text [
         letters [ "S" ]
        ]
        text [
-        letters [ " " ]
-       ]
-       text [
-        letters [ " " ]
+        letters [ "Y" ]
        ]
        text [
         letters [ "D" ]
