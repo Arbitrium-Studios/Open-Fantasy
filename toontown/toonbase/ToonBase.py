@@ -100,6 +100,8 @@ class ToonBase(OTPBase.OTPBase):
         self.FRIENDS = self.controlManager.getKeyName('HotKeys', ToontownGlobals.HotkeyFriends).lower()
         self.STREET_MAP = self.controlManager.getKeyName('HotKeys', ToontownGlobals.HotkeyMap).lower()
         self.CHAT = self.controlManager.getKeyName("HotKeys", ToontownGlobals.HotkeyChat).lower()
+        self.BOOK_SECONDARY = self.controlManager.getKeyName('HotKeys', ToontownGlobals.HotkeySecondaryBook).lower()
+        self.CHAT_LOG = self.controlManager.getKeyName('HotKeys', ToontownGlobals.HotkeyChatlog).lower()
         self.setBackgroundColor(ToontownGlobals.DefaultBackgroundColor)
         tpm = TextPropertiesManager.getGlobalPtr()
         candidateActive = TextProperties()
@@ -562,6 +564,8 @@ class ToonBase(OTPBase.OTPBase):
         self.FRIENDS = self.controlManager.getKeyName('HotKeys', ToontownGlobals.HotkeyFriends).lower()
         self.STREET_MAP = self.controlManager.getKeyName('HotKeys', ToontownGlobals.HotkeyMap).lower()
         self.CHAT = self.controlManager.getKeyName("HotKeys", ToontownGlobals.HotkeyChat).lower()
+        self.BOOK_SECONDARY = self.controlManager.getKeyName('HotKeys', ToontownGlobals.HotkeySecondaryBook).lower()
+        self.CHAT_LOG = self.controlManager.getKeyName('HotKeys', ToontownGlobals.HotkeyChatlog).lower()
         self.SCREENSHOT = self.controlManager.getKeyName("HotKeys", ToontownGlobals.HotkeyScreenshot).lower()
         self.accept(self.SCREENSHOT, self.takeScreenShot)
         self.wantWASD =  base.MOVE_FORWARD != 'arrow_up' and base.MOVE_BACKWARDS != 'arrow_down' and base.MOVE_LEFT != 'arrow_left' and base.MOVE_RIGHT != 'arrow_right'

@@ -7,7 +7,7 @@ from toontown.toonbase import TTLocalizer
 from toontown.toontowngui import TeaserPanel
 from direct.directnotify import DirectNotifyGlobal
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.chat import ChatManager
 from .TTChatInputSpeedChat import TTChatInputSpeedChat
 from .TTChatInputNormal import TTChatInputNormal
@@ -162,6 +162,7 @@ class ToontownChatManager(ChatManager.ChatManager):
         self.whisperPos = Vec3(0.0, 0, 0.71)
         self.speedChatPlusPos = Vec3(-0.35, 0, 0.71)
         self.chatInputWhiteList = TTChatInputWhiteList()
+        self.chatLogNode = DirectFrame(parent=base.aspect2d)
         if self.defaultToWhiteList:
             self.chatInputNormal = self.chatInputWhiteList
             self.chatInputNormal.setPos(self.normalPos)

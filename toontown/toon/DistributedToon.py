@@ -503,6 +503,9 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
             return Task.cont
 
     def setTalk(self, fromAV, fromAC, avatarName, chat, mods, flags):
+        if self.isLocal() and avatarName == '':
+            avatarName = self.name
+
         if base.cr.avatarFriendsManager.checkIgnored(fromAV):
             self.d_setWhisperIgnored(fromAV)
             return

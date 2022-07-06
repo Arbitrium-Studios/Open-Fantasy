@@ -441,6 +441,7 @@ class TalkAssistant(DirectObject.DirectObject):
                 self.historyComplete.append(newMessage)
                 self.historyOpen.append(newMessage)
                 messenger.send('NewOpenMessage', [newMessage])
+                messenger.send('addChatHistory', [avatarName, None, None, None, message])
             if newMessage.getBody() == OTPLocalizer.AntiSpamInChat:
                 self.spamDictByDoId[senderAvId] = 1
             else:
@@ -482,6 +483,7 @@ class TalkAssistant(DirectObject.DirectObject):
             self.addToHistoryDoId(newMessage, avatarId, scrubbed)
         if accountId:
             self.addToHistoryDISLId(newMessage, accountId)
+        messenger.send('addChatHistory', [avatarName, None, None, None, message, WhisperPopup.WTSystem])
         messenger.send('NewOpenMessage', [newMessage])
         return error
 
@@ -546,6 +548,9 @@ class TalkAssistant(DirectObject.DirectObject):
                     self.historyComplete.append(newMessage)
                     self.historyGuild.append(newMessage)
                     messenger.send('NewOpenMessage', [newMessage])
+                    # TODO implement WhisperPopup.WTGuild for when we add guilds
+                    # messenger.send('addChatHistory', [avatarName, None, None, None, message, WhisperPopup.WTGuild])
+                    messenger.send('addChatHistory', [avatarName, None, None, None, message])
                 if newMessage.getBody() == OTPLocalizer.AntiSpamInChat:
                     self.spamDictByDoId[senderAvId] = 1
                 else:
@@ -580,6 +585,7 @@ class TalkAssistant(DirectObject.DirectObject):
         if accountId:
             self.addToHistoryDISLId(newMessage, accountId)
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [avatarName, None, None, None, message])
         return error
 
     def receiveThought(self, avatarId, avatarName, accountId,
@@ -616,6 +622,7 @@ class TalkAssistant(DirectObject.DirectObject):
             self.historyComplete.append(newMessage)
             self.historyOpen.append(newMessage)
             messenger.send('NewOpenMessage', [newMessage])
+            messenger.send('addChatHistory', [avatarName, None, None, None, message])
         return error
 
     def receiveGameMessage(self, message):
@@ -638,6 +645,7 @@ class TalkAssistant(DirectObject.DirectObject):
             self.historyComplete.append(newMessage)
             self.historyUpdates.append(newMessage)
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [None, None, None, None, message])
         return error
 
     def receiveSystemMessage(self, message):
@@ -660,6 +668,7 @@ class TalkAssistant(DirectObject.DirectObject):
             self.historyComplete.append(newMessage)
             self.historyUpdates.append(newMessage)
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [None, None, None, None, message])
         return error
 
     def receiveDeveloperMessage(self, message):
@@ -681,6 +690,7 @@ class TalkAssistant(DirectObject.DirectObject):
         self.historyComplete.append(newMessage)
         self.historyUpdates.append(newMessage)
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [None, None, None, None, message])
         return error
 
     def receiveGuildMessage(self, message, senderAvId, senderName):
@@ -703,6 +713,7 @@ class TalkAssistant(DirectObject.DirectObject):
             self.historyComplete.append(newMessage)
             self.historyGuild.append(newMessage)
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [None, None, None, None, message])
         return error
 
     def receiveGuildUpdateMessage(
@@ -726,6 +737,7 @@ class TalkAssistant(DirectObject.DirectObject):
             self.historyComplete.append(newMessage)
             self.historyGuild.append(newMessage)
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [None, None, None, None, message])
         return error
 
     def receiveFriendUpdate(self, friendId, friendName, isOnline):
@@ -750,7 +762,9 @@ class TalkAssistant(DirectObject.DirectObject):
         self.addHandle(friendId, newMessage)
         self.historyComplete.append(newMessage)
         self.historyUpdates.append(newMessage)
+        message = f'{friendName} {onlineMessage}' 
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [None, None, None, None, message])
         return
 
     def receiveFriendAccountUpdate(self, friendId, friendName, isOnline):
@@ -801,7 +815,9 @@ class TalkAssistant(DirectObject.DirectObject):
             self.historyComplete.append(newMessage)
             self.historyUpdates.append(newMessage)
             self.historyGuild.append(newMessage)
+            message = f'{memberName} {onlineMessage}' 
             messenger.send('NewOpenMessage', [newMessage])
+            messenger.send('addChatHistory', [None, None, None, None, message])
         return
 
     def receiveOpenSpeedChat(self, type, messageIndex, senderAvId, name=None):
@@ -835,6 +851,7 @@ class TalkAssistant(DirectObject.DirectObject):
         self.historyOpen.append(newMessage)
         self.addToHistoryDoId(newMessage, senderAvId)
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [name, None, None, None, message])
         return error
 
     def receiveAvatarWhisperSpeedChat(
@@ -867,6 +884,7 @@ class TalkAssistant(DirectObject.DirectObject):
         self.historyOpen.append(newMessage)
         self.addToHistoryDoId(newMessage, senderAvId)
         messenger.send('NewOpenMessage', [newMessage])
+        messenger.send('addChatHistory', [name, None, None, None, message, WhisperPopup.WTQuickTalker])
         return error
 
     def receivePlayerWhisperSpeedChat(

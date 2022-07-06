@@ -2898,6 +2898,7 @@ HotkeyMap = 11
 HotkeyScreenshot = 12
 HotkeyChat = 13
 HotkeySecondaryBook = 14
+HotkeyChatLog = 15
 HotkeyNames = {
 0: {
        HotkeyUp: 'Move Forward',
@@ -2914,7 +2915,8 @@ HotkeyNames = {
        HotkeyMap: 'Open map',
        HotkeyScreenshot: 'screenshot',
        HotkeyChat: 'chat', 
-       HotkeySecondaryBook: 'Open Book Secondary'
+       HotkeySecondaryBook: 'Open Book Secondary',
+       HotkeyChatLog: 'Open Chat Log',
 }
 }
 

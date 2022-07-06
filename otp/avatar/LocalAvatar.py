@@ -20,7 +20,6 @@ from direct.controls.SwimWalker import SwimWalker
 from direct.controls.TwoDWalker import TwoDWalker
 from toontown.toon.OrbitalCamera import OrbitCamera
 
-
 class LocalAvatar(DistributedAvatar.DistributedAvatar,
                   DistributedSmoothNode.DistributedSmoothNode):
     notify = DirectNotifyGlobal.directNotify.newCategory('LocalAvatar')
@@ -1232,6 +1231,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
 
     def startChat(self):
         self.chatMgr.start()
+        self.chatMgr.chatLog.enableHotkey()
         self.accept(
             OTPGlobals.WhisperIncomingEvent,
             self.handlePlayerFriendWhisper)

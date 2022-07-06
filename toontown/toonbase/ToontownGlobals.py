@@ -1717,6 +1717,7 @@ HotkeyMap = 11
 HotkeyScreenshot = 12
 HotkeyChat = 13
 HotkeySecondaryBook = 14
+HotkeyChatlog = 15
 HotkeyGroupDefaults = {
     HotkeyUp: 'arrow_up',
     HotkeyDown: 'arrow_down',
@@ -1732,7 +1733,8 @@ HotkeyGroupDefaults = {
     HotkeyMap: 'alt',
     HotkeyScreenshot: 'f9',
     HotkeyChat: 't',
-    HotkeySecondaryBook: 'f8'
+    HotkeySecondaryBook: 'f8',
+    HotkeyChatlog: 'f11'
 }
 
 
