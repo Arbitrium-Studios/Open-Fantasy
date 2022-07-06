@@ -3,6 +3,7 @@
 *.pyd
 *.log
 screenshots/
+resources/
 *.so
 *.DS_Store
 .idea
@@ -26,4 +27,3 @@ Housekeeper/
 sign/
 sign/texture.jpg
 *.mf
-resources/
