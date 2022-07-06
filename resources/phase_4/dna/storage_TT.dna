@@ -39,8 +39,8 @@ hood_model "phase_3.5/models/props/trees" [
 	store_node [ "holiday_prop" "prop_tree_fat_ur" "prop_tree_fat_no_box_ur" ]
 	store_node [ "holiday_prop" "prop_tree_fat_ul" "prop_tree_fat_no_box_ul" ]
 	]
-
-store_texture [ "texture" "street_street_TT_tex"
+    
+store_texture [ "texture" "street_street_TT_tex"	
 		"phase_3.5/maps/sidewalkbrown.jpg"		]
 store_texture [ "texture" "street_sidewalk_TT_tex"
 		"phase_3.5/maps/sidewalk_4cont_brown.jpg"	]
@@ -89,7 +89,7 @@ hood_model "phase_4/models/props/tt_m_ara_gen_sillyMeterSign" [
 hood_model "phase_4/models/props/tt_m_ara_gen_victorySoonSign" [
 	store_node [ "prop" "prop_tt_m_ara_gen_victorySoonSign" "" ]
         ]
-
+        
 hood_model "phase_4/models/props/tt_m_ara_gen_victoryPartySign" [
 	store_node [ "prop" "prop_tt_m_ara_gen_victoryPartySign" "" ]
         ]
@@ -115,7 +115,3 @@ hood_model "phase_4/models/props/tt_m_ara_gen_foreSign" [
 hood_model "phase_4/models/props/tt_m_ara_gen_tunnelAheadSign" [
 	store_node [ "prop" "prop_tt_m_ara_gen_tunnelAheadSign" "" ]
         ]
-
-place_model "phase_4/models/neighborhoods/toontown_central_beta" [
-     store_node [ "prop" "toontown_central_beta" "" ]
-    ]

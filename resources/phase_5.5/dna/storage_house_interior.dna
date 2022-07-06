@@ -1,4 +1,4 @@
-// pre-built toon interiors
+ pre-built toon interiors
 model "phase_3.5/models/modules/toon_interior" [
         store_node [ "prop" "TI_room" "" ]
         ]

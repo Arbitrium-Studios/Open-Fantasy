@@ -331,63 +331,57 @@ group "minniesMelodyLand" [
       scale [ 0.8 1 0.8 ]
       width [ 43.3426 ]
       height [ 43.3426 ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "Y" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "A" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
+       text [
+        letters [ "T" ]
+       ]
+       text [
+        letters [ "H" ]
+       ]
+       text [
+        letters [ "E" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "L" ]
+       ]
+       text [
+        letters [ "A" ]
+       ]
+       text [
+        letters [ "N" ]
+       ]
+       text [
+        letters [ "D" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "O" ]
+       ]
+       text [
+        letters [ "F" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "M" ]
+       ]
+       text [
+        letters [ "U" ]
+       ]
+       text [
+        letters [ "S" ]
+       ]
+       text [
+        letters [ "I" ]
+       ]
+       text [
+        letters [ "C" ]
+       ]
      ]
      baseline [
       pos [ 0 0 1.68 ]
@@ -447,63 +441,57 @@ group "minniesMelodyLand" [
       scale [ 0.8 1 0.8 ]
       width [ 53.3903 ]
       height [ 53.3903 ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "Y" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "A" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
+       text [
+        letters [ "T" ]
+       ]
+       text [
+        letters [ "H" ]
+       ]
+       text [
+        letters [ "E" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "L" ]
+       ]
+       text [
+        letters [ "A" ]
+       ]
+       text [
+        letters [ "N" ]
+       ]
+       text [
+        letters [ "D" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "O" ]
+       ]
+       text [
+        letters [ "F" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "M" ]
+       ]
+       text [
+        letters [ "U" ]
+       ]
+       text [
+        letters [ "S" ]
+       ]
+       text [
+        letters [ "I" ]
+       ]
+       text [
+        letters [ "C" ]
+       ]
      ]
      baseline [
       pos [ 0 0 1.81 ]
@@ -605,63 +593,57 @@ group "minniesMelodyLand" [
       scale [ 0.8 1 0.8 ]
       width [ 33.2978 ]
       height [ 33.2978 ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "Y" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "A" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
+       text [
+        letters [ "T" ]
+       ]
+       text [
+        letters [ "H" ]
+       ]
+       text [
+        letters [ "E" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "L" ]
+       ]
+       text [
+        letters [ "A" ]
+       ]
+       text [
+        letters [ "N" ]
+       ]
+       text [
+        letters [ "D" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "O" ]
+       ]
+       text [
+        letters [ "F" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "M" ]
+       ]
+       text [
+        letters [ "U" ]
+       ]
+       text [
+        letters [ "S" ]
+       ]
+       text [
+        letters [ "I" ]
+       ]
+       text [
+        letters [ "C" ]
+       ]
      ]
      baseline [
       pos [ 0 0 1.79 ]

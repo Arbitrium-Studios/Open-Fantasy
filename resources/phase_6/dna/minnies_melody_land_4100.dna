@@ -6556,63 +6556,57 @@ group "minniesMelodyLand" [
       scale [ 0.8 1 0.8 ]
       width [ 50 ]
       height [ 50 ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "Y" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "A" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
+       text [
+        letters [ "T" ]
+       ]
+       text [
+        letters [ "H" ]
+       ]
+       text [
+        letters [ "E" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "L" ]
+       ]
+       text [
+        letters [ "A" ]
+       ]
+       text [
+        letters [ "N" ]
+       ]
+       text [
+        letters [ "D" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "O" ]
+       ]
+       text [
+        letters [ "F" ]
+       ]
+       text [
+        letters [ " " ]
+       ]
+       text [
+        letters [ "M" ]
+       ]
+       text [
+        letters [ "U" ]
+       ]
+       text [
+        letters [ "S" ]
+       ]
+       text [
+        letters [ "I" ]
+       ]
+       text [
+        letters [ "C" ]
+       ]
      ]
     ]
    ]
