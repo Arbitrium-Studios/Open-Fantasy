@@ -11,6 +11,7 @@ from toontown.toonbase import TTLocalizer
 from toontown.toonbase import DisplayOptions
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
+import webbrowser
 import random
 MAX_AVATARS = 6
 POSITIONS = (Vec3(-0.840167, 0, 0.359333),
