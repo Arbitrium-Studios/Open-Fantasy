@@ -11,7 +11,7 @@ class StreetSign(DistributedObject.DistributedObject):
     StreetSignBaseDir = config.GetString('street-sign-base-dir', 'sign')
     StreetSignUrl = base.config.GetString(
         'street-sign-url',
-        'http://www.toontownfantasy.com/assets/phase_3/sign/street-signs/img/')
+        'https://www.toontownfantasy.com/assets/phase_3/sign/')
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
