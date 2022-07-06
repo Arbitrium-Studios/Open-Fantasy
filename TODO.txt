@@ -70,10 +70,6 @@ The Road to Fantasy:
         + Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
         + Implement full Wide-Screen Support
         + Put all logs, screenshots, etc into a 'User/' folder
-        + Rename "Choose Your Type" under the Species list to "Choose Your Species"!
-        + Add TTR's Clothing Option for Create Your Toon
-        + Implement our version of Toontown House's Accessory Tab in the Clothing Page of the Create Your Toon part
-        + Implement a new tab for Further Customization for which hand your Toon uses, etc
         + Auto-Approve Type-A-Name Names
         + Type-A-Name for Doodles
         + Doodle Rebalance
@@ -87,7 +83,6 @@ The Road to Fantasy:
         + Add more fonts for usage in Catalog
         + Add Font Colors to the Catalog
         + Add the option to disable Disney Characters
-        + Overhaul the Choose Your Color page Hex Color to allow for Classic or Hex Colors
         + Add Black, White, and Gray to the Classic Colors
         + Make ALL textures HD
         + Toon Rewrite (That INCLUDES Species Rewrite and Name)
@@ -121,5 +116,90 @@ The Road to Fantasy:
             + Natural Attacks like Bite and such.
         + Toontown Time based where the continent of Toontown would be located in my universe aka around the South Indian Ocean!
         + 24-hour Day-Night Cycle
+            + The Time Zone for the Estate should be CST. It feels like a Midwestern Suburbs.
+        + Replace Mickey, Minnie, Chip, Dale, Goofy, Pluto, Donald with Toonified versions of themselves
+        + Each Building in Toontown should have a custom interior to personalize the game a bit more.
+        + Replace all Trading Card Images with redrawn versions of them.
+        + A Create A Toon Update:
+            + Do my own take on the Frog, Penguin, Deer, Gator, Cow, Chipmunk, Chicken, Fox, Parrot, Goat, Beaver, Racoon, Bat, Kiwi, Kangaroo, Koala, Armadillo, Spider, Snake, Turkey, Sheep, Hedgehog Toons, and more species!
+            + The Cat, Mouse, Dog, Pig, Horse, Bear, etc. Species should all get a revamp
+            + Add 3D whiskers.
+            + Add Pitch Options which boosts the ptch your Toon speaks at for more customization.
+            + Overhaul the Choose Your Color page Hex Color to allow for Classic or Hex Colors
+            + Rename "Choose Your Type" under the Species list to "Choose Your Species"!
+            + Replace TTO's Clothing Chooser with TTR's Clothing Chooser
+            + Implement our version of Toontown House's Accessory Tab in the Clothing Page of the Create Your Toon part
+            + Implement a new tab for Further Customization for which hand your Toon uses, etc.
+            + Remove Gender
+            + Add a Section of Create A Toon BETWEEN Pick Your Outfit and Choose Your Name called Personalize Your Toon!
+                + Add a slider for how often your Toon uses each hand
+                + Toggling Eyelashes
+                + Your Tail Type
+                + Choosing your Toon's Iris Color.
+                + Your Toon's Personality Type (which affects your Toon's Dialog)
+            + Add Accessories Button to the Pick Your Outfit section to choose your starting Accessories
+            + With the Coloring System, it should allow you to choose the color of your Ears and Feet.
+            + When you start making your Toon, it should fade through the colors of the Rainbow like it does on TVS.
+        + Pride Accessories and Clothing Options
+        + Add tails for Toons
+        + Make a gravity system that affects your Toon's Tail and Accessories like the Backpack.
+        + The Toontown Map should be able to be moved using the arrow keys to see areas outside of the core playgrounds Toontown
+        + With the Shaders Update, add weather system to the Game
+            + Weather types should be Sunny, Cloudy, Partly Cloudy, Rainy, Snow, etc.
+            + Add puddles to the ground after it rains
+        + Improve Doodle and Classic Character AI
+        + An Estate Overhaul Update:
+            + The Estate should have a Tunnel that's blocked off.
+            + Implement the TTO Estate Exterior Options
+                + Each Estate should be seasonal like on Toontown Rewritten!
+                + Fold the Toon's Estate name around curved objects for a better look.
+            + Add more Estate Exterior Options
+            + You should be able to buy individual Interior Rooms and Preplanned Interior Plans
+            + Add Firefly particles during nighttime
+            + Add Butterflies during the daytime
+            + Add Birds Chirping during the morning and daytime.
+            + Add Day-Night Estate Music
+            + Allow us to sit on Chairs
+            + Allow us to lay down on our beds.
+            + Add Fishing Bucket Expansion Sizes in the Catalog
+            + Add Gag Plot Expansions
+            + Allow us to turn on and off the estate lights.
+            + Add Benches to the Estates.
+        + Add Pay to Teleport to Buildings.
+        + A Multipart Cogs Inc. Overhaul Update:
+            + A Cog Building Update:
+                + Adds new music for each Floor specific to each department of COGS Incorporated.
+                + Each floor should have a specific lay out to it.
+                    + Floor 1: the entrance of a building with a Receptionist Cog to defeat before more, regular Cogs come out of the elevator.
+                + The Eyes outside of the building move around to show the building is alive.
+                + The Boss Cog should be a Head Honcho Manager Cog
+                + The Boss Cog can cheat to summon more Cogs to the Battle. So, it's wise to focus on it.
+            + A Field Office Update:
+                + Like in TTR, the Field Office will take over the Toon Headquarters but with a model like Toontown Online's Field Offices BUT exclusively on higher-level streets!
+                + Unlike in TTR, the final floor should be the Executive Suite with Head Honchos and Executive Cogs
+                + Like TTO, there will be a Mover and Shaker Game and the Lawbot Flying Game but unlike TTO, it'll be in the same building.
+                + Unlike Toontown Online and Toontown Rewritten, the side of the building you're on is Deparment Specific. You will be able to tell via a banner.
+                + There should be new music created for each of these floors, specific to the Field Office you're in.
+                + Depending on which side you go into, you can either get the Mega-Mover Mini-Game and a Real-Time Pie Round, a Craning Mini-Game and a Gooning Maze, a Cannon Mini-Game or a the Flying Legal Eagle Mini-Game from TTO, or a Real-Time Golf Mini-Game.
+                + You should start with a Cog round, then go onto a Mini-Game that's randomly chosen unless you have a Toontask for a specific Mini-Game, then onto another Cog Round, then onto the Boss round.
+                + Like in TTR, you should start with limited Gags.
+                    + For each Mini-Game, you collect Jokes to get back at least 2 Gag Tracks per floor and Laff.
+                + The reward for the Field Office should be a 6 Star SOS Cards that insta-kills your Cogs, a Training Point that you can redeem at the Cottage in Mount Acorn, and a discount on Potions because you saved the Witch of the Mountains.
+            + A Vice President Boss Battle Update:
+                + The higher level Cog your suit is, the harder the battle is.
+                + The battle starts off easy and gets progressively harder as you defeat more cogs.
+                + You will get multiple rewards that won't miss for any Gag Track.
+            + A Chief Financial Officer Boss Battle Update:
+                + The Craning round should be pushed back for a second Cog Round.
+                + You should get multiple varying types of Unite Rewards for this.
+            + A Chief Justice Boss Battle Update:
+                + This update gives you multiple rewards per Boss Run
+                + To make it worth while, the reward should allow you to Summon a Cog Mid-Battle to Heal you or Attack for a specific number of rounds.
+        + Cog Attacks should have the ability to do Damage Over Time.
+        + You should be able to pick your Boss Rewards with your Gags. The only time you forfeit your ability to pick a gag is when you use a Doodle.
+            + A Chief Executive Officer Boss Battle Update:
+                + This makes it so the Boss Battle itself functions like Toontown Rewritten's Boss Battle.
+                + You should get Multiple Fires.
+        + If you try to use a Fire on Executive or Manager Cogs, they should dodge it and use a cheat that lowers the accuracy of the Toon's Gags for a couple of Rounds.
 
         + More soon!
