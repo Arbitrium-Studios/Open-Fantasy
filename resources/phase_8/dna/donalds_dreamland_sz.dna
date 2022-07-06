@@ -445,6 +445,9 @@ group "donaldsDreamland" [
         letters [ "Y" ]
        ]
        text [
+        letters [ " " ]
+       ]
+       text [
         letters [ "D" ]
        ]
        text [
@@ -957,6 +960,9 @@ group "donaldsDreamland" [
        ]
        text [
         letters [ "Y" ]
+       ]
+       text [
+        letters [ " " ]
        ]
        text [
         letters [ "D" ]
