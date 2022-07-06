@@ -30,7 +30,7 @@
 + Rocket for helping me implement Wide-Screen Support
 + DTM1218
 + ToonJoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
-+ Nora for creating the Credits Button.
++ Nora for creating the Credits Button and more!
 + leothegreat2003#4524 for helping me find the bug that caused the Streets to not work!
 
 ### Special Thanks To:
