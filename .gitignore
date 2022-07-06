@@ -18,12 +18,10 @@ errorCode
 screenshots/
 libotp/
 libtoontown/
-news/
 *.egg
 Housekeeper/
 *.txt
 *.cfg
 sign/
-sign/texture.jpg
 *.mf
 *.yaml
