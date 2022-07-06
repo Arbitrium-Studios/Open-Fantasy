@@ -155,8 +155,8 @@ class TeaserPanel(DirectObject):
         self.browser.reparentTo(self.dialog)
         base.transitions.fadeScreen(0.5)
         if base.config.GetBool('want-teaser-scroll-keys', 0):
-            self.accept('arrow_right', self.showNextPage)
-            self.accept('arrow_left', self.showPrevPage)
+            self.accept(f'{base.MOVE_RIGHT}', self.showNextPage)
+            self.accept(f'{base.MOVE_LEFT}', self.showPrevPage)
         self.accept('stoppedAsleep', self.__handleDone)
 
     def showNextPage(self):

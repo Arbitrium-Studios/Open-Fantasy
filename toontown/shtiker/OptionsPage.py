@@ -1,5 +1,6 @@
 from panda3d.core import *
 from . import ShtikerPage
+from toontown.controls.ControlSettingsDialog import ControlSettingsDialog
 from toontown.toonbase import TTLocalizer, ToontownGlobals
 from toontown.toontowngui import TTDialog
 from direct.gui.DirectGui import *
@@ -170,6 +171,25 @@ class OptionsPage(ShtikerPage.ShtikerPage):
                 0.11,
                 0,
                 0.77))
+        self.extraOptionsTab = DirectButton(parent=self, relief=None,
+                                            text=TTLocalizer.ExtraOptionsPageTitle,
+                                            text_scale=TTLocalizer.OPoptionsTab,
+                                            text_align=TextNode.ALeft,
+                                            text_pos=(
+                                                 -0.05, 0.0, 0.0),
+                                             image=gui.find('**/tabs/polySurface2'),
+                                             image_pos=(0.12, 1, -0.91),
+                                             image_hpr=(
+                                                 0, 0, -90),
+                                             image_scale=(0.033, 0.033, 0.042),
+                                             image_color=normalColor,
+                                             image1_color=clickColor,
+                                             image2_color=rolloverColor,
+                                             image3_color=diabledColor,
+                                             text_fg=Vec4(0.2, 0.1, 0, 1),
+                                             command=self.setMode,
+                                             extraArgs=[PageMode.Extra], 
+                                             pos=(0.55, 0, 0.77))
         return
 
     def enter(self):
@@ -179,6 +199,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
     def exit(self):
         self.optionsTabPage.exit()
         self.codesTabPage.exit()
+        self.extraOptionsTabPage.exit()
         ShtikerPage.ShtikerPage.exit(self)
 
     def unload(self):
@@ -204,8 +225,8 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.optionsTabPage.enter()
             self.codesTab['state'] = DGG.NORMAL
             self.codesTabPage.exit()
-            # self.extraOptionsTab['state'] = DGG.NORMAL
-            # self.extraOptionsTabPage.exit()
+            self.extraOptionsTab['state'] = DGG.NORMAL
+            self.extraOptionsTabPage.exit()
         elif mode == PageMode.Codes:
             self.mode = PageMode.Codes
             self.title['text'] = TTLocalizer.CdrPageTitle
@@ -213,8 +234,8 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.optionsTabPage.exit()
             self.codesTab['state'] = DGG.DISABLED
             self.codesTabPage.enter()
-            # self.extraOptionsTab['state'] = DGG.NORMAL
-            # self.extraOptionsTabPage.exit()
+            self.extraOptionsTab['state'] = DGG.NORMAL
+            self.extraOptionsTabPage.exit()
         elif mode == PageMode.Extra:
             self.mode = PageMode.Extra
             self.title['text'] = TTLocalizer.ExtraOptionsPageTitle
@@ -244,6 +265,7 @@ class OptionsTabPage(DirectFrame):
                 0.0, 0.0, 0.0), scale=(
                 1.0, 1.0, 1.0))
         self.load()
+        self.dialog = None
         return
 
     def destroy(self):
@@ -1078,6 +1100,7 @@ class CodesTabPage(DirectFrame):
         self.submitButton['state'] = DGG.NORMAL
 
 class ExtraOptionsTabPage(DirectFrame):
+    # TODO add scrollbar frame so we can add unlimited number of options
     notify = directNotify.newCategory('ExtraOptionsTabPage')
 
     def __init__(self, parent=aspect2d):
@@ -1093,19 +1116,52 @@ class ExtraOptionsTabPage(DirectFrame):
         DirectFrame.destroy(self)
 
     def load(self):
-        self.optionChoosers = {}
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
-        circleModel = loader.loadModel('phase_3/models/gui/tt_m_gui_mat_nameShop')
-        titleHeight = 0.61
-        textStartHeight = 0.45
-        textRowHeight = 0.145
-        leftMargin = -0.72
-        buttonbase_xcoord = 0.35
-        buttonbase_ycoord = 0.45
-        button_image_scale = (0.7, 1, 1)
-        button_textpos = (0, -0.02)
-        options_text_scale = 0.052
-        disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
-        button_image = (guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR'))
+         guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+         gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+         titleHeight = 0.61
+         textStartHeight = 0.45
+         textRowHeight = 0.145
+         leftMargin = -0.72
+         buttonbase_xcoord = 0.35
+         buttonbase_ycoord = 0.45
+         button_image_scale = (0.7, 1, 1)
+         button_textpos = (0, -0.02)
+         options_text_scale = 0.052
+         disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
+         self.CustomControls_Label = DirectLabel(parent=self, relief=None,
+                                                 text='Custom Controls:',
+                                                 text_align=TextNode.ALeft,
+                                                 text_scale=options_text_scale,
+                                                 text_wordwrap=10,
+                                                 pos=(leftMargin, 0, textStartHeight))
+         self.CustomControls_button = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'),
+                                                   guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')),
+                                                   image_scale=button_image_scale,
+                                                   text='Custom Controls',
+                                                   text_scale=options_text_scale,
+                                                   text_pos=button_textpos,
+                                                   pos=(
+                                                       buttonbase_xcoord, 0.0, buttonbase_ycoord),
+                                                   command=self.openCustomControlsGUI)
+         guiButton.removeNode()
+         gui.removeNode()
+
+    def openCustomControlsGUI(self):
+         ControlSettingsDialog()
+
+    def enter(self):
+         self.show()
+         self.settingsChanged = 0
+
+    def exit(self):
+         self.hide()
+         if hasattr(self, 'settingsChanged'):
+             if self.settingsChanged != 0:
+                 base.settings.writeSettings()
+
+    def unload(self):
+         self.CustomControls_button.destroy()
+         del self.CustomControls_Label
+         del self.CustomControls_button
 
     BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'
