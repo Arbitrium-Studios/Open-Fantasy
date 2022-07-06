@@ -31,6 +31,7 @@
 + DTM1218
 + ToonJoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
 + Nora for creating the Credits Button.
++ leothegreat2003#4524 for helping me find the bug that caused the Streets to not work!
 
 ### Special Thanks To:
 + Satire6 for releasing Pandora & Anesidora to the public!
