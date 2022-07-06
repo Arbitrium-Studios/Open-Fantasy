@@ -32,9 +32,7 @@ Phase 2 - The Overhaul Versions:
     Goal: To begin Alpha Testing Toontown Fantasy.
 
 + Create an in-game launcher like ODS using the Anesidora files
-+ Add the capability for higher FPS and higher quality textures (upscale them up to 8k)
 + Patch as many bugs as possible
-+ Move to the latest version of Python if it hasn't been done already
 + Implement custom shaders for everyone to use!
 + Add custom keybinds with as many custom key options as possible!
 + Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button
@@ -42,9 +40,7 @@ Phase 2 - The Overhaul Versions:
 + Add a touch screen mode which is enabled/disabled in the Shticker Book
 + Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
 + Implement full Wide-Screen Support
-+ Implement in-engine Image Upscaling
-+ Add Credits to the game for everyone who is helping
-+ Put all logs, screenshots, etc into a 'User/InsertUserHere' folder
++ Put all logs, screenshots, etc into a 'User/' folder
 + Rename "Choose Your Type" under the Species list to "Choose Your Species"!
 + Add TTR's Clothing Option for Create Your Toon
 + Implement our version of Toontown House's Accessory Tab in the Clothing Page of the Create Your Toon part

@@ -1680,6 +1680,9 @@ AV_TOUCH_COUNT_TIME = 300
 
 BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'
 
+
+openDiscord = 'https://discord.gg/jy628fW'
+
 # TELEPORT_BUTTON_DEFAULT_COST = 50
 # TELEPORT_BUTTON_COSTS = {
 #  ToontownCentral: 5,
