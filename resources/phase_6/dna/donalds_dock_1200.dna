@@ -7383,7 +7383,10 @@ group "donaldsDock" [
       width [ 34.4021 ]
       height [ 34.4021 ]
       text [
-       letters [ "D" ]
+       letters [ "T" ]
+      ]
+      text [
+       letters [ "O" ]
       ]
       text [
        letters [ "O" ]
@@ -7392,19 +7395,16 @@ group "donaldsDock" [
        letters [ "N" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "T" ]
       ]
       text [
-       letters [ "L" ]
+       letters [ "O" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "W" ]
       ]
       text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
+       letters [ "N" ]
       ]
       text [
        letters [ " " ]
@@ -7420,6 +7420,9 @@ group "donaldsDock" [
       ]
       text [
        letters [ "K" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
      ]
     ]
