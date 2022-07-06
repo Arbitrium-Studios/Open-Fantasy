@@ -46,6 +46,7 @@ TrueBlueDogemon on Discord for implementing various Quality of Life features inc
 Rocket for helping me implement Wide-Screen Support
 DTM1218
 ToonJoey for letting us use his Project: Bikehorn assets for HD textures
+Nora for creating the Credits Button.
 
 \1limeText\1Special Thanks To\2
 Satire6 for releasing Pandora & Anesidora to the public!

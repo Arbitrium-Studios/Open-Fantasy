@@ -30,6 +30,7 @@
 + Rocket for helping me implement Wide-Screen Support
 + DTM1218
 + ToonJoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
++ Nora for creating the Credits Button.
 
 ### Special Thanks To:
 + Satire6 for releasing Pandora & Anesidora to the public!
