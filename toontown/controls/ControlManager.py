@@ -15,10 +15,10 @@ class ControlManager(DirectObject):
         self.disableChat = 1
         self.disabledHotkeys = []
         self.activeHotkeys = []
-        self.changedHotkeys = {ToontownGlobals.HotkeyMovement: [],
-                               ToontownGlobals.HotkeyInteraction: [],
-                               ToontownGlobals.HotkeyDebug: [],
-                               ToontownGlobals.HotkeyMisc: []}
+        self.changedHotkeys = {ToontownGlobals.Movement: [],
+                               ToontownGlobals.Interaction: [],
+                               ToontownGlobals.Debug: [],
+                               ToontownGlobals.Misc: []}
         self.disableAlphaNumericHotkeys = False
         self.reloadHotkeys(True)
 

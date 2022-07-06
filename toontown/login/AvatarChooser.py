@@ -241,6 +241,7 @@ class AvatarChooser(StateData.StateData):
         self.quitButton.destroy()
         del self.quitButton
         self.pickAToonBG.removeNode()
+        self.settingsButton.removeNode()
         del self.pickAToonBG
         del self.avatarList
         self.parentFSM.getCurrentState().removeChild(self.fsm)

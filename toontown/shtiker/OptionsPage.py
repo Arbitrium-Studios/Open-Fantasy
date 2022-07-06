@@ -52,7 +52,7 @@ speedChatStyles = ((2000,
                     (170 / 255.0, 120 / 255.0, 20 / 255.0),
                     (165 / 255.0, 120 / 255.0, 50 / 255.0),
                     (210 / 255.0, 200 / 255.0, 180 / 255.0)))
-PageMode = PythonUtil.Enum('Options, Codes')
+PageMode = PythonUtil.Enum('Options, Codes, Extra')
 
 
 class OptionsPage(ShtikerPage.ShtikerPage):
@@ -61,12 +61,22 @@ class OptionsPage(ShtikerPage.ShtikerPage):
     def __init__(self):
         ShtikerPage.ShtikerPage.__init__(self)
 
+        self.optionsTabPage = None
+        self.codesTabPage = None
+        self.extraOptionsTabPage = None
+        self.title = None
+        self.optionsTab = None
+        self.codesTab = None
+        self.extraOptionsTab = None
+
     def load(self):
         ShtikerPage.ShtikerPage.load(self)
         self.optionsTabPage = OptionsTabPage(self)
         self.optionsTabPage.hide()
         self.codesTabPage = CodesTabPage(self)
         self.codesTabPage.hide()
+        self.extraOptionsTabPage = ExtraOptionsTabPage(self)
+        self.extraOptionsTabPage.hide()
         titleHeight = 0.61
         self.title = DirectLabel(
             parent=self,
@@ -175,6 +185,10 @@ class OptionsPage(ShtikerPage.ShtikerPage):
         self.optionsTabPage.unload()
         del self.title
         ShtikerPage.ShtikerPage.unload(self)
+        
+        if self.extraOptionsTab is not None:
+            self.extraOptionsTab.destroy()
+            self.extraOptionsTab = None
 
     def setMode(self, mode, updateAnyways=0):
         messenger.send('wakeup')
@@ -190,6 +204,8 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.optionsTabPage.enter()
             self.codesTab['state'] = DGG.NORMAL
             self.codesTabPage.exit()
+            # self.extraOptionsTab['state'] = DGG.NORMAL
+            # self.extraOptionsTabPage.exit()
         elif mode == PageMode.Codes:
             self.mode = PageMode.Codes
             self.title['text'] = TTLocalizer.CdrPageTitle
@@ -197,6 +213,17 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.optionsTabPage.exit()
             self.codesTab['state'] = DGG.DISABLED
             self.codesTabPage.enter()
+            # self.extraOptionsTab['state'] = DGG.NORMAL
+            # self.extraOptionsTabPage.exit()
+        elif mode == PageMode.Extra:
+            self.mode = PageMode.Extra
+            self.title['text'] = TTLocalizer.ExtraOptionsPageTitle
+            self.optionsTab['state'] = DGG.NORMAL
+            self.optionsTabPage.exit()
+            self.codesTab['state'] = DGG.NORMAL
+            self.codesTabPage.exit()
+            self.extraOptionsTab['state'] = DGG.DISABLED
+            self.extraOptionsTabPage.enter()
         else:
             raise Exception('OptionsPage::setMode - Invalid Mode %s' % mode)
 
@@ -1049,5 +1076,36 @@ class CodesTabPage(DirectFrame):
         self.codeInput['state'] = DGG.NORMAL
         self.codeInput['focus'] = 1
         self.submitButton['state'] = DGG.NORMAL
+
+class ExtraOptionsTabPage(DirectFrame):
+    notify = directNotify.newCategory('ExtraOptionsTabPage')
+
+    def __init__(self, parent=aspect2d):
+        self._parent = parent
+        DirectFrame.__init__(
+            self, parent=self._parent, relief=None, pos=(
+                0.0, 0.0, 0.0), scale=(
+                1.0, 1.0, 1.0))
+        self.load()
+        return
+
+    def destroy(self):
+        DirectFrame.destroy(self)
+
+    def load(self):
+        self.optionChoosers = {}
+        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        circleModel = loader.loadModel('phase_3/models/gui/tt_m_gui_mat_nameShop')
+        titleHeight = 0.61
+        textStartHeight = 0.45
+        textRowHeight = 0.145
+        leftMargin = -0.72
+        buttonbase_xcoord = 0.35
+        buttonbase_ycoord = 0.45
+        button_image_scale = (0.7, 1, 1)
+        button_textpos = (0, -0.02)
+        options_text_scale = 0.052
+        disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
+        button_image = (guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR'))
 
     BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'
