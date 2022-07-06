@@ -7,21 +7,21 @@
 ## Toontown Fantasy is a singleplayer, non-profit, re-envisioning of Disney's Toontown Online built using Open-Toontown which is expected to have fantasy aspects to capture the 'Disney Magic', more of an open-world/adventure aspect to the gameplay, updated graphic/graphics engine, much better story-line to truly capture the magic of Toontown that Disney couldn't capture back in the day. This version is one you can change to your own liking for a Fantasy of your own! The future of Toontown is in YOUR fingertips! What will you create? Only time will tell!
 
 ### Management Team:
-+ THE PLAYER ZER0 aka Gracie T. Lovelight | Director/Owner
++ Gracie "THE PLAYER ZER0" Lovelight | Director/Owner
 + Pizza Taco Burger | Co-Owner
 
 ### Technical Team:
 + The Professor | Developer
 + Something Random | Developer
 + Sighost | Developer
-+ THE PLAYER ZER0 aka Gracie T. Lovelight | Developer
++ Gracie "THE PLAYER ZER0" Lovelight | Developer
 
 ### Creative Team:
 + SirDapperPenguin | 3D Modeler
 + Jardin | Artist
 + April | Artist
 + AiGenics | Story Writer
-+ THE PLAYER ZER0 aka Gracie T. Lovelight | Story Writer
++ Gracie "THE PLAYER ZER0" Lovelight | Story Writer
 
 ### Contributors:
 + Battery on Discord for helping me fix the Tuple error!
