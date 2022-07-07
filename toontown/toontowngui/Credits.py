@@ -43,7 +43,6 @@ Pizza Taco Burger | Storyline Writer
 Battery on Discord for helping me fix the Tuple error!
 DarthM on Discord for various features including Credits, Genderless Toons, etc.
 TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
-Rocket for helping me implement Wide-Screen Support
 DTM1218
 ToonJoey for letting us use his Project: Bikehorn assets for HD textures
 Nora for creating the Credits Button.

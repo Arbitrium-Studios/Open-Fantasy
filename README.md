@@ -27,7 +27,6 @@
 + Battery on Discord for helping me fix the Tuple error!
 + DarthM on Discord for various features including Credits, Genderless Toons, etc.
 + TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
-+ Rocket for helping me implement Wide-Screen Support
 + DTM1218
 + ToonJoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
 + Nora for creating the Credits Button and more!
@@ -40,6 +39,8 @@
 + Jesse Schell for fighting for Toontown Online's Official Return
 
 ## - If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
+
+## - If you would no longer like to be associated with Open-Fantasy, please notify Gracie (THE PLAYER ZERO#3876) on the PLAYER ZER0 STUDIOS Discord server.
 
 [discordImg]: https://img.shields.io/badge/Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&colorB=7289DA&style=for-the-badge
 
