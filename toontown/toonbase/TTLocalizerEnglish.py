@@ -2059,12 +2059,12 @@ FactoryBossTaunt = "I'm the Foreman."
 FactoryBossBattleTaunt = 'Let me introduce you to the Foreman.'
 MintBossTaunt = "I'm the Supervisor."
 MintBossBattleTaunt = 'You need to talk to the Supervisor.'
-StageBossTaunt = "My Justice isn't Blind"
-StageBossBattleTaunt = 'I am above the Law'
+StageBossTaunt = "My Justice isn't Blind."
+StageBossBattleTaunt = 'I am above the Law.'
 CountryClubBossTaunt = "I'm the Club President."
 CountryClubBossBattleTaunt = 'You need to talk to the Club President.'
 ForcedLeaveCountryClubAckMsg = 'The Club President was defeated before you could reach him. You did not recover any Stock Options.'
-ToonHealJokes = [['What goes TICK-TICK-TICK-WOOF?', 'A watchdog! '],
+ToonHealJokes = [['What goes TICK-TICK-TICK-WOOF?', 'A watchdog!'],
                  ['Why do male deer need braces?',
                      "Because they have 'buck teeth'!"],
                  ['Why is it hard for a ghost to tell a lie?',
@@ -2364,7 +2364,7 @@ MovieNPCSOSThrow = 'Throw'
 MovieNPCSOSSquirt = 'Squirt'
 MovieNPCSOSDrop = 'Drop'
 MovieNPCSOSAll = 'All'
-MoviePetSOSTrickFail = 'Sigh'
+MoviePetSOSTrickFail = 'Sigh...'
 MoviePetSOSTrickSucceedBoy = 'Good boy!'
 MoviePetSOSTrickSucceedGirl = 'Good girl!'
 MovieSuitCancelled = 'CANCELLED\nCANCELLED\nCANCELLED'
