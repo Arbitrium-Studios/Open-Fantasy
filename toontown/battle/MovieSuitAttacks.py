@@ -158,7 +158,7 @@ def doSuitAttack(attack):
     elif name == FIRED:
         suitTrack = doFired(attack)
     elif name == FIVE_O_CLOCK_SHADOW:
-        suitTrack = doDefault(attack)
+        suitTrack = doFiveOClockShadow(attack)
     elif name == FLOOD_THE_MARKET:
         suitTrack = doFloodTheMarket(attack)
     elif name == FOUNTAIN_PEN:
@@ -3747,6 +3747,39 @@ def doChomp(attack):
     dodgeAnims = [['jump', 0.01, 0.01]]
     toonTrack = getToonTrack(attack, damageDelay=3.2, splicedDamageAnims=damageAnims, dodgeDelay=2.75, splicedDodgeAnims=dodgeAnims, showDamageExtraTime=1.4)
     return Parallel(suitTrack, toonTrack, propTrack)
+
+
+def doFiveOClockShadow(attack):
+    suit = attack['suit']
+    battle = attack['battle']
+    target = attack['target']
+    toon = target['toon']
+    dmg = target['hp']
+    damageDelay = 1.1
+    shadow = toon.dropShadow
+    fakeShadow = MovieUtil.copyProp(shadow)
+    fakeShadow.wrtReparentTo(battle)
+    suitTrack = getSuitTrack(attack)
+    shadowTrack = Sequence(
+        Func(battle.movie.needRestoreRenderProp, fakeShadow),
+        Wait(damageDelay - 0.7),
+        Func(fakeShadow.hide),
+        Func(fakeShadow.setScale, MovieUtil.PNT3_NEARZERO),
+        Func(fakeShadow.reparentTo, toon),
+        Func(fakeShadow.setPos, MovieUtil.PNT3_ZERO),
+        Func(fakeShadow.wrtReparentTo, battle),
+        Func(fakeShadow.show),
+        LerpScaleInterval(fakeShadow, 1.0, Point3(1.7), startScale=MovieUtil.PNT3_NEARZERO)
+    )
+    toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=[['melt'], ['jump', 1.5, 0.4]], dodgeAnimNames=['sidestep'])
+    if dmg > 0:
+        shadowTrack.append(Wait(3.2))
+    else:
+        shadowTrack.append(Wait(0.3))
+    shadowTrack.append(LerpColorScaleInterval(fakeShadow, 0.5, Vec4(0, 0, 0, 0)))
+    shadowTrack.append(Func(MovieUtil.removeProp, fakeShadow))
+    shadowTrack.append(Func(battle.movie.clearRenderProp, fakeShadow))
+    return Parallel(suitTrack, shadowTrack, toonTrack)
 
 
 def doUndergroundLiquidity(attack):
