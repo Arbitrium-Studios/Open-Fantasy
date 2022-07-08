@@ -188,7 +188,8 @@ The Road to Fantasy:
             + A Vice President Boss Battle Update:
                 + The higher level Cog your suit is, the harder the battle is.
                 + The battle starts off easy and gets progressively harder as you defeat more cogs.
-                + You will get multiple rewards that won't miss for any Gag Track.
+                + SOS Card's should function like Corporate Clash's SOS Cards.
+            + The Overclocked Chief Executive Officer President Boss Battle
             + A Chief Financial Officer Boss Battle Update:
                 + The Craning round should be pushed back for a second Cog Round.
                 + You should get multiple varying types of Unite Rewards for this.
@@ -201,5 +202,102 @@ The Road to Fantasy:
                 + This makes it so the Boss Battle itself functions like Toontown Rewritten's Boss Battle.
                 + You should get Multiple Fires.
         + If you try to use a Fire on Executive or Manager Cogs, they should dodge it and use a cheat that lowers the accuracy of the Toon's Gags for a couple of Rounds.
+        + A Chat Overhaul Update:
+            + Replace the whitelist with a Blacklist
+                    + Use a modified version of Profanity Filter that checks for not allowed words.
+                    + If a word is said that isn't allowed, a report should automatically be filed and it should be censored.
+            + When we do the Blacklist update for the chat, I want to implement this chat menu for Type Chat from Toontown Online's Beta that you can type into. And use the Arrow button to switch to the OG chat system found here: https://cdn.discordapp.com/attachments/775528646349815817/994805297736585246/TTO_Beta_Chat.jpg
+            + Speedchat should still be accessible by keeping the 2013 TTO chat layout.
+            + The chat system should send your message in your set Speedchat color.
+            + To add onto the Customizability the game offers, in your Shtiker Book, there should be an Arrow Button that opens up to reveal an Advanced Color Chooser that you can choose between Hexidecimal and others just like the Create-A-Toon's Choose Your Color Menu.
+        + A Battle Overhaul:
+            + Adds Ranged Gag Track
+            + Adds my own take on the Zap gag track.
+            + When using Squirt, it adds Soaked Disadvantage to the Cog used on which may cause it to short circuit and miss a round, increase Toon Accuracy for a couple of rounds, and it will boost Zap damage.
+            + This update overhauls the Battle Gui to be
+            + Adds the Magic System
+                + Adds Magic to the new Battle Sub-Menu in the Shtiker Book.
+                + More on this later.
+            + Adds a new area called Mount Acorn you can access through the Abandoned Tunnel in Acorn Acres
+        + During the late game, there should be Overclocked Bosses
+            + The reason you've never heard of the Overclocked Boss in-universe is that, after you defeat a Sellbot Field Office, you collect a note that begins talking about Project: Overclock but it doesn't reveal to much. So, you must do more of the Sellbot Field Offices to retrieve more of the notes.
+            + When you first go into the Overclocked Vice President, he instantly tells that you're a Toon and makes you go sad instantly. This has a one-time benefit though that you collect a piece of paper that tells of a Magical Witch on the outskirts of Acorn Acres
+        + Achievements are a must soon!
+        + A system where if you go Sad during a fight, you can press a button to return to the battle.
+        + Revamp the Cog Heads and Suits.
+        + Add a Experience Bar
+            + Increase Max Laff amount to 145
+            + Remove Film Strips from the Game and replace it with Training Points that you earn every 5 levels.
+            + Remove Laff Point Toontasks and replace them with Laff Points gained every 5 levels but keep
+        + Overhaul the Shtiker Book Pages:
+            + The Options and the Extra Options Tabs should be merged together.
+                + Because the Options will take up more than one page, use the Scroll Bar from the Custom Controls Menu to scroll down.
+            + Remove the Gag Training Page
+            + Overhaul the Gags Page
+                + Add your Jellybean Total from the Toontown Bank and your Jellybean Bank (together) underneath the Jellybean Jar total.
+                + Add the text Training Points and the amount of Training Points you have under the Total Gags and it's amount.
+            + Merge the Gags, and the Cog Gallery into one page called Inventory
+            + Merge Fishing Page, Kart Racing, Gardening Page, the Achievements Page (when we add it), and the Golf Page into one page called Activities
+            + Regarding the District Page:
+                + When booting up the game (Singleplayer), there should always be 2 Districts.
+                    + Nutty River - Constant Invasions but checks your Toontasks to see if you need a specific Cog and ends then begins invasions based on that, it is represented by the Cog Madellion found in the Shtiker Book next to the Population Icon.
+                    + Toon Valley - A normal District that can get a random invasion every once in a while.
+                    + Thwackville - A district with no invasions, represented by a safe.
+                + When you hover over a District, it should let you know if there are any invasions going on within the district.
+            + Revamp the Cog Gallery
+                + It shows the health
+                + When hovering over a Cog Head, it should show you a basic overlay of what the Cog is and what it does.
+                + When clicking a Cog Head, it should show a full suited version of the Cog.
+                + When clicking over a Cog, it shows you the Attacks used on your Toon by that Cog.
+                + You should be able to click on an attack listed and it will play the animation for the attack.
+            + Redraw the Suit Parts.
+                + Each suit part should be colored with the department's Suit color.
+        + Remove Toontask Carry Limit
+            + Shrink the Toontask Scroll Image to match Test Toontown
+            + Add 2 more Scrolls to the top of the ToonTasks Page like Test Toontown
+            + Add a scroll bar to the right side of the
+            + Add Starfish Pin Images to the Main Quest
+            + Make the Scrollbar Scrollable instead of just a click and drag button.
+        + Rename Bossbots to Exebots
+        + Merge ~MaxToon and ~Unlocks together.
+        + Add Sleep Commands.
+        + Add a version of the Toontown Rewritten Silly Meter Update
+            + The Silly Meter should have an adaptable Build Up depending on who is online to make it easier or harder to adapt to the people online.
+            + There should be a Taskline to fix it and it should stay fixed.
+            + Instead of Silly Meter Teams, the followering should happen ALL at once:
+                + Gardening Speed is Boosted
+                + Global Toontown Teleportation
+                + Double Racing Tickets
+                + Decreased Fishing Rarity
+                + Boosted Activity, Department, Gag Experience
+                + Boosted Toon Attack Accuracy
+                + Higher Chance of Dodging attacks
+                + Toon's Walking, Sprinting, and Animation Speeds are all slightly boosted.
+        + Right before your Toon falls asleep, your Toon should yawn, like on Toontown: Corporate Clash, but for Open-Fantasy, your Toon puts their hands behind their head in a stretch, the front of the feet lift up like they're reaching, their eyes should slowly close before they fall asleep.
+        + We should do a contest for the addition of more Megaphone Jokes.
+            + If a Megaphone Joke misses, the Cogs should laugh and the other Toons should half-heartedly laugh.
+            + When you choose a Toon-Up Gag in battle and no other Toons are there, a random NPC should be called into battle to do the Toon-Up on you.
+        + For Moderators, there should be a page in your Shtiker Book that appears
+        + The Short Change should have a short body like on Toontown: Corporate Clash
+        + The Micromanager should be Microsized like on Toontown: Corporate Clash
+        + Create a tool to make it easy to add Quests to playgrounds like what Toontown Infinite had created for it by Joshsora.
+            + This tool should also allow for us to add Animations and Emotes to match Dialog.
+        + Implement my version of Toontown Relived NPC Toon Menu but using the Toon Menu used in-game.
+        + Make Knock Knock Doors heal you on the Street, giving there to be a reason to use the doors.
+        + Add the Silly Meter back into Toon Hall but don't take it out for repairs, just leave it not functional.
+        + Make the instruments in The Land of Music playable when you step on them.
+        + Make the text spoken in DDL, thought bubbles.
+        + Model Overhaul Update:
+            + Remake the Treasure Icons in 3D like what Corporate Clash did.
+            + Remodel the Street Lamps
+            + Add our own take on Benches that Toontown Rewritten added to make Toontown feel more lived in.
+            + Remake the Street Signs
+                + Redraw the Street Sign Textures without the Classic Character's Heads.
+                + Make the Pointers 3D
+            + Remake the Fences to be 3D
+        + Re-rig the doors in Donald's Dreamland to better work with their models.
+        + When rewriting the taskline, give each Toon their own personality. Flippy is patriotic, Coach Zucchini is well...that should be pretty obvious, and more!
+        + Make the Dialog for Toontasks continue after about 30 seconds while still allowing slow readers to read.
+            + This should make it easy to add voice acting over it if we decide to do so.
 
         + More soon!
