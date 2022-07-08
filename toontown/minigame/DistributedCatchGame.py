@@ -377,7 +377,7 @@ class DistributedCatchGame(DistributedMinigame):
         lt = base.localAvatar
         lt.reparentTo(render)
         self.__placeToon(self.localAvId)
-        lt.setSpeed(0, 0)
+        lt.setSpeed(0, 0, 0)
         toonSD = self.toonSDs[self.localAvId]
         toonSD.enter()
         toonSD.fsm.request('normal')

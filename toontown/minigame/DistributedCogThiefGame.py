@@ -184,7 +184,7 @@ class DistributedCogThiefGame(DistributedMinigame):
         lt = base.localAvatar
         lt.reparentTo(render)
         self.__placeToon(self.localAvId)
-        lt.setSpeed(0, 0)
+        lt.setSpeed(0, 0, 0)
         self.moveCameraToTop()
         toonSD = self.toonSDs[self.localAvId]
         toonSD.enter()
@@ -539,7 +539,7 @@ class DistributedCogThiefGame(DistributedMinigame):
                 base.localAvatar.setPos(endPos)
                 if hasattr(self, 'gameWalk'):
                     toon = base.localAvatar
-                    toon.setSpeed(0, 0)
+                    toon.setSpeed(0, 0, 0)
                     self.startGameWalk()
             dropShadow.removeNode()
             del dropShadow

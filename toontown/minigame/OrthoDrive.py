@@ -58,7 +58,7 @@ class OrthoDrive:
             if self.turnLocalToonIval.isPlaying():
                 self.turnLocalToonIval.pause()
             del self.turnLocalToonIval
-        base.localAvatar.setSpeed(0, 0)
+        base.localAvatar.setSpeed(0, 0, 0)
 
     def __update(self, task):
         vel = Vec3(0, 0, 0)
@@ -77,7 +77,7 @@ class OrthoDrive:
         vel.normalize()
         vel *= self.speed
         speed = vel.length()
-        action = self.lt.setSpeed(speed, 0)
+        action = self.lt.setSpeed(0, 0, 0)
         if action != self.lastAction:
             self.lastAction = action
             if self.wantSound:
