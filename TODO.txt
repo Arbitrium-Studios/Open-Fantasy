@@ -77,7 +77,7 @@ The Road to Fantasy:
         + Fix fishing
         + Implement a new Toon Tip system that replaces the one on the loading screen
         + Add Accessories to the Toon Heads for Pick-A-Toon and the Friends system
-        + Replace True Friends with 18        + chat where you and anyone who you are Best Friends with, can see you swear
+        + Replace True Friends with 18+ chat where you and anyone who you are Best Friends with, can see you swear
         + Add more areas for gaming!
         + Zoom out from the Toons in the Create-A-Toon section
         + Add more fonts for usage in Catalog
@@ -136,6 +136,7 @@ The Road to Fantasy:
                 + Toggling Eyelashes
                 + Your Tail Type
                 + Choosing your Toon's Iris Color.
+                + Add Chest Sizes for Toons (None, Small, Medium, Large) to mimick DuckTales
                 + Your Toon's Personality Type (which affects your Toon's Dialog)
             + Add Accessories Button to the Pick Your Outfit section to choose your starting Accessories
             + With the Coloring System, it should allow you to choose the color of your Ears and Feet.
