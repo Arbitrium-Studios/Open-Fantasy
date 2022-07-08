@@ -919,7 +919,13 @@ class Suit(Avatar.Avatar):
             if self.find('**/body'):
                 return self
         if self.loseActor is None:
-            if not self.isSkeleton:
+            if self.isSkeleton:
+                loseModel = 'phase_5/models/char/cog' + self.style.body.upper() + '_robot-lose-mod'
+                filePrefix, phase = TutorialModelDict[self.style.body]
+                loseAnim = 'phase_' + str(phase) + filePrefix + 'lose'
+                self.loseActor = Actor.Actor(loseModel, {'lose': loseAnim})
+                self.generateCorporateTie(self.loseActor)
+            else:
                 filePrefix, phase = TutorialModelDict[self.style.body]
                 loseModel = 'phase_' + str(phase) + filePrefix + 'lose-mod'
                 loseAnim = 'phase_' + str(phase) + filePrefix + 'lose'
@@ -932,13 +938,6 @@ class Suit(Avatar.Avatar):
                     self.makeWaiter(self.loseActor)
                 else:
                     self.setSuitClothes(self.loseActor)
-            else:
-                loseModel = 'phase_5/models/char/cog' + \
-                    self.style.body.upper() + '_robot-lose-mod'
-                filePrefix, phase = TutorialModelDict[self.style.body]
-                loseAnim = 'phase_' + str(phase) + filePrefix + 'lose'
-                self.loseActor = Actor.Actor(loseModel, {'lose': loseAnim})
-                self.generateCorporateTie(self.loseActor)
         self.loseActor.setScale(self.scale)
         self.loseActor.setPos(self.getPos())
         self.loseActor.setHpr(self.getHpr())
