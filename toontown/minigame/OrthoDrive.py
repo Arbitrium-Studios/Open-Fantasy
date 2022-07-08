@@ -77,7 +77,7 @@ class OrthoDrive:
         vel.normalize()
         vel *= self.speed
         speed = vel.length()
-        action = self.lt.setSpeed(0, 0, 0)
+        action = self.lt.setSpeed(speed , 0, 0)
         if action != self.lastAction:
             self.lastAction = action
             if self.wantSound:

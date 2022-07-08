@@ -104,7 +104,7 @@ class TwoDDrive:
             self.isMovingX = False
             messenger.send('avatarStoppedX')
         speed = vel.length()
-        action = self.lt.setSpeed(0, 0, 0)
+        action = self.lt.setSpeed(speed , 0, 0)
         if action != self.lastAction:
             self.lastAction = action
             if action == OTPGlobals.RUN_INDEX:
