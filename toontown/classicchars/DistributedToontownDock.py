@@ -11,19 +11,19 @@ from direct.task import Task
 from toontown.toonbase import TTLocalizer
 
 
-class DistributedDonaldDock(DistributedCCharBase.DistributedCCharBase):
+class DistributedToontownDock(DistributedCCharBase.DistributedCCharBase):
     notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedDonaldDock')
+        'DistributedToontownDock')
 
     def __init__(self, cr):
         try:
-            self.DistributedDonaldDock_initialized
+            self.DistributedToontownDock_initialized
         except BaseException:
-            self.DistributedDonaldDock_initialized = 1
+            self.DistributedToontownDock_initialized = 1
             DistributedCCharBase.DistributedCCharBase.__init__(
-                self, cr, TTLocalizer.DonaldDock, 'dw')
+                self, cr, TTLocalizer.ToontownDock, 'dw')
             self.fsm = ClassicFSM.ClassicFSM(
-                'DistributedDonaldDock', [
+                'DistributedToontownDock', [
                     State.State(
                         'Off', self.enterOff, self.exitOff, ['Neutral']), State.State(
                         'Neutral', self.enterNeutral, self.exitNeutral, ['Off'])], 'Off', 'Off')
@@ -41,9 +41,9 @@ class DistributedDonaldDock(DistributedCCharBase.DistributedCCharBase):
 
     def delete(self):
         try:
-            self.DistributedDonaldDock_deleted
+            self.DistributedToontownDock_deleted
         except BaseException:
-            self.DistributedDonaldDock_deleted = 1
+            self.DistributedToontownDock_deleted = 1
             del self.fsm
             DistributedCCharBase.DistributedCCharBase.delete(self)
 
@@ -52,7 +52,7 @@ class DistributedDonaldDock(DistributedCCharBase.DistributedCCharBase):
         boat = base.cr.playGame.hood.loader.boat
         self.setPos(0, -1, 3.95)
         self.reparentTo(boat)
-        self.neutralDoneEvent = self.taskName('DonaldDock-neutral-done')
+        self.neutralDoneEvent = self.taskName('ToontownDock-neutral-done')
         self.neutral = CharStateDatas.CharNeutralState(
             self.neutralDoneEvent, self)
         self.fsm.request('Neutral')

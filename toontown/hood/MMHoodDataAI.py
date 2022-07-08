@@ -11,7 +11,7 @@ class MMHoodDataAI(HoodDataAI.HoodDataAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('MMHoodDataAI')
 
     def __init__(self, air, zoneId=None):
-        hoodId = ToontownGlobals.MinniesMelodyland
+        hoodId = ToontownGlobals.TheLandOfMusic
         if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)

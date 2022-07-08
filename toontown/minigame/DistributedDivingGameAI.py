@@ -239,11 +239,11 @@ class DistributedDivingGameAI(DistributedMinigameAI):
                                [n, n],
                                [0.6, 1]))
     difficultyPatternsAI = {ToontownGlobals.ToontownCentral: [3.5, fishProportions[0], 1.5],
-                            ToontownGlobals.DonaldsDock: [3.0, fishProportions[1], 1.8],
-                            ToontownGlobals.DaisyGardens: [2.5, fishProportions[2], 2.1],
-                            ToontownGlobals.MinniesMelodyland: [2.0, fishProportions[3], 2.4],
-                            ToontownGlobals.TheBrrrgh: [2.0, fishProportions[4], 2.7],
-                            ToontownGlobals.DonaldsDreamland: [1.5, fishProportions[5], 3.0]}
+                            ToontownGlobals.ToontownDocks: [3.0, fishProportions[1], 1.8],
+                            ToontownGlobals.FloweringGrove: [2.5, fishProportions[2], 2.1],
+                            ToontownGlobals.TheLandOfMusic: [2.0, fishProportions[3], 2.4],
+                            ToontownGlobals.TundraWonderland: [2.0, fishProportions[4], 2.7],
+                            ToontownGlobals.DrowsyDreamland: [1.5, fishProportions[5], 3.0]}
 
     def __init__(self, air, minigameId):
         try:

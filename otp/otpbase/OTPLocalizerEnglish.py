@@ -2,13 +2,13 @@ from pandac.PandaModules import TextPropertiesManager
 from pandac.PandaModules import TextProperties
 import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
-lTheBrrrgh = 'Tundra Wonderland'
-lDaisyGardens = 'Flowering Grove'
-lDonaldsDock = "Toontown Docks"
-lDonaldsDreamland = "Drowsy Dreamland"
-lMinniesMelodyland = "The Land of Melody"
+lTundraWonderland = 'Tundra Wonderland'
+lFloweringGrove = 'Flowering Grove'
+lToontownDocks = "Toontown Docks"
+lDrowsyDreamland = "Drowsy Dreamland"
+lTheLandOfMusic = "The Land of Melody"
 lToontownCentral = 'Toontown Central'
-lGoofySpeedway = 'Toontown Stadium'
+lToontownStadium = 'Toontown Stadium'
 lOutdoorZone = "Acorn Acres"
 lGolfZone = "Toontown's MiniGolf"
 lCancel = 'Cancel'
@@ -989,12 +989,12 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1103: "Let's go take over a %s building!" % Cog,
                                1104: "Let's go in the elevator!",
                                1105: "Let's go to %s!" % lToontownCentral,
-                               1106: "Let's go to %s!" % lDonaldsDock,
-                               1107: "Let's go to %s!" % lMinniesMelodyland,
-                               1108: "Let's go to %s!" % lDaisyGardens,
-                               1109: "Let's go to %s!" % lTheBrrrgh,
-                               1110: "Let's go to %s!" % lDonaldsDreamland,
-                               1111: "Let's go to %s!" % lGoofySpeedway,
+                               1106: "Let's go to %s!" % lToontownDocks,
+                               1107: "Let's go to %s!" % lTheLandOfMusic,
+                               1108: "Let's go to %s!" % lFloweringGrove,
+                               1109: "Let's go to %s!" % lTundraWonderland,
+                               1110: "Let's go to %s!" % lDrowsyDreamland,
+                               1111: "Let's go to %s!" % lToontownStadium,
                                1112: "Let's go to my house!",
                                1113: "Let's go to your house!",
                                1114: "Let's go to Sellbot Headquarters!",

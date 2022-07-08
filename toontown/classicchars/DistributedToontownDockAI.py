@@ -9,14 +9,14 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 
 
-class DistributedDonaldDockAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
+class DistributedToontownDockAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
     notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedDonaldDockAI')
+        'DistributedToontownDockAI')
 
     def __init__(self, air):
         DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(
-            self, air, TTLocalizer.DonaldDock)
-        self.fsm = ClassicFSM.ClassicFSM('DistributedDonaldDockAI', [
+            self, air, TTLocalizer.ToontownDock)
+        self.fsm = ClassicFSM.ClassicFSM('DistributedToontownDockAI', [
             State.State('Off', self.enterOff, self.exitOff, [
                 'Lonely', 'TransitionToCostume']),
             State.State('Lonely', self.enterLonely, self.exitLonely, [
@@ -39,10 +39,10 @@ class DistributedDonaldDockAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
 
     def generate(self):
         DistributedCCharBaseAI.DistributedCCharBaseAI.generate(self)
-        self.lonelyDoneEvent = self.taskName('DonaldDock-lonely-done')
+        self.lonelyDoneEvent = self.taskName('ToontownDock-lonely-done')
         self.lonely = CharStateDatasAI.CharLonelyStateAI(
             self.lonelyDoneEvent, self)
-        self.chattyDoneEvent = self.taskName('DonaldDock-chatty-done')
+        self.chattyDoneEvent = self.taskName('ToontownDock-chatty-done')
         self.chatty = CharStateDatasAI.CharChattyStateAI(
             self.chattyDoneEvent, self)
 

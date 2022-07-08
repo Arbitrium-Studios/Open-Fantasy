@@ -322,7 +322,7 @@ store_suit_point [ 420, FRONT_DOOR_POINT, 11.7506 -115.203 0, 20 ]
 store_suit_point [ 421, FRONT_DOOR_POINT, 52.9857 -27.4682 0, 8 ]
 store_suit_point [ 422, FRONT_DOOR_POINT, -57.196 -1.92617 0, 19 ]
 store_suit_point [ 423, FRONT_DOOR_POINT, -65.1404 -52.472 0, 22 ]
-group "donaldsDreamland" [
+group "DrowsyDreamland" [
  visgroup "9201" [
   vis [   "9201"   "9202"   "9203"   "9205"   ]
   suit_edge [ 0 1 ]

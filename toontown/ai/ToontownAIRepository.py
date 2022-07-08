@@ -246,13 +246,13 @@ class ToontownAIRepository(ToontownInternalRepository):
         NPCToons.generateZone2NpcDict()
 
         # Donald's Dock
-        self.zoneTable[ToontownGlobals.DonaldsDock] = (
-            (ToontownGlobals.DonaldsDock, 1,
+        self.zoneTable[ToontownGlobals.ToontownDocks] = (
+            (ToontownGlobals.ToontownDocks, 1,
              0), (ToontownGlobals.BarnacleBoulevard, 1, 1),
             (ToontownGlobals.SeaweedStreet, 1,
              1), (ToontownGlobals.LighthouseLane, 1, 1)
         )
-        self.generateHood(DDHoodDataAI, ToontownGlobals.DonaldsDock)
+        self.generateHood(DDHoodDataAI, ToontownGlobals.ToontownDocks)
 
         # Toontown Central
         self.zoneTable[ToontownGlobals.ToontownCentral] = (
@@ -263,27 +263,27 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.generateHood(TTHoodDataAI, ToontownGlobals.ToontownCentral)
 
         # The Brrrgh
-        self.zoneTable[ToontownGlobals.TheBrrrgh] = (
-            (ToontownGlobals.TheBrrrgh, 1, 0), (ToontownGlobals.WalrusWay, 1, 1),
+        self.zoneTable[ToontownGlobals.TundraWonderland] = (
+            (ToontownGlobals.TundraWonderland, 1, 0), (ToontownGlobals.WalrusWay, 1, 1),
             (ToontownGlobals.SleetStreet, 1, 1), (ToontownGlobals.PolarPlace, 1, 1)
         )
-        self.generateHood(BRHoodDataAI, ToontownGlobals.TheBrrrgh)
+        self.generateHood(BRHoodDataAI, ToontownGlobals.TundraWonderland)
 
         # Minnie's Melodyland
-        self.zoneTable[ToontownGlobals.MinniesMelodyland] = (
-            (ToontownGlobals.MinniesMelodyland, 1,
+        self.zoneTable[ToontownGlobals.TheLandOfMusic] = (
+            (ToontownGlobals.TheLandOfMusic, 1,
              0), (ToontownGlobals.AltoAvenue, 1, 1),
             (ToontownGlobals.BaritoneBoulevard, 1,
              1), (ToontownGlobals.TenorTerrace, 1, 1)
         )
-        self.generateHood(MMHoodDataAI, ToontownGlobals.MinniesMelodyland)
+        self.generateHood(MMHoodDataAI, ToontownGlobals.TheLandOfMusic)
 
         # Daisy Gardens
-        self.zoneTable[ToontownGlobals.DaisyGardens] = (
-            (ToontownGlobals.DaisyGardens, 1, 0), (ToontownGlobals.ElmStreet, 1, 1),
+        self.zoneTable[ToontownGlobals.FloweringGrove] = (
+            (ToontownGlobals.FloweringGrove, 1, 0), (ToontownGlobals.ElmStreet, 1, 1),
             (ToontownGlobals.MapleStreet, 1, 1), (ToontownGlobals.OakStreet, 1, 1)
         )
-        self.generateHood(DGHoodDataAI, ToontownGlobals.DaisyGardens)
+        self.generateHood(DGHoodDataAI, ToontownGlobals.FloweringGrove)
 
         # Chip 'n Dale's Acorn Acres
         self.zoneTable[ToontownGlobals.OutdoorZone] = (
@@ -292,18 +292,18 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.generateHood(OZHoodDataAI, ToontownGlobals.OutdoorZone)
 
         # Goofy Speedway
-        self.zoneTable[ToontownGlobals.GoofySpeedway] = (
-            (ToontownGlobals.GoofySpeedway, 1, 0),
+        self.zoneTable[ToontownGlobals.ToontownStadium] = (
+            (ToontownGlobals.ToontownStadium, 1, 0),
         )
-        self.generateHood(GSHoodDataAI, ToontownGlobals.GoofySpeedway)
+        self.generateHood(GSHoodDataAI, ToontownGlobals.ToontownStadium)
 
         # Donald's Dreamland
-        self.zoneTable[ToontownGlobals.DonaldsDreamland] = (
-            (ToontownGlobals.DonaldsDreamland, 1,
+        self.zoneTable[ToontownGlobals.DrowsyDreamland] = (
+            (ToontownGlobals.DrowsyDreamland, 1,
              0), (ToontownGlobals.LullabyLane, 1, 1),
             (ToontownGlobals.PajamaPlace, 1, 1)
         )
-        self.generateHood(DLHoodDataAI, ToontownGlobals.DonaldsDreamland)
+        self.generateHood(DLHoodDataAI, ToontownGlobals.DrowsyDreamland)
 
         # Bossbot HQ
         self.zoneTable[ToontownGlobals.BossbotHQ] = (

@@ -115,13 +115,13 @@ class MagicWord:
         'ttc': ToontownGlobals.ToontownCentral,
         'tt': ToontownGlobals.ToontownCentral,
         'tc': ToontownGlobals.ToontownCentral,
-        'dd': ToontownGlobals.DonaldsDock,
-        'dg': ToontownGlobals.DaisyGardens,
-        'mml': ToontownGlobals.MinniesMelodyland,
-        'mm': ToontownGlobals.MinniesMelodyland,
-        'br': ToontownGlobals.TheBrrrgh,
-        'ddl': ToontownGlobals.DonaldsDreamland,
-        'dl': ToontownGlobals.DonaldsDreamland,
+        'td': ToontownGlobals.ToontownDocks,
+        'fg': ToontownGlobals.FloweringGrove,
+        'tlom': ToontownGlobals.TheLandOfMusic,
+        'lom': ToontownGlobals.TheLandOfMusic,
+        'tw': ToontownGlobals.TundraWonderland,
+        'ddl': ToontownGlobals.DrowsyDreamland,
+        'dl': ToontownGlobals.DrowsyDreamland,
     }
 
     def __init__(self):
