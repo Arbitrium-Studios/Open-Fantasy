@@ -10,6 +10,7 @@ The Road to Fantasy:
         + Create an in-game launcher like ODS using the Anesidora files that boots you into the game!
         + Figure out how to give Jellybeans and items for completing Toontasks
         + Add a new tab under Quests for Side Quests and Daily Quests.
+        + Make the map zoomable as well as give it the ability to be moved in any direction for the ability to see all places on the map. (if you've visited them) This also gives you the ability to view the streets but you can still view the streets by pressing alt on the street
         + Add an Inventory Page to the Shtiker Book where you can look at your Gags, Suit, Avatar, Enter Codes, etc.
         + Experience/Leveling System like TTCCs
         + Begin working on the custom Storyline myself.
@@ -41,6 +42,7 @@ The Road to Fantasy:
         + Credits Button
         + Discord Button
         + Magic Commands
+        + Replace the old playground function names with new functions using the current playground names (i.e. "lGoofySpeedway" >>> "lToontownStadium")
 
     Currently Being Developed:
 
@@ -65,7 +67,7 @@ The Road to Fantasy:
         + Implement custom shaders for everyone to use!
         + Add custom keybinds with as many custom key options as possible!
         + Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button
-        + Add the ability to play with an Xbox, Play Station, or PC controllers (Back to view map; right stick to control camera angle; left stick to control the movement of your character AND in battles, to move the highlighted box around each gag box; double flick the left stick upward to sprint, Y button to open Shticker Book, B to preform action, Xbox/Play Station/{Company name} Home button to bring up the pause menu; X (PS)/A to jump/select the gag selected in battle; D-Pad to select one of four party members; Left Trigger (LT) to use Elemental magic; Right Trigger (RT) to ???; Left Button (LB) ???; Right Button (RB) ???;)
+        + Add the ability to play with an Xbox, Play Station, or PC controllers with mappable buttons.
         + Add a touch screen mode which is enabled/disabled in the Shticker Book
         + Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
         + Implement full Wide-Screen Support
@@ -110,7 +112,6 @@ The Road to Fantasy:
         + Add the date when you get your next Catalog to the Calendar Page.
         + Add Refresh Audio Source Button so when you switch audio channels, you can click it or press a hot key, and it checks for working audio source.
         + Add a randomization of the Wrench Model, Golf Ball, etc. across Toontown Stadium's Playground as Treasures to heal your Toon!
-        + Replace the old playground function names with new functions using the current playground names (i.e. "lGoofySpeedway" >>> "lToontownStadium")
         + New types of Toon Attacks!
             + Elemental Magic as an ability set to decrease damage and such learned from the Witch of the Acorn Mountains
             + Natural Attacks like Bite and such.
@@ -123,7 +124,15 @@ The Road to Fantasy:
         + A Create A Toon Update:
             + Do my own take on the Frog, Penguin, Deer, Gator, Cow, Chipmunk, Chicken, Fox, Parrot, Goat, Beaver, Racoon, Bat, Kiwi, Kangaroo, Koala, Armadillo, Spider, Snake, Turkey, Sheep, Hedgehog Toons, and more species!
             + The Cat, Mouse, Dog, Pig, Horse, Bear, etc. Species should all get a revamp
-            + Add 3D whiskers.
+                + Ask permission from ..Flameout56..#1335 to model the frog head after his concept.
+            + Add more Toon body variations including chest sizes for all Toons (None, Small, Medium, Large) to mimick DuckTales.
+            + Add more leg types for height, width, etc.
+            + Separate the ears from the Toon's heads.
+            + Create various ear models
+                + This separation allows for us to change colors of the ears.
+                + Rig the ears to mimick the emotions of your Toon especially when you use Emotes.
+            + Create a few variations of 3D whiskers
+                + The variations should be thickness at the base and length.
             + Add Pitch Options which boosts the ptch your Toon speaks at for more customization.
             + Overhaul the Choose Your Color page Hex Color to allow for Classic or Hex Colors
             + Rename "Choose Your Type" under the Species list to "Choose Your Species"!
@@ -136,7 +145,6 @@ The Road to Fantasy:
                 + Toggling Eyelashes
                 + Your Tail Type
                 + Choosing your Toon's Iris Color.
-                + Add Chest Sizes for Toons (None, Small, Medium, Large) to mimick DuckTales
                 + Your Toon's Personality Type (which affects your Toon's Dialog)
             + Add Accessories Button to the Pick Your Outfit section to choose your starting Accessories
             + With the Coloring System, it should allow you to choose the color of your Ears and Feet.
@@ -150,6 +158,19 @@ The Road to Fantasy:
             + Add puddles to the ground after it rains
         + Improve Doodle and Classic Character AI
         + An Estate Overhaul Update:
+            + Add lamp posts to the exterior Estates
+            + Lights to hang up outside your house for Christmas and beyond.
+            + Change the mechanics of the estate’s cannon game to match that of the Party’s cannon game
+            + The ability to use the Radio, Television, Piano, chairs, couches, beds, lamps, and a few others as per their purpose
+            + The ability to buy and rent bigger and better houses with various areas using Jellybeans
+            + Add working lighters to light the fireplaces.
+            + Remove the lit fireplaces since you can light them yourselves now.
+            + The ability to move stuff outside your house/estate
+            + During storms, the Cogs, Toons, and the Buildings have the chance to be struck by lightning and be instantly killed.
+            + Christmas and Halloween decorations for indoor and outdoor
+            + Reimplement back the Gardening Game
+            + Add the ability to build your own house on your own plot of land
+            + Add bathrooms even though they’d serve no purpose other than realism.
             + The Estate should have a Tunnel that's blocked off.
             + Implement the TTO Estate Exterior Options
                 + Each Estate should be seasonal like on Toontown Rewritten!
@@ -237,8 +258,12 @@ The Road to Fantasy:
             + Overhaul the Gags Page
                 + Add your Jellybean Total from the Toontown Bank and your Jellybean Bank (together) underneath the Jellybean Jar total.
                 + Add the text Training Points and the amount of Training Points you have under the Total Gags and it's amount.
+            + Add our verison of Toontown Rewritten's In-Game Resource Pack Chooser.
+            + The ability to give the resource pack a nickname for within the game.
+            + Add the ability to toggle through shaders in the Shtiker Book as well as outside the game
             + Merge the Gags, and the Cog Gallery into one page called Inventory
             + Merge Fishing Page, Kart Racing, Gardening Page, the Achievements Page (when we add it), and the Golf Page into one page called Activities
+            + Add a Statistics Page
             + Regarding the District Page:
                 + When booting up the game (Singleplayer), there should always be 2 Districts.
                     + Nutty River - Constant Invasions but checks your Toontasks to see if you need a specific Cog and ends then begins invasions based on that, it is represented by the Cog Madellion found in the Shtiker Book next to the Population Icon.
@@ -300,24 +325,28 @@ The Road to Fantasy:
         + When rewriting the taskline, give each Toon their own personality. Flippy is patriotic, Coach Zucchini is well...that should be pretty obvious, and more!
         + Make the Dialog for Toontasks continue after about 15-45 seconds while still allowing slow readers to read.
             + This should make it easy to add voice acting over it if we decide to do so.
-        + Playground Model Updates:
-            + Add more trees around the Tundra Wonderland playground as well as the background to make it feel more like a Tundra.
-            + Replace the 2013 Toontown Central with the 2001 version but add the modern features like the following:
-                + Toontown School House
-                    + Make the building look like a school like the Prolouge of ODS but change it up to look less like an Estate.
-                + Toontown Library
-                    + Redesign the interior to look like a Library
-                + Toontown Bank
-                    + Redesign the interior to look like a Bank.
-                    + Make Banker Bob function like a bank.
-                + Toon Headquarters
-                + A street between the Flowering Grove and Toontown Central called "Wacky Avenue".
+        + Playground Updates:
+            + The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Central, Toontown Docks, Construction Zone, Flowering Grove, The Land of Music, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
+            + Vibrant Valley Kingdom:
+                + This area is accessed in the Prologue at first, it's where your Toon is from and had to escape from as the Cogs attacked during an event called Operation: Takeover.
+            + Toontown Central:
+            + Rework the taskline so it feels less grindy.
+                + Replace the 2013 Toontown Central with the 2001 version but add the modern features like the following:
+                    + Change the tunnels locations to the streets from direct links between playgrounds.
+                    + Toontown School House
+                        + Make the building look like a school like the Prolouge of ODS but change it up to look less like an Estate.
+                    + Toontown Library
+                        + Redesign the interior to look like a Library
+                    + Toontown Bank
+                        + Redesign the interior to look like a Bank.
+                        + Make Banker Bob function like a bank.
+                    + Toon Headquarters
+                    + A street between the Flowering Grove and Toontown Central called "Wacky Avenue".
                     + This street should be more of a sub-playground that links Toontown Central with Toontown Central, Tutorial Terrace, and the Flowering Grove.
                     + This fixture should also be added to the map.
             + Toontown Docks:
                 + Model the playground after the 2001 design with water leading out to sea.
                 + The boat should be docked in one of the piers (for use at a later date.)
-                + 
             + In Drowsy Dreamland, do the following:
                 + Make the pillow walkable
                     + Add a tunnel onto the pillow that leads to Cashbot Headquarters
@@ -325,6 +354,26 @@ The Road to Fantasy:
                     + Add a piece of sidewalk turning left leading into the Pond Area.
                 + Place the other tunnel where the fishing docks are.
                 + On the opposite side of the sidewalk to the fishing area, add a tunnel that's blocked off. (That's for later content!)
+            + Construction Zone Update:
+                + Design Wise, I think we should avoid the TTUU's CZ and go for the original look.
+                + The overall look should be unfinished. So, the NPCs for the Toon HQ, Gag Shop, etc. should be outside (Gag shop should have a pile of random gags behind the clerks.
+                + Parkour should be the main way to get around most of the playground and its streets to get to.
+                + Add ropes that you can climb on to get to the next streets or some of the buildings that you can also swing back and forth to jump to the next rope or to the next structure.
+                + Add unfinished and open pipes that you can go into and get side tasks from the people living in the sewer (like fallen construction worker)
+                + Make the treasures 3D Builder/Construction Hats that magically floats up and down (To differentiate from TTUU's treasure which are shovels.)
+                + The story line should revolve around building the buildings around the CZ's construction site.
+                + The story line should take place after Acorn Acres.
+                + The further you are in the task line, the more buildings that appear in the finished product and the more finished the playground is for you but not for those who haven't started the playground.
+                + The Quests should be to help build the playground.
+            + Funny Farms:
+                + Instead of the street design, you could make Funny Farm open and have the task line revolve around one family and their farming needs including getting rid of Cogs, pulling wheat and corn and what not, etc.
+                + There are multiple farms and you are required to help so Toons can be fed.
+                + Each Toontask should be helping them in different ways.
+                + The playground should be a short one but not too short.
+                + We should take inspiration from Bear E. Funny's Funny Farm but keep it different.
+                + Shaders should be black and white by default.
+            + Toontown Stadium:
+                + TBD
             + Acorn Acres:
                 + Add a Gag Shop
                 + Add a Pet Shop
@@ -359,9 +408,60 @@ The Road to Fantasy:
                 + Coming Soon...
         + All clothing in the Clothing Stores should be put into the Create-A-Toon AND the Catalog
         + Each playground's Clothing Store should have clothes based on each Playground's themes.
-
-            
         + Add throwable snowballs you get can from Tundra Wonderland
+        + Add daily & weekly quests with rewards
+        + Make side quests more appealing with more content
+        + Remove the Friends List
+        + Add more pet types other than Doodles
+            + Add Puffles, Dogs, etc.
+        + On the side of Acorn Acres, add a Pet Park where you can summon your pet to train them.
+        + Add the ability to purchase higher level of fishing rods with enchantments which allow for easier catching of fish
+        + Add the ability to purchase higher level of fishing rods with enchantments which allow for easier catching of fish
+        + Add separate categories for the catalog (Furniture, Clothing & Accessories, etc.)
+        + Reimplement the Taunt Emotion/Animation
+        + Add a variation of the Surpised emote that can randomly play which uses the Surprise Emote from the Toontown Online trailer when the Toons see the Cogs.
+        + In place where the Emoticons would be in TTR, add an Emoji section to the Speedchat which allows you use emojis that are premade by our artist(s).
+            + The Emojis should be specific to the user’s species
+    + Add the ability for Cogs to Promote Mid-Battle when fighting along side a Manager Cog.
+    + When the Manager Cog is defeated, it should turn into a v2.0 Cog, when you defeat it again, it's should turn into a SkeleCog like a v2.0 before being defeated.
+    + Make being a specific Toon have specific pros and cons to influence the user’s choice when creating a Toon (Horses are fast and strong; Cats can see better in the dark, can run faster (but not faster than horses), etc.
+    + Add New 3DS, New 2DS, Nintendo Switch, Xbox 360, Xbox One, Xbox Series, Playstation 4, Playstation 5, and mobile (only recent devices) support as well as Windows, Mac, Linux, and Chromebook support
+    + Add support for multiple languages that were included in TTO. Including English, Spanish, German, Portugese, Japanese, French, MAYBE Latin, and more!
+    + Upgrade the Clothing models so they look more natural and less like it was in the 90s.
+    + Add dresses
+    + Add long sleeve shirts
+    + Add sleeveless clothing
+    + Add crop-top shirts
+    + Add ankle-high dresses and skirts
+    + Add one-piece clothing items such as dresses, jumpsuits, costumes, and more!
+    + Make Jetpacks actually work like they’re supposed to irl
+    + Make backpacks actually give you more storage space
+    + Add coats, winter hats, winter boots, jackets, trench coats, etc.
+    + Add Credit Cards and maybe Debit Cards to Toontown that function exact purpose that Credit/Debit Cards serve in real life
+    + Make bags of Jellybeans collectible around Toontown which gives you a certain amount of Jellybeans
+    + Trolley Game Additions:
+        + Add a Battle Royalet trolley game located in Toontown Stadium where you try to run around the map to heal your teammates (who spawn randomly around the map) and green the other team before the other team heals their team member OR before time runs out (Your Laff is changed to a pre-set amount when the match begins and is reset back to the user’s original laff after the match is over)
+            + You fight against AI in singleplayer mode.
+            + Add a Capture the Flag Trolley Game where you have to use your sound to stun the enemy team while you try to capture the enemy team’s flag before time runs out OR before the other team gets your flag!
+        + Red Light, Green Light Trolley Game
+        + Squid Game Trolley Game
+        + Reimplement Photo Fun
+        + Add the ability to skip trolley games
+    + Add collectible items such as Cog Gears/Cog Parts, Flowers, jellybeans, etc. which can be traded in at your local Toon Market Store for Jellybeans. They appear on the Items page in the Shtiker Book.
+    + Add the ability to press escape (or whatever Custom Button) to exit an activity or menu.
+    + Let the people create their own servers for people to play on with friends while having an official server
+    + VR Mode:
+        + Create code to launch VR mode in first person and only have the arms and hands visible
+        + Have motion tracking built into the game
+        + Have the ability to select gags with your VR Controller
+        + Add the ability for each Gag Track in VR mode to be activated in a unique way.
+    + Later in the game, cellphones should be added which adds more features.
+    + Add benches around Toontown's Playgrounds, Streets, and the Estate
+    + Add Dialog Options based on your Toon's personality used to reply to NPC dialog.
+    + Add a Reproposal Option to the Toontask menu in the Toon HQ to renegotiate the Tasks that you are presented
+    + Allow Radios to play .MP3, .ogg, and all of the audio files
+    + Allow Televisions to play .mp4, .mov, and more.
+    + Allow your Toon to travel with your Doodle
+    + Allow your Doodle to come inside your house
 
-
-        + More soon!
+    + More soon!
