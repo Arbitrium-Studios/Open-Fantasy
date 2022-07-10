@@ -373,7 +373,21 @@ The Road to Fantasy:
                 + We should take inspiration from Bear E. Funny's Funny Farm but keep it different.
                 + Shaders should be black and white by default.
             + Toontown Stadium:
-                + TBD
+                + Add a Battle Royalet trolley game located in Toontown Stadium where you try to run around the map to heal your teammates (who spawn randomly around the map) and green the other team before the other team heals their team member OR before time runs out (Your Laff is changed to a pre-set amount when the match begins and is reset back to the user’s original laff after the match is over)
+                + You fight against AI in singleplayer mode.
+                + Add a Capture the Flag Mini Game around the playground where you have to use your sound to stun the enemy team while you try to capture the enemy team’s flag before time runs out OR before the other team gets your flag!
+                + Around the edges of the Stadium, put the Race Track Pads and the Golf Carts + Tunnels to indicate where the activities will be held.
+                + Activating a Mini-Game is like how you do it in a Party.
+                + Add sand pits where you can play Volley Ball with AIs.
+                + In the middle of the playground, there should be a beanstalk coming through the middle of the Shop with vines you can jump onto and do 3D Jungle Vines to get to the top.
+                + The top of the beanstalk should be a cloud you can walk on.  This is technically a new area called Flippy's Skyclan for later usage.
+                    + You should be able to earn Jellybeans by doing anything in Toontown Stadium
+                + In the shop in the center of the playground where you can buy, Karts, Golf Clubs, Golf Balls, cannons, etc. with color variations for customization.
+                + Add Tug-O-War minigame from parties to play against a friendly Cog whom flies down and challenges you to a game of Tug-O-War before leaving after you're done.
+                + Around the Stadium Playground should be racing stripes where you can train your Doodle in-playground.
+                + Around the playground, add cannons to bounce off of the low-hanging clouds.
+                    + When you land on the ground, you shouldn't be interrupted by a pop-up GUI, instead we should replace it with the Jellybean Jar Icon and a counter counting the amount of Jellybeans Earned + How much experience you've gained.
+                + When you're doing an activity, wind should affect you.
             + Acorn Acres:
                 + Add a Gag Shop
                 + Add a Pet Shop
@@ -418,6 +432,8 @@ The Road to Fantasy:
         + Add the ability to purchase higher level of fishing rods with enchantments which allow for easier catching of fish
         + Add the ability to purchase higher level of fishing rods with enchantments which allow for easier catching of fish
         + Add separate categories for the catalog (Furniture, Clothing & Accessories, etc.)
+        + There should be a GUI button where the Friends Button is that tells you the weather.
+            + When you click on the GUI, it should pop up a brand new GUI formatted like a phone's weather app to show you the weather.
         + Reimplement the Taunt Emotion/Animation
         + Add a variation of the Surpised emote that can randomly play which uses the Surprise Emote from the Toontown Online trailer when the Toons see the Cogs.
         + In place where the Emoticons would be in TTR, add an Emoji section to the Speedchat which allows you use emojis that are premade by our artist(s).
@@ -445,7 +461,7 @@ The Road to Fantasy:
             + Add a Capture the Flag Trolley Game where you have to use your sound to stun the enemy team while you try to capture the enemy team’s flag before time runs out OR before the other team gets your flag!
         + Red Light, Green Light Trolley Game
         + Squid Game Trolley Game
-        + Reimplement Photo Fun
+        + Reimplement Photo Fun if it isn't already implemented.
         + Add the ability to skip trolley games
     + Add collectible items such as Cog Gears/Cog Parts, Flowers, jellybeans, etc. which can be traded in at your local Toon Market Store for Jellybeans. They appear on the Items page in the Shtiker Book.
     + Add the ability to press escape (or whatever Custom Button) to exit an activity or menu.
