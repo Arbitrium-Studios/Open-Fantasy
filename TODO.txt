@@ -60,6 +60,7 @@ The Road to Fantasy:
 
     Wishlist:
         + Match the amount of trap you can hold to Toontown Rewritten
+        + Cog heads should look at you when you walk by.
         + Make some Cog Attacks like Fired do Damage Over Time.
         + Increase Font Quality for count-downs and such.
         + Level 13s and up should appear naturally in Bosses and in Late-Game Cog Buildings.
