@@ -13,19 +13,17 @@ bSize = 5.29
 cSize = 4.14
 SuitDialogArray = []
 SkelSuitDialogArray = []
-AllSuits = (('walk', 'walk'), ('run', 'walk'), ('neutral', 'neutral'))
+AllSuits = (('walk', 'walk'),
+            ('run', 'walk'),
+            ('neutral', 'neutral'))
 AllSuitsMinigame = (('victory', 'victory'),
                     ('flail', 'flailing'),
                     ('tug-o-war', 'tug-o-war'),
                     ('slip-backward', 'slip-backward'),
                     ('slip-forward', 'slip-forward'))
-AllSuitsTutorialBattle = (
-    ('lose',
-     'lose'),
-    ('pie-small-react',
-     'pie-small'),
-    ('squirt-small-react',
-     'squirt-small'))
+AllSuitsTutorialBattle = (('lose', 'lose'),
+                          ('pie-small-react', 'pie-small'),
+                          ('squirt-small-react', 'squirt-small'))
 AllSuitsBattle = (('drop-react', 'anvil-drop'),
                   ('flatten', 'drop'),
                   ('sidestep-left', 'sidestep-left'),
@@ -52,7 +50,8 @@ SuitsCEOBattle = (('sit', 'sit'),
                   ('tray-neutral', 'tray-neutral'),
                   ('sit-lose', 'sit-lose'))
 f = (('throw-paper', 'throw-paper', 3.5),
-     ('phone', 'phone', 3.5), ('shredder', 'shredder', 3.5))
+     ('phone', 'phone', 3.5),
+     ('shredder', 'shredder', 3.5))
 p = (('pencil-sharpener', 'pencil-sharpener', 5),
      ('pen-squirt', 'pen-squirt', 5),
      ('hold-eraser', 'hold-eraser', 5),
@@ -62,55 +61,73 @@ ym = (('golf-club-swing', 'golf-club-swing', 5),
       ('magic3', 'magic3', 5),
       ('rubber-stamp', 'rubber-stamp', 5),
       ('smile', 'smile', 5))
-mm = (('effort', 'effort', 5), ('pen-squirt', 'fountain-pen', 5),
+mm = (('effort', 'effort', 5),
+      ('pen-squirt', 'fountain-pen', 5),
       ('finger-wag', 'finger-wag', 5))
 ds = (('throw-paper', 'throw-paper', 5),)
 hh = (('pen-squirt', 'fountain-pen', 7),
       ('glower', 'glower', 5),
       ('throw-paper', 'throw-paper', 5),
       ('roll-o-dex', 'roll-o-dex', 5))
-cr = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5))
-tbc = (('cigar-smoke', 'cigar-smoke', 8), ('glower', 'glower', 5),
+cr = (('throw-paper', 'throw-paper', 3.5),
+      ('glower', 'glower', 5))
+tbc = (('cigar-smoke', 'cigar-smoke', 8),
+       ('glower', 'glower', 5),
        ('golf-club-swing', 'golf-club-swing', 5))
-cc = (('glower', 'glower', 5), ('phone', 'phone', 3.5),
+cc = (('glower', 'glower', 5),
+      ('phone', 'phone', 3.5),
       ('watercooler', 'watercooler', 5))
-tm = (('roll-o-dex', 'roll-o-dex', 5), ('phone', 'phone', 5))
+tm = (('roll-o-dex', 'roll-o-dex', 5),
+      ('phone', 'phone', 5))
 nd = (('roll-o-dex', 'roll-o-dex', 5),
       ('magic3', 'magic3', 5),
       ('smile', 'smile', 5),
       ('phone', 'phone', 5))
-gh = (('pen-squirt', 'fountain-pen', 5), ('rubber-stamp', 'rubber-stamp', 5))
-ms = (('effort', 'effort', 5), ('stomp', 'stomp', 5), ('quick-jump', 'jump', 6))
+gh = (('pen-squirt', 'fountain-pen', 5),
+      ('rubber-stamp', 'rubber-stamp', 5))
+ms = (('effort', 'effort', 5),
+      ('stomp', 'stomp', 5),
+      ('quick-jump', 'jump', 6))
 tf = (('phone', 'phone', 5),
       ('throw-paper', 'throw-paper', 5),
       ('throw-object', 'throw-object', 5),
       ('glower', 'glower', 5))
-m = (('smile', 'smile', 5), ('golf-club-swing', 'golf-club-swing', 5))
+m = (('smile', 'smile', 5),
+     ('golf-club-swing', 'golf-club-swing', 5))
 mh = (('smile', 'smile', 5),
       ('golf-club-swing', 'golf-club-swing', 5),
       ('song-and-dance', 'song-and-dance', 8))
-sc = (('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5))
-pp = (('throw-paper', 'throw-paper', 5), ('glower',
-      'glower', 5), ('finger-wag', 'fingerwag', 5))
+sc = (('throw-paper', 'throw-paper', 3.5),
+      ('glower', 'glower', 5))
+pp = (('throw-paper', 'throw-paper', 5),
+      ('glower', 'glower', 5),
+      ('finger-wag', 'fingerwag', 5))
 tw = (('throw-paper', 'throw-paper', 3.5),
-      ('glower', 'glower', 5), ('finger-wag', 'finger-wag', 5))
-bc = (('phone', 'phone', 5), ('hold-pencil', 'hold-pencil', 5))
-nc = (('phone', 'phone', 5), ('throw-object', 'throw-object', 5))
+      ('glower', 'glower', 5),
+      ('finger-wag', 'finger-wag', 5))
+bc = (('phone', 'phone', 5),
+      ('hold-pencil', 'hold-pencil', 5))
+nc = (('phone', 'phone', 5),
+      ('throw-object', 'throw-object', 5))
 mb = (('throw-paper', 'throw-paper', 3.5),)
-ls = (('throw-paper', 'throw-paper', 5), ('throw-object',
-      'throw-object', 5), ('hold-pencil', 'hold-pencil', 5))
+ls = (('throw-paper', 'throw-paper', 5),
+      ('throw-object', 'throw-object', 5),
+      ('hold-pencil', 'hold-pencil', 5))
 rb = (('effort', 'effort', 6),)
-bf = (('throw-paper', 'throw-paper', 5), ('shredder',
-      'shredder', 3.5), ('watercooler', 'watercooler', 5))
+bf = (('throw-paper', 'throw-paper', 5),
+      ('shredder', 'shredder', 3.5),
+      ('watercooler', 'watercooler', 5))
 b = (('throw-paper', 'throw-paper', 5),)
-dt = (('rubber-stamp', 'rubber-stamp', 5), ('throw-paper',
-      'throw-paper', 5), ('finger-wag', 'fingerwag', 5))
+dt = (('rubber-stamp', 'rubber-stamp', 5),
+      ('throw-paper', 'throw-paper', 5),
+      ('finger-wag', 'fingerwag', 5))
 ac = (('throw-object', 'throw-object', 5),
       ('roll-o-dex', 'roll-o-dex', 5),
       ('stomp', 'stomp', 5),
       ('phone', 'phone', 5),
       ('throw-paper', 'throw-paper', 5))
-bs = (('throw-paper', 'throw-paper', 5), ('finger-wag', 'fingerwag', 5))
+bs = (('throw-paper', 'throw-paper', 5),
+      ('finger-wag', 'fingerwag', 5))
 sd = (('quick-jump', 'jump', 6),
       ('stomp', 'stomp', 5),
       ('magic3', 'magic3', 5),
