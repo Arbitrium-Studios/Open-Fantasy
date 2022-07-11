@@ -160,7 +160,7 @@ class CogdoMazePlayer(FSM, CogdoMazeSplattable):
 
         def matchRunningAnim(toon=self.toon):
             toon.playingAnim = None
-            toon.setSpeed(toon.forwardSpeed, toon.rotateSpeed)
+            toon.setSpeed(toon.forwardSpeed, toon.slideSpeed, toon.rotateSpeed)
             return
 
         newTossTrack = Sequence(tossTrack, Func(matchRunningAnim))

@@ -42,6 +42,8 @@
 
 ## - If you would no longer like to be associated with Open-Fantasy, please notify Gracie (THE PLAYER ZERO#3876) on the PLAYER ZER0 STUDIOS Discord server.
 
+## If you would like to use Open-Fantasy as your own source code, go right ahead! This was always my intention!
+
 [discordImg]: https://img.shields.io/badge/Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&colorB=7289DA&style=for-the-badge
 
 [discordLink]: https://discord.gg/9fgW8jAaf6

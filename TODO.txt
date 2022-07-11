@@ -59,9 +59,20 @@ The Road to Fantasy:
         + More Options for playing Toontown Fantasy like Multiplayer and friend servers!
 
     Wishlist:
-
+        + Match the amount of trap you can hold to Toontown Rewritten
+        + Make some Cog Attacks like Fired do Damage Over Time.
+        + Increase Font Quality for count-downs and such.
+        + Level 13s and up should appear naturally in Bosses and in Late-Game Cog Buildings.
+        + Match Trap Damage to TTR's Trap Damage
+        + Replace Damage on Lure with Rounds the Cog will stay lured.
+        + Increase the amount of time you have to choose your Gags in Battle
+        + Remove Experience Cap implemented in Toontown Online.
+        + Make the Automatic Laff Heal match the level order of the playground. I.E. Toontown Central - 1, Toontown Docks - 2, Acorn Acres - 3, etc.
+        + Add a Photo Page where you can look at your screenshots.
+        + Allow us to pick what Gag Tracks to start with.
+            + Make sure to pop up an error saying you can't choose Trap without Lure.
+        + Rebalance Cog Suit Merits and how you earn them to make maxing them more pleasant.
         + Community Voice Acting
-        + Virtual Reality Support!
         + Create an in-game launcher like ODS using the Anesidora files
         + Patch as many bugs as possible
         + Implement custom shaders for everyone to use!
