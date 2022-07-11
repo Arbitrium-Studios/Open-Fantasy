@@ -546,6 +546,11 @@ def doDefault(attack):
             attack['name'] = 'Withdrawal'
             attack['animName'] = 'magic1'
             return doWithdrawal(attack)
+        elif suitName == 'ac':
+            attack['id'] = SHAKE
+            attack['name'] = 'Shake'
+            attack['animName'] = 'stomp'
+            return doShake(attack)
         elif suitName == 'bs':
             attack['id'] = GUILT_TRIP
             attack['name'] = 'GuiltTrip'
