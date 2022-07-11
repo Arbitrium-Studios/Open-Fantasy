@@ -381,6 +381,7 @@ def doDefault(attack):
             return doGlowerPower(attack)
         elif suitName == 'cc':
             attack['id'] = FREEZE_ASSETS
+            attack['group'] = ATK_TGT_SINGLE
             attack['name'] = 'FreezeAssets'
             attack['animName'] = 'glower'
             return doFreezeAssets(attack)
@@ -431,6 +432,7 @@ def doDefault(attack):
             return doPennyPinch(attack)
         elif suitName == 'tw':
             attack['id'] = FREEZE_ASSETS
+            attack['group'] = ATK_TGT_SINGLE
             attack['name'] = 'FreezeAssets'
             attack['animName'] = 'glower'
             return doFreezeAssets(attack)
@@ -505,21 +507,51 @@ def doDefault(attack):
             attack['animName'] = 'speak'
             return doMumboJumbo(attack)
     else:
-        if suitName == 'ym':
+        if suitName == 'p':
+            attack['id'] = FOUNTAIN_PEN
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FountainPen'
+            attack['animName'] = 'pen-squirt'
+            return doFountainPen(attack)
+        elif suitName == 'ym':
             attack['id'] = SYNERGY
             attack['name'] = 'Synergy'
             attack['animName'] = 'magic3'
             return doSynergy(attack)
+        elif suitName == 'mm':
+            attack['id'] = FOUNTAIN_PEN
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FountainPen'
+            attack['animName'] = 'pen-squirt'
+            return doFountainPen(attack)
+        elif suitName == 'hh':
+            attack['id'] = FOUNTAIN_PEN
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FountainPen'
+            attack['animName'] = 'pen-squirt'
+            return doFountainPen(attack)
         elif suitName == 'tbc':
             attack['id'] = POWER_TRIP
             attack['name'] = 'PowerTrip'
             attack['animName'] = 'magic1'
             return doPowerTrip(attack)
+        elif suitName == 'cc':
+            attack['id'] = FREEZE_ASSETS
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
         elif suitName == 'nd':
             attack['id'] = SYNERGY
             attack['name'] = 'Synergy'
             attack['animName'] = 'magic3'
             return doSynergy(attack)
+        elif suitName == 'gh':
+            attack['id'] = FOUNTAIN_PEN
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FountainPen'
+            attack['animName'] = 'pen-squirt'
+            return doFountainPen(attack)
         elif suitName == 'ms':
             attack['id'] = SHAKE
             attack['name'] = 'Shake'
@@ -535,6 +567,24 @@ def doDefault(attack):
             attack['name'] = 'SongAndDance'
             attack['animName'] = 'song-and-dance'
             return doSongAndDance(attack)
+        elif suitName == 'sc':
+            attack['id'] = FREEZE_ASSETS
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
+        elif suitName == 'pp':
+            attack['id'] = FREEZE_ASSETS
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
+        elif suitName == 'tw':
+            attack['id'] = FREEZE_ASSETS
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
         elif suitName == 'rb':
             attack['id'] = FLOOD_THE_MARKET
             attack['name'] = 'FloodTheMarket'
@@ -1123,72 +1173,144 @@ def doFillWithLead(attack):
 def doFountainPen(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
-    pen = globalPropPool.getProp('pen')
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        dmg = target['hp']
+        pen = globalPropPool.getProp('pen')
 
-    def getPenTip(pen=pen):
-        tip = pen.find('**/joint_toSpray')
-        return tip.getPos(render)
+        def getPenTip(pen=pen):
+            tip = pen.find('**/joint_toSpray')
+            return tip.getPos(render)
 
-    hitPoint = lambda toon = toon: __toonFacePoint(toon)
-    missPoint = lambda prop = pen, toon = toon: __toonMissPoint(prop, toon, 0, parent=render)
-    hitSprayTrack = MovieUtil.getSprayTrack(battle, VBase4(0, 0, 0, 1), getPenTip, hitPoint, 0.2, 0.2, 0.2, horizScale=0.1, vertScale=0.1)
-    missSprayTrack = MovieUtil.getSprayTrack(battle, VBase4(0, 0, 0, 1), getPenTip, missPoint, 0.2, 0.2, 0.2, horizScale=0.1, vertScale=0.1)
-    suitTrack = getSuitTrack(attack)
-    propTrack = Sequence(
-        Wait(0.01),
-        Func(__showProp, pen, suit.getRightHand(), MovieUtil.PNT3_ZERO),
-        LerpScaleInterval(pen, 0.5, Point3(1.5, 1.5, 1.5)),
-        Wait(1.05)
-    )
-    if dmg > 0:
-        propTrack.append(hitSprayTrack)
-    else:
-        propTrack.append(missSprayTrack)
-    propTrack.append(LerpScaleInterval(pen, 0.5, MovieUtil.PNT3_NEARZERO))
-    propTrack.append(Func(MovieUtil.removeProp, pen))
-    splashTrack = Sequence()
-    if dmg > 0:
-
-        def prepSplash(splash, targetPoint):
-            splash.reparentTo(render)
-            splash.setPos(targetPoint)
-            scale = splash.getScale()
-            splash.setBillboardPointWorld()
-            splash.setScale(scale)
-
-        splash = globalPropPool.getProp('splash-from-splat')
-        splash.setColor(0, 0, 0, 1)
-        splash.setScale(0.15)
-        splashTrack = Sequence(
-            Func(battle.movie.needRestoreRenderProp, splash),
-            Wait(1.65),
-            Func(prepSplash, splash, __toonFacePoint(toon)),
-            ActorInterval(splash, 'splash-from-splat'),
-            Func(MovieUtil.removeProp, splash),
-            Func(battle.movie.clearRenderProp, splash)
+        hitPoint = lambda toon = toon: __toonFacePoint(toon)
+        missPoint = lambda prop = pen, toon = toon: __toonMissPoint(prop, toon, 0, parent=render)
+        hitSprayTrack = MovieUtil.getSprayTrack(battle, VBase4(0, 0, 0, 1), getPenTip, hitPoint, 0.2, 0.2, 0.2, horizScale=0.1, vertScale=0.1)
+        missSprayTrack = MovieUtil.getSprayTrack(battle, VBase4(0, 0, 0, 1), getPenTip, missPoint, 0.2, 0.2, 0.2, horizScale=0.1, vertScale=0.1)
+        suitTrack = getSuitTrack(attack)
+        propTrack = Sequence(
+            Wait(0.01),
+            Func(__showProp, pen, suit.getRightHand(), MovieUtil.PNT3_ZERO),
+            LerpScaleInterval(pen, 0.5, Point3(1.5, 1.5, 1.5)),
+            Wait(1.05)
         )
-        headParts = toon.getHeadParts()
-        splashTrack.append(Func(battle.movie.needRestoreColor))
-        for partNum in range(0, headParts.getNumPaths()):
-            nextPart = headParts.getPath(partNum)
-            splashTrack.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
+        if dmg > 0:
+            propTrack.append(hitSprayTrack)
+        else:
+            propTrack.append(missSprayTrack)
+        propTrack.append(LerpScaleInterval(pen, 0.5, MovieUtil.PNT3_NEARZERO))
+        propTrack.append(Func(MovieUtil.removeProp, pen))
+        splashTrack = Sequence()
+        if dmg > 0:
 
-        splashTrack.append(Func(MovieUtil.removeProp, splash))
-        splashTrack.append(Wait(2.6))
-        for partNum in range(0, headParts.getNumPaths()):
-            nextPart = headParts.getPath(partNum)
-            splashTrack.append(Func(nextPart.clearColorScale))
+            def prepSplash(splash, targetPoint):
+                splash.reparentTo(render)
+                splash.setPos(targetPoint)
+                scale = splash.getScale()
+                splash.setBillboardPointWorld()
+                splash.setScale(scale)
 
-        splashTrack.append(Func(battle.movie.clearRestoreColor))
-    penSpill = BattleParticles.createParticleEffect(file='penSpill')
-    penSpill.setPos(getPenTip())
-    penSpillTrack = getPartTrack(penSpill, 1.4, 0.7, [penSpill, pen, 0])
-    toonTrack = getToonTrack(attack, 1.81, ['conked'], dodgeDelay=0.11, splicedDodgeAnims=[['duck', 0.01, 0.6]], showMissedExtraTime=1.66)
-    soundTrack = getSoundTrack('SA_fountain_pen.ogg', delay=1.6, node=suit)
-    return Parallel(suitTrack, toonTrack, propTrack, soundTrack, penSpillTrack, splashTrack)
+            splash = globalPropPool.getProp('splash-from-splat')
+            splash.setColor(0, 0, 0, 1)
+            splash.setScale(0.15)
+            splashTrack = Sequence(
+                Func(battle.movie.needRestoreRenderProp, splash),
+                Wait(1.65),
+                Func(prepSplash, splash, __toonFacePoint(toon)),
+                ActorInterval(splash, 'splash-from-splat'),
+                Func(MovieUtil.removeProp, splash),
+                Func(battle.movie.clearRenderProp, splash)
+            )
+            headParts = toon.getHeadParts()
+            splashTrack.append(Func(battle.movie.needRestoreColor))
+            for partNum in range(0, headParts.getNumPaths()):
+                nextPart = headParts.getPath(partNum)
+                splashTrack.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
+
+            splashTrack.append(Func(MovieUtil.removeProp, splash))
+            splashTrack.append(Wait(2.6))
+            for partNum in range(0, headParts.getNumPaths()):
+                nextPart = headParts.getPath(partNum)
+                splashTrack.append(Func(nextPart.clearColorScale))
+
+            splashTrack.append(Func(battle.movie.clearRestoreColor))
+        penSpill = BattleParticles.createParticleEffect(file='penSpill')
+        penSpill.setPos(getPenTip())
+        penSpillTrack = getPartTrack(penSpill, 1.4, 0.7, [penSpill, pen, 0])
+        toonTrack = getToonTrack(attack, 1.81, ['conked'], dodgeDelay=0.11, splicedDodgeAnims=[['duck', 0.01, 0.6]], showMissedExtraTime=1.66)
+        soundTrack = getSoundTrack('SA_fountain_pen.ogg', delay=1.6, node=suit)
+        return Parallel(suitTrack, toonTrack, propTrack, soundTrack, penSpillTrack, splashTrack)
+    else:
+        targets = attack['target']
+
+        def getPenTip(pen=pen):
+            tip = pen.find('**/joint_toSpray')
+            return tip.getPos(render)
+        
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        propTrack = Sequence(
+            Wait(0.01),
+            Func(__showProp, pen, suit.getRightHand(), MovieUtil.PNT3_ZERO),
+            LerpScaleInterval(pen, 0.5, Point3(1.5, 1.5, 1.5)),
+            Wait(1.05)
+        )
+        sprayTracks = Parallel()
+        splashTracks = Parallel()
+        penSpill = BattleParticles.createParticleEffect(file='penSpill')
+        penSpill.setPos(getPenTip())
+        penSpillTrack = getPartTrack(penSpill, 1.4, 0.7, [penSpill, pen, 0])
+        toonTracks = getToonTracks(attack, 1.81, ['conked'], dodgeDelay=0.11, splicedDodgeAnims=[['duck', 0.01, 0.6]], showMissedExtraTime=1.66)
+        soundTrack = getSoundTrack('SA_fountain_pen.ogg', delay=1.6, node=suit)
+        for t in targets:
+            toon = t['toon']
+            dmg = t['hp']
+            hitPoint = lambda toon = toon: __toonFacePoint(toon)
+            missPoint = lambda prop = pen, toon = toon: __toonMissPoint(prop, toon, 0, parent=render)
+            hitSprayTrack = MovieUtil.getSprayTrack(battle, VBase4(0, 0, 0, 1), getPenTip, hitPoint, 0.2, 0.2, 0.2, horizScale=0.1, vertScale=0.1)
+            missSprayTrack = MovieUtil.getSprayTrack(battle, VBase4(0, 0, 0, 1), getPenTip, missPoint, 0.2, 0.2, 0.2, horizScale=0.1, vertScale=0.1)
+            if dmg > 0:
+                sprayTracks.append(hitSprayTrack)
+            else:
+                sprayTracks.append(missSprayTrack)
+            splashTrack = Sequence()
+            if dmg > 0:
+                
+                def prepSplash(splash, targetPoint):
+                    splash.reparentTo(render)
+                    splash.setPos(targetPoint)
+                    scale = splash.getScale()
+                    splash.setBillboardPointWorld()
+                    splash.setScale(scale)
+
+                splash = globalPropPool.getProp('splash-from-splat')
+                splash.setColor(0, 0, 0, 1)
+                splash.setScale(0.15)
+                splashTrack = Sequence(
+                    Func(battle.movie.needRestoreRenderProp, splash),
+                    Wait(1.65),
+                    Func(prepSplash, splash, __toonFacePoint(toon)),
+                    ActorInterval(splash, 'splash-from-splat'),
+                    Func(MovieUtil.removeProp, splash),
+                    Func(battle.movie.clearRenderProp, splash)
+                )
+                headParts = toon.getHeadParts()
+                splashTrack.append(Func(battle.movie.needRestoreColor))
+                for partNum in range(0, headParts.getNumPaths()):
+                    nextPart = headParts.getPath(partNum)
+                    splashTrack.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
+
+                splashTrack.append(Func(MovieUtil.removeProp, splash))
+                splashTrack.append(Wait(2.6))
+                for partNum in range(0, headParts.getNumPaths()):
+                    nextPart = headParts.getPath(partNum)
+                    splashTrack.append(Func(nextPart.clearColorScale))
+
+                splashTrack.append(Func(battle.movie.clearRestoreColor))
+            splashTracks.append(splashTrack)
+        propTrack.append(sprayTracks)
+        propTrack.append(LerpScaleInterval(pen, 0.5, MovieUtil.PNT3_NEARZERO))
+        propTrack.append(Func(MovieUtil.removeProp, pen))
+        return Parallel(suitTrack, toonTracks, propTrack, soundTrack, penSpillTrack, splashTracks)
 
 
 def doRubOut(attack):
@@ -2505,51 +2627,101 @@ def doDoubleTalk(attack):
 def doFreezeAssets(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    BattleParticles.loadParticles()
-    snowEffect = BattleParticles.createParticleEffect('FreezeAssets')
-    BattleParticles.setEffectTexture(snowEffect, 'snow-particle')
-    cloud = globalPropPool.getProp('stormcloud')
-    partDelay = {
-        'a': 0.2,
-        'b': 0.2,
-        'c': 0.2
-    }
-    damageDelay = {
-        'a': 3.5,
-        'b': 3.5,
-        'c': 3.5
-    }
-    dodgeDelay = {
-        'a': 2.3,
-        'b': 2.3,
-        'c': 2.3
-    }
-    suitTrack = getSuitTrack(attack, delay=0.9)
-    initialCloudHeight = suit.height + 3
-    cloudPosPoints = [Point3(0, 3, initialCloudHeight), MovieUtil.PNT3_ZERO]
-    cloudPropTrack = Sequence(
-        Func(cloud.pose, 'stormcloud', 0),
-        getPropAppearTrack(cloud, suit, cloudPosPoints, 1e-06, Point3(3, 3, 3), scaleUpTime=0.7),
-        Func(battle.movie.needRestoreRenderProp, cloud),
-        Func(cloud.wrtReparentTo, render)
-    )
-    targetPoint = __toonFacePoint(toon)
-    targetPoint.setZ(targetPoint[2] + 3)
-    cloudPropTrack.append(Wait(1.1))
-    cloudPropTrack.append(LerpPosInterval(cloud, 1, pos=targetPoint))
-    suitType = getSuitBodyType(attack['suitName'])
-    cloudPropTrack.append(Wait(partDelay[suitType]))
-    cloudPropTrack.append(ParticleInterval(snowEffect, cloud, worldRelative=0, duration=2.1, cleanup=True))
-    cloudPropTrack.append(Wait(0.4))
-    cloudPropTrack.append(LerpScaleInterval(cloud, 0.5, MovieUtil.PNT3_NEARZERO))
-    cloudPropTrack.append(Func(MovieUtil.removeProp, cloud))
-    cloudPropTrack.append(Func(battle.movie.clearRenderProp, cloud))
-    damageAnims = [['cringe', 0.01, 0.4, 0.8],
-     ['duck', 0.01, 1.6]]
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay[suitType], splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'], showMissedExtraTime=1.2)
-    return Parallel(suitTrack, toonTrack, cloudPropTrack)
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        BattleParticles.loadParticles()
+        snowEffect = BattleParticles.createParticleEffect('FreezeAssets')
+        BattleParticles.setEffectTexture(snowEffect, 'snow-particle')
+        cloud = globalPropPool.getProp('stormcloud')
+        partDelay = {
+            'a': 0.2,
+            'b': 0.2,
+            'c': 0.2
+        }
+        damageDelay = {
+            'a': 3.5,
+            'b': 3.5,
+            'c': 3.5
+        }
+        dodgeDelay = {
+            'a': 2.3,
+            'b': 2.3,
+            'c': 2.3
+        }
+        suitTrack = getSuitTrack(attack, delay=0.9)
+        initialCloudHeight = suit.height + 3
+        cloudPosPoints = [Point3(0, 3, initialCloudHeight), MovieUtil.PNT3_ZERO]
+        cloudPropTrack = Sequence(
+            Func(cloud.pose, 'stormcloud', 0),
+            getPropAppearTrack(cloud, suit, cloudPosPoints, 1e-06, Point3(3, 3, 3), scaleUpTime=0.7),
+            Func(battle.movie.needRestoreRenderProp, cloud),
+            Func(cloud.wrtReparentTo, render)
+        )
+        targetPoint = __toonFacePoint(toon)
+        targetPoint.setZ(targetPoint[2] + 3)
+        cloudPropTrack.append(Wait(1.1))
+        cloudPropTrack.append(LerpPosInterval(cloud, 1, pos=targetPoint))
+        suitType = getSuitBodyType(attack['suitName'])
+        cloudPropTrack.append(Wait(partDelay[suitType]))
+        cloudPropTrack.append(ParticleInterval(snowEffect, cloud, worldRelative=0, duration=2.1, cleanup=True))
+        cloudPropTrack.append(Wait(0.4))
+        cloudPropTrack.append(LerpScaleInterval(cloud, 0.5, MovieUtil.PNT3_NEARZERO))
+        cloudPropTrack.append(Func(MovieUtil.removeProp, cloud))
+        cloudPropTrack.append(Func(battle.movie.clearRenderProp, cloud))
+        damageAnims = [['cringe', 0.01, 0.4, 0.8],
+         ['duck', 0.01, 1.6]]
+        toonTrack = getToonTrack(attack, damageDelay=damageDelay[suitType], splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'], showMissedExtraTime=1.2)
+        return Parallel(suitTrack, toonTrack, cloudPropTrack)
+    else:
+        targets = attack['target']
+        BattleParticles.loadParticles()
+        partDelay = {
+            'a': 0.2,
+            'b': 0.2,
+            'c': 0.2
+        }
+        damageDelay = {
+            'a': 3.5,
+            'b': 3.5,
+            'c': 3.5
+        }
+        dodgeDelay = {
+            'a': 2.3,
+            'b': 2.3,
+            'c': 2.3
+        }
+        suitTrack = getSuitAnimTrack(attack, delay=0.9)
+        initialCloudHeight = suit.height + 3
+        cloudPosPoints = [Point3(0, 3, initialCloudHeight), MovieUtil.PNT3_ZERO]
+        cloudPropTracks = Parallel()
+        damageAnims = [['cringe', 0.01, 0.4, 0.8],
+         ['duck', 0.01, 1.6]]
+        toonTracks = getToonTracks(attack, damageDelay=damageDelay[suitType], splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'], showMissedExtraTime=1.2)
+        for t in targets:
+            toon = t['toon']
+            snowEffect = BattleParticles.createParticleEffect('FreezeAssets')
+            BattleParticles.setEffectTexture(snowEffect, 'snow-particle')
+            cloud = globalPropPool.getProp('stormcloud')
+            cloudPropTrack = Sequence(
+                Func(cloud.pose, 'stormcloud', 0),
+                getPropAppearTrack(cloud, suit, cloudPosPoints, 1e-06, Point3(3, 3, 3), scaleUpTime=0.7),
+                Func(battle.movie.needRestoreRenderProp, cloud),
+                Func(cloud.wrtReparentTo, render)
+            )
+            targetPoint = __toonFacePoint(toon)
+            targetPoint.setZ(targetPoint[2] + 3)
+            cloudPropTrack.append(Wait(1.1))
+            cloudPropTrack.append(LerpPosInterval(cloud, 1, pos=targetPoint))
+            suitType = getSuitBodyType(attack['suitName'])
+            cloudPropTrack.append(Wait(partDelay[suitType]))
+            cloudPropTrack.append(ParticleInterval(snowEffect, cloud, worldRelative=0, duration=2.1, cleanup=True))
+            cloudPropTrack.append(Wait(0.4))
+            cloudPropTrack.append(LerpScaleInterval(cloud, 0.5, MovieUtil.PNT3_NEARZERO))
+            cloudPropTrack.append(Func(MovieUtil.removeProp, cloud))
+            cloudPropTrack.append(Func(battle.movie.clearRenderProp, cloud))
+            cloudPropTracks.append(cloudPropTrack)
+        return Parallel(suitTrack, toonTracks, cloudPropTracks)
 
 
 def doHotAir(attack):
