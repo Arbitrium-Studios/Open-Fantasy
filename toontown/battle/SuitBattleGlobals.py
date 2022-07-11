@@ -981,7 +981,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
                'Tremor': ('stomp', ATK_TGT_GROUP),
                'UndergroundLiquidity': ('magic1', ATK_TGT_SINGLE),
                'Watercooler': ('watercooler', ATK_TGT_SINGLE),
-               'Withdrawal': ('magic1', ATK_TGT_SINGLE),
+               'Withdrawal': ('magic1', ATK_TGT_GROUP),
                'WriteOff': ('hold-pencil', ATK_TGT_SINGLE)}
 AUDIT = list(SuitAttacks.keys()).index('Audit')
 BITE = list(SuitAttacks.keys()).index('Bite')

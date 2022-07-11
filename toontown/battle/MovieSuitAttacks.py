@@ -3891,55 +3891,105 @@ def doEvictionNotice(attack):
 def doWithdrawal(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
-    BattleParticles.loadParticles()
-    particleEffect = BattleParticles.createParticleEffect('Withdrawal')
-    BattleParticles.setEffectTexture(particleEffect, 'snow-particle')
-    suitTrack = getSuitAnimTrack(attack)
-    partTrack = getPartTrack(particleEffect, 1e-05, suitTrack.getDuration() + 1.2, [particleEffect, suit, 0])
-    toonTrack = getToonTrack(attack, 1.2, ['cringe'], 0.2, splicedDodgeAnims=[['duck', 1e-05, 0.8]], showMissedExtraTime=0.8)
-    headParts = toon.getHeadParts()
-    torsoParts = toon.getTorsoParts()
-    legsParts = toon.getLegsParts()
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        dmg = target['hp']
+        BattleParticles.loadParticles()
+        particleEffect = BattleParticles.createParticleEffect('Withdrawal')
+        BattleParticles.setEffectTexture(particleEffect, 'snow-particle')
+        suitTrack = getSuitAnimTrack(attack)
+        partTrack = getPartTrack(particleEffect, 1e-05, suitTrack.getDuration() + 1.2, [particleEffect, suit, 0])
+        toonTrack = getToonTrack(attack, 1.2, ['cringe'], 0.2, splicedDodgeAnims=[['duck', 1e-05, 0.8]], showMissedExtraTime=0.8)
+        headParts = toon.getHeadParts()
+        torsoParts = toon.getTorsoParts()
+        legsParts = toon.getLegsParts()
 
-    def changeColor(parts):
-        track = Parallel()
-        for partNum in range(0, parts.getNumPaths()):
-            nextPart = parts.getPath(partNum)
-            track.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
+        def changeColor(parts):
+            track = Parallel()
+            for partNum in range(0, parts.getNumPaths()):
+                nextPart = parts.getPath(partNum)
+                track.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
 
-        return track
+            return track
 
-    def resetColor(parts):
-        track = Parallel()
-        for partNum in range(0, parts.getNumPaths()):
-            nextPart = parts.getPath(partNum)
-            track.append(Func(nextPart.clearColorScale))
+        def resetColor(parts):
+            track = Parallel()
+            for partNum in range(0, parts.getNumPaths()):
+                nextPart = parts.getPath(partNum)
+                track.append(Func(nextPart.clearColorScale))
 
-        return track
+            return track
 
-    soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
-    multiTrackList = Parallel(suitTrack, partTrack, toonTrack, soundTrack)
-    if dmg > 0:
-        colorTrack = Sequence(
-            Wait(1.6),
-            Func(battle.movie.needRestoreColor),
-            Parallel(
-                changeColor(headParts),
-                changeColor(torsoParts),
-                changeColor(legsParts)
-            ),
-            Wait(2.9),
-            resetColor(headParts),
-            resetColor(torsoParts),
-            resetColor(legsParts),
-            Func(battle.movie.clearRestoreColor)
-        )
-        multiTrackList.append(colorTrack)
-    return multiTrackList
+        soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
+        multiTrackList = Parallel(suitTrack, partTrack, toonTrack, soundTrack)
+        if dmg > 0:
+            colorTrack = Sequence(
+                Wait(1.6),
+                Func(battle.movie.needRestoreColor),
+                Parallel(
+                    changeColor(headParts),
+                    changeColor(torsoParts),
+                    changeColor(legsParts)
+                ),
+                Wait(2.9),
+                resetColor(headParts),
+                resetColor(torsoParts),
+                resetColor(legsParts),
+                Func(battle.movie.clearRestoreColor)
+            )
+            multiTrackList.append(colorTrack)
+        return multiTrackList
+    else:
+        targets = attack['target']
+        BattleParticles.loadParticles()
+        particleEffect = BattleParticles.createParticleEffect('Withdrawal')
+        BattleParticles.setEffectTexture(particleEffect, 'snow-particle')
+        suitTrack = getSuitAnimTrack(attack)
+        partTrack = getPartTrack(particleEffect, 1e-05, suitTrack.getDuration() + 1.2, [particleEffect, suit, 0])
+        toonTracks = getToonTracks(attack, 1.2, ['cringe'], 0.2, splicedDodgeAnims=[['duck', 1e-05, 0.8]], showMissedExtraTime=0.8)
 
+        def changeColor(parts):
+            track = Parallel()
+            for partNum in range(0, parts.getNumPaths()):
+                nextPart = parts.getPath(partNum)
+                track.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
+
+            return track
+
+        def resetColor(parts):
+            track = Parallel()
+            for partNum in range(0, parts.getNumPaths()):
+                nextPart = parts.getPath(partNum)
+                track.append(Func(nextPart.clearColorScale))
+
+            return track
+
+        soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
+        colorTracks = Parallel()
+        for t in targets:
+            toon = t['toon']
+            dmg = t['hp']
+            headParts = toon.getHeadParts()
+            torsoParts = toon.getTorsoParts()
+            legsParts = toon.getLegsParts()
+            if dmg > 0:
+                colorTrack = Sequence(
+                    Wait(1.6),
+                    Func(battle.movie.needRestoreColor),
+                    Parallel(
+                        changeColor(headParts),
+                        changeColor(torsoParts),
+                        changeColor(legsParts)
+                    ),
+                    Wait(2.9),
+                    resetColor(headParts),
+                    resetColor(torsoParts),
+                    resetColor(legsParts),
+                    Func(battle.movie.clearRestoreColor)
+                )
+                colorTracks.append(colorTrack)
+        return Parallel(suitTrack, partTrack, toonTracks, soundTrack, colorTrack)
 
 def doJargon(attack):
     suit = attack['suit']
