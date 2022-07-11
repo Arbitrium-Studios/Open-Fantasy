@@ -1,3 +1,4 @@
+from tokenize import Triple
 from panda3d.otp import *
 from toontown.toonbase.ToontownGlobals import *
 from .SuitBattleGlobals import *
@@ -253,6 +254,8 @@ def doSuitAttack(attack):
         suitTrack = doDefault(attack)
     elif name == TREMOR:
         suitTrack = doTremor(attack)
+    elif name == TRIP:
+        suitTrack = doTrip(attack)
     elif name == UNDERGROUND_LIQUIDITY:
         suitTrack = doUndergroundLiquidity(attack)
     elif name == WATERCOOLER:
@@ -335,171 +338,233 @@ def __makeCancelledNodePath():
 def doDefault(attack):
     notify.debug('building suit attack in doDefault')
     suitName = attack['suitName']
-    if suitName == 'f':
-        attack['id'] = CLIPON_TIE
-        attack['name'] = 'ClipOnTie'
-        attack['animName'] = 'throw-paper'
-        return doClipOnTie(attack)
-    elif suitName == 'p':
-        attack['id'] = WRITE_OFF
-        attack['name'] = 'WriteOff'
-        attack['animName'] = 'hold-pencil'
-        return doWriteOff(attack)
-    elif suitName == 'ym':
-        attack['id'] = RUBBER_STAMP
-        attack['name'] = 'RubberStamp'
-        attack['animName'] = 'rubber-stamp'
-        return doRubberStamp(attack)
-    elif suitName == 'mm':
-        attack['id'] = DEMOTION
-        attack['name'] = 'Demotion'
-        attack['animName'] = 'magic1'
-        return doDemotion(attack)
-    elif suitName == 'ds':
-        attack['id'] = DOWNSIZE
-        attack['name'] = 'Downsize'
-        attack['animName'] = 'magic2'
-        return doDownsize(attack)
-    elif suitName == 'hh':
-        attack['id'] = HEAD_SHRINK
-        attack['name'] = 'HeadShrink'
-        attack['animName'] = 'magic1'
-        return doHeadShrink(attack)
-    elif suitName == 'cr':
-        attack['id'] = PICK_POCKET
-        attack['name'] = 'PickPocket'
-        attack['animName'] = 'pickpocket'
-        return doPickPocket(attack)
-    elif suitName == 'tbc':
-        attack['id'] = GLOWER_POWER
-        attack['name'] = 'GlowerPower'
-        attack['animName'] = 'glower'
-        return doGlowerPower(attack)
-    elif suitName == 'cc':
-        attack['id'] = FREEZE_ASSETS
-        attack['name'] = 'FreezeAssets'
-        attack['animName'] = 'glower'
-        return doFreezeAssets(attack)
-    elif suitName == 'tm':
-        attack['id'] = POUND_KEY
-        attack['name'] = 'PoundKey'
-        attack['animName'] = 'phone'
-        return doPoundKey(attack)
-    elif suitName == 'nd':
-        attack['id'] = ROLODEX
-        attack['name'] = 'Rolodex'
-        attack['animName'] = 'roll-o-dex'
-        return doRolodex(attack)
-    elif suitName == 'gh':
-        attack['id'] = SCHMOOZE
-        attack['name'] = 'Schmooze'
-        attack['animName'] = 'speak'
-        return doSchmooze(attack)
-    elif suitName == 'ms':
-        attack['id'] = SHAKE
-        attack['name'] = 'Shake'
-        attack['animName'] = 'stomp'
-        return doShake(attack)
-    elif suitName == 'tf':
-        attack['id'] = DOUBLE_WINDSOR
-        attack['name'] = 'DoubleWindsor'
-        attack['animName'] = 'throw-paper'
-        return doDoubleWindsor(attack)
-    elif suitName == 'm':
-        attack['id'] = SCHMOOZE
-        attack['name'] = 'Schmooze'
-        attack['animName'] = 'speak'
-        return doSchmooze(attack)
-    elif suitName == 'mh':
-        attack['id'] = RAZZLE_DAZZLE
-        attack['name'] = 'RazzleDazzle'
-        attack['animName'] = 'smile'
-        return doRazzleDazzle(attack)
-    elif suitName == 'sc':
-        attack['id'] = BOUNCE_CHECK
-        attack['name'] = 'BounceCheck'
-        attack['animName'] = 'throw-paper'
-        return doBounceCheck(attack)
-    elif suitName == 'pp':
-        attack['id'] = PENNY_PINCH
-        attack['name'] = 'PennyPinch'
-        attack['animName'] = 'pickpocket'
-        return doPennyPinch(attack)
-    elif suitName == 'tw':
-        attack['id'] = FREEZE_ASSETS
-        attack['name'] = 'FreezeAssets'
-        attack['animName'] = 'glower'
-        return doFreezeAssets(attack)
-    elif suitName == 'bc':
-        attack['id'] = AUDIT
-        attack['name'] = 'Audit'
-        attack['animName'] = 'phone'
-        return doAudit(attack)
-    elif suitName == 'nc':
-        attack['id'] = CRUNCH
-        attack['name'] = 'Crunch'
-        attack['animName'] = 'throw-object'
-        return doCrunch(attack)
-    elif suitName == 'mb':
-        attack['id'] = MARKET_CRASH
-        attack['name'] = 'MarketCrash'
-        attack['animName'] = 'throw-paper'
-        return doMarketCrash(attack)
-    elif suitName == 'ls':
-        attack['id'] = CHOMP
-        attack['name'] = 'Chomp'
-        attack['animName'] = 'throw-paper'
-        return doChomp(attack)
-    elif suitName == 'rb':
-        attack['id'] = PICK_POCKET
-        attack['name'] = 'PickPocket'
-        attack['animName'] = 'pickpocket'
-        return doPickPocket(attack)
-    elif suitName == 'bf':
-        attack['id'] = CANNED
-        attack['name'] = 'Canned'
-        attack['animName'] = 'throw-paper'
-        return doCanned(attack)
-    elif suitName == 'b':
-        attack['id'] = BITE
-        attack['name'] = 'Bite'
-        attack['animName'] = 'throw-paper'
-        return doBite(attack)
-    elif suitName == 'dt':
-        attack['id'] = DOUBLE_TALK
-        attack['name'] = 'DoubleTalk'
-        attack['animName'] = 'speak'
-        return doDoubleTalk(attack)
-    elif suitName == 'ac':
-        attack['id'] = RED_TAPE
-        attack['name'] = 'RedTape'
-        attack['animName'] = 'throw-object'
-        return doRedTape(attack)
-    elif suitName == 'bs':
-        attack['id'] = GUILT_TRIP
-        attack['name'] = 'GuiltTrip'
-        attack['animName'] = 'magic1'
-        return doGuiltTrip(attack)
-    elif suitName == 'sd':
-        attack['id'] = SPIN
-        attack['name'] = 'Spin'
-        attack['animName'] = 'magic3'
-        return doSpin(attack)
-    elif suitName == 'le':
-        attack['id'] = LEGALESE
-        attack['name'] = 'Legalese'
-        attack['animName'] = 'speak'
-        return doLegalese(attack)
-    elif suitName == 'bw':
-        attack['id'] = FINGER_WAG
-        attack['name'] = 'FingerWag'
-        attack['animName'] = 'finger-wag'
-        return doFingerWag(attack)
+    if attack['group'] == ATK_TGT_SINGLE:
+        if suitName == 'f':
+            attack['id'] = CLIPON_TIE
+            attack['name'] = 'ClipOnTie'
+            attack['animName'] = 'throw-paper'
+            return doClipOnTie(attack)
+        elif suitName == 'p':
+            attack['id'] = WRITE_OFF
+            attack['name'] = 'WriteOff'
+            attack['animName'] = 'hold-pencil'
+            return doWriteOff(attack)
+        elif suitName == 'ym':
+            attack['id'] = RUBBER_STAMP
+            attack['name'] = 'RubberStamp'
+            attack['animName'] = 'rubber-stamp'
+            return doRubberStamp(attack)
+        elif suitName == 'mm':
+            attack['id'] = DEMOTION
+            attack['name'] = 'Demotion'
+            attack['animName'] = 'magic1'
+            return doDemotion(attack)
+        elif suitName == 'ds':
+            attack['id'] = DOWNSIZE
+            attack['name'] = 'Downsize'
+            attack['animName'] = 'magic2'
+            return doDownsize(attack)
+        elif suitName == 'hh':
+            attack['id'] = HEAD_SHRINK
+            attack['name'] = 'HeadShrink'
+            attack['animName'] = 'magic1'
+            return doHeadShrink(attack)
+        elif suitName == 'cr':
+            attack['id'] = PICK_POCKET
+            attack['name'] = 'PickPocket'
+            attack['animName'] = 'pickpocket'
+            return doPickPocket(attack)
+        elif suitName == 'tbc':
+            attack['id'] = GLOWER_POWER
+            attack['name'] = 'GlowerPower'
+            attack['animName'] = 'glower'
+            return doGlowerPower(attack)
+        elif suitName == 'cc':
+            attack['id'] = FREEZE_ASSETS
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
+        elif suitName == 'tm':
+            attack['id'] = POUND_KEY
+            attack['name'] = 'PoundKey'
+            attack['animName'] = 'phone'
+            return doPoundKey(attack)
+        elif suitName == 'nd':
+            attack['id'] = ROLODEX
+            attack['name'] = 'Rolodex'
+            attack['animName'] = 'roll-o-dex'
+            return doRolodex(attack)
+        elif suitName == 'gh':
+            attack['id'] = SCHMOOZE
+            attack['name'] = 'Schmooze'
+            attack['animName'] = 'speak'
+            return doSchmooze(attack)
+        elif suitName == 'ms':
+            attack['id'] = BRAIN_STORM
+            attack['name'] = 'BrainStorm'
+            attack['animName'] = 'effort'
+            return doBrainStorm(attack)
+        elif suitName == 'tf':
+            attack['id'] = DOUBLE_WINDSOR
+            attack['name'] = 'DoubleWindsor'
+            attack['animName'] = 'throw-paper'
+            return doDoubleWindsor(attack)
+        elif suitName == 'm':
+            attack['id'] = SCHMOOZE
+            attack['name'] = 'Schmooze'
+            attack['animName'] = 'speak'
+            return doSchmooze(attack)
+        elif suitName == 'mh':
+            attack['id'] = RAZZLE_DAZZLE
+            attack['name'] = 'RazzleDazzle'
+            attack['animName'] = 'smile'
+            return doRazzleDazzle(attack)
+        elif suitName == 'sc':
+            attack['id'] = BOUNCE_CHECK
+            attack['name'] = 'BounceCheck'
+            attack['animName'] = 'throw-paper'
+            return doBounceCheck(attack)
+        elif suitName == 'pp':
+            attack['id'] = PENNY_PINCH
+            attack['name'] = 'PennyPinch'
+            attack['animName'] = 'pickpocket'
+            return doPennyPinch(attack)
+        elif suitName == 'tw':
+            attack['id'] = FREEZE_ASSETS
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
+        elif suitName == 'bc':
+            attack['id'] = AUDIT
+            attack['name'] = 'Audit'
+            attack['animName'] = 'phone'
+            return doAudit(attack)
+        elif suitName == 'nc':
+            attack['id'] = CRUNCH
+            attack['name'] = 'Crunch'
+            attack['animName'] = 'throw-object'
+            return doCrunch(attack)
+        elif suitName == 'mb':
+            attack['id'] = MARKET_CRASH
+            attack['name'] = 'MarketCrash'
+            attack['animName'] = 'throw-paper'
+            return doMarketCrash(attack)
+        elif suitName == 'ls':
+            attack['id'] = CHOMP
+            attack['name'] = 'Chomp'
+            attack['animName'] = 'throw-paper'
+            return doChomp(attack)
+        elif suitName == 'rb':
+            attack['id'] = PICK_POCKET
+            attack['name'] = 'PickPocket'
+            attack['animName'] = 'pickpocket'
+            return doPickPocket(attack)
+        elif suitName == 'bf':
+            attack['id'] = CANNED
+            attack['name'] = 'Canned'
+            attack['animName'] = 'throw-paper'
+            return doCanned(attack)
+        elif suitName == 'b':
+            attack['id'] = BITE
+            attack['name'] = 'Bite'
+            attack['animName'] = 'throw-paper'
+            return doBite(attack)
+        elif suitName == 'dt':
+            attack['id'] = DOUBLE_TALK
+            attack['name'] = 'DoubleTalk'
+            attack['animName'] = 'speak'
+            return doDoubleTalk(attack)
+        elif suitName == 'ac':
+            attack['id'] = RED_TAPE
+            attack['name'] = 'RedTape'
+            attack['animName'] = 'throw-object'
+            return doRedTape(attack)
+        elif suitName == 'bs':
+            attack['id'] = RESTRAINING_ORDER
+            attack['name'] = 'RestrainingOrder'
+            attack['animName'] = 'throw-paper'
+            return doRestrainingOrder(attack)
+        elif suitName == 'sd':
+            attack['id'] = SPIN
+            attack['name'] = 'Spin'
+            attack['animName'] = 'magic3'
+            return doSpin(attack)
+        elif suitName == 'le':
+            attack['id'] = LEGALESE
+            attack['name'] = 'Legalese'
+            attack['animName'] = 'speak'
+            return doLegalese(attack)
+        elif suitName == 'bw':
+            attack['id'] = FINGER_WAG
+            attack['name'] = 'FingerWag'
+            attack['animName'] = 'finger-wag'
+            return doFingerWag(attack)
+        else:
+            attack['id'] = MUMBO_JUMBO
+            attack['name'] = 'MumboJumbo'
+            attack['animName'] = 'speak'
+            return doMumboJumbo(attack)
     else:
-        attack['id'] = MUMBO_JUMBO
-        attack['name'] = 'MumboJumbo'
-        attack['animName'] = 'speak'
-        return doMumboJumbo(attack)
+        if suitName == 'ym':
+            attack['id'] = SYNERGY
+            attack['name'] = 'Synergy'
+            attack['animName'] = 'magic3'
+            return doSynergy(attack)
+        elif suitName == 'tbc':
+            attack['id'] = POWER_TRIP
+            attack['name'] = 'PowerTrip'
+            attack['animName'] = 'magic1'
+            return doPowerTrip(attack)
+        elif suitName == 'nd':
+            attack['id'] = SYNERGY
+            attack['name'] = 'Synergy'
+            attack['animName'] = 'magic3'
+            return doSynergy(attack)
+        elif suitName == 'ms':
+            attack['id'] = SHAKE
+            attack['name'] = 'Shake'
+            attack['animName'] = 'stomp'
+            return doShake(attack)
+        elif suitName == 'm':
+            attack['id'] = PARADIGM_SHIFT
+            attack['name'] = 'ParadigmShift'
+            attack['animName'] = 'magic2'
+            return doParadigmShift(attack)
+        elif suitName == 'mh':
+            attack['id'] = SONG_AND_DANCE
+            attack['name'] = 'SongAndDance'
+            attack['animName'] = 'song-and-dance'
+            return doSongAndDance(attack)
+        elif suitName == 'rb':
+            attack['id'] = FLOOD_THE_MARKET
+            attack['name'] = 'FloodTheMarket'
+            attack['animName'] = 'effort'
+            return doFloodTheMarket(attack)
+        elif suitName == 'b':
+            attack['id'] = WITHDRAWAL
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'Withdrawal'
+            attack['animName'] = 'magic1'
+            return doWithdrawal(attack)
+        elif suitName == 'bs':
+            attack['id'] = GUILT_TRIP
+            attack['name'] = 'GuiltTrip'
+            attack['animName'] = 'magic1'
+            return doGuiltTrip(attack)
+        elif suitName == 'sd':
+            attack['id'] = PARADIGM_SHIFT
+            attack['name'] = 'ParadigmShift'
+            attack['animName'] = 'magic2'
+            return doParadigmShift(attack)
+        elif suitName == 'bw':
+            attack['id'] = POWER_TRIP
+            attack['name'] = 'PowerTrip'
+            attack['animName'] = 'magic1'
+        else:
+            attack['id'] = TRIP
+            attack['name'] = 'Trip'
+            attack['animName'] = 'magic1'
+            return doTrip(attack)
 
 
 def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
@@ -4355,3 +4420,35 @@ def doLegalStorm(attack):
     toonTrack = getToonTrack(attack, damageDelay=damageDelay[suitType], splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'], showMissedExtraTime=1.1)
     soundTrack = getSoundTrack('SA_brainstorm.ogg', delay=2.6, node=suit)
     return Parallel(suitTrack, toonTrack, cloudPropTrack, soundTrack)
+
+
+def doTrip(attack):
+    suit = attack['suit']
+    battle = attack['battle']
+    powerBar1 = BattleParticles.createParticleEffect(file='powertrip')
+    powerBar2 = BattleParticles.createParticleEffect(file='powertrip2')
+    powerBar1.setPos(0, 6.1, 0.4)
+    powerBar1.setHpr(-60, 0, 0)
+    powerBar2.setPos(0, 6.1, 0.4)
+    powerBar2.setHpr(60, 0, 0)
+    waterfallEffect = BattleParticles.createParticleEffect('Waterfall')
+    waterfallEffect.setScale(11)
+    suitTrack = getSuitAnimTrack(attack)
+
+    def getPowerTrack(effect, suit=suit, battle=battle):
+        partTrack = Sequence(
+            Wait(1.0),
+            Func(battle.movie.needRestoreParticleEffect, effect),
+            Func(effect.start, suit),
+            Wait(0.4),
+            LerpPosInterval(effect, 1.0, Point3(0, 15, 0.4)),
+            LerpFunctionInterval(effect.setAlphaScale, fromData=1, toData=0, duration=0.4),
+            Func(effect.cleanup), Func(battle.movie.clearRestoreParticleEffect, effect)
+        )
+        return partTrack
+
+    partTrack1 = getPowerTrack(powerBar1)
+    partTrack2 = getPowerTrack(powerBar2)
+    waterfallTrack = getPartTrack(waterfallEffect, 0.6, 1.3, [waterfallEffect, suit, 0])
+    toonTracks = getToonTracks(attack, 1.8, ['slip-forward'], 1.29, ['jump'])
+    return Parallel(suitTrack, partTrack1, partTrack2, waterfallTrack, toonTracks)

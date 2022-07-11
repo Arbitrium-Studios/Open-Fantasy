@@ -546,6 +546,8 @@ def chooseSuitShot(attack, attackDuration):
                 suit,
                 attackDuration,
                 shakeIntensity))
+    elif name == TRIP:
+        camTrack.append(defaultCamera(openShotDuration=1.1))
     elif name == UNDERGROUND_LIQUIDITY:
         camTrack.append(defaultCamera(openShotDuration=2.5))
     elif name == WATERCOOLER:

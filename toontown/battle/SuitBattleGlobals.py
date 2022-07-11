@@ -979,6 +979,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
                'TeeOff': ('golf-club-swing', ATK_TGT_SINGLE),
                'ThrowBook': ('throw-object', ATK_TGT_SINGLE),
                'Tremor': ('stomp', ATK_TGT_GROUP),
+               'Trip': ('magic1', ATK_TGT_GROUP),
                'UndergroundLiquidity': ('magic1', ATK_TGT_SINGLE),
                'Watercooler': ('watercooler', ATK_TGT_SINGLE),
                'Withdrawal': ('magic1', ATK_TGT_GROUP),
@@ -1052,6 +1053,7 @@ TABULATE = list(SuitAttacks.keys()).index('Tabulate')
 TEE_OFF = list(SuitAttacks.keys()).index('TeeOff')
 THROW_BOOK = list(SuitAttacks.keys()).index('ThrowBook')
 TREMOR = list(SuitAttacks.keys()).index('Tremor')
+TRIP = list(SuitAttacks.keys()).index('Trip')
 UNDERGROUND_LIQUIDITY = list(SuitAttacks.keys()).index('UndergroundLiquidity')
 WATERCOOLER = list(SuitAttacks.keys()).index('Watercooler')
 WITHDRAWAL = list(SuitAttacks.keys()).index('Withdrawal')
