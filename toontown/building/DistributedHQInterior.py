@@ -25,7 +25,7 @@ class DistributedHQInterior(DistributedObject.DistributedObject):
     def generate(self):
         DistributedObject.DistributedObject.generate(self)
         self.interior = loader.loadModel(
-            'phase_3.5/models/modules/HQ_interior')
+            'user/resources/default/phase_3.5/models/modules/HQ_interior')
         self.interior.reparentTo(render)
         self.interior.find('**/cream').hide()
         self.interior.find('**/crashed_piano').hide()
@@ -186,7 +186,7 @@ class DistributedHQInterior(DistributedObject.DistributedObject):
         DistributedObject.DistributedObject.disable(self)
 
     def buildTrophyStar(self):
-        trophyStar = loader.loadModel('phase_3.5/models/gui/name_star')
+        trophyStar = loader.loadModel('user/resources/default/phase_3.5/models/gui/name_star')
         trophyStar.hide()
         trophyStar.setPos(*TTLocalizer.DHQItrophyStarPos)
         return trophyStar

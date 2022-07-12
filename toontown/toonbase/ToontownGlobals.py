@@ -1615,7 +1615,7 @@ gmMagicWordList = ['restock',
                    'newSummons',
                    'who',
                    'who all']
-NewsPageScaleAdjust = 0.85
+NewsPageScaleAdjust = 0.65 #Test this for News Size
 AnimPropTypes = Enum(('Unknown',
                       'Hydrant',
                       'Mailbox',

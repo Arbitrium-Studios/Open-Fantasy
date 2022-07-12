@@ -76,18 +76,18 @@ class DistributedCashbotBossCrane(
         self.craneAdviceLabel = None
         self.magnetAdviceLabel = None
         self.atLimitSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_adjust.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
         self.magnetOnSfx = base.loader.loadSfx(
-            'phase_10/audio/sfx/CBHQ_CFO_magnet_on.ogg')
+            'user/resources/default/phase_10/audio/sfx/CBHQ_CFO_magnet_on.ogg')
         self.magnetLoopSfx = base.loader.loadSfx(
-            'phase_10/audio/sfx/CBHQ_CFO_magnet_loop.ogg')
+            'user/resources/default/phase_10/audio/sfx/CBHQ_CFO_magnet_loop.ogg')
         self.magnetSoundInterval = Parallel(
             SoundInterval(
                 self.magnetOnSfx), Sequence(
                 Wait(0.5), Func(
                     base.playSfx, self.magnetLoopSfx, looping=1)))
         self.craneMoveSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_elevator_up_down.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_elevator_up_down.ogg')
         self.fadeTrack = None
         return
 
@@ -362,10 +362,10 @@ class DistributedCashbotBossCrane(
         self.shadow.setBin('shadow', 0)
         self.shadow.node().setFinal(1)
         self.magnetShadow = loader.loadModel(
-            'phase_3/models/props/drop_shadow')
+            'user/resources/default/phase_3/models/props/drop_shadow')
         self.magnetShadow.reparentTo(self.shadow)
         self.craneShadow = loader.loadModel(
-            'phase_3/models/props/square_drop_shadow')
+            'user/resources/default/phase_3/models/props/square_drop_shadow')
         self.craneShadow.setScale(0.5, 4, 1)
         self.craneShadow.setPos(0, -12, 0)
         self.craneShadow.flattenLight()
@@ -438,7 +438,7 @@ class DistributedCashbotBossCrane(
         return Task.cont
 
     def __enableControlInterface(self):
-        gui = loader.loadModel('phase_3.5/models/gui/avatar_panel_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.closeButton = DirectButton(image=(gui.find('**/CloseBtn_UP'),
                                                gui.find('**/CloseBtn_DN'),
                                                gui.find('**/CloseBtn_Rllvr'),

@@ -82,7 +82,7 @@ class PrivacyPolicyPanel(getGlobalDialogClass()):
             self.exitPrivacyPolicy),
             State.State('version2Kids', self.enterVersion2Kids, self.exitPrivacyPolicy)], 'off', 'off')
         self.fsm.enterInitialState()
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         moreButtonImage = (
             guiButton.find('**/QuitBtn_UP'),
             guiButton.find('**/QuitBtn_DN'),

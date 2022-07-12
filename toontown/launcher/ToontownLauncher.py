@@ -10,30 +10,12 @@ ltime = 1 and time.localtime()
 logSuffix = '%02d%02d%02d_%02d%02d%02d' % (ltime[0] - 2000, ltime[1], ltime[2],
                                            ltime[3], ltime[4], ltime[5])
 
-logfile = 'toontownD-' + logSuffix + '.log'
-
+logfile = 'ttfan-' + logSuffix + '.log'
 
 class LogAndOutput:
     def __init__(self, orig, log):
         self.orig = orig
         self.log = log
-
-    def write(self, str):
-        self.log.write(str)
-        self.log.flush()
-        self.orig.write(str)
-        self.orig.flush()
-
-    def flush(self):
-        self.log.flush()
-        self.orig.flush()
-
-
-log = open(logfile, 'a')
-logOut = LogAndOutput(sys.__stdout__, log)
-logErr = LogAndOutput(sys.__stderr__, log)
-sys.stdout = logOut
-sys.stderr = logErr
 
 print('\n\nStarting Toontown...')
 
@@ -96,7 +78,7 @@ class ToontownLauncher(LauncherBase):
         return self.gameServer
 
     def getLogFileName(self):
-        return 'toontown'
+        return 'ttfan'
 
     def parseWebAcctParams(self):
         s = config.GetString('fake-web-acct-params', '')

@@ -2,6 +2,7 @@
 *.pyo
 *.pyd
 *.log
+user/screenshots/
 screenshots/
 *.so
 *.DS_Store
@@ -15,7 +16,6 @@ venv/
 *.trackRecords
 local/
 errorCode
-screenshots/
 libotp/
 libtoontown/
 *.egg
@@ -25,6 +25,8 @@ Housekeeper/
 sign/
 *.mf
 *.yaml
-phase_3/maps/news
+phase_3.5/models/news
 news/
-resources/phase_3.5/maps/toontown_map - Backup.jpg
+user/resources/default/phase_3.5/maps/toontown_map - Backup.jpg
+user/resources/default/phase_2/
+toontown/installer

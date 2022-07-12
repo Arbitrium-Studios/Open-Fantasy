@@ -16,7 +16,7 @@ class DistributedBBElevator(DistributedBossElevator.DistributedBossElevator):
     def setupElevator(self):
         geom = base.cr.playGame.hood.loader.geom
         self.elevatorModel = loader.loadModel(
-            'phase_12/models/bossbotHQ/BB_Elevator')
+            'user/resources/default/phase_12/models/bossbotHQ/BB_Elevator')
         self.leftDoor = self.elevatorModel.find('**/left-door')
         if self.leftDoor.isEmpty():
             self.leftDoor = self.elevatorModel.find('**/left_door')

@@ -167,7 +167,7 @@ class DistributedBanquetTable(
 
     def loadAssets(self):
         self.tableGroup = loader.loadModel(
-            'phase_12/models/bossbotHQ/BanquetTableChairs')
+            'user/resources/default/phase_12/models/bossbotHQ/BanquetTableChairs')
         tableLocator = self.boss.geom.find(
             '**/TableLocator_%d' %
             (self.index + 1))
@@ -180,15 +180,15 @@ class DistributedBanquetTable(
         self.setupDiners()
         self.setupChairCols()
         self.squirtSfx = loader.loadSfx(
-            'phase_4/audio/sfx/AA_squirt_seltzer_miss.ogg')
+            'user/resources/default/phase_4/audio/sfx/AA_squirt_seltzer_miss.ogg')
         self.hitBossSfx = loader.loadSfx(
-            'phase_5/audio/sfx/SA_watercooler_spray_only.ogg')
+            'user/resources/default/phase_5/audio/sfx/SA_watercooler_spray_only.ogg')
         self.hitBossSoundInterval = SoundInterval(
             self.hitBossSfx, node=self.boss, volume=1.0)
         self.serveFoodSfx = loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_travel_game_bell_for_trolley.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_travel_game_bell_for_trolley.ogg')
         self.pitcherMoveSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_adjust.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
 
     def setupDiners(self):
         for i in range(self.numDiners):
@@ -257,7 +257,7 @@ class DistributedBanquetTable(
         self.removeFoodModel(chairIndex)
         serviceLoc = self.serviceLocs.get(chairIndex)
         if not food or food.isEmpty():
-            foodModel = loader.loadModel('phase_12/models/bossbotHQ/canoffood')
+            foodModel = loader.loadModel('user/resources/default/phase_12/models/bossbotHQ/canoffood')
             foodModel.setScale(ToontownGlobals.BossbotFoodModelScale)
             foodModel.reparentTo(serviceLoc)
         else:
@@ -446,9 +446,9 @@ class DistributedBanquetTable(
                                                         self.notify.debug, 'diner.stash'), Func(
                                                             diner.stash))
         spinningSound = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/Cog_Death.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg')
         deathSound = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
         deathSoundTrack = Sequence(
             Wait(0.8),
             SoundInterval(
@@ -590,7 +590,7 @@ class DistributedBanquetTable(
             self.accept('enter' + colName, self.touchedTable)
             self.preparedForPhaseFour = True
             self.waterPitcherModel = loader.loadModel(
-                'phase_12/models/bossbotHQ/tt_m_ara_bhq_seltzerBottle')
+                'user/resources/default/phase_12/models/bossbotHQ/tt_m_ara_bhq_seltzerBottle')
             lampNode = self.tableGroup.find('**/lamp_med_5')
             pos = lampNode.getPos(self.tableGroup)
             lampNode.hide()
@@ -784,7 +784,7 @@ class DistributedBanquetTable(
             self.smoothStarted = 0
 
     def __enableControlInterface(self):
-        gui = loader.loadModel('phase_3.5/models/gui/avatar_panel_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.closeButton = DirectButton(image=(gui.find('**/CloseBtn_UP'),
                                                gui.find('**/CloseBtn_DN'),
                                                gui.find('**/CloseBtn_Rllvr'),

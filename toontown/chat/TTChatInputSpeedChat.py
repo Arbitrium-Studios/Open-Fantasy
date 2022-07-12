@@ -338,7 +338,7 @@ class TTChatInputSpeedChat(DirectObject.DirectObject):
         self.chatMgr = chatMgr
         self.whisperAvatarId = None
         self.toPlayer = 0
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okButtonImage = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),
@@ -581,8 +581,8 @@ class TTChatInputSpeedChat(DirectObject.DirectObject):
             del self.speedChat
         self.speedChat = SpeedChat(
             structure=structure,
-            backgroundModelName='phase_3/models/gui/ChatPanel',
-            guiModelName='phase_3.5/models/gui/speedChatGui')
+            backgroundModelName='user/resources/default/phase_3/models/gui/ChatPanel',
+            guiModelName='user/resources/default/phase_3.5/models/gui/speedChatGui')
         self.speedChat.setScale(TTLocalizer.TTCISCspeedChat)
         self.speedChat.setBin('gui-popup', 0)
         self.speedChat.setTopLevelOverlap(TTLocalizer.TTCISCtopLevelOverlap)

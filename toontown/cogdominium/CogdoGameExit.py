@@ -17,9 +17,9 @@ class CogdoGameExit(NodePath):
         self._leftDoor = self._model.find('**/left_door')
         self._rightDoor = self._model.find('**/right_door')
         self._openSfx = openSfx or base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_VP_door_open.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_VP_door_open.ogg')
         self._closeSfx = closeSfx or base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_VP_door_close.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_VP_door_close.ogg')
         self._elevatorPoints = []
         for point in ElevatorConstants.ElevatorPoints:
             self._elevatorPoints.append(point[0])

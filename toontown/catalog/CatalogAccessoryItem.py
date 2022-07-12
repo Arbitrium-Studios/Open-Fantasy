@@ -263,7 +263,7 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
             str = AccessoryTypes[self.accessoryType][ATString]
             defn = ToonDNA.ShoesStyles[str]
             legModel = loader.loadModel(
-                'phase_3/models/char/tt_a_chr_dgm_shorts_legs_1000')
+                'user/resources/default/phase_3/models/char/tt_a_chr_dgm_shorts_legs_1000')
             model = legModel.find('**/' + modelPath)
         else:
             model = loader.loadModel(modelPath)

@@ -59,7 +59,7 @@ Jesse Schell for fighting for Toontown Online's Official Return
         self.text.setPos(0, -1)
         self.text.setColorScale(1, 1, 1, 0)
         self.logo = OnscreenImage(image = 'phase_3/maps/toontown-logo.png',
-                                  scale = (0.8 * (4.0 / 3.0), 0.8, 0.8 / (4.0 / 3.0)))
+                                  scale = (0.8 * (4.0 / 3.0), 0.8, 0.8 / (4.0 / 3.0))) # FIX CREDITS LOGO HERE.
         self.logo.setTransparency(TransparencyAttrib.MAlpha)
         self.logo.reparentTo(self.text)
         self.logo.setPos(0, 0, 0)

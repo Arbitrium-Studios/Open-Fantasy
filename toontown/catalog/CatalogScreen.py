@@ -30,11 +30,11 @@ class CatalogScreen(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('CatalogScreen')
 
     def __init__(self, parent=aspect2d, **kw):
-        guiItems = loader.loadModel('phase_5.5/models/gui/catalog_gui')
+        guiItems = loader.loadModel('user/resources/default/phase_5.5/models/gui/catalog_gui')
         background = guiItems.find('**/catalog_background')
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         guiBack = loader.loadModel(
-            'phase_5.5/models/gui/package_delivery_panel')
+            'user/resources/default/phase_5.5/models/gui/package_delivery_panel')
         optiondefs = (('scale', 0.667, None),
                       ('pos', (0, 1, 0.025), None),
                       ('phone', None, None),
@@ -503,7 +503,7 @@ class CatalogScreen(DirectFrame):
         smash = 0.75
         priceScale = 0.15
         emblemIcon = loader.loadModel(
-            'phase_3.5/models/gui/tt_m_gui_gen_emblemIcons')
+            'user/resources/default/phase_3.5/models/gui/tt_m_gui_gen_emblemIcons')
         silverModel = emblemIcon.find('**/tt_t_gui_gen_emblemSilver')
         goldModel = emblemIcon.find('**/tt_t_gui_gen_emblemGold')
         self.silverLabel = DirectLabel(parent=self,
@@ -684,7 +684,7 @@ class CatalogScreen(DirectFrame):
                                            textMayChange=1)
             self.friendLabel.setPos(0.5, 0, -0.42)
             self.friendLabel.hide()
-            gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+            gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
             self.scrollList = DirectScrolledList(parent=self, relief=None, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
                                                                                             gui.find(
                                                                                                 '**/FndsLst_ScrollDN'),
@@ -945,15 +945,15 @@ class CatalogScreen(DirectFrame):
         self.cDr.setClearColor(Vec4(0.3, 0.3, 0.3, 1))
         self.cDr.setCamera(self.cCam)
         self.clarabelle = Actor.Actor(
-            'phase_5.5/models/char/Clarabelle-zero', {
-                'listen': 'phase_5.5/models/char/Clarabelle-listens'})
+            'user/resources/default/phase_5.5/models/char/Clarabelle-zero', {
+                'listen': 'user/resources/default/phase_5.5/models/char/Clarabelle-listens'})
         self.clarabelle.loop('listen')
         self.clarabelle.find('**/eyes').setBin('fixed', 0)
         self.clarabelle.find('**/pupilL').setBin('fixed', 1)
         self.clarabelle.find('**/pupilR').setBin('fixed', 1)
         self.clarabelle.find('**/glassL').setBin('fixed', 2)
         self.clarabelle.find('**/glassR').setBin('fixed', 2)
-        switchboard = loader.loadModel('phase_5.5/models/estate/switchboard')
+        switchboard = loader.loadModel('user/resources/default/phase_5.5/models/estate/switchboard')
         switchboard.reparentTo(self.clarabelle)
         switchboard.setPos(0, -2, 0)
         self.clarabelle.reparentTo(self.cRender)
@@ -1204,7 +1204,7 @@ class CatalogScreen(DirectFrame):
         self.clearClarabelleChat()
         if not self.clarabelleChatBalloon:
             self.clarabelleChatBalloon = loader.loadModel(
-                'phase_3/models/props/chatbox.bam')
+                'user/resources/default/phase_3/models/props/chatbox.bam')
         self.clarabelleChat = ChatBalloon(self.clarabelleChatBalloon.node())
         chatNode = self.clarabelleChat.generate(
             str, ToontownGlobals.getInterfaceFont(), 10, Vec4(

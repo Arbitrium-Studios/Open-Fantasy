@@ -61,7 +61,7 @@ class MailboxScreen(DirectObject.DirectObject):
             'setAwardMailboxContents-%s' %
             base.localAvatar.doId,
             self.__refreshItems)
-        model = loader.loadModel('phase_5.5/models/gui/package_delivery_panel')
+        model = loader.loadModel('user/resources/default/phase_5.5/models/gui/package_delivery_panel')
         background = model.find('**/bg')
         itemBoard = model.find('**/item_board')
         self.frame = DirectFrame(scale=1.1, relief=DGG.FLAT, frameSize=(-0.5,
@@ -104,7 +104,7 @@ class MailboxScreen(DirectObject.DirectObject):
                                                                                                                                       TTLocalizer.MailBoxDiscard,
                                                                                                                                       TTLocalizer.MailBoxDiscard,
                                                                                                                                       ''), text_scale=1.0, text_pos=(0, -0.08), textMayChange=1, command=self.__makeDiscardInterface)
-        gui2 = loader.loadModel('phase_3/models/gui/quit_button')
+        gui2 = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         self.quitButton = DirectButton(
             parent=self.frame,
             relief=None,

@@ -325,6 +325,32 @@ The Road to Fantasy:
         + Add the Silly Meter back into Toon Hall but don't take it out for repairs, just leave it not functional.
         + Make the instruments in The Land of Music playable when you step on them.
         + Make the text spoken in DDL, thought bubbles.
+        + With the addition of Realistic Shaders, add Ray Tracing and other alternatives to help bring the game alive.
+        + Have the gags affect the environment
+            + Have Soaked Cog's suits be slightly darker to show it's damp
+            + Pie splat marks should show on walls, Cogs, etc. for a short period of time.
+            + The heavier the drop, the more damaged the floor should be for a short period of time
+            + TNT should leave a scorched mark on the ground for a short period of time
+            + Cog Gears and Merits should drop as collectible items
+            + Puddles of Water that dry after a short period of time
+                + You should be able to slip on the water if the time it takes to dry up hasn't finished.
+                + A way that Natural Attacks can miss should be if the floor is wet, you to slip on the puddle.
+        + A Save and Load Gag Preset in the Gag Shop.
+        + Allow us to carry 3 TNT, 7 Trap Doors, 15 Quicksands, 20 Marbles, 25 Rakes, and 30 Banana Peels
+        + Increase Spawn rate of Healing Treasures
+        + Add more locations for the Treasures in the playground to spawn
+        + Re-rig the Cog suits to the head so when the Cog looks down, the suit follows the head.
+        + Model a Roof Building Floor
+            + Instead of having Cogs come from the elevator on the roof, they should fly in
+            + There should be a chance a Cog from a different department flies in to the battle.
+        + Add shortcuts to the longer streets of Toontown.
+        + You should be able to use the orbital camera and tab buttons in Battle to get a better look at the battle.
+        + Make the water coming from the Geyser the Acorn Acres Geyser
+        + Make Have the Cog
+        + Increase the timer from 20 seconds to 45 seconds
+        + Add the Scrapped Lure Stunned Animation
+        + Add the various Toons in the Toon HQs looking around with the Parascope.
+
         + Model Overhaul Update:
             + Remake the Treasure Icons in 3D like what Corporate Clash did.
             + Remodel the Street Lamps
@@ -358,7 +384,10 @@ The Road to Fantasy:
                     + This fixture should also be added to the map.
             + Toontown Docks:
                 + Model the playground after the 2001 design with water leading out to sea.
-                + The boat should be docked in one of the piers (for use at a later date.)
+                + The boat should be docked in one of the piers 
+                + Donald's Boat should be docked in one of the Piers (for use during the Operation: F.U.R.)
+                    + When you go up to the boat, a gui menu should pop up asking where you want to go?
+                        + Within the list there is Antarctica, The Vibrant Valley Kingdom, the Pirates Locations, etc.
             + In Drowsy Dreamland, do the following:
                 + Make the pillow walkable
                     + Add a tunnel onto the pillow that leads to Cashbot Headquarters
@@ -419,19 +448,60 @@ The Road to Fantasy:
             + The Cog Headquarters:
                 + To expand upon the idea that the Cog Headquarters were once Toon Playgrounds, there should be Cogified Toon Buildings around the Headquarters.
                 + Once you defeat a Cog Headquarters Boss, you can take back the HQs to return the Cog HQ to a normal playground.
-            + Add a tunnel toward the river which leads to Downtown Toontown
         + Add Teleport To button on ToonTasks
         + A Toontown Map Update:
+            + Toontropolis Central:
+                + Add a tunnel toward the river which leads to Downtown Toontown
+            + Downtown Toontropolis:
+                + Toontown Stadium:
+                    + Add a Battle Royal-esk game located in Toontown Stadium where you try to run around the map to heal your teammates (who spawn randomly around the map) and green the other team before the other team heals their team member OR before time runs out (Your Laff is changed to a pre-set amount when the match begins and is reset back to the user’s original laff after the match is over)
+                    + You fight against AI in singleplayer mode.
+                    + Add a Capture the Flag Mini Game around the playground where you have to use your sound to stun the enemy team while you try to capture the enemy team’s flag before time runs out OR before the other team gets your flag!
+                    + Around the edges of the Stadium, put the Race Track Pads and the Golf Carts + Tunnels to indicate where the activities will be held.
+                    + Activating a Mini-Game is like how you do it in a Party.
+                    + Add sand pits where you can play Volley Ball with AIs.
+                    + In the middle of the playground, there should be a beanstalk coming through the middle of the Shop with vines you can jump onto and do 3D Jungle Vines to get to the top.
+                    + The top of the beanstalk should be a cloud you can walk on.  This is technically a new area called Flippy's Skyclan for later usage.
+                        + You should be able to earn Jellybeans by doing anything in Toontown Stadium
+                    + In the shop in the center of the playground where you can buy, Karts, Golf Clubs, Golf Balls, cannons, etc. with color variations for customization.
+                    + Add Tug-O-War minigame from parties to play against a friendly Cog whom flies down and challenges you to a game of Tug-O-War before leaving after you're done.
+                    + Around the Stadium Playground should be racing stripes where you can train your Doodle in-playground.
+                    + Around the playground, add cannons to bounce off of the low-hanging clouds.
+                        + When you land on the ground, you shouldn't be interrupted by a pop-up GUI, instead we should replace it with the Jellybean Jar Icon and a counter counting the amount of Jellybeans Earned + How much experience you've gained.
+                    + When you're doing an activity, wind should affect you.
+            + Toontropolis Docks:
+                + Combine the Dock fixtures for all streets
+                + Extend the Docks to include a Pier
             + Acorn Acres:
                 + Flip the mountain fixture to the other side of Acorn Acres map
                 + Expand upon the mountainous area to the edge of the main map.
                 + Put the Toontown Mini-Golf Tunnel on the other side, adjacent to the Mountainous Fixture.
                 + Add the tunnel to the Flowering Grove.
-            + Toontown Docks:
-                + Combine the Dock fixtures for all streets
-                + Extend the Docks to include a Pier
-            + Downtown Toontown: 
+                + Instead of the street design, you could make Funny Farm open and have the task line revolve around one family and their farming needs including getting rid of Cogs, pulling wheat and corn and what not, etc.
+                + There are multiple farms and you are required to help so Toons can be fed.
+                + Each Toontask should be helping them in different ways.
+                + The playground should be a short one but not too short.
+                + We should take inspiration from Bear E. Funny's Funny Farm but keep it different.
+                + Shaders should be black and white by default.
+            
+            + Operation F.U.R. (Fight, Unite, Rebuild) Taskforce:
                 + Coming Soon...
+            + Duckburg:
+                + Add a cogified version of Duckburg from DuckTales (2017)
+            + Antarctica - The Isles of Penglantis:
+                + Add open-world, Cogified versions of all the locations from Club Penguin and the Club Penguin Island Lore to the game.
+            + Pirates Locations:
+                + Add a Cogified version of the locations without the Humans.
+            + The Vibrant Valley Kingdom:
+                + Add a location off the shores of Toontropolis Docks
+                + This would be modeled after the version in the books
+                    + There should be an open-world fishing village linking to various locations.
+                    + There should be a full on medival castle
+            + The Jungle of Demise:
+                + This is a Jungle based on the area in the Jungle Vines Trolley Game
+                + This jungle should have Spiders, Bats, Parrots, and other non-anthro species.
+                + There should be a crack in the wall you should be able to manuver through that leads deep underground to an ancient site (for use during Project: Gateway)
+        + Add Teleport To button on ToonTasks
         + All clothing in the Clothing Stores should be put into the Create-A-Toon AND the Catalog
         + Each playground's Clothing Store should have clothes based on each Playground's themes.
         + Add throwable snowballs you get can from Tundra Wonderland
@@ -492,4 +562,4 @@ The Road to Fantasy:
     + Allow your Toon to travel with your Doodle
     + Allow your Doodle to come inside your house
 
-    + More soon!
++ More soon!

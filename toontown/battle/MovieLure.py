@@ -681,7 +681,7 @@ def __createSuitDamageTrack(battle, suit, hp, lure, trapProp):
         damageTrack = Sequence(Wait(2.3), Func(
             suit.showHpText, -hp, openEnded=0), Func(suit.updateHealthBar, hp))
         explosionSound = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
         soundTrack = Sequence(
             SoundInterval(
                 globalBattleSoundCache.getSound('TL_dynamite.ogg'),

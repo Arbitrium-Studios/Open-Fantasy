@@ -31,7 +31,7 @@ class DistributedButton(DistributedSwitch.DistributedSwitch):
         return
 
     def setupSwitch(self):
-        model = loader.loadModel('phase_9/models/cogHQ/CogDoor_Button')
+        model = loader.loadModel('user/resources/default/phase_9/models/cogHQ/CogDoor_Button')
         if model:
             buttonBase = model.find('**/buttonBase')
             change = render.attachNewNode('changePos')
@@ -92,7 +92,7 @@ class DistributedButton(DistributedSwitch.DistributedSwitch):
 
     def switchOnTrack(self):
         onSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_switch_pressed.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_switch_pressed.ogg')
         duration = 0.8
         halfDur = duration * 0.5
         pos = Vec3(0.0, 0.0, -0.2)
@@ -124,7 +124,7 @@ class DistributedButton(DistributedSwitch.DistributedSwitch):
     def switchCountdownTrack(self):
         wait = self.secondsOn - self.countdownSeconds
         countDownSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_switch_depressed.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_switch_depressed.ogg')
         track = Parallel(
             SoundInterval(countDownSfx),
             Sequence(
@@ -219,7 +219,7 @@ class DistributedButton(DistributedSwitch.DistributedSwitch):
 
     def switchOffTrack(self):
         offSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_switch_popup.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_switch_popup.ogg')
         duration = 1.0
         halfDur = duration * 0.5
         pos = Vec3(0.0)

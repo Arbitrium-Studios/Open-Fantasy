@@ -2,11 +2,11 @@ from .CatalogSurfaceItem import *
 WSTTextureName = 0
 WSTColor = 1
 WSTBasePrice = 2
-WainscotingTypes = {1000: ('phase_3.5/maps/wall_paper_b3.jpg', CTFlatColorDark, 200),
-                    1010: ('phase_5.5/maps/wall_paper_b4_greyscale.jpg', CTBasicWoodColorOnWhite, 200),
-                    1020: ('phase_5.5/maps/wainscotings_neutral.jpg', CTBasicWoodColorOnWhite, 200),
-                    1030: ('phase_3.5/maps/wall_paper_b3.jpg', CTValentinesColors, 200),
-                    1040: ('phase_3.5/maps/wall_paper_b3.jpg', CTUnderwaterColors, 200)}
+WainscotingTypes = {1000: ('user/resources/default/phase_3.5/maps/wall_paper_b3.jpg', CTFlatColorDark, 200),
+                    1010: ('user/resources/default/phase_5.5/maps/wall_paper_b4_greyscale.jpg', CTBasicWoodColorOnWhite, 200),
+                    1020: ('user/resources/default/phase_5.5/maps/wainscotings_neutral.jpg', CTBasicWoodColorOnWhite, 200),
+                    1030: ('user/resources/default/phase_3.5/maps/wall_paper_b3.jpg', CTValentinesColors, 200),
+                    1040: ('user/resources/default/phase_3.5/maps/wall_paper_b3.jpg', CTUnderwaterColors, 200)}
 
 
 class CatalogWainscotingItem(CatalogSurfaceItem):
@@ -30,7 +30,7 @@ class CatalogWainscotingItem(CatalogSurfaceItem):
 
     def getPicture(self, avatar):
         frame = self.makeFrame()
-        sample = loader.loadModel('phase_5.5/models/estate/wallpaper_sample')
+        sample = loader.loadModel('user/resources/default/phase_5.5/models/estate/wallpaper_sample')
         a = sample.find('**/a')
         b = sample.find('**/b')
         c = sample.find('**/c')

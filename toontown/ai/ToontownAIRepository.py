@@ -356,21 +356,21 @@ class ToontownAIRepository(ToontownInternalRepository):
         if 'outdoor_zone' in hood or 'golf_zone' in hood:
             phase = '6'
 
-        return 'phase_%s/dna/%s_%s.dna' % (phase, hood, canonicalZoneId)
+        return 'user/resources/default/phase_%s/dna/%s_%s.dna' % (phase, hood, canonicalZoneId)
 
     def lookupDNAFileName(self, dnaFileName):
         searchPath = DSearchPath()
-        searchPath.appendDirectory(Filename('resources/phase_3.5/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_4/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_5/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_5.5/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_6/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_8/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_9/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_10/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_11/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_12/dna'))
-        searchPath.appendDirectory(Filename('resources/phase_13/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_3.5/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_4/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_5/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_5.5/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_6/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_8/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_9/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_10/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_11/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_12/dna'))
+        searchPath.appendDirectory(Filename('user/resources/default/phase_13/dna'))
         filename = Filename(dnaFileName)
         found = vfs.resolveFilename(filename, searchPath)
         if not found:

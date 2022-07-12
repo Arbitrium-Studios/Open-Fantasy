@@ -24,7 +24,7 @@ EventsPage_News = 3
 class EventsPage(ShtikerPage.ShtikerPage):
     notify = DirectNotifyGlobal.directNotify.newCategory('EventsPage')
     UseNewsTab = ConfigVariableBool('want-news-tab', 0).value
-    DefaultNewsUrl = '/news/news_urls.txt'
+    DefaultNewsUrl = 'phase_3.5/models/news/news_urls.txt'
     NewsUrl = ConfigVariableString('news-url', DefaultNewsUrl).value
     DownloadArticlesTaskName = 'downloadArticlesTask'
     NonblockingDownload = ConfigVariableBool('news-nonblocking', 1).value

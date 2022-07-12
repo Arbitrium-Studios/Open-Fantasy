@@ -1,7 +1,7 @@
 # Window Settings
 window-title (Open-Fantasy) Toontown Fantasy
-icon-filename phase_3/models/gui/toontown.ico
-cursor-filename phase_3/models/gui/toonmono.cur
+icon-filename user/resources/default/phase_3/models/gui/toontown.ico
+cursor-filename user/resources/default/phase_3/models/gui/toonmono.cur
 
 # Audio/Video
 audio-library-name p3openal_audio

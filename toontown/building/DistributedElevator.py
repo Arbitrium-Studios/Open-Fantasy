@@ -28,10 +28,10 @@ class DistributedElevator(DistributedObject.DistributedObject):
         self.localToonOnBoard = 0
         self.boardedAvIds = {}
         self.openSfx = base.loader.loadSfx(
-            'phase_5/audio/sfx/elevator_door_open.ogg')
+            'user/resources/default/phase_5/audio/sfx/elevator_door_open.ogg')
         self.finalOpenSfx = None
         self.closeSfx = base.loader.loadSfx(
-            'phase_5/audio/sfx/elevator_door_close.ogg')
+            'user/resources/default/phase_5/audio/sfx/elevator_door_close.ogg')
         self.elevatorFSM = None
         self.finalCloseSfx = None
         self.elevatorPoints = ElevatorPoints

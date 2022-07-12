@@ -37,7 +37,7 @@ class CatalogChatItemPicker(DirectObject.DirectObject):
         for msg in base.localAvatar.customMessages:
             msgStrings.append(OTPLocalizer.CustomSCStrings[msg])
 
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.picker = DirectScrolledList(parent=self.panel, relief=None, pos=(0, 0, 0), incButton_image=(gui.find('**/FndsLst_ScrollUp'),
                                                                                                          gui.find(
                                                                                                              '**/FndsLst_ScrollDN'),
@@ -56,7 +56,7 @@ class CatalogChatItemPicker(DirectObject.DirectObject):
         clipNP = self.picker.attachNewNode(clipper)
         self.picker.setClipPlane(clipNP)
         gui.removeNode()
-        buttonModels = loader.loadModel('phase_3.5/models/gui/inventory_gui')
+        buttonModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_gui')
         upButton = buttonModels.find('**/InventoryButtonUp')
         downButton = buttonModels.find('**/InventoryButtonDown')
         rolloverButton = buttonModels.find('**/InventoryButtonRollover')

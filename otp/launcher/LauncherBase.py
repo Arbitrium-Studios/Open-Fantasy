@@ -53,9 +53,9 @@ class LauncherBase(DirectObject):
                                                    ltime[4],
                                                    ltime[5])
         logPrefix = self.getLogFileName() + '-'
-        if not os.path.exists('logs/'):
-            os.makedirs('logs/')
-        logfile = os.path.join('logs', logPrefix + logSuffix + '.log')
+        if not os.path.exists('user/logs/'):
+            os.makedirs('user/logs/')
+        logfile = os.path.join('user/logs', logPrefix + logSuffix + '.log')
         self.errorfile = 'errorCode'
         log = open(logfile, 'a')
         logOut = LogAndOutput(sys.__stdout__, log)
@@ -83,7 +83,7 @@ class LauncherBase(DirectObject):
             sys.stdout.console = True
             sys.stderr.console = True
         self.notify = directNotify.newCategory('Launcher')
-        self.logPrefix = logPrefix
+        self.logPrefix = 'ttfan-'
         self.testServerFlag = self.getTestServerFlag()
         self.notify.info('isTestServer: %s' % self.testServerFlag)
         gameServer = self.getGameServer() or '127.0.0.1'

@@ -50,7 +50,7 @@ class CogdoElevatorMovie(CogdoGameMovie):
         self.notify.debug('load()')
         CogdoGameMovie.load(self)
         backgroundGui = loader.loadModel(
-            'phase_5/models/cogdominium/tt_m_gui_csa_flyThru')
+            'user/resources/default/phase_5/models/cogdominium/tt_m_gui_csa_flyThru')
         self.bg = backgroundGui.find('**/background')
         self.chatBubble = backgroundGui.find('**/chatBubble')
         self.chatBubble.setScale(6.5, 6.5, 7.3)
@@ -96,7 +96,7 @@ class CogdoElevatorMovie(CogdoGameMovie):
         self.clipPlane.node().setPlane(Plane(0, 0, 1, 0))
         self.clipPlane.setPos(0, 0, 2.45)
         self._toonDialogueSfx = loader.loadSfx(
-            'phase_3.5/audio/dial/AV_dog_long.ogg')
+            'user/resources/default/phase_3.5/audio/dial/AV_dog_long.ogg')
         self._camHelperNode = NodePath('CamHelperNode')
         self._camHelperNode.reparentTo(render)
         dialogue = TTLocalizer.CogdoElevatorRewardLaff

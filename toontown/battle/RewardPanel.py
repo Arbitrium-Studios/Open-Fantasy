@@ -194,7 +194,7 @@ class RewardPanel(DirectFrame):
                                                                                                                                                                                   i][2],
                                                                                                                                                                               1), text='0/0', text_scale=0.18, text_fg=(0, 0, 0, 1), text_align=TextNode.ACenter, text_pos=(0, -0.05), pos=(0.4, 0, -0.09 * i)))
 
-        self._battleGui = loader.loadModel('phase_3.5/models/gui/battle_gui')
+        self._battleGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/battle_gui')
         self.skipButton = DirectButton(parent=self, relief=None, image=(self._battleGui.find('**/tt_t_gui_gen_skipSectionUp'),
                                                                         self._battleGui.find(
                                                                             '**/tt_t_gui_gen_skipSectionDown'),
@@ -694,7 +694,7 @@ class RewardPanel(DirectFrame):
         self.missedItemFrame.hide()
         name = SuitDNA.suitDepts[dept]
         self.promotionFrame['text'] = TTLocalizer.RewardPanelPromotion % SuitDNA.suitDeptFullnames[name]
-        icons = loader.loadModel('phase_3/models/gui/cog_icons')
+        icons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
         if dept == 0:
             self.deptIcon = icons.find(
                 '**/CorpIcon').copyTo(self.promotionFrame)

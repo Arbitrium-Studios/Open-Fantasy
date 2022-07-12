@@ -247,11 +247,11 @@ class ToonBase(OTPBase.OTPBase):
         self.walking = pressed
 
     def takeScreenShot(self):
-        if not os.path.exists('screenshots/'):
-            os.mkdir('screenshots/')
+        if not os.path.exists('user/screenshots/'):
+            os.mkdir('user/screenshots/')
 
-        namePrefix = 'screenshot'
-        namePrefix = 'screenshots/' + launcher.logPrefix + namePrefix
+        namePrefix = 'user/screenshot'
+        namePrefix = 'user/screenshots/' + launcher.logPrefix + namePrefix
         timedif = globalClock.getRealTime() - self.lastScreenShotTime
         if self.glitchCount > 10 and self.walking:
             return
@@ -259,7 +259,7 @@ class ToonBase(OTPBase.OTPBase):
             self.glitchCount += 1
             return
         if not hasattr(self, 'localAvatar'):
-            self.screenshot(namePrefix=namePrefix)
+            self.screenshot(namePrefix= "user/screenshots/ttfan-screenshot")
             self.lastScreenShotTime = globalClock.getRealTime()
             return
         coordOnScreen = ConfigVariableBool('screenshot-coords', 0).value

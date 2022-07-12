@@ -27,7 +27,7 @@ class TTWhiteList(WhiteList, DirectObject):
         filename = Filename('twhitelist.dat')
         searchPath = DSearchPath()
         if __debug__:
-            searchPath.appendDirectory(Filename('resources/phase_3/etc'))
+            searchPath.appendDirectory(Filename('user/resources/default/phase_3/etc'))
         found = vfs.resolveFilename(filename, searchPath)
         if not found:
             self.notify.info("Couldn't find whitelist data file!")

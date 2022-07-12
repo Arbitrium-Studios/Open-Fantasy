@@ -53,7 +53,7 @@ class DistributedElevatorFloor(DistributedElevatorFSM.DistributedElevatorFSM):
 
     def setupElevator2(self):
         self.elevatorModel = loader.loadModel(
-            'phase_4/models/modules/elevator')
+            'user/resources/default/phase_4/models/modules/elevator')
         self.elevatorModel.reparentTo(hidden)
         self.elevatorModel.setScale(1.05)
         self.leftDoor = self.elevatorModel.find('**/left-door')
@@ -66,7 +66,7 @@ class DistributedElevatorFloor(DistributedElevatorFSM.DistributedElevatorFSM):
 
     def setupElevator(self):
         self.elevatorModel = loader.loadModel(
-            'phase_11/models/lawbotHQ/LB_ElevatorScaled')
+            'user/resources/default/phase_11/models/lawbotHQ/LB_ElevatorScaled')
         if not self.elevatorModel:
             self.notify.error(
                 'No Elevator Model in DistributedElevatorFloor.setupElevator. Please inform JML. Fool!')

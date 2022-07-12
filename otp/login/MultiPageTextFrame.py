@@ -31,7 +31,7 @@ class MultiPageTextFrame(DirectFrame):
         self.defineoptions(kw, optiondefs)
         DirectFrame.__init__(self, parent)
         self.initialiseoptions(MultiPageTextFrame)
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         buttonScale = 0.7 * (float(height) / self.defHeight)
         buttonZ = -hHeight * 0.83
         self.nextButton = DirectButton(

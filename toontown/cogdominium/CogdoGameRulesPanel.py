@@ -20,7 +20,7 @@ class CogdoGameRulesPanel(StateData.StateData):
 
     def load(self):
         minigameGui = loader.loadModel(
-            'phase_5/models/cogdominium/tt_m_gui_csa_flyThru')
+            'user/resources/default/phase_5/models/cogdominium/tt_m_gui_csa_flyThru')
         self.bg = minigameGui.find('**/background')
         self.chatBubble = minigameGui.find('**/chatBubble')
         self.chatBubble.setScale(6.5, 6.5, 7.3)

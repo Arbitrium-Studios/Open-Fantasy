@@ -17,19 +17,19 @@ class Sparks(NodePath):
         particleSearchPath = DSearchPath()
         if __debug__:
             particleSearchPath.appendDirectory(
-                Filename('resources/phase_3.5/etc'))
+                Filename('user/resources/default/phase_3.5/etc'))
             particleSearchPath.appendDirectory(
-                Filename('resources/phase_4/etc'))
+                Filename('user/resources/default/phase_4/etc'))
             particleSearchPath.appendDirectory(
-                Filename('resources/phase_5/etc'))
+                Filename('user/resources/default/phase_5/etc'))
             particleSearchPath.appendDirectory(
-                Filename('resources/phase_6/etc'))
+                Filename('user/resources/default/phase_6/etc'))
             particleSearchPath.appendDirectory(
-                Filename('resources/phase_7/etc'))
+                Filename('user/resources/default/phase_7/etc'))
             particleSearchPath.appendDirectory(
-                Filename('resources/phase_8/etc'))
+                Filename('user/resources/default/phase_8/etc'))
             particleSearchPath.appendDirectory(
-                Filename('resources/phase_9/etc'))
+                Filename('user/resources/default/phase_9/etc'))
         pfile = Filename('sparks.ptf')
         found = vfs.resolveFilename(pfile, particleSearchPath)
         if not found:

@@ -35,6 +35,6 @@ class DistributedKartShopInterior(DistributedObject):
 
     def __handleInteriorSetup(self):
         self.interior = loader.loadModel(
-            'phase_6/models/karting/KartShop_Interior')
+            'user/resources/default/phase_6/models/karting/KartShop_Interior')
         self.interior.reparentTo(render)
         self.interior.flattenMedium()

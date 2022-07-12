@@ -134,7 +134,7 @@ def doEffect(textId, speakingToon, nearbyToons):
         fadeColor = VBase4(1, 0.5, 1, 1)
     elif menuIndex == RESISTANCE_MONEY:
         effect = BattleParticles.loadParticleFile('resistanceEffectBean.ptf')
-        bean = loader.loadModel('phase_4/models/props/jellybean4.bam')
+        bean = loader.loadModel('user/resources/default/phase_4/models/props/jellybean4.bam')
         bean = bean.find('**/jellybean')
         colors = {'particles-1': (1, 1, 0, 1),
                   'particles-2': (1, 0, 0, 1),
@@ -150,7 +150,7 @@ def doEffect(textId, speakingToon, nearbyToons):
         fadeColor = VBase4(0, 1, 0, 1)
     elif menuIndex == RESISTANCE_RESTOCK:
         effect = BattleParticles.loadParticleFile('resistanceEffectSprite.ptf')
-        invModel = loader.loadModel('phase_3.5/models/gui/inventory_icons')
+        invModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_icons')
         invModel.setScale(4)
         invModel.flattenLight()
         icons = []

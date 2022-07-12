@@ -7,7 +7,7 @@ from direct.task.Task import Task
 class DummyLauncherBase:
 
     def __init__(self):
-        self.logPrefix = ''
+        self.logPrefix = 'ttfan-'
         self._downloadComplete = False
         self.phaseComplete = {}
         for phase in self.LauncherPhases:

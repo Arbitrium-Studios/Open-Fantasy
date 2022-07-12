@@ -96,11 +96,11 @@ class FriendSecretNeedsParentLogin(StateData.StateData):
         StateData.StateData.enter(self)
         base.localAvatar.chatMgr.fsm.request('otherDialog')
         if self.dialog is None:
-            guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+            guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
             buttons = loader.loadModel(
-                'phase_3/models/gui/dialog_box_buttons_gui')
+                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             nameBalloon = loader.loadModel(
-                'phase_3/models/props/chatbox_input')
+                'user/resources/default/phase_3/models/props/chatbox_input')
             optionsButtonImage = (
                 guiButton.find('**/QuitBtn_UP'),
                 guiButton.find('**/QuitBtn_DN'),
@@ -412,7 +412,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
                 0, 0, 0.4), scale=0.05, text=OTPLocalizer.FriendSecretIntro, text_fg=(
                 0, 0, 0, 1), text_wordwrap=30)
         self.introText.hide()
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         self.getSecret = DirectButton(
             parent=self,
             relief=None,
@@ -542,7 +542,7 @@ class FriendSecret(DirectFrame, StateData.StateData):
         self.unload()
 
     def makeFriendTypeButtons(self):
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.avatarButton = DirectButton(
             self,
             image=(

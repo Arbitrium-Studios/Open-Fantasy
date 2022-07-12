@@ -78,10 +78,10 @@ class DistributedPetshopInterior(DistributedObject.DistributedObject):
         self.randomGenerator = random.Random()
         self.randomGenerator.seed(self.zoneId)
         self.interior = loader.loadModel(
-            'phase_4/models/modules/PetShopInterior')
+            'user/resources/default/phase_4/models/modules/PetShopInterior')
         self.interior.reparentTo(render)
-        self.fish = Actor.Actor('phase_4/models/props/interiorfish-zero',
-                                {'swim': 'phase_4/models/props/interiorfish-swim'})
+        self.fish = Actor.Actor('user/resources/default/phase_4/models/props/interiorfish-zero',
+                                {'swim': 'user/resources/default/phase_4/models/props/interiorfish-swim'})
         self.fish.reparentTo(self.interior)
         self.fish.setBlend(frameBlend=base.smoothAnimations)
         self.fish.setColorScale(0.8, 0.9, 1, 0.8)

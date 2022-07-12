@@ -317,15 +317,15 @@ class PropPool:
                 'kapow-chan'))
         self.propTypes[propName] = 'actor'
         propName = 'ship'
-        self.propStrings[propName] = ('phase_5/models/props/ship.bam',)
+        self.propStrings[propName] = ('user/resources/default/phase_5/models/props/ship.bam',)
         self.propTypes[propName] = 'model'
         propName = 'trolley'
         self.propStrings[propName] = (
-            'phase_4/models/modules/trolley_station_TT',)
+            'user/resources/default/phase_4/models/modules/trolley_station_TT',)
         self.propTypes[propName] = 'model'
 
     def getPath(self, phase, model):
-        return 'phase_%s/models/props/%s' % (phase, model)
+        return 'user/resources/default/phase_%s/models/props/%s' % (phase, model)
 
     def makeVariant(self, name):
         if name == 'tart':
@@ -355,12 +355,12 @@ class PropPool:
             lips.setPos(0, 0, -3.04)
             lips.flattenMedium()
         elif name == '5dollar':
-            tex = loader.loadTexture('phase_5/maps/dollar_5.jpg')
+            tex = loader.loadTexture('user/resources/default/phase_5/maps/dollar_5.jpg')
             tex.setMinfilter(Texture.FTLinearMipmapLinear)
             tex.setMagfilter(Texture.FTLinear)
             self.props[name].setTexture(tex, 1)
         elif name == '10dollar':
-            tex = loader.loadTexture('phase_5/maps/dollar_10.jpg')
+            tex = loader.loadTexture('user/resources/default/phase_5/maps/dollar_10.jpg')
             tex.setMinfilter(Texture.FTLinearMipmapLinear)
             tex.setMagfilter(Texture.FTLinear)
             self.props[name].setTexture(tex, 1)

@@ -32,7 +32,7 @@ class ToontownChatManager(ChatManager.ChatManager):
     notify = DirectNotifyGlobal.directNotify.newCategory('ToontownChatManager')
 
     def __init__(self, cr, localAvatar):
-        gui = loader.loadModel('phase_3.5/models/gui/chat_input_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/chat_input_gui')
         self.normalButton = DirectButton(
             image=(
                 gui.find('**/ChtBx_ChtBtn_UP'),
@@ -73,7 +73,7 @@ class ToontownChatManager(ChatManager.ChatManager):
             command=self.__normalButtonPressed)
         self.normalButton.hide()
         self.openScSfx = loader.loadSfx(
-            'phase_3.5/audio/sfx/GUI_quicktalker.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/GUI_quicktalker.ogg')
         self.openScSfx.setVolume(0.6)
         self.scButton = DirectButton(
             image=(
@@ -174,7 +174,7 @@ class ToontownChatManager(ChatManager.ChatManager):
 
     def delete(self):
         ChatManager.ChatManager.delete(self)
-        loader.unloadModel('phase_3.5/models/gui/chat_input_gui')
+        loader.unloadModel('user/resources/default/phase_3.5/models/gui/chat_input_gui')
         self.normalButton.destroy()
         del self.normalButton
         self.scButton.destroy()
@@ -225,7 +225,7 @@ class ToontownChatManager(ChatManager.ChatManager):
     def enterOpenChatWarning(self):
         if self.openChatWarning is None:
             buttons = loader.loadModel(
-                'phase_3/models/gui/dialog_box_buttons_gui')
+                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             buttonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),
@@ -305,7 +305,7 @@ class ToontownChatManager(ChatManager.ChatManager):
                 directFrameText = OTPLocalizer.UnpaidNoParentPasswordWarning
                 self.forceHidePayButton = True
         if self.unpaidChatWarning is None:
-            guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+            guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
             buttonImage = (
                 guiButton.find('**/QuitBtn_UP'),
                 guiButton.find('**/QuitBtn_DN'),
@@ -382,7 +382,7 @@ class ToontownChatManager(ChatManager.ChatManager):
     def enterNoSecretChatAtAll(self):
         if self.noSecretChatAtAll is None:
             buttons = loader.loadModel(
-                'phase_3/models/gui/dialog_box_buttons_gui')
+                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             okButtonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),
@@ -446,9 +446,9 @@ class ToontownChatManager(ChatManager.ChatManager):
             warningText = OTPLocalizer.ChangeSecretFriendsOptionsWarning
         if self.noSecretChatWarning is None:
             buttons = loader.loadModel(
-                'phase_3/models/gui/dialog_box_buttons_gui')
+                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             nameBalloon = loader.loadModel(
-                'phase_3/models/props/chatbox_input')
+                'user/resources/default/phase_3/models/props/chatbox_input')
             okButtonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),
@@ -568,9 +568,9 @@ class ToontownChatManager(ChatManager.ChatManager):
 
     def enterActivateChat(self):
         if self.activateChatGui is None:
-            guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+            guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
             buttons = loader.loadModel(
-                'phase_3/models/gui/dialog_box_buttons_gui')
+                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             okButtonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),
@@ -583,7 +583,7 @@ class ToontownChatManager(ChatManager.ChatManager):
                 guiButton.find('**/QuitBtn_UP'),
                 guiButton.find('**/QuitBtn_DN'),
                 guiButton.find('**/QuitBtn_RLVR'))
-            nameShopGui = loader.loadModel('phase_3/models/gui/nameshop_gui')
+            nameShopGui = loader.loadModel('user/resources/default/phase_3/models/gui/nameshop_gui')
             circle = nameShopGui.find('**/namePanelCircle')
             self.activateChatGui = DirectFrame(
                 parent=aspect2dp,
@@ -762,13 +762,13 @@ class ToontownChatManager(ChatManager.ChatManager):
         else:
             modeText = OTPLocalizer.SecretChatActivated
         if self.secretChatActivated is None:
-            guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+            guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
             optionsButtonImage = (
                 guiButton.find('**/QuitBtn_UP'),
                 guiButton.find('**/QuitBtn_DN'),
                 guiButton.find('**/QuitBtn_RLVR'))
             buttons = loader.loadModel(
-                'phase_3/models/gui/dialog_box_buttons_gui')
+                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             buttonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),
@@ -821,7 +821,7 @@ class ToontownChatManager(ChatManager.ChatManager):
     def enterProblemActivatingChat(self):
         if self.problemActivatingChat is None:
             buttons = loader.loadModel(
-                'phase_3/models/gui/dialog_box_buttons_gui')
+                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             buttonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),
@@ -967,7 +967,7 @@ class ToontownChatManager(ChatManager.ChatManager):
     def enterNoSecretChatAtAllAndNoWhitelist(self):
         if self.noSecretChatAtAllAndNoWhitelist is None:
             buttons = loader.loadModel(
-                'phase_3/models/gui/dialog_box_buttons_gui')
+                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             okButtonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),

@@ -292,7 +292,7 @@ def __throwPie(throw, delay, hitCount, showCannon=1):
     if showCannon:
         showDamage = Func(suit.showHpText, -hp, openEnded=0)
         updateHealthBar = Func(suit.updateHealthBar, hp)
-        cannon = loader.loadModel('phase_4/models/minigames/toon_cannon')
+        cannon = loader.loadModel('user/resources/default/phase_4/models/minigames/toon_cannon')
         barrel = cannon.find('**/cannon')
         barrel.setHpr(0, 90, 0)
         cannonHolder = render.attachNewNode('CannonHolder')
@@ -324,23 +324,23 @@ def __throwPie(throw, delay, hitCount, showCannon=1):
         kapow.hide()
         kapow.setScale(0.25)
         kapow.setBillboardPointEye()
-        smoke = loader.loadModel('phase_4/models/props/test_clouds')
+        smoke = loader.loadModel('user/resources/default/phase_4/models/props/test_clouds')
         smoke.reparentTo(cannonAttachPoint)
         smoke.setScale(0.5)
         smoke.hide()
         smoke.setBillboardPointEye()
         soundBomb = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
         playSoundBomb = SoundInterval(soundBomb, node=cannonHolder)
         soundFly = base.loader.loadSfx(
-            'phase_4/audio/sfx/firework_whistle_01.ogg')
+            'user/resources/default/phase_4/audio/sfx/firework_whistle_01.ogg')
         playSoundFly = SoundInterval(soundFly, node=cannonHolder)
         soundCannonAdjust = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_adjust.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
         playSoundCannonAdjust = SoundInterval(
             soundCannonAdjust, duration=0.6, node=cannonHolder)
         soundCogPanic = base.loader.loadSfx(
-            'phase_5/audio/sfx/ENC_cogafssm.ogg')
+            'user/resources/default/phase_5/audio/sfx/ENC_cogafssm.ogg')
         playSoundCogPanic = SoundInterval(soundCogPanic, node=cannonHolder)
         reactIval = Parallel(ActorInterval(suit, 'pie-small-react'), Sequence(Wait(0.0), LerpPosInterval(cannonHolder, 2.0, posFinal, startPos=posInit, blendType='easeInOut'), Parallel(LerpHprInterval(barrel, 0.6, Point3(0, 45, 0), startHpr=Point3(0, 90, 0), blendType='easeIn'), playSoundCannonAdjust), Wait(2.0), Parallel(LerpHprInterval(barrel, 0.6, Point3(0, 90, 0), startHpr=Point3(0, 45, 0), blendType='easeIn'), playSoundCannonAdjust), LerpPosInterval(cannonHolder, 1.0, posInit, startPos=posFinal, blendType='easeInOut')), Sequence(Wait(0.0), Parallel(ActorInterval(suit, 'flail'), suit.scaleInterval(1.0, suitScale), LerpPosInterval(suit, 0.25, Point3(0, -1.0, 0.0)), Sequence(Wait(0.25), Parallel(playSoundCogPanic, LerpPosInterval(suit, 1.5, Point3(0, -deep, 0.0), blendType='easeIn')))), Wait(2.5), Parallel(playSoundBomb, playSoundFly, Sequence(Func(smoke.show), Parallel(LerpScaleInterval(smoke, 0.5, 3), LerpColorScaleInterval(smoke, 0.5, Vec4(2, 2, 2, 0))), Func(smoke.hide)), Sequence(Func(kapow.show),
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ActorInterval(kapow, 'kapow'), Func(kapow.hide)), LerpPosInterval(suit, 3.0, Point3(0, 150.0, 0.0)), suit.scaleInterval(3.0, 0.01)), Func(suit.hide)))

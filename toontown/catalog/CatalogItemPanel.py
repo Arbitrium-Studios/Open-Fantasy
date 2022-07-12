@@ -66,7 +66,7 @@ class CatalogItemPanel(DirectFrame):
                 self.items = getAllWainscotings(self['item'].patternIndex)
             self.numItems = len(self.items)
             if self.numItems > 1:
-                guiItems = loader.loadModel('phase_5.5/models/gui/catalog_gui')
+                guiItems = loader.loadModel('user/resources/default/phase_5.5/models/gui/catalog_gui')
                 nextUp = guiItems.find('**/arrow_up')
                 nextRollover = guiItems.find('**/arrow_Rollover')
                 nextDown = guiItems.find('**/arrow_Down')
@@ -160,7 +160,7 @@ class CatalogItemPanel(DirectFrame):
                 0.95, 0.95, 0, 1), text_shadow=(
                 0, 0, 0, 1), text_font=ToontownGlobals.getSignFont(), text_align=TextNode.ACenter)
         self.createEmblemPrices(numericBeanPrice)
-        buttonModels = loader.loadModel('phase_3.5/models/gui/inventory_gui')
+        buttonModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_gui')
         upButton = buttonModels.find('**/InventoryButtonUp')
         downButton = buttonModels.find('**/InventoryButtonDown')
         rolloverButton = buttonModels.find('**/InventoryButtonRollover')
@@ -172,7 +172,7 @@ class CatalogItemPanel(DirectFrame):
                                                                                                                                                                                  downButton,
                                                                                                                                                                                  rolloverButton,
                                                                                                                                                                                  upButton), image_color=(1.0, 0.2, 0.2, 1), image0_color=Vec4(1.0, 0.4, 0.4, 1), image3_color=Vec4(1.0, 0.4, 0.4, 0.4), command=self.__handlePurchaseRequest)
-        soundIcons = loader.loadModel('phase_5.5/models/gui/catalogSoundIcons')
+        soundIcons = loader.loadModel('user/resources/default/phase_5.5/models/gui/catalogSoundIcons')
         soundOn = soundIcons.find('**/sound07')
         soundOff = soundIcons.find('**/sound08')
         self.soundOnButton = DirectButton(parent=self, relief=None, pos=(0.2, 0, -0.15), scale=(0.7, 1, 0.8), text_scale=buyTextScale, text_pos=(-0.005, -0.01), image=(upButton,
@@ -207,7 +207,7 @@ class CatalogItemPanel(DirectFrame):
             if numericBeanPrice:
                 self.priceLabel.hide()
                 beanModel = loader.loadModel(
-                    'phase_5.5/models/estate/jellyBean')
+                    'user/resources/default/phase_5.5/models/estate/jellyBean')
                 beanModel.setColorScale(1, 0, 0, 1)
                 self.beanPriceLabel = DirectLabel(
                     parent=self,
@@ -240,7 +240,7 @@ class CatalogItemPanel(DirectFrame):
             goldPrice = 0
             silverPrice = 0
             emblemIcon = loader.loadModel(
-                'phase_3.5/models/gui/tt_m_gui_gen_emblemIcons')
+                'user/resources/default/phase_3.5/models/gui/tt_m_gui_gen_emblemIcons')
             silverModel = emblemIcon.find('**/tt_t_gui_gen_emblemSilver')
             goldModel = emblemIcon.find('**/tt_t_gui_gen_emblemGold')
             if ToontownGlobals.EmblemTypes.Silver < len(emblemPrices):

@@ -8,26 +8,26 @@ for key in OL.SpeedChatStaticTextCommon.keys():
     OL.SpeedChatStaticText[key] = OL.SpeedChatStaticTextCommon[key]
 
 commitmantst = 'kptmptest - removable'
-InterfaceFont = 'phase_3/models/fonts/ImpressBT.ttf'
-ToonFont = 'phase_3/models/fonts/ImpressBT.ttf'
-SuitFont = 'phase_3/models/fonts/vtRemingtonPortable.ttf'
-SignFont = 'phase_3/models/fonts/MickeyFont'
-MinnieFont = 'phase_3/models/fonts/MinnieFont'
-FancyFont = 'phase_3/models/fonts/Comedy'
-NametagFonts = ('phase_3/models/fonts/AnimGothic',
-                'phase_3/models/fonts/Aftershock',
-                'phase_3/models/fonts/JiggeryPokery',
-                'phase_3/models/fonts/Ironwork',
-                'phase_3/models/fonts/HastyPudding',
-                'phase_3/models/fonts/Comedy',
-                'phase_3/models/fonts/Humanist',
-                'phase_3/models/fonts/Portago',
-                'phase_3/models/fonts/Musicals',
-                'phase_3/models/fonts/Scurlock',
-                'phase_3/models/fonts/Danger',
-                'phase_3/models/fonts/Alie',
-                'phase_3/models/fonts/OysterBar',
-                'phase_3/models/fonts/RedDogSaloon')
+InterfaceFont = 'user/resources/default/phase_3/models/fonts/ImpressBT.ttf'
+ToonFont = 'user/resources/default/phase_3/models/fonts/ImpressBT.ttf'
+SuitFont = 'user/resources/default/phase_3/models/fonts/vtRemingtonPortable.ttf'
+SignFont = 'user/resources/default/phase_3/models/fonts/MickeyFont'
+MinnieFont = 'user/resources/default/phase_3/models/fonts/MinnieFont'
+FancyFont = 'user/resources/default/phase_3/models/fonts/Comedy'
+NametagFonts = ('user/resources/default/phase_3/models/fonts/AnimGothic',
+                'user/resources/default/phase_3/models/fonts/Aftershock',
+                'user/resources/default/phase_3/models/fonts/JiggeryPokery',
+                'user/resources/default/phase_3/models/fonts/Ironwork',
+                'user/resources/default/phase_3/models/fonts/HastyPudding',
+                'user/resources/default/phase_3/models/fonts/Comedy',
+                'user/resources/default/phase_3/models/fonts/Humanist',
+                'user/resources/default/phase_3/models/fonts/Portago',
+                'user/resources/default/phase_3/models/fonts/Musicals',
+                'user/resources/default/phase_3/models/fonts/Scurlock',
+                'user/resources/default/phase_3/models/fonts/Danger',
+                'user/resources/default/phase_3/models/fonts/Alie',
+                'user/resources/default/phase_3/models/fonts/OysterBar',
+                'user/resources/default/phase_3/models/fonts/RedDogSaloon')
 NametagFontNames = ('Member',
                     'Shivering',
                     'Wonky',
@@ -48,7 +48,7 @@ GM_NAMES = ('TOON COUNCIL',
             'TOON TROOPER',
             'RESISTANCE RANGER',
             'GC')
-BuildingNametagFont = 'phase_3/models/fonts/MickeyFont'
+BuildingNametagFont = 'user/resources/default/phase_3/models/fonts/MickeyFont'
 BuildingNametagShadow = None
 ProductPrefix = 'TT'
 Mickey = 'Mickey'
