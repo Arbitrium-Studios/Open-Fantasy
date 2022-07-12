@@ -6,7 +6,7 @@ from toontown.racing import DistributedVehicle
 from . import SkyUtil
 
 
-class GSHood(ToonHood.ToonHood):
+class TTSHood(ToonHood.ToonHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
@@ -23,10 +23,10 @@ class GSHood(ToonHood.ToonHood):
 
     def load(self):
         ToonHood.ToonHood.load(self)
-        self.parentFSM.getStateNamed('GSHood').addChild(self.fsm)
+        self.parentFSM.getStateNamed('TTSHood').addChild(self.fsm)
 
     def unload(self):
-        self.parentFSM.getStateNamed('GSHood').removeChild(self.fsm)
+        self.parentFSM.getStateNamed('TTSHood').removeChild(self.fsm)
         ToonHood.ToonHood.unload(self)
 
     def enter(self, *args):

@@ -24,7 +24,7 @@ class CashbotCogHQLoader(CogHQLoader.CogHQLoader):
             state = self.fsm.getStateNamed(stateName)
             state.addTransition('mintInterior')
 
-        self.musicFile = 'phase_9/audio/bgm/encntr_suit_HQ_nbrhood.ogg'
+        self.musicFile = 'phase_9/audio/bgm/encntr_suit_HQ_nTWHood.ogg'
         self.cogHQExteriorModelPath = 'phase_10/models/cogHQ/CashBotShippingStation'
         self.cogHQLobbyModelPath = 'phase_10/models/cogHQ/VaultLobby'
         self.geom = None
@@ -51,7 +51,7 @@ class CashbotCogHQLoader(CogHQLoader.CogHQLoader):
             locator = self.geom.find('**/sign_origin')
             backgroundGeom = self.geom.find('**/EntranceFrameFront')
             backgroundGeom.node().setEffect(DecalEffect.make())
-            signText = DirectGui.OnscreenText(text=TTLocalizer.DrowsyDreamland[-1], font=ToontownGlobals.getSuitFont(
+            signText = DirectGui.OnscreenText(text=TTLocalizer.TwlightDreamland[-1], font=ToontownGlobals.getSuitFont(
             ), scale=3, fg=(0.87, 0.87, 0.87, 1), mayChange=False, parent=backgroundGeom)
             signText.setPosHpr(locator, 0, 0, 0, 0, 0, 0)
             signText.setDepthWrite(0)

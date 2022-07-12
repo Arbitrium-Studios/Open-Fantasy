@@ -6,7 +6,7 @@ from direct.fsm import State
 from . import CharStateDatas
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
-from toontown.hood import DLHood
+from toontown.hood import TDLHood
 
 
 class DistributedToontownStadium(DistributedCCharBase.DistributedCCharBase):
@@ -100,7 +100,7 @@ class DistributedToontownStadium(DistributedCCharBase.DistributedCCharBase):
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
             if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds and isinstance(
-                    self.cr.playGame.hood, DLHood.DLHood):
+                    self.cr.playGame.hood, TDLHood.TDLHood):
                 self.diffPath = TTLocalizer.Donald
 
     def getCCLocation(self):

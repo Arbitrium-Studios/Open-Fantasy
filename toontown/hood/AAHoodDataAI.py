@@ -18,8 +18,8 @@ if __debug__:
     import pdb
 
 
-class OZHoodDataAI(HoodDataAI.HoodDataAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('OZHoodDataAI')
+class AAHoodDataAI(HoodDataAI.HoodDataAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory('AAHoodDataAI')
 
     def __init__(self, air, zoneId=None):
         hoodId = ToontownGlobals.OutdoorZone

@@ -42,13 +42,13 @@ NumTreasures = {ToontownGlobals.ToontownCentral: 2,
                 ToontownGlobals.FloweringGrove: 2,
                 ToontownGlobals.TheLandOfMusic: 2,
                 ToontownGlobals.TundraWonderland: 1,
-                ToontownGlobals.DrowsyDreamland: 1}
+                ToontownGlobals.TwlightDreamland: 1}
 NumPenalties = {ToontownGlobals.ToontownCentral: 0,
                 ToontownGlobals.ToontownDocks: 1,
                 ToontownGlobals.FloweringGrove: 1,
                 ToontownGlobals.TheLandOfMusic: 1,
                 ToontownGlobals.TundraWonderland: 2,
-                ToontownGlobals.DrowsyDreamland: 2}
+                ToontownGlobals.TwlightDreamland: 2}
 Obstacles = {ToontownGlobals.ToontownCentral: (),
              ToontownGlobals.ToontownDocks: ((0, 0),),
              ToontownGlobals.FloweringGrove: ((MinWall[0] / 2, 0), (MaxWall[0] / 2, 0)),
@@ -57,7 +57,7 @@ Obstacles = {ToontownGlobals.ToontownCentral: (),
                                          (MaxWall[0] / 2, 0),
                                          (0, MinWall[1] / 2),
                                          (0, MaxWall[1] / 2)),
-             ToontownGlobals.DrowsyDreamland: ((MinWall[0] / 2, MinWall[1] / 2),
+             ToontownGlobals.TwlightDreamland: ((MinWall[0] / 2, MinWall[1] / 2),
                                                 (MinWall[0] / 2,
                                                  MaxWall[1] / 2),
                                                 (MaxWall[0] / 2,
@@ -68,4 +68,4 @@ ObstacleShapes = {ToontownGlobals.ToontownCentral: True,
                   ToontownGlobals.FloweringGrove: True,
                   ToontownGlobals.TheLandOfMusic: True,
                   ToontownGlobals.TundraWonderland: False,
-                  ToontownGlobals.DrowsyDreamland: False}
+                  ToontownGlobals.TwlightDreamland: False}

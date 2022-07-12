@@ -5,7 +5,7 @@ from . import HolidayDecorator
 from toontown.toonbase import ToontownGlobals
 from pandac.PandaModules import Vec4, CSDefault, TransformState, NodePath, TransparencyAttrib
 from panda3d.toontown import loadDNAFile
-from toontown.hood import GSHood
+from toontown.hood import TTSHood
 
 
 class CrashedLeaderBoardDecorator(HolidayDecorator.HolidayDecorator):
@@ -27,11 +27,11 @@ class CrashedLeaderBoardDecorator(HolidayDecorator.HolidayDecorator):
             self.startSmokeEffect()
 
     def startSmokeEffect(self):
-        if isinstance(base.cr.playGame.getPlace().loader.hood, GSHood.GSHood):
+        if isinstance(base.cr.playGame.getPlace().loader.hood, TTSHood.TTSHood):
             base.cr.playGame.getPlace().loader.startSmokeEffect()
 
     def stopSmokeEffect(self):
-        if isinstance(base.cr.playGame.getPlace().loader.hood, GSHood.GSHood):
+        if isinstance(base.cr.playGame.getPlace().loader.hood, TTSHood.TTSHood):
             base.cr.playGame.getPlace().loader.stopSmokeEffect()
 
     def undecorate(self):

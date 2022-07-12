@@ -7,7 +7,7 @@ from direct.fsm import State
 from . import CharStateDatas
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
-from toontown.hood import TTHood
+from toontown.hood import TTCHood
 
 
 class DistributedSockHopDaisy(DistributedDaisy.DistributedDaisy):

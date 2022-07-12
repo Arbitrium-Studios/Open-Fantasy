@@ -235,7 +235,7 @@ CourseWeights = {ToontownGlobals.ToontownCentral: ((0, 25),
                                              (5, 25),
                                              (6, 25),
                                              (7, 25)),
-                 ToontownGlobals.DrowsyDreamland: ((4, 20),
+                 ToontownGlobals.TwlightDreamland: ((4, 20),
                                                     (5, 20),
                                                     (6, 20),
                                                     (7, 20),
@@ -245,19 +245,19 @@ BaseBonusOnEndVine = {ToontownGlobals.ToontownCentral: 4,
                       ToontownGlobals.FloweringGrove: 6,
                       ToontownGlobals.TheLandOfMusic: 7,
                       ToontownGlobals.TundraWonderland: 8,
-                      ToontownGlobals.DrowsyDreamland: 9}
+                      ToontownGlobals.TwlightDreamland: 9}
 BatInfo = {ToontownGlobals.ToontownCentral: ((60, 0, 0.35),),
            ToontownGlobals.ToontownDocks: ((60, 0, 0.25), (30, 30)),
            ToontownGlobals.FloweringGrove: ((60, 0, 0.25), (15, 30)),
            ToontownGlobals.TheLandOfMusic: ((60, 0, 0.25), (10, 25)),
            ToontownGlobals.TundraWonderland: ((60, 0, 0.25), (30, 30), (30, 20)),
-           ToontownGlobals.DrowsyDreamland: ((60, 0, 0.25), (30, 30), (10, 20))}
+           ToontownGlobals.TwlightDreamland: ((60, 0, 0.25), (30, 30), (10, 20))}
 SpiderLimits = {ToontownGlobals.ToontownCentral: 1,
                 ToontownGlobals.ToontownDocks: 2,
                 ToontownGlobals.FloweringGrove: 2,
                 ToontownGlobals.TheLandOfMusic: 3,
                 ToontownGlobals.TundraWonderland: 3,
-                ToontownGlobals.DrowsyDreamland: 4}
+                ToontownGlobals.TwlightDreamland: 4}
 
 
 def getNumSpidersInSection(sectionIndex):

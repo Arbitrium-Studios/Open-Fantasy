@@ -2,16 +2,16 @@ from direct.directnotify import DirectNotifyGlobal
 from . import HoodDataAI
 from toontown.toonbase import ToontownGlobals
 from toontown.safezone import DistributedTrolleyAI
-from toontown.safezone import BRTreasurePlannerAI
-from toontown.classicchars import DistributedPlutoAI
-from toontown.toon import DistributedNPCFishermanAI
+from toontown.safezone import DDTreasurePlannerAI
+from toontown.safezone import DistributedBoatAI
+from toontown.classicchars import DistributedToontownDockAI
 
 
-class BRHoodDataAI(HoodDataAI.HoodDataAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('BRHoodDataAI')
+class TTDHoodDataAI(HoodDataAI.HoodDataAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory('TTDHoodDataAI')
 
     def __init__(self, air, zoneId=None):
-        hoodId = ToontownGlobals.TundraWonderland
+        hoodId = ToontownGlobals.ToontownDocks
         if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
@@ -23,10 +23,15 @@ class BRHoodDataAI(HoodDataAI.HoodDataAI):
         trolley.generateWithRequired(self.zoneId)
         trolley.start()
         self.addDistObj(trolley)
-        self.treasurePlanner = BRTreasurePlannerAI.BRTreasurePlannerAI(
+        self.treasurePlanner = DDTreasurePlannerAI.DDTreasurePlannerAI(
             self.zoneId)
         self.treasurePlanner.start()
-        self.classicChar = DistributedPlutoAI.DistributedPlutoAI(self.air)
+        boat = DistributedBoatAI.DistributedBoatAI(self.air)
+        boat.generateWithRequired(self.zoneId)
+        boat.start()
+        self.addDistObj(boat)
+        self.classicChar = DistributedToontownDockAI.DistributedToontownDockAI(
+            self.air)
         self.classicChar.generateWithRequired(self.zoneId)
         self.classicChar.start()
         self.addDistObj(self.classicChar)

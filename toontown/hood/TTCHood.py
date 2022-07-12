@@ -8,8 +8,8 @@ from . import SkyUtil
 from direct.directnotify import DirectNotifyGlobal
 
 
-class TTHood(ToonHood.ToonHood):
-    notify = DirectNotifyGlobal.directNotify.newCategory('TTHood')
+class TTCHood(ToonHood.ToonHood):
+    notify = DirectNotifyGlobal.directNotify.newCategory('TTCHood')
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
@@ -28,10 +28,10 @@ class TTHood(ToonHood.ToonHood):
 
     def load(self):
         ToonHood.ToonHood.load(self)
-        self.parentFSM.getStateNamed('TTHood').addChild(self.fsm)
+        self.parentFSM.getStateNamed('TTCHood').addChild(self.fsm)
 
     def unload(self):
-        self.parentFSM.getStateNamed('TTHood').removeChild(self.fsm)
+        self.parentFSM.getStateNamed('TTCHood').removeChild(self.fsm)
         ToonHood.ToonHood.unload(self)
 
     def enter(self, *args):

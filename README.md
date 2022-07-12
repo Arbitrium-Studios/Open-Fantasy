@@ -40,6 +40,8 @@
 
 ## - If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
 
+### - If you need to get in conact with me, either contact me on Discord or at gracielovelight@playerzerostudios.com
+
 [discordImg]: https://img.shields.io/badge/Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&colorB=7289DA&style=for-the-badge
 
 [discordLink]: https://discord.com/invite/9fgW8jAaf6/

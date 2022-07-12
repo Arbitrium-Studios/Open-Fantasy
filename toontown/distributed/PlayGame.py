@@ -8,15 +8,15 @@ from direct.fsm import State
 from direct.task.Task import Task
 from .ToontownMsgTypes import *
 from toontown.toonbase import ToontownGlobals
-from toontown.hood import TTHood
-from toontown.hood import DDHood
-from toontown.hood import MMHood
-from toontown.hood import BRHood
-from toontown.hood import DGHood
-from toontown.hood import DLHood
-from toontown.hood import GSHood
-from toontown.hood import OZHood
-from toontown.hood import GZHood
+from toontown.hood import TTCHood
+from toontown.hood import TTDHood
+from toontown.hood import TLOMHood
+from toontown.hood import TWHood
+from toontown.hood import FGHood
+from toontown.hood import TDLHood
+from toontown.hood import TTSHood
+from toontown.hood import AAHood
+from toontown.hood import AAGHood
 from toontown.hood import SellbotHQ, CashbotHQ, LawbotHQ, BossbotHQ
 from toontown.hood import TutorialHood
 from direct.task import TaskManagerGlobal
@@ -30,52 +30,52 @@ from toontown.parties.PartyGlobals import GoToPartyStatus
 
 class PlayGame(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('PlayGame')
-    Hood2ClassDict = {ToontownGlobals.ToontownCentral: TTHood.TTHood,
-                      ToontownGlobals.ToontownDocks: DDHood.DDHood,
-                      ToontownGlobals.TundraWonderland: BRHood.BRHood,
-                      ToontownGlobals.TheLandOfMusic: MMHood.MMHood,
-                      ToontownGlobals.FloweringGrove: DGHood.DGHood,
-                      ToontownGlobals.DrowsyDreamland: DLHood.DLHood,
-                      ToontownGlobals.ToontownStadium: GSHood.GSHood,
-                      ToontownGlobals.OutdoorZone: OZHood.OZHood,
+    Hood2ClassDict = {ToontownGlobals.ToontownCentral: TTCHood.TTCHood,
+                      ToontownGlobals.ToontownDocks: TTDHood.TTDHood,
+                      ToontownGlobals.TundraWonderland: TWHood.TWHood,
+                      ToontownGlobals.TheLandOfMusic: TLOMHood.TLOMHood,
+                      ToontownGlobals.FloweringGrove: FGHood.FGHood,
+                      ToontownGlobals.TwlightDreamland: TDLHood.TDLHood,
+                      ToontownGlobals.ToontownStadium: TTSHood.TTSHood,
+                      ToontownGlobals.OutdoorZone: AAHood.AAHood,
                       ToontownGlobals.Tutorial: TutorialHood.TutorialHood,
                       ToontownGlobals.MyEstate: EstateHood.EstateHood,
                       ToontownGlobals.BossbotHQ: BossbotHQ.BossbotHQ,
                       ToontownGlobals.SellbotHQ: SellbotHQ.SellbotHQ,
                       ToontownGlobals.CashbotHQ: CashbotHQ.CashbotHQ,
                       ToontownGlobals.LawbotHQ: LawbotHQ.LawbotHQ,
-                      ToontownGlobals.GolfZone: GZHood.GZHood,
+                      ToontownGlobals.GolfZone: AAGHood.AAGHood,
                       ToontownGlobals.PartyHood: PartyHood.PartyHood}
-    Hood2StateDict = {ToontownGlobals.ToontownCentral: 'TTHood',
-                      ToontownGlobals.ToontownDocks: 'DDHood',
-                      ToontownGlobals.TundraWonderland: 'BRHood',
-                      ToontownGlobals.TheLandOfMusic: 'MMHood',
-                      ToontownGlobals.FloweringGrove: 'DGHood',
-                      ToontownGlobals.DrowsyDreamland: 'DLHood',
-                      ToontownGlobals.ToontownStadium: 'GSHood',
-                      ToontownGlobals.OutdoorZone: 'OZHood',
+    Hood2StateDict = {ToontownGlobals.ToontownCentral: 'TTCHood',
+                      ToontownGlobals.ToontownDocks: 'TTDHood',
+                      ToontownGlobals.TundraWonderland: 'TWHood',
+                      ToontownGlobals.TheLandOfMusic: 'TLOMHood',
+                      ToontownGlobals.FloweringGrove: 'FGHood',
+                      ToontownGlobals.TwlightDreamland: 'TDLHood',
+                      ToontownGlobals.ToontownStadium: 'TTSHood',
+                      ToontownGlobals.OutdoorZone: 'AAHood',
                       ToontownGlobals.Tutorial: 'TutorialHood',
                       ToontownGlobals.MyEstate: 'EstateHood',
                       ToontownGlobals.BossbotHQ: 'BossbotHQ',
                       ToontownGlobals.SellbotHQ: 'SellbotHQ',
                       ToontownGlobals.CashbotHQ: 'CashbotHQ',
                       ToontownGlobals.LawbotHQ: 'LawbotHQ',
-                      ToontownGlobals.GolfZone: 'GZHood',
+                      ToontownGlobals.GolfZone: 'AAGHood',
                       ToontownGlobals.PartyHood: 'PartyHood'}
 
     def __init__(self, parentFSM, doneEvent):
         StateData.StateData.__init__(self, doneEvent)
         self.place = None
         self.fsm = ClassicFSM.ClassicFSM('PlayGame', [State.State('start', self.enterStart, self.exitStart, ['quietZone']),
-                                                      State.State('quietZone', self.enterQuietZone, self.exitQuietZone, ['TTHood',
-                                                                                                                         'DDHood',
-                                                                                                                         'BRHood',
-                                                                                                                         'MMHood',
-                                                                                                                         'DGHood',
-                                                                                                                         'DLHood',
-                                                                                                                         'GSHood',
-                                                                                                                         'OZHood',
-                                                                                                                         'GZHood',
+                                                      State.State('quietZone', self.enterQuietZone, self.exitQuietZone, ['TTCHood',
+                                                                                                                         'TTDHood',
+                                                                                                                         'TWHood',
+                                                                                                                         'TLOMHood',
+                                                                                                                         'FGHood',
+                                                                                                                         'TDLHood',
+                                                                                                                         'TTSHood',
+                                                                                                                         'AAHood',
+                                                                                                                         'AAGHood',
                                                                                                                          'SellbotHQ',
                                                                                                                          'CashbotHQ',
                                                                                                                          'LawbotHQ',
@@ -84,46 +84,46 @@ class PlayGame(StateData.StateData):
                                                                                                                          'EstateHood',
                                                                                                                          'PartyHood']),
                                                       State.State(
-            'TTHood', self.enterTTHood, self.exitTTHood, ['quietZone']),
+            'TTCHood', self.enterTTCHood, self.exitTTCHood, ['quietZone']),
             State.State(
-            'DDHood',
-            self.enterDDHood,
-            self.exitDDHood,
+            'TTDHood',
+            self.enterTTDHood,
+            self.exitTTDHood,
             ['quietZone']),
             State.State(
-            'BRHood',
-            self.enterBRHood,
-            self.exitBRHood,
+            'TWHood',
+            self.enterTWHood,
+            self.exitTWHood,
             ['quietZone']),
             State.State(
-            'MMHood',
-            self.enterMMHood,
-            self.exitMMHood,
+            'TLOMHood',
+            self.enterTLOMHood,
+            self.exitTLOMHood,
             ['quietZone']),
             State.State(
-            'DGHood',
-            self.enterDGHood,
-            self.exitDGHood,
+            'FGHood',
+            self.enterFGHood,
+            self.exitFGHood,
             ['quietZone']),
             State.State(
-            'DLHood',
-            self.enterDLHood,
-            self.exitDLHood,
+            'TDLHood',
+            self.enterTDLHood,
+            self.exitTDLHood,
             ['quietZone']),
             State.State(
-            'GSHood',
-            self.enterGSHood,
-            self.exitGSHood,
+            'TTSHood',
+            self.enterTTSHood,
+            self.exitTTSHood,
             ['quietZone']),
             State.State(
-            'OZHood',
-            self.enterOZHood,
-            self.exitOZHood,
+            'AAHood',
+            self.enterAAHood,
+            self.exitAAHood,
             ['quietZone']),
             State.State(
-            'GZHood',
-            self.enterGZHood,
-            self.exitGZHood,
+            'AAGHood',
+            self.enterAAGHood,
+            self.exitAAGHood,
             ['quietZone']),
             State.State(
             'BossbotHQ',
@@ -378,67 +378,67 @@ class PlayGame(StateData.StateData):
             self.handleLeftQuietZone()
         return
 
-    def enterTTHood(self, requestStatus):
+    def enterTTCHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitTTHood(self):
+    def exitTTCHood(self):
         self._destroyHood()
 
-    def enterDDHood(self, requestStatus):
+    def enterTTDHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitDDHood(self):
+    def exitTTDHood(self):
         self._destroyHood()
 
-    def enterMMHood(self, requestStatus):
+    def enterTLOMHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitMMHood(self):
+    def exitTLOMHood(self):
         self._destroyHood()
 
-    def enterBRHood(self, requestStatus):
+    def enterTWHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitBRHood(self):
+    def exitTWHood(self):
         self._destroyHood()
 
-    def enterDGHood(self, requestStatus):
+    def enterFGHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitDGHood(self):
+    def exitFGHood(self):
         self._destroyHood()
 
-    def enterDLHood(self, requestStatus):
+    def enterTDLHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitDLHood(self):
+    def exitTDLHood(self):
         self._destroyHood()
 
-    def enterGSHood(self, requestStatus):
+    def enterTTSHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitGSHood(self):
+    def exitTTSHood(self):
         self._destroyHood()
 
-    def enterOZHood(self, requestStatus):
+    def enterAAHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitOZHood(self):
+    def exitAAHood(self):
         self._destroyHood()
 
-    def enterGZHood(self, requestStatus):
+    def enterAAGHood(self, requestStatus):
         self.accept(self.hoodDoneEvent, self.handleHoodDone)
         self.hood.enter(requestStatus)
 
-    def exitGZHood(self):
+    def exitAAGHood(self):
         self._destroyHood()
 
     def enterSellbotHQ(self, requestStatus):

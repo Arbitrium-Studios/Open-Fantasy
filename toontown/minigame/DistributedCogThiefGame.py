@@ -114,7 +114,7 @@ class DistributedCogThiefGame(DistributedMinigame):
             self.gameBoard.find('**/floor_MM').show()
         elif zone == ToontownGlobals.TundraWonderland:
             self.gameBoard.find('**/floor_BR').show()
-        elif zone == ToontownGlobals.DrowsyDreamland:
+        elif zone == ToontownGlobals.TwlightDreamland:
             self.gameBoard.find('**/floor_DL').show()
         else:
             self.gameBoard.find('**/floor_TT').show()

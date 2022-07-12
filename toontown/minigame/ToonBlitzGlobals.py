@@ -16,32 +16,32 @@ GameDuration = {ToontownGlobals.ToontownCentral: 150,
                 ToontownGlobals.FloweringGrove: 140,
                 ToontownGlobals.TheLandOfMusic: 135,
                 ToontownGlobals.TundraWonderland: 130,
-                ToontownGlobals.DrowsyDreamland: 125}
+                ToontownGlobals.TwlightDreamland: 125}
 BaseBonusOnCompletion = {ToontownGlobals.ToontownCentral: 15,
                          ToontownGlobals.ToontownDocks: 17,
                          ToontownGlobals.FloweringGrove: 19,
                          ToontownGlobals.TheLandOfMusic: 21,
                          ToontownGlobals.TundraWonderland: 23,
-                         ToontownGlobals.DrowsyDreamland: 25}
+                         ToontownGlobals.TwlightDreamland: 25}
 BonusPerSecondLeft = 0.8
 ScoreLossPerEnemyCollision = {ToontownGlobals.ToontownCentral: -1,
                               ToontownGlobals.ToontownDocks: -1,
                               ToontownGlobals.FloweringGrove: -1,
                               ToontownGlobals.TheLandOfMusic: -1,
                               ToontownGlobals.TundraWonderland: -1,
-                              ToontownGlobals.DrowsyDreamland: -1}
+                              ToontownGlobals.TwlightDreamland: -1}
 ScoreLossPerFallDown = {ToontownGlobals.ToontownCentral: -0,
                         ToontownGlobals.ToontownDocks: -0,
                         ToontownGlobals.FloweringGrove: -0,
                         ToontownGlobals.TheLandOfMusic: -0,
                         ToontownGlobals.TundraWonderland: -0,
-                        ToontownGlobals.DrowsyDreamland: -0}
+                        ToontownGlobals.TwlightDreamland: -0}
 ScoreLossPerStomperSquish = {ToontownGlobals.ToontownCentral: -1,
                              ToontownGlobals.ToontownDocks: -1,
                              ToontownGlobals.FloweringGrove: -1,
                              ToontownGlobals.TheLandOfMusic: -1,
                              ToontownGlobals.TundraWonderland: -1,
-                             ToontownGlobals.DrowsyDreamland: -1}
+                             ToontownGlobals.TwlightDreamland: -1}
 SectionWeights = {ToontownGlobals.ToontownCentral: ((0, 25),
                                                     (1, 25),
                                                     (2, 25),
@@ -72,7 +72,7 @@ SectionWeights = {ToontownGlobals.ToontownCentral: ((0, 25),
                                               (3, 25),
                                               (4, 25),
                                               (5, 15)),
-                  ToontownGlobals.DrowsyDreamland: ((0, 10),
+                  ToontownGlobals.TwlightDreamland: ((0, 10),
                                                      (1, 10),
                                                      (2, 15),
                                                      (3, 15),
@@ -83,31 +83,31 @@ NumSections = {ToontownGlobals.ToontownCentral: 5,
                ToontownGlobals.FloweringGrove: 5,
                ToontownGlobals.TheLandOfMusic: 5,
                ToontownGlobals.TundraWonderland: 5,
-               ToontownGlobals.DrowsyDreamland: 5}
+               ToontownGlobals.TwlightDreamland: 5}
 PercentMaxEnemies = {ToontownGlobals.ToontownCentral: 50,
                      ToontownGlobals.ToontownDocks: 60,
                      ToontownGlobals.FloweringGrove: 70,
                      ToontownGlobals.TheLandOfMusic: 80,
                      ToontownGlobals.TundraWonderland: 90,
-                     ToontownGlobals.DrowsyDreamland: 100}
+                     ToontownGlobals.TwlightDreamland: 100}
 PercentMaxTreasures = {ToontownGlobals.ToontownCentral: 100,
                        ToontownGlobals.ToontownDocks: 100,
                        ToontownGlobals.FloweringGrove: 100,
                        ToontownGlobals.TheLandOfMusic: 100,
                        ToontownGlobals.TundraWonderland: 100,
-                       ToontownGlobals.DrowsyDreamland: 100}
+                       ToontownGlobals.TwlightDreamland: 100}
 PercentMaxSpawnPoints = {ToontownGlobals.ToontownCentral: 100,
                          ToontownGlobals.ToontownDocks: 90,
                          ToontownGlobals.FloweringGrove: 80,
                          ToontownGlobals.TheLandOfMusic: 70,
                          ToontownGlobals.TundraWonderland: 60,
-                         ToontownGlobals.DrowsyDreamland: 50}
+                         ToontownGlobals.TwlightDreamland: 50}
 PercentMaxStompers = {ToontownGlobals.ToontownCentral: 50,
                       ToontownGlobals.ToontownDocks: 60,
                       ToontownGlobals.FloweringGrove: 70,
                       ToontownGlobals.TheLandOfMusic: 80,
                       ToontownGlobals.TundraWonderland: 90,
-                      ToontownGlobals.DrowsyDreamland: 100}
+                      ToontownGlobals.TwlightDreamland: 100}
 TreasureValueProbability = {1: 4,
                             2: 3,
                             3: 2,

@@ -257,7 +257,7 @@ class DistributedCatchGame(DistributedMinigame):
                   ToontownGlobals.FloweringGrove: 'pear',
                   ToontownGlobals.TheLandOfMusic: 'coconut',
                   ToontownGlobals.TundraWonderland: 'watermelon',
-                  ToontownGlobals.DrowsyDreamland: 'pineapple'}
+                  ToontownGlobals.TwlightDreamland: 'pineapple'}
         self.fruitName = fruits[self.getSafezoneId()]
         self.ShowObjSpheres = 0
         self.ShowToonSpheres = 0

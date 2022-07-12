@@ -8,8 +8,8 @@ from toontown.safezone import ButterflyGlobals
 from direct.task import Task
 
 
-class TTHoodDataAI(HoodDataAI.HoodDataAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('TTHoodDataAI')
+class TTCHoodDataAI(HoodDataAI.HoodDataAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory('TTCHoodDataAI')
 
     def __init__(self, air, zoneId=None):
         hoodId = ToontownGlobals.ToontownCentral
@@ -35,11 +35,11 @@ class TTHoodDataAI(HoodDataAI.HoodDataAI):
         self.createButterflies(ButterflyGlobals.TTC)
         if simbase.blinkTrolley:
             taskMgr.doMethodLater(0.5, self._deleteTrolley, 'deleteTrolley')
-        messenger.send('TTHoodSpawned', [self])
+        messenger.send('TTCHoodSpawned', [self])
 
     def shutdown(self):
         HoodDataAI.HoodDataAI.shutdown(self)
-        messenger.send('TTHoodDestroyed', [self])
+        messenger.send('TTCHoodDestroyed', [self])
 
     def _deleteTrolley(self, task):
         self.trolley.requestDelete()

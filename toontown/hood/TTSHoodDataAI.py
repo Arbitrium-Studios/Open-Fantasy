@@ -10,8 +10,8 @@ if __debug__:
     import pdb
 
 
-class GSHoodDataAI(HoodDataAI.HoodDataAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('GSHoodDataAI')
+class TTSHoodDataAI(HoodDataAI.HoodDataAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory('TTSHoodDataAI')
 
     def __init__(self, air, zoneId=None):
         hoodId = ToontownGlobals.ToontownStadium
@@ -31,15 +31,15 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
         self.classicChar.generateWithRequired(self.zoneId)
         self.classicChar.start()
         self.addDistObj(self.classicChar)
-        messenger.send('GSHoodSpawned', [self])
+        messenger.send('TTSHoodSpawned', [self])
 
     def shutdown(self):
-        self.notify.debug('shutting down GSHoodDataAI: %s' % self.zoneId)
-        messenger.send('GSHoodDestroyed', [self])
+        self.notify.debug('shutting down TTSHoodDataAI: %s' % self.zoneId)
+        messenger.send('TTSHoodDestroyed', [self])
         HoodDataAI.HoodDataAI.shutdown(self)
 
     def cleanup(self):
-        self.notify.debug('cleaning up GSHoodDataAI: %s' % self.zoneId)
+        self.notify.debug('cleaning up TTSHoodDataAI: %s' % self.zoneId)
         taskMgr.removeTasksMatching(str(self) + '_leaderBoardSwitch')
         for board in self.leaderBoards:
             board.delete()

@@ -20,7 +20,7 @@ SafeZones = [ToontownGlobals.ToontownCentral,
              ToontownGlobals.FloweringGrove,
              ToontownGlobals.TheLandOfMusic,
              ToontownGlobals.TundraWonderland,
-             ToontownGlobals.DrowsyDreamland]
+             ToontownGlobals.TwlightDreamland]
 
 
 def getDifficulty(trolleyZone):

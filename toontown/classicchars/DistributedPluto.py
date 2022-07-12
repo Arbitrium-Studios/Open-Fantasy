@@ -9,7 +9,7 @@ from . import CharStateDatas
 from direct.fsm import StateData
 from direct.task import Task
 from toontown.toonbase import TTLocalizer
-from toontown.hood import MMHood
+from toontown.hood import TLOMHood
 
 
 class DistributedPluto(DistributedCCharBase.DistributedCCharBase):
@@ -121,7 +121,7 @@ class DistributedPluto(DistributedCCharBase.DistributedCCharBase):
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
             if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds and isinstance(
-                    self.cr.playGame.hood, MMHood.MMHood):
+                    self.cr.playGame.hood, TLOMHood.TLOMHood):
                 self.diffPath = TTLocalizer.Minnie
 
     def getCCLocation(self):

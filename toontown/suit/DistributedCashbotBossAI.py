@@ -196,7 +196,7 @@ class DistributedCashbotBossAI(
                 healAmount = 10
             else:
                 style = random.choice(
-                    [ToontownGlobals.TundraWonderland, ToontownGlobals.DrowsyDreamland])
+                    [ToontownGlobals.TundraWonderland, ToontownGlobals.TwlightDreamland])
                 healAmount = 12
         if self.recycledTreasures:
             treasure = self.recycledTreasures.pop(0)

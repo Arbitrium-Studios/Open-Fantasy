@@ -234,7 +234,7 @@ store_suit_point [ 241, STREET_POINT, -204.15 -174.151 -0.5 ]
 store_suit_point [ 242, STREET_POINT, -308.432 -153.529 -0.5 ]
 store_suit_point [ 243, STREET_POINT, -295.932 -175.18 -0.5 ]
 store_suit_point [ 244, SIDE_DOOR_POINT, -303.056 -190.84 0, 33 ]
-group "DrowsyDreamland" [
+group "TwlightDreamland" [
  visgroup "9101" [
   vis [   "9101"   "9102"   "9103"   "9104"   "9105"   ]
   battle_cell [ 20 20 25 30 -0.5 ]

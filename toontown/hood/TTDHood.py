@@ -5,7 +5,7 @@ from toontown.safezone import DDSafeZoneLoader
 from toontown.toonbase.ToontownGlobals import *
 
 
-class DDHood(ToonHood.ToonHood):
+class TTDHood(ToonHood.ToonHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
@@ -26,11 +26,11 @@ class DDHood(ToonHood.ToonHood):
 
     def load(self):
         ToonHood.ToonHood.load(self)
-        self.parentFSM.getStateNamed('DDHood').addChild(self.fsm)
+        self.parentFSM.getStateNamed('TTDHood').addChild(self.fsm)
         self.fog = Fog('DDFog')
 
     def unload(self):
-        self.parentFSM.getStateNamed('DDHood').removeChild(self.fsm)
+        self.parentFSM.getStateNamed('TTDHood').removeChild(self.fsm)
         ToonHood.ToonHood.unload(self)
         self.fog = None
         return
