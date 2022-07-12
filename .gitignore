@@ -16,8 +16,6 @@ venv/
 local/
 errorCode
 screenshots/
-libotp/
-libtoontown/
 *.egg
 Housekeeper/
 *.txt
@@ -28,4 +26,6 @@ sign/
 phase_3/maps/news
 news/
 resources/phase_3.5/maps/toontown_map - Backup.jpg
-toontown/instakker
+toontown/installer
+*.lnk
+Start Toontown Fantasy.lnk

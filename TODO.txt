@@ -42,13 +42,17 @@ The Road to Fantasy:
         + Credits Button
         + Discord Button
         + Magic Commands
-        + Replace the old playground function names with new functions using the current playground names (i.e. "lGoofySpeedway" >>> "lToontownStadium")
+        + Replaced the old playground function names with new functions using the current playground names (i.e. "lGoofySpeedway" >>> "lToontownStadium")
+        + Straifing
 
     Currently Being Developed:
-
-        + Straifing
         + Complete Wide-Screen Support
         + Chatlog
+        + Rich Presence
+        + User/ Folder
+        + Field Office Update
+        + Code Optimizations
+        + Texture Quality Options
 
     Confirmed Content:
 
@@ -57,23 +61,13 @@ The Road to Fantasy:
         + Controller Support
         + Advanced Custom Controls
         + More Options for playing Toontown Fantasy like Multiplayer and friend servers!
+        + Add Toontown Map Update.
 
     Wishlist:
-        + Match the amount of trap you can hold to Toontown Rewritten
-        + Cog heads should look at you when you walk by.
-        + Make some Cog Attacks like Fired do Damage Over Time.
-        + Increase Font Quality for count-downs and such.
-        + Level 13s and up should appear naturally in Bosses and in Late-Game Cog Buildings.
-        + Match Trap Damage to TTR's Trap Damage
-        + Replace Damage on Lure with Rounds the Cog will stay lured.
-        + Increase the amount of time you have to choose your Gags in Battle
-        + Remove Experience Cap implemented in Toontown Online.
-        + Make the Automatic Laff Heal match the level order of the playground. I.E. Toontown Central - 1, Toontown Docks - 2, Acorn Acres - 3, etc.
-        + Add a Photo Page where you can look at your screenshots.
-        + Allow us to pick what Gag Tracks to start with.
-            + Make sure to pop up an error saying you can't choose Trap without Lure.
-        + Rebalance Cog Suit Merits and how you earn them to make maxing them more pleasant.
+
         + Community Voice Acting
+        + For playgrounds not available yet, add a barrier to the streets and on the map, to avoid crashes, if you have Global Teleport Access, make a menu popup saying that this playground is not available yet.
+        + Virtual Reality Support!
         + Create an in-game launcher like ODS using the Anesidora files
         + Patch as many bugs as possible
         + Implement custom shaders for everyone to use!
@@ -163,6 +157,7 @@ The Road to Fantasy:
             + When you start making your Toon, it should fade through the colors of the Rainbow like it does on TVS.
         + Pride Accessories and Clothing Options
         + Add tails for Toons
+            + Make various looks for tails for customization.
         + Make a gravity system that affects your Toon's Tail and Accessories like the Backpack.
         + The Toontown Map should be able to be moved using the arrow keys to see areas outside of the core playgrounds Toontown
         + With the Shaders Update, add weather system to the Game
@@ -460,6 +455,10 @@ The Road to Fantasy:
     + Add long sleeve shirts
     + Add sleeveless clothing
     + Add crop-top shirts
+    + Add longer, looser shirts
+    + Add various types of shorts
+    + Add sweat pants
+    + Add jeans, Jirts, Jorts, and everything J.
     + Add ankle-high dresses and skirts
     + Add one-piece clothing items such as dresses, jumpsuits, costumes, and more!
     + Make Jetpacks actually work like they’re supposed to irl
