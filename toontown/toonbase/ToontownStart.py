@@ -12,9 +12,10 @@ builtins.game = game()
 from panda3d.core import *
 import time
 import sys
-from toontown.discord.DiscordRPC import DiscordRPC
-builtins.Discord = DiscordRPC()
-DiscordRPC.launching()
+def stopBoarding(self):
+    from toontown.discord.DiscordRPC import DiscordRPC
+    builtins.Discord = DiscordRPC()
+    DiscordRPC.launching(self)
 try:
     launcher
 except BaseException:
