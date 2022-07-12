@@ -16,10 +16,11 @@ hitSoundFiles = (
     'AA_tart_only.ogg',
     'AA_slice_only.ogg',
     'AA_slice_only.ogg',
-    'AA_slice_only.ogg',
-    'AA_slice_only.ogg',
     'AA_wholepie_only.ogg',
-    'AA_wholepie_only.ogg')
+    'AA_wholepie_only.ogg',
+    'AA_wholepie_only.ogg',
+    'AA_wedding_cake_cog.ogg'
+)
 tPieLeavesHand = 2.7
 tPieHitsSuit = 3.0
 tSuitDodges = 2.45
@@ -241,23 +242,23 @@ def __pieMissGroupLerpCallback(t, missDict):
 
 def __getWeddingCakeSoundTrack(level, hitSuit, node=None):
     throwTrack = Sequence()
+    throwSound = globalBattleSoundCache.getSound('AA_throw_wedding_cake.ogg')
+    songTrack = Sequence(
+        Wait(1.0),
+        SoundInterval(throwSound, node=node)
+    )
     if hitSuit:
-        throwSound = globalBattleSoundCache.getSound(
-            'AA_throw_wedding_cake.ogg')
-        songTrack = Sequence()
-        songTrack.append(Wait(1.0))
-        songTrack.append(SoundInterval(throwSound, node=node))
-        splatSound = globalBattleSoundCache.getSound(
-            'AA_throw_wedding_cake_cog.ogg')
+        splatSound = globalBattleSoundCache.getSound('AA_throw_wedding_cake_cog.ogg')
         splatTrack = Sequence()
         splatTrack.append(Wait(tPieHitsSuit))
         splatTrack.append(SoundInterval(splatSound, node=node))
         throwTrack.append(Parallel(songTrack, splatTrack))
     else:
-        throwSound = globalBattleSoundCache.getSound(
-            'AA_throw_wedding_cake_miss.ogg')
-        throwTrack.append(Wait(tSuitDodges))
-        throwTrack.append(SoundInterval(throwSound, node=node))
+        missSound = globalBattleSoundCache.getSound('AA_throw_wedding_cake_miss.ogg')
+        missTrack = Sequence()
+        missTrack.append(Wait(tSuitDodges))
+        missTrack.append(SoundInterval(missSound, node=node))
+        throwTrack.append(Parallel(songTrack, splatTrack))
     return throwTrack
 
 
@@ -269,10 +270,9 @@ def __getSoundTrack(level, hitSuit, node=None):
     if hitSuit:
         hitSound = globalBattleSoundCache.getSound(hitSoundFiles[level])
         hitTrack = Sequence(
-            Wait(tPieLeavesHand),
-            SoundInterval(
-                hitSound,
-                node=node))
+            Wait(tPieHitsSuit),
+            SoundInterval(hitSound, node=node)
+        )
         return Parallel(throwTrack, hitTrack)
     else:
         return throwTrack
@@ -319,37 +319,24 @@ def __throwPie(throw, delay, hitCount):
     toonTrack.append(Func(toon.setHpr, battle, origHpr))
     pieShow = Func(MovieUtil.showProps, pies, hands)
     pieAnim = Func(__animProp, pies, pieName, pieType)
-    pieScale1 = LerpScaleInterval(
-        pie,
-        1.0,
-        pie.getScale(),
-        startScale=MovieUtil.PNT3_NEARZERO)
-    pieScale2 = LerpScaleInterval(
-        pie2,
-        1.0,
-        pie2.getScale(),
-        startScale=MovieUtil.PNT3_NEARZERO)
+    pieScale1 = LerpScaleInterval(pie, 1.0, pie.getScale(), startScale=MovieUtil.PNT3_NEARZERO)
+    pieScale2 = LerpScaleInterval(pie2, 1.0, pie2.getScale(), startScale=MovieUtil.PNT3_NEARZERO)
     pieScale = Parallel(pieScale1, pieScale2)
     piePreflight = Func(__propPreflight, pies, suit, toon, battle)
     pieTrack = Sequence(
-        Wait(delay), pieShow, pieAnim, pieScale, Func(
-            battle.movie.needRestoreRenderProp, pies[0]), Wait(
-            tPieLeavesHand - 1.0), piePreflight)
+        Wait(delay),
+        pieShow,
+        pieAnim,
+        pieScale,
+        Func(battle.movie.needRestoreRenderProp, pies[0]),
+        Wait(tPieLeavesHand - 1.0),
+        piePreflight
+    )
     soundTrack = __getSoundTrack(level, hitSuit, toon)
     if hitSuit:
-        pieFly = LerpPosInterval(
-            pie,
-            tPieHitsSuit -
-            tPieLeavesHand,
-            pos=MovieUtil.avatarFacePoint(
-                suit,
-                other=battle),
-            name=pieFlyTaskName,
-            other=battle)
+        pieFly = LerpPosInterval(pie, tPieHitsSuit - tPieLeavesHand, pos=MovieUtil.avatarFacePoint(suit, other=battle), name=pieFlyTaskName, other=battle)
         pieHide = Func(MovieUtil.removeProps, pies)
-        splatShow = Func(
-            __showProp, splat, suit, Point3(
-                0, 0, suit.getHeight()))
+        splatShow = Func(__showProp, splat, suit, Point3(0, 0, suit.getHeight()))
         splatBillboard = Func(__billboardProp, splat)
         splatAnim = ActorInterval(splat, splatName)
         splatHide = Func(MovieUtil.removeProp, splat)
@@ -367,9 +354,7 @@ def __throwPie(throw, delay, hitCount):
         else:
             suitPoint = __suitMissPoint(suit, other=battle)
         piePreMiss = Func(__piePreMiss, missDict, pie, suitPoint, battle)
-        pieMiss = LerpFunctionInterval(
-            __pieMissLerpCallback, extraArgs=[missDict], duration=(
-                tPieHitsSuit - tPieLeavesHand) * ratioMissToHit)
+        pieMiss = LerpFunctionInterval(__pieMissLerpCallback, extraArgs=[missDict], duration=(tPieHitsSuit - tPieLeavesHand) * ratioMissToHit)
         pieHide = Func(MovieUtil.removeProps, pies)
         pieTrack.append(piePreMiss)
         pieTrack.append(pieMiss)
@@ -377,51 +362,30 @@ def __throwPie(throw, delay, hitCount):
         pieTrack.append(Func(battle.movie.clearRenderProp, pies[0]))
     if hitSuit:
         suitResponseTrack = Sequence()
-        showDamage = Func(suit.showHpText, -
-                          hp, openEnded=0, attackTrack=THROW_TRACK)
+        showDamage = Func(suit.showHpText, - hp, openEnded=0, attackTrack=THROW_TRACK)
         updateHealthBar = Func(suit.updateHealthBar, hp)
         sival = []
         if kbbonus > 0:
             suitPos, suitHpr = battle.getActorPosHpr(suit)
             suitType = getSuitBodyType(suit.getStyleName())
-            animTrack = Sequence()
-            animTrack.append(
-                ActorInterval(
-                    suit,
-                    'pie-small-react',
-                    duration=0.2))
+            animTrack = Sequence(ActorInterval(suit, 'pie-small-react', duration=0.2))
             if suitType == 'a':
-                animTrack.append(
-                    ActorInterval(
-                        suit,
-                        'slip-forward',
-                        startTime=2.43))
+                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.43))
             elif suitType == 'b':
-                animTrack.append(
-                    ActorInterval(
-                        suit,
-                        'slip-forward',
-                        startTime=1.94))
+                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=1.94))
             elif suitType == 'c':
-                animTrack.append(
-                    ActorInterval(
-                        suit,
-                        'slip-forward',
-                        startTime=2.58))
+                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.58))
             animTrack.append(Func(battle.unlureSuit, suit))
             moveTrack = Sequence(
-                Wait(0.2), LerpPosInterval(
-                    suit, 0.6, pos=suitPos, other=battle))
+                Wait(0.2),
+                LerpPosInterval(suit, 0.6, pos=suitPos, other=battle)
+            )
             sival = Parallel(animTrack, moveTrack)
         elif hitCount == 1:
             sival = Parallel(
-                ActorInterval(
-                    suit,
-                    'pie-small-react'),
-                MovieUtil.createSuitStunInterval(
-                    suit,
-                    0.3,
-                    1.3))
+                ActorInterval(suit, 'pie-small-react'),
+                MovieUtil.createSuitStunInterval(suit, 0.3, 1.3)
+            )
         else:
             sival = ActorInterval(suit, 'pie-small-react')
         suitResponseTrack.append(Wait(delay + tPieHitsSuit))
@@ -431,20 +395,14 @@ def __throwPie(throw, delay, hitCount):
         bonusTrack = Sequence(Wait(delay + tPieHitsSuit))
         if kbbonus > 0:
             bonusTrack.append(Wait(0.75))
-            bonusTrack.append(Func(suit.showHpText, -
-                                   kbbonus, 2, openEnded=0, attackTrack=THROW_TRACK))
+            bonusTrack.append(Func(suit.showHpText, - kbbonus, 2, openEnded=0, attackTrack=THROW_TRACK))
         if hpbonus > 0:
             bonusTrack.append(Wait(0.75))
-            bonusTrack.append(Func(suit.showHpText, -
-                                   hpbonus, 1, openEnded=0, attackTrack=THROW_TRACK))
+            bonusTrack.append(Func(suit.showHpText, - hpbonus, 1, openEnded=0, attackTrack=THROW_TRACK))
         if revived != 0:
-            suitResponseTrack.append(
-                MovieUtil.createSuitReviveTrack(
-                    suit, toon, battle))
+            suitResponseTrack.append(MovieUtil.createSuitReviveTrack(suit, toon, battle))
         elif died != 0:
-            suitResponseTrack.append(
-                MovieUtil.createSuitDeathTrack(
-                    suit, toon, battle))
+            suitResponseTrack.append(MovieUtil.createSuitDeathTrack(suit, toon, battle))
         else:
             suitResponseTrack.append(Func(suit.loop, 'neutral'))
         suitResponseTrack = Parallel(suitResponseTrack, bonusTrack)
@@ -486,18 +444,29 @@ def __createWeddingCakeFlight(throw, groupHitDict, pie, pies):
         cakeParts.append(pie.find('**/%s' % part))
 
     cakePartDivisions = {}
-    cakePartDivisions[1] = [[cakeParts[0],
-                             cakeParts[1],
-                             cakeParts[2],
-                             cakeParts[3]]]
+    cakePartDivisions[1] = [
+        [cakeParts[0],
+         cakeParts[1],
+         cakeParts[2],
+         cakeParts[3]]
+    ]
     cakePartDivisions[2] = [
-        [cakeParts[0], cakeParts[1]], [cakeParts[2], cakeParts[3]]]
-    cakePartDivisions[3] = [[cakeParts[0], cakeParts[1]],
-                            [cakeParts[2]], [cakeParts[3]]]
-    cakePartDivisions[4] = [[cakeParts[0]],
-                            [cakeParts[1]],
-                            [cakeParts[2]],
-                            [cakeParts[3]]]
+        [cakeParts[0],
+         cakeParts[1]],
+        [cakeParts[2],
+         cakeParts[3]]]
+    cakePartDivisions[3] = [
+        [cakeParts[0],
+         cakeParts[1]],
+        [cakeParts[2]],
+        [cakeParts[3]]
+    ]
+    cakePartDivisions[4] = [
+        [cakeParts[0]],
+        [cakeParts[1]],
+        [cakeParts[2]],
+        [cakeParts[3]]
+    ]
     cakePartDivToUse = cakePartDivisions[len(throw['target'])]
     groupPieTracks = Parallel()
     for i in range(numTargets):
@@ -510,24 +479,13 @@ def __createWeddingCakeFlight(throw, groupHitDict, pie, pies):
             singlePieTrack.append(piePartReparent)
             cakePartTrack = Parallel()
             for cakePart in cakePartDivToUse[i]:
-                pieFly = LerpPosInterval(
-                    cakePart,
-                    tPieHitsSuit -
-                    tPieLeavesHand,
-                    pos=MovieUtil.avatarFacePoint(
-                        suit,
-                        other=battle),
-                    name=pieFlyTaskName,
-                    other=battle)
+                pieFly = LerpPosInterval(cakePart, tPieHitsSuit - tPieLeavesHand, pos=MovieUtil.avatarFacePoint(suit, other=battle), name=pieFlyTaskName, other=battle)
                 cakePartTrack.append(pieFly)
 
             singlePieTrack.append(cakePartTrack)
-            pieRemoveCakeParts = Func(
-                MovieUtil.removeProps, cakePartDivToUse[i])
+            pieRemoveCakeParts = Func(MovieUtil.removeProps, cakePartDivToUse[i])
             pieHide = Func(MovieUtil.removeProps, pies)
-            splatShow = Func(
-                __showProp, splats[i], suit, Point3(
-                    0, 0, suit.getHeight()))
+            splatShow = Func(__showProp, splats[i], suit, Point3(0, 0, suit.getHeight()))
             splatBillboard = Func(__billboardProp, splats[i])
             splatAnim = ActorInterval(splats[i], splatName)
             splatHide = Func(MovieUtil.removeProp, splats[i])
@@ -545,18 +503,10 @@ def __createWeddingCakeFlight(throw, groupHitDict, pie, pies):
             else:
                 suitPoint = __suitMissPoint(suit, other=battle)
             piePartReparent = Func(reparentCakePart, pie, cakePartDivToUse[i])
-            piePreMiss = Func(
-                __piePreMissGroup,
-                missDict,
-                cakePartDivToUse[i],
-                suitPoint,
-                battle)
-            pieMiss = LerpFunctionInterval(
-                __pieMissGroupLerpCallback, extraArgs=[missDict], duration=(
-                    tPieHitsSuit - tPieLeavesHand) * ratioMissToHit)
+            piePreMiss = Func(__piePreMissGroup, missDict, cakePartDivToUse[i], suitPoint, battle)
+            pieMiss = LerpFunctionInterval(__pieMissGroupLerpCallback, extraArgs=[missDict], duration=(tPieHitsSuit - tPieLeavesHand) * ratioMissToHit)
             pieHide = Func(MovieUtil.removeProps, pies)
-            pieRemoveCakeParts = Func(
-                MovieUtil.removeProps, cakePartDivToUse[i])
+            pieRemoveCakeParts = Func(MovieUtil.removeProps, cakePartDivToUse[i])
             singlePieTrack.append(piePartReparent)
             singlePieTrack.append(piePreMiss)
             singlePieTrack.append(pieMiss)
@@ -596,22 +546,19 @@ def __throwGroupPie(throw, delay, groupHitDict):
     hands = toon.getRightHands()
     pieShow = Func(MovieUtil.showProps, pies, hands)
     pieAnim = Func(__animProp, pies, pieName, pieType)
-    pieScale1 = LerpScaleInterval(
-        pie,
-        1.0,
-        pie.getScale() * 1.5,
-        startScale=MovieUtil.PNT3_NEARZERO)
-    pieScale2 = LerpScaleInterval(
-        pie2,
-        1.0,
-        pie2.getScale() * 1.5,
-        startScale=MovieUtil.PNT3_NEARZERO)
+    pieScale1 = LerpScaleInterval(pie, 1.0, pie.getScale() * 1.5, startScale=MovieUtil.PNT3_NEARZERO)
+    pieScale2 = LerpScaleInterval(pie2, 1.0, pie2.getScale() * 1.5, startScale=MovieUtil.PNT3_NEARZERO)
     pieScale = Parallel(pieScale1, pieScale2)
     piePreflight = Func(__propPreflightGroup, pies, suits, toon, battle)
     pieTrack = Sequence(
-        Wait(delay), pieShow, pieAnim, pieScale, Func(
-            battle.movie.needRestoreRenderProp, pies[0]), Wait(
-            tPieLeavesHand - 1.0), piePreflight)
+        Wait(delay),
+        pieShow,
+        pieAnim,
+        pieScale,
+        Func(battle.movie.needRestoreRenderProp, pies[0]),
+        Wait(tPieLeavesHand - 1.0),
+        piePreflight
+    )
     if level == UBER_GAG_LEVEL_INDEX:
         groupPieTracks = __createWeddingCakeFlight(
             throw, groupHitDict, pie, pies)
@@ -639,51 +586,31 @@ def __throwGroupPie(throw, delay, groupHitDict):
         revived = target['revived']
         if hitSuit:
             singleSuitResponseTrack = Sequence()
-            showDamage = Func(suit.showHpText, -
-                              hp, openEnded=0, attackTrack=THROW_TRACK)
+            showDamage = Func(suit.showHpText, -hp, openEnded=0, attackTrack=THROW_TRACK)
             updateHealthBar = Func(suit.updateHealthBar, hp)
             sival = []
             if kbbonus > 0:
                 suitPos, suitHpr = battle.getActorPosHpr(suit)
                 suitType = getSuitBodyType(suit.getStyleName())
                 animTrack = Sequence()
-                animTrack.append(
-                    ActorInterval(
-                        suit,
-                        'pie-small-react',
-                        duration=0.2))
+                animTrack.append(ActorInterval(suit, 'pie-small-react', duration=0.2))
                 if suitType == 'a':
-                    animTrack.append(
-                        ActorInterval(
-                            suit,
-                            'slip-forward',
-                            startTime=2.43))
+                    animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.43))
                 elif suitType == 'b':
-                    animTrack.append(
-                        ActorInterval(
-                            suit,
-                            'slip-forward',
-                            startTime=1.94))
+                    animTrack.append(ActorInterval(suit, 'slip-forward', startTime=1.94))
                 elif suitType == 'c':
-                    animTrack.append(
-                        ActorInterval(
-                            suit,
-                            'slip-forward',
-                            startTime=2.58))
+                    animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.58))
                 animTrack.append(Func(battle.unlureSuit, suit))
                 moveTrack = Sequence(
-                    Wait(0.2), LerpPosInterval(
-                        suit, 0.6, pos=suitPos, other=battle))
+                    Wait(0.2),
+                    LerpPosInterval(suit, 0.6, pos=suitPos, other=battle)
+                )
                 sival = Parallel(animTrack, moveTrack)
             elif groupHitDict[suit.doId] == 1:
                 sival = Parallel(
-                    ActorInterval(
-                        suit,
-                        'pie-small-react'),
-                    MovieUtil.createSuitStunInterval(
-                        suit,
-                        0.3,
-                        1.3))
+                    ActorInterval(suit, 'pie-small-react'),
+                    MovieUtil.createSuitStunInterval(suit, 0.3, 1.3)
+                )
             else:
                 sival = ActorInterval(suit, 'pie-small-react')
             singleSuitResponseTrack.append(Wait(delay + tPieHitsSuit))
@@ -693,26 +620,17 @@ def __throwGroupPie(throw, delay, groupHitDict):
             bonusTrack = Sequence(Wait(delay + tPieHitsSuit))
             if kbbonus > 0:
                 bonusTrack.append(Wait(0.75))
-                bonusTrack.append(
-                    Func(
-                        suit.showHpText, -kbbonus, 2, openEnded=0, attackTrack=THROW_TRACK))
+                bonusTrack.append(Func(suit.showHpText, -kbbonus, 2, openEnded=0, attackTrack=THROW_TRACK))
             if hpbonus > 0:
                 bonusTrack.append(Wait(0.75))
-                bonusTrack.append(
-                    Func(
-                        suit.showHpText, -hpbonus, 1, openEnded=0, attackTrack=THROW_TRACK))
+                bonusTrack.append(Func(suit.showHpText, -hpbonus, 1, openEnded=0, attackTrack=THROW_TRACK))
             if revived != 0:
-                singleSuitResponseTrack.append(
-                    MovieUtil.createSuitReviveTrack(
-                        suit, toon, battle))
+                singleSuitResponseTrack.append(MovieUtil.createSuitReviveTrack(suit, toon, battle))
             elif died != 0:
-                singleSuitResponseTrack.append(
-                    MovieUtil.createSuitDeathTrack(
-                        suit, toon, battle))
+                singleSuitResponseTrack.append(MovieUtil.createSuitDeathTrack(suit, toon, battle))
             else:
                 singleSuitResponseTrack.append(Func(suit.loop, 'neutral'))
-            singleSuitResponseTrack = Parallel(
-                singleSuitResponseTrack, bonusTrack)
+            singleSuitResponseTrack = Parallel(singleSuitResponseTrack, bonusTrack)
         else:
             groupHitValues = list(groupHitDict.values())
             if groupHitValues.count(0) == len(groupHitValues):
@@ -720,12 +638,9 @@ def __throwGroupPie(throw, delay, groupHitDict):
                     delay + tSuitDodges, suit, leftSuits, rightSuits)
             else:
                 singleSuitResponseTrack = Sequence(
-                    Wait(
-                        tPieHitsSuit - 0.1),
-                    Func(
-                        MovieUtil.indicateMissed,
-                        suit,
-                        1.0))
+                    Wait(tPieHitsSuit - 0.1),
+                    Func(MovieUtil.indicateMissed, suit, 1.0)
+                )
         groupSuitResponseTrack.append(singleSuitResponseTrack)
 
     return [toonTrack,
