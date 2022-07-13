@@ -120,36 +120,36 @@ class Pet(Avatar.Avatar):
             self.dropShadow.setScale(0.75)
 
     def generatePet(self):
-        self.loadModel('phase_4/models/char/TT_pets-mod')
-        self.loadAnims({'toBeg': 'phase_5/models/char/TT_pets-intoBeg',
-                        'beg': 'phase_5/models/char/TT_pets-beg',
-                        'fromBeg': 'phase_5/models/char/TT_pets-begOut',
-                        'backflip': 'phase_5/models/char/TT_pets-backflip',
-                        'dance': 'phase_5/models/char/TT_pets-heal',
-                        'toDig': 'phase_5/models/char/TT_pets-intoDig',
-                        'dig': 'phase_5/models/char/TT_pets-dig',
-                        'fromDig': 'phase_5/models/char/TT_pets-digToNeutral',
-                        'disappear': 'phase_5/models/char/TT_pets-disappear',
-                        'eat': 'phase_5.5/models/char/TT_pets-eat',
-                        'jump': 'phase_5/models/char/TT_pets-jump',
-                        'neutral': 'phase_4/models/char/TT_pets-neutral',
-                        'neutralHappy': 'phase_4/models/char/TT_pets-neutralHappy',
-                        'neutralSad': 'phase_4/models/char/TT_pets-neutral_sad',
-                        'toPet': 'phase_5.5/models/char/TT_pets-petin',
-                        'pet': 'phase_5.5/models/char/TT_pets-petloop',
-                        'fromPet': 'phase_5.5/models/char/TT_pets-petend',
-                        'playDead': 'phase_5/models/char/TT_pets-playdead',
-                        'fromPlayDead': 'phase_5/models/char/TT_pets-deadend',
-                        'reappear': 'phase_5/models/char/TT_pets-reappear',
-                        'run': 'phase_5.5/models/char/TT_pets-run',
-                        'rollover': 'phase_5/models/char/TT_pets-rollover',
-                        'walkSad': 'phase_5.5/models/char/TT_pets-sadwalk',
-                        'speak': 'phase_5/models/char/TT_pets-speak',
-                        'swallow': 'phase_5.5/models/char/TT_pets-swallow',
-                        'swim': 'phase_5.5/models/char/TT_pets-swim',
-                        'toBall': 'phase_5.5/models/char/TT_pets-toBall',
-                        'walk': 'phase_5.5/models/char/TT_pets-walk',
-                        'walkHappy': 'phase_5.5/models/char/TT_pets-walkHappy'})
+        self.loadModel('user/resources/default/phase_4/models/char/TT_pets-mod')
+        self.loadAnims({'toBeg': 'user/resources/default/phase_5/models/char/TT_pets-intoBeg',
+                        'beg': 'user/resources/default/phase_5/models/char/TT_pets-beg',
+                        'fromBeg': 'user/resources/default/phase_5/models/char/TT_pets-begOut',
+                        'backflip': 'user/resources/default/phase_5/models/char/TT_pets-backflip',
+                        'dance': 'user/resources/default/phase_5/models/char/TT_pets-heal',
+                        'toDig': 'user/resources/default/phase_5/models/char/TT_pets-intoDig',
+                        'dig': 'user/resources/default/phase_5/models/char/TT_pets-dig',
+                        'fromDig': 'user/resources/default/phase_5/models/char/TT_pets-digToNeutral',
+                        'disappear': 'user/resources/default/phase_5/models/char/TT_pets-disappear',
+                        'eat': 'user/resources/default/phase_5.5/models/char/TT_pets-eat',
+                        'jump': 'user/resources/default/phase_5/models/char/TT_pets-jump',
+                        'neutral': 'user/resources/default/phase_4/models/char/TT_pets-neutral',
+                        'neutralHappy': 'user/resources/default/phase_4/models/char/TT_pets-neutralHappy',
+                        'neutralSad': 'user/resources/default/phase_4/models/char/TT_pets-neutral_sad',
+                        'toPet': 'user/resources/default/phase_5.5/models/char/TT_pets-petin',
+                        'pet': 'user/resources/default/phase_5.5/models/char/TT_pets-petloop',
+                        'fromPet': 'user/resources/default/phase_5.5/models/char/TT_pets-petend',
+                        'playDead': 'user/resources/default/phase_5/models/char/TT_pets-playdead',
+                        'fromPlayDead': 'user/resources/default/phase_5/models/char/TT_pets-deadend',
+                        'reappear': 'user/resources/default/phase_5/models/char/TT_pets-reappear',
+                        'run': 'user/resources/default/phase_5.5/models/char/TT_pets-run',
+                        'rollover': 'user/resources/default/phase_5/models/char/TT_pets-rollover',
+                        'walkSad': 'user/resources/default/phase_5.5/models/char/TT_pets-sadwalk',
+                        'speak': 'user/resources/default/phase_5/models/char/TT_pets-speak',
+                        'swallow': 'user/resources/default/phase_5.5/models/char/TT_pets-swallow',
+                        'swim': 'user/resources/default/phase_5.5/models/char/TT_pets-swim',
+                        'toBall': 'user/resources/default/phase_5.5/models/char/TT_pets-toBall',
+                        'walk': 'user/resources/default/phase_5.5/models/char/TT_pets-walk',
+                        'walkHappy': 'user/resources/default/phase_5.5/models/char/TT_pets-walkHappy'})
         self.setHeight(2)
         color = None
         colorIndex = self.style[5]
@@ -253,18 +253,18 @@ class Pet(Avatar.Avatar):
             self.leftHighlight.hide()
         if self.style[8]:
             self.eyesOpenTexture = loader.loadTexture(
-                'phase_4/maps/BeanEyeBoys2.jpg',
-                'phase_4/maps/BeanEyeBoys2_a.rgb')
+                'user/resources/default/phase_4/maps/BeanEyeBoys2.jpg',
+                'user/resources/default/phase_4/maps/BeanEyeBoys2_a.rgb')
             self.eyesClosedTexture = loader.loadTexture(
-                'phase_4/maps/BeanEyeBoysBlink.jpg',
-                'phase_4/maps/BeanEyeBoysBlink_a.rgb')
+                'user/resources/default/phase_4/maps/BeanEyeBoysBlink.jpg',
+                'user/resources/default/phase_4/maps/BeanEyeBoysBlink_a.rgb')
         else:
             self.eyesOpenTexture = loader.loadTexture(
-                'phase_4/maps/BeanEyeGirlsNew.jpg',
-                'phase_4/maps/BeanEyeGirlsNew_a.rgb')
+                'user/resources/default/phase_4/maps/BeanEyeGirlsNew.jpg',
+                'user/resources/default/phase_4/maps/BeanEyeGirlsNew_a.rgb')
             self.eyesClosedTexture = loader.loadTexture(
-                'phase_4/maps/BeanEyeGirlsBlinkNew.jpg',
-                'phase_4/maps/BeanEyeGirlsBlinkNew_a.rgb')
+                'user/resources/default/phase_4/maps/BeanEyeGirlsBlinkNew.jpg',
+                'user/resources/default/phase_4/maps/BeanEyeGirlsBlinkNew_a.rgb')
         self.eyesOpenTexture.setMinfilter(Texture.FTLinear)
         self.eyesOpenTexture.setMagfilter(Texture.FTLinear)
         self.eyesClosedTexture.setMinfilter(Texture.FTLinear)
@@ -287,7 +287,7 @@ class Pet(Avatar.Avatar):
         return color
 
     def generateMoods(self):
-        moodIcons = loader.loadModel('phase_4/models/char/petEmotes')
+        moodIcons = loader.loadModel('user/resources/default/phase_4/models/char/petEmotes')
         self.moodIcons = self.attachNewNode('moodIcons')
         self.moodIcons.setScale(2.0)
         self.moodIcons.setZ(3.65)
@@ -476,7 +476,7 @@ class Pet(Avatar.Avatar):
     def getTeleportInTrack(self):
         if not self.teleportHole:
             self.teleportHole = Actor.Actor(
-                'phase_3.5/models/props/portal-mod', {'hole': 'phase_3.5/models/props/portal-chan'})
+                'user/resources/default/phase_3.5/models/props/portal-mod', {'hole': 'user/resources/default/phase_3.5/models/props/portal-chan'})
             self.teleportHole.setBlend(frameBlend=base.smoothAnimations)
         track = Sequence(
             Wait(1.0), Parallel(
@@ -503,7 +503,7 @@ class Pet(Avatar.Avatar):
     def getTeleportOutTrack(self):
         if not self.teleportHole:
             self.teleportHole = Actor.Actor(
-                'phase_3.5/models/props/portal-mod', {'hole': 'phase_3.5/models/props/portal-chan'})
+                'user/resources/default/phase_3.5/models/props/portal-mod', {'hole': 'user/resources/default/phase_3.5/models/props/portal-chan'})
             self.teleportHole.setBlend(frameBlend=base.smoothAnimations)
         track = Sequence(
             Wait(1.0), Parallel(
@@ -547,13 +547,13 @@ class Pet(Avatar.Avatar):
     def getTeleportInSoundInterval(self):
         if not self.soundTeleportIn:
             self.soundTeleportIn = loader.loadSfx(
-                'phase_5/audio/sfx/teleport_reappear.ogg')
+                'user/resources/default/phase_5/audio/sfx/teleport_reappear.ogg')
         return SoundInterval(self.soundTeleportIn)
 
     def getTeleportOutSoundInterval(self):
         if not self.soundTeleportOut:
             self.soundTeleportOut = loader.loadSfx(
-                'phase_5/audio/sfx/teleport_disappear.ogg')
+                'user/resources/default/phase_5/audio/sfx/teleport_disappear.ogg')
         return SoundInterval(self.soundTeleportOut)
 
     def enterWalk(self):

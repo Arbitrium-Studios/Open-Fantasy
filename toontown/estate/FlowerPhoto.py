@@ -181,7 +181,7 @@ class FlowerPhoto(NodePath):
         if showBackground:
             if not hasattr(self, 'background'):
                 background = loader.loadModel(
-                    'phase_3.5/models/gui/stickerbook_gui')
+                    'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 background = background.find('**/Fish_BG')
                 self.background = background
             self.background.setPos(0, 15, 0)

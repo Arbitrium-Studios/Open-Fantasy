@@ -12,7 +12,7 @@ class TrackPoster(DirectFrame):
     def __init__(self, trackId, callback):
         DirectFrame.__init__(self, relief=None)
         self.initialiseoptions(TrackPoster)
-        bookModel = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+        bookModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
         trackName = ToontownBattleGlobals.Tracks[trackId].capitalize()
         self.poster = DirectFrame(
             parent=self,
@@ -22,7 +22,7 @@ class TrackPoster(DirectFrame):
                 0.8,
                 0.58,
                 0.58))
-        invModel = loader.loadModel('phase_3.5/models/gui/inventory_icons')
+        invModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_icons')
         iconGeom = invModel.find(
             '**/' + ToontownBattleGlobals.AvPropsNew[trackId][1])
         invModel.removeNode()
@@ -76,7 +76,7 @@ class TrackPoster(DirectFrame):
                                     pos=(-0.05,
                                          0,
                                          0.14))
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         self.chooseButton = DirectButton(
             parent=self.poster,
             relief=None,
@@ -110,7 +110,7 @@ class TrackChoiceGui(DirectFrame):
         DirectFrame.__init__(self, relief=None, geom=DGG.getDefaultDialogGeom(), geom_color=Vec4(
             0.8, 0.6, 0.4, 1), geom_scale=(1.5, 1, 0.9), geom_hpr=(0, 0, -90), pos=(-0.85, 0, 0))
         self.initialiseoptions(TrackChoiceGui)
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         self.cancelButton = DirectButton(
             parent=self,
             relief=None,

@@ -258,7 +258,7 @@ def getNextRaceInfo(prevTrackId, genreString, padId):
     return (trackId, raceInfo[1], raceInfo[2])
 
 
-TrackPath = 'phase_6/models/karting/'
+TrackPath = 'user/resources/default/phase_6/models/karting/'
 TrackDict = {RT_Speedway_1: (TrackPath + 'RT_SpeedwayA',
                              240.0,
                              115.0,

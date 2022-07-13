@@ -11,7 +11,7 @@ class HQTelescopeAnimatedProp(AnimatedProp.AnimatedProp):
         self.telescope = Actor.Actor(node, copy=0)
         self.telescope.reparentTo(parent)
         self.telescope.loadAnims(
-            {'anim': 'phase_3.5/models/props/HQ_telescope-chan'})
+            {'anim': 'user/resources/default/phase_3.5/models/props/HQ_telescope-chan'})
         self.telescope.pose('anim', 0)
         self.telescope.setBlend(frameBlend=base.smoothAnimations)
 

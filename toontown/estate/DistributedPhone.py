@@ -60,56 +60,56 @@ class DistributedPhone(DistributedFurnitureItem.DistributedFurnitureItem):
             self.uniqueName('ringDoLater'))
 
     def loadModel(self):
-        self.model = Actor.Actor('phase_5.5/models/estate/prop_phone-mod', {'SS_phoneOut': 'phase_5.5/models/estate/prop_phone-SS_phoneOut',
-                                                                            'SS_takePhone': 'phase_5.5/models/estate/prop_phone-SS_takePhone',
-                                                                            'SS_phoneNeutral': 'phase_5.5/models/estate/prop_phone-SS_phoneNeutral',
-                                                                            'SS_phoneBack': 'phase_5.5/models/estate/prop_phone-SS_phoneBack',
-                                                                            'SM_phoneOut': 'phase_5.5/models/estate/prop_phone-SM_phoneOut',
-                                                                            'SM_takePhone': 'phase_5.5/models/estate/prop_phone-SM_takePhone',
-                                                                            'SM_phoneNeutral': 'phase_5.5/models/estate/prop_phone-SM_phoneNeutral',
-                                                                            'SM_phoneBack': 'phase_5.5/models/estate/prop_phone-SM_phoneBack',
-                                                                            'SL_phoneOut': 'phase_5.5/models/estate/prop_phone-SL_phoneOut',
-                                                                            'SL_takePhone': 'phase_5.5/models/estate/prop_phone-SL_takePhone',
-                                                                            'SL_phoneNeutral': 'phase_5.5/models/estate/prop_phone-SL_phoneNeutral',
-                                                                            'SL_phoneBack': 'phase_5.5/models/estate/prop_phone-SL_phoneBack',
-                                                                            'MS_phoneOut': 'phase_5.5/models/estate/prop_phone-MS_phoneOut',
-                                                                            'MS_takePhone': 'phase_5.5/models/estate/prop_phone-MS_takePhone',
-                                                                            'MS_phoneNeutral': 'phase_5.5/models/estate/prop_phone-MS_phoneNeutral',
-                                                                            'MS_phoneBack': 'phase_5.5/models/estate/prop_phone-MS_phoneBack',
-                                                                            'MM_phoneOut': 'phase_5.5/models/estate/prop_phone-MM_phoneOut',
-                                                                            'MM_takePhone': 'phase_5.5/models/estate/prop_phone-MM_takePhone',
-                                                                            'MM_phoneNeutral': 'phase_5.5/models/estate/prop_phone-MM_phoneNeutral',
-                                                                            'MM_phoneBack': 'phase_5.5/models/estate/prop_phone-MM_phoneBack',
-                                                                            'ML_phoneOut': 'phase_5.5/models/estate/prop_phone-ML_phoneOut',
-                                                                            'ML_takePhone': 'phase_5.5/models/estate/prop_phone-ML_takePhone',
-                                                                            'ML_phoneNeutral': 'phase_5.5/models/estate/prop_phone-ML_phoneNeutral',
-                                                                            'ML_phoneBack': 'phase_5.5/models/estate/prop_phone-ML_phoneBack',
-                                                                            'LS_phoneOut': 'phase_5.5/models/estate/prop_phone-LS_phoneOut',
-                                                                            'LS_takePhone': 'phase_5.5/models/estate/prop_phone-LS_takePhone',
-                                                                            'LS_phoneNeutral': 'phase_5.5/models/estate/prop_phone-LS_phoneNeutral',
-                                                                            'LS_phoneBack': 'phase_5.5/models/estate/prop_phone-LS_phoneBack',
-                                                                            'LM_phoneOut': 'phase_5.5/models/estate/prop_phone-LM_phoneOut',
-                                                                            'LM_takePhone': 'phase_5.5/models/estate/prop_phone-LM_takePhone',
-                                                                            'LM_phoneNeutral': 'phase_5.5/models/estate/prop_phone-LM_phoneNeutral',
-                                                                            'LM_phoneBack': 'phase_5.5/models/estate/prop_phone-LM_phoneBack',
-                                                                            'LL_phoneOut': 'phase_5.5/models/estate/prop_phone-LL_phoneOut',
-                                                                            'LL_takePhone': 'phase_5.5/models/estate/prop_phone-LL_takePhone',
-                                                                            'LL_phoneNeutral': 'phase_5.5/models/estate/prop_phone-LL_phoneNeutral',
-                                                                            'LL_phoneBack': 'phase_5.5/models/estate/prop_phone-LL_phoneBack'})
+        self.model = Actor.Actor('user/resources/default/phase_5.5/models/estate/prop_phone-mod', {'SS_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-SS_phoneOut',
+                                                                            'SS_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-SS_takePhone',
+                                                                            'SS_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-SS_phoneNeutral',
+                                                                            'SS_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-SS_phoneBack',
+                                                                            'SM_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-SM_phoneOut',
+                                                                            'SM_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-SM_takePhone',
+                                                                            'SM_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-SM_phoneNeutral',
+                                                                            'SM_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-SM_phoneBack',
+                                                                            'SL_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-SL_phoneOut',
+                                                                            'SL_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-SL_takePhone',
+                                                                            'SL_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-SL_phoneNeutral',
+                                                                            'SL_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-SL_phoneBack',
+                                                                            'MS_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-MS_phoneOut',
+                                                                            'MS_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-MS_takePhone',
+                                                                            'MS_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-MS_phoneNeutral',
+                                                                            'MS_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-MS_phoneBack',
+                                                                            'MM_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-MM_phoneOut',
+                                                                            'MM_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-MM_takePhone',
+                                                                            'MM_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-MM_phoneNeutral',
+                                                                            'MM_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-MM_phoneBack',
+                                                                            'ML_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-ML_phoneOut',
+                                                                            'ML_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-ML_takePhone',
+                                                                            'ML_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-ML_phoneNeutral',
+                                                                            'ML_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-ML_phoneBack',
+                                                                            'LS_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-LS_phoneOut',
+                                                                            'LS_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-LS_takePhone',
+                                                                            'LS_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-LS_phoneNeutral',
+                                                                            'LS_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-LS_phoneBack',
+                                                                            'LM_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-LM_phoneOut',
+                                                                            'LM_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-LM_takePhone',
+                                                                            'LM_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-LM_phoneNeutral',
+                                                                            'LM_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-LM_phoneBack',
+                                                                            'LL_phoneOut': 'user/resources/default/phase_5.5/models/estate/prop_phone-LL_phoneOut',
+                                                                            'LL_takePhone': 'user/resources/default/phase_5.5/models/estate/prop_phone-LL_takePhone',
+                                                                            'LL_phoneNeutral': 'user/resources/default/phase_5.5/models/estate/prop_phone-LL_phoneNeutral',
+                                                                            'LL_phoneBack': 'user/resources/default/phase_5.5/models/estate/prop_phone-LL_phoneBack'})
         self.model.pose('SS_phoneOut', 0)
         self.receiverJoint = self.model.find('**/joint_receiver')
         self.receiverGeom = self.receiverJoint.getChild(0)
-        mount = loader.loadModel('phase_5.5/models/estate/phoneMount-mod')
+        mount = loader.loadModel('user/resources/default/phase_5.5/models/estate/phoneMount-mod')
         mount.setTransparency(0, 1)
         self.model.reparentTo(mount)
         self.model.setBlend(frameBlend=base.smoothAnimations)
-        self.ringSfx = loader.loadSfx('phase_3.5/audio/sfx/telephone_ring.ogg')
+        self.ringSfx = loader.loadSfx('user/resources/default/phase_3.5/audio/sfx/telephone_ring.ogg')
         self.handleSfx = loader.loadSfx(
-            'phase_5.5/audio/sfx/telephone_handle2.ogg')
+            'user/resources/default/phase_5.5/audio/sfx/telephone_handle2.ogg')
         self.hangUpSfx = loader.loadSfx(
-            'phase_5.5/audio/sfx/telephone_hang_up.ogg')
+            'user/resources/default/phase_5.5/audio/sfx/telephone_hang_up.ogg')
         self.pickUpSfx = loader.loadSfx(
-            'phase_5.5/audio/sfx/telephone_pickup1.ogg')
+            'user/resources/default/phase_5.5/audio/sfx/telephone_pickup1.ogg')
         if self.initialScale:
             mount.setScale(*self.initialScale)
             self.usedInitialScale = 1

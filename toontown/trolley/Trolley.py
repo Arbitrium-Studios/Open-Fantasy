@@ -71,7 +71,7 @@ class Trolley(StateData.StateData):
     def load(self):
         self.parentFSM.getStateNamed('trolley').addChild(self.fsm)
         self.buttonModels = loader.loadModel(
-            'phase_3.5/models/gui/inventory_gui')
+            'user/resources/default/phase_3.5/models/gui/inventory_gui')
         self.upButton = self.buttonModels.find('**//InventoryButtonUp')
         self.downButton = self.buttonModels.find('**/InventoryButtonDown')
         self.rolloverButton = self.buttonModels.find(

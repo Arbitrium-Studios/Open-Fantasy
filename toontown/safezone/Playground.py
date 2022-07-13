@@ -530,7 +530,7 @@ class Playground(Place.Place):
                 doneEvent='deathAck')
         elif base.localAvatar.hp > 0 and (Quests.avatarHasTrolleyQuest(base.localAvatar) or Quests.avatarHasFirstCogQuest(base.localAvatar) or Quests.avatarHasFriendQuest(base.localAvatar) or Quests.avatarHasPhoneQuest(base.localAvatar) and Quests.avatarHasCompletedPhoneQuest(base.localAvatar)) and self.loader.hood.id == ToontownGlobals.ToontownCentral:
             requestStatus['nextState'] = 'popup'
-            imageModel = loader.loadModel('phase_4/models/gui/tfa_images')
+            imageModel = loader.loadModel('user/resources/default/phase_4/models/gui/tfa_images')
             if base.localAvatar.quests[0][0] == Quests.TROLLEY_QUEST_ID:
                 if not Quests.avatarHasCompletedTrolleyQuest(base.localAvatar):
                     x, y, z, h, p, r = base.cr.hoodMgr.getDropPoint(
@@ -568,7 +568,7 @@ class Playground(Place.Place):
                         base.cr.hoodMgr.ToontownCentralInitialDropPoints)
                     msg = TTLocalizer.NPCForceAcknowledgeMessage7
                     gui = loader.loadModel(
-                        'phase_3.5/models/gui/friendslist_gui')
+                        'user/resources/default/phase_3.5/models/gui/friendslist_gui')
                     imgNodePath = gui.find('**/FriendsBox_Closed')
                     imgPos = (0, 0, 0.04)
                     imgScale = 1.0

@@ -27,7 +27,7 @@ class CannonGui(DirectObject):
         if self.__loaded:
             return
         self.__timerPad = PartyUtils.getNewToontownTimer()
-        guiModel = 'phase_4/models/gui/cannon_game_gui'
+        guiModel = 'user/resources/default/phase_4/models/gui/cannon_game_gui'
         guiNode = loader.loadModel(guiModel)
         self.__aimPad = DirectFrame(image=guiNode.find(
             '**/CannonFire_PAD'), relief=None, pos=(0.7, 0, -0.553333), scale=0.8)

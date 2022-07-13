@@ -126,7 +126,7 @@ class ShtikerBook(DirectFrame, StateData.StateData):
 
     def load(self):
         self.checkGardenStarted = localAvatar.getGardenStarted()
-        bookModel = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+        bookModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
         self['image'] = bookModel.find('**/big_book')
         self['image_scale'] = (2, 1, 1.5)
         self.resetFrameSize()
@@ -188,15 +188,15 @@ class ShtikerBook(DirectFrame, StateData.StateData):
                                       extraArgs=[-1])
         bookModel.removeNode()
         self.openSound = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/GUI_stickerbook_open.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/GUI_stickerbook_open.ogg')
         self.closeSound = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/GUI_stickerbook_delete.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/GUI_stickerbook_delete.ogg')
         self.pageSound = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/GUI_stickerbook_turn.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/GUI_stickerbook_turn.ogg')
         return
 
     def unload(self):
-        loader.unloadModel('phase_3.5/models/gui/stickerbook_gui')
+        loader.unloadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
         self.destroy()
         self.bookOpenButton.destroy()
         del self.bookOpenButton
@@ -270,73 +270,73 @@ class ShtikerBook(DirectFrame, StateData.StateData):
         buttonPressedCommand = goToPage
         extraArgs = []
         if pageName == TTLocalizer.OptionsPageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/switch')
             iconModels.detachNode()
         elif pageName == TTLocalizer.ShardPageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/district')
             iconModels.detachNode()
         elif pageName == TTLocalizer.MapPageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/teleportIcon')
             iconModels.detachNode()
         elif pageName == TTLocalizer.InventoryPageTitle:
             iconModels = loader.loadModel(
-                'phase_3.5/models/gui/inventory_icons')
+                'user/resources/default/phase_3.5/models/gui/inventory_icons')
             iconGeom = iconModels.find('**/inventory_tart')
             iconScale = 7
             iconModels.detachNode()
         elif pageName == TTLocalizer.QuestPageToonTasks:
             iconModels = loader.loadModel(
-                'phase_3.5/models/gui/stickerbook_gui')
+                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
             iconGeom = iconModels.find('**/questCard')
             iconScale = 0.9
             iconModels.detachNode()
         elif pageName == TTLocalizer.TrackPageShortTitle:
             iconGeom = iconModels = loader.loadModel(
-                'phase_3.5/models/gui/filmstrip')
+                'user/resources/default/phase_3.5/models/gui/filmstrip')
             iconScale = 1.1
             iconColor = Vec4(0.7, 0.7, 0.7, 1)
             iconModels.detachNode()
         elif pageName == TTLocalizer.SuitPageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/gui_gear')
             iconModels.detachNode()
         elif pageName == TTLocalizer.FishPageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/fish')
             iconModels.detachNode()
         elif pageName == TTLocalizer.GardenPageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/gardenIcon')
             iconModels.detachNode()
         elif pageName == TTLocalizer.DisguisePageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/disguise2')
             iconColor = Vec4(0.7, 0.7, 0.7, 1)
             iconModels.detachNode()
         elif pageName == TTLocalizer.NPCFriendPageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/playingCard')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/playingCard')
             iconImage = iconModels.find('**/card_back')
             iconGeom = iconModels.find('**/logo')
             iconScale = 0.22
             iconModels.detachNode()
         elif pageName == TTLocalizer.KartPageTitle:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/kartIcon')
             iconModels.detachNode()
         elif pageName == TTLocalizer.GolfPageTitle:
-            iconModels = loader.loadModel('phase_6/models/golf/golf_gui')
+            iconModels = loader.loadModel('user/resources/default/phase_6/models/golf/golf_gui')
             iconGeom = iconModels.find('**/score_card_icon')
             iconModels.detachNode()
         elif pageName == TTLocalizer.EventsPageName:
             iconModels = loader.loadModel(
-                'phase_4/models/parties/partyStickerbook')
+                'user/resources/default/phase_4/models/parties/partyStickerbook')
             iconGeom = iconModels.find('**/Stickerbook_PartyIcon')
             iconModels.detachNode()
         elif pageName == TTLocalizer.NewsPageName:
-            iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+            iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
             iconGeom = iconModels.find('**/tt_t_gui_sbk_newsPageTab')
             iconModels.detachNode()
             buttonPressedCommand = self.goToNewsPage

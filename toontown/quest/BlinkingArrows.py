@@ -5,8 +5,8 @@ from pandac.PandaModules import *
 class BlinkingArrows:
 
     def __init__(self, parent=aspect2d, otherNode=None):
-        self.arrow1 = loader.loadModel('phase_3/models/props/arrow')
-        self.arrow2 = loader.loadModel('phase_3/models/props/arrow')
+        self.arrow1 = loader.loadModel('user/resources/default/phase_3/models/props/arrow')
+        self.arrow2 = loader.loadModel('user/resources/default/phase_3/models/props/arrow')
         self.arrowTrack = None
         self.parent = parent
         self.otherNode = otherNode

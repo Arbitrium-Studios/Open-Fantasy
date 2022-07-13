@@ -37,9 +37,9 @@ class DistributedCogdoInterior(DistributedObject.DistributedObject):
         self.toons = []
         self.activeIntervals = {}
         self.openSfx = base.loader.loadSfx(
-            'phase_5/audio/sfx/elevator_door_open.ogg')
+            'user/resources/default/phase_5/audio/sfx/elevator_door_open.ogg')
         self.closeSfx = base.loader.loadSfx(
-            'phase_5/audio/sfx/elevator_door_close.ogg')
+            'user/resources/default/phase_5/audio/sfx/elevator_door_close.ogg')
         self.suits = []
         self.reserveSuits = []
         self.joiningReserves = []
@@ -81,9 +81,9 @@ class DistributedCogdoInterior(DistributedObject.DistributedObject):
         self.penthouseOutroChatDoneTrack = None
         self.penthouseIntroTrack = None
         self.waitMusic = base.loader.loadMusic(
-            'phase_7/audio/bgm/encntr_toon_winning_indoor.ogg')
+            'user/resources/default/phase_7/audio/bgm/encntr_toon_winning_indoor.ogg')
         self.elevatorMusic = base.loader.loadMusic(
-            'phase_7/audio/bgm/tt_elevator.ogg')
+            'user/resources/default/phase_7/audio/bgm/tt_elevator.ogg')
         self.fsm = ClassicFSM.ClassicFSM('DistributedCogdoInterior', [State.State('WaitForAllToonsInside', self.enterWaitForAllToonsInside, self.exitWaitForAllToonsInside, ['Elevator']),
                                                                       State.State(
             'Elevator', self.enterElevator, self.exitElevator, ['Game']),
@@ -151,11 +151,11 @@ class DistributedCogdoInterior(DistributedObject.DistributedObject):
         self.announceGenerateName = self.uniqueName('generate')
         self.accept(self.announceGenerateName, self.handleAnnounceGenerate)
         self.elevatorModelIn = loader.loadModel(
-            'phase_5/models/cogdominium/tt_m_ara_csa_elevatorB')
+            'user/resources/default/phase_5/models/cogdominium/tt_m_ara_csa_elevatorB')
         self.leftDoorIn = self.elevatorModelIn.find('**/left_door')
         self.rightDoorIn = self.elevatorModelIn.find('**/right_door')
         self.elevatorModelOut = loader.loadModel(
-            'phase_5/models/cogdominium/tt_m_ara_csa_elevatorB')
+            'user/resources/default/phase_5/models/cogdominium/tt_m_ara_csa_elevatorB')
         self.leftDoorOut = self.elevatorModelOut.find('**/left_door')
         self.rightDoorOut = self.elevatorModelOut.find('**/right_door')
 
@@ -208,9 +208,9 @@ class DistributedCogdoInterior(DistributedObject.DistributedObject):
     def handleAnnounceGenerate(self, obj):
         self.ignore(self.announceGenerateName)
         self.cageDoorSfx = loader.loadSfx(
-            'phase_5/audio/sfx/CHQ_SOS_cage_door.ogg')
+            'user/resources/default/phase_5/audio/sfx/CHQ_SOS_cage_door.ogg')
         self.cageLowerSfx = loader.loadSfx(
-            'phase_5/audio/sfx/CHQ_SOS_cage_lower.ogg')
+            'user/resources/default/phase_5/audio/sfx/CHQ_SOS_cage_lower.ogg')
         self.sendUpdate('setAvatarJoined', [])
 
     def disable(self):
@@ -451,7 +451,7 @@ class DistributedCogdoInterior(DistributedObject.DistributedObject):
         if self.isBossFloor(self.currentFloor):
             self.barrelRoom.unload()
             self.floorModel = loader.loadModel(
-                'phase_5/models/cogdominium/tt_m_ara_crg_penthouse')
+                'user/resources/default/phase_5/models/cogdominium/tt_m_ara_crg_penthouse')
             self.cage = self.floorModel.find('**/cage')
             pos = self.cage.getPos()
             self.cagePos = []
@@ -464,7 +464,7 @@ class DistributedCogdoInterior(DistributedObject.DistributedObject):
                 paintingModelName = PAINTING_DICT.get(self.FOType)
                 for i in range(4):
                     paintingModel = loader.loadModel(
-                        'phase_5/models/cogdominium/%s' % paintingModelName)
+                        'user/resources/default/phase_5/models/cogdominium/%s' % paintingModelName)
                     loc = self.floorModel.find('**/loc_painting%d' % (i + 1))
                     paintingModel.reparentTo(loc)
 
@@ -504,7 +504,7 @@ class DistributedCogdoInterior(DistributedObject.DistributedObject):
             elevOut.setY(render, y - 0.75)
         else:
             floorModel = loader.loadModel(
-                'phase_7/models/modules/boss_suit_office')
+                'user/resources/default/phase_7/models/modules/boss_suit_office')
             elevIn = floorModel.find('**/elevator-in').copyTo(render)
             elevOut = floorModel.find('**/elevator-out').copyTo(render)
             floorModel.removeNode()
@@ -868,13 +868,13 @@ class DistributedCogdoInterior(DistributedObject.DistributedObject):
             self.notify.warning('Invalid floor number for display badges.')
         for player in range(len(self.toons)):
             goldBadge = loader.loadModel(
-                'phase_5/models/cogdominium/tt_m_ara_crg_goldTrophy')
+                'user/resources/default/phase_5/models/cogdominium/tt_m_ara_crg_goldTrophy')
             goldBadge.setScale(1.2)
             goldNode = render.find('**/gold_0' + str(player + 1))
             goldBadge.reparentTo(goldNode)
             for floor in range(numFloors):
                 silverBadge = loader.loadModel(
-                    'phase_5/models/cogdominium/tt_m_ara_crg_silverTrophy.bam')
+                    'user/resources/default/phase_5/models/cogdominium/tt_m_ara_crg_silverTrophy.bam')
                 silverBadge.setScale(1.2)
                 silverNode = render.find(
                     '**/silver_0' + str(floor * 4 + (player + 1)))

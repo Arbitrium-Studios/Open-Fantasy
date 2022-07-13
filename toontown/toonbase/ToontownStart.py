@@ -37,7 +37,7 @@ tempLoader = Loader()
 from direct.gui import DirectGuiGlobals
 
 backgroundNode = tempLoader.loadSync(
-    Filename('phase_3/models/gui/loading-background'))
+    Filename('user/resources/default/phase_3/models/gui/loading-background'))
 from . import ToontownGlobals
 print('ToontownStart: setting default font')
 DirectGuiGlobals.setDefaultFontFunc(ToontownGlobals.getInterfaceFont)
@@ -60,25 +60,25 @@ backgroundNodePath.find('**/bg').setScale(aspect2d,
                                           VBase3(base.getAspectRatio(), 1, 1))
 base.graphicsEngine.renderFrame()
 DirectGuiGlobals.setDefaultRolloverSound(
-    base.loader.loadSfx('phase_3/audio/sfx/GUI_rollover.ogg'))
+    base.loader.loadSfx('user/resources/default/phase_3/audio/sfx/GUI_rollover.ogg'))
 DirectGuiGlobals.setDefaultClickSound(base.loader.loadSfx(
-    'phase_3/audio/sfx/GUI_create_toon_fwd.ogg'))
+    'user/resources/default/phase_3/audio/sfx/GUI_create_toon_fwd.ogg'))
 DirectGuiGlobals.setDefaultDialogGeom(
-    loader.loadModel('phase_3/models/gui/dialog_box_gui'))
+    loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_gui'))
 from . import TTLocalizer
 from otp.otpbase import OTPGlobals
 OTPGlobals.setDefaultProductPrefix(TTLocalizer.ProductPrefix)
 if base.musicManagerIsValid:
-    music = base.musicManager.getSound('phase_3/audio/bgm/tt_theme.ogg')
+    music = base.musicManager.getSound('user/resources/default/phase_3/audio/bgm/tt_theme.ogg')
     if music:
         music.setLoop(1)
         music.setVolume(0.9)
         music.play()
     print('ToontownStart: Loading default gui sounds')
     DirectGuiGlobals.setDefaultRolloverSound(
-        base.loader.loadSfx('phase_3/audio/sfx/GUI_rollover.ogg'))
+        base.loader.loadSfx('user/resources/default/phase_3/audio/sfx/GUI_rollover.ogg'))
     DirectGuiGlobals.setDefaultClickSound(
-        base.loader.loadSfx('phase_3/audio/sfx/GUI_create_toon_fwd.ogg'))
+        base.loader.loadSfx('user/resources/default/phase_3/audio/sfx/GUI_create_toon_fwd.ogg'))
 else:
     music = None
 from direct.gui.DirectGui import *

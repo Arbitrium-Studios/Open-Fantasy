@@ -57,12 +57,12 @@ class DistributedTagGame(DistributedMinigame):
                 0.95, 0.95, 0.65, 1), scale=0.14, font=ToontownGlobals.getSignFont(), pos=(
                 0.0, -0.8), wordwrap=15, mayChange=1)
         self.itText.hide()
-        self.sky = loader.loadModel('phase_3.5/models/props/TT_sky')
-        self.ground = loader.loadModel('phase_4/models/minigames/tag_arena')
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_toontag.ogg')
-        self.tagSfx = base.loader.loadSfx('phase_4/audio/sfx/MG_Tag_C.ogg')
+        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/TT_sky')
+        self.ground = loader.loadModel('user/resources/default/phase_4/models/minigames/tag_arena')
+        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_toontag.ogg')
+        self.tagSfx = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_Tag_C.ogg')
         self.itPointer = loader.loadModel(
-            'phase_4/models/minigames/bboard-pointer')
+            'user/resources/default/phase_4/models/minigames/bboard-pointer')
         self.tracks = []
         self.IT = None
         return

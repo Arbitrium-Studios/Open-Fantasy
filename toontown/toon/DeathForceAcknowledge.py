@@ -10,7 +10,7 @@ from . import LaffMeter
 class DeathForceAcknowledge:
 
     def __init__(self, doneEvent):
-        fadeModel = loader.loadModel('phase_3/models/misc/fade')
+        fadeModel = loader.loadModel('user/resources/default/phase_3/models/misc/fade')
         if fadeModel:
             self.fade = DirectFrame(
                 parent=aspect2dp,

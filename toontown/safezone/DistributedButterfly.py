@@ -65,10 +65,10 @@ class DistributedButterfly(DistributedObject.DistributedObject):
             return
         self.butterfly = Actor.Actor()
         self.butterfly.setBlend(frameBlend=base.smoothAnimations)
-        self.butterfly.loadModel('phase_4/models/props/SZ_butterfly-mod.bam')
-        self.butterfly.loadAnims({'flutter': 'phase_4/models/props/SZ_butterfly-flutter.bam',
-                                  'glide': 'phase_4/models/props/SZ_butterfly-glide.bam',
-                                  'land': 'phase_4/models/props/SZ_butterfly-land.bam'})
+        self.butterfly.loadModel('user/resources/default/phase_4/models/props/SZ_butterfly-mod.bam')
+        self.butterfly.loadAnims({'flutter': 'user/resources/default/phase_4/models/props/SZ_butterfly-flutter.bam',
+                                  'glide': 'user/resources/default/phase_4/models/props/SZ_butterfly-glide.bam',
+                                  'land': 'user/resources/default/phase_4/models/props/SZ_butterfly-land.bam'})
         index = self.doId % len(self.wingTypes)
         chosenType = self.wingTypes[index]
         node = self.butterfly.getGeomNode()
@@ -114,7 +114,7 @@ class DistributedButterfly(DistributedObject.DistributedObject):
         self.butterfly.reparentTo(self.butterflyNode)
         self.butterfly.setBlend(frameBlend=base.smoothAnimations)
         self.__initCollisions()
-        self.dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
+        self.dropShadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
         self.dropShadow.setColor(0, 0, 0, 0.3)
         self.dropShadow.setPos(0, 0.1, -0.05)
         self.dropShadow.setScale(self.shadowScaleBig)

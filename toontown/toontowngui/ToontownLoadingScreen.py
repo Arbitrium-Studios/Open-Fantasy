@@ -10,9 +10,9 @@ class ToontownLoadingScreen:
     def __init__(self):
         self.__expectedCount = 0
         self.__count = 0
-        self.gui = loader.loadModel('phase_3/models/gui/progress-background')
+        self.gui = loader.loadModel('user/resources/default/phase_3/models/gui/progress-background')
         self.banner = loader.loadModel(
-            'phase_3/models/gui/toon_council').find('**/scroll')
+            'user/resources/default/phase_3/models/gui/toon_council').find('**/scroll')
         self.banner.reparentTo(self.gui)
         self.banner.setScale(0.4, 0.4, 0.4)
         self.tip = DirectLabel(guiId='ToontownLoadingScreenTip',

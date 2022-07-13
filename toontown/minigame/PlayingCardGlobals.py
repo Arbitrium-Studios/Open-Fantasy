@@ -36,7 +36,7 @@ def getCardName(value):
 Styles = ['standard']
 CardImages = {}
 _cardImagesInitialized = 0
-_modelPathBase = 'phase_3.5/models/gui/inventory_icons'
+_modelPathBase = 'user/resources/default/phase_3.5/models/gui/inventory_icons'
 
 
 def convertValueToGagTrackAndLevel(value):

@@ -16,7 +16,7 @@ class PartyCogTrackerGui:
 
     def __init__(self):
         self.cogTracker = loader.loadModel(
-            'phase_13/models/parties/cogTrackerGUI')
+            'user/resources/default/phase_13/models/parties/cogTrackerGUI')
         self.cogTracker.reparentTo(aspect2d)
         self.cogTracker.setScale(1.25)
         self.cogTracker.setX(1.0)
@@ -160,7 +160,7 @@ class PartyCogActivityGui(DirectObject):
         h = PartyGlobals.CogActivityPowerMeterHeight / 2.0
         w = PartyGlobals.CogActivityPowerMeterWidth / 2.0
         victoryBalanceBar = loader.loadModel(
-            'phase_13/models/parties/tt_m_gui_pty_pieToss_balanceBar')
+            'user/resources/default/phase_13/models/parties/tt_m_gui_pty_pieToss_balanceBar')
         self._victoryBalanceBar = victoryBalanceBar.find(
             '**/*tt_t_gui_pty_pieToss_balanceBarBG')
         self._victoryBalanceBar.reparentTo(aspect2d)
@@ -200,7 +200,7 @@ class PartyCogActivityGui(DirectObject):
         self._attackIvalName = 'PartyCogActivityGui-attackKeys'
         self._moveIvalName = 'PartyCogActivityGui-moveKeys'
         pieTossControls = loader.loadModel(
-            'phase_13/models/parties/tt_m_gui_pty_pieToss_controls')
+            'user/resources/default/phase_13/models/parties/tt_m_gui_pty_pieToss_controls')
         self._attackKeys = pieTossControls.find('**/*control*')
         self._moveKeys = pieTossControls.find('**/*arrow*')
         self._moveKeys.reparentTo(aspect2d)

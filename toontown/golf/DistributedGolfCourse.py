@@ -115,7 +115,7 @@ class DistributedGolfCourse(
         return
 
     def load(self):
-        self.music = base.loader.loadMusic('phase_6/audio/bgm/GZ_PlayGolf.ogg')
+        self.music = base.loader.loadMusic('user/resources/default/phase_6/audio/bgm/GZ_PlayGolf.ogg')
 
     def setCourseReady(self, numHoles, holeIds, coursePar):
         self.notify.debug('GOLF COURSE: received setCourseReady')
@@ -143,7 +143,7 @@ class DistributedGolfCourse(
         whichToon = 0
         color = 0
         tpDiff = -0.45
-        headPanel = loader.loadModel('phase_6/models/golf/headPanel')
+        headPanel = loader.loadModel('user/resources/default/phase_6/models/golf/headPanel')
         if self.numPlayers > 0:
             for avId in self.avIdList:
                 if not self.localAvId == avId:

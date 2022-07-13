@@ -28,7 +28,7 @@ class GardenTutorial(DirectFrame, FSM.FSM):
                 0.0, 0.32), text_fg=(
                 1, 0, 0, 1), text_scale=0.13, text_font=ToontownGlobals.getSignFont())
         images = loader.loadModel(
-            'phase_5.5/models/estate/gardenTutorialPages')
+            'user/resources/default/phase_5.5/models/estate/gardenTutorialPages')
         self.iPage1 = DirectFrame(self, image=images.find(
             '**/GardenTutorialPage1'), scale=0.35, pos=(-0.51, -0.1, 0.05))
         self.iPage1.hide()
@@ -44,8 +44,8 @@ class GardenTutorial(DirectFrame, FSM.FSM):
         self.iPage5 = DirectFrame(self, image=images.find(
             '**/GardenTutorialPage5'), scale=0.7, pos=(-0.51, -0.1, 0.05))
         self.iPage5.hide()
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.bNext = DirectButton(self, image=(gui.find('**/Horiz_Arrow_UP'),
                                                gui.find('**/Horiz_Arrow_DN'),
                                                gui.find(

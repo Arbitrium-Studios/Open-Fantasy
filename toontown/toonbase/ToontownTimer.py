@@ -10,7 +10,7 @@ class ToontownTimer(OTPTimer):
 
     def getImage(self):
         if ToontownTimer.ClockImage is None:
-            model = loader.loadModel('phase_3.5/models/gui/clock_gui')
+            model = loader.loadModel('user/resources/default/phase_3.5/models/gui/clock_gui')
             ToontownTimer.ClockImage = model.find('**/alarm_clock')
             model.removeNode()
         return ToontownTimer.ClockImage

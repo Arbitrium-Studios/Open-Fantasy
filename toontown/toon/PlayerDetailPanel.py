@@ -60,8 +60,8 @@ class PlayerDetailPanel(DirectFrame):
         self.avName = avName
         self.avatar = None
         self.createdAvatar = None
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        gui = loader.loadModel('phase_3.5/models/gui/avatar_panel_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         detailPanel = gui.find('**/avatarInfoPanel')
         textScale = 0.132
         textWrap = 10.4
@@ -101,7 +101,7 @@ class PlayerDetailPanel(DirectFrame):
                     -0.85,
                     0.0,
                     0.56))
-            guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+            guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
             self.gotoToonButton = DirectButton(
                 parent=self,
                 relief=None,

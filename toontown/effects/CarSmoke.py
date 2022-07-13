@@ -24,13 +24,13 @@ class CarSmoke(NodePath):
             particleSearchPath.appendDirectory(
                 Filename.fromOsSpecific(
                     basePath + '/src/effects'))
-            particleSearchPath.appendDirectory(Filename('phase_3.5/etc'))
-            particleSearchPath.appendDirectory(Filename('phase_4/etc'))
-            particleSearchPath.appendDirectory(Filename('phase_5/etc'))
-            particleSearchPath.appendDirectory(Filename('phase_6/etc'))
-            particleSearchPath.appendDirectory(Filename('phase_7/etc'))
-            particleSearchPath.appendDirectory(Filename('phase_8/etc'))
-            particleSearchPath.appendDirectory(Filename('phase_9/etc'))
+            particleSearchPath.appendDirectory(Filename('user/resources/default/phase_3.5/etc'))
+            particleSearchPath.appendDirectory(Filename('user/resources/default/phase_4/etc'))
+            particleSearchPath.appendDirectory(Filename('user/resources/default/phase_5/etc'))
+            particleSearchPath.appendDirectory(Filename('user/resources/default/phase_6/etc'))
+            particleSearchPath.appendDirectory(Filename('user/resources/default/phase_7/etc'))
+            particleSearchPath.appendDirectory(Filename('user/resources/default/phase_8/etc'))
+            particleSearchPath.appendDirectory(Filename('user/resources/default/phase_9/etc'))
             particleSearchPath.appendDirectory(Filename('.'))
         pfile = Filename('smokeTest4.ptf')
         found = vfs.resolveFilename(pfile, particleSearchPath)
@@ -41,7 +41,7 @@ class CarSmoke(NodePath):
         self.effect.loadConfig(pfile)
         ren = self.effect.getParticlesNamed('particles-1').getRenderer()
         ren.setTextureFromNode(
-            'phase_4/models/props/tt_m_efx_ext_smoke', '**/*')
+            'user/resources/default/phase_4/models/props/tt_m_efx_ext_smoke', '**/*')
 
     def start(self):
         self.effect.start(parent=self.effectNode)

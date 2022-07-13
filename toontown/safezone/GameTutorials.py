@@ -33,7 +33,7 @@ class ChineseTutorial(DirectFrame, FSM.FSM):
             self, relief=None, text='', text_pos=(
                 0.0, 0.4), text_fg=(
                 1, 0, 0, 1), text_scale=0.13, text_font=ToontownGlobals.getSignFont())
-        images = loader.loadModel('phase_6/models/golf/checker_tutorial.bam')
+        images = loader.loadModel('user/resources/default/phase_6/models/golf/checker_tutorial.bam')
         images.setTransparency(1)
         self.iPage1 = images.find('**/tutorialPage1*')
         self.iPage1.reparentTo(aspect2d)
@@ -54,8 +54,8 @@ class ChineseTutorial(DirectFrame, FSM.FSM):
         self.iPage3.setScale(13.95)
         self.iPage3.setTransparency(1)
         self.iPage3.hide()
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.bNext = DirectButton(self, image=(gui.find('**/Horiz_Arrow_UP'),
                                                gui.find('**/Horiz_Arrow_DN'),
                                                gui.find(
@@ -190,7 +190,7 @@ class CheckersTutorial(DirectFrame, FSM.FSM):
                 0.0, 0.4), text_fg=(
                 1, 0, 0, 1), text_scale=0.13, text_font=ToontownGlobals.getSignFont())
         images = loader.loadModel(
-            'phase_6/models/golf/regularchecker_tutorial.bam')
+            'user/resources/default/phase_6/models/golf/regularchecker_tutorial.bam')
         images.setTransparency(1)
         self.iPage1 = images.find('**/tutorialPage1*')
         self.iPage1.reparentTo(aspect2d)
@@ -217,8 +217,8 @@ class CheckersTutorial(DirectFrame, FSM.FSM):
         self.iPage4.setScale(0.4)
         self.iPage4.setTransparency(1)
         self.iPage4.hide()
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.bNext = DirectButton(self, image=(gui.find('**/Horiz_Arrow_UP'),
                                                gui.find('**/Horiz_Arrow_DN'),
                                                gui.find(

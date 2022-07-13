@@ -61,14 +61,14 @@ class CalendarGuiMonth(DirectFrame):
 
     def attachMarker(self, parent, scale=0.01, color=(1, 0, 0)):
         if self.showMarkers:
-            marker = loader.loadModel('phase_3/models/misc/sphere')
+            marker = loader.loadModel('user/resources/default/phase_3/models/misc/sphere')
             marker.reparentTo(parent)
             marker.setScale(scale)
             marker.setColor(*color)
 
     def load(self):
         monthAsset = loader.loadModel(
-            'phase_4/models/parties/tt_m_gui_sbk_calendar')
+            'user/resources/default/phase_4/models/parties/tt_m_gui_sbk_calendar')
         monthAsset.reparentTo(self)
         self.monthLocator = self.find('**/locator_month/locator_month')
         self.attachMarker(self.monthLocator)
@@ -133,7 +133,7 @@ class CalendarGuiMonth(DirectFrame):
                 0, 0, 0, 0), text_scale=0.04)
 
         gui = loader.loadModel(
-            'phase_4/models/parties/tt_m_gui_sbk_calendar_box')
+            'user/resources/default/phase_4/models/parties/tt_m_gui_sbk_calendar_box')
         arrowUp = gui.find('**/downScroll_up')
         arrowDown = gui.find('**/downScroll_down')
         arrowHover = gui.find('**/downScroll_hover')

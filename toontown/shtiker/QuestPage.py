@@ -82,7 +82,7 @@ class QuestPage(ShtikerPage.ShtikerPage):
         del self.title
         del self.quests
         del self.questFrames
-        loader.unloadModel('phase_3.5/models/gui/stickerbook_gui')
+        loader.unloadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
         ShtikerPage.ShtikerPage.unload(self)
 
     def clearQuestFrame(self, index):

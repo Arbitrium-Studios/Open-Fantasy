@@ -111,7 +111,7 @@ class DistributedEstate(DistributedObject.DistributedObject):
         self.game = GardenDropGame.GardenDropGame()
 
     def loadAirplane(self):
-        self.airplane = loader.loadModel('phase_4/models/props/airplane.bam')
+        self.airplane = loader.loadModel('user/resources/default/phase_4/models/props/airplane.bam')
         self.airplane.setScale(4)
         self.airplane.setPos(0, 0, 1)
         self.banner = self.airplane.find('**/*banner')
@@ -129,13 +129,13 @@ class DistributedEstate(DistributedObject.DistributedObject):
     def loadWitch(self):
         if not self.airplane:
             self.airplane = loader.loadModel(
-                'phase_4/models/props/tt_m_prp_ext_flyingWitch.bam')
+                'user/resources/default/phase_4/models/props/tt_m_prp_ext_flyingWitch.bam')
 
         def __replaceAirplane__():
             self.airplane.reparentTo(hidden)
             del self.airplane
             self.airplane = loader.loadModel(
-                'phase_4/models/props/tt_m_prp_ext_flyingWitch.bam')
+                'user/resources/default/phase_4/models/props/tt_m_prp_ext_flyingWitch.bam')
             self.airplane.setScale(2)
             self.airplane.setPos(0, 0, 1)
             bannerText = TextNode('bannerText')
@@ -163,7 +163,7 @@ class DistributedEstate(DistributedObject.DistributedObject):
             del self.airplane
             del self.bn
             self.airplane = loader.loadModel(
-                'phase_4/models/props/airplane.bam')
+                'user/resources/default/phase_4/models/props/airplane.bam')
             self.airplane.setScale(4)
             self.airplane.setPos(0, 0, 1)
             self.banner = self.airplane.find('**/*banner')
@@ -438,7 +438,7 @@ class DistributedEstate(DistributedObject.DistributedObject):
 
     def loadFlowerSellBox(self):
         self.flowerSellBox = loader.loadModel(
-            'phase_5.5/models/estate/wheelbarrel.bam')
+            'user/resources/default/phase_5.5/models/estate/wheelbarrel.bam')
         self.flowerSellBox.setPos(-142.586, 4.353, 0.025)
         self.flowerSellBox.reparentTo(render)
         colNode = self.flowerSellBox.find('**/collision')

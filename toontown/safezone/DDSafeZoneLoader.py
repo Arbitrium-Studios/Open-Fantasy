@@ -13,21 +13,21 @@ class DDSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
         SafeZoneLoader.SafeZoneLoader.__init__(
             self, hood, parentFSM, doneEvent)
         self.playgroundClass = DDPlayground.DDPlayground
-        self.musicFile = 'phase_6/audio/bgm/DD_nbrhood.ogg'
-        self.activityMusicFile = 'phase_6/audio/bgm/DD_SZ_activity.ogg'
-        self.dnaFile = 'phase_6/dna/donalds_dock_sz.dna'
-        self.safeZoneStorageDNAFile = 'phase_6/dna/storage_DD_sz.dna'
+        self.musicFile = 'user/resources/default/phase_6/audio/bgm/DD_nbrhood.ogg'
+        self.activityMusicFile = 'user/resources/default/phase_6/audio/bgm/DD_SZ_activity.ogg'
+        self.dnaFile = 'user/resources/default/phase_6/dna/donalds_dock_sz.dna'
+        self.safeZoneStorageDNAFile = 'user/resources/default/phase_6/dna/storage_DD_sz.dna'
 
     def load(self):
         SafeZoneLoader.SafeZoneLoader.load(self)
         self.seagullSound = base.loader.loadSfx(
-            'phase_6/audio/sfx/SZ_DD_Seagull.ogg')
+            'user/resources/default/phase_6/audio/sfx/SZ_DD_Seagull.ogg')
         self.underwaterSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/AV_ambient_water.ogg')
+            'user/resources/default/phase_4/audio/sfx/AV_ambient_water.ogg')
         self.swimSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/AV_swim_single_stroke.ogg')
+            'user/resources/default/phase_4/audio/sfx/AV_swim_single_stroke.ogg')
         self.submergeSound = base.loader.loadSfx(
-            'phase_5.5/audio/sfx/AV_jump_in_water.ogg')
+            'user/resources/default/phase_5.5/audio/sfx/AV_jump_in_water.ogg')
         water = self.geom.find('**/water')
         water.setTransparency(1)
         water.setColor(1, 1, 1, 0.8)
@@ -42,13 +42,13 @@ class DDSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
                 wheel.hide()
             self.boat.stash()
         self.dockSound = base.loader.loadSfx(
-            'phase_6/audio/sfx/SZ_DD_dockcreak.ogg')
+            'user/resources/default/phase_6/audio/sfx/SZ_DD_dockcreak.ogg')
         self.foghornSound = base.loader.loadSfx(
-            'phase_5/audio/sfx/SZ_DD_foghorn.ogg')
+            'user/resources/default/phase_5/audio/sfx/SZ_DD_foghorn.ogg')
         self.bellSound = base.loader.loadSfx(
-            'phase_6/audio/sfx/SZ_DD_shipbell.ogg')
+            'user/resources/default/phase_6/audio/sfx/SZ_DD_shipbell.ogg')
         self.waterSound = base.loader.loadSfx(
-            'phase_6/audio/sfx/SZ_DD_waterlap.ogg')
+            'user/resources/default/phase_6/audio/sfx/SZ_DD_waterlap.ogg')
 
     def unload(self):
         SafeZoneLoader.SafeZoneLoader.unload(self)

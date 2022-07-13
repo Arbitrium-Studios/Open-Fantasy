@@ -362,10 +362,10 @@ class DistributedParty(DistributedObject.DistributedObject):
     def load(self):
         Toon.loadMinigameAnims()
         self.defaultSignModel = loader.loadModel(
-            'phase_13/models/parties/eventSign')
+            'user/resources/default/phase_13/models/parties/eventSign')
         self.activityIconsModel = loader.loadModel(
-            'phase_4/models/parties/eventSignIcons')
-        model = loader.loadModel('phase_4/models/parties/partyStickerbook')
+            'user/resources/default/phase_4/models/parties/eventSignIcons')
+        model = loader.loadModel('user/resources/default/phase_4/models/parties/partyStickerbook')
         self.partyHat = model.find('**/Stickerbook_PartyIcon')
         self.partyHat.setPos(0.0, 0.1, 2.5)
         self.partyHat.setHpr(0.0, 0.0, -50.0)
@@ -374,14 +374,14 @@ class DistributedParty(DistributedObject.DistributedObject):
         self.partyHat.reparentTo(hidden)
         model.removeNode()
         self.defaultLeverModel = loader.loadModel(
-            'phase_13/models/parties/partyLeverBase')
+            'user/resources/default/phase_13/models/parties/partyLeverBase')
         self.defaultStickModel = loader.loadModel(
-            'phase_13/models/parties/partyLeverStick')
+            'user/resources/default/phase_13/models/parties/partyLeverStick')
 
     def loadGrass(self):
         self.grassRoot = NodePath('GrassRoot')
         self.grassRoot.reparentTo(base.cr.playGame.hood.loader.geom)
-        grass = loader.loadModel('phase_13/models/parties/grass')
+        grass = loader.loadModel('user/resources/default/phase_13/models/parties/grass')
         clearPositions = self.getClearSquarePositions()
         numTufts = min(len(clearPositions) * 3, PartyGlobals.TuftsOfGrass)
         for i in range(numTufts):
@@ -567,7 +567,7 @@ class DistributedParty(DistributedObject.DistributedObject):
 
     def loadPartyCountdownTimer(self):
         self.partyClockModel = loader.loadModel(
-            'phase_13/models/parties/partyClock')
+            'user/resources/default/phase_13/models/parties/partyClock')
         self.partyClockModel.setPos(
             self.partyClockInfo[0], self.partyClockInfo[1], 0.0)
         self.partyClockModel.setH(self.partyClockInfo[2])

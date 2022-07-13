@@ -50,7 +50,7 @@ class DistributedLawOfficeElevatorExt(
 
     def setupElevator(self):
         self.elevatorModel = loader.loadModel(
-            'phase_10/models/cogHQ/mintElevator')
+            'user/resources/default/phase_10/models/cogHQ/mintElevator')
         self.elevatorModel.reparentTo(render)
         self.leftDoor = self.elevatorModel.find('**/left_door')
         self.rightDoor = self.elevatorModel.find('**/right_door')

@@ -85,7 +85,7 @@ class BodyShop(StateData.StateData):
         self.ignore(self.shuffleFetchMsg)
 
     def load(self):
-        self.gui = loader.loadModel('phase_3/models/gui/tt_m_gui_mat_mainGui')
+        self.gui = loader.loadModel('user/resources/default/phase_3/models/gui/tt_m_gui_mat_mainGui')
         guiRArrowUp = self.gui.find('**/tt_t_gui_mat_arrowUp')
         guiRArrowDown = self.gui.find('**/tt_t_gui_mat_arrowDown')
         guiRArrowRollover = self.gui.find('**/tt_t_gui_mat_arrowUp')
@@ -97,7 +97,7 @@ class BodyShop(StateData.StateData):
         shuffleArrowDisabled = self.gui.find(
             '**/tt_t_gui_mat_shuffleArrowDisabled')
         self.upsellModel = loader.loadModel(
-            'phase_3/models/gui/tt_m_gui_ups_mainGui')
+            'user/resources/default/phase_3/models/gui/tt_m_gui_ups_mainGui')
         upsellTex = self.upsellModel.find('**/tt_t_gui_ups_banner')
         self.parentFrame = DirectFrame(
             relief=DGG.RAISED, pos=(

@@ -39,9 +39,9 @@ class DistributedCogdoBarrel(DistributedObject.DistributedObject):
             cogdoBarrelsNode.stash()
         self.model.reparentTo(cogdoBarrelsNode)
         self.availableTex = loader.loadTexture(
-            'phase_5/maps/tt_t_ara_cbr_Barrel_notUsed.jpg')
+            'user/resources/default/phase_5/maps/tt_t_ara_cbr_Barrel_notUsed.jpg')
         self.usedTex = loader.loadTexture(
-            'phase_5/maps/tt_t_ara_cbr_Barrel_Used.jpg')
+            'user/resources/default/phase_5/maps/tt_t_ara_cbr_Barrel_Used.jpg')
         self.model.setTexture(self.availableTex, 100)
 
     def __addCollision(self):

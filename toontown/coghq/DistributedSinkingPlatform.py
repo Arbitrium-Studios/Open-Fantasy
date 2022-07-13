@@ -60,7 +60,7 @@ class DistributedSinkingPlatform(BasicEntities.DistributedNodePathEntity):
 
     def loadModel(self):
         self.notify.debug('loadModel')
-        model = loader.loadModel('phase_9/models/cogHQ/platform1')
+        model = loader.loadModel('user/resources/default/phase_9/models/cogHQ/platform1')
         self.platform = MovingPlatform.MovingPlatform()
         self.platform.setupCopyModel(
             self.getParentToken(), model, 'platformcollision')

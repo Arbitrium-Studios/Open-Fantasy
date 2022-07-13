@@ -17,7 +17,7 @@ GAME_LOGO_NAMES = {'Default': 'GameLogo_Unknown',
                    'Disney XD': 'GameLogo_XD',
                    'Toontown': 'GameLogo_Toontown',
                    'Pirates': 'GameLogo_Pirates'}
-GAME_LOGO_FILE = 'phase_3/models/misc/game_logo_card'
+GAME_LOGO_FILE = 'user/resources/default/phase_3/models/misc/game_logo_card'
 
 
 class PlayerInfoPanel(AvatarPanelBase.AvatarPanelBase):
@@ -66,7 +66,7 @@ class PlayerInfoPanel(AvatarPanelBase.AvatarPanelBase):
         else:
             onlineButtonState = DGG.DISABLED
         base.localAvatar.obscureFriendsListButton(1)
-        gui = loader.loadModel('phase_3.5/models/gui/avatar_panel_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.frame = DirectFrame(
             image=gui.find('**/avatar_panel'),
             relief=None,

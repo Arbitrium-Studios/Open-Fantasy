@@ -41,7 +41,7 @@ class FishSellGUI(DirectFrame):
         newTankFish = base.localAvatar.fishTank.getFish()
         self.picker.update(newTankFish)
         self.picker.show()
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okImageList = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),

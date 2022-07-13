@@ -463,12 +463,12 @@ class Street(BattlePlace.BattlePlace):
             signTexturePath = streetSign.StreetSignBaseDir + \
                 '/' + streetSign.StreetSignFileName
             loaderTexturePath = Filename(str(signTexturePath))
-            alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
+            alphaPath = 'user/resources/default/phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             inDreamland = False
             if place.zoneId and ZoneUtil.getCanonicalHoodId(
                     place.zoneId) == ToontownGlobals.DonaldsDreamland:
                 inDreamland = True
-            alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
+            alphaPath = 'user/resources/default/phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             if Filename(signTexturePath).exists():
                 signTexture = loader.loadTexture(loaderTexturePath, alphaPath)
             for sign in signs:

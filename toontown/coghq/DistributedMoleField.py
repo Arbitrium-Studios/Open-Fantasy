@@ -117,14 +117,14 @@ class DistributedMoleField(DistributedNodePathEntity,
         self.centerNode = self.attachNewNode('center')
         self.centerCenterNode()
         self.soundBomb = base.loader.loadSfx(
-            'phase_12/audio/sfx/Mole_Surprise.ogg')
+            'user/resources/default/phase_12/audio/sfx/Mole_Surprise.ogg')
         self.soundBomb2 = base.loader.loadSfx(
-            'phase_3.5/audio/dial/AV_pig_howl.ogg')
+            'user/resources/default/phase_3.5/audio/dial/AV_pig_howl.ogg')
         self.soundCog = base.loader.loadSfx(
-            'phase_12/audio/sfx/Mole_Stomp.ogg')
-        self.soundUp = base.loader.loadSfx('phase_4/audio/sfx/MG_Tag_C.ogg')
+            'user/resources/default/phase_12/audio/sfx/Mole_Stomp.ogg')
+        self.soundUp = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_Tag_C.ogg')
         self.soundDown = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_whizz.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_whizz.ogg')
         upInterval = SoundInterval(self.soundUp, loop=0)
         downInterval = SoundInterval(self.soundDown, loop=0)
         self.soundIUpDown = Sequence(upInterval, downInterval)

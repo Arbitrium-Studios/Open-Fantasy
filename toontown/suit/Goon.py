@@ -9,8 +9,8 @@ from . import SuitDNA
 import math
 AnimDict = {'pg': (('walk', '-walk'), ('collapse', '-collapse'), ('recovery', '-recovery')),
             'sg': (('walk', '-walk'), ('collapse', '-collapse'), ('recovery', '-recovery'))}
-ModelDict = {'pg': 'phase_9/models/char/Cog_Goonie',
-             'sg': 'phase_9/models/char/Cog_Goonie'}
+ModelDict = {'pg': 'user/resources/default/phase_9/models/char/Cog_Goonie',
+             'sg': 'user/resources/default/phase_9/models/char/Cog_Goonie'}
 
 
 class Goon(Avatar.Avatar):
@@ -119,7 +119,7 @@ class Goon(Avatar.Avatar):
         if self.radar:
             self.radar.removeNode()
         self.radar = self.eye.attachNewNode('radar')
-        model = loader.loadModel('phase_9/models/cogHQ/alphaCone2')
+        model = loader.loadModel('user/resources/default/phase_9/models/cogHQ/alphaCone2')
         beam = self.radar.attachNewNode('beam')
         transformNode = model.find('**/transform')
         transformNode.getChildren().reparentTo(beam)

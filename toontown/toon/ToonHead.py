@@ -51,45 +51,45 @@ DogMuzzleDict = {'dls': '/models/char/dogMM_Shorts-headMuzzles-',
 class ToonHead(Actor.Actor):
     notify = DirectNotifyGlobal.directNotify.newCategory('ToonHead')
     EyesOpen = loader.loadTexture(
-        'phase_3/maps/eyes.jpg',
-        'phase_3/maps/eyes_a.rgb')
+        'user/resources/default/phase_3/maps/eyes.jpg',
+        'user/resources/default/phase_3/maps/eyes_a.rgb')
     EyesOpen.setMinfilter(Texture.FTLinear)
     EyesOpen.setMagfilter(Texture.FTLinear)
     EyesClosed = loader.loadTexture(
-        'phase_3/maps/eyesClosed.jpg',
-        'phase_3/maps/eyesClosed_a.rgb')
+        'user/resources/default/phase_3/maps/eyesClosed.jpg',
+        'user/resources/default/phase_3/maps/eyesClosed_a.rgb')
     EyesClosed.setMinfilter(Texture.FTLinear)
     EyesClosed.setMagfilter(Texture.FTLinear)
     EyesSadOpen = loader.loadTexture(
-        'phase_3/maps/eyesSad.jpg',
-        'phase_3/maps/eyesSad_a.rgb')
+        'user/resources/default/phase_3/maps/eyesSad.jpg',
+        'user/resources/default/phase_3/maps/eyesSad_a.rgb')
     EyesSadOpen.setMinfilter(Texture.FTLinear)
     EyesSadOpen.setMagfilter(Texture.FTLinear)
     EyesSadClosed = loader.loadTexture(
-        'phase_3/maps/eyesSadClosed.jpg',
-        'phase_3/maps/eyesSadClosed_a.rgb')
+        'user/resources/default/phase_3/maps/eyesSadClosed.jpg',
+        'user/resources/default/phase_3/maps/eyesSadClosed_a.rgb')
     EyesSadClosed.setMinfilter(Texture.FTLinear)
     EyesSadClosed.setMagfilter(Texture.FTLinear)
     EyesAngryOpen = loader.loadTexture(
-        'phase_3/maps/eyesAngry.jpg',
-        'phase_3/maps/eyesAngry_a.rgb')
+        'user/resources/default/phase_3/maps/eyesAngry.jpg',
+        'user/resources/default/phase_3/maps/eyesAngry_a.rgb')
     EyesAngryOpen.setMinfilter(Texture.FTLinear)
     EyesAngryOpen.setMagfilter(Texture.FTLinear)
     EyesAngryClosed = loader.loadTexture(
-        'phase_3/maps/eyesAngryClosed.jpg',
-        'phase_3/maps/eyesAngryClosed_a.rgb')
+        'user/resources/default/phase_3/maps/eyesAngryClosed.jpg',
+        'user/resources/default/phase_3/maps/eyesAngryClosed_a.rgb')
     EyesAngryClosed.setMinfilter(Texture.FTLinear)
     EyesAngryClosed.setMagfilter(Texture.FTLinear)
     EyesSurprised = loader.loadTexture(
-        'phase_3/maps/eyesSurprised.jpg',
-        'phase_3/maps/eyesSurprised_a.rgb')
+        'user/resources/default/phase_3/maps/eyesSurprised.jpg',
+        'user/resources/default/phase_3/maps/eyesSurprised_a.rgb')
     EyesSurprised.setMinfilter(Texture.FTLinear)
     EyesSurprised.setMagfilter(Texture.FTLinear)
-    Muzzle = loader.loadTexture('phase_3/maps/muzzleShrtGeneric.jpg')
+    Muzzle = loader.loadTexture('user/resources/default/phase_3/maps/muzzleShrtGeneric.jpg')
     Muzzle.setMinfilter(Texture.FTLinear)
     Muzzle.setMagfilter(Texture.FTLinear)
     MuzzleSurprised = loader.loadTexture(
-        'phase_3/maps/muzzleShortSurprised.jpg')
+        'user/resources/default/phase_3/maps/muzzleShortSurprised.jpg')
     MuzzleSurprised.setMinfilter(Texture.FTLinear)
     MuzzleSurprised.setMagfilter(Texture.FTLinear)
     LeftA = Point3(0.06, 0.0, 0.14)
@@ -387,7 +387,7 @@ class ToonHead(Actor.Actor):
             ToonHead.notify.error('unknown head style: %s' % headStyle)
         if len(lods) == 1:
             self.loadModel(
-                'phase_3' +
+                'user/resources/default/phase_3' +
                 filePrefix +
                 lods[0],
                 'head',
@@ -410,7 +410,7 @@ class ToonHead(Actor.Actor):
                     self.__copy = copy
         else:
             for lod in lods:
-                self.loadModel('phase_3' + filePrefix + lod, 'head', lod, copy)
+                self.loadModel('user/resources/default/phase_3' + filePrefix + lod, 'head', lod, copy)
                 if not forGui:
                     pLoaded = self.loadPumpkin(headStyle[1], lod, copy)
                     self.loadSnowMan(headStyle[1], lod, copy)
@@ -439,7 +439,7 @@ class ToonHead(Actor.Actor):
                 not base.launcher or base.launcher and base.launcher.getPhaseComplete(4)):
             if not hasattr(self, 'pumpkins'):
                 self.pumpkins = NodePathCollection()
-            ppath = 'phase_4/models/estate/pumpkin_'
+            ppath = 'user/resources/default/phase_4/models/estate/pumpkin_'
             if headStyle == 'l':
                 if copy:
                     pmodel = loader.loadModel(ppath + 'tall')
@@ -469,14 +469,14 @@ class ToonHead(Actor.Actor):
                 return False
         else:
             ToonHead.notify.debug(
-                'phase_4 not complete yet. Postponing pumpkin head load.')
+                'user/resources/default/phase_4 not complete yet. Postponing pumpkin head load.')
 
     def loadSnowMan(self, headStyle, lod, copy):
         if hasattr(base, 'launcher') and (
                 not base.launcher or base.launcher and base.launcher.getPhaseComplete(4)):
             if not hasattr(self, 'snowMen'):
                 self.snowMen = NodePathCollection()
-            snowManPath = 'phase_4/models/props/tt_m_efx_snowmanHead_'
+            snowManPath = 'user/resources/default/phase_4/models/props/tt_m_efx_snowmanHead_'
             if headStyle == 'l':
                 snowManPath = snowManPath + 'tall'
             else:
@@ -496,7 +496,7 @@ class ToonHead(Actor.Actor):
                 del self.snowMen
                 return False
         else:
-            ToonHead.notify.debug('phase_4 not loaded yet.')
+            ToonHead.notify.debug('user/resources/default/phase_4 not loaded yet.')
 
     def __fixPumpkin(self, style, lodName=None, copy=1):
         if lodName is None:
@@ -819,7 +819,7 @@ class ToonHead(Actor.Actor):
             if self.__eyelashClosed:
                 self.__eyelashClosed.removeNode()
             animal = style.head[0]
-            model = loader.loadModel('phase_3' + EyelashDict[animal])
+            model = loader.loadModel('user/resources/default/phase_3' + EyelashDict[animal])
             if self.hasLOD():
                 head = self.getPart('head', '1000')
             else:
@@ -1275,7 +1275,7 @@ class ToonHead(Actor.Actor):
                     if lodName == '1000' or lodName == '500':
                         filePrefix = DogMuzzleDict[style.head]
                         muzzles = loader.loadModel(
-                            'phase_3' + filePrefix + lodName)
+                            'user/resources/default/phase_3' + filePrefix + lodName)
                         if ConfigVariableBool('want-new-anims', 1).value:
                             if not self.find(
                                     '**/' + lodName + '/**/__Actor_head/def_head').isEmpty():
@@ -1316,7 +1316,7 @@ class ToonHead(Actor.Actor):
             else:
                 muzzle = self.find('**/muzzle*')
                 filePrefix = DogMuzzleDict[style.head]
-                muzzles = loader.loadModel('phase_3' + filePrefix + '1000')
+                muzzles = loader.loadModel('user/resources/default/phase_3' + filePrefix + '1000')
                 if ConfigVariableBool('want-new-anims', 1).value:
                     if not self.find('**/def_head').isEmpty():
                         muzzles.reparentTo(self.find('**/def_head'))

@@ -10,7 +10,7 @@ class IceCream(PooledEffect, EffectController):
     def __init__(self):
         PooledEffect.__init__(self)
         EffectController.__init__(self)
-        self.card = loader.loadModel('phase_4/models/props/icecream')
+        self.card = loader.loadModel('user/resources/default/phase_4/models/props/icecream')
         self.cardScale = 18.0
         self.setDepthWrite(0)
         self.setColorScaleOff()

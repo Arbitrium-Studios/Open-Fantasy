@@ -22,7 +22,7 @@ class DistributedHealBarrel(DistributedBarrelBase.DistributedBarrelBase):
         DistributedBarrelBase.DistributedBarrelBase.delete(self)
 
     def applyLabel(self):
-        self.gagModel = loader.loadModel('phase_4/models/props/icecream')
+        self.gagModel = loader.loadModel('user/resources/default/phase_4/models/props/icecream')
         self.gagModel.reparentTo(self.gagNode)
         self.gagModel.find('**/p1_2').clearBillboard()
         self.gagModel.setScale(self.gagScale)

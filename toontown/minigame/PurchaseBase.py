@@ -27,8 +27,8 @@ class PurchaseBase(StateData.StateData):
     def load(self, purchaseModels=None):
         if purchaseModels is None:
             purchaseModels = loader.loadModel(
-                'phase_4/models/gui/purchase_gui')
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/FF_safezone.ogg')
+                'user/resources/default/phase_4/models/gui/purchase_gui')
+        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/FF_safezone.ogg')
         self.jarImage = purchaseModels.find('**/Jar')
         self.jarImage.reparentTo(hidden)
         self.frame = DirectFrame(relief=None)

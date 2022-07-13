@@ -15,7 +15,7 @@ class VineSpider(NodePath, DirectObject):
         serialNum = 0
         gameId = 0
         self.serialNum = serialNum
-        gameAssets = loader.loadModel('phase_4/models/minigames/vine_game')
+        gameAssets = loader.loadModel('user/resources/default/phase_4/models/minigames/vine_game')
         spider2 = gameAssets.find('**/spider_3')
         spider1 = gameAssets.find('**/spider_2')
         seqNode = SequenceNode('spider')

@@ -30,7 +30,7 @@ class NPCForceAcknowledge:
             base.localAvatar.b_setAnimState('neutral', 1)
             doneStatus['mode'] = 'incomplete'
             self.doneStatus = doneStatus
-            imageModel = loader.loadModel('phase_4/models/gui/tfa_images')
+            imageModel = loader.loadModel('user/resources/default/phase_4/models/gui/tfa_images')
             if Quests.avatarHasTrolleyQuest(base.localAvatar):
                 if base.localAvatar.quests[0][4] != 0:
                     imgNodePath = imageModel.find('**/hq-dialog-image')

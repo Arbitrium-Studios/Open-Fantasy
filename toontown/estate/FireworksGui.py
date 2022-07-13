@@ -37,7 +37,7 @@ class FireworksGui(DirectFrame):
         for i in itemTypes:
             itemStrings.append(FireworkGlobals.Names[i])
 
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.panelPicker = DirectScrolledList(parent=self, items=itemStrings, command=self.scrollItem, itemMakeFunction=FireworkItemPanel.FireworkItemPanel, itemMakeExtraArgs=[self, itemTypes, self.shootEvent], numItemsVisible=NUM_ITEMS_SHOWN, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
                                                                                                                                                                                                                                                                      gui.find(
                                                                                                                                                                                                                                                                          '**/FndsLst_ScrollDN'),
@@ -49,7 +49,7 @@ class FireworksGui(DirectFrame):
             gui.find('**/FndsLst_ScrollUp_Rllvr'),
             gui.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_scale=(0.5, 1, 1), decButton_pos=(0, 0, 0.2), decButton_image3_color=Vec4(1, 1, 1, 0.3))
         self.panelPicker.setPos(-.06, 0, 0.42)
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         cancelImageList = (
             buttons.find('**/CloseBtn_UP'),
             buttons.find('**/CloseBtn_DN'),

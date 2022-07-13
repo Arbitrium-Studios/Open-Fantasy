@@ -51,7 +51,7 @@ class QuestMap(DirectFrame):
         return
 
     def load(self):
-        gui = loader.loadModel('phase_4/models/questmap/questmap_gui')
+        gui = loader.loadModel('user/resources/default/phase_4/models/questmap/questmap_gui')
         icon = gui.find('**/tt_t_gui_qst_arrow')
         iconNP = aspect2d.attachNewNode('iconNP')
         icon.reparentTo(iconNP)
@@ -87,7 +87,7 @@ class QuestMap(DirectFrame):
         self.mapOpenButton.hide()
         self.mapCloseButton.hide()
         gui.removeNode()
-        icons = loader.loadModel('phase_3/models/gui/cog_icons')
+        icons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
         cIcon = icons.find('**/CorpIcon')
         lIcon = icons.find('**/LegalIcon')
         mIcon = icons.find('**/MoneyIcon')
@@ -168,7 +168,7 @@ class QuestMap(DirectFrame):
         marker = DirectLabel(parent=self.container, text='',
                              text_pos=(-0.05, -0.15), text_fg=(1, 1, 1, 1), relief=None)
         gui = loader.loadModel(
-            'phase_4/models/parties/schtickerbookHostingGUI')
+            'user/resources/default/phase_4/models/parties/schtickerbookHostingGUI')
         icon = gui.find('**/startPartyButton_inactive')
         iconNP = aspect2d.attachNewNode('iconNP')
         icon.reparentTo(iconNP)
@@ -274,7 +274,7 @@ class QuestMap(DirectFrame):
                 zoneId = ZoneUtil.getCanonicalBranchZone(
                     self.av.getLocation()[1])
                 mapsGeom = loader.loadModel(
-                    'phase_4/models/questmap/%s_maps' %
+                    'user/resources/default/phase_4/models/questmap/%s_maps' %
                     ToontownGlobals.dnaMap[hoodId])
                 mapImage = mapsGeom.find(
                     '**/%s_%s_english' %

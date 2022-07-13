@@ -13,7 +13,7 @@ class DistributedPartyCogActivity(DistributedPartyTeamActivity):
     view = None
 
     def __init__(
-            self, cr, arenaModel='phase_13/models/parties/cogPieArena_model', texture=None):
+            self, cr, arenaModel='user/resources/default/phase_13/models/parties/cogPieArena_model', texture=None):
         DistributedPartyTeamActivity.__init__(
             self,
             cr,

@@ -75,9 +75,9 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
             if (width, height) not in screenSizes:
                 screenSizes.append((width, height))
         self.screenSizes = sorted(screenSizes)
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
-        nameShopGui = loader.loadModel('phase_3/models/gui/nameshop_gui')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        nameShopGui = loader.loadModel('user/resources/default/phase_3/models/gui/nameshop_gui')
         circle = nameShopGui.find('**/namePanelCircle')
         innerCircle = circle.copyTo(hidden)
         innerCircle.setPos(0, 0, 0.2)

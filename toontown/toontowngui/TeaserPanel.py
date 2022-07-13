@@ -68,7 +68,7 @@ class TeaserPanel(DirectObject):
             self.browser.setScale(0.75)
             self.browser.reparentTo(hidden)
         self.upsellBackground = loader.loadModel(
-            'phase_3/models/gui/tt_m_gui_ups_panelBg')
+            'user/resources/default/phase_3/models/gui/tt_m_gui_ups_panelBg')
         self.leaveDialog = None
         self.showPage(pageName)
         self.ignore('exitingStoppedState')
@@ -202,7 +202,7 @@ class FeatureBrowser(DirectScrolledList):
 
     def load(self):
         guiModel = loader.loadModel(
-            'phase_3/models/gui/tt_m_gui_ups_logo_noText')
+            'user/resources/default/phase_3/models/gui/tt_m_gui_ups_logo_noText')
         leftLocator = guiModel.find('**/bubbleLeft_locator')
         rightLocator = guiModel.find('**/bubbleRight_locator')
         haveFunNode = TextNode('Have Fun')

@@ -28,7 +28,7 @@ class ClosetGUI(ClothesGUI.ClothesGUI):
 
     def load(self):
         ClothesGUI.ClothesGUI.load(self)
-        self.gui = loader.loadModel('phase_3/models/gui/create_a_toon_gui')
+        self.gui = loader.loadModel('user/resources/default/phase_3/models/gui/create_a_toon_gui')
         self.cancelButton = DirectButton(
             relief=None,
             image=(
@@ -62,7 +62,7 @@ class ClosetGUI(ClothesGUI.ClothesGUI):
         self.cancelButton.hide()
         if self.isOwner:
             trashcanGui = loader.loadModel(
-                'phase_3/models/gui/trashcan_gui.bam')
+                'user/resources/default/phase_3/models/gui/trashcan_gui.bam')
             trashImage = (
                 trashcanGui.find('**/TrashCan_CLSD'),
                 trashcanGui.find('**/TrashCan_OPEN'),

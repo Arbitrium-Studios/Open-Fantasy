@@ -20,7 +20,7 @@ class ShuffleButton:
         self.load()
 
     def load(self):
-        gui = loader.loadModel('phase_3/models/gui/tt_m_gui_mat_mainGui')
+        gui = loader.loadModel('user/resources/default/phase_3/models/gui/tt_m_gui_mat_mainGui')
         shuffleFrame = gui.find('**/tt_t_gui_mat_shuffleFrame')
         shuffleUp = gui.find('**/tt_t_gui_mat_shuffleUp')
         shuffleDown = gui.find('**/tt_t_gui_mat_shuffleDown')

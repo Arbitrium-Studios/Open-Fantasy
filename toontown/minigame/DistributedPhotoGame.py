@@ -129,18 +129,18 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
         self.storageDNAFile = self.data['DNA_TRIO'][1]
         self.dnaFile = self.data['DNA_TRIO'][2]
         self.dnaStore = DNAStorage()
-        loader.loadDNAFile(self.dnaStore, 'phase_4/dna/storage.dna')
+        loader.loadDNAFile(self.dnaStore, 'user/resources/default/phase_4/dna/storage.dna')
         loader.loadDNAFile(self.dnaStore, self.storageDNAFile)
         loader.loadDNAFile(self.dnaStore, self.safeZoneStorageDNAFile)
         node = loader.loadDNAFile(self.dnaStore, self.dnaFile)
         self.scene = hidden.attachNewNode(node)
         self.construct()
-        purchaseModels = loader.loadModel('phase_4/models/gui/purchase_gui')
+        purchaseModels = loader.loadModel('user/resources/default/phase_4/models/gui/purchase_gui')
         self.filmImage = loader.loadModel(
-            'phase_4/models/minigames/photogame_filmroll')
+            'user/resources/default/phase_4/models/minigames/photogame_filmroll')
         self.filmImage.reparentTo(hidden)
         self.tripodModel = loader.loadModel(
-            'phase_4/models/minigames/toon_cannon')
+            'user/resources/default/phase_4/models/minigames/toon_cannon')
         self.filmPanel = DirectLabel(
             parent=hidden,
             relief=None,
@@ -172,14 +172,14 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
                 0.95, 0.95, 0, 1), text_shadow=(
                 0, 0, 0, 1))
         self.music = base.loader.loadMusic(
-            'phase_4/audio/bgm/MG_cannon_game.ogg')
+            'user/resources/default/phase_4/audio/bgm/MG_cannon_game.ogg')
         self.sndPhotoMove = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_adjust.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
         self.sndPhotoFire = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
-        self.sndWin = base.loader.loadSfx('phase_4/audio/sfx/MG_win.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+        self.sndWin = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_win.ogg')
         self.sndFilmTick = base.loader.loadSfx(
-            'phase_4/audio/sfx/Photo_instamatic.ogg')
+            'user/resources/default/phase_4/audio/sfx/Photo_instamatic.ogg')
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.posInTopRightCorner()
         self.timer.hide()
@@ -192,7 +192,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
         self.screenSizeX = (base.a2dRight - base.a2dLeft) * self.screenSizeMult
         self.screenSizeZ = (base.a2dTop - base.a2dBottom) * self.screenSizeMult
         viewfinderImage = loader.loadModel(
-            'phase_4/models/minigames/photo_game_viewfinder')
+            'user/resources/default/phase_4/models/minigames/photo_game_viewfinder')
         viewfinderImage.reparentTo(self.viewfinderNode)
         viewfinderImage.setScale(0.55, 1.0, 0.55)
         self.blackoutNode = base.aspect2d.attachNewNode('blackout node')
@@ -212,8 +212,8 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
         self.blackoutNode.setDepthTest(1)
         self.blackoutNode.hide()
         self.subjectToon = Toon.Toon()
-        self.addSound('zoom', 'Photo_zoom.ogg', 'phase_4/audio/sfx/')
-        self.addSound('snap', 'Photo_shutter.ogg', 'phase_4/audio/sfx/')
+        self.addSound('zoom', 'Photo_zoom.ogg', 'user/resources/default/phase_4/audio/sfx/')
+        self.addSound('snap', 'Photo_shutter.ogg', 'user/resources/default/phase_4/audio/sfx/')
         return
 
     def __setupCapture(self):
@@ -1182,7 +1182,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
                 1.0, 1.0, 1.0, 1.0))
         screen.setHpr(0, 90, 0)
         screen.setDepthTest(1)
-        starImage = loader.loadModel('phase_4/models/minigames/photogame_star')
+        starImage = loader.loadModel('user/resources/default/phase_4/models/minigames/photogame_star')
         starParent = model.attachNewNode('star parent')
         self.starDict[model] = []
         for index in range(NUMSTARS):
@@ -1219,7 +1219,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
     def makeAssignmentFrame(self):
         from direct.gui.DirectGui import DirectFrame
         photoImage = loader.loadModel(
-            'phase_4/models/minigames/photo_game_pictureframe')
+            'user/resources/default/phase_4/models/minigames/photo_game_pictureframe')
         size = 1.0
         assignmentScale = self.screenSizeX / PhotoGameGlobals.ONSCREENASSIGNMENTS
         frame = DirectFrame(parent=hidden, image=photoImage, image_color=(1, 1, 1, 1), image_scale=Point3(1.6 * assignmentScale, 0.0, 1.75 * assignmentScale), frameSize=(-size,
@@ -1232,7 +1232,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
         from direct.gui.DirectGui import DirectFrame
         size = 1.0
         scoreImage = loader.loadModel(
-            'phase_4/models/minigames/photogame_camera')
+            'user/resources/default/phase_4/models/minigames/photogame_camera')
         frame = DirectFrame(parent=hidden, image=scoreImage, image_color=(1, 1, 1, 1), image_scale=Point3(0.64, 0.0, 0.64), frameSize=(-size,
                                                                                                                                        size,
                                                                                                                                        -size,
@@ -1566,7 +1566,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
 
     def constructTTC(self):
         self.photoRoot = self.scene.find('**/prop_gazebo*')
-        self.sky = loader.loadModel('phase_3.5/models/props/TT_sky')
+        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/TT_sky')
         self.sky.reparentTo(render)
         self.sky.setBin('background', -100)
         self.sky.find('**/cloud1').setBin('background', -99)
@@ -1585,7 +1585,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
 
     def constructDD(self):
         self.photoRoot = self.scene.find('**/center_island*')
-        self.sky = loader.loadModel('phase_3.5/models/props/BR_sky')
+        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/BR_sky')
         self.sky.reparentTo(render)
         self.sky.setBin('background', -100)
         self.sky.find('**/skypanel1').setBin('background', -98)
@@ -1650,10 +1650,10 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
         self.photoRoot = render.attachNewNode('DG PhotoRoot')
         self.photoRoot.setPos(1.39, 92.91, 2.0)
         self.bigFlower = loader.loadModel(
-            'phase_8/models/props/DG_flower-mod.bam')
+            'user/resources/default/phase_8/models/props/DG_flower-mod.bam')
         self.bigFlower.reparentTo(self.photoRoot)
         self.bigFlower.setScale(2.5)
-        self.sky = loader.loadModel('phase_3.5/models/props/TT_sky')
+        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/TT_sky')
         self.sky.reparentTo(render)
         self.sky.setBin('background', -100)
         self.sky.find('**/cloud1').setBin('background', -99)
@@ -1680,7 +1680,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
     def constructMM(self):
         self.photoRoot = render.attachNewNode('MM PhotoRoot')
         self.photoRoot.setPos(103.6, -61, -4.497)
-        self.sky = loader.loadModel('phase_6/models/props/MM_sky')
+        self.sky = loader.loadModel('user/resources/default/phase_6/models/props/MM_sky')
         self.sky.reparentTo(render)
         self.sky.setBin('background', -100)
         self.scene.reparentTo(render)
@@ -1711,7 +1711,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
     def constructBR(self):
         self.photoRoot = render.attachNewNode('BR PhotoRoot')
         self.photoRoot.setPos(-110, -48, 8.567)
-        self.sky = loader.loadModel('phase_3.5/models/props/BR_sky')
+        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/BR_sky')
         self.sky.reparentTo(render)
         self.sky.setBin('background', -100)
         self.scene.reparentTo(render)
@@ -1740,7 +1740,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
     def constructDL(self):
         self.photoRoot = render.attachNewNode('DL PhotoRoot')
         self.photoRoot.setPos(-70.228, 87.588, 4.397)
-        self.sky = loader.loadModel('phase_8/models/props/DL_sky')
+        self.sky = loader.loadModel('user/resources/default/phase_8/models/props/DL_sky')
         self.sky.reparentTo(render)
         self.sky.setBin('background', -100)
         self.scene.reparentTo(render)

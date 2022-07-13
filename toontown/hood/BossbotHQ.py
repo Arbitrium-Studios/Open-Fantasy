@@ -11,7 +11,7 @@ class BossbotHQ(CogHood.CogHood):
         self.id = ToontownGlobals.BossbotHQ
         self.cogHQLoaderClass = BossbotCogHQLoader.BossbotCogHQLoader
         self.storageDNAFile = None
-        self.skyFile = 'phase_9/models/cogHQ/cog_sky'
+        self.skyFile = 'user/resources/default/phase_9/models/cogHQ/cog_sky'
         self.titleColor = (0.5, 0.5, 0.5, 1.0)
         return
 

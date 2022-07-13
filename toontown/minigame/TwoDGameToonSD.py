@@ -80,7 +80,7 @@ class TwoDGameToonSD(StateData.StateData):
 
         self.battleMgr = TwoDBattleMgr.TwoDBattleMgr(self.game, self.toon)
         self.squishSound = base.loader.loadSfx(
-            'phase_3.5/audio/dial/AV_' +
+            'user/resources/default/phase_3.5/audio/dial/AV_' +
             self.toon.style.getAnimal() +
             '_exclaim.ogg')
 

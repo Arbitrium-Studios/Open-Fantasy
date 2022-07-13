@@ -169,19 +169,19 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
 
     def loadEnvironment(self):
         DistributedBossCog.DistributedBossCog.loadEnvironment(self)
-        self.midVault = loader.loadModel('phase_10/models/cogHQ/MidVault.bam')
-        self.endVault = loader.loadModel('phase_10/models/cogHQ/EndVault.bam')
+        self.midVault = loader.loadModel('user/resources/default/phase_10/models/cogHQ/MidVault.bam')
+        self.endVault = loader.loadModel('user/resources/default/phase_10/models/cogHQ/EndVault.bam')
         self.lightning = loader.loadModel(
-            'phase_10/models/cogHQ/CBLightning.bam')
-        self.magnet = loader.loadModel('phase_10/models/cogHQ/CBMagnet.bam')
+            'user/resources/default/phase_10/models/cogHQ/CBLightning.bam')
+        self.magnet = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CBMagnet.bam')
         self.craneArm = loader.loadModel(
-            'phase_10/models/cogHQ/CBCraneArm.bam')
+            'user/resources/default/phase_10/models/cogHQ/CBCraneArm.bam')
         self.controls = loader.loadModel(
-            'phase_10/models/cogHQ/CBCraneControls.bam')
-        self.stick = loader.loadModel('phase_10/models/cogHQ/CBCraneStick.bam')
-        self.safe = loader.loadModel('phase_10/models/cogHQ/CBSafe.bam')
+            'user/resources/default/phase_10/models/cogHQ/CBCraneControls.bam')
+        self.stick = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CBCraneStick.bam')
+        self.safe = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CBSafe.bam')
         self.eyes = loader.loadModel(
-            'phase_10/models/cogHQ/CashBotBossEyes.bam')
+            'user/resources/default/phase_10/models/cogHQ/CashBotBossEyes.bam')
         self.cableTex = self.craneArm.findTexture('MagnetControl')
         self.eyes.setPosHprScale(4.5, 0, -2.5, 90, 90, 0, 0.4, 0.4, 0.4)
         self.eyes.reparentTo(self.neck)
@@ -200,7 +200,7 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.door1 = self.midVault.find('**/SlidingDoor1/')
         self.door2 = self.midVault.find('**/SlidingDoor/')
         self.door3 = self.endVault.find('**/SlidingDoor/')
-        elevatorModel = loader.loadModel('phase_10/models/cogHQ/CFOElevator')
+        elevatorModel = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CFOElevator')
         elevatorOrigin = self.midVault.find('**/elevator_origin')
         elevatorOrigin.setScale(1)
         elevatorModel.reparentTo(elevatorOrigin)
@@ -579,12 +579,12 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def makeBossFleeMovie(self):
         hadEnough = TTLocalizer.CashbotBossHadEnough
         outtaHere = TTLocalizer.CashbotBossOuttaHere
-        loco = loader.loadModel('phase_10/models/cogHQ/CashBotLocomotive')
-        car1 = loader.loadModel('phase_10/models/cogHQ/CashBotBoxCar')
-        car2 = loader.loadModel('phase_10/models/cogHQ/CashBotTankCar')
+        loco = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CashBotLocomotive')
+        car1 = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CashBotBoxCar')
+        car2 = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CashBotTankCar')
         trainPassingSfx = base.loader.loadSfx(
-            'phase_10/audio/sfx/CBHQ_TRAIN_pass.ogg')
-        boomSfx = loader.loadSfx('phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
+            'user/resources/default/phase_10/audio/sfx/CBHQ_TRAIN_pass.ogg')
+        boomSfx = loader.loadSfx('user/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
         rollThroughDoor = self.rollBossToPoint(fromPos=Point3(
             120, -280, 0), fromHpr=None, toPos=Point3(120, -250, 0), toHpr=None, reverse=0)
         rollTrack = Sequence(

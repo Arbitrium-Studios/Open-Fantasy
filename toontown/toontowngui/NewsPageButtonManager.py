@@ -23,9 +23,9 @@ class NewsPageButtonManager(FSM.FSM):
 
     def load(self):
         btnGui = loader.loadModel(
-            'phase_3.5/models/gui/tt_m_gui_ign_newsBtnGui')
+            'user/resources/default/phase_3.5/models/gui/tt_m_gui_ign_newsBtnGui')
         bookModel = loader.loadModel(
-            'phase_3.5/models/gui/tt_m_gui_ign_shtickerBook')
+            'user/resources/default/phase_3.5/models/gui/tt_m_gui_ign_shtickerBook')
         self.openNewNewsUp = btnGui.find('**/tt_t_gui_ign_new')
         self.openNewNewsUpBlink = btnGui.find('**/tt_t_gui_ign_newBlink')
         self.openNewNewsHover = btnGui.find('**/tt_t_gui_ign_newHover')

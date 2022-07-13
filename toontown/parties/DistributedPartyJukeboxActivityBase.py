@@ -31,8 +31,8 @@ class DistributedPartyJukeboxActivityBase(DistributedPartyActivity):
 
     def load(self):
         DistributedPartyActivity.load(self)
-        self.jukebox = Actor('phase_13/models/parties/jukebox_model',
-                             {'dance': 'phase_13/models/parties/jukebox_dance'})
+        self.jukebox = Actor('user/resources/default/phase_13/models/parties/jukebox_model',
+                             {'dance': 'user/resources/default/phase_13/models/parties/jukebox_dance'})
         self.jukebox.reparentTo(self.root)
         self.collNode = CollisionNode(self.getCollisionName())
         self.collNode.setCollideMask(

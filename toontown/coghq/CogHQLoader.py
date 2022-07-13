@@ -39,7 +39,7 @@ class CogHQLoader(StateData.StateData):
         self.parentFSMState.addChild(self.fsm)
         self.music = base.loader.loadMusic(self.musicFile)
         self.battleMusic = base.loader.loadMusic(
-            'phase_9/audio/bgm/encntr_suit_winning.ogg')
+            'user/resources/default/phase_9/audio/bgm/encntr_suit_winning.ogg')
         self.townBattle = TownBattle.TownBattle(self.townBattleDoneEvent)
         self.townBattle.load()
         Suit.loadSuits(3)

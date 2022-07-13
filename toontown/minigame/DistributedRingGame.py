@@ -88,12 +88,12 @@ class DistributedRingGame(DistributedMinigame):
         self.notify.debug('load')
         DistributedMinigame.load(self)
         self.defineConstants()
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_toontag.ogg')
+        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_toontag.ogg')
         self.sndAmbience = base.loader.loadSfx(
-            'phase_4/audio/sfx/AV_ambient_water.ogg')
+            'user/resources/default/phase_4/audio/sfx/AV_ambient_water.ogg')
         self.sndPerfect = base.loader.loadSfx(
-            'phase_4/audio/sfx/ring_perfect.ogg')
-        loadBase = 'phase_4/models/minigames/'
+            'user/resources/default/phase_4/audio/sfx/ring_perfect.ogg')
+        loadBase = 'user/resources/default/phase_4/models/minigames/'
         self.environModel = loader.loadModel(loadBase + 'swimming_game.bam')
         self.environModel.setPos(
             0, self.ENVIRON_LENGTH / 2.0, self.SEA_FLOOR_Z)
@@ -104,7 +104,7 @@ class DistributedRingGame(DistributedMinigame):
         self.ringModel.setScale(RingGameGlobals.RING_RADIUS / modelRadius)
         self.ringModel.flattenMedium()
         self.dropShadowModel = loader.loadModel(
-            'phase_3/models/props/drop_shadow')
+            'user/resources/default/phase_3/models/props/drop_shadow')
         self.dropShadowModel.setColor(0, 0, 0, 0.5)
         self.dropShadowModel.flattenMedium()
         self.toonDropShadows = []
@@ -182,9 +182,9 @@ class DistributedRingGame(DistributedMinigame):
                          'missedRing': [None] * self.numPlayers}
         for i in range(0, self.numPlayers):
             self.sndTable['gotRing'][i] = base.loader.loadSfx(
-                'phase_4/audio/sfx/ring_get.ogg')
+                'user/resources/default/phase_4/audio/sfx/ring_get.ogg')
             self.sndTable['missedRing'][i] = base.loader.loadSfx(
-                'phase_4/audio/sfx/ring_miss.ogg')
+                'user/resources/default/phase_4/audio/sfx/ring_miss.ogg')
 
         self.__addToonDropShadow(self.getAvatar(self.localAvId))
         self.__spawnUpdateEnvironTask()

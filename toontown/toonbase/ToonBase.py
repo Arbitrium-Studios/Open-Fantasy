@@ -84,8 +84,8 @@ class ToonBase(OTPBase.OTPBase):
         candidateInactive = TextProperties()
         candidateInactive.setTextColor(0.3, 0.3, 0.7, 1)
         tpm.setProperties('candidate_inactive', candidateInactive)
-        self.transitions.IrisModelName = 'phase_3/models/misc/iris'
-        self.transitions.FadeModelName = 'phase_3/models/misc/fade'
+        self.transitions.IrisModelName = 'user/resources/default/phase_3/models/misc/iris'
+        self.transitions.FadeModelName = 'user/resources/default/phase_3/models/misc/fade'
         self.exitFunc = self.userExit
         if 'launcher' in __builtins__ and launcher:
             launcher.setPandaErrorCode(11)
@@ -303,15 +303,15 @@ class ToonBase(OTPBase.OTPBase):
         self.screenshotStr += str
 
     def initNametagGlobals(self):
-        arrow = loader.loadModel('phase_3/models/props/arrow')
-        card = loader.loadModel('phase_3/models/props/panel')
+        arrow = loader.loadModel('user/resources/default/phase_3/models/props/arrow')
+        card = loader.loadModel('user/resources/default/phase_3/models/props/panel')
         speech3d = ChatBalloon(loader.loadModel(
-            'phase_3/models/props/chatbox').node())
+            'user/resources/default/phase_3/models/props/chatbox').node())
         thought3d = ChatBalloon(loader.loadModel(
-            'phase_3/models/props/chatbox_thought_cutout').node())
+            'user/resources/default/phase_3/models/props/chatbox_thought_cutout').node())
         speech2d = ChatBalloon(loader.loadModel(
-            'phase_3/models/props/chatbox_noarrow').node())
-        chatButtonGui = loader.loadModel('phase_3/models/gui/chat_button_gui')
+            'user/resources/default/phase_3/models/props/chatbox_noarrow').node())
+        chatButtonGui = loader.loadModel('user/resources/default/phase_3/models/gui/chat_button_gui')
         NametagGlobals.setCamera(self.cam)
         NametagGlobals.setArrowModel(arrow)
         NametagGlobals.setNametagCard(card, VBase4(-0.5, 0.5, -0.5, 0.5))

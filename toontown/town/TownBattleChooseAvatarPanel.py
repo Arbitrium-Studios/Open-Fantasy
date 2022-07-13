@@ -19,7 +19,7 @@ class TownBattleChooseAvatarPanel(StateData.StateData):
         self.toon = toon
 
     def load(self):
-        gui = loader.loadModel('phase_3.5/models/gui/battle_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/battle_gui')
         self.frame = DirectFrame(relief=None, image=gui.find(
             '**/BtlPick_TAB'), image_color=Vec4(1, 0.2, 0.2, 1))
         self.frame.hide()

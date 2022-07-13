@@ -7,7 +7,7 @@ GlobalEntities = {
         'parentEntId': 0,
         'cogLevel': 0,
         'farPlaneDistance': 1500,
-        'modelFilename': 'phase_10/models/lawbotHQ/LawbotCourtroom3',
+        'modelFilename': 'user/resources/default/phase_10/models/lawbotHQ/LawbotCourtroom3',
         'wantDoors': 1},
     1001: {
         'type': 'editMgr',

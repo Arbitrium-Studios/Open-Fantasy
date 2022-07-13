@@ -24,7 +24,7 @@ class MoleHill(NodePath):
         return
 
     def loadModel(self):
-        self.hill = loader.loadModel('phase_12/models/bossbotHQ/mole_hole')
+        self.hill = loader.loadModel('user/resources/default/phase_12/models/bossbotHQ/mole_hole')
         self.hill.setZ(0.0)
         self.hill.reparentTo(self)
         self.hillColName = 'moleHillCol-%d-%d' % (
@@ -36,7 +36,7 @@ class MoleHill(NodePath):
         self.mole.reparentTo(self)
         self.mole.setScale(0.75)
         self.mole.setZ(-2.5)
-        self.moleHead = loader.loadModel('phase_12/models/bossbotHQ/mole_norm')
+        self.moleHead = loader.loadModel('user/resources/default/phase_12/models/bossbotHQ/mole_norm')
         self.moleHead.reparentTo(self.mole)
         moleColName = 'moleCol-%d-%s' % (self.moleField.doId, self.index)
         moleSphere = CollisionSphere(0, 0, 0, 1.0)
@@ -75,13 +75,13 @@ class MoleHill(NodePath):
         self.moleHead.removeNode()
         if type == MoleFieldBase.HILL_MOLE:
             self.moleHead = loader.loadModel(
-                'phase_12/models/bossbotHQ/mole_norm')
+                'user/resources/default/phase_12/models/bossbotHQ/mole_norm')
             self.moleColNodePath.setScale(3.0)
             self.moleHead.setH(0)
             self.mole.setBillboardAxis(localAvatar, 0)
         if type == MoleFieldBase.HILL_BOMB or type == MoleFieldBase.HILL_COGWHACKED:
             self.moleHead = loader.loadModel(
-                'phase_12/models/bossbotHQ/mole_cog')
+                'user/resources/default/phase_12/models/bossbotHQ/mole_cog')
             self.moleColNodePath.setScale(1.0)
             self.mole.setBillboardAxis(localAvatar, 0)
             if type == MoleFieldBase.HILL_COGWHACKED:
@@ -149,7 +149,7 @@ class MoleHill(NodePath):
                 self.moleHead.setH(0)
         if type == MoleFieldBase.HILL_WHACKED:
             self.moleHead = loader.loadModel(
-                'phase_12/models/bossbotHQ/mole_hit')
+                'user/resources/default/phase_12/models/bossbotHQ/mole_hit')
             self.mole.setBillboardAxis(0)
             self.moleColNodePath.setScale(0.0)
             if self.popIval:

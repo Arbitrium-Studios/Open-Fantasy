@@ -16,13 +16,13 @@ from direct.actor import Actor
 class Train(DirectObject):
     notify = directNotify.newCategory('Train')
     nameId = 0
-    Sfx_TrainPass = 'phase_10/audio/sfx/CBHQ_TRAIN_pass.ogg'
-    Sfx_TrainStopStart = 'phase_10/audio/sfx/CBHQ_TRAIN_stopstart.ogg'
-    LocomotiveFile = 'phase_10/models/cogHQ/CashBotLocomotive'
+    Sfx_TrainPass = 'user/resources/default/phase_10/audio/sfx/CBHQ_TRAIN_pass.ogg'
+    Sfx_TrainStopStart = 'user/resources/default/phase_10/audio/sfx/CBHQ_TRAIN_stopstart.ogg'
+    LocomotiveFile = 'user/resources/default/phase_10/models/cogHQ/CashBotLocomotive'
     CarFiles = [
-        'phase_10/models/cogHQ/CashBotBoxCar',
-        'phase_10/models/cogHQ/CashBotTankCar',
-        'phase_10/models/cogHQ/CashBotFlatCar']
+        'user/resources/default/phase_10/models/cogHQ/CashBotBoxCar',
+        'user/resources/default/phase_10/models/cogHQ/CashBotTankCar',
+        'user/resources/default/phase_10/models/cogHQ/CashBotFlatCar']
     CarLength = 88
     MarkDelta = 15
 

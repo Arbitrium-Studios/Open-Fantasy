@@ -104,9 +104,9 @@ class DistributedVineGame(DistributedMinigame):
         self.notify.debug('load')
         DistributedMinigame.load(self)
         self.defineConstants()
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_Vine.ogg')
+        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_Vine.ogg')
         self.gameAssets = loader.loadModel(
-            'phase_4/models/minigames/vine_game')
+            'user/resources/default/phase_4/models/minigames/vine_game')
         self.gameBoard = self.gameAssets.find('**/background')
         self.gameBoard.reparentTo(render)
         self.gameBoard.show()
@@ -118,25 +118,25 @@ class DistributedVineGame(DistributedMinigame):
         self.treasureModel = self.gameAssets.find('**/bananas')
         self.setupVineCourse()
         self.grabSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_bananas.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_bananas.ogg')
         self.jumpSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_jump.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_jump.ogg')
         self.catchSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_catch.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_catch.ogg')
         self.spiderHitSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_spider_hit.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_spider_hit.ogg')
         self.batHitVineSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_bat_hit.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_bat_hit.ogg')
         self.batHitMidairSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_bat_hit_midair.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_bat_hit_midair.ogg')
         self.winSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_finish.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_finish.ogg')
         self.fallSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_fall.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_fall.ogg')
         self.loadBats()
         self.createBatIvals()
         bothPlatform = loader.loadModel(
-            'phase_4/models/minigames/vine_game_shelf')
+            'user/resources/default/phase_4/models/minigames/vine_game_shelf')
         self.startPlatform = bothPlatform.find('**/start1')
         self.startPlatform.setPos(-16, 0, 15)
         self.startPlatform.reparentTo(render)

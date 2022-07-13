@@ -10,7 +10,7 @@ import random
 class CountryClubRoom(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('CountryClubRoom')
     FloorCollPrefix = 'mintFloorColl'
-    CashbotMintDoorFrame = 'phase_10/models/cashbotHQ/DoorFrame'
+    CashbotMintDoorFrame = 'user/resources/default/phase_10/models/cashbotHQ/DoorFrame'
 
     def __init__(self, path=None):
         if path is not None:

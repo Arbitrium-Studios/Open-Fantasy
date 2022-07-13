@@ -12,7 +12,7 @@ class FlowerBrowser(DirectScrolledList):
 
     def __init__(self, parent=aspect2d, **kw):
         self._parent = parent
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         optiondefs = (('parent', self._parent, None),
                       ('relief', None, None),
                       ('incButton_image', (gui.find('**/FndsLst_ScrollUp'),

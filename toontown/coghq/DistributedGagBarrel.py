@@ -24,7 +24,7 @@ class DistributedGagBarrel(DistributedBarrelBase.DistributedBarrelBase):
         DistributedBarrelBase.DistributedBarrelBase.delete(self)
 
     def applyLabel(self):
-        invModel = loader.loadModel('phase_3.5/models/gui/inventory_icons')
+        invModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_icons')
         self.invModels = []
         from toontown.toonbase import ToontownBattleGlobals
         for gagTrack in range(len(ToontownBattleGlobals.AvPropsNew)):
