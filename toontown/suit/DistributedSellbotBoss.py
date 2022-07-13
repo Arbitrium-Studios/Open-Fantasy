@@ -80,19 +80,19 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                                                       'dept': SuitDNA.getDeptFullname(self.style.dept)}
         self.setDisplayName(nameInfo)
         self.cageDoorSfx = loader.loadSfx(
-            'phase_5/audio/sfx/CHQ_SOS_cage_door.ogg')
+            'user/resources/default/phase_5/audio/sfx/CHQ_SOS_cage_door.ogg')
         self.cageLandSfx = loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_SOS_cage_land.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_SOS_cage_land.ogg')
         self.cageLowerSfx = loader.loadSfx(
-            'phase_5/audio/sfx/CHQ_SOS_cage_lower.ogg')
+            'user/resources/default/phase_5/audio/sfx/CHQ_SOS_cage_lower.ogg')
         self.piesRestockSfx = loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_SOS_pies_restock.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_SOS_pies_restock.ogg')
         self.rampSlideSfx = loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_VP_ramp_slide.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_VP_ramp_slide.ogg')
         self.strafeSfx = []
         for i in range(10):
             self.strafeSfx.append(
-                loader.loadSfx('phase_3.5/audio/sfx/SA_shred.ogg'))
+                loader.loadSfx('user/resources/default/phase_3.5/audio/sfx/SA_shred.ogg'))
 
         render.setTag('pieCode', str(ToontownGlobals.PieCodeNotBossCog))
         insidesA = CollisionPolygon(Point3(
@@ -129,7 +129,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         shieldNode.setCollideMask(
             ToontownGlobals.PieBitmask | ToontownGlobals.CameraBitmask)
         shieldNodePath = self.pelvis.attachNewNode(shieldNode)
-        disk = loader.loadModel('phase_9/models/char/bossCog-gearCollide')
+        disk = loader.loadModel('user/resources/default/phase_9/models/char/bossCog-gearCollide')
         disk.find('**/+CollisionNode').setName('BossZap')
         disk.reparentTo(self.pelvis)
         disk.setZ(0.8)
@@ -637,7 +637,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def __placeCageShadow(self):
         if self.cageShadow is None:
             self.cageShadow = loader.loadModel(
-                'phase_3/models/props/drop_shadow')
+                'user/resources/default/phase_3/models/props/drop_shadow')
             self.cageShadow.setPos(0, 77.9, 18)
             self.cageShadow.setColorScale(1, 1, 1, 0.6)
         self.cageShadow.reparentTo(render)
@@ -658,7 +658,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
 
     def loadEnvironment(self):
         DistributedBossCog.DistributedBossCog.loadEnvironment(self)
-        self.geom = loader.loadModel('phase_9/models/cogHQ/BossRoomHQ')
+        self.geom = loader.loadModel('user/resources/default/phase_9/models/cogHQ/BossRoomHQ')
         self.rampA = self.__findRamp('rampA', '**/west_ramp2')
         self.rampB = self.__findRamp('rampB', '**/west_ramp')
         self.rampC = self.__findRamp('rampC', '**/west_ramp1')
@@ -666,7 +666,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         elevatorEntrance = self.geom.find('**/elevatorEntrance')
         elevatorEntrance.getChildren().detach()
         elevatorEntrance.setScale(1)
-        elevatorModel = loader.loadModel('phase_9/models/cogHQ/cogHQ_elevator')
+        elevatorModel = loader.loadModel('user/resources/default/phase_9/models/cogHQ/cogHQ_elevator')
         elevatorModel.reparentTo(elevatorEntrance)
         self.setupElevator(elevatorModel)
         pos = self.cage.getPos()
@@ -687,11 +687,11 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.rope.setTexture(self.cage.findTexture('hq_chain'))
         self.rope.setTransparency(1)
         self.promotionMusic = base.loader.loadMusic(
-            'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
+            'user/resources/default/phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
         self.betweenBattleMusic = base.loader.loadMusic(
-            'phase_9/audio/bgm/encntr_toon_winning.ogg')
+            'user/resources/default/phase_9/audio/bgm/encntr_toon_winning.ogg')
         self.battleTwoMusic = base.loader.loadMusic(
-            'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
+            'user/resources/default/phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
         self.geom.reparentTo(render)
 
     def unloadEnvironment(self):
@@ -708,11 +708,11 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
 
     def __loadMopaths(self):
         self.toonsEnterA = Mopath.Mopath()
-        self.toonsEnterA.loadFile('phase_9/paths/bossBattle-toonsEnterA')
+        self.toonsEnterA.loadFile('user/resources/default/phase_9/paths/bossBattle-toonsEnterA')
         self.toonsEnterA.fFaceForward = 1
         self.toonsEnterA.timeScale = 35
         self.toonsEnterB = Mopath.Mopath()
-        self.toonsEnterB.loadFile('phase_9/paths/bossBattle-toonsEnterB')
+        self.toonsEnterB.loadFile('user/resources/default/phase_9/paths/bossBattle-toonsEnterB')
         self.toonsEnterB.fFaceForward = 1
         self.toonsEnterB.timeScale = 35
 

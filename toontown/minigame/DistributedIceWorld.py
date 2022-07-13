@@ -133,7 +133,7 @@ class DistributedIceWorld(
                 smileyModel.setTransparency(1)
             testTire.setPos(IceGameGlobals.StartingPositions[tireIndex])
             tireModel = loader.loadModel(
-                'phase_4/models/minigames/ice_game_tire')
+                'user/resources/default/phase_4/models/minigames/ice_game_tire')
             tireHeight = 1
             tireModel.setZ(-IceGameGlobals.TireRadius + 0.01)
             tireModel.reparentTo(testTire)
@@ -179,7 +179,7 @@ class DistributedIceWorld(
         geom.setCategoryBits(self.obstacleMask)
         self.space.setCollideId(geom, self.obstacleCollideId)
         tireModel = loader.loadModel(
-            'phase_4/models/minigames/ice_game_tirestack')
+            'user/resources/default/phase_4/models/minigames/ice_game_tirestack')
         tireHeight = 1
         tireModel.setPos(pos)
         tireModel.reparentTo(render)
@@ -194,7 +194,7 @@ class DistributedIceWorld(
         geom.setCollideBits(self.allTiresMask)
         geom.setCategoryBits(self.obstacleMask)
         self.space.setCollideId(geom, self.obstacleCollideId)
-        tireModel = loader.loadModel('phase_4/models/minigames/ice_game_crate')
+        tireModel = loader.loadModel('user/resources/default/phase_4/models/minigames/ice_game_crate')
         tireModel.setPos(pos)
         tireModel.reparentTo(render)
         geom.setPosition(tireModel.getPos())

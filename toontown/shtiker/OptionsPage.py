@@ -81,7 +81,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
         clickColor = (0.8, 0.8, 0, 1)
         rolloverColor = (0.15, 0.82, 1.0, 1)
         diabledColor = (1.0, 0.98, 0.15, 1)
-        gui = loader.loadModel('phase_3.5/models/gui/fishingBook')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingBook')
         self.optionsTab = DirectButton(
             parent=self,
             relief=None,
@@ -232,8 +232,8 @@ class OptionsTabPage(DirectFrame):
         self.displaySettingsEmbedded = None
         self.displaySettingsApi = None
         self.displaySettingsApiChanged = 0
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         titleHeight = 0.61
         textStartHeight = 0.45
         textRowHeight = 0.145
@@ -471,8 +471,8 @@ class OptionsTabPage(DirectFrame):
         self.speedChatStyleText = SpeedChat.SpeedChat(
             name='OptionsPageStyleText',
             structure=[2000],
-            backgroundModelName='phase_3/models/gui/ChatPanel',
-            guiModelName='phase_3.5/models/gui/speedChatGui')
+            backgroundModelName='user/resources/default/phase_3/models/gui/ChatPanel',
+            guiModelName='user/resources/default/phase_3.5/models/gui/speedChatGui')
         self.speedChatStyleText.setScale(self.speed_chat_scale)
         self.speedChatStyleText.setPos(
             0.37, 0, buttonbase_ycoord - textRowHeight * 6 + 0.03)
@@ -830,7 +830,7 @@ class CodesTabPage(DirectFrame):
 
     def load(self):
         cdrGui = loader.loadModel(
-            'phase_3.5/models/gui/tt_m_gui_sbk_codeRedemptionGui')
+            'user/resources/default/phase_3.5/models/gui/tt_m_gui_sbk_codeRedemptionGui')
         instructionGui = cdrGui.find('**/tt_t_gui_sbk_cdrPresent')
         flippyGui = cdrGui.find('**/tt_t_gui_sbk_cdrFlippy')
         codeBoxGui = cdrGui.find('**/tt_t_gui_sbk_cdrCodeBox')
@@ -841,9 +841,9 @@ class CodesTabPage(DirectFrame):
         self.resultPanelErrorGui = cdrGui.find(
             '**/tt_t_gui_sbk_cdrResultPanel_error')
         self.successSfx = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/tt_s_gui_sbk_cdrSuccess.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/tt_s_gui_sbk_cdrSuccess.ogg')
         self.failureSfx = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/tt_s_gui_sbk_cdrFailure.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/tt_s_gui_sbk_cdrFailure.ogg')
         self.instructionPanel = DirectFrame(
             parent=self,
             relief=None,
@@ -909,7 +909,7 @@ class CodesTabPage(DirectFrame):
             suppressMouse=1,
             autoCapitalize=0,
             command=self.__submitCode)
-        submitButtonGui = loader.loadModel('phase_3/models/gui/quit_button')
+        submitButtonGui = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         self.submitButton = DirectButton(parent=self, relief=None, image=(submitButtonGui.find('**/QuitBtn_UP'),
                                                                           submitButtonGui.find(
                                                                               '**/QuitBtn_DN'),
@@ -931,7 +931,7 @@ class CodesTabPage(DirectFrame):
                 -0.0567))
         self.resultPanel.hide()
         closeButtonGui = loader.loadModel(
-            'phase_3/models/gui/dialog_box_buttons_gui')
+            'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.closeButton = DirectButton(
             parent=self.resultPanel,
             pos=(

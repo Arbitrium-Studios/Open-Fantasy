@@ -48,14 +48,14 @@ class DistributedBoat(DistributedObject.DistributedObject):
         dockSound = self.cr.playGame.hood.loader.dockSound
         foghornSound = self.cr.playGame.hood.loader.foghornSound
         bellSound = self.cr.playGame.hood.loader.bellSound
-        self.eastWestMopath.loadFile('phase_6/paths/dd-e-w')
+        self.eastWestMopath.loadFile('user/resources/default/phase_6/paths/dd-e-w')
         self.eastWestMopathInterval = MopathInterval(self.eastWestMopath, boat)
         ewBoatTrack = ParallelEndTogether(
             Parallel(
                 self.eastWestMopathInterval, SoundInterval(
                     bellSound, node=boat)), SoundInterval(
                 foghornSound, node=boat), name='ew-boat')
-        self.westEastMopath.loadFile('phase_6/paths/dd-w-e')
+        self.westEastMopath.loadFile('user/resources/default/phase_6/paths/dd-w-e')
         self.westEastMopathInterval = MopathInterval(self.westEastMopath, boat)
         weBoatTrack = ParallelEndTogether(
             Parallel(

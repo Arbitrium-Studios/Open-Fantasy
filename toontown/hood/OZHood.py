@@ -13,11 +13,11 @@ class OZHood(ToonHood.ToonHood):
             self, parentFSM, doneEvent, dnaStore, hoodId)
         self.id = OutdoorZone
         self.safeZoneLoaderClass = OZSafeZoneLoader.OZSafeZoneLoader
-        self.storageDNAFile = 'phase_6/dna/storage_OZ.dna'
-        self.holidayStorageDNADict = {HALLOWEEN_PROPS: ['phase_6/dna/halloween_props_storage_OZ.dna'],
-                                      SPOOKY_PROPS: ['phase_6/dna/halloween_props_storage_OZ.dna']}
-        self.skyFile = 'phase_3.5/models/props/TT_sky'
-        self.spookySkyFile = 'phase_3.5/models/props/BR_sky'
+        self.storageDNAFile = 'user/resources/default/phase_6/dna/storage_OZ.dna'
+        self.holidayStorageDNADict = {HALLOWEEN_PROPS: ['user/resources/default/phase_6/dna/halloween_props_storage_OZ.dna'],
+                                      SPOOKY_PROPS: ['user/resources/default/phase_6/dna/halloween_props_storage_OZ.dna']}
+        self.skyFile = 'user/resources/default/phase_3.5/models/props/TT_sky'
+        self.spookySkyFile = 'user/resources/default/phase_3.5/models/props/BR_sky'
         self.titleColor = (1.0, 0.5, 0.4, 1.0)
         self.whiteFogColor = Vec4(0.95, 0.95, 0.95, 1)
         self.underwaterFogColor = Vec4(0.0, 0.0, 0.6, 1.0)

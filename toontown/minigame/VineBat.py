@@ -20,7 +20,7 @@ class VineBat(NodePath, DirectObject):
         self.serialNum = serialNum
         self.batIndex = batIndex
         self.timeToTraverseField = timeToTraverseField
-        gameAssets = loader.loadModel('phase_4/models/minigames/vine_game')
+        gameAssets = loader.loadModel('user/resources/default/phase_4/models/minigames/vine_game')
         bat3 = gameAssets.find('**/bat3')
         bat2 = gameAssets.find('**/bat2')
         bat1 = gameAssets.find('**/bat__1')
@@ -53,9 +53,9 @@ class VineBat(NodePath, DirectObject):
         self.collNodePath.hide()
         self.accept('enter' + self.sphereName, self.__handleEnterSphere)
         self.screechSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_bat_shriek_3.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_bat_shriek_3.ogg')
         self.flySfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_vine_game_bat_flying_lp.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_bat_flying_lp.ogg')
         self.oldCutoffDistance = base.sfxPlayer.getCutoffDistance()
         base.sfxPlayer.setCutoffDistance(240)
         self.soundInterval = SoundInterval(

@@ -83,18 +83,18 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             LocalAvatar.LocalAvatar.__init__(
                 self, cr, chatMgr, talkAssistant, passMessagesThrough=True)
             self.soundRun = base.loader.loadSfx(
-                'phase_3.5/audio/sfx/AV_footstep_runloop.ogg')
+                'user/resources/default/phase_3.5/audio/sfx/AV_footstep_runloop.ogg')
             self.soundWalk = base.loader.loadSfx(
-                'phase_3.5/audio/sfx/AV_footstep_walkloop.ogg')
+                'user/resources/default/phase_3.5/audio/sfx/AV_footstep_walkloop.ogg')
             self.soundWhisper = base.loader.loadSfx(
-                'phase_3.5/audio/sfx/GUI_whisper_3.ogg')
+                'user/resources/default/phase_3.5/audio/sfx/GUI_whisper_3.ogg')
             self.soundPhoneRing = base.loader.loadSfx(
-                'phase_3.5/audio/sfx/telephone_ring.ogg')
+                'user/resources/default/phase_3.5/audio/sfx/telephone_ring.ogg')
             self.soundSystemMessage = base.loader.loadSfx(
-                'phase_3/audio/sfx/clock03.ogg')
+                'user/resources/default/phase_3/audio/sfx/clock03.ogg')
             self.positionExaminer = PositionExaminer.PositionExaminer()
             friendsGui = loader.loadModel(
-                'phase_3.5/models/gui/friendslist_gui')
+                'user/resources/default/phase_3.5/models/gui/friendslist_gui')
             friendsButtonNormal = friendsGui.find('**/FriendsBox_Closed')
             friendsButtonPressed = friendsGui.find('**/FriendsBox_Rollover')
             friendsButtonRollover = friendsGui.find('**/FriendsBox_Rollover')
@@ -436,7 +436,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         self.questMap = QuestMap.QuestMap(self)
         self.questMap.stop()
         if not base.cr.isPaid():
-            guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+            guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
             self.purchaseButton = DirectButton(
                 parent=aspect2d,
                 relief=None,
@@ -994,7 +994,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             inv = self.inventory
             if self.pieType >= len(
                     inv.invModels[ToontownBattleGlobals.THROW_TRACK]):
-                gui = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+                gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 pieGui = gui.find('**/summons')
                 pieScale = 0.1
             else:
@@ -1124,7 +1124,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
     def loadFurnitureGui(self):
         if self.__furnitureGui:
             return
-        guiModels = loader.loadModel('phase_5.5/models/gui/house_design_gui')
+        guiModels = loader.loadModel('user/resources/default/phase_5.5/models/gui/house_design_gui')
         self.__furnitureGui = DirectFrame(
             relief=None, pos=(-1.19, 0.0, 0.33), scale=0.04, image=guiModels.find('**/attic'))
         DirectLabel(
@@ -1170,7 +1170,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
     def loadClarabelleGui(self):
         if self.__clarabelleButton:
             return
-        guiItems = loader.loadModel('phase_5.5/models/gui/catalog_gui')
+        guiItems = loader.loadModel('user/resources/default/phase_5.5/models/gui/catalog_gui')
         circle = guiItems.find('**/cover/blue_circle')
         icon = guiItems.find('**/cover/clarabelle')
         icon.reparentTo(circle)
@@ -1331,7 +1331,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
     def __placeMarker(self):
         pos = self.getPos()
         hpr = self.getHpr()
-        chest = loader.loadModel('phase_4/models/props/coffin')
+        chest = loader.loadModel('user/resources/default/phase_4/models/props/coffin')
         chest.reparentTo(render)
         chest.setColor(1, 0, 0, 1)
         chest.setPosHpr(pos, hpr)
@@ -1509,7 +1509,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
     def loadGardeningGui(self):
         if self.__gardeningGui:
             return
-        gardenGuiCard = loader.loadModel('phase_5.5/models/gui/planting_gui')
+        gardenGuiCard = loader.loadModel('user/resources/default/phase_5.5/models/gui/planting_gui')
         self.__gardeningGui = DirectFrame(
             relief=None, geom=gardenGuiCard, geom_color=GlobalDialogColor, geom_scale=(
                 0.17, 1.0, 0.3), pos=(
@@ -1526,16 +1526,16 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         iconColorBrown = Vec4(0.7, 0.4, 0.3, 1.0)
         iconColorBlue = Vec4(0.2, 0.3, 1.0, 1.0)
         shovelCardP = loader.loadModel(
-            'phase_5.5/models/gui/planting_but_shovel_P')
+            'user/resources/default/phase_5.5/models/gui/planting_but_shovel_P')
         shovelCardY = loader.loadModel(
-            'phase_5.5/models/gui/planting_but_shovel_Y')
+            'user/resources/default/phase_5.5/models/gui/planting_but_shovel_Y')
         wateringCanCardP = loader.loadModel(
-            'phase_5.5/models/gui/planting_but_can_P')
+            'user/resources/default/phase_5.5/models/gui/planting_but_can_P')
         wateringCanCardY = loader.loadModel(
-            'phase_5.5/models/gui/planting_but_can_Y')
-        backCard = loader.loadModel('phase_5.5/models/gui/planting_gui')
+            'user/resources/default/phase_5.5/models/gui/planting_but_can_Y')
+        backCard = loader.loadModel('user/resources/default/phase_5.5/models/gui/planting_gui')
         iconImage = None
-        iconModels = loader.loadModel('phase_3.5/models/gui/sos_textures')
+        iconModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/sos_textures')
         iconGeom = iconModels.find('**/fish')
         buttonText = TTLocalizer.GardeningPlant
         self.shovelText = ('',
@@ -2048,7 +2048,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
                                                                 'newbeans': shovelBeans}
         messagePos = Vec2(0, 0.2)
         messageScale = 0.07
-        image = loader.loadModel('phase_5.5/models/gui/planting_but_shovel_P')
+        image = loader.loadModel('user/resources/default/phase_5.5/models/gui/planting_but_shovel_P')
         imagePos = Vec3(0, 0, -0.13)
         imageScale = Vec3(0.28, 0, 0.56)
         if doPartyBall:
@@ -2088,7 +2088,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
                                                      'newbeans': shovelBeans}
         messagePos = Vec2(0, 0.2)
         messageScale = 0.07
-        image = loader.loadModel('phase_5.5/models/gui/planting_but_shovel_P')
+        image = loader.loadModel('user/resources/default/phase_5.5/models/gui/planting_but_shovel_P')
         imagePos = Vec3(0, 0, -0.13)
         imageScale = Vec3(0.28, 0, 0.56)
         go = Fanfare.makePanel(base.localAvatar, 1)
@@ -2115,7 +2115,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             GardenGlobals.WateringCanAttributes[wateringCanlevel]['name']
         messagePos = Vec2(0, 0.2)
         messageScale = 0.08
-        image = loader.loadModel('phase_5.5/models/gui/planting_but_can_P')
+        image = loader.loadModel('user/resources/default/phase_5.5/models/gui/planting_but_can_P')
         imagePos = Vec3(0, 0, -0.1)
         imageScale = Vec3(0.35, 0, 0.7)
         if wateringCanlevel >= GardenGlobals.MAX_WATERING_CANS - 1:

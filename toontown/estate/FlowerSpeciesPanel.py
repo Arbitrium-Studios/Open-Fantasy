@@ -12,7 +12,7 @@ class FlowerSpeciesPanel(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('FlowerSpeciesPanel')
 
     def __init__(self, species=None, itemIndex=0, *extraArgs):
-        flowerGui = loader.loadModel('phase_3.5/models/gui/fishingBook')
+        flowerGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingBook')
         albumGui = flowerGui.find('**/photo_frame1')
         pictureGroup = albumGui.attachNewNode('PictureGroup')
         hideList = ['corner_backs',

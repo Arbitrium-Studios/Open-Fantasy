@@ -43,7 +43,7 @@ class RocketExplosion(NodePath):
         self.effect.loadConfig(pfile)
         ren = self.effect.getParticlesNamed('particles-1').getRenderer()
         ren.setTextureFromNode(
-            'phase_4/models/props/tt_m_efx_fireball', '**/*')
+            'user/resources/default/phase_4/models/props/tt_m_efx_fireball', '**/*')
         pfile = Filename('tt_p_efx_rocketLaunchSmoke.ptf')
         found = vfs.resolveFilename(pfile, particleSearchPath)
         if not found:
@@ -52,7 +52,7 @@ class RocketExplosion(NodePath):
         notify.debug('Loading particle file: %s' % pfile)
         self.smokeEffect.loadConfig(pfile)
         ren = self.smokeEffect.getParticlesNamed('particles-1').getRenderer()
-        ren.setTextureFromNode('phase_4/models/props/tt_m_efx_smoke', '**/*')
+        ren.setTextureFromNode('user/resources/default/phase_4/models/props/tt_m_efx_smoke', '**/*')
         self.endSeq = None
         self.cleanupCompleted = 0
         return

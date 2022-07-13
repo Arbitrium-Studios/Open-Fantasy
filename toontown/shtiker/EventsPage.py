@@ -24,7 +24,7 @@ EventsPage_News = 3
 class EventsPage(ShtikerPage.ShtikerPage):
     notify = DirectNotifyGlobal.directNotify.newCategory('EventsPage')
     UseNewsTab = ConfigVariableBool('want-news-tab', 0).value
-    DefaultNewsUrl = 'phase_3.5/models/news/news_urls.txt'
+    DefaultNewsUrl = 'user/resources/default/phase_3.5/models/news/news_urls.txt'
     NewsUrl = ConfigVariableString('news-url', DefaultNewsUrl).value
     DownloadArticlesTaskName = 'downloadArticlesTask'
     NonblockingDownload = ConfigVariableBool('news-nonblocking', 1).value
@@ -46,15 +46,15 @@ class EventsPage(ShtikerPage.ShtikerPage):
 
     def load(self):
         self.scrollButtonGui = loader.loadModel(
-            'phase_3.5/models/gui/friendslist_gui')
+            'user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.hostingGui = loader.loadModel(
-            'phase_4/models/parties/schtickerbookHostingGUI')
+            'user/resources/default/phase_4/models/parties/schtickerbookHostingGUI')
         self.invitationGui = loader.loadModel(
-            'phase_4/models/parties/schtickerbookInvitationGUI')
+            'user/resources/default/phase_4/models/parties/schtickerbookInvitationGUI')
         self.activityIconsModel = loader.loadModel(
-            'phase_4/models/parties/eventSignIcons')
+            'user/resources/default/phase_4/models/parties/eventSignIcons')
         self.decorationModels = loader.loadModel(
-            'phase_4/models/parties/partyDecorations')
+            'user/resources/default/phase_4/models/parties/partyDecorations')
         self.loadTabs()
         self.loadHostingTab()
         self.loadInvitationsTab()
@@ -74,7 +74,7 @@ class EventsPage(ShtikerPage.ShtikerPage):
         clickColor = (0.8, 0.8, 0.0, 1.0)
         rolloverColor = (0.15, 0.82, 1.0, 1.0)
         diabledColor = (1.0, 0.98, 0.15, 1.0)
-        gui = loader.loadModel('phase_3.5/models/gui/fishingBook')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingBook')
         self.hostTab = DirectButton(
             parent=self,
             relief=None,
@@ -415,7 +415,7 @@ class EventsPage(ShtikerPage.ShtikerPage):
     def loadNewsTab(self):
         self.newsDisplay = self.attachNewNode('news')
         newspaper = loader.loadModel(
-            'phase_4/models/parties/tt_m_gui_sbk_newspaper.bam')
+            'user/resources/default/phase_4/models/parties/tt_m_gui_sbk_newspaper.bam')
         self.newsFrame = DirectLabel(
             relief=None, parent=self.newsDisplay, pos=(
                 0, 0, -0.1))

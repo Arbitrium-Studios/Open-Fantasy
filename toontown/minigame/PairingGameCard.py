@@ -28,7 +28,7 @@ class PairingGameCard(PlayingCardNodePath):
 
     def load(self):
         oneCard = loader.loadModel(
-            'phase_4/models/minigames/garden_sign_memory')
+            'user/resources/default/phase_4/models/minigames/garden_sign_memory')
         prop = self.attachNewNode('prop')
         PlayingCardGlobals.getImage(
             self.style, self.suit, self.rank).copyTo(prop)
@@ -50,7 +50,7 @@ class PairingGameCard(PlayingCardNodePath):
         oneCard.reparentTo(self)
         cardBack = oneCard.find('**/sign2')
         cardBack.setColorScale(0.12, 0.35, 0.5, 1.0)
-        cardModel = loader.loadModel('phase_3.5/models/gui/playingCard')
+        cardModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/playingCard')
         logo = cardModel.find('**/logo')
         logo.reparentTo(self)
         logo.setScale(0.45)
@@ -63,9 +63,9 @@ class PairingGameCard(PlayingCardNodePath):
         self.setScale(2.5)
         self.flipIval = None
         self.turnUpSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_pairing_card_flip_face_up.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_pairing_card_flip_face_up.ogg')
         self.turnDownSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_pairing_card_flip_face_down.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_pairing_card_flip_face_down.ogg')
         return
 
     def unload(self):

@@ -193,7 +193,7 @@ class GolfRewardDialog:
             self.rankLabel['text'] = text
             if len(self.avIdList) > 1:
                 self.victory = base.loader.loadSfx(
-                    'phase_6/audio/sfx/KART_Applause_%d.ogg' % self.myPlace)
+                    'user/resources/default/phase_6/audio/sfx/KART_Applause_%d.ogg' % self.myPlace)
                 self.victory.play()
 
         for avId in self.avIdList:

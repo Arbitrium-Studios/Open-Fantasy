@@ -153,7 +153,7 @@ class DistributedPartyCatchActivity(
 
         self.defineConstants()
         self.treesAndFence = loader.loadModel(
-            'phase_13/models/parties/%s' % arenaModel)
+            'user/resources/default/phase_13/models/parties/%s' % arenaModel)
         self.treesAndFence.setScale(0.9)
         self.treesAndFence.find('**/fence_floor').setPos(0.0, 0.0, 0.1)
         self.treesAndFence.reparentTo(self.root)
@@ -187,18 +187,18 @@ class DistributedPartyCatchActivity(
             self.avatarNodePath)
         self.toonSDs = {}
         self.dropShadow = loader.loadModelOnce(
-            'phase_3/models/props/drop_shadow')
+            'user/resources/default/phase_3/models/props/drop_shadow')
         self.dropObjModels = {}
         if loadModels:
             self.__loadDropModels()
         self.sndGoodCatch = base.loader.loadSfx(
-            'phase_4/audio/sfx/SZ_DD_treasure.ogg')
+            'user/resources/default/phase_4/audio/sfx/SZ_DD_treasure.ogg')
         self.sndOof = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
         self.sndAnvilLand = base.loader.loadSfx(
-            'phase_4/audio/sfx/AA_drop_anvil_miss.ogg')
+            'user/resources/default/phase_4/audio/sfx/AA_drop_anvil_miss.ogg')
         self.sndPerfect = base.loader.loadSfx(
-            'phase_4/audio/sfx/ring_perfect.ogg')
+            'user/resources/default/phase_4/audio/sfx/ring_perfect.ogg')
         self.__textGen = TextNode('partyCatchActivity')
         self.__textGen.setFont(ToontownGlobals.getSignFont())
         self.__textGen.setAlign(TextNode.ACenter)

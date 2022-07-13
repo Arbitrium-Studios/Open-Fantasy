@@ -48,16 +48,16 @@ class Cannon:
     def load(self, nodeName):
         self.parentNode = NodePath(nodeName)
         self.cannonNode = loader.loadModel(
-            'phase_4/models/minigames/toon_cannon')
+            'user/resources/default/phase_4/models/minigames/toon_cannon')
         self.cannonNode.reparentTo(self.parentNode)
         self.barrelNode = self.cannonNode.find('**/cannon')
         self.shadowNode = self.cannonNode.find('**/square_drop_shadow')
-        self.smokeNode = loader.loadModel('phase_4/models/props/test_clouds')
+        self.smokeNode = loader.loadModel('user/resources/default/phase_4/models/props/test_clouds')
         self.smokeNode.setBillboardPointEye()
         self.sndCannonMove = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_adjust.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
         self.sndCannonFire = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
         self.collSphere = CollisionSphere(0, 0, 0, self.getSphereRadius())
         self.collSphere.setTangible(1)
         self.collNode = CollisionNode(self.getCollisionName())

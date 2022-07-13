@@ -18,8 +18,8 @@ class MinigameRulesPanel(StateData.StateData):
         self.TIMEOUT = timeout
 
     def load(self):
-        minigameGui = loader.loadModel('phase_4/models/gui/minigame_rules_gui')
-        buttonGui = loader.loadModel('phase_3.5/models/gui/inventory_gui')
+        minigameGui = loader.loadModel('user/resources/default/phase_4/models/gui/minigame_rules_gui')
+        buttonGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_gui')
         self.frame = DirectFrame(image=minigameGui.find(
             '**/minigame-rules-panel'), relief=None, pos=(0.1375, 0, -0.6667))
         self.gameTitleText = DirectLabel(

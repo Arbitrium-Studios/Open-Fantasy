@@ -52,12 +52,12 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
         track, level = GardenGlobals.getTreeTrackAndLevel(typeIndex)
         self.gagTrack = track
         self.gagLevel = level
-        invModel = loader.loadModel('phase_3.5/models/gui/inventory_icons')
+        invModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_icons')
         propName = ToontownBattleGlobals.AvPropsNew[track][level]
         self.prop = invModel.find('**/' + propName)
         self.prop.setScale(7)
         invModel.removeNode()
-        invModel2 = loader.loadModel('phase_3.5/models/gui/inventory_icons')
+        invModel2 = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_icons')
         propName = ToontownBattleGlobals.AvPropsNew[track][level]
         self.prop2 = invModel2.find('**/' + propName)
         self.prop2.setScale(7)
@@ -96,14 +96,14 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
             self.createBackupFruits()
         if DIRT_AS_WATER_INDICATOR:
             self.dirtMound = loader.loadModel(
-                'phase_5.5/models/estate/dirt_mound')
+                'user/resources/default/phase_5.5/models/estate/dirt_mound')
             self.dirtMound.reparentTo(self.model)
             self.sandMound = loader.loadModel(
-                'phase_5.5/models/estate/sand_mound')
+                'user/resources/default/phase_5.5/models/estate/sand_mound')
             self.sandMound.reparentTo(self.model)
         self.adjustGrowth()
         self.signModel = loader.loadModel(
-            'phase_5.5/models/estate/garden_sign.bam')
+            'user/resources/default/phase_5.5/models/estate/garden_sign.bam')
         self.signModel.setPos(3.5, 0, 0.025)
         self.signModel.reparentTo(self.rotateNode)
         owner = self.getOwnerIndex()

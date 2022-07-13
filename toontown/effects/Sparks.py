@@ -38,7 +38,7 @@ class Sparks(NodePath):
         notify.debug('Loading particle file: %s' % pfile)
         self.effect.loadConfig(pfile)
         ren = self.effect.getParticlesNamed('particles-1').getRenderer()
-        ren.setTextureFromNode('phase_6/models/karting/particleSpark', '**/*')
+        ren.setTextureFromNode('user/resources/default/phase_6/models/karting/particleSpark', '**/*')
 
     def start(self):
         self.effect.start(self, self.renderParent)

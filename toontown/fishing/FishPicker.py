@@ -13,7 +13,7 @@ class FishPicker(DirectScrolledList):
         self.fishList = []
         self._parent = parent
         self.shown = 0
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         optiondefs = (('parent', self._parent, None),
                       ('relief', None, None),
                       ('incButton_image', (gui.find('**/FndsLst_ScrollUp'),
@@ -47,7 +47,7 @@ class FishPicker(DirectScrolledList):
         DirectScrolledList.__init__(self, parent)
         self.initialiseoptions(FishPicker)
         self.fishGui = loader.loadModel(
-            'phase_3.5/models/gui/fishingBook').find('**/bucket')
+            'user/resources/default/phase_3.5/models/gui/fishingBook').find('**/bucket')
         self.fishGui.find('**/fram1').removeNode()
         self.fishGui.find('**/bubble').removeNode()
         self.fishGui.reparentTo(self, -1)

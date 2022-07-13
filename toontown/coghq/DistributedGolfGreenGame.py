@@ -184,7 +184,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
                            countZ,
                            None]
                 groundCircle = loader.loadModel(
-                    'phase_12/models/bossbotHQ/bust_a_cog_hole')
+                    'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_hole')
                 groundCircle.reparentTo(self.spriteNode)
                 if groundCircle is None:
                     import pdb
@@ -279,28 +279,28 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
 
     def load(self):
         BattleParticles.loadParticles()
-        model = loader.loadModel('phase_5.5/models/gui/package_delivery_panel')
-        model1 = loader.loadModel('phase_3.5/models/gui/matching_game_gui')
+        model = loader.loadModel('user/resources/default/phase_5.5/models/gui/package_delivery_panel')
+        model1 = loader.loadModel('user/resources/default/phase_3.5/models/gui/matching_game_gui')
         self.invModel = loader.loadModel(
-            'phase_3.5/models/gui/inventory_icons')
+            'user/resources/default/phase_3.5/models/gui/inventory_icons')
         self.model = model
         self.model1 = model1
         self.soundFire = base.loader.loadSfx(
-            'phase_6/audio/sfx/Golf_Hit_Ball.ogg')
+            'user/resources/default/phase_6/audio/sfx/Golf_Hit_Ball.ogg')
         self.soundLand = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_maze_pickup.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_maze_pickup.ogg')
         self.soundBurst = base.loader.loadSfx(
-            'phase_5/audio/sfx/Toon_bodyfall_synergy.ogg')
+            'user/resources/default/phase_5/audio/sfx/Toon_bodyfall_synergy.ogg')
         self.soundBomb = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
         self.soundLose = base.loader.loadSfx(
-            'phase_11/audio/sfx/LB_capacitor_discharge_3.ogg')
+            'user/resources/default/phase_11/audio/sfx/LB_capacitor_discharge_3.ogg')
         self.soundWin = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_pairing_match_bonus_both.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_pairing_match_bonus_both.ogg')
         self.soundDone = base.loader.loadSfx(
-            'phase_3/audio/sfx/GUI_create_toon_back.ogg')
+            'user/resources/default/phase_3/audio/sfx/GUI_create_toon_back.ogg')
         self.soundMove = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/SA_shred.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/SA_shred.ogg')
         background = model.find('**/bg')
         itemBoard = model.find('**/item_board')
         self.focusPoint = self.baseNode.attachNewNode('GolfGreenGameFrame')
@@ -308,7 +308,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
                                                                           0.1,
                                                                           -0.1,
                                                                           -0.1), frameColor=(0.737, 0.573, 0.345, 0.3))
-        gui2 = loader.loadModel('phase_3/models/gui/quit_button')
+        gui2 = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         self.quitButton = DirectButton(
             parent=self.frame2D, relief=None, image=(
                 gui2.find('**/QuitBtn_UP'), gui2.find('**/QuitBtn_DN'), gui2.find('**/QuitBtn_RLVR')), pos=(
@@ -343,7 +343,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
                 -0.0))
         self.instructions.hide()
         imageCogBall = loader.loadModel(
-            'phase_12/models/bossbotHQ/bust_a_cog_ball_cog')
+            'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_cog')
         imageCogBall.setHpr(0, 90, 0)
         self.instCogBall = DirectFrame(
             parent=self.instructions,
@@ -358,7 +358,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
                 0.0,
                 0,
                 -0.2))
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         cancelImageList = (
             buttons.find('**/CloseBtn_UP'),
             buttons.find('**/CloseBtn_DN'),
@@ -390,7 +390,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
                 1, 1, 1, 1), text_scale=0.045, text_pos=(
                     0, -0.01))
         self.timerLabel.hide()
-        self.headPanel = loader.loadModel('phase_6/models/golf/headPanel')
+        self.headPanel = loader.loadModel('user/resources/default/phase_6/models/golf/headPanel')
         self.scoreBoard = DirectFrame(scale=1.0, pos=(0.0, 0, 0.9), relief=DGG.FLAT, parent=aspect2d, frameSize=(-0.35,
                                                                                                                  0.35,
                                                                                                                  -0.05,
@@ -413,7 +413,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
                                 0, -0.1), textMayChange=1)
         self.bonusBoard.hide()
         self.backBoard = loader.loadModel(
-            'phase_12/models/bossbotHQ/bust_a_cog_background')
+            'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_background')
         self.backBoard.setCollideMask(BitMask32.allOff())
         self.backBoard.reparentTo(self.frame)
         self.backBoard.setScale(0.3, 0.2, 0.25)
@@ -422,7 +422,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
         self.backBoard.hide()
         base.bb = self.backBoard
         self.aimbase = loader.loadModel(
-            'phase_12/models/bossbotHQ/bust_a_cog_shooter')
+            'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_shooter')
         self.aimbase.setHpr(90, 0, 90)
         self.aimbase.setScale(0.3, 0.3, 0.15)
         self.aimbase.reparentTo(self.frame)
@@ -1391,11 +1391,11 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
         self.hasChanged = 0
         self.squareNode = self.frame.attachNewNode('GolfGreenGameBase')
         groundCircle = loader.loadModel(
-            'phase_12/models/bossbotHQ/bust_a_cog_golf_green')
+            'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_golf_green')
         groundCircle.reparentTo(self.baseNode)
         groundCircle.setScale(0.24)
         self.groundFlag = loader.loadModel(
-            'phase_12/models/bossbotHQ/bust_a_cog_golf_flag')
+            'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_golf_flag')
         self.groundFlag.reparentTo(self.baseNode)
         self.groundFlag.setScale(0.5)
         self.groundFlag.setH(-45)
@@ -1589,7 +1589,7 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
                 toonName = toon.getName()
             self.bonusBoard['text'] = TTLocalizer.GolfGreenGameGotHelp % toonName
             imageBall = loader.loadModel(
-                'phase_12/models/bossbotHQ/bust_a_cog_ball_fire')
+                'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_fire')
             imageBall.setHpr(0, 90, 0)
             self.bonusBoard['image'] = imageBall
             self.bonusBoard['image_scale'] = 0.13

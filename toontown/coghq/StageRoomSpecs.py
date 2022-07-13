@@ -48,8 +48,8 @@ CashbotStageEntranceIDs = (0,)
 CashbotStageMiddleRoomIDs = (1,)
 CashbotStageFinalRoomIDs = (2,)
 CashbotStageConnectorRooms = (
-    'phase_11/models/lawbotHQ/LB_connector_7cubeL2',
-    'phase_11/models/lawbotHQ/LB_connector_7cubeLR')
+    'user/resources/default/phase_11/models/lawbotHQ/LB_connector_7cubeL2',
+    'user/resources/default/phase_11/models/lawbotHQ/LB_connector_7cubeLR')
 CashbotStageSpecModules = {}
 if not __debug__ or __execWarnings__:
     print('EXECWARNING StageRoomSpecs: %s' % CashbotStageRoomName2RoomId)

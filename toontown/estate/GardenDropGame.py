@@ -305,8 +305,8 @@ class GardenDropGame(DirectObject.DirectObject):
             sprite.isActive = 0
 
     def load(self):
-        model = loader.loadModel('phase_5.5/models/gui/package_delivery_panel')
-        model1 = loader.loadModel('phase_3.5/models/gui/matching_game_gui')
+        model = loader.loadModel('user/resources/default/phase_5.5/models/gui/package_delivery_panel')
+        model1 = loader.loadModel('user/resources/default/phase_3.5/models/gui/matching_game_gui')
         self.model = model
         self.model1 = model1
         background = model.find('**/bg')
@@ -328,7 +328,7 @@ class GardenDropGame(DirectObject.DirectObject):
             parent=self.frame, image=itemBoard, image_scale=0.05, image_color=(
                 0.922, 0.922, 0.753, 1), relief=None, pos=(
                 0, 1, 0))
-        gui2 = loader.loadModel('phase_3/models/gui/quit_button')
+        gui2 = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         self.quitButton = DirectButton(
             parent=self.frame,
             relief=None,

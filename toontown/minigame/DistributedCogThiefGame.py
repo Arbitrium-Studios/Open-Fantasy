@@ -66,11 +66,11 @@ class DistributedCogThiefGame(DistributedMinigame):
     def load(self):
         self.notify.debug('load')
         DistributedMinigame.load(self)
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_CogThief.ogg')
+        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_CogThief.ogg')
         self.initCogInfo()
         for barrelIndex in range(CTGG.NumBarrels):
             barrel = loader.loadModel(
-                'phase_4/models/minigames/cogthief_game_gagTank')
+                'user/resources/default/phase_4/models/minigames/cogthief_game_gagTank')
             barrel.setPos(CTGG.BarrelStartingPositions[barrelIndex])
             barrel.setScale(self.BarrelScale)
             barrel.reparentTo(render)
@@ -96,7 +96,7 @@ class DistributedCogThiefGame(DistributedMinigame):
             self.barrels.append(barrel)
 
         self.gameBoard = loader.loadModel(
-            'phase_4/models/minigames/cogthief_game')
+            'user/resources/default/phase_4/models/minigames/cogthief_game')
         self.gameBoard.find('**/floor_TT').hide()
         self.gameBoard.find('**/floor_DD').hide()
         self.gameBoard.find('**/floor_DG').hide()
@@ -129,15 +129,15 @@ class DistributedCogThiefGame(DistributedMinigame):
         self.toonHitTracks = {}
         self.toonPieTracks = {}
         self.sndOof = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
         self.sndRewardTick = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/tick_counter.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
         self.sndPerfect = base.loader.loadSfx(
-            'phase_4/audio/sfx/ring_perfect.ogg')
+            'user/resources/default/phase_4/audio/sfx/ring_perfect.ogg')
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.posInTopRightCorner()
         self.timer.hide()
-        purchaseModels = loader.loadModel('phase_4/models/gui/purchase_gui')
+        purchaseModels = loader.loadModel('user/resources/default/phase_4/models/gui/purchase_gui')
         self.jarImage = purchaseModels.find('**/Jar')
         self.jarImage.reparentTo(hidden)
         self.rewardPanel = DirectLabel(
@@ -207,9 +207,9 @@ class DistributedCogThiefGame(DistributedMinigame):
                          'falling': [None] * self.numPlayers}
         for i in range(self.numPlayers):
             self.sndTable['hitBySuit'][i] = base.loader.loadSfx(
-                'phase_4/audio/sfx/MG_Tag_C.ogg')
+                'user/resources/default/phase_4/audio/sfx/MG_Tag_C.ogg')
             self.sndTable['falling'][i] = base.loader.loadSfx(
-                'phase_4/audio/sfx/MG_cannon_whizz.ogg')
+                'user/resources/default/phase_4/audio/sfx/MG_cannon_whizz.ogg')
 
         base.playMusic(self.music, looping=1, volume=0.8)
         self.introTrack = self.getIntroTrack()
@@ -799,7 +799,7 @@ class DistributedCogThiefGame(DistributedMinigame):
         animPie = Sequence()
         if pieType == 'actor':
             animPie = ActorInterval(pie, pieName, startFrame=48)
-        sound = loader.loadSfx('phase_3.5/audio/sfx/AA_pie_throw_only.ogg')
+        sound = loader.loadSfx('user/resources/default/phase_3.5/audio/sfx/AA_pie_throw_only.ogg')
         t = power / 100.0
         dist = 100 - 70 * t
         time = 1 + 0.5 * t

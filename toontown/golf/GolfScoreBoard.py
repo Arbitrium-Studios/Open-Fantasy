@@ -43,8 +43,8 @@ class GolfScoreBoard:
         self.lines = LineSegs()
         self.lines.setColor(0, 0, 0, 1)
         self.lines.setThickness(2)
-        guiModel = loader.loadModel('phase_6/models/golf/golf_gui')
-        highlight = loader.loadModel('phase_6/models/golf/headPanel')
+        guiModel = loader.loadModel('user/resources/default/phase_6/models/golf/golf_gui')
+        highlight = loader.loadModel('user/resources/default/phase_6/models/golf/headPanel')
         self.maximizeB = DirectButton(
             parent=aspect2d,
             pos=(
@@ -74,7 +74,7 @@ class GolfScoreBoard:
         self.lineHorOffset = 0.13
         self.lineVertOffset = 0.125
         self.lineVCenter = 0.025
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.minimizeB = DirectButton(
             parent=self.scoreboard,
             pos=(

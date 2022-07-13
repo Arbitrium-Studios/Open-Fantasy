@@ -252,13 +252,13 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
             self.startBlink()
             if not self.swallowSfx:
                 self.swallowSfx = loader.loadSfx(
-                    'phase_5.5/audio/sfx/beg_eat_swallow.ogg')
+                    'user/resources/default/phase_5.5/audio/sfx/beg_eat_swallow.ogg')
             if not self.callSfx:
                 self.callSfx = loader.loadSfx(
-                    'phase_5.5/audio/sfx/call_pet.ogg')
+                    'user/resources/default/phase_5.5/audio/sfx/call_pet.ogg')
             if not self.petSfx:
                 self.petSfx = loader.loadSfx(
-                    'phase_5.5/audio/sfx/pet_the_pet.ogg')
+                    'user/resources/default/phase_5.5/audio/sfx/pet_the_pet.ogg')
             self.handleMoodChange()
             self.accept(
                 self.mood.getDominantMoodChangeEvent(),
@@ -523,7 +523,7 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
                 print(str(error))
 
         if mode == PetConstants.PET_MOVIE_FEED:
-            self.bean = loader.loadModel('phase_4/models/props/jellybean4')
+            self.bean = loader.loadModel('user/resources/default/phase_4/models/props/jellybean4')
             bean = self.bean.find('**/jellybean')
             bean.setColor(random.choice(BeanColors))
             self.movieTrack = Sequence(

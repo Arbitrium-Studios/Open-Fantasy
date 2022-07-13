@@ -67,14 +67,14 @@ class DistributedCatchGame(DistributedMinigame):
         self.notify.debug('load')
         DistributedMinigame.load(self)
         self.defineConstants()
-        groundModels = ['phase_4/models/minigames/treehouse_2players',
-                        'phase_4/models/minigames/treehouse_2players',
-                        'phase_4/models/minigames/treehouse_3players',
-                        'phase_4/models/minigames/treehouse_4players']
+        groundModels = ['user/resources/default/phase_4/models/minigames/treehouse_2players',
+                        'user/resources/default/phase_4/models/minigames/treehouse_2players',
+                        'user/resources/default/phase_4/models/minigames/treehouse_3players',
+                        'user/resources/default/phase_4/models/minigames/treehouse_4players']
         index = self.getNumPlayers() - 1
         self.ground = loader.loadModel(groundModels[index])
         self.ground.setHpr(180, -90, 0)
-        self.dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
+        self.dropShadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
         self.dropObjModels = {}
         for objType in DropObjectTypes:
             if objType.name not in ['anvil', self.fruitName]:
@@ -102,15 +102,15 @@ class DistributedCatchGame(DistributedMinigame):
                 model.setZ(-self.ObjRadius)
             model.flattenMedium()
 
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_toontag.ogg')
+        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_toontag.ogg')
         self.sndGoodCatch = base.loader.loadSfx(
-            'phase_4/audio/sfx/SZ_DD_treasure.ogg')
+            'user/resources/default/phase_4/audio/sfx/SZ_DD_treasure.ogg')
         self.sndOof = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
         self.sndAnvilLand = base.loader.loadSfx(
-            'phase_4/audio/sfx/AA_drop_anvil_miss.ogg')
+            'user/resources/default/phase_4/audio/sfx/AA_drop_anvil_miss.ogg')
         self.sndPerfect = base.loader.loadSfx(
-            'phase_4/audio/sfx/ring_perfect.ogg')
+            'user/resources/default/phase_4/audio/sfx/ring_perfect.ogg')
         self.toonSDs = {}
         avId = self.localAvId
         toonSD = CatchGameToonSD.CatchGameToonSD(avId, self)

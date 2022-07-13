@@ -33,7 +33,7 @@ class GenderShop(StateData.StateData):
         self.ignore('next')
 
     def load(self):
-        gui = loader.loadModel('phase_3/models/gui/tt_m_gui_mat_mainGui')
+        gui = loader.loadModel('user/resources/default/phase_3/models/gui/tt_m_gui_mat_mainGui')
         guiBoyUp = gui.find('**/tt_t_gui_mat_boyUp')
         guiBoyDown = gui.find('**/tt_t_gui_mat_boyDown')
         guiGirlUp = gui.find('**/tt_t_gui_mat_girlUp')

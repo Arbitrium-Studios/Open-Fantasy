@@ -14,13 +14,13 @@ class DGHood(ToonHood.ToonHood):
         self.id = DaisyGardens
         self.townLoaderClass = DGTownLoader.DGTownLoader
         self.safeZoneLoaderClass = DGSafeZoneLoader.DGSafeZoneLoader
-        self.storageDNAFile = 'phase_8/dna/storage_DG.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['phase_8/dna/winter_storage_DG.dna'],
-                                      WACKY_WINTER_DECORATIONS: ['phase_8/dna/winter_storage_DG.dna'],
-                                      HALLOWEEN_PROPS: ['phase_8/dna/halloween_props_storage_DG.dna'],
-                                      SPOOKY_PROPS: ['phase_8/dna/halloween_props_storage_DG.dna']}
-        self.skyFile = 'phase_3.5/models/props/TT_sky'
-        self.spookySkyFile = 'phase_3.5/models/props/BR_sky'
+        self.storageDNAFile = 'user/resources/default/phase_8/dna/storage_DG.dna'
+        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['user/resources/default/phase_8/dna/winter_storage_DG.dna'],
+                                      WACKY_WINTER_DECORATIONS: ['user/resources/default/phase_8/dna/winter_storage_DG.dna'],
+                                      HALLOWEEN_PROPS: ['user/resources/default/phase_8/dna/halloween_props_storage_DG.dna'],
+                                      SPOOKY_PROPS: ['user/resources/default/phase_8/dna/halloween_props_storage_DG.dna']}
+        self.skyFile = 'user/resources/default/phase_3.5/models/props/TT_sky'
+        self.spookySkyFile = 'user/resources/default/phase_3.5/models/props/BR_sky'
         self.titleColor = (0.8, 0.6, 1.0, 1.0)
 
     def load(self):

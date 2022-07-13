@@ -69,7 +69,7 @@ class CogdoMazeDrop(NodePath, DirectObject):
         self.id = id
         self.reparentTo(hidden)
         self.setPos(x, y, 0)
-        shadow = loader.loadModel('phase_3/models/props/square_drop_shadow')
+        shadow = loader.loadModel('user/resources/default/phase_3/models/props/square_drop_shadow')
         shadow.setZ(0.2)
         shadow.setBin('ground', 10)
         shadow.setColor(1, 1, 1, 1)
@@ -307,7 +307,7 @@ class CogdoMazeWaterCooler(NodePath, DirectObject):
 
     def _initArrow(self):
         matchingGameGui = loader.loadModel(
-            'phase_3.5/models/gui/matching_game_gui')
+            'user/resources/default/phase_3.5/models/gui/matching_game_gui')
         arrow = matchingGameGui.find('**/minnieArrow')
         arrow.setScale(Globals.CoolerArrowScale)
         arrow.setColor(*Globals.CoolerArrowColor)

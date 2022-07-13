@@ -29,7 +29,7 @@ class PartyEditorListElement(DirectButton):
                 '**/partyDecoration_%s' % assetName)
             if geom.isEmpty() or self.unreleased:
                 helpGui = loader.loadModel(
-                    'phase_3.5/models/gui/tt_m_gui_brd_help')
+                    'user/resources/default/phase_3.5/models/gui/tt_m_gui_brd_help')
                 helpImageList = (helpGui.find('**/tt_t_gui_brd_helpUp'),
                                  helpGui.find('**/tt_t_gui_brd_helpDown'),
                                  helpGui.find('**/tt_t_gui_brd_helpHover'),

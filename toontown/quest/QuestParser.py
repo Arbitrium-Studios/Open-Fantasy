@@ -952,7 +952,7 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         token, track, level, number = line
         inventory = self.getVar('inventory')
         countSound = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/tick_counter.ogg')
+            'user/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
         return Sequence(Func(base.playSfx, countSound), Func(inventory.buttonBoing, track, level), Func(
             inventory.addItems, track, level, number), Func(inventory.updateGUI, track, level))
 

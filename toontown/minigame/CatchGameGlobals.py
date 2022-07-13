@@ -14,14 +14,14 @@ class DropObject:
         return self.onscreenDurMult == 1.0
 
 
-DropObjectTypes = [DropObject('apple', 1, 1.0, 'phase_4/models/minigames/apple'),
+DropObjectTypes = [DropObject('apple', 1, 1.0, 'user/resources/default/phase_4/models/minigames/apple'),
                    DropObject(
-    'orange', 1, 1.0, 'phase_4/models/minigames/orange'),
-    DropObject('pear', 1, 1.0, 'phase_4/models/minigames/pear'),
-    DropObject('coconut', 1, 1.0, 'phase_4/models/minigames/coconut'),
-    DropObject('watermelon', 1, 1.0, 'phase_4/models/minigames/watermelon'),
-    DropObject('pineapple', 1, 1.0, 'phase_4/models/minigames/pineapple'),
-    DropObject('anvil', 0, 0.4, 'phase_4/models/props/anvil-mod')]
+    'orange', 1, 1.0, 'user/resources/default/phase_4/models/minigames/orange'),
+    DropObject('pear', 1, 1.0, 'user/resources/default/phase_4/models/minigames/pear'),
+    DropObject('coconut', 1, 1.0, 'user/resources/default/phase_4/models/minigames/coconut'),
+    DropObject('watermelon', 1, 1.0, 'user/resources/default/phase_4/models/minigames/watermelon'),
+    DropObject('pineapple', 1, 1.0, 'user/resources/default/phase_4/models/minigames/pineapple'),
+    DropObject('anvil', 0, 0.4, 'user/resources/default/phase_4/models/props/anvil-mod')]
 Name2DropObjectType = {}
 for type in DropObjectTypes:
     Name2DropObjectType[type.name] = type

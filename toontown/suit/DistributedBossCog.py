@@ -581,13 +581,13 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         if self.rightDoor.isEmpty():
             self.rightDoor = self.elevatorModel.find('**/right_door')
         self.openSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
         self.finalOpenSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
         self.closeSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
         self.finalCloseSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
         self.openDoors = ElevatorUtils.getOpenInterval(
             self,
             self.leftDoor,
@@ -892,7 +892,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
             i.start()
 
     def getGearFrisbee(self):
-        return loader.loadModel('phase_9/models/char/gearProp')
+        return loader.loadModel('user/resources/default/phase_9/models/char/gearProp')
 
     def backupToonsToBattlePosition(self, toonIds, battleNode):
         self.notify.debug('backupToonsToBattlePosition:')
@@ -1030,15 +1030,15 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
 
     def loadEnvironment(self):
         self.elevatorMusic = base.loader.loadMusic(
-            'phase_7/audio/bgm/tt_elevator.ogg')
+            'user/resources/default/phase_7/audio/bgm/tt_elevator.ogg')
         self.stingMusic = base.loader.loadMusic(
-            'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
+            'user/resources/default/phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
         self.battleOneMusic = base.loader.loadMusic(
-            'phase_3.5/audio/bgm/encntr_general_bg.ogg')
+            'user/resources/default/phase_3.5/audio/bgm/encntr_general_bg.ogg')
         self.battleThreeMusic = base.loader.loadMusic(
-            'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
+            'user/resources/default/phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
         self.epilogueMusic = base.loader.loadMusic(
-            'phase_9/audio/bgm/encntr_hall_of_fame.ogg')
+            'user/resources/default/phase_9/audio/bgm/encntr_hall_of_fame.ogg')
 
     def unloadEnvironment(self):
         pass
@@ -1060,8 +1060,8 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         else:
             self.accept('gotAllToons', self.__doneWaitForToons)
         self.transitions = Transitions.Transitions(loader)
-        self.transitions.IrisModelName = 'phase_3/models/misc/iris'
-        self.transitions.FadeModelName = 'phase_3/models/misc/fade'
+        self.transitions.IrisModelName = 'user/resources/default/phase_3/models/misc/iris'
+        self.transitions.FadeModelName = 'user/resources/default/phase_3/models/misc/fade'
         self.transitions.fadeScreen(alpha=1)
         NametagGlobals.setMasterArrowsOn(0)
 

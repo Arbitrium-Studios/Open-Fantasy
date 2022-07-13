@@ -32,7 +32,7 @@ class PetTutorial(DirectFrame, FSM.FSM):
                 1),
             text_scale=TTLocalizer.PTtitle,
             text_font=ToontownGlobals.getSignFont())
-        images = loader.loadModel('phase_5.5/models/gui/PetTutorial')
+        images = loader.loadModel('user/resources/default/phase_5.5/models/gui/PetTutorial')
         self.iPage1 = DirectFrame(self, image=images.find(
             '**/PetTutorialPanel'), scale=0.75, pos=(-0.55, -0.1, 0))
         self.iPage1.hide()
@@ -42,8 +42,8 @@ class PetTutorial(DirectFrame, FSM.FSM):
         self.iPage3 = DirectFrame(self, image=images.find(
             '**/PetTutorialCattlelog'), scale=0.75, pos=(-0.55, -0.1, 0))
         self.iPage3.hide()
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.bNext = DirectButton(self, image=(gui.find('**/Horiz_Arrow_UP'),
                                                gui.find('**/Horiz_Arrow_DN'),
                                                gui.find(

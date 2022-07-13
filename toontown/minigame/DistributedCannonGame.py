@@ -99,14 +99,14 @@ class DistributedCannonGame(DistributedMinigame):
     def load(self):
         self.notify.debug('load')
         DistributedMinigame.load(self)
-        self.sky = loader.loadModel('phase_3.5/models/props/TT_sky')
+        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/TT_sky')
         self.ground = loader.loadModel(
-            'phase_4/models/minigames/toon_cannon_gameground')
+            'user/resources/default/phase_4/models/minigames/toon_cannon_gameground')
         self.tower = loader.loadModel(
-            'phase_4/models/minigames/toon_cannon_water_tower')
-        self.cannon = loader.loadModel('phase_4/models/minigames/toon_cannon')
-        self.dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
-        self.hill = loader.loadModel('phase_4/models/minigames/cannon_hill')
+            'user/resources/default/phase_4/models/minigames/toon_cannon_water_tower')
+        self.cannon = loader.loadModel('user/resources/default/phase_4/models/minigames/toon_cannon')
+        self.dropShadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
+        self.hill = loader.loadModel('user/resources/default/phase_4/models/minigames/cannon_hill')
         self.sky.setScale(WORLD_SCALE)
         self.ground.setScale(GROUND_SCALE)
         self.cannon.setScale(CANNON_SCALE)
@@ -116,7 +116,7 @@ class DistributedCannonGame(DistributedMinigame):
         self.dropShadow.setBin('fixed', 0, 1)
         self.splash = Splash.Splash(render)
         self.dustCloud = DustCloud.DustCloud(render)
-        purchaseModels = loader.loadModel('phase_4/models/gui/purchase_gui')
+        purchaseModels = loader.loadModel('user/resources/default/phase_4/models/gui/purchase_gui')
         self.jarImage = purchaseModels.find('**/Jar')
         self.jarImage.reparentTo(hidden)
         self.rewardPanel = DirectLabel(
@@ -130,23 +130,23 @@ class DistributedCannonGame(DistributedMinigame):
                 0.95, 0.95, 0, 1), text_shadow=(
                 0, 0, 0, 1))
         self.music = base.loader.loadMusic(
-            'phase_4/audio/bgm/MG_cannon_game.ogg')
+            'user/resources/default/phase_4/audio/bgm/MG_cannon_game.ogg')
         self.sndCannonMove = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_adjust.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
         self.sndCannonFire = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
         self.sndHitGround = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
         self.sndHitTower = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_hit_tower.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_tower.ogg')
         self.sndHitWater = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_splash.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_splash.ogg')
         self.sndWhizz = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_whizz.ogg')
-        self.sndWin = base.loader.loadSfx('phase_4/audio/sfx/MG_win.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_whizz.ogg')
+        self.sndWin = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_win.ogg')
         self.sndRewardTick = base.loader.loadSfx(
-            'phase_3.5/audio/sfx/tick_counter.ogg')
-        guiModel = 'phase_4/models/gui/cannon_game_gui'
+            'user/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
+        guiModel = 'user/resources/default/phase_4/models/gui/cannon_game_gui'
         cannonGui = loader.loadModel(guiModel)
         self.aimPad = DirectFrame(image=cannonGui.find(
             '**/CannonFire_PAD'), relief=None, pos=(0.7, 0, -0.553333), scale=0.8)

@@ -73,7 +73,7 @@ class ColorShop(StateData.StateData):
         self.hideButtons()
 
     def load(self):
-        self.gui = loader.loadModel('phase_3/models/gui/tt_m_gui_mat_mainGui')
+        self.gui = loader.loadModel('user/resources/default/phase_3/models/gui/tt_m_gui_mat_mainGui')
         guiRArrowUp = self.gui.find('**/tt_t_gui_mat_arrowUp')
         guiRArrowRollover = self.gui.find('**/tt_t_gui_mat_arrowUp')
         guiRArrowDown = self.gui.find('**/tt_t_gui_mat_arrowDown')

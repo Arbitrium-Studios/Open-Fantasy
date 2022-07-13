@@ -188,7 +188,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
 
     def loadBackground(self):
         upsellBackground = loader.loadModel(
-            'phase_3.5/models/gui/tt_m_gui_ign_newsStatusBackground')
+            'user/resources/default/phase_3.5/models/gui/tt_m_gui_ign_newsStatusBackground')
         imageScaleX = self.FrameDimensions[1] - self.FrameDimensions[0]
         imageScaleY = self.FrameDimensions[3] - self.FrameDimensions[2]
         self.backFrame = DirectFrame(

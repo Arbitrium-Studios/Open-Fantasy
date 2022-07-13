@@ -15,7 +15,7 @@ from toontown.toonbase import ToontownGlobals
 class DistributedElevatorMarker(BasicEntities.DistributedNodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory(
         'DistributedElevatorMarker')
-    elevatorMarkerModels = ['phase_9/models/cogHQ/square_stomper']
+    elevatorMarkerModels = ['user/resources/default/phase_9/models/cogHQ/square_stomper']
 
     def __init__(self, cr):
         BasicEntities.DistributedNodePathEntity.__init__(self, cr)

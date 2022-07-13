@@ -44,7 +44,7 @@ class DisguisePage(ShtikerPage.ShtikerPage):
 
     def load(self):
         ShtikerPage.ShtikerPage.load(self)
-        gui = loader.loadModel('phase_9/models/gui/cog_disguises')
+        gui = loader.loadModel('user/resources/default/phase_9/models/gui/cog_disguises')
         self.frame = DirectFrame(
             parent=self,
             relief=None,

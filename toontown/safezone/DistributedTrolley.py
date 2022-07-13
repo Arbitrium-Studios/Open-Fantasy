@@ -38,9 +38,9 @@ class DistributedTrolley(DistributedObject.DistributedObject):
             State.State('leaving', self.enterLeaving, self.exitLeaving, ['entering'])], 'off', 'off')
         self.fsm.enterInitialState()
         self.trolleyAwaySfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/SZ_trolley_away.ogg')
+            'user/resources/default/phase_4/audio/sfx/SZ_trolley_away.ogg')
         self.trolleyBellSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/SZ_trolley_bell.ogg')
+            'user/resources/default/phase_4/audio/sfx/SZ_trolley_bell.ogg')
         self.__toonTracks = {}
 
     def generate(self):

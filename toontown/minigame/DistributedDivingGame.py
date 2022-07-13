@@ -74,10 +74,10 @@ class DistributedDivingGame(DistributedMinigame):
     def load(self):
         self.notify.debug('load')
         DistributedMinigame.load(self)
-        loadBase = 'phase_4/models/minigames/'
-        loadBaseShip = 'phase_5/models/props/'
+        loadBase = 'user/resources/default/phase_4/models/minigames/'
+        loadBaseShip = 'user/resources/default/phase_5/models/props/'
         self.sndAmbience = base.loader.loadSfx(
-            'phase_4/audio/sfx/AV_ambient_water.ogg')
+            'user/resources/default/phase_4/audio/sfx/AV_ambient_water.ogg')
         self.environModel = loader.loadModel(loadBase + 'diving_game.bam')
         self.boatModel = self.environModel.find('**/boat')
         self.skyModel = self.environModel.find('**/sky')
@@ -112,25 +112,25 @@ class DistributedDivingGame(DistributedMinigame):
         self.toonSDs[avId] = toonSD
         toonSD.load()
         crabSoundName = 'King_Crab.ogg'
-        crabSoundPath = 'phase_4/audio/sfx/%s' % crabSoundName
+        crabSoundPath = 'user/resources/default/phase_4/audio/sfx/%s' % crabSoundName
         self.crabSound = loader.loadSfx(crabSoundPath)
         treasureSoundName = 'SZ_DD_treasure.ogg'
-        treasureSoundPath = 'phase_4/audio/sfx/%s' % treasureSoundName
+        treasureSoundPath = 'user/resources/default/phase_4/audio/sfx/%s' % treasureSoundName
         self.treasureSound = loader.loadSfx(treasureSoundPath)
         hitSoundName = 'diving_game_hit.ogg'
-        hitSoundPath = 'phase_4/audio/sfx/%s' % hitSoundName
+        hitSoundPath = 'user/resources/default/phase_4/audio/sfx/%s' % hitSoundName
         self.hitSound = loader.loadSfx(hitSoundPath)
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_Target.ogg')
+        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_Target.ogg')
         self.addSound(
             'dropGold',
             'diving_treasure_drop_off.ogg',
-            'phase_4/audio/sfx/')
+            'user/resources/default/phase_4/audio/sfx/')
         self.addSound(
             'getGold',
             'diving_treasure_pick_up.ogg',
-            'phase_4/audio/sfx/')
+            'user/resources/default/phase_4/audio/sfx/')
         self.swimSound = loader.loadSfx(
-            'phase_4/audio/sfx/diving_swim_loop.ogg')
+            'user/resources/default/phase_4/audio/sfx/diving_swim_loop.ogg')
         self.swimSound.setVolume(0.0)
         self.swimSound.setPlayRate(1.0)
         self.swimSound.setLoop(True)
@@ -552,7 +552,7 @@ class DistributedDivingGame(DistributedMinigame):
         self.NUMCRABS = pattern[0]
         self.SPEEDMULT = pattern[1]
         self.TIME = pattern[2]
-        loadBase = 'phase_4/models/char/'
+        loadBase = 'user/resources/default/phase_4/models/char/'
         for i in range(self.NUMCRABS):
             self.crabs.append(Actor.Actor(
                 loadBase + 'kingCrab-zero.bam', {'anim': loadBase + 'kingCrab-swimLOOP.bam'}))
@@ -588,7 +588,7 @@ class DistributedDivingGame(DistributedMinigame):
         self.collHandEvent.addAgainPattern('reach-%in')
         self.collHandEvent.addInPattern('into-%in')
         self.collHandEvent.addInPattern('hitby-%in')
-        loadBase = 'phase_4/models/minigames/'
+        loadBase = 'user/resources/default/phase_4/models/minigames/'
         self.treasures = []
         self.chestIcons = {}
         for i in range(self.NUMTREASURES):
@@ -959,7 +959,7 @@ class DistributedDivingGame(DistributedMinigame):
                 fishSoundName = 'Piano_Tuna.ogg'
             else:
                 fishSoundName = ' '
-            fishSoundPath = 'phase_4/audio/sfx/%s' % fishSoundName
+            fishSoundPath = 'user/resources/default/phase_4/audio/sfx/%s' % fishSoundName
             fish.sound = loader.loadSfx(fishSoundPath)
             if fish.sound:
                 fish.sound.play()

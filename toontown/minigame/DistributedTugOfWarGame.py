@@ -26,7 +26,7 @@ from direct.task.Task import Task
 
 
 class DistributedTugOfWarGame(DistributedMinigame):
-    bgm = 'phase_4/audio/bgm/MG_tug_o_war.ogg'
+    bgm = 'user/resources/default/phase_4/audio/bgm/MG_tug_o_war.ogg'
     toonAnimNames = ['neutral',
                      'tug-o-war',
                      'slip-forward',
@@ -125,20 +125,20 @@ class DistributedTugOfWarGame(DistributedMinigame):
         self.timer.posInTopRightCorner()
         self.timer.hide()
         self.room = loader.loadModel(
-            'phase_4/models/minigames/tug_of_war_dock')
+            'user/resources/default/phase_4/models/minigames/tug_of_war_dock')
         self.room.reparentTo(hidden)
         ropeModel = loader.loadModel(
-            'phase_4/models/minigames/tug_of_war_rope')
+            'user/resources/default/phase_4/models/minigames/tug_of_war_rope')
         self.ropeTexture = ropeModel.findTexture('*')
         ropeModel.removeNode()
-        self.sky = loader.loadModel('phase_3.5/models/props/TT_sky')
-        self.dropShadow = loader.loadModel('phase_3/models/props/drop_shadow')
+        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/TT_sky')
+        self.dropShadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
         self.correctSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_pos_buzzer.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_pos_buzzer.ogg')
         self.sndHitWater = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_cannon_splash.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_cannon_splash.ogg')
         self.whistleSound = base.loader.loadSfx(
-            'phase_4/audio/sfx/AA_sound_whistle.ogg')
+            'user/resources/default/phase_4/audio/sfx/AA_sound_whistle.ogg')
         self.music = base.loader.loadMusic(self.bgm)
         self.roundText = DirectLabel(
             text='     ', text_fg=(
@@ -152,7 +152,7 @@ class DistributedTugOfWarGame(DistributedMinigame):
         self.powerMeter.setTarget(8)
         self.arrows = [None] * 2
         for x in range(len(self.arrows)):
-            self.arrows[x] = loader.loadModel('phase_3/models/props/arrow')
+            self.arrows[x] = loader.loadModel('user/resources/default/phase_3/models/props/arrow')
             self.arrows[x].reparentTo(self.powerMeter)
             self.arrows[x].hide()
             self.arrows[x].setScale(0.2 - 0.4 * x, 0.2, 0.2)

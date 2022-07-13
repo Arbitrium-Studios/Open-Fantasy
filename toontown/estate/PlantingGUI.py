@@ -17,7 +17,7 @@ PICKER_ALWAYS_UP = True
 
 
 def loadJellyBean(parent, beanIndex):
-    gui = loader.loadModel('phase_5.5/models/estate/jellyBean')
+    gui = loader.loadModel('user/resources/default/phase_5.5/models/estate/jellyBean')
     newBean = gui.instanceTo(parent)
     parent.setScale(0.09)
     colors = GardenGlobals.BeanColors[beanIndex]
@@ -37,7 +37,7 @@ def loadJellyBean(parent, beanIndex):
 class GenericBoxScrollList(DirectScrolledList):
 
     def __init__(self, parent, items, **kw):
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.forceHeight = 1
         optiondefs = (('parent', parent, None),
                       ('relief', None, None),
@@ -259,7 +259,7 @@ class PlantingGUI(DirectFrame):
                              text_pos=instructionsPos)
         self.initialiseoptions(PlantingGUI)
         self.doneEvent = doneEvent
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okImageList = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),
@@ -294,7 +294,7 @@ class PlantingGUI(DirectFrame):
         self.jellyBeanPicker = None
         self.jellyBeanPickerInterval = None
         self.createBoxes()
-        guiItems = loader.loadModel('phase_5.5/models/gui/catalog_gui')
+        guiItems = loader.loadModel('user/resources/default/phase_5.5/models/gui/catalog_gui')
         self.beanBank = DirectLabel(
             self,
             relief=None,

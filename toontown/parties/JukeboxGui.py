@@ -25,7 +25,7 @@ class JukeboxGui(DirectObject):
     def load(self):
         if self.isLoaded():
             return
-        guiNode = loader.loadModel('phase_13/models/parties/jukeboxGUI')
+        guiNode = loader.loadModel('user/resources/default/phase_13/models/parties/jukeboxGUI')
         self._timerGui = PartyUtils.getNewToontownTimer()
         self._windowFrame = DirectFrame(image=guiNode.find(
             '**/background'), relief=None, pos=(0, 0, 0), scale=0.7)

@@ -21,7 +21,7 @@ class QuestBookPoster(QuestPoster):
     confirmDeleteButtonEvent = 'confirmDeleteButtonEvent'
 
     def __init__(self, parent=aspect2d, **kw):
-        bookModel = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+        bookModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
         questCard = bookModel.find('**/questCard')
         optiondefs = (('relief', None, None),
                       ('reverse', 0, None),
@@ -35,7 +35,7 @@ class QuestBookPoster(QuestPoster):
         self._deleteCallback = None
         self.questFrame = DirectFrame(parent=self, relief=None)
         gui = loader.loadModel(
-            'phase_4/models/parties/schtickerbookHostingGUI')
+            'user/resources/default/phase_4/models/parties/schtickerbookHostingGUI')
         icon = gui.find('**/startPartyButton_inactive')
         iconNP = aspect2d.attachNewNode('iconNP')
         icon.reparentTo(iconNP)

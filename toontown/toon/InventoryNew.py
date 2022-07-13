@@ -184,7 +184,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
 
     def load(self):
         self.notify.debug('Loading Inventory for %d' % self.toon.doId)
-        invModel = loader.loadModel('phase_3.5/models/gui/inventory_icons')
+        invModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_icons')
         self.invModels = []
         for track in range(len(AvPropsNew)):
             itemList = []
@@ -196,7 +196,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         invModel.removeNode()
         del invModel
         self.buttonModels = loader.loadModel(
-            'phase_3.5/models/gui/inventory_gui')
+            'user/resources/default/phase_3.5/models/gui/inventory_gui')
         self.rowModel = self.buttonModels.find('**/InventoryRow')
         self.upButton = self.buttonModels.find('**/InventoryButtonUp')
         self.downButton = self.buttonModels.find('**/InventoryButtonDown')
@@ -207,7 +207,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         self.battleFrame = None
         self.purchaseFrame = None
         self.storePurchaseFrame = None
-        trashcanGui = loader.loadModel('phase_3/models/gui/trashcan_gui')
+        trashcanGui = loader.loadModel('user/resources/default/phase_3/models/gui/trashcan_gui')
         self.deleteEnterButton = DirectButton(
             parent=self.invFrame,
             image=(
@@ -1395,7 +1395,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
             self.updateGUI(track, level)
 
     def loadBattleFrame(self):
-        battleModels = loader.loadModel('phase_3.5/models/gui/battle_gui')
+        battleModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/battle_gui')
         self.battleFrame = DirectFrame(
             relief=None,
             image=battleModels.find('**/BATTLE_Menu'),
@@ -1498,7 +1498,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         return
 
     def loadPurchaseFrame(self):
-        purchaseModels = loader.loadModel('phase_4/models/gui/purchase_gui')
+        purchaseModels = loader.loadModel('user/resources/default/phase_4/models/gui/purchase_gui')
         self.purchaseFrame = DirectFrame(relief=None, image=purchaseModels.find(
             '**/PurchasePanel'), image_pos=(-0.21, 0, 0.08), parent=self)
         self.purchaseFrame.setX(-.06)
@@ -1508,7 +1508,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
 
     def loadStorePurchaseFrame(self):
         storePurchaseModels = loader.loadModel(
-            'phase_4/models/gui/gag_shop_purchase_gui')
+            'user/resources/default/phase_4/models/gui/gag_shop_purchase_gui')
         self.storePurchaseFrame = DirectFrame(relief=None, image=storePurchaseModels.find(
             '**/gagShopPanel'), image_pos=(-0.21, 0, 0.18), parent=self)
         self.storePurchaseFrame.hide()

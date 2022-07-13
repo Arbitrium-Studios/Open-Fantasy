@@ -15,7 +15,7 @@ class MapPage(ShtikerPage.ShtikerPage):
 
     def load(self):
         ShtikerPage.ShtikerPage.load(self)
-        mapModel = loader.loadModel('phase_3.5/models/gui/toontown_map')
+        mapModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/toontown_map')
         self.map = DirectFrame(
             parent=self,
             relief=None,
@@ -77,7 +77,7 @@ class MapPage(ShtikerPage.ShtikerPage):
                              (0.45, 0.0, -0.45))
         self.labels = []
         self.clouds = []
-        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
         buttonLoc = (0.45, 0, - 0.74)
         if base.housingEnabled:
             buttonLoc = (0.55, 0, -0.74)
@@ -120,7 +120,7 @@ class MapPage(ShtikerPage.ShtikerPage):
             text_pos=(0, 0),
             text_wordwrap=TTLocalizer.MPhoodLabelWordwrap)
         self.hoodLabel.hide()
-        cloudModel = loader.loadModel('phase_3.5/models/gui/cloud')
+        cloudModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/cloud')
         cloudImage = cloudModel.find('**/cloud')
         for hood in self.allZones:
             abbrev = base.cr.hoodMgr.getNameFromId(hood)

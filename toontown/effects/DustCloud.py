@@ -4,8 +4,8 @@ from otp.otpbase import PythonUtil
 from toontown.battle.BattleProps import globalPropPool
 from direct.directnotify import DirectNotifyGlobal
 SFX = PythonUtil.Enum('poof, magic')
-SFXPATHS = {SFX.poof: 'phase_4/audio/sfx/firework_distance_02.ogg',
-            SFX.magic: 'phase_4/audio/sfx/SZ_DD_treasure.ogg'}
+SFXPATHS = {SFX.poof: 'user/resources/default/phase_4/audio/sfx/firework_distance_02.ogg',
+            SFX.magic: 'user/resources/default/phase_4/audio/sfx/SZ_DD_treasure.ogg'}
 
 
 class DustCloud(NodePath):

@@ -1,11 +1,11 @@
 CELL_WIDTH = 2
-mazeNames = [['phase_4/models/minigames/maze_1player'],
-             ['phase_4/models/minigames/maze_2player'],
-             ['phase_4/models/minigames/maze_3player'],
-             ['phase_4/models/minigames/maze_4player']]
+mazeNames = [['user/resources/default/phase_4/models/minigames/maze_1player'],
+             ['user/resources/default/phase_4/models/minigames/maze_2player'],
+             ['user/resources/default/phase_4/models/minigames/maze_3player'],
+             ['user/resources/default/phase_4/models/minigames/maze_4player']]
 mazeData = {}
-mazeData['phase_4/models/minigames/maze_1player'] = {}
-data = mazeData['phase_4/models/minigames/maze_1player']
+mazeData['user/resources/default/phase_4/models/minigames/maze_1player'] = {}
+data = mazeData['user/resources/default/phase_4/models/minigames/maze_1player']
 data['width'] = 28
 data['height'] = 22
 data['originX'] = 14
@@ -823,8 +823,8 @@ data['treasurePosList'] = [(-20, -18, 0.1),
                            (20, 18, 0.1),
                            (22, 18, 0.1),
                            (24, 18, 0.1)]
-mazeData['phase_4/models/minigames/maze_2player'] = {}
-data = mazeData['phase_4/models/minigames/maze_2player']
+mazeData['user/resources/default/phase_4/models/minigames/maze_2player'] = {}
+data = mazeData['user/resources/default/phase_4/models/minigames/maze_2player']
 data['width'] = 32
 data['height'] = 50
 data['originX'] = 16
@@ -2857,8 +2857,8 @@ data['treasurePosList'] = [(-28, -46, 0.1),
                            (24, 46, 0.1),
                            (26, 46, 0.1),
                            (28, 46, 0.1)]
-mazeData['phase_4/models/minigames/maze_3player'] = {}
-data = mazeData['phase_4/models/minigames/maze_3player']
+mazeData['user/resources/default/phase_4/models/minigames/maze_3player'] = {}
+data = mazeData['user/resources/default/phase_4/models/minigames/maze_3player']
 data['width'] = 46
 data['height'] = 45
 data['originX'] = 23
@@ -5489,8 +5489,8 @@ data['treasurePosList'] = [(-22, -34, 0.1),
                            (18, 48, 0.1),
                            (20, 48, 0.1),
                            (22, 48, 0.1)]
-mazeData['phase_4/models/minigames/maze_4player'] = {}
-data = mazeData['phase_4/models/minigames/maze_4player']
+mazeData['user/resources/default/phase_4/models/minigames/maze_4player'] = {}
+data = mazeData['user/resources/default/phase_4/models/minigames/maze_4player']
 data['width'] = 50
 data['height'] = 40
 data['originX'] = 25

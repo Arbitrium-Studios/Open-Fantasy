@@ -26,11 +26,11 @@ class BankGui(DirectFrame):
         self.initialiseoptions(BankGui)
         self.doneEvent = doneEvent
         self.__transactionAmount = 0
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        jarGui = loader.loadModel('phase_3.5/models/gui/jar_gui')
-        arrowGui = loader.loadModel('phase_3/models/gui/create_a_toon_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        jarGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/jar_gui')
+        arrowGui = loader.loadModel('user/resources/default/phase_3/models/gui/create_a_toon_gui')
         bankModel = loader.loadModel(
-            'phase_5.5/models/estate/jellybeanBank.bam')
+            'user/resources/default/phase_5.5/models/estate/jellybeanBank.bam')
         bankModel.setDepthWrite(1)
         bankModel.setDepthTest(1)
         bankModel.find('**/jellybeans').setDepthWrite(0)

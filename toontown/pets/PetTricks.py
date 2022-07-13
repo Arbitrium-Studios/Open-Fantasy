@@ -51,13 +51,13 @@ TrickHeals = {Tricks.JUMP: (5, 10),
               Tricks.DANCE: (10, 20),
               Tricks.SPEAK: (11, 22),
               Tricks.BALK: (0, 0)}
-TrickSounds = {Tricks.BACKFLIP: 'phase_5/audio/sfx/backflip.ogg',
-               Tricks.ROLLOVER: 'phase_5/audio/sfx/rollover.ogg',
-               Tricks.PLAYDEAD: 'phase_5/audio/sfx/play_dead.ogg',
-               Tricks.BEG: 'phase_5/audio/sfx/beg.ogg',
-               Tricks.DANCE: 'phase_5/audio/sfx/heal_dance.ogg',
-               Tricks.JUMP: 'phase_5/audio/sfx/jump.ogg',
-               Tricks.SPEAK: 'phase_5/audio/sfx/speak_v1.ogg'}
+TrickSounds = {Tricks.BACKFLIP: 'user/resources/default/phase_5/audio/sfx/backflip.ogg',
+               Tricks.ROLLOVER: 'user/resources/default/phase_5/audio/sfx/rollover.ogg',
+               Tricks.PLAYDEAD: 'user/resources/default/phase_5/audio/sfx/play_dead.ogg',
+               Tricks.BEG: 'user/resources/default/phase_5/audio/sfx/beg.ogg',
+               Tricks.DANCE: 'user/resources/default/phase_5/audio/sfx/heal_dance.ogg',
+               Tricks.JUMP: 'user/resources/default/phase_5/audio/sfx/jump.ogg',
+               Tricks.SPEAK: 'user/resources/default/phase_5/audio/sfx/speak_v1.ogg'}
 
 
 def getSoundIval(trickId):

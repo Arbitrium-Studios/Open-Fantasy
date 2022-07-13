@@ -37,9 +37,9 @@ class PartyEditor(FSM, DirectObject):
 
     def initElementList(self):
         self.activityIconsModel = loader.loadModel(
-            'phase_4/models/parties/eventSignIcons')
+            'user/resources/default/phase_4/models/parties/eventSignIcons')
         self.decorationModels = loader.loadModel(
-            'phase_4/models/parties/partyDecorations')
+            'user/resources/default/phase_4/models/parties/partyDecorations')
         pos = self.partyPlanner.gui.find(
             '**/step_05_activitiesIcon_locator').getPos()
         self.elementList = DirectScrolledList(parent=self.parent, relief=None, decButton_image=(self.partyPlanner.gui.find('**/activitiesButtonUp_up'),
@@ -85,7 +85,7 @@ class PartyEditor(FSM, DirectObject):
         self.partyClockElement.buyButtonClicked((8, 7))
 
     def initTrashCan(self):
-        trashcanGui = loader.loadModel('phase_3/models/gui/trashcan_gui')
+        trashcanGui = loader.loadModel('user/resources/default/phase_3/models/gui/trashcan_gui')
         self.trashCanButton = DirectButton(parent=self.parent, relief=None, pos=Point3(*PartyGlobals.TrashCanPosition), scale=PartyGlobals.TrashCanScale, geom=(trashcanGui.find('**/TrashCan_CLSD'),
                                                                                                                                                                 trashcanGui.find(
                                                                                                                                                                     '**/TrashCan_OPEN'),

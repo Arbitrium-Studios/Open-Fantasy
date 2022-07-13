@@ -19,7 +19,7 @@ class ToontownLoadingBlocker(TTDialog.TTDialog):
         if not self.__shouldShowBlocker(avList):
             return
         TTDialog.TTDialog.__init__(self)
-        gui = loader.loadModel('phase_3/models/gui/tt_m_gui_pat_mainGui')
+        gui = loader.loadModel('user/resources/default/phase_3/models/gui/tt_m_gui_pat_mainGui')
         img = gui.find('**/tt_t_gui_pat_loadingPopup')
         self['image'] = img
         self['image_scale'] = (1, 0, 1)

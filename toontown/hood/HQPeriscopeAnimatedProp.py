@@ -11,7 +11,7 @@ class HQPeriscopeAnimatedProp(AnimatedProp.AnimatedProp):
         self.periscope = Actor.Actor(node, copy=0)
         self.periscope.reparentTo(parent)
         self.periscope.loadAnims(
-            {'anim': 'phase_3.5/models/props/HQ_periscope-chan'})
+            {'anim': 'user/resources/default/phase_3.5/models/props/HQ_periscope-chan'})
         self.periscope.setBlend(frameBlend=base.smoothAnimations)
         self.periscope.pose('anim', 0)
         self.node = self.periscope

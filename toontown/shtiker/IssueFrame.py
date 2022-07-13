@@ -113,9 +113,9 @@ class IssueFrame(DirectFrame):
 
     def load(self):
         self.gui = loader.loadModel(
-            'phase_3.5/models/gui/tt_m_gui_ign_directNewsGui')
+            'user/resources/default/phase_3.5/models/gui/tt_m_gui_ign_directNewsGui')
         self.guiNav = loader.loadModel(
-            'phase_3.5/models/gui/tt_m_gui_ign_directNewsGuiNav')
+            'user/resources/default/phase_3.5/models/gui/tt_m_gui_ign_directNewsGuiNav')
         numPagesLoaded = 0
         totalNumberOfPages = len(self.flatSubsectionList)
         for section, subSectionList in enumerate(self.sectionList):
@@ -129,7 +129,7 @@ class IssueFrame(DirectFrame):
 
     def createPage(self, section, subsection, fullFilename):
         upsellBackground = loader.loadModel(
-            'phase_3.5/models/gui/tt_m_gui_ign_newsStatusBackground')
+            'user/resources/default/phase_3.5/models/gui/tt_m_gui_ign_newsStatusBackground')
         imageScaleX = self.FrameDimensions[1] - self.FrameDimensions[0]
         imageScaleY = self.FrameDimensions[3] - self.FrameDimensions[2]
         pageFrame = DirectFrame(

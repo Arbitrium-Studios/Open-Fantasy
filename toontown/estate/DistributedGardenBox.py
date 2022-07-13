@@ -20,7 +20,7 @@ class DistributedGardenBox(DistributedLawnDecor.DistributedLawnDecor):
         self.plantPath.reparentTo(self)
         self.plotScale = 1.0
         self.plantingGuiDoneEvent = 'plantingGuiDone'
-        self.defaultModel = 'phase_5.5/models/estate/planterC'
+        self.defaultModel = 'user/resources/default/phase_5.5/models/estate/planterC'
 
     def announceGenerate(self):
         self.notify.debug('announceGenerate')
@@ -28,11 +28,11 @@ class DistributedGardenBox(DistributedLawnDecor.DistributedLawnDecor):
 
     def doModelSetup(self):
         if self.typeIndex == GardenGlobals.BOX_THREE:
-            self.defaultModel = 'phase_5.5/models/estate/planterA'
+            self.defaultModel = 'user/resources/default/phase_5.5/models/estate/planterA'
         elif self.typeIndex == GardenGlobals.BOX_TWO:
-            self.defaultModel = 'phase_5.5/models/estate/planterC'
+            self.defaultModel = 'user/resources/default/phase_5.5/models/estate/planterC'
         else:
-            self.defaultModel = 'phase_5.5/models/estate/planterD'
+            self.defaultModel = 'user/resources/default/phase_5.5/models/estate/planterD'
             self.collSphereOffset = 0.0
             self.collSphereRadius = self.collSphereRadius * 1.41
             self.plotScale = Vec3(1.0, 1.0, 1.0)

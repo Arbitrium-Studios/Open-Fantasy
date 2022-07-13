@@ -136,7 +136,7 @@ class MakeAToon(StateData.StateData):
         self.room.reparentTo(hidden)
 
     def load(self):
-        gui = loader.loadModel('phase_3/models/gui/tt_m_gui_mat_mainGui')
+        gui = loader.loadModel('user/resources/default/phase_3/models/gui/tt_m_gui_mat_mainGui')
         guiAcceptUp = gui.find('**/tt_t_gui_mat_okUp')
         guiAcceptDown = gui.find('**/tt_t_gui_mat_okDown')
         guiCancelUp = gui.find('**/tt_t_gui_mat_closeUp')
@@ -214,34 +214,34 @@ class MakeAToon(StateData.StateData):
             DGG.B1RELEASE, self.stopToonRotateRightTask)
         gui.removeNode()
         self.roomDropActor = Actor()
-        self.roomDropActor.loadModel('phase_3/models/makeatoon/roomAnim_model')
+        self.roomDropActor.loadModel('user/resources/default/phase_3/models/makeatoon/roomAnim_model')
         self.roomDropActor.loadAnims(
-            {'drop': 'phase_3/models/makeatoon/roomAnim_roomDrop'})
+            {'drop': 'user/resources/default/phase_3/models/makeatoon/roomAnim_roomDrop'})
         self.roomDropActor.reparentTo(render)
         self.roomDropActor.setBlend(frameBlend=base.smoothAnimations)
         self.dropJoint = self.roomDropActor.find('**/droppingJoint')
         self.roomSquishActor = Actor()
         self.roomSquishActor.loadModel(
-            'phase_3/models/makeatoon/roomAnim_model')
+            'user/resources/default/phase_3/models/makeatoon/roomAnim_model')
         self.roomSquishActor.loadAnims(
-            {'squish': 'phase_3/models/makeatoon/roomAnim_roomSquish'})
+            {'squish': 'user/resources/default/phase_3/models/makeatoon/roomAnim_roomSquish'})
         self.roomSquishActor.reparentTo(render)
         self.roomSquishActor.setBlend(frameBlend=base.smoothAnimations)
         self.squishJoint = self.roomSquishActor.find('**/scalingJoint')
         self.propSquishActor = Actor()
         self.propSquishActor.loadModel(
-            'phase_3/models/makeatoon/roomAnim_model')
+            'user/resources/default/phase_3/models/makeatoon/roomAnim_model')
         self.propSquishActor.loadAnims(
-            {'propSquish': 'phase_3/models/makeatoon/roomAnim_propSquish'})
+            {'propSquish': 'user/resources/default/phase_3/models/makeatoon/roomAnim_propSquish'})
         self.propSquishActor.reparentTo(render)
         self.propSquishActor.setBlend(frameBlend=base.smoothAnimations)
         self.propSquishActor.pose('propSquish', 0)
         self.propJoint = self.propSquishActor.find('**/propJoint')
         self.spotlightActor = Actor()
         self.spotlightActor.loadModel(
-            'phase_3/models/makeatoon/roomAnim_model')
+            'user/resources/default/phase_3/models/makeatoon/roomAnim_model')
         self.spotlightActor.loadAnims(
-            {'spotlightShake': 'phase_3/models/makeatoon/roomAnim_spotlightShake'})
+            {'spotlightShake': 'user/resources/default/phase_3/models/makeatoon/roomAnim_spotlightShake'})
         self.spotlightActor.reparentTo(render)
         self.spotlightActor.setBlend(frameBlend=base.smoothAnimations)
         self.spotlightJoint = self.spotlightActor.find('**/spotlightJoint')
@@ -250,7 +250,7 @@ class MakeAToon(StateData.StateData):
         ee.bind(DGG.B1PRESS, lambda x, ee=ee: self.toggleSlide())
         self.eee = ee
         self.room = loader.loadModel(
-            'phase_3/models/makeatoon/tt_m_ara_mat_room')
+            'user/resources/default/phase_3/models/makeatoon/tt_m_ara_mat_room')
         self.genderWalls = self.room.find('**/genderWalls')
         self.genderProps = self.room.find('**/genderProps')
         self.bodyWalls = self.room.find('**/bodyWalls')
@@ -273,7 +273,7 @@ class MakeAToon(StateData.StateData):
         self.spotlight.setHpr(0, 0, 0)
         smokeSeqNode = SequenceNode('smoke')
         smokeModel = loader.loadModel(
-            'phase_3/models/makeatoon/tt_m_ara_mat_smoke')
+            'user/resources/default/phase_3/models/makeatoon/tt_m_ara_mat_smoke')
         smokeFrameList = list(smokeModel.findAllMatches('**/smoke_*'))
         smokeFrameList.reverse()
         for smokeFrame in smokeFrameList:
@@ -298,22 +298,22 @@ class MakeAToon(StateData.StateData):
         self.cls.load()
         self.ns.load()
         self.music = base.loader.loadMusic(
-            'phase_3/audio/bgm/create_a_toon.ogg')
+            'user/resources/default/phase_3/audio/bgm/create_a_toon.ogg')
         self.musicVolume = base.config.GetFloat('makeatoon-music-volume', 1)
         self.sfxVolume = base.config.GetFloat('makeatoon-sfx-volume', 1)
         self.soundBack = base.loader.loadSfx(
-            'phase_3/audio/sfx/GUI_create_toon_back.ogg')
+            'user/resources/default/phase_3/audio/sfx/GUI_create_toon_back.ogg')
         self.crashSounds = []
         self.crashSounds.append(base.loader.loadSfx(
-            'phase_3/audio/sfx/tt_s_ara_mat_crash_boing.ogg'))
+            'user/resources/default/phase_3/audio/sfx/tt_s_ara_mat_crash_boing.ogg'))
         self.crashSounds.append(base.loader.loadSfx(
-            'phase_3/audio/sfx/tt_s_ara_mat_crash_glassBoing.ogg'))
+            'user/resources/default/phase_3/audio/sfx/tt_s_ara_mat_crash_glassBoing.ogg'))
         self.crashSounds.append(base.loader.loadSfx(
-            'phase_3/audio/sfx/tt_s_ara_mat_crash_wood.ogg'))
+            'user/resources/default/phase_3/audio/sfx/tt_s_ara_mat_crash_wood.ogg'))
         self.crashSounds.append(base.loader.loadSfx(
-            'phase_3/audio/sfx/tt_s_ara_mat_crash_woodBoing.ogg'))
+            'user/resources/default/phase_3/audio/sfx/tt_s_ara_mat_crash_woodBoing.ogg'))
         self.crashSounds.append(base.loader.loadSfx(
-            'phase_3/audio/sfx/tt_s_ara_mat_crash_woodGlass.ogg'))
+            'user/resources/default/phase_3/audio/sfx/tt_s_ara_mat_crash_woodGlass.ogg'))
         return
 
     def unload(self):
@@ -400,8 +400,8 @@ class MakeAToon(StateData.StateData):
         del self.parentFSM
         del self.fsm
         self.ignoreAll()
-        loader.unloadModel('phase_3/models/gui/create_a_toon_gui')
-        loader.unloadModel('phase_3/models/gui/create_a_toon')
+        loader.unloadModel('user/resources/default/phase_3/models/gui/create_a_toon_gui')
+        loader.unloadModel('user/resources/default/phase_3/models/gui/create_a_toon')
         ModelPool.garbageCollect()
         TexturePool.garbageCollect()
 
@@ -685,7 +685,7 @@ class MakeAToon(StateData.StateData):
 
     def create3DGui(self):
         self.proto = loader.loadModel(
-            'phase_3/models/makeatoon/tt_m_ara_mat_protoMachine')
+            'user/resources/default/phase_3/models/makeatoon/tt_m_ara_mat_protoMachine')
         self.proto.setScale(0.2)
         self.proto.reparentTo(render)
 

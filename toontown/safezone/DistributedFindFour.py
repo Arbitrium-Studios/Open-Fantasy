@@ -26,7 +26,7 @@ class DistributedFindFour(DistributedNode.DistributedNode):
         self.cr = cr
         self.reparentTo(render)
         self.boardNode = loader.loadModel(
-            'phase_6/models/golf/findfour_game.bam')
+            'user/resources/default/phase_6/models/golf/findfour_game.bam')
         self.boardNode.reparentTo(self)
         self.board = [[0,
                        0,
@@ -103,7 +103,7 @@ class DistributedFindFour(DistributedNode.DistributedNode):
         self.myHandler = CollisionHandlerQueue()
         self.traverser.addCollider(self.pickerNP, self.myHandler)
         self.buttonModels = loader.loadModel(
-            'phase_3.5/models/gui/inventory_gui')
+            'user/resources/default/phase_3.5/models/gui/inventory_gui')
         self.upButton = self.buttonModels.find('**//InventoryButtonUp')
         self.downButton = self.buttonModels.find('**/InventoryButtonDown')
         self.rolloverButton = self.buttonModels.find(
@@ -115,10 +115,10 @@ class DistributedFindFour(DistributedNode.DistributedNode):
         self.tintConstant = Vec4(0.25, 0.25, 0.25, 0)
         self.ghostConstant = Vec4(0, 0, 0, 0.5)
         self.knockSound = base.loader.loadSfx(
-            'phase_5/audio/sfx/GUI_knock_1.ogg')
+            'user/resources/default/phase_5/audio/sfx/GUI_knock_1.ogg')
         self.clickSound = base.loader.loadSfx(
-            'phase_3/audio/sfx/GUI_balloon_popup.ogg')
-        self.moveSound = base.loader.loadSfx('phase_6/audio/sfx/CC_move.ogg')
+            'user/resources/default/phase_3/audio/sfx/GUI_balloon_popup.ogg')
+        self.moveSound = base.loader.loadSfx('user/resources/default/phase_6/audio/sfx/CC_move.ogg')
         self.accept('stoppedAsleep', self.handleSleep)
         from direct.fsm import ClassicFSM, State
         self.fsm = ClassicFSM.ClassicFSM(

@@ -37,7 +37,7 @@ class DistributedPartyGate(DistributedObject.DistributedObject):
                 si = '%d' % i
             self.clockSounds.append(
                 base.loader.loadSfx(
-                    'phase_4/audio/sfx/clock%s.ogg' %
+                    'user/resources/default/phase_4/audio/sfx/clock%s.ogg' %
                     si))
 
     def generate(self):

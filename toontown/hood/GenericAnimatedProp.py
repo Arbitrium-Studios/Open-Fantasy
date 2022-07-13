@@ -26,7 +26,7 @@ class GenericAnimatedProp(AnimatedProp.AnimatedProp):
             pathStr = finalStr.split('__')[0]
         elif code.startswith('animated_building_'):
             pathStr = code[len('animated_building_'):].split('__')[0]
-        phaseDelimeter = len('phase_') + pathStr[len('phase_'):].find('_')
+        phaseDelimeter = len('user/resources/default/phase_') + pathStr[len('user/resources/default/phase_'):].find('_')
         phaseStr = pathStr[:phaseDelimeter]
         pathTokens = pathStr[phaseDelimeter + 1:].split('_')
         self.path = phaseStr

@@ -63,7 +63,7 @@ class DistributedDoorEntityLock(
         FourState.FourState.enterState1(self)
         beat = self.duration * 0.05
         slideSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_arms_retracting.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_arms_retracting.ogg')
         self.setTrack(
             Sequence(
                 Wait(
@@ -111,9 +111,9 @@ class DistributedDoorEntityLock(
     def enterState3(self):
         FourState.FourState.enterState3(self)
         unlockSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_unlock.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_unlock.ogg')
         slideSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_arms_retracting.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_arms_retracting.ogg')
         beat = self.duration * 0.05
         self.setTrack(
             Sequence(
@@ -299,7 +299,7 @@ class DistributedDoorEntity(DistributedDoorEntityBase.DistributedDoorEntityBase,
         return None
 
     def setupDoor(self):
-        model = loader.loadModel('phase_9/models/cogHQ/CogDoorHandShake')
+        model = loader.loadModel('user/resources/default/phase_9/models/cogHQ/CogDoorHandShake')
         if model:
             doorway = model.find('**/Doorway1')
             rootNode = self.doorNode.attachNewNode(self.getName() + '-root')
@@ -455,9 +455,9 @@ class DistributedDoorEntity(DistributedDoorEntityBase.DistributedDoorEntityBase,
             print('openInnerDoors stage Two')
             duration = self.duration
             slideSfx = base.loader.loadSfx(
-                'phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
+                'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
             finalSfx = base.loader.loadSfx(
-                'phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
+                'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
             moveDistance = 8.0
             self.setInnerDoorsTrack(
                 Sequence(
@@ -503,9 +503,9 @@ class DistributedDoorEntity(DistributedDoorEntityBase.DistributedDoorEntityBase,
     def closeInnerDoors(self):
         duration = self.duration
         slideSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
         finalSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
         moveDistance = 8.0
         self.setInnerDoorsTrack(
             Sequence(
@@ -556,9 +556,9 @@ class DistributedDoorEntity(DistributedDoorEntityBase.DistributedDoorEntityBase,
             self.okToUnblockVis()
         duration = self.duration
         slideSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
         finalSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
         moveDistance = 8.0
         self.setTrack(
             Sequence(
@@ -629,9 +629,9 @@ class DistributedDoorEntity(DistributedDoorEntityBase.DistributedDoorEntityBase,
         FourState.FourState.enterState3(self)
         duration = self.duration
         slideSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_sliding.ogg')
         finalSfx = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
+            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_door_open_final.ogg')
         self.setTrack(Sequence(Wait(duration * 0.1),
                                Func(self.closeInnerDoors),
                                Wait(duration * 0.4),

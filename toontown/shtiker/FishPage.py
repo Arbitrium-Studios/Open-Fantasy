@@ -45,7 +45,7 @@ class FishPage(ShtikerPage.ShtikerPage):
 
     def load(self):
         ShtikerPage.ShtikerPage.load(self)
-        gui = loader.loadModel('phase_3.5/models/gui/fishingBook')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingBook')
         rodFrame = gui.find('**/bucket/fram1')
         rodFrame.removeNode()
         trophyCase = gui.find('**/trophyCase1')
@@ -308,7 +308,7 @@ class FishingTrophy(DirectFrame):
     def __init__(self, level):
         DirectFrame.__init__(self, relief=None)
         self.initialiseoptions(FishingTrophy)
-        self.trophy = loader.loadModel('phase_3.5/models/gui/fishingTrophy')
+        self.trophy = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingTrophy')
         self.trophy.reparentTo(self)
         self.trophy.setPos(0, 1, 0)
         self.trophy.setScale(0.1)
@@ -318,7 +318,7 @@ class FishingTrophy(DirectFrame):
         self.topBase = self.trophy.find('**/trophyTopBase')
         self.statue = self.trophy.find('**/trophyStatue')
         self.base.setColorScale(1, 1, 0.8, 1)
-        self.bowl = loader.loadModel('phase_3.5/models/gui/fishingTrophyBowl')
+        self.bowl = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingTrophyBowl')
         self.bowl.reparentTo(self)
         self.bowl.setPos(0, 1, 0)
         self.bowl.setScale(2.0)
@@ -328,7 +328,7 @@ class FishingTrophy(DirectFrame):
         self.bowlBase.setColorScale(1, 1, 0.8, 1)
         self.nameLabel = DirectLabel(parent=self, relief=None, pos=(
             0, 0, -0.15), text='Trophy Text', text_scale=0.125, text_fg=Vec4(0.9, 0.9, 0.4, 1))
-        self.shadow = loader.loadModel('phase_3/models/props/drop_shadow')
+        self.shadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
         self.shadow.reparentTo(self)
         self.shadow.setColor(1, 1, 1, 0.2)
         self.shadow.setPosHprScale(0, 1, 0.35, 0, 90, 0, 0.1, 0.14, 0.1)

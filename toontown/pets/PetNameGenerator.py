@@ -26,7 +26,7 @@ class PetNameGenerator:
             searchPath.appendDirectory(
                 Filename.expandFrom('$TT_3_ROOT/phase_3/etc'))
         else:
-            searchPath.appendDirectory(Filename('phase_3/etc'))
+            searchPath.appendDirectory(Filename('user/resources/default/phase_3/etc'))
             if os.path.expandvars('$TOONTOWN') != '':
                 searchPath.appendDirectory(Filename.fromOsSpecific(
                     os.path.expandvars('$TOONTOWN/src/configfiles')))

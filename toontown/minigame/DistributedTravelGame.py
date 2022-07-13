@@ -122,17 +122,17 @@ class DistributedTravelGame(DistributedMinigame):
         self.minigameIcons = []
         self.bonusLabels = []
         self.trolleyAwaySfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/SZ_trolley_away.ogg')
+            'user/resources/default/phase_4/audio/sfx/SZ_trolley_away.ogg')
         self.trolleyBellSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/SZ_trolley_bell.ogg')
+            'user/resources/default/phase_4/audio/sfx/SZ_trolley_bell.ogg')
         self.turntableRotateSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_travel_game_turntble_rotate_2.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_travel_game_turntble_rotate_2.ogg')
         self.wonGameSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_travel_game_bonus.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_travel_game_bonus.ogg')
         self.lostGameSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_travel_game_no_bonus_2.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_travel_game_no_bonus_2.ogg')
         self.noWinnerSfx = base.loader.loadSfx(
-            'phase_4/audio/sfx/MG_sfx_travel_game_no_bonus.ogg')
+            'user/resources/default/phase_4/audio/sfx/MG_sfx_travel_game_no_bonus.ogg')
         self.boardIndex = 0
         self.avNames = []
         self.disconnectedAvIds = []
@@ -150,13 +150,13 @@ class DistributedTravelGame(DistributedMinigame):
     def load(self):
         self.notify.debug('load')
         DistributedMinigame.load(self)
-        self.sky = loader.loadModel('phase_3.5/models/props/TT_sky')
+        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/TT_sky')
         self.gameBoard = loader.loadModel(
-            'phase_4/models/minigames/toon_cannon_gameground')
+            'user/resources/default/phase_4/models/minigames/toon_cannon_gameground')
         self.gameBoard.setPosHpr(100, 0, 0, 0, 0, 0)
         self.gameBoard.setScale(1.0)
         station = loader.loadModel(
-            'phase_4/models/modules/trolley_station_TT.bam')
+            'user/resources/default/phase_4/models/modules/trolley_station_TT.bam')
         self.trolleyCar = station.find('**/trolley_car')
         self.trolleyCar.reparentTo(hidden)
         self.trolleyCarOrigPos = self.trolleyCar.getPos()
@@ -205,7 +205,7 @@ class DistributedTravelGame(DistributedMinigame):
         self.tunnels = {}
         self.extraTrainTracks = []
         turnTable = loader.loadModel(
-            'phase_4/models/minigames/trolley_game_turntable')
+            'user/resources/default/phase_4/models/minigames/trolley_game_turntable')
         minPoint = Point3(0, 0, 0)
         maxPoint = Point3(0, 0, 0)
         turnTable.calcTightBounds(minPoint, maxPoint)
@@ -244,7 +244,7 @@ class DistributedTravelGame(DistributedMinigame):
                     switchX, switchY, endX, switchY)
                 self.extraTrainTracks.append(trainTrack)
                 tempModel = loader.loadModel(
-                    'phase_4/models/minigames/trolley_game_turntable')
+                    'user/resources/default/phase_4/models/minigames/trolley_game_turntable')
                 tunnel = tempModel.find('**/tunnel1')
                 tunnel.reparentTo(render)
                 tempModel.removeNode()
@@ -260,13 +260,13 @@ class DistributedTravelGame(DistributedMinigame):
         turnTable.removeNode()
         self.loadGui()
         self.introMovie = self.getIntroMovie()
-        self.music = base.loader.loadMusic('phase_4/audio/bgm/MG_Travel.ogg')
+        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_Travel.ogg')
         self.flashWinningBeansTrack = None
         return
 
     def loadTrainTrack(self, x1, y1, x2, y2, zAdj=0):
         turnTable = loader.loadModel(
-            'phase_4/models/minigames/trolley_game_turntable')
+            'user/resources/default/phase_4/models/minigames/trolley_game_turntable')
         trainPart = turnTable.find('**/track_a2')
         trackHeight = 0.03
         trainTrack = render.attachNewNode('trainTrack%d%d%d%d' % (x1,
@@ -319,7 +319,7 @@ class DistributedTravelGame(DistributedMinigame):
             parent=self.remainingVotesFrame, relief=None, text=scoreText, text_fg=VBase4(
                 0, 0.5, 0, 1), text_align=TextNode.ARight, text_scale=0.7, pos=(
                 3.2, 0, -0.15))
-        guiModel = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        guiModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.choiceFrame = DirectFrame(
             parent=self.gui, relief=None, pos=(
                 -0.55, 0, -0.85), image=DGG.getDefaultDialogGeom(), image_scale=(
@@ -358,7 +358,7 @@ class DistributedTravelGame(DistributedMinigame):
             guiModel.find('**/FndsLst_ScrollUp_Rllvr'),
             guiModel.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_pos=(0.0, 0.0, 0.095), decButton_image3_color=Vec4(0.6, 0.6, 0.6, 0.6), itemFrame_pos=(0.0, 0.0, 0.0), itemFrame_relief=DGG.GROOVE, numItemsVisible=1, itemMakeFunction=makeLabel, items=[], scrollSpeed=3.0, itemFrame_scale=0.1, command=self.scrollChoiceChanged)
         self.putChoicesInScrollList()
-        buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okImageList = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),
@@ -1077,7 +1077,7 @@ class DistributedTravelGame(DistributedMinigame):
         self.loadMinigameIcons()
 
     def loadMinigameIcons(self):
-        self.mg_icons = loader.loadModel('phase_4/models/minigames/mg_icons')
+        self.mg_icons = loader.loadModel('user/resources/default/phase_4/models/minigames/mg_icons')
         for switch in list(self.switchToMinigameDict.keys()):
             minigame = self.switchToMinigameDict[switch]
             switchPos = self.trainSwitches[switch].getPos()

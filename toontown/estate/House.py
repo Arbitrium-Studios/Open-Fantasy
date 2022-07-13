@@ -19,7 +19,7 @@ class House(Place.Place):
         Place.Place.__init__(self, loader, doneEvent)
         self.id = ToontownGlobals.MyEstate
         self.ownersAvId = avId
-        self.dnaFile = 'phase_7/models/modules/toon_interior'
+        self.dnaFile = 'user/resources/default/phase_7/models/modules/toon_interior'
         self.isInterior = 1
         self.tfaDoneEvent = 'tfaDoneEvent'
         self.oldStyle = None

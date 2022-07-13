@@ -12,7 +12,7 @@ class SimpleSparkles(PooledEffect, EffectController):
         PooledEffect.__init__(self)
         EffectController.__init__(self)
         model = loader.loadModel(
-            'phase_4/models/props/tt_m_efx_ext_fireworkCards')
+            'user/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkCards')
         self.card = model.find('**/tt_t_efx_ext_particleStars')
         self.cardScale = 64.0
         self.setDepthWrite(0)

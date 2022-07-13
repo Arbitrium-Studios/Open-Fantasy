@@ -26,7 +26,7 @@ class DistributedPartyDanceActivityBase(DistributedPartyActivity):
     notify = directNotify.newCategory('DistributedPartyDanceActivity')
 
     def __init__(self, cr, actId, dancePatternToAnims,
-                 model='phase_13/models/parties/danceFloor'):
+                 model='user/resources/default/phase_13/models/parties/danceFloor'):
         DistributedPartyActivity.__init__(
             self, cr, actId, ActivityTypes.Continuous)
         self.model = model

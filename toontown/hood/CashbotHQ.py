@@ -14,7 +14,7 @@ class CashbotHQ(CogHood.CogHood):
         self.id = ToontownGlobals.CashbotHQ
         self.cogHQLoaderClass = CashbotCogHQLoader.CashbotCogHQLoader
         self.storageDNAFile = None
-        self.skyFile = 'phase_3.5/models/props/TT_sky'
+        self.skyFile = 'user/resources/default/phase_3.5/models/props/TT_sky'
         self.titleColor = (0.5, 0.5, 0.5, 1.0)
         return
 

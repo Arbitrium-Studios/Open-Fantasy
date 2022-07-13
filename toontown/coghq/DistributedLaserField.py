@@ -18,7 +18,7 @@ import random
 class DistributedLaserField(BattleBlocker.BattleBlocker):
     notify = DirectNotifyGlobal.directNotify.newCategory(
         'DistributedLaserField')
-    laserFieldModels = ['phase_9/models/cogHQ/square_stomper']
+    laserFieldModels = ['user/resources/default/phase_9/models/cogHQ/square_stomper']
 
     def __init__(self, cr):
         BattleBlocker.BattleBlocker.__init__(self, cr)
@@ -59,13 +59,13 @@ class DistributedLaserField(BattleBlocker.BattleBlocker):
         self.gridGameText = ' '
         self.activeLF = 1
         self.successSound = loader.loadSfx(
-            'phase_11/audio/sfx/LB_capacitor_discharge_3.ogg')
+            'user/resources/default/phase_11/audio/sfx/LB_capacitor_discharge_3.ogg')
         self.successTrack = Parallel(
             SoundInterval(
                 self.successSound,
                 node=self,
                 volume=0.8))
-        self.failSound = loader.loadSfx('phase_11/audio/sfx/LB_sparks_1.ogg')
+        self.failSound = loader.loadSfx('user/resources/default/phase_11/audio/sfx/LB_sparks_1.ogg')
         self.failTrack = Parallel(
             SoundInterval(
                 self.failSound,

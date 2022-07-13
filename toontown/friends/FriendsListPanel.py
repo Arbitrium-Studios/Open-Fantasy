@@ -142,8 +142,8 @@ class FriendsListPanel(DirectFrame, StateData.StateData):
         if self.isLoaded == 1:
             return None
         self.isLoaded = 1
-        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
-        auxGui = loader.loadModel('phase_3.5/models/gui/avatar_panel_gui')
+        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        auxGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.title = DirectLabel(
             parent=self, relief=None, text='', text_scale=TTLocalizer.FLPtitle, text_fg=(
                 0, 0.1, 0.4, 1), pos=(

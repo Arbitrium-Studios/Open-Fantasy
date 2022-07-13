@@ -72,7 +72,7 @@ class DistributedPhysicsWorld(
                     base.sfxPlayer.setCutoffDistance(240)
                     self.notify.debug('nodePath = %s' % pandaNodePathGeom)
                     windmillSfx = loader.loadSfx(
-                        'phase_6/audio/sfx/Golf_Windmill_Loop.ogg')
+                        'user/resources/default/phase_6/audio/sfx/Golf_Windmill_Loop.ogg')
                     windMillSoundInterval = SoundInterval(
                         windmillSfx,
                         node=pandaNodePathGeom,
@@ -92,7 +92,7 @@ class DistributedPhysicsWorld(
                 if odeBody == box:
                     self.notify.debug('nodePath = %s' % pandaNodePathGeom)
                     moverSfx = loader.loadSfx(
-                        'phase_6/audio/sfx/Golf_Moving_Barrier.ogg')
+                        'user/resources/default/phase_6/audio/sfx/Golf_Moving_Barrier.ogg')
                     moverSoundInterval = SoundInterval(
                         moverSfx,
                         node=pandaNodePathGeom,
