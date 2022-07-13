@@ -22,7 +22,7 @@ class Decoration(NodePath):
             self.partyCake = loader.loadModel(
                 'phase_13/models/parties/tt_m_ara_pty_cakeTower')
             tntSeqNode = self.partyCake.find('**/seqNode_tnt').node()
-            tntSeqNode.setFrameRate(20)
+            tntSeqNode.setFrameRate(60)
             self.partyCake.reparentTo(self)
         elif self.name == 'BannerJellyBean':
             partyBannerModel = loader.loadModel(
@@ -46,7 +46,7 @@ class Decoration(NodePath):
             temp.detachNode()
             del temp
             bannerSeqNodeParent.attachNewNode(bannerSeqNode)
-            bannerSeqNode.setFrameRate(4)
+            bannerSeqNode.setFrameRate(60)
             bannerSeqNode.loop(True)
             bannerSeqNode.setPlayRate(1)
             balloonLeft = self.partyBanner.find('**/balloonsLMesh')
@@ -132,7 +132,7 @@ class Decoration(NodePath):
             temp.detachNode()
             del temp
             wingsSeqNodeParent.attachNewNode(wingsSeqNode)
-            wingsSeqNode.setFrameRate(12)
+            wingsSeqNode.setFrameRate(60)
             wingsSeqNode.loop(True)
             wingsSeqNode.setPlayRate(1)
             self.flyingHeart.loop('idle')

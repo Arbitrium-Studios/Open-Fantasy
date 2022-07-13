@@ -21,7 +21,7 @@ class VineSpider(NodePath, DirectObject):
         seqNode = SequenceNode('spider')
         seqNode.addChild(spider1.node())
         seqNode.addChild(spider2.node())
-        seqNode.setFrameRate(2)
+        seqNode.setFrameRate(60)
         seqNode.loop(False)
         self.spiderModel = self.attachNewNode(seqNode)
         self.spiderModel.reparentTo(self)

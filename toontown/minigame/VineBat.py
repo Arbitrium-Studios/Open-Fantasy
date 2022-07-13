@@ -28,7 +28,7 @@ class VineBat(NodePath, DirectObject):
         seqNode.addChild(bat1.node())
         seqNode.addChild(bat2.node())
         seqNode.addChild(bat3.node())
-        seqNode.setFrameRate(12)
+        seqNode.setFrameRate(60)
         seqNode.pingpong(False)
         self.batModel = self.attachNewNode(seqNode)
         self.batModel.reparentTo(self)
