@@ -11,12 +11,15 @@
 + Pizza Taco Burger | Co-Owner
 
 ### Technical Team:
+
 + The Professor | Developer
 + Something Random | Developer
 + Sighost | Developer
 + Gracie "THE PLAYER ZER0" Lovelight | Developer
++ Nora | Developer
 
 ### Creative Team:
+
 + SirDapperPenguin | 3D Modeler
 + Jardin | Artist
 + April | Artist
@@ -24,6 +27,7 @@
 + Gracie "THE PLAYER ZER0" Lovelight | Story Writer
 
 ### Contributors:
+
 + Battery on Discord for helping me fix the Tuple error!
 + DarthM on Discord for various features including Credits, Genderless Toons, etc.
 + TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
@@ -31,8 +35,12 @@
 + ToonJoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
 + Nora for creating the Credits Button and more!
 + leothegreat2003#4524 for helping me find the bug that caused the Streets to not work!
++ ToonJoey for letting us use his project bikehorn assets for HD textures -- https://github.com/toonjoey/toontown-project-bikehorn
++ Nora for creating the Credits Button.
++ User Open Toontown on GitHub for open-sourcing libtoontown-pets and libotp-movements -- https://github.com/open-toontown
 
 ### Special Thanks To:
+
 + Satire6 for releasing Pandora & Anesidora to the public!
 + Toontown Rewritten for reviving the spirit of Toontown and its community!
 + Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
