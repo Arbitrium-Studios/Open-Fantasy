@@ -560,9 +560,6 @@ class OptionsTabPage(DirectFrame):
         self.speedChatStyleText.destroy()
         del self.speedChatStyleText
         self.currentSizeIndex = None
-        if self.dialog:
-            self.dialog.hide()
-        return
 
     def __doToggleMusic(self):
         messenger.send('wakeup')

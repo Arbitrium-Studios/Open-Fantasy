@@ -185,7 +185,7 @@ class IssueFrame(DirectFrame):
                                                                                                                                              image), pos=position, image_scale=imageScale)
         return
 
-    def loadHomePageButtons(self, section, subsection, pageFrame):
+    def loadHomePageButtons(self, section, pageFrame):
         buttonNames = ['',
                        'tt_i_art_btn_HomNew',
                        'tt_i_art_btn_HomEvt',

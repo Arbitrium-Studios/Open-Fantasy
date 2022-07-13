@@ -223,7 +223,7 @@ class SCMenu(SCObject, NodePath):
                 self.__setActiveMember(member)
                 return Task.done
 
-            minFrameRate = 1.0 / SCMenu.SpeedChatRolloverTolerance
+            minFrameRate = 30.0 / SCMenu.SpeedChatRolloverTolerance
             if globalClock.getAverageFrameRate() > minFrameRate:
                 taskMgr.doMethodLater(
                     SCMenu.SpeedChatRolloverTolerance,

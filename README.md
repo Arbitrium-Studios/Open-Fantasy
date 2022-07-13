@@ -28,9 +28,10 @@
 + DarthM on Discord for various features including Credits, Genderless Toons, etc.
 + TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
 + DTM1218
-+ ToonJoey for letting us use his project bikehorn assets for HD textures https://github.com/toonjoey/toontown-project-bikehorn
-+ Nora for creating the Credits Button and more!
++ ToonJoey for letting us use Project: Bikehorn assets for most of the uncompress Toontown Online textures https://github.com/toonjoey/toontown-project-bikehorn
++ Nora for letting me use the Credits Button and more!
 + leothegreat2003#4524 for helping me find the bug that caused the Streets to not work!
++ Flameout56, the creator of Toontown HD for allowing me to use the resources to upgrade Open-Fantasy's resources.
 
 ### Special Thanks To:
 + Satire6 for releasing Pandora & Anesidora to the public!

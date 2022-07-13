@@ -29,3 +29,5 @@ resources/phase_3.5/maps/toontown_map - Backup.jpg
 toontown/installer
 *.lnk
 Start Toontown Fantasy.lnk
+build/
+sign/texture.jpg

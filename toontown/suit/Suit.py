@@ -72,6 +72,7 @@ cr = (('throw-paper', 'throw-paper', 3.5),
 tbc = (('cigar-smoke', 'cigar-smoke', 5),
        ('glower', 'glower', 5),
        ('golf-club-swing', 'golf-club-swing', 5))
+cp = (('golf-club-swing', 'golf-club-swing', 5),)
 cc = (('glower', 'glower', 5),
       ('phone', 'phone', 3.5),
       ('watercooler', 'watercooler', 5))
@@ -93,6 +94,10 @@ m = (('smile', 'smile', 5),
 mh = (('smile', 'smile', 5),
       ('golf-club-swing', 'golf-club-swing', 5),
       ('song-and-dance', 'song-and-dance', 5))
+ff = (('throw-paper', 'throw-paper', 5),
+      ('cigar-smoke', 'cigar-smoke', 5),
+      ('magic3', 'magic3', 5),
+      ('golf-club-swing', 'golf-club-swing', 5))
 sc = (('throw-paper', 'throw-paper', 3.5),
       ('glower', 'glower', 5))
 pp = (('throw-paper', 'throw-paper', 5),
@@ -108,6 +113,7 @@ ls = (('throw-paper', 'throw-paper', 5),
       ('throw-object', 'throw-object', 5),
       ('hold-pencil', 'hold-pencil', 5))
 rb = ()
+msv = (('glower', 'glower', 5),)
 bf = (('throw-paper', 'throw-paper', 5),
       ('shredder', 'shredder', 3.5),
       ('watercooler', 'watercooler', 5))
@@ -131,6 +137,8 @@ le = (('throw-object', 'throw-object', 5),
 bw = (('gavel', 'gavel', 8),
       ('throw-object', 'throw-object', 5),
       ('throw-paper', 'throw-paper', 5))
+lc = (('throw-paper', 'throw-paper', 5),
+      ('magic3', 'magic3', 5))
 if not ConfigVariableBool('want-new-cogs', 0).value:
     ModelDict = {'a': ('/models/char/suitA-', 4),
                  'b': ('/models/char/suitB-', 4),
@@ -443,6 +451,14 @@ class Suit(Avatar.Avatar):
             self.generateBody()
             self.generateHead('bigcheese')
             self.setHeight(9.34)
+        elif dna.name == 'cp':
+            self.scale = 7.0 / aSize
+            self.handColor = SuitDNA.corpPolyColor
+            self.generateBody()
+            self.generateHead('yesman')
+            self.makeSkeleton()
+            self.setHeight(8.95)
+            self.setPickable(0) # Hide the fact the Cog's head isn't a Skelecog until one can be provided.
         elif dna.name == 'bf':
             self.scale = 4.0 / cSize
             self.handColor = SuitDNA.legalPolyColor
@@ -495,6 +511,14 @@ class Suit(Avatar.Avatar):
             self.generateBody()
             self.generateHead('bigwig')
             self.setHeight(8.69)
+        elif dna.name == 'lc':
+            self.scale = 7.0 / bSize
+            self.handColor = SuitDNA.legalPolyColor
+            self.generateBody()
+            self.generateHead('downsizer')
+            self.makeSkeleton()
+            self.setHeight(8.69)
+            self.setPickable(0)
         elif dna.name == 'sc':
             self.scale = 3.6 / cSize
             self.handColor = SuitDNA.moneyPolyColor
@@ -544,6 +568,14 @@ class Suit(Avatar.Avatar):
             self.headTexture = 'robber-baron.jpg'
             self.generateHead('yesman')
             self.setHeight(8.95)
+        elif dna.name == 'msv':
+            self.scale = 6.5 / cSize
+            self.handColor = SuitDNA.moneyPolyColor
+            self.generateBody()
+            self.generateHead('flunky')
+            self.makeSkeleton()
+            self.setHeight(7.5)
+            self.setPickable(0)
         elif dna.name == 'cc':
             self.scale = 3.5 / cSize
             self.handColor = VBase4(0.55, 0.65, 1.0, 1.0)
@@ -974,7 +1006,7 @@ class Suit(Avatar.Avatar):
         self.removePart('modelRoot')
         self.loadModel(model)
         self.loadAnims(anims)
-        self.getGeomNode().setScale(self.scale * 1.0173)
+        # self.getGeomNode().setScale(self.scale * 1.0173)
         self.generateHealthBar()
         self.generateCorporateMedallion()
         self.generateCorporateTie()

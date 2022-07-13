@@ -402,7 +402,7 @@ class PropPool:
             s = SequenceNode('geyser')
             p.findAllMatches('**/Splash*').reparentTo(NodePath(s))
             s.loop(0)
-            s.setFrameRate(12)
+            s.setFrameRate(60)
             p.attachNewNode(s)
         elif name == 'ship':
             self.props[name] = self.props[name].find('**/ship_gag')
