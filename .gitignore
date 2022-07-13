@@ -31,3 +31,4 @@ user/resources/default/phase_3.5/maps/toontown_map - Backup.jpg
 user/resources/default/phase_2/
 toontown/installer
 *.lnk
+*.code-workspace
