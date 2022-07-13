@@ -65,6 +65,9 @@ The Road to Fantasy:
 
     Wishlist:
 
+        + Allow us to scroll through the credits
+        + Add a special gift to people who sit through thet credits.
+        + Change the music in the credits to the Victory Theme v2
         + Community Voice Acting
         + For playgrounds not available yet, add a barrier to the streets and on the map, to avoid crashes, if you have Global Teleport Access, make a menu popup saying that this playground is not available yet.
         + Virtual Reality Support!
