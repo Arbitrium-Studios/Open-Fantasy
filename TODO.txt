@@ -360,6 +360,18 @@ The Road to Fantasy:
         + When rewriting the taskline, give each Toon their own personality. Flippy is patriotic, Coach Zucchini is well...that should be pretty obvious, and more!
         + Make the Dialog for Toontasks continue after about 15-45 seconds while still allowing slow readers to read.
             + This should make it easy to add voice acting over it if we decide to do so.
+        + Add new Suit types
+            + Add v3.0 Cogs as Manager Cogs
+                + Part one will be the suited Cog
+                + Part two of the fight will be the Skelecog Round
+                + Part 3 will be the Virtual Round.
+            + For the Isle of Gags Expansion, add Chefbots
+                + These cogs are food themed
+                + The boss is a Food-styled boss fight like what you'd see on Hell's Kitchen.
+            + For the Guilded Update, add the Guildedbots
+                + This Cog ranking system should be based on the Guilded Age
+                + The playground overtaken by the Guildedbots is the Vibrant Valley Kingdom.
+                + The boss should be a unisex king or queen 
         + Playground Updates:
             + The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Central, Toontown Docks, Construction Zone, Flowering Grove, The Land of Music, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
             + Vibrant Valley Kingdom:
@@ -532,9 +544,5 @@ The Road to Fantasy:
     + Add a Trading Cards Side Quest that you can take up early in the game where you can collect trading cards about every character in the game and return them to Librarian Larry in the Toontown Library and when you return one, you can go to the library and go to the shelves to learn about the character (OR another way the story could go is Librarian Larry looses them in the storm and the cards go all around the continent of Toontown and he rewards you with being able to keep the trading cards+ (You can look at them at any time by loading up your smartphone and opening the app to look at them or opening up your Shtiker Book and going to the Trading Card page where your can click on the trading card and learn about the person thath way)) and either way the mission goes, there will be more series to the trading cards being made and you have to go collect them
     + Create readable stories about the history of Toontown that you can read in the Toontown Library
     + Add collectable items (like cog pieces)
-    + Add v3.0 Cogs as Manager Cogs
-        + Part one will be the suited Cog
-        + Part two of the fight will be the Skelecog Round
-        + Part 3 will be the Virtual Round.
 
     + More soon!
