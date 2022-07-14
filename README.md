@@ -32,6 +32,7 @@
 + Nora for letting me use the Credits Button and more!
 + leothegreat2003#4524 for helping me find the bug that caused the Streets to not work!
 + Flameout56, the creator of Toontown HD for allowing me to use the resources to upgrade Open-Fantasy's resources.
++ TechieBlort for the code to increase accuracy of Doodles
 
 ### Special Thanks To:
 + Satire6 for releasing Pandora & Anesidora to the public!

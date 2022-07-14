@@ -7,8 +7,8 @@ NonHappyMinActualTrickAptitude = 0.1
 NonHappyMaxActualTrickAptitude = 0.6
 MinActualTrickAptitude = 0.5
 MaxActualTrickAptitude = 0.97
-AptitudeIncrementDidTrick = 0.0005
-MaxAptitudeIncrementGotPraise = 0.0003
+AptitudeIncrementDidTrick = 0.05
+MaxAptitudeIncrementGotPraise = 0.03
 MaxTrickFatigue = 0.65
 MinTrickFatigue = 0.1
 ScId2trickId = {21200: Tricks.JUMP,
@@ -35,22 +35,22 @@ TrickLengths = {Tricks.JUMP: 2.0,
                 Tricks.DANCE: 7.42,
                 Tricks.SPEAK: 0.75,
                 Tricks.BALK: 1.0}
-TrickAccuracies = {Tricks.JUMP: 1.0,
-                   Tricks.BEG: 0.9,
-                   Tricks.PLAYDEAD: 0.8,
-                   Tricks.ROLLOVER: 0.7,
-                   Tricks.BACKFLIP: 0.6,
-                   Tricks.DANCE: 0.5,
-                   Tricks.SPEAK: 0.4,
-                   Tricks.BALK: 1.0}
-TrickHeals = {Tricks.JUMP: (5, 10),
-              Tricks.BEG: (6, 12),
-              Tricks.PLAYDEAD: (7, 14),
-              Tricks.ROLLOVER: (8, 16),
-              Tricks.BACKFLIP: (9, 18),
-              Tricks.DANCE: (10, 20),
-              Tricks.SPEAK: (11, 22),
-              Tricks.BALK: (0, 0)}
+TrickAccuracies = {Tricks.JUMP: 0.95,
+                Tricks.BEG: 0.95,
+                Tricks.PLAYDEAD: 0.95,
+                Tricks.ROLLOVER: 0.95,
+                Tricks.BACKFLIP: 0.95,
+                Tricks.DANCE: 0.95,
+                Tricks.SPEAK: 0.95,
+                Tricks.BALK: 1.0}
+TrickHeals = {Tricks.JUMP: (10, 20),
+                 Tricks.BEG: (12, 24),
+                 Tricks.PLAYDEAD: (14, 28),
+                 Tricks.ROLLOVER: (16, 32),
+                 Tricks.BACKFLIP: (18, 36),
+                 Tricks.DANCE: (20, 40),
+                 Tricks.SPEAK: (22, 44),
+                 Tricks.BALK: (0, 0)}
 TrickSounds = {Tricks.BACKFLIP: 'phase_5/audio/sfx/backflip.ogg',
                Tricks.ROLLOVER: 'phase_5/audio/sfx/rollover.ogg',
                Tricks.PLAYDEAD: 'phase_5/audio/sfx/play_dead.ogg',
