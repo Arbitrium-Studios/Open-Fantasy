@@ -379,6 +379,11 @@ def doDefault(attack):
             attack['name'] = 'GlowerPower'
             attack['animName'] = 'glower'
             return doGlowerPower(attack)
+        elif suitName == 'cp':
+            attack['id'] = TEE_OFF
+            attack['name'] = 'TeeOff'
+            attack['animName'] = 'golf-club-swing'
+            return doTeeOff(attack)
         elif suitName == 'cc':
             attack['id'] = FREEZE_ASSETS
             attack['group'] = ATK_TGT_SINGLE
@@ -420,6 +425,11 @@ def doDefault(attack):
             attack['name'] = 'RazzleDazzle'
             attack['animName'] = 'smile'
             return doRazzleDazzle(attack)
+        elif suitName == 'ff':
+            attack['id'] = TEE_OFF
+            attack['name'] = 'TeeOff'
+            attack['animName'] = 'golf-club-swing'
+            return doTeeOff(attack)
         elif suitName == 'sc':
             attack['id'] = BOUNCE_CHECK
             attack['name'] = 'BounceCheck'
@@ -461,6 +471,12 @@ def doDefault(attack):
             attack['name'] = 'PickPocket'
             attack['animName'] = 'pickpocket'
             return doPickPocket(attack)
+        elif suitName == 'msv':
+            attack['id'] = FREEZE_ASSETS
+            attack['group'] = ATK_TGT_SINGLE
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
         elif suitName == 'bf':
             attack['id'] = CANNED
             attack['name'] = 'Canned'
@@ -501,6 +517,11 @@ def doDefault(attack):
             attack['name'] = 'FingerWag'
             attack['animName'] = 'finger-wag'
             return doFingerWag(attack)
+        elif suitName == 'lc':
+            attack['id'] = RESTRAINING_ORDER
+            attack['name'] = 'RestrainingOrder'
+            attack['animName'] = 'throw-paper'
+            return doRestrainingOrder(attack)
         else:
             attack['id'] = MUMBO_JUMBO
             attack['name'] = 'MumboJumbo'
@@ -535,6 +556,11 @@ def doDefault(attack):
             attack['name'] = 'PowerTrip'
             attack['animName'] = 'magic1'
             return doPowerTrip(attack)
+        elif suitName == 'cp':
+            attack['id'] = PARADIGM_SHIFT
+            attack['name'] = 'ParadigmShift'
+            attack['animName'] = 'magic2'
+            return doParadigmShift(attack)
         elif suitName == 'cc':
             attack['id'] = FREEZE_ASSETS
             attack['group'] = ATK_TGT_GROUP
@@ -590,6 +616,12 @@ def doDefault(attack):
             attack['name'] = 'FloodTheMarket'
             attack['animName'] = 'effort'
             return doFloodTheMarket(attack)
+        elif suitName == 'msv':
+            attack['id'] = FREEZE_ASSETS
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
         elif suitName == 'b':
             attack['id'] = WITHDRAWAL
             attack['group'] = ATK_TGT_GROUP
