@@ -65,6 +65,8 @@ The Road to Fantasy:
 
     Wishlist:
 
+        + Add Skip button to the Trolley mini-games
+        + Reformat the way the Resources folder is laid out
         + Allow us to scroll through the credits
         + Add a special gift to people who sit through thet credits.
         + Change the music in the credits to the Victory Theme v2
@@ -131,7 +133,7 @@ The Road to Fantasy:
         + Each Building in Toontown should have a custom interior to personalize the game a bit more.
         + Replace all Trading Card Images with redrawn versions of them.
         + A Create A Toon Update:
-            + Do my own take on the Frog, Penguin, Deer, Gator, Cow, Chipmunk, Chicken, Fox, Parrot, Goat, Beaver, Racoon, Bat, Kiwi, Kangaroo, Koala, Armadillo, Spider, Snake, Turkey, Sheep, Hedgehog Toons, and more species!
+            + Do my own take on the Frog, Penguin, Deer, Gator, Cow, Chipmunk, Chicken, Fox, Parrot, Goat, Beaver, Racoon, Bat, Kiwi, Kangaroo, Koala, Armadillo, Spider, Snake, Turkey, Sheep, Hedgehog, Human Toons, and more species!
             + The Cat, Mouse, Dog, Pig, Horse, Bear, etc. Species should all get a revamp
                 + Ask permission from ..Flameout56..#1335 to model the frog head after his concept.
             + Add more Toon body variations including chest sizes for all Toons (None, Small, Medium, Large) to mimick DuckTales.
