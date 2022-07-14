@@ -67,6 +67,7 @@ The Road to Fantasy:
 
         + Move the spawn area of the HQ to a safe place instead of in the Cog's way.
         + When hovering on a chat box that's behind another one, it should bring that one forward
+        + Have the daffodil move up and down based on how many players are online. So, if there's one person online, it'll move up to the highest position it can when that one Toon stands next to it.
         + Boost trap damage so TNT kills 12 and Railroad kills 13.
         + Replace all textures with the Pandora Texture Files
         + Add Skip button to the Trolley mini-games
@@ -212,7 +213,9 @@ The Road to Fantasy:
                 + The Eyes outside of the building move around to show the building is alive.
                 + The Boss Cog should be a Head Honcho Manager Cog
                 + The Boss Cog can cheat to summon more Cogs to the Battle. So, it's wise to focus on it.
+                + Recolor the eye piece of the Sellbot Field Office and stick them over the eyes on the buildings
             + A Field Office Update:
+                + Bring the Field Office animations and model from Toontown 2.0 to Open-Fantasy to replace the current models.
                 + Like in TTR, the Field Office will take over the Toon Headquarters but with a model like Toontown Online's Field Offices BUT exclusively on higher-level streets!
                 + Unlike in TTR, the final floor should be the Executive Suite with Head Honchos and Executive Cogs
                 + Like TTO, there will be a Mover and Shaker Game and the Lawbot Flying Game but unlike TTO, it'll be in the same building.
@@ -346,24 +349,43 @@ The Road to Fantasy:
             + The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Central, Toontown Docks, Construction Zone, Flowering Grove, The Land of Music, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
             + Vibrant Valley Kingdom:
                 + This area is accessed in the Prologue at first, it's where your Toon is from and had to escape from as the Cogs attacked during an event called Operation: Takeover.
-            + Toontown Central:
             + Rework the taskline so it feels less grindy.
-                + Replace the 2013 Toontown Central with the 2001 version but add the modern features like the following:
-                    + Change the tunnels locations to the streets from direct links between playgrounds.
-                    + Toontown School House
-                        + Make the building look like a school like the Prolouge of ODS but change it up to look less like an Estate.
-                    + Toontown Library
-                        + Redesign the interior to look like a Library
-                    + Toontown Bank
-                        + Redesign the interior to look like a Bank.
-                        + Make Banker Bob function like a bank.
-                    + Toon Headquarters
-                    + A street between the Flowering Grove and Toontown Central called "Wacky Avenue".
-                    + This street should be more of a sub-playground that links Toontown Central with Toontown Central, Tutorial Terrace, and the Flowering Grove.
-                    + This fixture should also be added to the map.
+            + Toontown Central:
+                    + Replace the 2013 Toontown Central with the 2001 version but add the modern features like the following:
+                        + Change the tunnels locations to the streets from direct links between playgrounds.
+                        + Toontown School House
+                            + Make the building look like a school like the Prolouge of ODS but change it up to look less like an Estate.
+                        + Toontown Library
+                            + Redesign the interior to look like a Library
+                        + Toontown Bank
+                            + Redesign the interior to look like a Bank.
+                            + Make Banker Bob function like a bank.
+                        + Toon Headquarters
+                        + A street between the Flowering Grove and Toontown Central called "Wacky Avenue".
+                        + This street should be more of a sub-playground that links Toontown Central with Toontown Central, Tutorial Terrace, and the Flowering Grove.
+                        + This fixture should also be added to the map.
             + Toontown Docks:
                 + Model the playground after the 2001 design with water leading out to sea.
+                    + There should be a barrier where you swim so you don't swim out too far.
                 + The boat should be docked in one of the piers (for use at a later date.)
+            + Acorn Acres:
+                + Add a Gag Shop
+                + Add a Pet Shop
+                + Add the Fishing Piers
+                + Add Clothing Store.
+                + Add Tunnels.
+                    + Peanut Avenue which leads to the Flowering Grove
+                    + Walnut Way which leads to Toontown Docks
+                    + Acorn Road which leads to Mount Toontown
+                    + Cashew Lane which leads to the Execubot Headquarters' Street
+                + Remove Chip 'N Dales' Mini-Golf Tunnel since that will be added into Toontown Stadium as an Activity.
+            + Flowering Grove:
+                + Add flowers that can be watered around Flowering Grove's playground and outside shop areas.
+                + Add more trees around the playground.
+                + Flatten FG so the streets and buildings are on the same level.
+                + Replace the daffodil with the giant flower in the middle of FG
+            + The Land of Music:
+                + Have all instruments you step on play a noise from their corresponding instrument like they do in Toontown 2.0
             + In Drowsy Dreamland, do the following:
                 + Make the pillow walkable
                     + Add a tunnel onto the pillow that leads to Cashbot Headquarters
@@ -405,22 +427,6 @@ The Road to Fantasy:
                 + Around the playground, add cannons to bounce off of the low-hanging clouds.
                     + When you land on the ground, you shouldn't be interrupted by a pop-up GUI, instead we should replace it with the Jellybean Jar Icon and a counter counting the amount of Jellybeans Earned + How much experience you've gained.
                 + When you're doing an activity, wind should affect you.
-            + Acorn Acres:
-                + Add a Gag Shop
-                + Add a Pet Shop
-                + Add the Fishing Piers
-                + Add Clothing Store.
-                + Add Tunnels.
-                    + Peanut Avenue which leads to the Flowering Grove
-                    + Walnut Way which leads to Toontown Docks
-                    + Acorn Road which leads to Mount Toontown
-                    + Cashew Lane which leads to the Execubot Headquarters' Street
-                + Remove Chip 'N Dales' Mini-Golf Tunnel since that will be added into Toontown Stadium as an Activity.
-            + Flowering Grove:
-                + Add flowers that can be watered around Flowering Grove's playground and outside shop areas.
-                + Add more trees around the playground.
-                + Flatten FG so the streets and buildings are on the same level.
-                + Replace the daffodil with the giant flower in the middle of FG
             + The Cog Headquarters:
                 + To expand upon the idea that the Cog Headquarters were once Toon Playgrounds, there should be Cogified Toon Buildings around the Headquarters.
                 + Once you defeat a Cog Headquarters Boss, you can take back the HQs to return the Cog HQ to a normal playground.
