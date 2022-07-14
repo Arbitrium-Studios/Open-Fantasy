@@ -72,7 +72,6 @@ class DiscordRPC(object):
 
         17000: ['golf', "In Acorn Acres's Mini-Golf"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontown Stadium
 
-        18000: ["party", "At A Toon Party"], # Remove this once we've completely removed Parties.
     }
 
     def __init__(self):
@@ -109,11 +108,11 @@ class DiscordRPC(object):
             self.setData()
  
     def setData(self, details=None, image=None, imageTxt=None):
-        if details == None:
+        if details is None:
             details = self.details
-        if image == None:
+        if image is None:
             image = self.image
-        if imageTxt == None:
+        if imageTxt is None:
             imageTxt = self.imageTxt
         smallLogo = self.smallLogo
         smallTxt = self.smallTxt
@@ -155,25 +154,31 @@ class DiscordRPC(object):
     def vp(self):
         if base.wantRichPresence:
             self.image = 'vp'
-            self.details = 'Fighting the vp.'
+            self.details = 'Fighting the V.P..'
             self.setData()
 
     def cfo(self):
         if base.wantRichPresence:
             self.image = 'cfo'
-            self.details = 'Fighting the cfo.'
+            self.details = 'Fighting the C.F.O.'
             self.setData()
 
     def cj(self):
         if base.wantRichPresence:
             self.image = 'cj'
-            self.details = 'Fighting the cj.'
+            self.details = 'Fighting the C.J.'
             self.setData()
 
     def ceo(self):
         if base.wantRichPresence:
             self.image = 'ceo'
-            self.details = 'Fighting the ceo.'
+            self.details = 'Fighting the CEO.'
+
+    def building(self):
+        if base.wantRichPresence:
+            self.image = 'building'
+            self.details = 'In a building.'
+            self.setData()
 
 
     

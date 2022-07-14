@@ -12,9 +12,7 @@ builtins.game = game()
 from panda3d.core import *
 import time
 import sys
-from toontown.discord.DiscordRPC import DiscordRPC
-builtins.Discord = DiscordRPC()
-DiscordRPC.launching()
+
 try:
     launcher
 except BaseException:
@@ -44,6 +42,9 @@ DirectGuiGlobals.setDefaultFontFunc(ToontownGlobals.getInterfaceFont)
 launcher.setPandaErrorCode(7)
 from . import ToonBase
 ToonBase.ToonBase()
+from toontown.discord.DiscordRPC import DiscordRPC
+builtins.Discord = DiscordRPC()
+Discord.launching()
 if base.win is None:
     print('Unable to open window; aborting.')
     sys.exit()

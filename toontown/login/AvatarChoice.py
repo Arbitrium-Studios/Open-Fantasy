@@ -37,6 +37,7 @@ class AvatarChoice(DirectButton):
             relief=None,
             text='',
             text_font=ToontownGlobals.getSignFont())
+        Discord.avChoice()
         self.initialiseoptions(AvatarChoice)
         self.hasPaid = paid
         self.mode = None

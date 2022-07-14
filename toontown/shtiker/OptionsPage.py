@@ -1143,6 +1143,24 @@ class ExtraOptionsTabPage(DirectFrame):
                                                    pos=(
                                                        buttonbase_xcoord, 0.0, buttonbase_ycoord),
                                                    command=self.openCustomControlsGUI)
+
+         self.richPresenceLabel = DirectLabel(parent=self, relief=None, text='Discord Rich Presence:',
+                                              text_align=TextNode.ALeft, text_scale=options_text_scale,
+                                              text_wordwrap=16, pos=(leftMargin, 0, textStartHeight - 0.2))
+         self.richPresenceButton = DirectButton(
+             parent=self,
+             relief=None,
+             image=(guiButton.find("**/QuitBtn_UP"),
+                    guiButton.find("**/QuitBtn_DN"),
+                    guiButton.find("**/QuitBtn_RLVR"),
+                    ),
+             image_scale=button_image_scale,
+             text="Toggle Rich Presence",
+             text_scale=options_text_scale,
+             text_pos=button_textpos,
+             pos=(buttonbase_xcoord, 0, buttonbase_ycoord - 0.2),
+             command=self.toggleRichPresence)
+         self.__setRichPresenceLabel()       
          guiButton.removeNode()
          gui.removeNode()
 
@@ -1163,5 +1181,27 @@ class ExtraOptionsTabPage(DirectFrame):
          self.CustomControls_button.destroy()
          del self.CustomControls_Label
          del self.CustomControls_button
+         self.richPresenceLabel.destroy()
+         del self.richPresenceLabel
+         self.richPresenceButton.destroy()
+         del self.richPresenceButton
+         
+    def toggleRichPresence(self):
+         self.settingsChanged = 1
+         base.settings.updateSetting('game', 'rich-presence', not base.wantRichPresence)
+         base.wantRichPresence = not base.wantRichPresence
+         self.__setRichPresenceLabel()
+         if base.wantRichPresence:
+             Discord.enable()
+         else:
+             Discord.disable()
+
+    def __setRichPresenceLabel(self):
+        if base.wantRichPresence:
+            self.richPresenceLabel['text'] = ['Discord Rich Presence: On']
+            self.richPresenceButton['text'] = ['Toggle Rich Presence off']
+        else:
+            self.richPresenceLabel['text'] = ['Discord Rich Presence : Off']
+            self.richPresenceButton['text'] = ['Toggle Rich Presence on']
 
     BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'

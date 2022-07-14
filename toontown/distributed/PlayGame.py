@@ -185,6 +185,7 @@ class PlayGame(StateData.StateData):
                                         'zoneId': zoneId,
                                         'shardId': None,
                                         'avId': avId}])
+        Discord.setZone(zoneId)
         return
 
     def exit(self):
