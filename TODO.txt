@@ -426,6 +426,11 @@ The Road to Fantasy:
                 + The playground should be a short one but not too short.
                 + We should take inspiration from Bear E. Funny's Funny Farm but keep it different.
                 + Shaders should be black and white by default.
+                + The streets will be called:
+                    + Crop Court
+                    + Tractor Terrance
+                    + Haystack Highway
+                    + Silo Street
             + Toontown Stadium:
                 + Add a Battle Royalet trolley game located in Toontown Stadium where you try to run around the map to heal your teammates (who spawn randomly around the map) and green the other team before the other team heals their team member OR before time runs out (Your Laff is changed to a pre-set amount when the match begins and is reset back to the user’s original laff after the match is over)
                 + You fight against AI in singleplayer mode.
@@ -527,5 +532,9 @@ The Road to Fantasy:
     + Add a Trading Cards Side Quest that you can take up early in the game where you can collect trading cards about every character in the game and return them to Librarian Larry in the Toontown Library and when you return one, you can go to the library and go to the shelves to learn about the character (OR another way the story could go is Librarian Larry looses them in the storm and the cards go all around the continent of Toontown and he rewards you with being able to keep the trading cards+ (You can look at them at any time by loading up your smartphone and opening the app to look at them or opening up your Shtiker Book and going to the Trading Card page where your can click on the trading card and learn about the person thath way)) and either way the mission goes, there will be more series to the trading cards being made and you have to go collect them
     + Create readable stories about the history of Toontown that you can read in the Toontown Library
     + Add collectable items (like cog pieces)
+    + Add v3.0 Cogs as Manager Cogs
+        + Part one will be the suited Cog
+        + Part two of the fight will be the Skelecog Round
+        + Part 3 will be the Virtual Round.
 
     + More soon!
