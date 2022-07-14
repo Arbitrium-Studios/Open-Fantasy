@@ -579,13 +579,14 @@ AvPropsNew = (('inventory_feather',
 AvPropStrings = TTLocalizer.BattleGlobalAvPropStrings
 AvPropStringsSingular = TTLocalizer.BattleGlobalAvPropStringsSingular
 AvPropStringsPlural = TTLocalizer.BattleGlobalAvPropStringsPlural
-AvPropAccuracy = ((70,
-                   70,
-                   70,
-                   70,
-                   70,
-                   70,
-                   100),
+AvPropAccuracy = (
+                (70,
+                 70,
+                 70,
+                 70,
+                 70,
+                 70,
+                 95),
                   (0,
                    0,
                    0,
@@ -636,13 +637,14 @@ AvLureBonusAccuracy = (60,
                        80,
                        100)
 AvTrackAccStrings = TTLocalizer.BattleGlobalAvTrackAccStrings
-AvPropDamage = ((((8, 10), (Levels[0][0], Levels[0][1])),
-                 ((15, 18), (Levels[0][1], Levels[0][2])),
-                 ((25, 30), (Levels[0][2], Levels[0][3])),
-                 ((40, 45), (Levels[0][3], Levels[0][4])),
-                 ((60, 70), (Levels[0][4], Levels[0][5])),
-                 ((90, 120), (Levels[0][5], Levels[0][6])),
-                 ((210, 210), (Levels[0][6], MaxSkill))),
+AvPropDamage = ((
+                ((8, 15), (Levels[0][0], Levels[0][1])),
+                ((15, 23), (Levels[0][1], Levels[0][2])),
+                ((25, 35), (Levels[0][2], Levels[0][3])),
+                ((40, 50), (Levels[0][3], Levels[0][4])),
+                ((60, 75), (Levels[0][4], Levels[0][5])),
+                ((90, 125), (Levels[0][5], Levels[0][6])),
+                ((215, 215), (Levels[0][6], MaxSkill))
                 (((10, 12), (Levels[1][0], Levels[1][1])),
                  ((18, 20), (Levels[1][1], Levels[1][2])),
                  ((30, 35), (Levels[1][2], Levels[1][3])),
