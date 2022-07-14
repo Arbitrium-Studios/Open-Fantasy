@@ -65,6 +65,7 @@ The Road to Fantasy:
 
     Wishlist:
 
+        + Move the spawn area of the HQ to a safe place instead of in the Cog's way.
         + When hovering on a chat box that's behind another one, it should bring that one forward
         + Boost trap damage so TNT kills 12 and Railroad kills 13.
         + Replace all textures with the Pandora Texture Files
