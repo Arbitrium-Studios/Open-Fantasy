@@ -75,8 +75,12 @@ The Road to Fantasy:
         + Allow us to scroll through the credits
         + Add a special gift to people who sit through thet credits.
         + Change the music in the credits to the Victory Theme v2
-        + Community Voice Acting
+        + Add community voice acting for each of the characters with a moving mouth as seen here - https://www+youtube+com/watch?v=JVCnNDNE
         + For playgrounds not available yet, add a barrier to the streets and on the map, to avoid crashes, if you have Global Teleport Access, make a menu popup saying that this playground is not available yet.
+        + Add pupil customizations and colorizations with multi-colored pupils
+        + Eventually replace Shtiker Books with Cell Phones with all new benefits
+        + Add more car customizations
+        + Use the download bar to our advantage by downloading phase_ with the launcher to play the game and the rest of the phase files will be installed in-game
         + Virtual Reality Support!
         + Create an in-game launcher like ODS using the Anesidora files
         + Patch as many bugs as possible
@@ -89,11 +93,22 @@ The Road to Fantasy:
         + Implement full Wide-Screen Support
         + Put all logs, screenshots, etc into a 'User/' folder
         + Auto-Approve Type-A-Name Names
-        + Type-A-Name for Doodles
-        + Doodle Rebalance
+        + Type-A-Name for Pets
+        + A Pets Rebalance
         + Fix racing
         + Fix fishing
         + Implement a new Toon Tip system that replaces the one on the loading screen
+            + Have Toon Tips appear to you on the side of the screen and you can view them in your Shtiker Book
+        + Add more new Fish Species
+        + Add an up and down arrow and scrolling mechanics for phrases that go off screen to accommodate for the lack of the limits on custom phrases that you can buy
+        + Allow us to see outside of our window in Estate
+        + Allow us to see the sky in the Factory
+        + Make the lamps, building, moon, and other stuff emit light during the night and the sun emit light during the day
+        + Add the ability to choose what you say to the NPCs to enhance gameplay
+        + Add even more language support
+        + Add pupil customizations and colorizations with multi-colored pupils
+        + Add species pros and cons for a more strategic create-a-toon process
+        + Have perks for every type of clothing except for the plain clothing
         + Add Accessories to the Toon Heads for Pick-A-Toon and the Friends system
         + Replace True Friends with 18+ chat where you and anyone who you are Best Friends with, can see you swear
         + Add more areas for gaming!
@@ -173,7 +188,7 @@ The Road to Fantasy:
         + With the Shaders Update, add weather system to the Game
             + Weather types should be Sunny, Cloudy, Partly Cloudy, Rainy, Snow, etc.
             + Add puddles to the ground after it rains
-        + Improve Doodle and Classic Character AI
+        + Improve Pets and Classic Character AI
         + An Estate Overhaul Update:
             + Add lamp posts to the exterior Estates
             + Lights to hang up outside your house for Christmas and beyond.
@@ -239,7 +254,7 @@ The Road to Fantasy:
                 + This update gives you multiple rewards per Boss Run
                 + To make it worth while, the reward should allow you to Summon a Cog Mid-Battle to Heal you or Attack for a specific number of rounds.
         + Cog Attacks should have the ability to do Damage Over Time.
-        + You should be able to pick your Boss Rewards with your Gags. The only time you forfeit your ability to pick a gag is when you use a Doodle.
+        + You should be able to pick your Boss Rewards with your Gags. The only time you forfeit your ability to pick a gag is when you use a Pets.
             + A Chief Executive Officer Boss Battle Update:
                 + This makes it so the Boss Battle itself functions like Toontown Rewritten's Boss Battle.
                 + You should get Multiple Fires.
@@ -423,7 +438,7 @@ The Road to Fantasy:
                     + You should be able to earn Jellybeans by doing anything in Toontown Stadium
                 + In the shop in the center of the playground where you can buy, Karts, Golf Clubs, Golf Balls, cannons, etc. with color variations for customization.
                 + Add Tug-O-War minigame from parties to play against a friendly Cog whom flies down and challenges you to a game of Tug-O-War before leaving after you're done.
-                + Around the Stadium Playground should be racing stripes where you can train your Doodle in-playground.
+                + Around the Stadium Playground should be racing stripes where you can train your Pets in-playground.
                 + Around the playground, add cannons to bounce off of the low-hanging clouds.
                     + When you land on the ground, you shouldn't be interrupted by a pop-up GUI, instead we should replace it with the Jellybean Jar Icon and a counter counting the amount of Jellybeans Earned + How much experience you've gained.
                 + When you're doing an activity, wind should affect you.
@@ -449,7 +464,7 @@ The Road to Fantasy:
         + Add daily & weekly quests with rewards
         + Make side quests more appealing with more content
         + Remove the Friends List
-        + Add more pet types other than Doodles
+        + Add more pet types other than Pets
             + Add Puffles, Dogs, etc.
         + On the side of Acorn Acres, add a Pet Park where you can summon your pet to train them.
         + Add the ability to purchase higher level of fishing rods with enchantments which allow for easier catching of fish
@@ -504,7 +519,13 @@ The Road to Fantasy:
     + Add a Reproposal Option to the Toontask menu in the Toon HQ to renegotiate the Tasks that you are presented
     + Allow Radios to play .MP3, .ogg, and all of the audio files
     + Allow Televisions to play .mp4, .mov, and more.
-    + Allow your Toon to travel with your Doodle
-    + Allow your Doodle to come inside your house
+    + Allow your Toon to travel with your Pet
+    + Allow pets to come into our Estate when you're not home.
+    + Add shops that you can buy objects, furnature, and more from to build your house around Toontown
+    + Remove the loading screens and have each zone load when you approach it and unload whenever you leave it
+    + Remove the limit on Phrases that you can order
+    + Add a Trading Cards Side Quest that you can take up early in the game where you can collect trading cards about every character in the game and return them to Librarian Larry in the Toontown Library and when you return one, you can go to the library and go to the shelves to learn about the character (OR another way the story could go is Librarian Larry looses them in the storm and the cards go all around the continent of Toontown and he rewards you with being able to keep the trading cards+ (You can look at them at any time by loading up your smartphone and opening the app to look at them or opening up your Shtiker Book and going to the Trading Card page where your can click on the trading card and learn about the person thath way)) and either way the mission goes, there will be more series to the trading cards being made and you have to go collect them
+    + Create readable stories about the history of Toontown that you can read in the Toontown Library
+    + Add collectable items (like cog pieces)
 
     + More soon!
