@@ -25,3 +25,5 @@ Housekeeper/
 *.cfg
 sign/
 sign/texture.jpg
+*.lnk
+build/
