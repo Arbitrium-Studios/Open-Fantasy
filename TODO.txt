@@ -65,6 +65,9 @@ The Road to Fantasy:
 
     Wishlist:
 
+        + When hovering on a chat box that's behind another one, it should bring that one forward
+        + Boost trap damage so TNT kills 12 and Railroad kills 13.
+        + Replace all textures with the Pandora Texture Files
         + Add Skip button to the Trolley mini-games
         + Reformat the way the Resources folder is laid out
         + Allow us to scroll through the credits
@@ -219,6 +222,7 @@ The Road to Fantasy:
                 + Like in TTR, you should start with limited Gags.
                     + For each Mini-Game, you collect Jokes to get back at least 2 Gag Tracks per floor and Laff.
                 + The reward for the Field Office should be a 6 Star SOS Cards that insta-kills your Cogs, a Training Point that you can redeem at the Cottage in Mount Acorn, and a discount on Potions because you saved the Witch of the Mountains.
+                + You should NOT be able to walk through Cogs
             + A Vice President Boss Battle Update:
                 + The higher level Cog your suit is, the harder the battle is.
                 + The battle starts off easy and gets progressively harder as you defeat more cogs.
