@@ -105,7 +105,7 @@ GlobalStreetNames = {20000: ('to', 'on', 'Tutorial Terrace'),
                      9000: ('to the', 'in the', 'Playground'),
                      9100: ('to', 'on', 'Lullaby Lane'),
                      9200: ('to', 'on', 'Pajama Place'),
-                     10000: ('to', 'in', 'Bossbot Country Club'),
+                     10000: ('to the', 'in the', 'Country Club'),
                      10100: ('to the', 'in the', 'Bossbot Lobby'),
                      10200: ('to the', 'in the', 'The Clubhouse'),
                      10500: ('to the', 'in the', 'The Front Three'),
@@ -3472,7 +3472,7 @@ WinterMickeyCChatter = (["Hi, I'm Merry Mickey!",
                                                                                                      'Shucks, sorry you have to go. So long!',
                                                                                                      "I'm going caroling with Minnie!"])
 ValentinesMickeyChatter = (["Hi, I'm Mickey!",
-                            'Welcome to ValenToontown Central!',
+                            'Welcome to ValenToontropolis Central!',
                             "Happy ValenToon's Day!",
                             "Happy ValenToon's Day, %"], ['Love is in the air! And butterflies!',
                                                           'Those hearts are good for Laff boosts!',
@@ -4476,7 +4476,7 @@ MusicCreateAToon = 'The New Toon in Town'
 MusicTtTheme = 'The Toontown Theme'
 MusicMinigameRace = 'Slow and Steady'
 MusicMgPairing = 'Remember Me?'
-MusicTcNbrhood = 'Toontown Central'
+MusicTcNbrhood = 'Toontropolis Central'
 MusicMgDiving = 'Treasure Lullaby'
 MusicMgCannonGame = 'Fire the Cannons!'
 MusicMgTwodgame = 'Running Toon'
@@ -4500,7 +4500,7 @@ MusicGsRaceRr = 'Route 66'
 MusicGzSz = 'The Putt-Putt Polka'
 MusicMmSz = 'Dancing in the Streets'
 MusicMmSzActivity = 'Here Comes Treble'
-MusicDdNbrhood = "Toontown Docks"
+MusicDdNbrhood = "Toontropolis Docks"
 MusicGsKartshop = 'Mr. Goofywrench'
 MusicDdSzActivity = 'Sea Shanty'
 MusicEncntrGeneralBgIndoor = 'Building Excitement'
@@ -4508,7 +4508,7 @@ MusicTtElevator = 'Going Up?'
 MusicEncntrToonWinningIndoor = 'Toons Unite!'
 MusicEncntrGeneralSuitWinningIndoor = 'Cog-tastrophe!'
 MusicTbNbrhood = 'The Brrrgh'
-MusicDlNbrhood = "Drowsy Dreamland"
+MusicDlNbrhood = "Twlight Dreamland"
 MusicDlSzActivity = 'Counting Sheep'
 MusicDgSz = 'Waltz of the Flowers'
 MusicDlSz = 'Sleepwalking'
@@ -5564,7 +5564,7 @@ ColorShopAll = 'Single Color'
 ClothesShopShorts = 'Shorts'
 ClothesShopShirt = 'Shirts'
 ClothesShopBottoms = 'Bottoms'
-PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontown Central?"
+PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontropolis Central?"
 MakeAToonSkipTutorial = 'Skip Toontorial'
 MakeAToonEnterTutorial = 'Enter Toontorial'
 MakeAToonDone = 'Done'
@@ -8526,7 +8526,7 @@ TipDict = {TIP_NONE: ('',),
                          'Visit the Pet Shops every day to see what new Doodles they have.',
                          'Different neighborhoods have different Doodles offered for adoption.',
                          "Show off your stylin' ride and turbo-boost your Laff limit at Goofy Speedway.",
-                         'Enter Goofy Speedway through the tire-shaped tunnel in Toontown Central Playground.',
+                         'Enter Goofy Speedway through the tire-shaped tunnel in Toontropolis Central Playground.',
                          'Earn Laff points at Goofy Speedway.',
                          'Goofy Speedway has six different race tracks. '),
            TIP_STREET: ('There are four types of Cogs: Lawbots, Cashbots, Sellbots, and Bossbots.',

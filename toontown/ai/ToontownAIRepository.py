@@ -254,7 +254,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         )
         self.generateHood(DDHoodDataAI, ToontownGlobals.ToontropolisDocks)
 
-        # Toontown Central
+        # Toontropolis Central
         self.zoneTable[ToontownGlobals.ToontropolisCenter] = (
             (ToontownGlobals.ToontropolisCenter, 1,
              0), (ToontownGlobals.SillyStreet, 1, 1),

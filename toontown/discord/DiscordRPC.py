@@ -5,12 +5,12 @@ from pypresence import Presence
 class DiscordRPC(object):
 
     zone2imgdesc = { # A dict of ZoneID -> An image and a description
-        1000: ["toontown-docks", "In Toontown Docks"],
+        1000: ["toontown-docks", "In Toontropolis Docks"],
         1100: ["toontown-docks", "On Barnacle Boulevard"],
         1200: ["toontown-docks", "On Seaweed Street"],
         1300: ["toontown-docks", "On Lighthouse Lane"],
 
-        2000: ["toontown-central", "In Toontown Central"],
+        2000: ["toontown-central", "In Toontropolis Central"],
         2100: ["toontown-central", "On Silly Street"],
         2200: ["toontown-central", "On Loopy Lane"],
         2300: ["toontown-central", "On Punchline Place"],
@@ -20,7 +20,7 @@ class DiscordRPC(object):
         3200: ["tundra-wonderland", "On Sleet Street"],
         3300: ["tundra-wonderland", "On Polar Place"],
 
-        4000: ["the-land-of-music", "In The Land of Music"],
+        4000: ["the-land-of-music", "In the Land of Music"],
         4100: ["the-land-of-music", "On Alto Avenue"],
         4200: ["the-land-of-music", "On Baritone Boulevard"],
         4300: ["the-land-of-music", "On Tenor Terrace"],
@@ -33,7 +33,7 @@ class DiscordRPC(object):
         6000: ["acorn-acres", "At Acorn Acres"],
 
 
-        8000: ["toontown-stadium", "In Toontown Stadium"],
+        8000: ["toontown-stadium", "In Toontropolis Stadium"],
 
         9000: ["twlight-dreamland", "In Twlight Dreamland"],
         9100: ["twlight-dreamland", "On Lullaby Lane"],
@@ -70,7 +70,7 @@ class DiscordRPC(object):
 
         16000: ["estate", "At A Toon Estate"],
 
-        17000: ['golf', "In Acorn Acres's Mini-Golf"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontown Stadium
+        17000: ['golf', "In Acorn Acres's Mini-Golf"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontropolis Stadium
 
     }
 
