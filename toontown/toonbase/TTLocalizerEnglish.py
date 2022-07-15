@@ -10028,7 +10028,7 @@ InteractivePropTrackBonusTerms = {0: 'Super Toon-Up!',
                                   4: 'Super Throw!',
                                   5: 'Super Squirt!',
                                   6: ''}
-PlayingCardUnknown = 'Card Name is unknown'
+
 ExtraOptionsPageTitle = 'Extra Options'
 ControlSettingsTitle = 'Control Settings'
 ControlSettingsInfoLabelDefault = 'Change your input settings here.'
@@ -10044,5 +10044,4 @@ ChatLogTabMain = 'Main'
 ChatLogTabWhispers = 'Whispers'
 ChatLogTabGlobal = 'Global'
 ChatLogTabSystem = 'System'
-ChatLogSendToGuild = 'Send to guild' 
-PlayingCardUnknown = 'Card Name is unknown'
+ChatLogSendToGuild = 'Send to guild'
