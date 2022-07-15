@@ -705,19 +705,13 @@ class Suit(Avatar.Avatar):
         phase = 3.5
 
         def __doItTheOldWay__():
-            torsoTex = loader.loadTexture(
-                'phase_%s/maps/%s_blazer.jpg' %
-                (phase, dept))
+            torsoTex = loader.loadTexture('phase_%s/maps/%s_blazer.jpg' % (phase, dept))
             torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
             torsoTex.setMagfilter(Texture.FTLinear)
-            legTex = loader.loadTexture(
-                'phase_%s/maps/%s_leg.jpg' %
-                (phase, dept))
+            legTex = loader.loadTexture('phase_%s/maps/%s_leg.jpg' % (phase, dept))
             legTex.setMinfilter(Texture.FTLinearMipmapLinear)
             legTex.setMagfilter(Texture.FTLinear)
-            armTex = loader.loadTexture(
-                'phase_%s/maps/%s_sleeve.jpg' %
-                (phase, dept))
+            armTex = loader.loadTexture('phase_%s/maps/%s_sleeve.jpg' % (phase, dept))
             armTex.setMinfilter(Texture.FTLinearMipmapLinear)
             armTex.setMagfilter(Texture.FTLinear)
             modelRoot.find('**/torso').setTexture(torsoTex, 1)
@@ -730,19 +724,17 @@ class Suit(Avatar.Avatar):
             self.nametagJoint = self.find('**/joint_nameTag')
 
         if ConfigVariableBool('want-new-cogs', 0).value:
-            if dept == 'c':
-                texType = 'bossbot'
-            elif dept == 'm':
-                texType = 'cashbot'
-            elif dept == 'l':
-                texType = 'lawbot'
-            elif dept == 's':
-                texType = 'sellbot'
+            texType = {
+                'c': 'bossbot',
+                'm': 'cashbot',
+                'l': 'lawbot',
+                's': 'sellbot'
+            }
             if self.find('**/body').isEmpty():
                 __doItTheOldWay__()
             else:
-                filepath = 'phase_3.5/maps/tt_t_ene_' + texType + '.jpg'
-                if cogExists('/maps/tt_t_ene_' + texType + '.jpg'):
+                filepath = 'phase_3.5/maps/tt_t_ene_' + texType[dept] + '.jpg'
+                if cogExists('/maps/tt_t_ene_' + texType[dept] + '.jpg'):
                     bodyTex = loader.loadTexture(filepath)
                     self.find('**/body').setTexture(bodyTex, 1)
                 self.leftHand = self.find('**/def_joint_left_hold')
