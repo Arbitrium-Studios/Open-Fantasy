@@ -11,7 +11,7 @@ class DGHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = FloweringGrove
+        self.id = DaisyGardens
         self.townLoaderClass = DGTownLoader.DGTownLoader
         self.safeZoneLoaderClass = DGSafeZoneLoader.DGSafeZoneLoader
         self.storageDNAFile = 'phase_8/dna/storage_DG.dna'

@@ -220,7 +220,7 @@ store_suit_point [ 223, SIDE_DOOR_POINT, 535 82 0, 70 ]
 store_suit_point [ 224, SIDE_DOOR_POINT, 645 157 0, 62 ]
 store_suit_point [ 225, SIDE_DOOR_POINT, 605 118 0, 71 ]
 store_suit_point [ 226, SIDE_DOOR_POINT, 637 215 0, 67 ]
-group "TheLandOfMusic" [
+group "minniesMelodyLand" [
  visgroup "4301" [
   vis [   "4301"   "4302"   "4303"   "4304"   ]
   suit_edge [ 0 1 ]

@@ -5,7 +5,7 @@ from toontown.racing import DistributedStartingBlockAI
 from pandac.PandaModules import *
 from panda3d.toontown import *
 from toontown.racing.RaceGlobals import *
-from toontown.classicchars import DistributedToontownStadiumAI
+from toontown.classicchars import DistributedGoofySpeedwayAI
 if __debug__:
     import pdb
 
@@ -14,7 +14,7 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('GSHoodDataAI')
 
     def __init__(self, air, zoneId=None):
-        hoodId = ToontownGlobals.ToontownStadium
+        hoodId = ToontownGlobals.GoofySpeedway
         if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
@@ -26,7 +26,7 @@ class GSHoodDataAI(HoodDataAI.HoodDataAI):
         self.cycleDuration = 10
         self.createLeaderBoards()
         self.__cycleLeaderBoards()
-        self.classicChar = DistributedToontownStadiumAI.DistributedToontownStadiumAI(
+        self.classicChar = DistributedGoofySpeedwayAI.DistributedGoofySpeedwayAI(
             self.air)
         self.classicChar.generateWithRequired(self.zoneId)
         self.classicChar.start()

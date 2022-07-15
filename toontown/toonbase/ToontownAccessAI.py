@@ -32,7 +32,7 @@ def openToAll(zoneId, avatar):
     canonicalZoneId = ZoneUtil.getCanonicalHoodId(zoneId)
     allowedZones = [ToontownGlobals.ToontownCentral,
                     ToontownGlobals.MyEstate,
-                    ToontownGlobals.ToontownStadium,
+                    ToontownGlobals.GoofySpeedway,
                     ToontownGlobals.Tutorial]
     specialZones = [ToontownGlobals.SellbotLobby]
     if ToontownGlobals.SELLBOT_NERF_HOLIDAY in simbase.air.holidayManager.currentHolidays:

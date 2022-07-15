@@ -4,7 +4,7 @@ zoneUtilNotify = DirectNotifyGlobal.directNotify.newCategory('ZoneUtil')
 tutorialDict = None
 
 
-def isToontownStadiumZone(zoneId):
+def isGoofySpeedwayZone(zoneId):
     return zoneId == 8000
 
 
@@ -148,7 +148,7 @@ def getCanonicalZoneId(zoneId):
         if zoneId < 1000:
             zoneId = zoneId + ToontownCentral
         else:
-            zoneId = zoneId - 1000 + ToontownStadium
+            zoneId = zoneId - 1000 + GoofySpeedway
     return zoneId
 
 
@@ -160,8 +160,8 @@ def getTrueZoneId(zoneId, currentZoneId):
         offset = currentZoneId - currentZoneId % 2000
         if hoodId == ToontownCentral:
             return zoneId - ToontownCentral + offset
-        elif hoodId == ToontownStadium:
-            return zoneId - ToontownStadium + offset + 1000
+        elif hoodId == GoofySpeedway:
+            return zoneId - GoofySpeedway + offset + 1000
     return zoneId
 
 
@@ -223,7 +223,7 @@ def getWakeInfo(hoodId=None, zoneId=None):
         if zoneId is None:
             zoneId = base.cr.playGame.getPlace().getZoneId()
         canonicalZoneId = getCanonicalZoneId(zoneId)
-        if canonicalZoneId == ToontownDocks:
+        if canonicalZoneId == DonaldsDock:
             wakeWaterHeight = DDWakeWaterHeight
             showWake = 1
         elif canonicalZoneId == ToontownCentral:

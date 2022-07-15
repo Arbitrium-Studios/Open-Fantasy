@@ -70,7 +70,7 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             dgSign.setPosHprScale(
                 0.0, -291.5, 29, 180.0, 0.0, 0.0, cogSignSF, cogSignSF, cogSignSF * aspectSF)
             dgSign.node().setEffect(DecalEffect.make())
-            dgText = DirectGui.OnscreenText(text=TTLocalizer.FloweringGrove[-1], font=ToontownGlobals.getSuitFont(
+            dgText = DirectGui.OnscreenText(text=TTLocalizer.DaisyGardens[-1], font=ToontownGlobals.getSuitFont(
             ), pos=(0, -0.3), scale=TTLocalizer.SCHQLdgText, mayChange=False, parent=dgSign)
             dgText.setDepthWrite(0)
             factorySign = cogSign.copyTo(factoryLinkTunnel)

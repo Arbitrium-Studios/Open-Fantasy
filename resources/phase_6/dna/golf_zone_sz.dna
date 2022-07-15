@@ -1,4 +1,4 @@
-group "ToontownStadium" [
+group "goofySpeedway" [
  visgroup "8000:safe_zone" [
   vis [   "8000:safe_zone"   ]
   node "level" [
