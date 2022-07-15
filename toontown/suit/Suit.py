@@ -428,7 +428,7 @@ class Suit(Avatar.Avatar):
             self.setHeight(3.25)
         elif dna.name == 'ds':
             self.scale = 4.5 / bSize
-            self.handColor = SuitDNA.corpPolyColor
+            self.handColor = SuitDNA.moneyPolyColor
             self.generateBody()
             self.generateHead('beancounter')
             self.setHeight(6.08)
@@ -440,7 +440,7 @@ class Suit(Avatar.Avatar):
             self.setHeight(7.45)
         elif dna.name == 'cr':
             self.scale = 6.75 / cSize
-            self.handColor = VBase4(0.85, 0.55, 0.55, 1.0)
+            self.handColor = SuitDNA.corpPolyColor
             self.generateBody()
             self.headTexture = 'corporate-raider.jpg'
             self.generateHead('flunky')
@@ -488,7 +488,7 @@ class Suit(Avatar.Avatar):
             self.setHeight(6.39)
         elif dna.name == 'bs':
             self.scale = 4.5 / aSize
-            self.handColor = SuitDNA.legalPolyColor
+            self.handColor = VBase4(0.5, 0.4, 0.75, 1.0)
             self.generateBody()
             self.generateHead('backstabber')
             self.setHeight(6.71)
@@ -604,13 +604,13 @@ class Suit(Avatar.Avatar):
             self.setHeight(6.4)
         elif dna.name == 'ms':
             self.scale = 4.75 / bSize
-            self.handColor = SuitDNA.salesPolyColor
+            self.handColor = SuitDNA.corpPolyColor
             self.generateBody()
             self.generateHead('movershaker')
             self.setHeight(6.7)
         elif dna.name == 'tf':
             self.scale = 5.25 / aSize
-            self.handColor = SuitDNA.salesPolyColor
+            self.handColor = SuitDNA.corpPolyColor
             self.generateBody()
             self.generateHead('twoface')
             self.setHeight(6.95)
@@ -623,7 +623,7 @@ class Suit(Avatar.Avatar):
             self.setHeight(7.61)
         elif dna.name == 'mh':
             self.scale = 7.0 / aSize
-            self.handColor = SuitDNA.salesPolyColor
+            self.handColor = SuitDNA.corpPolyColor
             self.generateBody()
             self.generateHead('yesman')
             self.setHeight(8.95)
