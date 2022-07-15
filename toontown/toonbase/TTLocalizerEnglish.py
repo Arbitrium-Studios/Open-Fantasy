@@ -10029,6 +10029,7 @@ InteractivePropTrackBonusTerms = {0: 'Super Toon-Up!',
                                   5: 'Super Squirt!',
                                   6: ''}
 
+PlayingCardUnknown = 'Card Name is unknown'
 ExtraOptionsPageTitle = 'Extra Options'
 ControlSettingsTitle = 'Control Settings'
 ControlSettingsInfoLabelDefault = 'Change your input settings here.'
