@@ -10029,3 +10029,20 @@ InteractivePropTrackBonusTerms = {0: 'Super Toon-Up!',
                                   5: 'Super Squirt!',
                                   6: ''}
 PlayingCardUnknown = 'Card Name is unknown'
+ExtraOptionsPageTitle = 'Extra Options'
+ControlSettingsTitle = 'Control Settings'
+ControlSettingsInfoLabelDefault = 'Change your input settings here.'
+ControlSettingsInfoLabelChangeKey = 'Press a key combination\ncreate your new hotkey.'
+ControlSettingsAlreadyInUse = 'That key combination is already\nin use. Please choose another.'
+ControlSettingsSuccessful = 'Hotkey set successfully.'
+ControlSettingsChangesApplied = 'All changes applied successfully.'
+ControlSettingsResetToDefault = 'Reset to default settings'
+ControlSettingsExit = 'Exit'
+
+# Chat log
+ChatLogTabMain = 'Main'
+ChatLogTabWhispers = 'Whispers'
+ChatLogTabGlobal = 'Global'
+ChatLogTabSystem = 'System'
+ChatLogSendToGuild = 'Send to guild' 
+PlayingCardUnknown = 'Card Name is unknown'
