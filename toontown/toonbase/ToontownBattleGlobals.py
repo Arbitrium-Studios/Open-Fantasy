@@ -645,7 +645,7 @@ AvPropDamage = (
         ((40, 50), (Levels[0][3], Levels[0][4])),
         ((60, 75), (Levels[0][4], Levels[0][5])),
         ((90, 125), (Levels[0][5], Levels[0][6])),
-        ((215, 215), (Levels[0][6], MaxSkill))
+        ((215, 215), (Levels[0][6], MaxSkill)),
         (((10, 12), (Levels[1][0], Levels[1][1])),
          ((18, 20), (Levels[1][1], Levels[1][2])),
          ((30, 35), (Levels[1][2], Levels[1][3])),
