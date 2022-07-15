@@ -23,7 +23,8 @@ from toontown.distributed import DelayDelete
 from . import AccessoryGlobals
 import importlib
 import functools
-
+from panda3d.direct import ShowInterval
+from panda3d.direct import HideInterval
 
 def teleportDebug(requestStatus, msg, onlyIfToAv=True):
     if teleportNotify.getDebug():
