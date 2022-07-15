@@ -21,17 +21,17 @@ def calcScore(t):
 
 
 AREA_DATA = {}
-AREA_DATA[ToontownGlobals.ToontownCentral] = {}
-AREA_DATA[ToontownGlobals.ToontownCentral]['FILMCOUNT'] = 32
-AREA_DATA[ToontownGlobals.ToontownCentral]['TIME'] = 120
-AREA_DATA[ToontownGlobals.ToontownCentral]['CAMERA_INTIAL_POSTION'] = Point3(
+AREA_DATA[ToontownGlobals.ToontropolisCenter] = {}
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['FILMCOUNT'] = 32
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['TIME'] = 120
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
-AREA_DATA[ToontownGlobals.ToontownCentral]['DNA_TRIO'] = (
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['DNA_TRIO'] = (
     'phase_4/dna/storage_TT_sz.dna', 'phase_4/dna/storage_TT.dna', 'phase_4/dna/toontown_central_sz.dna')
-AREA_DATA[ToontownGlobals.ToontownCentral]['TRIPOD_OFFSET'] = Point3(0, 0, 7.0)
-AREA_DATA[ToontownGlobals.ToontownCentral]['START_HPR'] = Point3(
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['TRIPOD_OFFSET'] = Point3(0, 0, 7.0)
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['START_HPR'] = Point3(
     -87.8752, -0.378549, 0)
-AREA_DATA[ToontownGlobals.ToontownCentral]['PATHS'] = ([Point3(10, 20, 4.025),
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['PATHS'] = ([Point3(10, 20, 4.025),
                                                         Point3(10, -3, 4.025),
                                                         Point3(32, -5, 4.025),
                                                         Point3(32, 12, 4.025)],
@@ -75,25 +75,25 @@ AREA_DATA[ToontownGlobals.ToontownCentral]['PATHS'] = ([Point3(10, 20, 4.025),
                                                         Point3(-94.049, -
                                                                60.519, 0.035),
                                                         Point3(-66.868, -64.715, 0.025)])
-AREA_DATA[ToontownGlobals.ToontownCentral]['PATHANIMREL'] = (0,
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['PATHANIMREL'] = (0,
                                                              0,
                                                              1,
                                                              2)
-AREA_DATA[ToontownGlobals.ToontownCentral]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0), (None, 1.0)], [
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0), (None, 1.0)], [
                                                             ('slip-forward', 2.0), (None, 1.0), (None, 1.0)], [('shrug', 2.0), (None, 1.0)])
-AREA_DATA[ToontownGlobals.ToontownCentral]['MOVEMODES'] = (
+AREA_DATA[ToontownGlobals.ToontropolisCenter]['MOVEMODES'] = (
     [('walk', 1.0), ('run', 0.4)], [('run', 0.4)], [('walk', 1.0), ('sad-walk', 2.5)])
-AREA_DATA[ToontownGlobals.DonaldsDock] = {}
-AREA_DATA[ToontownGlobals.DonaldsDock]['FILMCOUNT'] = 28
-AREA_DATA[ToontownGlobals.DonaldsDock]['TIME'] = 110
-AREA_DATA[ToontownGlobals.DonaldsDock]['CAMERA_INTIAL_POSTION'] = Point3(
+AREA_DATA[ToontownGlobals.ToontropolisDocks] = {}
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['FILMCOUNT'] = 28
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['TIME'] = 110
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
-AREA_DATA[ToontownGlobals.DonaldsDock]['DNA_TRIO'] = (
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['DNA_TRIO'] = (
     'phase_6/dna/storage_DD_sz.dna', 'phase_6/dna/storage_DD.dna', 'phase_6/dna/donalds_dock_sz.dna')
-AREA_DATA[ToontownGlobals.DonaldsDock]['TRIPOD_OFFSET'] = Point3(0, -4.0, 9.0)
-AREA_DATA[ToontownGlobals.DonaldsDock]['START_HPR'] = Point3(
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['TRIPOD_OFFSET'] = Point3(0, -4.0, 9.0)
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['START_HPR'] = Point3(
     218.211, -6.7879, 0)
-AREA_DATA[ToontownGlobals.DonaldsDock]['PATHS'] = ([Point3(-115.6, 39.4, 5.692),
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['PATHS'] = ([Point3(-115.6, 39.4, 5.692),
                                                     Point3(-109.9, -14, 5.692),
                                                     Point3(-112.652, -
                                                            46.7, 5.692),
@@ -144,32 +144,32 @@ AREA_DATA[ToontownGlobals.DonaldsDock]['PATHS'] = ([Point3(-115.6, 39.4, 5.692),
                                                     Point3(-55.102,
                                                            4.041, 0.2),
                                                     Point3(-54.247, 16.051, 0.2)])
-AREA_DATA[ToontownGlobals.DonaldsDock]['PATHANIMREL'] = (0,
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['PATHANIMREL'] = (0,
                                                          0,
                                                          1,
                                                          2,
                                                          3)
-AREA_DATA[ToontownGlobals.DonaldsDock]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)],
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)],
                                                         [('slip-forward', 2.0),
                                                          (None, 1.0), (None, 1.0)],
                                                         [('shrug', 2.0),
                                                          (None, 1.0)],
                                                         [(None, 1.0)])
-AREA_DATA[ToontownGlobals.DonaldsDock]['MOVEMODES'] = ([('walk', 1.0)],
+AREA_DATA[ToontownGlobals.ToontropolisDocks]['MOVEMODES'] = ([('walk', 1.0)],
                                                        [('run', 0.4)],
                                                        [('walk', 1.0),
                                                         ('sad-walk', 2.5)],
                                                        [('swim', 1.0)])
-AREA_DATA[ToontownGlobals.DaisyGardens] = {}
-AREA_DATA[ToontownGlobals.DaisyGardens]['FILMCOUNT'] = 26
-AREA_DATA[ToontownGlobals.DaisyGardens]['TIME'] = 100
-AREA_DATA[ToontownGlobals.DaisyGardens]['CAMERA_INTIAL_POSTION'] = Point3(
+AREA_DATA[ToontownGlobals.FloweringGrove] = {}
+AREA_DATA[ToontownGlobals.FloweringGrove]['FILMCOUNT'] = 26
+AREA_DATA[ToontownGlobals.FloweringGrove]['TIME'] = 100
+AREA_DATA[ToontownGlobals.FloweringGrove]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
-AREA_DATA[ToontownGlobals.DaisyGardens]['DNA_TRIO'] = (
+AREA_DATA[ToontownGlobals.FloweringGrove]['DNA_TRIO'] = (
     'phase_8/dna/storage_DG_sz.dna', 'phase_8/dna/storage_DG.dna', 'phase_8/dna/daisys_garden_sz.dna')
-AREA_DATA[ToontownGlobals.DaisyGardens]['TRIPOD_OFFSET'] = Point3(0, 0, 6.0)
-AREA_DATA[ToontownGlobals.DaisyGardens]['START_HPR'] = Point3(0.0, 0.0, 0.0)
-AREA_DATA[ToontownGlobals.DaisyGardens]['PATHS'] = ([Point3(-37.252, 25.513, 0.025),
+AREA_DATA[ToontownGlobals.FloweringGrove]['TRIPOD_OFFSET'] = Point3(0, 0, 6.0)
+AREA_DATA[ToontownGlobals.FloweringGrove]['START_HPR'] = Point3(0.0, 0.0, 0.0)
+AREA_DATA[ToontownGlobals.FloweringGrove]['PATHS'] = ([Point3(-37.252, 25.513, 0.025),
                                                      Point3(-30.032,
                                                             37.9, 0.025),
                                                      Point3(-38.694,
@@ -213,26 +213,26 @@ AREA_DATA[ToontownGlobals.DaisyGardens]['PATHS'] = ([Point3(-37.252, 25.513, 0.0
                                                      Point3(
                                                          69.468, 23.798, 0.025),
                                                      Point3(46.43, 20.473, 0.025)])
-AREA_DATA[ToontownGlobals.DaisyGardens]['PATHANIMREL'] = (0,
+AREA_DATA[ToontownGlobals.FloweringGrove]['PATHANIMREL'] = (0,
                                                           0,
                                                           1,
                                                           2)
-AREA_DATA[ToontownGlobals.DaisyGardens]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [(
+AREA_DATA[ToontownGlobals.FloweringGrove]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [(
     'jump', 2.0), (None, 1.0), (None, 1.0)], [('bow', 2.0), ('happy-dance', 2.0), (None, 1.0)])
-AREA_DATA[ToontownGlobals.DaisyGardens]['MOVEMODES'] = (
+AREA_DATA[ToontownGlobals.FloweringGrove]['MOVEMODES'] = (
     [('walk', 1.0), ('run', 0.4)], [('run', 0.4)], [('walk', 1.0), ('run', 0.4)])
-AREA_DATA[ToontownGlobals.MinniesMelodyland] = {}
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['FILMCOUNT'] = 23
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['TIME'] = 95
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['CAMERA_INTIAL_POSTION'] = Point3(
+AREA_DATA[ToontownGlobals.TheLandOfMusic] = {}
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['FILMCOUNT'] = 23
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['TIME'] = 95
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['CAMERA_INTIAL_POSTION'] = Point3(
     0, -50, 20)
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['DNA_TRIO'] = (
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['DNA_TRIO'] = (
     'phase_6/dna/storage_MM_sz.dna', 'phase_6/dna/storage_MM.dna', 'phase_6/dna/minnies_melody_land_sz.dna')
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['TRIPOD_OFFSET'] = Point3(
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['TRIPOD_OFFSET'] = Point3(
     0, 0, 6.0)
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['START_HPR'] = Point3(
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['START_HPR'] = Point3(
     71.3028, -3.12932, 0)
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['PATHS'] = ([Point3(-42.35, -16.0, -12.476),
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['PATHS'] = ([Point3(-42.35, -16.0, -12.476),
                                                           Point3(-23.7, -
                                                                  49.0, -12.476),
                                                           Point3(
@@ -276,28 +276,28 @@ AREA_DATA[ToontownGlobals.MinniesMelodyland]['PATHS'] = ([Point3(-42.35, -16.0, 
                                                           Point3(
                                                               14.322, -89.378, -14.562),
                                                           Point3(61.594, -91.931, -14.524)])
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['PATHANIMREL'] = (0,
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['PATHANIMREL'] = (0,
                                                                0,
                                                                1,
                                                                2)
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [('jump', 2.0),
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [('jump', 2.0),
                                                                                              ('slip-forward', 2.0),
                                                                                              (None,
                                                                                               1.0),
                                                                                              (None, 1.0)], [('shrug', 2.0), ('confused', 2.0), (None, 1.0)])
-AREA_DATA[ToontownGlobals.MinniesMelodyland]['MOVEMODES'] = (
+AREA_DATA[ToontownGlobals.TheLandOfMusic]['MOVEMODES'] = (
     [('walk', 1.0), ('run', 0.4)], [('run', 0.4)], [('walk', 1.0), ('sad-walk', 2.5)])
-AREA_DATA[ToontownGlobals.TheBrrrgh] = {}
-AREA_DATA[ToontownGlobals.TheBrrrgh]['FILMCOUNT'] = 21
-AREA_DATA[ToontownGlobals.TheBrrrgh]['TIME'] = 90
-AREA_DATA[ToontownGlobals.TheBrrrgh]['CAMERA_INTIAL_POSTION'] = Point3(
+AREA_DATA[ToontownGlobals.TundraWonderland] = {}
+AREA_DATA[ToontownGlobals.TundraWonderland]['FILMCOUNT'] = 21
+AREA_DATA[ToontownGlobals.TundraWonderland]['TIME'] = 90
+AREA_DATA[ToontownGlobals.TundraWonderland]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
-AREA_DATA[ToontownGlobals.TheBrrrgh]['DNA_TRIO'] = (
+AREA_DATA[ToontownGlobals.TundraWonderland]['DNA_TRIO'] = (
     'phase_8/dna/storage_BR_sz.dna', 'phase_8/dna/storage_BR.dna', 'phase_8/dna/the_burrrgh_sz.dna')
-AREA_DATA[ToontownGlobals.TheBrrrgh]['TRIPOD_OFFSET'] = Point3(0, 0, 6.0)
-AREA_DATA[ToontownGlobals.TheBrrrgh]['START_HPR'] = Point3(
+AREA_DATA[ToontownGlobals.TundraWonderland]['TRIPOD_OFFSET'] = Point3(0, 0, 6.0)
+AREA_DATA[ToontownGlobals.TundraWonderland]['START_HPR'] = Point3(
     -49.401, -11.6266, 0)
-AREA_DATA[ToontownGlobals.TheBrrrgh]['PATHS'] = ([Point3(-82.52, -28.727, 3.009),
+AREA_DATA[ToontownGlobals.TundraWonderland]['PATHS'] = ([Point3(-82.52, -28.727, 3.009),
                                                   Point3(-77.642, -
                                                          4.616, 3.009),
                                                   Point3(-51.006, 1.05, 3.009),
@@ -329,11 +329,11 @@ AREA_DATA[ToontownGlobals.TheBrrrgh]['PATHS'] = ([Point3(-82.52, -28.727, 3.009)
                                                   Point3(-139.328, -
                                                          6.628, 4.018),
                                                   Point3(-135.815, -39.935, 3.009)])
-AREA_DATA[ToontownGlobals.TheBrrrgh]['PATHANIMREL'] = (0,
+AREA_DATA[ToontownGlobals.TundraWonderland]['PATHANIMREL'] = (0,
                                                        0,
                                                        1,
                                                        2)
-AREA_DATA[ToontownGlobals.TheBrrrgh]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [('applause', 2.0),
+AREA_DATA[ToontownGlobals.TundraWonderland]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [('applause', 2.0),
                                                                                      ('slip-forward', 2.0),
                                                                                      (None,
                                                                                       1.0),
@@ -341,20 +341,20 @@ AREA_DATA[ToontownGlobals.TheBrrrgh]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0
                                                                                                     ('confused', 2.0),
                                                                                                     ('angry', 2.0),
                                                                                                     (None, 1.0)])
-AREA_DATA[ToontownGlobals.TheBrrrgh]['MOVEMODES'] = (
+AREA_DATA[ToontownGlobals.TundraWonderland]['MOVEMODES'] = (
     [('walk', 1.0), ('running-jump', 0.4)], [('run', 0.4)], [('walk', 1.0), ('sad-walk', 2.5)])
-AREA_DATA[ToontownGlobals.DonaldsDreamland] = {}
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['FILMCOUNT'] = 18
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['TIME'] = 85
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['CAMERA_INTIAL_POSTION'] = Point3(
+AREA_DATA[ToontownGlobals.TwilightDreamland] = {}
+AREA_DATA[ToontownGlobals.TwilightDreamland]['FILMCOUNT'] = 18
+AREA_DATA[ToontownGlobals.TwilightDreamland]['TIME'] = 85
+AREA_DATA[ToontownGlobals.TwilightDreamland]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['DNA_TRIO'] = (
+AREA_DATA[ToontownGlobals.TwilightDreamland]['DNA_TRIO'] = (
     'phase_8/dna/storage_DL_sz.dna', 'phase_8/dna/storage_DL.dna', 'phase_8/dna/donalds_dreamland_sz.dna')
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['TRIPOD_OFFSET'] = Point3(
+AREA_DATA[ToontownGlobals.TwilightDreamland]['TRIPOD_OFFSET'] = Point3(
     0, 0, 6.0)
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['START_HPR'] = Point3(
+AREA_DATA[ToontownGlobals.TwilightDreamland]['START_HPR'] = Point3(
     -137.183, -9.06236, 0)
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['PATHS'] = ([Point3(-51.222, 90.874, 0.025),
+AREA_DATA[ToontownGlobals.TwilightDreamland]['PATHS'] = ([Point3(-51.222, 90.874, 0.025),
                                                          Point3(
                                                              0.715, 94.789, 0.025),
                                                          Point3(
@@ -392,16 +392,16 @@ AREA_DATA[ToontownGlobals.DonaldsDreamland]['PATHS'] = ([Point3(-51.222, 90.874,
                                                          Point3(-25.728, -
                                                                 14.665, -13.975),
                                                          Point3(-43.923, -32.324, -14.634)])
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['PATHANIMREL'] = (0,
+AREA_DATA[ToontownGlobals.TwilightDreamland]['PATHANIMREL'] = (0,
                                                               0,
                                                               1,
                                                               2)
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [('applause', 2.0),
+AREA_DATA[ToontownGlobals.TwilightDreamland]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [('applause', 2.0),
                                                                                             ('jump',
                                                                                              2.0),
                                                                                             ('slip-forward', 2.0),
                                                                                             (None,
                                                                                              1.0),
                                                                                             (None, 1.0)], [('shrug', 2.0), ('angry', 2.0), (None, 1.0)])
-AREA_DATA[ToontownGlobals.DonaldsDreamland]['MOVEMODES'] = (
+AREA_DATA[ToontownGlobals.TwilightDreamland]['MOVEMODES'] = (
     [('walk', 1.0), ('catch-run', 0.4)], [('run', 0.4), ('running-jump', 0.4)], [('walk', 1.0), ('sad-walk', 2.5)])

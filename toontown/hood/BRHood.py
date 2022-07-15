@@ -10,7 +10,7 @@ class BRHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = TheBrrrgh
+        self.id = TundraWonderland
         self.townLoaderClass = BRTownLoader.BRTownLoader
         self.safeZoneLoaderClass = BRSafeZoneLoader.BRSafeZoneLoader
         self.storageDNAFile = 'phase_8/dna/storage_BR.dna'

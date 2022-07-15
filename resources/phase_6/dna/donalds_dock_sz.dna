@@ -1,4 +1,4 @@
-group "donaldsDock" [
+group "ToontropolisDocks" [
  visgroup "1000:safe_zone" [
   vis [   "1000:safe_zone"   ]
   group "streets" [

@@ -118,30 +118,30 @@ class PetTraits:
 
     class StdIncDistrib(TraitDistribution):
         TraitType = TraitDistribution.TraitTypes.INCREASING
-        Sz2MinMax = {ToontownGlobals.ToontownCentral: (0.2, 0.65),
-                     ToontownGlobals.DonaldsDock: (0.3, 0.7),
-                     ToontownGlobals.DaisyGardens: (0.4, 0.75),
-                     ToontownGlobals.MinniesMelodyland: (0.5, 0.8),
-                     ToontownGlobals.TheBrrrgh: (0.6, 0.85),
-                     ToontownGlobals.DonaldsDreamland: (0.7, 0.9)}
+        Sz2MinMax = {ToontownGlobals.ToontropolisCenter: (0.2, 0.65),
+                     ToontownGlobals.ToontropolisDocks: (0.3, 0.7),
+                     ToontownGlobals.FloweringGrove: (0.4, 0.75),
+                     ToontownGlobals.TheLandOfMusic: (0.5, 0.8),
+                     ToontownGlobals.TundraWonderland: (0.6, 0.85),
+                     ToontownGlobals.TwilightDreamland: (0.7, 0.9)}
 
     class StdDecDistrib(TraitDistribution):
         TraitType = TraitDistribution.TraitTypes.DECREASING
-        Sz2MinMax = {ToontownGlobals.ToontownCentral: (0.35, 0.8),
-                     ToontownGlobals.DonaldsDock: (0.3, 0.7),
-                     ToontownGlobals.DaisyGardens: (0.25, 0.6),
-                     ToontownGlobals.MinniesMelodyland: (0.2, 0.5),
-                     ToontownGlobals.TheBrrrgh: (0.15, 0.4),
-                     ToontownGlobals.DonaldsDreamland: (0.1, 0.3)}
+        Sz2MinMax = {ToontownGlobals.ToontropolisCenter: (0.35, 0.8),
+                     ToontownGlobals.ToontropolisDocks: (0.3, 0.7),
+                     ToontownGlobals.FloweringGrove: (0.25, 0.6),
+                     ToontownGlobals.TheLandOfMusic: (0.2, 0.5),
+                     ToontownGlobals.TundraWonderland: (0.15, 0.4),
+                     ToontownGlobals.TwilightDreamland: (0.1, 0.3)}
 
     class ForgetfulnessDistrib(TraitDistribution):
         TraitType = TraitDistribution.TraitTypes.DECREASING
-        Sz2MinMax = {ToontownGlobals.ToontownCentral: (0.0, 1.0),
-                     ToontownGlobals.DonaldsDock: (0.0, 0.9),
-                     ToontownGlobals.DaisyGardens: (0.0, 0.8),
-                     ToontownGlobals.MinniesMelodyland: (0.0, 0.7),
-                     ToontownGlobals.TheBrrrgh: (0.0, 0.6),
-                     ToontownGlobals.DonaldsDreamland: (0.0, 0.5)}
+        Sz2MinMax = {ToontownGlobals.ToontropolisCenter: (0.0, 1.0),
+                     ToontownGlobals.ToontropolisDocks: (0.0, 0.9),
+                     ToontownGlobals.FloweringGrove: (0.0, 0.8),
+                     ToontownGlobals.TheLandOfMusic: (0.0, 0.7),
+                     ToontownGlobals.TundraWonderland: (0.0, 0.6),
+                     ToontownGlobals.TwilightDreamland: (0.0, 0.5)}
 
     TraitDescs = (('forgetfulness', ForgetfulnessDistrib(), True),
                   ('boredomThreshold', StdIncDistrib(), True),

@@ -4,14 +4,14 @@ from toontown.toonbase import ToontownGlobals
 from toontown.safezone import DistributedTrolleyAI
 from toontown.safezone import DDTreasurePlannerAI
 from toontown.safezone import DistributedBoatAI
-from toontown.classicchars import DistributedDonaldDockAI
+from toontown.classicchars import DistributedToontropolisDockAI
 
 
 class DDHoodDataAI(HoodDataAI.HoodDataAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DDHoodDataAI')
 
     def __init__(self, air, zoneId=None):
-        hoodId = ToontownGlobals.DonaldsDock
+        hoodId = ToontownGlobals.ToontropolisDocks
         if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
@@ -30,7 +30,7 @@ class DDHoodDataAI(HoodDataAI.HoodDataAI):
         boat.generateWithRequired(self.zoneId)
         boat.start()
         self.addDistObj(boat)
-        self.classicChar = DistributedDonaldDockAI.DistributedDonaldDockAI(
+        self.classicChar = DistributedToontropolisDockAI.DistributedToontropolisDockAI(
             self.air)
         self.classicChar.generateWithRequired(self.zoneId)
         self.classicChar.start()

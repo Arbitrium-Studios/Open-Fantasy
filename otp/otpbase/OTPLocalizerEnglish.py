@@ -2,14 +2,14 @@ from pandac.PandaModules import TextPropertiesManager
 from pandac.PandaModules import TextProperties
 import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
-lTheBrrrgh = 'Tundra Wonderland'
-lDaisyGardens = 'Flowering Grove'
-lDonaldsDock = "Toontown Docks"
-lDonaldsDreamland = "Drowsy Dreamland"
-lMinniesMelodyland = "The Land of Melody"
-lToontownCentral = 'Toontown Central'
-lGoofySpeedway = 'Toontown Stadium'
-lOutdoorZone = "Acorn Acres"
+lTundraWonderland = 'Tundra Wonderland'
+lFloweringGrove = 'Flowering Grove'
+lToontropolisDocks = "Toontown Docks"
+lTwilightDreamland = "Drowsy Dreamland"
+lTheLandOfMusic = "The Land of Melody"
+lToontropolisCenter = 'Toontown Central'
+lToontropolisStadium = 'Toontown Stadium'
+lAcornAcres = "Acorn Acres"
 lGolfZone = "Toontown's MiniGolf"
 lCancel = 'Cancel'
 lClose = 'Close'
@@ -988,13 +988,13 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1102: "Let's go fight the %s!" % Cogs,
                                1103: "Let's go take over a %s building!" % Cog,
                                1104: "Let's go in the elevator!",
-                               1105: "Let's go to %s!" % lToontownCentral,
-                               1106: "Let's go to %s!" % lDonaldsDock,
-                               1107: "Let's go to %s!" % lMinniesMelodyland,
-                               1108: "Let's go to %s!" % lDaisyGardens,
-                               1109: "Let's go to %s!" % lTheBrrrgh,
-                               1110: "Let's go to %s!" % lDonaldsDreamland,
-                               1111: "Let's go to %s!" % lGoofySpeedway,
+                               1105: "Let's go to %s!" % lToontropolisCenter,
+                               1106: "Let's go to %s!" % lToontropolisDocks,
+                               1107: "Let's go to %s!" % lTheLandOfMusic,
+                               1108: "Let's go to %s!" % lFloweringGrove,
+                               1109: "Let's go to %s!" % lTundraWonderland,
+                               1110: "Let's go to %s!" % lTwilightDreamland,
+                               1111: "Let's go to %s!" % lToontropolisStadium,
                                1112: "Let's go to my house!",
                                1113: "Let's go to your house!",
                                1114: "Let's go to Sellbot Headquarters!",
@@ -1008,7 +1008,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1122: "Let's go to Lawbot Headquarters!",
                                1123: "Let's go fight the Chief Justice!",
                                1124: "Let's go in the District Attorney's Office!",
-                               1125: "Let's go to %s!" % lOutdoorZone,
+                               1125: "Let's go to %s!" % lAcornAcres,
                                1126: "Let's go to %s!" % lGolfZone,
                                1127: "Let's go to Bossbot Headquarters!",
                                1128: "Let's go fight the CEO!",

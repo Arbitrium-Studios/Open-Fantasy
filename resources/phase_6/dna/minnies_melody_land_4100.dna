@@ -245,7 +245,7 @@ store_suit_point [ 258, STREET_POINT, -320 -70 -0.5 ]
 store_suit_point [ 259, STREET_POINT, -302 -70 -0.5 ]
 store_suit_point [ 262, STREET_POINT, -302 -54 -0.5 ]
 store_suit_point [ 263, FRONT_DOOR_POINT, -284 -54 0, 54 ]
-group "minniesMelodyLand" [
+group "TheLandOfMusic" [
  visgroup "4101" [
   vis [   "4102"   "4103"   "4104"   "4101"   "4128"   ]
   battle_cell [ 20 20 -445 210 -0.5 ]

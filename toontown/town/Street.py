@@ -466,7 +466,7 @@ class Street(BattlePlace.BattlePlace):
             alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             inDreamland = False
             if place.zoneId and ZoneUtil.getCanonicalHoodId(
-                    place.zoneId) == ToontownGlobals.DonaldsDreamland:
+                    place.zoneId) == ToontownGlobals.TwilightDreamland:
                 inDreamland = True
             alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             if Filename(signTexturePath).exists():
