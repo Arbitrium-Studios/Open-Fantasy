@@ -493,4 +493,5 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         return
 
     def exitReward(self):
+        Discord.setZone(self.extZoneId)
         return None
