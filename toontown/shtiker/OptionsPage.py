@@ -1188,7 +1188,7 @@ class ExtraOptionsTabPage(DirectFrame):
          
     def toggleRichPresence(self):
          self.settingsChanged = 1
-         base.settings.updateSetting('game', 'rich-presence', not base.wantRichPresence)
+         base.settings.updateSetting('rich-presence', not base.wantRichPresence)
          base.wantRichPresence = not base.wantRichPresence
          self.__setRichPresenceLabel()
          if base.wantRichPresence:
