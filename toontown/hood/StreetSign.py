@@ -7,11 +7,11 @@ from direct.distributed import DistributedObject
 class StreetSign(DistributedObject.DistributedObject):
     RedownloadTaskName = 'RedownloadStreetSign'
     StreetSignFileName = config.GetString(
-        'street-sign-filename', 'texture.jpg')
+        'street-sign-filename', 'street-sign.jpg')
     StreetSignBaseDir = config.GetString('street-sign-base-dir', 'sign')
     StreetSignUrl = base.config.GetString(
         'street-sign-url',
-        'http://www.toontownfantasy.com/assets/phase_3/sign/')
+        'https://www.toontownfantasy.com/assets/phase_4/maps/sign/')
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
