@@ -5,12 +5,12 @@ from toontown.safezone import DLSafeZoneLoader
 from toontown.toonbase.ToontownGlobals import *
 
 
-class TDLHood(ToonHood.ToonHood):
+class DLHood(ToonHood.ToonHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = TwlightDreamland
+        self.id = DrowsyDreamland
         self.townLoaderClass = DLTownLoader.DLTownLoader
         self.safeZoneLoaderClass = DLSafeZoneLoader.DLSafeZoneLoader
         self.storageDNAFile = 'phase_8/dna/storage_DL.dna'
@@ -23,10 +23,10 @@ class TDLHood(ToonHood.ToonHood):
 
     def load(self):
         ToonHood.ToonHood.load(self)
-        self.parentFSM.getStateNamed('TDLHood').addChild(self.fsm)
+        self.parentFSM.getStateNamed('DLHood').addChild(self.fsm)
 
     def unload(self):
-        self.parentFSM.getStateNamed('TDLHood').removeChild(self.fsm)
+        self.parentFSM.getStateNamed('DLHood').removeChild(self.fsm)
         ToonHood.ToonHood.unload(self)
 
     def enter(self, *args):

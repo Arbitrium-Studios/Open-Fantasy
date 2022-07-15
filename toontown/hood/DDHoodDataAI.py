@@ -2,18 +2,16 @@ from direct.directnotify import DirectNotifyGlobal
 from . import HoodDataAI
 from toontown.toonbase import ToontownGlobals
 from toontown.safezone import DistributedTrolleyAI
-from toontown.safezone import DGTreasurePlannerAI
-from toontown.classicchars import DistributedGoofyAI
-from toontown.classicchars import DistributedDaisyAI
-from toontown.safezone import DistributedDGFlowerAI
-from toontown.safezone import ButterflyGlobals
+from toontown.safezone import DDTreasurePlannerAI
+from toontown.safezone import DistributedBoatAI
+from toontown.classicchars import DistributedToontownDockAI
 
 
-class FGHoodDataAI(HoodDataAI.HoodDataAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('FGHoodDataAI')
+class DDHoodDataAI(HoodDataAI.HoodDataAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory('DDHoodDataAI')
 
     def __init__(self, air, zoneId=None):
-        hoodId = ToontownGlobals.FloweringGrove
+        hoodId = ToontownGlobals.ToontownDocks
         if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
@@ -25,15 +23,15 @@ class FGHoodDataAI(HoodDataAI.HoodDataAI):
         trolley.generateWithRequired(self.zoneId)
         trolley.start()
         self.addDistObj(trolley)
-        self.treasurePlanner = DGTreasurePlannerAI.DGTreasurePlannerAI(
+        self.treasurePlanner = DDTreasurePlannerAI.DDTreasurePlannerAI(
             self.zoneId)
         self.treasurePlanner.start()
-        self.classicChar = DistributedDaisyAI.DistributedDaisyAI(self.air)
+        boat = DistributedBoatAI.DistributedBoatAI(self.air)
+        boat.generateWithRequired(self.zoneId)
+        boat.start()
+        self.addDistObj(boat)
+        self.classicChar = DistributedToontownDockAI.DistributedToontownDockAI(
+            self.air)
         self.classicChar.generateWithRequired(self.zoneId)
         self.classicChar.start()
         self.addDistObj(self.classicChar)
-        flower = DistributedDGFlowerAI.DistributedDGFlowerAI(self.air)
-        flower.generateWithRequired(self.zoneId)
-        flower.start()
-        self.addDistObj(flower)
-        self.createButterflies(ButterflyGlobals.DG)

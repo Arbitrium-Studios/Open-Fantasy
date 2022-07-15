@@ -343,18 +343,18 @@ AREA_DATA[ToontownGlobals.TundraWonderland]['ANIMATIONS'] = ([('wave', 2.0), (No
                                                                                                     (None, 1.0)])
 AREA_DATA[ToontownGlobals.TundraWonderland]['MOVEMODES'] = (
     [('walk', 1.0), ('running-jump', 0.4)], [('run', 0.4)], [('walk', 1.0), ('sad-walk', 2.5)])
-AREA_DATA[ToontownGlobals.TwlightDreamland] = {}
-AREA_DATA[ToontownGlobals.TwlightDreamland]['FILMCOUNT'] = 18
-AREA_DATA[ToontownGlobals.TwlightDreamland]['TIME'] = 85
-AREA_DATA[ToontownGlobals.TwlightDreamland]['CAMERA_INTIAL_POSTION'] = Point3(
+AREA_DATA[ToontownGlobals.DrowsyDreamland] = {}
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['FILMCOUNT'] = 18
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['TIME'] = 85
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
-AREA_DATA[ToontownGlobals.TwlightDreamland]['DNA_TRIO'] = (
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['DNA_TRIO'] = (
     'phase_8/dna/storage_DL_sz.dna', 'phase_8/dna/storage_DL.dna', 'phase_8/dna/donalds_dreamland_sz.dna')
-AREA_DATA[ToontownGlobals.TwlightDreamland]['TRIPOD_OFFSET'] = Point3(
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['TRIPOD_OFFSET'] = Point3(
     0, 0, 6.0)
-AREA_DATA[ToontownGlobals.TwlightDreamland]['START_HPR'] = Point3(
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['START_HPR'] = Point3(
     -137.183, -9.06236, 0)
-AREA_DATA[ToontownGlobals.TwlightDreamland]['PATHS'] = ([Point3(-51.222, 90.874, 0.025),
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['PATHS'] = ([Point3(-51.222, 90.874, 0.025),
                                                          Point3(
                                                              0.715, 94.789, 0.025),
                                                          Point3(
@@ -392,16 +392,16 @@ AREA_DATA[ToontownGlobals.TwlightDreamland]['PATHS'] = ([Point3(-51.222, 90.874,
                                                          Point3(-25.728, -
                                                                 14.665, -13.975),
                                                          Point3(-43.923, -32.324, -14.634)])
-AREA_DATA[ToontownGlobals.TwlightDreamland]['PATHANIMREL'] = (0,
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['PATHANIMREL'] = (0,
                                                               0,
                                                               1,
                                                               2)
-AREA_DATA[ToontownGlobals.TwlightDreamland]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [('applause', 2.0),
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)], [('applause', 2.0),
                                                                                             ('jump',
                                                                                              2.0),
                                                                                             ('slip-forward', 2.0),
                                                                                             (None,
                                                                                              1.0),
                                                                                             (None, 1.0)], [('shrug', 2.0), ('angry', 2.0), (None, 1.0)])
-AREA_DATA[ToontownGlobals.TwlightDreamland]['MOVEMODES'] = (
+AREA_DATA[ToontownGlobals.DrowsyDreamland]['MOVEMODES'] = (
     [('walk', 1.0), ('catch-run', 0.4)], [('run', 0.4), ('running-jump', 0.4)], [('walk', 1.0), ('sad-walk', 2.5)])

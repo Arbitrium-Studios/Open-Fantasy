@@ -1546,7 +1546,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
             self.constructMM()
         elif zone == ToontownGlobals.TundraWonderland:
             self.constructBR()
-        elif zone == ToontownGlobals.TwlightDreamland:
+        elif zone == ToontownGlobals.DrowsyDreamland:
             self.constructDL()
 
     def destruct(self):
@@ -1561,7 +1561,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
             self.destructMM()
         elif zone == ToontownGlobals.TundraWonderland:
             self.destructBR()
-        elif zone == ToontownGlobals.TwlightDreamland:
+        elif zone == ToontownGlobals.DrowsyDreamland:
             self.destructDL()
 
     def constructTTC(self):

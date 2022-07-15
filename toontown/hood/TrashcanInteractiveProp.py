@@ -129,7 +129,7 @@ class TrashcanInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                                 None,
                                                 3,
                                                 10)),
-                   ToontownGlobals.TwlightDreamland: (('tt_a_ara_ddl_trashcan_idleSleep0',
+                   ToontownGlobals.DrowsyDreamland: (('tt_a_ara_ddl_trashcan_idleSleep0',
                                                        3,
                                                        10,
                                                        None,
@@ -158,19 +158,19 @@ class TrashcanInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                 ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_trashcan_idleIntoFight',
                                 ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_trashcan_idleIntoFight',
                                 ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_trashcan_idleIntoFight',
-                                ToontownGlobals.TwlightDreamland: 'tt_a_ara_ddl_trashcan_idleIntoFight'}
+                                ToontownGlobals.DrowsyDreamland: 'tt_a_ara_ddl_trashcan_idleIntoFight'}
     ZoneToVictoryAnims = {ToontownGlobals.ToontownCentral: 'tt_a_ara_ttc_trashcan_victoryDance',
                           ToontownGlobals.ToontownDocks: 'tt_a_ara_dod_trashcan_victoryDance',
                           ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_trashcan_victoryDance',
                           ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_trashcan_victoryDance',
                           ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_trashcan_victoryDance',
-                          ToontownGlobals.TwlightDreamland: 'tt_a_ara_ddl_trashcan_victoryDance'}
+                          ToontownGlobals.DrowsyDreamland: 'tt_a_ara_ddl_trashcan_victoryDance'}
     ZoneToSadAnims = {ToontownGlobals.ToontownCentral: 'tt_a_ara_ttc_trashcan_fightSad',
                       ToontownGlobals.ToontownDocks: 'tt_a_ara_dod_trashcan_fightSad',
                       ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_trashcan_fightSad',
                       ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_trashcan_fightSad',
                       ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_trashcan_fightSad',
-                      ToontownGlobals.TwlightDreamland: 'tt_a_ara_ddl_trashcan_fightSad'}
+                      ToontownGlobals.DrowsyDreamland: 'tt_a_ara_ddl_trashcan_fightSad'}
     ZoneToFightAnims = {ToontownGlobals.ToontownCentral: ('tt_a_ara_ttc_trashcan_fightBoost', 'tt_a_ara_ttc_trashcan_fightCheer', 'tt_a_ara_ttc_trashcan_fightIdle'),
                         ToontownGlobals.ToontownDocks: ('tt_a_ara_dod_trashcan_fightBoost', 'tt_a_ara_dod_trashcan_fightCheer', 'tt_a_ara_dod_trashcan_fightIdle'),
                         ToontownGlobals.FloweringGrove: ('tt_a_ara_dga_trashcan_fightBoost', 'tt_a_ara_dga_trashcan_fightCheer', 'tt_a_ara_dga_trashcan_fightIdle'),
@@ -179,7 +179,7 @@ class TrashcanInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                                             'tt_a_ara_mml_trashcan_fightCheer1',
                                                             'tt_a_ara_mml_trashcan_fightIdle'),
                         ToontownGlobals.TundraWonderland: ('tt_a_ara_tbr_trashcan_fightBoost', 'tt_a_ara_tbr_trashcan_fightCheer', 'tt_a_ara_tbr_trashcan_fightIdle'),
-                        ToontownGlobals.TwlightDreamland: ('tt_a_ara_ddl_trashcan_fightBoost', 'tt_a_ara_ddl_trashcan_fightCheer', 'tt_a_ara_ddl_trashcan_fightIdle')}
+                        ToontownGlobals.DrowsyDreamland: ('tt_a_ara_ddl_trashcan_fightBoost', 'tt_a_ara_ddl_trashcan_fightCheer', 'tt_a_ara_ddl_trashcan_fightIdle')}
     IdlePauseTime = base.config.GetFloat('prop-idle-pause-time', 0.0)
 
     def __init__(self, node):

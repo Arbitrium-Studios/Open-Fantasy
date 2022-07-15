@@ -106,7 +106,7 @@ class DiscordRPC(object):
         if base.wantRichPresence:
             self.PartySize = size
             self.setData()
- 
+
     def setData(self, details=None, image=None, imageTxt=None):
         if details is None:
             details = self.details

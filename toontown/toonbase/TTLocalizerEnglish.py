@@ -72,14 +72,14 @@ PoliceChip = 'PoliceChip'
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
 lToontownDocks = "Toontown Docks"
-lTwlightDreamland = "Twilight Dreamland"
+lDrowsyDreamland = "Drowsy Dreamland"
 lTheLandOfMusic = "The Land Of Music"
 lToontownCentral = 'Toontown Central'
 lToonHQ = 'Toon Headquarters'
 lSellbotHQ = 'Sellbot Headquarters'
 lToontownStadium = 'Toontown Stadium'
 lOutdoorZone = "Acorn Acres"
-lGolfZone = "Acorn Acres's Mini-Golf"
+lGolfZone = "Toontown's MiniGolf"
 lPartyHood = 'Party Grounds'
 GlobalStreetNames = {20000: ('to', 'on', 'Tutorial Terrace'),
                      1000: ('to the', 'in the', 'Playground'),
@@ -135,7 +135,7 @@ FloweringGrove = ('to', 'in', lFloweringGrove)
 OutdoorZone = ('to', 'in', lOutdoorZone)
 FunnyFarm = ('to the', 'in the', 'Funny Farm')
 ToontownStadium = ('to', 'in', lToontownStadium)
-TwlightDreamland = ('to', 'in', lTwlightDreamland)
+DrowsyDreamland = ('to', 'in', lDrowsyDreamland)
 BossbotHQ = ('to', 'in', 'Bossbot Headquarters')
 SellbotHQ = ('to', 'in', 'Sellbot Headquarters')
 CashbotHQ = ('to', 'in', 'Cashbot Headquarters')
@@ -8561,7 +8561,7 @@ TipDict = {TIP_NONE: ('',),
                           'A perfect game of Match Minnie will double your points.',
                           'In the Tug-of-War you are awarded more Jellybeans if you play against a tougher Cog.',
                           'Trolley Game difficulty varies by neighborhood; ' + lToontownCentral +
-                          ' has the easiest and ' + lTwlightDreamland + ' has the hardest.',
+                          ' has the easiest and ' + lDrowsyDreamland + ' has the hardest.',
                           'Certain Trolley Games can only be played in a group.'),
            TIP_COGHQ: ('You must complete your Sellbot Disguise before visiting the V.P.',
                        'You must complete your Cashbot Disguise before visiting the C.F.O.',

@@ -123,7 +123,7 @@ class PetTraits:
                      ToontownGlobals.FloweringGrove: (0.4, 0.75),
                      ToontownGlobals.TheLandOfMusic: (0.5, 0.8),
                      ToontownGlobals.TundraWonderland: (0.6, 0.85),
-                     ToontownGlobals.TwlightDreamland: (0.7, 0.9)}
+                     ToontownGlobals.DrowsyDreamland: (0.7, 0.9)}
 
     class StdDecDistrib(TraitDistribution):
         TraitType = TraitDistribution.TraitTypes.DECREASING
@@ -132,7 +132,7 @@ class PetTraits:
                      ToontownGlobals.FloweringGrove: (0.25, 0.6),
                      ToontownGlobals.TheLandOfMusic: (0.2, 0.5),
                      ToontownGlobals.TundraWonderland: (0.15, 0.4),
-                     ToontownGlobals.TwlightDreamland: (0.1, 0.3)}
+                     ToontownGlobals.DrowsyDreamland: (0.1, 0.3)}
 
     class ForgetfulnessDistrib(TraitDistribution):
         TraitType = TraitDistribution.TraitTypes.DECREASING
@@ -141,7 +141,7 @@ class PetTraits:
                      ToontownGlobals.FloweringGrove: (0.0, 0.8),
                      ToontownGlobals.TheLandOfMusic: (0.0, 0.7),
                      ToontownGlobals.TundraWonderland: (0.0, 0.6),
-                     ToontownGlobals.TwlightDreamland: (0.0, 0.5)}
+                     ToontownGlobals.DrowsyDreamland: (0.0, 0.5)}
 
     TraitDescs = (('forgetfulness', ForgetfulnessDistrib(), True),
                   ('boredomThreshold', StdIncDistrib(), True),

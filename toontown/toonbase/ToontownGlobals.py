@@ -156,7 +156,7 @@ FloweringGrove = 5000
 OutdoorZone = 6000
 FunnyFarm = 7000
 ToontownStadium = 8000
-TwlightDreamland = 9000
+DrowsyDreamland = 9000
 BarnacleBoulevard = 1100
 SeaweedStreet = 1200
 LighthouseLane = 1300
@@ -180,7 +180,7 @@ HoodHierarchy = {ToontownCentral: (SillyStreet, LoopyLane, PunchlinePlace),
                  TundraWonderland: (WalrusWay, SleetStreet, PolarPlace),
                  TheLandOfMusic: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
                  FloweringGrove: (ElmStreet, MapleStreet, OakStreet),
-                 TwlightDreamland: (LullabyLane, PajamaPlace),
+                 DrowsyDreamland: (LullabyLane, PajamaPlace),
                  ToontownStadium: ()}
 WelcomeValleyToken = 0
 BossbotHQ = 10000
@@ -220,7 +220,7 @@ cogDept2index = {'c': 0,
                  's': 3}
 cogIndex2dept = invertDict(cogDept2index)
 HQToSafezone = {SellbotHQ: FloweringGrove,
-                CashbotHQ: TwlightDreamland,
+                CashbotHQ: DrowsyDreamland,
                 LawbotHQ: TundraWonderland,
                 BossbotHQ: ToontownDocks}
 CogDeptNames = [TTLocalizer.Bossbot,
@@ -312,7 +312,7 @@ Hoods = (ToontownDocks,
          OutdoorZone,
          FunnyFarm,
          ToontownStadium,
-         TwlightDreamland,
+         DrowsyDreamland,
          BossbotHQ,
          SellbotHQ,
          CashbotHQ,
@@ -325,7 +325,7 @@ HoodsForTeleportAll = (ToontownDocks,
                        FloweringGrove,
                        OutdoorZone,
                        ToontownStadium,
-                       TwlightDreamland,
+                       DrowsyDreamland,
                        BossbotHQ,
                        SellbotHQ,
                        CashbotHQ,
@@ -456,7 +456,7 @@ phaseMap = {Tutorial: 4,
             TundraWonderland: 8,
             FloweringGrove: 8,
             FunnyFarm: 8,
-            TwlightDreamland: 8,
+            DrowsyDreamland: 8,
             OutdoorZone: 8,
             BossbotHQ: 12,
             SellbotHQ: 9,
@@ -471,7 +471,7 @@ streetPhaseMap = {ToontownCentral: 5,
                   TundraWonderland: 8,
                   FloweringGrove: 8,
                   FunnyFarm: 8,
-                  TwlightDreamland: 8,
+                  DrowsyDreamland: 8,
                   OutdoorZone: 8,
                   BossbotHQ: 12,
                   SellbotHQ: 9,
@@ -486,7 +486,7 @@ dnaMap = {Tutorial: 'toontown_central',
           TundraWonderland: 'the_burrrgh',
           FloweringGrove: 'daisys_garden',
           FunnyFarm: 'not done yet',
-          TwlightDreamland: 'donalds_dreamland',
+          DrowsyDreamland: 'donalds_dreamland',
           OutdoorZone: 'outdoor_zone',
           BossbotHQ: 'cog_hq_bossbot',
           SellbotHQ: 'cog_hq_sellbot',
@@ -501,7 +501,7 @@ hoodNameMap = {ToontownDocks: TTLocalizer.ToontownDocks,
                OutdoorZone: TTLocalizer.OutdoorZone,
                FunnyFarm: TTLocalizer.FunnyFarm,
                ToontownStadium: TTLocalizer.ToontownStadium,
-               TwlightDreamland: TTLocalizer.TwlightDreamland,
+               DrowsyDreamland: TTLocalizer.DrowsyDreamland,
                BossbotHQ: TTLocalizer.BossbotHQ,
                SellbotHQ: TTLocalizer.SellbotHQ,
                CashbotHQ: TTLocalizer.CashbotHQ,
@@ -519,7 +519,7 @@ safeZoneCountMap = {MyEstate: 8,
                     TundraWonderland: 8,
                     FloweringGrove: 9,
                     FunnyFarm: 500,
-                    TwlightDreamland: 5,
+                    DrowsyDreamland: 5,
                     OutdoorZone: 500,
                     GolfZone: 500,
                     PartyHood: 500}
@@ -532,7 +532,7 @@ townCountMap = {MyEstate: 8,
                 TundraWonderland: 40,
                 FloweringGrove: 40,
                 FunnyFarm: 40,
-                TwlightDreamland: 40,
+                DrowsyDreamland: 40,
                 OutdoorZone: 40,
                 PartyHood: 20}
 hoodCountMap = {MyEstate: 2,
@@ -544,7 +544,7 @@ hoodCountMap = {MyEstate: 2,
                 TundraWonderland: 2,
                 FloweringGrove: 2,
                 FunnyFarm: 2,
-                TwlightDreamland: 2,
+                DrowsyDreamland: 2,
                 OutdoorZone: 2,
                 BossbotHQ: 2,
                 SellbotHQ: 43,
@@ -1690,7 +1690,7 @@ openDiscord = 'https://discord.gg/jy628fW'
 #  FloweringGrove: 30,
 #  TheLandOfMusic: 45,
 #  TundraWonderland: 60,
-#  TwlightDreamland: 75
+#  DrowsyDreamland: 75
 # }
 
 # def getTeleportButtonCost(hoodId):

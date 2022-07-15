@@ -1,5 +1,4 @@
 
-
 import builtins
 
 
@@ -12,12 +11,15 @@ builtins.game = game()
 from panda3d.core import *
 import time
 import sys
-
 try:
     launcher
 except BaseException:
     if __debug__:
         loadPrcFile('etc/Configrc.prc')
+
+    from toontown.launcher.ToontownDummyLauncher import ToontownDummyLauncher
+    launcher = ToontownDummyLauncher()
+    builtins.launcher = launcher
 
 launcher.setRegistry('EXIT_PAGE', 'normal')
 pollingDelay = 0.5
@@ -120,6 +122,7 @@ del version
 base.loader = base.loader
 builtins.loader = base.loader
 autoRun = ConfigVariableBool('toontown-auto-run', 1)
+Discord.startTasks()
 if autoRun and launcher.isDummy() and (
         not Thread.isTrueThreads() or __name__ == '__main__'):
     try:

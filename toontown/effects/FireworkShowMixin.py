@@ -31,8 +31,8 @@ class FireworkShowMixin:
                 ivalMgr.finishIntervalsMatching('shootFirework*')
             else:
                 self.destroyFireworkShow()
-        from toontown.hood import TTDHood
-        if isinstance(self.getHood(), TTDHood.TTDHood):
+        from toontown.hood import DDHood
+        if isinstance(self.getHood(), DDHood.DDHood):
             self.getHood().whiteFogColor = Vec4(0.8, 0.8, 0.8, 1)
         self.restoreCameraLens()
         if hasattr(self.getHood(), 'loader'):
@@ -161,10 +161,10 @@ class FireworkShowMixin:
 
     def restoreCameraLens(self):
         hood = self.getHood()
-        from toontown.hood import AAHood, TTSHood
-        if isinstance(hood, AAHood.AAHood):
+        from toontown.hood import OZHood, GSHood
+        if isinstance(hood, OZHood.OZHood):
             base.camLens.setFar(SpeedwayCameraFar)
-        elif isinstance(hood, TTSHood.TTSHood):
+        elif isinstance(hood, GSHood.GSHood):
             base.camLens.setFar(SpeedwayCameraFar)
         else:
             base.camLens.setFar(DefaultCameraFar)
@@ -225,29 +225,29 @@ class FireworkShowMixin:
             self.fireworkShow.begin(timeStamp)
             self.fireworkShow.reparentTo(root)
             hood = self.getHood()
-            from toontown.hood import TTCHood, TWHood, TLOMHood, FGHood, TDLHood, TTSHood, TTDHood, AAHood, PartyHood
-            if isinstance(hood, TTCHood.TTCHood):
+            from toontown.hood import TTHood, BRHood, MMHood, DGHood, DLHood, GSHood, DDHood, OZHood, PartyHood
+            if isinstance(hood, TTHood.TTHood):
                 self.fireworkShow.setPos(150, 0, 80)
                 self.fireworkShow.setHpr(90, 0, 0)
-            elif isinstance(hood, TWHood.TWHood):
+            elif isinstance(hood, BRHood.BRHood):
                 self.fireworkShow.setPos(-200, -60, 50)
                 self.fireworkShow.setHpr(270, 0, 0)
-            elif isinstance(hood, TLOMHood.TLOMHood):
+            elif isinstance(hood, MMHood.MMHood):
                 self.fireworkShow.setPos(150, -25, 40)
                 self.fireworkShow.setHpr(90, 0, 0)
-            elif isinstance(hood, FGHood.FGHood):
+            elif isinstance(hood, DGHood.DGHood):
                 self.fireworkShow.setPos(-80, -50, 60)
                 self.fireworkShow.setHpr(0, 0, 0)
-            elif isinstance(hood, TDLHood.TDLHood):
+            elif isinstance(hood, DLHood.DLHood):
                 self.fireworkShow.setPos(-160, 0, 80)
                 self.fireworkShow.setHpr(270, 0, 0)
-            elif isinstance(hood, TTSHood.TTSHood):
+            elif isinstance(hood, GSHood.GSHood):
                 self.fireworkShow.setPos(60, -350, 80)
                 self.fireworkShow.setHpr(20, 0, 0)
-            elif isinstance(hood, TTDHood.TTDHood):
+            elif isinstance(hood, DDHood.DDHood):
                 self.fireworkShow.setPos(150, 0, 50)
                 self.fireworkShow.setHpr(90, 0, 0)
-            elif isinstance(hood, AAHood.AAHood):
+            elif isinstance(hood, OZHood.OZHood):
                 self.fireworkShow.setPos(-450, -80, 140)
                 self.fireworkShow.setHpr(300, 0, 0)
             elif isinstance(hood, PartyHood.PartyHood):
@@ -313,16 +313,16 @@ class FireworkShowMixin:
         return None
 
     def __checkDDFog(self):
-        from toontown.hood import TTDHood
-        if isinstance(self.getHood(), TTDHood.TTDHood):
+        from toontown.hood import DDHood
+        if isinstance(self.getHood(), DDHood.DDHood):
             self.getHood().whiteFogColor = Vec4(0.2, 0.2, 0.2, 1)
             if hasattr(base.cr.playGame.getPlace(), 'cameraSubmerged'):
                 if not base.cr.playGame.getPlace().cameraSubmerged:
                     self.getHood().setWhiteFog()
 
     def __restoreDDFog(self):
-        from toontown.hood import TTDHood
-        if isinstance(self.getHood(), TTDHood.TTDHood):
+        from toontown.hood import DDHood
+        if isinstance(self.getHood(), DDHood.DDHood):
             self.getHood().whiteFogColor = Vec4(0.8, 0.8, 0.8, 1)
             if hasattr(base.cr.playGame.getPlace(), 'cameraSubmerged'):
                 if not base.cr.playGame.getPlace().cameraSubmerged:

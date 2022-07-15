@@ -9,7 +9,7 @@ from . import CharStateDatas
 from . import CCharChatter
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
-from toontown.hood import TTSHood
+from toontown.hood import GSHood
 
 
 class DistributedFrankenDonald(DistributedDonald.DistributedDonald):

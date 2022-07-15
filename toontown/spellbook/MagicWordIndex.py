@@ -120,8 +120,8 @@ class MagicWord:
         'tlom': ToontownGlobals.TheLandOfMusic,
         'lom': ToontownGlobals.TheLandOfMusic,
         'tw': ToontownGlobals.TundraWonderland,
-        'ddl': ToontownGlobals.TwlightDreamland,
-        'dl': ToontownGlobals.TwlightDreamland,
+        'ddl': ToontownGlobals.DrowsyDreamland,
+        'dl': ToontownGlobals.DrowsyDreamland,
     }
 
     def __init__(self):

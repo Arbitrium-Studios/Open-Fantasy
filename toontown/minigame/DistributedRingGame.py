@@ -383,7 +383,7 @@ class DistributedRingGame(DistributedMinigame):
                                    ToontownGlobals.FloweringGrove: [4, 12, 0],
                                    ToontownGlobals.TheLandOfMusic: [4, 8, 4],
                                    ToontownGlobals.TundraWonderland: [4, 6, 6],
-                                   ToontownGlobals.TwlightDreamland: [2, 6, 8]}
+                                   ToontownGlobals.DrowsyDreamland: [2, 6, 8]}
         for distr in list(difficultyDistributions.values()):
             sum = reduce(lambda x, y: x + y, distr)
 
@@ -506,7 +506,7 @@ class DistributedRingGame(DistributedMinigame):
                                                            1,
                                                            2,
                                                            2] * 2],
-                              ToontownGlobals.TwlightDreamland: [[0] * 2 + [1] * 6 + [2] * 8,
+                              ToontownGlobals.DrowsyDreamland: [[0] * 2 + [1] * 6 + [2] * 8,
                                                                  [0,
                                                                   1,
                                                                   1,

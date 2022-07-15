@@ -2,8 +2,8 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 
 from toontown.hood import ZoneUtil
-from toontown.hood.TTSHoodDataAI import TTSHoodDataAI
-from toontown.hood.TTCHoodDataAI import TTCHoodDataAI
+from toontown.hood.GSHoodDataAI import GSHoodDataAI
+from toontown.hood.TTHoodDataAI import TTHoodDataAI
 from toontown.toonbase import ToontownGlobals
 
 
@@ -46,7 +46,7 @@ class WelcomeValleyManagerAI(DistributedObjectAI):
         self.notify.info('Creating Welcome Valley zones...')
 
         # Toontown Central
-        self.air.generateHood(TTCHoodDataAI, 22000)
+        self.air.generateHood(TTHoodDataAI, 22000)
 
         # Goofy Speedway
-        self.air.generateHood(TTSHoodDataAI, 23000)
+        self.air.generateHood(GSHoodDataAI, 23000)

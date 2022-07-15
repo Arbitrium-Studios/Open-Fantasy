@@ -104,10 +104,10 @@ class DistributedStartingBlockAI(DistributedObjectAI.DistributedObjectAI):
 
     def handleUnexpectedCleanup(self):
         self.notify.warning('KartPad has already been cleaned up')
-        from toontown.hood import TTSHoodDataAI
+        from toontown.hood import GSHoodDataAI
         if hasattr(simbase.air, 'hoods') and simbase.air.hoods:
             for hood in simbase.air.hoods:
-                if isinstance(hood, TTSHoodDataAI.TTSHoodDataAI):
+                if isinstance(hood, GSHoodDataAI.GSHoodDataAI):
                     hood.logPossibleRaceCondition(self)
 
     def normalExit(self):

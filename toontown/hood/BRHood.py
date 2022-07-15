@@ -5,7 +5,7 @@ from toontown.safezone import BRSafeZoneLoader
 from toontown.toonbase.ToontownGlobals import *
 
 
-class TWHood(ToonHood.ToonHood):
+class BRHood(ToonHood.ToonHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
@@ -24,10 +24,10 @@ class TWHood(ToonHood.ToonHood):
 
     def load(self):
         ToonHood.ToonHood.load(self)
-        self.parentFSM.getStateNamed('TWHood').addChild(self.fsm)
+        self.parentFSM.getStateNamed('BRHood').addChild(self.fsm)
 
     def unload(self):
-        self.parentFSM.getStateNamed('TWHood').removeChild(self.fsm)
+        self.parentFSM.getStateNamed('BRHood').removeChild(self.fsm)
         ToonHood.ToonHood.unload(self)
 
     def enter(self, *args):

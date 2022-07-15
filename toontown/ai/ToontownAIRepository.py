@@ -20,19 +20,19 @@ from toontown.distributed.ToontownDistrictAI import ToontownDistrictAI
 from toontown.distributed.ToontownDistrictStatsAI import ToontownDistrictStatsAI
 from toontown.distributed.ToontownInternalRepository import ToontownInternalRepository
 from toontown.hood import ZoneUtil
-from toontown.hood.TWHoodDataAI import TWHoodDataAI
+from toontown.hood.BRHoodDataAI import BRHoodDataAI
 from toontown.hood.BossbotHQDataAI import BossbotHQDataAI
 from toontown.hood.CSHoodDataAI import CSHoodDataAI
 from toontown.hood.CashbotHQDataAI import CashbotHQDataAI
-from toontown.hood.TTDHoodDataAI import TTDHoodDataAI
-from toontown.hood.FGHoodDataAI import FGHoodDataAI
-from toontown.hood.TDLHoodDataAI import TDLHoodDataAI
-from toontown.hood.TTSHoodDataAI import TTSHoodDataAI
-from toontown.hood.AAGHoodDataAI import AAGHoodDataAI
+from toontown.hood.DDHoodDataAI import DDHoodDataAI
+from toontown.hood.DGHoodDataAI import DGHoodDataAI
+from toontown.hood.DLHoodDataAI import DLHoodDataAI
+from toontown.hood.GSHoodDataAI import GSHoodDataAI
+from toontown.hood.GZHoodDataAI import GZHoodDataAI
 from toontown.hood.LawbotHQDataAI import LawbotHQDataAI
-from toontown.hood.TLOMHoodDataAI import TLOMHoodDataAI
-from toontown.hood.AAHoodDataAI import AAHoodDataAI
-from toontown.hood.TTCHoodDataAI import TTCHoodDataAI
+from toontown.hood.MMHoodDataAI import MMHoodDataAI
+from toontown.hood.OZHoodDataAI import OZHoodDataAI
+from toontown.hood.TTHoodDataAI import TTHoodDataAI
 from toontown.pets.PetManagerAI import PetManagerAI
 from toontown.quest.QuestManagerAI import QuestManagerAI
 from toontown.racing import RaceGlobals
@@ -252,7 +252,7 @@ class ToontownAIRepository(ToontownInternalRepository):
             (ToontownGlobals.SeaweedStreet, 1,
              1), (ToontownGlobals.LighthouseLane, 1, 1)
         )
-        self.generateHood(TTDHoodDataAI, ToontownGlobals.ToontownDocks)
+        self.generateHood(DDHoodDataAI, ToontownGlobals.ToontownDocks)
 
         # Toontown Central
         self.zoneTable[ToontownGlobals.ToontownCentral] = (
@@ -260,14 +260,14 @@ class ToontownAIRepository(ToontownInternalRepository):
              0), (ToontownGlobals.SillyStreet, 1, 1),
             (ToontownGlobals.LoopyLane, 1, 1), (ToontownGlobals.PunchlinePlace, 1, 1)
         )
-        self.generateHood(TTCHoodDataAI, ToontownGlobals.ToontownCentral)
+        self.generateHood(TTHoodDataAI, ToontownGlobals.ToontownCentral)
 
         # The Brrrgh
         self.zoneTable[ToontownGlobals.TundraWonderland] = (
             (ToontownGlobals.TundraWonderland, 1, 0), (ToontownGlobals.WalrusWay, 1, 1),
             (ToontownGlobals.SleetStreet, 1, 1), (ToontownGlobals.PolarPlace, 1, 1)
         )
-        self.generateHood(TWHoodDataAI, ToontownGlobals.TundraWonderland)
+        self.generateHood(BRHoodDataAI, ToontownGlobals.TundraWonderland)
 
         # Minnie's Melodyland
         self.zoneTable[ToontownGlobals.TheLandOfMusic] = (
@@ -276,34 +276,34 @@ class ToontownAIRepository(ToontownInternalRepository):
             (ToontownGlobals.BaritoneBoulevard, 1,
              1), (ToontownGlobals.TenorTerrace, 1, 1)
         )
-        self.generateHood(TLOMHoodDataAI, ToontownGlobals.TheLandOfMusic)
+        self.generateHood(MMHoodDataAI, ToontownGlobals.TheLandOfMusic)
 
         # Daisy Gardens
         self.zoneTable[ToontownGlobals.FloweringGrove] = (
             (ToontownGlobals.FloweringGrove, 1, 0), (ToontownGlobals.ElmStreet, 1, 1),
             (ToontownGlobals.MapleStreet, 1, 1), (ToontownGlobals.OakStreet, 1, 1)
         )
-        self.generateHood(FGHoodDataAI, ToontownGlobals.FloweringGrove)
+        self.generateHood(DGHoodDataAI, ToontownGlobals.FloweringGrove)
 
         # Chip 'n Dale's Acorn Acres
         self.zoneTable[ToontownGlobals.OutdoorZone] = (
             (ToontownGlobals.OutdoorZone, 1, 0),
         )
-        self.generateHood(AAHoodDataAI, ToontownGlobals.OutdoorZone)
+        self.generateHood(OZHoodDataAI, ToontownGlobals.OutdoorZone)
 
         # Goofy Speedway
         self.zoneTable[ToontownGlobals.ToontownStadium] = (
             (ToontownGlobals.ToontownStadium, 1, 0),
         )
-        self.generateHood(TTSHoodDataAI, ToontownGlobals.ToontownStadium)
+        self.generateHood(GSHoodDataAI, ToontownGlobals.ToontownStadium)
 
         # Donald's Dreamland
-        self.zoneTable[ToontownGlobals.TwlightDreamland] = (
-            (ToontownGlobals.TwlightDreamland, 1,
+        self.zoneTable[ToontownGlobals.DrowsyDreamland] = (
+            (ToontownGlobals.DrowsyDreamland, 1,
              0), (ToontownGlobals.LullabyLane, 1, 1),
             (ToontownGlobals.PajamaPlace, 1, 1)
         )
-        self.generateHood(TDLHoodDataAI, ToontownGlobals.TwlightDreamland)
+        self.generateHood(DLHoodDataAI, ToontownGlobals.DrowsyDreamland)
 
         # Bossbot HQ
         self.zoneTable[ToontownGlobals.BossbotHQ] = (
@@ -334,7 +334,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.zoneTable[ToontownGlobals.GolfZone] = (
             (ToontownGlobals.GolfZone, 1, 0),
         )
-        self.generateHood(AAGHoodDataAI, ToontownGlobals.GolfZone)
+        self.generateHood(GZHoodDataAI, ToontownGlobals.GolfZone)
 
         # Welcome Valley zones
         self.welcomeValleyManager.createWelcomeValleyZones()

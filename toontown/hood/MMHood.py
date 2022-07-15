@@ -5,7 +5,7 @@ from toontown.safezone import MMSafeZoneLoader
 from toontown.toonbase.ToontownGlobals import *
 
 
-class TLOMHood(ToonHood.ToonHood):
+class MMHood(ToonHood.ToonHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
@@ -24,10 +24,10 @@ class TLOMHood(ToonHood.ToonHood):
 
     def load(self):
         ToonHood.ToonHood.load(self)
-        self.parentFSM.getStateNamed('TLOMHood').addChild(self.fsm)
+        self.parentFSM.getStateNamed('MMHood').addChild(self.fsm)
 
     def unload(self):
-        self.parentFSM.getStateNamed('TLOMHood').removeChild(self.fsm)
+        self.parentFSM.getStateNamed('MMHood').removeChild(self.fsm)
         ToonHood.ToonHood.unload(self)
 
     def enter(self, *args):

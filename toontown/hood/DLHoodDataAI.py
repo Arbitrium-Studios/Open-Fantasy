@@ -7,11 +7,11 @@ from toontown.classicchars import DistributedDonaldAI
 from toontown.safezone import ButterflyGlobals
 
 
-class TDLHoodDataAI(HoodDataAI.HoodDataAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('TDLHoodDataAI')
+class DLHoodDataAI(HoodDataAI.HoodDataAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory('DLHoodDataAI')
 
     def __init__(self, air, zoneId=None):
-        hoodId = ToontownGlobals.TwlightDreamland
+        hoodId = ToontownGlobals.DrowsyDreamland
         if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)

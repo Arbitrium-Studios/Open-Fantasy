@@ -6,7 +6,7 @@ from direct.fsm import State
 from . import CharStateDatas
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
-from toontown.hood import TTCHood
+from toontown.hood import TTHood
 
 
 class DistributedDaisy(DistributedCCharBase.DistributedCCharBase):
@@ -99,5 +99,5 @@ class DistributedDaisy(DistributedCCharBase.DistributedCCharBase):
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
             if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds and isinstance(
-                    self.cr.playGame.hood, TTCHood.TTCHood):
+                    self.cr.playGame.hood, TTHood.TTHood):
                 self.diffPath = TTLocalizer.Mickey

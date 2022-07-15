@@ -1,42 +1,40 @@
 from pandac.PandaModules import *
 from . import ToonHood
-from toontown.safezone import OZSafeZoneLoader
+from toontown.town import DGTownLoader
+from toontown.safezone import DGSafeZoneLoader
 from toontown.toonbase.ToontownGlobals import *
-from toontown.racing import DistributedVehicle
 from . import SkyUtil
 
 
-class AAHood(ToonHood.ToonHood):
+class DGHood(ToonHood.ToonHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = OutdoorZone
-        self.safeZoneLoaderClass = OZSafeZoneLoader.OZSafeZoneLoader
-        self.storageDNAFile = 'phase_6/dna/storage_OZ.dna'
-        self.holidayStorageDNADict = {HALLOWEEN_PROPS: ['phase_6/dna/halloween_props_storage_OZ.dna'],
-                                      SPOOKY_PROPS: ['phase_6/dna/halloween_props_storage_OZ.dna']}
+        self.id = FloweringGrove
+        self.townLoaderClass = DGTownLoader.DGTownLoader
+        self.safeZoneLoaderClass = DGSafeZoneLoader.DGSafeZoneLoader
+        self.storageDNAFile = 'phase_8/dna/storage_DG.dna'
+        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['phase_8/dna/winter_storage_DG.dna'],
+                                      WACKY_WINTER_DECORATIONS: ['phase_8/dna/winter_storage_DG.dna'],
+                                      HALLOWEEN_PROPS: ['phase_8/dna/halloween_props_storage_DG.dna'],
+                                      SPOOKY_PROPS: ['phase_8/dna/halloween_props_storage_DG.dna']}
         self.skyFile = 'phase_3.5/models/props/TT_sky'
         self.spookySkyFile = 'phase_3.5/models/props/BR_sky'
-        self.titleColor = (1.0, 0.5, 0.4, 1.0)
-        self.whiteFogColor = Vec4(0.95, 0.95, 0.95, 1)
-        self.underwaterFogColor = Vec4(0.0, 0.0, 0.6, 1.0)
+        self.titleColor = (0.8, 0.6, 1.0, 1.0)
 
     def load(self):
         ToonHood.ToonHood.load(self)
-        self.parentFSM.getStateNamed('AAHood').addChild(self.fsm)
-        self.fog = Fog('OZFog')
+        self.parentFSM.getStateNamed('DGHood').addChild(self.fsm)
 
     def unload(self):
-        self.parentFSM.getStateNamed('AAHood').removeChild(self.fsm)
+        self.parentFSM.getStateNamed('DGHood').removeChild(self.fsm)
         ToonHood.ToonHood.unload(self)
 
     def enter(self, *args):
         ToonHood.ToonHood.enter(self, *args)
-        base.camLens.setNearFar(SpeedwayCameraNear, SpeedwayCameraFar)
 
     def exit(self):
-        base.camLens.setNearFar(DefaultCameraNear, DefaultCameraFar)
         ToonHood.ToonHood.exit(self)
 
     def skyTrack(self, task):
@@ -47,29 +45,8 @@ class AAHood(ToonHood.ToonHood):
             self.endSpookySky()
         SkyUtil.startCloudSky(self)
 
-    def setUnderwaterFog(self):
-        if base.wantFog:
-            self.fog.setColor(self.underwaterFogColor)
-            self.fog.setLinearRange(0.1, 100.0)
-            render.setFog(self.fog)
-            self.sky.setFog(self.fog)
-
-    def setWhiteFog(self):
-        if base.wantFog:
-            self.fog.setColor(self.whiteFogColor)
-            self.fog.setLinearRange(0.0, 400.0)
-            render.clearFog()
-            render.setFog(self.fog)
-            self.sky.clearFog()
-            self.sky.setFog(self.fog)
-
-    def setNoFog(self):
-        if base.wantFog:
-            render.clearFog()
-            self.sky.clearFog()
-
     def startSpookySky(self):
-        if self.sky:
+        if hasattr(self, 'sky') and self.sky:
             self.stopSky()
         self.sky = loader.loadModel(self.spookySkyFile)
         self.sky.setTag('sky', 'Halloween')
