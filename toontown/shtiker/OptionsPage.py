@@ -100,7 +100,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             text_scale=TTLocalizer.OPoptionsTab,
             text_align=TextNode.ALeft,
             text_pos=(
-                0.01,
+                0.05,
                 0.0,
                 0.0),
             image=gui.find('**/tabs/polySurface1'),
@@ -115,7 +115,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             image_scale=(
                 0.033,
                 0.033,
-                0.035),
+                0.032),
             image_color=normalColor,
             image1_color=clickColor,
             image2_color=rolloverColor,
@@ -139,13 +139,13 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             text_scale=TTLocalizer.OPoptionsTab,
             text_align=TextNode.ALeft,
             text_pos=(
-                -0.035,
+                0.017,
                 0.0,
                 0.0),
             image=gui.find('**/tabs/polySurface2'),
             image_pos=(
-                0.12,
-                1,
+                0.10,
+                -1.0,
                 -0.91),
             image_hpr=(
                 0,
@@ -154,7 +154,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             image_scale=(
                 0.033,
                 0.033,
-                0.035),
+                0.028),
             image_color=normalColor,
             image1_color=clickColor,
             image2_color=rolloverColor,
@@ -176,12 +176,12 @@ class OptionsPage(ShtikerPage.ShtikerPage):
                                             text_scale=TTLocalizer.OPoptionsTab,
                                             text_align=TextNode.ALeft,
                                             text_pos=(
-                                                 -0.05, 0.0, 0.0),
+                                                 -0.07, 0.0, 0.0),
                                              image=gui.find('**/tabs/polySurface2'),
                                              image_pos=(0.12, 1, -0.91),
                                              image_hpr=(
                                                  0, 0, -90),
-                                             image_scale=(0.033, 0.033, 0.042),
+                                             image_scale=(0.033, 0.035, 0.045),
                                              image_color=normalColor,
                                              image1_color=clickColor,
                                              image2_color=rolloverColor,
@@ -1106,8 +1106,7 @@ class ExtraOptionsTabPage(DirectFrame):
     def __init__(self, parent=aspect2d):
         self._parent = parent
         DirectFrame.__init__(
-            self, parent=self._parent, relief=None, pos=(
-                0.0, 0.0, 0.0), scale=(
+            self, parent=self._parent, relief=None, pos=(0, 0, 0), scale=(
                 1.0, 1.0, 1.0))
         self.load()
         return
@@ -1125,6 +1124,8 @@ class ExtraOptionsTabPage(DirectFrame):
          buttonbase_xcoord = 0.35
          buttonbase_ycoord = 0.45
          button_image_scale = (0.7, 1, 1)
+         controls_button_image_scale = (1, 1, 1)
+         rich_presence_image_scale = (1.5, 1, 1)
          button_textpos = (0, -0.02)
          options_text_scale = 0.052
          disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
@@ -1136,7 +1137,7 @@ class ExtraOptionsTabPage(DirectFrame):
                                                  pos=(leftMargin, 0, textStartHeight))
          self.CustomControls_button = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'),
                                                    guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')),
-                                                   image_scale=button_image_scale,
+                                                   image_scale=controls_button_image_scale,
                                                    text='Custom Controls',
                                                    text_scale=options_text_scale,
                                                    text_pos=button_textpos,
@@ -1154,7 +1155,7 @@ class ExtraOptionsTabPage(DirectFrame):
                     guiButton.find("**/QuitBtn_DN"),
                     guiButton.find("**/QuitBtn_RLVR"),
                     ),
-             image_scale=button_image_scale,
+             image_scale=rich_presence_image_scale,
              text="Toggle Rich Presence",
              text_scale=options_text_scale,
              text_pos=button_textpos,
@@ -1201,7 +1202,7 @@ class ExtraOptionsTabPage(DirectFrame):
             self.richPresenceLabel['text'] = ['Discord Rich Presence: On']
             self.richPresenceButton['text'] = ['Toggle Rich Presence off']
         else:
-            self.richPresenceLabel['text'] = ['Discord Rich Presence : Off']
+            self.richPresenceLabel['text'] = ['Discord Rich Presence: Off']
             self.richPresenceButton['text'] = ['Toggle Rich Presence on']
 
     BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'

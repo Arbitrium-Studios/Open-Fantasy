@@ -291,7 +291,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         )
         self.generateHood(OZHoodDataAI, ToontownGlobals.AcornAcres)
 
-        # Goofy Speedway
+        # Toontropolis Stadium
         self.zoneTable[ToontownGlobals.ToontropolisStadium] = (
             (ToontownGlobals.ToontropolisStadium, 1, 0),
         )
