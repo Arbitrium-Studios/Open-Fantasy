@@ -206,9 +206,9 @@ class MagicWord:
                     validTargets -= 1
                     continue
                 targetAccess = OTPGlobals.AccessLevelDebug2Name.get(
-                    OTPGlobals.AccessLevelInt2Name.get(toon.getStaffAccess()))
+                    OTPGlobals.AccessLevelInt2Name.get(toon.getAccessLevel()))
                 invokerAccess = OTPGlobals.AccessLevelDebug2Name.get(
-                    OTPGlobals.AccessLevelInt2Name.get(invoker.getStaffAccess()))
+                    OTPGlobals.AccessLevelInt2Name.get(invoker.getAccessLevel()))
                 return "You don't have a high enough Access Level to target {0}! Their Access Level: {1}. Your Access Level: {2}.".format(
                     name, targetAccess, invokerAccess)
 
@@ -224,8 +224,8 @@ class MagicWord:
             # event
             if game.process == 'ai':
                 self.air.writeServerEvent('magic-word-excuted',
-                                          self.invokerId, invoker.getStaffAccess(),
-                                          toon.getStaffAccess(),
+                                          self.invokerId, invoker.getAccessLevel(),
+                                          toon.getAccessLevel(),
                                           self.__class__.__name__,
                                           executedWord)
 
@@ -325,7 +325,7 @@ class SetHP(MagicWord):
 
 
 class SetGMIcon(MagicWord):
-    aliases = ['gm', 'gmicon', 'setgm']
+    aliases = ['gm', 'gmicon', 'setgm', 'icons', 'setIcons', 'icon', 'staffIcon', 'si']
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     arguments = [("id", int, True)]
     accessLevel = 'MODERATOR'
@@ -336,12 +336,12 @@ class SetGMIcon(MagicWord):
         if not 0 <= id <= 8:
             return "Invalid GM Icon given."
 
-        staffAccess = toon.getStaffAccess()
-        if id > 3 and staffAccess < 600:
+        AccessLevel = toon.getAccessLevel()
+        if id > 3 and AccessLevel < 600:
             return "Your access level is too low to use this GM icon."
         else:
-            if (staffAccess < 400 and id > 2) or (
-                    staffAccess < 500 and id > 3):
+            if (AccessLevel < 400 and id > 2) or (
+                    AccessLevel < 500 and id > 3):
                 return "Your access level is too low to use this GM icon."
 
         if toon.isGM() and id != 0:
@@ -360,7 +360,7 @@ class ToggleGM(MagicWord):
     accessLevel = 'COMMUNITY'
 
     def handleWord(self, invoker, avId, toon, *args):
-        access = invoker.getStaffAccess()
+        access = invoker.getAccessLevel()
         if invoker.isGM():
             invoker.b_setGM(0)
             return "You have disabled your GM icon."
@@ -727,7 +727,12 @@ class allstuff(MagicWord):
         'restockinv',
         'maxinv',
         'maxinventory',
-        'restock']
+        'restock',
+        'restockall',
+        'inventoryRestock',
+        'invRestock',
+        'inventoryall',
+        'inventory']
     desc = 'Gives target all the inventory they can carry.'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
@@ -739,7 +744,7 @@ class allstuff(MagicWord):
 
 
 class nostuff(MagicWord):
-    aliases = ['emptyinventory', 'emptyinv', 'zeroinv', 'zeroinventory']
+    aliases = ['emptyinventory', 'emptyinv', 'zeroinv', 'zeroinventory', 'inventoryzero']
     desc = 'Gives target all the inventory they can carry.'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
@@ -752,7 +757,7 @@ class nostuff(MagicWord):
 
 class rich(MagicWord):
     desc = 'Gives the target full bank jellybeans'
-    aliases = ['maxjbs', 'maxjellybeans']
+    aliases = ['maxjbs', 'maxjellybeans', 'maxbankjellybeans']
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
 
@@ -766,7 +771,7 @@ class rich(MagicWord):
 class SetMoney(MagicWord):
     desc = "Sets the target's carrying jellybeans."
     advancedDesc = "Sets the target's carrying jellybeans. If no args are given give max beans."
-    aliases = ['setjellybeans', 'jellybeans', 'setjbs', ]
+    aliases = ['setjellybeans', 'jellybeans', 'setjbs', 'jbs']
     arguments = [('money', int, False, 250)]
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
@@ -927,7 +932,7 @@ class SetTrophyScore(MagicWord):
 
 
 class SetCheesyEffect(MagicWord):
-    aliases = ['setce', 'ce', 'effect', 'cheesyeffect']
+    aliases = ['setce', 'ce', 'effect', 'cheesyeffect', 'seteffect']
     desc = 'Sets the cheesy effect of the target.'
     advancedDesc = """These are the list of effects:Normal, BigHead,
      SmallHead, BigLegs,
@@ -1089,7 +1094,7 @@ class FinishTutorial(MagicWord):
 
 class FinishQuests(MagicWord):
     desc = 'Finishes quests magically.'
-    aliases = ['finishtasks']
+    aliases = ['finishtasks', 'finishToonTasks']
     accessLevel = 'DEVELOPER'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
 
@@ -1099,7 +1104,11 @@ class FinishQuests(MagicWord):
 
 
 class FinishQuest(MagicWord):
-    aliases = ['finishtask']
+    aliases = [
+            'finishtask',
+            'finishToonTask'
+            'skipTask',
+            'skipQuest']
     desc = 'Finishes specific quest magically.'
     accessLevel = 'DEVELOPER'
     arguments = [('index', int, True)]
@@ -1359,7 +1368,7 @@ class GetBuildings(MagicWord):
 
 
 class GetInvasion(MagicWord):
-    aliases = ['getsuitinvasion', 'getcoginvasion']
+    aliases = ['getsuitinvasion', 'getcoginvasion', 'setsuitinvasion', 'setcoginvasion']
     desc = 'Get the current invasion thats happening.'
     accessLevel = 'COMMUNITY'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
@@ -1587,6 +1596,7 @@ class DoMinigame(MagicWord):
 
         return response
 
+# TO DO AllSummons MagicWord command to get ALL summons in your Shtiker Book.
 
 class SummonSuit(MagicWord):
     aliases = ['call', 'summoncog']
@@ -1669,6 +1679,7 @@ class TeleportAll(MagicWord):
         av.b_setTeleportAccess(ToontownGlobals.HoodsForTeleportAll)
         return 'You can now teleport anywhere.'
 
+# TODO God Mode MagicWord command to become Immortal to damage, have unlimited gags, have unlimited unites, fires, etc.!
 
 class ToggleImmortality(MagicWord):
     aliases = ['immortal', 'toggleimmortal', 'invincible', 'toggleinvincible']
@@ -2149,7 +2160,7 @@ class ToggleWireframe(MagicWord):
 
 
 class ToggleRun(MagicWord):
-    aliases = ["run", 'sprint']
+    aliases = ["run", 'sprint', 'fast', 'speed']
     desc = "Toggles run mode, which gives you a faster running speed."
     advancedDesc = "This Magic Word will toggle Run Mode. When this mode is active, the target can run around at a " \
                    "very fast speed. This running speed stacks with other speed multipliers, such as the one given" \
