@@ -6,12 +6,12 @@ from pypresence import Presence
 class DiscordRPC(object):
 
     docksList=["oneDocks", "twoDocks", "threeDocks"]
-    toontown-docks=random.choice(docksList)
+    toontownDocks=random.choice(docksList)
     zone2imgdesc = { # A dict of ZoneID -> An image and a description
-        1000: [toontown-docks, "In Toontropolis Docks"],
-        1100: [toontown-docks, "On Barnacle Boulevard"],
-        1200: [toontown-docks, "On Seaweed Street"],
-        1300: [toontown-docks, "On Lighthouse Lane"],
+        1000: [toontownDocks, "In Toontropolis Docks"],
+        1100: [toontownDocks, "On Barnacle Boulevard"],
+        1200: [toontownDocks, "On Seaweed Street"],
+        1300: [toontownDocks, "On Lighthouse Lane"],
 
         2000: ["toontown-central", "In Toontropolis Central"],
         2100: ["toontown-central", "On Silly Street"],
