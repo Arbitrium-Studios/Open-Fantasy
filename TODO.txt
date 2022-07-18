@@ -543,6 +543,21 @@ The Road to Fantasy:
     + Remove the limit on Phrases that you can order
     + Add a Trading Cards Side Quest that you can take up early in the game where you can collect trading cards about every character in the game and return them to Librarian Larry in the Toontown Library and when you return one, you can go to the library and go to the shelves to learn about the character (OR another way the story could go is Librarian Larry looses them in the storm and the cards go all around the continent of Toontown and he rewards you with being able to keep the trading cards+ (You can look at them at any time by loading up your smartphone and opening the app to look at them or opening up your Shtiker Book and going to the Trading Card page where your can click on the trading card and learn about the person thath way)) and either way the mission goes, there will be more series to the trading cards being made and you have to go collect them
     + Create readable stories about the history of Toontown that you can read in the Toontown Library
-    + Add collectable items (like cog pieces)
+    + Add Collectables system in the game
+        + These collectibles would spawn around the the game's areas.
+        + You should be able to see what you've collected in the Inventory page of your Shtiker Book.
+        + You should be able to sell the items for Jellybeans.
+        + Each item has a rarity scale
+        + There should be a quest to get a crafting table, enchantment table, a Cauldron, and more which allow you to combine your items into a potion or something to help Amplify the amount of damage your gags can do.
+        + In this update, add a new street which functions as the summit to the Mountains
+        + The area will be larger than most so chunk loading will need to be implemented.
+        + This update should also add Human Toons stylized towards the game.
+            + This new Human Toon will look like an Anime Toon.
+        + The new species will be used when adding a new NPC to the game
+            + This NPC will be called Aurora Lovelight (yes the same one from the Magic Commands)
+                + This will introduce Potions to the game
+                    + Potions will allow your attacks to do more damage, add Resistance to your Toon, etc.
+                    + Later on, this is the same way we'll introduce Elemental Abilities.
+
 
     + More soon!
