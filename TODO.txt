@@ -559,5 +559,4 @@ The Road to Fantasy:
                     + Potions will allow your attacks to do more damage, add Resistance to your Toon, etc.
                     + Later on, this is the same way we'll introduce Elemental Abilities.
 
-
     + More soon!
