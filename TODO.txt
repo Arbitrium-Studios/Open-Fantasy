@@ -582,7 +582,6 @@ The Road to Fantasy:
             + These Cogs cannot be fired.
             + There should be mini-bosses at the end of each playground.
         + Add Specialist Inquisibots for when the Cogs take over
-    + Remove the Astron Database
     + Make Thought Bubbles refresh every 5 minutes so whenever someone enters the area, after the message has been sent, so you don't have to resend it.
     + Readjust the platforms on Trolley Games so they're easier to jump onto like in Cog Escape.
     + Remove Gender
