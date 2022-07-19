@@ -63,7 +63,7 @@ The Road to Fantasy:
         + More Options for playing Toontown Fantasy like Multiplayer and friend servers!
         + Add Toontown Map Update.
 
-    Wishlist:
+    Wishlist and Ideas:
 
         + Move the spawn area of the HQ to a safe place instead of in the Cog's way.
         + When hovering on a chat box that's behind another one, it should bring that one forward
@@ -153,9 +153,20 @@ The Road to Fantasy:
         + Each Building in Toontown should have a custom interior to personalize the game a bit more.
         + Replace all Trading Card Images with redrawn versions of them.
         + A Create A Toon Update:
-            + Do my own take on the Frog, Penguin, Deer, Gator, Cow, Chipmunk, Chicken, Fox, Parrot, Goat, Beaver, Racoon, Bat, Kiwi, Kangaroo, Koala, Armadillo, Spider, Snake, Turkey, Sheep, Hedgehog, Human Toons, and more species!
+            + Do my own take on the Frog, Penguin, Deer, Gator, Cow, Chipmunk, Chicken, Fox, Parrot, Goat, Beaver, Racoon, Bat, Kiwi, Kangaroo, Koala, Armadillo, Spider, Snake, Turkey, Sheep, Hedgehog, Human Toons, Tyrannosaurus Rex, Ankylosaurus, Stegosaurus, Velociraptor, Sabretoothed Tiger, Sloth, Mammoths, Turtles, Gold Fish, Axolotl, Olm, dragons, and more species!
+                + Each Species should have their own abilities:
+                    + Dragons, Bats, and other bird-like species can glide
+                    + Dinosaurs can roar
+                    + Spiders can sprint faster
+                    + Snakes can swallow an enemy whole
+                    + Gators can Bite
+                    + Horses can gallop
+                    + Chickens and Turkey's can peck
+                    + Sabretoothed Tiger can roar and bite
+                    + And more..
+            + Revamp the species selection so we don't have to cycle through.
+            + Add options for various lengths and styles of fur.
             + The Cat, Mouse, Dog, Pig, Horse, Bear, etc. Species should all get a revamp
-                + Ask permission from ..Flameout56..#1335 to model the frog head after his concept.
             + Add more Toon body variations including chest sizes for all Toons (None, Small, Medium, Large) to mimick DuckTales.
             + Add more leg types for height, width, etc.
             + Separate the ears from the Toon's heads.
@@ -558,5 +569,10 @@ The Road to Fantasy:
                 + This will introduce Potions to the game
                     + Potions will allow your attacks to do more damage, add Resistance to your Toon, etc.
                     + Later on, this is the same way we'll introduce Elemental Abilities.
+    + Work with Little Cat to add in-game Toonbook functionality to share your Achievements and such with other creators accessible via a newly improved News Section just for the Toontown Fantasy group.
+    + Add an in-game recorder activated by Pressing Shift+Screenshot_Button:
+        + The video should be located in the 'Users/Insert_User/Media/Videos'
+        + The videos should be able to be watched in-game on your TVs at your estate to provide functionality to the game.
+        + You should be able to export the video to YouTube if you have your YouTube Channel linked.
 
     + More soon!
