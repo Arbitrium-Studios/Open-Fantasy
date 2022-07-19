@@ -105,7 +105,9 @@ The Road to Fantasy:
         + Allow us to see the sky in the Factory
         + Make the lamps, building, moon, and other stuff emit light during the night and the sun emit light during the day
         + Add the ability to choose what you say to the NPCs to enhance gameplay
-        + Add even more language support
+        + Add a language button to the Log In Screen
+            + Add the major languages including Spanish, French, Portugese, etc.
+                + After that's done, add cusom languages like Atlantean, Moorse Code, and so on.
         + Add pupil customizations and colorizations with multi-colored pupils
         + Add species pros and cons for a more strategic create-a-toon process
         + Have perks for every type of clothing except for the plain clothing
@@ -203,7 +205,7 @@ The Road to Fantasy:
         + An Estate Overhaul Update:
             + Add lamp posts to the exterior Estates
             + Lights to hang up outside your house for Christmas and beyond.
-            + Change the mechanics of the estate’s cannon game to match that of the Party’s cannon game
+            + Change the mechanics of the estate's cannon game to match that of the Party's cannon game
             + The ability to use the Radio, Television, Piano, chairs, couches, beds, lamps, and a few others as per their purpose
             + The ability to buy and rent bigger and better houses with various areas using Jellybeans
             + Add working lighters to light the fireplaces.
@@ -213,7 +215,7 @@ The Road to Fantasy:
             + Christmas and Halloween decorations for indoor and outdoor
             + Reimplement back the Gardening Game
             + Add the ability to build your own house on your own plot of land
-            + Add bathrooms even though they’d serve no purpose other than realism.
+            + Add bathrooms even though they'd serve no purpose other than realism.
             + The Estate should have a Tunnel that's blocked off.
             + Implement the TTO Estate Exterior Options
                 + Each Estate should be seasonal like on Toontown Rewritten!
@@ -455,9 +457,9 @@ The Road to Fantasy:
                     + Haystack Highway
                     + Silo Street
             + Toontown Stadium:
-                + Add a Battle Royalet trolley game located in Toontown Stadium where you try to run around the map to heal your teammates (who spawn randomly around the map) and green the other team before the other team heals their team member OR before time runs out (Your Laff is changed to a pre-set amount when the match begins and is reset back to the user’s original laff after the match is over)
+                + Add a Battle Royalet trolley game located in Toontown Stadium where you try to run around the map to heal your teammates (who spawn randomly around the map) and green the other team before the other team heals their team member OR before time runs out (Your Laff is changed to a pre-set amount when the match begins and is reset back to the user's original laff after the match is over)
                 + You fight against AI in singleplayer mode.
-                + Add a Capture the Flag Mini Game around the playground where you have to use your sound to stun the enemy team while you try to capture the enemy team’s flag before time runs out OR before the other team gets your flag!
+                + Add a Capture the Flag Mini Game around the playground where you have to use your sound to stun the enemy team while you try to capture the enemy team's flag before time runs out OR before the other team gets your flag!
                 + Around the edges of the Stadium, put the Race Track Pads and the Golf Carts + Tunnels to indicate where the activities will be held.
                 + Activating a Mini-Game is like how you do it in a Party.
                 + Add sand pits where you can play Volley Ball with AIs.
@@ -503,10 +505,10 @@ The Road to Fantasy:
         + Reimplement the Taunt Emotion/Animation
         + Add a variation of the Surpised emote that can randomly play which uses the Surprise Emote from the Toontown Online trailer when the Toons see the Cogs.
         + In place where the Emoticons would be in TTR, add an Emoji section to the Speedchat which allows you use emojis that are premade by our artist(s).
-            + The Emojis should be specific to the user’s species
+            + The Emojis should be specific to the user's species
     + Add the ability for Cogs to Promote Mid-Battle when fighting along side a Manager Cog.
     + When the Manager Cog is defeated, it should turn into a v2.0 Cog, when you defeat it again, it's should turn into a SkeleCog like a v2.0 before being defeated.
-    + Make being a specific Toon have specific pros and cons to influence the user’s choice when creating a Toon (Horses are fast and strong; Cats can see better in the dark, can run faster (but not faster than horses), etc.
+    + Make being a specific Toon have specific pros and cons to influence the user's choice when creating a Toon (Horses are fast and strong; Cats can see better in the dark, can run faster (but not faster than horses), etc.
     + Add New 3DS, New 2DS, Nintendo Switch, Xbox 360, Xbox One, Xbox Series, Playstation 4, Playstation 5, and mobile (only recent devices) support as well as Windows, Mac, Linux, and Chromebook support
     + Add support for multiple languages that were included in TTO. Including English, Spanish, German, Portugese, Japanese, French, MAYBE Latin, and more!
     + Upgrade the Clothing models so they look more natural and less like it was in the 90s.
@@ -520,15 +522,15 @@ The Road to Fantasy:
     + Add jeans, Jirts, Jorts, and everything J.
     + Add ankle-high dresses and skirts
     + Add one-piece clothing items such as dresses, jumpsuits, costumes, and more!
-    + Make Jetpacks actually work like they’re supposed to irl
+    + Make Jetpacks actually work like they're supposed to irl
     + Make backpacks actually give you more storage space
     + Add coats, winter hats, winter boots, jackets, trench coats, etc.
     + Add Credit Cards and maybe Debit Cards to Toontown that function exact purpose that Credit/Debit Cards serve in real life
     + Make bags of Jellybeans collectible around Toontown which gives you a certain amount of Jellybeans
     + Trolley Game Additions:
-        + Add a Battle Royalet trolley game located in Toontown Stadium where you try to run around the map to heal your teammates (who spawn randomly around the map) and green the other team before the other team heals their team member OR before time runs out (Your Laff is changed to a pre-set amount when the match begins and is reset back to the user’s original laff after the match is over)
+        + Add a Battle Royalet trolley game located in Toontown Stadium where you try to run around the map to heal your teammates (who spawn randomly around the map) and green the other team before the other team heals their team member OR before time runs out (Your Laff is changed to a pre-set amount when the match begins and is reset back to the user's original laff after the match is over)
             + You fight against AI in singleplayer mode.
-            + Add a Capture the Flag Trolley Game where you have to use your sound to stun the enemy team while you try to capture the enemy team’s flag before time runs out OR before the other team gets your flag!
+            + Add a Capture the Flag Trolley Game where you have to use your sound to stun the enemy team while you try to capture the enemy team's flag before time runs out OR before the other team gets your flag!
         + Red Light, Green Light Trolley Game
         + Squid Game Trolley Game
         + Reimplement Photo Fun if it isn't already implemented.
@@ -574,5 +576,11 @@ The Road to Fantasy:
         + The video should be located in the 'Users/Insert_User/Media/Videos'
         + The videos should be able to be watched in-game on your TVs at your estate to provide functionality to the game.
         + You should be able to export the video to YouTube if you have your YouTube Channel linked.
+    + Add Specialist Cogs
+        + These Specialist Cogs should cheat
+            + They should be powerful with strong resistance.
+            + These Cogs cannot be fired.
+            + There should be mini-bosses at the end of each playground.
+        + Add Specialist Inquisibots for when the Cogs take over
 
     + More soon!
