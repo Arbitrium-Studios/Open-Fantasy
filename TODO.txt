@@ -155,10 +155,10 @@ The Road to Fantasy:
         + Each Building in Toontown should have a custom interior to personalize the game a bit more.
         + Replace all Trading Card Images with redrawn versions of them.
         + A Create A Toon Update:
-            + Do my own take on the Frog, Penguin, Deer, Gator, Cow, Chipmunk, Chicken, Fox, Parrot, Goat, Beaver, Racoon, Bat, Kiwi, Kangaroo, Koala, Armadillo, Spider, Snake, Turkey, Sheep, Hedgehog, Human Toons, Tyrannosaurus Rex, Ankylosaurus, Stegosaurus, Velociraptor, Sabretoothed Tiger, Sloth, Mammoths, Turtles, Gold Fish, Axolotl, Olm, dragons, and more species!
+            + Do my own take on the Frog, Penguin, Deer, Gator, Cow, Chipmunk, Chicken, Fox, Parrot, Goat, Beaver, Racoon, Bat, Kiwi, Kangaroo, Koala, Armadillo, Spider, Snake, Turkey, Sheep, Hedgehog, Human Toons, Tyrannosaurus Rex, Ankylosaurus, Stegosaurus, Velociraptor, Sabretoothed Tiger, Sloth, Mammoths, Turtles, Gold Fish, Axolotl, Olm, dragons, Dodo, and more species!
                 + Each Species should have their own abilities:
                     + Dragons, Bats, and other bird-like species can glide
-                    + Dinosaurs can roar
+                    + Dinosaurs can roar which stuns the Cogs for a few rounds
                     + Spiders can sprint faster
                     + Snakes can swallow an enemy whole
                     + Gators can Bite
@@ -582,5 +582,74 @@ The Road to Fantasy:
             + These Cogs cannot be fired.
             + There should be mini-bosses at the end of each playground.
         + Add Specialist Inquisibots for when the Cogs take over
+    + Remove the Astron Database
+    + Make Thought Bubbles refresh every 5 minutes so whenever someone enters the area, after the message has been sent, so you don't have to resend it.
+    + Readjust the platforms on Trolley Games so they're easier to jump onto like in Cog Escape.
+    + Remove Gender
+    + The more buildings on a street, the smoggier it gets, and the harder it is to see thus further incentivizing Toons to fight back.
+    + Make Cheesy Effect Toontasks Permanent
+    + Disable Cheesy Effects in Mints, Factories, bosses, etc.
+    + Replace Toon Heads with Cog Heads when your Toon is in a suit.
+    + Remove time limits on Catalog Items.
+    + Add disabled buttons that enable when you have 6 Toons already created, said buttons would change between Pick A Toon Menus.
+        + There should be different styles of the Pick A Toon Menus.
+    + Add more Holiday themed Menus like for Christmas, Halloween, etc.
+    + Adjust the amount of Cog Merits you need to get a promotion for your suits.
+    + Each Cog should have a weakness to a specific Gag.
+    + When we remove Gender, we should be able to buy different styles for Wardrobes and Accessory Trunks
+    + Add one more upgrade for Wardobes and Accessory Trunk for unlimited space.
+    + Add an Other Option to the Report Options with a field to type in.
+    + Add Trolling to the list of reportable options.
+    + Add Health Bars to all bosses.
+    + Add "I'm out of Insert_Attack_Here" for use in the speedchat menu when you're out of Gags, Unites, etc.
+    + Add Verification menu for Resource Packs
+    + Nerf Toons Hit and Cogs Miss to be Accuracy Boost and Decreases.
+    + Add i-card to SOS Cards to let us know what they do.
+    + Add a Near-By Toons menu to the list of Menus in your Friends menu.
+    + Optimize the code as much as we can for the Friends Menu so we know who's where.
+    + Add code for Damage Over Time to the game and add it to Cogs who have Fired abilities and such.
+    + Make it so the floor sound effects are dynamic and change depending on what your Toon steps on.
+    + Add more animations like a T-Pose, Dab, etc.
+    + Add CyberCogs
+    + When you're in game, have the ability to Ask to Join a server for those using a custom server.
+    + Make props always animated.
+    + Add the ability to choose how you want your Speedchat to be formatted.
+    + NPC nametags to learn more about an NPC.
+    + Inverted Shaders for those using darkmode.
+    + Implement Speedchat Thought Bubbles via right clicking on a Speedchat button.
+    + Once we have a live version, there should be a mobile launcher for mobile.
+    + When adding the Content Pack Chooser, you should be able to toggle one or more on or off.
+    + Add Statistic Page.
+        + This should include amount of time played.
+        + Fastest and Slowest time taken down a Cog Dominion.
+    + Replace the lighthouse on Lighthouse Lane with a Cog Building that goes on forever that's just for training.
+    + Hotkey to move dialog along
+    + Add sliders for Chat Dialog, Music, and Sound Effects.
+    + Make any crash in the game not close the game.
+    + Hot Tubs
+    + Allow Doodles to wear Accessories.
+    + Add as many open-source Cogs as we can and are allowed to use
+        + Governaughts as Governbots
+    + Make as many shorts into skirts as we can.
+    + Add Cognation as areas outside of Toontropolis
+    + Add Render Distance
+    + The ability to gift or sell clothing and accessories.
+    + Gag Save and Load Presets
+    + Add playground maps
+    + Add Toodos, the game Dos but Toonified.
+    + Cog Streets
+    + Allow sprinting for a short period of time.
+        + The cooldown period can be lessened by upgrading your Toon's stats.
+    + Difficulty Scaling in Multiplayer Games
+    + Revamp building interiors to be customized to the NPC's likings.
+    + A District File that automatically updates when you change district for Streamers.
+    + The ability to move houses to a different color.
+    + A Pride Month clothing line.
+    + Add stairs to tunnels
+    + The ability to make Clans and Groups
+    + An invasion tracker built into the District Page of the Shtiker Book
+    + Add more Estate Exterior Types.
+    + Client Sided Jukebox's around the playgrounds
+    + Implement the Scrapped Gags from Toontown Online through SOS Cards
 
     + More soon!
