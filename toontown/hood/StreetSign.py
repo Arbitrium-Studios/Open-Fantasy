@@ -11,8 +11,6 @@ class StreetSign(DistributedObject.DistributedObject):
     StreetSignBaseDir = config.GetString('street-sign-base-dir', 'sign')
     StreetSignUrl = base.config.GetString(
         'street-sign-url', 'https://www.playerzerostudios.com/assets/phase_4/maps/')
-
->>>>>>> Stashed changes
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
