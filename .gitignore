@@ -32,3 +32,4 @@ user/resources/default/phase_2/
 toontown/installer
 *.lnk
 *.code-workspace
+build/
