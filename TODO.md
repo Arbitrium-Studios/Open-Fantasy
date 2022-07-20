@@ -617,5 +617,6 @@
     > In Bosses, if there are 4 Toons, there should be 1 battle going on.
     > Like in Wizard101, for a set period of time, add the ability to return to a dungeon if you die.
     > Remove the ability to leave during the in-between rounds of the Boss battles.
+    > When a Cog Building falls, instead of squishing the trees, it should make the tree's leaves fall off because of the nearby smog.
 
     > More soon!
