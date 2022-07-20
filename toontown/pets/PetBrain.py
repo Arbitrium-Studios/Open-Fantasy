@@ -1,6 +1,6 @@
 """PetBrain module: contains the PetBrain class"""
 
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.otpbase.PythonUtil import weightedChoice, randFloat, Functor
 from otp.otpbase.PythonUtil import list2dict
 from direct.showbase import DirectObject

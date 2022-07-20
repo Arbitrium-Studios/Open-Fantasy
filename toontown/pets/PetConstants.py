@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.otpbase.PythonUtil import Enum
 from direct.showbase.PythonUtil import invertDictLossless
 import math

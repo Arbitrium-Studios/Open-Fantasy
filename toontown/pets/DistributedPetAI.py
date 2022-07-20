@@ -1,6 +1,6 @@
 """DistributedPetAI module: contains the DistributedPetAI class"""
 
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.otpbase.PythonUtil import weightedChoice, randFloat, lerp
 from otp.otpbase.PythonUtil import contains, list2dict, clampScalar
 from direct.directnotify import DirectNotifyGlobal

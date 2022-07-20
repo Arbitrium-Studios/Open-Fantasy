@@ -5,7 +5,7 @@ from direct.distributed.ClockDelta import *
 from otp.otpbase.PythonUtil import Functor
 from otp.otpbase.PythonUtil import StackTrace
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.fsm import FSM
 from direct.fsm import ClassicFSM
 from direct.fsm import State

@@ -1,12 +1,12 @@
 """DistributedMazeGame module: contains the DistributedMazeGame class"""
 
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from direct.interval.IntervalGlobal import *
 from .DistributedMinigame import *
 from .MazeSuit import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.otpbase.PythonUtil import *
 from .OrthoWalk import *
 from otp.otpbase.PythonUtil import lerp

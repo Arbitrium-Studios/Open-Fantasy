@@ -44,7 +44,7 @@ cd ../
 
 :main
 if %INPUT%==1 (
-    "C:\Panda3D-1.11.0-x64\python\ppython.exe" -m toontown.launcher.QuickStartLauncher
+    "C:\Panda3D-1.11.0-x64\python\python.exe" -m toontown.launcher.QuickStartLauncher
 )
 
 pause

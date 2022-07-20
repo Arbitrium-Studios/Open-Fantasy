@@ -7,7 +7,7 @@ import datetime
 #from sets import Set
 
 # panda3d imports
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.otpbase import PythonUtil
 from direct.task import Task
 

@@ -1,6 +1,6 @@
 """Avatar Module: contains the avatar class"""
 
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.otp import Nametag, NametagGroup
 from panda3d.otp import CFSpeech, CFThought, CFTimeout, CFPageButton, CFNoQuitButton, CFQuitButton
 from otp.otpbase import OTPGlobals
