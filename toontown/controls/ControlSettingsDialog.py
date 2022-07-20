@@ -53,7 +53,7 @@ class ControlSettingsDialog(DirectFrame):
         self.resetToDefaults = DirectButton(parent=self, relief=None, text=TTLocalizer.ControlSettingsResetToDefault,
                                    image=(guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'),
                                           guiButton.find('**/QuitBtn_RLVR')),
-                                   image_scale=(1.5, 1, 1), text_scale=TTLocalizer.DSDcancel ,
+                                   image_scale=(1.7, 1, 1), text_scale=TTLocalizer.DSDcancel ,
                                    text_pos=TTLocalizer.DSDcancelPos , pos=(0.42, 0, -0.53), command=self.__resetToDefault)
 
         self.infoLabel = DirectLabel(parent=self, relief=None, text=TTLocalizer.ControlSettingsInfoLabelDefault,

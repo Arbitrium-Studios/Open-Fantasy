@@ -100,7 +100,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             text_scale=TTLocalizer.OPoptionsTab,
             text_align=TextNode.ALeft,
             text_pos=(
-                0.05,
+                0.01,
                 0.0,
                 0.0),
             image=gui.find('**/tabs/polySurface1'),
@@ -139,7 +139,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             text_scale=TTLocalizer.OPoptionsTab,
             text_align=TextNode.ALeft,
             text_pos=(
-                0.017,
+                0.05,
                 0.0,
                 0.0),
             image=gui.find('**/tabs/polySurface2'),
@@ -176,12 +176,12 @@ class OptionsPage(ShtikerPage.ShtikerPage):
                                             text_scale=TTLocalizer.OPoptionsTab,
                                             text_align=TextNode.ALeft,
                                             text_pos=(
-                                                 -0.07, 0.0, 0.0),
+                                                 -0.05, 0.0, 0.0),
                                              image=gui.find('**/tabs/polySurface2'),
                                              image_pos=(0.12, 1, -0.91),
                                              image_hpr=(
                                                  0, 0, -90),
-                                             image_scale=(0.033, 0.035, 0.045),
+                                             image_scale=(0.033, 0.033, 0.042),
                                              image_color=normalColor,
                                              image1_color=clickColor,
                                              image2_color=rolloverColor,
@@ -1106,7 +1106,8 @@ class ExtraOptionsTabPage(DirectFrame):
     def __init__(self, parent=aspect2d):
         self._parent = parent
         DirectFrame.__init__(
-            self, parent=self._parent, relief=None, pos=(0, 0, 0), scale=(
+            self, parent=self._parent, relief=None, pos=(
+                0.0, 0.0, 0.0), scale=(
                 1.0, 1.0, 1.0))
         self.load()
         return
@@ -1126,6 +1127,7 @@ class ExtraOptionsTabPage(DirectFrame):
          button_image_scale = (0.7, 1, 1)
          controls_button_image_scale = (1, 1, 1)
          rich_presence_image_scale = (1.5, 1, 1)
+         button_image_scale = (1.0)
          button_textpos = (0, -0.02)
          options_text_scale = 0.052
          disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
@@ -1145,6 +1147,8 @@ class ExtraOptionsTabPage(DirectFrame):
                                                        buttonbase_xcoord, 0.0, buttonbase_ycoord),
                                                    command=self.openCustomControlsGUI)
 
+
+
          self.richPresenceLabel = DirectLabel(parent=self, relief=None, text='Discord Rich Presence:',
                                               text_align=TextNode.ALeft, text_scale=options_text_scale,
                                               text_wordwrap=16, pos=(leftMargin, 0, textStartHeight - 0.2))
@@ -1162,6 +1166,7 @@ class ExtraOptionsTabPage(DirectFrame):
              pos=(buttonbase_xcoord, 0, buttonbase_ycoord - 0.2),
              command=self.toggleRichPresence)
          self.__setRichPresenceLabel()       
+
          guiButton.removeNode()
          gui.removeNode()
 
