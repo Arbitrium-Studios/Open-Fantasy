@@ -513,7 +513,10 @@ group "ToontropolisDocks" [
       width [ 29.2886 ]
       height [ 29.2886 ]
       text [
-       letters [ "D" ]
+       letters [ "T" ]
+      ]
+      text [
+       letters [ "O" ]
       ]
       text [
        letters [ "O" ]
@@ -522,19 +525,16 @@ group "ToontropolisDocks" [
        letters [ "N" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "T" ]
       ]
       text [
-       letters [ "L" ]
+       letters [ "O" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "W" ]
       ]
       text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
+       letters [ "N" ]
       ]
       text [
        letters [ " " ]
@@ -550,6 +550,9 @@ group "ToontropolisDocks" [
       ]
       text [
        letters [ "K" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
      ]
      baseline [
@@ -642,7 +645,10 @@ group "ToontropolisDocks" [
       width [ 47.5285 ]
       height [ 47.5285 ]
       text [
-       letters [ "D" ]
+       letters [ "T" ]
+      ]
+      text [
+       letters [ "O" ]
       ]
       text [
        letters [ "O" ]
@@ -651,19 +657,16 @@ group "ToontropolisDocks" [
        letters [ "N" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "T" ]
       ]
       text [
-       letters [ "L" ]
+       letters [ "O" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "W" ]
       ]
       text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
+       letters [ "N" ]
       ]
       text [
        letters [ " " ]
@@ -679,6 +682,9 @@ group "ToontropolisDocks" [
       ]
       text [
        letters [ "K" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
      ]
     ]
@@ -749,7 +755,10 @@ group "ToontropolisDocks" [
       width [ 38.8969 ]
       height [ 38.8969 ]
       text [
-       letters [ "D" ]
+       letters [ "T" ]
+      ]
+      text [
+       letters [ "O" ]
       ]
       text [
        letters [ "O" ]
@@ -758,19 +767,16 @@ group "ToontropolisDocks" [
        letters [ "N" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "T" ]
       ]
       text [
-       letters [ "L" ]
+       letters [ "O" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "W" ]
       ]
       text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
+       letters [ "N" ]
       ]
       text [
        letters [ " " ]
@@ -786,6 +792,9 @@ group "ToontropolisDocks" [
       ]
       text [
        letters [ "K" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
      ]
      baseline [
@@ -931,57 +940,8 @@ group "ToontropolisDocks" [
      baseline [
       code [ "TT_Comedy" ]
       color [ 0.439216 0.247059 0.184314 1 ]
-      scale [ 1.5 1 1.4 ]
-      wiggle [ 3 ]
-      stomp [ 0.0367716 ]
-      text [
-       letters [ "C" ]
-      ]
-      text [
-       letters [ "h" ]
-      ]
-      text [
-       letters [ "i" ]
-      ]
-      text [
-       letters [ "p" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "n" ]
-      ]
-      text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "a" ]
-      ]
-      text [
-       letters [ "l" ]
-      ]
-      text [
-       letters [ "e" ]
-      ]
-      text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "s" ]
-      ]
-     ]
-     baseline [
-      code [ "TT_Comedy" ]
-      color [ 0.439216 0.247059 0.184314 1 ]
-      pos [ 0 0 -1.2 ]
-      scale [ 1.5 1 1.4 ]
+      pos [ -0.5 0 -0.5 ]
+      scale [ 1.5 1 1.6 ]
       wiggle [ 3 ]
       stomp [ 0.0367716 ]
       text [

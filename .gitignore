@@ -16,14 +16,20 @@ venv/
 local/
 errorCode
 screenshots/
-libotp/
-libtoontown/
-news/
 *.egg
 Housekeeper/
 *.txt
 *.cfg
 sign/
+*.mf
+*.yaml
+phase_3/maps/news
+news/
+resources/phase_3.5/maps/toontown_map - Backup.jpg
+toontown/installer
+*.lnk
+Start Toontown Fantasy.lnk
+build/
 sign/texture.jpg
 *.lnk
 build/

@@ -302,49 +302,16 @@ group "ToontropolisCenter" [
       width [ 45.996 ]
       height [ 45.996 ]
       text [
-       letters [ "M" ]
+       letters [ "T" ]
       ]
       text [
-       letters [ "I" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "I" ]
+       letters [ "H" ]
       ]
       text [
        letters [ "E" ]
-      ]
-      text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
       ]
       text [
        letters [ " " ]
-      ]
-      text [
-       letters [ "M" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "Y" ]
       ]
       text [
        letters [ "L" ]
@@ -357,6 +324,34 @@ group "ToontropolisCenter" [
       ]
       text [
        letters [ "D" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "O" ]
+      ]
+      
+      text [
+       letters [ "F" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "M" ]
+      ]
+      text [
+       letters [ "U" ]
+      ]
+      text [
+       letters [ "S" ]
+      ]
+      text [
+       letters [ "I" ]
+      ]
+      text [
+       letters [ "C" ]
       ]
      ]
      baseline [

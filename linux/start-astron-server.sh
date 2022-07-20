@@ -1,5 +1,5 @@
 #!/bin/sh
-cd ../astron/linux
+cd ../astron/astron
 
 # This assumes that your astrond build is located in the
 # "astron/linux" directory.

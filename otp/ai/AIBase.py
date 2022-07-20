@@ -59,7 +59,7 @@ class AIBase:
         globalClock = ClockObject.getGlobalClock()
         self.trueClock = TrueClock.getGlobalPtr()
         globalClock.setRealTime(self.trueClock.getShortTime())
-        globalClock.setAverageFrameRateInterval(30.0)
+        globalClock.setAverageFrameRateInterval(60.0)
         globalClock.tick()
         taskMgr.globalClock = globalClock
         __builtins__['ostream'] = Notify.out()

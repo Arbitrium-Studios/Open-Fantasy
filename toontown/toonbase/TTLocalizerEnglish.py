@@ -4501,6 +4501,7 @@ MusicGzSz = 'The Putt-Putt Polka'
 MusicMmSz = 'Dancing in the Streets'
 MusicMmSzActivity = 'Here Comes Treble'
 MusicDdNbrhood = "Toontropolis Docks"
+MusicDdNbrhood = "Toontropolis Docks"
 MusicGsKartshop = 'Mr. Goofywrench'
 MusicDdSzActivity = 'Sea Shanty'
 MusicEncntrGeneralBgIndoor = 'Building Excitement'

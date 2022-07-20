@@ -440,7 +440,7 @@ class CogdoFlyingPlayer(FSM):
     def enable(self):
         self.toon.setAnimState('Happy', 1.0)
         self.toon.setForceJumpIdle(True)
-        self.toon.setSpeed(0, 0)
+        self.toon.setSpeed(0, 0, 0)
         self.setPropellerSpinRate(Globals.Gameplay.NormalPropSpeed)
         self.propellerSpinLerp.loop()
 

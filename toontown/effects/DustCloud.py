@@ -20,7 +20,7 @@ class DustCloud(NodePath):
             self.setBillboardAxis()
         self.reparentTo(parent)
         self.seqNode = self.find('**/+SequenceNode').node()
-        self.seqNode.setFrameRate(0)
+        self.seqNode.setFrameRate(60)
         self.wantSound = wantSound
         if self.wantSound and not DustCloud.sounds:
             DustCloud.sounds[SFX.poof] = loader.loadSfx(SFXPATHS[SFX.poof])
@@ -68,7 +68,7 @@ class DustCloud(NodePath):
             self.trackId)
 
     def _resetTrack(self):
-        self.seqNode.setFrameRate(0)
+        self.seqNode.setFrameRate(60)
         self.hide()
 
     def messaging(self):

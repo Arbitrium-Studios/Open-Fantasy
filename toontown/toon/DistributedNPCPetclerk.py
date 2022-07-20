@@ -68,14 +68,16 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
 
     def handleCollisionSphereEnter(self, collEntry):
         if self.allowedToEnter():
-            base.cr.playGame.getPlace().fsm.request('purchase')
-            self.sendUpdate('avatarEnter', [])
-        else:
-            place = base.cr.playGame.getPlace()
-            if place:
-                place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(
-                pageName='tricks', doneFunc=self.handleOkTeaser)
+            pass
+        # if self.allowedToEnter():
+            # self.cr.playGame.getPlace().fsm.request('purchase')
+            # self.sendUpdate('avatarEnter', [])
+        # else:
+        #     place = base.cr.playGame.getPlace()
+        #     if place:
+        #         place.fsm.request('stopped')
+        #     self.dialog = TeaserPanel.TeaserPanel(
+        #         pageName='tricks', doneFunc=self.handleOkTeaser)
 
     def __handleUnexpectedExit(self):
         self.notify.warning('unexpected exit')

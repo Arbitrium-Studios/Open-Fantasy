@@ -6,7 +6,7 @@ MAX_CHANNELS=999999
 STATE_SERVER=4002
 MESSAGE_DIRECTOR_IP="127.0.0.1:7199"
 EVENT_LOGGER_IP="127.0.0.1:7197"
-DISTRICT_NAME="Toon Valley"
+DISTRICT_NAME="Random World"
 
 python3 -m toontown.ai.AIStart --base-channel ${BASE_CHANNEL} \
                --max-channels ${MAX_CHANNELS} --stateserver ${STATE_SERVER} \

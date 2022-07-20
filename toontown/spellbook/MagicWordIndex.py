@@ -720,7 +720,6 @@ class ToggleFPS(MagicWord):
             response = 'frame rate OFF'
         return response
 
-
 class allstuff(MagicWord):
     aliases = [
         'restockinventory',
@@ -734,13 +733,22 @@ class allstuff(MagicWord):
         'inventoryall',
         'inventory']
     desc = 'Gives target all the inventory they can carry.'
+
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
 
-    def handleWord(self, invoker, avId, toon, *args):
-        toon.inventory.maxOutInv()
-        toon.d_setInventory()
-        return ("Maxing out inventory for " + toon._name)
+    def handleWord(self, invoker, avId, av, *args):
+        av.b_setMaxCarry(255)
+        experience = Experience.Experience(av.getExperience(), av)
+        for i, track in enumerate(av.getTrackAccess()):
+            if track:
+                experience.experience[i] = (
+                    Experience.MaxSkill - Experience.UberSkill)
+        av.b_setExperience(experience.makeNetString())
+        av.inventory.maxOutInv(filterUberGags=0, filterPaidGags=0)
+        av.b_setInventory(av.inventory.makeNetString())
+        # TODO give 255 of each gag
+        return 'Successfully gave your toon the max amount of gags.'
 
 
 class nostuff(MagicWord):

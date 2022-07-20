@@ -439,6 +439,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.3))
     elif name == FIRED:
         camTrack.append(defaultCamera(openShotDuration=1.7))
+    elif name == FIVE_O_CLOCK_SHADOW:
+        camTrack.append(allGroupShot(suit, attackDuration))
     elif name == FLOOD_THE_MARKET:
         camTrack.append(defaultCamera(openShotDuration=1.7))
     elif name == FOUNTAIN_PEN:
@@ -544,6 +546,8 @@ def chooseSuitShot(attack, attackDuration):
                 suit,
                 attackDuration,
                 shakeIntensity))
+    elif name == TRIP:
+        camTrack.append(defaultCamera(openShotDuration=1.1))
     elif name == UNDERGROUND_LIQUIDITY:
         camTrack.append(defaultCamera(openShotDuration=2.5))
     elif name == WATERCOOLER:

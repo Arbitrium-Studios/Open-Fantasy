@@ -280,7 +280,7 @@ class MakeAToon(StateData.StateData):
         for smokeFrame in smokeFrameList:
             smokeSeqNode.addChild(smokeFrame.node())
 
-        smokeSeqNode.setFrameRate(12)
+        smokeSeqNode.setFrameRate(60)
         self.smoke = render.attachNewNode(smokeSeqNode)
         self.smoke.setScale(1, 1, 0.75)
         self.smoke.hide()

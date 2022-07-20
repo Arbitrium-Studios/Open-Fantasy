@@ -13814,7 +13814,10 @@ group "ToontropolisCenter" [
       width [ 36.3888 ]
       height [ 36.3888 ]
       text [
-       letters [ "D" ]
+       letters [ "T" ]
+      ]
+      text [
+       letters [ "O" ]
       ]
       text [
        letters [ "O" ]
@@ -13823,19 +13826,16 @@ group "ToontropolisCenter" [
        letters [ "N" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "T" ]
       ]
       text [
-       letters [ "L" ]
+       letters [ "O" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "W" ]
       ]
       text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
+       letters [ "N" ]
       ]
       text [
        letters [ " " ]
@@ -13851,6 +13851,9 @@ group "ToontropolisCenter" [
       ]
       text [
        letters [ "K" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
      ]
     ]

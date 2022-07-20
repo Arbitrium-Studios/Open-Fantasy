@@ -44,27 +44,11 @@ class BRSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
     def enter(self, requestStatus):
         SafeZoneLoader.SafeZoneLoader.enter(self, requestStatus)
         self.snow.start(camera, self.snowRender)
-        self.accept('enterigloo-interior', self.enterIgloo)
-        self.accept('exitigloo-interior', self.exitIgloo)
 
     def exit(self):
-        self.ignore('enterigloo-interior')
-        self.ignore('exitigloo-interior')
         self.resetSnowLerp()
         self.snow.cleanup()
         SafeZoneLoader.SafeZoneLoader.exit(self)
-
-    def enterIgloo(self, entry):
-        self.fadeOutSnow()
-
-    def exitIgloo(self, entry):
-        self.fadeInSnow()
-
-    def resetSnowLerp(self):
-        if self.snowFade is not None:
-            self.snowFade.stop()
-            self.snowFade = None
-        return
 
     def fadeInSnow(self):
         self.resetSnowLerp()
@@ -91,3 +75,8 @@ class BRSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
                 duration=self.SnowFadeLerpTime)]
         self.snowFade = Track(ivals, 'snow-fade')
         self.snowFade.play()
+
+    def resetSnowLerp(self):
+        if self.snowFade != None:
+            self.snowFade.stop()
+            self.snowFade = None

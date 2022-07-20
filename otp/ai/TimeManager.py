@@ -229,7 +229,7 @@ class TimeManager(DistributedObject.DistributedObject):
             return
         if not base.frameRateMeter:
             maxFrameRateInterval = base.config.GetDouble(
-                'max-frame-rate-interval', 30.0)
+                'max-frame-rate-interval', 60.0)
             globalClock.setAverageFrameRateInterval(
                 min(frameRateInterval, maxFrameRateInterval))
         taskMgr.remove('frameRateMonitor')
