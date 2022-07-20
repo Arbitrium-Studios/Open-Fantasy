@@ -7,6 +7,7 @@ from otp.login import PrivacyPolicyPanel
 from otp.otpbase import OTPLocalizer
 from direct.directnotify import DirectNotifyGlobal
 from otp.login import LeaveToPayDialog
+from toontown.chat import ChatLog
 from direct.gui.DirectGui import *
 from panda3d.core import *
 ChatEvent = 'ChatEvent'
@@ -43,7 +44,7 @@ class ChatManager(DirectObject.DirectObject):
     def __init__(self, cr, localAvatar):
         self.cr = cr
         self.localAvatar = localAvatar
-        self.wantBackgroundFocus = 1
+        self.wantBackgroundFocus = not self.checkTheKeys()
         self.__scObscured = 0
         self.__normalObscured = 0
         self.openChatWarning = None
@@ -214,9 +215,11 @@ class ChatManager(DirectObject.DirectObject):
     def stop(self):
         self.fsm.request('off')
         self.ignoreAll()
-
+        if hasattr(self, 'chatLog'):
+            self.chatLog.destroy()
     def start(self):
         self.fsm.request('mainMenu')
+        self.chatLog = ChatLog.ChatLog(self)
 
     def announceChat(self):
         messenger.send(ChatEvent)
@@ -290,7 +293,8 @@ class ChatManager(DirectObject.DirectObject):
                 'enterNormalChat',
                 self.fsm.request,
                 ['normalChat'])
-
+            if not self.wantBackgroundFocus:
+                self.accept(base.CHAT, messenger.send, ['enterNormalChat'])
     def checkObscurred(self):
         if not self.__scObscured:
             self.scButton.show()
@@ -483,10 +487,12 @@ class ChatManager(DirectObject.DirectObject):
         self.chatInputSpeedChat.hide()
 
     def enterNormalChat(self):
+        base.localAvatar.controlManager.disableWASD()
         result = self.chatInputNormal.activateByData()
         return result
 
     def exitNormalChat(self):
+        base.localAvatar.controlManager.enableWASD()
         self.chatInputNormal.deactivate()
 
     def enterOpenChatWarning(self):
@@ -608,3 +614,17 @@ class ChatManager(DirectObject.DirectObject):
 
     def __privacyPolicyDone(self):
         self.fsm.request('activateChat')
+
+    def checkTheKeys(self):
+        """
+        Checks if any of the changed hotkeys match an alpha numeric character, if so return true
+        if not return false
+        """
+        hotkeys = base.controlManager.getChangedHotkeys()
+        for key in hotkeys:
+            if base.controlManager.isAlphaNumericHotkey(key) and str(base.CHAT) != str(key):
+                return True
+        return False
+        
+    def setBackgroundFocus(self, backgroundFocus):
+        self.wantBackgroundFocus = backgroundFocus

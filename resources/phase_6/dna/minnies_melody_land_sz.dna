@@ -1,4 +1,4 @@
-group "minniesMelodyLand" [
+group "TheLandOfMusic" [
  visgroup "4000:safe_zone" [
   vis [   "4000:safe_zone"   ]
   group "streets" [

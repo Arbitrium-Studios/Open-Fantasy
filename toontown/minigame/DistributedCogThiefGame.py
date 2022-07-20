@@ -104,17 +104,17 @@ class DistributedCogThiefGame(DistributedMinigame):
         self.gameBoard.find('**/floor_BR').hide()
         self.gameBoard.find('**/floor_DL').hide()
         zone = self.getSafezoneId()
-        if zone == ToontownGlobals.ToontownCentral:
+        if zone == ToontownGlobals.ToontropolisCenter:
             self.gameBoard.find('**/floor_TT').show()
-        elif zone == ToontownGlobals.DonaldsDock:
+        elif zone == ToontownGlobals.ToontropolisDocks:
             self.gameBoard.find('**/floor_DD').show()
-        elif zone == ToontownGlobals.DaisyGardens:
+        elif zone == ToontownGlobals.FloweringGrove:
             self.gameBoard.find('**/floor_DG').show()
-        elif zone == ToontownGlobals.MinniesMelodyland:
+        elif zone == ToontownGlobals.TheLandOfMusic:
             self.gameBoard.find('**/floor_MM').show()
-        elif zone == ToontownGlobals.TheBrrrgh:
+        elif zone == ToontownGlobals.TundraWonderland:
             self.gameBoard.find('**/floor_BR').show()
-        elif zone == ToontownGlobals.DonaldsDreamland:
+        elif zone == ToontownGlobals.TwilightDreamland:
             self.gameBoard.find('**/floor_DL').show()
         else:
             self.gameBoard.find('**/floor_TT').show()
@@ -291,12 +291,12 @@ class DistributedCogThiefGame(DistributedMinigame):
         self.notify.debug('enterPlay')
         self.startGameWalk()
         self.spawnUpdateSuitsTask()
-        self.accept('control', self.controlKeyPressed)
+        self.accept(f'{base.JUMP}', self.controlKeyPressed)
         self.pieHandler = CollisionHandlerEvent()
         self.pieHandler.setInPattern('pieHit-%fn')
 
     def exitPlay(self):
-        self.ignore('control')
+        self.ignore(f'{base.JUMP}')
         if self.resultIval and self.resultIval.isPlaying():
             self.resultIval.finish()
             self.resultIval = None

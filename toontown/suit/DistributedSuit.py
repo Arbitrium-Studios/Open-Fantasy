@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.otp import *
 from panda3d.toontown import *
 from direct.interval.IntervalGlobal import *
@@ -696,12 +696,15 @@ class DistributedSuit(DistributedSuitBase.DistributedSuitBase, DelayDeletable):
         elif chatFlags & CFSpeech != 0:
             if self.nametag.getNumChatPages() > 0:
                 self.playDialogueForString(self.nametag.getChat())
+                messenger.send('addChatHistory', [self.name, ToontownGlobals.getSuitFont(), None, None, self.nametag.getChat()])
                 if self.soundChatBubble is not None:
                     base.playSfx(self.soundChatBubble, node=self)
             elif self.nametag.getChatStomp() > 0:
                 self.playDialogueForString(
                     self.nametag.getStompText(),
                     self.nametag.getStompDelay())
+                messenger.send('addChatHistory', [self.name, ToontownGlobals.getSuitFont(), None, None, self.nametag.getStompText()])
+            
         return
 
     def playDialogueForString(self, chatString, delay=0.0):

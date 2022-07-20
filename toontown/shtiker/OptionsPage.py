@@ -1,5 +1,6 @@
 from panda3d.core import *
 from . import ShtikerPage
+from toontown.controls.ControlSettingsDialog import ControlSettingsDialog
 from toontown.toonbase import TTLocalizer, ToontownGlobals
 from toontown.toontowngui import TTDialog
 from direct.gui.DirectGui import *
@@ -52,7 +53,7 @@ speedChatStyles = ((2000,
                     (170 / 255.0, 120 / 255.0, 20 / 255.0),
                     (165 / 255.0, 120 / 255.0, 50 / 255.0),
                     (210 / 255.0, 200 / 255.0, 180 / 255.0)))
-PageMode = PythonUtil.Enum('Options, Codes')
+PageMode = PythonUtil.Enum('Options, Codes, Extra')
 
 
 class OptionsPage(ShtikerPage.ShtikerPage):
@@ -61,12 +62,22 @@ class OptionsPage(ShtikerPage.ShtikerPage):
     def __init__(self):
         ShtikerPage.ShtikerPage.__init__(self)
 
+        self.optionsTabPage = None
+        self.codesTabPage = None
+        self.extraOptionsTabPage = None
+        self.title = None
+        self.optionsTab = None
+        self.codesTab = None
+        self.extraOptionsTab = None
+
     def load(self):
         ShtikerPage.ShtikerPage.load(self)
         self.optionsTabPage = OptionsTabPage(self)
         self.optionsTabPage.hide()
         self.codesTabPage = CodesTabPage(self)
         self.codesTabPage.hide()
+        self.extraOptionsTabPage = ExtraOptionsTabPage(self)
+        self.extraOptionsTabPage.hide()
         titleHeight = 0.61
         self.title = DirectLabel(
             parent=self,
@@ -104,7 +115,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             image_scale=(
                 0.033,
                 0.033,
-                0.035),
+                0.032),
             image_color=normalColor,
             image1_color=clickColor,
             image2_color=rolloverColor,
@@ -128,13 +139,13 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             text_scale=TTLocalizer.OPoptionsTab,
             text_align=TextNode.ALeft,
             text_pos=(
-                -0.035,
+                0.05,
                 0.0,
                 0.0),
             image=gui.find('**/tabs/polySurface2'),
             image_pos=(
-                0.12,
-                1,
+                0.10,
+                -1.0,
                 -0.91),
             image_hpr=(
                 0,
@@ -143,7 +154,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             image_scale=(
                 0.033,
                 0.033,
-                0.035),
+                0.028),
             image_color=normalColor,
             image1_color=clickColor,
             image2_color=rolloverColor,
@@ -160,6 +171,25 @@ class OptionsPage(ShtikerPage.ShtikerPage):
                 0.11,
                 0,
                 0.77))
+        self.extraOptionsTab = DirectButton(parent=self, relief=None,
+                                            text=TTLocalizer.ExtraOptionsPageTitle,
+                                            text_scale=TTLocalizer.OPoptionsTab,
+                                            text_align=TextNode.ALeft,
+                                            text_pos=(
+                                                 -0.05, 0.0, 0.0),
+                                             image=gui.find('**/tabs/polySurface2'),
+                                             image_pos=(0.12, 1, -0.91),
+                                             image_hpr=(
+                                                 0, 0, -90),
+                                             image_scale=(0.033, 0.033, 0.042),
+                                             image_color=normalColor,
+                                             image1_color=clickColor,
+                                             image2_color=rolloverColor,
+                                             image3_color=diabledColor,
+                                             text_fg=Vec4(0.2, 0.1, 0, 1),
+                                             command=self.setMode,
+                                             extraArgs=[PageMode.Extra], 
+                                             pos=(0.55, 0, 0.77))
         return
 
     def enter(self):
@@ -169,12 +199,17 @@ class OptionsPage(ShtikerPage.ShtikerPage):
     def exit(self):
         self.optionsTabPage.exit()
         self.codesTabPage.exit()
+        self.extraOptionsTabPage.exit()
         ShtikerPage.ShtikerPage.exit(self)
 
     def unload(self):
         self.optionsTabPage.unload()
         del self.title
         ShtikerPage.ShtikerPage.unload(self)
+        
+        if self.extraOptionsTab is not None:
+            self.extraOptionsTab.destroy()
+            self.extraOptionsTab = None
 
     def setMode(self, mode, updateAnyways=0):
         messenger.send('wakeup')
@@ -190,6 +225,8 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.optionsTabPage.enter()
             self.codesTab['state'] = DGG.NORMAL
             self.codesTabPage.exit()
+            self.extraOptionsTab['state'] = DGG.NORMAL
+            self.extraOptionsTabPage.exit()
         elif mode == PageMode.Codes:
             self.mode = PageMode.Codes
             self.title['text'] = TTLocalizer.CdrPageTitle
@@ -197,6 +234,17 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.optionsTabPage.exit()
             self.codesTab['state'] = DGG.DISABLED
             self.codesTabPage.enter()
+            self.extraOptionsTab['state'] = DGG.NORMAL
+            self.extraOptionsTabPage.exit()
+        elif mode == PageMode.Extra:
+            self.mode = PageMode.Extra
+            self.title['text'] = TTLocalizer.ExtraOptionsPageTitle
+            self.optionsTab['state'] = DGG.NORMAL
+            self.optionsTabPage.exit()
+            self.codesTab['state'] = DGG.NORMAL
+            self.codesTabPage.exit()
+            self.extraOptionsTab['state'] = DGG.DISABLED
+            self.extraOptionsTabPage.enter()
         else:
             raise Exception('OptionsPage::setMode - Invalid Mode %s' % mode)
 
@@ -217,6 +265,7 @@ class OptionsTabPage(DirectFrame):
                 0.0, 0.0, 0.0), scale=(
                 1.0, 1.0, 1.0))
         self.load()
+        self.dialog = None
         return
 
     def destroy(self):
@@ -1046,5 +1095,116 @@ class CodesTabPage(DirectFrame):
         self.codeInput['state'] = DGG.NORMAL
         self.codeInput['focus'] = 1
         self.submitButton['state'] = DGG.NORMAL
+
+class ExtraOptionsTabPage(DirectFrame):
+    # TODO add scrollbar frame so we can add unlimited number of options
+    notify = directNotify.newCategory('ExtraOptionsTabPage')
+
+    def __init__(self, parent=aspect2d):
+        self._parent = parent
+        DirectFrame.__init__(
+            self, parent=self._parent, relief=None, pos=(
+                0.0, 0.0, 0.0), scale=(
+                1.0, 1.0, 1.0))
+        self.load()
+        return
+
+    def destroy(self):
+        DirectFrame.destroy(self)
+
+    def load(self):
+         guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+         gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+         titleHeight = 0.61
+         textStartHeight = 0.45
+         textRowHeight = 0.145
+         leftMargin = -0.72
+         buttonbase_xcoord = 0.35
+         buttonbase_ycoord = 0.45
+         button_image_scale = (0.7, 1, 1)
+         controls_button_image_scale = (1, 1, 1)
+         rich_presence_image_scale = (1.5, 1, 1)
+         button_image_scale = (1.0)
+         button_textpos = (0, -0.02)
+         options_text_scale = 0.052
+         disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
+         self.CustomControls_Label = DirectLabel(parent=self, relief=None,
+                                                 text='Custom Controls:',
+                                                 text_align=TextNode.ALeft,
+                                                 text_scale=options_text_scale,
+                                                 text_wordwrap=10,
+                                                 pos=(leftMargin, 0, textStartHeight))
+         self.CustomControls_button = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'),
+                                                   guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')),
+                                                   image_scale=controls_button_image_scale,
+                                                   text='Custom Controls',
+                                                   text_scale=options_text_scale,
+                                                   text_pos=button_textpos,
+                                                   pos=(
+                                                       buttonbase_xcoord, 0.0, buttonbase_ycoord),
+                                                   command=self.openCustomControlsGUI)
+
+
+
+         self.richPresenceLabel = DirectLabel(parent=self, relief=None, text='Discord Rich Presence:',
+                                              text_align=TextNode.ALeft, text_scale=options_text_scale,
+                                              text_wordwrap=16, pos=(leftMargin, 0, textStartHeight - 0.2))
+         self.richPresenceButton = DirectButton(
+             parent=self,
+             relief=None,
+             image=(guiButton.find("**/QuitBtn_UP"),
+                    guiButton.find("**/QuitBtn_DN"),
+                    guiButton.find("**/QuitBtn_RLVR"),
+                    ),
+             image_scale=rich_presence_image_scale,
+             text="Toggle Rich Presence",
+             text_scale=options_text_scale,
+             text_pos=button_textpos,
+             pos=(buttonbase_xcoord, 0, buttonbase_ycoord - 0.2),
+             command=self.toggleRichPresence)
+         self.__setRichPresenceLabel()       
+
+         guiButton.removeNode()
+         gui.removeNode()
+
+    def openCustomControlsGUI(self):
+         ControlSettingsDialog()
+
+    def enter(self):
+         self.show()
+         self.settingsChanged = 0
+
+    def exit(self):
+         self.hide()
+         if hasattr(self, 'settingsChanged'):
+             if self.settingsChanged != 0:
+                 base.settings.writeSettings()
+
+    def unload(self):
+         self.CustomControls_button.destroy()
+         del self.CustomControls_Label
+         del self.CustomControls_button
+         self.richPresenceLabel.destroy()
+         del self.richPresenceLabel
+         self.richPresenceButton.destroy()
+         del self.richPresenceButton
+         
+    def toggleRichPresence(self):
+         self.settingsChanged = 1
+         base.settings.updateSetting('rich-presence', not base.wantRichPresence)
+         base.wantRichPresence = not base.wantRichPresence
+         self.__setRichPresenceLabel()
+         if base.wantRichPresence:
+             Discord.enable()
+         else:
+             Discord.disable()
+
+    def __setRichPresenceLabel(self):
+        if base.wantRichPresence:
+            self.richPresenceLabel['text'] = ['Discord Rich Presence: On']
+            self.richPresenceButton['text'] = ['Toggle Rich Presence off']
+        else:
+            self.richPresenceLabel['text'] = ['Discord Rich Presence: Off']
+            self.richPresenceButton['text'] = ['Toggle Rich Presence on']
 
     BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'

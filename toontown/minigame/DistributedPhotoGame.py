@@ -57,11 +57,11 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
         'DistributedPhotoGame')
     font = ToontownGlobals.getToonFont()
     LOCAL_PHOTO_MOVE_TASK = 'localPhotoMoveTask'
-    FIRE_KEY = 'control'
-    UP_KEY = 'arrow_up'
-    DOWN_KEY = 'arrow_down'
-    LEFT_KEY = 'arrow_left'
-    RIGHT_KEY = 'arrow_right'
+    FIRE_KEY =  base.JUMP
+    UP_KEY = base.MOVE_FORWARD
+    DOWN_KEY = base.MOVE_BACKWARDS
+    LEFT_KEY = base.MOVE_LEFT
+    RIGHT_KEY = base.MOVE_RIGHT
     INTRO_TASK_NAME = 'PhotoGameIntro'
     INTRO_TASK_NAME_CAMERA_LERP = 'PhotoGameIntroCamera'
 
@@ -1536,32 +1536,32 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
 
     def construct(self):
         zone = self.getSafezoneId()
-        if zone == ToontownGlobals.ToontownCentral:
+        if zone == ToontownGlobals.ToontropolisCenter:
             self.constructTTC()
-        elif zone == ToontownGlobals.DonaldsDock:
+        elif zone == ToontownGlobals.ToontropolisDocks:
             self.constructDD()
-        elif zone == ToontownGlobals.DaisyGardens:
+        elif zone == ToontownGlobals.FloweringGrove:
             self.constructDG()
-        elif zone == ToontownGlobals.MinniesMelodyland:
+        elif zone == ToontownGlobals.TheLandOfMusic:
             self.constructMM()
-        elif zone == ToontownGlobals.TheBrrrgh:
+        elif zone == ToontownGlobals.TundraWonderland:
             self.constructBR()
-        elif zone == ToontownGlobals.DonaldsDreamland:
+        elif zone == ToontownGlobals.TwilightDreamland:
             self.constructDL()
 
     def destruct(self):
         zone = self.getSafezoneId()
-        if zone == ToontownGlobals.ToontownCentral:
+        if zone == ToontownGlobals.ToontropolisCenter:
             self.destructTTC()
-        elif zone == ToontownGlobals.DonaldsDock:
+        elif zone == ToontownGlobals.ToontropolisDocks:
             self.destructDD()
-        elif zone == ToontownGlobals.DaisyGardens:
+        elif zone == ToontownGlobals.FloweringGrove:
             self.destructDG()
-        elif zone == ToontownGlobals.MinniesMelodyland:
+        elif zone == ToontownGlobals.TheLandOfMusic:
             self.destructMM()
-        elif zone == ToontownGlobals.TheBrrrgh:
+        elif zone == ToontownGlobals.TundraWonderland:
             self.destructBR()
-        elif zone == ToontownGlobals.DonaldsDreamland:
+        elif zone == ToontownGlobals.TwilightDreamland:
             self.destructDL()
 
     def constructTTC(self):

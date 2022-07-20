@@ -4,7 +4,7 @@ from direct.gui.DirectGui import *
 from direct.showbase.PythonUtil import *
 from direct.interval.IntervalGlobal import *
 from direct.showbase.InputStateGlobal import inputState
-from direct.controls import ControlManager
+from toontown.controls import ToontownControlManager
 from . import DistributedAvatar
 from direct.task import Task
 from otp.otpbase import OTPGlobals
@@ -19,7 +19,6 @@ from direct.controls.ObserverWalker import ObserverWalker
 from direct.controls.SwimWalker import SwimWalker
 from direct.controls.TwoDWalker import TwoDWalker
 from toontown.toon.OrbitalCamera import OrbitCamera
-
 
 class LocalAvatar(DistributedAvatar.DistributedAvatar,
                   DistributedSmoothNode.DistributedSmoothNode):
@@ -49,7 +48,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         base.pushCTrav(self.cTrav)
         self.cTrav.setRespectPrevTransform(1)
         self.avatarControlsEnabled = 0
-        self.controlManager = ControlManager.ControlManager(
+        self.controlManager = ToontownControlManager.ToontownControlManager(
             True, passMessagesThrough)
         self.initializeCollisions()
         self.initializeSmartCamera()
@@ -443,6 +442,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
             return
         self.avatarControlsEnabled = 0
         self.ignoreAnimationEvents()
+        self.controlManager.setWASDTurn(1)
         self.controlManager.disable()
         self.clearPageUpDown()
 
@@ -1023,24 +1023,27 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         return self.animMultiplier
 
     def enableRun(self):
-        self.accept('arrow_up', self.startRunWatch)
-        self.accept('arrow_up-up', self.stopRunWatch)
-        self.accept('control-arrow_up', self.startRunWatch)
-        self.accept('control-arrow_up-up', self.stopRunWatch)
-        self.accept('alt-arrow_up', self.startRunWatch)
-        self.accept('alt-arrow_up-up', self.stopRunWatch)
-        self.accept('shift-arrow_up', self.startRunWatch)
-        self.accept('shift-arrow_up-up', self.stopRunWatch)
+        moveForward = base.MOVE_FORWARD
+        moveBackwards = base.MOVE_BACKWARDS
+        self.accept(moveForward, self.startRunWatch)
+        self.accept(moveBackwards, self.stopRunWatch)
+        self.accept(f"control-{moveForward}", self.startRunWatch)
+        self.accept(f"control-{moveForward}-up", self.stopRunWatch)
+        self.accept(f"alt-{moveForward}", self.startRunWatch)
+        self.accept(f"alt-{moveForward}-up", self.stopRunWatch)
+        self.accept(f"shift-{moveForward}", self.startRunWatch)
+        self.accept(f"shift-{moveForward}-up", self.stopRunWatch)
 
     def disableRun(self):
-        self.ignore('arrow_up')
-        self.ignore('arrow_up-up')
-        self.ignore('control-arrow_up')
-        self.ignore('control-arrow_up-up')
-        self.ignore('alt-arrow_up')
-        self.ignore('alt-arrow_up-up')
-        self.ignore('shift-arrow_up')
-        self.ignore('shift-arrow_up-up')
+        moveForward = base.MOVE_FORWARD
+        self.ignore(f"{moveForward}")
+        self.ignore(f"{moveForward}-up")
+        self.ignore(f"control-{moveForward}-up")
+        self.ignore(f"control-{moveForward}-up")
+        self.ignore(f"alt-{moveForward}")
+        self.ignore(f"alt-{moveForward}-up")
+        self.ignore(f"shift-{moveForward}")
+        self.ignore(f"shift-{moveForward}-up")
 
     def startRunWatch(self):
 
@@ -1120,7 +1123,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
     def sleepSwimTest(self, task):
         now = globalClock.getFrameTime()
         speed, rotSpeed, slideSpeed = self.controlManager.getSpeeds()
-        if speed != 0.0 or rotSpeed != 0.0 or inputState.isSet('jump'):
+        if speed != 0.0 or rotSpeed != 0.0 or slideSpeed != 0.0 or inputState.isSet('jump'):
             if not self.swimmingFlag:
                 self.swimmingFlag = 1
         elif self.swimmingFlag:
@@ -1199,7 +1202,8 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
                 self.emoteTrack = None
             if action == OTPGlobals.WALK_INDEX or action == OTPGlobals.REVERSE_INDEX:
                 self.walkSound()
-            elif action == OTPGlobals.RUN_INDEX:
+            elif (action == OTPGlobals.RUN_INDEX or action == OTPGlobals.STRAFE_LEFT_INDEX  
+                or action == OTPGlobals.STRAFE_RIGHT_INDEX):
                 self.runSound()
             else:
                 self.stopSound()
@@ -1227,6 +1231,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
 
     def startChat(self):
         self.chatMgr.start()
+        self.chatMgr.chatLog.enableHotkey()
         self.accept(
             OTPGlobals.WhisperIncomingEvent,
             self.handlePlayerFriendWhisper)

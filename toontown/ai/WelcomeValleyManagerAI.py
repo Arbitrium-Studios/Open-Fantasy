@@ -35,7 +35,7 @@ class WelcomeValleyManagerAI(DistributedObjectAI):
                         doId,
                         newZoneId))
                 self.accept(self.air.getAvatarExitEvent(doId), self.toonSetZone,
-                            extraArgs=[doId, ToontownGlobals.ToontownCentral])
+                            extraArgs=[doId, ToontownGlobals.ToontropolisCenter])
             elif (not ZoneUtil.isWelcomeValley(zoneId)) and inWelcomeValley:
                 self.air.districtStats.b_setNewAvatarCount(
                     self.air.districtStats.getNewAvatarCount() - 1)
@@ -45,7 +45,7 @@ class WelcomeValleyManagerAI(DistributedObjectAI):
     def createWelcomeValleyZones(self):
         self.notify.info('Creating Welcome Valley zones...')
 
-        # Toontown Central
+        # Toontropolis Central
         self.air.generateHood(TTHoodDataAI, 22000)
 
         # Goofy Speedway

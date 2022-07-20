@@ -328,7 +328,7 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
             self.leavingTrampoline = True
             self.timer.reset()
             self.trampB = self.leavingTrampB
-            self.ignore('control')
+            self.ignore(f'{base.JUMP}')
             self.quitEarlyButton.stash()
         return
 
@@ -398,10 +398,10 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
         DistributedPartyTrampolineActivity.notify.debug('startActive')
         if self.toon is not None and self.toon.doId == base.localAvatar.doId:
             base.setCellsAvailable(base.bottomCells, True)
-            self.accept('arrow_left', self.onLeft)
-            self.accept('arrow_left-up', self.onLeftUp)
-            self.accept('arrow_right', self.onRight)
-            self.accept('arrow_right-up', self.onRightUp)
+            self.accept(f'{base.MOVE_LEFT}', self.onLeft)
+            self.accept(f'{base.MOVE_LEFT}-up', self.onLeftUp)
+            self.accept(f'{base.MOVE_RIGHT}', self.onRight)
+            self.accept(f'{base.MOVE_RIGHT}-up', self.onRightUp)
             self.beginRoundInterval = Sequence(
                 Func(
                     self._showFlashMessage, TTLocalizer.PartyTrampolineReady), Wait(1.2), Func(
@@ -468,7 +468,7 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
         self.timer.show()
         self.quitEarlyButton.unstash()
         self.notify.debug('Accepting contorl')
-        self.accept('control', self.onJump)
+        self.accept(f'{base.JUMP}', self.onJump)
         self.notify.debug('setting simulate step to true')
         self.doSimulateStep = True
 
@@ -505,10 +505,10 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
 
     def releaseToon(self):
         self._hideFlashMessage()
-        self.ignore('arrow_left')
-        self.ignore('arrow_left-up')
-        self.ignore('arrow_right')
-        self.ignore('arrow_right-up')
+        self.ignore(f'{base.MOVE_LEFT}')
+        self.ignore(f'{base.MOVE_LEFT}-up')
+        self.ignore(f'{base.MOVE_RIGHT}')
+        self.ignore(f'{base.MOVE_RIGHT}-up')
         taskMgr.remove(self.uniqueName('TrampolineActivity.updateTask'))
         self.hopOffAnim = Sequence(
             self.toon.hprInterval(

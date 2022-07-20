@@ -2,15 +2,15 @@ from pandac.PandaModules import TextPropertiesManager
 from pandac.PandaModules import TextProperties
 import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
-lTheBrrrgh = 'Tundra Wonderland'
-lDaisyGardens = 'Flowering Grove'
-lDonaldsDock = "Toontown Docks"
-lDonaldsDreamland = "Drowsy Dreamland"
-lMinniesMelodyland = "The Land of Melody"
-lToontownCentral = 'Toontown Central'
-lGoofySpeedway = 'Toontown Stadium'
-lOutdoorZone = "Acorn Acres"
-lGolfZone = "Toontown's MiniGolf"
+lTundraWonderland = 'Tundra Wonderland'
+lFloweringGrove = 'Flowering Grove'
+lToontropolisDocks = "Toontropolis Docks"
+lTwilightDreamland = "Twlight Dreamland"
+lTheLandOfMusic = "The Land of Melody"
+lToontropolisCenter = 'Toontropolis Central'
+lToontropolisStadium = 'Toontropolis Stadium'
+lAcornAcres = "Acorn Acres"
+lGolfZone = "Toontropolis Mini-Golf"
 lCancel = 'Cancel'
 lClose = 'Close'
 lOK = 'OK'
@@ -988,13 +988,13 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1102: "Let's go fight the %s!" % Cogs,
                                1103: "Let's go take over a %s building!" % Cog,
                                1104: "Let's go in the elevator!",
-                               1105: "Let's go to %s!" % lToontownCentral,
-                               1106: "Let's go to %s!" % lDonaldsDock,
-                               1107: "Let's go to %s!" % lMinniesMelodyland,
-                               1108: "Let's go to %s!" % lDaisyGardens,
-                               1109: "Let's go to %s!" % lTheBrrrgh,
-                               1110: "Let's go to %s!" % lDonaldsDreamland,
-                               1111: "Let's go to %s!" % lGoofySpeedway,
+                               1105: "Let's go to %s!" % lToontropolisCenter,
+                               1106: "Let's go to %s!" % lToontropolisDocks,
+                               1107: "Let's go to %s!" % lTheLandOfMusic,
+                               1108: "Let's go to %s!" % lFloweringGrove,
+                               1109: "Let's go to %s!" % lTundraWonderland,
+                               1110: "Let's go to %s!" % lTwilightDreamland,
+                               1111: "Let's go to %s!" % lToontropolisStadium,
                                1112: "Let's go to my house!",
                                1113: "Let's go to your house!",
                                1114: "Let's go to Sellbot Headquarters!",
@@ -1008,7 +1008,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1122: "Let's go to Lawbot Headquarters!",
                                1123: "Let's go fight the Chief Justice!",
                                1124: "Let's go in the District Attorney's Office!",
-                               1125: "Let's go to %s!" % lOutdoorZone,
+                               1125: "Let's go to %s!" % lAcornAcres,
                                1126: "Let's go to %s!" % lGolfZone,
                                1127: "Let's go to Bossbot Headquarters!",
                                1128: "Let's go fight the CEO!",
@@ -1765,7 +1765,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                30101: "Welcome to my April Toons' Week party!",
                                30102: 'The Silly Meter is back in Toon Hall!',
                                30110: 'Mickey is in Daisy Gardens.',
-                               30111: 'Daisy is in Toontown Central.',
+                               30111: 'Daisy is in Toontropolis Central.',
                                30112: 'Minnie is in The Brrrgh.',
                                30113: 'Pluto is in Melodyland.',
                                30114: 'Donald is sleepwalking at the Speedway.',
@@ -2877,6 +2877,48 @@ TTAccountCallCustomerService = 'Please call Customer Service at %s.'
 TTAccountCustomerServiceHelp = '\nIf you need help, please call Customer Service at %s.'
 TTAccountIntractibleError = 'An error occurred.'
 
+HotkeyCategoryNames = {
+        "HotKeys": "HotKeys",
+
+ }
+
+
+HotkeyUp = 0
+HotkeyDown = 1
+HotkeyLeft = 2
+HotkeyRight = 3
+HotkeyJump = 4
+HotkeyThrow = 5
+HotkeySprint = 6
+HotkeyBook = 7
+HotkeyTasks = 8
+HotkeyInventory = 9
+HotkeyFriends = 10
+HotkeyMap = 11
+HotkeyScreenshot = 12
+HotkeyChat = 13
+HotkeySecondaryBook = 14
+HotkeyChatLog = 15
+HotkeyNames = {
+0: {
+       HotkeyUp: 'Move Forward',
+       HotkeyDown: 'Move Backwards',
+       HotkeyLeft: 'Move Left',
+       HotkeyRight: 'Move Right',
+       HotkeyJump: 'Jump',
+       HotkeyThrow: 'Throw',
+       HotkeySprint: 'Sprint',
+       HotkeyBook: 'Open Book',
+       HotkeyTasks: 'Open Tasks',
+       HotkeyInventory: 'Open Inventory',
+       HotkeyFriends: 'Open Friends',
+       HotkeyMap: 'Open map',
+       HotkeyScreenshot: 'screenshot',
+       HotkeyChat: 'chat', 
+       HotkeySecondaryBook: 'Open Book Secondary',
+       HotkeyChatLog: 'Open Chat Log',
+}
+}
 
 def timeElapsedString(timeDelta):
     timeDelta = abs(timeDelta)

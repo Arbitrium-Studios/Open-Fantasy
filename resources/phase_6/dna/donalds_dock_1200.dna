@@ -167,7 +167,7 @@ store_suit_point [ 189, SIDE_DOOR_POINT, -415 -340 0, 5 ]
 store_suit_point [ 190, SIDE_DOOR_POINT, -415 -378 0, 3 ]
 store_suit_point [ 191, SIDE_DOOR_POINT, -415 -423 0, 25 ]
 store_suit_point [ 192, SIDE_DOOR_POINT, -358 -410 0, 1 ]
-group "donaldsDock" [
+group "ToontropolisDocks" [
  visgroup "1201" [
   vis [   "1201"   "1202"   "1203"   "1226"   ]
   battle_cell [ 20 20 -324.875 -429.81 -0.5 ]

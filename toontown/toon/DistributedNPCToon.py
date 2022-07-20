@@ -55,9 +55,9 @@ class DistributedNPCToon(DistributedNPCToonBase):
         myHoodId = ZoneUtil.getCanonicalHoodId(place.zoneId)
         if hasattr(place, 'id'):
             myHoodId = place.id
-        if myHoodId in (ToontownGlobals.ToontownCentral,
+        if myHoodId in (ToontownGlobals.ToontropolisCenter,
                         ToontownGlobals.MyEstate,
-                        ToontownGlobals.GoofySpeedway,
+                        ToontownGlobals.ToontropolisStadium,
                         ToontownGlobals.Tutorial):
             return True
         return False

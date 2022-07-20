@@ -1,4 +1,4 @@
-group "toontownCentral" [
+group "ToontropolisCenter" [
  node "Buildings_inner-0" [
   flat_building "tb2:random20_DNARoot" [
    pos [ 747.457 258.221 0 ]

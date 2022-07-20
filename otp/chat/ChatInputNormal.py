@@ -2,7 +2,7 @@ from direct.showbase import DirectObject
 from otp.otpbase import OTPGlobals
 import sys
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.otpbase import OTPLocalizer
 
 
@@ -30,8 +30,8 @@ class ChatInputNormal(DirectObject.DirectObject):
         messenger.send('enterNormalChat')
 
     def delete(self):
-        self.ignore('arrow_up-up')
-        self.ignore('arrow_down-up')
+        self.ignore(f'{base.MOVE_FORWARD}-up')
+        self.ignore(f'{base.MOVE_BACKWARDS}-up')
         self.chatFrame.destroy()
         del self.chatFrame
         del self.chatButton
@@ -55,8 +55,8 @@ class ChatInputNormal(DirectObject.DirectObject):
         self.chatEntry['focus'] = 1
         self.chatFrame.show()
         if self.wantHistory:
-            self.accept('arrow_up-up', self.getPrevHistory)
-            self.accept('arrow_down-up', self.getNextHistory)
+            self.accept(f'{base.MOVE_FORWARD}-up', self.getPrevHistory)
+            self.accept(f'{base.MOVE_BACKWARDS}-up', self.getNextHistory)
 
     def deactivate(self):
         self.chatEntry.set('')
@@ -64,8 +64,8 @@ class ChatInputNormal(DirectObject.DirectObject):
         self.chatFrame.hide()
         self.whisperLabel.hide()
         base.win.closeIme()
-        self.ignore('arrow_up-up')
-        self.ignore('arrow_down-up')
+        self.ignore(f'{base.MOVE_FORWARD}-up')
+        self.ignore(f'{base.MOVE_BACKWARDS}-up')
 
     def checkForOverRide(self):
         return False
