@@ -5,14 +5,18 @@ from toontown.toonbase import ToontownGlobals
 from direct.distributed import DistributedObject
 from toontown.toonbase import TTLocalizer
 
-
 class DistributedHouseItem(DistributedObject.DistributedObject):
-    notify = directNotify.newCategory('DistributedHouseItem')
+
+    notify = directNotify.newCategory("DistributedHouseItem")
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
 
     def generate(self):
+        """
+        This method is called when the DistributedObject is reintroduced
+        to the world, either for the first time or from the cache.
+        """
         DistributedObject.DistributedObject.generate(self)
 
     def announceGenerate(self):
@@ -21,7 +25,7 @@ class DistributedHouseItem(DistributedObject.DistributedObject):
 
     def load(self):
         pass
-
+        
     def disable(self):
         DistributedObject.DistributedObject.disable(self)
 

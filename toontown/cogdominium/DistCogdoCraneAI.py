@@ -1,9 +1,8 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.distributed import DistributedObjectAI
 from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 from direct.fsm import FSM
-
 
 class DistCogdoCraneAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM):
 
@@ -26,9 +25,7 @@ class DistCogdoCraneAI(DistributedObjectAI.DistributedObjectAI, FSM.FSM):
         self.request('Free')
 
     def d_setState(self, state, avId):
-        self.sendUpdate('setState', [
-            state,
-            avId])
+        self.sendUpdate('setState', [state, avId])
 
     def enterOff(self):
         pass

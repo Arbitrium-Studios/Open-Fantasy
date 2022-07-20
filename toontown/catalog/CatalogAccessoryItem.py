@@ -8,10 +8,9 @@ from otp.otpbase import PythonUtil
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 
-
 class CatalogAccessoryItem(CatalogItem.CatalogItem):
 
-    def makeNewItem(self, accessoryType, loyaltyDays=0):
+    def makeNewItem(self, accessoryType, loyaltyDays = 0):
         self.accessoryType = accessoryType
         self.loyaltyDays = loyaltyDays
         CatalogItem.CatalogItem.makeNewItem(self)
@@ -22,14 +21,14 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
     def notOfferedTo(self, avatar):
         article = AccessoryTypes[self.accessoryType][ATArticle]
         if article in [AHat,
-                       AGlasses,
-                       ABackpack,
-                       AShoes]:
+         AGlasses,
+         ABackpack,
+         AShoes]:
             return 0
         forBoys = article in [ABoysHat,
-                              ABoysGlasses,
-                              ABoysBackpack,
-                              ABoysShoes]
+         ABoysGlasses,
+         ABoysBackpack,
+         ABoysShoes]
         if avatar.getStyle().getGender() == 'm':
             return not forBoys
         else:
@@ -38,9 +37,9 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
     def forBoysOnly(self):
         article = AccessoryTypes[self.accessoryType][ATArticle]
         if article in [ABoysHat,
-                       ABoysGlasses,
-                       ABoysBackpack,
-                       ABoysShoes]:
+         ABoysGlasses,
+         ABoysBackpack,
+         ABoysShoes]:
             return 1
         else:
             return 0
@@ -48,9 +47,9 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
     def forGirlsOnly(self):
         article = AccessoryTypes[self.accessoryType][ATArticle]
         if article in [AGirlsHat,
-                       AGirlsGlasses,
-                       AGirlsBackpack,
-                       AGirlsShoes]:
+         AGirlsGlasses,
+         AGirlsBackpack,
+         AGirlsShoes]:
             return 1
         else:
             return 0
@@ -75,8 +74,7 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
                 return 1
             l = avatar.hatList
             for i in range(0, len(l), 3):
-                if l[i] == defn[0] and l[i +
-                                         1] == defn[1] and l[i + 2] == defn[2]:
+                if l[i] == defn[0] and l[i + 1] == defn[1] and l[i + 2] == defn[2]:
                     return 1
 
         elif self.areGlasses():
@@ -86,8 +84,7 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
                 return 1
             l = avatar.glassesList
             for i in range(0, len(l), 3):
-                if l[i] == defn[0] and l[i +
-                                         1] == defn[1] and l[i + 2] == defn[2]:
+                if l[i] == defn[0] and l[i + 1] == defn[1] and l[i + 2] == defn[2]:
                     return 1
 
         elif self.isBackpack():
@@ -97,8 +94,7 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
                 return 1
             l = avatar.backpackList
             for i in range(0, len(l), 3):
-                if l[i] == defn[0] and l[i +
-                                         1] == defn[1] and l[i + 2] == defn[2]:
+                if l[i] == defn[0] and l[i + 1] == defn[1] and l[i + 2] == defn[2]:
                     return 1
 
         else:
@@ -108,8 +104,7 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
                 return 1
             l = avatar.shoesList
             for i in range(0, len(l), 3):
-                if l[i] == defn[0] and l[i +
-                                         1] == defn[1] and l[i + 2] == defn[2]:
+                if l[i] == defn[0] and l[i + 1] == defn[1] and l[i + 2] == defn[2]:
                     return 1
 
         return 0
@@ -134,99 +129,91 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
         str = AccessoryTypes[self.accessoryType][ATString]
         if self.isHat():
             defn = ToonDNA.HatStyles[str]
-            if not avatar.checkAccessorySanity(
-                    ToonDNA.HAT, defn[0], defn[1], defn[2]):
+            if not avatar.checkAccessorySanity(ToonDNA.HAT, defn[0], defn[1], defn[2]):
                 self.notify.warning('Avatar %s lost hat %d %d %d; invalid item.' % (avatar.doId,
-                                                                                    defn[0],
-                                                                                    defn[1],
-                                                                                    defn[2]))
+                 defn[0],
+                 defn[1],
+                 defn[2]))
                 return ToontownGlobals.P_ItemAvailable
             hat = avatar.getHat()
-            added = avatar.addToAccessoriesList(
-                ToonDNA.HAT, hat[0], hat[1], hat[2])
+            added = avatar.addToAccessoriesList(ToonDNA.HAT, hat[0], hat[1], hat[2])
             if added:
                 avatar.b_setHatList(avatar.getHatList())
                 self.notify.info('Avatar %s put hat %d,%d,%d in trunk.' % (avatar.doId,
-                                                                           hat[0],
-                                                                           hat[1],
-                                                                           hat[2]))
+                 hat[0],
+                 hat[1],
+                 hat[2]))
             else:
                 self.notify.warning('Avatar %s lost current hat %d %d %d; trunk full.' % (avatar.doId,
-                                                                                          hat[0],
-                                                                                          hat[1],
-                                                                                          hat[2]))
+                 hat[0],
+                 hat[1],
+                 hat[2]))
             avatar.b_setHat(defn[0], defn[1], defn[2])
         elif self.areGlasses():
             defn = ToonDNA.GlassesStyles[str]
-            if not avatar.checkAccessorySanity(
-                    ToonDNA.GLASSES, defn[0], defn[1], defn[2]):
+            if not avatar.checkAccessorySanity(ToonDNA.GLASSES, defn[0], defn[1], defn[2]):
                 self.notify.warning('Avatar %s lost glasses %d %d %d; invalid item.' % (avatar.doId,
-                                                                                        defn[0],
-                                                                                        defn[1],
-                                                                                        defn[2]))
+                 defn[0],
+                 defn[1],
+                 defn[2]))
                 return ToontownGlobals.P_ItemAvailable
             glasses = avatar.getGlasses()
-            added = avatar.addToAccessoriesList(
-                ToonDNA.GLASSES, glasses[0], glasses[1], glasses[2])
+            added = avatar.addToAccessoriesList(ToonDNA.GLASSES, glasses[0], glasses[1], glasses[2])
             if added:
                 avatar.b_setGlassesList(avatar.getGlassesList())
                 self.notify.info('Avatar %s put glasses %d,%d,%d in trunk.' % (avatar.doId,
-                                                                               glasses[0],
-                                                                               glasses[1],
-                                                                               glasses[2]))
+                 glasses[0],
+                 glasses[1],
+                 glasses[2]))
             else:
                 self.notify.warning('Avatar %s lost current glasses %d %d %d; trunk full.' % (avatar.doId,
-                                                                                              glasses[0],
-                                                                                              glasses[1],
-                                                                                              glasses[2]))
+                 glasses[0],
+                 glasses[1],
+                 glasses[2]))
             avatar.b_setGlasses(defn[0], defn[1], defn[2])
         elif self.isBackpack():
             defn = ToonDNA.BackpackStyles[str]
-            if not avatar.checkAccessorySanity(
-                    ToonDNA.BACKPACK, defn[0], defn[1], defn[2]):
+            if not avatar.checkAccessorySanity(ToonDNA.BACKPACK, defn[0], defn[1], defn[2]):
                 self.notify.warning('Avatar %s lost backpack %d %d %d; invalid item.' % (avatar.doId,
-                                                                                         defn[0],
-                                                                                         defn[1],
-                                                                                         defn[2]))
+                 defn[0],
+                 defn[1],
+                 defn[2]))
                 return ToontownGlobals.P_ItemAvailable
             backpack = avatar.getBackpack()
-            added = avatar.addToAccessoriesList(
-                ToonDNA.BACKPACK, backpack[0], backpack[1], backpack[2])
+            added = avatar.addToAccessoriesList(ToonDNA.BACKPACK, backpack[0], backpack[1], backpack[2])
             if added:
                 avatar.b_setBackpackList(avatar.getBackpackList())
                 self.notify.info('Avatar %s put backpack %d,%d,%d in trunk.' % (avatar.doId,
-                                                                                backpack[0],
-                                                                                backpack[1],
-                                                                                backpack[2]))
+                 backpack[0],
+                 backpack[1],
+                 backpack[2]))
             else:
                 self.notify.warning('Avatar %s lost current backpack %d %d %d; trunk full.' % (avatar.doId,
-                                                                                               backpack[0],
-                                                                                               backpack[1],
-                                                                                               backpack[2]))
+                 backpack[0],
+                 backpack[1],
+                 backpack[2]))
             avatar.b_setBackpack(defn[0], defn[1], defn[2])
         else:
             defn = ToonDNA.ShoesStyles[str]
-            if not avatar.checkAccessorySanity(
-                    ToonDNA.SHOES, defn[0], defn[1], defn[2]):
+            if not avatar.checkAccessorySanity(ToonDNA.SHOES, defn[0], defn[1], defn[2]):
                 self.notify.warning('Avatar %s lost shoes %d %d %d; invalid item.' % (avatar.doId,
-                                                                                      defn[0],
-                                                                                      defn[1],
-                                                                                      defn[2]))
+                 defn[0],
+                 defn[1],
+                 defn[2]))
                 return ToontownGlobals.P_ItemAvailable
             shoes = avatar.getShoes()
-            added = avatar.addToAccessoriesList(
-                ToonDNA.SHOES, shoes[0], shoes[1], shoes[2])
+            added = avatar.addToAccessoriesList(ToonDNA.SHOES, shoes[0], shoes[1], shoes[2])
             if added:
                 avatar.b_setShoesList(avatar.getShoesList())
                 self.notify.info('Avatar %s put shoes %d,%d,%d in trunk.' % (avatar.doId,
-                                                                             shoes[0],
-                                                                             shoes[1],
-                                                                             shoes[2]))
+                 shoes[0],
+                 shoes[1],
+                 shoes[2]))
             else:
                 self.notify.warning('Avatar %s lost current shoes %d %d %d; trunk full.' % (avatar.doId,
-                                                                                            shoes[0],
-                                                                                            shoes[1],
-                                                                                            shoes[2]))
+                 shoes[0],
+                 shoes[1],
+                 shoes[2]))
             avatar.b_setShoes(defn[0], defn[1], defn[2])
         avatar.d_catalogGenAccessories()
         return ToontownGlobals.P_ItemAvailable
@@ -242,9 +229,9 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
         return self.makeFrameModel(model, spin)
 
     def applyColor(self, model, color):
-        if model is None or color is None:
+        if model == None or color == None:
             return
-        if isinstance(color, str):
+        if isinstance(color, (str, bytes)):
             tex = loader.loadTexture(color)
             tex.setMinfilter(Texture.FTLinearMipmapLinear)
             tex.setMagfilter(Texture.FTLinear)
@@ -262,8 +249,7 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
         if self.areShoes():
             str = AccessoryTypes[self.accessoryType][ATString]
             defn = ToonDNA.ShoesStyles[str]
-            legModel = loader.loadModel(
-                'phase_3/models/char/tt_a_chr_dgm_shorts_legs_1000')
+            legModel = loader.loadModel('phase_3/models/char/tt_a_chr_dgm_shorts_legs_1000')
             model = legModel.find('**/' + modelPath)
         else:
             model = loader.loadModel(modelPath)
@@ -287,17 +273,12 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
 
         if avatar.isTrunkFull(accessoriesOnOrder):
             self.requestPurchaseCleanup()
-            buttonCallback = PythonUtil.Functor(
-                self.__handleFullPurchaseDialog, phone, callback)
+            buttonCallback = PythonUtil.Functor(self.__handleFullPurchaseDialog, phone, callback)
             if avatar.getMaxAccessories() == 0:
                 text = TTLocalizer.CatalogPurchaseNoTrunk
             else:
                 text = TTLocalizer.CatalogPurchaseTrunkFull
-            self.dialog = TTDialog.TTDialog(
-                style=TTDialog.YesNo,
-                text=text,
-                text_wordwrap=15,
-                command=buttonCallback)
+            self.dialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=text, text_wordwrap=15, command=buttonCallback)
             self.dialog.show()
         else:
             CatalogItem.CatalogItem.requestPurchase(self, phone, callback)
@@ -347,9 +328,8 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
         article = AccessoryTypes[self.accessoryType][ATArticle]
         return article in [AShoes, ABoysShoes, AGirlsShoes]
 
-    def output(self, store=-1):
-        return 'CatalogAccessoryItem(%s, %s)' % (
-            self.accessoryType, self.formatOptionalData(store))
+    def output(self, store = -1):
+        return 'CatalogAccessoryItem(%s, %s)' % (self.accessoryType, self.formatOptionalData(store))
 
     def getFilename(self):
         str = AccessoryTypes[self.accessoryType][ATString]

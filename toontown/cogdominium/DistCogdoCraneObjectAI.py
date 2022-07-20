@@ -1,13 +1,11 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.distributed import DistributedSmoothNodeAI
 from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
 from direct.fsm import FSM
 from direct.task import Task
 
-
-class DistCogdoCraneObjectAI(
-        DistributedSmoothNodeAI.DistributedSmoothNodeAI, FSM.FSM):
+class DistCogdoCraneObjectAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, FSM.FSM):
     wantsWatchDrift = 1
 
     def __init__(self, air, craneGame):
@@ -89,7 +87,7 @@ class DistCogdoCraneObjectAI(
             self.doFree(None)
 
     def __getCraneAndObject(self, avId):
-        if self.craneGame and self.craneGame._cranes is not None:
+        if self.craneGame and self.craneGame._cranes != None:
             for crane in self.craneGame._cranes:
                 if crane.avId == avId:
                     return (crane.doId, crane.objectId)

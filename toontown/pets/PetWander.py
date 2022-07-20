@@ -1,20 +1,25 @@
 from pandac.PandaModules import *
-from panda3d.toontown import *
-from direct.showbase.PythonUtil import reduceAngle, randFloat, normalDistrib
+from otp.otpbase.PythonUtil import reduceAngle, randFloat, normalDistrib
 from direct.showbase import DirectObject
 from toontown.pets import PetChase
 from toontown.pets import PetConstants
-
+from libtoontown import *
 
 class PetWander(CPetChase, DirectObject.DirectObject):
-
-    def __init__(self, minDist=5.0, moveAngle=20.0):
+    def __init__(self, minDist=5., moveAngle=20.):
+        # create a target node that we'll be moving around
+        # it doesn't matter that it's under hidden, we can still compare
+        # positions with objects under render
         self.movingTarget = hidden.attachNewNode('petWanderTarget')
-        CPetChase.__init__(self, self.movingTarget, minDist, moveAngle)
+        CPetChase.__init__(self, self.movingTarget,
+                           minDist, moveAngle)
+
         self.targetMoveCountdown = 0
+
+        # listen for any detected collisions, and use them when deciding
+        # where to go next
         self.collEvent = None
         self.gotCollision = False
-        return
 
     def isCpp(self):
         return 0
@@ -23,7 +28,6 @@ class PetWander(CPetChase, DirectObject.DirectObject):
         if self.collEvent is not None:
             self.ignore(self.collEvent)
             self.collEvent = None
-        return
 
     def _setMover(self, mover):
         CPetChase.setMover(self, mover)
@@ -38,8 +42,9 @@ class PetWander(CPetChase, DirectObject.DirectObject):
 
     def _handleCollision(self, collEntry):
         self.gotCollision = True
+        # stop running against the wall
         self.movingTarget.setPos(self.getNodePath().getPos())
-        self.targetMoveCountdown *= 0.5
+        self.targetMoveCountdown *= .5
 
     def destroy(self):
         self.__ignoreCollisions()
@@ -48,16 +53,22 @@ class PetWander(CPetChase, DirectObject.DirectObject):
 
     def _process(self, dt):
         self.targetMoveCountdown -= dt
-        if self.targetMoveCountdown <= 0.0:
-            distance = normalDistrib(3.0, 30.0)
-            heading = normalDistrib(-(90 + 45), 90 + 45)
+        if self.targetMoveCountdown <= 0.:
+            distance = normalDistrib(3.,30.)
+            heading = normalDistrib(-(90+45),(90+45))
+
+            # if we bumped into something, go in the opposite direction
+            # from where we were about to go
             if self.gotCollision:
                 self.gotCollision = False
                 heading = heading + 180
+
             target = self.getTarget()
             target.setPos(self.getNodePath().getPos())
             target.setH(target, heading)
             target.setY(target, distance)
+
             duration = distance / self.mover.getFwdSpeed()
-            self.targetMoveCountdown = duration * randFloat(1.2, 3.0)
+            self.targetMoveCountdown = duration * randFloat(1.2, 3.)
+
         CPetChase.process(self, dt)

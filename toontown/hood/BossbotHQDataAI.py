@@ -13,102 +13,100 @@ from toontown.building import DistributedBoardingPartyAI
 from toontown.building import FADoorCodes
 from toontown.coghq import DistributedCogKartAI
 
-
 class BossbotHQDataAI(HoodDataAI.HoodDataAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('BossbotHQDataAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory("BossbotHQDataAI")
 
-    def __init__(self, air, zoneId=None):
-        self.notify.debug('__init__: zoneId:%s' % zoneId)
+    def __init__(self, air, zoneId = None):
+        """Create BossbotHQDataAI."""
+        self.notify.debug("__init__: zoneId:%s" % zoneId)
         hoodId = ToontownGlobals.BossbotHQ
-        if zoneId is None:
+        if zoneId == None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
         self.cogKarts = []
-        return
 
     def startup(self):
+        """Start the BossbotHQ zone."""
         HoodDataAI.HoodDataAI.startup(self)
 
-        def makeOfficeElevator(index, antiShuffle=0, minLaff=0):
+
+        # TODO: define these in a more modular way
+        def makeOfficeElevator(index, antiShuffle = 0, minLaff = 0):
             destZone = (
                 ToontownGlobals.LawbotStageIntA,
                 ToontownGlobals.LawbotStageIntB,
                 ToontownGlobals.LawbotStageIntC,
-                ToontownGlobals.LawbotStageIntD)[index]
-            elev = DistributedLawOfficeElevatorExtAI.DistributedLawOfficeElevatorExtAI(
-                self.air, self.air.lawMgr, destZone, index, antiShuffle=0, minLaff=minLaff)
+                ToontownGlobals.LawbotStageIntD,)[index]
+            elev = DistributedLawOfficeElevatorExtAI.DistributedLawOfficeElevatorExtAI(self.air,
+                                                                                       self.air.lawMgr,
+                                                                                       destZone, index, antiShuffle = 0, minLaff= minLaff)#antiShufflePOI
             elev.generateWithRequired(ToontownGlobals.LawbotOfficeExt)
             self.addDistObj(elev)
 
-        self.lobbyMgr = LobbyManagerAI.LobbyManagerAI(
-            self.air, DistributedBossbotBossAI.DistributedBossbotBossAI)
+        # Lobby elevator
+        self.lobbyMgr = LobbyManagerAI.LobbyManagerAI(self.air, DistributedBossbotBossAI.DistributedBossbotBossAI)
         self.lobbyMgr.generateWithRequired(ToontownGlobals.BossbotLobby)
         self.addDistObj(self.lobbyMgr)
-        self.lobbyElevator = DistributedBBElevatorAI.DistributedBBElevatorAI(
-            self.air, self.lobbyMgr, ToontownGlobals.BossbotLobby, antiShuffle=1)
+        
+        self.lobbyElevator = DistributedBBElevatorAI.DistributedBBElevatorAI(self.air, self.lobbyMgr, ToontownGlobals.BossbotLobby, antiShuffle = 1) # antiShufflePOI
         self.lobbyElevator.generateWithRequired(ToontownGlobals.BossbotLobby)
         self.addDistObj(self.lobbyElevator)
+        
         if simbase.config.GetBool('want-boarding-groups', 1):
-            self.boardingParty = DistributedBoardingPartyAI.DistributedBoardingPartyAI(
-                self.air, [self.lobbyElevator.doId], 8)
-            self.boardingParty.generateWithRequired(
-                ToontownGlobals.BossbotLobby)
+            self.boardingParty = DistributedBoardingPartyAI.DistributedBoardingPartyAI(self.air, [self.lobbyElevator.doId], 8)
+            self.boardingParty.generateWithRequired(ToontownGlobals.BossbotLobby)
+        #self.addDistObj(self.boardingParty)
+        
+        
 
         def makeDoor(destinationZone, intDoorIndex, extDoorIndex, lock=0):
-            intDoor = DistributedCogHQDoorAI.DistributedCogHQDoorAI(
-                self.air,
-                0,
-                DoorTypes.INT_COGHQ,
-                self.canonicalHoodId,
-                doorIndex=intDoorIndex,
-                lockValue=lock)
+            #set up both doors
+            intDoor=DistributedCogHQDoorAI.DistributedCogHQDoorAI(
+                self.air, 0, DoorTypes.INT_COGHQ,
+                self.canonicalHoodId, doorIndex=intDoorIndex, lockValue=lock)
             intDoor.zoneId = destinationZone
-            extDoor = DistributedCogHQDoorAI.DistributedCogHQDoorAI(
-                self.air,
-                0,
-                DoorTypes.EXT_COGHQ,
-                destinationZone,
-                doorIndex=extDoorIndex,
-                lockValue=lock)
-            extDoor.setOtherDoor(intDoor)
+            extDoor=DistributedCogHQDoorAI.DistributedCogHQDoorAI(
+                self.air, 0, DoorTypes.EXT_COGHQ,
+                destinationZone, doorIndex=extDoorIndex, lockValue=lock)
+
+            #point them to each other
+            extDoor.setOtherDoor(intDoor)                
             intDoor.setOtherDoor(extDoor)
+
+            #generate them
             intDoor.generateWithRequired(destinationZone)
-            intDoor.sendUpdate('setDoorIndex', [intDoor.getDoorIndex()])
+            intDoor.sendUpdate("setDoorIndex", [intDoor.getDoorIndex()])
             self.addDistObj(intDoor)
+
             extDoor.generateWithRequired(self.canonicalHoodId)
-            extDoor.sendUpdate('setDoorIndex', [extDoor.getDoorIndex()])
+            extDoor.sendUpdate("setDoorIndex", [extDoor.getDoorIndex()])
             self.addDistObj(extDoor)
 
-        makeDoor(ToontownGlobals.BossbotLobby, 0, 0,
-                 FADoorCodes.BB_DISGUISE_INCOMPLETE)
+
+        # CogHQ Main building -> Lobby doors
+        makeDoor(ToontownGlobals.BossbotLobby, 0, 0, FADoorCodes.BB_DISGUISE_INCOMPLETE)
+        # Plaza -> Office
+        #makeDoor(ToontownGlobals.LawbotOfficeExt, 0, 0)
+        
         kartIdList = self.createCogKarts()
         if simbase.config.GetBool('want-boarding-groups', 1):
-            self.courseBoardingParty = DistributedBoardingPartyAI.DistributedBoardingPartyAI(
-                self.air, kartIdList, 4)
+            self.courseBoardingParty = DistributedBoardingPartyAI.DistributedBoardingPartyAI(self.air, kartIdList, 4)
             self.courseBoardingParty.generateWithRequired(self.zoneId)
 
     def createCogKarts(self):
-        posList = (
-            (154.762, 37.169, 0), (141.403, -81.887, 0), (-48.44, 15.308, 0))
-        hprList = ((110.815, 0, 0), (61.231, 0, 0), (-105.481, 0, 0))
+        """Create the AI Cog karts."""
+        posList = ( (154.762, 37.169, 0), (141.403, -81.887,0), (-48.44, 15.308,0) )
+        hprList = ( (110.815, 0, 0), (61.231, 0,0), (-105.481,0,0) )
         mins = ToontownGlobals.FactoryLaffMinimums[3]
         kartIdList = []
         for cogCourse in range(len(posList)):
             pos = posList[cogCourse]
             hpr = hprList[cogCourse]
-            cogKart = DistributedCogKartAI.DistributedCogKartAI(
-                self.air,
-                cogCourse,
-                pos[0],
-                pos[1],
-                pos[2],
-                hpr[0],
-                hpr[1],
-                hpr[2],
-                self.air.countryClubMgr,
-                minLaff=mins[cogCourse])
+            cogKart = DistributedCogKartAI.DistributedCogKartAI(self.air, cogCourse,
+                                                                pos[0], pos[1], pos[2],
+                                                                hpr[0], hpr[1], hpr[2],
+                                                                self.air.countryClubMgr, minLaff=mins[cogCourse])
             cogKart.generateWithRequired(self.zoneId)
             self.cogKarts.append(cogKart)
             kartIdList.append(cogKart.doId)
-
         return kartIdList

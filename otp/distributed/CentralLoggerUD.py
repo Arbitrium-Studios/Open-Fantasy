@@ -1,6 +1,4 @@
-from direct.directnotify import DirectNotifyGlobal
-from direct.distributed.DistributedObjectUD import DistributedObjectUD
+from direct.distributed.DistributedObjectGlobalUD import DistributedObjectGlobalUD
 
-
-class CentralLoggerUD(DistributedObjectUD):
-    notify = DirectNotifyGlobal.directNotify.newCategory('CentralLoggerUD')
+class CentralLoggerUD(DistributedObjectGlobalUD):
+    pass

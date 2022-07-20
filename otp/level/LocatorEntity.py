@@ -2,10 +2,8 @@ from . import Entity, BasicEntities
 from pandac.PandaModules import NodePath
 from direct.directnotify import DirectNotifyGlobal
 
-
 class LocatorEntity(Entity.Entity, NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory('LocatorEntity')
-
     def __init__(self, level, entId):
         node = hidden.attachNewNode('LocatorEntity-%s' % entId)
         NodePath.__init__(self, node)
@@ -17,6 +15,7 @@ class LocatorEntity(Entity.Entity, NodePath):
         self.removeNode()
 
     def getNodePath(self):
+        # this allows other entities to be parented to us
         return self
 
     def doReparent(self):
@@ -30,6 +29,5 @@ class LocatorEntity(Entity.Entity, NodePath):
                 self.reparentTo(parent)
 
     if __dev__:
-
         def attribChanged(self, attrib, value):
             self.doReparent()

@@ -1,6 +1,5 @@
-from pandac.PandaModules import CollisionSphere, CollisionTube, CollisionNode
-from pandac.PandaModules import NodePath, BitMask32
-from pandac.PandaModules import Point3, Point4, WaitInterval, Vec3, Vec4
+from panda3d.core import CollisionSphere, CollisionTube, CollisionNode, NodePath, BitMask32, Point3, Point4, Vec3, Vec4
+from panda3d.direct import WaitInterval
 from direct.interval.IntervalGlobal import LerpScaleInterval, LerpColorScaleInterval, LerpPosInterval, LerpFunc
 from direct.interval.IntervalGlobal import Func, Sequence, Parallel
 from direct.showbase.DirectObject import DirectObject
@@ -11,7 +10,6 @@ from .CogdoGameExit import CogdoGameExit
 from . import CogdoUtil
 import math
 import random
-
 
 class CogdoMazeSplattable:
 
@@ -52,12 +50,7 @@ class CogdoMazeSplattable:
         self.splat.setPos(self.object, 0, 0, 3.0)
         self.splat.setY(self.splat.getY() - 1.0)
         self._splatSfxIval.node = self.splat
-        self.splatTrack = Parallel(
-            self._splatSfxIval, Sequence(
-                Func(
-                    self.splat.showThrough), LerpScaleInterval(
-                    self.splat, duration=0.5, scale=6, startScale=1, blendType='easeOut'), Func(
-                    self.splat.hide)))
+        self.splatTrack = Parallel(self._splatSfxIval, Sequence(Func(self.splat.showThrough), LerpScaleInterval(self.splat, duration=0.5, scale=6, startScale=1, blendType='easeOut'), Func(self.splat.hide)))
         self.splatTrack.start()
 
 
@@ -79,8 +72,7 @@ class CogdoMazeDrop(NodePath, DirectObject):
         roll = random.randint(-15, 15)
         drop.setHpr(0, 0, roll)
         drop.setZ(Globals.DropHeight)
-        self.collTube = CollisionTube(
-            0, 0, 0, 0, 0, 4, Globals.DropCollisionRadius)
+        self.collTube = CollisionTube(0, 0, 0, 0, 0, 4, Globals.DropCollisionRadius)
         self.collTube.setTangible(0)
         name = Globals.DropCollisionName
         self.collNode = CollisionNode(name)
@@ -90,8 +82,7 @@ class CogdoMazeDrop(NodePath, DirectObject):
         self.collNodePath.setTag('isFalling', str('True'))
         drop.reparentTo(self)
         self.drop = drop
-        self._dropSfx = base.cogdoGameAudioMgr.createSfxIval(
-            'drop', volume=0.6)
+        self._dropSfx = base.cogdoGameAudioMgr.createSfxIval('drop', volume=0.6)
 
     def disableCollisionDamage(self):
         self.collTube.setTangible(1)
@@ -108,105 +99,22 @@ class CogdoMazeDrop(NodePath, DirectObject):
         dropHeight = Globals.DropHeight
         targetShadowScale = 0.5
         targetShadowAlpha = 0.4
-        shadowScaleIval = LerpScaleInterval(
-            shadow, dropTime, targetShadowScale, startScale=0)
-        shadowAlphaIval = LerpColorScaleInterval(
-            shadow, hangTime, Point4(
-                1, 1, 1, targetShadowAlpha), startColorScale=Point4(
-                1, 1, 1, 0))
+        shadowScaleIval = LerpScaleInterval(shadow, dropTime, targetShadowScale, startScale=0)
+        shadowAlphaIval = LerpColorScaleInterval(shadow, hangTime, Point4(1, 1, 1, targetShadowAlpha), startColorScale=Point4(1, 1, 1, 0))
         shadowIval = Parallel(shadowScaleIval, shadowAlphaIval)
         startPos = Point3(0, 0, dropHeight)
         drop.setPos(startPos)
-        dropIval = LerpPosInterval(drop, dropTime, Point3(
-            0, 0, 0), startPos=startPos, blendType='easeIn')
+        dropIval = LerpPosInterval(drop, dropTime, Point3(0, 0, 0), startPos=startPos, blendType='easeIn')
         dropSoundIval = self._dropSfx
         dropSoundIval.node = self
         self.drop.setTransparency(1)
 
         def _setRandScale(t):
-            self.drop.setScale(
-                self,
-                1 - random.random() / 16,
-                1 - random.random() / 16,
-                1 - random.random() / 4)
+            self.drop.setScale(self, 1 - random.random() / 16, 1 - random.random() / 16, 1 - random.random() / 4)
 
         scaleChange = 0.4 + random.random() / 4
-        dropShakeSeq = Sequence(
-            LerpScaleInterval(
-                self.drop,
-                0.25,
-                Vec3(
-                    1.0 + scaleChange,
-                    1.0 + scaleChange / 2,
-                    1.0 - scaleChange),
-                blendType='easeInOut'),
-            LerpScaleInterval(
-                self.drop,
-                0.25,
-                Vec3(
-                    1.0,
-                    1.0,
-                    1.0),
-                blendType='easeInOut'),
-            Func(
-                self.disableCollisionDamage),
-            LerpScaleInterval(
-                self.drop,
-                0.2,
-                Vec3(
-                    1.0 + scaleChange / 8,
-                    1.0 + scaleChange / 8,
-                    1.0 - scaleChange / 8),
-                blendType='easeInOut'),
-            LerpScaleInterval(
-                self.drop,
-                0.2,
-                Vec3(
-                    1.0,
-                    1.0,
-                    1.0),
-                blendType='easeInOut'),
-            LerpScaleInterval(
-                self.drop,
-                0.15,
-                Vec3(
-                    1.0 + scaleChange / 16,
-                    1.0 + scaleChange / 16,
-                    1.0 - scaleChange / 16),
-                blendType='easeInOut'),
-            LerpScaleInterval(
-                self.drop,
-                0.15,
-                Vec3(
-                    1.0,
-                    1.0,
-                    1.0),
-                blendType='easeInOut'),
-            LerpScaleInterval(
-                self.drop,
-                0.1,
-                Vec3(
-                    1.0 + scaleChange / 16,
-                    1.0 + scaleChange / 8,
-                    1.0 - scaleChange / 16),
-                blendType='easeInOut'),
-            LerpColorScaleInterval(
-                self.drop,
-                Globals.DropFadeTime,
-                Vec4(
-                    1.0,
-                    1.0,
-                    1.0,
-                    0.0)))
-        ival = Sequence(
-            Func(
-                self.reparentTo, render), Parallel(
-                Sequence(
-                    WaitInterval(hangTime), dropIval), shadowIval), Parallel(
-                    Func(
-                        self.game.dropHit, self, id), dropSoundIval, dropShakeSeq), Func(
-                            self.game.cleanupDrop, id), name='drop%s' %
-            id)
+        dropShakeSeq = Sequence(LerpScaleInterval(self.drop, 0.25, Vec3(1.0 + scaleChange, 1.0 + scaleChange / 2, 1.0 - scaleChange), blendType='easeInOut'), LerpScaleInterval(self.drop, 0.25, Vec3(1.0, 1.0, 1.0), blendType='easeInOut'), Func(self.disableCollisionDamage), LerpScaleInterval(self.drop, 0.2, Vec3(1.0 + scaleChange / 8, 1.0 + scaleChange / 8, 1.0 - scaleChange / 8), blendType='easeInOut'), LerpScaleInterval(self.drop, 0.2, Vec3(1.0, 1.0, 1.0), blendType='easeInOut'), LerpScaleInterval(self.drop, 0.15, Vec3(1.0 + scaleChange / 16, 1.0 + scaleChange / 16, 1.0 - scaleChange / 16), blendType='easeInOut'), LerpScaleInterval(self.drop, 0.15, Vec3(1.0, 1.0, 1.0), blendType='easeInOut'), LerpScaleInterval(self.drop, 0.1, Vec3(1.0 + scaleChange / 16, 1.0 + scaleChange / 8, 1.0 - scaleChange / 16), blendType='easeInOut'), LerpColorScaleInterval(self.drop, Globals.DropFadeTime, Vec4(1.0, 1.0, 1.0, 0.0)))
+        ival = Sequence(Func(self.reparentTo, render), Parallel(Sequence(WaitInterval(hangTime), dropIval), shadowIval), Parallel(Func(self.game.dropHit, self, id), dropSoundIval, dropShakeSeq), Func(self.game.cleanupDrop, id), name='drop%s' % id)
         self.ival = ival
         return ival
 
@@ -297,8 +205,7 @@ class CogdoMazeWaterCooler(NodePath, DirectObject):
 
     def _initCollisions(self):
         offset = Globals.WaterCoolerTriggerOffset
-        self.collSphere = CollisionSphere(
-            offset[0], offset[1], offset[2], Globals.WaterCoolerTriggerRadius)
+        self.collSphere = CollisionSphere(offset[0], offset[1], offset[2], Globals.WaterCoolerTriggerRadius)
         self.collSphere.setTangible(0)
         name = Globals.WaterCoolerCollisionName
         self.collNode = CollisionNode(name)
@@ -306,8 +213,7 @@ class CogdoMazeWaterCooler(NodePath, DirectObject):
         self.collNodePath = self.attachNewNode(self.collNode)
 
     def _initArrow(self):
-        matchingGameGui = loader.loadModel(
-            'phase_3.5/models/gui/matching_game_gui')
+        matchingGameGui = loader.loadModel('phase_3.5/models/gui/matching_game_gui')
         arrow = matchingGameGui.find('**/minnieArrow')
         arrow.setScale(Globals.CoolerArrowScale)
         arrow.setColor(*Globals.CoolerArrowColor)
@@ -329,8 +235,7 @@ class CogdoMazeWaterCooler(NodePath, DirectObject):
         self._arrow.stash()
 
     def update(self, dt):
-        newZ = math.sin(globalClock.getFrameTime() *
-                        Globals.CoolerArrowSpeed) * Globals.CoolerArrowBounce
+        newZ = math.sin(globalClock.getFrameTime() * Globals.CoolerArrowSpeed) * Globals.CoolerArrowBounce
         self._arrow.setZ(newZ)
 
     def __startUpdateTask(self):

@@ -8,7 +8,6 @@ from direct.fsm import State
 from . import LiftConstants
 from . import MovingPlatform
 
-
 class DistributedLift(BasicEntities.DistributedNodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLift')
 
@@ -18,23 +17,43 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
     def generateInit(self):
         self.notify.debug('generateInit')
         BasicEntities.DistributedNodePathEntity.generateInit(self)
-        self.moveSnd = base.loader.loadSfx(
-            'phase_9/audio/sfx/CHQ_FACT_elevator_up_down.ogg')
-        self.fsm = ClassicFSM.ClassicFSM(
-            'DistributedLift', [
-                State.State(
-                    'off', self.enterOff, self.exitOff, ['moving']), State.State(
-                    'moving', self.enterMoving, self.exitMoving, ['waiting']), State.State(
-                    'waiting', self.enterWaiting, self.exitWaiting, ['moving'])], 'off', 'off')
+        # load stuff
+
+        self.moveSnd = base.loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_elevator_up_down.ogg')
+
+        self.fsm = ClassicFSM.ClassicFSM('DistributedLift',
+                           [
+                            State.State('off',
+                                        self.enterOff,
+                                        self.exitOff,
+                                        ['moving']),
+                            State.State('moving',
+                                        self.enterMoving,
+                                        self.exitMoving,
+                                        ['waiting']),
+                            State.State('waiting',
+                                        self.enterWaiting,
+                                        self.exitWaiting,
+                                        ['moving']),
+                            ],
+                           # Initial State
+                           'off',
+                           # Final State
+                           'off',
+                           )
         self.fsm.enterInitialState()
 
     def generate(self):
         self.notify.debug('generate')
         BasicEntities.DistributedNodePathEntity.generate(self)
+        # nodepath that will be lerped, regardless of whether or not
+        # model loaded correctly
         self.platform = self.attachNewNode('platParent')
 
     def setStateTransition(self, toState, fromState, arrivalTimestamp):
         self.notify.debug('setStateTransition: %s->%s' % (fromState, toState))
+        # the lift should reach state 'toState' precisely
+        # at time 'arrivalTimestamp'
         if not self.isGenerated():
             self.initialState = toState
             self.initialFromState = fromState
@@ -45,24 +64,28 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
     def announceGenerate(self):
         self.notify.debug('announceGenerate')
         BasicEntities.DistributedNodePathEntity.announceGenerate(self)
+
         self.initPlatform()
+
+        # fire it up
         self.state = None
-        self.fsm.request('moving',
-                         [self.initialState,
-                          self.initialFromState,
-                          self.initialStateTimestamp])
+        self.fsm.request('moving', [self.initialState,
+                                    self.initialFromState,
+                                    self.initialStateTimestamp])
         del self.initialState
         del self.initialStateTimestamp
-        return
 
     def disable(self):
         self.notify.debug('disable')
+        # stop things
         self.ignoreAll()
         self.fsm.requestFinalState()
+
         BasicEntities.DistributedNodePathEntity.disable(self)
 
     def delete(self):
         self.notify.debug('delete')
+        # unload things
         del self.moveSnd
         del self.fsm
         self.destroyPlatform()
@@ -75,13 +98,19 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
         if model is None:
             return
         model.setScale(self.modelScale)
+
+        # create our moving platform
         if self.floorName is None:
             return
         self.platformModel = MovingPlatform.MovingPlatform()
         self.platformModel.setupCopyModel(
-            self.getParentToken(), model, self.floorName)
+                self.getParentToken(), model, self.floorName)
+
+        # listen for the platform's enter and exit event
         self.accept(self.platformModel.getEnterEvent(), self.localToonEntered)
         self.accept(self.platformModel.getExitEvent(), self.localToonLeft)
+
+        # get handles on the start and end guard collision polys
         self.startGuard = None
         self.endGuard = None
         zoneNp = self.getZoneNode()
@@ -89,17 +118,36 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
             self.startGuard = zoneNp.find('**/%s' % self.startGuardName)
         if len(self.endGuardName):
             self.endGuard = zoneNp.find('**/%s' % self.endGuardName)
-        side2srch = {'front': '**/wall_front',
-                     'back': '**/wall_back',
-                     'left': '**/wall_left',
-                     'right': '**/wall_right'}
+
+        # get handles on the start and end boarding collision planes
+        # (actually, they're the planes we need to stash so that toons
+        # can get off the lift)
+        side2srch = {
+            'front': '**/wall_front',
+            'back': '**/wall_back',
+            'left': '**/wall_left',
+            'right': '**/wall_right',
+            }
+        if 0:
+            # Hack to stop getting out of lift:
+            floor = self.platformModel.model.find("**/MovingPlatform-*")
+            assert not floor.isEmpty()
+            safetyNet = floor.copyTo(floor.getParent())
+            safetyNet.setName("safetyNet")
+            safetyNet.setZ(-0.1)
+            safetyNet.setScale(2.0)
+            safetyNet.setCollideMask(ToontownGlobals.safetyNetBitmask)
+            safetyNet.flattenLight()
+            safetyNet.show() #*#
+
+        # Hack for falling off of the lift:
         for side in list(side2srch.values()):
             np = self.platformModel.find(side)
             if not np.isEmpty():
                 np.setScale(1.0, 1.0, 2.0)
                 np.setZ(-10)
                 np.flattenLight()
-
+        
         self.startBoardColl = NodePathCollection()
         self.endBoardColl = NodePathCollection()
         for side in self.startBoardSides:
@@ -109,7 +157,6 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
                     "couldn't find %s board collision" % side)
             else:
                 self.startBoardColl.addPath(np)
-
         for side in self.endBoardSides:
             np = self.platformModel.find(side2srch[side])
             if np.isEmpty():
@@ -118,8 +165,9 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
             else:
                 self.endBoardColl.addPath(np)
 
+        # now that we've found the guards, we can reparent the platform
+        # otherwise our finds would venture into the platform model
         self.platformModel.reparentTo(self.platform)
-        return
 
     def destroyPlatform(self):
         if hasattr(self, 'platformModel'):
@@ -135,7 +183,6 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
             del self.endGuard
             del self.startBoardColl
             del self.endBoardColl
-        return
 
     def localToonEntered(self):
         self.sendUpdate('setAvatarEnter')
@@ -143,9 +190,9 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
     def localToonLeft(self):
         self.sendUpdate('setAvatarLeave')
 
+    # ClassicFSM state enter/exit funcs
     def enterOff(self):
         self.notify.debug('enterOff')
-
     def exitOff(self):
         pass
 
@@ -156,12 +203,15 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
             return self.endPos
 
     def getGuard(self, state):
+        """returns guard that should be disabled when lift is in 'state'"""
         if state is LiftConstants.Down:
             return self.startGuard
         else:
             return self.endGuard
 
     def getBoardColl(self, state):
+        """returns collision geom that should be disabled when lift is in
+        'state'"""
         if state is LiftConstants.Down:
             return self.startBoardColl
         else:
@@ -171,10 +221,19 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
         self.notify.debug('enterMoving, %s->%s' % (fromState, toState))
         if self.state == toState:
             self.notify.warning('already in state %s' % toState)
+
+        # TODO: optimization:
+        # if timestamp < now:
+        #   just set lift to target state
+        # else:
+        #   create and play interval
+
         startPos = self.getPosition(fromState)
         endPos = self.getPosition(toState)
+
         startGuard = self.getGuard(fromState)
         endGuard = self.getGuard(toState)
+
         startBoardColl = self.getBoardColl(fromState)
         endBoardColl = self.getBoardColl(toState)
 
@@ -182,12 +241,13 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
             if guard is not None and not guard.isEmpty():
                 guard.unstash()
             boardColl.unstash()
+            # start the lift sound looping, so that the attenuation recalcs
+            # every time it loops
             self.soundIval = SoundInterval(self.moveSnd, node=self.platform)
             self.soundIval.loop()
-            return
 
-        def doneMoving(self=self, guard=endGuard,
-                       boardColl=endBoardColl, newState=toState):
+        def doneMoving(self=self, guard=endGuard, boardColl=endBoardColl,
+                       newState=toState):
             self.state = newState
             if hasattr(self, 'soundIval'):
                 self.soundIval.pause()
@@ -196,39 +256,36 @@ class DistributedLift(BasicEntities.DistributedNodePathEntity):
                 guard.stash()
             boardColl.stash()
             self.fsm.request('waiting')
-            return
 
         self.moveIval = Sequence(
             Func(startMoving),
-            LerpPosInterval(
-                self.platform,
-                self.duration,
-                endPos,
-                startPos=startPos,
-                blendType='easeInOut',
-                name='lift-%s-move' %
-                self.entId,
-                fluid=1),
-            Func(doneMoving))
-        ivalStartT = globalClockDelta.networkToLocalTime(
-            arrivalTimestamp, bits=32) - self.moveIval.getDuration()
+            LerpPosInterval(self.platform, self.duration,
+                            endPos, startPos = startPos,
+                            blendType='easeInOut',
+                            name='lift-%s-move' % self.entId,
+                            fluid = 1),
+            Func(doneMoving),
+            )
+        # move should finish at 'arrivalTimestamp'
+        ivalStartT = (
+            globalClockDelta.networkToLocalTime(arrivalTimestamp, bits=32)
+            - self.moveIval.getDuration())
         self.moveIval.start(globalClock.getFrameTime() - ivalStartT)
-
+        
     def exitMoving(self):
         if hasattr(self, 'soundIval'):
             self.soundIval.pause()
             del self.soundIval
+        # 'finish'ing here causes ClassicFSM problems
         self.moveIval.pause()
         del self.moveIval
 
     def enterWaiting(self):
         self.notify.debug('enterWaiting')
-
     def exitWaiting(self):
         pass
 
     if __dev__:
-
         def attribChanged(self, *args):
             BasicEntities.DistributedNodePathEntity.attribChanged(self, *args)
             self.destroyPlatform()

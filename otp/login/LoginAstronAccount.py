@@ -3,7 +3,6 @@ from otp.login.LoginBase import LoginBase
 from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.MsgTypes import *
 
-
 class LoginAstronAccount(LoginBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('LoginAstronAccount')
 

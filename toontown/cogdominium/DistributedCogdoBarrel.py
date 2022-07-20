@@ -1,13 +1,11 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObject
 from toontown.toonbase import ToontownGlobals, ToontownIntervals
 from toontown.cogdominium import CogdoBarrelRoomConsts
 
-
 class DistributedCogdoBarrel(DistributedObject.DistributedObject):
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedCogdoBarrel')
+    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCogdoBarrel')
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
@@ -23,10 +21,8 @@ class DistributedCogdoBarrel(DistributedObject.DistributedObject):
 
     def generate(self):
         DistributedObject.DistributedObject.generate(self)
-        self.bumpSound = base.loader.loadSfx(
-            CogdoBarrelRoomConsts.BarrelBumpSound)
-        self.grabSound = base.loader.loadSfx(
-            CogdoBarrelRoomConsts.BarrelGrabSound)
+        self.bumpSound = base.loader.loadSfx(CogdoBarrelRoomConsts.BarrelBumpSound)
+        self.grabSound = base.loader.loadSfx(CogdoBarrelRoomConsts.BarrelGrabSound)
 
     def __setModel(self):
         self.model = loader.loadModel(CogdoBarrelRoomConsts.BarrelModel)
@@ -38,10 +34,8 @@ class DistributedCogdoBarrel(DistributedObject.DistributedObject):
             cogdoBarrelsNode = render.attachNewNode('CogdoBarrels')
             cogdoBarrelsNode.stash()
         self.model.reparentTo(cogdoBarrelsNode)
-        self.availableTex = loader.loadTexture(
-            'phase_5/maps/tt_t_ara_cbr_Barrel_notUsed.jpg')
-        self.usedTex = loader.loadTexture(
-            'phase_5/maps/tt_t_ara_cbr_Barrel_Used.jpg')
+        self.availableTex = loader.loadTexture('phase_5/maps/tt_t_ara_cbr_Barrel_notUsed.jpg')
+        self.usedTex = loader.loadTexture('phase_5/maps/tt_t_ara_cbr_Barrel_Used.jpg')
         self.model.setTexture(self.availableTex, 100)
 
     def __addCollision(self):
@@ -51,8 +45,7 @@ class DistributedCogdoBarrel(DistributedObject.DistributedObject):
             radius = 1
             self.collTube = CollisionTube(ax, ay, az, bx, by, bz, radius)
             self.collTube.setTangible(1)
-            self.collSphere = CollisionSphere(
-                *CogdoBarrelRoomConsts.BarrelCollParams)
+            self.collSphere = CollisionSphere(*CogdoBarrelRoomConsts.BarrelCollParams)
             self.collSphere.setTangible(0)
             self.collNode = CollisionNode(self.uniqueName('barrelSphere'))
             self.collNode.setIntoCollideMask(ToontownGlobals.WallBitmask)
@@ -94,9 +87,7 @@ class DistributedCogdoBarrel(DistributedObject.DistributedObject):
             if self.model:
                 self.model.unstash()
                 self.model.setTexture(self.availableTex, 100)
-            self.accept(
-                self.uniqueName('enterbarrelSphere'),
-                self.handleEnterSphere)
+            self.accept(self.uniqueName('enterbarrelSphere'), self.handleEnterSphere)
         elif self.state == CogdoBarrelRoomConsts.StateUsed:
             if self.model:
                 self.model.unstash()
@@ -111,12 +102,8 @@ class DistributedCogdoBarrel(DistributedObject.DistributedObject):
                 self.model.stash()
             self.ignore(self.uniqueName('enterbarrelSphere'))
 
-    def handleEnterSphere(self, collEntry=None):
-        base.playSfx(
-            self.bumpSound,
-            volume=0.35,
-            node=self.model,
-            listener=camera)
+    def handleEnterSphere(self, collEntry = None):
+        base.playSfx(self.bumpSound, volume=0.35, node=self.model, listener=camera)
         self.d_requestGrab()
 
     def d_requestGrab(self):
@@ -124,12 +111,7 @@ class DistributedCogdoBarrel(DistributedObject.DistributedObject):
 
     def setGrab(self, avId):
         if avId == base.localAvatar.doId:
-            ToontownIntervals.start(
-                ToontownIntervals.getPulseIval(
-                    self.model,
-                    self.__pulseIvalName(),
-                    1.15,
-                    duration=0.2))
+            ToontownIntervals.start(ToontownIntervals.getPulseIval(self.model, self.__pulseIvalName(), 1.15, duration=0.2))
             self.setState(CogdoBarrelRoomConsts.StateUsed)
 
     def setReject(self):

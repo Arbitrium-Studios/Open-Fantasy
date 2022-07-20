@@ -1,4 +1,4 @@
-from pandac.PandaModules import NodePath, Point3, PlaneNode, TextNode
+from panda3d.core import NodePath, Point3, PlaneNode, TextNode
 from direct.interval.IntervalGlobal import *
 from direct.showbase.ShowBase import Plane
 from direct.directnotify import DirectNotifyGlobal
@@ -12,7 +12,6 @@ from toontown.suit import Suit, SuitDNA
 from toontown.toon import Toon, ToonHead, ToonDNA
 from .CogdoUtil import CogdoGameMovie
 from . import CogdoUtil
-
 
 class CogdoElevatorMovie(CogdoGameMovie):
     notify = DirectNotifyGlobal.directNotify.newCategory('CogdoElevatorMovie')
@@ -49,8 +48,7 @@ class CogdoElevatorMovie(CogdoGameMovie):
     def load(self):
         self.notify.debug('load()')
         CogdoGameMovie.load(self)
-        backgroundGui = loader.loadModel(
-            'phase_5/models/cogdominium/tt_m_gui_csa_flyThru')
+        backgroundGui = loader.loadModel('phase_5/models/cogdominium/tt_m_gui_csa_flyThru')
         self.bg = backgroundGui.find('**/background')
         self.chatBubble = backgroundGui.find('**/chatBubble')
         self.chatBubble.setScale(6.5, 6.5, 7.3)
@@ -59,71 +57,43 @@ class CogdoElevatorMovie(CogdoGameMovie):
         self.bg.setPos(0.14, 0, -0.6667)
         self.bg.reparentTo(aspect2d)
         self.chatBubble.reparentTo(aspect2d)
-        self.frame = DirectFrame(
-            geom=self.bg, relief=None, pos=(
-                0.2, 0, -0.6667))
+        self.frame = DirectFrame(geom=self.bg, relief=None, pos=(0.2, 0, -0.6667))
         self.bg.wrtReparentTo(self.frame)
-        self.gameTitleText = DirectLabel(
-            parent=self.frame,
-            text=TTLocalizer.CogdoExecutiveSuiteTitle,
-            scale=TTLocalizer.MRPgameTitleText * 0.8,
-            text_align=TextNode.ACenter,
-            text_font=getSignFont(),
-            text_fg=(
-                1.0,
-                0.33,
-                0.33,
-                1.0),
-            pos=TTLocalizer.MRgameTitleTextPos,
-            relief=None)
+        self.gameTitleText = DirectLabel(parent=self.frame, text=TTLocalizer.CogdoExecutiveSuiteTitle, scale=TTLocalizer.MRPgameTitleText * 0.8, text_align=TextNode.ACenter, text_font=getSignFont(), text_fg=(1.0, 0.33, 0.33, 1.0), pos=TTLocalizer.MRgameTitleTextPos, relief=None)
         self.chatBubble.wrtReparentTo(self.frame)
         self.frame.hide()
         backgroundGui.removeNode()
         self.toonDNA = ToonDNA.ToonDNA()
-        self.toonDNA.newToonFromProperties(
-            'dss', 'ss', 'm', 'm', 2, 0, 2, 2, 1, 8, 1, 8, 1, 14)
+        self.toonDNA.newToonFromProperties('dss', 'ss', 'm', 'm', 2, 0, 2, 2, 1, 8, 1, 8, 1, 14)
         self.toonHead = Toon.Toon()
         self.toonHead.setDNA(self.toonDNA)
         self.makeSuit('sc')
         self.toonHead.getGeomNode().setDepthWrite(1)
         self.toonHead.getGeomNode().setDepthTest(1)
         self.toonHead.loop('neutral')
-        self.toonHead.setPosHprScale(-0.73, 0, -
-                                     1.27, 180, 0, 0, 0.18, 0.18, 0.18)
+        self.toonHead.setPosHprScale(-0.73, 0, -1.27, 180, 0, 0, 0.18, 0.18, 0.18)
         self.toonHead.reparentTo(hidden)
         self.toonHead.startBlink()
         self.clipPlane = self.toonHead.attachNewNode(PlaneNode('clip'))
         self.clipPlane.node().setPlane(Plane(0, 0, 1, 0))
         self.clipPlane.setPos(0, 0, 2.45)
-        self._toonDialogueSfx = loader.loadSfx(
-            'phase_3.5/audio/dial/AV_dog_long.ogg')
+        self._toonDialogueSfx = loader.loadSfx('phase_3.5/audio/dial/AV_dog_long.ogg')
         self._camHelperNode = NodePath('CamHelperNode')
         self._camHelperNode.reparentTo(render)
         dialogue = TTLocalizer.CogdoElevatorRewardLaff
 
         def start():
             self.frame.show()
-            base.setCellsAvailable(
-                base.bottomCells +
-                base.leftCells +
-                base.rightCells,
-                0)
+            base.setCellsAvailable(base.bottomCells + base.leftCells + base.rightCells, 0)
 
         def end():
             self._dialogueLabel.reparentTo(hidden)
             self.toonHead.reparentTo(hidden)
             self.frame.hide()
-            base.setCellsAvailable(
-                base.bottomCells +
-                base.leftCells +
-                base.rightCells,
-                1)
+            base.setCellsAvailable(base.bottomCells + base.leftCells + base.rightCells, 1)
             self._stopUpdateTask()
 
-        self._ival = Sequence(
-            Func(start), Func(
-                self.displayLine, dialogue), Wait(
-                self.elevatorDuration), Func(end))
+        self._ival = Sequence(Func(start), Func(self.displayLine, dialogue), Wait(self.elevatorDuration), Func(end))
         self._startUpdateTask()
         return
 

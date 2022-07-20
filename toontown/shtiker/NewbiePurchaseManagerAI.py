@@ -1,15 +1,17 @@
 from . import PurchaseManagerAI
 
-
 class NewbiePurchaseManagerAI(PurchaseManagerAI.PurchaseManagerAI):
 
-    def __init__(self, air, newbieId, playerArray,
-                 mpArray, previousMinigameId, trolleyZone):
+    def __init__(self, air, newbieId, playerArray, mpArray, previousMinigameId,
+                 trolleyZone):
         self.ownedNewbieId = newbieId
+        # newbie PMs have an empty newbie list
         newbieList = []
         PurchaseManagerAI.PurchaseManagerAI.__init__(
-            self, air, playerArray, mpArray, previousMinigameId, trolleyZone, newbieList)
+            self, air, playerArray, mpArray, previousMinigameId,
+            trolleyZone, newbieList)
 
+    # newbie purchase screen has no timeout
     def startCountdown(self):
         pass
 
@@ -17,6 +19,7 @@ class NewbiePurchaseManagerAI(PurchaseManagerAI.PurchaseManagerAI):
         return self.ownedNewbieId
 
     def getInvolvedPlayerIds(self):
+        """ only one newbie """
         return [self.ownedNewbieId]
 
     def handlePlayerLeaving(self, avId):

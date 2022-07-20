@@ -1,21 +1,14 @@
-from panda3d.otp import *
 from direct.interval.IntervalGlobal import *
 from direct.showbase.DirectObject import DirectObject
+
 from .RewardPanel import *
 from .BattleSounds import *
+
 from . import MovieCamera
 from direct.directnotify import DirectNotifyGlobal
 import types
+from panda3d.otp import  *
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieToonVictory')
-
-
-def __findToonReward(rewards, toon):
-    for r in rewards:
-        if r['toon'] == toon:
-            return r
-
-    return None
-
 
 class ToonVictorySkipper(DirectObject):
 
@@ -43,7 +36,7 @@ class ToonVictorySkipper(DirectObject):
     def setStartTime(self, index, startT):
         self._startTimes[index] = startT
 
-    def setIvals(self, ivals, timeOffset=0.0):
+    def setIvals(self, ivals, timeOffset = 0.0):
         for index in self._startTimes:
             self._startTimes[index] += timeOffset
 
@@ -71,17 +64,25 @@ class ToonVictorySkipper(DirectObject):
         elif nextIndex in self._startTimes:
             for ival in self._ivals:
                 ival.setT(self._startTimes[nextIndex])
+def __findToonReward(rewards, toon):
+    for r in rewards:
+        if (r['toon'] == toon):
+            return r
+    return None
 
-
-def doToonVictory(localToonActive, toons, rewardToonIds, rewardDicts, deathList,
-                  rpanel, allowGroupShot=1, uberList=[], helpfulToonsList=[], noSkip=False):
+def doToonVictory(localToonActive, toons, rewardToonIds, rewardDicts,
+                  deathList, rpanel, allowGroupShot = 1, uberList = [], helpfulToonsList= [], noSkip = False):
     track = Sequence()
-    if localToonActive == 1:
+    if (localToonActive == 1):
         track.append(Func(rpanel.show))
         track.append(Func(NametagGlobals.setOnscreenChatForced, 1))
+        
     camTrack = Sequence()
     endTrack = Sequence()
     danceSound = globalBattleSoundCache.getSound('ENC_Win.ogg')
+
+    # The toons list might be a list of toons, or it might be a list
+    # of toonId's.  In either case, build a list of toons out of it.
     toonList = []
     countToons = 0
     uberListNew = []
@@ -92,11 +93,16 @@ def doToonVictory(localToonActive, toons, rewardToonIds, rewardDicts, deathList,
             toonList.append(t)
             uberListNew.append(uberList[countToons])
         countToons += 1
+        
 
+    # make a list of toons/None from the rewardToonIds list. This list
+    # corresponds with the bitmasks embedded in the deathList. We need this
+    # in case a toon leaves in between the creation of the bitmasks and
+    # the client-side interpretation of them. (the bitmasks tell us who
+    # of the remaining toons was around when each cog was defeated)
     toonId2toon = {}
     for toon in toonList:
         toonId2toon[toon.doId] = toon
-
     rewardToonList = []
     for id in rewardToonIds:
         rewardToonList.append(toonId2toon.get(id))
@@ -107,22 +113,13 @@ def doToonVictory(localToonActive, toons, rewardToonIds, rewardDicts, deathList,
     for tIndex in range(len(toonList)):
         t = toonList[tIndex]
         rdict = __findToonReward(rewardDicts, t)
-        if rdict is not None:
-            expTrack = rpanel.getExpTrack(
-                t,
-                rdict['origExp'],
-                rdict['earnedExp'],
-                deathList,
-                rdict['origQuests'],
-                rdict['items'],
-                rdict['missedItems'],
-                rdict['origMerits'],
-                rdict['merits'],
-                rdict['parts'],
-                rewardToonList,
-                uberListNew[tIndex],
-                helpfulToonsList,
-                noSkip=noSkip)
+        # To prevent client from crashing in this case.
+        if rdict != None:
+            expTrack = rpanel.getExpTrack(t, rdict['origExp'], rdict['earnedExp'],
+                                          deathList, rdict['origQuests'], rdict['items'], rdict['missedItems'],
+                                          rdict['origMerits'], rdict['merits'],
+                                          rdict['parts'], rewardToonList, uberListNew[tIndex],
+                                          helpfulToonsList, noSkip=noSkip)
             if expTrack:
                 skipper.setStartTime(tIndex, track.getDuration())
                 track.append(skipper.getTeardownFunc(lastListenIndex))
@@ -131,18 +128,21 @@ def doToonVictory(localToonActive, toons, rewardToonIds, rewardDicts, deathList,
                 track.append(expTrack)
                 camDuration = expTrack.getDuration()
                 camExpTrack = MovieCamera.chooseRewardShot(t, camDuration)
-                camTrack.append(
-                    MovieCamera.chooseRewardShot(
-                        t, camDuration, allowGroupShot=allowGroupShot))
-
+                assert camDuration == camExpTrack.getDuration()
+                camTrack.append(MovieCamera.chooseRewardShot(
+                    t, camDuration, allowGroupShot = allowGroupShot))
     track.append(skipper.getTeardownFunc(lastListenIndex))
     track.append(Func(skipper.destroy))
-    if localToonActive == 1:
+    if (localToonActive == 1):
         track.append(Func(rpanel.hide))
         track.append(Func(NametagGlobals.setOnscreenChatForced, 0))
     track.append(endTrack)
     trackdur = track.getDuration()
     soundTrack = SoundInterval(danceSound, duration=trackdur, loop=1)
     mtrack = Parallel(track, soundTrack)
+
     skipper.setIvals((mtrack, camTrack))
+    mtrack = Parallel(track, soundTrack)
+
     return (mtrack, camTrack, skipper)
+

@@ -1,7 +1,10 @@
-from direct.directnotify import DirectNotifyGlobal
+
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 
-
 class DistributedDirectoryAI(DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedDirectoryAI')
+    """
+    This object has no attributes and none of them get created, but it
+    is still needed.  It is used as a parent for the individual games.
+    The dc system uses the parenting rules as if this object existed.
+    """
+    pass

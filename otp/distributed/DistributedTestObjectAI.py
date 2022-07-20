@@ -1,7 +1,5 @@
-from direct.directnotify import DirectNotifyGlobal
-from direct.distributed.DistributedObjectAI import DistributedObjectAI
+from direct.distributed import DistributedObjectAI
 
-
-class DistributedTestObjectAI(DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedTestObjectAI')
+class DistributedTestObjectAI(DistributedObjectAI.DistributedObjectAI):
+    def getRequiredField(self):
+        return 88

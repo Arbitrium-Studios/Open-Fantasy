@@ -1,6 +1,4 @@
-from direct.directnotify import DirectNotifyGlobal
-from direct.distributed.DistributedObjectAI import DistributedObjectAI
+from direct.distributed.DistributedObjectGlobalAI import DistributedObjectGlobalAI
 
-
-class CentralLoggerAI(DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory('CentralLoggerAI')
+class CentralLoggerAI(DistributedObjectGlobalAI):
+    pass

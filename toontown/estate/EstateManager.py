@@ -9,49 +9,65 @@ from toontown.toonbase import TTLocalizer
 from . import HouseGlobals
 from . import Estate
 
-
 class EstateManager(DistributedObject.DistributedObject):
-    notify = DirectNotifyGlobal.directNotify.newCategory('EstateManager')
+    notify = DirectNotifyGlobal.directNotify.newCategory("EstateManager")
     neverDisable = 1
 
     def __init__(self, cr):
+
         DistributedObject.DistributedObject.__init__(self, cr)
+
         self.availableZones = 0
         self.popupInfo = None
-        return
 
     def disable(self):
-        self.notify.debug("i'm disabling EstateManager rightnow.")
-        self.ignore('getLocalEstateZone')
+        self.notify.debug( "i'm disabling EstateManager rightnow.")
+        #self.ignore("requestEstateZone")
+        self.ignore("getLocalEstateZone")
         self.ignoreAll()
         if self.popupInfo:
             self.popupInfo.destroy()
             self.popupInfo = None
         DistributedObject.DistributedObject.disable(self)
-        return
 
     def allocateMyEstateZone(self):
+        # Get a zone for our own estate, i.e. we are going home right now
         self.getLocalEstateZone(base.localAvatar.getDoId())
 
     def getLocalEstateZone(self, avId):
-        name = ''
+        # Fullfill client request for estateZone
+        name = ""
         if base.localAvatar.doId == avId:
+            # going to our own home, provide AI with userName
             name = base.cr.userName
-        self.sendUpdate('getEstateZone', [avId, name])
+        self.sendUpdate("getEstateZone", [avId, name])
 
     def setEstateZone(self, ownerId, zoneId):
-        self.notify.debug('setEstateZone(%s, %s)' % (ownerId, zoneId))
-        messenger.send('setLocalEstateZone', [ownerId, zoneId])
+        # The AI is telling us the zone for this avatars estate
+        self.notify.debug("setEstateZone(%s, %s)" % (ownerId, zoneId))
+
+        # Send this to other hooks on the client side
+        messenger.send("setLocalEstateZone", [ownerId, zoneId])
 
     def generate(self):
-        self.notify.debug('BASE: generate')
+        self.notify.debug("BASE: generate")
         DistributedObject.DistributedObject.generate(self)
+
+        # register with the cr
         base.cr.estateMgr = self
-        self.accept('getLocalEstateZone', self.getLocalEstateZone)
-        self.announceGenerateName = self.uniqueName('generate')
+
+        # listen for requests
+        #self.accept("requestEstateZone", self.allocateMyEstateZone)
+        self.accept("getLocalEstateZone", self.getLocalEstateZone)
+        #self.__createRandomNumGen()
+
+        # listen for the generate event, which will be thrown after the
+        # required fields are filled in
+        self.announceGenerateName = self.uniqueName("generate")
+        #self.accept(self.announceGenerateName, self.handleAnnounceGenerate)
 
     def setAvHouseId(self, avId, houseIds):
-        self.notify.debug('setAvHouseId %d' % base.localAvatar.doId)
+        self.notify.debug("setAvHouseId %d" % base.localAvatar.doId)
         for av in base.cr.avList:
             if av.id == avId:
                 houseId = houseIds[av.position]
@@ -61,26 +77,26 @@ class EstateManager(DistributedObject.DistributedObject):
                 return
 
     def sendAvToPlayground(self, avId, retCode):
-        self.notify.debug('sendAvToPlayground: %d' % avId)
-        messenger.send('kickToPlayground', [retCode])
+        self.notify.debug("sendAvToPlayground: %d" % avId)
+        messenger.send("kickToPlayground", [retCode])
 
     def leaveEstate(self):
         if self.isDisabled():
-            self.notify.warning(
-                'EstateManager disabled; unable to leave estate.')
+            self.notify.warning("EstateManager disabled; unable to leave estate.")
             return
-        self.sendUpdate('exitEstate')
+
+        self.sendUpdate("exitEstate")
 
     def removeFriend(self, ownerId, avId):
-        self.notify.debug(
-            'removeFriend ownerId = %s, avId = %s' %
-            (ownerId, avId))
-        self.sendUpdate('removeFriend', [ownerId, avId])
+        self.notify.debug("removeFriend ownerId = %s, avId = %s" % (ownerId, avId))
+        # The estate owner is  removing avId from his friends list.
+        # Notify the AI, and kick the ex-friend out of the estate
+        self.sendUpdate("removeFriend", [ownerId, avId])
 
     def startAprilFools(self):
-        if isinstance(base.cr.playGame.getPlace(), Estate.Estate):
+        if isinstance(base.cr.playGame.getPlace(),Estate.Estate):
             base.cr.playGame.getPlace().startAprilFoolsControls()
 
     def stopAprilFools(self):
-        if isinstance(base.cr.playGame.getPlace(), Estate.Estate):
+        if isinstance(base.cr.playGame.getPlace(),Estate.Estate):
             base.cr.playGame.getPlace().stopAprilFoolsControls()

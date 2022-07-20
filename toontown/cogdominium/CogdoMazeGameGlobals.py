@@ -1,10 +1,10 @@
 from otp.otpbase import PythonUtil
-from pandac.PandaModules import VBase4
+from panda3d.core import VBase4
 GameActions = PythonUtil.Enum(('EnterDoor',
-                               'RevealDoor',
-                               'OpenDoor',
-                               'Countdown',
-                               'TimeAlert'))
+ 'RevealDoor',
+ 'OpenDoor',
+ 'Countdown',
+ 'TimeAlert'))
 SecondsUntilTimeout = 4.0 * 60.0
 SecondsUntilGameEnds = 60.0
 SecondsForTimeAlert = 60.0
@@ -22,53 +22,53 @@ QuadrantUnitGap = 3
 TotalBarriers = 12
 NumBarriers = 3
 MazeBarriers = ([(7, 34),
-                 (8, 34),
-                 (9, 34),
-                 (10, 34)],
-                [(24, 34),
-                 (25, 34),
-                 (26, 34),
-                 (27, 34)],
-                [(41, 34),
-                 (42, 34),
-                 (43, 34),
-                 (44, 34)],
-                [(7, 17),
-                 (8, 17),
-                 (9, 17),
-                 (10, 17)],
-                [(24, 17),
-                 (25, 17),
-                 (26, 17),
-                 (27, 17)],
-                [(41, 17),
-                 (42, 17),
-                 (43, 17),
-                 (44, 17)],
-                [(17, 41),
-                 (17, 42),
-                 (17, 43),
-                 (17, 44)],
-                [(17, 24),
-                 (17, 25),
-                 (17, 26),
-                 (17, 27)],
-                [(17, 7),
-                 (17, 8),
-                 (17, 9),
-                 (17, 10)],
-                [(34, 41),
-                 (34, 42),
-                 (34, 43),
-                 (34, 44)],
-                [(34, 24),
-                 (34, 25),
-                 (34, 26),
-                 (34, 27)],
-                [(34, 7),
-                 (34, 8),
-                 (34, 9),
-                 (34, 10)])
+  (8, 34),
+  (9, 34),
+  (10, 34)],
+ [(24, 34),
+  (25, 34),
+  (26, 34),
+  (27, 34)],
+ [(41, 34),
+  (42, 34),
+  (43, 34),
+  (44, 34)],
+ [(7, 17),
+  (8, 17),
+  (9, 17),
+  (10, 17)],
+ [(24, 17),
+  (25, 17),
+  (26, 17),
+  (27, 17)],
+ [(41, 17),
+  (42, 17),
+  (43, 17),
+  (44, 17)],
+ [(17, 41),
+  (17, 42),
+  (17, 43),
+  (17, 44)],
+ [(17, 24),
+  (17, 25),
+  (17, 26),
+  (17, 27)],
+ [(17, 7),
+  (17, 8),
+  (17, 9),
+  (17, 10)],
+ [(34, 41),
+  (34, 42),
+  (34, 43),
+  (34, 44)],
+ [(34, 24),
+  (34, 25),
+  (34, 26),
+  (34, 27)],
+ [(34, 7),
+  (34, 8),
+  (34, 9),
+  (34, 10)])
 ToonRunSpeed = 11.2
 CameraAngle = 60
 CameraRemoteToonRadius = 6
@@ -84,23 +84,23 @@ SuitWalkTurnAroundProb = 100
 SuitTypes = PythonUtil.Enum(('Boss', 'FastMinion', 'SlowMinion'))
 SuitData = {}
 SuitData[SuitTypes.Boss] = {'dnaName': 'ms',
-                            'cellWalkPeriod': 192,
-                            'toonDamage': 3.0,
-                            'scale': 2.5,
-                            'hp': 2,
-                            'memos': 0}
+ 'cellWalkPeriod': 192,
+ 'toonDamage': 3.0,
+ 'scale': 2.5,
+ 'hp': 2,
+ 'memos': 0}
 SuitData[SuitTypes.FastMinion] = {'dnaName': 'nd',
-                                  'cellWalkPeriod': 64,
-                                  'toonDamage': 1.0,
-                                  'scale': 1.3,
-                                  'hp': 1,
-                                  'memos': 3}
+ 'cellWalkPeriod': 64,
+ 'toonDamage': 1.0,
+ 'scale': 1.3,
+ 'hp': 1,
+ 'memos': 3}
 SuitData[SuitTypes.SlowMinion] = {'dnaName': 'cc',
-                                  'cellWalkPeriod': 160,
-                                  'toonDamage': 2.0,
-                                  'scale': 1.33,
-                                  'hp': 1,
-                                  'memos': 2}
+ 'cellWalkPeriod': 160,
+ 'toonDamage': 2.0,
+ 'scale': 1.33,
+ 'hp': 1,
+ 'memos': 2}
 NumSuits = (4, 5, 5)
 BossSpinTime = 1.0
 BossSpinCount = 2
@@ -145,25 +145,25 @@ GagPickupScale = 2.0
 GagPickupCollisionRadius = 1.0
 GagPickupCollisionName = 'PickUpCollision'
 GagColors = ((1.0,
-              0.27,
-              0.27,
-              1.0),
-             (1.0,
-              0.66,
-              0.15,
-              1.0),
-             (0.31,
-              1.0,
-              0.29,
-              1.0),
-             (0.31,
-              0.62,
-              1.0,
-              1.0),
-             (0.91,
-              0.32,
-              1.0,
-              1.0))
+  0.27,
+  0.27,
+  1.0),
+ (1.0,
+  0.66,
+  0.15,
+  1.0),
+ (0.31,
+  1.0,
+  0.29,
+  1.0),
+ (0.31,
+  0.62,
+  1.0,
+  1.0),
+ (0.91,
+  0.32,
+  1.0,
+  1.0))
 GagCollisionName = 'Gag_Collision'
 WaterCoolerTriggerRadius = 2.5
 WaterCoolerTriggerOffset = (0, -1.5, 0)
@@ -172,50 +172,50 @@ WaterCoolerShowEventName = 'CogdoMazeWaterCooler_Show'
 WaterCoolerHideEventName = 'CogdoMazeWaterCooler_Hide'
 AudioCutoff = 75.0
 MusicFiles = {'normal': 'phase_9/audio/bgm/CHQ_FACT_bg.ogg',
-              'timeRunningOut': 'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg'}
+ 'timeRunningOut': 'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg'}
 SfxFiles = {'toonHitByDrop': 'phase_5/audio/sfx/tt_s_ara_cmg_toonHit.ogg',
-            'toonHit': 'phase_4/audio/sfx/MG_cannon_hit_dirt.ogg',
-            'getMemo': 'phase_4/audio/sfx/MG_maze_pickup.ogg',
-            'drop': 'phase_5/audio/sfx/tt_s_ara_cmg_itemHitsFloor.ogg',
-            'throw': 'phase_3.5/audio/sfx/AA_pie_throw_only.ogg',
-            'splat': 'phase_5/audio/sfx/SA_watercooler_spray_only.ogg',
-            'cogSpin': 'phase_3.5/audio/sfx/Cog_Death.ogg',
-            'cogDeath': 'phase_3.5/audio/sfx/ENC_cogfall_apart.ogg',
-            'bossCogAngry': 'phase_5/audio/sfx/tt_s_ara_cmg_bossCogAngry.ogg',
-            'cogStomp': 'phase_5/audio/sfx/tt_s_ara_cmg_cogStomp.ogg',
-            'quake': 'phase_5/audio/sfx/tt_s_ara_cmg_groundquake.ogg',
-            'waterCoolerFill': 'phase_5/audio/sfx/tt_s_ara_cmg_waterCoolerFill.ogg',
-            'lose': 'phase_4/audio/sfx/MG_lose.ogg',
-            'win': 'phase_4/audio/sfx/MG_win.ogg',
-            'cogDialogue': 'phase_3.5/audio/dial/COG_VO_statement.ogg',
-            'toonDialogue': 'phase_3.5/audio/dial/AV_dog_long.ogg'}
+ 'toonHit': 'phase_4/audio/sfx/MG_cannon_hit_dirt.ogg',
+ 'getMemo': 'phase_4/audio/sfx/MG_maze_pickup.ogg',
+ 'drop': 'phase_5/audio/sfx/tt_s_ara_cmg_itemHitsFloor.ogg',
+ 'throw': 'phase_3.5/audio/sfx/AA_pie_throw_only.ogg',
+ 'splat': 'phase_5/audio/sfx/SA_watercooler_spray_only.ogg',
+ 'cogSpin': 'phase_3.5/audio/sfx/Cog_Death.ogg',
+ 'cogDeath': 'phase_3.5/audio/sfx/ENC_cogfall_apart.ogg',
+ 'bossCogAngry': 'phase_5/audio/sfx/tt_s_ara_cmg_bossCogAngry.ogg',
+ 'cogStomp': 'phase_5/audio/sfx/tt_s_ara_cmg_cogStomp.ogg',
+ 'quake': 'phase_5/audio/sfx/tt_s_ara_cmg_groundquake.ogg',
+ 'waterCoolerFill': 'phase_5/audio/sfx/tt_s_ara_cmg_waterCoolerFill.ogg',
+ 'lose': 'phase_4/audio/sfx/MG_lose.ogg',
+ 'win': 'phase_4/audio/sfx/MG_win.ogg',
+ 'cogDialogue': 'phase_3.5/audio/dial/COG_VO_statement.ogg',
+ 'toonDialogue': 'phase_3.5/audio/dial/AV_dog_long.ogg'}
 MessageLabelPos = (0.0, 0.0, -0.4)
 MemoGuiPos = (-0.85, 0, -0.9)
 MemoGuiTextScale = 0.1
 MemoGuiTextColor = (0.95,
-                    0.95,
-                    0,
-                    1)
+ 0.95,
+ 0,
+ 1)
 MapGuiBgColor = (0.9, 0.9, 0.9)
 MapGuiFgColor = (0.5,
-                 0.5,
-                 0.5,
-                 1)
-MapGuiPos = (1.05, 0.0, -0.71)
+ 0.5,
+ 0.5,
+ 1)
+MapGuiPos = (-0.283, 0, 0.290)
 MapGuiScale = 0.225
 MapGuiSuitMarkerFlashColor = (1.0, 0.0, 0.0)
 MapGuiSuitMarkerSize = 0.075
 MapGuiWaterCoolerMarkerSize = 0.08
 QuestArrowScale = 5
 QuestArrowColor = (1,
-                   1,
-                   0,
-                   1)
+ 1,
+ 0,
+ 1)
 CoolerArrowScale = 8
 CoolerArrowColor = (1,
-                    1,
-                    0,
-                    1)
+ 1,
+ 0,
+ 1)
 CoolerArrowZ = 10
 CoolerArrowBounce = 2
 CoolerArrowSpeed = 2
@@ -226,10 +226,10 @@ BossCodeFrameWidth = 0.13
 BossCodeFrameGap = 0.005
 BossCodeFrameLabelScale = 0.12
 BossCodeFrameLabelNormalColor = (0,
-                                 0,
-                                 0,
-                                 1)
+ 0,
+ 0,
+ 1)
 BossCodeFrameLabelHighlightColor = (0,
-                                    0.5,
-                                    0,
-                                    1)
+ 0.5,
+ 0,
+ 1)

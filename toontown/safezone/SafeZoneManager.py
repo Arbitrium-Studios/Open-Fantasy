@@ -2,9 +2,8 @@ from pandac.PandaModules import *
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 
-
 class SafeZoneManager(DistributedObject.DistributedObject):
-    notify = DirectNotifyGlobal.directNotify.newCategory('SafeZoneManager')
+    notify = DirectNotifyGlobal.directNotify.newCategory("SafeZoneManager")
     neverDisable = 1
 
     def __init__(self, cr):
@@ -12,15 +11,16 @@ class SafeZoneManager(DistributedObject.DistributedObject):
 
     def generate(self):
         DistributedObject.DistributedObject.generate(self)
-        self.accept('enterSafeZone', self.d_enterSafeZone)
-        self.accept('exitSafeZone', self.d_exitSafeZone)
+        self.accept("enterSafeZone", self.d_enterSafeZone)
+        self.accept("exitSafeZone", self.d_exitSafeZone)
 
     def disable(self):
         self.ignoreAll()
         DistributedObject.DistributedObject.disable(self)
 
     def d_enterSafeZone(self):
-        self.sendUpdate('enterSafeZone', [])
+        self.sendUpdate("enterSafeZone", [])
 
     def d_exitSafeZone(self):
-        self.sendUpdate('exitSafeZone', [])
+        self.sendUpdate("exitSafeZone", [])
+    

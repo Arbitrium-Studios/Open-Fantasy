@@ -4,18 +4,17 @@ from otp.speedchat.SCMenuHolder import SCMenuHolder
 from otp.speedchat.SCStaticTextTerminal import SCStaticTextTerminal
 from otp.otpbase import OTPLocalizer
 JellybeanJamMenu = [(OTPLocalizer.JellybeanJamMenuSections[0], [30180,
-                                                                30181,
-                                                                30182,
-                                                                30183,
-                                                                30184,
-                                                                30185]), (OTPLocalizer.JellybeanJamMenuSections[1], [30186,
-                                                                                                                     30187,
-                                                                                                                     30188,
-                                                                                                                     30189,
-                                                                                                                     30190])]
+   30181,
+   30182,
+   30183,
+   30184,
+   30185]), (OTPLocalizer.JellybeanJamMenuSections[1], [30186,
+   30187,
+   30188,
+   30189,
+   30190])]
 JellybeanJamPhases = PythonUtil.Enum('TROLLEY, FISHING, PARTIES')
 PhaseSpecifPhrases = [30180, 30181, 30182]
-
 
 class TTSCJellybeanJamMenu(SCMenu):
 
@@ -24,9 +23,7 @@ class TTSCJellybeanJamMenu(SCMenu):
         if phase in JellybeanJamPhases:
             self.__messagesChanged(phase)
         else:
-            print(
-                'warning: tried to add Jellybean Jam phase %s which does not seem to exist' %
-                phase)
+            print('warning: tried to add Jellybean Jam phase %s which does not seem to exist' % phase)
 
     def destroy(self):
         SCMenu.destroy(self)
@@ -38,16 +35,14 @@ class TTSCJellybeanJamMenu(SCMenu):
         self.clearMenu()
         try:
             lt = base.localAvatar
-        except BaseException:
+        except:
             return
 
         for section in JellybeanJamMenu:
             if section[0] == -1:
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print(
-                            'warning: tried to link Jellybean Jam phrase %s which does not seem to exist' %
-                            phrase)
+                        print('warning: tried to link Jellybean Jam phrase %s which does not seem to exist' % phrase)
                         break
                     self.append(SCStaticTextTerminal(phrase))
 
@@ -55,9 +50,7 @@ class TTSCJellybeanJamMenu(SCMenu):
                 menu = SCMenu()
                 for phrase in section[1]:
                     if phrase not in OTPLocalizer.SpeedChatStaticText:
-                        print(
-                            'warning: tried to link Jellybean Jam phrase %s which does not seem to exist' %
-                            phrase)
+                        print('warning: tried to link Jellybean Jam phrase %s which does not seem to exist' % phrase)
                         break
                     menu.append(SCStaticTextTerminal(phrase))
 

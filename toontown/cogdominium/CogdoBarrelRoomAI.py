@@ -8,17 +8,13 @@ from toontown.toonbase import ToontownGlobals
 from toontown.cogdominium import CogdoBarrelRoomConsts
 from toontown.cogdominium import DistributedCogdoBarrelAI
 
-
 class CogdoBarrelRoomAI:
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedCogdoBarrelRoomAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedCogdoBarrelRoomAI')
 
     def __init__(self, cogdoInteriorAI):
         self.cogdoInteriorAI = cogdoInteriorAI
-        self.allBarrelsCollectedTask = self.cogdoInteriorAI.taskName(
-            'allBarrelsCollectedTask')
-        self.collectionDoneEvent = self.cogdoInteriorAI.taskName(
-            'barrelCollectionDone')
+        self.allBarrelsCollectedTask = self.cogdoInteriorAI.taskName('allBarrelsCollectedTask')
+        self.collectionDoneEvent = self.cogdoInteriorAI.taskName('barrelCollectionDone')
         self.collectTimer = None
         self.results = [
             [],
@@ -48,8 +44,7 @@ class CogdoBarrelRoomAI:
         self.spawnedBarrels = []
 
         def spawnBarrel(index):
-            barrel = DistributedCogdoBarrelAI.DistributedCogdoBarrelAI(
-                self.cogdoInteriorAI.air, index, self.barrelCollected)
+            barrel = DistributedCogdoBarrelAI.DistributedCogdoBarrelAI(self.cogdoInteriorAI.air, index, self.barrelCollected)
             barrel.generateWithRequired(self.cogdoInteriorAI.zoneId)
             self.spawnedBarrels.append(barrel)
 
@@ -65,17 +60,12 @@ class CogdoBarrelRoomAI:
 
     def activate(self):
         self.collectTimer = Timer.Timer()
-        self.collectTimer.startCallback(
-            CogdoBarrelRoomConsts.CollectionTime,
-            self.__endCollectionPhase)
+        self.collectTimer.startCallback(CogdoBarrelRoomConsts.CollectionTime, self.__endCollectionPhase)
         for barrel in self.spawnedBarrels:
             barrel.interactive = True
 
         taskMgr.remove(self.allBarrelsCollectedTask)
-        taskMgr.doMethodLater(
-            CogdoBarrelRoomConsts.AllBarrelsCollectedTime,
-            self.__checkAllBarrelsCollected,
-            self.allBarrelsCollectedTask)
+        taskMgr.doMethodLater(CogdoBarrelRoomConsts.AllBarrelsCollectedTime, self.__checkAllBarrelsCollected, self.allBarrelsCollectedTask)
 
     def __endCollectionPhase(self):
         messenger.send(self.collectionDoneEvent)
@@ -116,12 +106,11 @@ class CogdoBarrelRoomAI:
 
     def __toonIdNeedsLaff(self, toonId):
         toon = self.cogdoInteriorAI.air.doId2do.get(toonId)
-        if toon is not None:
+        if toon != None:
             return not toon.isToonedUp()
 
     def __allBarrelsCollected(self):
-        toonsNeedingLaff = set(
-            [toon for toon in self.cogdoInteriorAI.toons if self.__toonIdNeedsLaff(toon)])
+        toonsNeedingLaff = set([toon for toon in self.cogdoInteriorAI.toons if self.__toonIdNeedsLaff(toon)])
         for barrel in self.spawnedBarrels:
             if not toonsNeedingLaff.issubset(set(barrel.grabbedBy)):
                 return False

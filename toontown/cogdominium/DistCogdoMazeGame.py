@@ -7,7 +7,6 @@ from .CogdoMaze import CogdoMazeFactory
 from . import CogdoMazeGameGlobals
 from . import CogdoMazeGameGlobals as Globals
 
-
 class DistCogdoMazeGame(DistCogdoGame, DistCogdoMazeGameBase):
     notify = directNotify.newCategory('DistCogdoMazeGame')
 
@@ -108,12 +107,11 @@ class DistCogdoMazeGame(DistCogdoGame, DistCogdoMazeGameBase):
         self.game.toonUsedGag(toonId, x, y, h, elapsedTime)
 
     def d_requestUseGag(self, x, y, h):
-        networkTime = globalClockDelta.localToNetworkTime(
-            globalClock.getFrameTime())
+        networkTime = globalClockDelta.localToNetworkTime(globalClock.getFrameTime())
         self.sendUpdate('requestUseGag', [x,
-                                          y,
-                                          h,
-                                          networkTime])
+         y,
+         h,
+         networkTime])
 
     def b_toonUsedGag(self, x, y, h):
         self.d_requestUseGag(x, y, h)
@@ -163,8 +161,7 @@ class DistCogdoMazeGame(DistCogdoGame, DistCogdoMazeGameBase):
         self.game.toonHitBySuit(toonId, suitType, suitNum, elapsedTime)
 
     def d_requestHitBySuit(self, suitType, suitNum):
-        networkTime = globalClockDelta.localToNetworkTime(
-            globalClock.getFrameTime())
+        networkTime = globalClockDelta.localToNetworkTime(globalClock.getFrameTime())
         self.sendUpdate('requestHitBySuit', [suitType, suitNum, networkTime])
 
     def b_toonHitBySuit(self, suitType, suitNum):
@@ -218,8 +215,7 @@ class DistCogdoMazeGame(DistCogdoGame, DistCogdoMazeGameBase):
         elif action == Globals.GameActions.EnterDoor:
             self.game.toonEntersDoor(data)
         elif action == Globals.GameActions.OpenDoor:
-            timeLeft = Globals.SecondsUntilGameEnds - \
-                globalClockDelta.localElapsedTime(networkTime)
+            timeLeft = Globals.SecondsUntilGameEnds - globalClockDelta.localElapsedTime(networkTime)
             self.game.openDoor(timeLeft)
         elif action == Globals.GameActions.Countdown:
             countdownTimeLeft = Globals.SecondsUntilTimeout

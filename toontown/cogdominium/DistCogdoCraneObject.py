@@ -1,4 +1,5 @@
-from pandac.PandaModules import *
+from panda3d.core import *
+from panda3d.physics import *
 from direct.interval.IntervalGlobal import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedSmoothNode
@@ -8,11 +9,8 @@ from direct.fsm import FSM
 from direct.task import Task
 smileyDoId = 1
 
-
-class DistCogdoCraneObject(
-        DistributedSmoothNode.DistributedSmoothNode, FSM.FSM):
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistCogdoCraneObject')
+class DistCogdoCraneObject(DistributedSmoothNode.DistributedSmoothNode, FSM.FSM):
+    notify = DirectNotifyGlobal.directNotify.newCategory('DistCogdoCraneObject')
     wantsWatchDrift = 1
 
     def __init__(self, cr):
@@ -23,21 +21,16 @@ class DistCogdoCraneObject(
         self.craneId = 0
         self.cleanedUp = 0
         self.collisionNode = CollisionNode('object')
-        self.collisionNode.setIntoCollideMask(
-            ToontownGlobals.PieBitmask | OTPGlobals.WallBitmask | ToontownGlobals.CashbotBossObjectBitmask | OTPGlobals.CameraBitmask)
-        self.collisionNode.setFromCollideMask(
-            ToontownGlobals.PieBitmask | OTPGlobals.FloorBitmask)
+        self.collisionNode.setIntoCollideMask(ToontownGlobals.PieBitmask | OTPGlobals.WallBitmask | ToontownGlobals.CashbotBossObjectBitmask | OTPGlobals.CameraBitmask)
+        self.collisionNode.setFromCollideMask(ToontownGlobals.PieBitmask | OTPGlobals.FloorBitmask)
         self.collisionNodePath = NodePath(self.collisionNode)
         self.physicsActivated = 0
         self.toMagnetSoundInterval = Sequence()
         self.hitFloorSoundInterval = Sequence()
-        self.hitBossSfx = loader.loadSfx(
-            'phase_5/audio/sfx/AA_drop_safe_miss.ogg')
+        self.hitBossSfx = loader.loadSfx('phase_5/audio/sfx/AA_drop_safe_miss.ogg')
         self.hitBossSoundInterval = SoundInterval(self.hitBossSfx)
-        self.touchedBossSfx = loader.loadSfx(
-            'phase_5/audio/sfx/AA_drop_sandbag.ogg')
-        self.touchedBossSoundInterval = SoundInterval(
-            self.touchedBossSfx, duration=0.8)
+        self.touchedBossSfx = loader.loadSfx('phase_5/audio/sfx/AA_drop_sandbag.ogg')
+        self.touchedBossSoundInterval = SoundInterval(self.touchedBossSfx, duration=0.8)
         self.lerpInterval = None
         return
 
@@ -128,19 +121,18 @@ class DistCogdoCraneObject(
         pass
 
     def __hitBoss(self, entry):
-        if (self.state == 'Dropped' or self.state ==
-                'LocalDropped') and self.craneId != self.craneGame.doId:
+        if (self.state == 'Dropped' or self.state == 'LocalDropped') and self.craneId != self.craneGame.doId:
             vel = self.physicsObject.getVelocity()
             vel = self.crane.root.getRelativeVector(render, vel)
             vel.normalize()
             impact = vel[1]
             if impact >= self.getMinImpact():
-                print('hit! %s' % impact)
+                print(('hit! %s' % impact))
                 self.hitBossSoundInterval.start()
                 self.doHitBoss(impact)
             else:
                 self.touchedBossSoundInterval.start()
-                print('--not hard enough: %s' % impact)
+                print(('--not hard enough: %s' % impact))
 
     def doHitBoss(self, impact):
         self.d_hitBoss(impact)
@@ -201,15 +193,15 @@ class DistCogdoCraneObject(
 
     def d_requestFree(self):
         self.sendUpdate('requestFree', [self.getX(),
-                                        self.getY(),
-                                        self.getZ(),
-                                        self.getH()])
+         self.getY(),
+         self.getZ(),
+         self.getH()])
 
     def d_hitBoss(self, impact):
         self.sendUpdate('hitBoss', [impact])
 
     def defaultFilter(self, request, args):
-        if self.craneGame is None:
+        if self.craneGame == None:
             raise FSM.RequestDenied(request)
         return FSM.FSM.defaultFilter(self, request, args)
 

@@ -5,12 +5,19 @@ from toontown.suit import DistributedSuitPlannerAI
 from toontown.safezone import ButterflyGlobals
 from toontown.safezone import DistributedButterflyAI
 from pandac.PandaModules import *
-from panda3d.toontown import *
 from toontown.toon import NPCToons
-
+from panda3d.toontown import DNAData
 
 class HoodDataAI:
-    notify = DirectNotifyGlobal.directNotify.newCategory('HoodDataAI')
+    """
+
+    A HoodDataAI object is created for each neighborhood; it owns the
+    pointers to objects such as the suit planners and building
+    managers, and can shut itself down cleanly on demand.
+
+    """
+
+    notify = DirectNotifyGlobal.directNotify.newCategory("HoodDataAI")
 
     def __init__(self, air, zoneId, canonicalHoodId):
         self.air = air
@@ -20,11 +27,12 @@ class HoodDataAI:
         self.buildingManagers = []
         self.suitPlanners = []
         self.doId2do = {}
+
+        # These members are used to balance WelcomeValley hoods.
         self.replacementHood = None
         self.redirectingToMe = []
         self.hoodPopulation = 0
         self.pgPopulation = 0
-        return
 
     def startup(self):
         self.createFishingPonds()
@@ -34,28 +42,30 @@ class HoodDataAI:
 
     def shutdown(self):
         self.setRedirect(None)
+
         if self.treasurePlanner:
             self.treasurePlanner.stop()
             self.treasurePlanner.deleteAllTreasuresNow()
             self.treasurePlanner = None
+
         for suitPlanner in self.suitPlanners:
             suitPlanner.requestDelete()
             del self.air.suitPlanners[suitPlanner.zoneId]
-
         self.suitPlanners = []
+
         for buildingManager in self.buildingManagers:
             buildingManager.cleanup()
             del self.air.buildingManagers[buildingManager.branchID]
-
         self.buildingManagers = []
+
         ButterflyGlobals.clearIndexes(self.zoneId)
         del self.fishingPonds
         for distObj in list(self.doId2do.values()):
             distObj.requestDelete()
-
         del self.doId2do
+
+        # Break back-pointers
         del self.air
-        return
 
     def addDistObj(self, distObj):
         self.doId2do[distObj.doId] = distObj
@@ -69,15 +79,18 @@ class HoodDataAI:
             zoneId = ZoneUtil.getTrueZoneId(zone[0], self.zoneId)
             dnaData = self.air.dnaDataMap.get(zone[0], None)
             if isinstance(dnaData, DNAData):
-                foundPartyHats = self.air.findPartyHats(dnaData, zoneId)
+                foundPartyHats = self.air.findPartyHats(dnaData, zoneId )
                 partyHats += foundPartyHats
 
         for distObj in partyHats:
             self.addDistObj(distObj)
-
-        return
+            # NOTE: The PartyPerson NPCs are created below in createFishingPonds
+            #       because that method creates all the NPCs in the hood
 
     def createFishingPonds(self):
+        # Note: A list of fishing ponds is now maintanied for easier access
+        #       when generating Pond Bingo Managers for Bingo Night.
+        #       (JJT - 07/22/04)
         self.fishingPonds = []
         fishingPondGroups = []
         for zone in self.air.zoneTable[self.canonicalHoodId]:
@@ -85,25 +98,26 @@ class HoodDataAI:
             dnaData = self.air.dnaDataMap.get(zone[0], None)
             if isinstance(dnaData, DNAData):
                 area = ZoneUtil.getCanonicalZoneId(zoneId)
-                foundFishingPonds, foundFishingPondGroups = self.air.findFishingPonds(
-                    dnaData, zoneId, area)
+                foundFishingPonds, foundFishingPondGroups = self.air.findFishingPonds(dnaData, zoneId, area)
                 self.fishingPonds += foundFishingPonds
                 fishingPondGroups += foundFishingPondGroups
-
         for distObj in self.fishingPonds:
             self.addDistObj(distObj)
+            # Every pond gets a fisherman
             npcs = NPCToons.createNpcsInZone(self.air, distObj.zoneId)
+            # TODO-parties : Ask for clarification on this.
+            # Since this creates all the NPCs in the zone, this creates the
+            # party people for the party hat as well... but what if there are
+            # no fishing ponds??
             for npc in npcs:
                 self.addDistObj(npc)
 
+        # Now look in the fishing pond DNAGroups for fishing spots
         fishingSpots = []
         for dnaGroup, distPond in zip(fishingPondGroups, self.fishingPonds):
             fishingSpots += self.air.findFishingSpots(dnaGroup, distPond)
-
         for distObj in fishingSpots:
             self.addDistObj(distObj)
-
-        return
 
     def createBuildingManagers(self):
         for zone in self.air.zoneTable[self.canonicalHoodId]:
@@ -123,6 +137,10 @@ class HoodDataAI:
                     self.air, zoneId)
                 sp.generateWithRequired(zoneId)
                 sp.d_setZoneId(zoneId)
+
+                # be sure to start up necessary tasks so the suit planner
+                # is updated when needed
+                #
                 sp.initTasks()
                 self.suitPlanners.append(sp)
                 self.air.suitPlanners[zoneId] = sp
@@ -137,7 +155,16 @@ class HoodDataAI:
                 bfly.start()
                 self.addDistObj(bfly)
 
+    # WelcomeValley hoods have some additional methods for managing
+    # population balancing (via the WelcomeValleyManagerAI class).
+    # These are provided here, but are not used for the static hoods.
+
     def setRedirect(self, replacementHood):
+        # Indicates that this hood is now in Removing mode, and all
+        # avatar requests to or within this hood are to be redirected
+        # to the indicated other hood, which will also immediately
+        # begin reporting this hood's population as its own.
+
         if self.replacementHood:
             self.replacementHood[0].redirectingToMe.remove(self)
         self.replacementHood = replacementHood
@@ -145,30 +172,43 @@ class HoodDataAI:
             self.replacementHood[0].redirectingToMe.append(self)
 
     def hasRedirect(self):
-        return self.replacementHood is not None
+        # Returns true if a redirect has been set, false otherwise.
+        return self.replacementHood != None
 
     def getRedirect(self):
-        if self.replacementHood is None:
+        # Returns the hood to which an avatar is to be redirected, or
+        # self if redirect has not been enabled.
+
+        if self.replacementHood == None:
             return self
         else:
             return self.replacementHood[0].getRedirect()
-        return
 
     def incrementPopulation(self, zoneId, increment):
+        # Adds (or subtracts if negative) the indicated increment to
+        # the population counters.  If zoneId represents a playground,
+        # the increment is also added to the playground population.
+
         self.hoodPopulation += increment
         if ZoneUtil.isPlayground(zoneId):
             self.pgPopulation += increment
 
     def getHoodPopulation(self):
+        # Returns the complete population of avatars within the hood,
+        # including those within hoods that are currently redirecting
+        # to this hood.
+
         population = self.hoodPopulation
         for hood in self.redirectingToMe:
             population += hood.getHoodPopulation()
-
         return population
 
     def getPgPopulation(self):
+        # Returns the population of avatars within the playground
+        # only, including those within hoods that are currently
+        # redirecting to this hood.
+
         population = self.pgPopulation
         for pg in self.redirectingToMe:
             population += pg.getPgPopulation()
-
         return population

@@ -1,22 +1,14 @@
-from direct.distributed.ClockDelta import globalClockDelta
+from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 
-
 class DistCogdoCraneCogAI(DistributedObjectAI):
+    notify = DirectNotifyGlobal.directNotify.newCategory("DistCogdoCraneCogAI")
 
-    def __init__(self, air, game, dna, entranceId, spawnTime):
-        DistributedObjectAI.__init__(self, air)
-        self._gameId = game.doId
-        self._dna = dna
-        self._entranceId = entranceId
-        self._spawnTime = spawnTime
+    def setGameId(self, todo0):
+        pass
 
-    def getGameId(self):
-        return self._gameId
+    def setDNAString(self, todo0):
+        pass
 
-    def getDNAString(self):
-        return self._dna.makeNetString()
-
-    def getSpawnInfo(self):
-        return (self._entranceId,
-                globalClockDelta.localToNetworkTime(self._spawnTime))
+    def setSpawnInfo(self, todo0, todo1):
+        pass

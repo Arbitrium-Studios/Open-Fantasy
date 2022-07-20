@@ -77,7 +77,6 @@ class Enum:
 
         # make sure we don't overwrite an existing element of the class
         assert self._checkExistingMembers(items)
-        assert uniqueElements(items)
 
         i = start
         for item in items:

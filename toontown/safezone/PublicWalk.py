@@ -1,85 +1,71 @@
-from panda3d.core import *
+from pandac.PandaModules import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.directnotify import DirectNotifyGlobal
 from . import Walk
-from otp.otpbase import OTPGlobals
-
 
 class PublicWalk(Walk.Walk):
-    notify = DirectNotifyGlobal.directNotify.newCategory('PublicWalk')
-
+    """
+    Walking around in public places. Turns on a lot of interface stuff
+    that plain old walk doesn't bother with.
+    """
+    # create a notify category
+    notify = DirectNotifyGlobal.directNotify.newCategory("PublicWalk")
+    
+    
     def __init__(self, parentFSM, doneEvent):
+        """
+        doneEvent is a string.
+        PublicWalk state constructor
+        """
+        # Call up the chain
         Walk.Walk.__init__(self, doneEvent)
+
+        # We'll need this later
         self.parentFSM = parentFSM
-        self.previousFOV = None
-        self.isSprinting = 0
 
     def load(self):
+        # Call up the chain
         Walk.Walk.load(self)
-
+            
     def unload(self):
+        # Call up the chain
         Walk.Walk.unload(self)
         del self.parentFSM
 
-    def enter(self, slowWalk=0):
+    def enter(self, slowWalk = 0):
+        # Call up the chain
         Walk.Walk.enter(self, slowWalk)
+        
+        # The shticker book and associated events
         base.localAvatar.book.showButton()
         self.accept(StickerBookHotkey, self.__handleStickerBookEntry)
-        self.accept('enterStickerBook', self.__handleStickerBookEntry)
+        self.accept("enterStickerBook", self.__handleStickerBookEntry)
         self.accept(OptionsPageHotkey, self.__handleOptionsEntry)
+
+        # The laffMeter
         base.localAvatar.laffMeter.start()
         base.localAvatar.beginAllowPies()
-        # switch to this when we implement keymapping for the controls
-        # self.accept(base.SPRINT, self.startSprint)
-        # self.accept(f'{base.SPRINT}-up', self.stopSprint)
-        self.accept('shift', self.startSprint)
-        self.accept('shift-up', self.stopSprint)
 
     def exit(self):
+        # Call up the chain
         Walk.Walk.exit(self)
+        
+        # Put away the book
         base.localAvatar.book.hideButton()
         self.ignore(StickerBookHotkey)
-        self.ignore('enterStickerBook')
+        self.ignore("enterStickerBook")
         self.ignore(OptionsPageHotkey)
+
+        # Put away the laff meter
         base.localAvatar.laffMeter.stop()
         base.localAvatar.endAllowPies()
-        # switch to this when we implement keymapping for the controls
-        # self.ignore(base.SPRINT)
-        # self.ignore(f'{base.SPRINT}-up')
-        self.ignore('shift')
-        self.ignore('shift-up')
-
-    def startSprint(self):
-        if hasattr(base, 'localAvatar'):
-            if base.localAvatar.getHp() <= 0:
-                return
-            else:
-                self.previousFOV = base.genFOV
-
-                base.localAvatar.currentSpeed = OTPGlobals.ToonForwardSprintSpeed
-                base.localAvatar.currentReverseSpeed = OTPGlobals.ToonReverseSprintSpeed
-                base.localAvatar.controlManager.setSpeeds(
-                    OTPGlobals.ToonForwardSprintSpeed, OTPGlobals.ToonJumpForce, OTPGlobals.ToonReverseSprintSpeed, OTPGlobals.ToonRotateSpeed)
-                self.isSprinting = 1
-                base.localAvatar.lerpCameraFov(self.previousFOV + 20, 0.5)
-
-        else:
-            if self.isSprinting == 1:
-                self.stopSprint()
-
-    def stopSprint(self):
-        if hasattr(base, 'localAvatar'):
-            base.localAvatar.currentSpeed = OTPGlobals.ToonForwardSpeed
-            base.localAvatar.currentReverseSpeed = OTPGlobals.ToonReverseSpeed
-            base.localAvatar.controlManager.setSpeeds(
-                OTPGlobals.ToonForwardSpeed, OTPGlobals.ToonJumpForce, OTPGlobals.ToonReverseSpeed, OTPGlobals.ToonRotateSpeed)
-            self.isSprinting = 0
-            base.localAvatar.lerpCameraFov(self.previousFOV, 1.0)
 
     def __handleStickerBookEntry(self):
+        # Don't open sticker book if we're jumping
         currentState = base.localAvatar.animFSM.getCurrentState().getName()
         if currentState == 'jumpAirborne':
             return
+            
         if base.localAvatar.book.isObscured():
             return
         else:
@@ -89,9 +75,11 @@ class PublicWalk(Walk.Walk):
             return
 
     def __handleOptionsEntry(self):
+        # Don't open the options page if we are jumping
         currentState = base.localAvatar.animFSM.getCurrentState().getName()
         if currentState == 'jumpAirborne':
             return
+        
         if base.localAvatar.book.isObscured():
             return
         else:

@@ -5,7 +5,6 @@ from .DistCogdoGame import DistCogdoGame
 from . import CogdoFlyingGameGlobals
 from . import CogdoFlyingGameGlobals as Globals
 
-
 class DistCogdoFlyingGame(DistCogdoGame):
     notify = directNotify.newCategory('DistCogdoFlyingGame')
 

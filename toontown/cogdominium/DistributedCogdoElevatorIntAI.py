@@ -1,5 +1,5 @@
+from direct.directnotify import DirectNotifyGlobal
 from toontown.building.DistributedElevatorIntAI import DistributedElevatorIntAI
 
-
 class DistributedCogdoElevatorIntAI(DistributedElevatorIntAI):
-    pass
+    notify = DirectNotifyGlobal.directNotify.newCategory("DistributedCogdoElevatorIntAI")

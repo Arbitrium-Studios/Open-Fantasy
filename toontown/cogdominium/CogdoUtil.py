@@ -1,42 +1,40 @@
-from pandac.PandaModules import ColorBlendAttrib
+from panda3d.core import ColorBlendAttrib
 ModelPhase = 5
 ModelTypes = {'animation': 'a',
-              'model': 'm',
-              'rig': 'r'}
+ 'model': 'm',
+ 'rig': 'r'}
 ModelGroups = {'area': 'ara',
-               'gui': 'gui'}
+ 'gui': 'gui'}
 Games = {'flying': 'cfg',
-         'maze': 'cmg',
-         'shared': 'csa'}
+ 'maze': 'cmg',
+ 'shared': 'csa'}
 
-
-def loadFlyingModel(baseName, type='model', group='area'):
+def loadFlyingModel(baseName, type = 'model', group = 'area'):
     return loadModel(baseName, 'flying', type=type, group=group)
 
 
-def loadMazeModel(baseName, type='model', group='area'):
+def loadMazeModel(baseName, type = 'model', group = 'area'):
     return loadModel(baseName, 'maze', type=type, group=group)
 
 
-def getModelPath(baseName, game='shared', type='model', group='area'):
+def getModelPath(baseName, game = 'shared', type = 'model', group = 'area'):
     extension = ''
     if hasattr(getBase(), 'air'):
         extension = '.bam'
     return 'phase_%i/models/cogdominium/tt_%s_%s_%s_%s%s' % (ModelPhase,
-                                                             ModelTypes[type],
-                                                             ModelGroups[group],
-                                                             Games[game],
-                                                             baseName,
-                                                             extension)
+     ModelTypes[type],
+     ModelGroups[group],
+     Games[game],
+     baseName,
+     extension)
 
 
-def loadModel(baseName, game='shared', type='model', group='area'):
+def loadModel(baseName, game = 'shared', type = 'model', group = 'area'):
     return loader.loadModel(getModelPath(baseName, game, type, group))
 
 
 class VariableContainer:
     pass
-
 
 class DevVariableContainer:
 
@@ -60,7 +58,7 @@ class CogdoGameMovie:
 
     def load(self):
         from toontown.toonbase import ToontownGlobals
-        from pandac.PandaModules import TextNode
+        from panda3d.core import TextNode
         textNode = TextNode('moviedialogue')
         textNode.setTextColor(0, 0, 0, 1)
         textNode.setCardColor(1, 1, 1, 1)
@@ -85,13 +83,12 @@ class CogdoGameMovie:
     def getIval(self):
         return self._ival
 
-    def play(self, elapsedTime=0.0):
+    def play(self, elapsedTime = 0.0):
         self._dialogueLabel.reparentTo(aspect2d)
         self._ival.start(elapsedTime)
 
     def _startUpdateTask(self):
-        self._task = taskMgr.add(
-            self._updateTask, 'CogdoGameMovie_updateTask', 45)
+        self._task = taskMgr.add(self._updateTask, 'CogdoGameMovie_updateTask', 45)
 
     def _stopUpdateTask(self):
         if self._task is not None:
@@ -106,12 +103,8 @@ class CogdoGameMovie:
         self._ival.finish()
 
 
-def initializeLightCone(np, bin='fixed', sorting=3):
-    np.node().setAttrib(
-        ColorBlendAttrib.make(
-            ColorBlendAttrib.MAdd,
-            ColorBlendAttrib.OIncomingAlpha,
-            ColorBlendAttrib.OOne))
+def initializeLightCone(np, bin = 'fixed', sorting = 3):
+    np.node().setAttrib(ColorBlendAttrib.make(ColorBlendAttrib.MAdd, ColorBlendAttrib.OIncomingAlpha, ColorBlendAttrib.OOne))
     if bin:
         np.setBin(bin, sorting)
     np.setDepthWrite(False)
@@ -119,7 +112,6 @@ def initializeLightCone(np, bin='fixed', sorting=3):
 
 
 ROTATE_TABLE_ALLOWED_ANGLES = (0, 90, 180, 270)
-
 
 def rotateTable(table, angle):
     if angle == 0:

@@ -1,5 +1,5 @@
 import math
-from pandac.PandaModules import CardMaker, TextNode
+from panda3d.core import CardMaker, TextNode
 from direct.gui.DirectGui import DirectFrame, DirectLabel, DirectButton
 from direct.task import Task
 from toontown.toon import NPCToons
@@ -8,7 +8,6 @@ from toontown.toonbase import ToontownGlobals
 from toontown.quest import Quests
 from toontown.suit import SuitPlannerBase
 from . import QuestMapGlobals
-
 
 class QuestMap(DirectFrame):
 
@@ -60,30 +59,8 @@ class QuestMap(DirectFrame):
         self.marker['image'] = iconNP
         self.marker.setScale(0.05)
         iconNP.removeNode()
-        self.mapOpenButton = DirectButton(
-            image=(
-                gui.find('**/tt_t_gui_qst_mapClose'),
-                gui.find('**/tt_t_gui_qst_mapClose'),
-                gui.find('**/tt_t_gui_qst_mapTryToOpen')),
-            relief=None,
-            pos=(
-                1.25,
-                0,
-                -0.63),
-            scale=0.205,
-            command=self.show)
-        self.mapCloseButton = DirectButton(
-            image=(
-                gui.find('**/tt_t_gui_qst_mapOpen'),
-                gui.find('**/tt_t_gui_qst_mapOpen'),
-                gui.find('**/tt_t_gui_qst_mapTryToClose')),
-            relief=None,
-            pos=(
-                1.25,
-                0,
-                -0.63),
-            scale=0.205,
-            command=self.hide)
+        self.mapOpenButton = DirectButton(image=(gui.find('**/tt_t_gui_qst_mapClose'), gui.find('**/tt_t_gui_qst_mapClose'), gui.find('**/tt_t_gui_qst_mapTryToOpen')), relief=None, pos=(1.25, 0, -0.63), scale=0.205, command=self.show)
+        self.mapCloseButton = DirectButton(image=(gui.find('**/tt_t_gui_qst_mapOpen'), gui.find('**/tt_t_gui_qst_mapOpen'), gui.find('**/tt_t_gui_qst_mapTryToClose')), relief=None, pos=(1.25, 0, -0.63), scale=0.205, command=self.hide)
         self.mapOpenButton.hide()
         self.mapCloseButton.hide()
         gui.removeNode()
@@ -95,53 +72,13 @@ class QuestMap(DirectFrame):
         cogInfoTextColor = (0.2, 0.2, 0.2, 1)
         textPos = (1.2, -0.2)
         textScale = 0.8
-        self.cInfo = DirectLabel(parent=self.cogInfoFrame,
-                                 text='',
-                                 text_fg=cogInfoTextColor,
-                                 text_pos=textPos,
-                                 text_scale=textScale,
-                                 geom=cIcon,
-                                 geom_pos=(-0.2,
-                                           0,
-                                           0),
-                                 geom_scale=0.8,
-                                 relief=None)
+        self.cInfo = DirectLabel(parent=self.cogInfoFrame, text='', text_fg=cogInfoTextColor, text_pos=textPos, text_scale=textScale, geom=cIcon, geom_pos=(-0.2, 0, 0), geom_scale=0.8, relief=None)
         self.cInfo.setPos(-2.2, 0, 0.5)
-        self.lInfo = DirectLabel(parent=self.cogInfoFrame,
-                                 text_fg=cogInfoTextColor,
-                                 text='',
-                                 text_pos=textPos,
-                                 text_scale=textScale,
-                                 geom=lIcon,
-                                 geom_pos=(-0.2,
-                                           0,
-                                           0),
-                                 geom_scale=0.8,
-                                 relief=None)
+        self.lInfo = DirectLabel(parent=self.cogInfoFrame, text_fg=cogInfoTextColor, text='', text_pos=textPos, text_scale=textScale, geom=lIcon, geom_pos=(-0.2, 0, 0), geom_scale=0.8, relief=None)
         self.lInfo.setPos(-2.2, 0, -0.5)
-        self.mInfo = DirectLabel(parent=self.cogInfoFrame,
-                                 text_fg=cogInfoTextColor,
-                                 text='',
-                                 text_pos=textPos,
-                                 text_scale=textScale,
-                                 geom=mIcon,
-                                 geom_pos=(-0.2,
-                                           0,
-                                           0),
-                                 geom_scale=0.8,
-                                 relief=None)
+        self.mInfo = DirectLabel(parent=self.cogInfoFrame, text_fg=cogInfoTextColor, text='', text_pos=textPos, text_scale=textScale, geom=mIcon, geom_pos=(-0.2, 0, 0), geom_scale=0.8, relief=None)
         self.mInfo.setPos(0.8, 0, 0.5)
-        self.sInfo = DirectLabel(parent=self.cogInfoFrame,
-                                 text_fg=cogInfoTextColor,
-                                 text='',
-                                 text_pos=textPos,
-                                 text_scale=textScale,
-                                 geom=sIcon,
-                                 geom_pos=(-0.2,
-                                           0,
-                                           0),
-                                 geom_scale=0.8,
-                                 relief=None)
+        self.sInfo = DirectLabel(parent=self.cogInfoFrame, text_fg=cogInfoTextColor, text='', text_pos=textPos, text_scale=textScale, geom=sIcon, geom_pos=(-0.2, 0, 0), geom_scale=0.8, relief=None)
         self.sInfo.setPos(0.8, 0, -0.5)
         icons.removeNode()
         return
@@ -164,11 +101,9 @@ class QuestMap(DirectFrame):
         del self.mapCloseButton
         DirectFrame.destroy(self)
 
-    def putBuildingMarker(self, pos, hpr=(0, 0, 0), mapIndex=None):
-        marker = DirectLabel(parent=self.container, text='',
-                             text_pos=(-0.05, -0.15), text_fg=(1, 1, 1, 1), relief=None)
-        gui = loader.loadModel(
-            'phase_4/models/parties/schtickerbookHostingGUI')
+    def putBuildingMarker(self, pos, hpr = (0, 0, 0), mapIndex = None):
+        marker = DirectLabel(parent=self.container, text='', text_pos=(-0.05, -0.15), text_fg=(1, 1, 1, 1), relief=None)
+        gui = loader.loadModel('phase_4/models/parties/schtickerbookHostingGUI')
         icon = gui.find('**/startPartyButton_inactive')
         iconNP = aspect2d.attachNewNode('iconNP')
         icon.reparentTo(iconNP)
@@ -200,13 +135,11 @@ class QuestMap(DirectFrame):
             mapIndex = questIndex + 1
             questId, fromNpcId, toNpcId, rewardId, toonProgress = questDesc
             quest = Quests.getQuest(questId)
-            fComplete = quest.getCompletionStatus(
-                self.av, questDesc) == Quests.COMPLETE
+            fComplete = quest.getCompletionStatus(self.av, questDesc) == Quests.COMPLETE
             if not fComplete:
                 if quest.getType() == Quests.RecoverItemQuest:
                     if quest.getHolder() == Quests.AnyFish:
-                        self.putBuildingMarker(
-                            self.fishingSpotInfo, mapIndex=mapIndex)
+                        self.putBuildingMarker(self.fishingSpotInfo, mapIndex=mapIndex)
                     continue
                 elif quest.getType() != Quests.DeliverGagQuest and quest.getType() != Quests.DeliverItemQuest and quest.getType() != Quests.VisitQuest and quest.getType() != Quests.TrackChoiceQuest:
                     continue
@@ -222,15 +155,9 @@ class QuestMap(DirectFrame):
                         zone = dnaStore.getZoneFromBlockNumber(blockNumber)
                         branchZone = zone - zone % 100
                         finalZone = branchZone + 500 + blockNumber
-                        buildingType = dnaStore.getBlockBuildingType(
-                            blockNumber)
+                        buildingType = dnaStore.getBlockBuildingType(blockNumber)
                         if npcZone == finalZone:
-                            self.putBuildingMarker(
-                                dnaStore.getDoorPosHprFromBlockNumber(
-                                    blockNumber).getPos(),
-                                dnaStore.getDoorPosHprFromBlockNumber(
-                                    blockNumber).getHpr(),
-                                mapIndex=mapIndex)
+                            self.putBuildingMarker(dnaStore.getDoorPosHprFromBlockNumber(blockNumber).getPos(), dnaStore.getDoorPosHprFromBlockNumber(blockNumber).getHpr(), mapIndex=mapIndex)
 
         return
 
@@ -239,10 +166,8 @@ class QuestMap(DirectFrame):
             return (0, 0)
         topRight = self.cornerPosInfo[0]
         bottomLeft = self.cornerPosInfo[1]
-        relativeX = (pos.getX() - bottomLeft.getX()) / \
-            (topRight.getX() - bottomLeft.getX()) - 0.5
-        relativeY = (pos.getY() - bottomLeft.getY()) / \
-            (topRight.getY() - bottomLeft.getY()) - 0.5
+        relativeX = (pos.getX() - bottomLeft.getX()) / (topRight.getX() - bottomLeft.getX()) - 0.5
+        relativeY = (pos.getY() - bottomLeft.getY()) / (topRight.getY() - bottomLeft.getY()) - 0.5
         return (relativeX, relativeY)
 
     def update(self, task):
@@ -253,16 +178,7 @@ class QuestMap(DirectFrame):
                 self.marker.setHpr(0, 0, -180 - self.av.getH())
         i = 0
         for buildingMarker in self.buildingMarkers:
-            buildingMarker.setScale(
-                (math.sin(
-                    task.time *
-                    16.0 +
-                    i *
-                    math.pi /
-                    3.0) +
-                    1) *
-                0.005 +
-                0.04)
+            buildingMarker.setScale((math.sin(task.time * 16.0 + i * math.pi / 3.0) + 1) * 0.005 + 0.04)
             i = i + 1
 
         return Task.cont
@@ -271,25 +187,16 @@ class QuestMap(DirectFrame):
         if self.av:
             try:
                 hoodId = ZoneUtil.getCanonicalHoodId(self.av.getLocation()[1])
-                zoneId = ZoneUtil.getCanonicalBranchZone(
-                    self.av.getLocation()[1])
-                mapsGeom = loader.loadModel(
-                    'phase_4/models/questmap/%s_maps' %
-                    ToontownGlobals.dnaMap[hoodId])
-                mapImage = mapsGeom.find(
-                    '**/%s_%s_english' %
-                    (ToontownGlobals.dnaMap[hoodId], zoneId))
+                zoneId = ZoneUtil.getCanonicalBranchZone(self.av.getLocation()[1])
+                mapsGeom = loader.loadModel('phase_4/models/questmap/%s_maps' % ToontownGlobals.dnaMap[hoodId])
+                mapImage = mapsGeom.find('**/%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
                 if not mapImage.isEmpty():
                     self.container['image'] = mapImage
                     self.resetFrameSize()
-                    self.cornerPosInfo = QuestMapGlobals.CornerPosTable.get(
-                        '%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
-                    self.hqPosInfo = QuestMapGlobals.HQPosTable.get(
-                        '%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
-                    self.fishingSpotInfo = QuestMapGlobals.FishingSpotPosTable.get(
-                        '%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
-                    self.cogInfoPos = QuestMapGlobals.CogInfoPosTable.get(
-                        '%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
+                    self.cornerPosInfo = QuestMapGlobals.CornerPosTable.get('%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
+                    self.hqPosInfo = QuestMapGlobals.HQPosTable.get('%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
+                    self.fishingSpotInfo = QuestMapGlobals.FishingSpotPosTable.get('%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
+                    self.cogInfoPos = QuestMapGlobals.CogInfoPosTable.get('%s_%s_english' % (ToontownGlobals.dnaMap[hoodId], zoneId))
                     self.cogInfoFrame.setPos(self.cogInfoPos)
                     self.hide()
                     self.hoodId = hoodId
@@ -300,7 +207,7 @@ class QuestMap(DirectFrame):
                 else:
                     self.stop()
                 mapsGeom.removeNode()
-            except BaseException:
+            except:
                 self.stop()
 
     def start(self):
@@ -311,16 +218,15 @@ class QuestMap(DirectFrame):
 
     def initMarker(self, task):
         if self.av:
-            if not hasattr(base.cr.playGame.getPlace(
-            ), 'isInterior') or not base.cr.playGame.getPlace().isInterior:
+            if not hasattr(base.cr.playGame.getPlace(), 'isInterior') or not base.cr.playGame.getPlace().isInterior:
                 relX, relY = self.transformAvPos(self.av.getPos())
                 self.marker.setPos(relX, 0, relY)
                 self.marker.setHpr(0, 0, -180 - self.av.getH())
             self.marker['geom_scale'] = 1.4 * task.time % 0.5 * 10 + 1
             self.marker['geom_color'] = (1,
-                                         1,
-                                         1,
-                                         0.8 - 1.4 * task.time % 0.5 * 2 / 0.8 + 0.2)
+             1,
+             1,
+             0.8 - 1.4 * task.time % 0.5 * 2 / 0.8 + 0.2)
         if task.time < 1:
             return Task.cont
         else:
@@ -365,8 +271,7 @@ class QuestMap(DirectFrame):
         return
 
     def handleMarker(self):
-        if hasattr(base.cr.playGame.getPlace(),
-                   'isInterior') and base.cr.playGame.getPlace().isInterior:
+        if hasattr(base.cr.playGame.getPlace(), 'isInterior') and base.cr.playGame.getPlace().isInterior:
             self.updateMarker = False
         else:
             self.updateMarker = True

@@ -1,4 +1,4 @@
-
+"""PotentialShard module: contains the PotenialShardClass"""
 
 class PotentialShard:
 
@@ -9,4 +9,4 @@ class PotentialShard:
         self.welcomeValleyPopulation = 0
         self.active = 1
         self.available = 1
-        return
+

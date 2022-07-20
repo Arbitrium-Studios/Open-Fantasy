@@ -1,7 +1,9 @@
-from pandac.PandaModules import *
+"""DistributedPet module: contains the DistributedPet class"""
+
+from panda3d.core import *
 from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
-from direct.showbase.PythonUtil import *
+from otp.otpbase.PythonUtil import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedSmoothNode
 from direct.distributed.ClockDelta import globalClockDelta
@@ -15,36 +17,44 @@ from toontown.toonbase import TTLocalizer
 from toontown.distributed import DelayDelete
 from toontown.distributed.DelayDeletable import DelayDeletable
 import random
-if __dev__:
-    import pdb
-BeanColors = (VBase4(1.0, 0.2, 0.2, 1.0),
-              VBase4(0.2, 1.0, 0.2, 1.0),
-              VBase4(0.2, 0.2, 1.0, 1.0),
-              VBase4(0.0, 1.0, 1.0, 1.0),
-              VBase4(1.0, 1.0, 0.0, 1.0),
-              VBase4(1.0, 0.6, 1.0, 1.0),
-              VBase4(0.6, 0.0, 0.6, 1.0))
 
+if __dev__:
+    # import pdb def
+    import pdb
+
+BeanColors = (
+        VBase4(1.0, 0.2, 0.2, 1.0), # red
+        VBase4(0.2, 1.0, 0.2, 1.0), # green
+        VBase4(0.2, 0.2, 1.0, 1.0), # blue
+        VBase4(0.0, 1.0, 1.0, 1.0), # light blue
+        # VBase4(1.0, 0.6, 0.1, 1.0), # orange
+        VBase4(1.0, 1.0, 0.0, 1.0), # yellow
+        VBase4(1.0, 0.6, 1.0, 1.0), # pink
+        VBase4(0.6, 0.0, 0.6, 1.0), # purple
+        )
 
 class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
                      Pet.Pet, PetBase.PetBase, DelayDeletable):
-    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPet')
+    """client-side implementation of Toon pet"""
+
+    notify = DirectNotifyGlobal.directNotify.newCategory("DistributedPet")
     swallowSfx = None
     callSfx = None
     petSfx = None
 
-    def __init__(self, cr, bFake=False):
+    def __init__(self, cr, bFake = False):
         DistributedSmoothNode.DistributedSmoothNode.__init__(self, cr)
         Pet.Pet.__init__(self)
         self.bFake = bFake
         self.isLocalToon = 0
         self.inWater = 0
+        # create our distributed trait and mood funcs
         self.__funcsToDelete = []
         self.__generateDistTraitFuncs()
         self.__generateDistMoodFuncs()
+
         self.trickAptitudes = []
         self.avDelayDelete = None
-        return
 
     def generate(self):
         DistributedPet.notify.debug('generate(), fake=%s' % self.bFake)
@@ -53,43 +63,44 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
         DistributedSmoothNode.DistributedSmoothNode.generate(self)
         self.trickIval = None
         self.movieTrack = None
+
+        # this will be filled in during generation
         self.traitList = [0] * PetTraits.PetTraits.NumTraits
+
+
+
+        # cache required mood components until we have a self.mood to give
+        # them to
         self.requiredMoodComponents = {}
-        return
 
     def b_setLocation(self, parentId, zoneId):
         if not self.bFake:
-            DistributedSmoothNode.DistributedSmoothNode.b_setLocation(
-                self, parentId, zoneId)
-
+            DistributedSmoothNode.DistributedSmoothNode.b_setLocation(self, parentId, zoneId)
     def d_setLocation(self, parentId, zoneId):
         if not self.bFake:
-            DistributedSmoothNode.DistributedSmoothNode.d_setLocation(
-                self, parentId, zoneId)
-
+            DistributedSmoothNode.DistributedSmoothNode.d_setLocation(self, parentId, zoneId)
     def setLocation(self, parentId, zoneId):
         if not self.bFake:
-            DistributedSmoothNode.DistributedSmoothNode.setLocation(
-                self, parentId, zoneId)
+            DistributedSmoothNode.DistributedSmoothNode.setLocation(self, parentId, zoneId)
 
+    # debug OSD display
     def getDisplayPrefix(self):
         return 'pet%s' % self.doId
-
     def display(self, key, value, category=''):
         if self.bFake:
             return 1
+
         if len(category) > 0:
             category = '-' + category
-        onScreenDebug.add(
-            '%s%s-%s' %
-            (self.getDisplayPrefix(), category, key), value)
+        onScreenDebug.add('%s%s-%s' % (self.getDisplayPrefix(),
+                                       category, key), value)
         return 1
-
     def clearDisplay(self):
         onScreenDebug.removeAllWithPrefix(self.getDisplayPrefix())
         return 1
 
     def moodComponentChanged(self, components=[]):
+        # update the on-screen debug display
         if len(components) == 0:
             components = PetMood.PetMood.Components
         for comp in components:
@@ -103,10 +114,14 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
 
     def setPetName(self, petName):
         self.petName = petName
+        # set the nodepath name, for kicks
         DistributedSmoothNode.DistributedSmoothNode.setName(self, self.petName)
+        # make sure the pet's nametag is up-to-date
         if self.isGenerated():
+            # unqualified self.setName was resolving to NodePath.setName
             Pet.Pet.setName(self, self.petName)
-        messenger.send('petNameChanged', [self])
+
+        messenger.send("petNameChanged", [self])
 
     def setTraitSeed(self, traitSeed):
         self.traitSeed = traitSeed
@@ -114,14 +129,15 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
     def setSafeZone(self, safeZone):
         self.safeZone = safeZone
 
+    # setXXX func is generated for each trait
     def __generateDistTraitFuncs(self):
+        # generate a set func for each trait
         for i in range(PetTraits.PetTraits.NumTraits):
             traitName = PetTraits.getTraitNames()[i]
             setterName = self.getSetterName(traitName)
-
             def traitSetter(value, self=self, i=i):
                 self.traitList[i] = value
-
+            # put the func onto self
             self.__dict__[setterName] = traitSetter
             self.__funcsToDelete.append(setterName)
 
@@ -166,27 +182,42 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
         self.lastSeenTimestamp = timestamp
 
     def getTimeSinceLastSeen(self):
+        # returns time since pet was last seen on the AI
         t = self.cr.getServerTimeOfDay() - self.lastSeenTimestamp
-        return max(0.0, t)
+        return max(0., t)
 
     def updateOfflineMood(self):
-        self.mood.driftMood(
-            dt=self.getTimeSinceLastSeen(),
-            curMood=self.lastKnownMood)
+        # Used by the client to figure out what the pet's mood is when
+        # the pet is not currently instantiated on the AI. Once the pet's
+        # last-known-mood fields and last-seen timestamp are filled in,
+        # and the object is 'fake-generated', you can call this at any
+        # time to recalculate the pet's mood.
+        assert(self.bFake)
+        self.mood.driftMood(dt=self.getTimeSinceLastSeen(),
+                            curMood=self.lastKnownMood)
 
     def __handleMoodSet(self, component, value):
+        # THIS IS ONLY TO BE USED BY THE MOOD SET HANDLERS
+        # see requiredMoodComponents comment in __init__
+        #print "Doid: %s Comp: %s Value: %s" % (self.doId, component, value)
         if self.isGenerated():
             self.mood.setComponent(component, value)
         else:
             self.requiredMoodComponents[component] = value
 
+    # setXXX func is generated for each mood component
+    # this is one of the original functions:
+    """
+    def setHunger(self, hunger):
+        self.__handleMoodSet('hunger', hunger)"""
+
     def __generateDistMoodFuncs(self):
+        # generate a get, b_set, d_set, and set func for each mood component
         for compName in PetMood.PetMood.Components:
             setterName = self.getSetterName(compName)
-
             def moodSetter(value, self=self, compName=compName):
                 self.__handleMoodSet(compName, value)
-
+            # put the func onto self
             self.__dict__[setterName] = moodSetter
             self.__funcsToDelete.append(setterName)
 
@@ -195,6 +226,7 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
             setterName = self.getSetterName(name)
             self.__dict__[setterName](value)
 
+
     def doTrick(self, trickId, timestamp):
         if not self.isLockedDown():
             if self.trickIval is not None and self.trickIval.isPlaying():
@@ -202,31 +234,44 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
             self.trickIval = PetTricks.getTrickIval(self, trickId)
             if trickId == PetTricks.Tricks.BALK:
                 mood = self.getDominantMood()
-                self.trickIval = Parallel(
-                    self.trickIval, Sequence(
-                        Func(
-                            self.handleMoodChange, 'confusion'), Wait(1.0), Func(
-                            self.handleMoodChange, mood)))
+                self.trickIval = Parallel(self.trickIval,
+                                          Sequence(Func(self.handleMoodChange, 'confusion'),
+                                                   Wait(1.),
+                                                   Func(self.handleMoodChange, mood)
+                                                   )
+                                          )
             self.trickIval.start(globalClockDelta.localElapsedTime(timestamp))
-        return
 
     def getName(self):
+        # call the correct getName
         return Pet.Pet.getName(self)
 
     def announceGenerate(self):
-        DistributedPet.notify.debug('announceGenerate(), fake=%s' % self.bFake)
+        DistributedPet.notify.debug('announceGenerate(), fake=%s' %
+                                    self.bFake)
         DistributedSmoothNode.DistributedSmoothNode.announceGenerate(self)
-        if hasattr(self, 'petName'):
+        if hasattr(self, "petName"):
             Pet.Pet.setName(self, self.petName)
+
+        # don't use the trait values from the DB, this should circumvent
+        # the corrupted doodle problem
         self.traits = PetTraits.PetTraits(self.traitSeed, self.safeZone)
+        """
+        self.traits = PetTraits.PetTraits(self.traitSeed, self.safeZone,
+                                          traitValueList=self.traitList)
+                                          """
+
+        # create our mood manager. we need to have self.traits first.
         self.mood = PetMood.PetMood(self)
+
+        # pass in the cached required mood component values
         for mood, value in list(self.requiredMoodComponents.items()):
             self.mood.setComponent(mood, value, announce=0)
-
         self.requiredMoodComponents = {}
+
         DistributedPet.notify.debug(
-            'time since last seen: %s' %
-            self.getTimeSinceLastSeen())
+            'time since last seen: %s' % self.getTimeSinceLastSeen())
+
         self.setDNA([self.head,
                      self.ears,
                      self.nose,
@@ -235,43 +280,57 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
                      self.color,
                      self.colorScale,
                      self.eyeColor,
-                     self.gender])
+                     self.gender,
+                     ])
+
+        # Locally store a copy of the pet's DNA on its owner, for
+        # convenience.  Really this is just for the catalog system for
+        # now, but maybe there will be other applications later.
         av = self.cr.doId2do.get(self.ownerId)
         if av:
             av.petDNA = self.style
+
         if self.bFake:
+            # store a copy of the 'last known' mood state
             self.lastKnownMood = self.mood.makeCopy()
+            # and calculate the current mood
             self.updateOfflineMood()
         else:
             self.__initCollisions()
             self.startSmooth()
             self.setActiveShadow(1)
+
+        # make sure the nametag is up-to-date
         self.setPetName(self.petName)
         if not self.bFake:
             self.addActive()
+
+            # start the blink task again because disable stops it
             self.startBlink()
+
+            # only load the sounds for 'real' pets
             if not self.swallowSfx:
-                self.swallowSfx = loader.loadSfx(
-                    'phase_5.5/audio/sfx/beg_eat_swallow.ogg')
+                self.swallowSfx = loader.loadSfx('phase_5.5/audio/sfx/beg_eat_swallow.ogg')
             if not self.callSfx:
-                self.callSfx = loader.loadSfx(
-                    'phase_5.5/audio/sfx/call_pet.ogg')
+                self.callSfx = loader.loadSfx('phase_5.5/audio/sfx/call_pet.ogg')
             if not self.petSfx:
-                self.petSfx = loader.loadSfx(
-                    'phase_5.5/audio/sfx/pet_the_pet.ogg')
+                self.petSfx = loader.loadSfx('phase_5.5/audio/sfx/pet_the_pet.ogg')
+
+            # kick-start the emote display
             self.handleMoodChange()
-            self.accept(
-                self.mood.getDominantMoodChangeEvent(),
-                self.handleMoodChange)
-            self.accept(
-                self.mood.getMoodChangeEvent(),
-                self.moodComponentChanged)
+            # and listen for changes
+            self.accept(self.mood.getDominantMoodChangeEvent(), self.handleMoodChange)
+            # listen for every mood change for debug display
+            self.accept(self.mood.getMoodChangeEvent(),
+                        self.moodComponentChanged)
 
     def disable(self):
         DistributedPet.notify.debug('disable(), fake=%s' % self.bFake)
-        if self.isLocalToon:
+        # free local avatar
+        if (self.isLocalToon):
             base.localAvatar.enableSmartCameraViews()
             self.freeAvatar()
+
         self.ignore(self.mood.getDominantMoodChangeEvent())
         self.ignore(self.mood.getMoodChangeEvent())
         if hasattr(self, 'lastKnownMood'):
@@ -284,9 +343,13 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
         if not self.bFake:
             self.stopSmooth()
             self.__cleanupCollisions()
+            # stop all animations on disabled pets
             self.stopAnimations()
+            # if we're localAv's pet, mark our mood as 'dirty' so that the pet
+            # panel will re-query and not use old cached info
             if self.doId == localAvatar.getPetId():
                 bboard.post(PetConstants.OurPetsMoodChangedKey, True)
+        # clean up any trick movie state
         taskMgr.remove(self.uniqueName('lerpCamera'))
         self.clearDisplay()
         DistributedSmoothNode.DistributedSmoothNode.disable(self)
@@ -296,11 +359,15 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
         if self.trickIval is not None:
             self.trickIval.finish()
             del self.trickIval
+
         if self.movieTrack is not None:
             self.movieTrack.finish()
             del self.movieTrack
-        taskMgr.remove(self.uniqueName('Pet-Movie-%s' % self.getDoId()))
+
+        # Precaution in case we are in a movie.
+        taskMgr.remove(self.uniqueName('Pet-Movie-%s' %self.getDoId()))
         self.clearMovie()
+
         for funcName in self.__funcsToDelete:
             del self.__dict__[funcName]
 
@@ -308,27 +375,34 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
         DistributedSmoothNode.DistributedSmoothNode.delete(self)
         if not self.bFake:
             PetManager.releasePetManager()
-        return
 
     def __initCollisions(self):
+        # This is a ray cast down to detect floor polygons
         cRay = CollisionRay(0.0, 0.0, 40000.0, 0.0, 0.0, -1.0)
         cRayNode = CollisionNode('pet-cRayNode-%s' % self.doId)
         cRayNode.addSolid(cRay)
         cRayNode.setFromCollideMask(OTPGlobals.FloorBitmask)
         cRayNode.setIntoCollideMask(BitMask32.allOff())
         self.cRayNodePath = self.attachNewNode(cRayNode)
+
+        # set up floor collision mechanism
         self.lifter = CollisionHandlerFloor()
-        self.lifter.setInPattern('enter%in')
-        self.lifter.setOutPattern('exit%in')
+        self.lifter.setInPattern("enter%in")
+        self.lifter.setOutPattern("exit%in")
         self.lifter.setOffset(OTPGlobals.FloorOffset)
+        # This is how high the pet will reach up to another floor
+        # polygon:
         self.lifter.setReach(4.0)
         self.lifter.addCollider(self.cRayNodePath, self)
+
+        # hook into the petManager's collision traverser
         self.cTrav = base.petManager.cTrav
         self.cTrav.addCollider(self.cRayNodePath, self.lifter)
-        taskMgr.add(
-            self._detectWater,
-            self.getDetectWaterTaskName(),
-            priority=32)
+
+        # check for water after the global collision traversal
+        taskMgr.add(self._detectWater, self.getDetectWaterTaskName(),
+                    priority=32)
+
         self.initializeBodyCollisions('pet-%s' % self.doId)
 
     def __cleanupCollisions(self):
@@ -341,8 +415,12 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
         del self.lifter
 
     def lockPet(self):
+        # call this when you need to lock the pet down in order to play
+        # a movie on him
         if not self.lockedDown:
             self.prevAnimState = self.animFSM.getCurrentState().getName()
+            # if the movie doesn't do anything, the pet is going to stop moving.
+            # put him in neutral
             self.animFSM.request('neutral')
         self.lockedDown += 1
 
@@ -352,27 +430,30 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
     def unlockPet(self):
         if self.lockedDown <= 0:
             DistributedPet.notify.warning(
-                '%s: unlockPet called on unlockedPet' %
-                self.doId)
+                '%s: unlockPet called on unlockedPet' % self.doId)
         else:
+            # call this when you're done playing the movie
             self.lockedDown -= 1
             if not self.lockedDown:
+                # make sure the pet is playing the same animation that it was
+                # playing when we locked it down
                 self.animFSM.request(self.prevAnimState)
                 self.prevAnimState = None
-        return
 
+    # this is called every frame by the smoothing task
     def smoothPosition(self):
         DistributedSmoothNode.DistributedSmoothNode.smoothPosition(self)
         if not self.lockedDown:
-            self.trackAnimToSpeed(
-                self.smoother.getSmoothForwardVelocity(),
-                self.smoother.getSmoothRotationalVelocity())
+            self.trackAnimToSpeed(self.smoother.getSmoothForwardVelocity(),
+                                  self.smoother.getSmoothRotationalVelocity())
 
     def getDetectWaterTaskName(self):
         return self.uniqueName('detectWater')
 
     def _detectWater(self, task):
+        # this uses localToon's zone info to look up water info
         showWake, wakeWaterHeight = ZoneUtil.getWakeInfo()
+        # if showWake is false, don't check for water, there's none around
         self.inWater = 0
         if showWake:
             if self.getZ() <= wakeWaterHeight:
@@ -380,27 +461,32 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
                 self.inWater = 1
         return Task.cont
 
+    # override funcs in Pet.py
     def isInWater(self):
         return self.inWater
-
     def isExcited(self):
         return PetBase.PetBase.isExcited(self)
-
     def isSad(self):
         return PetBase.PetBase.isSad(self)
 
     def handleMoodChange(self, mood=None):
+        # Normally this is called with the new dominant mood. If not passed in,
+        # just query for the dominant mood.
         if mood is None:
             mood = self.mood.getDominantMood()
+        # for now, display the pet's mood in a thought balloon
         if mood == PetMood.PetMood.Neutral:
             self.clearChat()
             self.clearMood()
         else:
+            #self.setChatAbsolute(TTLocalizer.PetMoodAdjectives[mood], CFThought)
             self.showMood(mood)
         messenger.send('petStateUpdated', [self])
-        return
 
     def getDominantMood(self):
+        # there are situations where this is being called by PetAvatarPanel
+        # before we're fully generated. Not a big deal if the panel erroneously
+        # shows the pet as neutral
         if not hasattr(self, 'mood'):
             return PetMood.PetMood.Neutral
         return self.mood.getDominantMood()
@@ -410,151 +496,225 @@ class DistributedPet(DistributedSmoothNode.DistributedSmoothNode,
 
     def teleportIn(self, timestamp):
         self.lockPet()
-        self.animFSM.request('teleportIn', [timestamp])
+        self.animFSM.request("teleportIn", [timestamp])
         self.unlockPet()
 
     def teleportOut(self, timestamp):
         self.lockPet()
-        self.animFSM.request('teleportOut', [timestamp])
+        self.animFSM.request("teleportOut", [timestamp])
         self.unlockPet()
 
+    #
+    # pet movie methods
+    #
+
     def avatarInteract(self, avId):
+        # Lock down the avatar and prepare to play trick movie
+        assert(self.notify.debug("Entering movie mode"))
         place = base.cr.playGame.getPlace()
         place.setState('pet')
+        #base.localAvatar.startUpdateSmartCamera()
         base.localAvatar.disableSmartCameraViews()
 
     def freeAvatar(self):
+        # This is a message from the AI used to free the avatar from movie mode
         place = base.cr.playGame.getPlace()
         if place:
-            place.setState('walk')
+            place.setState("walk")
         base.localAvatar.unlock()
         messenger.send('pet-interaction-done')
 
     def setUpMovieAvatar(self, av):
-        self.avDelayDelete = DelayDelete.DelayDelete(
-            av, 'Pet.setUpMovieAvatar')
+        # Assign the av pointer and prevent the av from being deleted
+        # while it is assigned here.
+        self.avDelayDelete = DelayDelete.DelayDelete(av, 'Pet.setUpMovieAvatar')
+
+        # Prepare the avatar for the trick movie
         av.headsUp(self, 0, 0, 0)
         av.stopLookAround()
+        #av.lerpLookAt(self.getPos(), time=0.5)
 
     def holdPetDownForMovie(self):
+        # used to be in setUpMovieAvatar but not wanted for call movie
         self.lockPet()
         self.stopSmooth()
 
     def releasePetFromHoldDown(self):
+        # used to be in resetAvatarAndPet but not wanted for call movie
         self.unlockPet()
         self.startSmooth()
 
     def clearMovieAvatar(self):
+        # Allow the avatar that was assigned during the movie to be deleted.
         if self.avDelayDelete:
             self.avDelayDelete.destroy()
             self.avDelayDelete = None
-        return
 
     def clearMovie(self):
+        # Reset the pet after trick movie
+        assert(self.notify.debug('clearMovie'))
         self.clearMovieAvatar()
         return Task.done
 
     def resetAvatarAndPet(self, task=None):
-        if self.isLocalToon:
+        # return to original pos hpr
+        #self.clearMat()
+        # free local avatar
+        if (self.isLocalToon):
             base.localAvatar.enableSmartCameraViews()
+            # turn away from the pet so we can see him
             base.localAvatar.setH(base.localAvatar, 30)
             self.freeAvatar()
             self.isLocalToon = 0
+
         return Task.done
 
     def _petMovieStart(self, av):
+        assert(self.notify.debug('PET_MOVIE_START'))
+
         if not self.isLocalToon:
             av.stopSmooth()
+
         self.setUpMovieAvatar(av)
-        if self.isLocalToon:
+
+        # if this is the localtoon, lerp the camera
+        if (self.isLocalToon):
             base.localAvatar.setCameraPosForPetInteraction()
             base.localAvatar.lock()
 
     def _getPetMovieCompleteIval(self, av):
-
         def _petMovieComplete(self=self):
+            assert(self.notify.debug('PET_MOVIE_COMPLETE'))
             if self.isLocalToon:
                 base.localAvatar.unsetCameraPosForPetInteraction()
             else:
                 av.startSmooth()
 
-        return Sequence(Func(_petMovieComplete), Wait(0.8),
-                        Func(self.resetAvatarAndPet))
+        return Sequence(
+            Func(_petMovieComplete),
+            Wait(.8),
+            Func(self.resetAvatarAndPet),
+            )
 
     def setMovie(self, mode, avId, timestamp):
+        # This is a message from the AI describing a movie between this pet
+        # and a Toon that has entered trick mode with us.
+
         timeStamp = globalClockDelta.localElapsedTime(timestamp)
+
+        # if we need to stop a currently-playing movie ival, do it before
+        # we set self.isLocalToon. Otherwise we may crash in
+        # LocalAvatar.unsetCameraPosForPetInteraction -- the movie will not
+        # be able to clean up correctly wrt localToon/not localToon
         if mode in (PetConstants.PET_MOVIE_CALL,
-                    PetConstants.PET_MOVIE_SCRATCH, PetConstants.PET_MOVIE_FEED):
+                    PetConstants.PET_MOVIE_SCRATCH,
+                    PetConstants.PET_MOVIE_FEED):
             if self.movieTrack is not None and self.movieTrack.isPlaying():
                 self.movieTrack.finish()
-        if avId != 0:
-            self.isLocalToon = avId == base.localAvatar.doId
+
+        if (avId != 0):
+            self.isLocalToon = (avId == base.localAvatar.doId)
             av = base.cr.doId2do.get(avId)
             if av is None:
-                self.notify.warning('Avatar %d not found in doId' % avId)
+                self.notify.warning("Avatar %d not found in doId" % (avId))
                 return
-        if mode == PetConstants.PET_MOVIE_CLEAR:
+
+        assert(self.notify.debug("setMovie: %s %s %s %s" %
+                                 (mode, avId, timeStamp, self.isLocalToon)))
+
+        # old movie has been cleared
+        if (mode == PetConstants.PET_MOVIE_CLEAR):
+            assert(self.notify.debug('PET_MOVIE_CLEAR'))
             self.clearMovie()
             return
-        if mode == PetConstants.PET_MOVIE_CALL:
+
+        if (mode == PetConstants.PET_MOVIE_CALL):
+            assert(self.notify.debug('PET_MOVIE_CALL'))
             try:
                 self.movieTrack = Sequence(
-                    Func(
-                        self._petMovieStart, av), Parallel(
-                        av.getCallPetIval(), Sequence(
-                            Wait(0.54), SoundInterval(
-                                self.callSfx))), self._getPetMovieCompleteIval(av))
+                    Func(self._petMovieStart, av),
+                    Parallel( av.getCallPetIval(),
+                              Sequence(Wait(.54),
+                                       SoundInterval(self.callSfx)
+                                       )
+                              ),
+                    self._getPetMovieCompleteIval(av),
+                    )
                 self.movieTrack.start()
             except Exception as error:
                 print(str(error))
 
-        if mode == PetConstants.PET_MOVIE_SCRATCH:
+        if (mode == PetConstants.PET_MOVIE_SCRATCH):
+            assert(self.notify.debug('PET_MOVIE_SCRATCH'))
             try:
                 self.movieTrack = Sequence(
-                    Func(
-                        self._petMovieStart, av), Func(
-                        self.holdPetDownForMovie), Parallel(
-                        self.getInteractIval(
-                            self.Interactions.SCRATCH), av.getScratchPetIval(), SoundInterval(
-                            self.petSfx)), Func(
-                            self.releasePetFromHoldDown), self._getPetMovieCompleteIval(av))
+                    Func(self._petMovieStart, av),
+                    Func(self.holdPetDownForMovie),
+                    Parallel( self.getInteractIval(self.Interactions.SCRATCH),
+                              av.getScratchPetIval(),
+                              SoundInterval(self.petSfx)
+                              ),
+                    Func(self.releasePetFromHoldDown),
+                    self._getPetMovieCompleteIval(av),
+                    )
                 self.movieTrack.start()
             except Exception as error:
                 print(str(error))
 
-        if mode == PetConstants.PET_MOVIE_FEED:
-            self.bean = loader.loadModel('phase_4/models/props/jellybean4')
-            bean = self.bean.find('**/jellybean')
+        if (mode == PetConstants.PET_MOVIE_FEED):
+            assert(self.notify.debug('PET_MOVIE_FEED'))
+            # the jellybean has already been taken
+            #assert(av.getTotalMoney() >= PetConstants.FEED_AMOUNT)
+
+            # Load the Jellybean
+            self.bean = loader.loadModel("phase_4/models/props/jellybean4")
+            bean = self.bean.find("**/jellybean")
             bean.setColor(random.choice(BeanColors))
             self.movieTrack = Sequence(
-                Func(
-                    self._petMovieStart, av), Func(
-                    self.holdPetDownForMovie), Parallel(
-                    Func(
-                        base.playSfx, self.swallowSfx, 0, 1, 1, 2.5, self.bean), Sequence(
-                        ActorInterval(
-                            self, 'toBeg'), ActorInterval(
-                                self, 'beg'), ActorInterval(
-                                    self, 'fromBeg'), ActorInterval(
-                                        self, 'eat'), ActorInterval(
-                                            self, 'swallow'), Func(
-                                                self.loop, 'neutral')), Sequence(
-                                                    Wait(0.3), ActorInterval(
-                                                        av, 'feedPet'), Func(
-                                                            av.animFSM.request, 'neutral')), Sequence(
-                                                                Wait(0.3), Func(
-                                                                    self.bean.reparentTo, av.rightHand), Func(
-                                                                        self.bean.setPos, 0.1, 0.0, 0.2), Wait(2.1), Func(
-                                                                            av.update, 0), Func(
-                                                                                av.update, 1), Func(
-                                                                                    av.update, 2), Func(
-                                                                                        self.bean.wrtReparentTo, render), Parallel(
-                                                                                            LerpHprInterval(
-                                                                                                self.bean, hpr=Point3(
-                                                                                                    random.random() * 360.0 * 2, random.random() * 360.0 * 2, random.random() * 360.0 * 2), duration=1.2), ProjectileInterval(
-                                                                                                        self.bean, endPos=self.find('**/joint_tongueBase').getPos(render), duration=1.2, gravityMult=0.45)), Func(
-                                                                                                            self.bean.removeNode))), Func(
-                                                                                                                self.releasePetFromHoldDown), self._getPetMovieCompleteIval(av))
+                Func(self._petMovieStart, av),
+                Func(self.holdPetDownForMovie),
+                Parallel(Func(base.playSfx, self.swallowSfx,
+                              0, 1, 1, 2.5, self.bean),
+                         Sequence( ActorInterval(self, "toBeg"),
+                                   ActorInterval(self, "beg"),
+                                   ActorInterval(self, "fromBeg"),
+                                   ActorInterval(self, "eat"),
+                                   ActorInterval(self, "swallow"),
+                                   Func(self.loop, "neutral"),
+                                   ),
+                         # self.getInteractIval(self.Interactions.BEG),
+                         Sequence( Wait(0.3),
+                                   ActorInterval(av, "feedPet"),
+                                   Func(av.animFSM.request, "neutral")),
+                         # av.getFeedPetIval(),
+                         Sequence( Wait(0.3),
+                                   Func(self.bean.reparentTo, av.rightHand),
+                                   Func(self.bean.setPos, .1, 0., .2),
+                                   Wait(2.1),
+                                   # Make sure all LODs are up to date before
+                                   # parenting the bean to render
+                                   Func(av.update, 0),
+                                   Func(av.update, 1),
+                                   Func(av.update, 2),
+                                   Func(self.bean.wrtReparentTo, render),
+                                   Parallel(
+                LerpHprInterval(self.bean,
+                                hpr = Point3(random.random() * 360. * 2,
+                                             random.random() * 360. * 2,
+                                             random.random() * 360. * 2,),
+                                duration = 1.2),
+                ProjectileInterval(self.bean,
+                                   endPos = self.find("**/joint_tongueBase").getPos(render),
+                                   duration = 1.2,
+                                   gravityMult = 0.45),
+                ),
+                                   Func(self.bean.removeNode),
+                                   # self.getInteractIval(self.Interactions.EAT)
+                                   ),
+                         ),
+                Func(self.releasePetFromHoldDown),
+                self._getPetMovieCompleteIval(av),
+                )
             self.movieTrack.start()
         return
 

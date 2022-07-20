@@ -5,16 +5,20 @@ from direct.task import Task
 import random
 from . import TreasurePlannerAI
 
-
 class RegenTreasurePlannerAI(TreasurePlannerAI.TreasurePlannerAI):
     notify = DirectNotifyGlobal.directNotify.newCategory(
-        'RegenTreasurePlannerAI')
+        "RegenTreasurePlannerAI")
 
     def __init__(self, zoneId, treasureConstructor, taskName,
                  spawnInterval, maxTreasures, callback=None):
-        TreasurePlannerAI.TreasurePlannerAI.__init__(
-            self, zoneId, treasureConstructor, callback)
-        self.taskName = '%s-%s' % (taskName, zoneId)
+
+        TreasurePlannerAI.TreasurePlannerAI.__init__(self, zoneId,
+                                                     treasureConstructor,
+                                                     callback)
+        
+        # will spawn a task that creates a treasure every
+        # spawnInterval seconds unless the max has been reached.
+        self.taskName = "%s-%s" % (taskName, zoneId)
         self.spawnInterval = spawnInterval
         self.maxTreasures = maxTreasures
 
@@ -30,24 +34,21 @@ class RegenTreasurePlannerAI(TreasurePlannerAI.TreasurePlannerAI):
 
     def startSpawning(self):
         self.stopSpawning()
-        taskMgr.doMethodLater(
-            self.spawnInterval,
-            self.upkeepTreasurePopulation,
-            self.taskName)
+        taskMgr.doMethodLater(self.spawnInterval, self.upkeepTreasurePopulation, self.taskName)
 
     def upkeepTreasurePopulation(self, task):
         if self.numTreasures() < self.maxTreasures:
             self.placeRandomTreasure()
-        taskMgr.doMethodLater(
-            self.spawnInterval,
-            self.upkeepTreasurePopulation,
-            self.taskName)
+        taskMgr.doMethodLater(self.spawnInterval, self.upkeepTreasurePopulation, self.taskName)
         return Task.done
 
     def placeRandomTreasure(self):
         self.notify.debug('Placing a Treasure...')
+        # Pick a random index from the empty indexes that are available.
+        # Probably blows up if there aren't any available.
         spawnPointIndex = self.nthEmptyIndex(
             random.randrange(self.countEmptySpawnPoints()))
+
         self.placeTreasure(spawnPointIndex)
 
     def preSpawnTreasures(self):

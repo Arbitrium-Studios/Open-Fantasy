@@ -1,7 +1,22 @@
 from direct.directnotify import DirectNotifyGlobal
-from direct.distributed.DistributedObjectAI import DistributedObjectAI
+from direct.distributed import DistributedObjectAI
+from . import DistributedScavengerHuntTargetAI
 
+class DistributedTrickOrTreatTargetAI(DistributedScavengerHuntTargetAI.DistributedScavengerHuntTargetAI):
+    """
+    This class is instanced several times by TrickOrTreatManagerAI.  Each one sits in
+    in its assigned zone and listens for the client to say an SC
+    phrase.
+    """
 
-class DistributedTrickOrTreatTargetAI(DistributedObjectAI):
     notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedTrickOrTreatTargetAI')
+        'DistributedScavengerHuntTargetAI')
+    
+    def __init__(self, air, hunt, goal, totMgr):
+        DistributedScavengerHuntTargetAI.DistributedScavengerHuntTargetAI.__init__(self,  \
+                                                                                                            air, hunt, goal, totMgr)
+
+    def attemptScavengerHunt(self):
+        avId = self.air.getAvatarIdFromSender()
+        self.shMgr.avatarAttemptingGoal(avId, self.goal)
+    
