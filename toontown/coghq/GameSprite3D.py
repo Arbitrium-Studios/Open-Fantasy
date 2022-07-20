@@ -82,7 +82,7 @@ class GameSprite:
         self.nodeObj = None
         self.inputSize = size
         myColor = GameSprite.colorWhite
-        myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_white'
+        myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_white'
         self.setBallType(colorType)
         self.size = 0.4 * self.sizeMult
         self.isQue = 0
@@ -104,7 +104,7 @@ class GameSprite:
         if solidOverride:
             solid = 1
         myColor = GameSprite.colorWhite
-        myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_white'
+        myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_white'
         if not solid or colorType > 9:
             if colorType == 0:
                 myColor = GameSprite.colorGhostRed
@@ -143,27 +143,27 @@ class GameSprite:
                 myColor = GameSprite.colorSteel
                 self.breakable = 0
             elif colorType == 10:
-                myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_fire'
+                myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_fire'
                 self.giftId = 7
                 self.colorType = 0
             elif colorType == 11:
-                myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_unknown'
+                myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_unknown'
                 self.giftId = 8
                 self.colorType = 1
         elif colorType == 0:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_red'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_red'
         elif colorType == 1:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_blue'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_blue'
         elif colorType == 2:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_green'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_green'
         elif colorType == 3:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_cog'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_cog'
         elif colorType == 4:
             myColor = GameSprite.colorBlack
         elif colorType == 5:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_purple'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_purple'
         elif colorType == 6:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_yello'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_yello'
         elif colorType == 7:
             myColor = GameSprite.colorOrange
             self.multiColor = 1
@@ -184,17 +184,17 @@ class GameSprite:
             self.multiColorLevel = 0.0
             self.multiColorStep = 0.1
         elif colorType == 9:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_steel'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_steel'
             if not myModel:
                 import pdb
                 pdb.set_trace()
             self.breakable = 0
         elif colorType == 10:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_fire'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_fire'
             self.giftId = 7
             self.colorType = 0
         elif colorType == 11:
-            myModel = 'user/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_unknown'
+            myModel = '../../user/default/resources/default/phase_12/models/bossbotHQ/bust_a_cog_ball_unknown'
             self.giftId = 8
             self.colorType = 1
         self.nodeObj = loader.loadModel(myModel)

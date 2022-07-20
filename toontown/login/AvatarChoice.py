@@ -63,7 +63,7 @@ class AvatarChoice(DirectButton):
         self.doneEvent = 'avChoicePanel-' + str(self.position)
         self.deleteWithPasswordFrame = None
         self.pickAToonGui = loader.loadModel(
-            'user/resources/default/phase_3/models/gui/tt_m_gui_pat_mainGui')
+            '../../user/default/resources/default/phase_3/models/gui/tt_m_gui_pat_mainGui')
         self.buttonBgs = []
         self.buttonBgs.append(
             self.pickAToonGui.find('**/tt_t_gui_pat_squareRed'))
@@ -90,10 +90,10 @@ class AvatarChoice(DirectButton):
             self['text2_fg'] = (0.3, 1, 0.9, 1)
             self['text_pos'] = (0, 0.19)
             upsellModel = loader.loadModel(
-                'user/resources/default/phase_3/models/gui/tt_m_gui_ups_mainGui')
+                '../../user/default/resources/default/phase_3/models/gui/tt_m_gui_ups_mainGui')
             upsellTex = upsellModel.find('**/tt_t_gui_ups_logo_noBubbles')
             self.logoModelImage = loader.loadModel(
-                'user/resources/default/phase_3/models/gui/members_only_gui').find('**/MembersOnly')
+                '../../user/default/resources/default/phase_3/models/gui/members_only_gui').find('**/MembersOnly')
             logo = DirectFrame(
                 state=DGG.DISABLED,
                 parent=self,
@@ -156,7 +156,7 @@ class AvatarChoice(DirectButton):
                 state=DGG.DISABLED)
             if self.approvedName != '':
                 self.nameText['text'] = self.approvedName
-            guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+            guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
             self.nameYourToonButton = DirectButton(
                 parent=self,
                 relief=None,
@@ -245,7 +245,7 @@ class AvatarChoice(DirectButton):
             self.headModel.setScale(bodyScale / 0.75)
             self.headModel.startBlink()
             self.headModel.startLookAround()
-            trashcanGui = loader.loadModel('user/resources/default/phase_3/models/gui/trashcan_gui')
+            trashcanGui = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/trashcan_gui')
             self.deleteButton = DirectButton(
                 parent=self,
                 image=(
@@ -285,7 +285,7 @@ class AvatarChoice(DirectButton):
         return
 
     def destroy(self):
-        loader.unloadModel('user/resources/default/phase_3/models/gui/pick_a_toon_gui')
+        loader.unloadModel('../../user/default/resources/default/phase_3/models/gui/pick_a_toon_gui')
         self.pickAToonGui.removeNode()
         del self.pickAToonGui
         del self.dna
@@ -304,8 +304,8 @@ class AvatarChoice(DirectButton):
             del self.deleteButton
             self.nameYourToonButton.destroy()
             del self.nameYourToonButton
-            loader.unloadModel('user/resources/default/phase_3/models/gui/trashcan_gui')
-            loader.unloadModel('user/resources/default/phase_3/models/gui/quit_button')
+            loader.unloadModel('../../user/default/resources/default/phase_3/models/gui/trashcan_gui')
+            loader.unloadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
         DirectFrame.destroy(self)
         if self.deleteWithPasswordFrame:
             self.deleteWithPasswordFrame.destroy()
@@ -354,9 +354,9 @@ class AvatarChoice(DirectButton):
                                                                       'confirm': TTLocalizer.AvatarChoiceDeleteConfirmUserTypes}
         if self.deleteWithPasswordFrame is None:
             buttons = loader.loadModel(
-                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+                '../../../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             nameBalloon = loader.loadModel(
-                'user/resources/default/phase_3/models/props/chatbox_input')
+                '../../user/default/resources/default/phase_3/models/props/chatbox_input')
             okButtonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),

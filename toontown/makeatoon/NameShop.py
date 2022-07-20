@@ -189,7 +189,7 @@ class NameShop(StateData.StateData):
 
             if not self.addedGenderSpecific:
                 nameShopGui = loader.loadModel(
-                    'user/resources/default/phase_3/models/gui/tt_m_gui_mat_nameShop')
+                    '../../user/default/resources/default/phase_3/models/gui/tt_m_gui_mat_nameShop')
                 self.namePanel = DirectFrame(
                     parent=aspect2d, image=None, relief='flat', state='disabled', pos=(
                         -0.42, 0, -0.15), image_pos=(
@@ -434,9 +434,9 @@ class NameShop(StateData.StateData):
         self.notify.debug('load')
         if self.isLoaded == 1:
             return None
-        nameBalloon = loader.loadModel('user/resources/default/phase_3/models/props/chatbox_input')
-        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
-        gui = loader.loadModel('user/resources/default/phase_3/models/gui/tt_m_gui_mat_nameShop')
+        nameBalloon = loader.loadModel('../../user/default/resources/default/phase_3/models/props/chatbox_input')
+        guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/tt_m_gui_mat_nameShop')
         self.arrowUp = gui.find('**/tt_t_gui_mat_namePanelArrowUp')
         self.arrowDown = gui.find('**/tt_t_gui_mat_namePanelArrowDown')
         self.arrowHover = gui.find('**/tt_t_gui_mat_namePanelArrowHover')

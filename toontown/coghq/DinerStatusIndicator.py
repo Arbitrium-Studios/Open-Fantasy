@@ -30,7 +30,7 @@ class DinerStatusIndicator(NodePath, FSM.FSM):
         return
 
     def loadAssets(self):
-        iconsFile = loader.loadModel('user/resources/default/phase_12/models/bossbotHQ/BanquetIcons')
+        iconsFile = loader.loadModel('../../user/default/resources/default/phase_12/models/bossbotHQ/BanquetIcons')
         self.angryIcon, self.angryMeter = self.loadIcon(iconsFile, '**/Anger')
         self.hungryIcon, self.hungryMeter = self.loadIcon(
             iconsFile, '**/Hunger')

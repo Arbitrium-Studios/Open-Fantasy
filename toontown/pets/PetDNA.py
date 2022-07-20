@@ -21,13 +21,13 @@ EarParts = ['horns',
 EarTextures = {'horns': None,
                'antennae': None,
                'dogEars': None,
-               'catEars': 'user/resources/default/phase_4/maps/BeanCatEar6.jpg',
-               'rabbitEars': 'user/resources/default/phase_4/maps/BeanBunnyEar6.jpg'}
+               'catEars': '../../user/default/resources/default/phase_4/maps/BeanCatEar6.jpg',
+               'rabbitEars': '../../user/default/resources/default/phase_4/maps/BeanBunnyEar6.jpg'}
 ExoticEarTextures = {'horns': None,
                      'antennae': None,
                      'dogEars': None,
-                     'catEars': 'user/resources/default/phase_4/maps/BeanCatEar3Yellow.jpg',
-                     'rabbitEars': 'user/resources/default/phase_4/maps/BeanBunnyEar6.jpg'}
+                     'catEars': '../../user/default/resources/default/phase_4/maps/BeanCatEar3Yellow.jpg',
+                     'rabbitEars': '../../user/default/resources/default/phase_4/maps/BeanBunnyEar6.jpg'}
 NoseParts = ['clownNose',
              'dogNose',
              'ovalNose',
@@ -36,12 +36,12 @@ TailParts = ['catTail',
              'longTail',
              'birdTail',
              'bunnyTail']
-TailTextures = {'catTail': 'user/resources/default/phase_4/maps/beanCatTail6.jpg',
-                'longTail': 'user/resources/default/phase_4/maps/BeanLongTail6.jpg',
+TailTextures = {'catTail': '../../user/default/resources/default/phase_4/maps/beanCatTail6.jpg',
+                'longTail': '../../user/default/resources/default/phase_4/maps/BeanLongTail6.jpg',
                 'birdTail': None,
                 'bunnyTail': None}
-GiraffeTail = 'user/resources/default/phase_4/maps/BeanLongTailGiraffe.jpg'
-LeopardTail = 'user/resources/default/phase_4/maps/BeanLongTailLepord.jpg'
+GiraffeTail = '../../user/default/resources/default/phase_4/maps/BeanLongTailGiraffe.jpg'
+LeopardTail = '../../user/default/resources/default/phase_4/maps/BeanLongTailLepord.jpg'
 GenericBodies = ['dots',
                  'threeStripe',
                  'tigerStripe',
@@ -85,17 +85,17 @@ PetRarities = {'body': {ToontownGlobals.ToontownCentral: {'threeStripe': 50,
                                                            'turtle': 25,
                                                            'giraffe': 20,
                                                            'leopard': 10}}}
-BodyTextures = {'dots': 'user/resources/default/phase_4/maps/BeanbodyDots6.jpg',
-                'threeStripe': 'user/resources/default/phase_4/maps/Beanbody3stripes6.jpg',
-                'tigerStripe': 'user/resources/default/phase_4/maps/BeanbodyZebraStripes6.jpg',
-                'turtle': 'user/resources/default/phase_4/maps/BeanbodyTurtle.jpg',
-                'giraffe': 'user/resources/default/phase_4/maps/BeanbodyGiraffe1.jpg',
-                'leopard': 'user/resources/default/phase_4/maps/BeanbodyLepord2.jpg',
-                'tummy': 'user/resources/default/phase_4/maps/BeanbodyTummy6.jpg'}
-FeetTextures = {'normal': 'user/resources/default/phase_4/maps/BeanFoot6.jpg',
-                'turtle': 'user/resources/default/phase_4/maps/BeanFootTurttle.jpg',
-                'giraffe': 'user/resources/default/phase_4/maps/BeanFootYellow3.jpg',
-                'leopard': 'user/resources/default/phase_4/maps/BeanFootYellow3.jpg'}
+BodyTextures = {'dots': '../../user/default/resources/default/phase_4/maps/BeanbodyDots6.jpg',
+                'threeStripe': '../../user/default/resources/default/phase_4/maps/Beanbody3stripes6.jpg',
+                'tigerStripe': '../../user/default/resources/default/phase_4/maps/BeanbodyZebraStripes6.jpg',
+                'turtle': '../../user/default/resources/default/phase_4/maps/BeanbodyTurtle.jpg',
+                'giraffe': '../../user/default/resources/default/phase_4/maps/BeanbodyGiraffe1.jpg',
+                'leopard': '../../user/default/resources/default/phase_4/maps/BeanbodyLepord2.jpg',
+                'tummy': '../../user/default/resources/default/phase_4/maps/BeanbodyTummy6.jpg'}
+FeetTextures = {'normal': '../../user/default/resources/default/phase_4/maps/BeanFoot6.jpg',
+                'turtle': '../../user/default/resources/default/phase_4/maps/BeanFootTurttle.jpg',
+                'giraffe': '../../user/default/resources/default/phase_4/maps/BeanFootYellow3.jpg',
+                'leopard': '../../user/default/resources/default/phase_4/maps/BeanFootYellow3.jpg'}
 AllPetColors = (VBase4(1.0, 1.0, 1.0, 1.0),
                 VBase4(0.96875, 0.691406, 0.699219, 1.0),
                 VBase4(0.933594, 0.265625, 0.28125, 1.0),

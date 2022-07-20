@@ -151,10 +151,10 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
 
     def congratulations(self, avatarChoice):
         self.acceptedScreen = loader.loadModel(
-            'user/resources/default/phase_3/models/gui/toon_council')
+            '../../user/default/resources/default/phase_3/models/gui/toon_council')
         self.acceptedScreen.setScale(0.667)
         self.acceptedScreen.reparentTo(aspect2d)
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.acceptedBanner = DirectLabel(
             parent=self.acceptedScreen,
             relief=None,
@@ -260,7 +260,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         self.clearFriendState()
         if self.music is None and base.musicManagerIsValid:
             self.music = base.musicManager.getSound(
-                'user/resources/default/phase_3/audio/bgm/tt_theme.ogg')
+                '../../user/default/resources/default/phase_3/audio/bgm/tt_theme.ogg')
             if self.music:
                 self.music.setLoop(1)
                 self.music.setVolume(0.9)

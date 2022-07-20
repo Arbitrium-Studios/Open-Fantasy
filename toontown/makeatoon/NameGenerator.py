@@ -38,7 +38,7 @@ class NameGenerator:
         self.nameDictionary = {}
         searchPath = DSearchPath()
         if __debug__:
-            searchPath.appendDirectory(Filename('user/resources/default/phase_3/etc'))
+            searchPath.appendDirectory(Filename('user/default/resources/default/phase_3/etc'))
         filename = Filename(TTLocalizer.NameShopNameMaster)
         found = vfs.resolveFilename(filename, searchPath)
         if not found:

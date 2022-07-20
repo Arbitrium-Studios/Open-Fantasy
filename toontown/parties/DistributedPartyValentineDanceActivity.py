@@ -13,7 +13,7 @@ class DistributedPartyValentineDanceActivity(
             cr,
             PartyGlobals.ActivityIds.PartyDance,
             PartyGlobals.DancePatternToAnims,
-            model='user/resources/default/phase_13/models/parties/tt_m_ara_pty_danceFloorValentine')
+            model='../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_danceFloorValentine')
 
     def getInstructions(self):
         return TTLocalizer.PartyDanceActivityInstructions

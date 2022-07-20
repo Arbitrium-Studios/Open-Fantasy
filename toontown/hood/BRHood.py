@@ -13,13 +13,13 @@ class BRHood(ToonHood.ToonHood):
         self.id = TheBrrrgh
         self.townLoaderClass = BRTownLoader.BRTownLoader
         self.safeZoneLoaderClass = BRSafeZoneLoader.BRSafeZoneLoader
-        self.storageDNAFile = 'user/resources/default/phase_8/dna/storage_BR.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['user/resources/default/phase_8/dna/winter_storage_BR.dna'],
-                                      WACKY_WINTER_DECORATIONS: ['user/resources/default/phase_8/dna/winter_storage_BR.dna'],
-                                      HALLOWEEN_PROPS: ['user/resources/default/phase_8/dna/halloween_props_storage_BR.dna'],
-                                      SPOOKY_PROPS: ['user/resources/default/phase_8/dna/halloween_props_storage_BR.dna']}
-        self.skyFile = 'user/resources/default/phase_3.5/models/props/BR_sky'
-        self.spookySkyFile = 'user/resources/default/phase_3.5/models/props/BR_sky'
+        self.storageDNAFile = '../../user/default/resources/default/phase_8/dna/storage_BR.dna'
+        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['../../user/default/resources/default/phase_8/dna/winter_storage_BR.dna'],
+                                      WACKY_WINTER_DECORATIONS: ['../../user/default/resources/default/phase_8/dna/winter_storage_BR.dna'],
+                                      HALLOWEEN_PROPS: ['../../user/default/resources/default/phase_8/dna/halloween_props_storage_BR.dna'],
+                                      SPOOKY_PROPS: ['../../user/default/resources/default/phase_8/dna/halloween_props_storage_BR.dna']}
+        self.skyFile = '../../user/default/resources/default/phase_3.5/models/props/BR_sky'
+        self.spookySkyFile = '../../user/default/resources/default/phase_3.5/models/props/BR_sky'
         self.titleColor = (0.3, 0.6, 1.0, 1.0)
 
     def load(self):

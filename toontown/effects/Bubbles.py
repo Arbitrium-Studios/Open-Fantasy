@@ -28,7 +28,7 @@ class Bubbles(NodePath):
         p0.factory.setTerminalVelocitySpread(40.0)
         p0.renderer.setAlphaMode(BaseParticleRenderer.PRALPHAUSER)
         p0.renderer.setUserAlpha(1.0)
-        p0.renderer.setTextureFromNode('user/resources/default/phase_4/models/char/bubble', '**/*')
+        p0.renderer.setTextureFromNode('../../user/default/resources/default/phase_4/models/char/bubble', '**/*')
         p0.renderer.setXScaleFlag(1)
         p0.renderer.setYScaleFlag(1)
         p0.renderer.setInitialXScale(0.07)

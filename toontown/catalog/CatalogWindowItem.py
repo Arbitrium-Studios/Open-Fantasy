@@ -6,19 +6,19 @@ from toontown.toonbase import TTLocalizer
 WVTModelName = 0
 WVTBasePrice = 1
 WVTSkyName = 2
-WindowViewTypes = {10: ('user/resources/default/phase_5.5/models/estate/Garden1', 900, None),
-                   20: ('user/resources/default/phase_5.5/models/estate/GardenA', 900, None),
-                   30: ('user/resources/default/phase_5.5/models/estate/GardenB', 900, None),
-                   40: ('user/resources/default/phase_5.5/models/estate/cityView', 900, None),
-                   50: ('user/resources/default/phase_5.5/models/estate/westernView', 900, None),
-                   60: ('user/resources/default/phase_5.5/models/estate/underwaterView', 900, None),
-                   70: ('user/resources/default/phase_5.5/models/estate/tropicView', 900, None),
-                   80: ('user/resources/default/phase_5.5/models/estate/spaceView', 900, None),
-                   90: ('user/resources/default/phase_5.5/models/estate/PoolView', 900, None),
-                   100: ('user/resources/default/phase_5.5/models/estate/SnowView', 900, None),
-                   110: ('user/resources/default/phase_5.5/models/estate/FarmView', 900, None),
-                   120: ('user/resources/default/phase_5.5/models/estate/IndianView', 900, None),
-                   130: ('user/resources/default/phase_5.5/models/estate/WesternMainStreetView', 900, None)}
+WindowViewTypes = {10: ('../../user/default/resources/default/phase_5.5/models/estate/Garden1', 900, None),
+                   20: ('../../user/default/resources/default/phase_5.5/models/estate/GardenA', 900, None),
+                   30: ('../../user/default/resources/default/phase_5.5/models/estate/GardenB', 900, None),
+                   40: ('../../user/default/resources/default/phase_5.5/models/estate/cityView', 900, None),
+                   50: ('../../user/default/resources/default/phase_5.5/models/estate/westernView', 900, None),
+                   60: ('../../user/default/resources/default/phase_5.5/models/estate/underwaterView', 900, None),
+                   70: ('../../user/default/resources/default/phase_5.5/models/estate/tropicView', 900, None),
+                   80: ('../../user/default/resources/default/phase_5.5/models/estate/spaceView', 900, None),
+                   90: ('../../user/default/resources/default/phase_5.5/models/estate/PoolView', 900, None),
+                   100: ('../../user/default/resources/default/phase_5.5/models/estate/SnowView', 900, None),
+                   110: ('../../user/default/resources/default/phase_5.5/models/estate/FarmView', 900, None),
+                   120: ('../../user/default/resources/default/phase_5.5/models/estate/IndianView', 900, None),
+                   130: ('../../user/default/resources/default/phase_5.5/models/estate/WesternMainStreetView', 900, None)}
 
 
 class CatalogWindowItem(CatalogAtticItem.CatalogAtticItem):

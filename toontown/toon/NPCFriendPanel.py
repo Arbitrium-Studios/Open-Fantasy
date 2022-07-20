@@ -86,7 +86,7 @@ class NPCFriendCard(DirectFrame):
         self.defineoptions(kw, optiondefs)
         DirectFrame.__init__(self, parent=parent)
         self.initialiseoptions(NPCFriendCard)
-        cardModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/playingCard')
+        cardModel = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/playingCard')
         self.front = DirectFrame(
             parent=self,
             relief=None,
@@ -156,7 +156,7 @@ class NPCFriendCard(DirectFrame):
                 0,
                 0,
                 namePosZ))
-        buttonModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_gui')
+        buttonModels = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/inventory_gui')
         upButton = buttonModels.find('**/InventoryButtonUp')
         downButton = buttonModels.find('**/InventoryButtonDown')
         rolloverButton = buttonModels.find('**/InventoryButtonRollover')
@@ -177,7 +177,7 @@ class NPCFriendCard(DirectFrame):
                 0.0,
                 0,
                 -1.0))
-        star = loader.loadModel('user/resources/default/phase_3.5/models/gui/name_star')
+        star = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/name_star')
         self.rarityStars = []
         for i in range(self.maxRarity):
             label = DirectLabel(

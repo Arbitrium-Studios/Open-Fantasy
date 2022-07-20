@@ -62,7 +62,7 @@ class TownLoader(StateData.StateData):
         self.music = base.loader.loadMusic(self.musicFile)
         self.activityMusic = base.loader.loadMusic(self.activityMusicFile)
         self.battleMusic = base.loader.loadMusic(
-            'user/resources/default/phase_3.5/audio/bgm/encntr_general_bg.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/bgm/encntr_general_bg.ogg')
         self.townBattle = TownBattle.TownBattle(self.townBattleDoneEvent)
         self.townBattle.load()
 
@@ -204,10 +204,10 @@ class TownLoader(StateData.StateData):
         if loadStorage:
             loader.loadDNAFile(
                 self.hood.dnaStore,
-                'user/resources/default/phase_5/dna/storage_town.dna')
+                '../../user/default/resources/default/phase_5/dna/storage_town.dna')
             self.notify.debug(
                 'done loading %s' %
-                'user/resources/default/phase_5/dna/storage_town.dna')
+                '../../user/default/resources/default/phase_5/dna/storage_town.dna')
             loader.loadDNAFile(self.hood.dnaStore, self.townStorageDNAFile)
             self.notify.debug('done loading %s' % self.townStorageDNAFile)
         node = loader.loadDNAFile(self.hood.dnaStore, dnaFile)

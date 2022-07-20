@@ -41,7 +41,7 @@ class FlowerSellGUI(DirectFrame):
         newBasketFlower = base.localAvatar.flowerBasket.getFlower()
         self.picker.update(newBasketFlower)
         self.picker.show()
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okImageList = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),

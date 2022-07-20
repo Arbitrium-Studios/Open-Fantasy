@@ -56,7 +56,7 @@ class CalendarGuiDay(DirectFrame):
 
     def load(self):
         dayAsset = loader.loadModel(
-            'user/resources/default/phase_4/models/parties/tt_m_gui_sbk_calendar_box')
+            '../../user/default/resources/default/phase_4/models/parties/tt_m_gui_sbk_calendar_box')
         dayAsset.reparentTo(self)
         self.dayButtonLocator = self.find('**/loc_origin')
         self.numberLocator = self.find('**/loc_number')
@@ -75,7 +75,7 @@ class CalendarGuiDay(DirectFrame):
 
     def attachMarker(self, parent, scale=0.005, color=(1, 0, 0)):
         if self.showMarkers:
-            marker = loader.loadModel('user/resources/default/phase_3/models/misc/sphere')
+            marker = loader.loadModel('../../user/default/resources/default/phase_3/models/misc/sphere')
             marker.reparentTo(parent)
             marker.setScale(scale)
             marker.setColor(*color)
@@ -115,7 +115,7 @@ class CalendarGuiDay(DirectFrame):
         self.itemFrameXorigin = 0
         self.itemFrameZorigin = 0
         self.buttonXstart = self.itemFrameXorigin + 0.21
-        self.gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        self.gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
         buttonOffSet = -0.01
         incButtonPos = (0.0, 0, 0)
         decButtonPos = (0.0, 0, 0)
@@ -550,7 +550,7 @@ class CalendarGuiDay(DirectFrame):
                 newItem.description.setZ(descOverItemZAdjust)
             descWidth = newItem.description.getWidth()
             brightFrame = loader.loadModel(
-                'user/resources/default/phase_4/models/parties/tt_m_gui_sbk_calendar_popUp_bg')
+                '../../user/default/resources/default/phase_4/models/parties/tt_m_gui_sbk_calendar_popUp_bg')
             newItem.description['geom'] = brightFrame
             newItem.description['geom_scale'] = (descWidth, 1, descHeight)
             descGeomZ = (bounds[2] - bounds[3]) / 2.0
@@ -651,7 +651,7 @@ class MiniInviteVisual(DirectFrame):
         self.partyInfo = partyInfo
         self._parent = parent
         self.inviteBackgrounds = loader.loadModel(
-            'user/resources/default/phase_4/models/parties/partyStickerbook')
+            '../../user/default/resources/default/phase_4/models/parties/partyStickerbook')
         backgrounds = ['calendar_popup_birthday',
                        'calendar_popup_fun',
                        'calendar_popup_cupcake',

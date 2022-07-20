@@ -43,8 +43,8 @@ class ModelEntity(BasicEntities.NodePathEntity):
                     self.model.hide()
             else:
                 self.model.show()
-            if self.modelPath in ('user/resources/default/phase_9/models/cogHQ/woodCrateB.bam', 'user/resources/default/phase_9/models/cogHQ/metal_crateB.bam', 'user/resources/default/phase_10/models/cashbotHQ/CBMetalCrate.bam', 'user/resources/default/phase_10/models/cogHQ/CBMetalCrate2.bam',
-                                  'user/resources/default/phase_10/models/cashbotHQ/CBWoodCrate.bam', 'user/resources/default/phase_11/models/lawbotHQ/LB_metal_crate.bam', 'user/resources/default/phase_11/models/lawbotHQ/LB_metal_crate2.bam'):
+            if self.modelPath in ('../../user/default/resources/default/phase_9/models/cogHQ/woodCrateB.bam', '../../user/default/resources/default/phase_9/models/cogHQ/metal_crateB.bam', '../../user/default/resources/default/phase_10/models/cashbotHQ/CBMetalCrate.bam', '../../user/default/resources/default/phase_10/models/cogHQ/CBMetalCrate2.bam',
+                                  '../../user/default/resources/default/phase_10/models/cashbotHQ/CBWoodCrate.bam', '../../user/default/resources/default/phase_11/models/lawbotHQ/LB_metal_crate.bam', '../../user/default/resources/default/phase_11/models/lawbotHQ/LB_metal_crate2.bam'):
                 cNode = self.find('**/wall')
                 cNode.setZ(cNode, -.75)
                 colNode = self.find('**/collision')

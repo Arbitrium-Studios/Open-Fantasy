@@ -8,8 +8,8 @@ QuadrantAngles = (0,
                   180,
                   270)
 QuadrantCollisions = {}
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant1'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant1']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant1'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant1']
 collTable[0] = [[0,
                  0,
                  1,
@@ -1034,8 +1034,8 @@ collTable[270] = [[1,
                    0,
                    0,
                    1]]
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant2'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant2']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant2'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant2']
 collTable[0] = [[1,
                  1,
                  0,
@@ -2060,8 +2060,8 @@ collTable[270] = [[1,
                    1,
                    1,
                    1]]
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant3'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant3']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant3'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant3']
 collTable[0] = [[1,
                  1,
                  1,
@@ -3086,8 +3086,8 @@ collTable[270] = [[1,
                    0,
                    1,
                    1]]
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant4'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant4']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant4'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant4']
 collTable[0] = [[1,
                  1,
                  1,
@@ -4112,8 +4112,8 @@ collTable[270] = [[1,
                    1,
                    1,
                    1]]
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant5'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant5']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant5'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant5']
 collTable[0] = [[1,
                  1,
                  0,
@@ -5138,8 +5138,8 @@ collTable[270] = [[1,
                    0,
                    0,
                    1]]
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant6'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant6']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant6'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant6']
 collTable[0] = [[0,
                  0,
                  1,
@@ -6164,8 +6164,8 @@ collTable[270] = [[1,
                    1,
                    0,
                    0]]
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant7'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant7']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant7'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant7']
 collTable[0] = [[1,
                  1,
                  0,
@@ -7190,8 +7190,8 @@ collTable[270] = [[1,
                    1,
                    1,
                    1]]
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant8'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant8']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant8'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant8']
 collTable[0] = [[1,
                  0,
                  1,
@@ -8216,8 +8216,8 @@ collTable[270] = [[1,
                    0,
                    0,
                    1]]
-QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant9'] = {}
-collTable = QuadrantCollisions['user/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant9']
+QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant9'] = {}
+collTable = QuadrantCollisions['../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cmg_quadrant9']
 collTable[0] = [[1,
                  0,
                  0,

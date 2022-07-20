@@ -10,10 +10,10 @@ class MMSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
         SafeZoneLoader.SafeZoneLoader.__init__(
             self, hood, parentFSM, doneEvent)
         self.playgroundClass = MMPlayground.MMPlayground
-        self.musicFile = 'user/resources/default/phase_6/audio/bgm/MM_nbrhood.ogg'
-        self.activityMusicFile = 'user/resources/default/phase_6/audio/bgm/MM_SZ_activity.ogg'
-        self.dnaFile = 'user/resources/default/phase_6/dna/minnies_melody_land_sz.dna'
-        self.safeZoneStorageDNAFile = 'user/resources/default/phase_6/dna/storage_MM_sz.dna'
+        self.musicFile = '../../user/default/resources/default/phase_6/audio/bgm/MM_nbrhood.ogg'
+        self.activityMusicFile = '../../user/default/resources/default/phase_6/audio/bgm/MM_SZ_activity.ogg'
+        self.dnaFile = '../../user/default/resources/default/phase_6/dna/minnies_melody_land_sz.dna'
+        self.safeZoneStorageDNAFile = '../../user/default/resources/default/phase_6/dna/storage_MM_sz.dna'
 
     def load(self):
         print('loading MM safezone')

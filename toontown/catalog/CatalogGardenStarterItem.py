@@ -51,7 +51,7 @@ class CatalogGardenStarterItem(CatalogItem.CatalogItem):
         roll = 0
         spin = 1
         down = -1
-        modelParent = loader.loadModel('user/resources/default/phase_5.5/models/estate/watering_cans')
+        modelParent = loader.loadModel('../../user/default/resources/default/phase_5.5/models/estate/watering_cans')
         model = modelParent.find('**/water_canA')
         scale = 0.5
         heading = 45

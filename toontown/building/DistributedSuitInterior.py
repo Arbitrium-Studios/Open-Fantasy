@@ -20,9 +20,9 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         self.toons = []
         self.activeIntervals = {}
         self.openSfx = base.loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/elevator_door_open.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/elevator_door_open.ogg')
         self.closeSfx = base.loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/elevator_door_close.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/elevator_door_close.ogg')
         self.suits = []
         self.reserveSuits = []
         self.joiningReserves = []
@@ -57,9 +57,9 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
                                   12,
                                   38]
         self.waitMusic = base.loader.loadMusic(
-            'user/resources/default/phase_7/audio/bgm/encntr_toon_winning_indoor.ogg')
+            '../../user/default/resources/default/phase_7/audio/bgm/encntr_toon_winning_indoor.ogg')
         self.elevatorMusic = base.loader.loadMusic(
-            'user/resources/default/phase_7/audio/bgm/tt_elevator.ogg')
+            '../../user/default/resources/default/phase_7/audio/bgm/tt_elevator.ogg')
         self.fsm = ClassicFSM.ClassicFSM('DistributedSuitInterior', [State.State('WaitForAllToonsInside', self.enterWaitForAllToonsInside, self.exitWaitForAllToonsInside, ['Elevator']),
                                                                      State.State(
             'Elevator', self.enterElevator, self.exitElevator, ['Battle']),
@@ -89,11 +89,11 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         self.announceGenerateName = self.uniqueName('generate')
         self.accept(self.announceGenerateName, self.handleAnnounceGenerate)
         self.elevatorModelIn = loader.loadModel(
-            'user/resources/default/phase_4/models/modules/elevator')
+            '../../user/default/resources/default/phase_4/models/modules/elevator')
         self.leftDoorIn = self.elevatorModelIn.find('**/left-door')
         self.rightDoorIn = self.elevatorModelIn.find('**/right-door')
         self.elevatorModelOut = loader.loadModel(
-            'user/resources/default/phase_4/models/modules/elevator')
+            '../../user/default/resources/default/phase_4/models/modules/elevator')
         self.leftDoorOut = self.elevatorModelOut.find('**/left-door')
         self.rightDoorOut = self.elevatorModelOut.find('**/right-door')
 
@@ -273,17 +273,17 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
             self.floorModel.removeNode()
         if self.currentFloor == 0:
             self.floorModel = loader.loadModel(
-                'user/resources/default/phase_7/models/modules/suit_interior')
+                '../../user/default/resources/default/phase_7/models/modules/suit_interior')
             SuitHs = self.BottomFloor_SuitHs
             SuitPositions = self.BottomFloor_SuitPositions
         elif self.currentFloor == self.numFloors - 1:
             self.floorModel = loader.loadModel(
-                'user/resources/default/phase_7/models/modules/boss_suit_office')
+                '../../user/default/resources/default/phase_7/models/modules/boss_suit_office')
             SuitHs = self.BossOffice_SuitHs
             SuitPositions = self.BossOffice_SuitPositions
         else:
             self.floorModel = loader.loadModel(
-                'user/resources/default/phase_7/models/modules/cubicle_room')
+                '../../user/default/resources/default/phase_7/models/modules/cubicle_room')
             SuitHs = self.Cubicle_SuitHs
             SuitPositions = self.Cubicle_SuitPositions
         self.floorModel.reparentTo(render)

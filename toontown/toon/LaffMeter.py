@@ -32,7 +32,7 @@ class LaffMeter(DirectFrame):
         return self.__obscured
 
     def load(self):
-        gui = loader.loadModel('user/resources/default/phase_3/models/gui/laff_o_meter')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/laff_o_meter')
         if self.isToon:
             hType = self.style.getType()
             if hType == 'dog':

@@ -30,7 +30,7 @@ class StreetSign(DistributedObject.DistributedObject):
         self.precentDownload = 0.0
         self.startRedownload = datetime.datetime.now()
         self.downloadingStreetSign = True
-        Filename(self.StreetSignBaseDir + 'user/resources/default/phase_4/maps').makeDir()
+        Filename(self.StreetSignBaseDir + '../../user/default/resources/default/phase_4/maps').makeDir()
         http = HTTPClient.getGlobalPtr()
         self.url = self.StreetSignUrl + self.StreetSignFileName
         self.ch = http.makeChannel(True)

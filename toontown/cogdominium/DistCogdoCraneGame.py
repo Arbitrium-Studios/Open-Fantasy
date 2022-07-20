@@ -41,15 +41,15 @@ class DistCogdoCraneGame(CogdoCraneGameBase, DistCogdoLevelGame):
     def enterLoaded(self):
         DistCogdoLevelGame.enterLoaded(self)
         self.lightning = loader.loadModel(
-            'user/resources/default/phase_10/models/cogHQ/CBLightning.bam')
-        self.magnet = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CBMagnet.bam')
+            '../../user/default/resources/default/phase_10/models/cogHQ/CBLightning.bam')
+        self.magnet = loader.loadModel('../../user/default/resources/default/phase_10/models/cogHQ/CBMagnet.bam')
         self.craneArm = loader.loadModel(
-            'user/resources/default/phase_10/models/cogHQ/CBCraneArm.bam')
+            '../../user/default/resources/default/phase_10/models/cogHQ/CBCraneArm.bam')
         self.controls = loader.loadModel(
-            'user/resources/default/phase_10/models/cogHQ/CBCraneControls.bam')
-        self.stick = loader.loadModel('user/resources/default/phase_10/models/cogHQ/CBCraneStick.bam')
+            '../../user/default/resources/default/phase_10/models/cogHQ/CBCraneControls.bam')
+        self.stick = loader.loadModel('../../user/default/resources/default/phase_10/models/cogHQ/CBCraneStick.bam')
         self.cableTex = self.craneArm.findTexture('MagnetControl')
-        self.moneyBag = loader.loadModel('user/resources/default/phase_10/models/cashbotHQ/MoneyBag')
+        self.moneyBag = loader.loadModel('../../user/default/resources/default/phase_10/models/cashbotHQ/MoneyBag')
         self.geomRoot = PM.NodePath('geom')
         self.sceneRoot = self.geomRoot.attachNewNode('sceneRoot')
         self.sceneRoot.setPos(35.84, -115.46, 6.46)

@@ -575,7 +575,7 @@ class PartyCogActivity(DirectObject):
         animPie = Sequence()
         if pieType == 'actor':
             animPie = ActorInterval(pie, pieName, startFrame=48)
-        sound = loader.loadSfx('user/resources/default/phase_3.5/audio/sfx/AA_pie_throw_only.ogg')
+        sound = loader.loadSfx('../../user/default/resources/default/phase_3.5/audio/sfx/AA_pie_throw_only.ogg')
         t = power / 100.0
         dist = lerp(PartyGlobals.CogActivityPieMinDist,
                     PartyGlobals.CogActivityPieMaxDist, t)

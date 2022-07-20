@@ -12,7 +12,7 @@ class GenusPanel(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('GenusPanel')
 
     def __init__(self, genus=None, itemIndex=0, *extraArgs):
-        fishingGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingBook')
+        fishingGui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/fishingBook')
         albumGui = fishingGui.find('**/photo_frame1').copyTo(hidden)
         albumGui.find('**/picture_frame').reparentTo(albumGui, -1)
         albumGui.find('**/arrows').removeNode()

@@ -60,7 +60,7 @@ class GolfPage(ShtikerPage):
         clickColor = (0.8, 0.8, 0, 1)
         rolloverColor = (0.15, 0.82, 1.0, 1)
         diabledColor = (1.0, 0.98, 0.15, 1)
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingBook')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/fishingBook')
         self.recordsTab = DirectButton(
             parent=self,
             relief=None,
@@ -197,7 +197,7 @@ class GolfingRecordsUI(DirectFrame):
         DirectFrame.destroy(self)
 
     def load(self):
-        self.gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        self.gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.listXorigin = -0.5
         self.listFrameSizeX = 1.5
         self.listZorigin = -0.9
@@ -539,7 +539,7 @@ class GolfTrophy(DirectFrame):
         opts = {'relief': None}
         opts.update(kwargs)
         DirectFrame.__init__(self, *args, **opts)
-        self.trophy = loader.loadModel('user/resources/default/phase_6/models/golf/golfTrophy')
+        self.trophy = loader.loadModel('../../user/default/resources/default/phase_6/models/golf/golfTrophy')
         self.trophy.reparentTo(self)
         self.trophy.setPos(0, 1, 0)
         self.trophy.setScale(0.1)
@@ -551,11 +551,11 @@ class GolfTrophy(DirectFrame):
         self.base.setColorScale(1, 1, 0.8, 1)
         self.topBase.setColorScale(1, 1, 0.8, 1)
         self.greyBowl = loader.loadModel(
-            'user/resources/default/phase_6/models/gui/racingTrophyBowl2')
+            '../../user/default/resources/default/phase_6/models/gui/racingTrophyBowl2')
         self.greyBowl.reparentTo(self)
         self.greyBowl.setPos(0, 0.5, 0)
         self.greyBowl.setScale(2.0)
-        self.goldBowl = loader.loadModel('user/resources/default/phase_6/models/gui/racingTrophyBowl')
+        self.goldBowl = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/racingTrophyBowl')
         self.goldBowl.reparentTo(self)
         self.goldBowl.setPos(0, 0.5, 0)
         self.goldBowl.setScale(2.0)
@@ -563,7 +563,7 @@ class GolfTrophy(DirectFrame):
         self.goldBowlBase.hide()
         self.nameLabel = DirectLabel(parent=self, relief=None, pos=(
             0, 0, -0.15), text='', text_scale=0.125, text_fg=Vec4(0.9, 0.9, 0.4, 1))
-        self.shadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
+        self.shadow = loader.loadModel('../../user/default/resources/default/phase_3/models/props/drop_shadow')
         self.shadow.reparentTo(self)
         self.shadow.setColor(1, 1, 1, 0.2)
         self.shadow.setPosHprScale(0, 1, 0.35, 0, 90, 0, 0.1, 0.14, 0.1)

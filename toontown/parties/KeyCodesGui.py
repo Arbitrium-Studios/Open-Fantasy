@@ -28,7 +28,7 @@ class KeyCodesGui(DirectObject):
 
     def load(self):
         matchingGameGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/matching_game_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/matching_game_gui')
         minnieArrow = matchingGameGui.find('**/minnieArrow')
         minnieArrow.setScale(0.6)
         minnieArrow.setZ(self._yOffset + 0.2)

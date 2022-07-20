@@ -302,7 +302,7 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
             rodPath = RodFileDict[0]
         self.pole = Actor.Actor()
         self.pole.loadModel(rodPath)
-        self.pole.loadAnims({'cast': 'user/resources/default/phase_4/models/props/fishing-pole-chan'})
+        self.pole.loadAnims({'cast': '../../user/default/resources/default/phase_4/models/props/fishing-pole-chan'})
         self.pole.pose('cast', 0)
         self.ptop = self.pole.find('**/joint_attachBill')
         if self.line is None:
@@ -311,15 +311,15 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
             self.line.setTransparency(1)
             self.lineSphere = BoundingSphere(Point3(-0.6, -2, -5), 5.5)
         if self.bob is None:
-            self.bob = loader.loadModel('user/resources/default/phase_4/models/props/fishing_bob')
+            self.bob = loader.loadModel('../../user/default/resources/default/phase_4/models/props/fishing_bob')
             self.bob.setScale(1.5)
             self.ripples = Ripples.Ripples(self.nodePath)
             self.ripples.setScale(0.4)
             self.ripples.hide()
         if self.splashSounds is None:
             self.splashSounds = (
-                base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/TT_splash1.ogg'),
-                base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/TT_splash2.ogg'))
+                base.loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/TT_splash1.ogg'),
+                base.loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/TT_splash2.ogg'))
         return
 
     def __placeAvatar(self):
@@ -616,7 +616,7 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.posInTopRightCorner()
         self.timer.hide()
-        self.castGui = loader.loadModel('user/resources/default/phase_4/models/gui/fishingGui')
+        self.castGui = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/fishingGui')
         self.castGui.setScale(0.67)
         self.castGui.setPos(0, 1, 0)
         for nodeName in ('bucket', 'jar', 'display_bucket', 'display_jar'):
@@ -707,7 +707,7 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
         self.itemLabel = DirectLabel(
             parent=self.itemFrame, text='', text_scale=0.06, pos=(
                 0, 0, -0.25))
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.itemGuiCloseButton = DirectButton(
             parent=self.itemFrame,
             pos=(
@@ -725,10 +725,10 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
                 0.7),
             command=self.__itemGuiClose)
         buttons.removeNode()
-        jarGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/jar_gui')
-        bootGui = loader.loadModel('user/resources/default/phase_4/models/gui/fishing_boot')
+        jarGui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/jar_gui')
+        bootGui = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/fishing_boot')
         packageGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/stickerbook_gui').find('**/package')
+            '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui').find('**/package')
         self.itemJellybean = DirectFrame(
             parent=self.itemFrame,
             relief=None,

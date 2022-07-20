@@ -1,0 +1,190 @@
+ pre-built toon interiors
+model "user/default/resources/default/phase_3.5/models/modules/toon_interior" [
+        store_node [ "prop" "TI_room" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/toon_interior_2" [
+        store_node [ "prop" "TI_room_2" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/toon_interior_L" [
+        store_node [ "prop" "TI_room_L" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/toon_interior_T" [
+        store_node [ "prop" "TI_room_T" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/tt_m_ara_int_toonhall" [
+        store_node [ "prop" "TI_hall" "" ]
+        ]
+
+
+store_texture [ "TI_wallpaper" "wall_paper_a1"
+                "user/default/resources/default/phase_3.5/maps/wall_paper_a1.jpg" ]
+store_texture [ "TI_wallpaper" "wall_paper_a2"
+                "user/default/resources/default/phase_3.5/maps/wall_paper_a2.jpg" ]
+store_texture [ "TI_wallpaper" "wall_paper_a3"
+                "user/default/resources/default/phase_3.5/maps/wall_paper_a3.jpg" ]
+store_texture [ "TI_wallpaper" "wall_paper_a4"
+                "user/default/resources/default/phase_3.5/maps/wall_paper_a4.jpg" ]
+store_texture [ "TI_wallpaper" "wall_paper_a5"
+                "user/default/resources/default/phase_3.5/maps/wall_paper_a5.jpg" ]
+
+store_texture [ "TI_wainscotting" "wall_paper_b3"
+                "user/default/resources/default/phase_3.5/maps/wall_paper_b3.jpg" ]
+store_texture [ "TI_wainscotting" "wall_paper_b4"
+                "user/default/resources/default/phase_3.5/maps/wall_paper_b4.jpg" ]
+
+store_texture [ "TI_floor" "floor_wood"
+                "user/default/resources/default/phase_3/maps/floor_create_toon.jpg" ]
+store_texture [ "TI_floor" "floor_carpet"
+                "user/default/resources/default/phase_3.5/maps/carpet.jpg" ]
+
+store_texture [ "TI_molding" "molding_wood1"
+                "user/default/resources/default/phase_3.5/maps/molding_wood1.jpg" ]
+store_texture [ "TI_molding" "molding_wood2"
+                "user/default/resources/default/phase_3.5/maps/molding_wood2.jpg" ]
+
+
+store_texture [ "TI_couch" "couch1"
+                "user/default/resources/default/phase_3.5/maps/couch.jpg" ]
+store_texture [ "TI_couch" "couch2"
+                "user/default/resources/default/phase_3.5/maps/couch2.jpg" ]
+store_texture [ "TI_couch" "couch3"
+                "user/default/resources/default/phase_3.5/maps/couch3.jpg" ]
+
+
+
+model "user/default/resources/default/phase_3.5/models/modules/paper_trashcan" [
+        store_node [ "prop" "paper_trashcan" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/props/big_planter" [
+        store_node [ "prop" "big_planter" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/bookcase" [
+        store_node [ "prop" "bookcase" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/bookcase_low" [
+        store_node [ "prop" "bookcase_low" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/chair" [
+        store_node [ "prop" "chair" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/coatrack" [
+        store_node [ "prop" "coatrack" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/counter" [
+        store_node [ "prop" "counter" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/counterShort" [
+        store_node [ "prop" "counterShort" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/desk" [
+        store_node [ "prop" "desk" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/desk_only" [
+        store_node [ "prop" "desk_only" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/desk_only_wo_phone" [
+        store_node [ "prop" "desk_only_wo_phone" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/int_door" [
+        store_node [ "prop" "int_door" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/lamp_short" [
+        store_node [ "prop" "lamp_short" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/lamp_tall" [
+        store_node [ "prop" "lamp_tall" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/rug" [
+        store_node [ "prop" "rug" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/tie_rack" [
+        store_node [ "prop" "tie_rack" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/umbrella_stand" [
+        store_node [ "prop" "umbrella_stand" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/couch_1person" [
+        store_node [ "prop" "couch_1person" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/couch_2person" [
+        store_node [ "prop" "couch_2person" "" ]
+        ]
+model "user/default/resources/default/phase_3.5/models/modules/ending_table" [
+        store_node [ "prop" "ending_table" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/GardenA" [
+        store_node [ "prop" "GardenA" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/Garden1" [
+        store_node [ "prop" "Garden1" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/cabinetYwood" [
+        store_node [ "prop" "cabinetYwood" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/cabinetRwood" [
+        store_node [ "prop" "cabinetRwood" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/rugB" [
+        store_node [ "prop" "rugB" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/rugA" [
+        store_node [ "prop" "rugA" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/regular_bed" [
+        store_node [ "prop" "regular_bed" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/chairA" [
+        store_node [ "prop" "chairA" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/jellybeanBank" [
+        store_node [ "prop" "jellybeanBank" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/closetGirl" [
+        store_node [ "prop" "closetGirl" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/closetBoy" [
+        store_node [ "prop" "closetBoy" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/Piano" [
+        store_node [ "prop" "Piano" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/Organ" [
+        store_node [ "prop" "Organ" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/tt_m_ara_int_estateHouseA" [
+        store_node [ "prop" "tt_m_ara_int_estateHouseA" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/girly_bed" [
+        store_node [ "prop" "girly_bed" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/bathtub_bed" [
+        store_node [ "prop" "bathtub_bed" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/FireplaceSq" [
+        store_node [ "prop" "FireplaceSq" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/FireplaceRound" [
+        store_node [ "prop" "FireplaceRound" "" ]
+        ]
+
+model "user/default/resources/default/phase_5.5/models/estate/FireplaceGirlee" [
+        store_node [ "prop" "FireplaceGirlee" "" ]
+        ]

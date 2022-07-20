@@ -30,7 +30,7 @@ class DistributedSZTreasure(DistributedTreasure.DistributedTreasure):
         self.defaultModelPath = self.modelPath
         holidayIds = base.cr.newsManager.getHolidayIdList()
         if ToontownGlobals.VALENTINES_DAY in holidayIds:
-            self.modelPath = 'user/resources/default/phase_4/models/props/tt_m_ara_ext_heart'
+            self.modelPath = '../../user/default/resources/default/phase_4/models/props/tt_m_ara_ext_heart'
 
     def loadModel(self, modelPath, modelFindString=None):
         self.setHolidayModelPath()
@@ -38,7 +38,7 @@ class DistributedSZTreasure(DistributedTreasure.DistributedTreasure):
             self, self.modelPath, modelFindString)
 
     def startValentinesDay(self):
-        newModelPath = 'user/resources/default/phase_4/models/props/tt_m_ara_ext_heart'
+        newModelPath = '../../user/default/resources/default/phase_4/models/props/tt_m_ara_ext_heart'
         self.replaceTreasure(newModelPath)
         self.startAnimation()
 

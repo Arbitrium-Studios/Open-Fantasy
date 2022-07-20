@@ -52,28 +52,28 @@ class Purchase(PurchaseBase):
         self.setupUnexpectedExitHooks()
 
     def load(self):
-        purchaseModels = loader.loadModel('user/resources/default/phase_4/models/gui/purchase_gui')
+        purchaseModels = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/purchase_gui')
         PurchaseBase.load(self, purchaseModels)
         interiorPhase = 3.5
         self.bg = loader.loadModel(
-            'user/resources/default/phase_%s/models/modules/toon_interior' %
+            '../../user/default/resources/default/phase_%s/models/modules/toon_interior' %
             interiorPhase)
         self.bg.setPos(0.0, 5.0, -1.0)
         self.wt = self.bg.find('**/random_tc1_TI_wallpaper')
         wallTex = loader.loadTexture(
-            'user/resources/default/phase_%s/maps/wall_paper_a5.jpg' %
+            '../../user/default/resources/default/phase_%s/maps/wall_paper_a5.jpg' %
             interiorPhase)
         self.wt.setTexture(wallTex, 100)
         self.wt.setColorScale(0.8, 0.67, 0.549, 1.0)
         self.bt = self.bg.find('**/random_tc1_TI_wallpaper_border')
         wallTex = loader.loadTexture(
-            'user/resources/default/phase_%s/maps/wall_paper_a5.jpg' %
+            '../../user/default/resources/default/phase_%s/maps/wall_paper_a5.jpg' %
             interiorPhase)
         self.bt.setTexture(wallTex, 100)
         self.bt.setColorScale(0.8, 0.67, 0.549, 1.0)
         self.wb = self.bg.find('**/random_tc1_TI_wainscotting')
         wainTex = loader.loadTexture(
-            'user/resources/default/phase_%s/maps/wall_paper_b4.jpg' %
+            '../../user/default/resources/default/phase_%s/maps/wall_paper_b4.jpg' %
             interiorPhase)
         self.wb.setTexture(wainTex, 100)
         self.wb.setColorScale(0.473, 0.675, 0.488, 1.0)
@@ -139,21 +139,21 @@ class Purchase(PurchaseBase):
                 self.headFrames.append((avInfo[AVID_INDEX], headFrame))
 
         purchaseModels.removeNode()
-        self.foreground = loader.loadModel('user/resources/default/phase_3.5/models/modules/TT_A1')
+        self.foreground = loader.loadModel('../../user/default/resources/default/phase_3.5/models/modules/TT_A1')
         self.foreground.setPos(12.5, -20, -5.5)
         self.foreground.setHpr(180, 0, 0)
-        self.backgroundL = loader.loadModel('user/resources/default/phase_3.5/models/modules/TT_A1')
+        self.backgroundL = loader.loadModel('../../user/default/resources/default/phase_3.5/models/modules/TT_A1')
         self.backgroundL.setPos(-12.5, -25, -5)
         self.backgroundL.setHpr(180, 0, 0)
         self.backgroundR = self.backgroundL.copyTo(hidden)
         self.backgroundR.setPos(20, -25, -5)
-        streets = loader.loadModel('user/resources/default/phase_3.5/models/modules/street_modules')
+        streets = loader.loadModel('../../user/default/resources/default/phase_3.5/models/modules/street_modules')
         sidewalk = streets.find('**/street_sidewalk_40x40')
         self.sidewalk = sidewalk.copyTo(hidden)
         self.sidewalk.setPos(-20, -25, -5.5)
         self.sidewalk.setColor(0.9, 0.6, 0.4)
         streets.removeNode()
-        doors = loader.loadModel('user/resources/default/phase_4/models/modules/doors')
+        doors = loader.loadModel('../../user/default/resources/default/phase_4/models/modules/doors')
         door = doors.find('**/door_single_square_ur_door')
         self.door = door.copyTo(hidden)
         self.door.setH(180)
@@ -173,11 +173,11 @@ class Purchase(PurchaseBase):
                 0.0, 0, -0.67), scale=0.08)
         self.rewardDoubledJellybeanLabel.hide()
         self.countSound = base.loader.loadSfx(
-            'user/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
         self.overMaxSound = base.loader.loadSfx(
-            'user/resources/default/phase_3.5/audio/sfx/AV_collision.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/sfx/AV_collision.ogg')
         self.celebrateSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_win.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_win.ogg')
         return
 
     def unload(self):
@@ -208,9 +208,9 @@ class Purchase(PurchaseBase):
             del total
 
         del self.totalCounters
-        loader.unloadModel('user/resources/default/phase_3.5/models/modules/TT_A1')
-        loader.unloadModel('user/resources/default/phase_3.5/models/modules/street_modules')
-        loader.unloadModel('user/resources/default/phase_4/models/modules/doors')
+        loader.unloadModel('../../user/default/resources/default/phase_3.5/models/modules/TT_A1')
+        loader.unloadModel('../../user/default/resources/default/phase_3.5/models/modules/street_modules')
+        loader.unloadModel('../../user/default/resources/default/phase_4/models/modules/doors')
         taskMgr.remove('countUpTask')
         taskMgr.remove('countVotesUpTask')
         taskMgr.remove('countDownTask')

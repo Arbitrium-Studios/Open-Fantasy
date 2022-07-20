@@ -21,7 +21,7 @@ class Kart(NodePath, ShadowCaster.ShadowCaster):
                  {'node': 'wheel*Node3'},
                  {'node': 'wheel*Node4'}]
     ShadowScale = 2.5
-    SFX_BaseDir = 'user/resources/default/phase_6/audio/sfx/'
+    SFX_BaseDir = '../../user/default/resources/default/phase_6/audio/sfx/'
     SFX_KartStart = SFX_BaseDir + 'KART_Engine_start_%d.ogg'
     SFX_KartLoop = SFX_BaseDir + 'KART_Engine_loop_%d.ogg'
 
@@ -427,12 +427,12 @@ class Kart(NodePath, ShadowCaster.ShadowCaster):
             decalId = getAccessory(self.kartDNA[KartDNA.decalType])
             kartDecal = getDecalId(self.kartDNA[KartDNA.bodyType])
             hoodDecalTex = loader.loadTexture(
-                'user/resources/default/phase_6/maps/%s_HoodDecal_%s.jpg' %
-                (kartDecal, decalId), 'user/resources/default/phase_6/maps/%s_HoodDecal_%s_a.rgb' %
+                '../../user/default/resources/default/phase_6/maps/%s_HoodDecal_%s.jpg' %
+                (kartDecal, decalId), '../../user/default/resources/default/phase_6/maps/%s_HoodDecal_%s_a.rgb' %
                 (kartDecal, decalId))
             sideDecalTex = loader.loadTexture(
-                'user/resources/default/phase_6/maps/%s_SideDecal_%s.jpg' %
-                (kartDecal, decalId), 'user/resources/default/phase_6/maps/%s_SideDecal_%s_a.rgb' %
+                '../../user/default/resources/default/phase_6/maps/%s_SideDecal_%s.jpg' %
+                (kartDecal, decalId), '../../user/default/resources/default/phase_6/maps/%s_SideDecal_%s_a.rgb' %
                 (kartDecal, decalId))
             hoodDecalTex.setMinfilter(Texture.FTLinearMipmapLinear)
             sideDecalTex.setMinfilter(Texture.FTLinearMipmapLinear)

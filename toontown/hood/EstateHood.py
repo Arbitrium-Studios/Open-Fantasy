@@ -35,13 +35,13 @@ class EstateHood(Hood.Hood):
         self.fsm.enterInitialState()
         self.id = MyEstate
         self.safeZoneLoaderClass = EstateLoader.EstateLoader
-        self.storageDNAFile = 'user/resources/default/phase_5.5/dna/storage_estate.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['user/resources/default/phase_5.5/dna/winter_storage_estate.dna'],
-                                      WACKY_WINTER_DECORATIONS: ['user/resources/default/phase_5.5/dna/winter_storage_estate.dna'],
-                                      HALLOWEEN_PROPS: ['user/resources/default/phase_5.5/dna/halloween_props_storage_estate.dna'],
-                                      SPOOKY_PROPS: ['user/resources/default/phase_5.5/dna/halloween_props_storage_estate.dna']}
-        self.skyFile = 'user/resources/default/phase_3.5/models/props/TT_sky'
-        self.spookySkyFile = 'user/resources/default/phase_3.5/models/props/BR_sky'
+        self.storageDNAFile = '../../user/default/resources/default/phase_5.5/dna/storage_estate.dna'
+        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['../../user/default/resources/default/phase_5.5/dna/winter_storage_estate.dna'],
+                                      WACKY_WINTER_DECORATIONS: ['../../user/default/resources/default/phase_5.5/dna/winter_storage_estate.dna'],
+                                      HALLOWEEN_PROPS: ['../../user/default/resources/default/phase_5.5/dna/halloween_props_storage_estate.dna'],
+                                      SPOOKY_PROPS: ['../../user/default/resources/default/phase_5.5/dna/halloween_props_storage_estate.dna']}
+        self.skyFile = '../../user/default/resources/default/phase_3.5/models/props/TT_sky'
+        self.spookySkyFile = '../../user/default/resources/default/phase_3.5/models/props/BR_sky'
         self.popupInfo = None
         return
 
@@ -114,7 +114,7 @@ class EstateHood(Hood.Hood):
         if self.popupInfo is not None:
             self.popupInfo.destroy()
             self.popupInfo = None
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okButtonImage = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),

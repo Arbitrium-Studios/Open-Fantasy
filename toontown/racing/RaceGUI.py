@@ -27,7 +27,7 @@ import random
 
 class RaceGUI:
     GagPie = 0
-    gagRoot = 'user/resources/default/phase_3.5/maps/inventory_'
+    gagRoot = '../../user/default/resources/default/phase_3.5/maps/inventory_'
 
     class RacerInfo:
 
@@ -76,10 +76,10 @@ class RaceGUI:
         self.maxLapHit = 0
         self.photoFinish = False
         toonInteriorTextures = loader.loadModel(
-            'user/resources/default/phase_3.5/models/modules/toon_interior_textures')
-        invTextures = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_icons')
+            '../../user/default/resources/default/phase_3.5/models/modules/toon_interior_textures')
+        invTextures = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/inventory_icons')
         racingTextures = loader.loadModel(
-            'user/resources/default/phase_6/models/karting/racing_textures')
+            '../../user/default/resources/default/phase_6/models/karting/racing_textures')
         self.gagTextures = [toonInteriorTextures.find('**/couch'),
                             invTextures.find('**/inventory_bannana_peel'),
                             racingTextures.find('**/boost_arrow'),
@@ -96,7 +96,7 @@ class RaceGUI:
         self.aspect2dRoot = aspect2d.attachNewNode('RaceGuiAspect2dRoot')
         self.aspect2dRoot.setDepthWrite(1)
         self.raceModeRoot = self.aspect2dRoot.attachNewNode('RaceModeRoot')
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.closeButton = DirectButton(image=(gui.find('**/CloseBtn_UP'),
                                                gui.find('**/CloseBtn_DN'),
                                                gui.find('**/CloseBtn_Rllvr'),
@@ -107,12 +107,12 @@ class RaceGUI:
         self.raceModeReady = False
         self.resultModeReady = False
         self.gagCycleSound = base.loader.loadSfx(
-            'user/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
         if hasattr(self.gagCycleSound, 'setPlayRate'):
             self.gagCycleSound.setPlayRate(0.2)
         self.gagCycleSound.setLoop(1)
         self.gagAcquireSound = base.loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/SZ_MM_gliss.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/SZ_MM_gliss.ogg')
         self.disable()
         return
 
@@ -271,7 +271,7 @@ class RaceGUI:
         self.cardMaker.setFrame(-0.5, 0.5, -0.5, 0.5)
         self.cardMaker.setColor(1, 1, 1, 1)
         self.gagPanel = DirectFrame(parent=self.raceModeRoot, relief=None, image=loader.loadModel(
-            'user/resources/default/phase_6/models/karting/gag_panel'), image_scale=0.25, pos=(-1.13, 0, -0.5))
+            '../../user/default/resources/default/phase_6/models/karting/gag_panel'), image_scale=0.25, pos=(-1.13, 0, -0.5))
         self.directObjList.append(self.gagPanel)
         self.gag = self.gagPanel.attachNewNode('gag')
         self.gag.setScale(0.2)
@@ -580,7 +580,7 @@ class RaceGUI:
         headframe.setDepthTest(True)
         headframe.reparentTo(self.raceModeRoot)
         self.directObjList.append(headframe)
-        mapspot = loader.loadModel('user/resources/default/phase_6/models/karting/race_mapspot')
+        mapspot = loader.loadModel('../../user/default/resources/default/phase_6/models/karting/race_mapspot')
         mapspot.setColor(bodyColor)
         mapspot.reparentTo(self.mapLines)
         mapspot.setHpr(self.mapScene, 0, 0, 0)

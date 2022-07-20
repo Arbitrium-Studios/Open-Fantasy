@@ -13,16 +13,16 @@ class DDHood(ToonHood.ToonHood):
         self.id = DonaldsDock
         self.townLoaderClass = DDTownLoader.DDTownLoader
         self.safeZoneLoaderClass = DDSafeZoneLoader.DDSafeZoneLoader
-        self.storageDNAFile = 'user/resources/default/phase_6/dna/storage_DD.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['user/resources/default/phase_6/dna/winter_storage_DD.dna'],
-                                      WACKY_WINTER_DECORATIONS: ['user/resources/default/phase_6/dna/winter_storage_DD.dna'],
-                                      HALLOWEEN_PROPS: ['user/resources/default/phase_6/dna/halloween_props_storage_DD.dna'],
-                                      SPOOKY_PROPS: ['user/resources/default/phase_6/dna/halloween_props_storage_DD.dna']}
-        self.skyFile = 'user/resources/default/phase_3.5/models/props/BR_sky'
+        self.storageDNAFile = '../../user/default/resources/default/phase_6/dna/storage_DD.dna'
+        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['../../user/default/resources/default/phase_6/dna/winter_storage_DD.dna'],
+                                      WACKY_WINTER_DECORATIONS: ['../../user/default/resources/default/phase_6/dna/winter_storage_DD.dna'],
+                                      HALLOWEEN_PROPS: ['../../user/default/resources/default/phase_6/dna/halloween_props_storage_DD.dna'],
+                                      SPOOKY_PROPS: ['../../user/default/resources/default/phase_6/dna/halloween_props_storage_DD.dna']}
+        self.skyFile = '../../user/default/resources/default/phase_3.5/models/props/BR_sky'
         self.titleColor = (0.8, 0.6, 0.5, 1.0)
         self.whiteFogColor = Vec4(0.8, 0.8, 0.8, 1)
         self.underwaterFogColor = Vec4(0.0, 0.0, 0.6, 1.0)
-        self.spookySkyFile = 'user/resources/default/phase_3.5/models/props/BR_sky'
+        self.spookySkyFile = '../../user/default/resources/default/phase_3.5/models/props/BR_sky'
 
     def load(self):
         ToonHood.ToonHood.load(self)

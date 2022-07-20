@@ -187,10 +187,10 @@ class DistributedTargetGame(DistributedMinigame):
     UPDATE_RUBBER_BAND_PRIORITY = 2
     COLLISION_DETECTION_PRIORITY = 5
     UPDATE_SHADOWS_PRIORITY = 47
-    UMBRELLA_TEXTURE_LIST = ['user/resources/default/phase_4/maps/mg_slingshot_umbrella_blue.jpg',
-                             'user/resources/default/phase_4/maps/mg_slingshot_umbrella_purple.jpg',
-                             'user/resources/default/phase_4/maps/mg_slingshot_umbrella_red.jpg',
-                             'user/resources/default/phase_4/maps/mg_slingshot_umbrella_yellow.jpg']
+    UMBRELLA_TEXTURE_LIST = ['../../user/default/resources/default/phase_4/maps/mg_slingshot_umbrella_blue.jpg',
+                             '../../user/default/resources/default/phase_4/maps/mg_slingshot_umbrella_purple.jpg',
+                             '../../user/default/resources/default/phase_4/maps/mg_slingshot_umbrella_red.jpg',
+                             '../../user/default/resources/default/phase_4/maps/mg_slingshot_umbrella_yellow.jpg']
     RT_UNKNOWN = 0
     RT_SUCCESS = 1
     RT_GROUPSUCCESS = 2
@@ -367,18 +367,18 @@ class DistributedTargetGame(DistributedMinigame):
                             score3Label,
                             score4Label]
         self.scoreboard.hide()
-        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_Diving.ogg')
+        self.music = base.loader.loadMusic('../../user/default/resources/default/phase_4/audio/bgm/MG_Diving.ogg')
         self.sndAmbience = None
         self.skyListLow = []
         self.skyListMid = []
-        loadBase = 'user/resources/default/phase_4/models/minigames/'
+        loadBase = '../../user/default/resources/default/phase_4/models/minigames/'
         self.modelName = 'slingshot_game_desert4.bam'
         self.trampoline = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/slingshot_game_tramp.bam')
+            '../../user/default/resources/default/phase_4/models/minigames/slingshot_game_tramp.bam')
         self.trampoline.setBin('ground', 100)
         self.trampoline.find('**/tramp_shadow').hide()
         self.cacti = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/slingshot_game_cacti.bam')
+            '../../user/default/resources/default/phase_4/models/minigames/slingshot_game_cacti.bam')
         self.cactusA = self.cacti.find('**/cactus_a')
         self.cactusB = self.cacti.find('**/cactus_b')
         self.findGround = '**/sand_layer1'
@@ -428,7 +428,7 @@ class DistributedTargetGame(DistributedMinigame):
         self.environModel.flattenMedium()
         self.environModel.setScale(15.0, 15.0, 2.0)
         self.dropShadowModel = loader.loadModel(
-            'user/resources/default/phase_3/models/props/drop_shadow')
+            '../../user/default/resources/default/phase_3/models/props/drop_shadow')
         self.dropShadowModel.setColor(0, 0, 0, 0.5)
         self.dropShadowModel.flattenMedium()
         self.toonDropShadows = []
@@ -444,7 +444,7 @@ class DistributedTargetGame(DistributedMinigame):
         self.powerBar.hide()
         self.rubberBands = []
         self.umbrella = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/slingshot_game_umbrellas.bam')
+            '../../user/default/resources/default/phase_4/models/minigames/slingshot_game_umbrellas.bam')
         pick = random.randint(0, 3)
         self.umbrellaColorSelect[pick] = 0
         tex = loader.loadTexture(
@@ -466,34 +466,34 @@ class DistributedTargetGame(DistributedMinigame):
             self.umbrella.instanceTo(hand)
 
         self.remoteUmbrellas = {}
-        self.addSound('wind1', 'target_cloud.ogg', 'user/resources/default/phase_4/audio/sfx/')
+        self.addSound('wind1', 'target_cloud.ogg', '../../user/default/resources/default/phase_4/audio/sfx/')
         self.addSound(
             'trampoline',
             'target_trampoline_2.ogg',
-            'user/resources/default/phase_4/audio/sfx/')
-        self.addSound('launch', 'target_launch.ogg', 'user/resources/default/phase_4/audio/sfx/')
-        self.addSound('miss', 'target_Lose.ogg', 'user/resources/default/phase_4/audio/sfx/')
-        self.addSound('score', 'target_happydance.ogg', 'user/resources/default/phase_4/audio/sfx/')
+            '../../user/default/resources/default/phase_4/audio/sfx/')
+        self.addSound('launch', 'target_launch.ogg', '../../user/default/resources/default/phase_4/audio/sfx/')
+        self.addSound('miss', 'target_Lose.ogg', '../../user/default/resources/default/phase_4/audio/sfx/')
+        self.addSound('score', 'target_happydance.ogg', '../../user/default/resources/default/phase_4/audio/sfx/')
         self.addSound(
             'impact',
             'target_impact_grunt1.ogg',
-            'user/resources/default/phase_4/audio/sfx/')
-        self.addSound('umbrella', 'target_chute.ogg', 'user/resources/default/phase_4/audio/sfx/')
-        self.addSound('bounce', 'target_impact_only.ogg', 'user/resources/default/phase_4/audio/sfx/')
+            '../../user/default/resources/default/phase_4/audio/sfx/')
+        self.addSound('umbrella', 'target_chute.ogg', '../../user/default/resources/default/phase_4/audio/sfx/')
+        self.addSound('bounce', 'target_impact_only.ogg', '../../user/default/resources/default/phase_4/audio/sfx/')
         self.flySound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/target_wind_fly_loop.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/target_wind_fly_loop.ogg')
         self.flySound.setVolume(0.0)
         self.flySound.setPlayRate(1.0)
         self.flySound.setLoop(True)
         self.flySound.play()
         self.rubberSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/target_stretching_aim_loop.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/target_stretching_aim_loop.ogg')
         self.rubberSound.setVolume(0.0)
         self.rubberSound.setPlayRate(1.0)
         self.rubberSound.setLoop(True)
         self.rubberSound.play()
         self.flutterSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/target_wind_float_clothloop.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/target_wind_float_clothloop.ogg')
         self.flutterSound.setVolume(1.0)
         self.flutterSound.setPlayRate(1.0)
         self.flutterSound.setLoop(True)

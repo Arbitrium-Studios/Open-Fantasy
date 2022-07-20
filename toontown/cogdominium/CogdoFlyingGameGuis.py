@@ -33,7 +33,7 @@ class CogdoFlyingProgressGui(DirectFrame):
 
     def _initModel(self):
         self._laffMeterModel = loader.loadModel(
-            'user/resources/default/phase_3/models/gui/laff_o_meter')
+            '../../user/default/resources/default/phase_3/models/gui/laff_o_meter')
         self._model = CogdoUtil.loadFlyingModel('progressMeter', group='gui')
         self._model.reparentTo(self)
         self._model.setBin('fixed', 0)

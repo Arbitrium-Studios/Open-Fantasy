@@ -14,12 +14,12 @@ colors = {WHITE: Vec4(1, 1, 1, 1),
           PEACH: Vec4(0.9, 0.6, 0.4, 1),
           PURPLE: Vec4(1, 0.1, 1, 1),
           CYAN: Vec4(0.2, 1, 1, 1)}
-textures = {SNOWFLAKE: 'user/resources/default/phase_8/models/props/snowflake_treasure',
-            MUSICNOTE: 'user/resources/default/phase_6/models/props/music_treasure',
-            FLOWER: 'user/resources/default/phase_8/models/props/flower_treasure',
-            ICECREAM: 'user/resources/default/phase_4/models/props/icecream',
-            STARFISH: 'user/resources/default/phase_6/models/props/starfish_treasure',
-            ZZZ: 'user/resources/default/phase_8/models/props/zzz_treasure'}
+textures = {SNOWFLAKE: '../../user/default/resources/default/phase_8/models/props/snowflake_treasure',
+            MUSICNOTE: '../../user/default/resources/default/phase_6/models/props/music_treasure',
+            FLOWER: '../../user/default/resources/default/phase_8/models/props/flower_treasure',
+            ICECREAM: '../../user/default/resources/default/phase_4/models/props/icecream',
+            STARFISH: '../../user/default/resources/default/phase_6/models/props/starfish_treasure',
+            ZZZ: '../../user/default/resources/default/phase_8/models/props/zzz_treasure'}
 fireworkId = 0
 
 
@@ -102,7 +102,7 @@ def shootFireworkRing(x, y, z, color1, color2, amp):
     f.addParticles(p0)
     f.setPos(x, y, z)
     f.setHpr(0, random.random() * 180, random.random() * 180)
-    sfx = loader.loadSfx('user/resources/default/phase_4/audio/sfx/firework_distance_03.ogg')
+    sfx = loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/firework_distance_03.ogg')
     t = Sequence(
         Func(
             f.start, render, render), Func(
@@ -147,8 +147,8 @@ def shootFireworkRocket(x, y, z, color1, color2, amp):
     f.addForceGroup(gravityForceGroup)
     f.setPos(x, y, z)
     sfxName = random.choice(
-        ('user/resources/default/phase_4/audio/sfx/firework_whistle_01.ogg',
-         'user/resources/default/phase_4/audio/sfx/firework_whistle_02.ogg'))
+        ('../../user/default/resources/default/phase_4/audio/sfx/firework_whistle_01.ogg',
+         '../../user/default/resources/default/phase_4/audio/sfx/firework_whistle_02.ogg'))
     sfx = loader.loadSfx(sfxName)
     t = Sequence(
         Func(
@@ -177,9 +177,9 @@ def shootFireworkRocket(x, y, z, color1, color2, amp):
 
 def shootPop(x, y, z, color1, color2, amp):
     sfxName = random.choice(
-        ('user/resources/default/phase_4/audio/sfx/firework_distance_01.ogg',
-         'user/resources/default/phase_4/audio/sfx/firework_distance_02.ogg',
-         'user/resources/default/phase_4/audio/sfx/firework_distance_03.ogg'))
+        ('../../user/default/resources/default/phase_4/audio/sfx/firework_distance_01.ogg',
+         '../../user/default/resources/default/phase_4/audio/sfx/firework_distance_02.ogg',
+         '../../user/default/resources/default/phase_4/audio/sfx/firework_distance_03.ogg'))
     sfx = loader.loadSfx(sfxName)
     t = Sequence(
         Func(
@@ -241,9 +241,9 @@ def shootFireworkCircleGeneric(x, y, z, color1, color2, amp, poolSize):
     f.addForceGroup(circleForceGroup)
     f.setPos(x, y, z)
     sfxName = random.choice(
-        ('user/resources/default/phase_4/audio/sfx/firework_explosion_01.ogg',
-         'user/resources/default/phase_4/audio/sfx/firework_explosion_02.ogg',
-         'user/resources/default/phase_4/audio/sfx/firework_explosion_03.ogg'))
+        ('../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_01.ogg',
+         '../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_02.ogg',
+         '../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_03.ogg'))
     sfx = loader.loadSfx(sfxName)
     t = Sequence(
         Func(
@@ -299,9 +299,9 @@ def shootFireworkCircleSprite(x, y, z, color, texture, amp):
     f.addForceGroup(circleForceGroup)
     f.setPos(x, y, z)
     sfxName = random.choice(
-        ('user/resources/default/phase_4/audio/sfx/firework_explosion_01.ogg',
-         'user/resources/default/phase_4/audio/sfx/firework_explosion_02.ogg',
-         'user/resources/default/phase_4/audio/sfx/firework_explosion_03.ogg'))
+        ('../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_01.ogg',
+         '../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_02.ogg',
+         '../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_03.ogg'))
     sfx = loader.loadSfx(sfxName)
     t = Sequence(
         Func(

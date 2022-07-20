@@ -17,13 +17,13 @@ class TTHood(ToonHood.ToonHood):
         self.id = ToontownCentral
         self.townLoaderClass = TTTownLoader.TTTownLoader
         self.safeZoneLoaderClass = TTSafeZoneLoader.TTSafeZoneLoader
-        self.storageDNAFile = 'user/resources/default/phase_4/dna/storage_TT.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['user/resources/default/phase_4/dna/winter_storage_TT.dna', 'user/resources/default/phase_4/dna/winter_storage_TT_sz.dna'],
-                                      WACKY_WINTER_DECORATIONS: ['user/resources/default/phase_4/dna/winter_storage_TT.dna', 'user/resources/default/phase_4/dna/winter_storage_TT_sz.dna'],
-                                      HALLOWEEN_PROPS: ['user/resources/default/phase_4/dna/halloween_props_storage_TT.dna', 'user/resources/default/phase_4/dna/halloween_props_storage_TT_sz.dna'],
-                                      SPOOKY_PROPS: ['user/resources/default/phase_4/dna/halloween_props_storage_TT.dna', 'user/resources/default/phase_4/dna/halloween_props_storage_TT_sz.dna']}
-        self.skyFile = 'user/resources/default/phase_3.5/models/props/TT_sky'
-        self.spookySkyFile = 'user/resources/default/phase_3.5/models/props/BR_sky'
+        self.storageDNAFile = '../../user/default/resources/default/phase_4/dna/storage_TT.dna'
+        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['../../user/default/resources/default/phase_4/dna/winter_storage_TT.dna', '../../user/default/resources/default/phase_4/dna/winter_storage_TT_sz.dna'],
+                                      WACKY_WINTER_DECORATIONS: ['../../user/default/resources/default/phase_4/dna/winter_storage_TT.dna', '../../user/default/resources/default/phase_4/dna/winter_storage_TT_sz.dna'],
+                                      HALLOWEEN_PROPS: ['../../user/default/resources/default/phase_4/dna/halloween_props_storage_TT.dna', '../../user/default/resources/default/phase_4/dna/halloween_props_storage_TT_sz.dna'],
+                                      SPOOKY_PROPS: ['../../user/default/resources/default/phase_4/dna/halloween_props_storage_TT.dna', '../../user/default/resources/default/phase_4/dna/halloween_props_storage_TT_sz.dna']}
+        self.skyFile = '../../user/default/resources/default/phase_3.5/models/props/TT_sky'
+        self.spookySkyFile = '../../user/default/resources/default/phase_3.5/models/props/BR_sky'
         self.titleColor = (1.0, 0.5, 0.4, 1.0)
 
     def load(self):

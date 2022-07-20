@@ -23,7 +23,7 @@ class StretchingArrow(DirectFrame):
         self.stash()
 
     def load(self):
-        model = loader.loadModel('user/resources/default/phase_13/models/parties/stretchingArrow')
+        model = loader.loadModel('../../user/default/resources/default/phase_13/models/parties/stretchingArrow')
         model.setP(-90)
         self.body = model.find('**/arrowBody_' + self.useColor)
         self.body.wrtReparentTo(self)

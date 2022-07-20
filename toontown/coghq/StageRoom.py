@@ -8,7 +8,7 @@ import random
 
 class StageRoom(DirectObject.DirectObject):
     FloorCollPrefix = 'stageFloorColl'
-    CashbotStageDoorFrame = 'user/resources/default/phase_10/models/cashbotHQ/DoorFrame'
+    CashbotStageDoorFrame = '../../user/default/resources/default/phase_10/models/cashbotHQ/DoorFrame'
 
     def __init__(self, path=None):
         if path is not None:

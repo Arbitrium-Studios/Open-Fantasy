@@ -20,7 +20,7 @@ class BingoCardGui(DirectFrame):
 
     def __init__(self, parent=aspect2d, **kw):
         self.notify.debug('Bingo card initialized')
-        self.model = loader.loadModel('user/resources/default/phase_4/models/gui/FishBingo')
+        self.model = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/FishBingo')
         optiondefs = (('relief', None, None),
                       ('state', DGG.NORMAL, None),
                       ('image', self.model.find('**/g'), None),
@@ -132,7 +132,7 @@ class BingoCardGui(DirectFrame):
         self.loadNextGameTimer()
         textScale = 0.06
         textHeight = 0.38 * BG.CardImageScale[2]
-        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
         self.bingo = DirectButton(
             parent=self,
             pos=(
@@ -169,7 +169,7 @@ class BingoCardGui(DirectFrame):
             image_color=BG.getButtonColor(0),
             pressEffect=False)
         guiButton.removeNode()
-        arrowModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/speedChatGui')
+        arrowModel = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/speedChatGui')
         self.gameType = DirectButton(parent=self,
                                      pos=(BG.GridXOffset,
                                           0,

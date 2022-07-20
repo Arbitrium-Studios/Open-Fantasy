@@ -30,12 +30,12 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
 
         self.musicFile = random.choice(
             [
-                'user/resources/default/phase_12/audio/bgm/Bossbot_Entry_v1.ogg',
-                'user/resources/default/phase_12/audio/bgm/Bossbot_Entry_v2.ogg',
-                'user/resources/default/phase_12/audio/bgm/Bossbot_Entry_v3.ogg'])
-        self.cogHQExteriorModelPath = 'user/resources/default/phase_12/models/bossbotHQ/CogGolfHub'
-        self.factoryExteriorModelPath = 'user/resources/default/phase_11/models/lawbotHQ/LB_DA_Lobby'
-        self.cogHQLobbyModelPath = 'user/resources/default/phase_12/models/bossbotHQ/CogGolfCourtyard'
+                '../../user/default/resources/default/phase_12/audio/bgm/Bossbot_Entry_v1.ogg',
+                '../../user/default/resources/default/phase_12/audio/bgm/Bossbot_Entry_v2.ogg',
+                '../../user/default/resources/default/phase_12/audio/bgm/Bossbot_Entry_v3.ogg'])
+        self.cogHQExteriorModelPath = '../../user/default/resources/default/phase_12/models/bossbotHQ/CogGolfHub'
+        self.factoryExteriorModelPath = '../../user/default/resources/default/phase_11/models/lawbotHQ/LB_DA_Lobby'
+        self.cogHQLobbyModelPath = '../../user/default/resources/default/phase_12/models/bossbotHQ/CogGolfCourtyard'
         self.geom = None
         return
 

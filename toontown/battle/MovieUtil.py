@@ -289,9 +289,9 @@ def createSuitReviveTrack(suit, toon, battle, npcs=[]):
             name='remove-death-suit'))
     suitTrack.append(Func(notify.debug, 'after removeDeathSuit'))
     suitTrack.append(Func(suit.loop, 'neutral'))
-    spinningSound = base.loader.loadSfx('user/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg')
+    spinningSound = base.loader.loadSfx('../../user/default/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg')
     deathSound = base.loader.loadSfx(
-        'user/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
+        '../../user/default/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
     deathSoundTrack = Sequence(
         Wait(0.8),
         SoundInterval(
@@ -423,9 +423,9 @@ def createSuitDeathTrack(suit, toon, battle, npcs=[]):
             deathSuit,
             name='remove-death-suit'))
     suitTrack.append(Func(notify.debug, 'after removeDeathSuit'))
-    spinningSound = base.loader.loadSfx('user/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg')
+    spinningSound = base.loader.loadSfx('../../user/default/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg')
     deathSound = base.loader.loadSfx(
-        'user/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
+        '../../user/default/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
     deathSoundTrack = Sequence(
         Wait(0.8),
         SoundInterval(
@@ -824,7 +824,7 @@ def indicateMissed(actor, duration=1.1, scale=0.7):
 
 def createKapowExplosionTrack(parent, explosionPoint=None, scale=1.0):
     explosionTrack = Sequence()
-    explosion = loader.loadModel('user/resources/default/phase_3.5/models/props/explosion.bam')
+    explosion = loader.loadModel('../../user/default/resources/default/phase_3.5/models/props/explosion.bam')
     explosion.setBillboardPointEye()
     explosion.setDepthWrite(False)
     if not explosionPoint:

@@ -42,7 +42,7 @@ class LeaveToPayDialog:
             directButtonNoText = OTPLocalizer.LeaveToPayNo
         if self.dialog is None:
             buttons = loader.loadModel(
-                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+                '../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             okButtonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),

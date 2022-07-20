@@ -44,7 +44,7 @@ class FishBase:
         return fileInfo[0]
 
     def getActor(self):
-        prefix = 'user/resources/default/phase_%s/models/char/' % self.getPhase()
+        prefix = '../../user/default/resources/default/phase_%s/models/char/' % self.getPhase()
         dict = FishGlobals.FishFileDict
         fileInfo = dict.get(self.genus, dict[-1])
         from direct.actor import Actor
@@ -62,7 +62,7 @@ class FishBase:
             soundDict = FishGlobals.FishAudioFileDict
             fileInfo = soundDict.get(self.genus, None)
             if fileInfo:
-                prefix = 'user/resources/default/phase_%s/audio/sfx/' % self.getPhase()
+                prefix = '../../user/default/resources/default/phase_%s/audio/sfx/' % self.getPhase()
                 sound = loader.loadSfx(prefix + soundDict[self.genus][0])
                 loop = soundDict[self.genus][1]
                 delay = soundDict[self.genus][2]

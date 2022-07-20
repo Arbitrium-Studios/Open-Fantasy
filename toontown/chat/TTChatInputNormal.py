@@ -9,7 +9,7 @@ class TTChatInputNormal(ChatInputNormal.ChatInputNormal):
 
     def __init__(self, chatMgr):
         ChatInputNormal.ChatInputNormal.__init__(self, chatMgr)
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/chat_input_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/chat_input_gui')
         self.chatFrame = DirectFrame(parent=aspect2dp,
                                      image=gui.find('**/Chat_Bx_FNL'),
                                      relief=None,
@@ -107,7 +107,7 @@ class TTChatInputNormal(ChatInputNormal.ChatInputNormal):
         self.chatButton.destroy()
         self.cancelButton.destroy()
         ChatInputNormal.ChatInputNormal.delete(self)
-        loader.unloadModel('user/resources/default/phase_3.5/models/gui/chat_input_gui')
+        loader.unloadModel('../../user/default/resources/default/phase_3.5/models/gui/chat_input_gui')
 
     def importExecNamespace(self):
         ChatInputNormal.ChatInputNormal.importExecNamespace(self)

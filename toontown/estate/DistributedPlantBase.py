@@ -197,7 +197,7 @@ class DistributedPlantBase(DistributedLawnDecor.DistributedLawnDecor):
         self.waterTrackDict[avId] = track
 
     def generateWaterTrack(self, toon):
-        sound = loader.loadSfx('user/resources/default/phase_5/audio/sfx/firehose_spray.ogg')
+        sound = loader.loadSfx('../../user/default/resources/default/phase_5/audio/sfx/firehose_spray.ogg')
         sound.setPlayRate(0.75)
         waterTrack = Parallel()
         waterTrack.append(

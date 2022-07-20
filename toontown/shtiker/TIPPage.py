@@ -31,7 +31,7 @@ class TIPPage(ShtikerPage.ShtikerPage):
 
     def unload(self):
         del self.title
-        loader.unloadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+        loader.unloadModel('../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
         ShtikerPage.ShtikerPage.unload(self)
 
     def updatePage(self):

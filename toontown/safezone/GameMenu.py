@@ -40,7 +40,7 @@ class GameMenu(DirectFrame):
                 text_scale=0.09,
                 text_font=ToontownGlobals.getSignFont())
         self.selectionButtons = loader.loadModel(
-            'user/resources/default/phase_6/models/golf/picnic_game_menu.bam')
+            '../../user/default/resources/default/phase_6/models/golf/picnic_game_menu.bam')
         btn1 = self.selectionButtons.find('**/Btn1')
         btn2 = self.selectionButtons.find('**/Btn2')
         btn3 = self.selectionButtons.find('**/Btn3')

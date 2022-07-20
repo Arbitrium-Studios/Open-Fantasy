@@ -44,7 +44,7 @@ class TTChatInputWhiteList(ChatInputWhiteListFrame):
         self.promoteWhiteList = 1
         self.typeGrabbed = 0
         self.deactivate()
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/chat_input_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/chat_input_gui')
         self.chatFrame = DirectFrame(
             parent=self,
             image=gui.find('**/Chat_Bx_FNL'),

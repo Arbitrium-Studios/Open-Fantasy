@@ -8,7 +8,7 @@ class RaceHeadFrame(DirectFrame):
 
     def __init__(self, av=None, color=Vec4(1, 1, 1, 1), *args, **kwargs):
         self.panelGeom = loader.loadModel(
-            'user/resources/default/phase_4/models/karting/racing_panel')
+            '../../user/default/resources/default/phase_4/models/karting/racing_panel')
         self.panelGeom.find('**/*fg').setColor(color)
         opts = {'relief': None,
                 'geom': self.panelGeom,

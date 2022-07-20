@@ -84,7 +84,7 @@ class TwoDSectionMgr(DirectObject):
             self.endSectionNP)
         self.exitElevator.setPos(52, -2, 12.7)
         cogSignModel = loader.loadModel(
-            'user/resources/default/phase_4/models/props/sign_sellBotHeadHQ')
+            '../../user/default/resources/default/phase_4/models/props/sign_sellBotHeadHQ')
         cogSign = cogSignModel.find('**/sign_sellBotHeadHQ')
         cogSignSF = 23
         elevatorSignSF = 15

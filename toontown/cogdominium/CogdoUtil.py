@@ -22,7 +22,7 @@ def getModelPath(baseName, game='shared', type='model', group='area'):
     extension = ''
     if hasattr(getBase(), 'air'):
         extension = '.bam'
-    return 'user/resources/default/phase_%i/models/cogdominium/tt_%s_%s_%s_%s%s' % (ModelPhase,
+    return '../../user/default/resources/default/phase_%i/models/cogdominium/tt_%s_%s_%s_%s%s' % (ModelPhase,
                                                              ModelTypes[type],
                                                              ModelGroups[group],
                                                              Games[game],

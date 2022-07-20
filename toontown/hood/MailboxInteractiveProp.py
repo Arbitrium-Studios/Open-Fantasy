@@ -187,8 +187,8 @@ class MailboxInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
 
     def setupActor(self, node):
         self.pieActor = Actor.Actor(
-            'user/resources/default/phase_5/models/char/tt_r_prp_ext_piePackage', {
-                'fightBoost': 'user/resources/default/phase_5/models/char/tt_a_prp_ext_piePackage_fightBoost'})
+            '../../user/default/resources/default/phase_5/models/char/tt_r_prp_ext_piePackage', {
+                'fightBoost': '../../user/default/resources/default/phase_5/models/char/tt_a_prp_ext_piePackage_fightBoost'})
         self.pieActor.setBlend(frameBlend=base.smoothAnimations)
         self.pieActor.reparentTo(self.node)
         self.pieActor.hide()

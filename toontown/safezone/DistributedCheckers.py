@@ -25,7 +25,7 @@ class DistributedCheckers(DistributedNode.DistributedNode):
         self.cr = cr
         self.reparentTo(render)
         self.boardNode = loader.loadModel(
-            'user/resources/default/phase_6/models/golf/regular_checker_game.bam')
+            '../../user/default/resources/default/phase_6/models/golf/regular_checker_game.bam')
         self.boardNode.reparentTo(self)
         self.board = CheckersBoard()
         self.exitButton = None
@@ -56,7 +56,7 @@ class DistributedCheckers(DistributedNode.DistributedNode):
         self.myHandler = CollisionHandlerQueue()
         self.traverser.addCollider(self.pickerNP, self.myHandler)
         self.buttonModels = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/inventory_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/inventory_gui')
         self.upButton = self.buttonModels.find('**//InventoryButtonUp')
         self.downButton = self.buttonModels.find('**/InventoryButtonDown')
         self.rolloverButton = self.buttonModels.find(
@@ -92,10 +92,10 @@ class DistributedCheckers(DistributedNode.DistributedNode):
                                          30,
                                          31]]
         self.knockSound = base.loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/GUI_knock_1.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/GUI_knock_1.ogg')
         self.clickSound = base.loader.loadSfx(
-            'user/resources/default/phase_3/audio/sfx/GUI_balloon_popup.ogg')
-        self.moveSound = base.loader.loadSfx('user/resources/default/phase_6/audio/sfx/CC_move.ogg')
+            '../../user/default/resources/default/phase_3/audio/sfx/GUI_balloon_popup.ogg')
+        self.moveSound = base.loader.loadSfx('../../user/default/resources/default/phase_6/audio/sfx/CC_move.ogg')
         self.accept('stoppedAsleep', self.handleSleep)
         self.fsm = ClassicFSM.ClassicFSM(
             'ChineseCheckers', [
@@ -118,10 +118,10 @@ class DistributedCheckers(DistributedNode.DistributedNode):
 
         for z in self.locatorList:
             y = loader.loadModel(
-                'user/resources/default/phase_6/models/golf/regular_checker_piecewhite.bam')
+                '../../user/default/resources/default/phase_6/models/golf/regular_checker_piecewhite.bam')
             y.find('**/checker_k*').hide()
             zz = loader.loadModel(
-                'user/resources/default/phase_6/models/golf/regular_checker_pieceblack.bam')
+                '../../user/default/resources/default/phase_6/models/golf/regular_checker_pieceblack.bam')
             zz.find('**/checker_k*').hide()
             y.reparentTo(z)
             y.hide()
@@ -770,10 +770,10 @@ class DistributedCheckers(DistributedNode.DistributedNode):
         messenger.send('wakeup')
         if playerColor == 'white':
             gamePeiceForAnimation = loader.loadModel(
-                'user/resources/default/phase_6/models/golf/regular_checker_piecewhite.bam')
+                '../../user/default/resources/default/phase_6/models/golf/regular_checker_piecewhite.bam')
         else:
             gamePeiceForAnimation = loader.loadModel(
-                'user/resources/default/phase_6/models/golf/regular_checker_pieceblack.bam')
+                '../../user/default/resources/default/phase_6/models/golf/regular_checker_pieceblack.bam')
         if type == 'king':
             gamePeiceForAnimation.find('**/checker_k*').show()
         else:

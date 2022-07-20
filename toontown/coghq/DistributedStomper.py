@@ -14,13 +14,13 @@ from toontown.toonbase import ToontownGlobals
 class DistributedStomper(DistributedCrusherEntity.DistributedCrusherEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedStomper')
     stomperSounds = [
-        'user/resources/default/phase_4/audio/sfx/CHQ_FACT_stomper_small.ogg',
-        'user/resources/default/phase_9/audio/sfx/CHQ_FACT_stomper_med.ogg',
-        'user/resources/default/phase_9/audio/sfx/CHQ_FACT_stomper_large.ogg']
-    stomperModels = ['user/resources/default/phase_9/models/cogHQ/square_stomper']
+        '../../user/default/resources/default/phase_4/audio/sfx/CHQ_FACT_stomper_small.ogg',
+        '../../user/default/resources/default/phase_9/audio/sfx/CHQ_FACT_stomper_med.ogg',
+        '../../user/default/resources/default/phase_9/audio/sfx/CHQ_FACT_stomper_large.ogg']
+    stomperModels = ['../../user/default/resources/default/phase_9/models/cogHQ/square_stomper']
 
     def __init__(self, cr):
-        self.stomperModels = ['user/resources/default/phase_9/models/cogHQ/square_stomper']
+        self.stomperModels = ['../../user/default/resources/default/phase_9/models/cogHQ/square_stomper']
         self.lastPos = Point3(0, 0, 0)
         self.model = None
         self.smokeTrack = None
@@ -80,9 +80,9 @@ class DistributedStomper(DistributedCrusherEntity.DistributedCrusherEntity):
 
     def loadModel(self):
         self.loaded = 1
-        self.stomperModels = ['user/resources/default/phase_9/models/cogHQ/square_stomper']
+        self.stomperModels = ['../../user/default/resources/default/phase_9/models/cogHQ/square_stomper']
         if self.cogStyle == 1:
-            self.stomperModels = ['user/resources/default/phase_11/models/lawbotHQ/LB_square_stomper']
+            self.stomperModels = ['../../user/default/resources/default/phase_11/models/lawbotHQ/LB_square_stomper']
         self.notify.debug('loadModel')
         shadow = None
         self.sound = self.sounds[self.soundPath]
@@ -105,7 +105,7 @@ class DistributedStomper(DistributedCrusherEntity.DistributedCrusherEntity):
             self.shadow = None
             if self.wantShadow:
                 shadow = loader.loadModel(
-                    'user/resources/default/phase_3/models/props/square_drop_shadow').getChild(0)
+                    '../../user/default/resources/default/phase_3/models/props/square_drop_shadow').getChild(0)
                 shadow.setScale(
                     0.3 * self.headScale[0],
                     0.3 * self.headScale[2],
@@ -175,7 +175,7 @@ class DistributedStomper(DistributedCrusherEntity.DistributedCrusherEntity):
             self.model.setPos(0, -self.range, 0)
         self.model.reparentTo(self.rotateNode)
         if self.wantSmoke:
-            self.smoke = loader.loadModel('user/resources/default/phase_4/models/props/test_clouds')
+            self.smoke = loader.loadModel('../../user/default/resources/default/phase_4/models/props/test_clouds')
             self.smoke.setColor(0.8, 0.7, 0.5, 1)
             self.smoke.setBillboardPointEye()
         return

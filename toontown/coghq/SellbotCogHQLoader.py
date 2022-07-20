@@ -35,10 +35,10 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             state = self.fsm.getStateNamed(stateName)
             state.addTransition('factoryInterior')
 
-        self.musicFile = 'user/resources/default/phase_9/audio/bgm/encntr_suit_HQ_nbrhood.ogg'
-        self.cogHQExteriorModelPath = 'user/resources/default/phase_9/models/cogHQ/SellbotHQExterior'
-        self.cogHQLobbyModelPath = 'user/resources/default/phase_9/models/cogHQ/SellbotHQLobby'
-        self.factoryExteriorModelPath = 'user/resources/default/phase_9/models/cogHQ/SellbotFactoryExterior'
+        self.musicFile = '../../user/default/resources/default/phase_9/audio/bgm/encntr_suit_HQ_nbrhood.ogg'
+        self.cogHQExteriorModelPath = '../../user/default/resources/default/phase_9/models/cogHQ/SellbotHQExterior'
+        self.cogHQLobbyModelPath = '../../user/default/resources/default/phase_9/models/cogHQ/SellbotHQLobby'
+        self.factoryExteriorModelPath = '../../user/default/resources/default/phase_9/models/cogHQ/SellbotFactoryExterior'
         self.geom = None
         return
 
@@ -63,7 +63,7 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             factoryLinkTunnel = self.geom.find('**/Tunnel2')
             factoryLinkTunnel.setName('linktunnel_sellhq_11200_DNARoot')
             cogSignModel = loader.loadModel(
-                'user/resources/default/phase_4/models/props/sign_sellBotHeadHQ')
+                '../../user/default/resources/default/phase_4/models/props/sign_sellBotHeadHQ')
             cogSign = cogSignModel.find('**/sign_sellBotHeadHQ')
             cogSignSF = 23
             dgSign = cogSign.copyTo(dgLinkTunnel)
@@ -108,7 +108,7 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             factoryLinkTunnel.find(
                 '**/tunnel_sphere').setName('tunnel_trigger')
             cogSignModel = loader.loadModel(
-                'user/resources/default/phase_4/models/props/sign_sellBotHeadHQ')
+                '../../user/default/resources/default/phase_4/models/props/sign_sellBotHeadHQ')
             cogSign = cogSignModel.find('**/sign_sellBotHeadHQ')
             cogSignSF = 23
             elevatorSignSF = 15

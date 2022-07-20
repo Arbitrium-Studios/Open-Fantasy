@@ -216,30 +216,30 @@ def loadModels():
 
         for key in list(LegDict.keys()):
             fileRoot = LegDict[key]
-            model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '1000').node()
+            model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '1000').node()
             Preloaded.append(model)
-            model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '500').node()
+            model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '500').node()
             Preloaded.append(model)
-            model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '250').node()
+            model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '250').node()
             Preloaded.append(model)
 
         for key in list(TorsoDict.keys()):
             fileRoot = TorsoDict[key]
-            model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '1000').node()
+            model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '1000').node()
             Preloaded.append(model)
             if len(key) > 1:
-                model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '500').node()
+                model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '500').node()
                 Preloaded.append(model)
-                model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '250').node()
+                model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '250').node()
                 Preloaded.append(model)
 
         for key in list(HeadDict.keys()):
             fileRoot = HeadDict[key]
-            model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '1000').node()
+            model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '1000').node()
             Preloaded.append(model)
-            model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '500').node()
+            model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '500').node()
             Preloaded.append(model)
-            model = loader.loadModel('user/resources/default/phase_3' + fileRoot + '250').node()
+            model = loader.loadModel('../../user/default/resources/default/phase_3' + fileRoot + '250').node()
             Preloaded.append(model)
 
 
@@ -252,71 +252,71 @@ def unloadBasicAnims():
 
 
 def loadTutorialBattleAnims():
-    loadPhaseAnims('user/resources/default/phase_3.5')
+    loadPhaseAnims('../../user/default/resources/default/phase_3.5')
 
 
 def unloadTutorialBattleAnims():
-    loadPhaseAnims('user/resources/default/phase_3.5', 0)
+    loadPhaseAnims('../../user/default/resources/default/phase_3.5', 0)
 
 
 def loadMinigameAnims():
-    loadPhaseAnims('user/resources/default/phase_4')
+    loadPhaseAnims('../../user/default/resources/default/phase_4')
 
 
 def unloadMinigameAnims():
-    loadPhaseAnims('user/resources/default/phase_4', 0)
+    loadPhaseAnims('../../user/default/resources/default/phase_4', 0)
 
 
 def loadBattleAnims():
-    loadPhaseAnims('user/resources/default/phase_5')
+    loadPhaseAnims('../../user/default/resources/default/phase_5')
 
 
 def unloadBattleAnims():
-    loadPhaseAnims('user/resources/default/phase_5', 0)
+    loadPhaseAnims('../../user/default/resources/default/phase_5', 0)
 
 
 def loadSellbotHQAnims():
-    loadPhaseAnims('user/resources/default/phase_9')
+    loadPhaseAnims('../../user/default/resources/default/phase_9')
 
 
 def unloadSellbotHQAnims():
-    loadPhaseAnims('user/resources/default/phase_9', 0)
+    loadPhaseAnims('../../user/default/resources/default/phase_9', 0)
 
 
 def loadCashbotHQAnims():
-    loadPhaseAnims('user/resources/default/phase_10')
+    loadPhaseAnims('../../user/default/resources/default/phase_10')
 
 
 def unloadCashbotHQAnims():
-    loadPhaseAnims('user/resources/default/phase_10', 0)
+    loadPhaseAnims('../../user/default/resources/default/phase_10', 0)
 
 
 def loadBossbotHQAnims():
-    loadPhaseAnims('user/resources/default/phase_12')
+    loadPhaseAnims('../../user/default/resources/default/phase_12')
 
 
 def unloadBossbotHQAnims():
-    loadPhaseAnims('user/resources/default/phase_12', 0)
+    loadPhaseAnims('../../user/default/resources/default/phase_12', 0)
 
 
-def loadPhaseAnims(phaseStr='user/resources/default/phase_3', loadFlag=1):
-    if phaseStr == 'user/resources/default/phase_3':
+def loadPhaseAnims(phaseStr='../../user/default/resources/default/phase_3', loadFlag=1):
+    if phaseStr == '../../user/default/resources/default/phase_3':
         animList = Phase3AnimList
-    elif phaseStr == 'user/resources/default/phase_3.5':
+    elif phaseStr == '../../user/default/resources/default/phase_3.5':
         animList = Phase3_5AnimList
-    elif phaseStr == 'user/resources/default/phase_4':
+    elif phaseStr == '../../user/default/resources/default/phase_4':
         animList = Phase4AnimList
-    elif phaseStr == 'user/resources/default/phase_5':
+    elif phaseStr == '../../user/default/resources/default/phase_5':
         animList = Phase5AnimList
-    elif phaseStr == 'user/resources/default/phase_5.5':
+    elif phaseStr == '../../user/default/resources/default/phase_5.5':
         animList = Phase5_5AnimList
-    elif phaseStr == 'user/resources/default/phase_6':
+    elif phaseStr == '../../user/default/resources/default/phase_6':
         animList = Phase6AnimList
-    elif phaseStr == 'user/resources/default/phase_9':
+    elif phaseStr == '../../user/default/resources/default/phase_9':
         animList = Phase9AnimList
-    elif phaseStr == 'user/resources/default/phase_10':
+    elif phaseStr == '../../user/default/resources/default/phase_10':
         animList = Phase10AnimList
-    elif phaseStr == 'user/resources/default/phase_12':
+    elif phaseStr == '../../user/default/resources/default/phase_12':
         animList = Phase12AnimList
     else:
         self.notify.error('Unknown phase string %s' % phaseStr)
@@ -358,15 +358,15 @@ def compileGlobalAnimList():
                  Phase9AnimList,
                  Phase10AnimList,
                  Phase12AnimList]
-    phaseStrList = ['user/resources/default/phase_3',
-                    'user/resources/default/phase_3.5',
-                    'user/resources/default/phase_4',
-                    'user/resources/default/phase_5',
-                    'user/resources/default/phase_5.5',
-                    'user/resources/default/phase_6',
-                    'user/resources/default/phase_9',
-                    'user/resources/default/phase_10',
-                    'user/resources/default/phase_12']
+    phaseStrList = ['../../user/default/resources/default/phase_3',
+                    '../../user/default/resources/default/phase_3.5',
+                    '../../user/default/resources/default/phase_4',
+                    '../../user/default/resources/default/phase_5',
+                    '../../user/default/resources/default/phase_5.5',
+                    '../../user/default/resources/default/phase_6',
+                    '../../user/default/resources/default/phase_9',
+                    '../../user/default/resources/default/phase_10',
+                    '../../user/default/resources/default/phase_12']
     for animList in phaseList:
         phaseStr = phaseStrList[phaseList.index(animList)]
         for key in list(LegDict.keys()):
@@ -390,7 +390,7 @@ def compileGlobalAnimList():
 
 
 def loadDialog():
-    loadPath = 'user/resources/default/phase_3.5/audio/dial/'
+    loadPath = '../../user/default/resources/default/phase_3.5/audio/dial/'
 
     DogDialogueFiles = (
         'AV_dog_short',
@@ -572,7 +572,7 @@ class Toon(Avatar.Avatar, ToonHead):
         self.setTag('pieCode', str(ToontownGlobals.PieCodeToon))
         self.setFont(ToontownGlobals.getToonFont())
         self.soundChatBubble = base.loader.loadSfx(
-            'user/resources/default/phase_3/audio/sfx/GUI_balloon_popup.ogg')
+            '../../user/default/resources/default/phase_3/audio/sfx/GUI_balloon_popup.ogg')
         self.swimBobSeq = None
         self.animFSM = ClassicFSM('Toon', [State('off', self.enterOff, self.exitOff),
                                            State(
@@ -853,7 +853,7 @@ class Toon(Avatar.Avatar, ToonHead):
         if self.__bookActors:
             return self.__bookActors
         bookActor = Actor.Actor(
-            'user/resources/default/phase_3.5/models/props/book-mod', {'book': 'user/resources/default/phase_3.5/models/props/book-chan'})
+            '../../user/default/resources/default/phase_3.5/models/props/book-mod', {'book': '../../user/default/resources/default/phase_3.5/models/props/book-chan'})
         bookActor2 = Actor.Actor(other=bookActor)
         bookActor3 = Actor.Actor(other=bookActor)
         self.__bookActors = [bookActor, bookActor2, bookActor3]
@@ -867,8 +867,8 @@ class Toon(Avatar.Avatar, ToonHead):
     def getHoleActors(self):
         if self.__holeActors:
             return self.__holeActors
-        holeActor = Actor.Actor('user/resources/default/phase_3.5/models/props/portal-mod',
-                                {'hole': 'user/resources/default/phase_3.5/models/props/portal-chan'})
+        holeActor = Actor.Actor('../../user/default/resources/default/phase_3.5/models/props/portal-mod',
+                                {'hole': '../../user/default/resources/default/phase_3.5/models/props/portal-chan'})
         holeActor2 = Actor.Actor(other=holeActor)
         holeActor3 = Actor.Actor(other=holeActor)
         self.__holeActors = [holeActor, holeActor2, holeActor3]
@@ -916,9 +916,9 @@ class Toon(Avatar.Avatar, ToonHead):
         filePrefix = LegDict.get(legStyle)
         if filePrefix is None:
             self.notify.error('unknown leg style: %s' % legStyle)
-        self.loadModel('user/resources/default/phase_3' + filePrefix + '1000', 'legs', '1000', copy)
-        self.loadModel('user/resources/default/phase_3' + filePrefix + '500', 'legs', '500', copy)
-        self.loadModel('user/resources/default/phase_3' + filePrefix + '250', 'legs', '250', copy)
+        self.loadModel('../../user/default/resources/default/phase_3' + filePrefix + '1000', 'legs', '1000', copy)
+        self.loadModel('../../user/default/resources/default/phase_3' + filePrefix + '500', 'legs', '500', copy)
+        self.loadModel('../../user/default/resources/default/phase_3' + filePrefix + '250', 'legs', '250', copy)
         if not copy:
             self.showPart('legs', '1000')
             self.showPart('legs', '500')
@@ -951,17 +951,17 @@ class Toon(Avatar.Avatar, ToonHead):
         filePrefix = TorsoDict.get(torsoStyle)
         if filePrefix is None:
             self.notify.error('unknown torso style: %s' % torsoStyle)
-        self.loadModel('user/resources/default/phase_3' + filePrefix + '1000', 'torso', '1000', copy)
+        self.loadModel('../../user/default/resources/default/phase_3' + filePrefix + '1000', 'torso', '1000', copy)
         if len(torsoStyle) == 1:
             self.loadModel(
-                'user/resources/default/phase_3' +
+                '../../user/default/resources/default/phase_3' +
                 filePrefix +
                 '1000',
                 'torso',
                 '500',
                 copy)
             self.loadModel(
-                'user/resources/default/phase_3' +
+                '../../user/default/resources/default/phase_3' +
                 filePrefix +
                 '1000',
                 'torso',
@@ -969,14 +969,14 @@ class Toon(Avatar.Avatar, ToonHead):
                 copy)
         else:
             self.loadModel(
-                'user/resources/default/phase_3' +
+                '../../user/default/resources/default/phase_3' +
                 filePrefix +
                 '500',
                 'torso',
                 '500',
                 copy)
             self.loadModel(
-                'user/resources/default/phase_3' +
+                '../../user/default/resources/default/phase_3' +
                 filePrefix +
                 '250',
                 'torso',
@@ -1545,7 +1545,7 @@ class Toon(Avatar.Avatar, ToonHead):
 
     def getJar(self):
         if not self.jar:
-            self.jar = loader.loadModel('user/resources/default/phase_5.5/models/estate/jellybeanJar')
+            self.jar = loader.loadModel('../../user/default/resources/default/phase_5.5/models/estate/jellybeanJar')
             self.jar.setP(290.0)
             self.jar.setY(0.5)
             self.jar.setZ(0.5)
@@ -2026,7 +2026,7 @@ class Toon(Avatar.Avatar, ToonHead):
     def getSoundTeleport(self):
         if not self.soundTeleport:
             self.soundTeleport = base.loader.loadSfx(
-                'user/resources/default/phase_3.5/audio/sfx/AV_teleport.ogg')
+                '../../user/default/resources/default/phase_3.5/audio/sfx/AV_teleport.ogg')
         return self.soundTeleport
 
     def getTeleportOutTrack(self, autoFinishTrack=1):
@@ -2148,7 +2148,7 @@ class Toon(Avatar.Avatar, ToonHead):
         pass
 
     def getDiedInterval(self, autoFinishTrack=1):
-        sound = loader.loadSfx('user/resources/default/phase_5/audio/sfx/ENC_Lose.ogg')
+        sound = loader.loadSfx('../../user/default/resources/default/phase_5/audio/sfx/ENC_Lose.ogg')
         if hasattr(self, 'uniqueName'):
             trackName = self.uniqueName('died')
         else:
@@ -2458,7 +2458,7 @@ class Toon(Avatar.Avatar, ToonHead):
 
     def enterSquish(self, animMultiplier=1, ts=0, callback=None, extraArgs=[]):
         Emote.globalEmote.disableAll(self)
-        sound = loader.loadSfx('user/resources/default/phase_9/audio/sfx/toon_decompress.ogg')
+        sound = loader.loadSfx('../../user/default/resources/default/phase_9/audio/sfx/toon_decompress.ogg')
         lerpTime = 0.1
         node = self.getGeomNode().getChild(0)
         origScale = node.getScale()
@@ -3338,7 +3338,7 @@ class Toon(Avatar.Avatar, ToonHead):
         animPie = Sequence()
         if pieType == 'actor':
             animPie = ActorInterval(pie, pieName, startFrame=48)
-        sound = loader.loadSfx('user/resources/default/phase_3.5/audio/sfx/AA_pie_throw_only.ogg')
+        sound = loader.loadSfx('../../user/default/resources/default/phase_3.5/audio/sfx/AA_pie_throw_only.ogg')
         t = power / 100.0
         dist = 100 - 70 * t
         time = 1 + 0.5 * t
@@ -3406,10 +3406,10 @@ class Toon(Avatar.Avatar, ToonHead):
             splat.setColor(*color)
         vol = 1.0
         if pieName == 'lawbook':
-            sound = loader.loadSfx('user/resources/default/phase_11/audio/sfx/LB_evidence_miss.ogg')
+            sound = loader.loadSfx('../../user/default/resources/default/phase_11/audio/sfx/LB_evidence_miss.ogg')
             vol = 0.25
         else:
-            sound = loader.loadSfx('user/resources/default/phase_4/audio/sfx/AA_wholepie_only.ogg')
+            sound = loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/AA_wholepie_only.ogg')
         ival = Parallel(
             Func(
                 splat.reparentTo, render), Func(
@@ -3482,7 +3482,7 @@ class Toon(Avatar.Avatar, ToonHead):
     def enterFlattened(self, animMultiplier=1, ts=0,
                        callback=None, extraArgs=[]):
         Emote.globalEmote.disableAll(self)
-        sound = loader.loadSfx('user/resources/default/phase_9/audio/sfx/toon_decompress.ogg')
+        sound = loader.loadSfx('../../user/default/resources/default/phase_9/audio/sfx/toon_decompress.ogg')
         lerpTime = 0.1
         node = self.getGeomNode().getChild(0)
         self.origScale = node.getScale()

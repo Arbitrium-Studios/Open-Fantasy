@@ -15,12 +15,12 @@ class FishAnimatedProp(AnimatedProp.AnimatedProp):
         self.fish.reparentTo(parent)
         self.fish.setTransform(node.getTransform())
         node.clearMat()
-        self.fish.loadAnims({'jump': 'user/resources/default/phase_4/models/props/SZ_fish-jump',
-                             'swim': 'user/resources/default/phase_4/models/props/SZ_fish-swim'})
+        self.fish.loadAnims({'jump': '../../user/default/resources/default/phase_4/models/props/SZ_fish-jump',
+                             'swim': '../../user/default/resources/default/phase_4/models/props/SZ_fish-swim'})
         self.fish.setBlend(frameBlend=base.smoothAnimations)
         self.splashSfxList = (
-            loader.loadSfx('user/resources/default/phase_4/audio/sfx/TT_splash1.ogg'),
-            loader.loadSfx('user/resources/default/phase_4/audio/sfx/TT_splash2.ogg'))
+            loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/TT_splash1.ogg'),
+            loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/TT_splash2.ogg'))
         self.node = self.fish
         self.geom = self.fish.getGeomNode()
         self.exitRipples = Ripples(self.geom)

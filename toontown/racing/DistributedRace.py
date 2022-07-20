@@ -34,17 +34,17 @@ class DistributedRace(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedRace')
     ReadyPost = 'RaceReady'
     WinEvent = 'RaceWinEvent'
-    BGM_BaseDir = 'user/resources/default/phase_6/audio/bgm/'
-    SFX_BaseDir = 'user/resources/default/phase_6/audio/sfx/'
+    BGM_BaseDir = '../../user/default/resources/default/phase_6/audio/bgm/'
+    SFX_BaseDir = '../../user/default/resources/default/phase_6/audio/sfx/'
     SFX_StartBoop = SFX_BaseDir + 'KART_raceStart1.ogg'
     SFX_StartBoop2 = SFX_BaseDir + 'KART_raceStart2.ogg'
     SFX_Applause = SFX_BaseDir + 'KART_Applause_%d.ogg'
 
     def __init__(self, cr):
-        self.qbox = loader.loadModel('user/resources/default/phase_6/models/karting/qbox')
+        self.qbox = loader.loadModel('../../user/default/resources/default/phase_6/models/karting/qbox')
         self.boostArrowTexture = loader.loadTexture(
-            'user/resources/default/phase_6/maps/boost_arrow.jpg',
-            'user/resources/default/phase_6/maps/boost_arrow_a.rgb')
+            '../../user/default/resources/default/phase_6/maps/boost_arrow.jpg',
+            '../../user/default/resources/default/phase_6/maps/boost_arrow_a.rgb')
         self.boostArrowTexture.setMinfilter(Texture.FTLinear)
         DistributedObject.DistributedObject.__init__(self, cr)
         self.kartMap = {}
@@ -88,9 +88,9 @@ class DistributedRace(DistributedObject.DistributedObject):
         self.dummyNode = None
         self.fog = None
         self.bananaSound = base.loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/KART_tossBanana.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/KART_tossBanana.ogg')
         self.anvilFall = base.loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/KART_Gag_Hit_Anvil.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/KART_Gag_Hit_Anvil.ogg')
         self.accept('leaveRace', self.leaveRace)
         self.toonsToLink = []
         self.curveTs = []
@@ -143,7 +143,7 @@ class DistributedRace(DistributedObject.DistributedObject):
         for i in range(3):
             base.loader.tick()
 
-        self.sky = loader.loadModel('user/resources/default/phase_3.5/models/props/TT_sky')
+        self.sky = loader.loadModel('../../user/default/resources/default/phase_3.5/models/props/TT_sky')
         self.sky.setPos(0, 0, 0)
         self.sky.setScale(20.0)
         self.sky.setFogOff()
@@ -784,16 +784,16 @@ class DistributedRace(DistributedObject.DistributedObject):
 
     def loadUrbanTrack(self):
         self.dnaStore = DNAStorage()
-        loader.loadDNAFile(self.dnaStore, 'user/resources/default/phase_4/dna/storage.dna')
-        loader.loadDNAFile(self.dnaStore, 'user/resources/default/phase_5/dna/storage_town.dna')
-        loader.loadDNAFile(self.dnaStore, 'user/resources/default/phase_4/dna/storage_TT.dna')
-        loader.loadDNAFile(self.dnaStore, 'user/resources/default/phase_5/dna/storage_TT_town.dna')
-        loader.loadDNAFile(self.dnaStore, 'user/resources/default/phase_8/dna/storage_BR.dna')
-        loader.loadDNAFile(self.dnaStore, 'user/resources/default/phase_8/dna/storage_BR_town.dna')
-        dnaFile = 'user/resources/default/phase_6/dna/urban_track_town.dna'
+        loader.loadDNAFile(self.dnaStore, '../../user/default/resources/default/phase_4/dna/storage.dna')
+        loader.loadDNAFile(self.dnaStore, '../../user/default/resources/default/phase_5/dna/storage_town.dna')
+        loader.loadDNAFile(self.dnaStore, '../../user/default/resources/default/phase_4/dna/storage_TT.dna')
+        loader.loadDNAFile(self.dnaStore, '../../user/default/resources/default/phase_5/dna/storage_TT_town.dna')
+        loader.loadDNAFile(self.dnaStore, '../../user/default/resources/default/phase_8/dna/storage_BR.dna')
+        loader.loadDNAFile(self.dnaStore, '../../user/default/resources/default/phase_8/dna/storage_BR_town.dna')
+        dnaFile = '../../user/default/resources/default/phase_6/dna/urban_track_town.dna'
         if self.trackId in (RaceGlobals.RT_Urban_2,
                             RaceGlobals.RT_Urban_2_rev):
-            dnaFile = 'user/resources/default/phase_6/dna/urban_track_town_B.dna'
+            dnaFile = '../../user/default/resources/default/phase_6/dna/urban_track_town_B.dna'
         node = loader.loadDNAFile(self.dnaStore, dnaFile)
         self.townGeom = self.geom.attachNewNode(node)
         self.townGeom.findAllMatches('**/+CollisionNode').stash()

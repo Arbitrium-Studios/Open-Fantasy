@@ -385,7 +385,7 @@ class ObjectManager(NodePath, DirectObject):
         self.fRecenter = 0
         self.gridSpacing = None
         self.firstTime = 0
-        guiModels = loader.loadModel('user/resources/default/phase_5.5/models/gui/house_design_gui')
+        guiModels = loader.loadModel('../../user/default/resources/default/phase_5.5/models/gui/house_design_gui')
         self.createSelectedObjectPanel(guiModels)
         self.createMainControls(guiModels)
         self.furnitureManager = None
@@ -1192,7 +1192,7 @@ class ObjectManager(NodePath, DirectObject):
                 camCWUp, camCWDown, camCWRollover], relief=None, pos=(
                 -1.4, 0, -3.0), command=self.rotateCamCW)
         self.bindHelpText(self.rotateCamRightButton, 'RotateRight')
-        trashcanGui = loader.loadModel('user/resources/default/phase_3/models/gui/trashcan_gui')
+        trashcanGui = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/trashcan_gui')
         trashcanUp = trashcanGui.find('**/TrashCan_CLSD')
         trashcanDown = trashcanGui.find('**/TrashCan_OPEN')
         trashcanRollover = trashcanGui.find('**/TrashCan_RLVR')
@@ -1342,7 +1342,7 @@ class ObjectManager(NodePath, DirectObject):
         return
 
     def createScrolledList(self, itemList, text, name, selectedIndex):
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
         picker = DirectScrolledList(parent=self.furnitureGui, pos=(-0.38, 0.0, 3), scale=7.125, relief=None, items=itemList, numItemsVisible=5, text=text, text_fg=(1, 1, 1, 1), text_shadow=(0, 0, 0, 1), text_scale=0.1, text_pos=(0, 0.4), decButton_image=(gui.find('**/FndsLst_ScrollUp'),
                                                                                                                                                                                                                                                                gui.find(
                                                                                                                                                                                                                                                                    '**/FndsLst_ScrollDN'),
@@ -1776,7 +1776,7 @@ class ObjectManager(NodePath, DirectObject):
     def createVerifyDialog(self, item, verifyText, okFunc, cancelFunc):
         if self.verifyFrame is None:
             buttons = loader.loadModel(
-                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+                '../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             okButtonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),

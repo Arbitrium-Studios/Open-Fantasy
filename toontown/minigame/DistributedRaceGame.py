@@ -300,10 +300,10 @@ class DistributedRaceGame(DistributedMinigame):
     def load(self):
         self.notify.debug('load')
         DistributedMinigame.load(self)
-        self.raceBoard = loader.loadModel('user/resources/default/phase_4/models/minigames/race')
+        self.raceBoard = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/race')
         self.raceBoard.setPosHpr(0, 0, 0, 0, 0, 0)
         self.raceBoard.setScale(0.8)
-        self.dice = loader.loadModel('user/resources/default/phase_4/models/minigames/dice')
+        self.dice = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/dice')
         self.dice1 = self.dice.find('**/dice_button1')
         self.dice2 = self.dice.find('**/dice_button2')
         self.dice3 = self.dice.find('**/dice_button3')
@@ -313,13 +313,13 @@ class DistributedRaceGame(DistributedMinigame):
                          self.dice3,
                          self.dice4]
         self.music = base.loader.loadMusic(
-            'user/resources/default/phase_4/audio/bgm/minigame_race.ogg')
+            '../../user/default/resources/default/phase_4/audio/bgm/minigame_race.ogg')
         self.posBuzzer = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_pos_buzzer.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_pos_buzzer.ogg')
         self.negBuzzer = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_neg_buzzer.ogg')
-        self.winSting = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_win.ogg')
-        self.loseSting = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_lose.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_neg_buzzer.ogg')
+        self.winSting = base.loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/MG_win.ogg')
+        self.loseSting = base.loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/MG_lose.ogg')
         self.diceButtonList = []
         for i in range(1, 5):
             button = self.dice.find('**/dice_button' + str(i))
@@ -338,16 +338,16 @@ class DistributedRaceGame(DistributedMinigame):
                 -0.6, 0, -0.75), scale=0.075)
         self.waitingChoicesLabel.hide()
         self.chanceMarker = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/question_mark')
+            '../../user/default/resources/default/phase_4/models/minigames/question_mark')
         self.chanceCard = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/chance_card')
+            '../../user/default/resources/default/phase_4/models/minigames/chance_card')
         self.chanceCardText = OnscreenText(
             '', fg=(
                 1.0, 0, 0, 1), scale=0.14, font=ToontownGlobals.getSignFont(), wordwrap=14, pos=(
                 0.0, 0.2), mayChange=1)
         self.chanceCardText.hide()
         self.cardSound = base.loader.loadSfx(
-            'user/resources/default/phase_3.5/audio/sfx/GUI_stickerbook_turn.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/sfx/GUI_stickerbook_turn.ogg')
         self.chanceMarkers = []
         return
 

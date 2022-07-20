@@ -11,17 +11,17 @@ class ChrysanthemumEffect(NodePath, EffectController):
         self.effectScale = 1.0
         self.effectColor = Vec4(1, 1, 1, 1)
         self.effectModel = loader.loadModel(
-            'user/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkBurst_tflip')
+            '../../user/default/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkBurst_tflip')
         self.effectModel.setColorScale(Point4(0, 0, 0, 0))
         self.effectModel.reparentTo(self)
         self.seqNode = self.effectModel.getChild(0).getChild(0).node()
         self.effectModel2 = loader.loadModel(
-            'user/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkBurst_tflip')
+            '../../user/default/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkBurst_tflip')
         self.effectModel2.setColorScale(Point4(0, 0, 0, 0))
         self.effectModel2.reparentTo(self)
         self.seqNode2 = self.effectModel2.getChild(0).getChild(0).node()
         model = loader.loadModel(
-            'user/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkCards')
+            '../../user/default/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkCards')
         self.stars = model.find('**/tt_t_efx_ext_fireworkStars_02')
         self.stars.setColorScale(Point4(0, 0, 0, 0))
         self.stars.reparentTo(self)

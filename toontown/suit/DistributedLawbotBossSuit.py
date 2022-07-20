@@ -339,7 +339,7 @@ class DistributedLawbotBossSuit(DistributedSuitBase.DistributedSuitBase):
         return (suitTrack, propTrack)
 
     def getEvidence(self, usedForAttack=False):
-        model = loader.loadModel('user/resources/default/phase_5/models/props/lawbook')
+        model = loader.loadModel('../../user/default/resources/default/phase_5/models/props/lawbook')
         if usedForAttack:
             bounds = model.getBounds()
             center = bounds.getCenter()

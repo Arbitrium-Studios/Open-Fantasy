@@ -457,7 +457,7 @@ class DistributedTrunk(DistributedCloset.DistributedCloset):
         self.deleteEvent = self.uniqueName('delete')
         if self.isOwner:
             self.accept(self.deleteEvent, self.__handleDelete)
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okButtonImage = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),
@@ -501,7 +501,7 @@ class DistributedTrunk(DistributedCloset.DistributedCloset):
         if self.popupInfo is not None:
             self.popupInfo.destroy()
             self.popupInfo = None
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okButtonImage = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),

@@ -28,7 +28,7 @@ class GZPlayground(Playground.Playground):
 
     def load(self):
         Playground.Playground.load(self)
-        self.hub = loader.loadModel('user/resources/default/phase_6/models/golf/golf_hub2')
+        self.hub = loader.loadModel('../../user/default/resources/default/phase_6/models/golf/golf_hub2')
         self.hub.reparentTo(render)
         self.dnaroot = render.find('**/goofy_speedway_DNARoot')
         self.dnaroot = base.cr.playGame.hood.loader.geom.find(

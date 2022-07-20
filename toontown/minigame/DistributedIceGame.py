@@ -137,10 +137,10 @@ class DistributedIceGame(DistributedMinigame.DistributedMinigame,
     def load(self):
         self.notify.debug('load')
         DistributedMinigame.DistributedMinigame.load(self)
-        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_IceGame.ogg')
+        self.music = base.loader.loadMusic('../../user/default/resources/default/phase_4/audio/bgm/MG_IceGame.ogg')
         self.gameBoard = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/ice_game_icerink')
-        background = loader.loadModel('user/resources/default/phase_4/models/minigames/ice_game_2d')
+            '../../user/default/resources/default/phase_4/models/minigames/ice_game_icerink')
+        background = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/ice_game_2d')
         background.reparentTo(self.gameBoard)
         self.gameBoard.setPosHpr(0, 0, 0, 0, 0, 0)
         self.gameBoard.setScale(1.0)
@@ -170,12 +170,12 @@ class DistributedIceGame(DistributedMinigame.DistributedMinigame,
             self.eastWallModel.setScale(4)
             self.eastWallModel.setH(180)
         self.arrowKeys = ArrowKeys.ArrowKeys()
-        self.target = loader.loadModel('user/resources/default/phase_3/models/misc/sphere')
+        self.target = loader.loadModel('../../user/default/resources/default/phase_3/models/misc/sphere')
         self.target.setScale(0.01)
         self.target.reparentTo(self.gameBoard)
         self.target.setPos(0, 0, 0)
         self.scoreCircle = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/ice_game_score_circle')
+            '../../user/default/resources/default/phase_4/models/minigames/ice_game_score_circle')
         self.scoreCircle.setScale(0.01)
         self.scoreCircle.reparentTo(self.gameBoard)
         self.scoreCircle.setZ(IceGameGlobals.TireRadius / 2.0)
@@ -183,9 +183,9 @@ class DistributedIceGame(DistributedMinigame.DistributedMinigame,
         self.scoreCircle.setTransparency(1)
         self.scoreCircle.hide()
         self.treasureModel = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/ice_game_barrel')
+            '../../user/default/resources/default/phase_4/models/minigames/ice_game_barrel')
         self.penaltyModel = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/ice_game_tnt2')
+            '../../user/default/resources/default/phase_4/models/minigames/ice_game_tnt2')
         self.penaltyModel.setScale(0.75, 0.75, 0.7)
         szId = self.getSafezoneId()
         obstacles = IceGameGlobals.Obstacles[szId]
@@ -198,30 +198,30 @@ class DistributedIceGame(DistributedMinigame.DistributedMinigame,
             index += 1
 
         self.countSound = loader.loadSfx(
-            'user/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/sfx/tick_counter.ogg')
         self.treasureGrabSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_bananas.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_bananas.ogg')
         self.penaltyGrabSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
         self.tireSounds = []
         for tireIndex in range(4):
             tireHit = loader.loadSfx(
-                'user/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_1.ogg')
-            wallHit = loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_maze_pickup.ogg')
+                '../../user/default/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_1.ogg')
+            wallHit = loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/MG_maze_pickup.ogg')
             obstacleHit = loader.loadSfx(
-                'user/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_2.ogg')
+                '../../user/default/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_2.ogg')
             self.tireSounds.append({'tireHit': tireHit,
                                     'wallHit': wallHit,
                                     'obstacleHit': obstacleHit})
 
         self.arrowRotateSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_sfx_ice_force_rotate.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_sfx_ice_force_rotate.ogg')
         self.arrowUpSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_sfx_ice_force_increase_3sec.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_sfx_ice_force_increase_3sec.ogg')
         self.arrowDownSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_sfx_ice_force_decrease_3sec.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_sfx_ice_force_decrease_3sec.ogg')
         self.scoreCircleSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_sfx_ice_scoring_1.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_sfx_ice_scoring_1.ogg')
 
     def unload(self):
         self.notify.debug('unload')
@@ -685,7 +685,7 @@ class DistributedIceGame(DistributedMinigame.DistributedMinigame,
             self.accept(eventName, self.toonHitSomething)
 
     def setupForceArrow(self, avId):
-        arrow = loader.loadModel('user/resources/default/phase_4/models/minigames/ice_game_arrow')
+        arrow = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/ice_game_arrow')
         priority = 0
         if avId < 0:
             priority = -avId

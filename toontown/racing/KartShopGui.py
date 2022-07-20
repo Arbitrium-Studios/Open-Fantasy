@@ -37,7 +37,7 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
             'KartShopGuiMgr.MainMenuDlg')
 
         def __init__(self, doneEvent):
-            model = loader.loadModel('user/resources/default/phase_6/models/gui/Kart_MainMenuPanel')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/Kart_MainMenuPanel')
             self.modelScale = 0.75
             DirectFrame.__init__(self, relief=None, state='normal', geom=model, text_scale=0.1,
                                  geom_scale=self.modelScale, pos=(0, 0, -.01), frameSize=(-1, 1, -1, 1))
@@ -103,7 +103,7 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
 
         def __init__(self, doneEvent):
             self.modelScale = 1
-            model = loader.loadModel('user/resources/default/phase_6/models/gui/BuyKartPanel')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/BuyKartPanel')
             self.unownedKartList = list(KartDict.keys())
             if base.localAvatar.hasKart():
                 k = base.localAvatar.getKartBodyType()
@@ -261,7 +261,7 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
 
         def __init__(self, doneEvent):
             self.modelScale = 1
-            model = loader.loadModel('user/resources/default/phase_6/models/gui/ReturnKartPanel')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/ReturnKartPanel')
             DirectFrame.__init__(
                 self,
                 relief=None,
@@ -325,7 +325,7 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
 
         def __init__(self, doneEvent, kartID):
             self.modelScale = 1
-            model = loader.loadModel('user/resources/default/phase_6/models/gui/BoughtKartPanel')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/BoughtKartPanel')
             kartInfo = getKartTypeInfo(kartID)
             name = kartInfo[KartInfo.name]
             DirectFrame.__init__(
@@ -384,7 +384,7 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
         def __init__(self, doneEvent, kartNum):
             self.kartNum = kartNum
             self.modelScale = 1
-            model = loader.loadModel('user/resources/default/phase_6/models/gui/ConfirmBuyKartPanel')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/ConfirmBuyKartPanel')
             kartInfo = getKartTypeInfo(kartNum)
             name = kartInfo[KartInfo.name]
             cost = kartInfo[KartInfo.cost]
@@ -454,7 +454,7 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
 
         def __init__(self, doneEvent):
             self.modelScale = 1
-            model = loader.loadModel('user/resources/default/phase_6/models/gui/BuyAccessoryPanel')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/BuyAccessoryPanel')
             self.doneEvent = doneEvent
             DirectFrame.__init__(self, relief=None, state='normal', geom=model, geom_scale=self.modelScale, frameSize=(
                 -1, 1, -1, 1), pos=(0, 0, -0.01), text_wordwrap=26, text_scale=0.1, text_fg=Vec4(0.36, 0.94, 0.93, 1.0), text_pos=(0, 0))
@@ -776,7 +776,7 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
 
         def __init__(self, doneEvent, accID):
             self.modelScale = 1
-            model = loader.loadModel('user/resources/default/phase_6/models/gui/BoughtAccessoryPanel')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/BoughtAccessoryPanel')
             accInfo = getAccessoryInfo(accID)
             name = accInfo[AccInfo.name]
             DirectFrame.__init__(self, relief=None, state='normal', geom=model, geom_scale=self.modelScale, frameSize=(-1, 1, -1, 1), pos=(
@@ -825,9 +825,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
                            KartDNA.bwwType]:
                 texNodePath = getTexCardNode(accID)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath)
             elif accType == KartDNA.rimsType:
                 if accID == InvalidEntry:
@@ -835,14 +835,14 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
                 else:
                     texNodePath = getTexCardNode(accID)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath)
             elif accType in [KartDNA.bodyColor, KartDNA.accColor]:
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/Kartmenu_paintbucket.jpg',
-                    'user/resources/default/phase_6/maps/Kartmenu_paintbucket_a.rgb')
+                    '../../user/default/resources/default/phase_6/maps/Kartmenu_paintbucket.jpg',
+                    '../../user/default/resources/default/phase_6/maps/Kartmenu_paintbucket_a.rgb')
                 if accID == InvalidEntry:
                     self.kartView.component(
                         'geom0').setColorScale(getDefaultColor())
@@ -853,16 +853,16 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
                 kartDecal = getDecalId(base.localAvatar.getKartBodyType())
                 texNodePath = getTexCardNode(accID)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath %
                     kartDecal,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath %
                     kartDecal)
             else:
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
-                    'user/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb')
+                    '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
+                    '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb')
             tex.setMinfilter(Texture.FTLinearMipmapLinear)
             self.kartView.component('geom0').setTexture(tex, 1)
             self.initialize = True
@@ -879,7 +879,7 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
         def __init__(self, doneEvent, accID):
             self.accID = accID
             self.modelScale = 1
-            model = loader.loadModel('user/resources/default/phase_6/models/gui/ConfirmBuyAccessory')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/ConfirmBuyAccessory')
             accInfo = getAccessoryInfo(accID)
             cost = accInfo[AccInfo.cost]
             name = accInfo[AccInfo.name]
@@ -944,9 +944,9 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
                            KartDNA.bwwType]:
                 texNodePath = getTexCardNode(accID)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath)
             elif accType == KartDNA.rimsType:
                 if accID == InvalidEntry:
@@ -954,14 +954,14 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
                 else:
                     texNodePath = getTexCardNode(accID)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath)
             elif accType in [KartDNA.bodyColor, KartDNA.accColor]:
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/Kartmenu_paintbucket.jpg',
-                    'user/resources/default/phase_6/maps/Kartmenu_paintbucket_a.rgb')
+                    '../../user/default/resources/default/phase_6/maps/Kartmenu_paintbucket.jpg',
+                    '../../user/default/resources/default/phase_6/maps/Kartmenu_paintbucket_a.rgb')
                 if accID == InvalidEntry:
                     self.kartView.component(
                         'geom0').setColorScale(getDefaultColor())
@@ -972,16 +972,16 @@ class KartShopGuiMgr(DirectObject.DirectObject, object):
                 kartDecal = getDecalId(base.localAvatar.getKartBodyType())
                 texNodePath = getTexCardNode(accID)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath %
                     kartDecal,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath %
                     kartDecal)
             else:
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
-                    'user/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb')
+                    '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
+                    '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb')
             tex.setMinfilter(Texture.FTLinearMipmapLinear)
             self.kartView.component('geom0').setTexture(tex, 1)
             self.initialize = True

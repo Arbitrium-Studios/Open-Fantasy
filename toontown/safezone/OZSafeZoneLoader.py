@@ -24,10 +24,10 @@ class OZSafeZoneLoader(SafeZoneLoader):
 
     def __init__(self, hood, parentFSM, doneEvent):
         SafeZoneLoader.__init__(self, hood, parentFSM, doneEvent)
-        self.musicFile = 'user/resources/default/phase_6/audio/bgm/OZ_SZ.ogg'
-        self.activityMusicFile = 'user/resources/default/phase_6/audio/bgm/GS_KartShop.ogg'
-        self.dnaFile = 'user/resources/default/phase_6/dna/outdoor_zone_sz.dna'
-        self.safeZoneStorageDNAFile = 'user/resources/default/phase_6/dna/storage_OZ_sz.dna'
+        self.musicFile = '../../user/default/resources/default/phase_6/audio/bgm/OZ_SZ.ogg'
+        self.activityMusicFile = '../../user/default/resources/default/phase_6/audio/bgm/GS_KartShop.ogg'
+        self.dnaFile = '../../user/default/resources/default/phase_6/dna/outdoor_zone_sz.dna'
+        self.safeZoneStorageDNAFile = '../../user/default/resources/default/phase_6/dna/storage_OZ_sz.dna'
         self.__toonTracks = {}
         del self.fsm
         self.fsm = ClassicFSM.ClassicFSM('SafeZoneLoader', [State.State('start', self.enterStart, self.exitStart, ['quietZone', 'playground', 'toonInterior']),
@@ -51,15 +51,15 @@ class OZSafeZoneLoader(SafeZoneLoader):
         self.geyserTrack = None
         SafeZoneLoader.load(self)
         self.birdSound = list(map(base.loader.loadSfx,
-                                  ['user/resources/default/phase_4/audio/sfx/SZ_TC_bird1.ogg',
-                                   'user/resources/default/phase_4/audio/sfx/SZ_TC_bird2.ogg',
-                                   'user/resources/default/phase_4/audio/sfx/SZ_TC_bird3.ogg']))
+                                  ['../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird1.ogg',
+                                   '../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird2.ogg',
+                                   '../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird3.ogg']))
         self.underwaterSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/AV_ambient_water.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/AV_ambient_water.ogg')
         self.swimSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/AV_swim_single_stroke.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/AV_swim_single_stroke.ogg')
         self.submergeSound = base.loader.loadSfx(
-            'user/resources/default/phase_5.5/audio/sfx/AV_jump_in_water.ogg')
+            '../../user/default/resources/default/phase_5.5/audio/sfx/AV_jump_in_water.ogg')
         geyserPlacer = self.geom.find('**/geyser*')
         waterfallPlacer = self.geom.find('**/waterfall*')
         binMgr = CullBinManager.getGlobalPtr()
@@ -74,8 +74,8 @@ class OZSafeZoneLoader(SafeZoneLoader):
         pool.setColorScale(1.0, 1.0, 1.0, 1.0)
         pool.setBin('water', 50, 1)
         self.geyserModel = loader.loadModel(
-            'user/resources/default/phase_6/models/golf/golf_geyser_model')
-        self.geyserSound = loader.loadSfx('user/resources/default/phase_6/audio/sfx/OZ_Geyser.ogg')
+            '../../user/default/resources/default/phase_6/models/golf/golf_geyser_model')
+        self.geyserSound = loader.loadSfx('../../user/default/resources/default/phase_6/audio/sfx/OZ_Geyser.ogg')
         self.geyserSoundInterval = SoundInterval(
             self.geyserSound,
             node=geyserPlacer,
@@ -84,7 +84,7 @@ class OZSafeZoneLoader(SafeZoneLoader):
             volume=1.0,
             cutOff=120)
         self.geyserSoundNoToon = loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/OZ_Geyser_No_Toon.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/OZ_Geyser_No_Toon.ogg')
         self.geyserSoundNoToonInterval = SoundInterval(
             self.geyserSoundNoToon,
             node=geyserPlacer,
@@ -95,7 +95,7 @@ class OZSafeZoneLoader(SafeZoneLoader):
         if self.geyserModel:
             self.geyserActor = Actor.Actor(self.geyserModel)
             self.geyserActor.loadAnims(
-                {'idle': 'user/resources/default/phase_6/models/golf/golf_geyser'})
+                {'idle': '../../user/default/resources/default/phase_6/models/golf/golf_geyser'})
             self.geyserActor.reparentTo(render)
             self.geyserActor.setBlend(frameBlend=base.smoothAnimations)
             self.geyserActor.setPlayRate(8.6, 'idle')
@@ -117,7 +117,7 @@ class OZSafeZoneLoader(SafeZoneLoader):
             self.startGeyser()
             base.sfxPlayer.setCutoffDistance(160)
             self.geyserPoolSfx = loader.loadSfx(
-                'user/resources/default/phase_6/audio/sfx/OZ_Geyser_BuildUp_Loop.ogg')
+                '../../user/default/resources/default/phase_6/audio/sfx/OZ_Geyser_BuildUp_Loop.ogg')
             self.geyserPoolSoundInterval = SoundInterval(
                 self.geyserPoolSfx,
                 node=self.geyserPlacer,
@@ -141,11 +141,11 @@ class OZSafeZoneLoader(SafeZoneLoader):
             self.geyserPos[1],
             self.geyserPos[2] - 100.0)
         self.waterfallModel = loader.loadModel(
-            'user/resources/default/phase_6/models/golf/golf_waterfall_model')
+            '../../user/default/resources/default/phase_6/models/golf/golf_waterfall_model')
         if self.waterfallModel:
             self.waterfallActor = Actor.Actor(self.waterfallModel)
             self.waterfallActor.loadAnims(
-                {'idle': 'user/resources/default/phase_6/models/golf/golf_waterfall'})
+                {'idle': '../../user/default/resources/default/phase_6/models/golf/golf_waterfall'})
             self.waterfallActor.reparentTo(render)
             self.waterfallActor.setBlend(frameBlend=base.smoothAnimations)
             self.waterfallActor.setPlayRate(3.5, 'idle')

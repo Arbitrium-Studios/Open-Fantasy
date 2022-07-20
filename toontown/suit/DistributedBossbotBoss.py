@@ -83,7 +83,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             'pieCode', str(
                 ToontownGlobals.PieCodeBossCog))
         self.axle.getParent().setTag('pieCode', str(ToontownGlobals.PieCodeBossCog))
-        disk = loader.loadModel('user/resources/default/phase_9/models/char/bossCog-gearCollide')
+        disk = loader.loadModel('../../user/default/resources/default/phase_9/models/char/bossCog-gearCollide')
         disk.find('**/+CollisionNode').setName('BossZap')
         disk.reparentTo(self.pelvis)
         disk.setZ(0.8)
@@ -111,7 +111,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         demotedCeo.stash()
         self.demotedCeo = demotedCeo
         self.bossClub = loader.loadModel(
-            'user/resources/default/phase_12/models/char/bossbotBoss-golfclub')
+            '../../user/default/resources/default/phase_12/models/char/bossbotBoss-golfclub')
         overtimeOneClubSequence = Sequence(
             self.bossClub.colorScaleInterval(
                 0.1, colorScale=VBase4(
@@ -130,10 +130,10 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.rightHandJoint = self.find('**/joint17')
         self.setPosHpr(*ToontownGlobals.BossbotBossBattleOnePosHpr)
         self.reparentTo(render)
-        self.toonUpSfx = loader.loadSfx('user/resources/default/phase_11/audio/sfx/LB_toonup.ogg')
+        self.toonUpSfx = loader.loadSfx('../../user/default/resources/default/phase_11/audio/sfx/LB_toonup.ogg')
         self.warningSfx = loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/Skel_COG_VO_grunt.ogg')
-        self.swingClubSfx = loader.loadSfx('user/resources/default/phase_5/audio/sfx/SA_hardball.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/Skel_COG_VO_grunt.ogg')
+        self.swingClubSfx = loader.loadSfx('../../user/default/resources/default/phase_5/audio/sfx/SA_hardball.ogg')
         self.moveBossTaskName = 'CEOMoveTask'
         return
 
@@ -170,13 +170,13 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.notify.debug('----- loadEnvironment')
         DistributedBossCog.DistributedBossCog.loadEnvironment(self)
         self.geom = loader.loadModel(
-            'user/resources/default/phase_12/models/bossbotHQ/BanquetInterior_1')
+            '../../user/default/resources/default/phase_12/models/bossbotHQ/BanquetInterior_1')
         self.elevatorEntrance = self.geom.find('**/elevator_origin')
         elevatorModel = loader.loadModel(
-            'user/resources/default/phase_12/models/bossbotHQ/BB_Inside_Elevator')
+            '../../user/default/resources/default/phase_12/models/bossbotHQ/BB_Inside_Elevator')
         if not elevatorModel:
             elevatorModel = loader.loadModel(
-                'user/resources/default/phase_12/models/bossbotHQ/BB_Elevator')
+                '../../user/default/resources/default/phase_12/models/bossbotHQ/BB_Elevator')
         elevatorModel.reparentTo(self.elevatorEntrance)
         self.setupElevator(elevatorModel)
         self.banquetDoor = self.geom.find('**/door3')
@@ -187,17 +187,17 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.geom.attachNewNode(planeNode)
         self.geom.reparentTo(render)
         self.promotionMusic = base.loader.loadMusic(
-            'user/resources/default/phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
+            '../../user/default/resources/default/phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
         self.betweenPhaseMusic = base.loader.loadMusic(
-            'user/resources/default/phase_9/audio/bgm/encntr_toon_winning.ogg')
+            '../../user/default/resources/default/phase_9/audio/bgm/encntr_toon_winning.ogg')
         self.phaseTwoMusic = base.loader.loadMusic(
-            'user/resources/default/phase_12/audio/bgm/BossBot_CEO_v1.ogg')
+            '../../user/default/resources/default/phase_12/audio/bgm/BossBot_CEO_v1.ogg')
         self.phaseFourMusic = base.loader.loadMusic(
-            'user/resources/default/phase_12/audio/bgm/BossBot_CEO_v2.ogg')
+            '../../user/default/resources/default/phase_12/audio/bgm/BossBot_CEO_v2.ogg')
         self.pickupFoodSfx = loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/SZ_MM_gliss.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/SZ_MM_gliss.ogg')
         self.explodeSfx = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/firework_distance_02.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/firework_distance_02.ogg')
 
     def unloadEnvironment(self):
         self.notify.debug('----- unloadEnvironment')
@@ -541,7 +541,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 oldSeq.finish()
             seq.start()
             self.activeIntervals[intervalName] = seq
-            foodModel = loader.loadModel('user/resources/default/phase_12/models/bossbotHQ/canoffood')
+            foodModel = loader.loadModel('../../user/default/resources/default/phase_12/models/bossbotHQ/canoffood')
             foodModel.setName('cogFood')
             foodModel.setScale(ToontownGlobals.BossbotFoodModelScale)
             foodModel.reparentTo(av.suit.getRightHand())
@@ -1422,7 +1422,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
 
     def getGolfBall(self):
         golfRoot = NodePath('golfRoot')
-        golfBall = loader.loadModel('user/resources/default/phase_6/models/golf/golf_ball')
+        golfBall = loader.loadModel('../../user/default/resources/default/phase_6/models/golf/golf_ball')
         golfBall.setColorScale(0.75, 0.75, 0.75, 0.5)
         golfBall.setTransparency(1)
         ballScale = 5

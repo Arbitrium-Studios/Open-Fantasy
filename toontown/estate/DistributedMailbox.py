@@ -59,7 +59,7 @@ class DistributedMailbox(DistributedObject.DistributedObject):
             zOffset = -1
         elif self.housePosInd == 2:
             zOffset = 0.5
-        self.model = loader.loadModel('user/resources/default/phase_5.5/models/estate/mailboxHouse')
+        self.model = loader.loadModel('../../user/default/resources/default/phase_5.5/models/estate/mailboxHouse')
         self.model.reparentTo(estateNode)
         self.model.setPos(houseNode, 19, -4, 0 + zOffset)
         self.model.setH(houseNode, 90)
@@ -177,10 +177,10 @@ class DistributedMailbox(DistributedObject.DistributedObject):
         elif mode == MailboxGlobals.MAILBOX_MOVIE_EXIT:
             if random.random() < 0.5:
                 sfx = base.loader.loadSfx(
-                    'user/resources/default/phase_5.5/audio/sfx/mailbox_close_1.ogg')
+                    '../../user/default/resources/default/phase_5.5/audio/sfx/mailbox_close_1.ogg')
             else:
                 sfx = base.loader.loadSfx(
-                    'user/resources/default/phase_5.5/audio/sfx/mailbox_close_2.ogg')
+                    '../../user/default/resources/default/phase_5.5/audio/sfx/mailbox_close_2.ogg')
             sfxTrack = SoundInterval(sfx, node=self.model)
             sfxTrack.start()
             DistributedMailbox.notify.debug('setMovie: exit')
@@ -211,10 +211,10 @@ class DistributedMailbox(DistributedObject.DistributedObject):
             DistributedMailbox.notify.debug('setMovie: ready')
             if random.random() < 0.5:
                 sfx = base.loader.loadSfx(
-                    'user/resources/default/phase_5.5/audio/sfx/mailbox_open_1.ogg')
+                    '../../user/default/resources/default/phase_5.5/audio/sfx/mailbox_open_1.ogg')
             else:
                 sfx = base.loader.loadSfx(
-                    'user/resources/default/phase_5.5/audio/sfx/mailbox_open_2.ogg')
+                    '../../user/default/resources/default/phase_5.5/audio/sfx/mailbox_open_2.ogg')
             sfxTrack = SoundInterval(sfx, node=self.model)
             sfxTrack.start()
             if isLocalToon:

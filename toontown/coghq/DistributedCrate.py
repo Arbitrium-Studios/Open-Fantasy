@@ -17,8 +17,8 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
     LEFT_KEY = 'arrow_left'
     RIGHT_KEY = 'arrow_right'
     ModelPaths = (
-        'user/resources/default/phase_9/models/cogHQ/woodCrateB',
-        'user/resources/default/phase_10/models/cashbotHQ/CBWoodCrate')
+        '../../user/default/resources/default/phase_9/models/cogHQ/woodCrateB',
+        '../../user/default/resources/default/phase_10/models/cashbotHQ/CBWoodCrate')
 
     def __init__(self, cr):
         DistributedCrushableEntity.DistributedCrushableEntity.__init__(
@@ -39,9 +39,9 @@ class DistributedCrate(DistributedCrushableEntity.DistributedCrushableEntity):
         self.upPressed = 0
         self.isPushing = 0
         self.creakSound = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_crate_effort.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_FACT_crate_effort.ogg')
         self.pushSound = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_FACT_crate_sliding.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_FACT_crate_sliding.ogg')
         return
 
     def disable(self):

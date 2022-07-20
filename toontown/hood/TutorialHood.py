@@ -14,7 +14,7 @@ class TutorialHood(ToonHood.ToonHood):
         self.townLoaderClass = TutorialTownLoader.TutorialTownLoader
         self.safeZoneLoaderClass = None
         self.storageDNAFile = None
-        self.skyFile = 'user/resources/default/phase_3.5/models/props/TT_sky'
+        self.skyFile = '../../user/default/resources/default/phase_3.5/models/props/TT_sky'
         self.titleColor = (1.0, 0.5, 0.4, 1.0)
         return
 

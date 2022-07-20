@@ -171,24 +171,24 @@ WaterCoolerCollisionName = 'WaterCooler_Collision'
 WaterCoolerShowEventName = 'CogdoMazeWaterCooler_Show'
 WaterCoolerHideEventName = 'CogdoMazeWaterCooler_Hide'
 AudioCutoff = 75.0
-MusicFiles = {'normal': 'user/resources/default/phase_9/audio/bgm/CHQ_FACT_bg.ogg',
-              'timeRunningOut': 'user/resources/default/phase_7/audio/bgm/encntr_suit_winning_indoor.ogg'}
-SfxFiles = {'toonHitByDrop': 'user/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_toonHit.ogg',
-            'toonHit': 'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg',
-            'getMemo': 'user/resources/default/phase_4/audio/sfx/MG_maze_pickup.ogg',
-            'drop': 'user/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_itemHitsFloor.ogg',
-            'throw': 'user/resources/default/phase_3.5/audio/sfx/AA_pie_throw_only.ogg',
-            'splat': 'user/resources/default/phase_5/audio/sfx/SA_watercooler_spray_only.ogg',
-            'cogSpin': 'user/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg',
-            'cogDeath': 'user/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg',
-            'bossCogAngry': 'user/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_bossCogAngry.ogg',
-            'cogStomp': 'user/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_cogStomp.ogg',
-            'quake': 'user/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_groundquake.ogg',
-            'waterCoolerFill': 'user/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_waterCoolerFill.ogg',
-            'lose': 'user/resources/default/phase_4/audio/sfx/MG_lose.ogg',
-            'win': 'user/resources/default/phase_4/audio/sfx/MG_win.ogg',
-            'cogDialogue': 'user/resources/default/phase_3.5/audio/dial/COG_VO_statement.ogg',
-            'toonDialogue': 'user/resources/default/phase_3.5/audio/dial/AV_dog_long.ogg'}
+MusicFiles = {'normal': '../../user/default/resources/default/phase_9/audio/bgm/CHQ_FACT_bg.ogg',
+              'timeRunningOut': '../../user/default/resources/default/phase_7/audio/bgm/encntr_suit_winning_indoor.ogg'}
+SfxFiles = {'toonHitByDrop': '../../user/default/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_toonHit.ogg',
+            'toonHit': '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg',
+            'getMemo': '../../user/default/resources/default/phase_4/audio/sfx/MG_maze_pickup.ogg',
+            'drop': '../../user/default/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_itemHitsFloor.ogg',
+            'throw': '../../user/default/resources/default/phase_3.5/audio/sfx/AA_pie_throw_only.ogg',
+            'splat': '../../user/default/resources/default/phase_5/audio/sfx/SA_watercooler_spray_only.ogg',
+            'cogSpin': '../../user/default/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg',
+            'cogDeath': '../../user/default/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg',
+            'bossCogAngry': '../../user/default/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_bossCogAngry.ogg',
+            'cogStomp': '../../user/default/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_cogStomp.ogg',
+            'quake': '../../user/default/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_groundquake.ogg',
+            'waterCoolerFill': '../../user/default/resources/default/phase_5/audio/sfx/tt_s_ara_cmg_waterCoolerFill.ogg',
+            'lose': '../../user/default/resources/default/phase_4/audio/sfx/MG_lose.ogg',
+            'win': '../../user/default/resources/default/phase_4/audio/sfx/MG_win.ogg',
+            'cogDialogue': '../../user/default/resources/default/phase_3.5/audio/dial/COG_VO_statement.ogg',
+            'toonDialogue': '../../user/default/resources/default/phase_3.5/audio/dial/AV_dog_long.ogg'}
 MessageLabelPos = (0.0, 0.0, -0.4)
 MemoGuiPos = (-0.85, 0, -0.9)
 MemoGuiTextScale = 0.1

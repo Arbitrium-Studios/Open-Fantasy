@@ -17,7 +17,7 @@ class SuitAvatarPanel(AvatarPanel.AvatarPanel):
         AvatarPanel.AvatarPanel.__init__(
             self, avatar, FriendsListPanel=FriendsListPanel)
         self.avName = avatar.getName()
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/suit_detail_panel')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/suit_detail_panel')
         self.frame = DirectFrame(
             geom=gui.find('**/avatar_panel'),
             geom_scale=0.21,

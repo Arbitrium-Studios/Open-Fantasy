@@ -15,11 +15,11 @@ from . import SuitDNA
 from toontown.battle import BattleProps
 from direct.showbase.PythonUtil import Functor
 import string
-GenericModel = 'user/resources/default/phase_9/models/char/bossCog'
-ModelDict = {'s': 'user/resources/default/phase_9/models/char/sellbotBoss',
-             'm': 'user/resources/default/phase_10/models/char/cashbotBoss',
-             'l': 'user/resources/default/phase_11/models/char/lawbotBoss',
-             'c': 'user/resources/default/phase_12/models/char/bossbotBoss'}
+GenericModel = '../../user/default/resources/default/phase_9/models/char/bossCog'
+ModelDict = {'s': '../../user/default/resources/default/phase_9/models/char/sellbotBoss',
+             'm': '../../user/default/resources/default/phase_10/models/char/cashbotBoss',
+             'l': '../../user/default/resources/default/phase_11/models/char/lawbotBoss',
+             'c': '../../user/default/resources/default/phase_12/models/char/bossbotBoss'}
 AnimList = (
     'Ff_speech',
     'ltTurn2Wave',
@@ -105,31 +105,31 @@ class BossCog(Avatar.Avatar):
 
     def generateBossCog(self):
         self.throwSfx = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_VP_frisbee_gears.ogg')
-        self.swingSfx = loader.loadSfx('user/resources/default/phase_9/audio/sfx/CHQ_VP_swipe.ogg')
-        self.spinSfx = loader.loadSfx('user/resources/default/phase_9/audio/sfx/CHQ_VP_spin.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_frisbee_gears.ogg')
+        self.swingSfx = loader.loadSfx('../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_swipe.ogg')
+        self.spinSfx = loader.loadSfx('../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_spin.ogg')
         self.rainGearsSfx = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_VP_raining_gears.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_raining_gears.ogg')
         self.swishSfx = loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/General_throw_miss.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/General_throw_miss.ogg')
         self.boomSfx = loader.loadSfx(
-            'user/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
         self.deathSfx = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_VP_big_death.ogg')
-        self.upSfx = loader.loadSfx('user/resources/default/phase_9/audio/sfx/CHQ_VP_raise_up.ogg')
-        self.downSfx = loader.loadSfx('user/resources/default/phase_9/audio/sfx/CHQ_VP_collapse.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_big_death.ogg')
+        self.upSfx = loader.loadSfx('../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_raise_up.ogg')
+        self.downSfx = loader.loadSfx('../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_collapse.ogg')
         self.reelSfx = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_VP_reeling_backwards.ogg')
-        self.birdsSfx = loader.loadSfx('user/resources/default/phase_4/audio/sfx/SZ_TC_bird1.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_reeling_backwards.ogg')
+        self.birdsSfx = loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird1.ogg')
         self.dizzyAlert = loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/AA_sound_aoogah.ogg')
-        self.grunt = loader.loadSfx('user/resources/default/phase_9/audio/sfx/Boss_COG_VO_grunt.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/AA_sound_aoogah.ogg')
+        self.grunt = loader.loadSfx('../../user/default/resources/default/phase_9/audio/sfx/Boss_COG_VO_grunt.ogg')
         self.murmur = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/Boss_COG_VO_murmur.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/Boss_COG_VO_murmur.ogg')
         self.statement = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/Boss_COG_VO_statement.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/Boss_COG_VO_statement.ogg')
         self.question = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/Boss_COG_VO_question.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/Boss_COG_VO_question.ogg')
         self.dialogArray = [self.grunt,
                             self.murmur,
                             self.statement,
@@ -192,7 +192,7 @@ class BossCog(Avatar.Avatar):
         chestNull = self.find('**/joint_lifeMeter')
         if chestNull.isEmpty():
             return
-        model = loader.loadModel('user/resources/default/phase_3.5/models/gui/matching_game_gui')
+        model = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/matching_game_gui')
         button = model.find('**/minnieCircle')
         button.setScale(6.0)
         button.setP(-20)
@@ -328,9 +328,9 @@ class BossCog(Avatar.Avatar):
             self.uniqueName = uniqueName
             self.ival = 0
             self.openSfx = loader.loadSfx(
-                'user/resources/default/phase_9/audio/sfx/CHQ_VP_door_open.ogg')
+                '../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_door_open.ogg')
             self.closeSfx = loader.loadSfx(
-                'user/resources/default/phase_9/audio/sfx/CHQ_VP_door_close.ogg')
+                '../../user/default/resources/default/phase_9/audio/sfx/CHQ_VP_door_close.ogg')
             self.request('Closed')
 
         def filterOpening(self, request, args):

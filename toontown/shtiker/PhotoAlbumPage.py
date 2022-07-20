@@ -30,13 +30,13 @@ class PhotoAlbumPage(ShtikerPage.ShtikerPage):
                 0,
                 0.6))
         self.pictureImage = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/photo_frame')
+            '../../user/default/resources/default/phase_3.5/models/gui/photo_frame')
         self.pictureImage.setScale(0.2)
         self.pictureImage.setPos(0.44, 0, 0.25)
         self.pictureImage.reparentTo(self)
         self.pictureFg = self.pictureImage.find('**/fg')
         self.pictureFg.setColor(1, 1, 1, 0.1)
-        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
         self.pictureCaption = DirectLabel(
             parent=self,
             relief=None,
@@ -70,7 +70,7 @@ class PhotoAlbumPage(ShtikerPage.ShtikerPage):
                 -0.02),
             command=self.renameImage,
             state=DGG.DISABLED)
-        trashcanGui = loader.loadModel('user/resources/default/phase_3/models/gui/trashcan_gui')
+        trashcanGui = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/trashcan_gui')
         self.deleteButton = DirectButton(
             parent=self,
             image=(
@@ -107,7 +107,7 @@ class PhotoAlbumPage(ShtikerPage.ShtikerPage):
             command=self.deleteImage)
         guiButton.removeNode()
         trashcanGui.removeNode()
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.scrollList = DirectScrolledList(parent=self, relief=None, forceHeight=0.07, pos=(-0.5, 0, 0), incButton_image=(gui.find('**/FndsLst_ScrollUp'),
                                                                                                                             gui.find(
                                                                                                                                 '**/FndsLst_ScrollDN'),
@@ -144,7 +144,7 @@ class PhotoAlbumPage(ShtikerPage.ShtikerPage):
                                                                                                                                                                                                              10,
                                                                                                                                                                                                              -0.4,
                                                                                                                                                                                                              1.1), command=self.renameDialog)
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.bCancel = DirectButton(
             parent=self.renamePanel,
             image=(

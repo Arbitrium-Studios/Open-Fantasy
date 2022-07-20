@@ -250,7 +250,7 @@ class AvatarPanelBase(AvatarPanel.AvatarPanel):
             text=TTLocalizer.ReportPanelTitle,
             textMayChange=0,
             text_scale=0.08)
-        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
         DirectButton(
             parent=self.dialog,
             relief=None,

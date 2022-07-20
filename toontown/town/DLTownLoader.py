@@ -8,14 +8,14 @@ class DLTownLoader(TownLoader.TownLoader):
     def __init__(self, hood, parentFSM, doneEvent):
         TownLoader.TownLoader.__init__(self, hood, parentFSM, doneEvent)
         self.streetClass = DLStreet.DLStreet
-        self.musicFile = 'user/resources/default/phase_8/audio/bgm/DL_SZ.ogg'
-        self.activityMusicFile = 'user/resources/default/phase_8/audio/bgm/DL_SZ_activity.ogg'
-        self.townStorageDNAFile = 'user/resources/default/phase_8/dna/storage_DL_town.dna'
+        self.musicFile = '../../user/default/resources/default/phase_8/audio/bgm/DL_SZ.ogg'
+        self.activityMusicFile = '../../user/default/resources/default/phase_8/audio/bgm/DL_SZ_activity.ogg'
+        self.townStorageDNAFile = '../../user/default/resources/default/phase_8/dna/storage_DL_town.dna'
 
     def load(self, zoneId):
         TownLoader.TownLoader.load(self, zoneId)
         Suit.loadSuits(3)
-        dnaFile = 'user/resources/default/phase_8/dna/donalds_dreamland_' + \
+        dnaFile = '../../user/default/resources/default/phase_8/dna/donalds_dreamland_' + \
             str(self.canonicalBranchZone) + '.dna'
         self.createHood(dnaFile)
 

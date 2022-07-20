@@ -530,12 +530,12 @@ class DistributedMazeGame(DistributedMinigame):
         mazeName = MazeGameGlobals.getMazeName(
             self.doId, self.numPlayers, MazeData.mazeNames)
         self.maze = Maze.Maze(mazeName)
-        model = loader.loadModel('user/resources/default/phase_3.5/models/props/mickeySZ')
+        model = loader.loadModel('../../user/default/resources/default/phase_3.5/models/props/mickeySZ')
         self.treasureModel = model.find('**/mickeySZ')
         model.removeNode()
         self.treasureModel.setScale(1.6)
         self.treasureModel.setP(-90)
-        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_toontag.ogg')
+        self.music = base.loader.loadMusic('../../user/default/resources/default/phase_4/audio/bgm/MG_toontag.ogg')
         self.toonHitTracks = {}
         self.scorePanels = []
 
@@ -590,14 +590,14 @@ class DistributedMazeGame(DistributedMinigame):
                          'falling': [None] * self.numPlayers}
         for i in range(self.numPlayers):
             self.sndTable['hitBySuit'][i] = base.loader.loadSfx(
-                'user/resources/default/phase_4/audio/sfx/MG_Tag_C.ogg')
+                '../../user/default/resources/default/phase_4/audio/sfx/MG_Tag_C.ogg')
             self.sndTable['falling'][i] = base.loader.loadSfx(
-                'user/resources/default/phase_4/audio/sfx/MG_cannon_whizz.ogg')
+                '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_whizz.ogg')
 
         self.grabSounds = []
         for i in range(5):
             self.grabSounds.append(base.loader.loadSfx(
-                'user/resources/default/phase_4/audio/sfx/MG_maze_pickup.ogg'))
+                '../../user/default/resources/default/phase_4/audio/sfx/MG_maze_pickup.ogg'))
 
         self.grabSoundIndex = 0
         for avId in self.avIdList:

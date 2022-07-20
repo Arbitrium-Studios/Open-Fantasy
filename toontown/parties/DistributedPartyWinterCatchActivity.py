@@ -24,7 +24,7 @@ class DistributedPartyWinterCatchActivity(DistributedPartyCatchActivity):
             model = None
             if not objType == PartyGlobals.Name2DropObjectType['anvil']:
                 model = loader.loadModel(
-                    'user/resources/default/phase_13/models/parties/tt_m_ara_pty_winterPresent')
+                    '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_winterPresent')
                 model.setScale(0.5)
             else:
                 model = loader.loadModel(objType.modelPath)

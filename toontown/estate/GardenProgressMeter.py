@@ -47,8 +47,8 @@ class GardenProgressMeter(DirectObject.DirectObject):
         return
 
     def load(self):
-        model = loader.loadModel('user/resources/default/phase_5.5/models/gui/package_delivery_panel')
-        model1 = loader.loadModel('user/resources/default/phase_3.5/models/gui/matching_game_gui')
+        model = loader.loadModel('../../user/default/resources/default/phase_5.5/models/gui/package_delivery_panel')
+        model1 = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/matching_game_gui')
         self.model = model
         self.model1 = model1
         background = model.find('**/bg')
@@ -86,7 +86,7 @@ class GardenProgressMeter(DirectObject.DirectObject):
                 1,
                 1),
             parent=self.frame)
-        gui2 = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+        gui2 = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
         self.quitButton = DirectButton(
             parent=self.frame, relief=None, image=(
                 gui2.find('**/QuitBtn_UP'), gui2.find('**/QuitBtn_DN'), gui2.find('**/QuitBtn_RLVR')), pos=(

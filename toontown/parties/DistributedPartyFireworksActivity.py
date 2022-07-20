@@ -53,7 +53,7 @@ class DistributedPartyFireworksActivity(
         DistributedPartyActivity.load(self)
         self.eventId = PartyGlobals.FireworkShows.Summer
         self.launchPadModel = loader.loadModel(
-            'user/resources/default/phase_13/models/parties/launchPad')
+            '../../user/default/resources/default/phase_13/models/parties/launchPad')
         self.launchPadModel.setH(90.0)
         self.launchPadModel.setPos(0.0, -18.0, 0.0)
         self.launchPadModel.reparentTo(self.root)
@@ -70,8 +70,8 @@ class DistributedPartyFireworksActivity(
         self.toonPullingLeverInterval = None
         self.sign.reparentTo(
             self.launchPadModel.find('**/launchPad_sign_locator'))
-        self.rocketActor = Actor('user/resources/default/phase_13/models/parties/rocket_model',
-                                 {'launch': 'user/resources/default/phase_13/models/parties/rocket_launch'})
+        self.rocketActor = Actor('../../user/default/resources/default/phase_13/models/parties/rocket_model',
+                                 {'launch': '../../user/default/resources/default/phase_13/models/parties/rocket_launch'})
         rocketLocator = self.launchPadModel.find('**/rocket_locator')
         self.rocketActor.reparentTo(rocketLocator)
         self.rocketActor.node().setBound(OmniBoundingVolume())
@@ -81,7 +81,7 @@ class DistributedPartyFireworksActivity(
             effectsLocator, rocketLocator)
         self.rocketParticleSeq = None
         self.launchSound = base.loader.loadSfx(
-            'user/resources/default/phase_13/audio/sfx/rocket_launch.ogg')
+            '../../user/default/resources/default/phase_13/audio/sfx/rocket_launch.ogg')
         self.activityFSM = FireworksActivityFSM(self)
         self.activityFSM.request('Idle')
         return

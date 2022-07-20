@@ -37,7 +37,7 @@ class DistributedLawnDecor(
         ShadowCaster.ShadowCaster.__init__(self, False)
         self.plantPath = NodePath('plantPath')
         self.plantPath.reparentTo(self)
-        self.defaultModel = 'user/resources/default/phase_9/models/cogHQ/woodCrateB'
+        self.defaultModel = '../../user/default/resources/default/phase_9/models/cogHQ/woodCrateB'
         self.messageName = None
         self.model = None
         self.colSphereNode = None
@@ -371,7 +371,7 @@ class DistributedLawnDecor(
         self.movie.start()
 
     def generateDigupTrack(self, toon):
-        sound = loader.loadSfx('user/resources/default/phase_5.5/audio/sfx/burrow.ogg')
+        sound = loader.loadSfx('../../user/default/resources/default/phase_5.5/audio/sfx/burrow.ogg')
         sound.setPlayRate(0.5)
         pos = self.model.getPos()
         pos.setZ(pos[2] - 1)

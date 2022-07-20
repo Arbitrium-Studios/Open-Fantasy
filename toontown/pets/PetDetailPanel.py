@@ -15,8 +15,8 @@ class PetDetailPanel(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('PetDetailPanel')
 
     def __init__(self, pet, closeCallback, parent=aspect2d, **kw):
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         detailPanel = gui.find('**/PetBattlePannel2')
         optiondefs = (('pos', (-4.52, 0.0, 3.05), None),
                       ('scale', 3.58, None),

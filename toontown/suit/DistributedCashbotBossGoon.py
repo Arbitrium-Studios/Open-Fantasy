@@ -30,9 +30,9 @@ class DistributedCashbotBossGoon(DistributedGoon.DistributedGoon,
         self.target = None
         self.arrivalTime = None
         self.flyToMagnetSfx = loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/TL_rake_throw_only.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/TL_rake_throw_only.ogg')
         self.hitMagnetSfx = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/AA_drop_anvil_miss.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/AA_drop_anvil_miss.ogg')
         self.toMagnetSoundInterval = Sequence(
             SoundInterval(
                 self.flyToMagnetSfx,
@@ -42,10 +42,10 @@ class DistributedCashbotBossGoon(DistributedGoon.DistributedGoon,
                 self.hitMagnetSfx,
                 node=self))
         self.hitFloorSfx = loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/AA_drop_flowerpot.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/AA_drop_flowerpot.ogg')
         self.hitFloorSoundInterval = SoundInterval(
             self.hitFloorSfx, duration=1.0, node=self)
-        self.wiggleSfx = loader.loadSfx('user/resources/default/phase_5/audio/sfx/SA_finger_wag.ogg')
+        self.wiggleSfx = loader.loadSfx('../../user/default/resources/default/phase_5/audio/sfx/SA_finger_wag.ogg')
         return
 
     def generate(self):

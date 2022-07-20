@@ -52,7 +52,7 @@ class PartyPlanner(DirectFrame, FSM):
         self.guests = []
         self.isPrivate = False
         self.selectedCalendarGuiDay = None
-        self.gui = loader.loadModel('user/resources/default/phase_4/models/parties/partyPlannerGUI')
+        self.gui = loader.loadModel('../../user/default/resources/default/phase_4/models/parties/partyPlannerGUI')
         self.partyDuration = timedelta(hours=PartyGlobals.DefaultPartyDuration)
         self.timeTypeToMaxValue = {'hour': 23,
                                    'minute': 59}
@@ -879,7 +879,7 @@ class PartyPlanner(DirectFrame, FSM):
                 0.0,
                 0.04))
         self.totalMoney = base.localAvatar.getTotalMoney()
-        catalogGui = loader.loadModel('user/resources/default/phase_5.5/models/gui/catalog_gui')
+        catalogGui = loader.loadModel('../../user/default/resources/default/phase_5.5/models/gui/catalog_gui')
         self.beanBank = DirectLabel(
             parent=page,
             relief=None,

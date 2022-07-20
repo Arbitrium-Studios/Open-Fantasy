@@ -53,7 +53,7 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
         rodPath = FishGlobals.RodFileDict.get(self.rodId)
         pole = Actor.Actor(
             rodPath, {
-                'cast': 'user/resources/default/phase_4/models/props/fishing-pole-chan'})
+                'cast': '../../user/default/resources/default/phase_4/models/props/fishing-pole-chan'})
         pole.setPosHpr(1.47, 0, -1.67, 90, 55, -90)
         pole.setScale(0.8)
         pole.setDepthTest(1)

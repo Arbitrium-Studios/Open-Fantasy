@@ -21,13 +21,13 @@ class BattleSounds:
         if __debug__:
             # In the dev environment, it will always be here:
             self.sfxSearchPath.appendDirectory(
-                Filename('user/resources/default/phase_3/audio/sfx'))
+                Filename('../../user/default/resources/default/phase_3/audio/sfx'))
             self.sfxSearchPath.appendDirectory(
-                Filename('user/resources/default/phase_3.5/audio/sfx'))
+                Filename('../../user/default/resources/default/phase_3.5/audio/sfx'))
             self.sfxSearchPath.appendDirectory(
-                Filename('user/resources/default/phase_4/audio/sfx'))
+                Filename('../../user/default/resources/default/phase_4/audio/sfx'))
             self.sfxSearchPath.appendDirectory(
-                Filename('user/resources/default/phase_5/audio/sfx'))
+                Filename('../../user/default/resources/default/phase_5/audio/sfx'))
 
     def clear(self):
         if self.isValid:

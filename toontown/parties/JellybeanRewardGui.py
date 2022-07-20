@@ -21,7 +21,7 @@ class JellybeanRewardGui(DirectFrame):
         self.setPos(0.0, 0.0, 0.16)
         self.stash()
         publicPartyGui = loader.loadModel(
-            'user/resources/default/phase_4/models/parties/publicPartyGUI')
+            '../../user/default/resources/default/phase_4/models/parties/publicPartyGUI')
         self.frame = DirectFrame(parent=self, geom=publicPartyGui.find(
             '**/activities_background'), geom_pos=(-0.8, 0.0, 0.2), geom_scale=2.0, relief=None)
         self.earnedLabel = DirectLabel(
@@ -50,7 +50,7 @@ class JellybeanRewardGui(DirectFrame):
                 0.0,
                 0.2),
             scale=0.9)
-        purchaseModels = loader.loadModel('user/resources/default/phase_4/models/gui/purchase_gui')
+        purchaseModels = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/purchase_gui')
         jarImage = purchaseModels.find('**/Jar')
         self.jarLabel = DirectLabel(
             parent=self,
@@ -111,9 +111,9 @@ class JellybeanRewardGui(DirectFrame):
         publicPartyGui.removeNode()
         del publicPartyGui
         self.countSound = base.loader.loadSfx(
-            'user/resources/default/phase_13/audio/sfx/tick_counter_short.ogg')
+            '../../user/default/resources/default/phase_13/audio/sfx/tick_counter_short.ogg')
         self.overMaxSound = base.loader.loadSfx(
-            'user/resources/default/phase_13/audio/sfx/tick_counter_overflow.ogg')
+            '../../user/default/resources/default/phase_13/audio/sfx/tick_counter_overflow.ogg')
         return
 
     def showReward(self, earnedAmount, jarAmount, message):

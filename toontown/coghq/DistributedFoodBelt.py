@@ -16,10 +16,10 @@ class DistributedFoodBelt(
     ToonupBeltSpeed = 1.0
     BeltActorPlayRate = 5.35
     ToonupBeltActorPlayRate = BeltActorPlayRate * ToonupBeltSpeed / BeltSpeed
-    ToonupModels = ['user/resources/default/phase_6/models/golf/picnic_apple.bam',
-                    'user/resources/default/phase_6/models/golf/picnic_cupcake.bam',
-                    'user/resources/default/phase_6/models/golf/picnic_sandwich.bam',
-                    'user/resources/default/phase_6/models/golf/picnic_chocolate_cake.bam']
+    ToonupModels = ['../../user/default/resources/default/phase_6/models/golf/picnic_apple.bam',
+                    '../../user/default/resources/default/phase_6/models/golf/picnic_cupcake.bam',
+                    '../../user/default/resources/default/phase_6/models/golf/picnic_sandwich.bam',
+                    '../../user/default/resources/default/phase_6/models/golf/picnic_chocolate_cake.bam']
     ToonupScales = [5,
                     5,
                     5,
@@ -168,18 +168,18 @@ class DistributedFoodBelt(
         self.setupToonupIvals()
         if self.index == 0:
             self.beltActorModel = loader.loadModel(
-                'user/resources/default/phase_12/models/bossbotHQ/food_belt1_model')
+                '../../user/default/resources/default/phase_12/models/bossbotHQ/food_belt1_model')
         else:
             self.beltActorModel = loader.loadModel(
-                'user/resources/default/phase_12/models/bossbotHQ/food_belt2_model')
+                '../../user/default/resources/default/phase_12/models/bossbotHQ/food_belt2_model')
         if self.beltActorModel:
             self.beltActor = Actor.Actor(self.beltActorModel)
             if self.index == 0:
                 self.beltActor.loadAnims(
-                    {'idle': 'user/resources/default/phase_12/models/bossbotHQ/food_belt1'})
+                    {'idle': '../../user/default/resources/default/phase_12/models/bossbotHQ/food_belt1'})
             else:
                 self.beltActor.loadAnims(
-                    {'idle': 'user/resources/default/phase_12/models/bossbotHQ/food_belt2'})
+                    {'idle': '../../user/default/resources/default/phase_12/models/bossbotHQ/food_belt2'})
             self.beltActor.reparentTo(render)
             self.beltActor.setBlend(frameBlend=base.smoothAnimations)
             self.beltActor.setPlayRate(self.BeltActorPlayRate, 'idle')
@@ -191,7 +191,7 @@ class DistributedFoodBelt(
                 self.beltActor)
             self.beltActor.setPos(self.startLocator.getPos())
         self.beltSound = base.loader.loadSfx(
-            'user/resources/default/phase_12/audio/sfx/CHQ_FACT_conveyor_belt.ogg')
+            '../../user/default/resources/default/phase_12/audio/sfx/CHQ_FACT_conveyor_belt.ogg')
         self.beltSound.setLoop(1)
         self.beltSoundInterval = SoundInterval(
             self.beltSound,
@@ -276,7 +276,7 @@ class DistributedFoodBelt(
             colNp.setTag('foodNum', str(self.foodNum))
         else:
             foodModelScale = ToontownGlobals.BossbotFoodModelScale
-            foodModel = loader.loadModel('user/resources/default/phase_12/models/bossbotHQ/canoffood')
+            foodModel = loader.loadModel('../../user/default/resources/default/phase_12/models/bossbotHQ/canoffood')
             foodModel.setScale(foodModelScale)
             foodModel.reparentTo(self.foodNodes[foodIndex])
             target = CollisionTube(4, 0, 0, -4, 0, 0, 2)

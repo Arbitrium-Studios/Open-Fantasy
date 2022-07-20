@@ -179,7 +179,7 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
         return trophy
 
     def buildFrame(self, name, dnaString):
-        frame = loader.loadModel('user/resources/default/phase_3.5/models/modules/trophy_frame')
+        frame = loader.loadModel('../../user/default/resources/default/phase_3.5/models/modules/trophy_frame')
         dna = ToonDNA.ToonDNA(dnaString)
         head = ToonHead.ToonHead()
         head.setupHead(dna)

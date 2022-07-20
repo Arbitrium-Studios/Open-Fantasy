@@ -33,10 +33,10 @@ class TownBattleSOSPanel(DirectFrame, StateData.StateData):
         if self.isLoaded == 1:
             return None
         self.isLoaded = 1
-        bgd = loader.loadModel('user/resources/default/phase_3.5/models/gui/frame')
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/frame4names')
-        scrollGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
-        backGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/battle_gui')
+        bgd = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/frame')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/frame4names')
+        scrollGui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
+        backGui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/battle_gui')
         self['image'] = bgd
         self['image_pos'] = (0.0, 0.1, -0.08)
         self.setScale(0.3)

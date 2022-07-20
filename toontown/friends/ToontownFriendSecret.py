@@ -34,7 +34,7 @@ class ToontownFriendSecret(FriendSecret.FriendSecret):
         self.initialiseoptions(ToontownFriendSecret)
 
     def makeFriendTypeButtons(self):
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.avatarButton = DirectButton(
             parent=self,
             image=(

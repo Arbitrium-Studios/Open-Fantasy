@@ -88,7 +88,7 @@ class DistributedPairingGame(DistributedMinigame):
         self.gameDuration = PairingGameGlobals.calcGameDuration(
             self.getDifficulty())
         self.gameBoard = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/memory_room')
+            '../../user/default/resources/default/phase_4/models/minigames/memory_room')
         self.gameBoard.setPosHpr(0.5, 0, 0, 0, 0, 0)
         self.gameBoard.setScale(1.0)
         self.deck = PairingGameGlobals.createDeck(
@@ -118,7 +118,7 @@ class DistributedPairingGame(DistributedMinigame):
 
         self.bonusTraversal = list(range(len(self.cards)))
         self.bonusGlow = render.attachNewNode('bonusGlow')
-        sign = loader.loadModel('user/resources/default/phase_4/models/minigames/garden_sign_memory')
+        sign = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/garden_sign_memory')
         sign.find('**/sign1').removeNode()
         sign.find('**/sign2').removeNode()
         sign.find('**/collision').removeNode()
@@ -169,20 +169,20 @@ class DistributedPairingGame(DistributedMinigame):
         self.__textGen.setFont(ToontownGlobals.getSignFont())
         self.__textGen.setAlign(TextNode.ACenter)
         self.sndPerfect = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_pairing_all_matched.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_pairing_all_matched.ogg')
         self.calcBonusTraversal()
-        self.music = base.loader.loadMusic('user/resources/default/phase_4/audio/bgm/MG_Pairing.ogg')
+        self.music = base.loader.loadMusic('../../user/default/resources/default/phase_4/audio/bgm/MG_Pairing.ogg')
         self.matchSfx = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_pairing_match.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_pairing_match.ogg')
         self.matchWithBonusSfx = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_pairing_match_bonus_both.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_pairing_match_bonus_both.ogg')
         self.signalSfx = []
         for i in range(4):
             self.signalSfx.append(base.loader.loadSfx(
-                'user/resources/default/phase_4/audio/sfx/MG_pairing_jumping_signal.ogg'))
+                '../../user/default/resources/default/phase_4/audio/sfx/MG_pairing_jumping_signal.ogg'))
 
         self.bonusMovesSfx = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_pairing_bonus_moves.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_pairing_bonus_moves.ogg')
         return
 
     def unload(self):

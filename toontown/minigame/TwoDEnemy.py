@@ -158,7 +158,7 @@ class TwoDEnemy(DirectObject):
                         setIsGoingUp, True), getForwardIval('easeInOut'), Func(
                         setIsGoingUp, False), getBackwardIval('easeInOut'))
                 self.suitSound = base.loader.loadSfx(
-                    'user/resources/default/phase_4/audio/sfx/TB_propeller.ogg')
+                    '../../user/default/resources/default/phase_4/audio/sfx/TB_propeller.ogg')
             else:
                 self.isMovingLeftRight = True
                 self.moveIval = Sequence(
@@ -320,9 +320,9 @@ class TwoDEnemy(DirectObject):
             2.0)
         gearPoint = Point3(0, 0, self.suit.height / 2.0 + 2.0)
         spinningSound = base.loader.loadSfx(
-            'user/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/sfx/Cog_Death.ogg')
         deathSound = base.loader.loadSfx(
-            'user/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
+            '../../user/default/resources/default/phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
         smallGears = BattleParticles.createParticleEffect(
             file='gearExplosionSmall')
         singleGear = BattleParticles.createParticleEffect(

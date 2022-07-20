@@ -31,7 +31,7 @@ class CatalogNotifyDialog:
                                  pos=(framePosX,
                                       0,
                                       0.78))
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         cancelImageList = (
             buttons.find('**/CloseBtn_UP'),
             buttons.find('**/CloseBtn_DN'),

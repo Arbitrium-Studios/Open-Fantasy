@@ -15,7 +15,7 @@ class QuestChoiceGui(DirectFrame):
             0.8, 0.6, 0.4, 1), geom_scale=(1.85, 1, 0.9), geom_hpr=(0, 0, -90), pos=(-0.85, 0, 0))
         self.initialiseoptions(QuestChoiceGui)
         self.questChoicePosters = []
-        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+        guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
         self.cancelButton = DirectButton(
             parent=self,
             relief=None,

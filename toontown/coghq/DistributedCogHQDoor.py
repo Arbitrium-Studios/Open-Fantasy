@@ -17,9 +17,9 @@ class DistributedCogHQDoor(DistributedDoor.DistributedDoor):
     def __init__(self, cr):
         DistributedDoor.DistributedDoor.__init__(self, cr)
         self.openSfx = base.loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_door_open.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_door_open.ogg')
         self.closeSfx = base.loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_door_close.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_door_close.ogg')
 
     def wantsNametag(self):
         return 0

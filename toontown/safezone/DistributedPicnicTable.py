@@ -27,7 +27,7 @@ class DistributedPicnicTable(DistributedNode.DistributedNode):
         DistributedNode.DistributedNode.__init__(self, cr)
         self.reparentTo(render)
         self.picnicTable = loader.loadModel(
-            'user/resources/default/phase_6/models/golf/game_table.bam')
+            '../../user/default/resources/default/phase_6/models/golf/game_table.bam')
         self.picnicTable.reparentTo(self)
         self.picnicTableSphereNodes = []
         self.numSeats = 6
@@ -60,9 +60,9 @@ class DistributedPicnicTable(DistributedNode.DistributedNode):
                            None]
         self.haveAnimated = []
         self.winSound = base.loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/KART_Applause_1.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/KART_Applause_1.ogg')
         self.happyDance = base.loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/AA_heal_happydance.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/AA_heal_happydance.ogg')
         self.accept('stoppedAsleep', self.handleSleep)
         base.localAvatar.startSleepWatch(self.handleSleep)
         self.__toonTracks = {}
@@ -113,7 +113,7 @@ class DistributedPicnicTable(DistributedNode.DistributedNode):
                            None]
         self.requestTableState()
         self.buttonModels = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/inventory_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/inventory_gui')
         self.upButton = self.buttonModels.find('**//InventoryButtonUp')
         self.downButton = self.buttonModels.find('**/InventoryButtonDown')
         self.rolloverButton = self.buttonModels.find(

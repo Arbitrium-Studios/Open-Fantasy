@@ -16,7 +16,7 @@ class DistributedVPElevator(DistributedBossElevator.DistributedBossElevator):
 
     def setupElevator(self):
         self.elevatorModel = loader.loadModel(
-            'user/resources/default/phase_9/models/cogHQ/cogHQ_elevator')
+            '../../user/default/resources/default/phase_9/models/cogHQ/cogHQ_elevator')
         icon = self.elevatorModel.find('**/big_frame/')
         icon.hide()
         self.leftDoor = self.elevatorModel.find('**/left-door')

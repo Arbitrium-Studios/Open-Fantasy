@@ -5,8 +5,8 @@ from pandac.PandaModules import Vec3
 
 
 class GearEntity(BasicEntities.NodePathEntity):
-    ModelPaths = {'factory': 'user/resources/default/phase_9/models/cogHQ/FactoryGearB',
-                  'mint': 'user/resources/default/phase_10/models/cashbotHQ/MintGear'}
+    ModelPaths = {'factory': '../../user/default/resources/default/phase_9/models/cogHQ/FactoryGearB',
+                  'mint': '../../user/default/resources/default/phase_10/models/cashbotHQ/MintGear'}
 
     def __init__(self, level, entId):
         self.modelType = 'factory'

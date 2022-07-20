@@ -207,7 +207,7 @@ class DistributedNPCTailor(DistributedNPCToonBase):
         self.clothesGUI.load()
         self.clothesGUI.enter(self.av)
         self.clothesGUI.showButtons()
-        self.gui = loader.loadModel('user/resources/default/phase_3/models/gui/create_a_toon_gui')
+        self.gui = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/create_a_toon_gui')
         if self.browsing == 0:
             self.button = DirectButton(
                 relief=None,
@@ -316,7 +316,7 @@ class DistributedNPCTailor(DistributedNPCToonBase):
     def __enterConfirmLoss(self, finished, which):
         if self.popupInfo is None:
             buttons = loader.loadModel(
-                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+                '../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
             okButtonImage = (
                 buttons.find('**/ChtBx_OKBtn_UP'),
                 buttons.find('**/ChtBx_OKBtn_DN'),

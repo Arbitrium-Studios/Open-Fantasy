@@ -12,7 +12,7 @@ class ScavengerHuntEffect:
     def __init__(self, beanAmount):
         if not ScavengerHuntEffect.images:
             ScavengerHuntEffect.images = loader.loadModel(
-                'user/resources/default/phase_4/models/props/tot_jar')
+                '../../user/default/resources/default/phase_4/models/props/tot_jar')
         self.npRoot = DirectFrame(
             parent=aspect2d,
             relief=None,
@@ -151,7 +151,7 @@ class WinterCarolingEffect(ScavengerHuntEffect):
         ScavengerHuntEffect.__init__(self, beanAmount)
         if beanAmount > 0:
             sm = loader.loadModel(
-                'user/resources/default/phase_5.5/models/estate/tt_m_prp_ext_snowman_icon')
+                '../../user/default/resources/default/phase_5.5/models/estate/tt_m_prp_ext_snowman_icon')
             self.snowman = DirectFrame(
                 parent=self.eventImage,
                 relief=None,

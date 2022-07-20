@@ -13,7 +13,7 @@ class FlowerPicker(DirectScrolledList):
         self.flowerList = []
         self._parent = parent
         self.shown = 0
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
         optiondefs = (('parent', self._parent, None),
                       ('relief', None, None),
                       ('incButton_image', (gui.find('**/FndsLst_ScrollUp'),
@@ -47,7 +47,7 @@ class FlowerPicker(DirectScrolledList):
         DirectScrolledList.__init__(self, parent)
         self.initialiseoptions(FlowerPicker)
         self.flowerGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/fishingBook').find('**/bucket')
+            '../../user/default/resources/default/phase_3.5/models/gui/fishingBook').find('**/bucket')
         self.flowerGui.find('**/fram1').removeNode()
         self.flowerGui.find('**/bubble').removeNode()
         self.flowerGui.find('**/bucket').removeNode()
@@ -55,7 +55,7 @@ class FlowerPicker(DirectScrolledList):
         self.flowerGui.setPos(0.63, 0.1, -0.1)
         self.flowerGui.setScale(0.035)
         self.basketGui = loader.loadModel(
-            'user/resources/default/phase_5.5/models/estate/flowerBasket')
+            '../../user/default/resources/default/phase_5.5/models/estate/flowerBasket')
         self.basketGui.reparentTo(self, -2)
         self.basketGui.setPos(0.17, 0.1, 0.0)
         self.basketGui.setScale(1.25)

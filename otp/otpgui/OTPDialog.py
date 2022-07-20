@@ -109,7 +109,7 @@ class GlobalDialog(OTPDialog):
     def __init__(self, message='', doneEvent=None, style=NoButtons,
                  okButtonText=OTPLocalizer.DialogOK, cancelButtonText=OTPLocalizer.DialogCancel, **kw):
         if not hasattr(self, 'path'):
-            self.path = 'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui'
+            self.path = '../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui'
         if doneEvent is None and style != NoButtons:
             self.notify.error('Boxes with buttons must specify a doneEvent.')
         self.__doneEvent = doneEvent

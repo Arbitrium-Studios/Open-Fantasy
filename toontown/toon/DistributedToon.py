@@ -1658,7 +1658,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
             return
         if self.trophyScore >= ToontownGlobals.TrophyStarLevels[4]:
             self.trophyStar = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/name_star')
+                '../../user/default/resources/default/phase_3.5/models/gui/name_star')
             self.trophyStar.reparentTo(self.nametag.getNameIcon())
             self.trophyStar.setScale(2)
             self.trophyStar.setZ(2)
@@ -1668,7 +1668,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
                 taskMgr.add(self.__starSpin, self.uniqueName('starSpin'))
         elif self.trophyScore >= ToontownGlobals.TrophyStarLevels[2]:
             self.trophyStar = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/name_star')
+                '../../user/default/resources/default/phase_3.5/models/gui/name_star')
             self.trophyStar.reparentTo(self.nametag.getNameIcon())
             self.trophyStar.setScale(1.5)
             self.trophyStar.setZ(1.6)
@@ -1678,7 +1678,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
                 taskMgr.add(self.__starSpin, self.uniqueName('starSpin'))
         elif self.trophyScore >= ToontownGlobals.TrophyStarLevels[0]:
             self.trophyStar = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/name_star')
+                '../../user/default/resources/default/phase_3.5/models/gui/name_star')
             self.trophyStar.reparentTo(self.nametag.getNameIcon())
             self.trophyStar.setScale(1.5)
             self.trophyStar.setZ(1.6)
@@ -2013,7 +2013,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
             self.shovelModel.removeNode()
 
     def getShovelModel(self):
-        shovels = loader.loadModel('user/resources/default/phase_5.5/models/estate/shovels')
+        shovels = loader.loadModel('../../user/default/resources/default/phase_5.5/models/estate/shovels')
         shovelId = ['A',
                     'B',
                     'C',
@@ -2049,7 +2049,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
                              (0.2, 0.0, 0.25, 0.2, -90, -125, -45),
                              (0.2, 0.2, 0.1, 0.2, -90, -125, -45),
                              (0.2, 0.0, 0.25, 0.2, -90, -125, -45))
-        cans = loader.loadModel('user/resources/default/phase_5.5/models/estate/watering_cans')
+        cans = loader.loadModel('../../user/default/resources/default/phase_5.5/models/estate/watering_cans')
         canId = ['A',
                  'B',
                  'C',
@@ -2780,12 +2780,12 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
             return
         if not gmType:
             gmType = self._gmType
-        iconInfo = (('user/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_whistle', '**/*whistleIcon*', 4),
-                    ('user/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_whistle',
+        iconInfo = (('../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_whistle', '**/*whistleIcon*', 4),
+                    ('../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_whistle',
                      '**/*whistleIcon*', 4),
-                    ('user/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toonResistance_fist',
+                    ('../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toonResistance_fist',
                      '**/*fistIcon*', 4),
-                    ('user/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_getConnected', '**/*whistleIcon*', 4))
+                    ('../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_getConnected', '**/*whistleIcon*', 4))
         if gmType > len(iconInfo) - 1:
             return
         modelName, searchString, scale = iconInfo[gmType]
@@ -2805,10 +2805,10 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
     def setGMPartyIcon(self):
         gmType = self._gmType
         iconInfo = (
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toonResistance_fist',
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_whistle',
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toonResistance_fist',
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_getConnected')
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toonResistance_fist',
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_whistle',
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toonResistance_fist',
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gm_toontroop_getConnected')
         if gmType > len(iconInfo) - 1:
             return
         self.gmIcon = loader.loadModel(iconInfo[gmType])

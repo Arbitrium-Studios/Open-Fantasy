@@ -50,15 +50,15 @@ class DistributedGolfKart(DistributedObject.DistributedObject):
             State.State('leaving', self.enterLeaving, self.exitLeaving, ['entering'])], 'off', 'off')
         self.fsm.enterInitialState()
         self.trolleyAwaySfx = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/SZ_trolley_away.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/SZ_trolley_away.ogg')
         self.trolleyBellSfx = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/SZ_trolley_bell.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/SZ_trolley_bell.ogg')
         self.__toonTracks = {}
         self.avIds = [0,
                       0,
                       0,
                       0]
-        self.kartModelPath = 'user/resources/default/phase_6/models/golf/golf_cart3.bam'
+        self.kartModelPath = '../../user/default/resources/default/phase_6/models/golf/golf_cart3.bam'
 
     def generate(self):
         DistributedObject.DistributedObject.generate(self)

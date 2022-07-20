@@ -164,7 +164,7 @@ class SuitPage(ShtikerPage.ShtikerPage):
 
     def load(self):
         ShtikerPage.ShtikerPage.load(self)
-        frameModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/suitpage_frame')
+        frameModel = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/suitpage_frame')
         frameModel.setScale(0.03375, 1, 0.045)
         frameModel.setPos(0, 10, -0.575)
         self.guiTop = NodePath('guiTop')
@@ -227,7 +227,7 @@ class SuitPage(ShtikerPage.ShtikerPage):
             radarButton.building = 0
             radarButton.buildingRadarLabel = None
 
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/suitpage_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/suitpage_gui')
         self.panelModel = gui.find('**/card')
         self.shadowModels = []
         for index in range(1, len(SuitDNA.suitHeadTypes) + 1):
@@ -241,7 +241,7 @@ class SuitPage(ShtikerPage.ShtikerPage):
                         0]
         priceScale = 0.1
         emblemIcon = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_gen_emblemIcons')
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_gen_emblemIcons')
         silverModel = emblemIcon.find('**/tt_t_gui_gen_emblemSilver')
         goldModel = emblemIcon.find('**/tt_t_gui_gen_emblemGold')
         self.silverLabel = DirectLabel(parent=self,
@@ -522,12 +522,12 @@ class SuitPage(ShtikerPage.ShtikerPage):
         return
 
     def addSummonButton(self, panel):
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okButtonList = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),
             buttons.find('**/ChtBx_OKBtn_Rllvr'))
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
         iconGeom = gui.find('**/summons')
         summonButton = DirectButton(parent=panel, pos=(0.1, 0.0, -0.13), scale=0.1, relief=None, state=DGG.NORMAL, image=okButtonList, image_scale=13.0, geom=iconGeom, geom_scale=0.7, text=('',
                                                                                                                                                                                               TTLocalizer.IssueSummons,
@@ -556,7 +556,7 @@ class SuitPage(ShtikerPage.ShtikerPage):
         return
 
     def addBuildingRadarLabel(self, button):
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/suit_detail_panel')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/suit_detail_panel')
         zPos = BUILDING_RADAR_POS[self.radarButtons.index(button)]
         buildingRadarLabel = DirectLabel(
             parent=button,

@@ -68,7 +68,7 @@ class InventoryPage(ShtikerPage.ShtikerPage):
                                                                                                                   -0.1,
                                                                                                                   0.1), borderWidth=(0.025, 0.025), scale=1.1, frameColor=(0.4, 0.6, 0.4, 1), barColor=(0.9, 1, 0.7, 1), text='0/0', text_scale=0.15, text_fg=(0.05, 0.14, 0.4, 1), text_align=TextNode.ACenter, text_pos=(0, -0.22))
         self.trackProgress.hide()
-        jarGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/jar_gui')
+        jarGui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/jar_gui')
         self.moneyDisplay = DirectLabel(
             parent=self, relief=None, pos=(
                 0.55, 0, -0.5), scale=0.8, text=str(

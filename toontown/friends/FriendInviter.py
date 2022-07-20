@@ -119,8 +119,8 @@ class FriendInviter(DirectFrame):
         from toontown.toon import ToonAvatarDetailPanel
         ToonTeleportPanel.hideTeleportPanel()
         ToonAvatarDetailPanel.hideAvatarDetail()
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.bOk = DirectButton(
             self,
             image=(

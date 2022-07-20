@@ -274,7 +274,7 @@ class CogdoMazeHud:
 
     def _initQuestArrow(self):
         matchingGameGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/matching_game_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/matching_game_gui')
         arrow = matchingGameGui.find('**/minnieArrow')
         arrow.setScale(Globals.QuestArrowScale)
         arrow.setColor(*Globals.QuestArrowColor)

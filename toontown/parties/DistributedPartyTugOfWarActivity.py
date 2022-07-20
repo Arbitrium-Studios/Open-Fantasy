@@ -197,7 +197,7 @@ class DistributedPartyTugOfWarActivity(DistributedPartyTeamActivity):
 
     def loadModels(self):
         self.playArea = loader.loadModel(
-            'user/resources/default/phase_13/models/parties/partyTugOfWar')
+            '../../user/default/resources/default/phase_13/models/parties/partyTugOfWar')
         self.playArea.reparentTo(self.root)
         self.sign.reparentTo(self.playArea.find('**/TugOfWar_sign_locator'))
         self.dockPositions = [[], []]
@@ -250,7 +250,7 @@ class DistributedPartyTugOfWarActivity(DistributedPartyTeamActivity):
 
         self.__enableCollisions()
         ropeModel = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/tug_of_war_rope')
+            '../../user/default/resources/default/phase_4/models/minigames/tug_of_war_rope')
         self.ropeTexture = ropeModel.findTexture('*')
         ropeModel.removeNode()
         for i in range(PartyGlobals.TugOfWarMaximumPlayersPerTeam * 2 - 1):
@@ -281,7 +281,7 @@ class DistributedPartyTugOfWarActivity(DistributedPartyTeamActivity):
         self.powerMeter.hide()
         self.arrows = [None] * 2
         for x in range(len(self.arrows)):
-            self.arrows[x] = loader.loadModel('user/resources/default/phase_3/models/props/arrow')
+            self.arrows[x] = loader.loadModel('../../user/default/resources/default/phase_3/models/props/arrow')
             self.arrows[x].reparentTo(self.powerMeter)
             self.arrows[x].setScale(0.2 - 0.4 * x, 0.2, 0.2)
             self.arrows[x].setPos(0.12 - 0.24 * x, 0, -.26)
@@ -290,9 +290,9 @@ class DistributedPartyTugOfWarActivity(DistributedPartyTeamActivity):
 
     def loadSounds(self):
         self.splashSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_splash.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_splash.ogg')
         self.whistleSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/AA_sound_whistle.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/AA_sound_whistle.ogg')
 
     def loadIntervals(self):
         self.updateIdealRateInterval = Sequence()

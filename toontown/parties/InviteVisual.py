@@ -14,7 +14,7 @@ class InviteVisual(DirectFrame):
 
     def __init__(self, parent):
         DirectFrame.__init__(self, parent=parent)
-        self.gui = loader.loadModel('user/resources/default/phase_5.5/models/parties/partyInviteGUI')
+        self.gui = loader.loadModel('../../user/default/resources/default/phase_5.5/models/parties/partyInviteGUI')
         self.inviteThemesIdToInfo = {PartyGlobals.InviteTheme.Birthday: (self.gui.find('**/birthdayPage'), TTLocalizer.PartyPlannerBirthdayTheme, (0.0,
                                                                                                                                                    0.0,
                                                                                                                                                    0.0,

@@ -61,7 +61,7 @@ def getCirclePoints(segCount, centerX, centerY, radius, wideX=1.0, wideY=1.0):
 class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory(
         'DistributedSecurityCamera')
-    laserFieldModels = ['user/resources/default/phase_9/models/cogHQ/square_stomper']
+    laserFieldModels = ['../../user/default/resources/default/phase_9/models/cogHQ/square_stomper']
 
     def __init__(self, cr):
         BasicEntities.DistributedNodePathEntity.__init__(self, cr)
@@ -106,22 +106,22 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
         self.Alert['Blue'] = 0.0
         self.Alert['Alpha'] = 1.0
         self.attackSound = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_GOON_tractor_beam_alarmed.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_GOON_tractor_beam_alarmed.ogg')
         self.onSound = loader.loadSfx(
-            'user/resources/default/phase_11/audio/sfx/LB_camera_shutter_2.ogg')
+            '../../user/default/resources/default/phase_11/audio/sfx/LB_camera_shutter_2.ogg')
         self.attackTrack = Parallel(
             SoundInterval(
                 self.attackSound, node=self, volume=0.8), SoundInterval(
                 self.onSound, node=self, volume=0.8))
         self.moveStartSound = loader.loadSfx(
-            'user/resources/default/phase_11/audio/sfx/LB_laser_beam_on_2.ogg')
+            '../../user/default/resources/default/phase_11/audio/sfx/LB_laser_beam_on_2.ogg')
         self.moveStartTrack = Parallel(
             SoundInterval(
                 self.moveStartSound,
                 node=self,
                 volume=0.4))
         self.moveLoopSound = loader.loadSfx(
-            'user/resources/default/phase_11/audio/sfx/LB_laser_beam_hum_2.ogg')
+            '../../user/default/resources/default/phase_11/audio/sfx/LB_laser_beam_hum_2.ogg')
         self.moveLoopSound.setLoop()
         self.moveLoopTrack = Parallel(
             SoundInterval(
@@ -129,7 +129,7 @@ class DistributedSecurityCamera(BasicEntities.DistributedNodePathEntity):
                 node=self,
                 volume=0.4))
         self.moveStopSound = loader.loadSfx(
-            'user/resources/default/phase_11/audio/sfx/LB_laser_beam_off_2.ogg')
+            '../../user/default/resources/default/phase_11/audio/sfx/LB_laser_beam_off_2.ogg')
         self.moveStopTrack = Parallel(
             SoundInterval(
                 self.moveStopSound,

@@ -18,12 +18,12 @@ from toontown.toonbase import TTLocalizer
 
 
 class DistributedPatternGame(DistributedMinigame):
-    phase4snd = 'user/resources/default/phase_4/audio/sfx/'
+    phase4snd = '../../user/default/resources/default/phase_4/audio/sfx/'
     ButtonSoundNames = (phase4snd + 'm_match_trumpet.ogg',
                         phase4snd + 'm_match_guitar.ogg',
                         phase4snd + 'm_match_drums.ogg',
                         phase4snd + 'm_match_piano.ogg')
-    bgm = 'user/resources/default/phase_4/audio/bgm/m_match_bg1.ogg'
+    bgm = '../../user/default/resources/default/phase_4/audio/bgm/m_match_bg1.ogg'
     strWatch = TTLocalizer.PatternGameWatch
     strGo = TTLocalizer.PatternGameGo
     strRight = TTLocalizer.PatternGameRight
@@ -95,17 +95,17 @@ class DistributedPatternGame(DistributedMinigame):
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.posInTopRightCorner()
         self.timer.hide()
-        self.room = loader.loadModel('user/resources/default/phase_4/models/minigames/matching_room')
+        self.room = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/matching_room')
         self.buttonSounds = []
         for soundName in self.ButtonSoundNames:
             self.buttonSounds.append(base.loader.loadSfx(soundName))
 
         self.correctSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_pos_buzzer.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_pos_buzzer.ogg')
         self.incorrectSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_neg_buzzer.ogg')
-        self.perfectSound = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_win.ogg')
-        self.fallSound = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_Tag_A.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_neg_buzzer.ogg')
+        self.perfectSound = base.loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/MG_win.ogg')
+        self.fallSound = base.loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/MG_Tag_A.ogg')
         self.music = base.loader.loadMusic(self.bgm)
         self.waitingText = DirectLabel(
             text=self.strPleaseWait, text_fg=(
@@ -120,7 +120,7 @@ class DistributedPatternGame(DistributedMinigame):
         self.roundText.hide()
         self.waitingText.hide()
         matchingGameGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/matching_game_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/matching_game_gui')
         minnieArrow = matchingGameGui.find('**/minnieArrow')
         minnieX = matchingGameGui.find('**/minnieX')
         minnieCircle = matchingGameGui.find('**/minnieCircle')

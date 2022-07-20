@@ -45,11 +45,11 @@ class DistributedGoon(
         self.isDead = 0
         self.isStunned = 0
         self.collapseSound = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_GOON_hunker_down.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_GOON_hunker_down.ogg')
         self.recoverSound = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_GOON_rattle_shake.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_GOON_rattle_shake.ogg')
         self.attackSound = loader.loadSfx(
-            'user/resources/default/phase_9/audio/sfx/CHQ_GOON_tractor_beam_alarmed.ogg')
+            '../../user/default/resources/default/phase_9/audio/sfx/CHQ_GOON_tractor_beam_alarmed.ogg')
         return
 
     def announceGenerate(self):

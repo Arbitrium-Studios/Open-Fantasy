@@ -66,7 +66,7 @@ class KartPage(ShtikerPage):
         clickColor = (0.8, 0.8, 0, 1)
         rolloverColor = (0.15, 0.82, 1.0, 1)
         diabledColor = (1.0, 0.98, 0.15, 1)
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingBook')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/fishingBook')
         self.customizeTab = DirectButton(
             parent=self,
             relief=None,
@@ -254,7 +254,7 @@ class KartCustomizeUI(DirectFrame):
         DirectFrame.destroy(self)
 
     def load(self):
-        uiRootNode = loader.loadModel('user/resources/default/phase_6/models/gui/ShtikerBookUI')
+        uiRootNode = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/ShtikerBookUI')
         self.itemSelector = ItemSelector(self.avatar, parent=self)
         self.itemSelector.setPos(
             uiRootNode.find('**/uiAccessoryIcons').getPos())
@@ -492,7 +492,7 @@ class RacingTrophiesUI(DirectFrame):
             self.trophyPanels.append(cupPanel)
 
         self.ticketDisplay = DirectLabel(
-            parent=self, relief=None, image=loader.loadModel('user/resources/default/phase_6/models/karting/tickets'), image_pos=(
+            parent=self, relief=None, image=loader.loadModel('../../user/default/resources/default/phase_6/models/karting/tickets'), image_pos=(
                 0.2, 0, -0.635), image_scale=0.2, text=TTLocalizer.KartPageTickets + str(
                 self.avatar.getTickets()), text_scale=0.07, text_fg=(
                 0, 0, 0.95, 1.0), text_pos=(
@@ -617,8 +617,8 @@ class ItemSelector(DirectFrame):
             self.locator1.setPos(0, 0, 0.035)
             self.locator2.setPos(0.0, 0.0, 0.0)
             tex = loader.loadTexture(
-                'user/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
-                'user/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb')
+                '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
+                '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb')
             self.uiImagePlane.component('geom0').setTexture(tex, self.texCount)
             self.texCount += 1
             self.uiTextBox = DirectFrame(
@@ -812,9 +812,9 @@ class ItemSelector(DirectFrame):
                                           KartDNA.bwwType]:
                 texNodePath = getTexCardNode(self.currItem)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath)
             elif self.currAccessoryType == KartDNA.rimsType:
                 if self.currItem == InvalidEntry:
@@ -822,14 +822,14 @@ class ItemSelector(DirectFrame):
                 else:
                     texNodePath = getTexCardNode(self.currItem)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath)
             elif self.currAccessoryType in [KartDNA.bodyColor, KartDNA.accColor]:
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/Kartmenu_paintbucket.jpg',
-                    'user/resources/default/phase_6/maps/Kartmenu_paintbucket_a.rgb')
+                    '../../user/default/resources/default/phase_6/maps/Kartmenu_paintbucket.jpg',
+                    '../../user/default/resources/default/phase_6/maps/Kartmenu_paintbucket_a.rgb')
                 if self.currItem == InvalidEntry:
                     self.uiImagePlane.component(
                         'geom0').setColorScale(getDefaultColor())
@@ -841,16 +841,16 @@ class ItemSelector(DirectFrame):
                 kartDecal = getDecalId(kart.kartDNA[KartDNA.bodyType])
                 texNodePath = getTexCardNode(self.currItem)
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/%s.jpg' %
+                    '../../user/default/resources/default/phase_6/maps/%s.jpg' %
                     texNodePath %
                     kartDecal,
-                    'user/resources/default/phase_6/maps/%s_a.rgb' %
+                    '../../user/default/resources/default/phase_6/maps/%s_a.rgb' %
                     texNodePath %
                     kartDecal)
             else:
                 tex = loader.loadTexture(
-                    'user/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
-                    'user/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb')
+                    '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
+                    '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb')
             colorTypeList = [KartDNA.bodyColor, KartDNA.accColor]
             if self.currItem == InvalidEntry:
                 if self.currAccessoryType == KartDNA.rimsType:
@@ -873,8 +873,8 @@ class ItemSelector(DirectFrame):
                 'geom0').setColorScale(1.0, 1.0, 1.0, 1.0)
             self.uiImagePlane.component('geom0').setTexture(
                 loader.loadTexture(
-                    'user/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
-                    'user/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb'),
+                    '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3.jpg',
+                    '../../user/default/resources/default/phase_6/maps/NoAccessoryIcon3_a.rgb'),
                 self.texCount)
             self.texCount += 1
 
@@ -882,7 +882,7 @@ class ItemSelector(DirectFrame):
             self.notify.debug('__handleItemDeleteConfirm:')
             if not hasattr(self, 'confirmDlg'):
                 uiRootNode = loader.loadModel(
-                    'user/resources/default/phase_6/models/gui/ShtikerBookUI')
+                    '../../user/default/resources/default/phase_6/models/gui/ShtikerBookUI')
                 self.confirmDlg = DirectFrame(
                     parent=aspect2d,
                     relief=None,
@@ -1324,7 +1324,7 @@ class RacingTrophy(DirectFrame):
         opts = {'relief': None}
         opts.update(kwargs)
         DirectFrame.__init__(self, *args, **opts)
-        self.trophy = loader.loadModel('user/resources/default/phase_6/models/gui/racingTrophy')
+        self.trophy = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/racingTrophy')
         self.trophy.reparentTo(self)
         self.trophy.setPos(0, 1, 0)
         self.trophy.setScale(0.1)
@@ -1336,11 +1336,11 @@ class RacingTrophy(DirectFrame):
         self.base.setColorScale(1, 1, 0.8, 1)
         self.topBase.setColorScale(1, 1, 0.8, 1)
         self.greyBowl = loader.loadModel(
-            'user/resources/default/phase_6/models/gui/racingTrophyBowl2')
+            '../../user/default/resources/default/phase_6/models/gui/racingTrophyBowl2')
         self.greyBowl.reparentTo(self)
         self.greyBowl.setPos(0, 0.5, 0)
         self.greyBowl.setScale(2.0)
-        self.goldBowl = loader.loadModel('user/resources/default/phase_6/models/gui/racingTrophyBowl')
+        self.goldBowl = loader.loadModel('../../user/default/resources/default/phase_6/models/gui/racingTrophyBowl')
         self.goldBowl.reparentTo(self)
         self.goldBowl.setPos(0, 0.5, 0)
         self.goldBowl.setScale(2.0)
@@ -1348,7 +1348,7 @@ class RacingTrophy(DirectFrame):
         self.goldBowlBase.hide()
         self.nameLabel = DirectLabel(parent=self, relief=None, pos=(
             0, 0, -0.15), text='', text_scale=0.125, text_fg=Vec4(0.9, 0.9, 0.4, 1))
-        self.shadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
+        self.shadow = loader.loadModel('../../user/default/resources/default/phase_3/models/props/drop_shadow')
         self.shadow.reparentTo(self)
         self.shadow.setColor(1, 1, 1, 0.2)
         self.shadow.setPosHprScale(0, 1, 0.35, 0, 90, 0, 0.1, 0.14, 0.1)

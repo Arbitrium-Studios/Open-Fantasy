@@ -119,7 +119,7 @@ class DistributedLawbotCannon(DistributedObject.DistributedObject):
         self.index = index
 
     def load(self):
-        self.cannon = loader.loadModel('user/resources/default/phase_4/models/minigames/toon_cannon')
+        self.cannon = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/toon_cannon')
         self.collSphere = CollisionSphere(0, 0, 0, self.getSphereRadius())
         self.dustCloud = DustCloud.DustCloud(render)
         self.dustCloud.setBillboardPointEye()
@@ -132,13 +132,13 @@ class DistributedLawbotCannon(DistributedObject.DistributedObject):
         self.kartColNode = CollisionNode(self.uniqueName('KartColNode'))
         self.kartNode = self.nodePath.attachNewNode(self.kartColNode)
         self.sndCannonMove = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
         self.sndCannonFire = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
         self.sndHitGround = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
         self.sndHitChair = base.loader.loadSfx(
-            'user/resources/default/phase_11/audio/sfx/LB_toon_jury.ogg')
+            '../../user/default/resources/default/phase_11/audio/sfx/LB_toon_jury.ogg')
         self.cannon.hide()
         self.flashingLabel = None
         return
@@ -266,7 +266,7 @@ class DistributedLawbotCannon(DistributedObject.DistributedObject):
         if self.madeGui:
             return
         NametagGlobals.setMasterArrowsOn(0)
-        guiModel = 'user/resources/default/phase_4/models/gui/cannon_game_gui'
+        guiModel = '../../user/default/resources/default/phase_4/models/gui/cannon_game_gui'
         cannonGui = loader.loadModel(guiModel)
         self.aimPad = DirectFrame(image=cannonGui.find(
             '**/CannonFire_PAD'), relief=None, pos=(0.7, 0, -0.553333), scale=0.8)
@@ -355,7 +355,7 @@ class DistributedLawbotCannon(DistributedObject.DistributedObject):
                 0,
                 0,
                 90))
-        guiClose = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+        guiClose = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         cannonBallText = '%d/%d' % (self.cannonBallsLeft,
                                     ToontownGlobals.LawbotBossCannonBallMax)
         self.cannonBallLabel = DirectLabel(

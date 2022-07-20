@@ -67,7 +67,7 @@ class DistributedNPCScientist(DistributedNPCToonBase.DistributedNPCToonBase):
         self.setupToonNodes()
         if self.style.getTorsoSize() == 'short' and self.style.getAnimal() == 'duck':
             sillyReader = loader.loadModel(
-                'user/resources/default/phase_4/models/props/tt_m_prp_acs_sillyReader')
+                '../../user/default/resources/default/phase_4/models/props/tt_m_prp_acs_sillyReader')
             for rHand in self.getRightHands():
                 placeholder = rHand.attachNewNode('SillyReader')
                 sillyReader.instanceTo(placeholder)
@@ -77,7 +77,7 @@ class DistributedNPCScientist(DistributedNPCToonBase.DistributedNPCToonBase):
 
         elif self.style.getTorsoSize() == 'long' and self.style.getAnimal() == 'monkey' or self.style.getTorsoSize() == 'medium' and self.style.getAnimal() == 'horse':
             clipBoard = loader.loadModel(
-                'user/resources/default/phase_4/models/props/tt_m_prp_acs_clipboard')
+                '../../user/default/resources/default/phase_4/models/props/tt_m_prp_acs_clipboard')
             for rHand in self.getRightHands():
                 placeholder = rHand.attachNewNode('ClipBoard')
                 clipBoard.instanceTo(placeholder)

@@ -15,7 +15,7 @@ class TownBattleSOSPetInfoPanel(StateData.StateData):
         StateData.StateData.__init__(self, doneEvent)
 
     def load(self):
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/PetControlPannel')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/PetControlPannel')
         guiScale = 0.116
         guiPos = (0, 0, 0)
         self.frame = DirectFrame(

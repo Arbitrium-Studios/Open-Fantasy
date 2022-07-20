@@ -8,7 +8,7 @@ import random
 
 class MintRoom(DirectObject.DirectObject):
     FloorCollPrefix = 'mintFloorColl'
-    CashbotMintDoorFrame = 'user/resources/default/phase_10/models/cashbotHQ/DoorFrame'
+    CashbotMintDoorFrame = '../../user/default/resources/default/phase_10/models/cashbotHQ/DoorFrame'
 
     def __init__(self, path=None):
         if path is not None:

@@ -12,19 +12,19 @@ class BRSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
         SafeZoneLoader.SafeZoneLoader.__init__(
             self, hood, parentFSM, doneEvent)
         self.playgroundClass = BRPlayground.BRPlayground
-        self.musicFile = 'user/resources/default/phase_8/audio/bgm/TB_nbrhood.ogg'
-        self.activityMusicFile = 'user/resources/default/phase_8/audio/bgm/TB_SZ_activity.ogg'
-        self.dnaFile = 'user/resources/default/phase_8/dna/the_burrrgh_sz.dna'
-        self.safeZoneStorageDNAFile = 'user/resources/default/phase_8/dna/storage_BR_sz.dna'
+        self.musicFile = '../../user/default/resources/default/phase_8/audio/bgm/TB_nbrhood.ogg'
+        self.activityMusicFile = '../../user/default/resources/default/phase_8/audio/bgm/TB_SZ_activity.ogg'
+        self.dnaFile = '../../user/default/resources/default/phase_8/dna/the_burrrgh_sz.dna'
+        self.safeZoneStorageDNAFile = '../../user/default/resources/default/phase_8/dna/storage_BR_sz.dna'
 
     def load(self):
         SafeZoneLoader.SafeZoneLoader.load(self)
         self.wind1Sound = base.loader.loadSfx(
-            'user/resources/default/phase_8/audio/sfx/SZ_TB_wind_1.ogg')
+            '../../user/default/resources/default/phase_8/audio/sfx/SZ_TB_wind_1.ogg')
         self.wind2Sound = base.loader.loadSfx(
-            'user/resources/default/phase_8/audio/sfx/SZ_TB_wind_2.ogg')
+            '../../user/default/resources/default/phase_8/audio/sfx/SZ_TB_wind_2.ogg')
         self.wind3Sound = base.loader.loadSfx(
-            'user/resources/default/phase_8/audio/sfx/SZ_TB_wind_3.ogg')
+            '../../user/default/resources/default/phase_8/audio/sfx/SZ_TB_wind_3.ogg')
         self.snow = BattleParticles.loadParticleFile('snowdisk.ptf')
         self.snow.setPos(0, 0, 5)
         self.snowRender = self.geom.attachNewNode('snowRender')

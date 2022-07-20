@@ -43,7 +43,7 @@ class ToonStatueSelectionGUI(DirectFrame):
                              text_pos=instructionsPos)
         self.initialiseoptions(ToonStatueSelectionGUI)
         self.doneEvent = doneEvent
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okImageList = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),
@@ -98,7 +98,7 @@ class ToonStatueSelectionGUI(DirectFrame):
     def createFriendsList(self):
         self.__makeFFlist()
         if len(self.ffList) > 0:
-            gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+            gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
             self.scrollList = DirectScrolledList(parent=self, relief=None, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
                                                                                             gui.find(
                                                                                                 '**/FndsLst_ScrollDN'),

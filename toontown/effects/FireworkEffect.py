@@ -22,14 +22,14 @@ from toontown.effects.SkullFlash import SkullFlash
 from toontown.effects.TrailExplosion import TrailExplosion
 from toontown.effects.IceCream import IceCream
 trailSfxNames = [
-    'user/resources/default/phase_4/audio/sfx/firework_whistle_01.ogg',
-    'user/resources/default/phase_4/audio/sfx/firework_whistle_02.ogg']
-burstSfxNames = ['user/resources/default/phase_4/audio/sfx/firework_explosion_01.ogg',
-                 'user/resources/default/phase_4/audio/sfx/firework_explosion_02.ogg',
-                 'user/resources/default/phase_4/audio/sfx/firework_explosion_03.ogg',
-                 'user/resources/default/phase_4/audio/sfx/firework_distance_01.ogg',
-                 'user/resources/default/phase_4/audio/sfx/firework_distance_02.ogg',
-                 'user/resources/default/phase_4/audio/sfx/firework_distance_03.ogg']
+    '../../user/default/resources/default/phase_4/audio/sfx/firework_whistle_01.ogg',
+    '../../user/default/resources/default/phase_4/audio/sfx/firework_whistle_02.ogg']
+burstSfxNames = ['../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_01.ogg',
+                 '../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_02.ogg',
+                 '../../user/default/resources/default/phase_4/audio/sfx/firework_explosion_03.ogg',
+                 '../../user/default/resources/default/phase_4/audio/sfx/firework_distance_01.ogg',
+                 '../../user/default/resources/default/phase_4/audio/sfx/firework_distance_02.ogg',
+                 '../../user/default/resources/default/phase_4/audio/sfx/firework_distance_03.ogg']
 
 
 class FireworkEffect(NodePath):

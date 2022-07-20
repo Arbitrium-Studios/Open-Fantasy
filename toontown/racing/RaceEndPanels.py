@@ -225,7 +225,7 @@ class RaceResultsPanel(DirectFrame):
 
         if trophies:
             DirectFrame(parent=headFrame, relief=None, image=loader.loadModel(
-                'user/resources/default/phase_6/models/karting/trophy'), image_pos=(0.25, -1.01, -0.25), image_scale=0.25)
+                '../../user/default/resources/default/phase_6/models/karting/trophy'), image_pos=(0.25, -1.01, -0.25), image_scale=0.25)
 
         def ticketTicker(
                 t, label=self.entryList[place - 1][4], tickets=tickets):
@@ -509,7 +509,7 @@ class RaceWinningsPanel(DirectFrame):
             text_align=TextNode.ARight,
             text_font=DGG.getDefaultFont())
         ticketPic = DirectFrame(parent=tFrame, relief=None, image=loader.loadModel(
-            'user/resources/default/phase_6/models/karting/tickets'), image_pos=(0.5, 0, -0.02), image_scale=0.4)
+            '../../user/default/resources/default/phase_6/models/karting/tickets'), image_pos=(0.5, 0, -0.02), image_scale=0.4)
         self.ticketFrame = tFrame
         self.ticketComponents = (dLabel,
                                  wLabel,
@@ -529,7 +529,7 @@ class RaceWinningsPanel(DirectFrame):
                                           0.1,
                                           0))
         bonusPic = DirectFrame(parent=tFrame, relief=None, image=loader.loadModel(
-            'user/resources/default/phase_6/models/karting/tickets'), image_pos=(0.5, 0, -0.02), image_scale=0.4)
+            '../../user/default/resources/default/phase_6/models/karting/tickets'), image_pos=(0.5, 0, -0.02), image_scale=0.4)
         self.bonusFrame = tFrame
         self.bonusComponents = (textFrame, bonusPic)
         tFrame = DirectFrame(parent=frame, relief=None, pos=(0, 0, 0))
@@ -727,7 +727,7 @@ class RaceEndPanel(DirectFrame):
             exitText = TTLocalizer.KartRace_Exit
         else:
             exitText = TTLocalizer.KartRace_NextRace
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.closeButton = DirectButton(parent=self, image=(gui.find('**/CloseBtn_UP'),
                                                             gui.find(
                                                                 '**/CloseBtn_DN'),

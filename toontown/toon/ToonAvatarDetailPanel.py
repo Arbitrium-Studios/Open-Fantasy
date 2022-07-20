@@ -47,8 +47,8 @@ class ToonAvatarDetailPanel(DirectFrame):
 
     def __init__(self, avId, avName, playerId=None, parent=aspect2dp, **kw):
         print('ToonAvatarDetailPanel %s' % playerId)
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         detailPanel = gui.find('**/avatarInfoPanel')
         self.playerId = playerId
         textScale = 0.095
@@ -205,7 +205,7 @@ class ToonAvatarDetailPanel(DirectFrame):
                 shardName = '%s (%s)' % (
                     TTLocalizer.WelcomeValley[-1], shardName)
             if self.playerInfo:
-                guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+                guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
                 self.gotoAvatarButton = DirectButton(
                     parent=self,
                     relief=None,
@@ -263,7 +263,7 @@ class ToonAvatarDetailPanel(DirectFrame):
         ySpacing = -0.115
         inventory = self.avatar.inventory
         inventoryModels = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/inventory_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/inventory_gui')
         buttonModel = inventoryModels.find('**/InventoryButtonUp')
         for track in range(0, len(Tracks)):
             DirectLabel(parent=self,
@@ -324,7 +324,7 @@ class ToonAvatarDetailPanel(DirectFrame):
         else:
             color = None
         if color:
-            gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+            gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
             star = gui.find('**/avatarStar')
             self.star = DirectLabel(
                 parent=self, image=star, image_color=color, pos=(

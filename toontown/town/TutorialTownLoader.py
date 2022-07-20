@@ -15,7 +15,7 @@ class TutorialTownLoader(TTTownLoader.TTTownLoader):
     def load(self, zoneId):
         TownLoader.TownLoader.load(self, zoneId)
         Suit.loadTutorialSuit()
-        dnaFile = 'user/resources/default/phase_3.5/dna/tutorial_street.dna'
+        dnaFile = '../../user/default/resources/default/phase_3.5/dna/tutorial_street.dna'
         self.createHood(dnaFile, loadStorage=0)
         self.alterDictionaries()
 

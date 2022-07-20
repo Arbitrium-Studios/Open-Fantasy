@@ -53,9 +53,9 @@ class CogThief(DirectObject):
         self.perceptionRange = 6
         self.notify.debug('cogSpeed=%s' % self.cogSpeed)
         self.kaboomSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
         self.kaboom = loader.loadModel(
-            'user/resources/default/phase_4/models/minigames/ice_game_kaboom')
+            '../../user/default/resources/default/phase_4/models/minigames/ice_game_kaboom')
         self.kaboom.setScale(2.0)
         self.kaboom.setBillboardPointEye()
         self.kaboom.hide()

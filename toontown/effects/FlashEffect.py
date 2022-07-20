@@ -11,7 +11,7 @@ class FlashEffect(NodePath, EffectController):
         self.fadeTime = 0.15
         self.effectColor = Vec4(1, 1, 1, 1)
         model = loader.loadModel(
-            'user/resources/default/phase_4/models/props/tt_m_efx_ext_particleCards')
+            '../../user/default/resources/default/phase_4/models/props/tt_m_efx_ext_particleCards')
         self.effectModel = model.find('**/tt_t_efx_ext_particleWhiteGlow')
         self.effectModel.setBillboardAxis(0)
         self.effectModel.reparentTo(self)

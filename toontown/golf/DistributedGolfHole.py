@@ -191,7 +191,7 @@ class DistributedGolfHole(
 
     def createClub(self, avId):
         club = NodePath('club-%s' % avId)
-        clubModel = loader.loadModel('user/resources/default/phase_6/models/golf/putter')
+        clubModel = loader.loadModel('../../user/default/resources/default/phase_6/models/golf/putter')
         clubModel.reparentTo(club)
         clubModel.setR(clubModel, 45)
         self.clubs[avId] = club
@@ -314,36 +314,36 @@ class DistributedGolfHole(
         self.hardSurfaceNodePath.flattenStrong()
 
     def loadSounds(self):
-        self.hitBallSfx = loader.loadSfx('user/resources/default/phase_6/audio/sfx/Golf_Hit_Ball.ogg')
+        self.hitBallSfx = loader.loadSfx('../../user/default/resources/default/phase_6/audio/sfx/Golf_Hit_Ball.ogg')
         self.holeInOneSfx = loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/Golf_Hole_In_One.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/Golf_Hole_In_One.ogg')
         self.holeInTwoPlusSfx = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_fall.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_sfx_vine_game_fall.ogg')
         self.ballGoesInStartSfx = loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/Golf_Ball_Goes_In_Start.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/Golf_Ball_Goes_In_Start.ogg')
         self.ballGoesInLoopSfx = loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/Golf_Ball_Goes_In_Loop.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/Golf_Ball_Goes_In_Loop.ogg')
         self.ballGoesToRestSfx = loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/Golf_Ball_Rest_In_Cup.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/Golf_Ball_Rest_In_Cup.ogg')
         self.kickedOutSfx = loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/Golf_Sad_Noise_Kicked_Off_Hole.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/Golf_Sad_Noise_Kicked_Off_Hole.ogg')
         self.crowdBuildupSfx = []
         self.crowdApplauseSfx = []
         self.crowdMissSfx = []
         for i in range(4):
             self.crowdBuildupSfx.append(
-                loader.loadSfx('user/resources/default/phase_6/audio/sfx/Golf_Crowd_Buildup.ogg'))
+                loader.loadSfx('../../user/default/resources/default/phase_6/audio/sfx/Golf_Crowd_Buildup.ogg'))
             self.crowdApplauseSfx.append(
-                loader.loadSfx('user/resources/default/phase_6/audio/sfx/Golf_Crowd_Applause.ogg'))
+                loader.loadSfx('../../user/default/resources/default/phase_6/audio/sfx/Golf_Crowd_Applause.ogg'))
             self.crowdMissSfx.append(
-                loader.loadSfx('user/resources/default/phase_6/audio/sfx/Golf_Crowd_Miss.ogg'))
+                loader.loadSfx('../../user/default/resources/default/phase_6/audio/sfx/Golf_Crowd_Miss.ogg'))
 
         self.bumpHardSfx = loader.loadSfx(
-            'user/resources/default/phase_6/audio/sfx/Golf_Hit_Barrier_3.ogg')
+            '../../user/default/resources/default/phase_6/audio/sfx/Golf_Hit_Barrier_3.ogg')
         self.bumpMoverSfx = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_2.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_2.ogg')
         self.bumpWindmillSfx = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_1.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_1.ogg')
 
     def setup(self):
         self.notify.debug('setup golf hole')
@@ -413,7 +413,7 @@ class DistributedGolfHole(
         self.putAwayAllToons()
         base.transitions.irisOut(t=0)
         self.dropShadowModel = loader.loadModel(
-            'user/resources/default/phase_3/models/props/drop_shadow')
+            '../../user/default/resources/default/phase_3/models/props/drop_shadow')
         self.dropShadowModel.setColor(0, 0, 0, 0.5)
         self.dropShadowModel.flattenMedium()
         self.dropShadowModel.hide()

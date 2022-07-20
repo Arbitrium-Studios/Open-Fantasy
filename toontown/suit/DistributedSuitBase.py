@@ -161,10 +161,10 @@ class DistributedSuitBase(
             self.prop = BattleProps.globalPropPool.getProp('propeller')
         if self.propInSound is None:
             self.propInSound = base.loader.loadSfx(
-                'user/resources/default/phase_5/audio/sfx/ENC_propeller_in.ogg')
+                '../../user/default/resources/default/phase_5/audio/sfx/ENC_propeller_in.ogg')
         if self.propOutSound is None:
             self.propOutSound = base.loader.loadSfx(
-                'user/resources/default/phase_5/audio/sfx/ENC_propeller_out.ogg')
+                '../../user/default/resources/default/phase_5/audio/sfx/ENC_propeller_out.ogg')
         if base.config.GetBool('want-new-cogs', 0):
             head = self.find('**/to_head')
             if head.isEmpty():

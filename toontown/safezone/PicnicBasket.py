@@ -73,7 +73,7 @@ class PicnicBasket(StateData.StateData):
     def load(self):
         self.parentFSM.getStateNamed('picnicBasketBlock').addChild(self.fsm)
         self.buttonModels = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/inventory_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/inventory_gui')
         self.upButton = self.buttonModels.find('**//InventoryButtonUp')
         self.downButton = self.buttonModels.find('**/InventoryButtonDown')
         self.rolloverButton = self.buttonModels.find(

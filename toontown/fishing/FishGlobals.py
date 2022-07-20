@@ -39,11 +39,11 @@ WEIGHT_VALUE_SCALE = 0.05 / 16.0
 COLLECT_NO_UPDATE = 0
 COLLECT_NEW_ENTRY = 1
 COLLECT_NEW_RECORD = 2
-RodFileDict = {0: 'user/resources/default/phase_4/models/props/pole_treebranch-mod',
-               1: 'user/resources/default/phase_4/models/props/pole_bamboo-mod',
-               2: 'user/resources/default/phase_4/models/props/pole_wood-mod',
-               3: 'user/resources/default/phase_4/models/props/pole_steel-mod',
-               4: 'user/resources/default/phase_4/models/props/pole_gold-mod'}
+RodFileDict = {0: '../../user/default/resources/default/phase_4/models/props/pole_treebranch-mod',
+               1: '../../user/default/resources/default/phase_4/models/props/pole_bamboo-mod',
+               2: '../../user/default/resources/default/phase_4/models/props/pole_wood-mod',
+               3: '../../user/default/resources/default/phase_4/models/props/pole_steel-mod',
+               4: '../../user/default/resources/default/phase_4/models/props/pole_gold-mod'}
 RodPriceDict = {0: 0,
                 1: 400,
                 2: 800,

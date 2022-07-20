@@ -192,7 +192,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
         InteractiveAnimatedProp.InteractiveAnimatedProp.setupActor(self, node)
         if not self.hoodId == ToontownGlobals.TheBrrrgh:
             water = loader.loadModel(
-                'user/resources/default/phase_5/models/char/tt_m_efx_hydrantSquirt')
+                '../../user/default/resources/default/phase_5/models/char/tt_m_efx_hydrantSquirt')
             self.leftWater = water.find('**/efx_hydrantSquirtLeft')
             self.rightWater = water.find('**/efx_hydrantSquirtRight')
             dx_left_water = self.node.find('**/dx_left_water')

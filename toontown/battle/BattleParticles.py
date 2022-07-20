@@ -69,7 +69,7 @@ def loadParticles():
     global particleModel
     if particleModel is None:
         particleModel = loader.loadModel(
-            'user/resources/default/phase_3.5/models/props/suit-particles')
+            '../../user/default/resources/default/phase_3.5/models/props/suit-particles')
     return
 
 
@@ -98,15 +98,15 @@ def loadParticleFile(name):
         particleSearchPath = DSearchPath()
         if __debug__:
             particleSearchPath.appendDirectory(
-                Filename('user/resources/default/user/resources/default/phase_3.5/etc'))
+                Filename('user/default/resources/user/default/resources/default/phase_3.5/etc'))
             particleSearchPath.appendDirectory(
-                Filename('user/resources/default/phase_4/etc'))
+                Filename('../../user/default/resources/default/phase_4/etc'))
             particleSearchPath.appendDirectory(
-                Filename('user/resources/default/phase_5/etc'))
+                Filename('../../user/default/resources/default/phase_5/etc'))
             particleSearchPath.appendDirectory(
-                Filename('user/resources/default/phase_8/etc'))
+                Filename('../../user/default/resources/default/phase_8/etc'))
             particleSearchPath.appendDirectory(
-                Filename('user/resources/default/phase_9/etc'))
+                Filename('../../user/default/resources/default/phase_9/etc'))
 
     pfile = Filename(name)
     found = vfs.resolveFilename(pfile, particleSearchPath)

@@ -90,12 +90,12 @@ class DistributedTutorialInterior(DistributedObject.DistributedObject):
         self.randomGenerator = random.Random()
         self.randomGenerator.seed(self.zoneId)
         self.interior = loader.loadModel(
-            'user/resources/default/phase_3.5/models/modules/toon_interior_tutorial')
+            '../../user/default/resources/default/phase_3.5/models/modules/toon_interior_tutorial')
         self.interior.reparentTo(render)
         dnaStore = DNAStorage()
         node = loader.loadDNAFile(
             self.cr.playGame.hood.dnaStore,
-            'user/resources/default/phase_3.5/dna/tutorial_street.dna')
+            '../../user/default/resources/default/phase_3.5/dna/tutorial_street.dna')
         self.street = render.attachNewNode(node)
         self.street.flattenMedium()
         self.street.setPosHpr(-17, 42, -0.5, 180, 0, 0)
@@ -103,7 +103,7 @@ class DistributedTutorialInterior(DistributedObject.DistributedObject):
         self.street.find(
             '**/tb1:toon_landmark_hqTT_DNARoot/**/door_flat_0').stash()
         self.street.findAllMatches('**/+CollisionNode').stash()
-        self.skyFile = 'user/resources/default/phase_3.5/models/props/TT_sky'
+        self.skyFile = '../../user/default/resources/default/phase_3.5/models/props/TT_sky'
         self.sky = loader.loadModel(self.skyFile)
         self.sky.setScale(0.8)
         self.sky.reparentTo(render)

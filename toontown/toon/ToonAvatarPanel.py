@@ -53,7 +53,7 @@ class ToonAvatarPanel(AvatarPanelBase.AvatarPanelBase):
 
         base.localAvatar.obscureFriendsListButton(1)
 
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.frame = DirectFrame(
             image=gui.find('**/avatar_panel'),
             relief=None,
@@ -555,7 +555,7 @@ class ToonAvatarPanel(AvatarPanelBase.AvatarPanelBase):
         return
 
     def __makePetGui(self, avatar):
-        petGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/PetControlPannel')
+        petGui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/PetControlPannel')
         self.petButton = DirectButton(parent=self.frame, image=(petGui.find('**/PetControlToonButtonUp1'), petGui.find('**/PetControlToonButtonDown1'), petGui.find('**/PetControlToonButtonRollover1')), geom=petGui.find('**/PetBattleIcon'), geom3_color=self.disabledImageColor, relief=None, pos=(0.22, -0.2, -0.475), text=('',
                                                                                                                                                                                                                                                                                                                                   TTLocalizer.AvatarPanelPet,
                                                                                                                                                                                                                                                                                                                                   TTLocalizer.AvatarPanelPet,
@@ -570,7 +570,7 @@ class ToonAvatarPanel(AvatarPanelBase.AvatarPanelBase):
     def __makeBoardingGui(self):
         self.confirmKickOutDialog = None
         groupAvatarBgGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_brd_avatarPanelBg')
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_brd_avatarPanelBg')
         boardingGroupBGImage = groupAvatarBgGui.find(
             '**/tt_t_gui_brd_avatar_panel_party')
         self.groupFrame = DirectFrame(
@@ -593,7 +593,7 @@ class ToonAvatarPanel(AvatarPanelBase.AvatarPanelBase):
                 0,
                 -0.61))
         groupInviteGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_brd_inviteButton')
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_brd_inviteButton')
         self.inviteImageList = (groupInviteGui.find('**/tt_t_gui_brd_inviteUp'),
                                 groupInviteGui.find(
                                     '**/tt_t_gui_brd_inviteDown'),
@@ -632,7 +632,7 @@ class ToonAvatarPanel(AvatarPanelBase.AvatarPanelBase):
                 0.01013,
                 0,
                 -0.05464))
-        helpGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/tt_m_gui_brd_help')
+        helpGui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_brd_help')
         helpImageList = (helpGui.find('**/tt_t_gui_brd_helpUp'),
                          helpGui.find('**/tt_t_gui_brd_helpDown'),
                          helpGui.find('**/tt_t_gui_brd_helpHover'),

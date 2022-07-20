@@ -17,7 +17,7 @@ from math import *
 
 class DistributedMover(BasicEntities.DistributedNodePathEntity):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedMover')
-    laserFieldModels = ['user/resources/default/phase_9/models/cogHQ/square_stomper']
+    laserFieldModels = ['../../user/default/resources/default/phase_9/models/cogHQ/square_stomper']
 
     def __init__(self, cr):
         BasicEntities.DistributedNodePathEntity.__init__(self, cr)

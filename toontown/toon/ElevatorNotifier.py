@@ -49,7 +49,7 @@ class ElevatorNotifier:
                     -0.0,
                     0.1),
                 pos=framePos)
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.cancelImageList = (
             buttons.find('**/CloseBtn_UP'),
             buttons.find('**/CloseBtn_DN'),

@@ -296,11 +296,11 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.setMovie(CannonGlobals.CANNON_MOVIE_CLEAR, 0)
 
     def load(self):
-        self.cannon = loader.loadModel('user/resources/default/phase_4/models/minigames/toon_cannon')
-        self.shadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
+        self.cannon = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/toon_cannon')
+        self.shadow = loader.loadModel('../../user/default/resources/default/phase_3/models/props/drop_shadow')
         self.shadowNode = hidden.attachNewNode('dropShadow')
         self.shadow.copyTo(self.shadowNode)
-        self.smoke = loader.loadModel('user/resources/default/phase_4/models/props/test_clouds')
+        self.smoke = loader.loadModel('../../user/default/resources/default/phase_4/models/props/test_clouds')
         self.smoke.setBillboardPointEye()
         self.cannon.setScale(CANNON_SCALE)
         self.shadowNode.setColor(0, 0, 0, 0.5)
@@ -309,20 +309,20 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.dustCloud = DustCloud.DustCloud(render)
         self.dustCloud.setBillboardPointEye()
         self.sndCannonMove = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_adjust.ogg')
         self.sndCannonFire = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
         self.sndHitGround = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_hit_dirt.ogg')
         self.sndHitTower = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_hit_tower.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_hit_tower.ogg')
         self.sndHitWater = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_splash.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_splash.ogg')
         self.sndWhizz = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/MG_cannon_whizz.ogg')
-        self.sndWin = base.loader.loadSfx('user/resources/default/phase_4/audio/sfx/MG_win.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_whizz.ogg')
+        self.sndWin = base.loader.loadSfx('../../user/default/resources/default/phase_4/audio/sfx/MG_win.ogg')
         self.sndHitHouse = base.loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/AA_drop_sandbag.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/AA_drop_sandbag.ogg')
         self.collSphere = CollisionSphere(0, 0, 0, self.getSphereRadius())
         self.collSphere.setTangible(1)
         self.collNode = CollisionNode(self.uniqueName('CannonSphere'))
@@ -359,7 +359,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
     def __makeGui(self):
         if self.madeGui:
             return
-        guiModel = 'user/resources/default/phase_4/models/gui/cannon_game_gui'
+        guiModel = '../../user/default/resources/default/phase_4/models/gui/cannon_game_gui'
         cannonGui = loader.loadModel(guiModel)
         self.aimPad = DirectFrame(image=cannonGui.find(
             '**/CannonFire_PAD'), relief=None, pos=(0.7, 0, -0.553333), scale=0.8)
@@ -1760,7 +1760,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
 
     def loadCannonBumper(self):
         self.cannonBumper = loader.loadModel(
-            'user/resources/default/phase_5.5/models/estate/bumper_cloud')
+            '../../user/default/resources/default/phase_5.5/models/estate/bumper_cloud')
         self.cannonBumper.reparentTo(self.nodePath)
         self.cannonBumper.setScale(4.0)
         self.cannonBumper.setColor(0.52, 0.8, 0.98, 1)

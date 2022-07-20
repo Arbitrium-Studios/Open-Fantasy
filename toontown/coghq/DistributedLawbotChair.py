@@ -30,7 +30,7 @@ class DistributedLawbotChair(DistributedObject.DistributedObject, FSM.FSM):
         self.boss = None
         self.index = None
         self.avId = 0
-        self.modelPath = 'user/resources/default/phase_11/models/lawbotHQ/JuryBoxChair'
+        self.modelPath = '../../user/default/resources/default/phase_11/models/lawbotHQ/JuryBoxChair'
         self.modelFindString = None
         self.nodePath = None
         self.ival = None
@@ -96,13 +96,13 @@ class DistributedLawbotChair(DistributedObject.DistributedObject, FSM.FSM):
     def loadSounds(self):
         if self.propInSound is None:
             self.propInSound = base.loader.loadSfx(
-                'user/resources/default/phase_5/audio/sfx/ENC_propeller_in.ogg')
+                '../../user/default/resources/default/phase_5/audio/sfx/ENC_propeller_in.ogg')
         if self.propOutSound is None:
             self.propOutSound = base.loader.loadSfx(
-                'user/resources/default/phase_5/audio/sfx/ENC_propeller_out.ogg')
+                '../../user/default/resources/default/phase_5/audio/sfx/ENC_propeller_out.ogg')
         if self.cogJurorSound is None:
             self.cogJurorSound = base.loader.loadSfx(
-                'user/resources/default/phase_11/audio/sfx/LB_cog_jury.ogg')
+                '../../user/default/resources/default/phase_11/audio/sfx/LB_cog_jury.ogg')
         return
 
     def unloadSounds(self):

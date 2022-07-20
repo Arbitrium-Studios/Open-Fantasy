@@ -48,7 +48,7 @@ class MazeMapGui(DirectFrame):
         self.mask.reparentTo(self)
         self.visibleLayer = self.attachNewNode('visibleLayer')
         self._laffMeterModel = loader.loadModel(
-            'user/resources/default/phase_3/models/gui/laff_o_meter')
+            '../../user/default/resources/default/phase_3/models/gui/laff_o_meter')
         self._toon2marker = {}
         return
 

@@ -11,7 +11,7 @@ class TownBattleSOSPetSearchPanel(StateData.StateData):
         StateData.StateData.__init__(self, doneEvent)
 
     def load(self):
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/battle_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/battle_gui')
         self.frame = DirectFrame(
             relief=None,
             image=gui.find('**/Waiting4Others'),

@@ -37,7 +37,7 @@ class DistributedFactoryElevatorExt(
 
     def setupElevator(self):
         self.elevatorModel = loader.loadModel(
-            'user/resources/default/phase_4/models/modules/elevator')
+            '../../user/default/resources/default/phase_4/models/modules/elevator')
         self.elevatorModel.reparentTo(render)
         self.elevatorModel.setScale(1.05)
         self.leftDoor = self.elevatorModel.find('**/left-door')

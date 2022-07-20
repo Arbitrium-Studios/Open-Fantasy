@@ -73,7 +73,7 @@ class ConveyorBelt(Nodepath):
                ('length', 1.0, 'float'),
                ('widthScale', 1.0, 'float'),
                ('treadLength', 10.0, 'float'),
-               ('treadModelPath', 'user/resources/default/phase_9/models/cogHQ/platform1', 'bamfilename'),
+               ('treadModelPath', '../../user/default/resources/default/phase_9/models/cogHQ/platform1', 'bamfilename'),
                ('floorName', 'platformcollision'))
 
 
@@ -309,7 +309,7 @@ class Lift(Nodepath):
     attribs = (('duration', 1, 'float'),
                ('startPos', Point3(0, 0, 0), 'pos'),
                ('endPos', Point3(0, 0, 0), 'pos'),
-               ('modelPath', 'user/resources/default/phase_9/models/cogHQ/Elevator.bam', 'bamfilename'),
+               ('modelPath', '../../user/default/resources/default/phase_9/models/cogHQ/Elevator.bam', 'bamfilename'),
                ('floorName', 'elevator_floor', 'string'),
                ('modelScale', Vec3(1), 'scale'),
                ('startGuardName', '', 'string'),
@@ -369,7 +369,7 @@ class Mover(Nodepath):
 
 class Platform(Nodepath):
     type = 'platform'
-    attribs = (('modelPath', 'user/resources/default/phase_9/models/cogHQ/platform1', 'bamfilename'),
+    attribs = (('modelPath', '../../user/default/resources/default/phase_9/models/cogHQ/platform1', 'bamfilename'),
                ('modelScale', Vec3(1, 1, 1), 'scale'),
                ('floorName', 'platformcollision', 'string'),
                ('offset', Point3(0, 0, 0), 'pos'),
@@ -531,7 +531,7 @@ class PaintMixer(Platform):
     type = 'paintMixer'
     attribs = (
         ('modelPath',
-         'user/resources/default/phase_9/models/cogHQ/PaintMixer',
+         '../../user/default/resources/default/phase_9/models/cogHQ/PaintMixer',
          'const'),
         ('floorName',
          'PaintMixerFloorCollision',

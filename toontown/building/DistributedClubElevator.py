@@ -55,7 +55,7 @@ class DistributedClubElevator(DistributedElevatorFSM.DistributedElevatorFSM):
         self.wantState = 0
         self.latch = None
         self.lastState = self.state
-        self.kartModelPath = 'user/resources/default/phase_12/models/bossbotHQ/Coggolf_cart3.bam'
+        self.kartModelPath = '../../user/default/resources/default/phase_12/models/bossbotHQ/Coggolf_cart3.bam'
         self.leftDoor = None
         self.rightDoor = None
         self.__toonTracks = {}
@@ -63,7 +63,7 @@ class DistributedClubElevator(DistributedElevatorFSM.DistributedElevatorFSM):
 
     def setupElevator(self):
         self.elevatorModel = loader.loadModel(
-            'user/resources/default/phase_11/models/lawbotHQ/LB_ElevatorScaled')
+            '../../user/default/resources/default/phase_11/models/lawbotHQ/LB_ElevatorScaled')
         if not self.elevatorModel:
             self.notify.error(
                 'No Elevator Model in DistributedElevatorFloor.setupElevator. Please inform JML. Fool!')

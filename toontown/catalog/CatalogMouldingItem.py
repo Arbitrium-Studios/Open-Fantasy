@@ -2,20 +2,20 @@ from .CatalogSurfaceItem import *
 MTTextureName = 0
 MTColor = 1
 MTBasePrice = 2
-MouldingTypes = {1000: ('user/resources/default/phase_3.5/maps/molding_wood1.jpg', CTBasicWoodColorOnWhite, 150),
-                 1010: ('user/resources/default/phase_5.5/maps/bd_grey_border1.jpg', CTFlatColorDark, 150),
-                 1020: ('user/resources/default/phase_5.5/maps/dental_Border_wood_neutral.jpg', CTFlatColorDark, 150),
-                 1030: ('user/resources/default/phase_5.5/maps/littleFlowers_border.jpg', CTWhite, 150),
-                 1040: ('user/resources/default/phase_5.5/maps/littleFlowers_border_neutral.jpg', CTFlatColorDark, 150),
-                 1050: ('user/resources/default/phase_5.5/maps/ladybugs2_Border.jpg', CTFlatColorDark, 150),
-                 1060: ('user/resources/default/phase_5.5/maps/bd_grey_border1.jpg', CTValentinesColors, 150),
-                 1070: ('user/resources/default/phase_5.5/maps/bd_grey_border1.jpg', CTUnderwaterColors, 150),
-                 1080: ('user/resources/default/phase_5.5/maps/tt_t_ara_int_border_winterLights1.jpg', CTWhite, 150),
-                 1085: ('user/resources/default/phase_5.5/maps/tt_t_ara_int_border_winterLights2.jpg', CTWhite, 150),
-                 1090: ('user/resources/default/phase_5.5/maps/tt_t_ara_int_border_winterLights3.jpg', CTWhite, 150),
-                 1100: ('user/resources/default/phase_5.5/maps/tt_t_ara_int_border_valentine_cupid.jpg', CTWhite, 150),
-                 1110: ('user/resources/default/phase_5.5/maps/tt_t_ara_int_border_valentine_heart1.jpg', CTWhite, 150),
-                 1120: ('user/resources/default/phase_5.5/maps/tt_t_ara_int_border_valentine_heart2.jpg', CTWhite, 150)}
+MouldingTypes = {1000: ('../../user/default/resources/default/phase_3.5/maps/molding_wood1.jpg', CTBasicWoodColorOnWhite, 150),
+                 1010: ('../../user/default/resources/default/phase_5.5/maps/bd_grey_border1.jpg', CTFlatColorDark, 150),
+                 1020: ('../../user/default/resources/default/phase_5.5/maps/dental_Border_wood_neutral.jpg', CTFlatColorDark, 150),
+                 1030: ('../../user/default/resources/default/phase_5.5/maps/littleFlowers_border.jpg', CTWhite, 150),
+                 1040: ('../../user/default/resources/default/phase_5.5/maps/littleFlowers_border_neutral.jpg', CTFlatColorDark, 150),
+                 1050: ('../../user/default/resources/default/phase_5.5/maps/ladybugs2_Border.jpg', CTFlatColorDark, 150),
+                 1060: ('../../user/default/resources/default/phase_5.5/maps/bd_grey_border1.jpg', CTValentinesColors, 150),
+                 1070: ('../../user/default/resources/default/phase_5.5/maps/bd_grey_border1.jpg', CTUnderwaterColors, 150),
+                 1080: ('../../user/default/resources/default/phase_5.5/maps/tt_t_ara_int_border_winterLights1.jpg', CTWhite, 150),
+                 1085: ('../../user/default/resources/default/phase_5.5/maps/tt_t_ara_int_border_winterLights2.jpg', CTWhite, 150),
+                 1090: ('../../user/default/resources/default/phase_5.5/maps/tt_t_ara_int_border_winterLights3.jpg', CTWhite, 150),
+                 1100: ('../../user/default/resources/default/phase_5.5/maps/tt_t_ara_int_border_valentine_cupid.jpg', CTWhite, 150),
+                 1110: ('../../user/default/resources/default/phase_5.5/maps/tt_t_ara_int_border_valentine_heart1.jpg', CTWhite, 150),
+                 1120: ('../../user/default/resources/default/phase_5.5/maps/tt_t_ara_int_border_valentine_heart2.jpg', CTWhite, 150)}
 
 
 class CatalogMouldingItem(CatalogSurfaceItem):
@@ -40,7 +40,7 @@ class CatalogMouldingItem(CatalogSurfaceItem):
     def getPicture(self, avatar):
         self.hasPicture = True
         frame = self.makeFrame()
-        sample = loader.loadModel('user/resources/default/phase_5.5/models/estate/wallpaper_sample')
+        sample = loader.loadModel('../../user/default/resources/default/phase_5.5/models/estate/wallpaper_sample')
         a = sample.find('**/a')
         b = sample.find('**/b')
         c = sample.find('**/c')

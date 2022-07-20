@@ -120,8 +120,8 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
     def loadModels(self):
         self.tramp = self.root.attachNewNode(self.uniqueName('tramp'))
         self.screenPlaneElements = NodePath(self.uniqueName('screenPlane'))
-        self.trampActor = Actor('user/resources/default/phase_13/models/parties/trampoline_model',
-                                {'emptyAnim': 'user/resources/default/phase_13/models/parties/trampoline_anim'})
+        self.trampActor = Actor('../../user/default/resources/default/phase_13/models/parties/trampoline_model',
+                                {'emptyAnim': '../../user/default/resources/default/phase_13/models/parties/trampoline_anim'})
         self.trampActor.reparentTo(self.tramp)
         if self.texture:
             reskinNode = self.tramp.find(
@@ -134,7 +134,7 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
             self.surface, 'modelRoot', 'trampoline_joint1')
         self.sign.setPos(PartyGlobals.TrampolineSignOffset)
         self.beans = [loader.loadModelCopy(
-            'user/resources/default/phase_4/models/props/jellybean4') for i in range(self.numJellyBeans)]
+            '../../user/default/resources/default/phase_4/models/props/jellybean4') for i in range(self.numJellyBeans)]
         for bean in self.beans:
             bean.find('**/jellybean').setP(-35.0)
             bean.setScale(3.0)
@@ -168,7 +168,7 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
             self.onTrampolineTrigger)
 
     def loadGUI(self):
-        self.gui = loader.loadModel('user/resources/default/phase_13/models/parties/trampolineGUI')
+        self.gui = loader.loadModel('../../user/default/resources/default/phase_13/models/parties/trampolineGUI')
         self.gui.setX(-1.15)
         self.gui.reparentTo(self.screenPlaneElements)
         self.toonIndicator = self.gui.find('**/trampolineGUI_MovingBar')
@@ -196,7 +196,7 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
         self.heightText.setScale(0.1)
         self.heightText.setAlphaScale(0.0)
         self.quitEarlyButtonModels = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/inventory_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/inventory_gui')
         quitEarlyUp = self.quitEarlyButtonModels.find('**//InventoryButtonUp')
         quitEarlyDown = self.quitEarlyButtonModels.find(
             '**/InventoryButtonDown')
@@ -252,11 +252,11 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
 
     def loadSounds(self):
         self.jellyBeanSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/sparkly.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/sparkly.ogg')
         self.boingSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/target_trampoline_2.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/target_trampoline_2.ogg')
         self.whistleSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/AA_sound_whistle.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/AA_sound_whistle.ogg')
 
     def loadIntervals(self):
 

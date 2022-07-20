@@ -31,7 +31,7 @@ class IssueFrameV2(IssueFrame.IssueFrame):
 
     def load(self):
         self.guiNavV2 = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_ign_directNewsGuiNavV2')
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_ign_directNewsGuiNavV2')
         IssueFrame.IssueFrame.load(self)
 
     def calcActualSectionsInThisIssue(self):

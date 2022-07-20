@@ -97,7 +97,7 @@ class MinigamePhysicsWorldBase:
         if self.canRender:
             for count in range(self.jointMarkerCount):
                 testMarker = render.attachNewNode('Joint Marker')
-                ballmodel = loader.loadModel('user/resources/default/phase_3/models/misc/sphere')
+                ballmodel = loader.loadModel('../../user/default/resources/default/phase_3/models/misc/sphere')
                 ballmodel.reparentTo(testMarker)
                 ballmodel.setScale(0.1)
                 testMarker.setPos(0.0, 0.0, -100.0)

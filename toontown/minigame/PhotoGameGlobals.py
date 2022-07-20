@@ -27,7 +27,7 @@ AREA_DATA[ToontownGlobals.ToontownCentral]['TIME'] = 120
 AREA_DATA[ToontownGlobals.ToontownCentral]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
 AREA_DATA[ToontownGlobals.ToontownCentral]['DNA_TRIO'] = (
-    'user/resources/default/phase_4/dna/storage_TT_sz.dna', 'user/resources/default/phase_4/dna/storage_TT.dna', 'user/resources/default/phase_4/dna/toontown_central_sz.dna')
+    '../../user/default/resources/default/phase_4/dna/storage_TT_sz.dna', '../../user/default/resources/default/phase_4/dna/storage_TT.dna', '../../user/default/resources/default/phase_4/dna/toontown_central_sz.dna')
 AREA_DATA[ToontownGlobals.ToontownCentral]['TRIPOD_OFFSET'] = Point3(0, 0, 7.0)
 AREA_DATA[ToontownGlobals.ToontownCentral]['START_HPR'] = Point3(
     -87.8752, -0.378549, 0)
@@ -89,7 +89,7 @@ AREA_DATA[ToontownGlobals.DonaldsDock]['TIME'] = 110
 AREA_DATA[ToontownGlobals.DonaldsDock]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
 AREA_DATA[ToontownGlobals.DonaldsDock]['DNA_TRIO'] = (
-    'user/resources/default/phase_6/dna/storage_DD_sz.dna', 'user/resources/default/phase_6/dna/storage_DD.dna', 'user/resources/default/phase_6/dna/donalds_dock_sz.dna')
+    '../../user/default/resources/default/phase_6/dna/storage_DD_sz.dna', '../../user/default/resources/default/phase_6/dna/storage_DD.dna', '../../user/default/resources/default/phase_6/dna/donalds_dock_sz.dna')
 AREA_DATA[ToontownGlobals.DonaldsDock]['TRIPOD_OFFSET'] = Point3(0, -4.0, 9.0)
 AREA_DATA[ToontownGlobals.DonaldsDock]['START_HPR'] = Point3(
     218.211, -6.7879, 0)
@@ -166,7 +166,7 @@ AREA_DATA[ToontownGlobals.DaisyGardens]['TIME'] = 100
 AREA_DATA[ToontownGlobals.DaisyGardens]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
 AREA_DATA[ToontownGlobals.DaisyGardens]['DNA_TRIO'] = (
-    'user/resources/default/phase_8/dna/storage_DG_sz.dna', 'user/resources/default/phase_8/dna/storage_DG.dna', 'user/resources/default/phase_8/dna/daisys_garden_sz.dna')
+    '../../user/default/resources/default/phase_8/dna/storage_DG_sz.dna', '../../user/default/resources/default/phase_8/dna/storage_DG.dna', '../../user/default/resources/default/phase_8/dna/daisys_garden_sz.dna')
 AREA_DATA[ToontownGlobals.DaisyGardens]['TRIPOD_OFFSET'] = Point3(0, 0, 6.0)
 AREA_DATA[ToontownGlobals.DaisyGardens]['START_HPR'] = Point3(0.0, 0.0, 0.0)
 AREA_DATA[ToontownGlobals.DaisyGardens]['PATHS'] = ([Point3(-37.252, 25.513, 0.025),
@@ -227,7 +227,7 @@ AREA_DATA[ToontownGlobals.MinniesMelodyland]['TIME'] = 95
 AREA_DATA[ToontownGlobals.MinniesMelodyland]['CAMERA_INTIAL_POSTION'] = Point3(
     0, -50, 20)
 AREA_DATA[ToontownGlobals.MinniesMelodyland]['DNA_TRIO'] = (
-    'user/resources/default/phase_6/dna/storage_MM_sz.dna', 'user/resources/default/phase_6/dna/storage_MM.dna', 'user/resources/default/phase_6/dna/minnies_melody_land_sz.dna')
+    '../../user/default/resources/default/phase_6/dna/storage_MM_sz.dna', '../../user/default/resources/default/phase_6/dna/storage_MM.dna', '../../user/default/resources/default/phase_6/dna/minnies_melody_land_sz.dna')
 AREA_DATA[ToontownGlobals.MinniesMelodyland]['TRIPOD_OFFSET'] = Point3(
     0, 0, 6.0)
 AREA_DATA[ToontownGlobals.MinniesMelodyland]['START_HPR'] = Point3(
@@ -293,7 +293,7 @@ AREA_DATA[ToontownGlobals.TheBrrrgh]['TIME'] = 90
 AREA_DATA[ToontownGlobals.TheBrrrgh]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
 AREA_DATA[ToontownGlobals.TheBrrrgh]['DNA_TRIO'] = (
-    'user/resources/default/phase_8/dna/storage_BR_sz.dna', 'user/resources/default/phase_8/dna/storage_BR.dna', 'user/resources/default/phase_8/dna/the_burrrgh_sz.dna')
+    '../../user/default/resources/default/phase_8/dna/storage_BR_sz.dna', '../../user/default/resources/default/phase_8/dna/storage_BR.dna', '../../user/default/resources/default/phase_8/dna/the_burrrgh_sz.dna')
 AREA_DATA[ToontownGlobals.TheBrrrgh]['TRIPOD_OFFSET'] = Point3(0, 0, 6.0)
 AREA_DATA[ToontownGlobals.TheBrrrgh]['START_HPR'] = Point3(
     -49.401, -11.6266, 0)
@@ -349,7 +349,7 @@ AREA_DATA[ToontownGlobals.DonaldsDreamland]['TIME'] = 85
 AREA_DATA[ToontownGlobals.DonaldsDreamland]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
 AREA_DATA[ToontownGlobals.DonaldsDreamland]['DNA_TRIO'] = (
-    'user/resources/default/phase_8/dna/storage_DL_sz.dna', 'user/resources/default/phase_8/dna/storage_DL.dna', 'user/resources/default/phase_8/dna/donalds_dreamland_sz.dna')
+    '../../user/default/resources/default/phase_8/dna/storage_DL_sz.dna', '../../user/default/resources/default/phase_8/dna/storage_DL.dna', '../../user/default/resources/default/phase_8/dna/donalds_dreamland_sz.dna')
 AREA_DATA[ToontownGlobals.DonaldsDreamland]['TRIPOD_OFFSET'] = Point3(
     0, 0, 6.0)
 AREA_DATA[ToontownGlobals.DonaldsDreamland]['START_HPR'] = Point3(

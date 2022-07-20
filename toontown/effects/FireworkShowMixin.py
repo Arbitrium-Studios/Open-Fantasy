@@ -83,22 +83,22 @@ class FireworkShowMixin:
             instructionMessage = TTLocalizer.FireworksInstructions
             startMessage = TTLocalizer.FireworksJuly4Beginning
             endMessage = TTLocalizer.FireworksJuly4Ending
-            musicFile = 'user/resources/default/phase_4/audio/bgm/tt_party2.ogg'
+            musicFile = '../../user/default/resources/default/phase_4/audio/bgm/tt_party2.ogg'
         elif eventId == NEWYEARS_FIREWORKS:
             instructionMessage = TTLocalizer.FireworksInstructions
             startMessage = TTLocalizer.FireworksNewYearsEveBeginning
             endMessage = TTLocalizer.FireworksNewYearsEveEnding
-            musicFile = 'user/resources/default/phase_4/audio/bgm/tt_s_ara_gen_fireworks_auldLangSyne.ogg'
+            musicFile = '../../user/default/resources/default/phase_4/audio/bgm/tt_s_ara_gen_fireworks_auldLangSyne.ogg'
         elif eventId == PartyGlobals.FireworkShows.Summer:
             instructionMessage = TTLocalizer.FireworksActivityInstructions
             startMessage = TTLocalizer.FireworksActivityBeginning
             endMessage = TTLocalizer.FireworksActivityEnding
-            musicFile = 'user/resources/default/phase_4/audio/bgm/tt_summer.ogg'
+            musicFile = '../../user/default/resources/default/phase_4/audio/bgm/tt_summer.ogg'
         elif eventId == COMBO_FIREWORKS:
             instructionMessage = TTLocalizer.FireworksInstructions
             startMessage = TTLocalizer.FireworksComboBeginning
             endMessage = TTLocalizer.FireworksComboEnding
-            musicFile = 'user/resources/default/phase_4/audio/bgm/tt_party2.ogg'
+            musicFile = '../../user/default/resources/default/phase_4/audio/bgm/tt_party2.ogg'
         else:
             FireworkShowMixin.notify.warning(
                 'Invalid fireworks event ID: %d' % eventId)

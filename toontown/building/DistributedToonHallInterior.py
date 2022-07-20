@@ -226,34 +226,34 @@ class DistributedToonHallInterior(DistributedToonInterior):
         pass
 
     def enterSetup(self):
-        ropes = loader.loadModel('user/resources/default/phase_4/models/modules/tt_m_ara_int_ropes')
+        ropes = loader.loadModel('../../user/default/resources/default/phase_4/models/modules/tt_m_ara_int_ropes')
         ropes.reparentTo(self.interior)
-        self.sillyMeter = Actor.Actor('user/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_default', {'arrowTube': 'user/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_arrowFluid',
-                                                                                               'phaseOne': 'user/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseOne',
-                                                                                               'phaseTwo': 'user/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseTwo',
-                                                                                               'phaseThree': 'user/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseThree',
-                                                                                               'phaseFour': 'user/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseFour',
-                                                                                               'phaseFourToFive': 'user/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseFourToFive',
-                                                                                               'phaseFive': 'user/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseFive'})
+        self.sillyMeter = Actor.Actor('../../user/default/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_default', {'arrowTube': '../../user/default/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_arrowFluid',
+                                                                                               'phaseOne': '../../user/default/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseOne',
+                                                                                               'phaseTwo': '../../user/default/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseTwo',
+                                                                                               'phaseThree': '../../user/default/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseThree',
+                                                                                               'phaseFour': '../../user/default/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseFour',
+                                                                                               'phaseFourToFive': '../../user/default/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseFourToFive',
+                                                                                               'phaseFive': '../../user/default/resources/default/phase_4/models/props/tt_a_ara_ttc_sillyMeter_phaseFive'})
         self.sillyMeter.reparentTo(self.interior)
         self.flatSillyMeter = loader.loadModel(
-            'user/resources/default/phase_3.5/models/modules/tt_m_ara_int_sillyMeterFlat')
+            '../../user/default/resources/default/phase_3.5/models/modules/tt_m_ara_int_sillyMeterFlat')
         self.flatSillyMeter.reparentTo(self.interior)
         self.flatSillyMeter.hide()
         self.flatDuck = loader.loadModel(
-            'user/resources/default/phase_3.5/models/modules/tt_m_ara_int_scientistDuckFlat')
+            '../../user/default/resources/default/phase_3.5/models/modules/tt_m_ara_int_scientistDuckFlat')
         loc1 = self.interior.find('**/npc_origin_1')
         if loc1:
             self.flatDuck.reparentTo(loc1)
         self.flatDuck.hide()
         self.flatMonkey = loader.loadModel(
-            'user/resources/default/phase_3.5/models/modules/tt_m_ara_int_scientistMonkeyFlat')
+            '../../user/default/resources/default/phase_3.5/models/modules/tt_m_ara_int_scientistMonkeyFlat')
         loc1 = self.interior.find('**/npc_origin_2')
         if loc1:
             self.flatMonkey.reparentTo(loc1)
         self.flatMonkey.hide()
         self.flatHorse = loader.loadModel(
-            'user/resources/default/phase_3.5/models/modules/tt_m_ara_int_scientistHorseFlat')
+            '../../user/default/resources/default/phase_3.5/models/modules/tt_m_ara_int_scientistHorseFlat')
         loc1 = self.interior.find('**/npc_origin_3')
         if loc1:
             self.flatHorse.reparentTo(loc1)
@@ -281,25 +281,25 @@ class DistributedToonHallInterior(DistributedToonInterior):
         self.audio3d = Audio3DManager.Audio3DManager(
             base.sfxManagerList[0], camera)
         self.phase1Sfx = self.audio3d.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseOne.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseOne.ogg')
         self.phase1Sfx.setLoop(True)
         self.phase2Sfx = self.audio3d.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseTwo.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseTwo.ogg')
         self.phase2Sfx.setLoop(True)
         self.phase3Sfx = self.audio3d.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseThree.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseThree.ogg')
         self.phase3Sfx.setLoop(True)
         self.phase4Sfx = self.audio3d.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseFour.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseFour.ogg')
         self.phase4Sfx.setLoop(True)
         self.phase4To5Sfx = self.audio3d.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseFourToFive.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseFourToFive.ogg')
         self.phase4To5Sfx.setLoop(False)
         self.phase5Sfx = self.audio3d.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseFive.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterPhaseFive.ogg')
         self.phase5Sfx.setLoop(True)
         self.arrowSfx = self.audio3d.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterArrow.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/tt_s_prp_sillyMeterArrow.ogg')
         self.arrowSfx.setLoop(False)
         self.audio3d.setDropOffFactor(0.1)
         self.accept('SillyMeterPhase', self.selectPhase)

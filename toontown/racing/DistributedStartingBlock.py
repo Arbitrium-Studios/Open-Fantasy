@@ -33,7 +33,7 @@ class DistributedStartingBlock(DistributedObject.DistributedObject, FSM):
     id = 0
     cameraPos = Point3(0, -23, 10)
     cameraHpr = Point3(0, -10, 0)
-    SFX_BaseDir = 'user/resources/default/phase_6/audio/sfx/'
+    SFX_BaseDir = '../../user/default/resources/default/phase_6/audio/sfx/'
     SFX_KartAppear = SFX_BaseDir + 'KART_Appear.ogg'
     defaultTransitions = {'Off': ['EnterMovie'],
                           'EnterMovie': ['Off', 'Waiting', 'ExitMovie'],
@@ -342,7 +342,7 @@ class DistributedStartingBlock(DistributedObject.DistributedObject, FSM):
         self.notify.debugStateCall(self)
         if hasattr(self, 'cancelButton'):
             return
-        fishGui = loader.loadModel('user/resources/default/phase_4/models/gui/fishingGui')
+        fishGui = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/fishingGui')
         self.cancelButton = DirectGui.DirectButton(
             relief=None,
             scale=0.67,
@@ -585,7 +585,7 @@ class DistributedStartingBlock(DistributedObject.DistributedObject, FSM):
 
         if not self.holeActor:
             self.holeActor = Actor.Actor(
-                'user/resources/default/phase_3.5/models/props/portal-mod', {'hole': 'user/resources/default/phase_3.5/models/props/portal-chan'})
+                '../../user/default/resources/default/phase_3.5/models/props/portal-mod', {'hole': '../../user/default/resources/default/phase_3.5/models/props/portal-chan'})
         holeTrack = getHoleTrack(self.holeActor, self.kartNode)
         shrinkTrack = getKartShrinkTrack(self.kart)
         kartTrack = Parallel(shrinkTrack, holeTrack)

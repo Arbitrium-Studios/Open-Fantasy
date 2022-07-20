@@ -45,12 +45,12 @@ class IceTreasure(DirectObject):
             self.sparksEffect = sparks
             sparks.start(self.tip)
             self.penaltyGrabSound = loader.loadSfx(
-                'user/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
+                '../../user/default/resources/default/phase_4/audio/sfx/MG_cannon_fire_alt.ogg')
             self.penaltyGrabSound.setVolume(0.75)
             kaboomAttachPoint = self.nodePath.attachNewNode('kaboomAttach')
             kaboomAttachPoint.setZ(3)
             self.kaboom = loader.loadModel(
-                'user/resources/default/phase_4/models/minigames/ice_game_kaboom')
+                '../../user/default/resources/default/phase_4/models/minigames/ice_game_kaboom')
             self.kaboom.reparentTo(kaboomAttachPoint)
             self.kaboom.setScale(2.0)
             self.kaboom.setBillboardPointEye()

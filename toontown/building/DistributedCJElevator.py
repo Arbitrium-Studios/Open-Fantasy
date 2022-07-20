@@ -14,7 +14,7 @@ class DistributedCJElevator(DistributedBossElevator.DistributedBossElevator):
 
     def setupElevator(self):
         self.elevatorModel = loader.loadModel(
-            'user/resources/default/phase_11/models/lawbotHQ/LB_Elevator')
+            '../../user/default/resources/default/phase_11/models/lawbotHQ/LB_Elevator')
         self.leftDoor = self.elevatorModel.find('**/left-door')
         if self.leftDoor.isEmpty():
             self.leftDoor = self.elevatorModel.find('**/left_door')

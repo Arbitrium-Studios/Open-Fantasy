@@ -17,7 +17,7 @@ class ClerkPurchase(PurchaseBase):
 
     def load(self):
         purchaseModels = loader.loadModel(
-            'user/resources/default/phase_4/models/gui/gag_shop_purchase_gui')
+            '../../user/default/resources/default/phase_4/models/gui/gag_shop_purchase_gui')
         PurchaseBase.load(self, purchaseModels)
         self.backToPlayground = DirectButton(
             parent=self.frame,

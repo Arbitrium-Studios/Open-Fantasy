@@ -151,7 +151,7 @@ HeadModelDict = {'a': ('/models/char/suitA-', 4),
 
 
 def loadTutorialSuit():
-    loader.loadModel('user/resources/default/phase_3.5/models/char/suitC-mod').node()
+    loader.loadModel('../../user/default/resources/default/phase_3.5/models/char/suitC-mod').node()
     loadDialog(1)
 
 
@@ -174,30 +174,30 @@ def loadSuitModelsAndAnims(level, flag=0):
             headModel, headPhase = ModelDict[key]
         if flag:
             if ConfigVariableBool('want-new-cogs', 0).value:
-                filepath = 'user/resources/default/phase_3.5' + model + 'zero'
+                filepath = '../../user/default/resources/default/phase_3.5' + model + 'zero'
                 if cogExists(model + 'zero.bam'):
                     loader.loadModel(filepath).node()
             else:
-                loader.loadModel('user/resources/default/phase_3.5' + model + 'mod').node()
+                loader.loadModel('../../user/default/resources/default/phase_3.5' + model + 'mod').node()
             loader.loadModel(
-                'user/resources/default/phase_' +
+                '../../user/default/resources/default/phase_' +
                 str(headPhase) +
                 headModel +
                 'heads').node()
         else:
             if ConfigVariableBool('want-new-cogs', 0).value:
-                filepath = 'user/resources/default/phase_3.5' + model + 'zero'
+                filepath = '../../user/default/resources/default/phase_3.5' + model + 'zero'
                 if cogExists(model + 'zero.bam'):
                     loader.unloadModel(filepath)
             else:
-                loader.unloadModel('user/resources/default/phase_3.5' + model + 'mod')
-            loader.unloadModel('user/resources/default/phase_' + str(headPhase) + headModel + 'heads')
+                loader.unloadModel('../../user/default/resources/default/phase_3.5' + model + 'mod')
+            loader.unloadModel('../../user/default/resources/default/phase_' + str(headPhase) + headModel + 'heads')
 
 
 def cogExists(filePrefix):
     searchPath = DSearchPath()
     if __debug__:
-        searchPath.appendDirectory(Filename('user/resources/default/user/resources/default/phase_3.5'))
+        searchPath.appendDirectory(Filename('user/default/resources/user/default/resources/default/phase_3.5'))
     filePrefix = filePrefix.strip('/')
     pfile = Filename(filePrefix)
     found = vfs.resolveFilename(pfile, searchPath)
@@ -217,7 +217,7 @@ def loadSuitAnims(suit, flag=1):
         print('Invalid suit name: ', suit)
         return -1
     for anim in animList:
-        phase = 'user/resources/default/phase_' + str(anim[2])
+        phase = '../../user/default/resources/default/phase_' + str(anim[2])
         filePrefix = ModelDict[bodyType][0]
         animName = filePrefix + anim[1]
         if flag:
@@ -231,7 +231,7 @@ def loadDialog(level):
     if len(SuitDialogArray) > 0:
         return
     else:
-        loadPath = 'user/resources/default/phase_3.5/audio/dial/'
+        loadPath = '../../user/default/resources/default/phase_3.5/audio/dial/'
         SuitDialogFiles = ['COG_VO_grunt',
                            'COG_VO_murmur',
                            'COG_VO_statement',
@@ -250,11 +250,11 @@ def loadSkelDialog():
     if len(SkelSuitDialogArray) > 0:
         return
     else:
-        grunt = loader.loadSfx('user/resources/default/phase_5/audio/sfx/Skel_COG_VO_grunt.ogg')
-        murmur = loader.loadSfx('user/resources/default/phase_5/audio/sfx/Skel_COG_VO_murmur.ogg')
+        grunt = loader.loadSfx('../../user/default/resources/default/phase_5/audio/sfx/Skel_COG_VO_grunt.ogg')
+        murmur = loader.loadSfx('../../user/default/resources/default/phase_5/audio/sfx/Skel_COG_VO_murmur.ogg')
         statement = loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/Skel_COG_VO_statement.ogg')
-        question = loader.loadSfx('user/resources/default/phase_5/audio/sfx/Skel_COG_VO_question.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/Skel_COG_VO_statement.ogg')
+        question = loader.loadSfx('../../user/default/resources/default/phase_5/audio/sfx/Skel_COG_VO_question.ogg')
         SkelSuitDialogArray = [grunt,
                                murmur,
                                statement,
@@ -607,11 +607,11 @@ class Suit(Avatar.Avatar):
         filePrefix, bodyPhase = ModelDict[self.style.body]
         if ConfigVariableBool('want-new-cogs', 0).value:
             if cogExists(filePrefix + 'zero.bam'):
-                self.loadModel('user/resources/default/phase_3.5' + filePrefix + 'zero')
+                self.loadModel('../../user/default/resources/default/phase_3.5' + filePrefix + 'zero')
             else:
-                self.loadModel('user/resources/default/phase_3.5' + filePrefix + 'mod')
+                self.loadModel('../../user/default/resources/default/phase_3.5' + filePrefix + 'mod')
         else:
-            self.loadModel('user/resources/default/phase_3.5' + filePrefix + 'mod')
+            self.loadModel('../../user/default/resources/default/phase_3.5' + filePrefix + 'mod')
         self.loadAnims(animDict)
         self.setSuitClothes()
 
@@ -619,35 +619,35 @@ class Suit(Avatar.Avatar):
         animDict = {}
         filePrefix, bodyPhase = ModelDict[self.style.body]
         for anim in AllSuits:
-            animDict[anim[0]] = 'user/resources/default/phase_' + \
+            animDict[anim[0]] = '../../user/default/resources/default/phase_' + \
                 str(bodyPhase) + filePrefix + anim[1]
 
         for anim in AllSuitsMinigame:
-            animDict[anim[0]] = 'user/resources/default/phase_4' + filePrefix + anim[1]
+            animDict[anim[0]] = '../../user/default/resources/default/phase_4' + filePrefix + anim[1]
 
         for anim in AllSuitsTutorialBattle:
             filePrefix, bodyPhase = TutorialModelDict[self.style.body]
-            animDict[anim[0]] = 'user/resources/default/phase_' + \
+            animDict[anim[0]] = '../../user/default/resources/default/phase_' + \
                 str(bodyPhase) + filePrefix + anim[1]
 
         for anim in AllSuitsBattle:
-            animDict[anim[0]] = 'user/resources/default/phase_5' + filePrefix + anim[1]
+            animDict[anim[0]] = '../../user/default/resources/default/phase_5' + filePrefix + anim[1]
 
         if not ConfigVariableBool('want-new-cogs', 0).value:
             if self.style.body == 'a':
-                animDict['neutral'] = 'user/resources/default/phase_4/models/char/suitA-neutral'
+                animDict['neutral'] = '../../user/default/resources/default/phase_4/models/char/suitA-neutral'
                 for anim in SuitsCEOBattle:
-                    animDict[anim[0]] = 'user/resources/default/phase_12/models/char/suitA-' + anim[1]
+                    animDict[anim[0]] = '../../user/default/resources/default/phase_12/models/char/suitA-' + anim[1]
 
             elif self.style.body == 'b':
-                animDict['neutral'] = 'user/resources/default/phase_4/models/char/suitB-neutral'
+                animDict['neutral'] = '../../user/default/resources/default/phase_4/models/char/suitB-neutral'
                 for anim in SuitsCEOBattle:
-                    animDict[anim[0]] = 'user/resources/default/phase_12/models/char/suitB-' + anim[1]
+                    animDict[anim[0]] = '../../user/default/resources/default/phase_12/models/char/suitB-' + anim[1]
 
             elif self.style.body == 'c':
-                animDict['neutral'] = 'user/resources/default/phase_3.5/models/char/suitC-neutral'
+                animDict['neutral'] = '../../user/default/resources/default/phase_3.5/models/char/suitC-neutral'
                 for anim in SuitsCEOBattle:
-                    animDict[anim[0]] = 'user/resources/default/phase_12/models/char/suitC-' + anim[1]
+                    animDict[anim[0]] = '../../user/default/resources/default/phase_12/models/char/suitC-' + anim[1]
 
         try:
             animList = eval(self.style.name)
@@ -655,7 +655,7 @@ class Suit(Avatar.Avatar):
             animList = ()
 
         for anim in animList:
-            phase = 'user/resources/default/phase_' + str(anim[2])
+            phase = '../../user/default/resources/default/phase_' + str(anim[2])
             animDict[anim[0]] = phase + filePrefix + anim[1]
 
         return animDict
@@ -674,17 +674,17 @@ class Suit(Avatar.Avatar):
 
         def __doItTheOldWay__():
             torsoTex = loader.loadTexture(
-                'user/resources/default/phase_%s/maps/%s_blazer.jpg' %
+                '../../user/default/resources/default/phase_%s/maps/%s_blazer.jpg' %
                 (phase, dept))
             torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
             torsoTex.setMagfilter(Texture.FTLinear)
             legTex = loader.loadTexture(
-                'user/resources/default/phase_%s/maps/%s_leg.jpg' %
+                '../../user/default/resources/default/phase_%s/maps/%s_leg.jpg' %
                 (phase, dept))
             legTex.setMinfilter(Texture.FTLinearMipmapLinear)
             legTex.setMagfilter(Texture.FTLinear)
             armTex = loader.loadTexture(
-                'user/resources/default/phase_%s/maps/%s_sleeve.jpg' %
+                '../../user/default/resources/default/phase_%s/maps/%s_sleeve.jpg' %
                 (phase, dept))
             armTex.setMinfilter(Texture.FTLinearMipmapLinear)
             armTex.setMagfilter(Texture.FTLinear)
@@ -709,7 +709,7 @@ class Suit(Avatar.Avatar):
             if self.find('**/body').isEmpty():
                 __doItTheOldWay__()
             else:
-                filepath = 'user/resources/default/phase_3.5/maps/tt_t_ene_' + texType + '.jpg'
+                filepath = '../../user/default/resources/default/phase_3.5/maps/tt_t_ene_' + texType + '.jpg'
                 if cogExists('/maps/tt_t_ene_' + texType + '.jpg'):
                     bodyTex = loader.loadTexture(filepath)
                     self.find('**/body').setTexture(bodyTex, 1)
@@ -724,13 +724,13 @@ class Suit(Avatar.Avatar):
         if not modelRoot:
             modelRoot = self
         self.isWaiter = 1
-        torsoTex = loader.loadTexture('user/resources/default/phase_3.5/maps/waiter_m_blazer.jpg')
+        torsoTex = loader.loadTexture('../../user/default/resources/default/phase_3.5/maps/waiter_m_blazer.jpg')
         torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
         torsoTex.setMagfilter(Texture.FTLinear)
-        legTex = loader.loadTexture('user/resources/default/phase_3.5/maps/waiter_m_leg.jpg')
+        legTex = loader.loadTexture('../../user/default/resources/default/phase_3.5/maps/waiter_m_leg.jpg')
         legTex.setMinfilter(Texture.FTLinearMipmapLinear)
         legTex.setMagfilter(Texture.FTLinear)
-        armTex = loader.loadTexture('user/resources/default/phase_3.5/maps/waiter_m_sleeve.jpg')
+        armTex = loader.loadTexture('../../user/default/resources/default/phase_3.5/maps/waiter_m_sleeve.jpg')
         armTex.setMinfilter(Texture.FTLinearMipmapLinear)
         armTex.setMagfilter(Texture.FTLinear)
         modelRoot.find('**/torso').setTexture(torsoTex, 1)
@@ -742,13 +742,13 @@ class Suit(Avatar.Avatar):
             modelRoot = self.getGeomNode()
         if suitType == 's':
             torsoTex = loader.loadTexture(
-                'user/resources/default/phase_3.5/maps/tt_t_ene_sellbotRental_blazer.jpg')
+                '../../user/default/resources/default/phase_3.5/maps/tt_t_ene_sellbotRental_blazer.jpg')
             legTex = loader.loadTexture(
-                'user/resources/default/phase_3.5/maps/tt_t_ene_sellbotRental_leg.jpg')
+                '../../user/default/resources/default/phase_3.5/maps/tt_t_ene_sellbotRental_leg.jpg')
             armTex = loader.loadTexture(
-                'user/resources/default/phase_3.5/maps/tt_t_ene_sellbotRental_sleeve.jpg')
+                '../../user/default/resources/default/phase_3.5/maps/tt_t_ene_sellbotRental_sleeve.jpg')
             handTex = loader.loadTexture(
-                'user/resources/default/phase_3.5/maps/tt_t_ene_sellbotRental_hand.jpg')
+                '../../user/default/resources/default/phase_3.5/maps/tt_t_ene_sellbotRental_hand.jpg')
         else:
             self.notify.warning('No rental suit for cog type %s' % suitType)
             return
@@ -764,7 +764,7 @@ class Suit(Avatar.Avatar):
         else:
             filePrefix, phase = ModelDict[self.style.body]
         headModel = loader.loadModel(
-            'user/resources/default/phase_' + str(phase) + filePrefix + 'heads')
+            '../../user/default/resources/default/phase_' + str(phase) + filePrefix + 'heads')
         headReferences = headModel.findAllMatches('**/' + headType)
         for i in range(0, headReferences.getNumPaths()):
             if ConfigVariableBool('want-new-cogs', 0).value:
@@ -778,7 +778,7 @@ class Suit(Avatar.Avatar):
                     headReferences.getPath(i), 'modelRoot', 'joint_head')
             if self.headTexture:
                 headTex = loader.loadTexture(
-                    'user/resources/default/phase_' + str(phase) + '/maps/' + self.headTexture)
+                    '../../user/default/resources/default/phase_' + str(phase) + '/maps/' + self.headTexture)
                 headTex.setMinfilter(Texture.FTLinearMipmapLinear)
                 headTex.setMagfilter(Texture.FTLinear)
                 headPart.setTexture(headTex, 1)
@@ -797,19 +797,19 @@ class Suit(Avatar.Avatar):
             self.notify.warning('skelecog has no tie model!!!')
             return
         if dept == 'c':
-            tieTex = loader.loadTexture('user/resources/default/phase_5/maps/cog_robot_tie_boss.jpg')
+            tieTex = loader.loadTexture('../../user/default/resources/default/phase_5/maps/cog_robot_tie_boss.jpg')
         elif dept == 's':
-            tieTex = loader.loadTexture('user/resources/default/phase_5/maps/cog_robot_tie_sales.jpg')
+            tieTex = loader.loadTexture('../../user/default/resources/default/phase_5/maps/cog_robot_tie_sales.jpg')
         elif dept == 'l':
-            tieTex = loader.loadTexture('user/resources/default/phase_5/maps/cog_robot_tie_legal.jpg')
+            tieTex = loader.loadTexture('../../user/default/resources/default/phase_5/maps/cog_robot_tie_legal.jpg')
         elif dept == 'm':
-            tieTex = loader.loadTexture('user/resources/default/phase_5/maps/cog_robot_tie_money.jpg')
+            tieTex = loader.loadTexture('../../user/default/resources/default/phase_5/maps/cog_robot_tie_money.jpg')
         tieTex.setMinfilter(Texture.FTLinearMipmapLinear)
         tieTex.setMagfilter(Texture.FTLinear)
         tie.setTexture(tieTex, 1)
 
     def generateCorporateMedallion(self):
-        icons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
+        icons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/cog_icons')
         dept = self.style.dept
         if ConfigVariableBool('want-new-cogs', 0).value:
             chestNull = self.find('**/def_joint_attachMeter')
@@ -832,7 +832,7 @@ class Suit(Avatar.Avatar):
 
     def generateHealthBar(self):
         self.removeHealthBar()
-        model = loader.loadModel('user/resources/default/phase_3.5/models/gui/matching_game_gui')
+        model = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/matching_game_gui')
         button = model.find('**/minnieCircle')
         button.setScale(3.0)
         button.setH(180.0)
@@ -927,15 +927,15 @@ class Suit(Avatar.Avatar):
                 return self
         if self.loseActor is None:
             if self.isSkeleton:
-                loseModel = 'user/resources/default/phase_5/models/char/cog' + self.style.body.upper() + '_robot-lose-mod'
+                loseModel = '../../user/default/resources/default/phase_5/models/char/cog' + self.style.body.upper() + '_robot-lose-mod'
                 filePrefix, phase = TutorialModelDict[self.style.body]
-                loseAnim = 'user/resources/default/phase_' + str(phase) + filePrefix + 'lose'
+                loseAnim = '../../user/default/resources/default/phase_' + str(phase) + filePrefix + 'lose'
                 self.loseActor = Actor.Actor(loseModel, {'lose': loseAnim})
                 self.generateCorporateTie(self.loseActor)
             else:
                 filePrefix, phase = TutorialModelDict[self.style.body]
-                loseModel = 'user/resources/default/phase_' + str(phase) + filePrefix + 'lose-mod'
-                loseAnim = 'user/resources/default/phase_' + str(phase) + filePrefix + 'lose'
+                loseModel = '../../user/default/resources/default/phase_' + str(phase) + filePrefix + 'lose-mod'
+                loseAnim = '../../user/default/resources/default/phase_' + str(phase) + filePrefix + 'lose'
                 self.loseActor = Actor.Actor(loseModel, {'lose': loseAnim})
                 loseNeck = self.loseActor.find('**/joint_head')
                 for part in self.headParts:
@@ -950,7 +950,7 @@ class Suit(Avatar.Avatar):
         self.loseActor.setHpr(self.getHpr())
         self.loseActor.setBlend(frameBlend=base.smoothAnimations)
         shadowJoint = self.loseActor.find('**/joint_shadow')
-        dropShadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
+        dropShadow = loader.loadModel('../../user/default/resources/default/phase_3/models/props/drop_shadow')
         dropShadow.setScale(0.45)
         dropShadow.setColor(0.0, 0.0, 0.0, 0.5)
         dropShadow.reparentTo(shadowJoint)
@@ -965,7 +965,7 @@ class Suit(Avatar.Avatar):
         return
 
     def makeSkeleton(self):
-        model = 'user/resources/default/phase_5/models/char/cog' + self.style.body.upper() + '_robot-zero'
+        model = '../../user/default/resources/default/phase_5/models/char/cog' + self.style.body.upper() + '_robot-zero'
         anims = self.generateAnimDict()
         anim = self.getCurrentAnim()
         dropShadow = self.dropShadow

@@ -22,7 +22,7 @@ class DistributedBeanBarrel(DistributedBarrelBase.DistributedBarrelBase):
         DistributedBarrelBase.DistributedBarrelBase.delete(self)
 
     def applyLabel(self):
-        purchaseModels = loader.loadModel('user/resources/default/phase_4/models/gui/purchase_gui')
+        purchaseModels = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/purchase_gui')
         self.gagModel = purchaseModels.find('**/Jar')
         self.gagModel.reparentTo(self.gagNode)
         self.gagModel.setScale(self.gagScale)

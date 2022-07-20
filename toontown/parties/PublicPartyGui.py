@@ -17,11 +17,11 @@ class PublicPartyGui(DirectFrame):
     def __init__(self, doneEvent):
         DirectFrame.__init__(self)
         self.doneEvent = doneEvent
-        self.gui = loader.loadModel('user/resources/default/phase_4/models/parties/publicPartyGUI')
+        self.gui = loader.loadModel('../../user/default/resources/default/phase_4/models/parties/publicPartyGUI')
         self.setPos(0.1, 0.0, 0.1)
         self.doneStatus = None
         self.activityIconsModel = loader.loadModel(
-            'user/resources/default/phase_4/models/parties/eventSignIcons')
+            '../../user/default/resources/default/phase_4/models/parties/eventSignIcons')
         self.normalFrameColor = Vec4(
             130 / 255.0, 174 / 255.0, 249 / 255.0, 1.0)
         self.selectedFrameColor = Vec4(1.0, 1.0, 0.0, 1.0)

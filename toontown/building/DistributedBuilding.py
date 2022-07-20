@@ -26,7 +26,7 @@ FO_DICT = {'s': 'tt_m_ara_cbe_fieldOfficeMoverShaker',
 
 class DistributedBuilding(DistributedObject.DistributedObject):
     SUIT_INIT_HEIGHT = 125
-    TAKEOVER_SFX_PREFIX = 'user/resources/default/phase_5/audio/sfx/'
+    TAKEOVER_SFX_PREFIX = '../../user/default/resources/default/phase_5/audio/sfx/'
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
@@ -352,10 +352,10 @@ class DistributedBuilding(DistributedObject.DistributedObject):
         self.elevatorNodePath = hidden.attachNewNode('elevatorNodePath')
         if cogdo:
             self.elevatorModel = loader.loadModel(
-                'user/resources/default/phase_5/models/cogdominium/tt_m_ara_csa_elevatorB')
+                '../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_csa_elevatorB')
         else:
             self.elevatorModel = loader.loadModel(
-                'user/resources/default/phase_4/models/modules/elevator')
+                '../../user/default/resources/default/phase_4/models/modules/elevator')
             npc = self.elevatorModel.findAllMatches('**/floor_light_?;+s')
             for i in range(npc.getNumPaths()):
                 np = npc.getPath(i)
@@ -369,7 +369,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
         self.elevatorModel.reparentTo(self.elevatorNodePath)
         if self.mode == 'suit':
             self.cab = self.elevatorModel.find('**/elevator')
-            cogIcons = loader.loadModel('user/resources/default/user/resources/default/phase_3/models/gui/cog_icons')
+            cogIcons = loader.loadModel('user/default/resources/user/default/resources/default/phase_3/models/gui/cog_icons')
             dept = chr(self.track)
             if dept == 'c':
                 corpIcon = cogIcons.find('**/CorpIcon').copyTo(self.cab)
@@ -406,7 +406,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
             self.cogSettleSound = base.loader.loadSfx(
                 self.TAKEOVER_SFX_PREFIX + 'cogbldg_settle.ogg')
             self.openSfx = base.loader.loadSfx(
-                'user/resources/default/phase_5/audio/sfx/elevator_door_open.ogg')
+                '../../user/default/resources/default/phase_5/audio/sfx/elevator_door_open.ogg')
         return
 
     def loadAnimToToonSfx(self):
@@ -420,7 +420,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
             self.toonSettleSound = base.loader.loadSfx(
                 self.TAKEOVER_SFX_PREFIX + 'toonbldg_settle.ogg')
             self.openSfx = base.loader.loadSfx(
-                'user/resources/default/phase_5/audio/sfx/elevator_door_open.ogg')
+                '../../user/default/resources/default/phase_5/audio/sfx/elevator_door_open.ogg')
         return
 
     def unloadSfx(self):
@@ -563,7 +563,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
         textHeight = textNode.getHeight()
         zScale = (textHeight + 2) / 3.0
         signOrigin = suitBuildingNP.find('**/sign_origin;+s')
-        backgroundNP = loader.loadModel('user/resources/default/phase_5/models/modules/suit_sign')
+        backgroundNP = loader.loadModel('../../user/default/resources/default/phase_5/models/modules/suit_sign')
         backgroundNP.reparentTo(signOrigin)
         backgroundNP.setPosHprScale(
             0.0,
@@ -724,7 +724,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
         zScale = (textHeight + 2) / 3.0
         signOrigin = suitBuildingNP.find('**/sign_origin;+s')
         backgroundNP = loader.loadModel(
-            'user/resources/default/phase_5/models/cogdominium/field_office_sign')
+            '../../user/default/resources/default/phase_5/models/cogdominium/field_office_sign')
         backgroundNP.reparentTo(signOrigin)
         backgroundNP.setPosHprScale(0.0, 0.0, -
                                     1.2 +

@@ -69,7 +69,7 @@ class QuestPoster(DirectFrame):
     confirmDeleteButtonEvent = 'confirmDeleteButtonEvent'
 
     def __init__(self, parent=aspect2d, **kw):
-        bookModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+        bookModel = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
         questCard = bookModel.find('**/questCard')
         optiondefs = (('relief', None, None),
                       ('image', questCard, None),
@@ -267,7 +267,7 @@ class QuestPoster(DirectFrame):
 
     def loadElevator(self, building, numFloors):
         elevatorNodePath = hidden.attachNewNode('elevatorNodePath')
-        elevatorModel = loader.loadModel('user/resources/default/phase_4/models/modules/elevator')
+        elevatorModel = loader.loadModel('../../user/default/resources/default/phase_4/models/modules/elevator')
         floorIndicator = [None,
                           None,
                           None,
@@ -350,7 +350,7 @@ class QuestPoster(DirectFrame):
         self.rewardText.setZ(-0.205)
         self.questProgress.hide()
         if not hasattr(self, 'chooseButton'):
-            guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+            guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
             self.chooseButton = DirectButton(
                 parent=self.questFrame,
                 relief=None,
@@ -457,13 +457,13 @@ class QuestPoster(DirectFrame):
             frameBgColor = 'red'
             if quest.getType() == Quests.DeliverGagQuest:
                 invModel = loader.loadModel(
-                    'user/resources/default/phase_3.5/models/gui/inventory_icons')
+                    '../../user/default/resources/default/phase_3.5/models/gui/inventory_icons')
                 track, item = quest.getGagType()
                 lIconGeom = invModel.find('**/' + AvPropsNew[track][item])
                 invModel.removeNode()
             else:
                 bookModel = loader.loadModel(
-                    'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                    '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 lIconGeom = bookModel.find('**/package')
                 lIconGeomScale = 0.12
                 bookModel.removeNode()
@@ -479,7 +479,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.RecoverItemQuest:
             frameBgColor = 'green'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/package')
             lIconGeomScale = 0.12
             bookModel.removeNode()
@@ -488,7 +488,7 @@ class QuestPoster(DirectFrame):
                 holder = quest.getHolder()
                 holderType = quest.getHolderType()
                 if holder == Quests.Any:
-                    cogIcons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
+                    cogIcons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/cog_icons')
                     rIconGeom = cogIcons.find('**/cog')
                     cogIcons.removeNode()
                     lPos.setX(-0.18)
@@ -501,7 +501,7 @@ class QuestPoster(DirectFrame):
                 else:
                     if holderType == 'track':
                         cogIcons = loader.loadModel(
-                            'user/resources/default/phase_3/models/gui/cog_icons')
+                            '../../user/default/resources/default/phase_3/models/gui/cog_icons')
                         if holder == 'c':
                             icon = cogIcons.find('**/CorpIcon')
                         elif holder == 's':
@@ -516,7 +516,7 @@ class QuestPoster(DirectFrame):
                         cogIcons.removeNode()
                     elif holderType == 'level':
                         cogIcons = loader.loadModel(
-                            'user/resources/default/phase_3/models/gui/cog_icons')
+                            '../../user/default/resources/default/phase_3/models/gui/cog_icons')
                         rIconGeom = cogIcons.find('**/cog')
                         rIconGeomScale = IMAGE_SCALE_SMALL
                         cogIcons.removeNode()
@@ -537,7 +537,7 @@ class QuestPoster(DirectFrame):
                     toNpcBuildingName, toNpcStreetName, toNpcLocationName)
         elif quest.getType() == Quests.TrackChoiceQuest:
             frameBgColor = 'green'
-            invModel = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_icons')
+            invModel = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/inventory_icons')
             track1, track2 = quest.getChoices()
             lIconGeom = invModel.find('**/' + AvPropsNew[track1][1])
             if not fComplete:
@@ -556,19 +556,19 @@ class QuestPoster(DirectFrame):
             numFloors = quest.getNumFloors()
             if track == 'c':
                 lIconGeom = loader.loadModel(
-                    'user/resources/default/phase_4/models/modules/suit_landmark_corp')
+                    '../../user/default/resources/default/phase_4/models/modules/suit_landmark_corp')
             elif track == 'l':
                 lIconGeom = loader.loadModel(
-                    'user/resources/default/phase_4/models/modules/suit_landmark_legal')
+                    '../../user/default/resources/default/phase_4/models/modules/suit_landmark_legal')
             elif track == 'm':
                 lIconGeom = loader.loadModel(
-                    'user/resources/default/phase_4/models/modules/suit_landmark_money')
+                    '../../user/default/resources/default/phase_4/models/modules/suit_landmark_money')
             elif track == 's':
                 lIconGeom = loader.loadModel(
-                    'user/resources/default/phase_4/models/modules/suit_landmark_sales')
+                    '../../user/default/resources/default/phase_4/models/modules/suit_landmark_sales')
             else:
                 bookModel = loader.loadModel(
-                    'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                    '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 lIconGeom = bookModel.find('**/COG_building')
                 bookModel.removeNode()
             if lIconGeom and track != Quests.Any:
@@ -588,19 +588,19 @@ class QuestPoster(DirectFrame):
             numFloors = quest.getNumFloors()
             if track == 'c':
                 rIconGeom = loader.loadModel(
-                    'user/resources/default/phase_4/models/modules/suit_landmark_corp')
+                    '../../user/default/resources/default/phase_4/models/modules/suit_landmark_corp')
             elif track == 'l':
                 rIconGeom = loader.loadModel(
-                    'user/resources/default/phase_4/models/modules/suit_landmark_legal')
+                    '../../user/default/resources/default/phase_4/models/modules/suit_landmark_legal')
             elif track == 'm':
                 rIconGeom = loader.loadModel(
-                    'user/resources/default/phase_4/models/modules/suit_landmark_money')
+                    '../../user/default/resources/default/phase_4/models/modules/suit_landmark_money')
             elif track == 's':
                 rIconGeom = loader.loadModel(
-                    'user/resources/default/phase_4/models/modules/suit_landmark_sales')
+                    '../../user/default/resources/default/phase_4/models/modules/suit_landmark_sales')
             else:
                 bookModel = loader.loadModel(
-                    'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                    '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 rIconGeom = bookModel.find('**/COG_building')
                 bookModel.removeNode()
             if rIconGeom and track != Quests.Any:
@@ -631,7 +631,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.FactoryQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/factoryIcon2')
             bookModel.removeNode()
             lIconGeomScale = 0.13
@@ -642,7 +642,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.FactoryNewbieQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             rIconGeom = bookModel.find('**/factoryIcon2')
             bookModel.removeNode()
             rIconGeomScale = 0.13
@@ -667,7 +667,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.MintQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/CashBotMint')
             bookModel.removeNode()
             lIconGeomScale = 0.13
@@ -678,7 +678,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.MintNewbieQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             rIconGeom = bookModel.find('**/CashBotMint')
             bookModel.removeNode()
             rIconGeomScale = 0.13
@@ -703,7 +703,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.CogPartQuest:
             frameBgColor = 'green'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/CogArmIcon2')
             bookModel.removeNode()
             lIconGeomScale = 0.13
@@ -714,7 +714,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.CogPartNewbieQuest:
             frameBgColor = 'green'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             rIconGeom = bookModel.find('**/CogArmIcon2')
             bookModel.removeNode()
             rIconGeomScale = 0.13
@@ -739,7 +739,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.ForemanQuest or quest.getType() == Quests.SupervisorQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/skelecog5')
             bookModel.removeNode()
             lIconGeomScale = 0.13
@@ -750,7 +750,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.ForemanNewbieQuest or quest.getType() == Quests.SupervisorNewbieQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             rIconGeom = bookModel.find('**/skelecog5')
             bookModel.removeNode()
             rIconGeomScale = 0.13
@@ -775,7 +775,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.VPQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/BossHead3Icon')
             bookModel.removeNode()
             lIconGeomScale = 0.13
@@ -786,7 +786,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.VPNewbieQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             rIconGeom = bookModel.find('**/BossHead3Icon')
             bookModel.removeNode()
             rIconGeomScale = 0.13
@@ -811,7 +811,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.CFOQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/CashBotBossHeadIcon')
             bookModel.removeNode()
             lIconGeomScale = 0.13
@@ -822,7 +822,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.CFONewbieQuest:
             frameBgColor = 'blue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             rIconGeom = bookModel.find('**/CashBotBossHeadIcon')
             bookModel.removeNode()
             rIconGeomScale = 0.13
@@ -876,21 +876,21 @@ class QuestPoster(DirectFrame):
                 rIconGeomScale = 1
         elif quest.getType() == Quests.FriendQuest:
             frameBgColor = 'brown'
-            gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+            gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
             lIconGeom = gui.find('**/FriendsBox_Closed')
             lIconGeomScale = 0.45
             gui.removeNode()
             infoText = TTLocalizer.QuestPosterAnywhere
         elif quest.getType() == Quests.FriendNewbieQuest:
             frameBgColor = 'brown'
-            gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+            gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
             lIconGeom = gui.find('**/FriendsBox_Closed')
             lIconGeomScale = 0.45
             gui.removeNode()
             infoText = TTLocalizer.QuestPosterAnywhere
         elif quest.getType() == Quests.TrolleyQuest:
             frameBgColor = 'lightBlue'
-            gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+            gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = gui.find('**/trolley')
             lIconGeomScale = 0.13
             gui.removeNode()
@@ -898,7 +898,7 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.MailboxQuest:
             frameBgColor = 'lightBlue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/package')
             lIconGeomScale = 0.12
             bookModel.removeNode()
@@ -906,14 +906,14 @@ class QuestPoster(DirectFrame):
         elif quest.getType() == Quests.PhoneQuest:
             frameBgColor = 'lightBlue'
             bookModel = loader.loadModel(
-                'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             lIconGeom = bookModel.find('**/clarabelleCow')
             lIconGeomScale = 0.12
             bookModel.removeNode()
             infoText = TTLocalizer.QuestPosterOnPhone
         elif quest.getType() == Quests.MinigameNewbieQuest:
             frameBgColor = 'lightBlue'
-            gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+            gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
             rIconGeom = gui.find('**/trolley')
             rIconGeomScale = 0.13
             gui.removeNode()
@@ -938,7 +938,7 @@ class QuestPoster(DirectFrame):
             frameBgColor = 'blue'
             if quest.getType() == Quests.CogTrackQuest:
                 dept = quest.getCogTrack()
-                cogIcons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
+                cogIcons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/cog_icons')
                 lIconGeomScale = 0.13
                 if dept == 'c':
                     icon = cogIcons.find('**/CorpIcon')
@@ -956,12 +956,12 @@ class QuestPoster(DirectFrame):
                     lIconGeom = self.createSuitHead(quest.getCogType())
                     lIconGeomScale = IMAGE_SCALE_SMALL
                 else:
-                    cogIcons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
+                    cogIcons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/cog_icons')
                     lIconGeom = cogIcons.find('**/cog')
                     lIconGeomScale = IMAGE_SCALE_SMALL
                     cogIcons.removeNode()
             elif quest.getType() == Quests.CogLevelQuest:
-                cogIcons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
+                cogIcons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/cog_icons')
                 lIconGeom = cogIcons.find('**/cog')
                 lIconGeomScale = IMAGE_SCALE_SMALL
                 cogIcons.removeNode()
@@ -970,7 +970,7 @@ class QuestPoster(DirectFrame):
                     rIconGeom = self.createSuitHead(quest.getCogType())
                     rIconGeomScale = IMAGE_SCALE_SMALL
                 else:
-                    cogIcons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
+                    cogIcons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/cog_icons')
                     rIconGeom = cogIcons.find('**/cog')
                     rIconGeomScale = IMAGE_SCALE_SMALL
                     cogIcons.removeNode()
@@ -992,7 +992,7 @@ class QuestPoster(DirectFrame):
                     rIconGeomScale = 1
             elif quest.getType() == Quests.SkelecogTrackQuest:
                 dept = quest.getCogTrack()
-                cogIcons = loader.loadModel('user/resources/default/phase_3/models/gui/cog_icons')
+                cogIcons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/cog_icons')
                 lIconGeomScale = 0.13
                 if dept == 'c':
                     icon = cogIcons.find('**/CorpIcon')
@@ -1007,19 +1007,19 @@ class QuestPoster(DirectFrame):
                 cogIcons.removeNode()
             elif quest.getType() == Quests.SkelecogQuest:
                 cogIcons = loader.loadModel(
-                    'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                    '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 lIconGeom = cogIcons.find('**/skelecog5')
                 lIconGeomScale = IMAGE_SCALE_SMALL
                 cogIcons.removeNode()
             elif quest.getType() == Quests.SkelecogLevelQuest:
                 cogIcons = loader.loadModel(
-                    'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                    '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 lIconGeom = cogIcons.find('**/skelecog5')
                 lIconGeomScale = IMAGE_SCALE_SMALL
                 cogIcons.removeNode()
             elif quest.getType() == Quests.SkelecogNewbieQuest:
                 cogIcons = loader.loadModel(
-                    'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                    '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 rIconGeom = cogIcons.find('**/skelecog5')
                 rIconGeomScale = IMAGE_SCALE_SMALL
                 cogIcons.removeNode()
@@ -1041,7 +1041,7 @@ class QuestPoster(DirectFrame):
                     rIconGeomScale = 1
             elif quest.getType() == Quests.SkeleReviveQuest:
                 cogIcons = loader.loadModel(
-                    'user/resources/default/phase_3.5/models/gui/stickerbook_gui')
+                    '../../user/default/resources/default/phase_3.5/models/gui/stickerbook_gui')
                 lIconGeom = cogIcons.find('**/skelecog5')
                 lIconGeomScale = IMAGE_SCALE_SMALL
                 cogIcons.removeNode()
@@ -1126,7 +1126,7 @@ class QuestPoster(DirectFrame):
 
     def showDeleteButton(self, questDesc):
         self.hideDeleteButton()
-        trashcanGui = loader.loadModel('user/resources/default/phase_3/models/gui/trashcan_gui')
+        trashcanGui = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/trashcan_gui')
         self.deleteButton = DirectButton(
             parent=self.questFrame,
             image=(

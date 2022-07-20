@@ -515,7 +515,7 @@ class OTPClientRepository(ClientRepositoryBase):
         whisper.manage(base.marginManager)
         if not self.systemMessageSfx:
             self.systemMessageSfx = base.loader.loadSfx(
-                'user/resources/default/phase_3/audio/sfx/clock03.ogg')
+                '../../user/default/resources/default/phase_3/audio/sfx/clock03.ogg')
         if self.systemMessageSfx:
             base.playSfx(self.systemMessageSfx)
 

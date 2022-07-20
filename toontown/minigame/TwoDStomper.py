@@ -65,7 +65,7 @@ class TwoDStomper(DirectObject):
         self.shaftStartScaleZ, self.shaftEndScaleZ = typeAttribs[3]
         self.numCollSolids = typeAttribs[4]
         self.stompSound = loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/CHQ_FACT_stomper_small.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/CHQ_FACT_stomper_small.ogg')
         self.model.setPos(self.pos)
         self.model.setScale(self.scale)
         self.model.find('**/block').setScale(1.0 / self.scale)
@@ -81,7 +81,7 @@ class TwoDStomper(DirectObject):
             self.collSolids.append(newColl)
 
         self.collSolids[-1].reparentTo(self.head)
-        self.smoke = loader.loadModel('user/resources/default/phase_4/models/props/test_clouds')
+        self.smoke = loader.loadModel('../../user/default/resources/default/phase_4/models/props/test_clouds')
         self.smoke.setZ(self.headEndZ - 1)
         self.smoke.setColor(0.8, 0.7, 0.5, 1)
         self.smoke.setBillboardPointEye()

@@ -48,8 +48,8 @@ class PetshopGUI(DirectObject):
             self['image'] = DGG.getDefaultDialogGeom()
             self['text'] = TTLocalizer.PetshopGoHomeText
             buttons = loader.loadModel(
-                'user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
-            gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+                '../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+            gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
             self.bYes = DirectButton(
                 self,
                 image=(
@@ -100,7 +100,7 @@ class PetshopGUI(DirectObject):
             zoneId = ZoneUtil.getCanonicalSafeZoneId(
                 base.localAvatar.getZoneId())
             name, dna, traitSeed = PetUtil.getPetInfoFromSeed(petSeed, zoneId)
-            self.gui = loader.loadModel('user/resources/default/phase_4/models/gui/PetNamePanel')
+            self.gui = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/PetNamePanel')
             self.guiScale = 0.09
             DirectFrame.__init__(self, relief=None, geom=self.gui,
                                  geom_scale=self.guiScale, state='normal', frameSize=(-1, 1, -1, 1))
@@ -180,7 +180,7 @@ class PetshopGUI(DirectObject):
                     [
                         self.ng.returnUniqueID(
                             self.curName)]))
-            model = loader.loadModel('user/resources/default/phase_4/models/gui/PetShopInterface')
+            model = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/PetShopInterface')
             modelScale = 0.1
             cancelImageList = (
                 model.find('**/CancelButtonUp'),
@@ -329,7 +329,7 @@ class PetshopGUI(DirectObject):
             'PetshopGUI.MainMenuDlg')
 
         def __init__(self, doneEvent):
-            model = loader.loadModel('user/resources/default/phase_4/models/gui/AdoptReturnSell')
+            model = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/AdoptReturnSell')
             modelPos = (0, 0, -0.3)
             modelScale = 0.055
             DirectFrame.__init__(self, relief=None, state='normal', geom=model, geom_scale=(
@@ -460,7 +460,7 @@ class PetshopGUI(DirectObject):
             name, dna, traitSeed = PetUtil.getPetInfoFromSeed(petSeed, zoneId)
             name = PetNameGenerator.PetNameGenerator().getName(petNameIndex)
             cost = PetUtil.getPetCostFromSeed(petSeed, zoneId)
-            model = loader.loadModel('user/resources/default/phase_4/models/gui/AdoptPet')
+            model = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/AdoptPet')
             modelPos = (0, 0, -0.3)
             modelScale = 0.055
             DirectFrame.__init__(self,
@@ -565,7 +565,7 @@ class PetshopGUI(DirectObject):
         def __init__(self, doneEvent):
 
             def showDialog(avatar):
-                model = loader.loadModel('user/resources/default/phase_4/models/gui/ReturnPet')
+                model = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/ReturnPet')
                 modelPos = (0, 0, -0.3)
                 modelScale = (0.055, 0.055, 0.055)
                 base.r = self
@@ -638,7 +638,7 @@ class PetshopGUI(DirectObject):
             'PetshopGUI.ChoosePetDlg')
 
         def __init__(self, doneEvent, petSeeds):
-            model = loader.loadModel('user/resources/default/phase_4/models/gui/PetShopInterface')
+            model = loader.loadModel('../../user/default/resources/default/phase_4/models/gui/PetShopInterface')
             modelPos = (0, 0, -0.9)
             modelScale = (0.185, 0.185, 0.185)
             DirectFrame.__init__(self,

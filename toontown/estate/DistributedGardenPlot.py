@@ -24,7 +24,7 @@ class DistributedGardenPlot(DistributedLawnDecor.DistributedLawnDecor):
         self.plotScale = 1.0
         self.plantingGuiDoneEvent = 'plantingGuiDone'
         self.toonStatueSelectionDoneEvent = 'toonStatueSelectionDone'
-        self.defaultModel = 'user/resources/default/phase_5.5/models/estate/dirt_mound'
+        self.defaultModel = '../../user/default/resources/default/phase_5.5/models/estate/dirt_mound'
         self.colorScaler = Vec4(1, 1, 1, 1)
         self.plantingGui = None
         return
@@ -55,7 +55,7 @@ class DistributedGardenPlot(DistributedLawnDecor.DistributedLawnDecor):
             self.collSphereRadius = 3.0
             self.plotScale = 0.075
             self.stickUp = -0.0
-            self.defaultModel = 'user/resources/default/phase_5.5/models/estate/garden_slab'
+            self.defaultModel = '../../user/default/resources/default/phase_5.5/models/estate/garden_slab'
         else:
             self.collSphereOffset = 0.0
         self.notify.debug('announceGenerate')
@@ -372,7 +372,7 @@ class DistributedGardenPlot(DistributedLawnDecor.DistributedLawnDecor):
         self.movie.start()
 
     def generatePlaceItemTrack(self, toon, item):
-        sound = loader.loadSfx('user/resources/default/phase_5.5/audio/sfx/burrow.ogg')
+        sound = loader.loadSfx('../../user/default/resources/default/phase_5.5/audio/sfx/burrow.ogg')
         sound.setPlayRate(0.5)
         placeItemTrack = Parallel()
         placeItemTrack.append(

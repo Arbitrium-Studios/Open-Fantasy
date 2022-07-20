@@ -69,7 +69,7 @@ class DistributedHouseInterior(DistributedObject.DistributedObject):
     def setup(self):
         dnaStore = base.cr.playGame.dnaStore
         self.interior = loader.loadModel(
-            'user/resources/default/phase_5.5/models/estate/tt_m_ara_int_estateHouseA')
+            '../../user/default/resources/default/phase_5.5/models/estate/tt_m_ara_int_estateHouseA')
         self.interior.reparentTo(render)
         doorModelName = 'door_double_round_ur'
         door = dnaStore.findNode(doorModelName)

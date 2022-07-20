@@ -65,8 +65,8 @@ class SummonCogDialog(DirectFrame, StateData.StateData):
         if self.isLoaded == 1:
             return None
         self.isLoaded = 1
-        gui = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
-        guiButton = loader.loadModel('user/resources/default/phase_3/models/gui/quit_button')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        guiButton = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/quit_button')
         self.head = Suit.attachSuitHead(self, self.suitName)
         z = self.head.getZ()
         self.head.setPos(-0.4, -0.1, z + 0.2)

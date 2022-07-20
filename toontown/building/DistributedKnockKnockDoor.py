@@ -66,9 +66,9 @@ class DistributedKnockKnockDoor(
         if avatar is None:
             return
         self.rimshot = base.loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/AA_heal_telljoke.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/AA_heal_telljoke.ogg')
         self.knockSfx = base.loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/GUI_knock_3.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/GUI_knock_3.ogg')
         joke = KnockKnockJokes[self.propId % len(KnockKnockJokes)]
         place = base.cr.playGame.getPlace()
         if place:

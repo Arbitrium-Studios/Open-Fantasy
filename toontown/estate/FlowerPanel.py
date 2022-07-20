@@ -98,7 +98,7 @@ class FlowerPanel(DirectFrame):
                 0,
                 0,
                 0.26))
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.cancel = DirectButton(
             parent=self,
             pos=(

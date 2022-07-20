@@ -57,7 +57,7 @@ class GroupPanel(DirectObject.DirectObject):
 
     def __load(self):
         self.guiBg = loader.loadModel(
-            'user/resources/default/phase_9/models/gui/tt_m_gui_brd_groupListBg')
+            '../../user/default/resources/default/phase_9/models/gui/tt_m_gui_brd_groupListBg')
         self.__defineConstants()
         if self.boardingParty.maxSize == 4:
             bgImage = self.guiBg.find('**/tt_t_gui_brd_memberListTop_half')
@@ -69,7 +69,7 @@ class GroupPanel(DirectObject.DirectObject):
             bgImageZPos = 0
             frameZPos = 0.0278943
             quitButtonZPos = -0.30366
-        guiButtons = loader.loadModel('user/resources/default/phase_9/models/gui/tt_m_gui_brd_status')
+        guiButtons = loader.loadModel('../../user/default/resources/default/phase_9/models/gui/tt_m_gui_brd_status')
         self.frame = DirectFrame(
             relief=None, image=bgImage, image_scale=(
                 0.5, 1, 0.5), image_pos=(
@@ -77,7 +77,7 @@ class GroupPanel(DirectObject.DirectObject):
                 -1.044, 0, frameZPos))
         self.frameBounds = self.frame.getBounds()
         leaveButtonGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/tt_m_gui_brd_leaveBtn')
+            '../../user/default/resources/default/phase_3.5/models/gui/tt_m_gui_brd_leaveBtn')
         leaveImageList = (leaveButtonGui.find('**/tt_t_gui_brd_leaveUp'),
                           leaveButtonGui.find('**/tt_t_gui_brd_leaveDown'),
                           leaveButtonGui.find('**/tt_t_gui_brd_leaveHover'),
@@ -96,7 +96,7 @@ class GroupPanel(DirectObject.DirectObject):
                                                                                                                                                         quitText,
                                                                                                                                                         quitText,
                                                                                                                                                         ''), text_scale=0.06, text_fg=Vec4(1, 1, 1, 1), text_shadow=Vec4(0, 0, 0, 1), text_pos=(0.045, 0.0), text_align=TextNode.ALeft, pos=(0.223, 0, quitButtonZPos), image3_color=self.disabledOrangeColor)
-        arrowGui = loader.loadModel('user/resources/default/phase_9/models/gui/tt_m_gui_brd_arrow')
+        arrowGui = loader.loadModel('../../user/default/resources/default/phase_9/models/gui/tt_m_gui_brd_arrow')
         hideImageList = (
             arrowGui.find('**/tt_t_gui_brd_arrow_up'),
             arrowGui.find('**/tt_t_gui_brd_arrow_down'),
@@ -216,7 +216,7 @@ class GroupPanel(DirectObject.DirectObject):
 
     def __makeAvatarNameScrolledList(self):
         friendsListGui = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/friendslist_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.scrollList = DirectScrolledList(parent=self.frame, relief=None, incButton_image=(friendsListGui.find('**/FndsLst_ScrollUp'),
                                                                                               friendsListGui.find(
                                                                                                   '**/FndsLst_ScrollDN'),
@@ -236,7 +236,7 @@ class GroupPanel(DirectObject.DirectObject):
 
     def __makeDestinationScrolledList(self):
         arrowGui = loader.loadModel(
-            'user/resources/default/phase_9/models/gui/tt_m_gui_brd_gotoArrow')
+            '../../user/default/resources/default/phase_9/models/gui/tt_m_gui_brd_gotoArrow')
         incrementImageList = (arrowGui.find('**/tt_t_gui_brd_arrowL_gotoUp'),
                               arrowGui.find('**/tt_t_gui_brd_arrowL_gotoDown'),
                               arrowGui.find(
@@ -317,7 +317,7 @@ class GroupPanel(DirectObject.DirectObject):
         return
 
     def __makeGoButton(self):
-        goGui = loader.loadModel('user/resources/default/phase_9/models/gui/tt_m_gui_brd_gotoBtn')
+        goGui = loader.loadModel('../../user/default/resources/default/phase_9/models/gui/tt_m_gui_brd_gotoBtn')
         self.goImageList = (goGui.find('**/tt_t_gui_brd_gotoUp'),
                             goGui.find('**/tt_t_gui_brd_gotoDown'),
                             goGui.find('**/tt_t_gui_brd_gotoHover'),

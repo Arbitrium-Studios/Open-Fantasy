@@ -33,7 +33,7 @@ class PetAvatarPanel(AvatarPanel.AvatarPanel):
             self, self.avatar, FriendsListPanel=FriendsListPanel)
         base.localAvatar.obscureFriendsListButton(1)
         base.panel = self
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/PetControlPannel')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/PetControlPannel')
         guiScale = 0.116
         guiPos = (1.12, 0, 0.3)
         self.frame = DirectFrame(
@@ -87,7 +87,7 @@ class PetAvatarPanel(AvatarPanel.AvatarPanel):
                                                                                                                                                                                                                                                                                                                             ''), text_fg=text2Color, text_shadow=(0, 0, 0, 1), text_scale=TTLocalizer.PAPownerButton, text_pos=(0.3, 1.05), text_align=TextNode.ACenter, command=self.__handleToOwner)
         if self.avatar.getOwnerId() == base.localAvatar.doId:
             self.ownerButton['state'] = DGG.DISABLED
-        toonGui = loader.loadModel('user/resources/default/phase_3.5/models/gui/avatar_panel_gui')
+        toonGui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/avatar_panel_gui')
         self.detailButton = DirectButton(parent=self.frame, image=(toonGui.find('**/ChtBx_BackBtn_UP'),
                                                                    toonGui.find(
                                                                        '**/ChtBx_BackBtn_DN'),

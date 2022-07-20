@@ -26,7 +26,7 @@ class DistributedChineseCheckers(DistributedNode.DistributedNode):
         self.cr = cr
         self.reparentTo(render)
         self.boardNode = loader.loadModel(
-            'user/resources/default/phase_6/models/golf/checker_game.bam')
+            '../../user/default/resources/default/phase_6/models/golf/checker_game.bam')
         self.boardNode.reparentTo(self)
         self.board = ChineseCheckersBoard()
         self.playerTags = render.attachNewNode('playerTags')
@@ -60,7 +60,7 @@ class DistributedChineseCheckers(DistributedNode.DistributedNode):
         self.myHandler = CollisionHandlerQueue()
         self.traverser.addCollider(self.pickerNP, self.myHandler)
         self.buttonModels = loader.loadModel(
-            'user/resources/default/phase_3.5/models/gui/inventory_gui')
+            '../../user/default/resources/default/phase_3.5/models/gui/inventory_gui')
         self.upButton = self.buttonModels.find('**//InventoryButtonUp')
         self.downButton = self.buttonModels.find('**/InventoryButtonDown')
         self.rolloverButton = self.buttonModels.find(
@@ -139,10 +139,10 @@ class DistributedChineseCheckers(DistributedNode.DistributedNode):
                                    55]]
         self.nonOpposingPositions = []
         self.knockSound = base.loader.loadSfx(
-            'user/resources/default/phase_5/audio/sfx/GUI_knock_1.ogg')
+            '../../user/default/resources/default/phase_5/audio/sfx/GUI_knock_1.ogg')
         self.clickSound = base.loader.loadSfx(
-            'user/resources/default/phase_3/audio/sfx/GUI_balloon_popup.ogg')
-        self.moveSound = base.loader.loadSfx('user/resources/default/phase_6/audio/sfx/CC_move.ogg')
+            '../../user/default/resources/default/phase_3/audio/sfx/GUI_balloon_popup.ogg')
+        self.moveSound = base.loader.loadSfx('../../user/default/resources/default/phase_6/audio/sfx/CC_move.ogg')
         self.accept('stoppedAsleep', self.handleSleep)
         from direct.fsm import ClassicFSM, State
         self.fsm = ClassicFSM.ClassicFSM(
@@ -165,7 +165,7 @@ class DistributedChineseCheckers(DistributedNode.DistributedNode):
             tempList[x].node().addSolid(CollisionSphere(0, 0, 0, 0.115))
 
         for z in self.locatorList:
-            y = loader.loadModel('user/resources/default/phase_6/models/golf/checker_marble.bam')
+            y = loader.loadModel('../../user/default/resources/default/phase_6/models/golf/checker_marble.bam')
             z.setColor(0, 0, 0, 0)
             y.reparentTo(z)
 
@@ -323,7 +323,7 @@ class DistributedChineseCheckers(DistributedNode.DistributedNode):
         for x in range(6):
             pos = self.table.seats[x].getPos(render)
             renderedPeice = loader.loadModel(
-                'user/resources/default/phase_6/models/golf/checker_marble.bam')
+                '../../user/default/resources/default/phase_6/models/golf/checker_marble.bam')
             renderedPeice.reparentTo(self.playerTags)
             renderedPeice.setPos(pos)
             renderedPeice.setScale(1.5)
@@ -772,7 +772,7 @@ class DistributedChineseCheckers(DistributedNode.DistributedNode):
     def animatePeice(self, tableState, moveList):
         messenger.send('wakeup')
         gamePeiceForAnimation = loader.loadModel(
-            'user/resources/default/phase_6/models/golf/checker_marble.bam')
+            '../../user/default/resources/default/phase_6/models/golf/checker_marble.bam')
         gamePeiceForAnimation.setColor(
             self.locatorList[moveList[0]].getColor())
         gamePeiceForAnimation.reparentTo(self.boardNode)

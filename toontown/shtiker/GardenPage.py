@@ -54,7 +54,7 @@ class GardenPage(ShtikerPage.ShtikerPage):
     def load(self):
         self.notify.debug('load')
         ShtikerPage.ShtikerPage.load(self)
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingBook')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/fishingBook')
         trophyCase = gui.find('**/trophyCase1')
         trophyCase.find('glass1').reparentTo(trophyCase, -1)
         trophyCase.find('shelf').reparentTo(trophyCase, -1)
@@ -212,7 +212,7 @@ class GardenPage(ShtikerPage.ShtikerPage):
         self.collectionTab.setPos(-0.33, 0, 0.775)
         self.trophyTab.setPos(0.09, 0, 0.775)
         self.specialsTab.setPos(0.51, 0, 0.775)
-        gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.gardenSpecialsList = DirectScrolledList(parent=self, relief=None, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
                                                                                                 gui.find(
                                                                                                     '**/FndsLst_ScrollDN'),
@@ -234,7 +234,7 @@ class GardenPage(ShtikerPage.ShtikerPage):
             -1, parent=self.specialsFrame)
         self.specialsPhoto.setBackBounds(-0.3, 0.3, -0.235, 0.25)
         self.specialsPhoto.setBackColor(1.0, 1.0, 0.74901, 1.0)
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         okImageList = (
             buttons.find('**/ChtBx_OKBtn_UP'),
             buttons.find('**/ChtBx_OKBtn_DN'),
@@ -551,7 +551,7 @@ class GardenTrophy(DirectFrame):
     def __init__(self, level):
         DirectFrame.__init__(self, relief=None)
         self.initialiseoptions(GardenTrophy)
-        self.trophy = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingTrophy')
+        self.trophy = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/fishingTrophy')
         self.trophy.reparentTo(self)
         self.trophy.setPos(0, 1, 0)
         self.trophy.setScale(0.1)
@@ -561,7 +561,7 @@ class GardenTrophy(DirectFrame):
         self.topBase = self.trophy.find('**/trophyTopBase')
         self.statue = self.trophy.find('**/trophyStatue')
         self.base.setColorScale(1, 1, 0.8, 1)
-        self.bowl = loader.loadModel('user/resources/default/phase_3.5/models/gui/fishingTrophyBowl')
+        self.bowl = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/fishingTrophyBowl')
         self.bowl.reparentTo(self)
         self.bowl.setPos(0, 1, 0)
         self.bowl.setScale(2.0)
@@ -571,7 +571,7 @@ class GardenTrophy(DirectFrame):
         self.bowlBase.setColorScale(1, 1, 0.8, 1)
         self.nameLabel = DirectLabel(parent=self, relief=None, pos=(
             0, 0, -0.15), text='Trophy Text', text_scale=0.125, text_fg=Vec4(0.9, 0.9, 0.4, 1))
-        self.shadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
+        self.shadow = loader.loadModel('../../user/default/resources/default/phase_3/models/props/drop_shadow')
         self.shadow.reparentTo(self)
         self.shadow.setColor(1, 1, 1, 0.2)
         self.shadow.setPosHprScale(0, 1, 0.35, 0, 90, 0, 0.1, 0.14, 0.1)
@@ -584,7 +584,7 @@ class GardenTrophy(DirectFrame):
         scales = (0.25, 0.25, 0.22, 0.25)
         metalTrophy = ('wheelbarrel', 'shovels', 'flower', 'watering_can')
         if self.level >= 0 and self.level < len(order):
-            modelStr = 'user/resources/default/phase_5.5/models/estate/trophy'
+            modelStr = '../../user/default/resources/default/phase_5.5/models/estate/trophy'
             modelStr += order[level]
             self.gardenTrophy = loader.loadModel(modelStr)
             self.gardenTrophy.setScale(scales[level])

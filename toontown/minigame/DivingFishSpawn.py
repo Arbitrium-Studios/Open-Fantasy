@@ -11,7 +11,7 @@ class DivingFishSpawn(DirectObject):
     RADIUS = 0.7
 
     def __init__(self, spawnId, direction, position, cHandler):
-        loadBase = 'user/resources/default/phase_4/models/char/'
+        loadBase = '../../user/default/resources/default/phase_4/models/char/'
         self.entryNode = render.attachNewNode('entryNode')
         self.direction = direction
         self.fishArray = {}
@@ -26,18 +26,18 @@ class DivingFishSpawn(DirectObject):
         return self.id
 
     def createFish(self, fishcode):
-        loadBase = 'user/resources/default/phase_4/models/char/'
+        loadBase = '../../user/default/resources/default/phase_4/models/char/'
         if fishcode == 0:
-            fish = Actor.Actor('user/resources/default/phase_4/models/char/clownFish-zero.bam',
+            fish = Actor.Actor('../../user/default/resources/default/phase_4/models/char/clownFish-zero.bam',
                                {'anim': loadBase + 'clownFish-swim.bam'})
             fish.name = 'clown'
         elif fishcode == 1:
-            fish = Actor.Actor('user/resources/default/phase_4/models/char/PBJfish-zero.bam',
-                               {'anim': 'user/resources/default/phase_4/models/char/PBJfish-swim.bam'})
+            fish = Actor.Actor('../../user/default/resources/default/phase_4/models/char/PBJfish-zero.bam',
+                               {'anim': '../../user/default/resources/default/phase_4/models/char/PBJfish-swim.bam'})
             fish.name = 'pbj'
         elif fishcode == 2:
-            fish = Actor.Actor('user/resources/default/phase_4/models/char/BearAcuda-zero.bam',
-                               {'anim': 'user/resources/default/phase_4/models/char/BearAcuda-swim.bam'})
+            fish = Actor.Actor('../../user/default/resources/default/phase_4/models/char/BearAcuda-zero.bam',
+                               {'anim': '../../user/default/resources/default/phase_4/models/char/BearAcuda-swim.bam'})
             fish.name = 'bear'
         elif fishcode == 3:
             fish = Actor.Actor(loadBase + 'balloonFish-zero.bam',

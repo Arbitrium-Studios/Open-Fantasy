@@ -17,7 +17,7 @@ class DistributedTreasure(DistributedObject.DistributedObject):
         self.dropShadow = None
         self.modelFindString = None
         self.grabSoundPath = None
-        self.rejectSoundPath = 'user/resources/default/phase_4/audio/sfx/ring_miss.ogg'
+        self.rejectSoundPath = '../../user/default/resources/default/phase_4/audio/sfx/ring_miss.ogg'
         self.playSoundForRemoteToons = 1
         self.scale = 1.0
         self.shadow = 1
@@ -82,7 +82,7 @@ class DistributedTreasure(DistributedObject.DistributedObject):
         if self.shadow:
             if not self.dropShadow:
                 self.dropShadow = loader.loadModel(
-                    'user/resources/default/phase_3/models/props/drop_shadow')
+                    '../../user/default/resources/default/phase_3/models/props/drop_shadow')
                 self.dropShadow.setColor(0, 0, 0, 0.5)
                 self.dropShadow.setPos(0, 0, 0.025)
                 self.dropShadow.setScale(0.4 * self.scale)

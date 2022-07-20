@@ -30,7 +30,7 @@ class DistributedFishingTarget(DistributedNode.DistributedNode):
 
     def generate(self):
         self.assign(render.attachNewNode('DistributedFishingTarget'))
-        shadow = loader.loadModel('user/resources/default/phase_3/models/props/drop_shadow')
+        shadow = loader.loadModel('../../user/default/resources/default/phase_3/models/props/drop_shadow')
         shadow.setPos(0, 0, -0.1)
         shadow.setScale(0.33)
         shadow.setColorScale(1, 1, 1, 0.75)

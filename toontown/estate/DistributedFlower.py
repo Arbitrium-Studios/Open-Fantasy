@@ -81,7 +81,7 @@ class DistributedFlower(
         if DIRT_AS_WATER_INDICATOR:
             dirtMoundScale = invFlowerScale * 0.73
             self.dirtMound = loader.loadModel(
-                'user/resources/default/phase_5.5/models/estate/dirt_mound')
+                '../../user/default/resources/default/phase_5.5/models/estate/dirt_mound')
             self.dirtMound.reparentTo(self.model)
             self.dirtMound.setScale(dirtMoundScale)
             self.dirtMound.setZ(
@@ -89,7 +89,7 @@ class DistributedFlower(
                 DIRT_MOUND_HEIGHT /
                 2.0)
             self.sandMound = loader.loadModel(
-                'user/resources/default/phase_5.5/models/estate/sand_mound')
+                '../../user/default/resources/default/phase_5.5/models/estate/sand_mound')
             self.sandMound.reparentTo(self.model)
             self.sandMound.setScale(dirtMoundScale)
             self.sandMound.setZ(

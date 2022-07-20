@@ -66,7 +66,7 @@ class DistributedVehicle(
                              'driftMin': 1,
                              'windResistance': 0.2,
                              'particleColor': Vec4(1.0, 1.0, 1.0, 1.0)}}
-    SFX_BaseDir = 'user/resources/default/phase_6/audio/sfx/'
+    SFX_BaseDir = '../../user/default/resources/default/phase_6/audio/sfx/'
     SFX_WallHits = [SFX_BaseDir + 'KART_Hitting_Wood_Fence.ogg',
                     SFX_BaseDir + 'KART_Hitting_Wood_Fence_1.ogg',
                     SFX_BaseDir + 'KART_Hitting_Metal_Fence.ogg',
@@ -142,7 +142,7 @@ class DistributedVehicle(
 
     def __loadTextures(self):
         self.pieSplatter = loader.loadModel(
-            'user/resources/default/phase_6/models/karting/pie_splat_1.bam')
+            '../../user/default/resources/default/phase_6/models/karting/pie_splat_1.bam')
 
     def announceGenerate(self):
         DistributedSmoothNode.DistributedSmoothNode.announceGenerate(self)
@@ -689,7 +689,7 @@ class DistributedVehicle(
             self.speedometerImages.setTransparency(True)
             self.speedometerImages.setPos(1.24, 0.0, -0.98)
             self.speedometerImages.setScale(0.75)
-            m = loader.loadModel('user/resources/default/phase_6/models/karting/speedometer')
+            m = loader.loadModel('../../user/default/resources/default/phase_6/models/karting/speedometer')
             if self.getBodyColor() == InvalidEntry:
                 bodyColor = getDefaultColor()
             else:

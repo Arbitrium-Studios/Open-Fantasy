@@ -42,8 +42,8 @@ BossbotCountryClubEntranceIDs = (0,)
 BossbotCountryClubMiddleRoomIDs = (2, 5, 6)
 BossbotCountryClubFinalRoomIDs = (18,)
 BossbotCountryClubConnectorRooms = (
-    'user/resources/default/phase_12/models/bossbotHQ/Connector_Tunnel_A',
-    'user/resources/default/phase_12/models/bossbotHQ/Connector_Tunnel_B')
+    '../../user/default/resources/default/phase_12/models/bossbotHQ/Connector_Tunnel_A',
+    '../../user/default/resources/default/phase_12/models/bossbotHQ/Connector_Tunnel_B')
 CashbotMintSpecModules = {}
 if not __debug__ or __execWarnings__:
     print('EXECWARNING CountryClubRoomSpecs: %s' %

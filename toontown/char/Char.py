@@ -54,24 +54,24 @@ AnimDict = {'mk': (('walk', 'walk', 3),
             'pch': (('walk', 'walk', 6), ('neutral', 'idle', 6)),
             'da': (('walk', 'walk', 6), ('neutral', 'idle', 6)),
             'jda': (('walk', 'walk', 6), ('neutral', 'idle', 6))}
-ModelDict = {'mk': 'user/resources/default/phase_3/models/char/mickey-',
-             'vmk': 'user/resources/default/phase_3.5/models/char/tt_a_chr_csc_mickey_vampire_',
-             'mn': 'user/resources/default/phase_3/models/char/minnie-',
-             'wmn': 'user/resources/default/phase_3.5/models/char/tt_a_chr_csc_witchMinnie_',
-             'g': 'user/resources/default/phase_6/models/char/TT_G',
-             'sg': 'user/resources/default/phase_6/models/char/tt_a_chr_csc_goofyCostume_',
-             'd': 'user/resources/default/phase_6/models/char/DL_donald-',
-             'fd': 'user/resources/default/phase_6/models/char/tt_a_chr_csc_donaldCostume_',
-             'dw': 'user/resources/default/phase_6/models/char/donald-wheel-',
-             'p': 'user/resources/default/phase_6/models/char/pluto-',
-             'wp': 'user/resources/default/phase_6/models/char/tt_a_chr_csc_plutoCostume_',
-             'cl': 'user/resources/default/phase_5.5/models/estate/Clara_pose2-',
-             'dd': 'user/resources/default/phase_4/models/char/daisyduck_',
-             'shdd': 'user/resources/default/phase_4/models/char/tt_a_chr_csc_daisyCostume_',
-             'ch': 'user/resources/default/phase_6/models/char/chip_',
-             'pch': 'user/resources/default/phase_6/models/char/tt_a_chr_csc_chipCostume_',
-             'da': 'user/resources/default/phase_6/models/char/dale_',
-             'jda': 'user/resources/default/phase_6/models/char/tt_a_chr_csc_daleCostume_'}
+ModelDict = {'mk': '../../user/default/resources/default/phase_3/models/char/mickey-',
+             'vmk': '../../user/default/resources/default/phase_3.5/models/char/tt_a_chr_csc_mickey_vampire_',
+             'mn': '../../user/default/resources/default/phase_3/models/char/minnie-',
+             'wmn': '../../user/default/resources/default/phase_3.5/models/char/tt_a_chr_csc_witchMinnie_',
+             'g': '../../user/default/resources/default/phase_6/models/char/TT_G',
+             'sg': '../../user/default/resources/default/phase_6/models/char/tt_a_chr_csc_goofyCostume_',
+             'd': '../../user/default/resources/default/phase_6/models/char/DL_donald-',
+             'fd': '../../user/default/resources/default/phase_6/models/char/tt_a_chr_csc_donaldCostume_',
+             'dw': '../../user/default/resources/default/phase_6/models/char/donald-wheel-',
+             'p': '../../user/default/resources/default/phase_6/models/char/pluto-',
+             'wp': '../../user/default/resources/default/phase_6/models/char/tt_a_chr_csc_plutoCostume_',
+             'cl': '../../user/default/resources/default/phase_5.5/models/estate/Clara_pose2-',
+             'dd': '../../user/default/resources/default/phase_4/models/char/daisyduck_',
+             'shdd': '../../user/default/resources/default/phase_4/models/char/tt_a_chr_csc_daisyCostume_',
+             'ch': '../../user/default/resources/default/phase_6/models/char/chip_',
+             'pch': '../../user/default/resources/default/phase_6/models/char/tt_a_chr_csc_chipCostume_',
+             'da': '../../user/default/resources/default/phase_6/models/char/dale_',
+             'jda': '../../user/default/resources/default/phase_6/models/char/tt_a_chr_csc_daleCostume_'}
 LODModelDict = {'mk': [1200, 800, 400],
                 'vmk': [1200, 800, 400],
                 'wmn': [1200, 800, 400],
@@ -255,10 +255,10 @@ class Char(Avatar.Avatar):
         self.eyesClosed = None
         if self._name == 'mickey' or self._name == 'minnie':
             self.eyesOpen = loader.loadTexture(
-                'user/resources/default/phase_3/maps/eyes1.jpg', 'user/resources/default/phase_3/maps/eyes1_a.rgb')
+                '../../user/default/resources/default/phase_3/maps/eyes1.jpg', '../../user/default/resources/default/phase_3/maps/eyes1_a.rgb')
             self.eyesClosed = loader.loadTexture(
-                'user/resources/default/phase_3/maps/mickey_eyes_closed.jpg',
-                'user/resources/default/phase_3/maps/mickey_eyes_closed_a.rgb')
+                '../../user/default/resources/default/phase_3/maps/mickey_eyes_closed.jpg',
+                '../../user/default/resources/default/phase_3/maps/mickey_eyes_closed_a.rgb')
             self.eyes = self.find('**/1200/**/eyes')
             self.eyes.setBin('transparent', 0)
             self.lpupil = self.find('**/1200/**/joint_pupilL')
@@ -291,11 +291,11 @@ class Char(Avatar.Avatar):
 
         elif self._name == 'pluto':
             self.eyesOpen = loader.loadTexture(
-                'user/resources/default/phase_6/maps/plutoEyesOpen.jpg',
-                'user/resources/default/phase_6/maps/plutoEyesOpen_a.rgb')
+                '../../user/default/resources/default/phase_6/maps/plutoEyesOpen.jpg',
+                '../../user/default/resources/default/phase_6/maps/plutoEyesOpen_a.rgb')
             self.eyesClosed = loader.loadTexture(
-                'user/resources/default/phase_6/maps/plutoEyesClosed.jpg',
-                'user/resources/default/phase_6/maps/plutoEyesClosed_a.rgb')
+                '../../user/default/resources/default/phase_6/maps/plutoEyesClosed.jpg',
+                '../../user/default/resources/default/phase_6/maps/plutoEyesClosed_a.rgb')
             self.eyes = self.find('**/1000/**/eyes')
             self.lpupil = self.find('**/1000/**/joint_pupilL')
             self.rpupil = self.find('**/1000/**/joint_pupilR')
@@ -327,11 +327,11 @@ class Char(Avatar.Avatar):
             self.drawInFront('joint_pupil?', 'eyes*', -3)
         elif self._name == 'chip' or self._name == 'dale':
             self.eyesOpen = loader.loadTexture(
-                'user/resources/default/phase_6/maps/dale_eye1.jpg',
-                'user/resources/default/phase_6/maps/dale_eye1_a.rgb')
+                '../../user/default/resources/default/phase_6/maps/dale_eye1.jpg',
+                '../../user/default/resources/default/phase_6/maps/dale_eye1_a.rgb')
             self.eyesClosed = loader.loadTexture(
-                'user/resources/default/phase_6/maps/chip_dale_eye1_blink.jpg',
-                'user/resources/default/phase_6/maps/chip_dale_eye1_blink_a.rgb')
+                '../../user/default/resources/default/phase_6/maps/chip_dale_eye1_blink.jpg',
+                '../../user/default/resources/default/phase_6/maps/chip_dale_eye1_blink_a.rgb')
             self.eyes = self.find('**/eyes')
             self.lpupil = self.find('**/pupil_left')
             self.rpupil = self.find('**/pupil_right')
@@ -427,7 +427,7 @@ class Char(Avatar.Avatar):
         self.unloadDialogue()
         language = base.config.GetString('language', 'english')
         if char == 'mk':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_3/audio/dial/mickey.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_3/audio/dial/mickey.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
@@ -441,9 +441,9 @@ class Char(Avatar.Avatar):
                                                    4,
                                                    5])
                 self.loadChatterDialogue(
-                    'mickey', chatterIndexArray, 'user/resources/default/phase_3/audio/dial', language)
+                    'mickey', chatterIndexArray, '../../user/default/resources/default/phase_3/audio/dial', language)
         elif char == 'vmk':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_3/audio/dial/mickey.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_3/audio/dial/mickey.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
@@ -457,9 +457,9 @@ class Char(Avatar.Avatar):
                                                    4,
                                                    5])
                 self.loadChatterDialogue(
-                    'mickey', chatterIndexArray, 'user/resources/default/phase_3/audio/dial', language)
+                    'mickey', chatterIndexArray, '../../user/default/resources/default/phase_3/audio/dial', language)
         elif char == 'mn' or char == 'wmn':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_3/audio/dial/minnie.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_3/audio/dial/minnie.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
@@ -482,9 +482,9 @@ class Char(Avatar.Avatar):
                                               16,
                                               17], [1, 2, 3])
                 self.loadChatterDialogue(
-                    'minnie', chatterIndexArray, 'user/resources/default/phase_3/audio/dial', language)
+                    'minnie', chatterIndexArray, '../../user/default/resources/default/phase_3/audio/dial', language)
         elif char == 'dd' or char == 'shdd':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_4/audio/dial/daisy.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_4/audio/dial/daisy.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
@@ -505,9 +505,9 @@ class Char(Avatar.Avatar):
                                                        3,
                                                        4])
                 self.loadChatterDialogue(
-                    'daisy', chatterIndexArray, 'user/resources/default/phase_8/audio/dial', language)
+                    'daisy', chatterIndexArray, '../../user/default/resources/default/phase_8/audio/dial', language)
         elif char == 'g' or char == 'sg':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_6/audio/dial/goofy.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_6/audio/dial/goofy.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
@@ -528,9 +528,9 @@ class Char(Avatar.Avatar):
                                                        3,
                                                        4])
                 self.loadChatterDialogue(
-                    'goofy', chatterIndexArray, 'user/resources/default/phase_6/audio/dial', language)
+                    'goofy', chatterIndexArray, '../../user/default/resources/default/phase_6/audio/dial', language)
         elif char == 'd' or char == 'dw' or char == 'fd':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_6/audio/dial/donald.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_6/audio/dial/donald.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
@@ -551,36 +551,36 @@ class Char(Avatar.Avatar):
                                                         3,
                                                         4])
                     self.loadChatterDialogue(
-                        'donald', chatterIndexArray, 'user/resources/default/phase_6/audio/dial', language)
+                        'donald', chatterIndexArray, '../../user/default/resources/default/phase_6/audio/dial', language)
         elif char == 'p' or char == 'wp':
             dialogueFile = base.loader.loadSfx(
-                'user/resources/default/phase_3.5/audio/dial/AV_dog_med.ogg')
+                '../../user/default/resources/default/phase_3.5/audio/dial/AV_dog_med.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
         elif char == 'cl':
             dialogueFile = base.loader.loadSfx(
-                'user/resources/default/phase_3.5/audio/dial/AV_dog_med.ogg')
+                '../../user/default/resources/default/phase_3.5/audio/dial/AV_dog_med.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
         elif char == 'ch':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_6/audio/dial/chip.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_6/audio/dial/chip.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
         elif char == 'da':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_6/audio/dial/dale.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_6/audio/dial/dale.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
         elif char == 'pch':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_6/audio/dial/chip.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_6/audio/dial/chip.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 
         elif char == 'jda':
-            dialogueFile = base.loader.loadSfx('user/resources/default/phase_6/audio/dial/dale.ogg')
+            dialogueFile = base.loader.loadSfx('../../user/default/resources/default/phase_6/audio/dial/dale.ogg')
             for i in range(0, 6):
                 self.dialogueArray.append(dialogueFile)
 

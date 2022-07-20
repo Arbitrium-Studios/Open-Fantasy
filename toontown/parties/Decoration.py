@@ -20,13 +20,13 @@ class Decoration(NodePath):
         self.setH(h)
         if self.name == 'CakeTower':
             self.partyCake = loader.loadModel(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_cakeTower')
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_cakeTower')
             tntSeqNode = self.partyCake.find('**/seqNode_tnt').node()
             tntSeqNode.setFrameRate(20)
             self.partyCake.reparentTo(self)
         elif self.name == 'BannerJellyBean':
             partyBannerModel = loader.loadModel(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerJellybean_model')
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerJellybean_model')
             banner = []
             banner1 = partyBannerModel.find('**/banner1')
             banner2 = partyBannerModel.find('**/banner2')
@@ -37,7 +37,7 @@ class Decoration(NodePath):
             banner.append(banner2)
             self.partyBanner = Actor.Actor(
                 partyBannerModel, {
-                    'float': 'user/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerJellybean'})
+                    'float': '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerJellybean'})
             bannerSeqNodeParent = self.partyBanner.find('**/bannerJoint')
             bannerSeqNode = SequenceNode('banner')
             for bannerNode in banner:
@@ -61,8 +61,8 @@ class Decoration(NodePath):
             self.partyBanner.reparentTo(self)
         elif self.name == 'GagGlobe':
             self.partyGlobe = Actor.Actor(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_gagGlobe_model', {
-                    'idle': 'user/resources/default/phase_13/models/parties/tt_m_ara_pty_gagGlobe'})
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_gagGlobe_model', {
+                    'idle': '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_gagGlobe'})
             self.partyGlobe.setBillboardAxis()
             confettiLocator = self.partyGlobe.find('**/uvj_confetti')
             confettiMesh = self.partyGlobe.find('**/innerGlobeMesh')
@@ -88,10 +88,10 @@ class Decoration(NodePath):
             self.partyGlobe.reparentTo(self)
         elif self.name == 'FlyingHeart':
             flyingHeartModel = loader.loadModel(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_heartWing_model')
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_heartWing_model')
             self.flyingHeart = Actor.Actor(
                 flyingHeartModel, {
-                    'idle': 'user/resources/default/phase_13/models/parties/tt_m_ara_pty_heartWing'})
+                    'idle': '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_heartWing'})
             wingsSeqNodeParent = self.flyingHeart.find('**/heartWingJoint')
             collisionMesh = self.flyingHeart.find('**/collision_heartWing')
             collisionMesh.hide()
@@ -139,8 +139,8 @@ class Decoration(NodePath):
             self.flyingHeart.reparentTo(self)
         elif self.name == 'HeartBanner':
             self.heartBanner = Actor.Actor(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerValentine_model', {
-                    'idle': 'user/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerValentine'})
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerValentine_model', {
+                    'idle': '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerValentine'})
             balloonLeft = self.heartBanner.find('**/balloonsL')
             balloonRight = self.heartBanner.find('**/balloonsR')
             balloonLeft.setBillboardAxis()
@@ -155,17 +155,17 @@ class Decoration(NodePath):
         elif self.name == 'Hydra' or self.name == 'StageWinter':
             if self.name == 'StageWinter':
                 self.hydra = Actor.Actor(
-                    'user/resources/default/phase_13/models/parties/tt_r_ara_pty_winterProps', {
-                        'dance': 'user/resources/default/phase_13/models/parties/tt_a_ara_pty_hydra_dance'})
+                    '../../user/default/resources/default/phase_13/models/parties/tt_r_ara_pty_winterProps', {
+                        'dance': '../../user/default/resources/default/phase_13/models/parties/tt_a_ara_pty_hydra_dance'})
             else:
                 self.hydra = Actor.Actor(
-                    'user/resources/default/phase_13/models/parties/tt_a_ara_pty_hydra_default', {
-                        'dance': 'user/resources/default/phase_13/models/parties/tt_a_ara_pty_hydra_dance'})
+                    '../../user/default/resources/default/phase_13/models/parties/tt_a_ara_pty_hydra_default', {
+                        'dance': '../../user/default/resources/default/phase_13/models/parties/tt_a_ara_pty_hydra_dance'})
             st = random.randint(0, 10)
             animIval = ActorInterval(self.hydra, 'dance')
             animIvalDur = animIval.getDuration()
             self.decSfx = loader.loadSfx(
-                'user/resources/default/phase_13/audio/sfx/tt_s_ara_pty_propsShow_dance.ogg')
+                '../../user/default/resources/default/phase_13/audio/sfx/tt_s_ara_pty_propsShow_dance.ogg')
             soundIval = SoundInterval(
                 self.decSfx,
                 node=self.hydra,
@@ -186,13 +186,13 @@ class Decoration(NodePath):
                 self.hydra.node().setFinal(1)
         elif self.name == 'TubeCogVictory':
             self.tubeCog = Actor.Actor(
-                'user/resources/default/phase_5.5/models/estate/tt_a_ara_pty_tubeCogVictory_default', {
-                    'wave': 'user/resources/default/phase_5.5/models/estate/tt_a_ara_pty_tubeCogVictory_wave'})
+                '../../user/default/resources/default/phase_5.5/models/estate/tt_a_ara_pty_tubeCogVictory_default', {
+                    'wave': '../../user/default/resources/default/phase_5.5/models/estate/tt_a_ara_pty_tubeCogVictory_wave'})
             st = random.randint(0, 10)
             animIval = ActorInterval(self.tubeCog, 'wave')
             animIvalDur = animIval.getDuration()
             self.decSfx = loader.loadSfx(
-                'user/resources/default/phase_13/audio/sfx/tt_s_ara_pty_tubeCogVictory_wave.ogg')
+                '../../user/default/resources/default/phase_13/audio/sfx/tt_s_ara_pty_tubeCogVictory_wave.ogg')
             soundIval = SoundInterval(
                 self.decSfx,
                 node=self.tubeCog,
@@ -208,8 +208,8 @@ class Decoration(NodePath):
             self.tubeCog.setBlend(frameBlend=base.smoothAnimations)
         elif self.name == 'BannerVictory':
             self.bannerVictory = Actor.Actor(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerVictory_model', {
-                    'idle': 'user/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerVictory'})
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerVictory_model', {
+                    'idle': '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_bannerVictory'})
             balloonLeft = self.bannerVictory.find('**/balloonsLMesh')
             balloonRight = self.bannerVictory.find('**/balloonsRMesh')
             balloonLeft.setBillboardAxis()
@@ -223,8 +223,8 @@ class Decoration(NodePath):
             self.bannerVictory.setBlend(frameBlend=base.smoothAnimations)
         elif self.name == 'CannonVictory':
             self.cannonVictory = Actor.Actor(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_cannonVictory_model', {
-                    'idle': 'user/resources/default/phase_13/models/parties/tt_m_ara_pty_cannonVictory'})
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_cannonVictory_model', {
+                    'idle': '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_cannonVictory'})
             confettiLocator = self.cannonVictory.findAllMatches(
                 '**/uvj_confetties')[1]
             confettiMesh = self.cannonVictory.find('**/confettis')
@@ -238,39 +238,39 @@ class Decoration(NodePath):
             self.cannonVictory.setBlend(frameBlend=base.smoothAnimations)
         elif self.name == 'CogStatueVictory':
             self.decorationModel = loader.loadModel(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_cogDoodleVictory')
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_cogDoodleVictory')
             self.decorationModel.reparentTo(self)
             self.decorationShadow = self.setupAnimSeq()
         elif self.name == 'CogIceCreamVictory':
             self.decorationModel = loader.loadModel(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_cogIceCreamVictory')
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_cogIceCreamVictory')
             self.decorationModel.reparentTo(self)
             self.decorationShadow = self.setupAnimSeq()
         elif self.name == 'cogIceCreamWinter':
             self.decorationModel = loader.loadModel(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_cogIceCreamWinter')
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_cogIceCreamWinter')
             self.decorationModel.reparentTo(self)
             self.decorationShadow = self.setupAnimSeq()
         elif self.name == 'CogStatueWinter':
             self.decorationModel = loader.loadModel(
-                'user/resources/default/phase_13/models/parties/tt_m_ara_pty_cogDoodleWinter')
+                '../../user/default/resources/default/phase_13/models/parties/tt_m_ara_pty_cogDoodleWinter')
             self.decorationModel.reparentTo(self)
             self.decorationShadow = self.setupAnimSeq()
         elif self.name == 'snowman':
             self.decorationModel = loader.loadModel(
-                'user/resources/default/phase_13/models/estate/tt_m_prp_ext_snowman')
+                '../../user/default/resources/default/phase_13/models/estate/tt_m_prp_ext_snowman')
             self.decorationModel.reparentTo(self)
             self.decorationModel.find('**/growthStage_1').hide()
             self.decorationModel.find('**/growthStage_2').hide()
         elif self.name == 'snowDoodle':
             self.decorationModel = loader.loadModel(
-                'user/resources/default/phase_5.5/models/estate/tt_m_prp_ext_snowDoodle')
+                '../../user/default/resources/default/phase_5.5/models/estate/tt_m_prp_ext_snowDoodle')
             self.decorationModel.reparentTo(self)
             self.decorationModel.find('**/growthStage_1').hide()
             self.decorationModel.find('**/growthStage_2').hide()
         else:
             self.decorationModels = loader.loadModel(
-                'user/resources/default/phase_4/models/parties/partyDecorations')
+                '../../user/default/resources/default/phase_4/models/parties/partyDecorations')
             self.decorationModels.copyTo(self)
             decors = self.findAllMatches('**/partyDecoration_*')
             for i in range(decors.getNumPaths()):

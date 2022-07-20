@@ -20,7 +20,7 @@ class TeamActivityGui:
         self.activity = activity
 
     def load(self):
-        buttonModels = loader.loadModel('user/resources/default/phase_3.5/models/gui/inventory_gui')
+        buttonModels = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/inventory_gui')
         upButton = buttonModels.find('**//InventoryButtonUp')
         downButton = buttonModels.find('**/InventoryButtonDown')
         rolloverButton = buttonModels.find('**/InventoryButtonRollover')

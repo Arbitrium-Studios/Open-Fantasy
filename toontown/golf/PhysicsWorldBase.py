@@ -231,7 +231,7 @@ class PhysicsWorldBase:
         if self.canRender:
             for count in range(self.jointMarkerCount):
                 testMarker = render.attachNewNode('Joint Marker')
-                ballmodel = loader.loadModel('user/resources/default/phase_3/models/misc/sphere')
+                ballmodel = loader.loadModel('../../user/default/resources/default/phase_3/models/misc/sphere')
                 ballmodel.reparentTo(testMarker)
                 ballmodel.setScale(0.1)
                 testMarker.setPos(0.0, 0.0, -100.0)
@@ -509,10 +509,10 @@ class PhysicsWorldBase:
             self.subPlacerNode.setPos(0, 0, 0)
             if self.canRender:
                 myModel = loader.loadModel(
-                    'user/resources/default/phase_6/models/golf/golf_windmill_b')
+                    '../../user/default/resources/default/phase_6/models/golf/golf_windmill_b')
             else:
                 myModel = loader.loadModel(
-                    'user/resources/default/phase_6/models/golf/golf_windmill_b.bam')
+                    '../../user/default/resources/default/phase_6/models/golf/golf_windmill_b.bam')
             myModel.reparentTo(self.root)
             myModel.setPos(vPos)
             myModel.setHpr(vHpr)
@@ -635,7 +635,7 @@ class PhysicsWorldBase:
         self.notify.debug('Collide Bits %s' % geom.getCollideBits())
         if self.canRender:
             testball = render.attachNewNode('Ball Holder')
-            ballmodel = loader.loadModel('user/resources/default/phase_6/models/golf/golf_ball')
+            ballmodel = loader.loadModel('../../user/default/resources/default/phase_6/models/golf/golf_ball')
             ballmodel.reparentTo(testball)
             ballmodel.setColor(*GolfGlobals.PlayerColors[ballIndex - 1])
             testball.setPos(0, 0, -100)

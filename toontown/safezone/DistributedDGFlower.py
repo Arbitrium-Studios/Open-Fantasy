@@ -15,7 +15,7 @@ class DistributedDGFlower(DistributedObject.DistributedObject):
     def generate(self):
         DistributedObject.DistributedObject.generate(self)
         self.bigFlower = loader.loadModel(
-            'user/resources/default/phase_8/models/props/DG_flower-mod.bam')
+            '../../user/default/resources/default/phase_8/models/props/DG_flower-mod.bam')
         self.bigFlower.setPos(1.39, 92.91, 2.0)
         self.bigFlower.setScale(2.5)
         self.bigFlower.reparentTo(render)

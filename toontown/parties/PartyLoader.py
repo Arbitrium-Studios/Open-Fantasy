@@ -24,9 +24,9 @@ class PartyLoader(SafeZoneLoader.SafeZoneLoader):
             State.State('quietZone', self.enterQuietZone,
                         self.exitQuietZone, ['planning', 'party']),
             State.State('final', self.enterFinal, self.exitFinal, ['start'])], 'start', 'final')
-        self.musicFile = 'user/resources/default/phase_13/audio/bgm/party_original_theme.ogg'
-        self.activityMusicFile = 'user/resources/default/phase_13/audio/bgm/party_waltz_dance.ogg'
-        self.dnaFile = 'user/resources/default/phase_13/dna/party_sz.dna'
+        self.musicFile = '../../user/default/resources/default/phase_13/audio/bgm/party_original_theme.ogg'
+        self.activityMusicFile = '../../user/default/resources/default/phase_13/audio/bgm/party_waltz_dance.ogg'
+        self.dnaFile = '../../user/default/resources/default/phase_13/dna/party_sz.dna'
         self.safeZoneStorageDNAFile = None
         self.cloudSwitch = 0
         self.id = PartyHood
@@ -45,19 +45,19 @@ class PartyLoader(SafeZoneLoader.SafeZoneLoader):
         base.win.setClearColor(Vec4(0.47, 0.69, 0.3, 1.0))
         SafeZoneLoader.SafeZoneLoader.load(self)
         self.underwaterSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/AV_ambient_water.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/AV_ambient_water.ogg')
         self.swimSound = base.loader.loadSfx(
-            'user/resources/default/phase_4/audio/sfx/AV_swim_single_stroke.ogg')
+            '../../user/default/resources/default/phase_4/audio/sfx/AV_swim_single_stroke.ogg')
         self.submergeSound = base.loader.loadSfx(
-            'user/resources/default/phase_5.5/audio/sfx/AV_jump_in_water.ogg')
+            '../../user/default/resources/default/phase_5.5/audio/sfx/AV_jump_in_water.ogg')
         self.birdSound = list(map(base.loader.loadSfx,
-                                  ['user/resources/default/phase_4/audio/sfx/SZ_TC_bird1.ogg',
-                                   'user/resources/default/phase_4/audio/sfx/SZ_TC_bird2.ogg',
-                                   'user/resources/default/phase_4/audio/sfx/SZ_TC_bird3.ogg']))
+                                  ['../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird1.ogg',
+                                   '../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird2.ogg',
+                                   '../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird3.ogg']))
         self.cricketSound = list(map(base.loader.loadSfx,
-                                     ['user/resources/default/phase_4/audio/sfx/SZ_TC_bird1.ogg',
-                                      'user/resources/default/phase_4/audio/sfx/SZ_TC_bird2.ogg',
-                                      'user/resources/default/phase_4/audio/sfx/SZ_TC_bird3.ogg']))
+                                     ['../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird1.ogg',
+                                      '../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird2.ogg',
+                                      '../../user/default/resources/default/phase_4/audio/sfx/SZ_TC_bird3.ogg']))
 
     def unload(self):
         self.ignoreAll()
@@ -126,8 +126,8 @@ class PartyLoader(SafeZoneLoader.SafeZoneLoader):
         self.loadSunMoon()
 
     def loadSunMoon(self):
-        self.sun = loader.loadModel('user/resources/default/phase_4/models/props/sun.bam')
-        self.moon = loader.loadModel('user/resources/default/phase_5.5/models/props/moon.bam')
+        self.sun = loader.loadModel('../../user/default/resources/default/phase_4/models/props/sun.bam')
+        self.moon = loader.loadModel('../../user/default/resources/default/phase_5.5/models/props/moon.bam')
         self.sunMoonNode = self.geom.attachNewNode('sunMoon')
         self.sunMoonNode.setPosHpr(0, 0, 0, 0, 0, 0)
         if self.sun:
@@ -250,7 +250,7 @@ class PartyLoader(SafeZoneLoader.SafeZoneLoader):
     def loadCloud(self, version, radius, zOffset):
         self.notify.debug('loadOnePlatform version=%d' % version)
         cloud = NodePath('cloud-%d%d' % (radius, version))
-        cloudModel = loader.loadModel('user/resources/default/phase_5.5/models/estate/bumper_cloud')
+        cloudModel = loader.loadModel('../../user/default/resources/default/phase_5.5/models/estate/bumper_cloud')
         cc = cloudModel.copyTo(cloud)
         colCube = cc.find('**/collision')
         colCube.setName('cloudSphere-0')

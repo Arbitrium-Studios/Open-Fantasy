@@ -6,7 +6,7 @@ def loadMockup(fileName, dmodelsAlt='coffin'):
     try:
         model = loader.loadModel(fileName)
     except IOError:
-        model = loader.loadModel('user/resources/default/phase_4/models/props/%s' % dmodelsAlt)
+        model = loader.loadModel('../../user/default/resources/default/phase_4/models/props/%s' % dmodelsAlt)
 
     return model
 

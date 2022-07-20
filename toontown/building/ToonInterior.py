@@ -20,7 +20,7 @@ class ToonInterior(Place.Place):
 
     def __init__(self, loader, parentFSMState, doneEvent):
         Place.Place.__init__(self, loader, doneEvent)
-        self.dnaFile = 'user/resources/default/phase_7/models/modules/toon_interior'
+        self.dnaFile = '../../user/default/resources/default/phase_7/models/modules/toon_interior'
         self.isInterior = 1
         self.tfaDoneEvent = 'tfaDoneEvent'
         self.hfaDoneEvent = 'hfaDoneEvent'

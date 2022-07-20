@@ -47,7 +47,7 @@ class CatalogBeanItem(CatalogItem.CatalogItem):
         return ToontownGlobals.P_ItemAvailable
 
     def getPicture(self, avatar):
-        beanJar = loader.loadModel('user/resources/default/phase_3.5/models/gui/jar_gui')
+        beanJar = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/jar_gui')
         frame = self.makeFrame()
         beanJar.reparentTo(frame)
         beanJar.setPos(0, 0, 0)

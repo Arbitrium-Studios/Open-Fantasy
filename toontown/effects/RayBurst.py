@@ -12,7 +12,7 @@ class RayBurst(NodePath, EffectController):
         self.effectScale = 1.0
         self.effectColor = Vec4(1, 1, 1, 1)
         model = loader.loadModel(
-            'user/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkCards')
+            '../../user/default/resources/default/phase_4/models/props/tt_m_efx_ext_fireworkCards')
         self.effectModel = model.find('**/tt_t_efx_ext_fireworkRays')
         self.effectModel.setBillboardPointWorld()
         self.effectModel.reparentTo(self)

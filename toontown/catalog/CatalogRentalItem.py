@@ -68,11 +68,11 @@ class CatalogRentalItem(CatalogItem.CatalogItem):
         spin = 1
         down = -1
         if self.typeIndex == ToontownGlobals.RentalCannon:
-            model = loader.loadModel('user/resources/default/phase_4/models/minigames/toon_cannon')
+            model = loader.loadModel('../../user/default/resources/default/phase_4/models/minigames/toon_cannon')
             scale = 0.5
             heading = 45
         elif self.typeIndex == ToontownGlobals.RentalGameTable:
-            model = loader.loadModel('user/resources/default/phase_6/models/golf/game_table')
+            model = loader.loadModel('../../user/default/resources/default/phase_6/models/golf/game_table')
         self.hasPicture = True
         return self.makeFrameModel(model, spin)
 

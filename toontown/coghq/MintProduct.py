@@ -3,9 +3,9 @@ from otp.level import BasicEntities
 
 
 class MintProduct(BasicEntities.NodePathEntity):
-    Models = {CashbotMintIntA: 'user/resources/default/phase_10/models/cashbotHQ/MoneyBag',
-              CashbotMintIntB: 'user/resources/default/phase_10/models/cashbotHQ/MoneyStackPallet',
-              CashbotMintIntC: 'user/resources/default/phase_10/models/cashbotHQ/GoldBarStack'}
+    Models = {CashbotMintIntA: '../../user/default/resources/default/phase_10/models/cashbotHQ/MoneyBag',
+              CashbotMintIntB: '../../user/default/resources/default/phase_10/models/cashbotHQ/MoneyStackPallet',
+              CashbotMintIntC: '../../user/default/resources/default/phase_10/models/cashbotHQ/GoldBarStack'}
     Scales = {CashbotMintIntA: 0.98,
               CashbotMintIntB: 0.38,
               CashbotMintIntC: 0.6}

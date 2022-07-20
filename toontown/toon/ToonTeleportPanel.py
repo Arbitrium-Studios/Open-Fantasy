@@ -93,7 +93,7 @@ class ToonTeleportPanel(DirectFrame):
         from toontown.friends import FriendInviter
         FriendInviter.hideFriendInviter()
         ToonAvatarDetailPanel.hideAvatarDetail()
-        buttons = loader.loadModel('user/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
+        buttons = loader.loadModel('../../user/default/resources/default/phase_3/models/gui/dialog_box_buttons_gui')
         self.bOk = DirectButton(
             self,
             image=(

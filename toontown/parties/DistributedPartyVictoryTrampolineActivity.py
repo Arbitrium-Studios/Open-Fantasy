@@ -10,4 +10,4 @@ class DistributedPartyVictoryTrampolineActivity(
             cr,
             doJellyBeans,
             doTricks,
-            'user/resources/default/phase_13/maps/tt_t_ara_pty_trampolineVictory.jpg')
+            '../../user/default/resources/default/phase_13/maps/tt_t_ara_pty_trampolineVictory.jpg')

@@ -9,7 +9,7 @@ class DivingTreasure(DirectObject):
 
     def __init__(self, i):
         self.treasureNode = render.attachNewNode('treasure')
-        loadBase = 'user/resources/default/phase_4/models/minigames/'
+        loadBase = '../../user/default/resources/default/phase_4/models/minigames/'
         self.chest = loader.loadModel(loadBase + 'treasure.bam')
         self.chest.reparentTo(self.treasureNode)
         self.chest.setPos(0, 0, -25)

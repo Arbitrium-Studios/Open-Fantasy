@@ -74,7 +74,7 @@ class PartyCog(FSM):
     def load(self):
         self.root = NodePath('PartyCog-%d' % self.id)
         self.root.reparentTo(self.parentNode)
-        path = 'user/resources/default/phase_13/models/parties/cogPinata_'
+        path = '../../user/default/resources/default/phase_13/models/parties/cogPinata_'
         self.actor = Actor(path + 'actor', {'idle': path + 'idle_anim',
                                             'down': path + 'down_anim',
                                             'up': path + 'up_anim',
@@ -120,7 +120,7 @@ class PartyCog(FSM):
         self.pieHitSound = globalBattleSoundCache.getSound(
             'AA_wholepie_only.ogg')
         self.upSound = globalBattleSoundCache.getSound('AV_jump_to_side.ogg')
-        self.hole = loader.loadModel('user/resources/default/phase_13/models/parties/cogPinataHole')
+        self.hole = loader.loadModel('../../user/default/resources/default/phase_13/models/parties/cogPinataHole')
         self.hole.setTransparency(True)
         self.hole.setP(-90.0)
         self.hole.setScale(3)

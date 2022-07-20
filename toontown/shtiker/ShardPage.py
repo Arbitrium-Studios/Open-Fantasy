@@ -84,7 +84,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
             self.totalPopulationText.show()
         else:
             self.totalPopulationText.hide()
-        self.gui = loader.loadModel('user/resources/default/phase_3.5/models/gui/friendslist_gui')
+        self.gui = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/friendslist_gui')
         self.listXorigin = -0.02
         self.listFrameSizeX = 0.67
         self.listZorigin = -0.96
@@ -184,7 +184,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
                 command=self.choseShard,
                 extraArgs=[shardId])
         else:
-            model = loader.loadModel('user/resources/default/phase_3.5/models/gui/matching_game_gui')
+            model = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/matching_game_gui')
             button = model.find('**/minnieCircle')
             shardButtonR = DirectButton(
                 parent=shardButtonParent, relief=None, image=button, image_scale=(

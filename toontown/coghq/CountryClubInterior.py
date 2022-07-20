@@ -105,9 +105,9 @@ class CountryClubInterior(BattlePlace.BattlePlace):
         BattlePlace.BattlePlace.load(self)
         musicName = random.choice(
             [
-                'user/resources/default/phase_12/audio/bgm/Bossbot_Factory_v1.ogg',
-                'user/resources/default/phase_12/audio/bgm/Bossbot_Factory_v2.ogg',
-                'user/resources/default/phase_12/audio/bgm/Bossbot_Factory_v3.ogg'])
+                '../../user/default/resources/default/phase_12/audio/bgm/Bossbot_Factory_v1.ogg',
+                '../../user/default/resources/default/phase_12/audio/bgm/Bossbot_Factory_v2.ogg',
+                '../../user/default/resources/default/phase_12/audio/bgm/Bossbot_Factory_v3.ogg'])
         self.music = base.loader.loadMusic(musicName)
 
     def unload(self):

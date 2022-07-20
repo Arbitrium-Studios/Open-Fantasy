@@ -22,7 +22,7 @@ class TrackFrame(DirectFrame):
     def __init__(self, index):
         DirectFrame.__init__(self, relief=None)
         self.initialiseoptions(TrackFrame)
-        filmstrip = loader.loadModel('user/resources/default/phase_3.5/models/gui/filmstrip')
+        filmstrip = loader.loadModel('../../user/default/resources/default/phase_3.5/models/gui/filmstrip')
         self.index = index
         self.frame = DirectFrame(parent=self, relief=None, image=filmstrip, image_scale=1, text=str(
             self.index - 1), text_pos=(0.26, -0.22), text_fg=(1, 1, 1, 1), text_scale=0.1)

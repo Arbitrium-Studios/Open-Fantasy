@@ -51,9 +51,9 @@ StomperProps = [{'path': '**/stomper_GRP_01/stomper_cylinder_01',
                 {'path': '**/stomper_GRP_12/stomper_cylinder_034',
                  'motion': 'up'}]
 StomperHaltTime = 7.3
-StomperSound = 'user/resources/default/phase_9/audio/sfx/CHQ_FACT_stomper_raise.ogg'
+StomperSound = '../../user/default/resources/default/phase_9/audio/sfx/CHQ_FACT_stomper_raise.ogg'
 MaxToons = 4
-BarrelRoomModel = 'user/resources/default/phase_5/models/cogdominium/tt_m_ara_cbr_barrelRoom'
+BarrelRoomModel = '../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cbr_barrelRoom'
 BarrelRoomModelPos = (0, 0, 0)
 BarrelRoomElevatorOutPath = '**/elevatorOut_locator'
 BarrelRoomPlayerSpawnPoints = [(-4,
@@ -83,14 +83,14 @@ BarrelRoomPlayerSpawnPoints = [(-4,
 BarrelRoomCameraFar = 525.0
 BarrelRoomFogColor = Vec4(0.65, 0.21, 0, 1.0)
 BarrelRoomFogLinearRange = (0.0, 800.0)
-BarrelModel = 'user/resources/default/phase_5/models/cogdominium/tt_m_ara_cbr_laughBarrel'
+BarrelModel = '../../user/default/resources/default/phase_5/models/cogdominium/tt_m_ara_cbr_laughBarrel'
 BarrelModelScale = 1.0
 BarrelCollParams = (0,
                     0,
                     2,
                     2.0)
-BarrelBumpSound = 'user/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_2.ogg'
-BarrelGrabSound = 'user/resources/default/phase_4/audio/sfx/SZ_DD_treasure.ogg'
+BarrelBumpSound = '../../user/default/resources/default/phase_4/audio/sfx/Golf_Hit_Barrier_2.ogg'
+BarrelGrabSound = '../../user/default/resources/default/phase_4/audio/sfx/SZ_DD_treasure.ogg'
 StateHidden, StateAvailable, StateUsed, StateCrushed = list(range(4))
 
 
