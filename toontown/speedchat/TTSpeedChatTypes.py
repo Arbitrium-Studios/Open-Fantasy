@@ -1,3 +1,5 @@
+"""TTSpeedChatTypes.py: Toontown specific SpeedChat types """
+
 from .TTSCToontaskMenu import TTSCToontaskMenu
 from .TTSCFactoryMenu import TTSCFactoryMenu
 from .TTSCCogMenu import TTSCCogMenu

@@ -1,3 +1,5 @@
+
+
 from direct.fsm import StateData
 from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
@@ -6,51 +8,83 @@ from direct.fsm import State
 from . import TTEmote
 from otp.avatar import Emote
 
+# Motion class just keeps track of what motion animation the
+# Toon is playing
+
 
 class Motion(StateData.StateData):
-    notify = DirectNotifyGlobal.directNotify.newCategory('Motion')
+
+    notify = DirectNotifyGlobal.directNotify.newCategory("Motion")
 
     def __init__(self, toon):
         self.lt = toon
-        self.doneEvent = 'motionDone'
+        self.doneEvent = "motionDone"
         StateData.StateData.__init__(self, self.doneEvent)
-        self.fsm = ClassicFSM.ClassicFSM('Motion', [State.State('off', self.enterOff, self.exitOff),
-                                                    State.State(
-            'neutral', self.enterNeutral, self.exitNeutral),
-            State.State('walk', self.enterWalk, self.exitWalk),
-            State.State('run', self.enterRun, self.exitRun),
-            State.State(
-            'sad-neutral',
-            self.enterSadNeutral,
-            self.exitSadNeutral),
-            State.State('sad-walk', self.enterSadWalk, self.exitSadWalk),
-            State.State(
-            'catch-neutral',
-            self.enterCatchNeutral,
-            self.exitCatchNeutral),
-            State.State('catch-run', self.enterCatchRun, self.exitCatchRun),
-            State.State(
-            'catch-eatneutral',
-            self.enterCatchEatNeutral,
-            self.exitCatchEatNeutral),
-            State.State('catch-eatnrun', self.enterCatchEatNRun, self.exitCatchEatNRun)], 'off', 'off')
+
+        # The motionFSM keeps track of whether you are playing the
+        # run/walk/reverse/stand animation.  It is seperate from
+        # the animFSM states, because you can be in the "happy" or
+        # "sad" animFSM state and also be running/walking/standing, etc.  
+        # SDN: should this be defined here or somewhere else?
+        self.fsm = ClassicFSM.ClassicFSM('Motion',
+                           [State.State('off',
+                                        self.enterOff,
+                                        self.exitOff),
+                            State.State('neutral',
+                                        self.enterNeutral,
+                                        self.exitNeutral),
+                            State.State('walk',
+                                        self.enterWalk,
+                                        self.exitWalk),
+                            State.State('run',
+                                        self.enterRun,
+                                        self.exitRun),
+                            State.State('sad-neutral',
+                                        self.enterSadNeutral,
+                                        self.exitSadNeutral),
+                            State.State('sad-walk',
+                                        self.enterSadWalk,
+                                        self.exitSadWalk),
+                            State.State('catch-neutral',
+                                        self.enterCatchNeutral,
+                                        self.exitCatchNeutral),
+                            State.State('catch-run',
+                                        self.enterCatchRun,
+                                        self.exitCatchRun),
+                            State.State('catch-eatneutral',
+                                        self.enterCatchEatNeutral,
+                                        self.exitCatchEatNeutral),
+                            State.State('catch-eatnrun',
+                                        self.enterCatchEatNRun,
+                                        self.exitCatchEatNRun),
+                            ],
+                           # Initial State
+                           'off',
+                           # Final State
+                           'off',
+                           )
+        
         self.fsm.enterInitialState()
+
+        #self.parentFSMState = parentFSMState
+        #self.parentFSMState.addChild(self.fsm)
 
     def delete(self):
         del self.fsm
-
+        
     def load(self):
         pass
-
+            
     def unload(self):
         pass
 
     def enter(self):
         self.notify.debug('enter')
+        #self.fsm.enterInitialState()
 
     def exit(self):
         self.fsm.requestFinalState()
-
+    
     def enterOff(self, rate=0):
         self.notify.debug('enterOff')
 
@@ -62,22 +96,24 @@ class Motion(StateData.StateData):
 
     def exitNeutral(self):
         self.notify.debug('exitNeutral')
-
+        
     def enterWalk(self, rate=0):
         self.notify.debug('enterWalk')
-        Emote.globalEmote.disableBody(self.lt, 'enterWalk')
+        # disable emotes using the whole body
+        Emote.globalEmote.disableBody(self.lt, "enterWalk")
 
     def exitWalk(self):
         self.notify.debug('exitWalk')
-        Emote.globalEmote.releaseBody(self.lt, 'exitWalk')
+        Emote.globalEmote.releaseBody(self.lt, "exitWalk")
 
     def enterRun(self, rate=0):
         self.notify.debug('enterRun')
-        Emote.globalEmote.disableBody(self.lt, 'enterRun')
+        # disable emotes using the whole body
+        Emote.globalEmote.disableBody(self.lt, "enterRun")
 
     def exitRun(self):
         self.notify.debug('exitRun')
-        Emote.globalEmote.releaseBody(self.lt, 'exitRun')
+        Emote.globalEmote.releaseBody(self.lt, "exitRun")
 
     def enterSadNeutral(self, rate=0):
         self.notify.debug('enterSadNeutral')
@@ -119,3 +155,4 @@ class Motion(StateData.StateData):
         toon = self.lt
         if toon.playingAnim != anim:
             self.fsm.request(anim, [rate])
+

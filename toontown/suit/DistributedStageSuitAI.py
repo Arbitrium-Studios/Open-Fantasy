@@ -1,9 +1,7 @@
 from toontown.suit import DistributedFactorySuitAI
 from direct.directnotify import DirectNotifyGlobal
 
-
-class DistributedStageSuitAI(
-        DistributedFactorySuitAI.DistributedFactorySuitAI):
+class DistributedStageSuitAI(DistributedFactorySuitAI.DistributedFactorySuitAI):
     notify = DirectNotifyGlobal.directNotify.newCategory(
         'DistributedStageSuitAI')
 

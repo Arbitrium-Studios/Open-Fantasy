@@ -1,8 +1,7 @@
+
 from . import Street
 
-
 class MMStreet(Street.Street):
-
     def __init__(self, loader, parentFSM, doneEvent):
         Street.Street.__init__(self, loader, parentFSM, doneEvent)
 
@@ -11,3 +10,4 @@ class MMStreet(Street.Street):
 
     def unload(self):
         Street.Street.unload(self)
+

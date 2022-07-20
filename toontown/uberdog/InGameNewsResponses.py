@@ -1,2 +1,20 @@
-setLatestIssueFailureXML = '\n<setLatestIssueResponse>\n <success>false</success>\n <error>%s</error>\n</setLatestIssueResponse>\n\r\n'
-setLatestIssueSuccessXML = '\n<setLatestIssueResponse>\n <success>true</success>\n <info>%s</info>\n</setLatestIssueResponse>\n\r\n'
+"""
+Constants file that contains XML and misc. codes for award responses
+"""
+
+# --- Begin XML message constants ---
+
+
+setLatestIssueFailureXML = """
+<setLatestIssueResponse>
+ <success>false</success>
+ <error>%s</error>
+</setLatestIssueResponse>
+\r\n"""
+
+setLatestIssueSuccessXML = """
+<setLatestIssueResponse>
+ <success>true</success>
+ <info>%s</info>
+</setLatestIssueResponse>
+\r\n"""
