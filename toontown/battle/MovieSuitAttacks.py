@@ -1419,7 +1419,7 @@ def doRubOut(attack):
         # hideTrack.append(showParts(headParts))
         # hideTrack.append(showParts(torsoParts))
         # hideTrack.append(showParts(legsParts))
-        hideTrack.append(Parallel(showParts(headParts), showParts(torsoParts), hideParts(legsParts)))
+        hideTrack.append(Parallel(showParts(headParts), showParts(torsoParts), showParts(legsParts)))
         hideTrack.append(Func(battle.movie.clearRestoreColor))
         multiTrackList.append(hideTrack)
         multiTrackList.append(headTrack)
