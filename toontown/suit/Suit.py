@@ -345,6 +345,7 @@ class Suit(Avatar.Avatar):
         self.isDisguised = 0
         self.isWaiter = 0
         self.isRental = 0
+        self.isManager = 0
         return
 
     def delete(self):
@@ -401,6 +402,7 @@ class Suit(Avatar.Avatar):
         self.headTexture = None
         self.loseActor = None
         self.isSkeleton = 0
+        self.isManager = 0
         if dna.name == 'f':
             self.scale = 4.0 / cSize
             self.handColor = SuitDNA.corpPolyColor
@@ -1019,8 +1021,16 @@ class Suit(Avatar.Avatar):
         self.setName(TTLocalizer.Skeleton)
         nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self._name,
                                                         'dept': self.getStyleDept(),
-                                                        'level': self.getActualLevel()}
+                                                        'level': self.getActualLevel(),
+                                                        'mgr': 'Manager' if self.getManager() else ''}
         self.setDisplayName(nameInfo)
+        if self.isManager:
+            self.setColorScale(
+                {'c': SuitDNA.corpPolyColor,
+                 'l': SuitDNA.legalPolyColor,
+                 'm': SuitDNA.moneyPolyColor,
+                 's': SuitDNA.salesPolyColor}[self.style.dept]
+            )
         self.leftHand = self.find('**/joint_Lhold')
         self.rightHand = self.find('**/joint_Rhold')
         self.shadowJoint = self.find('**/joint_shadow')

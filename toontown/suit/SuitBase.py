@@ -23,6 +23,7 @@ class SuitBase:
         self.maxHP = 10
         self.currHP = 10
         self.isSkelecog = 0
+        self.isManager = 0
         return
 
     def delete(self):
@@ -49,7 +50,8 @@ class SuitBase:
         self.level = level
         nameWLevel = TTLocalizer.SuitBaseNameWithLevel % {'name': self._name,
                                                           'dept': self.getStyleDept(),
-                                                          'level': self.getActualLevel()}
+                                                          'level': self.getActualLevel(),
+                                                          'mgr': '\nManager' if self.getManager() else ''}
         self.setDisplayName(nameWLevel)
         attributes = SuitBattleGlobals.SuitAttributes[self.dna.name]
         self.maxHP = attributes['hp'][self.level]
@@ -69,6 +71,12 @@ class SuitBase:
             self.notify.warning(
                 'called getActualLevel with no DNA, returning 1 for level')
             return 1
+    
+    def getManager(self):
+        return self.isManager
+    
+    def setManager(self, flag):
+        self.isManager = flag
 
     def setPath(self, path):
         self.path = path
