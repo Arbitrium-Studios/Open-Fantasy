@@ -1398,6 +1398,7 @@ def doRubOut(attack):
         for partNum in range(0, parts.getNumPaths()):
             nextPart = parts.getPath(partNum)
             track.append(Func(nextPart.clearColorScale))
+            track.append(LerpFunctionInterval(nextPart.setAlphaScale, duration=0.2))
             track.append(Func(nextPart.clearTransparency))
 
         return track
@@ -1415,9 +1416,10 @@ def doRubOut(attack):
         # hideTrack.append(Wait(1))
         hideTrack.append(Parallel(hideParts(headParts), hideParts(torsoParts), hideParts(legsParts)))
         hideTrack.append(Wait(2.4))
-        hideTrack.append(showParts(headParts))
-        hideTrack.append(showParts(torsoParts))
-        hideTrack.append(showParts(legsParts))
+        # hideTrack.append(showParts(headParts))
+        # hideTrack.append(showParts(torsoParts))
+        # hideTrack.append(showParts(legsParts))
+        hideTrack.append(Parallel(showParts(headParts), showParts(torsoParts), hideParts(legsParts)))
         hideTrack.append(Func(battle.movie.clearRestoreColor))
         multiTrackList.append(hideTrack)
         multiTrackList.append(headTrack)
