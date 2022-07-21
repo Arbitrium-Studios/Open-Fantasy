@@ -137,6 +137,9 @@ class ToontownAIRepository(ToontownInternalRepository):
         """
         Creates "local" (non-distributed) objects.
         """
+        # Generate our news manager...
+        self.newsManager = NewsManagerAI(self)
+        self.newsManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
         # Create our holiday manager...
         self.holidayManager = HolidayManagerAI(self)
@@ -197,9 +200,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.timeManager = TimeManagerAI(self)
         self.timeManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        # Generate our news manager...
-        self.newsManager = NewsManagerAI(self)
-        self.newsManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+
 
         # Generate our Welcome Valley manager...
         self.welcomeValleyManager = WelcomeValleyManagerAI(self)
