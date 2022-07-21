@@ -1379,8 +1379,10 @@ def doRubOut(attack):
     legsEffect.setPos(effectX, effectY - 0.6, legsEffectHeight)
     partDelay = 2.5
     headTrack = getPartTrack(headEffect, partDelay + 0, 0.5, [headEffect, toon, 0])
-    torsoTrack = getPartTrack(torsoEffect, partDelay + 1.1, 0.5, [torsoEffect, toon, 0])
-    legsTrack = getPartTrack(legsEffect, partDelay + 2.2, 0.5, [legsEffect, toon, 0])
+    # torsoTrack = getPartTrack(torsoEffect, partDelay + 1.1, 0.5, [torsoEffect, toon, 0])
+    # legsTrack = getPartTrack(legsEffect, partDelay + 2.2, 0.5, [legsEffect, toon, 0])
+    torsoTrack = getPartTrack(torsoEffect, partDelay + 0, 0.5, [torsoEffect, toon, 0])
+    legsTrack = getPartTrack(legsEffect, partDelay + 0, 0.5, [legsEffect, toon, 0])
 
     def hideParts(parts):
         track = Parallel()
