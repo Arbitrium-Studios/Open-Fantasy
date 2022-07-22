@@ -3270,7 +3270,8 @@ class Toon(Avatar.Avatar, ToonHead):
             suitName = SuitBattleGlobals.SuitAttributes[suitType]['name']
             self.nametag.setDisplayName(TTLocalizer.SuitBaseNameWithLevel % {'name': name,
                                                                              'dept': suitName,
-                                                                             'level': self.cogLevels[suitDept] + 1})
+                                                                             'level': self.cogLevels[suitDept] + 1,
+                                                                             'mgr': ''})
             self.nametag.setNameWordwrap(9.0)
 
     def takeOffSuit(self):

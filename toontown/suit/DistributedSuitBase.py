@@ -76,12 +76,14 @@ class DistributedSuitBase(
         if self.getSkeleRevives() > 0:
             nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self._name,
                                                             'dept': self.getStyleDept(),
-                                                            'level': '%s%s' % (self.getActualLevel(), TTLocalizer.SkeleRevivePostFix)}
+                                                            'level': '%s%s' % (self.getActualLevel(), TTLocalizer.SkeleRevivePostFix),
+                                                            'mgr': ''}
             self.setDisplayName(nameInfo)
         else:
             nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self._name,
                                                             'dept': self.getStyleDept(),
-                                                            'level': self.getActualLevel()}
+                                                            'level': self.getActualLevel(),
+                                                            'mgr': ''}
             self.setDisplayName(nameInfo)
         return
 
