@@ -618,5 +618,15 @@
     > Like in Wizard101, for a set period of time, add the ability to return to a dungeon if you die.
     > Remove the ability to leave during the in-between rounds of the Boss battles.
     > When a Cog Building falls, instead of squishing the trees, it should make the tree's leaves fall off because of the nearby smog.
+    > Make trap damage meet between TTR and Clash's trap damage!
+    > Make TNT kill 12s
+    > Make Railroad kill 13s
+    > Make Clocks in Toontown reflect Toontown Time
+    > Make the Erase Attack by Pencil Pushers fade out your Toon all at once using the same functionality as the ghost command
+    > Remove Clothing Ticket Toontasks
+    > Make all clothing purchasable via Jellybeans
+    > Make all shaders match that which it is reflecting aka a Toon's shadow should be of itself, not a circle regardless what shaders you're using.
+    > When we implement shaders, we should add CRT and VHS tape filters
+    > Make the clouds be at various levels through out the day.
 
     > More soon!
