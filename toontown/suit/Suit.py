@@ -423,11 +423,11 @@ class Suit(Avatar.Avatar):
             self.generateHead('yesman')
             self.setHeight(5.28)
         elif dna.name == 'mm':
-            self.scale = 2.5 / cSize
+            self.scale = 1.25 / cSize
             self.handColor = SuitDNA.corpPolyColor
             self.generateBody()
             self.generateHead('micromanager')
-            self.setHeight(3.25)
+            self.setHeight(1.625)
         elif dna.name == 'ds':
             self.scale = 4.5 / bSize
             self.handColor = SuitDNA.corpPolyColor
@@ -522,11 +522,11 @@ class Suit(Avatar.Avatar):
             self.setHeight(8.69)
             self.setPickable(0)
         elif dna.name == 'sc':
-            self.scale = 3.6 / cSize
+            self.scale = 2.5 / cSize
             self.handColor = SuitDNA.moneyPolyColor
             self.generateBody()
             self.generateHead('coldcaller')
-            self.setHeight(4.77)
+            self.setHeight(3.3125)
         elif dna.name == 'pp':
             self.scale = 3.55 / aSize
             self.handColor = VBase4(1.0, 0.5, 0.6, 1.0)
