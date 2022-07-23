@@ -47,7 +47,8 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         self.camParent = self.escapementNode.attachNewNode('orbitCamParent')
         self._paramStack = []
         self.setDefaultParams()
-
+        self.DistanceCheckTaskName = 'OrbitCamDistanceTask'
+        taskMgr.add(self.checkSubjectDist, self.DistanceCheckTaskName, priority=40)
         self._isAtRear = True
         self._rotateToRearIval = None
         self.toggleFov = False
@@ -76,6 +77,8 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         self.lodCenter = NodePath()
         self.lodCenterEnv = NodePath()
         self.accept('change_movement', self.change_movement)
+
+        
 
     def change_movement(self, action, speed_normal, speed_running, speed_sliding):
         run_angle = -45 if speed_sliding > 0 else 45
@@ -106,6 +109,7 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         CameraMode.CameraMode.destroy(self)
         NodePath.removeNode(self)
         ParamObj.destroy(self)
+        taskMgr.remove(self.DistanceCheckTaskName)
         return
 
     def getName(self):
@@ -717,3 +721,11 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
             self.subject.getGeomNode().hide()
         else:
             self.subject.getGeomNode().show()
+
+    def checkSubjectDist(self, task):
+        distance = camera.getDistance(self)
+        if distance < 1.8 or self.subject.isDisguised:
+            self.subject.getGeomNode().hide()
+        else:
+            self.subject.getGeomNode().show()
+        return task.cont
