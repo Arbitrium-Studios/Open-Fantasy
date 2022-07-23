@@ -621,7 +621,7 @@
     > Make trap damage meet between TTR and Clash's trap damage!
     > Make TNT kill 12s
     > Make Railroad kill 13s
-    > Make Clocks in Toontown reflect Toontown Time
+    > Make ALL Clocks (Even Cog building ones) in Toontown reflect Toontown Time
     > Make the Erase Attack by Pencil Pushers fade out your Toon all at once using the same functionality as the ghost command
     > Remove Clothing Ticket Toontasks
     > Make all clothing purchasable via Jellybeans
