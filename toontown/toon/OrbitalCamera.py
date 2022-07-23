@@ -531,19 +531,12 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         taskMgr.add(self._collisionCheckTask, OrbitCamera.CollisionCheckTaskName, priority=45)
 
     def _stopCollisionCheck(self):
-        # while len(self._hiddenGeoms):
-        # self._unfadeGeom(self._hiddenGeoms.keys()[0])
-        #
-        # del self._hiddenGeoms
-        #  del self._fadeOutIvals
-        #   del self._fadeInIvals
         taskMgr.remove(OrbitCamera.CollisionCheckTaskName)
         self._cTrav.removeCollider(self._collSolidNp)
         del self._cHandlerQueue
         del self._cTrav
         self._collSolidNp.detachNode()
         del self._collSolidNp
-        self.showOrHide(self.subject)
 
     def _fadeGeom(self, np):
         if np in self._fadeInIvals:
@@ -679,15 +672,10 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
             camera.setPos(self.camOffset)
             camera.setZ(0)
             return task.cont
-        self.showOrHide(self.subject)
         cPoint = collEntry.getSurfacePoint(self)
         offset = 0.9
         camera.setPos(cPoint + cNormal * offset)
         distance = camera.getDistance(self)
-        if distance < 1.8 or self.subject.isDisguised:
-            self.subject.getGeomNode().hide()
-        else:
-            self.subject.getGeomNode().show()
 
         self._cTrav.traverse(render)
         return Task.cont
