@@ -142,7 +142,7 @@ class ToontownControlManager(ControlManager.ControlManager):
             
         if self.passMessagesThrough: # for not breaking toontown          
             #if base.wantWASD:
-            self.notify.info('WASD support was enabled.')
+            self.notify.info('Custom Controls are enabled.')
             self.istWASD.append(inputState.watchWithModifiers("forward", base.MOVE_FORWARD, inputSource=inputState.WASD))
             self.istWASD.append(inputState.watchWithModifiers("reverse", base.MOVE_BACKWARDS, inputSource=inputState.WASD))
             self.istWASD.append(inputState.watchWithModifiers("turnLeft", base.MOVE_LEFT, inputSource=inputState.WASD))
