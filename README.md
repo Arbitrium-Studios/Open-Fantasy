@@ -37,6 +37,7 @@
 + Toontown Rewritten for reviving the spirit of Toontown and its community!
 + Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
 + Jesse Schell for fighting for Toontown Online's Official Return
++ Toontown Stride team for open-sourcing their code for all to use!
 
 ## - If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
 

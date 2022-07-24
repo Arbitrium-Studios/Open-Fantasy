@@ -10047,3 +10047,17 @@ ChatLogTabWhispers = 'Whispers'
 ChatLogTabGlobal = 'Global'
 ChatLogTabSystem = 'System'
 ChatLogSendToGuild = 'Send to guild'
+
+# Credits
+
+CreditsButtonText = "Credits"
+
+# Languages
+
+LanguageButtonText = "Language"
+LanguageSelectorTitle = 'Choose your language!'
+LanguageSelectorCurrent = 'Current language: %s'
+LanguageSelectorAvailable = 'Available languages:'
+LanguageSelectorBack = 'Back'
+LanguageSelectorConfirm = 'Are you sure you want to change your language to %s? This will close your game.'
+LanguageSelectorSameLanguage = "You're already using that language!"

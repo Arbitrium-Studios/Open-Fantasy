@@ -1,5 +1,6 @@
 from pandac.PandaModules import *
 from toontown.toonbase import ToontownGlobals
+from toontown.language import LanguageSelector
 from . import AvatarChoice
 from direct.fsm import StateData
 from direct.fsm import ClassicFSM, State
@@ -70,6 +71,17 @@ class AvatarChooser(StateData.StateData):
         base.disableMouse()
         self.title.reparentTo(aspect2d)
         self.quitButton.show()
+        if config.GetBool('want-language-selection', False):
+            self.languageButton.show()
+        self.pickAToonBG.setBin('background', 1)
+        self.pickAToonBG.reparentTo(aspect2d)
+        base.setBackgroundColor(Vec4(0.145, 0.368, 0.78, 1))
+        choice = config.GetInt('auto-avatar-choice', -1)
+        for panel in self.panelList:
+            panel.show()
+            self.accept(panel.doneEvent, self.__handlePanelDone)
+            if panel.position == choice and panel.mode == AvatarChoice.AvatarChoice.MODE_CHOOSE:
+                self.__handlePanelDone('chose', panelChoice=choice)
         self.discordButton.show()
         self.creditsButton.show()
         self.pickAToonBG.setBin('backround', 1)
@@ -91,6 +103,7 @@ class AvatarChooser(StateData.StateData):
         self.ignoreAll()
         self.title.reparentTo(hidden)
         self.quitButton.hide()
+        self.languageButton.hide()
         self.discordButton.hide()
         self.creditsButton.hide()
         self.pickAToonBG.reparentTo(hidden)
@@ -117,8 +130,10 @@ class AvatarChooser(StateData.StateData):
         self.settingsButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text='Settings', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), text_pos=(0, -0.025), pos=(-0.00005, 0, -0.914), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openSettings)
         self.discordButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text='Discord', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), text_pos=(0, -0.020), pos=(-0.50, 0, -0.914), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openDiscord)
         self.discordButton.hide()
-        self.creditsButton = DirectButton(image=(quitHover, quitHover, quitHover), relief=None, text='Credits', text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), image_scale=1, image1_scale=1.05, image2_scale=1.05, scale=1.05, text_pos=(0, -0.025), pos=(-1, 0, -0.914), command=self.openCredits)
+        self.creditsButton = DirectButton(image=(quitHover, quitHover, quitHover), relief=None, text=TTLocalizer.CreditsButtonText, text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), image_scale=1, image1_scale=1.05, image2_scale=1.05, scale=1.05, text_pos=(0, -0.025), pos=(-1, 0, -0.914), command=self.openCredits)
         self.creditsButton.hide()
+        self.languageButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text=TTLocalizer.LanguageButtonText, text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=(0.075), text_pos=(0, -0.020), pos=(-0.50, 0, -0.914), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openLanguageGui)
+        self.languageButton.hide() # Finish this when we finish working on French
         gui.removeNode()
         gui2.removeNode()
         newGui.removeNode()
@@ -242,6 +257,8 @@ class AvatarChooser(StateData.StateData):
         del self.title
         self.quitButton.destroy()
         del self.quitButton
+        self.languageButton.destroy()
+        del self.languageButton
         self.pickAToonBG.removeNode()
         self.settingsButton.removeNode()
         del self.pickAToonBG
@@ -327,3 +344,7 @@ class AvatarChooser(StateData.StateData):
     def openSettings(self):
         from toontown.controls import ControlManager
         ControlManager.ControlManager()
+
+    def openLanguageGui(self):
+        self.exit()
+        LanguageSelector.LanguageSelector(self.enter).create()

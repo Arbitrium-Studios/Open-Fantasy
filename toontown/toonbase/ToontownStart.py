@@ -1,5 +1,6 @@
-
 import builtins
+from otp.settings import Settings
+from otp.otpbase import OTPGlobals
 
 
 class game:
@@ -20,6 +21,11 @@ except BaseException:
     from toontown.launcher.ToontownDummyLauncher import ToontownDummyLauncher
     launcher = ToontownDummyLauncher()
     builtins.launcher = launcher
+
+from direct.directnotify.DirectNotifyGlobal import directNotify
+
+notify = directNotify.newCategory('ToontownStart')
+notify.setInfo(True)
 
 launcher.setRegistry('EXIT_PAGE', 'normal')
 pollingDelay = 0.5
@@ -133,3 +139,7 @@ if autoRun and launcher.isDummy() and (
         from otp.otpbase import PythonUtil
         print(PythonUtil.describeException())
         raise
+
+
+# if 'language' not in Settings:
+#     Settings['language'] = 'English'
