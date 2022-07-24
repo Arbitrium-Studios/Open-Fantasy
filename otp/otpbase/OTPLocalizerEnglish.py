@@ -2912,11 +2912,11 @@ HotkeyNames = {
        HotkeyTasks: 'Open Tasks',
        HotkeyInventory: 'Open Inventory',
        HotkeyFriends: 'Open Friends',
-       HotkeyMap: 'Open map',
-       HotkeyScreenshot: 'screenshot',
-       HotkeyChat: 'chat', 
+       HotkeyMap: 'Open Map',
+       HotkeyScreenshot: 'Screenshot',
+       HotkeyChat: 'Chat', 
        HotkeySecondaryBook: 'Open Book Secondary',
-       HotkeyChatLog: 'Open Chat Log',
+       HotkeyChatLog: 'Open Chatlog',
 }
 }
 

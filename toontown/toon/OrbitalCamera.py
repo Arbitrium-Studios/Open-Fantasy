@@ -369,7 +369,7 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
 
     def __toggleFOV(self):
         if self.toggleFov:
-            base.camLens.setMinFov(base.genFOV / (4 / 3))
+            base.camLens.setMinFov(base.genFOV / (6 / 4))
         else:
             base.camLens.setMinFov((base.genFOV + 40) / (4 / 3))
         # camera.setPosHpr(self.camOffset[0], self.camOffset[1], 10, 0, 0, 0)
@@ -701,19 +701,20 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         self.setPos(self.getX(), self.getY(), z)
         self.setHpr(h, p, 0)
 
-    def showOrHide(self, subject):
-        """Given a toon object check if they are in a disguise if so hide the toon ,
-        else show the toon
-        """
-        if subject.isDisguised:
-            self.subject.getGeomNode().hide()
-        else:
-            self.subject.getGeomNode().show()
+    # def showOrHide(self, subject):
+    #     """Given a toon object check if they are in a disguise if so hide the toon ,
+    #     else show the toon
+    #     """
+    #     if subject.isDisguised:
+    #         self.subject.getGeomNode().hide()
+    #     else:
+    #         self.subject.getGeomNode().show()
 
     def checkSubjectDist(self, task):
         distance = camera.getDistance(self)
         if distance < 1.8 or self.subject.isDisguised:
             self.subject.getGeomNode().hide()
         else:
-            self.subject.getGeomNode().show()
+            # self.subject.getGeomNode().show()
+            pass
         return task.cont

@@ -1,3 +1,4 @@
+from otp.otpbase.OTPLocalizerEnglish import HotkeyChatLog
 from toontown.golf import GolfGlobals
 from toontown.racing import RaceGlobals
 from toontown.toonbase.TTLocalizerEnglishProperty import *
@@ -4755,7 +4756,7 @@ DanceAnimPush = 'The Mimetoon'
 DanceAnimAngry = "Rock n' Roll"
 DanceAnimLeft = 'Left'
 PartyCannonActivityTitle = 'Party Cannons'
-PartyCannonActivityInstructions = 'Hit the clouds to change their color and bounce in the air! While IN THE AIR, you can USE THE ARROW KEYS to GLIDE.'
+PartyCannonActivityInstructions = 'Hit the clouds to change their color and bounce in the air! While IN THE AIR, you can USE THE movement keys to GLIDE.'
 PartyCannonResults = 'You collected %d jelly beans!\n\nNumber of Clouds Hit: %d'
 FireworksActivityInstructions = 'Hit the "Page Up" key to see better.'
 FireworksActivityBeginning = 'Party fireworks are about to start! Enjoy the show!'
@@ -4799,7 +4800,7 @@ PartyCogSignNote = 'HI-SCORE\n%s\n%d'
 PartyCogTitle = 'Cog-O-War'
 PartyCogInstructions = 'Throw pies at cogs to push them away from your team. ' + \
     "When time's up, the team with most cogs on the other side wins!" + \
-    '\n\nThrow with the CONTROL KEY. Move with the ARROW KEYS.'
+    '\n\nThrow with the CONTROL KEY. Move with the movement keys.'
 PartyCogDistance = '%d ft'
 PartyCogTimeUp = "Time's up!"
 PartyCogGuiScoreLabel = 'SCORE'
@@ -5318,7 +5319,7 @@ FishPoker2Pair = '2 Pair'
 FishPokerPair = 'Pair'
 TutorialGreeting1 = 'Hi %s!'
 TutorialGreeting2 = 'Hi %s!\nCome over here!'
-TutorialGreeting3 = 'Hi %s!\nCome over here!\nUse the arrow keys!'
+TutorialGreeting3 = 'Hi %s!\nCome over here!\nUse the movement keys!'
 TutorialMickeyWelcome = 'Welcome to Toontown!'
 TutorialFlippyIntro = 'Let me introduce you to my friend %s...' % Flippy
 TutorialFlippyHi = 'Hi, %s!'
@@ -5419,14 +5420,14 @@ MinigamePowerMeterTooFast = 'Too\nfast'
 MinigameTemplateTitle = 'Minigame Template'
 MinigameTemplateInstructions = 'This is a template minigame. Use it to create new minigames.'
 CannonGameTitle = 'Cannon Game'
-CannonGameInstructions = 'Shoot your toon into the water tower as quickly as you can. Use the mouse or the arrow keys to aim the cannon. Be quick and win a big reward for everyone!'
+CannonGameInstructions = 'Shoot your toon into the water tower as quickly as you can. Use the mouse or the movement keys to aim the cannon. Be quick and win a big reward for everyone!'
 CannonGameReward = 'REWARD'
 TwoDGameTitle = 'Toon Escape'
-TwoDGameInstructions = 'Escape from the ' + Cog + ' den as soon as you can. Use arrow keys to run/jump and Ctrl to squirt a ' + \
+TwoDGameInstructions = 'Escape from the ' + Cog + ' den as soon as you can. Use movement keys to run/jump and Ctrl to squirt a ' + \
     Cog + '. Collect ' + Cog + ' treasures to gain even more points.'
 TwoDGameElevatorExit = 'EXIT'
 TugOfWarGameTitle = 'Tug-of-War'
-TugOfWarInstructions = "Alternately tap the left and right arrow keys just fast enough to line up the green bar with the red line. Don't tap them too slow or too fast, or you'll end up in the water!"
+TugOfWarInstructions = "Alternately tap the left and right movement keys just fast enough to line up the green bar with the red line. Don't tap them too slow or too fast, or you'll end up in the water!"
 TugOfWarGameGo = 'GO!'
 TugOfWarGameReady = 'Ready...'
 TugOfWarGameEnd = 'Good game!'
@@ -5434,7 +5435,7 @@ TugOfWarGameTie = 'You tied!'
 TugOfWarPowerMeter = 'Power meter'
 PatternGameTitle = 'Match %s' % Minnie
 PatternGameInstructions = Minnie + ' will show you a dance sequence. ' + \
-    'Try to repeat ' + Minnie + "'s dance just the way you see it using the arrow keys!"
+    'Try to repeat ' + Minnie + "'s dance just the way you see it using the movement keys!"
 PatternGameWatch = 'Watch these dance steps...'
 PatternGameGo = 'GO!'
 PatternGameRight = 'Good, %s!'
@@ -5470,8 +5471,8 @@ RaceGameJellybeans2 = '2 Jellybeans'
 RaceGameJellybeans4 = '4 Jellybeans'
 RaceGameJellybeans10 = '10 Jellybeans!'
 RingGameTitle = 'Ring Game'
-RingGameInstructionsSinglePlayer = 'Try to swim through as many of the %s rings as you can.  Use the arrow keys to swim.'
-RingGameInstructionsMultiPlayer = 'Try to swim through the %s rings.  Other players will try for the other colored rings.  Use the arrow keys to swim.'
+RingGameInstructionsSinglePlayer = 'Try to swim through as many of the %s rings as you can.  Use the movement keys to swim.'
+RingGameInstructionsMultiPlayer = 'Try to swim through the %s rings.  Other players will try for the other colored rings.  Use the movement keys to swim.'
 RingGameMissed = 'MISSED'
 RingGameGroupPerfect = 'GROUP\nPERFECT!!'
 RingGamePerfect = 'PERFECT!'
@@ -5484,8 +5485,8 @@ ColorWhite = 'white'
 ColorBlack = 'black'
 ColorYellow = 'yellow'
 DivingGameTitle = 'Treasure Dive'
-DivingInstructionsSinglePlayer = 'Treasures will appear at the bottom of the lake.  Use the arrow keys to swim.  Avoid the fish and get the treasures up to the boat!'
-DivingInstructionsMultiPlayer = 'Treasures will appear at the bottom of the lake.  Use the arrow keys to swim.  Work together to get the treasures up to the boat!'
+DivingInstructionsSinglePlayer = 'Treasures will appear at the bottom of the lake.  Use the movement keys to swim.  Avoid the fish and get the treasures up to the boat!'
+DivingInstructionsMultiPlayer = 'Treasures will appear at the bottom of the lake.  Use the movement keys to swim.  Work together to get the treasures up to the boat!'
 DivingGameTreasuresRetrieved = 'Treasures Retrieved'
 TargetGameTitle = 'Toon Slingshot'
 TargetGameInstructionsSinglePlayer = 'Land on targets to score points'
@@ -5494,7 +5495,7 @@ TargetGameBoard = 'Round %s - Keeping Best Score'
 TargetGameCountdown = 'Forced launch in %s seconds'
 TargetGameCountHelp = 'Pound left and right arrows for power, stop to launch'
 TargetGameFlyHelp = 'Press down to open umbrella'
-TargetGameFallHelp = 'Use the arrow keys to land on target'
+TargetGameFallHelp = 'Use the movement keys to land on target'
 TargetGameBounceHelp = ' Bouncing can knock you off target'
 PhotoGameScoreTaken = '%s: %s\nYou: %s'
 PhotoGameScoreBlank = 'Score: %s'
@@ -5519,13 +5520,13 @@ CatchGamePineapples = 'pineapples'
 CatchGameAnvils = 'anvils'
 PieTossGameTitle = 'Pie Toss Game'
 PieTossGameInstructions = 'Toss pies at the targets.'
-PhotoGameInstructions = 'Capture photos matching the toons shown at the bottom. Aim the camera with the mouse, and left click to take a picture. Press Ctrl to zoom in/out, and look around with the arrow keys.  Pictures with higher ratings get more points!'
+PhotoGameInstructions = 'Capture photos matching the toons shown at the bottom. Aim the camera with the mouse, and left click to take a picture. Press Ctrl to zoom in/out, and look around with the movement keys.  Pictures with higher ratings get more points!'
 PhotoGameTitle = 'Photo Fun'
 PhotoGameFilm = 'FILM'
 PhotoGameScore = 'Team Score: %s\n\nBest Photos: %s\n\nTotal Score: %s'
 CogThiefGameTitle = Cog + ' Thief'
 CogThiefGameInstructions = 'Keep the ' + Cogs + \
-    ' from stealing our gag barrels! Press the Ctrl key to throw a pie. Use the arrow keys to move. Tip: you can move diagonally.'
+    ' from stealing our gag barrels! Press the Ctrl key to throw a pie. Use the movement keys to move. Tip: you can move diagonally.'
 CogThiefBarrelsSaved = '%(num)d Barrels\nSaved!'
 CogThiefBarrelSaved = '%(num)d Barrel\nSaved!'
 CogThiefNoBarrelsSaved = 'No Barrels\nSaved'
@@ -5736,7 +5737,7 @@ LeaderboardTitle = 'Toon Platoon'
 QuestScriptTutorialMickey_1 = 'Toontown has a new citizen! Do you have some extra gags?'
 QuestScriptTutorialMickey_2 = 'Sure, %s!'
 QuestScriptTutorialMickey_3 = 'Tutorial Tom will tell you all about the Cogs.\x07Gotta go!'
-QuestScriptTutorialMickey_4 = 'Come here! Use the arrow keys to move.'
+QuestScriptTutorialMickey_4 = 'Come here! Use the movement keys to move.'
 QuestScriptTutorialMinnie_1 = 'Toontown has a new citizen! Do you have some extra gags?'
 QuestScriptTutorialMinnie_2 = 'Sure, %s!'
 QuestScriptTutorialMinnie_3 = 'Tutorial Tom will tell you all about the Cogs.\x07Gotta go!'
@@ -5861,12 +5862,12 @@ ResistanceToonKeepHimBusy = "Keep him busy!  I'm going to set a trap!"
 ResistanceToonWatchThis = 'Watch this!'
 CashbotBossGetAwayFromThat = 'Hey!  Get away from that!'
 ResistanceToonCraneInstructions1 = 'Control a magnet by stepping up to a podium.'
-ResistanceToonCraneInstructions2 = 'Use the arrow keys to move the crane, and press the Ctrl key to grab an object.'
+ResistanceToonCraneInstructions2 = 'Use the movement keys to move the crane, and press the Ctrl key to grab an object.'
 ResistanceToonCraneInstructions3 = "Grab a safe with a magnet and knock the C.F.O.'s safe-ty helmet off."
 ResistanceToonCraneInstructions4 = 'Once his helmet is gone, grab a disabled goon and hit him in the head!'
 ResistanceToonGetaway = 'Eek!  Gotta run!'
 CashbotCraneLeave = 'Leave Crane'
-CashbotCraneAdvice = 'Use the arrow keys to move the overhead crane.'
+CashbotCraneAdvice = 'Use the movement keys to move the overhead crane.'
 CashbotMagnetAdvice = 'Hold down the control key to pick things up.'
 CashbotCraneLeaving = 'Leaving crane'
 MintElevatorRejectMessage = 'You cannot enter the Mints until you have completed your %s Cog Suit.'
@@ -8467,6 +8468,13 @@ BlockerLoadingTexts = ['Scrubbing pie tins',
                        'Spooling red tape',
                        'Freezing Brrrgh ice',
                        'Tuning falling pianos']
+
+from toontown.toonbase import ToontownGlobals
+from otp.otpbase import OTPLocalizerEnglish
+
+
+# controlHotkey.settings.readSettings()
+
 TIP_NONE = 0
 TIP_GENERAL = 1
 TIP_STREET = 2
@@ -8477,13 +8485,12 @@ TIP_KARTING = 6
 TIP_GOLF = 7
 TipTitle = 'TOON TIP:'
 TipDict = {TIP_NONE: ('',),
-           TIP_GENERAL: ('Quickly check your ToonTask progress by holding down the "End" key.',
-                         'Quickly check your Gag page by holding down the "Home" key.',
+           TIP_GENERAL: (f'Quickly check your ToonTask progress by holding down the {HotkeyTasks} key.',
+                         f'Quickly check your Gag page by holding down the {HotkeyInventory} key.',
                          'Open your Friends List by pressing the "F7" key.',
-                         'Open or close your Shticker Book by pressing the "F8" key.',
-                         'You can look up by pressing the "Page Up" key and look down by pressing the "Page Down" key.',
-                         'Press the "Control" key to jump.',
-                         'Press the "F9" key to take a screenshot, which will be saved in your Toontown folder on your computer.',
+                         f'Open or close your Shticker Book by pressing the {HotkeyBook} key.',
+                         f'Press the {HotkeyJump} key to jump.',
+                         f'Press the {HotkeyScreenshot} key to take a screenshot, which will be saved in your Toontown Fantasy folder on your computer.',
                          'You can change your screen resolution, adjust audio, and control other options on the Options Page in the Shticker Book.',
                          "Try on your friend's clothing at the closet in their house.",
                          'You can go to your house using the "Go Home" button on your map.',
@@ -8491,21 +8498,23 @@ TipDict = {TIP_NONE: ('',),
                          'You can browse the selection at Clothing Stores even without a clothing ticket.',
                          'Rewards for some ToonTasks allow you to carry more gags and Jellybeans.',
                          'You can have up to 50 friends on your Friends List.',
-                         'Some ToonTask rewards let you teleport to playgrounds in Toontown by using the Map Page in the Shticker Book.',
-                         'Increase your Laff points in the Playgrounds by collecting treasures like stars and ice cream cones.',
+                         'Some ToonTask rewards let you teleport to playgrounds in Toontropolis by using the Map Page in the Shticker Book.',
+                         'Regain your Laff points in the Playgrounds by collecting treasures like stars and ice cream cones.',
                          'To heal quickly after a battle, go to your estate and play with your Doodle.',
                          'Change to different views of your Toon by pressing the Tab Key.',
+                         "Press the Right mouse button to move the orbital camera around!",
+                         "To zoom in our out at any time, use the mouse wheel.",
                          'Sometimes you can find several different ToonTasks offered for the same reward. Shop around!',
                          'Finding friends with similar ToonTasks is a fun way to progress through the game.',
-                         'You never need to save your Toontown progress. The Toontown servers continually save all the necessary information.',
+                         'You never need to save your game progress. The Toontown Fantasy servers continually save all the necessary information.',
                          'You can whisper to other Toons either by clicking on them or by selecting them from your Friends List.',
-                         'Some SpeedChat phrases play emotion animations on your Toon.',
+                         'Some SpeedChat phrases play animations on your Toon.',
                          'If the area you are in is crowded, try changing Districts. Go to the District Page in the Shticker Book and select a different one.',
                          'If you actively rescue buildings you will get a bronze, silver, or gold star above your Toon.',
-                         'If you rescue enough buildings to get a star above your head you may find your name on the blackboard in a Toon HQ.',
+                         'If you rescue enough buildings to get a star above your head you may find your name on the blackboard in a Toon Headquarters.',
                          'Rescued buildings are sometimes recaptured by the Cogs. The only way to keep your star is to go out and rescue more buildings!',
                          'The names of your True Friends will appear in Blue.',
-                         'See if you can collect all the fish in Toontown!',
+                         'See if you can collect all the fish in Toontropolis and beyond!',
                          'Different ponds hold different fish. Try them all!',
                          'When your fishing bucket is full sell your fish to the Fishermen in the Playgrounds.',
                          'You can sell your fish to the Fishermen or inside Pet Shops.',
@@ -8528,7 +8537,7 @@ TipDict = {TIP_NONE: ('',),
                          'Different neighborhoods have different Doodles offered for adoption.',
                          "Show off your stylin' ride and turbo-boost your Laff limit at Toontropolis Stadium.",
                          'Enter Toontropolis Stadium through the tire-shaped tunnel in Toontropolis Central Playground.',
-                         'Earn Laff points at Toontropolis Stadium.',
+                         'Earn Laff points at Toontropolis Stadium by completing races.',
                          'Toontropolis Stadium has six different race tracks. '),
            TIP_STREET: ('There are four types of Cogs: Lawbots, Cashbots, Sellbots, and Bossbots.',
                         'Each Gag Track has different amounts of accuracy and damage.',
@@ -8544,7 +8553,7 @@ TipDict = {TIP_NONE: ('',),
                         'A gag that will earn experience has a blue background on the Gag Menu in battle.',
                         'Gag experience is multiplied when used inside Cog Buildings. Higher floors have higher multipliers.',
                         'When a Cog is defeated, each Toon in that round will get credit for the Cog when the battle is over.',
-                        'Each street in Toontown has different Cog levels and types.',
+                        'Each street in Toontropolis have different Cog levels and types.',
                         'Sidewalks are safe from Cogs.',
                         'On the streets, side doors tell knock-knock jokes when approached.',
                         'Some ToonTasks train you for new Gag Tracks. You only get to choose six of the seven Gag Tracks, so choose carefully!',
@@ -8566,10 +8575,10 @@ TipDict = {TIP_NONE: ('',),
                         'Cogs tend to attack the Toon that has done them the most damage.',
                         'Sound gags do not get bonus damage against lured Cogs.',
                         'If you wait too long to attack a lured Cog, it will wake up. Higher level lures last longer.',
-                        'There are fishing ponds on every street in Toontown. Some streets have unique fish.'),
+                        'There are fishing ponds across every street of Toontropolis! Some streets have unique fish.'),
            TIP_MINIGAME: ('After you fill up your Jellybean jar, any Jellybeans you get from Trolley Games automatically spill over into your bank.',
-                          'You can use the arrow keys instead of the mouse in the "Match Minnie" Trolley Game.',
-                          'In the Cannon Game you can use the arrow keys to move your cannon and press the "Control" key to fire.',
+                          'You can use the movement keys instead of the mouse in the "Match Minnie" Trolley Game.',
+                          'In the Cannon Game you can use the movement keys to move your cannon and press the "Control" key to fire.',
                           'In the Ring Game, bonus points are awarded when the entire group successfully swims through its rings.',
                           'A perfect game of Match Minnie will double your points.',
                           'In the Tug-of-War you are awarded more Jellybeans if you play against a tougher Cog.',
@@ -9071,7 +9080,7 @@ KartRace_RRInfo = 'Welcome to Rustic Raceway!\nPlease be kind to the fauna and s
 KartRace_AAInfo = 'Welcome to Airborne Acres!\nHold onto your hats! It looks bumpy up ahead...\n'
 KartRace_CCInfo = 'Welcome to City Circuit!\nWatch out for pedestrians as you speed through downtown!\n'
 KartRace_BBInfo = 'Welcome to Blizzard Boulevard!\nWatch your speed. There might be ice out there.\n'
-KartRace_GeneralInfo = 'Use Control to throw gags you pick up on the track, and the arrow keys to control your kart.'
+KartRace_GeneralInfo = 'Use Control to throw gags you pick up on the track, and the movement keys to control your kart.'
 KartRace_TrackInfo = {RaceGlobals.RT_Speedway_1: KartRace_SSInfo + KartRace_GeneralInfo,
                       RaceGlobals.RT_Speedway_1_rev: KartRace_SSInfo + KartRace_GeneralInfo,
                       RaceGlobals.RT_Speedway_2: KartRace_CoCoInfo + KartRace_GeneralInfo,
@@ -9784,8 +9793,8 @@ ElevatorLawBotCourse2 = 'Office C'
 ElevatorLawBotCourse3 = 'Office D'
 DaysToGo = 'Wait\n%s Days'
 IceGameTitle = 'Ice Slide'
-IceGameInstructions = 'Get as close to the center by the end of the second round. Use arrow keys to change direction and force. Press Ctrl to launch your toon.  Hit barrels for extra points and avoid the TNT!'
-IceGameInstructionsNoTnt = 'Get as close to the center by the end of the second round. Use arrow keys to change direction and force. Press Ctrl to launch your toon.  Hit barrels for extra points.'
+IceGameInstructions = 'Get as close to the center by the end of the second round. Use movement keys to change direction and force. Press Ctrl to launch your toon.  Hit barrels for extra points and avoid the TNT!'
+IceGameInstructionsNoTnt = 'Get as close to the center by the end of the second round. Use movement keys to change direction and force. Press Ctrl to launch your toon.  Hit barrels for extra points.'
 IceGameWaitingForPlayersToFinishMove = 'Waiting for other players...'
 IceGameWaitingForAISync = 'Waiting for other players...'
 IceGameInfo = 'Match %(curMatch)d/%(numMatch)d, Round %(curRound)d/%(numRound)d'
