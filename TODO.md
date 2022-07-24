@@ -1,5 +1,6 @@
 ### Wishlist and Ideas:
 
+    > 
     > Take inspiration from the publically available Design Documents in revamping the Toontown models with some modern ideas.
     > Move the spawn area of the HQ to a safe place instead of in the Cog's way.
     > When hovering on a chat box that's behind another one, it should bring that one forward
@@ -21,11 +22,14 @@
     > Create an in-game launcher like ODS using the Anesidora files
     > Patch as many bugs as possible
     > Implement custom shaders for everyone to use!
-    > Add custom keybinds with as many custom key options as possible!
-    > Add a box around the gag selection for keyboard users to just use their keyboards by pressing the enter key if they want to while allowing controller users to select a gag using the A button
-    > Add the ability to play with an Xbox, Play Station, or PC controllers with mappable buttons.
-    > Add a touch screen mode which is enabled/disabled in the Shticker Book
-    > Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
+    > Finish implementation of a TTR styled Settings Menu
+        > Add custom keybinds with as many custom key options as possible!
+        > Make the screen sizes a drop-down menu
+        > Add a Pronoun Picker
+            > You should be able to hide them via a togglable button.
+        > Temporarily add a built-in version joy2key system with mappable keys and controls that gives the ability to play with an Xbox, Play Station, or PC controllers with mappable buttons until we can build it in to Panda3D ourselves!
+        > Add a touch screen mode which is enabled/disabled in the Shticker Book
+        > Implement Mobile Mode for Android and Apple users! (Sideloading ONLY)
     > Implement full Wide-Screen Support
     > Put all logs, screenshots, etc into a 'User/' folder
     > Auto-Approve Type-A-Name Names
