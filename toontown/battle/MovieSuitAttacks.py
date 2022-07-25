@@ -1009,6 +1009,51 @@ def getSoundTrack(fileName, delay=0.01, duration=None, node=None):
         return Sequence(Wait(delay), SoundInterval(soundEffect, node=node))
 
 
+def getColorTrack(attack, part, color, delay = 0.0, duration = 1.0):
+    battle = attack['battle']
+    target = attack['target']
+    toon = target['toon']
+    headParts = toon.getHeadParts()
+    torsoParts = toon.getTorsoParts()
+    legsParts = toon.getLegsParts()
+
+    def changeColor(parts):
+        track = Parallel()
+        for partNum in xrange(0, parts.getNumPaths()):
+            nextPart = parts.getPath(partNum)
+            track.append(Func(nextPart.setColorScale, color))
+
+        return track
+
+    def resetColor(parts):
+        track = Parallel()
+        for partNum in xrange(0, parts.getNumPaths()):
+            nextPart = parts.getPath(partNum)
+            track.append(Func(nextPart.clearColorScale))
+
+        return track
+
+    colorTrack = Sequence(
+        Wait(delay),
+        Func(battle.movie.needRestoreColor)
+    )
+    if part == 'head' or part == 'all':
+        colorTrack.append(changeColor(headParts))
+    if part == 'torso' or part == 'all':
+        colorTrack.append(changeColor(torsoParts))
+    if part == 'legs' or part == 'all':
+        colorTrack.append(changeColor(legsParts))
+    colorTrack.append(Wait(duration))
+    if part == 'head' or part == 'all':
+        colorTrack.append(resetColor(headParts))
+    if part == 'torso' or part == 'all':
+        colorTrack.append(resetColor(torsoParts))
+    if part == 'legs' or part == 'all':
+        colorTrack.append(resetColor(legsParts))
+    colorTrack.append(Func(battle.movie.clearRestoreColor))
+    return colorTrack
+
+
 def doClipOnTie(attack):
     suit = attack['suit']
     target = attack['target']
@@ -2789,39 +2834,6 @@ def doHotAir(attack):
     baseFlameTrack = getPartTrack(baseFlameEffect, flameDelay, flameDuration, [baseFlameEffect, toon, 0])
     flameTrack = getPartTrack(flameEffect, flameDelay, flameDuration, [flameEffect, toon, 0])
     flecksTrack = getPartTrack(flecksEffect, flecksDelay, flecksDuration, [flecksEffect, toon, 0])
-
-    def changeColor(parts):
-        track = Parallel()
-        for partNum in range(0, parts.getNumPaths()):
-            nextPart = parts.getPath(partNum)
-            track.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
-
-        return track
-
-    def resetColor(parts):
-        track = Parallel()
-        for partNum in range(0, parts.getNumPaths()):
-            nextPart = parts.getPath(partNum)
-            track.append(Func(nextPart.clearColorScale))
-
-        return track
-
-    if dmg > 0:
-        headParts = toon.getHeadParts()
-        torsoParts = toon.getTorsoParts()
-        legsParts = toon.getLegsParts()
-        colorTrack = Sequence(
-            Wait(4.0),
-            Func(battle.movie.needRestoreColor),
-            changeColor(headParts),
-            changeColor(torsoParts),
-            changeColor(legsParts),
-            Wait(3.5),
-            resetColor(headParts),
-            resetColor(torsoParts),
-            resetColor(legsParts),
-            Func(battle.movie.clearRestoreColor)
-        )
     damageAnims = [['cringe', 0.01, 0.7, 0.62],
      ['slip-forward', 0.01, 0.4, 1.2],
      ['slip-forward', 0.01, 1.0]]
@@ -2829,6 +2841,7 @@ def doHotAir(attack):
     soundTrack = getSoundTrack('SA_hot_air.ogg', delay=1.6, node=suit)
     multiTrackList = Parallel(suitTrack, toonTrack, sprayTrack, soundTrack)
     if dmg > 0:
+        colorTrack = getColorTrack(attack, 'all', Vec4(0, 0, 0, 1), 4.0, 3.5)
         multiTrackList.append(baseFlameTrack)
         multiTrackList.append(flameTrack)
         multiTrackList.append(flecksTrack)
@@ -3509,45 +3522,13 @@ def doFired(attack):
     baseFlameSmallTrack = getPartTrack(baseFlameSmall, 1.0, 1.9, [baseFlameSmall, toon, 0])
     flameSmallTrack = getPartTrack(flameSmall, 1.0, 1.9, [flameSmall, toon, 0])
     flecksSmallTrack = getPartTrack(flecksSmall, 1.8, 1.1, [flecksSmall, toon, 0])
-
-    def changeColor(parts):
-        track = Parallel()
-        for partNum in range(0, parts.getNumPaths()):
-            nextPart = parts.getPath(partNum)
-            track.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
-
-        return track
-
-    def resetColor(parts):
-        track = Parallel()
-        for partNum in range(0, parts.getNumPaths()):
-            nextPart = parts.getPath(partNum)
-            track.append(Func(nextPart.clearColorScale))
-
-        return track
-
-    if dmg > 0:
-        headParts = toon.getHeadParts()
-        torsoParts = toon.getTorsoParts()
-        legsParts = toon.getLegsParts()
-        colorTrack = Sequence(
-            Wait(2.0),
-            Func(battle.movie.needRestoreColor),
-            changeColor(headParts),
-            changeColor(torsoParts),
-            changeColor(legsParts),
-            Wait(3.5),
-            resetColor(headParts),
-            resetColor(torsoParts),
-            resetColor(legsParts),
-            Func(battle.movie.clearRestoreColor)
-        )
     damageAnims = [['cringe', 0.01, 0.7, 0.62],
      ['slip-forward', 1e-05, 0.4, 1.2]]
     damageAnims.extend(getSplicedLerpAnims('slip-forward', 0.31, 0.8, startTime=1.2))
     toonTrack = getToonTrack(attack, damageDelay=1.5, splicedDamageAnims=damageAnims, dodgeDelay=0.3, dodgeAnimNames=['sidestep'])
     soundTrack = getSoundTrack('SA_hot_air.ogg', delay=1.0, node=suit)
     if dmg > 0:
+        colorTrack = getColorTrack(attack, 'all', Vec4(0, 0, 0, 1), 2.0, 3.5)
         return Parallel(suitTrack, baseFlameTrack, flameTrack, flecksTrack, toonTrack, colorTrack, soundTrack)
     else:
         return Parallel(suitTrack, baseFlameSmallTrack, flameSmallTrack, flecksSmallTrack, toonTrack, soundTrack)
@@ -4179,7 +4160,6 @@ def doWithdrawal(attack):
     battle = attack['battle']
     if attack['group'] == ATK_TGT_SINGLE:
         target = attack['target']
-        toon = target['toon']
         dmg = target['hp']
         BattleParticles.loadParticles()
         particleEffect = BattleParticles.createParticleEffect('Withdrawal')
@@ -4187,43 +4167,10 @@ def doWithdrawal(attack):
         suitTrack = getSuitAnimTrack(attack)
         partTrack = getPartTrack(particleEffect, 1e-05, suitTrack.getDuration() + 1.2, [particleEffect, suit, 0])
         toonTrack = getToonTrack(attack, 1.2, ['cringe'], 0.2, splicedDodgeAnims=[['duck', 1e-05, 0.8]], showMissedExtraTime=0.8)
-        headParts = toon.getHeadParts()
-        torsoParts = toon.getTorsoParts()
-        legsParts = toon.getLegsParts()
-
-        def changeColor(parts):
-            track = Parallel()
-            for partNum in range(0, parts.getNumPaths()):
-                nextPart = parts.getPath(partNum)
-                track.append(Func(nextPart.setColorScale, Vec4(0, 0, 0, 1)))
-
-            return track
-
-        def resetColor(parts):
-            track = Parallel()
-            for partNum in range(0, parts.getNumPaths()):
-                nextPart = parts.getPath(partNum)
-                track.append(Func(nextPart.clearColorScale))
-
-            return track
-
         soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
         multiTrackList = Parallel(suitTrack, partTrack, toonTrack, soundTrack)
         if dmg > 0:
-            colorTrack = Sequence(
-                Wait(1.6),
-                Func(battle.movie.needRestoreColor),
-                Parallel(
-                    changeColor(headParts),
-                    changeColor(torsoParts),
-                    changeColor(legsParts)
-                ),
-                Wait(2.9),
-                resetColor(headParts),
-                resetColor(torsoParts),
-                resetColor(legsParts),
-                Func(battle.movie.clearRestoreColor)
-            )
+            colorTrack = getColorTrack(attack, 'all', Vec4(0, 0, 0, 1), 1.6, 2.9)
             multiTrackList.append(colorTrack)
         return multiTrackList
     else:
@@ -4254,26 +4201,8 @@ def doWithdrawal(attack):
         soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
         colorTracks = Parallel()
         for t in targets:
-            toon = t['toon']
-            dmg = t['hp']
-            headParts = toon.getHeadParts()
-            torsoParts = toon.getTorsoParts()
-            legsParts = toon.getLegsParts()
-            if dmg > 0:
-                colorTrack = Sequence(
-                    Wait(1.6),
-                    Func(battle.movie.needRestoreColor),
-                    Parallel(
-                        changeColor(headParts),
-                        changeColor(torsoParts),
-                        changeColor(legsParts)
-                    ),
-                    Wait(2.9),
-                    resetColor(headParts),
-                    resetColor(torsoParts),
-                    resetColor(legsParts),
-                    Func(battle.movie.clearRestoreColor)
-                )
+            if t['hp'] > 0:
+                colorTrack = getColorTrack(attack, 'all', Vec4(0, 0, 0, 1), 1.6, 2.9)
                 colorTracks.append(colorTrack)
         return Parallel(suitTrack, partTrack, toonTracks, soundTrack, colorTrack)
 
