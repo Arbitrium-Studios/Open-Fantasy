@@ -4148,23 +4148,29 @@ def doUndergroundLiquidity(attack):
 
 
 def doEvictionNotice(attack):
+    # TODO: Attack should make a Toon get launched from the battle, evicting them.
     suit = attack['suit']
     battle = attack['battle']
     target = attack['target']
     toon = target['toon']
+    dmg = target['hp']
     paper = globalPropPool.getProp('shredder-paper')
-    suitTrack = getSuitTrack(attack)
+    suitTrack = getSuitTrack(attack, playRate=1.5)
     posPoints = [Point3(-0.04, 0.15, -1.38), VBase3(10.584, -11.945, 18.316)]
     propTrack = Sequence(
-        getPropAppearTrack(paper, suit.getRightHand(), posPoints, 0.8, MovieUtil.PNT3_ONE, scaleUpTime=0.5),
-        Wait(1.73)
+        getPropAppearTrack(paper, suit.getRightHand(), posPoints, 0.6, MovieUtil.PNT3_ONE, scaleUpTime=0.375),
+        Wait(1.2975)
     )
     hitPoint = __toonFacePoint(toon, parent=battle)
     hitPoint.setX(hitPoint.getX() - 1.4)
     missPoint = __toonGroundPoint(attack, toon, 0.7, parent=battle)
     missPoint.setX(missPoint.getX() - 1.1)
-    propTrack.append(getPropThrowTrack(attack, paper, [hitPoint], [missPoint], parent=battle))
-    toonTrack = getToonTrack(attack, 3.4, ['conked'], 2.8, ['jump'])
+    propTrack.append(getPropThrowTrack(attack, paper, [hitPoint], [missPoint], hitDuration=0.375, missDuration=0.375, parent=battle))
+    if dmg > 0:
+        # Will work on the eviction part later.
+        toonTrack = getToonTakeDamageTrack(toon, target['died'], dmg, 2.55, ['conked'], None, 0.01)
+    else:
+        toonTrack = getToonDodgeTrack(target, 2.1, ['jump'], None, 0.5)
     return Parallel(suitTrack, toonTrack, propTrack)
 
 
