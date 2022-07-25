@@ -48,7 +48,6 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         self._paramStack = []
         self.setDefaultParams()
         self.DistanceCheckTaskName = 'OrbitCamDistanceTask'
-        taskMgr.add(self.checkSubjectDist, self.DistanceCheckTaskName, priority=40)
         self._isAtRear = True
         self._rotateToRearIval = None
         self.toggleFov = False
@@ -700,20 +699,3 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         self.camOffset.setY(y)
         self.setPos(self.getX(), self.getY(), z)
         self.setHpr(h, p, 0)
-
-    def showOrHide(self, subject):
-        """Given a toon object check if they are in a disguise if so hide the toon ,
-        else show the toon
-        """
-        if subject.isDisguised:
-            self.subject.getGeomNode().hide()
-        else:
-            self.subject.getGeomNode().show()
-
-    def checkSubjectDist(self, task):
-        distance = camera.getDistance(self)
-        if distance < 1.8 or self.subject.isDisguised:
-            self.subject.getGeomNode().hide()
-        else:
-            self.subject.getGeomNode().show()
-        return task.cont
