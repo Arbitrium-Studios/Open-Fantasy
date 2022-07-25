@@ -1,6 +1,6 @@
 @echo off
 title Start Toontown Fantasy - UberDOG Server
-cd..
+cd ../
 
 :uberdog
 
