@@ -1,18 +1,16 @@
 from toontown.estate import DistributedPlantBase
 from direct.interval.IntervalGlobal import *
 from direct.directnotify import DirectNotifyGlobal
-from otp.otpbase import PythonUtil
+from direct.showbase import PythonUtil
 from toontown.toonbase import ToontownBattleGlobals
 from toontown.toontowngui import TTDialog
 from toontown.toonbase import TTLocalizer
-from . import GardenGlobals
-from . import HouseGlobals
+from toontown.estate import GardenGlobals
+from toontown.estate import HouseGlobals
 from direct.task import Task
 from panda3d.core import *
 from otp.otpbase import OTPGlobals
 from toontown.estate import DistributedLawnDecor
-
-DIRT_AS_WATER_INDICATOR = True
 
 class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGagTree')
@@ -95,8 +93,8 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
         if self.isFruiting() and not self.isWilted():
             # add the gag 'fruit' on
             self.fruits = []
-            for i in range(1,self.maxFruit+1):
-                pos = self.model.find("**/locator" + str(i))
+            for i in xrange(1, self.maxFruit + 1):
+                pos = self.model.find('**/locator' + str(i))
                 if pos and not pos.isEmpty():
                     fruit = self.prop.copyTo(self.model)
                     fruit.setPos(pos, 0, 0, 0)
@@ -106,15 +104,13 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
             self.createBackupFruits()
 
         if DIRT_AS_WATER_INDICATOR:
-            self.dirtMound = loader.loadModel("phase_5.5/models/estate/dirt_mound")
+            self.dirtMound = loader.loadModel('phase_5.5/models/estate/dirt_mound')
             self.dirtMound.reparentTo(self.model)
-            self.sandMound = loader.loadModel("phase_5.5/models/estate/sand_mound")
+            self.sandMound = loader.loadModel('phase_5.5/models/estate/sand_mound')
             self.sandMound.reparentTo(self.model)
 
         self.adjustGrowth()
-
-        # load the gag sign
-        self.signModel = loader.loadModel("phase_5.5/models/estate/garden_sign.bam")
+        self.signModel = loader.loadModel('phase_5.5/models/estate/garden_sign.bam')
         self.signModel.setPos(3.5, 0, 0.025)
         self.signModel.reparentTo(self.rotateNode)
 
@@ -164,7 +160,6 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
         messenger.send('wakeup')
         
         if self.isFruiting() and self.canBeHarvested():
-            # no confirmation, just harvest
             self.startInteraction()
             self.doHarvesting()
             return
@@ -174,12 +169,7 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
         text = TTLocalizer.ConfirmRemoveTree % {'tree': fullName}
         if self.hasDependentTrees():
             text += TTLocalizer.ConfirmWontBeAbleToHarvest
-
-        self.confirmDialog = TTDialog.TTDialog(
-            style = TTDialog.YesNo,
-            text = text,
-            command = self.confirmCallback
-            )
+        self.confirmDialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=text, command=self.confirmCallback)
         self.confirmDialog.show()
         self.startInteraction()
         
@@ -310,8 +300,8 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
             dirtMoundDepth = 2.0    
             if self.isEstablished():
                 dirtMoundScale = shadowScale * 1.2
-            self.dirtMound.setScale(dirtMoundScale,dirtMoundScale,dirtMoundDepth)
-            self.sandMound.setScale(dirtMoundScale,dirtMoundScale,dirtMoundDepth)
+            self.dirtMound.setScale(dirtMoundScale, dirtMoundScale, dirtMoundDepth)
+            self.sandMound.setScale(dirtMoundScale, dirtMoundScale, dirtMoundDepth)
             self.adjustWaterIndicator()
             
         #if self.colSphereNode:
@@ -351,7 +341,6 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
             self.model.setTransparency(1)
             self.model.setAlphaScale(0)
             self.movie.append(LerpFunc(self.model.setAlphaScale, fromData=0, toData=1, duration=3))
-
         if self.signModel:
             self.signModel.hide()
             self.movie.append(Func(self.signModel.show))
@@ -375,12 +364,7 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
         
         moveTrack = self.generateToonMoveTrack(toon)
         harvestTrack = self.generateHarvestTrack(toon)
-        self.movie = Sequence(self.startCamIval(avId),
-                              moveTrack,
-                              harvestTrack,
-                              self.stopCamIval(avId),
-                              )
-
+        self.movie = Sequence(self.startCamIval(avId), moveTrack, harvestTrack, self.stopCamIval(avId))
         if avId == localAvatar.doId:
             self.movie.append(Func(self.finishInteraction))
             self.movie.append(Func(self.movieDone))
@@ -401,14 +385,7 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
         
         fruitTrack = Parallel()
         for fruit in self.backupFruits:
-            fruitTrack.append(
-                Sequence(
-                  Func(fruit.show),
-                  LerpPosInterval(fruit, 1.5, pos,
-                                  startPos = Point3(fruit.getX(), fruit.getY(), fruit.getZ() + self.model.getZ())),
-                  Func(fruit.removeNode),
-                  ),
-                )
+            fruitTrack.append(Sequence(Func(fruit.show), LerpPosInterval(fruit, 1.5, pos, startPos=Point3(fruit.getX(), fruit.getY(), fruit.getZ() + self.model.getZ())), Func(fruit.removeNode)))
 
         self.fruits = None
 
@@ -458,15 +435,12 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
 
         picker = CollisionTraverser()
         picker.addCollider(cRayNodePath, queue)
-        #testPath.setPos(self.plantPath.getX(),self.plantPath.getY(),0)
-        # fix the main model
-        testPath.setPos(self.signModel.getX(render),self.signModel.getY(render),0)
+        testPath.setPos(self.signModel.getX(render), self.signModel.getY(render), 0)
         picker.traverse(render)
         if queue.getNumEntries() > 0:
             queue.sortEntries()
-            for index in range(queue.getNumEntries()):
+            for index in xrange(queue.getNumEntries()):
                 entry = queue.getEntry(index)
-                #TODO clean up this next bit to be more generic
                 if DistributedLawnDecor.recurseParent(entry.getIntoNode(), 'terrain_DNARoot'):
                     self.signModel.wrtReparentTo(render)
                     self.signModel.setZ(entry.getSurfacePoint(render)[2] + self.stickUp + 0.1)
@@ -478,12 +452,6 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
     
                 
     def canBeHarvested(self):
-        """
-        If he plants a level 6 gag, then chops away the level 5 gag,
-        we should not let him harvest the level 6 gag.  But if he has
-        the level 5 tree, even when not fruiting, let him harvest
-        the level 6 gag
-        """
         myTrack, myLevel = GardenGlobals.getTreeTrackAndLevel(self.typeIndex)
 
         levelsInTrack = []
@@ -496,8 +464,7 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
                     levelsInTrack.append(curLevel)
                     levelTreeDict[curLevel] = gagTree
 
-        #test the for existence of gag trees below my level
-        for levelToTest in range(myLevel ):
+        for levelToTest in xrange(myLevel):
             if levelToTest not in levelsInTrack:
                 return False
             #make sure it is full grown
@@ -533,11 +500,7 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
         species = GardenGlobals.getTreeTypeIndex(curTrack, curLevel)
         treeName = GardenGlobals.PlantAttributes[species]['name']
         stringToShow = TTLocalizer.getResultPlantedSomethingSentence(treeName)
-        self.resultDialog = TTDialog.TTDialog(
-            style = TTDialog.Acknowledge,
-            text = stringToShow,
-            command = self.resultsCallback
-            )         
+        self.resultDialog = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=stringToShow, command=self.resultsCallback)
 
     def resultsCallback(self, value):
         assert self.notify.debug('value=%d' % value)
@@ -545,7 +508,11 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
             self.resultDialog.destroy()
             self.resultDialog = None
         self.finishInteraction()
-        
+        return
+
+    def allowedToPick(self):
+        return True
+
     def unlockPick(self):
         """
         Don't pick if it should be ghosted
@@ -556,12 +523,9 @@ class DistributedGagTree(DistributedPlantBase.DistributedPlantBase):
         inventory = toon.inventory
         load = inventory.totalProps
         maxCarry = toon.getMaxCarry()
-        #self.gagTrack
-        #self.gagLevel
-        
-        if load >= maxCarry and not (self.gagLevel > ToontownBattleGlobals.LAST_REGULAR_GAG_LEVEL):
+        if load >= maxCarry:
             retval = False
-        if  inventory.numItem(self.gagTrack,self.gagLevel) >= inventory.getMax(self.gagTrack, self.gagLevel):
+        if inventory.numItem(self.gagTrack, self.gagLevel) >= inventory.getMax(self.gagTrack, self.gagLevel):
             retval = False
 
         return retval

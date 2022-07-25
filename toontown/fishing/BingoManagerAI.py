@@ -53,12 +53,12 @@ class BingoManagerAI(object):
     #notify.setInfo(True)
     serverDataFolder = simbase.config.GetString('server-data-folder', "dependencies/backups/bingo")
 
-    DefaultReward = { TTG.DonaldsDock: [BG.MIN_SUPER_JACKPOT, 1],
-                      TTG.ToontownCentral: [BG.MIN_SUPER_JACKPOT, 1],
-                      TTG.TheBrrrgh: [BG.MIN_SUPER_JACKPOT, 1],
-                      TTG.MinniesMelodyland: [BG.MIN_SUPER_JACKPOT, 1],
-                      TTG.DaisyGardens: [BG.MIN_SUPER_JACKPOT, 1],
-                      TTG.DonaldsDreamland: [BG.MIN_SUPER_JACKPOT, 1],
+    DefaultReward = { TTG.ToontropolisDocks: [BG.MIN_SUPER_JACKPOT, 1],
+                      TTG.ToontropolisPlaza: [BG.MIN_SUPER_JACKPOT, 1],
+                      TTG.TundraWonderland: [BG.MIN_SUPER_JACKPOT, 1],
+                      TTG.TheLandOfMusic: [BG.MIN_SUPER_JACKPOT, 1],
+                      TTG.FloweringGrove: [BG.MIN_SUPER_JACKPOT, 1],
+                      TTG.TwilightDreamland: [BG.MIN_SUPER_JACKPOT, 1],
                       TTG.MyEstate: [BG.MIN_SUPER_JACKPOT, 1] }
 
     ############################################################
@@ -74,12 +74,12 @@ class BingoManagerAI(object):
         # Dictionaries for quick reference to the DPMAI
         self.doId2do = {}
         self.zoneId2do = {}
-        self.hood2doIdList = { TTG.DonaldsDock: [],
-                               TTG.ToontownCentral: [],
-                               TTG.TheBrrrgh: [],
-                               TTG.MinniesMelodyland: [],
-                               TTG.DaisyGardens: [],
-                               TTG.DonaldsDreamland: [],
+        self.hood2doIdList = { TTG.ToontropolisDocks: [],
+                               TTG.ToontropolisPlaza: [],
+                               TTG.TundraWonderland: [],
+                               TTG.TheLandOfMusic: [],
+                               TTG.FloweringGrove: [],
+                               TTG.TwilightDreamland: [],
                                TTG.MyEstate: [] }
 
         self.__hoodJackpots = {}

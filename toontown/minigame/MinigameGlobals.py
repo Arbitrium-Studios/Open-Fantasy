@@ -85,12 +85,12 @@ NoTrolleyZoneOverride = -1
 
 # this is a list of the Toontown safezones, ordered by 'difficulty'
 SafeZones = [
-    ToontownGlobals.ToontownCentral,
-    ToontownGlobals.DonaldsDock,
-    ToontownGlobals.DaisyGardens,
-    ToontownGlobals.MinniesMelodyland,
-    ToontownGlobals.TheBrrrgh,
-    ToontownGlobals.DonaldsDreamland,
+    ToontownGlobals.ToontropolisPlaza,
+    ToontownGlobals.ToontropolisDocks,
+    ToontownGlobals.FloweringGrove,
+    ToontownGlobals.TheLandOfMusic,
+    ToontownGlobals.TundraWonderland,
+    ToontownGlobals.TwilightDreamland,
     ]
 
 def getDifficulty(trolleyZone):

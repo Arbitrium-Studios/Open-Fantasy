@@ -4,6 +4,8 @@ from toontown.toonbase import TTLocalizer
 from otp.otpbase import OTPLocalizer
 from direct.interval.IntervalGlobal import *
 from toontown.estate import GardenGlobals
+from direct.actor import Actor
+from pandac.PandaModules import NodePath
 
 class CatalogGardenItem(CatalogItem.CatalogItem):
     """
@@ -12,8 +14,7 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
 
     sequenceNumber = 0
 
-    def makeNewItem(self, itemIndex = 0, count  = 3, tagCode = 1):
-        #import pdb; pdb.set_trace()
+    def makeNewItem(self, itemIndex = 0, count = 3, tagCode = 1):
         self.gardenIndex = itemIndex
         self.numItems = count
         self.giftCode = tagCode
@@ -27,14 +28,6 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
             return 1
         else:
             return 100
-
-    def reachedPurchaseLimit(self, avatar):
-        # Returns true if the item cannot be bought because the avatar
-        # has already bought his limit on this item.
-        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder \
-           or self in avatar.awardMailboxContents or self in avatar.onAwardOrder:
-            return 1        
-        return 0
 
     def getAcceptItemErrorText(self, retcode):
         # Returns a string describing the error that occurred on
@@ -54,42 +47,51 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
         return TTLocalizer.GardenTypeName
 
     def getName(self):
-        #name = ("Garden Item %s %s" % (self.gardenIndex, self.numItems))
-        name = GardenGlobals.Specials[self.gardenIndex]['photoName']
-        return name
+        return GardenGlobals.Specials[self.gardenIndex]['photoName']
 
     def recordPurchase(self, avatar, optional):
-        #import pdb; pdb.set_trace()
-        #if self.gardenIndex == GardenGlobals.GardenAcceleratorSpecial:
-        #    return ToontownGlobals.P_ItemOnOrder
-        #else:
-        if 1:
-            if avatar:
-                pass
-                avatar.addGardenItem(self.gardenIndex, self.numItems)
-                #TODO modify the toon's GardenSpecials field
-            return ToontownGlobals.P_ItemAvailable
+        if avatar:
+            avatar.addGardenItem(self.gardenIndex, self.numItems)
+        return ToontownGlobals.P_ItemAvailable
 
     def getPicture(self, avatar):
         photoModel = GardenGlobals.Specials[self.gardenIndex]['photoModel']
-        beanJar = loader.loadModel(photoModel)
-        frame = self.makeFrame()
-        beanJar.reparentTo(frame)
 
-        photoPos = GardenGlobals.Specials[self.gardenIndex]['photoPos']
-        beanJar.setPos(*photoPos)
-        photoScale = GardenGlobals.Specials[self.gardenIndex]['photoScale']
-        #beanJar.setScale(2.5)
-        beanJar.setScale(photoScale)
+        if 'photoAnimation' in GardenGlobals.Specials[self.gardenIndex]:
+            modelPath = photoModel + GardenGlobals.Specials[self.gardenIndex]['photoAnimation'][0]
+            animationName = GardenGlobals.Specials[self.gardenIndex]['photoAnimation'][1]
+            animationPath = photoModel + animationName
+            self.model = Actor.Actor()
+            self.model.loadModel(modelPath)
+            self.model.loadAnims(dict([[animationName, animationPath]]))
+            frame, ival = self.makeFrameModel(self.model, 0)
+            ival = ActorInterval(self.model, animationName, 2.0)
+            photoPos = GardenGlobals.Specials[self.gardenIndex]['photoPos']
+            frame.setPos(photoPos)
+            photoScale = GardenGlobals.Specials[self.gardenIndex]['photoScale']
+            self.model.setScale(photoScale)
+            self.hasPicture = True
+            return (frame, ival)
+        else:
+            self.model = loader.loadModel(photoModel)
+            frame = self.makeFrame()
+            self.model.reparentTo(frame)
+            photoPos = GardenGlobals.Specials[self.gardenIndex]['photoPos']
+            self.model.setPos(*photoPos)
+            photoScale = GardenGlobals.Specials[self.gardenIndex]['photoScale']
+            self.model.setScale(photoScale)
+            self.hasPicture = True
+            return (frame, None)
 
-        assert (not self.hasPicture)
-        self.hasPicture=True
-        return (frame, None)
+    def cleanupPicture(self):
+        CatalogItem.CatalogItem.cleanupPicture(self)
+        if hasattr(self, 'model') and self.model:
+            self.model.detachNode()
+            self.model = None
+        return
 
-    def output(self, store = ~0):
-        return "CatalogGardenItem(%s%s)" % (
-            self.gardenIndex,
-            self.formatOptionalData(store))
+    def output(self, store = -1):
+        return 'CatalogGardenItem(%s%s)' % (self.gardenIndex, self.formatOptionalData(store))
 
     def compareTo(self, other):
         return 0
@@ -115,15 +117,9 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
         dg.addUint8(self.numItems)
 
     def getRequestPurchaseErrorText(self, retcode):
-        """
-        Tell the user the item is available and what jelly beans to use it with.
-        """
-        retval = CatalogItem.CatalogItem.getRequestPurchaseErrorText(self,retcode)
-        origText =retval
-        
-        if retval == TTLocalizer.CatalogPurchaseItemAvailable or \
-           retval == TTLocalizer.CatalogPurchaseItemOnOrder:
-            #now lets tell them what other beans to plant it with
+        retval = CatalogItem.CatalogItem.getRequestPurchaseErrorText(self, retcode)
+        origText = retval
+        if retval == TTLocalizer.CatalogPurchaseItemAvailable or retval == TTLocalizer.CatalogPurchaseItemOnOrder:
             recipeKey = GardenGlobals.getRecipeKeyUsingSpecial(self.gardenIndex)
             if not recipeKey == -1:
                 retval += GardenGlobals.getPlantItWithString(self.gardenIndex)
@@ -198,10 +194,7 @@ class CatalogGardenItem(CatalogItem.CatalogItem):
         result = False
         if canPlant < numBeansRequired:
             result = True
-        # make the Toon Statue special, requiring 639 skill
-        if not result and \
-           self.gardenIndex in GardenGlobals.Specials and \
-           'minSkill' in GardenGlobals.Specials[self.gardenIndex]:
+        if not result and self.gardenIndex in GardenGlobals.Specials and 'minSkill' in GardenGlobals.Specials[self.gardenIndex]:
             minSkill = GardenGlobals.Specials[self.gardenIndex]['minSkill']
             if  avatar.shovelSkill < minSkill:
                 result = True

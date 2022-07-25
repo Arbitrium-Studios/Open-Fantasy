@@ -884,7 +884,29 @@ class OptionsTabPage(DirectFrame):
         if (status == "ok"):
             base.cr._userLoggingOut = True
             messenger.send(self._parent.doneEvent)
-            #self.cr.loginFSM.request("chooseAvatar", [self.cr.avList])
+
+    # def __updateFishingPole(self, resetIndex=True):
+    #     chooser = self.optionChoosers['pole']
+
+    #     if resetIndex:
+    #         chooser.setIndex(base.localAvatar.getFishingRod())
+
+    #     chooser.setDisplayText(TTLocalizer.FishingRodNameDict[chooser.index])
+    #     chooser.decideButtons(0, base.localAvatar.maxFishingRod)
+    
+    # def __applyFishingPole(self, index):
+    #     if index != -1 and index != base.localAvatar.getFishingRod():
+    #         base.localAvatar.requestFishingRod(index)
+
+    def showReportNotice(self):
+        self.dialog = TTDialog.TTDialog(style=TTDialog.YesNo, text="WARNING!\n\nIn order to report the bug, you have to open your web browser. It is an external link. You must fill out the Issue with the bug, how to replicate, add your logs, and screenshots in order for us to fully understand!", command=self.confirmBugReport)
+        self.dialog.show()
+
+    def confirmBugReport(self, value):
+        if value > 0:
+            webbrowser.open(ToontownGlobals.BugReportSite, new=2, autoraise=True)
+        self.dialog.hide()
+        return
 
 class CodesTabPage(DirectFrame):
     """

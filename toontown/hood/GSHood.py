@@ -10,7 +10,7 @@ class GSHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(self, parentFSM, doneEvent, dnaStore,
                                    hoodId)
-        self.id = GoofySpeedway
+        self.id = ToontropolisStadium
         # Create the safe zone state data
         #self.storageDNAFile = None
         self.safeZoneLoaderClass = GSSafeZoneLoader.GSSafeZoneLoader

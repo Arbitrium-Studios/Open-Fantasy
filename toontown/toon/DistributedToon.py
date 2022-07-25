@@ -535,11 +535,11 @@ class DistributedToon(DistributedPlayer.DistributedPlayer,
         # computer that has not finished the download yet.
         hoodPhase = base.cr.hoodMgr.getPhaseFromHood(zoneId)
         if not base.cr.isPaid() or (launcher and not launcher.getPhaseComplete(hoodPhase)):
-            # We will act like your default zone is ToontownCentral
+            # We will act like your default zone is ToontropolisPlaza
             # since you are not finished downloading the other zones
             # (same deal if you haven't paid)
-            assert self.notify.debug("default zone %s not downloaded yet. Reverting to ToontownCentral." % zoneId)
-            self.defaultZone = ToontownCentral
+            assert self.notify.debug("default zone %s not downloaded yet. Reverting to ToontropolisPlaza." % zoneId)
+            self.defaultZone = ToontropolisPlaza
         else:
             assert self.notify.debug("setting default zone to %s" % zoneId)
             self.defaultZone = zoneId
@@ -1348,6 +1348,20 @@ class DistributedToon(DistributedPlayer.DistributedPlayer,
 
     def getFishingRod(self):
         return self.fishingRod
+    
+    def setMaxFishingRod(self, rodId):
+        self.maxFishingRod = rodId
+        if self == base.localAvatar:
+            messenger.send('refreshFishingRod')
+
+    def getMaxFishingRod(self):
+        return self.maxFishingRod
+    
+    def requestFishingRod(self, rodId):
+        if not 0 <= rodId <= self.maxFishingRod:
+            return
+
+        self.sendUpdate('requestFishingRod', [rodId])
 
     ## Fishing trophy List
     def setFishingTrophies(self, trophyList):
@@ -1456,7 +1470,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer,
 
             if hoodId == 1:
                 # hoodId 1 means any hood except TTC.
-                if currentHoodId == ToontownGlobals.ToontownCentral:
+                if currentHoodId == ToontownGlobals.ToontropolisPlaza:
                     effect = CENormal
             else:
                 # Any other hoodId means only in that hood.

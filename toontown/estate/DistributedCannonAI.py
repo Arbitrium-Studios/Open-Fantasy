@@ -6,7 +6,7 @@ from direct.task import Task
 from toontown.minigame import CannonGameGlobals
 from direct.distributed import DistributedObjectAI
 from toontown.minigame import Trajectory
-from . import CannonGlobals
+from toontown.estate import CannonGlobals
 
 class DistributedCannonAI(DistributedObjectAI.DistributedObjectAI):
 
@@ -14,13 +14,18 @@ class DistributedCannonAI(DistributedObjectAI.DistributedObjectAI):
 
     def __init__(self, air, estateId, targetId, x, y, z, h, p, r):
         DistributedObjectAI.DistributedObjectAI.__init__(self, air)
-
-        self.posHpr = [x, y, z, h, p, r]
+        self.posHpr = [x,
+         y,
+         z,
+         h,
+         p,
+         r]
         self.avId = 0
         self.estateId = estateId
         self.timeoutTask = None
         self.targetId = targetId
         self.cannonBumperPos = list(ToontownGlobals.PinballCannonBumperInitialPos)
+        return
 
     def delete(self):
         self.ignoreAll()
@@ -38,26 +43,20 @@ class DistributedCannonAI(DistributedObjectAI.DistributedObjectAI):
             self.avId = avId
             self.__stopTimeout()
             self.setMovie(CannonGlobals.CANNON_MOVIE_LOAD, self.avId)
-
-            # Handle unexpected exit
-            self.acceptOnce(self.air.getAvatarExitEvent(avId),
-                            self.__handleUnexpectedExit, extraArgs=[avId])
-            self.acceptOnce("bootAvFromEstate-"+str(avId),
-                            self.__handleBootMessage, extraArgs=[avId])
-
-            # Start timeout timer
+            self.acceptOnce(self.air.getAvatarExitEvent(avId), self.__handleUnexpectedExit, extraArgs=[avId])
+            self.acceptOnce('bootAvFromEstate-' + str(avId), self.__handleBootMessage, extraArgs=[avId])
             self.__startTimeout(CannonGlobals.CANNON_TIMEOUT)
         else:
             self.air.writeServerEvent('suspicious', avId, 'DistributedCannonAI.requestEnter cannon already occupied')
-            self.notify.warning("requestEnter() - cannon already occupied")
-            self.sendUpdateToAvatarId(avId, "requestExit", [])
-            
+            self.notify.warning('requestEnter() - cannon already occupied')
+            self.sendUpdateToAvatarId(avId, 'requestExit', [])
+
     def setMovie(self, mode, avId):
         self.avId = avId
         self.sendUpdate("setMovie", [mode, avId])
 
     def getCannonBumperPos(self):
-        self.notify.debug ('---------getCannonBumperPos %s' % self.cannonBumperPos)
+        self.notify.debug('---------getCannonBumperPos %s' % self.cannonBumperPos)
         return self.cannonBumperPos
 
     def requestBumperMove(self, x, y, z):
@@ -80,21 +79,19 @@ class DistributedCannonAI(DistributedObjectAI.DistributedObjectAI):
 
     def setCannonPosition(self, zRot, angle):
         avId = self.air.getAvatarIdFromSender()
-        # a client is sending a position update for their cannon
-        self.notify.debug("setCannonPosition: " + str(avId) +
-                          ": zRot=" + str(zRot) + ", angle=" + str(angle))
-        self.sendUpdate("updateCannonPosition", [avId, zRot, angle])
+        self.notify.debug('setCannonPosition: ' + str(avId) + ': zRot=' + str(zRot) + ', angle=' + str(angle))
+        self.sendUpdate('updateCannonPosition', [avId, zRot, angle])
 
     def setCannonLit(self, zRot, angle):
         avId = self.air.getAvatarIdFromSender()
         self.__stopTimeout()
-        # a client is telling us that their cannon's fuse is lit
-        self.notify.debug("setCannonLit: " + str(avId) + ": zRot=" +
-                          str(zRot) + ", angle=" + str(angle))
+        self.notify.debug('setCannonLit: ' + str(avId) + ': zRot=' + str(zRot) + ', angle=' + str(angle))
         fireTime = CannonGameGlobals.FUSE_TIME
-        # set the cannon to go off in the near future
-        self.sendUpdate("setCannonWillFire", [avId, fireTime, zRot, angle,
-                                globalClockDelta.getRealNetworkTime()])
+        self.sendUpdate('setCannonWillFire', [avId,
+         fireTime,
+         zRot,
+         angle,
+         globalClockDelta.getRealNetworkTime()])
 
     def setLanded(self):
         assert(self.notify.debug("%s setLanded" % self.doId))
@@ -119,13 +116,10 @@ class DistributedCannonAI(DistributedObjectAI.DistributedObjectAI):
         # day.
         
         self.__stopTimeout()
-        self.timeoutTask = taskMgr.doMethodLater(timeLimit,
-                                                 self.__handleTimeout,
-                                                 self.taskName("timeout"))
+        self.timeoutTask = taskMgr.doMethodLater(timeLimit, self.__handleTimeout, self.taskName('timeout'))
 
     def __stopTimeout(self):
-        # Stops a previously-set timeout from expiring.
-        if self.timeoutTask != None:
+        if self.timeoutTask:
             taskMgr.remove(self.timeoutTask)
             self.timeoutTask = None
 

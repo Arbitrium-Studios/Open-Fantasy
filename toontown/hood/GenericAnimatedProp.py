@@ -88,7 +88,7 @@ class GenericAnimatedProp(AnimatedProp.AnimatedProp):
 
     def calcHoodId(self,node):
         """Calculated our hoodId based on the node full path."""
-        self.hoodId = ToontownGlobals.ToontownCentral
+        self.hoodId = ToontownGlobals.ToontropolisPlaza
         fullString = str(node)
         splits = fullString.split('/')
         try:            

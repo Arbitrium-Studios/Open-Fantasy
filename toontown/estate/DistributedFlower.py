@@ -55,8 +55,8 @@ class DistributedFlower(DistributedPlantBase.DistributedPlantBase, FlowerBase.Fl
             wilt.show()
             desat = wilt.find('**/*desat*')
             bloom.hide()
-            leaves =wilt.findAllMatches('**/*leaf*')
-            for leafIndex in range(leaves.getNumPaths()):
+            leaves = wilt.findAllMatches('**/*leaf*')
+            for leafIndex in xrange(leaves.getNumPaths()):
                 leaf = leaves.getPath(leafIndex)
                 leaf.setColorScale(1.0,0.3,0.1, 1.0)
 
@@ -64,18 +64,11 @@ class DistributedFlower(DistributedPlantBase.DistributedPlantBase, FlowerBase.Fl
             bloom.show()
             desat = bloom.find('**/*desat*')
             wilt.hide()
-            
-        if desat and not desat.isEmpty():            
-            desat.setColorScale( colorTuple[0],
-                                    colorTuple[1],
-                                    colorTuple[2],
-                                    1.0)            
+        if desat and not desat.isEmpty():
+            desat.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
         elif not self.isSeedling():
-            #the seedling model does not have a desat node
-            nodePath.setColorScale( colorTuple[0],
-                                    colorTuple[1],
-                                    colorTuple[2],
-                                    1.0)            
+            nodePath.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
+        return
 
         
         
@@ -94,14 +87,14 @@ class DistributedFlower(DistributedPlantBase.DistributedPlantBase, FlowerBase.Fl
 
         if DIRT_AS_WATER_INDICATOR:
             dirtMoundScale = invFlowerScale * 0.73
-            self.dirtMound = loader.loadModel("phase_5.5/models/estate/dirt_mound")
+            self.dirtMound = loader.loadModel('phase_5.5/models/estate/dirt_mound')
             self.dirtMound.reparentTo(self.model)
             self.dirtMound.setScale(dirtMoundScale)
-            self.dirtMound.setZ(self.dirtMound.getZ() - DIRT_MOUND_HEIGHT/2.0)
-            self.sandMound = loader.loadModel("phase_5.5/models/estate/sand_mound")
+            self.dirtMound.setZ(self.dirtMound.getZ() - DIRT_MOUND_HEIGHT / 2.0)
+            self.sandMound = loader.loadModel('phase_5.5/models/estate/sand_mound')
             self.sandMound.reparentTo(self.model)
             self.sandMound.setScale(dirtMoundScale)
-            self.sandMound.setZ(self.sandMound.getZ() - DIRT_MOUND_HEIGHT/2.0)
+            self.sandMound.setZ(self.sandMound.getZ() - DIRT_MOUND_HEIGHT / 2.0)
             self.adjustWaterIndicator()
         
 
@@ -111,57 +104,31 @@ class DistributedFlower(DistributedPlantBase.DistributedPlantBase, FlowerBase.Fl
         """
         #if we're clicking on buttons, we're not asleep
         messenger.send('wakeup')
-        
-        fullName = GardenGlobals.getFlowerVarietyName(self.species,
-                                                      self.variety)        
+        fullName = GardenGlobals.getFlowerVarietyName(self.species, self.variety)
         if self.isWilted():
-            self.confirmDialog = TTDialog.TTDialog(
-                style = TTDialog.YesNo,
-                text = TTLocalizer.ConfirmWiltedFlower % {'plant': fullName},
-                command = self.confirmCallback
-                )
+            self.confirmDialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=TTLocalizer.ConfirmWiltedFlower % {'plant': fullName}, command=self.confirmCallback)
         elif not self.isFruiting():
-            self.confirmDialog = TTDialog.TTDialog(
-                style = TTDialog.YesNo,
-                text = TTLocalizer.ConfirmUnbloomingFlower % {'plant': fullName},
-                command = self.confirmCallback
-                )
+            self.confirmDialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=TTLocalizer.ConfirmUnbloomingFlower % {'plant': fullName}, command=self.confirmCallback)
         elif base.localAvatar.isFlowerBasketFull():
-            self.confirmDialog = TTDialog.TTDialog(
-                style = TTDialog.CancelOnly,
-                text = TTLocalizer.ConfirmBasketFull,
-                command = self.confirmCallback
-                )
-
+            self.confirmDialog = TTDialog.TTDialog(style=TTDialog.CancelOnly, text=TTLocalizer.ConfirmBasketFull, command=self.confirmCallback)
         else:
             #we are sure it is going into the flower basket
             shovel = base.localAvatar.shovel
             skill = base.localAvatar.shovelSkill
             shovelPower = GardenGlobals.getShovelPower(shovel, skill)
             giveSkillUp = True
-            beansRequired = GardenGlobals.getNumBeansRequired(self.species,
-                                                              self.variety)
+            beansRequired = GardenGlobals.getNumBeansRequired(self.species, self.variety)
             if not shovelPower == beansRequired:
                 giveSkillUp = False
 
             if giveSkillUp:
                 if skill == GardenGlobals.getMaxShovelSkill():
-                    text = TTLocalizer.ConfirmMaxedSkillFlower % {'plant': fullName},
+                    text = (TTLocalizer.ConfirmMaxedSkillFlower % {'plant': fullName},)
                 else:
                     text = TTLocalizer.ConfirmSkillupFlower % {'plant': fullName}
-                self.confirmDialog = TTDialog.TTDialog(
-                    style = TTDialog.YesNo,
-                    text = text,
-                    command = self.confirmCallback
-                )
+                self.confirmDialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=text, command=self.confirmCallback)
             else:
-                self.confirmDialog = TTDialog.TTDialog(
-                    style = TTDialog.YesNo,
-                    text = TTLocalizer.ConfirmNoSkillupFlower % {'plant': fullName},
-                    command = self.confirmCallback
-                )                
-                
-        
+                self.confirmDialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=TTLocalizer.ConfirmNoSkillupFlower % {'plant': fullName}, command=self.confirmCallback)
         self.confirmDialog.show()
         base.localAvatar.setInGardenAction(self)
         base.cr.playGame.getPlace().detectedGardenPlotUse()
@@ -202,7 +169,7 @@ class DistributedFlower(DistributedPlantBase.DistributedPlantBase, FlowerBase.Fl
 
         
     def setWaterLevel(self, waterLevel):
-        DistributedPlantBase.DistributedPlantBase.setWaterLevel(self,waterLevel)
+        DistributedPlantBase.DistributedPlantBase.setWaterLevel(self, waterLevel)
         self.showWiltOrBloom()
 
         if self.model:
@@ -267,14 +234,9 @@ class DistributedFlower(DistributedPlantBase.DistributedPlantBase, FlowerBase.Fl
     def doResultDialog(self):
         #import pdb; pdb.set_trace()
         self.startInteraction()
-        flowerName = GardenGlobals.getFlowerVarietyName(self.species,self.variety)        
+        flowerName = GardenGlobals.getFlowerVarietyName(self.species, self.variety)
         stringToShow = TTLocalizer.getResultPlantedSomethingSentence(flowerName)
-                           
-        self.resultDialog = TTDialog.TTDialog(
-            style = TTDialog.Acknowledge,
-            text = stringToShow,
-            command = self.resultsCallback
-            )         
+        self.resultDialog = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=stringToShow, command=self.resultsCallback)
 
     def resultsCallback(self, value):
         self.notify.debug('value=%d' % value)

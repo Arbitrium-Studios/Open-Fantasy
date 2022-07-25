@@ -13,7 +13,7 @@ from toontown.classicchars import DistributedSuperGoofy/AI
 from toontown.classicchars import DistributedDaisy/AI
 from toontown.classicchars import DistributedChip/AI
 from toontown.classicchars import DistributedDale/AI
-from toontown.classicchars import DistributedGoofySpeedway/AI
+from toontown.classicchars import DistributedToontropolisStadium/AI
 from toontown.classicchars import DistributedDonald/AI
 from toontown.classicchars import DistributedDonaldDock/AI
 from toontown.classicchars import DistributedPluto/AI
@@ -875,9 +875,9 @@ dclass DistributedPluto: DistributedCCharBase {
 };
 dclass DistributedWesternPluto: DistributedPluto {
 };
-dclass DistributedGoofySpeedway: DistributedCCharBase {
+dclass DistributedToontropolisStadium: DistributedCCharBase {
 };
-dclass DistributedSuperGoofy: DistributedGoofySpeedway {
+dclass DistributedSuperGoofy: DistributedToontropolisStadium {
 };
 
 dclass DistributedPartyGate: DistributedObject {

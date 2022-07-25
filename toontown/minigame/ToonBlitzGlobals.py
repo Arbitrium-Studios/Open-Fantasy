@@ -12,118 +12,118 @@ ToonStartingPosition = (-39, 0, 13.59)
 CameraStartingPosition = (-28, -53, 17.3, 0, 0, 0)
 
 GameDuration = {
-    ToontownGlobals.ToontownCentral : 150,
-    ToontownGlobals.DonaldsDock : 145,
-    ToontownGlobals.DaisyGardens : 140,
-    ToontownGlobals.MinniesMelodyland: 135,
-    ToontownGlobals.TheBrrrgh: 130,
-    ToontownGlobals.DonaldsDreamland: 125,
+    ToontownGlobals.ToontropolisPlaza : 150,
+    ToontownGlobals.ToontropolisDocks : 145,
+    ToontownGlobals.FloweringGrove : 140,
+    ToontownGlobals.TheLandOfMusic: 135,
+    ToontownGlobals.TundraWonderland: 130,
+    ToontownGlobals.TwilightDreamland: 125,
     }
 
 # Extra points to award when they reach end vine
 BaseBonusOnCompletion = {
-    ToontownGlobals.ToontownCentral : 15,
-    ToontownGlobals.DonaldsDock : 17,
-    ToontownGlobals.DaisyGardens : 19, 
-    ToontownGlobals.MinniesMelodyland: 21,
-    ToontownGlobals.TheBrrrgh: 23,
-    ToontownGlobals.DonaldsDreamland: 25,
+    ToontownGlobals.ToontropolisPlaza : 15,
+    ToontownGlobals.ToontropolisDocks : 17,
+    ToontownGlobals.FloweringGrove : 19, 
+    ToontownGlobals.TheLandOfMusic: 21,
+    ToontownGlobals.TundraWonderland: 23,
+    ToontownGlobals.TwilightDreamland: 25,
     }
 BonusPerSecondLeft = 0.8 # For each second left how many more points to give
 
 ScoreLossPerEnemyCollision = {
-    ToontownGlobals.ToontownCentral : -1,
-    ToontownGlobals.DonaldsDock : -1,
-    ToontownGlobals.DaisyGardens : -1,
-    ToontownGlobals.MinniesMelodyland: -1,
-    ToontownGlobals.TheBrrrgh: -1,
-    ToontownGlobals.DonaldsDreamland: -1,
+    ToontownGlobals.ToontropolisPlaza : -1,
+    ToontownGlobals.ToontropolisDocks : -1,
+    ToontownGlobals.FloweringGrove : -1,
+    ToontownGlobals.TheLandOfMusic: -1,
+    ToontownGlobals.TundraWonderland: -1,
+    ToontownGlobals.TwilightDreamland: -1,
     }
     
 ScoreLossPerFallDown = {
-    ToontownGlobals.ToontownCentral : -0,
-    ToontownGlobals.DonaldsDock : -0,
-    ToontownGlobals.DaisyGardens : -0,
-    ToontownGlobals.MinniesMelodyland: -0,
-    ToontownGlobals.TheBrrrgh: -0,
-    ToontownGlobals.DonaldsDreamland: -0,
+    ToontownGlobals.ToontropolisPlaza : -0,
+    ToontownGlobals.ToontropolisDocks : -0,
+    ToontownGlobals.FloweringGrove : -0,
+    ToontownGlobals.TheLandOfMusic: -0,
+    ToontownGlobals.TundraWonderland: -0,
+    ToontownGlobals.TwilightDreamland: -0,
     }
     
 ScoreLossPerStomperSquish = {
-    ToontownGlobals.ToontownCentral : -1,
-    ToontownGlobals.DonaldsDock : -1,
-    ToontownGlobals.DaisyGardens : -1,
-    ToontownGlobals.MinniesMelodyland: -1,
-    ToontownGlobals.TheBrrrgh: -1,
-    ToontownGlobals.DonaldsDreamland: -1,
+    ToontownGlobals.ToontropolisPlaza : -1,
+    ToontownGlobals.ToontropolisDocks : -1,
+    ToontownGlobals.FloweringGrove : -1,
+    ToontownGlobals.TheLandOfMusic: -1,
+    ToontownGlobals.TundraWonderland: -1,
+    ToontownGlobals.TwilightDreamland: -1,
     }
 
 # Each tuple references a section difficulty, and the probability percent of that being chosen
 # Recommended but not required that they add up to 100
 SectionWeights = {
-    ToontownGlobals.ToontownCentral : ( (0,25), (1,25), (2,25), (3,15), (4,10), (5,0) ),
-    ToontownGlobals.DonaldsDock : ( (0,15), (1,25), (2,25), (3,15), (4,10), (5,10) ),
-    ToontownGlobals.DaisyGardens : ( (0,15), (1,15), (2,25), (3,25), (4,10), (5,10) ), 
-    ToontownGlobals.MinniesMelodyland: ( (0,10), (1,10), (2,25), (3,25), (4,15), (5,15) ),
-    ToontownGlobals.TheBrrrgh: ( (0,10), (1,10), (2,15), (3,25), (4,25), (5,15) ),
-    ToontownGlobals.DonaldsDreamland: ( (0,10), (1,10), (2,15), (3,15), (4,25), (5,25) ),
+    ToontownGlobals.ToontropolisPlaza : ( (0,25), (1,25), (2,25), (3,15), (4,10), (5,0) ),
+    ToontownGlobals.ToontropolisDocks : ( (0,15), (1,25), (2,25), (3,15), (4,10), (5,10) ),
+    ToontownGlobals.FloweringGrove : ( (0,15), (1,15), (2,25), (3,25), (4,10), (5,10) ), 
+    ToontownGlobals.TheLandOfMusic: ( (0,10), (1,10), (2,25), (3,25), (4,15), (5,15) ),
+    ToontownGlobals.TundraWonderland: ( (0,10), (1,10), (2,15), (3,25), (4,25), (5,15) ),
+    ToontownGlobals.TwilightDreamland: ( (0,10), (1,10), (2,15), (3,15), (4,25), (5,25) ),
     }
     
 NumSections = {
-    ToontownGlobals.ToontownCentral : 5,
-    ToontownGlobals.DonaldsDock : 5,
-    ToontownGlobals.DaisyGardens : 5, 
-    ToontownGlobals.MinniesMelodyland: 5,
-    ToontownGlobals.TheBrrrgh: 5,
-    ToontownGlobals.DonaldsDreamland: 5,
+    ToontownGlobals.ToontropolisPlaza : 5,
+    ToontownGlobals.ToontropolisDocks : 5,
+    ToontownGlobals.FloweringGrove : 5, 
+    ToontownGlobals.TheLandOfMusic: 5,
+    ToontownGlobals.TundraWonderland: 5,
+    ToontownGlobals.TwilightDreamland: 5,
     }
     
 # Percent of the maxEnemies that will be there in a section.
-# DonaldsDreamland will have 100% of the maxEnemies.
-# ToontownCentral will have the least %.
+# TwilightDreamland will have 100% of the maxEnemies.
+# ToontropolisPlaza will have the least %.
 PercentMaxEnemies = {
-    ToontownGlobals.ToontownCentral : 50,
-    ToontownGlobals.DonaldsDock : 60,
-    ToontownGlobals.DaisyGardens : 70, 
-    ToontownGlobals.MinniesMelodyland: 80,
-    ToontownGlobals.TheBrrrgh: 90,
-    ToontownGlobals.DonaldsDreamland: 100,
+    ToontownGlobals.ToontropolisPlaza : 50,
+    ToontownGlobals.ToontropolisDocks : 60,
+    ToontownGlobals.FloweringGrove : 70, 
+    ToontownGlobals.TheLandOfMusic: 80,
+    ToontownGlobals.TundraWonderland: 90,
+    ToontownGlobals.TwilightDreamland: 100,
     }
     
 # Percent of the maxTreasures that will be there in a section.
-# DonaldsDreamland will have 100% of the maxTreasures.
-# ToontownCentral will have the least %.
+# TwilightDreamland will have 100% of the maxTreasures.
+# ToontropolisPlaza will have the least %.
 PercentMaxTreasures = {
-    ToontownGlobals.ToontownCentral : 100,
-    ToontownGlobals.DonaldsDock : 100,
-    ToontownGlobals.DaisyGardens : 100, 
-    ToontownGlobals.MinniesMelodyland: 100,
-    ToontownGlobals.TheBrrrgh: 100,
-    ToontownGlobals.DonaldsDreamland: 100,
+    ToontownGlobals.ToontropolisPlaza : 100,
+    ToontownGlobals.ToontropolisDocks : 100,
+    ToontownGlobals.FloweringGrove : 100, 
+    ToontownGlobals.TheLandOfMusic: 100,
+    ToontownGlobals.TundraWonderland: 100,
+    ToontownGlobals.TwilightDreamland: 100,
     }
     
 # Percent of the maxSpawnPoints that will be there in a section.
-# DonaldsDreamland will have 50% of the maxSpawnPoints.
-# ToontownCentral will have the most %.
+# TwilightDreamland will have 50% of the maxSpawnPoints.
+# ToontropolisPlaza will have the most %.
 PercentMaxSpawnPoints = {
-    ToontownGlobals.ToontownCentral : 100,
-    ToontownGlobals.DonaldsDock : 90,
-    ToontownGlobals.DaisyGardens : 80, 
-    ToontownGlobals.MinniesMelodyland: 70,
-    ToontownGlobals.TheBrrrgh: 60,
-    ToontownGlobals.DonaldsDreamland: 50,
+    ToontownGlobals.ToontropolisPlaza : 100,
+    ToontownGlobals.ToontropolisDocks : 90,
+    ToontownGlobals.FloweringGrove : 80, 
+    ToontownGlobals.TheLandOfMusic: 70,
+    ToontownGlobals.TundraWonderland: 60,
+    ToontownGlobals.TwilightDreamland: 50,
     }
     
 # Percent of the maxStompers that will be there in a section.
-# DonaldsDreamland will have 100% of the maxStompers.
-# ToontownCentral will have the least %.
+# TwilightDreamland will have 100% of the maxStompers.
+# ToontropolisPlaza will have the least %.
 PercentMaxStompers = {
-    ToontownGlobals.ToontownCentral : 50,
-    ToontownGlobals.DonaldsDock : 60,
-    ToontownGlobals.DaisyGardens : 70, 
-    ToontownGlobals.MinniesMelodyland: 80,
-    ToontownGlobals.TheBrrrgh: 90,
-    ToontownGlobals.DonaldsDreamland: 100,
+    ToontownGlobals.ToontropolisPlaza : 50,
+    ToontownGlobals.ToontropolisDocks : 60,
+    ToontownGlobals.FloweringGrove : 70, 
+    ToontownGlobals.TheLandOfMusic: 80,
+    ToontownGlobals.TundraWonderland: 90,
+    ToontownGlobals.TwilightDreamland: 100,
     }
     
 # Probability of a treasure of a particular value to appear.

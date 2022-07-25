@@ -252,8 +252,8 @@ model "scenes/art/modules/trashcan.egg" [
 	store_node [ "prop" "prop_trashcan_metal" 8181 ]
 	]
 
-model "scenes/art/assembly/donaldsdock.egg" [
-	store_node [ "prop" "prop_donalds_dock" "donaldsdock" 8190 ]
+model "scenes/art/assembly/ToontropolisDocks.egg" [
+	store_node [ "prop" "prop_donalds_dock" "ToontropolisDocks" 8190 ]
 	]
 
 model "scenes/tunnel/tunnel3.egg" [

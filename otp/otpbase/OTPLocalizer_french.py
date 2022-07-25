@@ -2,13 +2,13 @@
 from otp.otpbase.OTPLocalizer_french_Property import *
 
 # common locations
-lTheBrrrgh = 'Le Glagla'
-lDaisyGardens = 'Le Jardin de Daisy'
-lDonaldsDock = "Quais Donald"
-lDonaldsDreamland = "Le Pays des Rêves de Donald"
-lMinniesMelodyland = "Le Pays Musical de Minnie"
-lToontownCentral = 'Toontown Centre'
-lGoofySpeedway = "Circuit Dingo"
+lTundraWonderland = 'Le Glagla'
+lFloweringGrove = 'Le Jardin de Daisy'
+lToontropolisDocks = "Quais Donald"
+lTwilightDreamland = "Le Pays des Rêves de Donald"
+lTheLandOfMusic = "Le Pays Musical de Minnie"
+lToontropolisPlaza = 'Toontown Centre'
+lToontropolisStadium = "Circuit Dingo"
 
 # common strings
 lCancel = 'Annuler'

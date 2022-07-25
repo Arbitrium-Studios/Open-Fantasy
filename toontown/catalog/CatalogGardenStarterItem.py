@@ -23,12 +23,9 @@ class CatalogGardenStarterItem(CatalogItem.CatalogItem):
         # may purchase.  This is either 0, 1, or some larger number; 0
         # stands for infinity.
         return 0
-        
-    def reachedPurchaseLimit(self, avatar):
-        # Returns true if the item cannot be bought because the avatar
-        # has already bought his limit on this item.
-        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder \
-           or self in avatar.awardMailboxContents or self in avatar.onAwardOrder or (hasattr(avatar, "gardenStarted") and avatar.getGardenStarted()):
+
+    def reachedPurchaseLimit(self, avatar):            
+        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder or self in avatar.awardMailboxContents or self in avatar.onAwardOrder or hasattr(avatar, 'gardenStarted') and avatar.getGardenStarted():
             return 1
         return 0
         
@@ -47,23 +44,14 @@ class CatalogGardenStarterItem(CatalogItem.CatalogItem):
             
 
     def recordPurchase(self, avatar, optional):
-        print("rental-- record purchase")
-        #if avatar:
-        #   avatar.addMoney(self.beanAmount)
-
         if avatar:
-            print("starter garden-- has avater")
-            #zoneId = avatar.zoneId
-            #estateOwnerDoId = simbase.air.estateMgr.zone2owner.get(zoneId)
-            estate = simbase.air.estateMgr.estate.get(avatar.doId)
+            self.notify.debug('rental -- has avatar')
+            estate = simbase.air.estateManager._lookupEstate(avatar)
             if estate:
-                print("starter garden-- has estate")
+                self.notify.debug('rental -- has estate')
                 estate.placeStarterGarden(avatar.doId)
             else:
-                pass
-                print("starter garden-- something not there")
-                #import pdb; pdb.set_trace()
-                
+                self.notify.warning('rental -- something not there')
         return ToontownGlobals.P_ItemAvailable
 
     def getPicture(self, avatar):
@@ -85,9 +73,8 @@ class CatalogGardenStarterItem(CatalogItem.CatalogItem):
 
         return self.makeFrameModel(model, spin)
 
-    def output(self, store = ~0):
-        return "CatalogGardenStarterItem(%s)" % (
-            self.formatOptionalData(store))
+    def output(self, store = -1):
+        return 'CatalogGardenStarterItem(%s)' % self.formatOptionalData(store)
 
     def compareTo(self, other):
         return 0
@@ -116,28 +103,7 @@ class CatalogGardenStarterItem(CatalogItem.CatalogItem):
         return 0
         
     def acceptItem(self, mailbox, index, callback):
-        # Accepts the item from the mailbox.  Some items will pop up a
-        # dialog querying the user for more information before
-        # accepting the item; other items will accept it immediately.
-
-        # In either case, the function will return immediately before
-        # the transaction is finished, but the given callback will be
-        # called later with three parameters: the return code (one of
-        # the P_* symbols defined in ToontownGlobals.py), followed by
-        # the item itself, and the supplied index number.
-
-        # The index is the position of this item within the avatar's
-        # mailboxContents list, which is used by the AI to know which
-        # item to remove from the list (and also to doublecheck that
-        # we're accepting the expected item).
-
-        # This method is only called on the client.
-        self.confirmGarden = TTDialog.TTGlobalDialog(
-            doneEvent = "confirmGarden",
-            message = TTLocalizer.MessageConfirmGarden,
-            command = Functor(self.handleGardenConfirm, mailbox, index, callback),
-            style = TTDialog.TwoChoice)
-        #self.confirmRent.msg = msg
+        self.confirmGarden = TTDialog.TTGlobalDialog(doneEvent='confirmGarden', message=TTLocalizer.MessageConfirmGarden, command=Functor(self.handleGardenConfirm, mailbox, index, callback), style=TTDialog.TwoChoice)
         self.confirmGarden.show()
         #self.accept("confirmRent", Functor(self.handleRentConfirm, mailbox, index, callback))
         #self.__handleRentConfirm)
@@ -154,7 +120,7 @@ class CatalogGardenStarterItem(CatalogItem.CatalogItem):
                 self.gardenTutorial = None
 
             self.gardenTutorial = GardenTutorial.GardenTutorial(callback=handleTutorialDone)
-            if hasattr(mailbox, "mailboxGui") and mailbox.mailboxGui:
+            if hasattr(mailbox, 'mailboxGui') and mailbox.mailboxGui:
                 mailbox.acceptItem(self, index, callback)
                 mailbox.mailboxGui.justExit()
         else:

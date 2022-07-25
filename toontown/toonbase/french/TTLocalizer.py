@@ -29,15 +29,15 @@ Chip   = "Tic"
 Dale   = "Tac"
 
 # common locations
-lTheBrrrgh = 'Le Glagla'
-lDaisyGardens = 'Le Jardin de Daisy'
-lDonaldsDock = "Quais Donald"
-lDonaldsDreamland = "Le Pays des Rêves de Donald"
-lMinniesMelodyland = "Le Pays Musical de Minnie"
-lToontownCentral = 'Toontown Centre'
+lTundraWonderland = 'Le Glagla'
+lFloweringGrove = 'Le Jardin de Daisy'
+lToontropolisDocks = "Quais Donald"
+lTwilightDreamland = "Le Pays des Rêves de Donald"
+lTheLandOfMusic = "Le Pays Musical de Minnie"
+lToontropolisPlaza = 'Toontown Centre'
 lToonHQ = 'QG des Toons'
-lOutdoorZone = "Forêt de glands de Tic et Tac"
-lGoofySpeedway = "Circuit Dingo"
+lAcornAcres = "Forêt de glands de Tic et Tac"
+lToontropolisStadium = "Circuit Dingo"
 lGolfZone = "Minigolf de Tic et Tac"
 
 lGagShop = 'Gag Shop'
@@ -170,16 +170,16 @@ GlobalStreetNames = {
     }
 
 # reference the location name as [-1]; it's guaranteed to be the last entry
-DonaldsDock       = ("vers les",     "sur les",     "Quais Donald")
-ToontownCentral   = ("vers",     "à",     "Toontown centre")
-TheBrrrgh         = ("vers",     "dans",     "le Glagla")
-MinniesMelodyland = ("vers le",     "au",     "Pays musical de Minnie")
-DaisyGardens      = ("vers les",     "au",     "Jardins de Daisy")
+ToontropolisDocks       = ("vers les",     "sur les",     "Quais Donald")
+ToontropolisPlaza   = ("vers",     "à",     "Toontown centre")
+TundraWonderland         = ("vers",     "dans",     "le Glagla")
+TheLandOfMusic = ("vers le",     "au",     "Pays musical de Minnie")
+FloweringGrove      = ("vers les",     "au",     "Jardins de Daisy")
 ConstructionZone  = ("vers la", "dans la", "Zone de construction")
-OutdoorZone       = ("",     "",     lOutdoorZone)
+AcornAcres       = ("",     "",     lAcornAcres)
 FunnyFarm         = ("vers la", "dans la", "Ferme farfelue")
-GoofySpeedway      = ("vers le",     "au",     "Circuit Dingo")
-DonaldsDreamland  = ("vers le",     "au",     "Pays des rêves de Donald")
+ToontropolisStadium      = ("vers le",     "au",     "Circuit Dingo")
+TwilightDreamland  = ("vers le",     "au",     "Pays des rêves de Donald")
 BossbotHQ         = ("vers le",     "dans le",     "QG des Chefbots")
 SellbotHQ         = ("vers le",     "dans le",     "QG Vendibot")
 CashbotHQ         = ("vers le",     "dans le",     "QG Caissbot")
@@ -686,7 +686,7 @@ INCOMPLETE_WRONG_NPC = 4
 COMPLETE = 5
 LEAVING = 6
 
-TheBrrrghTrackQuestDict = {
+TundraWonderlandTrackQuestDict = {
     GREETING : "",
     QUEST : "Maintenant tu es prêt(e).\aSors et fais un tour avant de décider quelle série tu voudras choisir.\aChoisis bien, parce que c'est ta dernière série.\aQuand tu auras décidé, reviens me voir.",
     INCOMPLETE_PROGRESS : "Choisis bien.",
@@ -1552,7 +1552,7 @@ QuestDialogDict = {
              QUEST : "Un rigolpoint? Je ne crois pas!\aSans problème, mais il va d'abord falloir que tu me débarrasses de quelques-uns de ces fichus Loibots." },
 
     # Johnny Cashmere will knit you a large bag if...
-    5303 : { QUEST : lTheBrrrgh+" est envahi de Cogs très dangereux.\aSi j'étais toi, j'irais là-bas avec plus de gags.\aJ'ai entendu dire que _toNpcName_ peut te faire un grand sac si tu n'as pas peur de marcher._where_" },
+    5303 : { QUEST : lTundraWonderland+" est envahi de Cogs très dangereux.\aSi j'étais toi, j'irais là-bas avec plus de gags.\aJ'ai entendu dire que _toNpcName_ peut te faire un grand sac si tu n'as pas peur de marcher._where_" },
     5304 : { GREETING: "",
              LEAVING : "",
              INCOMPLETE_PROGRESS : "Il devrait y avoir plein de Loibots par là-bas.\aAlors, vas-y!" ,
@@ -4324,7 +4324,7 @@ DaisyChatter = (
         "As-tu vu"+Donald+"?Il est introuvable.",
         "Si tu vois mon ami"+Minnie+", dis-lui \"Bonjour\" de ma part.",
         "Meilleurs sont tes outils de jardinage, et plus belles seront tes plantes.",
-        "Il y a beaucoup trop de"+Cogs+" par ici"+lDonaldsDock+".",
+        "Il y a beaucoup trop de"+Cogs+" par ici"+lToontropolisDocks+".",
         "Tu feras le bonheur de tes plantes si tu les arroses tous les jours.",
         "Pour faire pousser une pâquerette rose, plante un bonbon jaune et un bonbon rouge ensemble.",
         "C'est facile de faire pousser une pâquerette jaune, tu n'as qu'à planter un bonbon jaune.",
@@ -4333,14 +4333,14 @@ DaisyChatter = (
         [ # Goodbyes
         "Je vais au Pays musical pour voir %s!" % Minnie,
         "Je suis en retard pour mon pique-nique avec %s!" % Donald,
-        "Je crois que je vais aller nager à"+lDonaldsDock+".",
+        "Je crois que je vais aller nager à"+lToontropolisDocks+".",
         "Oh, je commence à avoir sommeil. Je crois que je vais aller au Pays des Rêves",
         ]
     )
 
 ChipChatter = (
         [ # Greetings
-        "Bienvenue dans %s !" % lOutdoorZone,
+        "Bienvenue dans %s !" % lAcornAcres,
         "Bonjour, je m'appelle" + Chip + ". Et toi, comment t'appelles-tu ?",
         "Non, je suis" + Chip + ".",
         "Je suis content de te voir % !",
@@ -4352,9 +4352,9 @@ ChipChatter = (
         "Les trous de golf dotés de volcans sont les plus difficiles pour moi.",
         ],
         [ # Goodbyes
-        "Nous allons dans le" + lTheBrrrgh +"pour jouer avec %s." % Pluto,
+        "Nous allons dans le" + lTundraWonderland +"pour jouer avec %s." % Pluto,
         "Nous rendrons visite à %s et pourrons le réparer." % Donald,
-        "Je crois que je vais aller me baigner dans" + lDonaldsDock + ".",
+        "Je crois que je vais aller me baigner dans" + lToontropolisDocks + ".",
         "Oh, j'ai un peu sommeil. Je pense que je vais aller au Pays des Rêves.",
         ]
     )
@@ -4365,7 +4365,7 @@ DaleChatter = (
         "Je suis content de te voir % !",
         "Bonjour, je m'appelle" + Dale + ". Et toi, comment t'appelles-tu ?",
         "Salut, je suis" + Chip + ".",
-        "Bienvenue dans %s !" % lOutdoorZone,
+        "Bienvenue dans %s !" % lAcornAcres,
         "Nous sommes Tic et Tac !",
         ],
         [ # Comments
@@ -4409,9 +4409,9 @@ GoofyChatter = (
         ]
     )
 
-GoofySpeedwayChatter = (
+ToontropolisStadiumChatter = (
         [ # Greetings
-        "Bienvenue au "+lGoofySpeedway+".",
+        "Bienvenue au "+lToontropolisStadium+".",
         "Salut, je m'appelle "+Goofy+". Et toi ?",
         "Ouah, sympa de te voir %!",
         ],
@@ -4423,7 +4423,7 @@ GoofySpeedwayChatter = (
         "Dis-donc, tu as vu "+Donald+"?",
         "Si tu vois mon ami "+Mickey+", dis-lui bonjour de ma part.",
         "Oh! J'ai oublié de préparer le petit déjeuner de "+Mickey+"!",
-        "Bon sang, c'est vrai qu'il y a un tas de "+Cogs+" sur les "+lDonaldsDock+".",
+        "Bon sang, c'est vrai qu'il y a un tas de "+Cogs+" sur les "+lToontropolisDocks+".",
         "À la succursale du Glagla de ma boutique à gags, les lunettes hypnotiques sont en vente pour seulement 1 bonbon!",
         "La boutique à gags de Dingo propose les meilleurs blagues, astuces et chatouilles de tout Toontown!",
         "À la boutique à gags de Dingo, chaque tarte à la crème est garantie de te faire rire ou tes bonbons te seront remboursés !"
@@ -4431,7 +4431,7 @@ GoofySpeedwayChatter = (
         [ # Goodbyes
         "Je vais au Pays Musical pour voir %s!" % Mickey,
         "Aïe, je suis en retard pour mon rendez-vous avec %s!" % Donald,
-        "Je crois que je vais aller nager aux "+lDonaldsDock+".",
+        "Je crois que je vais aller nager aux "+lToontropolisDocks+".",
         "C'est l'heure de faire la sieste. Je vais au Pays des rêves.",
         ]
     )
@@ -8652,7 +8652,7 @@ SummonDlgShopkeeper = "Le commerçant"
 # Polar Place cheesy effect chat phrases
 PolarPlaceEffect1 = NPCToonNames[3306] + ": Bienvenue à la Place Polaire!"
 PolarPlaceEffect2 = NPCToonNames[3306] + ": Essaie pour voir si la taille te va."
-PolarPlaceEffect3 = NPCToonNames[3306] + ": Ton nouveau look ne marchera que" + lTheBrrrgh + "."
+PolarPlaceEffect3 = NPCToonNames[3306] + ": Ton nouveau look ne marchera que" + lTundraWonderland + "."
 
 # LaserGrid game Labels
 LaserGameMine = "Recherche de crâne!"

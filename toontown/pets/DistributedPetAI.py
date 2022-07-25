@@ -48,7 +48,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI,
         self.ownerId = 0
         self.petName = 'unnamed'
         self.traitSeed = 0
-        self.safeZone = ToontownGlobals.ToontownCentral
+        self.safeZone = ToontownGlobals.ToontropolisPlaza
         self.initialDNA = dna
 
         # if this flag is false by the time we're generated, we won't try
@@ -134,7 +134,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI,
     if __debug__:
         # these are debug functions to prepare new pets
         def _initFakePet(self, ownerId, name, traitSeed=0,
-                         safeZone=ToontownGlobals.ToontownCentral):
+                         safeZone=ToontownGlobals.ToontropolisPlaza):
             # Initializes a 'fake' pet (not represented in the database).
             # Call before generate.
             self.setOwnerId(ownerId)
@@ -188,7 +188,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI,
                 self.__dict__[setterName](value)
             
     def _initDBVals(self, ownerId, name=None, traitSeed=0, dna=None,
-                    safeZone=ToontownGlobals.ToontownCentral):
+                    safeZone=ToontownGlobals.ToontropolisPlaza):
         # Initializes the DB fields for a new, generated pet object to
         # valid/safe values.
         self.b_setOwnerId(ownerId)

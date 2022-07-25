@@ -13,7 +13,7 @@ class DistributedBankMgr(DistributedObject.DistributedObject):
         DistributedObject.DistributedObject.__init__(self, cr)
 
     def generate(self):
-        if base.cr.bankManager != None:
+        if base.cr.bankManager:
             base.cr.bankManager.delete()
         base.cr.bankManager = self
         DistributedObject.DistributedObject.generate(self)

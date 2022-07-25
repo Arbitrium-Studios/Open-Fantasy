@@ -66,12 +66,12 @@ class DistributedHouseDoor(DistributedDoor.DistributedDoor):
             if house and house.house_loaded:
                 self.__gotRelatedHouse()
             else:
-                self.acceptOnce("houseLoaded-%d" % self.houseId, self.__gotRelatedHouse)
+                self.acceptOnce('houseLoaded-%d' % self.houseId, self.__gotRelatedHouse)
         elif self.doorType == DoorTypes.INT_STANDARD:
             # wish there was a better way to test if houseInterior has already called setup
             door=render.find("**/leftDoor;+s")
             if door.isEmpty():
-                self.acceptOnce("houseInteriorLoaded-%d" % self.zoneId, self.__gotRelatedHouse)
+                self.acceptOnce('houseInteriorLoaded-%d' % self.zoneId, self.__gotRelatedHouse)
             else:
                 self.__gotRelatedHouse()
 
@@ -100,9 +100,8 @@ class DistributedHouseDoor(DistributedDoor.DistributedDoor):
         self.zoneDoneLoading = 0
         
 
-    def getBuilding(self, allowEmpty=False):
-        # Once we find it, we store it, so we don't have to find it again.
-        if ('building' not in self.__dict__):
+    def getBuilding(self, allowEmpty = False):
+        if 'building' not in self.__dict__:
             if self.doorType == DoorTypes.INT_STANDARD:
                 #if ZoneUtil.isInterior(self.zoneId):
                 # building interior.
@@ -114,7 +113,6 @@ class DistributedHouseDoor(DistributedDoor.DistributedDoor):
             elif self.doorType == DoorTypes.EXT_STANDARD:
                 if self.houseId:
                     self.building = self.cr.playGame.hood.loader.houseId2house.get(self.houseId, None)
-
         if allowEmpty:
             return self.building
                     
@@ -145,14 +143,9 @@ class DistributedHouseDoor(DistributedDoor.DistributedDoor):
         return otherNP
         
     def enterClosing(self, ts):
-        assert(self.debugPrint("enterClosing()"))
-        # Start animation:
-        #building=self.getBuilding()
-        # The right hole (aka doorway):
-        #doorFrameHoleRight=building.find("**/doorFrameHoleRight;+s")
-        doorFrameHoleRight=self.findDoorNode("doorFrameHoleRight")
-        if (doorFrameHoleRight.isEmpty()):
-            self.notify.warning("enterClosing(): did not find doorFrameHoleRight")
+        doorFrameHoleRight = self.findDoorNode('doorFrameHoleRight')
+        if doorFrameHoleRight.isEmpty():
+            self.notify.warning('enterClosing(): did not find doorFrameHoleRight')
             return
         
         # Right door:
@@ -169,19 +162,8 @@ class DistributedHouseDoor(DistributedDoor.DistributedDoor):
             h = 100
         else:
             h = -100
-        self.finishDoorTrack()            
-        self.doorTrack=Sequence(
-                LerpHprInterval(
-                    nodePath=rightDoor,
-                    duration=1.0,
-                    hpr=VBase3(0, 0, 0),
-                    startHpr=VBase3(h, 0, 0),
-                    other=otherNP,
-                    blendType="easeInOut"),
-                Func(doorFrameHoleRight.hide),
-                Func(self.hideIfHasFlat, rightDoor),
-                SoundInterval(self.closeSfx, node=rightDoor),
-                name = trackName)
+        self.finishDoorTrack()
+        self.doorTrack = Sequence(LerpHprInterval(nodePath=rightDoor, duration=1.0, hpr=VBase3(0, 0, 0), startHpr=VBase3(h, 0, 0), other=otherNP, blendType='easeInOut'), Func(doorFrameHoleRight.hide), Func(self.hideIfHasFlat, rightDoor), SoundInterval(self.closeSfx, node=rightDoor), name=trackName)
         self.doorTrack.start(ts)
         if hasattr(self, "done"):
             assert(self.debugPrint("exiting the estate, to a house"))
@@ -190,29 +172,15 @@ class DistributedHouseDoor(DistributedDoor.DistributedDoor):
             if self.doorType == DoorTypes.EXT_STANDARD:
                 whereTo = "house"
             else:
-                whereTo = "estate"
-            # We must set allowRedirect to 0 because we expect to meet
-            # our other door on the other side.
-            request={
-                    #"loader": "estateLoader" ,
-                    "loader": "safeZoneLoader" ,
-                    "where": whereTo,
-                    "how": "doorIn",
-                    "hoodId": ToontownGlobals.MyEstate,
-                    "zoneId": zoneId,
-                    "shardId": None,
-                    "avId": -1,
-                    "allowRedirect" : 0,
-                    "doorDoId":self.otherDoId}
-            messenger.send("doorDoneEvent", [request])
-
-    if __debug__:
-        def debugPrint(self, message):
-            """for debugging""" 
-            type=self.__dict__.get('doorType', '?')
-            if type == DoorTypes.INT_STANDARD:
-                type="INT_ST"
-            elif type == DoorTypes.EXT_STANDARD:
-                type="EXT_ST"
-            return self.notify.debug(
-                    str(self.__dict__.get('houseId', '?'))+' '+type+' '+message)
+                whereTo = 'estate'
+            request = {'loader': 'safeZoneLoader',
+             'where': whereTo,
+             'how': 'doorIn',
+             'hoodId': ToontownGlobals.MyEstate,
+             'zoneId': zoneId,
+             'shardId': None,
+             'avId': -1,
+             'allowRedirect': 0,
+             'doorDoId': self.otherDoId}
+            messenger.send('doorDoneEvent', [request])
+        return

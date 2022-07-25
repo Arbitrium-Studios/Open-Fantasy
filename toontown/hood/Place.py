@@ -888,6 +888,8 @@ class Place(StateData.StateData,
         else:
             # we are teleporting to our own estate
             base.cr.estateMgr.getLocalEstateZone(base.localAvatar.getDoId())
+        if HouseGlobals.WANT_TELEPORT_TIMEOUT:
+            taskMgr.doMethodLater(HouseGlobals.TELEPORT_TIMEOUT, self.goHomeFailed, 'goHomeFailed')
 
         # set a timeout just in case we never hear back
         # SDN:  this doesn't work correctly yet.  getEstateZone
@@ -906,15 +908,10 @@ class Place(StateData.StateData,
                                   "goHomeFailed")
             
     def goHome(self, ownerId, zoneId):
-        self.notify.debug("goHome ownerId = %s" % ownerId)
-        taskMgr.remove("goHomeFailed")
-
-        # Disallow transitive visits, i.e. teleporting to a friend who is
-        # currently at a non-friends estate
-
-        if (ownerId > 0 and ownerId != base.localAvatar.doId and
-            not base.cr.isFriend(ownerId)):
-            self.doneStatus["failed"] = 1
+        self.notify.debug('goHome ownerId = %s' % ownerId)
+        taskMgr.remove('goHomeFailed')
+        if ownerId > 0 and ownerId != base.localAvatar.doId and not base.cr.isFriend(ownerId):
+            self.doneStatus['failed'] = 1
             self.goHomeFailed(None)
             return
 

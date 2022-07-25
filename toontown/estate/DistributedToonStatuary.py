@@ -5,11 +5,9 @@ from direct.showbase.ShowBase import *
 from panda3d.core import *
 from toontown.toon import Toon
 from toontown.toon import ToonDNA
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
-from panda3d.core import NodePath
-from panda3d.core import Point3
 
 def dnaCodeFromToonDNA(dna):
     """This is the code that is stored in the uint16 optional parameter on the statue"""
@@ -37,16 +35,6 @@ def dnaCodeFromToonDNA(dna):
 class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedToonStatuary')
 
-    # Note: These are the steps to take while adding a pose to the catalog list of available poses
-    # 1) Add 205, 1005, 105 equivalent in GardenGlobals.py
-    # 2) Add CatalogGardenItem(106, 1), in CatalogGenerator.py
-    # 3) Make sure the correct pose matches in DistributedToonStatuary for 205, 206, etc.
-    # 4) Adjust range in DistributedEstateAI.py   from 205 to (Last typeIndex of ToonStatue)
-    # 5) Adjust range in DistributedGardenPlot.py from 205 to (Last typeIndex of ToonStatue)
-    # 6) Adjust range in CatalogGardenItem.py     from 105 to (Last Specials number of ToonStatue)
-    # 7) Adjust range in SpecialsPhoto.py         from 105 to (Last Specials number of ToonStatue)
-    # 8) Add the name of the statue to TTLocalizerEnglish.py
-
     def __init__(self, cr):
         self.notify.debug('constructing DistributedToonStatuary')
         DistributedStatuary.DistributedStatuary.__init__(self, cr)
@@ -58,7 +46,7 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
 
     def loadModel(self):
         DistributedStatuary.DistributedStatuary.loadModel(self)
-        self.model.setScale(self.worldScale*1.5, self.worldScale*1.5, self.worldScale)
+        self.model.setScale(self.worldScale * 1.5, self.worldScale * 1.5, self.worldScale)
         self.getToonPropertiesFromOptional()
         dna = ToonDNA.ToonDNA()
         dna.newToonFromProperties(self.headType, self.torsoType, self.legType, self.gender, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -151,7 +139,7 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
                     sleeves.setTexture(desatSleeveTex, 1)
                 
                 bottoms = torso.findAllMatches('**/torso-bot*')
-                for bottomNum in range(0, bottoms.getNumPaths()):
+                for bottomNum in xrange(0, bottoms.getNumPaths()):
                     bottom = bottoms.getPath(bottomNum)
                     # Replace whatever texture the toon has with the default desaturated textures.
                     if (self.toon.style.torso[1] == 's'):
@@ -173,10 +161,7 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
         tsDetail = TextureStage('tsDetail')
         tsDetail.setPriority(2)
         tsDetail.setSort(10)
-        tsDetail.setCombineRgb(tsDetail.CMInterpolate, tsDetail.CSTexture, 
-                               tsDetail.COSrcColor, tsDetail.CSPrevious, 
-                               tsDetail.COSrcColor, tsDetail.CSConstant, 
-                               tsDetail.COSrcColor)
+        tsDetail.setCombineRgb(tsDetail.CMInterpolate, tsDetail.CSTexture, tsDetail.COSrcColor, tsDetail.CSPrevious, tsDetail.COSrcColor, tsDetail.CSConstant, tsDetail.COSrcColor)
         tsDetail.setColor(VBase4(0.5, 0.5, 0.5, 1))
 
         if (self.toon.hasLOD()):

@@ -238,7 +238,7 @@ __goofyWaypoints = (
     ('p','q',1,[])
     )
 
-__goofySpeedwayPaths = {
+__ToontropolisStadiumPaths = {
     # for each node:
     # (
     #   pos, # position of node
@@ -283,7 +283,7 @@ __goofySpeedwayPaths = {
            ),
     }
 
-__goofySpeedwayWaypoints = (
+__ToontropolisStadiumWaypoints = (
     # from, to, waypoints
     ('a','k',1,[]),
     ('k','a',1,[])
@@ -536,9 +536,9 @@ def getPaths(charName, location = 0):
         if location == 0:
             return __goofyPaths
         else:
-            return __goofySpeedwayPaths
+            return __ToontropolisStadiumPaths
     elif charName==TTLocalizer.SuperGoofy:
-        return __goofySpeedwayPaths
+        return __ToontropolisStadiumPaths
     elif charName==TTLocalizer.Donald:
         return __donaldPaths
     elif charName==TTLocalizer.Pluto:
@@ -563,8 +563,8 @@ def __getWaypointList(paths):
         return __daisyWaypoints
     elif paths==__goofyPaths:
         return __goofyWaypoints
-    elif paths==__goofySpeedwayPaths:
-        return __goofySpeedwayWaypoints
+    elif paths==__ToontropolisStadiumPaths:
+        return __ToontropolisStadiumWaypoints
     elif paths==__donaldPaths:
         return __donaldWaypoints
     elif paths==__plutoPaths:

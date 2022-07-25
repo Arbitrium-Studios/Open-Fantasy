@@ -292,38 +292,38 @@ def getSuitFont():
 # Hood ids.  These are also the zone ids of the corresponding
 # safezone, and also represent the first of a range of 1000 zone ids
 # allocated to each hood.
-DonaldsDock =           1000
-ToontownCentral =       2000
-TheBrrrgh =             3000
-MinniesMelodyland =     4000
-DaisyGardens =          5000
-OutdoorZone =           6000
+ToontropolisDocks =           1000
+ToontropolisPlaza =       2000
+TundraWonderland =             3000
+TheLandOfMusic =     4000
+FloweringGrove =          5000
+AcornAcres =           6000
 FunnyFarm =             7000
-GoofySpeedway =         8000
-DonaldsDreamland =      9000
+ToontropolisStadium =         8000
+TwilightDreamland =      9000
 
 # Street Branch zones
-# DonaldsDock
+# ToontropolisDocks
 BarnacleBoulevard =  1100
 SeaweedStreet =      1200
 LighthouseLane =     1300
-# ToontownCentral
+# ToontropolisPlaza
 SillyStreet =        2100
 LoopyLane =          2200
 PunchlinePlace =     2300
-# TheBrrrgh
+# TundraWonderland
 WalrusWay =          3100
 SleetStreet =        3200
 PolarPlace =         3300
-# MinniesMelodyland
+# TheLandOfMusic
 AltoAvenue =         4100
 BaritoneBoulevard =  4200
 TenorTerrace =       4300
-# DaisyGardens
+# FloweringGrove
 ElmStreet =          5100
 MapleStreet =        5200
 OakStreet =          5300
-# DonaldsDreamland
+# TwilightDreamland
 LullabyLane =        9100
 PajamaPlace =        9200
 
@@ -331,13 +331,13 @@ PajamaPlace =        9200
 ToonHall = 2513
 
 HoodHierarchy = {
-    ToontownCentral : (SillyStreet, LoopyLane, PunchlinePlace),
-    DonaldsDock : (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
-    TheBrrrgh : (WalrusWay, SleetStreet, PolarPlace),
-    MinniesMelodyland : (AltoAvenue, BaritoneBoulevard, TenorTerrace),
-    DaisyGardens : (ElmStreet, MapleStreet, OakStreet),
-    DonaldsDreamland : (LullabyLane, PajamaPlace),
-    GoofySpeedway : (),
+    ToontropolisPlaza : (SillyStreet, LoopyLane, PunchlinePlace),
+    ToontropolisDocks : (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
+    TundraWonderland : (WalrusWay, SleetStreet, PolarPlace),
+    TheLandOfMusic : (AltoAvenue, BaritoneBoulevard, TenorTerrace),
+    FloweringGrove : (ElmStreet, MapleStreet, OakStreet),
+    TwilightDreamland : (LullabyLane, PajamaPlace),
+    ToontropolisStadium : (),
     }
 
 # This is a special case.  It's not a real zoneId, but is used to
@@ -386,7 +386,7 @@ PartyHood =            18000
 HoodsAlwaysVisited = [17000,18000,]
 
 # This is the pool of zone ids reserved for the dynamically-allocated
-# copies of ToontownCentral known as WelcomeValley.  Each dynamic hood
+# copies of ToontropolisPlaza known as WelcomeValley.  Each dynamic hood
 # gets 1000 zone ids.
 WelcomeValleyBegin =      22000
 WelcomeValleyEnd =        61000
@@ -408,10 +408,10 @@ cogDept2index = {
 cogIndex2dept = invertDict(cogDept2index)
 
 HQToSafezone = {
-    SellbotHQ : DaisyGardens,
-    CashbotHQ : DonaldsDreamland,
-    LawbotHQ : TheBrrrgh,
-    BossbotHQ : DonaldsDock, # ?
+    SellbotHQ : FloweringGrove,
+    CashbotHQ : TwilightDreamland,
+    LawbotHQ : TundraWonderland,
+    BossbotHQ : ToontropolisDocks, # ?
     }
 
 CogDeptNames = [
@@ -576,15 +576,15 @@ StreetNames = TTLocalizer.GlobalStreetNames
 StreetBranchZones = list(StreetNames.keys())
 
 # hood name list
-Hoods = ( DonaldsDock,
-          ToontownCentral,
-          TheBrrrgh,
-          MinniesMelodyland,
-          DaisyGardens,
-          OutdoorZone,
+Hoods = ( ToontropolisDocks,
+          ToontropolisPlaza,
+          TundraWonderland,
+          TheLandOfMusic,
+          FloweringGrove,
+          AcornAcres,
           FunnyFarm,
-          GoofySpeedway,
-          DonaldsDreamland,
+          ToontropolisStadium,
+          TwilightDreamland,
           BossbotHQ,
           SellbotHQ,
           CashbotHQ,
@@ -592,14 +592,14 @@ Hoods = ( DonaldsDock,
           GolfZone,
           )
 
-HoodsForTeleportAll = ( DonaldsDock,
-          ToontownCentral,
-          TheBrrrgh,
-          MinniesMelodyland,
-          DaisyGardens,
-          OutdoorZone,
-          GoofySpeedway,
-          DonaldsDreamland,
+HoodsForTeleportAll = ( ToontropolisDocks,
+          ToontropolisPlaza,
+          TundraWonderland,
+          TheLandOfMusic,
+          FloweringGrove,
+          AcornAcres,
+          ToontropolisStadium,
+          TwilightDreamland,
           BossbotHQ,
           SellbotHQ,
           CashbotHQ,
@@ -714,16 +714,16 @@ KeyboardTimeout = 300
 # Maps hoods to download phases
 phaseMap = {
     Tutorial : 4,
-    ToontownCentral : 4, # TT streets are in 5
+    ToontropolisPlaza : 4, # TT streets are in 5
     MyEstate : 5.5,
-    DonaldsDock : 6,
-    MinniesMelodyland : 6,
-    GoofySpeedway : 6,
-    TheBrrrgh : 8,
-    DaisyGardens : 8,
+    ToontropolisDocks : 6,
+    TheLandOfMusic : 6,
+    ToontropolisStadium : 6,
+    TundraWonderland : 8,
+    FloweringGrove : 8,
     FunnyFarm : 8,
-    DonaldsDreamland : 8,
-    OutdoorZone : 8,
+    TwilightDreamland : 8,
+    AcornAcres : 8,
     BossbotHQ : 12,
     SellbotHQ : 9,
     CashbotHQ : 10,
@@ -735,15 +735,15 @@ phaseMap = {
 
 # town streets to download phases
 streetPhaseMap = {
-    ToontownCentral : 5,
-    DonaldsDock : 6,
-    MinniesMelodyland : 6,
-    GoofySpeedway : 6,
-    TheBrrrgh : 8,
-    DaisyGardens : 8,
+    ToontropolisPlaza : 5,
+    ToontropolisDocks : 6,
+    TheLandOfMusic : 6,
+    ToontropolisStadium : 6,
+    TundraWonderland : 8,
+    FloweringGrove : 8,
     FunnyFarm : 8,
-    DonaldsDreamland : 8,
-    OutdoorZone : 8,
+    TwilightDreamland : 8,
+    AcornAcres : 8,
     BossbotHQ : 12,
     SellbotHQ : 9,
     CashbotHQ : 10,
@@ -755,15 +755,15 @@ streetPhaseMap = {
 # Maps hoods to download phases
 dnaMap = {
     Tutorial : "toontown_central",
-    ToontownCentral : "toontown_central",
-    DonaldsDock : "donalds_dock",
-    MinniesMelodyland : "minnies_melody_land",
-    GoofySpeedway : "goofy_speedway",
-    TheBrrrgh : "the_burrrgh",
-    DaisyGardens : "daisys_garden",
+    ToontropolisPlaza : "toontown_central",
+    ToontropolisDocks : "donalds_dock",
+    TheLandOfMusic : "minnies_melody_land",
+    ToontropolisStadium : "goofy_speedway",
+    TundraWonderland : "the_burrrgh",
+    FloweringGrove : "daisys_garden",
     FunnyFarm : "not done yet",
-    DonaldsDreamland : "donalds_dreamland",
-    OutdoorZone : "outdoor_zone",
+    TwilightDreamland : "donalds_dreamland",
+    AcornAcres : "outdoor_zone",
     BossbotHQ : "cog_hq_bossbot",
     SellbotHQ : "cog_hq_sellbot",
     CashbotHQ : "cog_hq_cashbot",
@@ -773,15 +773,15 @@ dnaMap = {
 
 # Maps hoods to names
 hoodNameMap = {
-    DonaldsDock : TTLocalizer.DonaldsDock,
-    ToontownCentral : TTLocalizer.ToontownCentral,
-    TheBrrrgh : TTLocalizer.TheBrrrgh,
-    MinniesMelodyland : TTLocalizer.MinniesMelodyland,
-    DaisyGardens : TTLocalizer.DaisyGardens,
-    OutdoorZone : TTLocalizer.OutdoorZone,
+    ToontropolisDocks : TTLocalizer.ToontropolisDocks,
+    ToontropolisPlaza : TTLocalizer.ToontropolisPlaza,
+    TundraWonderland : TTLocalizer.TundraWonderland,
+    TheLandOfMusic : TTLocalizer.TheLandOfMusic,
+    FloweringGrove : TTLocalizer.FloweringGrove,
+    AcornAcres : TTLocalizer.AcornAcres,
     FunnyFarm : TTLocalizer.FunnyFarm,
-    GoofySpeedway : TTLocalizer.GoofySpeedway,
-    DonaldsDreamland : TTLocalizer.DonaldsDreamland,
+    ToontropolisStadium : TTLocalizer.ToontropolisStadium,
+    TwilightDreamland : TTLocalizer.TwilightDreamland,
     BossbotHQ : TTLocalizer.BossbotHQ,
     SellbotHQ : TTLocalizer.SellbotHQ,
     CashbotHQ : TTLocalizer.CashbotHQ,
@@ -796,15 +796,15 @@ hoodNameMap = {
 safeZoneCountMap = {
     MyEstate : 8 ,
     Tutorial : 6,
-    ToontownCentral : 6,
-    DonaldsDock : 10,
-    MinniesMelodyland : 5,
-    GoofySpeedway : 500,
-    TheBrrrgh : 8,
-    DaisyGardens : 9,
+    ToontropolisPlaza : 6,
+    ToontropolisDocks : 10,
+    TheLandOfMusic : 5,
+    ToontropolisStadium : 500,
+    TundraWonderland : 8,
+    FloweringGrove : 9,
     FunnyFarm : 500,
-    DonaldsDreamland : 5,
-    OutdoorZone : 500,
+    TwilightDreamland : 5,
+    AcornAcres : 500,
     GolfZone : 500,
     PartyHood : 500,
     }
@@ -814,30 +814,30 @@ townCountMap = {
     # and SDN guessed at Estate count
     MyEstate : 8 ,
     Tutorial : 40 ,
-    ToontownCentral : 37,
-    DonaldsDock : 40,
-    MinniesMelodyland : 40,
-    GoofySpeedway : 40,
-    TheBrrrgh : 40,
-    DaisyGardens : 40,
+    ToontropolisPlaza : 37,
+    ToontropolisDocks : 40,
+    TheLandOfMusic : 40,
+    ToontropolisStadium : 40,
+    TundraWonderland : 40,
+    FloweringGrove : 40,
     FunnyFarm : 40,
-    DonaldsDreamland : 40,
-    OutdoorZone : 40,
+    TwilightDreamland : 40,
+    AcornAcres : 40,
     PartyHood : 20,
     }
 
 hoodCountMap = {
     MyEstate : 2,
     Tutorial : 2,
-    ToontownCentral : 2,
-    DonaldsDock : 2,
-    MinniesMelodyland : 2,
-    GoofySpeedway : 2,
-    TheBrrrgh : 2,
-    DaisyGardens : 2,
+    ToontropolisPlaza : 2,
+    ToontropolisDocks : 2,
+    TheLandOfMusic : 2,
+    ToontropolisStadium : 2,
+    TundraWonderland : 2,
+    FloweringGrove : 2,
     FunnyFarm : 2,
-    DonaldsDreamland : 2,
-    OutdoorZone : 2,
+    TwilightDreamland : 2,
+    AcornAcres : 2,
     BossbotHQ : 2,
     SellbotHQ : 43,
     CashbotHQ : 2,

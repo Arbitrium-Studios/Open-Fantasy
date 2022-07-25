@@ -10,7 +10,7 @@ class OZHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(self, parentFSM, doneEvent, dnaStore,
                                    hoodId)
-        self.id = OutdoorZone
+        self.id = AcornAcres
         # Create the safe zone state data
         #self.storageDNAFile = None
         self.safeZoneLoaderClass = OZSafeZoneLoader.OZSafeZoneLoader

@@ -1,28 +1,24 @@
 
 #from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
-#from direct.gui.DirectGui import *
 from panda3d.core import *
-
 from direct.interval.IntervalGlobal import *
 from toontown.fishing import FishGlobals
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from direct.actor import Actor
-
-#WARNING Specials Photo is used in both GardenPage.py and PlantingGUI.py
 
 class DirectRegion(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory("DirectRegion")
 
-    def __init__(self, parent=aspect2d):
-        assert self.notify.debugStateCall(self)
+    def __init__(self, parent = aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode("DirectRegion"))
 
     def destroy(self):
         assert self.notify.debugStateCall(self)
         self.unload()
-        self.parent = None
+        self._parent = None
+        return
 
     def setBounds(self, *bounds):
         """
@@ -64,21 +60,17 @@ class DirectRegion(NodePath):
             self.fishSwimCam = self.fishSwimCamera.attachNewNode(self.cCamNode)
 
             cm = CardMaker('displayRegionCard')
-
-            assert hasattr(self, "bounds")
-            cm.setFrame(*self.bounds)
-
+            apply(cm.setFrame, self.bounds)
             self.card = card = self.attachNewNode(cm.generate())
-            assert hasattr(self, "color")
-            card.setColor(*self.color)
-
-            newBounds=card.getTightBounds()
-            ll=render2d.getRelativePoint(card, newBounds[0])
-            ur=render2d.getRelativePoint(card, newBounds[1])
-            newBounds=[ll.getX(), ur.getX(), ll.getZ(), ur.getZ()]
-            # scale the -1.0..2.0 range to 0.0..1.0:
-            newBounds=[max(0.0, min(1.0, (x+1.0)/2.0)) for x in newBounds]
-
+            apply(card.setColor, self.color)
+            newBounds = card.getTightBounds()
+            ll = render2d.getRelativePoint(card, newBounds[0])
+            ur = render2d.getRelativePoint(card, newBounds[1])
+            newBounds = [ll.getX(),
+             ur.getX(),
+             ll.getZ(),
+             ur.getZ()]
+            newBounds = map(lambda x: max(0.0, min(1.0, (x + 1.0) / 2.0)), newBounds)
             self.cDr = base.win.makeDisplayRegion(*newBounds)
             self.cDr.setSort(10)
             self.cDr.setClearColor(card.getColor())
@@ -104,9 +96,7 @@ class SpecialsPhoto(NodePath):
     """
     notify = DirectNotifyGlobal.directNotify.newCategory("SpecialsPhoto")
 
-    # special methods
-    def __init__(self, type=None, parent=aspect2d):
-        assert self.notify.debugStateCall(self)
+    def __init__(self, type = None, parent = aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode("SpecialsPhoto"))
         self.type = type
@@ -122,7 +112,7 @@ class SpecialsPhoto(NodePath):
         if hasattr(self, "background"):
             self.background.destroy()
             del self.background
-        if hasattr(self, "specialsFrame") and hasattr(self.specialsFrame,'destroy'):
+        if hasattr(self, 'specialsFrame') and hasattr(self.specialsFrame, 'destroy'):
             self.specialsFrame.destroy()
         if hasattr(self, 'toonStatuary'):
             if self.toonStatuary.toon:
@@ -130,7 +120,8 @@ class SpecialsPhoto(NodePath):
         self.type = None
         del self.soundTrack
         del self.track
-        self.parent = None
+        self._parent = None
+        return
 
     def update(self, type):
         assert self.notify.debugStateCall(self)
@@ -162,8 +153,8 @@ class SpecialsPhoto(NodePath):
         # scale the actor to the frame
         if not hasattr(self, "specialsDisplayRegion"):
             self.specialsDisplayRegion = DirectRegion(parent=self)
-            self.specialsDisplayRegion.setBounds(*self.backBounds)
-            self.specialsDisplayRegion.setColor(*self.backColor)
+            apply(self.specialsDisplayRegion.setBounds, self.backBounds)
+            apply(self.specialsDisplayRegion.setColor, self.backColor)
         frame = self.specialsDisplayRegion.load()
         pitch = frame.attachNewNode('pitch')
         rotate = pitch.attachNewNode('rotate')
@@ -201,7 +192,17 @@ class SpecialsPhoto(NodePath):
             self.toonStatuary.toon.reparentTo(pedestal)
             pedestal.setScale(GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.5)
             return pedestal
-
+        elif specialsIndex == 135:
+            model = Actor.Actor()
+            modelPath = GardenGlobals.Specials[specialsIndex]['photoModel']
+            anims = GardenGlobals.Specials[specialsIndex]['photoAnimation']
+            animPath = modelPath + anims[1]
+            model.loadModel(modelPath + anims[0])
+            model.loadAnims(dict([[anims[1], animPath]]))
+            frameNo = random.randint(1, 2)
+            model.pose(anims[1], 1)
+            model.setScale(GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.1)
+            return model
         else:
             modelName = GardenGlobals.Specials[specialsIndex]['photoModel']
             nodePath = loader.loadModel(modelName)
@@ -210,20 +211,13 @@ class SpecialsPhoto(NodePath):
             colorTuple = (1,1,1)
 
             if desat and not desat.isEmpty():
-                desat.setColorScale( colorTuple[0],
-                                        colorTuple[1],
-                                        colorTuple[2],
-                                        1.0)
+                desat.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
             else:
-                nodePath.setColorScale( colorTuple[0],
-                                        colorTuple[1],
-                                        colorTuple[2],
-                                        1.0)
-
+                nodePath.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
             nodePath.setScale(GardenGlobals.Specials[specialsIndex]['photoScale'] * 0.5)
             return nodePath
 
-    def show(self, showBackground=0):
+    def show(self, showBackground = 0):
         self.notify.debug('show')
         assert self.notify.debugStateCall(self)
         messenger.send('wakeup')
@@ -237,9 +231,9 @@ class SpecialsPhoto(NodePath):
         self.specialsFrame = self.makeSpecialsFrame(self.actor)
 
         if showBackground:
-            if not hasattr(self, "background"):
-                background = loader.loadModel("phase_3.5/models/gui/stickerbook_gui")
-                background = background.find("**/Fish_BG")
+            if not hasattr(self, 'background'):
+                background = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+                background = background.find('**/Fish_BG')
                 self.background = background
             self.background.setPos(0, 15, 0)
             self.background.setScale(11)

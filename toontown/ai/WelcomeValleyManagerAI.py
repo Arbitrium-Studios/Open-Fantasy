@@ -398,7 +398,7 @@ class WelcomeValleyManagerAI(DistributedObjectAI.DistributedObjectAI):
         return bestHood
 
     def createWelcomeValley(self):
-        # Creates new copy of ToontownCentral and Goofy Speedway and returns
+        # Creates new copy of ToontropolisPlaza and Goofy Speedway and returns
         # thier HoodDataAI.  Returns None if no new hoods can be created.
 
         index = self.welcomeValleyAllocator.allocate()

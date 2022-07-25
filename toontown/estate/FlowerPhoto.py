@@ -1,18 +1,16 @@
 
 #from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
-#from direct.gui.DirectGui import *
 from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from toontown.fishing import FishGlobals
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from direct.actor import Actor
 
 class DirectRegion(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory("DirectRegion")
 
-    def __init__(self, parent=aspect2d):
-        assert self.notify.debugStateCall(self)
+    def __init__(self, parent = aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode("DirectRegion"))
     
@@ -60,21 +58,17 @@ class DirectRegion(NodePath):
             self.fishSwimCam = self.fishSwimCamera.attachNewNode(self.cCamNode)
 
             cm = CardMaker('displayRegionCard')
-            
-            assert hasattr(self, "bounds")
-            cm.setFrame(*self.bounds)
-            
+            apply(cm.setFrame, self.bounds)
             self.card = card = self.attachNewNode(cm.generate())
-            assert hasattr(self, "color")
-            card.setColor(*self.color)
-            
-            newBounds=card.getTightBounds()
-            ll=render2d.getRelativePoint(card, newBounds[0])
-            ur=render2d.getRelativePoint(card, newBounds[1])
-            newBounds=[ll.getX(), ur.getX(), ll.getZ(), ur.getZ()]
-            # scale the -1.0..2.0 range to 0.0..1.0:
-            newBounds=[max(0.0, min(1.0, (x+1.0)/2.0)) for x in newBounds]
-
+            apply(card.setColor, self.color)
+            newBounds = card.getTightBounds()
+            ll = render2d.getRelativePoint(card, newBounds[0])
+            ur = render2d.getRelativePoint(card, newBounds[1])
+            newBounds = [ll.getX(),
+             ur.getX(),
+             ll.getZ(),
+             ur.getZ()]
+            newBounds = map(lambda x: max(0.0, min(1.0, (x + 1.0) / 2.0)), newBounds)
             self.cDr = base.win.makeDisplayRegion(*newBounds)
             self.cDr.setSort(10)
             self.cDr.setClearColor(card.getColor())
@@ -97,9 +91,7 @@ class DirectRegion(NodePath):
 class FlowerPhoto(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory("FlowerPhoto")
 
-    # special methods
-    def __init__(self, species=None, variety = None, parent=aspect2d):
-        assert self.notify.debugStateCall(self)
+    def __init__(self, species = None, variety = None, parent = aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode("FlowerPhoto"))
         self.species = species
@@ -151,8 +143,8 @@ class FlowerPhoto(NodePath):
         # scale the actor to the frame
         if not hasattr(self, "flowerDisplayRegion"):
             self.flowerDisplayRegion = DirectRegion(parent=self)
-            self.flowerDisplayRegion.setBounds(*self.swimBounds)
-            self.flowerDisplayRegion.setColor(*self.swimColor)
+            apply(self.flowerDisplayRegion.setBounds, self.swimBounds)
+            apply(self.flowerDisplayRegion.setColor, self.swimColor)
         frame = self.flowerDisplayRegion.load()
         pitch = frame.attachNewNode('pitch')
         rotate = pitch.attachNewNode('rotate')
@@ -196,20 +188,13 @@ class FlowerPhoto(NodePath):
             bloom.show()
             desat = bloom.find('**/*desat*')
             wilt.hide()
-            
-        if desat and not desat.isEmpty():            
-            desat.setColorScale( colorTuple[0],
-                                    colorTuple[1],
-                                    colorTuple[2],
-                                    1.0)            
+        if desat and not desat.isEmpty():
+            desat.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
         else:
-            nodePath.setColorScale( colorTuple[0],
-                                    colorTuple[1],
-                                    colorTuple[2],
-                                    1.0)            
+            nodePath.setColorScale(colorTuple[0], colorTuple[1], colorTuple[2], 1.0)
         return nodePath
 
-    def show(self, showBackground=0):
+    def show(self, showBackground = 0):
         self.notify.debug('show')
         assert self.notify.debugStateCall(self)
         #import pdb; pdb.set_trace()
@@ -229,14 +214,13 @@ class FlowerPhoto(NodePath):
         self.flowerFrame = self.makeFlowerFrame(self.actor)
 
         if showBackground:
-            if not hasattr(self, "background"):
-                background = loader.loadModel("phase_3.5/models/gui/stickerbook_gui")
-                background = background.find("**/Fish_BG")
+            if not hasattr(self, 'background'):
+                background = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
+                background = background.find('**/Fish_BG')
                 self.background = background
             self.background.setPos(0, 15, 0)
             self.background.setScale(11)
             self.background.reparentTo(self.flowerFrame)
-        """
         self.sound, loop, delay, playRate = self.fish.getSound()       
         if playRate is not None:
             # make a track to play the anim and sound
@@ -262,7 +246,6 @@ class FlowerPhoto(NodePath):
                 self.soundTrack = soundTrack
             else:
                 track.append(soundTrack)
-        """
         #track = Sequence()
         #self.track = track
         #self.track.start()
@@ -287,5 +270,3 @@ class FlowerPhoto(NodePath):
 
     def changeVariety(self, variety):
         self.variety = variety
-
-        

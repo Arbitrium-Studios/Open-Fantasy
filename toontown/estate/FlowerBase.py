@@ -1,7 +1,4 @@
-
-# NOTE: This file is imported on the client and AI, so do not import anything
-# that the AI will have a problem with (like opening a window)
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from toontown.toonbase import TTLocalizer
 from direct.directnotify import DirectNotifyGlobal
 
@@ -11,9 +8,8 @@ class FlowerBase:
     def __init__(self, species, variety):
         self.species = species
         self.variety = variety
-        #temp hack code to fix rose
-        if self.species not in list(GardenGlobals.PlantAttributes.keys()):
-            print("remove me when everyone is updated")
+        if self.species not in GardenGlobals.PlantAttributes.keys():
+            print('remove me when everyone is updated')
             self.species = 56
             species = 56
         assert self.species in list(GardenGlobals.PlantAttributes.keys())

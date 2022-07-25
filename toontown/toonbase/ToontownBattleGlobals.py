@@ -44,7 +44,7 @@ TrackColors = ((211/255.0, 148/255.0, 255/255.0),
 #    wantAllProps = simbase.config.GetBool('want-all-props', 0)
 #if (wantAllProps == 1):
 #    for i in range(len(TrackZones)):
-#        TrackZones[i] = ToontownCentral
+#        TrackZones[i] = ToontropolisPlaza
 
 HEAL_TRACK = 0
 TRAP_TRACK = 1

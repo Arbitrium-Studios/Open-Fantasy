@@ -49,9 +49,9 @@ class TTPlayground(Playground.Playground):
         if hood == ToontownGlobals.MyEstate:
             # Ask if we can enter phase 5.5
             self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.MyEstate))
-        elif hood == ToontownGlobals.GoofySpeedway:
+        elif hood == ToontownGlobals.ToontropolisStadium:
             # Ask if we can enter phase 6
-            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.GoofySpeedway))
+            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.ToontropolisStadium))
         elif hood == ToontownGlobals.PartyHood:
             # ask if we can enter phase 13
             self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.PartyHood))

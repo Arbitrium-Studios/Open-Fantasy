@@ -37,8 +37,8 @@ class DistributedFurnitureManager(DistributedObject.DistributedObject):
         self.ownerId = ownerId
         if self.ownerId == base.localAvatar.doId:
             self.cr.furnitureManager = self
-            if self.cr.objectManager == None:
-                from . import houseDesign
+            if self.cr.objectManager is None:
+                import houseDesign
                 self.cr.objectManager = houseDesign.ObjectManager()
 
     def setOwnerName(self, name):
@@ -56,16 +56,16 @@ class DistributedFurnitureManager(DistributedObject.DistributedObject):
         return self.cr.doId2do.get(self.interiorId)
 
     def setAtticItems(self, items):
-        self.atticItems = CatalogItemList.CatalogItemList(items, store = CatalogItem.Customization)
+        self.atticItems = CatalogItemList.CatalogItemList(items, store=CatalogItem.Customization)
 
     def setAtticWallpaper(self, items):
-        self.atticWallpaper = CatalogItemList.CatalogItemList(items, store = CatalogItem.Customization)
+        self.atticWallpaper = CatalogItemList.CatalogItemList(items, store=CatalogItem.Customization)
 
     def setAtticWindows(self, items):
-        self.atticWindows = CatalogItemList.CatalogItemList(items, store = CatalogItem.Customization)
+        self.atticWindows = CatalogItemList.CatalogItemList(items, store=CatalogItem.Customization)
 
     def setDeletedItems(self, items):
-        self.deletedItems = CatalogItemList.CatalogItemList(items, store = CatalogItem.Customization)
+        self.deletedItems = CatalogItemList.CatalogItemList(items, store=CatalogItem.Customization)
 
     def releaseDirector(self):
         # Tells the AI that we are done being the director.
@@ -118,9 +118,14 @@ class DistributedFurnitureManager(DistributedObject.DistributedObject):
         # index.
         
         context = self.getCallbackContext(callback, [index])
-        self.sendUpdate("moveItemFromAtticMessage",
-                        [index, posHpr[0], posHpr[1], posHpr[2],
-                         posHpr[3], posHpr[4], posHpr[5], context])
+        self.sendUpdate('moveItemFromAtticMessage', [index,
+         posHpr[0],
+         posHpr[1],
+         posHpr[2],
+         posHpr[3],
+         posHpr[4],
+         posHpr[5],
+         context])
 
     def deleteItemFromAttic(self, item, index, callback):
         # Requests the AI to delete the nth item from the attic.  The
@@ -144,8 +149,8 @@ class DistributedFurnitureManager(DistributedObject.DistributedObject):
         # already have been deleted.
         
         context = self.getCallbackContext(callback, [dfitem.item])
-        blob = dfitem.item.getBlob(store = CatalogItem.Customization)
-        self.sendUpdate("deleteItemFromRoomMessage", [blob, dfitem.doId, context])
+        blob = dfitem.item.getBlob(store=CatalogItem.Customization)
+        self.sendUpdate('deleteItemFromRoomMessage', [blob, dfitem.doId, context])
 
     def moveWallpaperFromAttic(self, index, room, callback):
         # Requests the AI to move the nth wallpaper item from the
@@ -157,8 +162,7 @@ class DistributedFurnitureManager(DistributedObject.DistributedObject):
         # item index and the room index.
         
         context = self.getCallbackContext(callback, [index, room])
-        self.sendUpdate("moveWallpaperFromAtticMessage",
-                        [index, room, context])
+        self.sendUpdate('moveWallpaperFromAtticMessage', [index, room, context])
 
     def deleteWallpaperFromAttic(self, item, index, callback):
         # Requests the AI to delete the nth wallpaper item from the
@@ -173,8 +177,8 @@ class DistributedFurnitureManager(DistributedObject.DistributedObject):
         # atticWallpapers.
         
         context = self.getCallbackContext(callback, [item, index])
-        blob = item.getBlob(store = CatalogItem.Customization)
-        self.sendUpdate("deleteWallpaperFromAtticMessage", [blob, index, context])
+        blob = item.getBlob(store=CatalogItem.Customization)
+        self.sendUpdate('deleteWallpaperFromAtticMessage', [blob, index, context])
 
     def moveWindowToAttic(self, slot, callback):
         # Requests the AI to move the window in the indicated

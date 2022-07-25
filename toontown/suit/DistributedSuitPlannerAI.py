@@ -103,7 +103,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI,
     #                 10 all possible suit levels for this hood
     #
     # In general, we set the max suit count fairly high for
-    # ToontownCentral, and relatively low for the other zones, because
+    # ToontropolisPlaza, and relatively low for the other zones, because
     # we expect building suits to make up the difference in the other
     # zones.
 

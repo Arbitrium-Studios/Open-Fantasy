@@ -4,10 +4,9 @@ from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 import random
 from direct.gui.DirectGui import *
-from panda3d.core import *
 from toontown.toonbase import TTLocalizer
-from . import HouseGlobals
-from . import Estate
+from toontown.estate import HouseGlobals
+from toontown.estate import Estate
 
 class EstateManager(DistributedObject.DistributedObject):
     notify = DirectNotifyGlobal.directNotify.newCategory("EstateManager")
@@ -35,12 +34,8 @@ class EstateManager(DistributedObject.DistributedObject):
         self.getLocalEstateZone(base.localAvatar.getDoId())
 
     def getLocalEstateZone(self, avId):
-        # Fullfill client request for estateZone
-        name = ""
-        if base.localAvatar.doId == avId:
-            # going to our own home, provide AI with userName
-            name = base.cr.userName
-        self.sendUpdate("getEstateZone", [avId, name])
+        name = ''
+        self.sendUpdate('getEstateZone', [avId, name])
 
     def setEstateZone(self, ownerId, zoneId):
         # The AI is telling us the zone for this avatars estate
@@ -82,16 +77,14 @@ class EstateManager(DistributedObject.DistributedObject):
 
     def leaveEstate(self):
         if self.isDisabled():
-            self.notify.warning("EstateManager disabled; unable to leave estate.")
+            self.notify.warning('EstateManager disabled; unable to leave estate.')
             return
 
         self.sendUpdate("exitEstate")
 
     def removeFriend(self, ownerId, avId):
-        self.notify.debug("removeFriend ownerId = %s, avId = %s" % (ownerId, avId))
-        # The estate owner is  removing avId from his friends list.
-        # Notify the AI, and kick the ex-friend out of the estate
-        self.sendUpdate("removeFriend", [ownerId, avId])
+        self.notify.debug('removeFriend ownerId = %s, avId = %s' % (ownerId, avId))
+        self.sendUpdate('removeFriend', [ownerId, avId])
 
     def startAprilFools(self):
         if isinstance(base.cr.playGame.getPlace(),Estate.Estate):

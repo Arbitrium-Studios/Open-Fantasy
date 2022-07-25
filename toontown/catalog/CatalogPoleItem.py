@@ -29,12 +29,7 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
         return 1
 
     def reachedPurchaseLimit(self, avatar):
-        # Returns true if the item cannot be bought because the avatar
-        # has already bought his limit on this item.
-        return avatar.getFishingRod() >= self.rodId or \
-               self in avatar.onOrder or \
-               self in avatar.mailboxContents
-    
+        return avatar.getMaxFishingRod() >= self.rodId or self in avatar.onOrder or self in avatar.mailboxContents
 
     def saveHistory(self):
         # Returns true if items of this type should be saved in the
@@ -49,14 +44,14 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
 
     def recordPurchase(self, avatar, optional):
         if self.rodId < 0 or self.rodId > FishGlobals.MaxRodId:
-            self.notify.warning("Invalid fishing pole: %s for avatar %s" % (self.rodId, avatar.doId))
+            self.notify.warning('Invalid fishing pole: %s for avatar %s' % (self.rodId, avatar.doId))
             return ToontownGlobals.P_InvalidIndex
-
-        if self.rodId < avatar.getFishingRod():
-            self.notify.warning("Avatar already has pole: %s for avatar %s" % (self.rodId, avatar.doId))
+        if self.rodId < avatar.getMaxFishingRod():
+            self.notify.warning('Avatar already has pole: %s for avatar %s' % (self.rodId, avatar.doId))
             return ToontownGlobals.P_ItemUnneeded
                          
         avatar.b_setFishingRod(self.rodId)
+        avatar.b_setMaxFishingRod(self.rodId)
         return ToontownGlobals.P_ItemAvailable
         
     def isGift(self):
@@ -74,12 +69,8 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
         # the client.
 
         rodPath = FishGlobals.RodFileDict.get(self.rodId)
-
-        pole = Actor.Actor(rodPath, {'cast' : 'phase_4/models/props/fishing-pole-chan'})
-        
-        pole.setPosHpr(
-            1.47, 0, -1.67,
-            90, 55, -90)
+        pole = Actor.Actor(rodPath, {'cast': 'phase_4/models/props/fishing-pole-chan'})
+        pole.setPosHpr(1.47, 0, -1.67, 90, 55, -90)
         pole.setScale(0.8)
         
         pole.setDepthTest(1)
@@ -87,8 +78,7 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
 
         frame = self.makeFrame()
         frame.attachNewNode(pole.node())
-
-        name = "pole-item-%s" % (self.sequenceNumber)
+        name = 'pole-item-%s' % self.sequenceNumber
         CatalogPoleItem.sequenceNumber += 1
 
         # Not sure if this looks good or not.  This interval makes the
@@ -122,10 +112,8 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
             
         return CatalogItem.CatalogItem.getAcceptItemErrorText(self, retcode)
 
-    def output(self, store = ~0):
-        return "CatalogPoleItem(%s%s)" % (
-            self.rodId,
-            self.formatOptionalData(store))
+    def output(self, store = -1):
+        return 'CatalogPoleItem(%s%s)' % (self.rodId, self.formatOptionalData(store))
 
     def getFilename(self):
         return FishGlobals.RodFileDict.get(self.rodId)
@@ -143,17 +131,13 @@ class CatalogPoleItem(CatalogItem.CatalogItem):
         CatalogItem.CatalogItem.decodeDatagram(self, di, versionNumber, store)
         self.rodId = di.getUint8()
 
-        # The following will generate an exception if self.rodId is
-        # invalid.
-        price = FishGlobals.RodPriceDict[self.rodId]
-
     def encodeDatagram(self, dg, store):
         CatalogItem.CatalogItem.encodeDatagram(self, dg, store)
         dg.addUint8(self.rodId)
         
 
 def nextAvailablePole(avatar, duplicateItems):
-    rodId = avatar.getFishingRod() + 1
+    rodId = avatar.getMaxFishingRod() + 1
     if rodId > FishGlobals.MaxRodId:
         # No more fishing rods for this avatar.
         return None

@@ -149,7 +149,7 @@ class CostumeManagerAI(HolidayBaseAI.HolidayBaseAI, DirectObject.DirectObject):
                     elif(curChar.getName() == TTLocalizer.Goofy):
                         taskMgr.doMethodLater(0.5, self.__switchChars, "SwitchChars"+str(hood), extraArgs = [DistributedSuperGoofyAI.DistributedSuperGoofyAI, curWalkNode, hood])
                     elif(curChar.getName() == TTLocalizer.SuperGoofy):
-                        taskMgr.doMethodLater(0.5, self.__switchChars, "SwitchChars"+str(hood), extraArgs = [DistributedGoofySpeedwayAI.DistributedGoofySpeedwayAI, curWalkNode, hood])
+                        taskMgr.doMethodLater(0.5, self.__switchChars, "SwitchChars"+str(hood), extraArgs = [DistributedToontropolisStadiumAI.DistributedToontropolisStadiumAI, curWalkNode, hood])
                     elif(curChar.getName() == TTLocalizer.Pluto):
                         taskMgr.doMethodLater(0.5, self.__switchChars, "SwitchChars"+str(hood), extraArgs = [DistributedWesternPlutoAI.DistributedWesternPlutoAI, curWalkNode, hood])
                     elif(curChar.getName() == TTLocalizer.WesternPluto):
@@ -165,7 +165,7 @@ class CostumeManagerAI(HolidayBaseAI.HolidayBaseAI, DirectObject.DirectObject):
                     elif(curChar.getName() == TTLocalizer.Goofy):
                         taskMgr.doMethodLater(0.5, self.__switchChars, "SwitchChars"+str(hood), extraArgs = [DistributedDonaldAI.DistributedDonaldAI, curWalkNode, hood])
                     elif(curChar.getName() == TTLocalizer.Donald):
-                        taskMgr.doMethodLater(0.5, self.__switchChars, "SwitchChars"+str(hood), extraArgs = [DistributedGoofySpeedwayAI.DistributedGoofySpeedwayAI, curWalkNode, hood])
+                        taskMgr.doMethodLater(0.5, self.__switchChars, "SwitchChars"+str(hood), extraArgs = [DistributedToontropolisStadiumAI.DistributedToontropolisStadiumAI, curWalkNode, hood])
                     elif(curChar.getName() == TTLocalizer.Pluto):
                         taskMgr.doMethodLater(0.5, self.__switchChars, "SwitchChars"+str(hood), extraArgs = [DistributedMinnieAI.DistributedMinnieAI, curWalkNode, hood])
                     elif(curChar.getName() == TTLocalizer.Minnie):

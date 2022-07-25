@@ -4,7 +4,7 @@ from toontown.toonbase import ToontownGlobals
 from toontown.racing import DistributedStartingBlockAI
 from panda3d.core import *
 from toontown.racing.RaceGlobals import *
-from toontown.classicchars import DistributedGoofySpeedwayAI
+from toontown.classicchars import DistributedToontropolisStadiumAI
 from toontown.safezone import DistributedGolfKartAI
 import string
 
@@ -44,7 +44,7 @@ class GZHoodDataAI(HoodDataAI.HoodDataAI):
         #self.createLeaderBoards()
         #self.__cycleLeaderBoards()
 
-        #goofy = DistributedGoofySpeedwayAI.DistributedGoofySpeedwayAI(self.air)
+        #goofy = DistributedToontropolisStadiumAI.DistributedToontropolisStadiumAI(self.air)
         #goofy.generateWithRequired(self.zoneId)
         #goofy.start()
         #self.addDistObj(goofy)

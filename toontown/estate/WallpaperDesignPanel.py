@@ -1,6 +1,6 @@
 from toontown.catalog.CatalogWallpaperItem import *
 from direct.gui.DirectGui import *
-from panda3d.core import *
+from pandac.PandaModules import *
 from otp.otpbase import PythonUtil
 from toontown.toonbase import ToontownGlobals
 

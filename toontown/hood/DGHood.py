@@ -9,7 +9,7 @@ from . import SkyUtil
 class DGHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = DaisyGardens
+        self.id = FloweringGrove
         # Create the town state data
         self.townLoaderClass = DGTownLoader.DGTownLoader
         # Create the safe zone state data

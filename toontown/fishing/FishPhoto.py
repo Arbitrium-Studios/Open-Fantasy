@@ -2,7 +2,7 @@
 #from toontown.toonbase import ToontownGlobals
 from direct.directnotify import DirectNotifyGlobal
 #from direct.gui.DirectGui import *
-from panda3d.core import *
+from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from . import FishGlobals
 

@@ -10,19 +10,6 @@ from .CatalogFurnitureItem import *
 # FTScale = 5
 FTAnimRate = 6
 
-# IMPORTANT this list must be updated if any new animated furniture item gets added
-AnimatedFurnitureItemKeys = (
-    10020, # winter tree
-    270,  # Trolley Bed
-    990,  # Gag Fan
-    460,  # Coral Fireplace with fire
-    470,  # Square Fireplace with fire
-    480,  # Round Fireplace with fire
-    490,  # Girly Fireplace with fire
-    491,  # Bug Room Fireplace with fire
-    492,  # Caramel Apple Fireplace with fire
-    )
-
 class CatalogAnimatedFurnitureItem(CatalogFurnitureItem):
     """
     This class represents a furniture item that has some kind or animation on it.
@@ -49,7 +36,7 @@ class CatalogAnimatedFurnitureItem(CatalogFurnitureItem):
         item = FurnitureTypes[self.furnitureType]
         if (FTAnimRate < len(item)):
             animRate = item[FTAnimRate]
-            if not (animRate == None):
+            if not animRate == None:
                 return item[FTAnimRate]
             else:
                 return 1

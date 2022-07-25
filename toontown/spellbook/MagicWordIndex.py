@@ -112,16 +112,16 @@ class MagicWord:
     # is it a safezone?
 
     Str2szId = {
-        'ttc': ToontownGlobals.ToontownCentral,
-        'tt': ToontownGlobals.ToontownCentral,
-        'tc': ToontownGlobals.ToontownCentral,
-        'dd': ToontownGlobals.DonaldsDock,
-        'dg': ToontownGlobals.DaisyGardens,
-        'mml': ToontownGlobals.MinniesMelodyland,
-        'mm': ToontownGlobals.MinniesMelodyland,
-        'br': ToontownGlobals.TheBrrrgh,
-        'ddl': ToontownGlobals.DonaldsDreamland,
-        'dl': ToontownGlobals.DonaldsDreamland,
+        'ttc': ToontownGlobals.ToontropolisPlaza,
+        'tt': ToontownGlobals.ToontropolisPlaza,
+        'tc': ToontownGlobals.ToontropolisPlaza,
+        'dd': ToontownGlobals.ToontropolisDocks,
+        'dg': ToontownGlobals.FloweringGrove,
+        'mml': ToontownGlobals.TheLandOfMusic,
+        'mm': ToontownGlobals.TheLandOfMusic,
+        'br': ToontownGlobals.TundraWonderland,
+        'ddl': ToontownGlobals.TwilightDreamland,
+        'dl': ToontownGlobals.TwilightDreamland,
     }
 
     def __init__(self):
@@ -2983,6 +2983,21 @@ class SkipCFO(MagicWord):
 
 # TODO add skipcj and skipcfo
 
+class MaxRod(MagicWord):
+    def MaxRod(base, rod):
+        aliases = ['MaxFishingRod']
+        desc = 'Maxing your fishing rod!'
+        execLocation = MagicWordConfig.EXEC_LOC_SERVER
+        accessLevel = 'DEVELOPER'
+        """
+        Modify the target's fishing rod value.
+        """
+        if not 0 <= rod <= 4:
+            print("Invalid rod value!")
+            pass
+        base.b_setFishingRod(rod)
+        base.b_setMaxFishingRod(rod)
+        return("Set %s's fishing rod to the best rod there is!")
 
 # Instantiate all classes defined here to register them.
 # A bit hacky, but better than the old system

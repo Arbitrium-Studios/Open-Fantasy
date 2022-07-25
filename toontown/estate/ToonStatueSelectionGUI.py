@@ -1,6 +1,7 @@
 from toontown.estate import PlantingGUI
 from direct.gui.DirectGui import *
 from panda3d.core import *
+from libotp import *
 from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
@@ -19,20 +20,7 @@ class ToonStatueSelectionGUI(DirectFrame):
         base.tssGUI = self
         instructions = TTLocalizer.GardeningChooseToonStatue
         instructionsPos = (0, 0.4)
-        DirectFrame.__init__(self,
-                             relief = None,
-                             state = 'normal',
-                             geom = DGG.getDefaultDialogGeom(),
-                             geom_color = ToontownGlobals.GlobalDialogColor,
-                             #geom_scale = (2.0,1,1.5),
-                             geom_scale = (1.5,1.0,1.0),
-                             frameSize = (-1,1,-1,1),
-                             pos = (0,0,0),
-                             text = instructions,
-                             text_wordwrap = 18,
-                             text_scale = .08,
-                             text_pos = instructionsPos,
-                             )
+        DirectFrame.__init__(self, relief=None, state='normal', geom=DGG.getDefaultDialogGeom(), geom_color=ToontownGlobals.GlobalDialogColor, geom_scale=(1.5, 1.0, 1.0), frameSize=(-1, 1, -1, 1), pos=(0, 0, 0), text=instructions, text_wordwrap=18, text_scale=0.08, text_pos=instructionsPos)
         self.initialiseoptions(ToonStatueSelectionGUI)
 
         # Send this when we are done so whoever made us can get a callback
@@ -40,34 +28,10 @@ class ToonStatueSelectionGUI(DirectFrame):
 
         # Init buttons
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        okImageList = (buttons.find('**/ChtBx_OKBtn_UP'),
-                       buttons.find('**/ChtBx_OKBtn_DN'),
-                       buttons.find('**/ChtBx_OKBtn_Rllvr'))
-        cancelImageList = (buttons.find('**/CloseBtn_UP'),
-                           buttons.find('**/CloseBtn_DN'),
-                           buttons.find('**/CloseBtn_Rllvr'))
-        self.cancelButton = DirectButton(
-            parent = self,
-            relief = None,
-            image = cancelImageList,
-            #pos = (0.3, 0, -0.58),
-            pos = (-0.3, 0, -0.35),
-            text = TTLocalizer.PlantingGuiCancel,
-            text_scale = 0.06,
-            text_pos = (0,-0.1),
-            command = self.__cancel,
-            )
-        self.okButton = DirectButton(
-            parent = self,
-            relief = None,
-            image = okImageList,
-            #pos = (0.6, 0, -0.58),
-            pos = (0.3, 0, -0.35),
-            text = TTLocalizer.PlantingGuiOk,
-            text_scale = 0.06,
-            text_pos = (0,-0.1),
-            command = self.__accept,
-            )
+        okImageList = (buttons.find('**/ChtBx_OKBtn_UP'), buttons.find('**/ChtBx_OKBtn_DN'), buttons.find('**/ChtBx_OKBtn_Rllvr'))
+        cancelImageList = (buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr'))
+        self.cancelButton = DirectButton(parent=self, relief=None, image=cancelImageList, pos=(-0.3, 0, -0.35), text=TTLocalizer.PlantingGuiCancel, text_scale=0.06, text_pos=(0, -0.1), command=self.__cancel)
+        self.okButton = DirectButton(parent=self, relief=None, image=okImageList, pos=(0.3, 0, -0.35), text=TTLocalizer.PlantingGuiOk, text_scale=0.06, text_pos=(0, -0.1), command=self.__accept)
         buttons.removeNode()
 
         self.ffList = []
@@ -101,52 +65,24 @@ class ToonStatueSelectionGUI(DirectFrame):
         messenger.send('wakeup')
 
     def __accept(self):
-        messenger.send(self.doneEvent, [1, "", DistributedToonStatuary.dnaCodeFromToonDNA(self.dnaSelected)])
-        #if we're clicking on buttons, we're not asleep
+        messenger.send(self.doneEvent, [1, '', DistributedToonStatuary.dnaCodeFromToonDNA(self.dnaSelected)])
         messenger.send('wakeup')
 
     def createFriendsList(self):
         self.__makeFFlist()
 
         if len(self.ffList) > 0:
-            gui = loader.loadModel("phase_3.5/models/gui/friendslist_gui")
-            self.scrollList = DirectScrolledList(
-                parent = self,
-                relief = None,
-                # inc and dec are DirectButtons
-                incButton_image = (gui.find("**/FndsLst_ScrollUp"),
-                                   gui.find("**/FndsLst_ScrollDN"),
-                                   gui.find("**/FndsLst_ScrollUp_Rllvr"),
-                                   gui.find("**/FndsLst_ScrollUp"),
-                                   ),
-                incButton_relief = None,
-                incButton_pos = (0.0, 0.0, -0.316),
-                # Make the disabled button darker
-                incButton_image1_color = Vec4(1.0, 0.9, 0.4, 1.0),
-                incButton_image3_color = Vec4(1.0, 1.0, 0.6, 0.5),
-                incButton_scale = (1.0, 1.0, -1.0),
-                decButton_image = (gui.find("**/FndsLst_ScrollUp"),
-                                   gui.find("**/FndsLst_ScrollDN"),
-                                   gui.find("**/FndsLst_ScrollUp_Rllvr"),
-                                   gui.find("**/FndsLst_ScrollUp"),
-                                   ),
-                decButton_relief = None,
-                decButton_pos = (0.0, 0.0, 0.117),
-                # Make the disabled button darker
-                decButton_image1_color = Vec4(1.0, 1.0, 0.6, 1.0),
-                decButton_image3_color = Vec4(1.0, 1.0, 0.6, 0.6),
-
-                # itemFrame is a DirectFrame
-                itemFrame_pos = (-0.17, 0.0, 0.06),
-                itemFrame_relief = DGG.SUNKEN,
-                itemFrame_frameSize = (-0.01, 0.35, -0.35, 0.04),
-                itemFrame_frameColor = (0.85,0.95,1,1),
-                itemFrame_borderWidth = (0.01,0.01),
-                numItemsVisible = 8,
-                itemFrame_scale = 1.0,
-                #forceHeight = 0.065,
-                items = [],
-                )
+            gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+            self.scrollList = DirectScrolledList(parent=self, relief=None, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
+             gui.find('**/FndsLst_ScrollDN'),
+             gui.find('**/FndsLst_ScrollUp_Rllvr'),
+             gui.find('**/FndsLst_ScrollUp')), incButton_relief=None, incButton_pos=(0.0, 0.0, -0.316), incButton_image1_color=Vec4(1.0, 0.9, 0.4, 1.0), incButton_image3_color=Vec4(1.0, 1.0, 0.6, 0.5), incButton_scale=(1.0, 1.0, -1.0), decButton_image=(gui.find('**/FndsLst_ScrollUp'),
+             gui.find('**/FndsLst_ScrollDN'),
+             gui.find('**/FndsLst_ScrollUp_Rllvr'),
+             gui.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_pos=(0.0, 0.0, 0.117), decButton_image1_color=Vec4(1.0, 1.0, 0.6, 1.0), decButton_image3_color=Vec4(1.0, 1.0, 0.6, 0.6), itemFrame_pos=(-0.17, 0.0, 0.06), itemFrame_relief=DGG.SUNKEN, itemFrame_frameSize=(-0.01,
+             0.35,
+             -0.35,
+             0.04), itemFrame_frameColor=(0.85, 0.95, 1, 1), itemFrame_borderWidth=(0.01, 0.01), numItemsVisible=8, itemFrame_scale=1.0, items=[])
             gui.removeNode()
             self.scrollList.setPos(0.35, 0, 0.125)
             self.scrollList.setScale(1.25)
@@ -168,15 +104,14 @@ class ToonStatueSelectionGUI(DirectFrame):
         return test
 
     def __makeFFlist(self):
-        # Make the player's avatar the first in the list and make a preview
-        playerAvatar = (base.localAvatar.doId, base.localAvatar.name, NametagGroup.CCNonPlayer)
+        playerAvatar = (base.localAvatar.doId, base.localAvatar._name, NametagGroup.CCNonPlayer)
         self.ffList.append(playerAvatar)
         self.dnaSelected = base.localAvatar.style # Making the player's avatarDNA the default dna
         self.createPreviewToon(self.dnaSelected)
 
         for familyMember in base.cr.avList:
             if familyMember.id != base.localAvatar.doId:
-                newFF = (familyMember.id, familyMember.name, NametagGroup.CCNonPlayer)
+                newFF = (familyMember.id, familyMember._name, NametagGroup.CCNonPlayer)
                 self.ffList.append(newFF)
         for friendPair in base.localAvatar.friendsList:
             friendId, flags = friendPair
@@ -205,20 +140,7 @@ class ToonStatueSelectionGUI(DirectFrame):
         # appropriate nametag color, according to whether we are
         # "special friends" or not.
         fg = NametagGlobals.getNameFg(colorCode, PGButton.SInactive)
-
-        return DirectButton(
-            relief = None,
-            text = familyName,
-            text_scale = 0.04,
-            text_align = TextNode.ALeft,
-            text_fg = fg,
-            text1_bg = self.textDownColor,
-            text2_bg = self.textRolloverColor,
-            text3_fg = self.textDisabledColor,
-            textMayChange = 0,
-            command = self.__chooseFriend,
-            extraArgs = [familyId, familyName],
-            )
+        return DirectButton(relief=None, text=familyName, text_scale=0.04, text_align=TextNode.ALeft, text_fg=fg, text1_bg=self.textDownColor, text2_bg=self.textRolloverColor, text3_fg=self.textDisabledColor, textMayChange=0, command=self.__chooseFriend, extraArgs=[familyId, familyName])
 
     def __chooseFriend(self, friendId, friendName):
         """
@@ -235,17 +157,10 @@ class ToonStatueSelectionGUI(DirectFrame):
             if friendId == base.localAvatar.doId:
                 self.createPreviewToon(base.localAvatar.style)
             else:
-                # The request to the database takes too long, so we cache off the value
-                # everytime a new family avatar is clicked. Check this list before making a new database request.
-                if friendId in self.doId2Dna:
-                    self.createPreviewToon(self.doId2Dna[friendId])
-                else:
-                    familyAvatar = DistributedToon.DistributedToon(base.cr)
-                    familyAvatar.doId = friendId # The doId is required for getAvatarDetails to work
-                    # getAvatarDetails puts a DelayDelete on the avatar, and this
-                    # is not a real DO, so bypass the 'generated' check
-                    familyAvatar.forceAllowDelayDelete()
-                    base.cr.getAvatarDetails(familyAvatar, self.__handleFamilyAvatar, "DistributedToon")
+                familyAvatar = DistributedToon.DistributedToon(base.cr)
+                familyAvatar.doId = friendId
+                familyAvatar.forceAllowDelayDelete()
+                base.cr.getAvatarDetails(familyAvatar, self.__handleFamilyAvatar, 'DistributedToon')
         else:
             friend = base.cr.identifyFriend(friendId)
             if friend:

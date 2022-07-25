@@ -11,7 +11,7 @@ MickeyChatter = TTLocalizer.MickeyChatter
 VampireMickeyChatter = TTLocalizer.VampireMickeyChatter
 MinnieChatter = TTLocalizer.MinnieChatter
 GoofyChatter = TTLocalizer.GoofyChatter
-GoofySpeedwayChatter = TTLocalizer.GoofySpeedwayChatter
+ToontropolisStadiumChatter = TTLocalizer.ToontropolisStadiumChatter
 DonaldChatter = TTLocalizer.DonaldChatter
 ChipChatter = TTLocalizer.ChipChatter
 DaleChatter = TTLocalizer.DaleChatter
@@ -111,34 +111,34 @@ def getChatter( charName, chatterType ):
     
     elif charName==TTLocalizer.Goofy:
         if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
-            return TTLocalizer.AFGoofySpeedwayChatter                        
+            return TTLocalizer.AFToontropolisStadiumChatter                        
         elif chatterType == ToontownGlobals.CRASHED_LEADERBOARD:        
-            return TTLocalizer.CLGoofySpeedwayChatter
+            return TTLocalizer.CLToontropolisStadiumChatter
         elif chatterType == ToontownGlobals.CIRCUIT_RACING_EVENT:        
-            return TTLocalizer.GPGoofySpeedwayChatter
+            return TTLocalizer.GPToontropolisStadiumChatter
         elif chatterType == ToontownGlobals.WINTER_DECORATIONS \
             or chatterType == ToontownGlobals.WINTER_CAROLING:
             return TTLocalizer.WinterGoofyChatter
         elif chatterType == ToontownGlobals.VALENTINES_DAY:
             return TTLocalizer.ValentinesGoofyChatter
         elif chatterType == ToontownGlobals.SILLY_CHATTER_ONE:
-            SillyGoofySpeedwayChatter = GoofySpeedwayChatter
-            SillyGoofySpeedwayChatter[1].extend(TTLocalizer.SillyPhase1Chatter)
-            return SillyGoofySpeedwayChatter
+            SillyToontropolisStadiumChatter = ToontropolisStadiumChatter
+            SillyToontropolisStadiumChatter[1].extend(TTLocalizer.SillyPhase1Chatter)
+            return SillyToontropolisStadiumChatter
         elif chatterType == ToontownGlobals.SILLY_CHATTER_TWO:
-            SillyGoofySpeedwayChatter = GoofySpeedwayChatter
-            SillyGoofySpeedwayChatter[1].extend(TTLocalizer.SillyPhase2Chatter)
-            return SillyGoofySpeedwayChatter
+            SillyToontropolisStadiumChatter = ToontropolisStadiumChatter
+            SillyToontropolisStadiumChatter[1].extend(TTLocalizer.SillyPhase2Chatter)
+            return SillyToontropolisStadiumChatter
         elif chatterType == ToontownGlobals.SILLY_CHATTER_THREE:
-            SillyGoofySpeedwayChatter = GoofySpeedwayChatter
-            SillyGoofySpeedwayChatter[1].extend(TTLocalizer.SillyPhase3Chatter)
-            return SillyGoofySpeedwayChatter
+            SillyToontropolisStadiumChatter = ToontropolisStadiumChatter
+            SillyToontropolisStadiumChatter[1].extend(TTLocalizer.SillyPhase3Chatter)
+            return SillyToontropolisStadiumChatter
         elif chatterType == ToontownGlobals.SILLY_CHATTER_FOUR:
-            SillyGoofySpeedwayChatter = GoofySpeedwayChatter
-            SillyGoofySpeedwayChatter[1].extend(TTLocalizer.SillyPhase4Chatter)
-            return SillyGoofySpeedwayChatter
+            SillyToontropolisStadiumChatter = ToontropolisStadiumChatter
+            SillyToontropolisStadiumChatter[1].extend(TTLocalizer.SillyPhase4Chatter)
+            return SillyToontropolisStadiumChatter
         else:
-            return GoofySpeedwayChatter
+            return ToontropolisStadiumChatter
     
     elif charName==TTLocalizer.SuperGoofy:
         return TTLocalizer.SuperGoofyChatter

@@ -657,7 +657,6 @@ class ParamObj:
             if not hasattr(self, setterName):
                 # no; provide the default
                 def defaultSetter(self, value, param=param):
-                    # print '%s=%s for %s' % (param, value, id(self))
                     setattr(self, param, value)
                 #self.__class__.__dict__[setterName] = defaultSetter
                 setattr(self, setterName, defaultSetter)

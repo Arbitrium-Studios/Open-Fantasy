@@ -100,22 +100,22 @@ colorWhite['Blue'] = 1.0
 colorWhite['Alpha'] = 1.0
 
 difficultyPatterns = {
-    ToontownGlobals.ToontownCentral:
+    ToontownGlobals.ToontropolisPlaza:
     [ [8,4,2,0], [10,16,21,28], [31,15,7,3.5], [colorRed, colorGreen, colorBlue, colorYellow], [2,2,2,1], 10, 2,
       ],
-    ToontownGlobals.DonaldsDock:
+    ToontownGlobals.ToontropolisDocks:
     [ [7,4,2,0], [11,17,23,32], [29,13,6.5,3.2], [colorRed, colorGreen, colorBlue, colorYellow], [2,2,2,1], 9, 2,
       ],
-    ToontownGlobals.DaisyGardens:
+    ToontownGlobals.FloweringGrove:
     [ [6,4,2,0], [11,18,25,34], [29,13,6.5,3.1], [colorRed, colorGreen, colorBlue, colorYellow], [2,2,2,1], 8, 2,
       ],
-    ToontownGlobals.MinniesMelodyland:
+    ToontownGlobals.TheLandOfMusic:
     [ [6,4,2,0], [12,19,27,37], [28,12,6,3.0], [colorGreen, colorBlue, colorYellow, colorPurple], [2,2,2,1], 8, 2,
       ],
-    ToontownGlobals.TheBrrrgh:
+    ToontownGlobals.TundraWonderland:
     [ [5,4,2,0], [12,20,29,40], [25,12,5.5,2.5], [colorGreen, colorBlue, colorYellow, colorPurple], [2,2,2,1], 7, 2,
       ],
-    ToontownGlobals.DonaldsDreamland:
+    ToontownGlobals.TwilightDreamland:
     [ [4,3,1,0], [12,21,31,42], [20,10,4.5,2.0], [colorBlue, colorYellow, colorPurple, colorOrange], [2,2,2,1], 7, 2,
       ],
     }

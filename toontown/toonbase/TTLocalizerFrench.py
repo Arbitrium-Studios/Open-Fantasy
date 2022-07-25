@@ -22,14 +22,14 @@ Pluto  = "Pluto"
 Flippy = "Flippy"
 
 # common locations
-lTheBrrrgh = 'Glagla'
-lDaisyGardens = 'Jardin de Daisy'
-lDaisyGardensNC = 'jardin de Daisy'
-lDonaldsDock = 'Quais Donald'
-lDonaldsDockNC = 'quais Donald'
-lDonaldsDreamland = 'Pays des rêves de Donald'
-lMinniesMelodyland = 'Pays musical de Minnie'
-lToontownCentral = 'Toontown centre'
+lTundraWonderland = 'Glagla'
+lFloweringGrove = 'Jardin de Daisy'
+lFloweringGroveNC = 'jardin de Daisy'
+lToontropolisDocks = 'Quais Donald'
+lToontropolisDocksNC = 'quais Donald'
+lTwilightDreamland = 'Pays des rêves de Donald'
+lTheLandOfMusic = 'Pays musical de Minnie'
+lToontropolisPlaza = 'Toontown centre'
 lToonHQ = 'QG des Toons'
 
 # common strings
@@ -422,7 +422,7 @@ QuestsItemDict = {
     5009 : ["Sac de graines pour oiseaux", "Sacs de graines pour oiseaux", "un "],
     5010 : ["Pignon", "Pignons", "un "],
     5011 : ["Salade", "Salades", "une "],
-    5012 : ["Clé du "+lDaisyGardensNC, "Clés du "+lDaisyGardensNC, "une "],
+    5012 : ["Clé du "+lFloweringGroveNC, "Clés du "+lFloweringGroveNC, "une "],
     5013 : ["Plans du QG Vendibot", "Plans du QG Vendibot", "des "],
     5014 : ["Note de service du QG Vendibot", "Notes de service du QG Vendibot", "une "],
     5015 : ["Note de service du QG Vendibot", "Notes de service du QG Vendibot", "une "],
@@ -479,7 +479,7 @@ INCOMPLETE_WRONG_NPC = 4
 COMPLETE = 5
 LEAVING = 6
 
-TheBrrrghTrackQuestDict = {
+TundraWonderlandTrackQuestDict = {
     GREETING : "",
     QUEST : "Maintenant tu es prêt(e).\aSors et fais un tour avant de décider quelle série tu voudras choisir.\aChoisis bien, parce que c'est ta dernière série.\aQuand tu auras décidé, reviens me voir.",
     INCOMPLETE_PROGRESS : "Choisis bien.",
@@ -551,7 +551,7 @@ QuestDialogDict = {
              INCOMPLETE_PROGRESS : "Est-ce que tu as pu retrouver mes recettes?" },
     1045 : { QUEST : "Merci beaucoup!\aD'ici peu, j'aurai retrouvé toutes mes recettes et je pourrai rouvrir mon restaurant.\aOh, j'ai une petite note ici pour toi - quelque chose à propos de l'accès par téléportation?\aC'est écrit, merci d'avoir aidé mon ami et d'avoir livré ceci au quartier général des Toons. \aEh bien, merci vraiment - au revoir!",
              LEAVING : "",
-             COMPLETE : "Ah oui, c'est écrit que tu as été d'une grande aide à de braves gens de l'avenue des Fondus.\aEt que tu as besoin d'un accès par téléportation à Toontown centre.\aBon, c'est comme si c'était fait.\aMaintenant tu peux revenir au terrain de jeux par téléportation depuis presque partout dans Toontown.\aOuvre simplement ta carte et clique sur "+lToontownCentral+"." },
+             COMPLETE : "Ah oui, c'est écrit que tu as été d'une grande aide à de braves gens de l'avenue des Fondus.\aEt que tu as besoin d'un accès par téléportation à Toontown centre.\aBon, c'est comme si c'était fait.\aMaintenant tu peux revenir au terrain de jeux par téléportation depuis presque partout dans Toontown.\aOuvre simplement ta carte et clique sur "+lToontropolisPlaza+"." },
     1046 : { QUEST : "Les Caissbots ont vraiment ennuyé la Caisse d'épargne Drôle d'argent.\aVa donc y faire un tour et vois si tu peux faire quelque chose._where_" },
     1047 : { QUEST : "Les Caissbots se sont introduits dans la banque et ont volé nos machines.\aS'il te plaît, reprends 5 machines à calculer aux Caissbots.\aPour t'éviter de faire des allers et retours, rapporte-les toutes en une seule fois.",
              LEAVING : "",
@@ -776,10 +776,10 @@ QuestDialogDict = {
              COMPLETE : "Oh, merci! Maintenant je vais pouvoir livrer le courrier à temps! Voilà ta récompense...",
              },
 
-    3208 : { QUEST : "Nous avons eu des plaintes des résidents récemment à propos des Cassepieds.\aEssaie de vaincre 10 Cassepieds pour aider tes camarades Toons du "+lDaisyGardens+"." },
-    3209 : { QUEST : "Merci d'avoir battu ces Cassepieds!\aMais maintenant ce sont les Télévendeurs qui sont incontrôlables.\aVa vaincre 10 Télévendeurs au "+lDaisyGardens+" et reviens ici pour ta récompense." },
+    3208 : { QUEST : "Nous avons eu des plaintes des résidents récemment à propos des Cassepieds.\aEssaie de vaincre 10 Cassepieds pour aider tes camarades Toons du "+lFloweringGrove+"." },
+    3209 : { QUEST : "Merci d'avoir battu ces Cassepieds!\aMais maintenant ce sont les Télévendeurs qui sont incontrôlables.\aVa vaincre 10 Télévendeurs au "+lFloweringGrove+" et reviens ici pour ta récompense." },
 
-    3247 : { QUEST : "Nous avons eu des plaintes des résidents récemment à propos des Pique-au-sang.\aEssaie de vaincre 20 Pique-au-sang pour aider tes camarades Toons du "+lDaisyGardens+". " },
+    3247 : { QUEST : "Nous avons eu des plaintes des résidents récemment à propos des Pique-au-sang.\aEssaie de vaincre 20 Pique-au-sang pour aider tes camarades Toons du "+lFloweringGrove+". " },
 
 
     3210 : { QUEST : "Oh non, la Fleur qui mouille, rue des Érables, n'a plus de fleurs!\aEmmène-leur dix de tes fleurs à éclabousser pour les aider.\aVérifie que tu as bien 10 fleurs à éclabousser dans ton inventaire d'abord.",
@@ -811,7 +811,7 @@ QuestDialogDict = {
     3246 : { QUEST : "Super! Encore un pignon et c'est bon.\aCette fois, il nous faut un pignon de Tournegris.\aQuand tu en auras attrapé un, rapporte-le pour avoir ta récompense." },
 
     3220 : { QUEST : "Je viens d'apprendre que _toNpcName_ te cherchait.\aPourquoi ne vas-tu pas voir ce qu'elle veut?_where_" },
-    3221 : { QUEST : "Ohé, _avName_! Et voilà!\aJ'ai entendu dire que tu étais expert(e) en éclaboussures.\aJ'ai besoin de quelqu'un pour montrer l'exemple à tous les Toons du "+lDaisyGardens+".\aUtilise tes attaques par éclaboussure pour vaincre un groupe de Cogs.\aEncourage tes amis à utiliser aussi les éclaboussures.\aLorque tu auras vaincu 20 Cogs, reviens ici pour ta récompense!" },
+    3221 : { QUEST : "Ohé, _avName_! Et voilà!\aJ'ai entendu dire que tu étais expert(e) en éclaboussures.\aJ'ai besoin de quelqu'un pour montrer l'exemple à tous les Toons du "+lFloweringGrove+".\aUtilise tes attaques par éclaboussure pour vaincre un groupe de Cogs.\aEncourage tes amis à utiliser aussi les éclaboussures.\aLorque tu auras vaincu 20 Cogs, reviens ici pour ta récompense!" },
 
     3222 : { QUEST : "C'est le moment de faire preuve de ta Toonmaîtrise.\aSi tu réussis à reprendre un certain nombre de bâtiments aux Cogs, tu gagneras le droit à trois quêtes.\aD'abord, tu dois prendre deux bâtiments aux Cogs.\aN'hésite pas à demander l'aide de tes amis."},
     3223 : { QUEST : "Super travail pour ces bâtiments!\aMaintenant tu dois prendre deux bâtiments de plus.\aCes immeubles doivent faire au moins deux étages." },
@@ -821,7 +821,7 @@ QuestDialogDict = {
              },
 
     3225 : { QUEST : "_toNpcName_ dit qu'elle a besoin d'aide.\aVa voir si tu peux donner un coup de main?_where_" },
-    3235 : { QUEST : "Oh, c'est la salade que j'ai commandée!\aMerci de me l'avoir apportée.\aTous ces Cogs ont dû effrayer le livreur habituel de _toNpcName_ encore une fois.\aTu pourrais nous rendre service et vaincre quelques-uns des Cogs qui traînent par ici?\aVa vaincre 10 Cogs dans le "+lDaisyGardens+" et reviens voir _toNpcName_.",
+    3235 : { QUEST : "Oh, c'est la salade que j'ai commandée!\aMerci de me l'avoir apportée.\aTous ces Cogs ont dû effrayer le livreur habituel de _toNpcName_ encore une fois.\aTu pourrais nous rendre service et vaincre quelques-uns des Cogs qui traînent par ici?\aVa vaincre 10 Cogs dans le "+lFloweringGrove+" et reviens voir _toNpcName_.",
              INCOMPLETE_PROGRESS : "Tu es en train de vaincre des Cogs pour moi?\aC'est super!! Continue comme ça!",
              COMPLETE : "Oh, merci beaucoup d'avoir vaincu ces Cogs!\aMaintenant je vais peut-être pouvoir reprendre mon programme habituel de livraisons.\aTa récompense est...",
              INCOMPLETE_WRONG_NPC : "Va raconter à _toNpcName_ tous les Cogs que tu as vaincus._where_" },
@@ -829,11 +829,11 @@ QuestDialogDict = {
     3236 : { QUEST : "Il y a beaucoup trop de Loibots par ici.\aTu peux faire ta part de travail!\aVa vaincre 3 bâtiments Loibot." },
     3237 : { QUEST : "Super travail pour ces bâtiments Loibot!\aMais maintenant il y a beaucoup trop de Vendibots!\aVa vaincre 3 bâtiments Vendibot, puis reviens chercher ta récompense." },
 
-    3238 : { QUEST : "Oh non! Un Cog Circulateur a volé la clé du "+lDaisyGardens+"!\aVa voir si tu peux la retrouver.\aSouviens-toi que les Circulateurs ne se trouvent que dans les bâtiments Vendibot." },
-    3239 : { QUEST : "Tu as bien trouvé une clé, mais ce n'est pas la bonne!\aNous avons besoin de la clé du "+lDaisyGardens+".\aContinue de chercher! Un Cog Circulateur l'a encore!" },
+    3238 : { QUEST : "Oh non! Un Cog Circulateur a volé la clé du "+lFloweringGrove+"!\aVa voir si tu peux la retrouver.\aSouviens-toi que les Circulateurs ne se trouvent que dans les bâtiments Vendibot." },
+    3239 : { QUEST : "Tu as bien trouvé une clé, mais ce n'est pas la bonne!\aNous avons besoin de la clé du "+lFloweringGrove+".\aContinue de chercher! Un Cog Circulateur l'a encore!" },
 
-    3242 : { QUEST : "Oh non! Un Cog Avocageot a volé la clé du "+lDaisyGardens+"!\aVa voir si tu peux la retrouver.\aSouviens-toi que les Avocageots ne se trouvent que dans les bâtiments Loibot." },
-    3243 : { QUEST : "Tu as bien trouvé une clé, mais ce n'est pas la bonne!\aNous avons besoin de la clé du "+lDaisyGardens+".\aContinue de chercher! Un Cog Avocageot l'a encore!" },
+    3242 : { QUEST : "Oh non! Un Cog Avocageot a volé la clé du "+lFloweringGrove+"!\aVa voir si tu peux la retrouver.\aSouviens-toi que les Avocageots ne se trouvent que dans les bâtiments Loibot." },
+    3243 : { QUEST : "Tu as bien trouvé une clé, mais ce n'est pas la bonne!\aNous avons besoin de la clé du "+lFloweringGrove+".\aContinue de chercher! Un Cog Avocageot l'a encore!" },
 
     3240 : { QUEST : "_toNpcName_ vient de me dire qu'un Avocageot lui a volé un sac de graines pour oiseaux.\aVa vaincre des Avocageots jusqu'à ce que tu retrouves les graines pour oiseaux de Piaf, et rapporte-les lui.\aLes Avocageots ne se trouvent que dans les bâtiments Loibot._where_",
              COMPLETE : "Oh, merci beaucoup d'avoir retrouvé mes graines pour oiseaux!\aTa récompense est...",
@@ -1045,7 +1045,7 @@ QuestDialogDict = {
              INCOMPLETE_PROGRESS : "Est-ce que tu as retrouvé mon ballon de foot?",
              COMPLETE : "Youpiii! Tu l'as trouvé! Tiens, prends ta récompense...",
              },
-    5202 : { QUEST : "Le "+lTheBrrrgh+" a été envahi par des Cogs parmi les plus robustes qu'on ait vus.\aTu auras probablement besoin d'emporter plus de gags là-bas.\aJ'ai entendu dire que _toNpcName_ pourrait te prêter un grand sac pour emporter plus de gags._where_" },
+    5202 : { QUEST : "Le "+lTundraWonderland+" a été envahi par des Cogs parmi les plus robustes qu'on ait vus.\aTu auras probablement besoin d'emporter plus de gags là-bas.\aJ'ai entendu dire que _toNpcName_ pourrait te prêter un grand sac pour emporter plus de gags._where_" },
     5203 : { GREETING: "Eh? Tu es dans mon équipe de luge?",
              QUEST : "Qu'est-ce que c'est? Tu veux un sac?\aJ'en avais un par là...peut-être qu'il est dans ma luge?\aMais c'est que... Je n'ai pas vu ma luge depuis la grande course!\aPeut-être qu'un de ces Cogs l'a prise?",
              LEAVING : "As-tu vu ma luge?",
@@ -1291,22 +1291,22 @@ QuestDialogDict = {
     5254 : { GREETING: "",
              QUEST : "Tout va bien! Maintenant je peux travailler.\aSi seulement ils n'avaient pas pris mes chaussures à plate-forme...\aJe parie que mes chaussures sont sûrement aux pieds d'un M Hollywood.",
              LEAVING : "",
-             COMPLETE : "Tout va bien! Je suis prêt maintenant.\aVous êtes tous prêts à mettre le feu dans le "+lTheBrrrgh+" ce soir?\aEh? Où sont-ils?\aOK, prends ça et ramène-moi des fans, d'accord?",
+             COMPLETE : "Tout va bien! Je suis prêt maintenant.\aVous êtes tous prêts à mettre le feu dans le "+lTundraWonderland+" ce soir?\aEh? Où sont-ils?\aOK, prends ça et ramène-moi des fans, d'accord?",
              INCOMPLETE_PROGRESS : "Je ne peux pas faire mon spectacle pieds nus, si?" },
     5282 : { GREETING: "",
              QUEST : "Tout va bien! Maintenant je peux travailler.\aSi seulement ils n'avaient pas pris mes chaussures à plate-forme...\aJe parie que mes chaussures sont aux pieds d'un Gros Blochon.",
              LEAVING : "",
-             COMPLETE : "Tout va bien! Je suis prêt maintenant.\aVous êtes tous prêts à mettre le feu dans le "+lTheBrrrgh+" ce soir?\aEh? Où sont-ils?\aOK, prends ça et ramène-moi des fans, d'accord?",
+             COMPLETE : "Tout va bien! Je suis prêt maintenant.\aVous êtes tous prêts à mettre le feu dans le "+lTundraWonderland+" ce soir?\aEh? Où sont-ils?\aOK, prends ça et ramène-moi des fans, d'accord?",
              INCOMPLETE_PROGRESS : "Je ne peux pas faire mon spectacle pieds nus, si?" },
     5283 : { GREETING: "",
              QUEST : "Tout va bien! Maintenant je peux travailler.\aSi seulement ils n'avaient pas pris mes chaussures à plate-forme...\aJe parie que mes chaussures sont aux pieds d'un Pillard.",
              LEAVING : "",
-             COMPLETE : "Tout va bien! Je suis prêt maintenant.\aVous êtes tous prêts à mettre le feu dans le "+lTheBrrrgh+" ce soir?\aEh? Où sont-ils?\aOK, prends ça et ramène-moi des fans, d'accord?",
+             COMPLETE : "Tout va bien! Je suis prêt maintenant.\aVous êtes tous prêts à mettre le feu dans le "+lTundraWonderland+" ce soir?\aEh? Où sont-ils?\aOK, prends ça et ramène-moi des fans, d'accord?",
              INCOMPLETE_PROGRESS : "Je ne peux pas faire mon spectacle pieds nus, si?" },
     5284 : { GREETING: "",
              QUEST : "Tout va bien! Maintenant je peux travailler.\aSi seulement ils n'avaient pas pris mes chaussures à plate-forme...\aJe parie que mes chaussures sont aux pieds d'un Chouffleur.",
              LEAVING : "",
-             COMPLETE : "Tout va bien! Je suis prêt maintenant.\aVous êtes tous prêts à mettre le feu dans le "+lTheBrrrgh+" ce soir?\aEh? Où sont-ils?\aOK, prends ça et ramène-moi des fans, d'accord?",
+             COMPLETE : "Tout va bien! Je suis prêt maintenant.\aVous êtes tous prêts à mettre le feu dans le "+lTundraWonderland+" ce soir?\aEh? Où sont-ils?\aOK, prends ça et ramène-moi des fans, d'accord?",
              INCOMPLETE_PROGRESS : "Je ne peux pas faire mon spectacle pieds nus, si?" },
 
     5255 : { QUEST : "On dirait que tu as besoin de plus de rigolpoints.\aPeut-être que tu pourrais passer un marché avec _toNpcName_.\aVérifie que c'est fait par écrit..._where_" },
@@ -3567,10 +3567,10 @@ SharedChatterComments = [
         "Je crois bien que je vais aller à la pêche cet après-midi.",
         "Amuse-toi bien dans mon quartier.",
         "J'espère que tu profites bien de ton séjour à Toontown!",
-        "J'ai entendu dire qu'il neigeait dans le "+lTheBrrrgh+".",
+        "J'ai entendu dire qu'il neigeait dans le "+lTundraWonderland+".",
         "Est-ce que tu as fait un tour de tramway aujourd'hui?",
         "J'aime bien rencontrer des nouveaux.",
-        "Aïe, il y a beaucoup de " + Cogs + " dans le "+lTheBrrrgh+".",
+        "Aïe, il y a beaucoup de " + Cogs + " dans le "+lTundraWonderland+".",
         "J'aime bien jouer à chat. Et toi?",
         "Les jeux du tramway sont amusants.",
         "J'aime bien faire rire les gens.",
@@ -3604,12 +3604,12 @@ SharedChatterGoodbyes = [
 
 MickeyChatter = (
         [ # Greetings specific to Mickey
-        "Bienvenue à "+lToontownCentral+".",
+        "Bienvenue à "+lToontropolisPlaza+".",
         "Salut, je m'appelle ""+Mickey+". Et toi?",
         ],
         [ # Comments
         "Dis donc, as-tu vu "+Donald+"?",
-        "Je vais aller regarder le brouillard se lever sur les "+lDonaldsDockNC+".",
+        "Je vais aller regarder le brouillard se lever sur les "+lToontropolisDocksNC+".",
         "Si tu vois mon copain "+Goofy+", dis-lui bonjour de ma part.",
         "J'ai entendu dire que "+Daisy+" a planté de nouvelles fleurs dans son jardin.",
         ],
@@ -3617,7 +3617,7 @@ MickeyChatter = (
         "Je vais au pays musical voir "+Minnie+"!",
         "Aïe, je suis en retard pour mon rendez-vous avec "+Minnie+"!",
         "On dirait que c'est l'heure du dîner pour "+Pluto+".",
-        "Je crois que je vais aller nager aux "+lDonaldsDockNC+".",
+        "Je crois que je vais aller nager aux "+lToontropolisDocksNC+".",
         "C'est l'heure de faire la sieste. Je vais au Pays des rêves.",
         ]
     )
@@ -3634,8 +3634,8 @@ MinnieChatter = (
         "Dis donc, as-tu vu "+Mickey+"?",
         "Si tu vois mon ami "+Goofy+", dis-lui bonjour de ma part.",
         "Aïe, il y a beaucoup de "+Cogs+" près du Pays des rêves de "+Donald+".",
-        "J'ai entendu dire qu'il y a du brouillard sur les "+lDonaldsDockNC+".",
-        "N'oublie pas d'essayer le labyrinthe dans le "+lDaisyGardensNC+".",
+        "J'ai entendu dire qu'il y a du brouillard sur les "+lToontropolisDocksNC+".",
+        "N'oublie pas d'essayer le labyrinthe dans le "+lFloweringGroveNC+".",
         "Je crois bien que je vais aller chercher quelques airs de musique.",
         "Hé %, regarde donc par là-bas.",
         "J'aime bien entendre de la musique.",
@@ -3655,7 +3655,7 @@ MinnieChatter = (
 
 GoofyChatter = (
         [ # Greetings
-        "Bienvenue au "+lDaisyGardensNC+".",
+        "Bienvenue au "+lFloweringGroveNC+".",
         "Salut, je m'appelle "+Goofy+". Et toi?",
         "Wof, je suis content de te voir, %!",
         ],
@@ -3667,7 +3667,7 @@ GoofyChatter = (
         "Dis donc, as-tu vu "+Donald+"?",
         "Si tu vois mon ami "+Mickey+", dis-lui bonjour de ma part.",
         "Oh! J'ai oublié le petit déjeuner de "+Mickey+"!",
-        "Wof, il y a beaucoup de "+Cogs+" près des "+lDonaldsDockNC+".",
+        "Wof, il y a beaucoup de "+Cogs+" près des "+lToontropolisDocksNC+".",
         "On dirait que "+Daisy+" a planté de nouvelles fleurs dans son jardin.",
         "À la succursale du Glagla de ma boutique à gags, les lunettes hypnotiques sont en vente pour seulement 1 bonbon!",
         "La boutique à gags de Dingo propose les meilleures blagues, astuces et chatouilles de tout Toontown!",
@@ -3676,7 +3676,7 @@ GoofyChatter = (
         [ # Goodbyes
         "Je vais au Pays musical voir %s!" % Minnie,
         "Aïe, je suis en retard pour mon rendez-vous avec %s!" % Donald,
-        "Je crois que je vais aller nager aux "+lDonaldsDockNC+".",
+        "Je crois que je vais aller nager aux "+lToontropolisDocksNC+".",
         "C'est l'heure de faire la sieste. Je vais au Pays des rêves.",
         ]
     )
@@ -3688,13 +3688,13 @@ DonaldChatter = (
         ],
         [ # Comments
         "Cet endroit me donne quelquefois la chair de poule.",
-        "N'oublie pas d'essayer le labyrinthe dans le "+lDaisyGardensNC+".",
+        "N'oublie pas d'essayer le labyrinthe dans le "+lFloweringGroveNC+".",
         "Oh bon sang, quelle bonne journée.",
         "Dis donc, as-tu vu "+Mickey+"?",
         "Si tu vois mon copain "+Goofy+", dis-lui bonjour de ma part."
         "Je crois bien que je vais aller à la pêche cet après-midi.",
-        "Aïe, il y a beaucoup de "+Cogs+" près des "+lDonaldsDockNC+".",
-        "Hé dis donc, tu n'as pas encore fait un tour de bateau avec moi aux "+lDonaldsDockNC+"?",
+        "Aïe, il y a beaucoup de "+Cogs+" près des "+lToontropolisDocksNC+".",
+        "Hé dis donc, tu n'as pas encore fait un tour de bateau avec moi aux "+lToontropolisDocksNC+"?",
         "Je n'ai pas vu "+Daisy+" de la journée.",
         "J'ai entendu dire que "+Daisy+" a planté de nouvelles fleurs dans son jardin.",
         "Coin coin.",
@@ -5184,15 +5184,15 @@ GlobalStreetNames = {
     }
 
 # reference the location name as [-1]; it's guaranteed to be the last entry
-DonaldsDock       = ("vers les", "sur les", lDonaldsDock)
-ToontownCentral   = ("vers",     "à",      lToontownCentral)
-TheBrrrgh         = ("vers",     "dans",    "le %s" % lTheBrrrgh)
-MinniesMelodyland = ("vers le",  "au",      lMinniesMelodyland)
-DaisyGardens      = ("vers les", "au",      lDaisyGardens)
+ToontropolisDocks       = ("vers les", "sur les", lToontropolisDocks)
+ToontropolisPlaza   = ("vers",     "à",      lToontropolisPlaza)
+TundraWonderland         = ("vers",     "dans",    "le %s" % lTundraWonderland)
+TheLandOfMusic = ("vers le",  "au",      lTheLandOfMusic)
+FloweringGrove      = ("vers les", "au",      lFloweringGrove)
 ConstructionZone  = ("vers la",  "dans la", "Zone de construction")
 FunnyFarm         = ("vers la",  "dans la", "Ferme farfelue")
 GoofyStadium      = ("vers le",  "au",      "Stade Dingo")
-DonaldsDreamland  = ("vers le",  "au",      lDonaldsDreamland)
+TwilightDreamland  = ("vers le",  "au",      lTwilightDreamland)
 BossbotHQ         = ("vers le",  "dans le", "QG des Chefbots")
 SellbotHQ         = ("vers le",  "dans le", "QG Vendibot")
 CashbotHQ         = ("vers le",  "dans le", "QG Caissbot")
@@ -5517,12 +5517,12 @@ SpeedChatStaticText = {
     1102 : "Allons combattre les %s!" % Cogs,
     1103 : "Allons reprendre un bâtiment %s!" % Cog,
     1104 : "Allons dans l'ascenseur!",
-    1105 : "Allons à "+lToontownCentral+"!",
-    1106 : "Allons aux "+lDonaldsDockNC+"!",
-    1107 : "Allons au "+lMinniesMelodyland+"!",
-    1108 : "Allons au "+lDaisyGardensNC+"!",
-    1109 : "Allons au "+lTheBrrrgh+"!",
-    1110 : "Allons au "+lDonaldsDreamland+"!",
+    1105 : "Allons à "+lToontropolisPlaza+"!",
+    1106 : "Allons aux "+lToontropolisDocksNC+"!",
+    1107 : "Allons au "+lTheLandOfMusic+"!",
+    1108 : "Allons au "+lFloweringGroveNC+"!",
+    1109 : "Allons au "+lTundraWonderland+"!",
+    1110 : "Allons au "+lTwilightDreamland+"!",
     1111 : "Allons chez moi!",
 
     # Toontasks
@@ -6926,7 +6926,7 @@ QuestScript130_1 = "Bien, tu as trouvé le tramway!\aPendant qu'on y est, j'ai r
 
 QuestScript131_1 = "Oh, merci pour la craie.\aQuoi?!?\aCes Cogs ont volé mon tableau. Va vaincre des Cogs pour retrouver le tableau qu'ils m'ont volé.\aQuand tu l'auras trouvé, ramène-le moi."
 
-QuestScript140_1 = "Bien, tu as trouvé le tramway!\aPendant qu'on y est, j'ai un ami, Larry le Libraire, qui est un rat de bibliothèque.\aJ'ai pris ce livre pour lui la dernière fois que j'ai été aux "+lDonaldsDockNC+".\aPourrais-tu lui apporter? Il est à la bibliothèque, d'habitude."
+QuestScript140_1 = "Bien, tu as trouvé le tramway!\aPendant qu'on y est, j'ai un ami, Larry le Libraire, qui est un rat de bibliothèque.\aJ'ai pris ce livre pour lui la dernière fois que j'ai été aux "+lToontropolisDocksNC+".\aPourrais-tu lui apporter? Il est à la bibliothèque, d'habitude."
 
 QuestScript141_1 = "Oh, oui, ce livre complète presque ma collection.\aVoyons ça...\aAh, oh...\aMais où est-ce que j'ai mis mes lunettes?\aJe les avais juste avant que ces Cogs ne prennent mon bâtiment.\aVa vaincre des Cogs pour retrouver les lunettes qu'ils m'ont volées.\aQuand tu les auras retrouvées, reviens me voir pour avoir une récompense."
 

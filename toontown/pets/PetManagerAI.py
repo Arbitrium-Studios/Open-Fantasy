@@ -330,7 +330,7 @@ class PetManagerAI(DirectObject.DirectObject):
             self.air.writeServerEvent('assignPet', toonId, '%s' % petId)
             toon.b_setPetId(petId)
 
-    def createNewPetFromSeed(self, toonId, seed, gender = -1, nameIndex = -1, safeZoneId = ToontownGlobals.ToontownCentral):
+    def createNewPetFromSeed(self, toonId, seed, gender = -1, nameIndex = -1, safeZoneId = ToontownGlobals.ToontropolisPlaza):
       
     
         #def handleCreate(petId):

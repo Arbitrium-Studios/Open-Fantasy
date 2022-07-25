@@ -109,7 +109,7 @@ class LawbotCogHQLoader(CogHQLoader.CogHQLoader):
                 cogSignSF, cogSignSF, cogSignSF * aspectSF)
             dgSign.node().setEffect(DecalEffect.make())
             dgText = DirectGui.OnscreenText(
-                text = TTLocalizer.TheBrrrgh[-1],
+                text = TTLocalizer.TundraWonderland[-1],
                 font = ToontownGlobals.getSuitFont(),
                 pos = (0,-0.3), scale = 0.1,
                 # required for DecalEffect (must be a GeomNode, not a TextNode)

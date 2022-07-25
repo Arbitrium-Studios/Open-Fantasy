@@ -4,8 +4,8 @@ from direct.task import Task
 from . import DistributedFireworkShowAI
 from toontown.ai import HolidayBaseAI
 from . import FireworkShow
-from toontown.toonbase.ToontownGlobals import DonaldsDock, ToontownCentral, \
-    TheBrrrgh, MinniesMelodyland, DaisyGardens, OutdoorZone, GoofySpeedway, DonaldsDreamland
+from toontown.toonbase.ToontownGlobals import ToontropolisDocks, ToontropolisPlaza, \
+    TundraWonderland, TheLandOfMusic, FloweringGrove, AcornAcres, ToontropolisStadium, TwilightDreamland
 import time
 
 class FireworkManagerAI(HolidayBaseAI.HolidayBaseAI):
@@ -17,21 +17,21 @@ class FireworkManagerAI(HolidayBaseAI.HolidayBaseAI):
 
     zoneToStyleDict = {
         # Donald's Dock
-        DonaldsDock : 5,
+        ToontropolisDocks : 5,
         # Toontown Central
-        ToontownCentral : 0,
+        ToontropolisPlaza : 0,
         # The Brrrgh
-        TheBrrrgh : 4,
+        TundraWonderland : 4,
         # Minnie's Melodyland
-        MinniesMelodyland : 3,
+        TheLandOfMusic : 3,
         # Daisy Gardens
-        DaisyGardens : 1,
+        FloweringGrove : 1,
         # Acorn Acres
-        OutdoorZone : 0,
+        AcornAcres : 0,
         # GS
-        GoofySpeedway : 0,
+        ToontropolisStadium : 0,
         # Donald's Dreamland
-        DonaldsDreamland : 2,
+        TwilightDreamland : 2,
         }
 
     def __init__(self, air, holidayId):

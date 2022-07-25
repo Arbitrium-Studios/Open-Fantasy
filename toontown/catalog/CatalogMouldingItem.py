@@ -4,38 +4,20 @@ from .CatalogSurfaceItem import *
 MTTextureName = 0
 MTColor = 1
 MTBasePrice = 2
-
-# These index numbers are written to the database.  Don't mess with them.
-# Also see TTLocalizer.MouldingNames.
-MouldingTypes = {
-    # Wood - Series 1
-    1000 : ("phase_3.5/maps/molding_wood1.jpg", CTBasicWoodColorOnWhite, 150),
-    # Plain with colors - Series 1
-    1010 : ("phase_5.5/maps/bd_grey_border1.jpg", CTFlatColorDark, 150),
-    # Dental wood - Series 2
-    1020 : ("phase_5.5/maps/dental_Border_wood_neutral.jpg", CTFlatColorDark, 150),
-    # Flowers - Series 2
-    1030 : ("phase_5.5/maps/littleFlowers_border.jpg", CTWhite, 150),
-    1040 : ("phase_5.5/maps/littleFlowers_border_neutral.jpg", CTFlatColorDark, 150),
-    # Ladybug - Unused
-    1050 : ("phase_5.5/maps/ladybugs2_Border.jpg", CTFlatColorDark, 150),
-    # Valentines
-    1060 : ("phase_5.5/maps/bd_grey_border1.jpg", CTValentinesColors, 150),
-    # Beach
-    1070 : ("phase_5.5/maps/bd_grey_border1.jpg", CTUnderwaterColors, 150),
-    # Winter String Lights 1
-    1080 : ("phase_5.5/maps/tt_t_ara_int_border_winterLights1.jpg", CTWhite, 150),
-    # Winter String Lights 2
-    1085 : ("phase_5.5/maps/tt_t_ara_int_border_winterLights2.jpg", CTWhite, 150),
-    # Winter String Lights 3
-    1090 : ("phase_5.5/maps/tt_t_ara_int_border_winterLights3.jpg", CTWhite, 150),
-    # Valentines Day - Cupid
-    1100 : ("phase_5.5/maps/tt_t_ara_int_border_valentine_cupid.jpg", CTWhite, 150),
-    # Valentines Day - Heart 1
-    1110 : ("phase_5.5/maps/tt_t_ara_int_border_valentine_heart1.jpg", CTWhite, 150),
-    # Valentines Day - Heart 2
-    1120 : ("phase_5.5/maps/tt_t_ara_int_border_valentine_heart2.jpg", CTWhite, 150),
-    }
+MouldingTypes = {1000: ('phase_3.5/maps/molding_wood1.jpg', CTBasicWoodColorOnWhite, 150),
+ 1010: ('phase_5.5/maps/bd_grey_border1.jpg', CTFlatColorDark, 150),
+ 1020: ('phase_5.5/maps/dental_Border_wood_neutral.jpg', CTFlatColorDark, 150),
+ 1030: ('phase_5.5/maps/littleFlowers_border.jpg', CTWhite, 150),
+ 1040: ('phase_5.5/maps/littleFlowers_border_neutral.jpg', CTFlatColorDark, 150),
+ 1050: ('phase_5.5/maps/ladybugs2_Border.jpg', CTFlatColorDark, 150),
+ 1060: ('phase_5.5/maps/bd_grey_border1.jpg', CTValentinesColors, 150),
+ 1070: ('phase_5.5/maps/bd_grey_border1.jpg', CTUnderwaterColors, 150),
+ 1080: ('phase_5.5/maps/tt_t_ara_int_border_winterLights1.jpg', CTWhite, 150),
+ 1085: ('phase_5.5/maps/tt_t_ara_int_border_winterLights2.jpg', CTWhite, 150),
+ 1090: ('phase_5.5/maps/tt_t_ara_int_border_winterLights3.jpg', CTWhite, 150),
+ 1100: ('phase_5.5/maps/tt_t_ara_int_border_valentine_cupid.jpg', CTWhite, 150),
+ 1110: ('phase_5.5/maps/tt_t_ara_int_border_valentine_heart1.jpg', CTWhite, 150),
+ 1120: ('phase_5.5/maps/tt_t_ara_int_border_valentine_heart2.jpg', CTWhite, 150)}
 
 class CatalogMouldingItem(CatalogSurfaceItem):
     """CatalogMouldingItem
@@ -90,10 +72,8 @@ class CatalogMouldingItem(CatalogSurfaceItem):
 
         return (frame, None)
 
-    def output(self, store = ~0):
-        return "CatalogMouldingItem(%s, %s%s)" % (
-            self.patternIndex, self.colorIndex,
-            self.formatOptionalData(store))
+    def output(self, store = -1):
+        return 'CatalogMouldingItem(%s, %s%s)' % (self.patternIndex, self.colorIndex, self.formatOptionalData(store))
 
     def getFilename(self):
         return MouldingTypes[self.patternIndex][MTTextureName]
@@ -119,7 +99,6 @@ class CatalogMouldingItem(CatalogSurfaceItem):
 
     def getColor(self):
         if self.colorIndex == None:
-            # If no color index is set yet, use first color in color list
             colorIndex = 0
         else:
             colorIndex = self.colorIndex
@@ -135,10 +114,7 @@ class CatalogMouldingItem(CatalogSurfaceItem):
 
     def decodeDatagram(self, di, versionNumber, store):
         CatalogAtticItem.CatalogAtticItem.decodeDatagram(self, di, versionNumber, store)
-        if versionNumber < 3:
-            self.patternIndex = di.getUint8()
-        else:
-            self.patternIndex = di.getUint16()
+        self.patternIndex = di.getUint16()
         self.colorIndex = di.getUint8()
 
         # The following will generate an exception if

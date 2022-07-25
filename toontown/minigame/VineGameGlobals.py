@@ -52,45 +52,45 @@ CourseSections = (
 # each tuple references a course section, and how many times that can be chosen
 # recommended but not required that they add up to 100
 CourseWeights = {
-    ToontownGlobals.ToontownCentral : ( (0,25), (1,25), (2,25), (3,25) ),
-    ToontownGlobals.DonaldsDock : ( (1,25), (2,25), (3,25), (4,25) ),
-    ToontownGlobals.DaisyGardens :  ( (2,25), (3,25), (4,25), (5,25) ), 
-    ToontownGlobals.MinniesMelodyland:  ( (3,25), (4,25), (5,25), (6,25) ),
-    ToontownGlobals.TheBrrrgh: ( (4,25), (5,25), (6,25), (7,25) ),
-    ToontownGlobals.DonaldsDreamland: ( (4,20), (5,20), (6,20), (7,20), (8,20) ),
+    ToontownGlobals.ToontropolisPlaza : ( (0,25), (1,25), (2,25), (3,25) ),
+    ToontownGlobals.ToontropolisDocks : ( (1,25), (2,25), (3,25), (4,25) ),
+    ToontownGlobals.FloweringGrove :  ( (2,25), (3,25), (4,25), (5,25) ), 
+    ToontownGlobals.TheLandOfMusic:  ( (3,25), (4,25), (5,25), (6,25) ),
+    ToontownGlobals.TundraWonderland: ( (4,25), (5,25), (6,25), (7,25) ),
+    ToontownGlobals.TwilightDreamland: ( (4,20), (5,20), (6,20), (7,20), (8,20) ),
     }
 
  # extra points to award when they reach end vine
 BaseBonusOnEndVine = {
-    ToontownGlobals.ToontownCentral : 4,
-    ToontownGlobals.DonaldsDock : 5,
-    ToontownGlobals.DaisyGardens : 6, 
-    ToontownGlobals.MinniesMelodyland: 7,
-    ToontownGlobals.TheBrrrgh: 8,
-    ToontownGlobals.DonaldsDreamland: 9,
+    ToontownGlobals.ToontropolisPlaza : 4,
+    ToontownGlobals.ToontropolisDocks : 5,
+    ToontownGlobals.FloweringGrove : 6, 
+    ToontownGlobals.TheLandOfMusic: 7,
+    ToontownGlobals.TundraWonderland: 8,
+    ToontownGlobals.TwilightDreamland: 9,
     }
 
 # first number is how many seconds it takes for the bat to traverse entire field
 # second number is how many seconds to wait before it starts
 # third number, if any, is where in the field it starts 0..1, 1 meaning it starts at the end
 BatInfo = {
-    ToontownGlobals.ToontownCentral : ( (60, 0, 0.35),),
-    ToontownGlobals.DonaldsDock : ( (60, 0, 0.25), (30,30)),
-    ToontownGlobals.DaisyGardens :  ( (60, 0, 0.25), (15,30) ), 
-    ToontownGlobals.MinniesMelodyland:  (  (60, 0, 0.25), (10,25)  ),
-    ToontownGlobals.TheBrrrgh: ((60, 0, 0.25), (30,30), (30, 20) ),
-    ToontownGlobals.DonaldsDreamland: ( (60, 0, 0.25), (30,30), (10, 20)),
+    ToontownGlobals.ToontropolisPlaza : ( (60, 0, 0.35),),
+    ToontownGlobals.ToontropolisDocks : ( (60, 0, 0.25), (30,30)),
+    ToontownGlobals.FloweringGrove :  ( (60, 0, 0.25), (15,30) ), 
+    ToontownGlobals.TheLandOfMusic:  (  (60, 0, 0.25), (10,25)  ),
+    ToontownGlobals.TundraWonderland: ((60, 0, 0.25), (30,30), (30, 20) ),
+    ToontownGlobals.TwilightDreamland: ( (60, 0, 0.25), (30,30), (10, 20)),
 }
 
 # for each difficulty, what is the maximum number of spiders, the course
 # can have less than the maximum numbre of spiders
 SpiderLimits = {
-    ToontownGlobals.ToontownCentral : 1,
-    ToontownGlobals.DonaldsDock : 2,
-    ToontownGlobals.DaisyGardens : 2,
-    ToontownGlobals.MinniesMelodyland:  3,
-    ToontownGlobals.TheBrrrgh: 3,
-    ToontownGlobals.DonaldsDreamland: 4
+    ToontownGlobals.ToontropolisPlaza : 1,
+    ToontownGlobals.ToontropolisDocks : 2,
+    ToontownGlobals.FloweringGrove : 2,
+    ToontownGlobals.TheLandOfMusic:  3,
+    ToontownGlobals.TundraWonderland: 3,
+    ToontownGlobals.TwilightDreamland: 4
 }
     
    

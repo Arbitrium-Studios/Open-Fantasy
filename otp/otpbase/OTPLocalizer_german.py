@@ -2,12 +2,12 @@ import string
 from otp.otpbase.OTPLocalizer_german_Property import *
 
 # common locations
-lTheBrrrgh = 'Das Brrr'
-lDaisyGardens = 'Daisys Gärten'
-lDonaldsDock = 'Donalds Dock'
-lDonaldsDreamland = 'Donalds Traumland'
-lMinniesMelodyland = 'Minnies Melodienland'
-lToontownCentral = 'Toontown Mitte'
+lTundraWonderland = 'Das Brrr'
+lFloweringGrove = 'Daisys Gärten'
+lToontropolisDocks = 'Donalds Dock'
+lTwilightDreamland = 'Donalds Traumland'
+lTheLandOfMusic = 'Minnies Melodienland'
+lToontropolisPlaza = 'Toontown Mitte'
 
 # common strings
 lCancel = 'Abbrechen'

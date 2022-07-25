@@ -67,7 +67,7 @@ class CashbotCogHQLoader(CogHQLoader.CogHQLoader):
             backgroundGeom = self.geom.find('**/EntranceFrameFront')
             backgroundGeom.node().setEffect(DecalEffect.make())
             signText = DirectGui.OnscreenText(
-                text = TTLocalizer.DonaldsDreamland[-1],
+                text = TTLocalizer.TwilightDreamland[-1],
                 font = ToontownGlobals.getSuitFont(),
                 scale = 3,
                 fg = (0.87, 0.87, 0.87, 1), 

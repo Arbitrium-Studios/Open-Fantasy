@@ -5,10 +5,6 @@ from toontown.estate import DistributedStatuary
 from toontown.estate import GardenGlobals
 
 class DistributedChangingStatuary(DistributedStatuary.DistributedStatuary):
-    """
-    Regular statues and toon statues don't change once planted.
-    This class does, initially created for the melting snowman
-    """
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedChangingStatuary')
 
     def __init__(self, cr):
@@ -50,8 +46,7 @@ class DistributedChangingStatuary(DistributedStatuary.DistributedStatuary):
         if stage == -1:
             stage = len(growthThresholds)
         self.notify.debug('growth Stage=%d' % stage)
-        # we know the right stage, hide the others
-        for index in range(len(growthThresholds) +1):
+        for index in xrange(len(growthThresholds) + 1):
             if index != stage:
                 partName = '**/growthStage_%d' % index
                 self.notify.debug('trying to remove %s' % partName)

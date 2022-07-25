@@ -15,7 +15,7 @@ class HoodMgr(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory("HoodMgr")
 
     # We'd like first-timers to drop in with the trolley in view
-    ToontownCentralInitialDropPoints = (
+    ToontropolisPlazaInitialDropPoints = (
         [-90.7, -60.0, 0.025, 102.575, 0, 0],
         [-91.4, -40.5, -3.948, 125.763, 0, 0],
         [-107.8, -17.8, -1.937, 149.456, 0, 0],
@@ -24,7 +24,7 @@ class HoodMgr(DirectObject.DirectObject):
         [-35.2, -60.2, 0.025, -265.639, 0, 0],
         )
 
-    ToontownCentralHQDropPoints = (
+    ToontropolisPlazaHQDropPoints = (
         [-43.5, 42.6, -0.550, -100.454, 0, 0],
         [-53.0, 12.5, -2.948, 281.502, 0, 0],
         [-40.3, -18.5, -0.913, -56.674, 0, 0],
@@ -32,7 +32,7 @@ class HoodMgr(DirectObject.DirectObject):
         [1.9, -5.9, 4.0, -37.941, 0, 0],
         )
 
-    ToontownCentralTunnelDropPoints = (
+    ToontropolisPlazaTunnelDropPoints = (
         [-28.3, 40.1, 00.25, 17.25, 0, 0],
         [-63.75, 58.96, -0.5, -23.75, 0, 0],
         [-106.93, 17.66, -2.2, 99.0, 0, 0],
@@ -42,7 +42,7 @@ class HoodMgr(DirectObject.DirectObject):
         )
 
     dropPoints = {
-        ToontownGlobals.DonaldsDock: (
+        ToontownGlobals.ToontropolisDocks: (
         [-28.0, -2.5, 5.8, 120.0, 0.0, 0.0],
         [-22, 13, 5.8, 155.6, 0.0, 0.0],
         [67, 47, 5.7, 134.7, 0.0, 0.0],
@@ -56,7 +56,7 @@ class HoodMgr(DirectObject.DirectObject):
         [-38, -78, 5.7, 9.1, -0.0, 0.0],
         ),
 
-        ToontownGlobals.ToontownCentral: (
+        ToontownGlobals.ToontropolisPlaza: (
         [-60, -8, 1.3, -90, 0, 0],  # veranda center
         [-66, -9, 1.3, -274, 0, 0],  # veranda off-center
         [17, -28, 4.1, -44, 0, 0],  # courtyard
@@ -79,7 +79,7 @@ class HoodMgr(DirectObject.DirectObject):
         [-130.7, 50, 0.55, -111, 0, 0],
         ),
 
-        ToontownGlobals.TheBrrrgh: (
+        ToontownGlobals.TundraWonderland: (
         [35, -32, 6.2, 138, 0.0, 0.0],
         [26, -105, 6.2, -339, 0.0, 0.0],
         [-29, -139, 6.2, -385, 0.0, 0.0],
@@ -92,7 +92,7 @@ class HoodMgr(DirectObject.DirectObject):
         [-116, -44, 8.3, -20, 0.0, 0.0], # hilltop 2
         ),
 
-        ToontownGlobals.MinniesMelodyland: (
+        ToontownGlobals.TheLandOfMusic: (
         [86, 44, -13.5, 121.1, 0.0, 0.0],
         [88, -8, -13.5, 91, 0, 0],
         [92, -76, -13.5, 62.5, 0.0, 0.0],
@@ -104,7 +104,7 @@ class HoodMgr(DirectObject.DirectObject):
         [-41, 47, 6.5, -98.9, 0.0, 0.0],
         ),
 
-        ToontownGlobals.DaisyGardens: (
+        ToontownGlobals.FloweringGrove: (
         [0, 0, 0, -10.5, 0, 0],
         [76, 35, 1.1, -30.2, 0.0, 0.0],
         [97, 106, 0.0, 51.4, 0.0, 0.0],
@@ -118,7 +118,7 @@ class HoodMgr(DirectObject.DirectObject):
         [87, 128, 0.0, 45.4, 0.0, 0.0],
         ),
 
-        ToontownGlobals.DonaldsDreamland: (
+        ToontownGlobals.TwilightDreamland: (
         [77, 91, 0.0, 124.4, 0.0, 0.0],
         [29, 92, 0.0, -154.5, 0.0, 0.0],
         [-28, 49, -16.4, -142.0, 0.0, 0.0],
@@ -131,7 +131,7 @@ class HoodMgr(DirectObject.DirectObject):
         [76, -90, 0.0, 11.0, 0.0, 0.0],
         ),
 
-        ToontownGlobals.GoofySpeedway: (
+        ToontownGlobals.ToontropolisStadium: (
         [-0.7, 62, 0.08, 182, 0, 0],
         [-1, -30, 0.06, 183, 0, 0],
         [-13, -120, 0, 307, 0, 0],
@@ -152,7 +152,7 @@ class HoodMgr(DirectObject.DirectObject):
         [73, -111, 0, 354, 0, 0],
         ),
 
-        ToontownGlobals.OutdoorZone: (
+        ToontownGlobals.AcornAcres: (
         [-165.8, 108, 0.025, 252, 0, 0],
         [21, 130, 0.16, 170, 0, 0],
         [93, 78.5, 0.23, 112, 0, 0],
@@ -195,15 +195,15 @@ class HoodMgr(DirectObject.DirectObject):
         }
 
     hoodName2Id = {
-        "dd": ToontownGlobals.DonaldsDock,
-        "tt": ToontownGlobals.ToontownCentral,
-        "br": ToontownGlobals.TheBrrrgh,
-        "mm": ToontownGlobals.MinniesMelodyland,
-        "dg": ToontownGlobals.DaisyGardens,
-        "oz": ToontownGlobals.OutdoorZone,
+        "dd": ToontownGlobals.ToontropolisDocks,
+        "tt": ToontownGlobals.ToontropolisPlaza,
+        "br": ToontownGlobals.TundraWonderland,
+        "mm": ToontownGlobals.TheLandOfMusic,
+        "dg": ToontownGlobals.FloweringGrove,
+        "oz": ToontownGlobals.AcornAcres,
         "ff": ToontownGlobals.FunnyFarm,
-        "gs": ToontownGlobals.GoofySpeedway,
-        "dl": ToontownGlobals.DonaldsDreamland,
+        "gs": ToontownGlobals.ToontropolisStadium,
+        "dl": ToontownGlobals.TwilightDreamland,
         "bosshq": ToontownGlobals.BossbotHQ,
         "sellhq": ToontownGlobals.SellbotHQ,
         "cashhq": ToontownGlobals.CashbotHQ,
@@ -212,19 +212,19 @@ class HoodMgr(DirectObject.DirectObject):
         }
 
     hoodId2Name = {
-        ToontownGlobals.DonaldsDock: "dd",
-        ToontownGlobals.ToontownCentral: "tt",
+        ToontownGlobals.ToontropolisDocks: "dd",
+        ToontownGlobals.ToontropolisPlaza: "tt",
         # This is a hack to handle the fact that the tutorial tunnel
         # connects to the Toontown Central Playground. Maybe there is
         # a cleaner way.
         ToontownGlobals.Tutorial: "tt",
-        ToontownGlobals.TheBrrrgh: "br",
-        ToontownGlobals.MinniesMelodyland: "mm",
-        ToontownGlobals.DaisyGardens: "dg",
-        ToontownGlobals.OutdoorZone: "oz",
+        ToontownGlobals.TundraWonderland: "br",
+        ToontownGlobals.TheLandOfMusic: "mm",
+        ToontownGlobals.FloweringGrove: "dg",
+        ToontownGlobals.AcornAcres: "oz",
         ToontownGlobals.FunnyFarm: "ff",
-        ToontownGlobals.GoofySpeedway: "gs",
-        ToontownGlobals.DonaldsDreamland: "dl",
+        ToontownGlobals.ToontropolisStadium: "gs",
+        ToontownGlobals.TwilightDreamland: "dl",
         ToontownGlobals.BossbotHQ: "bosshq",
         ToontownGlobals.SellbotHQ: "sellhq",
         ToontownGlobals.CashbotHQ: "cashhq",

@@ -10,16 +10,16 @@ from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.hood import DLHood
 
-class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
-    """DistributedGoofySpeedway class"""
+class DistributedToontropolisStadium(DistributedCCharBase.DistributedCCharBase):
+    """DistributedToontropolisStadium class"""
 
-    notify = DirectNotifyGlobal.directNotify.newCategory("DistributedGoofySpeedway")
+    notify = DirectNotifyGlobal.directNotify.newCategory("DistributedToontropolisStadium")
 
     def __init__(self, cr):
         try:
-            self.DistributedGoofySpeedway_initialized
+            self.DistributedToontropolisStadium_initialized
         except:
-            self.DistributedGoofySpeedway_initialized = 1
+            self.DistributedToontropolisStadium_initialized = 1
             DistributedCCharBase.DistributedCCharBase.__init__(self, cr,
                                                                TTLocalizer.Goofy,
                                                                'g')
@@ -61,10 +61,10 @@ class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
         remove Goofy and state data information
         """
         try:
-            self.DistributedGoofySpeedway_deleted
+            self.DistributedToontropolisStadium_deleted
         except:
             del self.fsm
-            self.DistributedGoofySpeedway_deleted = 1
+            self.DistributedToontropolisStadium_deleted = 1
             DistributedCCharBase.DistributedCCharBase.delete(self)
 
     def generate( self ):

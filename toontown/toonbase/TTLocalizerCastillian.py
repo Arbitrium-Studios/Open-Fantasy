@@ -22,12 +22,12 @@ Pluto  = "Pluto"
 Flippy = "Flipi"
 
 # common locations
-lTheBrrrgh = 'The Brrrgh'
-lDaisyGardens = 'Daisy Gardens'
-lDonaldsDock = "Donald's Dock"
-lDonaldsDreamland = "Donald's Dreamland"
-lMinniesMelodyland = "Minnie's Melodyland"
-lToontownCentral = 'Toontown Central'
+lTundraWonderland = 'The Brrrgh'
+lFloweringGrove = 'Daisy Gardens'
+lToontropolisDocks = "Donald's Dock"
+lTwilightDreamland = "Donald's Dreamland"
+lTheLandOfMusic = "Minnie's Melodyland"
+lToontropolisPlaza = 'Toontown Central'
 
 # common strings
 lCancel = 'Cancel'
@@ -488,7 +488,7 @@ INCOMPLETE_WRONG_NPC = 4
 COMPLETE = 5
 LEAVING = 6
 
-TheBrrrghTrackQuestDict = {
+TundraWonderlandTrackQuestDict = {
     GREETING : "",
     QUEST : "Ya estás listo.\aSal y ponte a caminar hasta que decidas qué circuito elegir.\aPiénsalo bien, porque éste será tu circuito final.\aCuando estés seguro, vuelve conmigo.",
     INCOMPLETE_PROGRESS : "Piénsalo bien.",
@@ -5219,15 +5219,15 @@ GlobalStreetNames = {
     }
 
 # reference the location name as [-1]; it's guaranteed to be the last entry
-DonaldsDock       = ("a",    "", "Puerto Donald")
-ToontownCentral   = ("al",   "", "Centro de Toontown")
-TheBrrrgh         = ("a",    "", "Frescolandia")
-MinniesMelodyland = ("a",    "", "Melodilandia de Minnie")
-DaisyGardens      = ("a",    "", "los Jardines de Daisy")
+ToontropolisDocks       = ("a",    "", "Puerto Donald")
+ToontropolisPlaza   = ("al",   "", "Centro de Toontown")
+TundraWonderland         = ("a",    "", "Frescolandia")
+TheLandOfMusic = ("a",    "", "Melodilandia de Minnie")
+FloweringGrove      = ("a",    "", "los Jardines de Daisy")
 ConstructionZone  = ("a la", "", "Zona de obras")
 FunnyFarm         = ("a la", "", "Granja Jolgorio")
 GoofyStadium      = ("al",   "", "Estadio Goofy")
-DonaldsDreamland  = ("a",    "", "Sueñolandia de Donald")
+TwilightDreamland  = ("a",    "", "Sueñolandia de Donald")
 BossbotHQ         = ("al",   "", "Cuartel general jefebot")
 SellbotHQ         = ("al",   "", "Cuartel general vendebot")
 CashbotHQ         = ("al",   "", "Cuartel general chequebot")

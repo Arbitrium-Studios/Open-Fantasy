@@ -3,6 +3,7 @@ from direct.showbase.ShowBase import *
 from toontown.toonbase import TTLocalizer
 import string
 from direct.fsm import StateData
+from toontown.toontowngui.TeaserPanel import TeaserPanel
 
 class PlantTreeGUI(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('PlantTreeGUI')
@@ -27,15 +28,10 @@ class PlantTreeGUI(StateData.StateData):
         base.localAvatar.inventory.hide()
     
     def __handleInventory(self, track, level):
-        assert self.notify.debugStateCall(self)
-        if (base.localAvatar.inventory.numItem(track, level) > 0):
-            # Report the selection
+        if base.localAvatar.inventory.numItem(track, level) > 0:
             messenger.send(self.doneEvent, [True, track, level])
         else:
-            self.notify.error(
-                "An item we don't have: track %s level %s was selected." %
-                (track, level))
-        return
+            self.notify.error("An item we don't have: track %s level %s was selected." % (track, level))
 
     def __handleCancel(self):
         assert self.notify.debugStateCall(self)

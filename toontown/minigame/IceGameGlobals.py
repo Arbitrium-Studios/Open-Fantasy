@@ -53,35 +53,35 @@ ShowScoresDuration = 4. # in seconds, how long to display the player's score
 
 # for each safezone, how many treasures do we put
 NumTreasures = {
-     ToontownGlobals.ToontownCentral : 2,
-     ToontownGlobals.DonaldsDock : 2,
-     ToontownGlobals.DaisyGardens : 2, 
-     ToontownGlobals.MinniesMelodyland: 2,
-     ToontownGlobals.TheBrrrgh: 1,
-     ToontownGlobals.DonaldsDreamland: 1,
+     ToontownGlobals.ToontropolisPlaza : 2,
+     ToontownGlobals.ToontropolisDocks : 2,
+     ToontownGlobals.FloweringGrove : 2, 
+     ToontownGlobals.TheLandOfMusic: 2,
+     ToontownGlobals.TundraWonderland: 1,
+     ToontownGlobals.TwilightDreamland: 1,
      }
 
 # for each safezone, how many penalties do we put
 NumPenalties = {
-     ToontownGlobals.ToontownCentral : 0,
-     ToontownGlobals.DonaldsDock : 1,
-     ToontownGlobals.DaisyGardens : 1, 
-     ToontownGlobals.MinniesMelodyland: 1,
-     ToontownGlobals.TheBrrrgh: 2,
-     ToontownGlobals.DonaldsDreamland: 2,
+     ToontownGlobals.ToontropolisPlaza : 0,
+     ToontownGlobals.ToontropolisDocks : 1,
+     ToontownGlobals.FloweringGrove : 1, 
+     ToontownGlobals.TheLandOfMusic: 1,
+     ToontownGlobals.TundraWonderland: 2,
+     ToontownGlobals.TwilightDreamland: 2,
      }
 
 # for each safezone, where the obstacles go
 Obstacles = {
-     ToontownGlobals.ToontownCentral : (),
-     ToontownGlobals.DonaldsDock : ((0,0),),
-     ToontownGlobals.DaisyGardens : ((MinWall[0]/2,0), (MaxWall[0]/2,0)), 
-     ToontownGlobals.MinniesMelodyland: ((0,MinWall[1]/2), (0, MaxWall[1]/2)), 
-     ToontownGlobals.TheBrrrgh: ((MinWall[0]/2,0),
+     ToontownGlobals.ToontropolisPlaza : (),
+     ToontownGlobals.ToontropolisDocks : ((0,0),),
+     ToontownGlobals.FloweringGrove : ((MinWall[0]/2,0), (MaxWall[0]/2,0)), 
+     ToontownGlobals.TheLandOfMusic: ((0,MinWall[1]/2), (0, MaxWall[1]/2)), 
+     ToontownGlobals.TundraWonderland: ((MinWall[0]/2,0),
                                  (MaxWall[0]/2 , 0),
                                  (0,MinWall[1]/2),
                                  (0,MaxWall[1]/2) ), 
-     ToontownGlobals.DonaldsDreamland: ( ( MinWall[0]/2, MinWall[1]/2),
+     ToontownGlobals.TwilightDreamland: ( ( MinWall[0]/2, MinWall[1]/2),
                                          ( MinWall[0]/2, MaxWall[1]/2),
                                          ( MaxWall[0]/2, MinWall[1]/2),
                                          ( MaxWall[0]/2, MaxWall[1]/2),
@@ -90,11 +90,11 @@ Obstacles = {
 
 # for each safezone, if we use cubic obstacles (false means cylindrical)
 ObstacleShapes = {
-     ToontownGlobals.ToontownCentral : True ,
-     ToontownGlobals.DonaldsDock : True ,
-     ToontownGlobals.DaisyGardens : True, 
-     ToontownGlobals.MinniesMelodyland: True, 
-     ToontownGlobals.TheBrrrgh: False, 
-     ToontownGlobals.DonaldsDreamland: False ,
+     ToontownGlobals.ToontropolisPlaza : True ,
+     ToontownGlobals.ToontropolisDocks : True ,
+     ToontownGlobals.FloweringGrove : True, 
+     ToontownGlobals.TheLandOfMusic: True, 
+     ToontownGlobals.TundraWonderland: False, 
+     ToontownGlobals.TwilightDreamland: False ,
      }
     

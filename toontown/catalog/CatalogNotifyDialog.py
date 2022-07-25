@@ -2,7 +2,8 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from direct.gui.DirectGui import *
-from panda3d.core import *
+from pandac.PandaModules import *
+CatalogNotifyBaseXPos = 0.133333
 
 class CatalogNotifyDialog:
     """CatalogNotifyDialog:
@@ -16,6 +17,7 @@ class CatalogNotifyDialog:
     def __init__(self, message):
         self.message = message
         self.messageIndex = 0
+        framePosX = CatalogNotifyBaseXPos
 
         framePosX = 0.40
         from toontown.toon import LocalToon # import here to stop cyclic import

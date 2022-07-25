@@ -7,9 +7,6 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.effects import FireworkGlobals
 from toontown.effects import Fireworks
 
-# how many items of master list are visible at once in the scrolling list
-NUM_ITEMS_SHOWN = 4
-
 class FireworksGui(DirectFrame):
     """FireworksGui
 
@@ -20,13 +17,7 @@ class FireworksGui(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory("FireworksGui")
 
     def __init__(self, doneEvent, shootEvent):
-        DirectFrame.__init__(self,
-                             relief=None,
-                             geom = DGG.getDefaultDialogGeom(),
-                             geom_color = (0, .5, 1, 1),
-                             geom_scale = (0.43,1,1.4),
-                             pos = (1.1,0,0),
-                             )
+        DirectFrame.__init__(self, relief=None, geom=DGG.getDefaultDialogGeom(), geom_color=(0, 0.5, 1, 1), geom_scale=(0.43, 1, 1.4), pos=(1.1, 0, 0))
         self.initialiseoptions(FireworksGui)
         # Send this when we are done so whoever made us can get a callback
         self.doneEvent = doneEvent
@@ -36,8 +27,12 @@ class FireworksGui(DirectFrame):
         self.load()
 
     def load(self):
-        # scrolled list wants a list of strings
-        itemTypes = [0,1,2,3,4,5]
+        itemTypes = [0,
+         1,
+         2,
+         3,
+         4,
+         5]
         itemStrings = []
         for i in itemTypes:
             itemStrings.append(FireworkGlobals.Names[i])
@@ -76,46 +71,31 @@ class FireworksGui(DirectFrame):
             )
         self.panelPicker.setPos(-.06,0,.42)
 
+        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        self.panelPicker = DirectScrolledList(parent=self, items=itemStrings, command=self.scrollItem, itemMakeFunction=FireworkItemPanel.FireworkItemPanel, itemMakeExtraArgs=[self, itemTypes, self.shootEvent], numItemsVisible=NUM_ITEMS_SHOWN, incButton_image=(gui.find('**/FndsLst_ScrollUp'),
+         gui.find('**/FndsLst_ScrollDN'),
+         gui.find('**/FndsLst_ScrollUp_Rllvr'),
+         gui.find('**/FndsLst_ScrollUp')), incButton_relief=None, incButton_scale=(0.5, 1, -1), incButton_pos=(0, 0, -1.08), incButton_image3_color=Vec4(1, 1, 1, 0.3), decButton_image=(gui.find('**/FndsLst_ScrollUp'),
+         gui.find('**/FndsLst_ScrollDN'),
+         gui.find('**/FndsLst_ScrollUp_Rllvr'),
+         gui.find('**/FndsLst_ScrollUp')), decButton_relief=None, decButton_scale=(0.5, 1, 1), decButton_pos=(0, 0, 0.2), decButton_image3_color=Vec4(1, 1, 1, 0.3))
+        self.panelPicker.setPos(-.06, 0, 0.42)
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        cancelImageList = (buttons.find('**/CloseBtn_UP'),
-                           buttons.find('**/CloseBtn_DN'),
-                           buttons.find('**/CloseBtn_Rllvr'))
-
-        self.cancelButton = DirectButton(
-            parent = self,
-            relief = None,
-            image = cancelImageList,
-            pos = (0.15, 0, -0.62),
-            text_scale = 0.06,
-            text_pos = (0,-0.1),
-            command = self.__cancel,
-            )
+        cancelImageList = (buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr'))
+        self.cancelButton = DirectButton(parent=self, relief=None, image=cancelImageList, pos=(0.15, 0, -0.62), text_scale=0.06, text_pos=(0, -0.1), command=self.__cancel)
         buttons.removeNode()
 
         # create a color picker
         self.hilightColor = VBase4(1,1,1,1)
         self.bgColor = VBase4(.8,.8,.8,1)
         self.colorButtons = []
-        for i in list(Fireworks.colors.keys()):
+        for i in Fireworks.colors.keys():
             color = Fireworks.colors[i]
-            height = .07
-            paddedHeight = .10
-
-            buttonBg = DirectFrame(self,
-                                   geom = DGG.getDefaultDialogGeom(),
-                                   geom_scale = paddedHeight,
-                                   geom_color = self.bgColor,
-                                   pos = (.15,0,.50-(paddedHeight+.025)*i),
-                                   relief = None,
-                                   )
+            height = 0.07
+            paddedHeight = 0.1
+            buttonBg = DirectFrame(self, geom=DGG.getDefaultDialogGeom(), geom_scale=paddedHeight, geom_color=self.bgColor, pos=(0.15, 0, 0.5 - (paddedHeight + 0.025) * i), relief=None)
             self.initialiseoptions(buttonBg)
-            button = DirectButton(buttonBg,
-                                  image = (DGG.getDefaultDialogGeom(),
-                                           DGG.getDefaultDialogGeom(),
-                                           DGG.getDefaultDialogGeom()),
-                                  relief = None,
-                                  command = self.__handleColor,
-                                  extraArgs = [i])
+            button = DirectButton(buttonBg, image=(DGG.getDefaultDialogGeom(), DGG.getDefaultDialogGeom(), DGG.getDefaultDialogGeom()), relief=None, command=self.__handleColor, extraArgs=[i])
             button.setScale(height)
             #button.setPos(0.14,0.0,.50-paddedHeight*i)
             button.setColor(color)
@@ -147,8 +127,7 @@ class FireworksGui(DirectFrame):
         
     def __handleColor(self, index):
         color = Fireworks.colors[index]
-        # reset button backgrounds
-        for i in range(len(self.colorButtons)):
+        for i in xrange(len(self.colorButtons)):
             self.colorButtons[i][1]['geom_color'] = self.bgColor
             self.colorButtons[i][1].setScale(1)
         

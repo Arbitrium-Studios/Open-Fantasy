@@ -1,7 +1,6 @@
 from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from direct.gui.DirectGui import *
-from panda3d.core import *
 from direct.gui.DirectScrolledList import *
 from direct.distributed.ClockDelta import *
 from toontown.toontowngui import TTDialog
@@ -15,9 +14,7 @@ from toontown.toon import Toon
 from direct.showbase import RandomNumGen
 from toontown.toonbase import TTLocalizer
 import random
-import random
-import pickle
-from otp.otpbase import PythonUtil
+from direct.showbase import PythonUtil
 from . import GameSprite
 from math import pi
 from toontown.estate import GardenGlobals
@@ -28,8 +25,8 @@ GAMEWIN = 2
 
 class GardenProgressMeter(DirectObject.DirectObject):
 
-    def __init__(self, typePromotion = "game", level = 0):
-        if typePromotion == "shovel":
+    def __init__(self, typePromotion = 'game', level = 0):
+        if typePromotion == 'shovel':
             self.typePromotion = SHOVEL
         elif typePromotion == "wateringCan":
             self.typePromotion = WATERINGCAN
@@ -59,32 +56,18 @@ class GardenProgressMeter(DirectObject.DirectObject):
         
         congratsMessage = "Super Congratulations!!"
         if self.typePromotion == SHOVEL:
-            congratsMessage = TTLocalizer.GardenShovelLevelUp + " \n" + GardenGlobals.ShovelAttributes[self.level]['name']
+            congratsMessage = TTLocalizer.GardenShovelLevelUp + ' \n' + GardenGlobals.ShovelAttributes[self.level]['name']
         elif self.typePromotion == WATERINGCAN:
-            congratsMessage = TTLocalizer.GardenWateringCanLevelUp + " \n" + GardenGlobals.WateringCanAttributes[self.level]['name']
+            congratsMessage = TTLocalizer.GardenWateringCanLevelUp + ' \n' + GardenGlobals.WateringCanAttributes[self.level]['name']
         elif self.typePromotion == GAMEWIN:
             congratsMessage = TTLocalizer.GardenMiniGameWon
-            
-    
-        self.frame = DirectFrame(scale = 1.1, relief = None, 
-                                 image = DGG.getDefaultDialogGeom(),
-                                 image_scale = (1.75, 1, 0.75),
-                                 image_color = ToontownGlobals.GlobalDialogColor,
-                                 frameSize = (-0.5,0.5,-0.45,-0.05),
-                                 )
-                                 
-        self.congratsText = DirectLabel(scale = 1.1, relief = None,
-                                        text_pos = (0, 0.2),
-                                        text_wordwrap = 16,
-                                        text = congratsMessage,
-                                        text_font = ToontownGlobals.getSignFont(),
-                                        pos = (0.0, 0.0, 0.0),
-                                        text_scale = 0.10,
-                                        text0_fg = (1, 1, 1, 1),
-                                        parent = self.frame
-                                        )
-        
-
+        self.frame = DirectFrame(scale=1.1, relief=None, image=DGG.getDefaultDialogGeom(), image_scale=(1.75, 1, 0.75), image_color=ToontownGlobals.GlobalDialogColor, frameSize=(-0.5,
+         0.5,
+         -0.45,
+         -0.05))
+        self.congratsText = DirectLabel(scale=1.1, relief=None, text_pos=(0, 0.2), text_wordwrap=16, text=congratsMessage, text_font=ToontownGlobals.getSignFont(), pos=(0.0, 0.0, 0.0), text_scale=0.1, text0_fg=(1, 1, 1, 1), parent=self.frame)
+        gui2 = loader.loadModel('phase_3/models/gui/quit_button')
+        self.quitButton = DirectButton(parent=self.frame, relief=None, image=(gui2.find('**/QuitBtn_UP'), gui2.find('**/QuitBtn_DN'), gui2.find('**/QuitBtn_RLVR')), pos=(0.5, 1.0, -0.32), scale=0.9, text='Exit', text_font=ToontownGlobals.getSignFont(), text0_fg=(1, 1, 1, 1), text1_fg=(1, 1, 1, 1), text2_fg=(1, 1, 1, 1), text_scale=0.045, text_pos=(0, -0.01), command=self.__handleExit)
         
         gui2 = loader.loadModel("phase_3/models/gui/quit_button")
         
@@ -127,7 +110,6 @@ class GardenProgressMeter(DirectObject.DirectObject):
             
     def __handleExit(self):
         self.__acceptExit()
-        
     def __acceptExit(self, buttonValue = None):
         if hasattr(self, 'frame'):
             self.hide()

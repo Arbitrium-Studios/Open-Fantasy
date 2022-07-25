@@ -1,7 +1,6 @@
 from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from direct.gui.DirectGui import *
-from panda3d.core import *
 from direct.distributed.ClockDelta import *
 from toontown.toonbase import ToontownGlobals
 from direct.distributed import DistributedObject
@@ -12,12 +11,10 @@ from toontown.toon import Toon
 from direct.showbase import RandomNumGen
 from toontown.toonbase import TTLocalizer
 import random
-import random
-import pickle
-from otp.otpbase import PythonUtil
+from direct.showbase import PythonUtil
 from toontown.hood import Place
-from . import Estate
-from . import HouseGlobals
+from toontown.estate import Estate
+from toontown.estate import HouseGlobals
 
 class DistributedGarden(DistributedObject.DistributedObject):
     """
@@ -37,7 +34,7 @@ class DistributedGarden(DistributedObject.DistributedObject):
         # initialize a 2d array that indicates whether a
         # i,j slot in the garden is taken
         self.propTable = [None] * self.gridCells
-        for i in range(len(self.propTable)):
+        for i in xrange(len(self.propTable)):
             self.propTable[i] = [None] * self.gridCells
         self.dx = 1.0/self.gridCells
         self.occupied = []
@@ -65,26 +62,26 @@ class DistributedGarden(DistributedObject.DistributedObject):
         self.unload()
 
     def sendNewProp(self, prop, x, y, z):
-        self.notify.debug("sendNewProp")
-        print(("new prop (%d) = %s,%s,%s" % (prop,x,y,z)))
+        self.notify.debug('sendNewProp')
+        print('new prop (%d) = %s,%s,%s' % (prop, x, y, z))
         if prop == HouseGlobals.PROP_ICECUBE:
             model = loader.loadModel("phase_8/models/props/icecube.bam")
         elif prop == HouseGlobals.PROP_FLOWER:
-            model = loader.loadModel("phase_8/models/props/flower_treasure.bam")
+            model = loader.loadModel('phase_8/models/props/flower_treasure.bam')
         elif prop == HouseGlobals.PROP_SNOWFLAKE:
-            model = loader.loadModel("phase_8/models/props/snowflake_treasure.bam")
-
+            model = loader.loadModel('phase_8/models/props/snowflake_treasure.bam')
         model.reparentTo(hidden)
         model.setPos(x,y,z)
         model.setScale(.2)
         model.setBillboardPointEye()
         model.reparentTo(render)
-        self.props.append([model,x,y,z])
+        self.props.append([model,
+         x,
+         y,
+         z])
 
     def getPropPos(self, i, j):
-        pos = [(self.pos[0] - self.radius + 2*self.radius*i),
-               (self.pos[1] - self.radius + 2*self.radius*j),
-               self.pos[2]]
+        pos = [self.pos[0] - self.radius + 2 * self.radius * i, self.pos[1] - self.radius + 2 * self.radius * j, self.pos[2]]
         return pos
 
     def loadProp(self, prop, i, j):
@@ -92,9 +89,9 @@ class DistributedGarden(DistributedObject.DistributedObject):
         if prop == HouseGlobals.PROP_ICECUBE:
             model = loader.loadModel("phase_8/models/props/icecube.bam")
         elif prop == HouseGlobals.PROP_FLOWER:
-            model = loader.loadModel("phase_8/models/props/flower_treasure.bam")
+            model = loader.loadModel('phase_8/models/props/flower_treasure.bam')
         elif prop == HouseGlobals.PROP_SNOWFLAKE:
-            model = loader.loadModel("phase_8/models/props/snowflake_treasure.bam")
+            model = loader.loadModel('phase_8/models/props/snowflake_treasure.bam')
         else:
             self.notify.error("cant find prop: %s" % prop)
 

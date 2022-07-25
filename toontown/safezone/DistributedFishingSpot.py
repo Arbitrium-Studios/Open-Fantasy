@@ -207,9 +207,9 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
         if hasattr(place, 'id'):
             myHoodId = place.id
         if  myHoodId in \
-           (ToontownGlobals.ToontownCentral,
+           (ToontownGlobals.ToontropolisPlaza,
             ToontownGlobals.MyEstate,
-            ToontownGlobals.GoofySpeedway,
+            ToontownGlobals.ToontropolisStadium,
             ):
             # trialer going to TTC/Estate/Goofy Speedway, let them through
             return True

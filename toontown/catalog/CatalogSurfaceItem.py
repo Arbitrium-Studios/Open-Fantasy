@@ -35,10 +35,6 @@ class CatalogSurfaceItem(CatalogAtticItem.CatalogAtticItem):
         return 1
 
     def recordPurchase(self, avatar, optional):
-        # Updates the appropriate field on the avatar to indicate the
-        # purchase (or delivery).  This makes the item available to
-        # use by the avatar.  This method is only called on the AI side.
-        self.giftTag = None
         house, retcode = self.getHouseInfo(avatar)
         if retcode >= 0:
             house.addWallpaper(self)

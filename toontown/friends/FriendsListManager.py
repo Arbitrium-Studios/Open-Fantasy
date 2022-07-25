@@ -1,4 +1,4 @@
-from panda3d.core import *
+from pandac.PandaModules import *
 from . import FriendsListPanel
 from . import FriendInviter
 from . import FriendInvitee

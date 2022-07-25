@@ -22,15 +22,11 @@ class CatalogToonStatueItem(CatalogGardenItem.CatalogGardenItem):
        are in numeric succession     
     """
 
-    pictureToonStatue = None
-    
-    def makeNewItem(self, itemIndex = 105, count  = 1, tagCode = 1, endPoseIndex = 108):
-        # The itemIndex has to be less than or equal to the endPoseIndex
-        assert (itemIndex <= endPoseIndex) 
+    def makeNewItem(self, itemIndex = 105, count = 1, tagCode = 1, endPoseIndex = 108):
         self.startPoseIndex = itemIndex
         self.endPoseIndex = endPoseIndex
         CatalogGardenItem.CatalogGardenItem.makeNewItem(self, itemIndex, count, tagCode)
-        
+
     def needsCustomize(self):
         # Returns true if endPoseIndex - startPoseIndex is more 0, this means there are more than 1 choice
         return ((self.endPoseIndex - self.startPoseIndex) > 0)
@@ -51,9 +47,8 @@ class CatalogToonStatueItem(CatalogGardenItem.CatalogGardenItem):
         model, ival = self.makeFrameModel(toonStatuary.toon, 1)
 
         self.pictureToonStatue = toonStatuary
-        
-        assert (not self.hasPicture)
-        self.hasPicture=True
+        self.hasPicture = True
+        toonStatuary.toon.setBin('gui-popup', 60)
         return (model, ival)
     
     def cleanupPicture(self):        
@@ -81,7 +76,8 @@ class CatalogToonStatueItem(CatalogGardenItem.CatalogGardenItem):
         # This function returns a list of all possible toon statues
         self.statueList = []
         for index in range(self.startPoseIndex, self.endPoseIndex + 1):
-            self.statueList.append(CatalogToonStatueItem(index, 1, endPoseIndex = index))
+            self.statueList.append(CatalogToonStatueItem(index, 1, endPoseIndex=index))
+
         return self.statueList
     
     def deleteAllToonStatues(self):

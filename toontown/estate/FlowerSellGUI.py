@@ -4,25 +4,13 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from direct.task import Task
-from . import FlowerBase
+from toontown.estate import FlowerBase
 from . import FlowerPicker
 
 class FlowerSellGUI(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory("FlowerGui")
     def __init__(self, doneEvent):
-        DirectFrame.__init__(self,
-                             relief = None,
-                             state = 'normal',
-                             geom = DGG.getDefaultDialogGeom(),
-                             geom_color = ToontownGlobals.GlobalDialogColor,
-                             geom_scale = (2.0,1,1.5),
-                             frameSize = (-1,1,-1,1),
-                             pos = (0,0,0),
-                             text = '',
-                             text_wordwrap = 26,
-                             text_scale = TTLocalizer.FSGDFTextScale,
-                             text_pos = (0, 0.65),
-                             )
+        DirectFrame.__init__(self, relief=None, state='normal', geom=DGG.getDefaultDialogGeom(), geom_color=ToontownGlobals.GlobalDialogColor, geom_scale=(2.0, 1, 1.5), frameSize=(-1, 1, -1, 1), pos=(0, 0, 0), text='', text_wordwrap=26, text_scale=TTLocalizer.FSGUIdirectFrame, text_pos=(0, 0.65))
         self.initialiseoptions(FlowerSellGUI)
 
         # Send this when we are done so whoever made us can get a callback
@@ -40,33 +28,10 @@ class FlowerSellGUI(DirectFrame):
         
         # Init buttons
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        okImageList = (buttons.find('**/ChtBx_OKBtn_UP'),
-                       buttons.find('**/ChtBx_OKBtn_DN'),
-                       buttons.find('**/ChtBx_OKBtn_Rllvr'))
-        cancelImageList = (buttons.find('**/CloseBtn_UP'),
-                           buttons.find('**/CloseBtn_DN'),
-                           buttons.find('**/CloseBtn_Rllvr'))
-        self.cancelButton = DirectButton(
-            parent = self,
-            relief = None,
-            image = cancelImageList,
-            pos = (0.3, 0, -0.58),
-            text = TTLocalizer.FlowerGuiCancel,
-            text_scale = TTLocalizer.FSGCancelBtnTextScale,
-            text_pos = (0,-0.1),
-            command = self.__cancel,
-            )
-        self.okButton = DirectButton(
-            parent = self,
-            relief = None,
-            image = okImageList,
-            pos = (0.6, 0, -0.58),
-            text = TTLocalizer.FlowerGuiOk,
-            text_scale = TTLocalizer.FSGOkBtnTextScale,
-            text_pos = (0,-0.1),
-            command = self.__sellFlower,
-            )
-
+        okImageList = (buttons.find('**/ChtBx_OKBtn_UP'), buttons.find('**/ChtBx_OKBtn_DN'), buttons.find('**/ChtBx_OKBtn_Rllvr'))
+        cancelImageList = (buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr'))
+        self.cancelButton = DirectButton(parent=self, relief=None, image=cancelImageList, pos=(0.3, 0, -0.58), text=TTLocalizer.FlowerGuiCancel, text_scale=TTLocalizer.FSGUIcancelButton, text_pos=(0, -0.1), command=self.__cancel)
+        self.okButton = DirectButton(parent=self, relief=None, image=okImageList, pos=(0.6, 0, -0.58), text=TTLocalizer.FlowerGuiOk, text_scale=TTLocalizer.FSGUIokButton, text_pos=(0, -0.1), command=self.__sellFlower)
         buttons.removeNode()
 
         # update the value of the flower tank
@@ -88,8 +53,9 @@ class FlowerSellGUI(DirectFrame):
         flowerBasket = base.localAvatar.getFlowerBasket()
         num = len(flowerBasket)
         value = flowerBasket.getTotalValue()
-        self['text'] = TTLocalizer.FlowerBasketValue % { "name": base.localAvatar.getName(),
-                                                   "num": num, "value":value }
+        self['text'] = TTLocalizer.FlowerBasketValue % {'name': base.localAvatar.getName(),
+         'num': num,
+         'value': value}
         self.setText()
         
         

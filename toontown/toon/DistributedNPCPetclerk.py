@@ -61,9 +61,9 @@ class DistributedNPCPetclerk(DistributedNPCToonBase):
         place = base.cr.playGame.getPlace()
         myHoodId = ZoneUtil.getCanonicalHoodId(place.zoneId)
         if  myHoodId in \
-           (ToontownGlobals.ToontownCentral,
+           (ToontownGlobals.ToontropolisPlaza,
             ToontownGlobals.MyEstate,
-            ToontownGlobals.GoofySpeedway,
+            ToontownGlobals.ToontropolisStadium,
             ):
             # trialer going to TTC/Estate/Goofy Speedway, let them through
             return True

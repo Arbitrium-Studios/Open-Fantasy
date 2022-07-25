@@ -8,24 +8,15 @@ from toontown.parties.PartyGlobals import InviteStatus
 from toontown.parties.SimpleMailBase import SimpleMailBase
 from toontown.toonbase import TTLocalizer, ToontownGlobals
 from toontown.toontowngui import TTDialog
-from toontown.toontowngui.TeaserPanel import TeaserPanel
 from toontown.parties.InviteVisual import InviteVisual
 from toontown.toon import GMUtils
 from . import CatalogItem
-from otp.otpbase.PythonUtil import StackTrace
+from direct.showbase.PythonUtil import StackTrace
 
 class MailboxScreen(DirectObject.DirectObject):
-    """
+    notify = directNotify.newCategory('MailboxScreen')
 
-    This class allows the user to accept items one at a time out of
-    his or her mailbox.
-    
-    """
-    notify = directNotify.newCategory("MailboxScreen")
-    
     def __init__(self, mailbox, avatar, doneEvent = None):
-        assert( MailboxScreen.notify.debug("__init__") )
-        # This is the DistributedMailbox that is handling our transactions.
         self.mailbox = mailbox
         # This is the avatar we're accepting for.
         self.avatar = avatar
@@ -46,7 +37,6 @@ class MailboxScreen(DirectObject.DirectObject):
 
         self.load()
         self.hide()
-        
     def show(self):
         assert( MailboxScreen.notify.debug("show") )
         self.frame.show()
@@ -59,8 +49,8 @@ class MailboxScreen(DirectObject.DirectObject):
         if hasattr(self,'frame'):
             self.frame.hide()
         else:
-            self.notify.warning("hide called, but frame is deleted, self.frame deleted in:")
-            if hasattr(self, "frameDelStackTrace"):
+            self.notify.warning('hide called, but frame is deleted, self.frame deleted in:')
+            if hasattr(self, 'frameDelStackTrace'):
                 print(self.frameDelStackTrace)
             self.notify.warning("current stackTrace =")
             print(StackTrace())
@@ -69,115 +59,39 @@ class MailboxScreen(DirectObject.DirectObject):
             #self.frame.hide()
 
     def load(self):
-        assert( MailboxScreen.notify.debug("load") )
-        self.accept("setMailboxContents-%s" % (base.localAvatar.doId), self.__refreshItems)
-        self.accept("setAwardMailboxContents-%s" % (base.localAvatar.doId), self.__refreshItems)
-        # load the buttons
+        self.accept('setMailboxContents-%s' % base.localAvatar.doId, self.__refreshItems)
+        self.accept('setAwardMailboxContents-%s' % base.localAvatar.doId, self.__refreshItems)
         model = loader.loadModel('phase_5.5/models/gui/package_delivery_panel')
 
         background = model.find('**/bg')
         itemBoard = model.find('**/item_board')
-
-        self.frame = DirectFrame(scale = 1.1, relief = DGG.FLAT,
-                                 frameSize = (-0.5,0.5,-0.45,-0.05),
-                                 frameColor = (0.737, 0.573, 0.345, 1.000))
-        
-        self.background = DirectFrame(self.frame,
-                                      image = background,
-                                      image_scale = 0.05,
-                                      relief = None,
-                                      pos = (0,1,0),
-                                      )
-        self.itemBoard = DirectFrame(parent = self.frame,
-                                     image = itemBoard,
-                                     image_scale = 0.05,
-                                     image_color = (.922, 0.922, 0.753, 1),
-                                     relief = None,
-                                     pos = (0,1,0),
-                                     )
-        # shows how many items you have to browse through
-        self.itemCountLabel = DirectLabel(
-            parent = self.frame,
-            relief = None,
-            text = self.__getNumberOfItemsText(),
-            text_wordwrap = 16,
-            pos = (0.0, 0.0, 0.7),
-            scale = 0.09,
-            )
-
+        self.frame = DirectFrame(scale=1.1, relief=DGG.FLAT, frameSize=(-0.5,
+         0.5,
+         -0.45,
+         -0.05), frameColor=(0.737, 0.573, 0.345, 1.0))
+        self.background = DirectFrame(self.frame, image=background, image_scale=0.05, relief=None, pos=(0, 1, 0))
+        self.itemBoard = DirectFrame(parent=self.frame, image=itemBoard, image_scale=0.05, image_color=(0.922, 0.922, 0.753, 1), relief=None, pos=(0, 1, 0))
+        self.itemCountLabel = DirectLabel(parent=self.frame, relief=None, text=self.__getNumberOfItemsText(), text_wordwrap=16, pos=(0.0, 0.0, 0.7), scale=0.09)
         exitUp = model.find('**/bu_return_rollover')
         exitDown = model.find('**/bu_return_rollover')
         exitRollover = model.find('**/bu_return_rollover')
         exitUp.setP(-90)
         exitDown.setP(-90)
         exitRollover.setP(-90)
-        # click this button to discard/decline an item in your mailbox
-        self.DiscardButton = DirectButton(
-            parent = self.frame,
-            relief = None,
-            image = (exitUp, exitDown, exitRollover, exitUp),
-            pos = (-0.01, 1.0, -0.36),
-            scale = 0.048,
-            text = ("", TTLocalizer.MailBoxDiscard,
-                    TTLocalizer.MailBoxDiscard, ""),
-            text_scale = 1.0,
-            text_pos = (0, -0.08),
-            textMayChange = 1,            
-            command = self.__makeDiscardInterface,
-            )
-            
-        gui2 = loader.loadModel("phase_3/models/gui/quit_button")
-        # click this button to stop interacting with the mailbox
-        self.quitButton = DirectButton(
-            parent = self.frame,
-            relief = None,
-            image = (gui2.find("**/QuitBtn_UP"),
-            gui2.find("**/QuitBtn_DN"),
-            gui2.find("**/QuitBtn_RLVR"),
-            ),
-            pos = (0.5, 1.0, -0.42),
-            scale = 0.90,
-            text = TTLocalizer.MailboxExitButton,
-            text_font = ToontownGlobals.getSignFont(),
-            text0_fg = (0.152, 0.750, 0.258, 1),
-            text1_fg = (0.152, 0.750, 0.258, 1),
-            text2_fg = (0.977, 0.816, 0.133, 1),
-            text_scale = 0.045,
-            text_pos = (0, -0.01),         
-            command = self.__handleExit,
-            )
-
-        self.gettingText = DirectLabel(
-            parent = self.frame,
-            relief = None,
-            text = '',
-            text_wordwrap = 10,
-            pos = (0.0, 0.0, 0.32),
-            scale = 0.09,
-            )
+        self.DiscardButton = DirectButton(parent=self.frame, relief=None, image=(exitUp,
+         exitDown,
+         exitRollover,
+         exitUp), pos=(-0.01, 1.0, -0.36), scale=0.048, text=('',
+         TTLocalizer.MailBoxDiscard,
+         TTLocalizer.MailBoxDiscard,
+         ''), text_scale=1.0, text_pos=(0, -0.08), textMayChange=1, command=self.__makeDiscardInterface)
+        gui2 = loader.loadModel('phase_3/models/gui/quit_button')
+        self.quitButton = DirectButton(parent=self.frame, relief=None, image=(gui2.find('**/QuitBtn_UP'), gui2.find('**/QuitBtn_DN'), gui2.find('**/QuitBtn_RLVR')), pos=(0.5, 1.0, -0.42), scale=0.9, text=TTLocalizer.MailboxExitButton, text_font=ToontownGlobals.getSignFont(), text0_fg=(0.152, 0.75, 0.258, 1), text1_fg=(0.152, 0.75, 0.258, 1), text2_fg=(0.977, 0.816, 0.133, 1), text_scale=0.045, text_pos=(0, -0.01), command=self.__handleExit)
+        self.gettingText = DirectLabel(parent=self.frame, relief=None, text='', text_wordwrap=10, pos=(0.0, 0.0, 0.32), scale=0.09)
         self.gettingText.hide()
-        
-        # label describing who the item is from
-        self.giftTagPanel = DirectLabel(
-            parent = self.frame,
-            relief = None,
-            text = 'Gift TAG!!',
-            text_wordwrap = 16,
-            pos = (0.0, 0.0, 0.01),
-            scale = 0.06,
-            )
+        self.giftTagPanel = DirectLabel(parent=self.frame, relief=None, text=TTLocalizer.MailboxGiftTag % TTLocalizer.MailboxGiftTagAnonymous, text_wordwrap=16, pos=(0.0, 0.0, 0.01), scale=0.06)
         self.giftTagPanel.hide()
-        
-        # description of the item. For invites, this might be the body of the
-        # invite.
-        self.itemText = DirectLabel(
-            parent = self.frame,
-            relief = None,
-            text = '',
-            text_wordwrap = 16,
-            pos = (0.0, 0.0, -0.022),
-            scale = 0.07,
-            )
+        self.itemText = DirectLabel(parent=self.frame, relief=None, text='', text_wordwrap=16, pos=(0.0, 0.0, -0.022), scale=0.07)
         self.itemText.hide()
 
         acceptUp = model.find('**/bu_check_up')
@@ -186,74 +100,40 @@ class MailboxScreen(DirectObject.DirectObject):
         acceptUp.setP(-90)
         acceptDown.setP(-90)
         acceptRollover.setP(-90)
-        # click this button to accept an item
-        self.acceptButton = DirectButton(
-            parent = self.frame,
-            relief = None,
-            image = (acceptUp, acceptDown, acceptRollover, acceptUp),
-            image3_color = (0.8, 0.8, 0.8, 0.6),
-            pos = (-0.01, 1.0, -0.16),
-            scale = 0.048,
-            text = ("", TTLocalizer.MailboxAcceptButton,
-                    TTLocalizer.MailboxAcceptButton, ""),
-            text_scale = 1.0,
-            text_pos = (0, -0.09),
-            textMayChange = 1,            
-            command = self.__handleAccept,
-            state = DGG.DISABLED,
-            )
-
-        nextUp = model.find("**/bu_next_up")
+        self.acceptButton = DirectButton(parent=self.frame, relief=None, image=(acceptUp,
+         acceptDown,
+         acceptRollover,
+         acceptUp), image3_color=(0.8, 0.8, 0.8, 0.6), pos=(-0.01, 1.0, -0.16), scale=0.048, text=('',
+         TTLocalizer.MailboxAcceptButton,
+         TTLocalizer.MailboxAcceptButton,
+         ''), text_scale=1.0, text_pos=(0, -0.09), textMayChange=1, command=self.__handleAccept, state=DGG.DISABLED)
+        nextUp = model.find('**/bu_next_up')
         nextUp.setP(-90)
         nextDown = model.find("**/bu_next_down")
         nextDown.setP(-90)
         nextRollover = model.find("**/bu_next_rollover")
         nextRollover.setP(-90)
-        # click this button to go to the next item in my mailbox
-        self.nextButton = DirectButton(
-            parent = self.frame,
-            relief = None,
-            image = (nextUp, nextDown, nextRollover, nextUp),
-            image3_color = (0.8, 0.8, 0.8, 0.6),
-            pos = (0.31, 1.0, -0.26),
-            scale = 0.05,
-            text = ("", TTLocalizer.MailboxItemNext,
-                    TTLocalizer.MailboxItemNext, ""),
-            text_scale = 1,
-            text_pos = (-0.2, 0.3),
-            text_fg = (1,1,1,1),
-            text_shadow = (0,0,0,1),
-            textMayChange = 0,
-            command = self.__nextItem,
-            state = DGG.DISABLED,
-            )
-
-        prevUp = model.find("**/bu_previous_up")
+        self.nextButton = DirectButton(parent=self.frame, relief=None, image=(nextUp,
+         nextDown,
+         nextRollover,
+         nextUp), image3_color=(0.8, 0.8, 0.8, 0.6), pos=(0.31, 1.0, -0.26), scale=0.05, text=('',
+         TTLocalizer.MailboxItemNext,
+         TTLocalizer.MailboxItemNext,
+         ''), text_scale=1, text_pos=(-0.2, 0.3), text_fg=(1, 1, 1, 1), text_shadow=(0, 0, 0, 1), textMayChange=0, command=self.__nextItem, state=DGG.DISABLED)
+        prevUp = model.find('**/bu_previous_up')
         prevUp.setP(-90)
         prevDown = model.find("**/bu_previous_down")
         prevDown.setP(-90)
         prevRollover = model.find("**/bu_previous_rollover")
         prevRollover.setP(-90)
-        # click this button to go to the previous item in my mailbox
-        self.prevButton = DirectButton(
-            parent = self.frame,
-            relief = None,
-            image = (prevUp, prevDown, prevRollover, prevUp),
-            pos = (-0.35, 1, -0.26),
-            scale = 0.05,
-            image3_color = (0.8, 0.8, 0.8, 0.6),
-            text = ("", TTLocalizer.MailboxItemPrev,
-                    TTLocalizer.MailboxItemPrev, ""),
-            text_scale = 1,
-            text_pos = (0, 0.3),
-            text_fg = (1,1,1,1),
-            text_shadow = (0,0,0,1),
-            textMayChange = 0,
-            command = self.__prevItem,
-            state = DGG.DISABLED,
-            )
-        self.currentItem=None
-        
+        self.prevButton = DirectButton(parent=self.frame, relief=None, image=(prevUp,
+         prevDown,
+         prevRollover,
+         prevUp), pos=(-0.35, 1, -0.26), scale=0.05, image3_color=(0.8, 0.8, 0.8, 0.6), text=('',
+         TTLocalizer.MailboxItemPrev,
+         TTLocalizer.MailboxItemPrev,
+         ''), text_scale=1, text_pos=(0, 0.3), text_fg=(1, 1, 1, 1), text_shadow=(0, 0, 0, 1), textMayChange=0, command=self.__prevItem, state=DGG.DISABLED)
+        self.currentItem = None
         self.partyInviteVisual = InviteVisual(self.frame)
         self.partyInviteVisual.setScale(0.73)
         self.partyInviteVisual.setPos(0.0, 0.0, 0.48)
@@ -296,57 +176,36 @@ class MailboxScreen(DirectObject.DirectObject):
         if self.numAtticAccepted == 0:
             self.__acceptExit()
         elif self.numAtticAccepted == 1:
-            self.dialogBox = TTDialog.TTDialog(
-                style = TTDialog.Acknowledge,
-                text = TTLocalizer.CatalogAcceptInAttic,
-                text_wordwrap = 15,
-                command = self.__acceptExit,
-                )
+            self.dialogBox = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=TTLocalizer.CatalogAcceptInAttic, text_wordwrap=15, command=self.__acceptExit)
             self.dialogBox.show()
         else:
-            self.dialogBox = TTDialog.TTDialog(
-                style = TTDialog.Acknowledge,
-                text = TTLocalizer.CatalogAcceptInAtticP,
-                text_wordwrap = 15,
-                command = self.__acceptExit,
-                )
+            self.dialogBox = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=TTLocalizer.CatalogAcceptInAtticP, text_wordwrap=15, command=self.__acceptExit)
             self.dialogBox.show()
 
     def __acceptExit(self, buttonValue = None):
-        assert( MailboxScreen.notify.debug("__acceptExit") )
         if hasattr(self, 'frame'):
             self.hide()
             self.unload()
             messenger.send(self.doneEvent)
     
     def __handleAccept(self):
-        assert( MailboxScreen.notify.debug("__handleAccept") )
+        if base.config.GetBool('want-qa-regression', 0):
+            self.notify.info('QA-REGRESSION: MAILBOX: Accept item')
         if self.acceptingIndex != None:
-            # Ignore an extraneous click.
             return
         item = self.items[self.itemIndex]
         isAward = False
         if isinstance(item, CatalogItem.CatalogItem):
             isAward = item.isAward()
-        if not base.cr.isPaid() and not (isinstance(item, InviteInfoBase) or isAward):
-            # make sure free players can accept party invites or awards
-            TeaserPanel(pageName='clothing')
-        else:
-            self.acceptingIndex = self.itemIndex
-            self.acceptButton['state'] = DGG.DISABLED
+        self.acceptingIndex = self.itemIndex
+        self.acceptButton['state'] = DGG.DISABLED
+        self.__showCurrentItem()
+        item = self.items[self.itemIndex]
+        item.acceptItem(self.mailbox, self.acceptingIndex, self.__acceptItemCallback)
+        return
 
-            self.__showCurrentItem()
-
-            item = self.items[self.itemIndex]
-            item.acceptItem(self.mailbox, self.acceptingIndex,
-                            self.__acceptItemCallback)
-                        
     def __handleDiscard(self, buttonValue = None):
-        assert( MailboxScreen.notify.debug("__handleDiscard") )
-        #print ("Discard Button Value:%s " % (buttonValue)) 
-
         if self.acceptingIndex != None:
-            # Ignore an extraneous click.
             return
         elif buttonValue == -1:
             if self.dialogBox:
@@ -361,9 +220,9 @@ class MailboxScreen(DirectObject.DirectObject):
             self.__showCurrentItem()
 
             item = self.items[self.itemIndex]
-            item.discardItem(self.mailbox, self.acceptingIndex,
-                self.__discardItemCallback)
-            
+            item.discardItem(self.mailbox, self.acceptingIndex, self.__discardItemCallback)
+        return
+
     def __discardItemCallback(self, retcode, item, index):
         assert( MailboxScreen.notify.debug("__discardItemCallback") )
         if not hasattr(self, "frame"):
@@ -377,12 +236,7 @@ class MailboxScreen(DirectObject.DirectObject):
         self.__updateItems()
         if isinstance(item, InviteInfoBase):
             callback = self.__incIndexRemoveDialog
-            self.dialogBox = TTDialog.TTDialog(
-                style = TTDialog.Acknowledge,
-                text = item.getDiscardItemErrorText(retcode),
-                text_wordwrap = 15,
-                command = callback,
-                )
+            self.dialogBox = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=item.getDiscardItemErrorText(retcode), text_wordwrap=15, command=callback)
             self.dialogBox.show()
         #self.__acceptOk(index)
         
@@ -391,25 +245,17 @@ class MailboxScreen(DirectObject.DirectObject):
         if self.itemIndex >= 0 and self.itemIndex < len(self.items): #check to see if index is within range, should help with button mashing
             item = self.items[self.itemIndex]
             if isinstance(item, InviteInfoBase):
-                itemText = (TTLocalizer.MailBoxRejectVerify % (self.getItemName(item)))
+                itemText = TTLocalizer.MailBoxRejectVerify % self.getItemName(item)
                 yesText = TTLocalizer.MailboxReject
             else:
-                itemText = (TTLocalizer.MailBoxDiscardVerify % (self.getItemName(item)))
+                itemText = TTLocalizer.MailBoxDiscardVerify % self.getItemName(item)
                 yesText = TTLocalizer.MailboxDiscard
-            #self.notify.info("Could not take item %s: retcode %s" % (item, retcode))
-            self.dialogBox = TTDialog.TTDialog(
-                style = TTDialog.TwoChoiceCustom, #TwoChoice YesNo
-                text = itemText, #what happens when you try to take chat from the mailbox
-                text_wordwrap = 15,
-                command = self.__handleDiscard,
-                buttonText = [yesText, TTLocalizer.MailboxLeave],
-                )
+            self.dialogBox = TTDialog.TTDialog(style=TTDialog.TwoChoiceCustom, text=itemText, text_wordwrap=15, command=self.__handleDiscard, buttonText=[yesText, TTLocalizer.MailboxLeave])
             self.dialogBox.show()
         
     def __acceptItemCallback(self, retcode, item, index):
         assert( MailboxScreen.notify.debug("__acceptItemCallback") )
         needtoUpdate = 0
-        
         if self.acceptingIndex == None:
             needtoUpdate = 1
             #if the setMailboxContents call won the race back here then
@@ -429,83 +275,40 @@ class MailboxScreen(DirectObject.DirectObject):
             return
 
         if self.acceptingIndex != index:
-            self.notify.warning("Got unexpected callback for index %s, expected %s." % (index, self.acceptingIndex))
+            self.notify.warning('Got unexpected callback for index %s, expected %s.' % (index, self.acceptingIndex))
             return
             
         self.acceptingIndex = None
        
         if retcode < 0:
-            # There was some error with the accept.  Pop up an
-            # appropriate dialog.
             self.notify.info('Could not take item %s: retcode %s' % (item, retcode))
-            if retcode == ToontownGlobals.P_NoTrunk:
-                self.dialogBox = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=TTLocalizer.CatalogAcceptNoTrunk, text_wordwrap=15, command=self.__acceptError)
-            else:
-                self.dialogBox = TTDialog.TTDialog(
-                style = TTDialog.TwoChoiceCustom, #TwoChoice YesNo
-                text = item.getAcceptItemErrorText(retcode), #what happens when you try to take chat from the mailbox
-                text_wordwrap = 15,
-                command = self.__handleDiscard,
-                buttonText = [ TTLocalizer.MailboxDiscard, TTLocalizer.MailboxLeave]
-                )
-            """
-            #buttonText = [TTLocalizer.MailboxOverflowButtonDicard,
-            #TTLocalizer.MailboxOverflowButtonLeave]
-            """
-            #import pdb; pdb.set_trace()
-         
+            self.dialogBox = TTDialog.TTDialog(style=TTDialog.TwoChoiceCustom, text=item.getAcceptItemErrorText(retcode), text_wordwrap=15, command=self.__handleDiscard, buttonText=[TTLocalizer.MailboxDiscard, TTLocalizer.MailboxLeave])
             self.dialogBox.show()
 
         else:
-            # The item was accepted successfully.
-            if hasattr(item,'storedInAttic') and item.storedInAttic():
-                # It's an attic item; collect these messages to
-                # display just one dialog box at the end.
-                self.numAtticAccepted += 1
-                self.itemIndex += 1
-                #self.__acceptOk(index)
-                if needtoUpdate == 1:
-                    self.__updateItems();
+            if isinstance(item, InviteInfoBase):
+                self.__updateItems()
+            callback = self.__incIndexRemoveDialog
+            self.dialogBox = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=item.getAcceptItemErrorText(retcode), text_wordwrap=15, command=callback)
+            self.dialogBox.show()
+        return
 
-            else:
-                # It's some other kind of item; display the accept
-                # dialog immediately.
-                #callback = PythonUtil.Functor(self.__acceptOk, index)
-                
-                # TODO force it to just discard the item when appropriate
-                # e.g. invites to cancelled parties
-                if isinstance(item, InviteInfoBase):
-                    self.__updateItems();                  
-                callback = self.__incIndexRemoveDialog
-                # tell player that the party's host got their response
-                self.dialogBox = TTDialog.TTDialog(
-                    style = TTDialog.Acknowledge,
-                    text = item.getAcceptItemErrorText(retcode),
-                    text_wordwrap = 15,
-                    command = callback,
-                    )
-                self.dialogBox.show()
-                                  
-                
     def __acceptError(self, buttonValue = None):
-        assert( MailboxScreen.notify.debug("__acceptError") )
         self.dialogBox.cleanup()
         self.dialogBox = None
         self.__showCurrentItem()
-        
+        return
+
     def __incIndexRemoveDialog(self, junk = 0):
-        assert( MailboxScreen.notify.debug("__incIndexRemoveDialog") )
         self.__incIndex()
         self.dialogBox.cleanup()
         self.dialogBox = None
         self.__showCurrentItem()
 
     def __incIndex(self, junk = 0):
-        assert( MailboxScreen.notify.debug("__incIndex") )
         self.itemIndex += 1
 
     def __acceptOk(self, index, buttonValue = None):
-        assert( MailboxScreen.notify.debug("__acceptOk") )
         self.acceptingIndex = None
         if self.dialogBox:
             self.dialogBox.cleanup()
@@ -583,17 +386,8 @@ class MailboxScreen(DirectObject.DirectObject):
             if isinstance(self.currentItem, CatalogItem.CatalogItem):
                 self.currentItem.cleanupPicture()
             self.currentItem = None
-                    
-    def checkFamily(self, doId):
-        assert( MailboxScreen.notify.debug("checkFamily") )
-        for familyMember in base.cr.avList:
-            #print ("Family %s %s" % (familyMember.name, familyMember.id))
-            if familyMember.id == doId:
-                #print("found it")
-                #import pdb; pdb.set_trace()
-                return familyMember
-        return None
-                
+        return
+
     def __showCurrentItem(self):
         assert( MailboxScreen.notify.debug("__showCurrentItem") )
         self.__clearCurrentItem()
@@ -608,8 +402,7 @@ class MailboxScreen(DirectObject.DirectObject):
         item = self.items[self.itemIndex]
 
         if self.itemIndex == self.acceptingIndex:
-            # We are currently waiting on the AI to accept this item.
-            self.gettingText['text'] = TTLocalizer.MailboxGettingItem % (self.getItemName(item))
+            self.gettingText['text'] = TTLocalizer.MailboxGettingItem % self.getItemName(item)
             self.gettingText.show()
             return
 
@@ -620,14 +413,17 @@ class MailboxScreen(DirectObject.DirectObject):
         # giftTag is the senders do Id
         # giftCode is the type of tag to use (added after giftTag or I would have named them differently)
         if isinstance(item, CatalogItem.CatalogItem):
-            self.acceptButton['text'] = ("", TTLocalizer.MailboxAcceptButton,
-                    TTLocalizer.MailboxAcceptButton, "")
-            self.DiscardButton['text'] = ("", TTLocalizer.MailBoxDiscard,
-                    TTLocalizer.MailBoxDiscard, "")
+            self.acceptButton['text'] = ('',
+             TTLocalizer.MailboxAcceptButton,
+             TTLocalizer.MailboxAcceptButton,
+             '')
+            self.DiscardButton['text'] = ('',
+             TTLocalizer.MailBoxDiscard,
+             TTLocalizer.MailBoxDiscard,
+             '')
             if item.isAward():
                 self.giftTagPanel['text'] = TTLocalizer.SpecialEventMailboxStrings[item.specialEventId]
             elif item.giftTag != None:
-                # if it's a gift add the tag
                 nameOfSender = self.getSenderName(item.giftTag)
 
                 if item.giftCode == ToontownGlobals.GIFT_RAT:
@@ -639,26 +435,35 @@ class MailboxScreen(DirectObject.DirectObject):
                 self.giftTagPanel['text'] = ""
             self.itemPanel, self.ival = item.getPicture(base.localAvatar)
         elif isinstance(item, SimpleMailBase):
-            self.acceptButton['text'] = ("", TTLocalizer.MailboxAcceptButton,
-                    TTLocalizer.MailboxAcceptButton, "")
-            self.DiscardButton['text'] = ("", TTLocalizer.MailBoxDiscard,
-                    TTLocalizer.MailBoxDiscard, "")             
+            self.acceptButton['text'] = ('',
+             TTLocalizer.MailboxAcceptButton,
+             TTLocalizer.MailboxAcceptButton,
+             '')
+            self.DiscardButton['text'] = ('',
+             TTLocalizer.MailBoxDiscard,
+             TTLocalizer.MailBoxDiscard,
+             '')
             senderId = item.senderId
             nameOfSender = self.getSenderName(senderId)
             self.giftTagPanel['text'] = (TTLocalizer.MailFromTag % (nameOfSender))
             self.itemText['text'] = item.body
         elif isinstance(item, InviteInfoBase):
-            self.acceptButton['text'] = ("", TTLocalizer.MailboxAcceptInvite,
-                    TTLocalizer.MailboxAcceptInvite, "")
-            self.DiscardButton['text'] = ("", TTLocalizer.MailBoxRejectInvite,
-                    TTLocalizer.MailBoxRejectInvite, "") 
+            self.acceptButton['text'] = ('',
+             TTLocalizer.MailboxAcceptInvite,
+             TTLocalizer.MailboxAcceptInvite,
+             '')
+            self.DiscardButton['text'] = ('',
+             TTLocalizer.MailBoxRejectInvite,
+             TTLocalizer.MailBoxRejectInvite,
+             '')
             partyInfo = None
             for party in self.avatar.partiesInvitedTo:
                 if party.partyId == item.partyId:
                     partyInfo = party
                     break
-            else: # could not find party info
-                MailboxScreen.notify.error("Unable to find party with id %d to match invitation %s"%(item.partyId, item))
+            else:
+                MailboxScreen.notify.error('Unable to find party with id %d to match invitation %s' % (item.partyId, item))
+
             if self.mailbox:
                 if item.status == PartyGlobals.InviteStatus.NotRead:
                     self.mailbox.sendInviteReadButNotReplied(item.inviteKey)
@@ -671,11 +476,15 @@ class MailboxScreen(DirectObject.DirectObject):
             self.itemPanel = None
             self.ival = None
         else:
-            self.acceptButton['text'] = ("", TTLocalizer.MailboxAcceptButton,
-                    TTLocalizer.MailboxAcceptButton, "")
-            self.DiscardButton['text'] = ("", TTLocalizer.MailBoxDiscard,
-                    TTLocalizer.MailBoxDiscard, "")  
-            self.giftTagPanel['text'] = " "
+            self.acceptButton['text'] = ('',
+             TTLocalizer.MailboxAcceptButton,
+             TTLocalizer.MailboxAcceptButton,
+             '')
+            self.DiscardButton['text'] = ('',
+             TTLocalizer.MailBoxDiscard,
+             TTLocalizer.MailBoxDiscard,
+             '')
+            self.giftTagPanel['text'] = ' '
             self.itemPanel = None
             self.ival = None
         self.itemText.show()
@@ -774,26 +583,12 @@ class MailboxScreen(DirectObject.DirectObject):
         """Return the name of the toon that matches avId."""
         assert( MailboxScreen.notify.debug("getSenderName") )
         sender = base.cr.identifyFriend(avId)
-        nameOfSender = ""
+
         if sender:
-            nameOfSender = sender.getName()
-            #sender = self.checkFamily(avId) # check family
-           # if sender: 
-            #    nameOfSender = sender.name # careful a family member returns a PotentialAvatar not a handle
-            #elif hasattr(base.cr, "playerFriendsManager"): # check transient toons
-             #   sender = base.cr.playerFriendsManager.getAvHandleFromId(avId)
-              #  if sender: 
-               #     nameOfSender = sender.getName()
-                    
-        if GMUtils.testGMIdentity(nameOfSender):
-            nameOfSender = GMUtils.handleGMName(nameOfSender)
-
-        if not sender:
-            nameOfSender = TTLocalizer.MailboxGiftTagAnonymous
-           # if hasattr(base.cr, "playerFriendsManager"): # request the info
-            #    base.cr.playerFriendsManager.requestAvatarInfo(avId)
-             #   self.accept('friendsListChanged', self.__showCurrentItem) # accepts this as long as it stays up
-        return nameOfSender
-
-    
-
+            return sender.getName()
+        
+        for av in base.cr.avList:
+            if av.id == avId:
+                return av.name
+            
+        return TTLocalizer.MailboxGiftTagAnonymous

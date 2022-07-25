@@ -4,9 +4,6 @@ from toontown.toonbase import TTLocalizer
 from otp.otpbase import OTPLocalizer
 from direct.interval.IntervalGlobal import *
 
-# A list of emotesthat are loyalty items, needed by award manager
-LoyaltyEmoteItems = (20, 21, 22, 23, 24)
-
 class CatalogEmoteItem(CatalogItem.CatalogItem):
     """
     This represents a particular emote animation.
@@ -14,12 +11,10 @@ class CatalogEmoteItem(CatalogItem.CatalogItem):
 
     sequenceNumber = 0
     pictureToon = None
-    
-    def makeNewItem(self, emoteIndex, special=False):
-        self.emoteIndex = emoteIndex
-        #self.loyaltyDays = loyaltyDays
-        self.special = special
 
+    def makeNewItem(self, emoteIndex, isSpecial = False):
+        self.emoteIndex = emoteIndex
+        self.isSpecial = isSpecial
         CatalogItem.CatalogItem.makeNewItem(self)
 
     def getPurchaseLimit(self):
@@ -29,11 +24,8 @@ class CatalogEmoteItem(CatalogItem.CatalogItem):
         return 1
 
     def reachedPurchaseLimit(self, avatar):
-        # Returns true if the item cannot be bought because the avatar
-        # has already bought his limit on this item.
-        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder \
-           or self in avatar.awardMailboxContents or self in avatar.onAwardOrder:
-            return 1        
+        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder:
+            return 1
         if self.emoteIndex >= len(avatar.emoteAccess):
             return 0
         return avatar.emoteAccess[self.emoteIndex] != 0
@@ -60,7 +52,7 @@ class CatalogEmoteItem(CatalogItem.CatalogItem):
 
     def recordPurchase(self, avatar, optional):
         if self.emoteIndex < 0 or self.emoteIndex > len(avatar.emoteAccess):
-            self.notify.warning("Invalid emote access: %s for avatar %s" % (self.emoteIndex, avatar.doId))
+            self.notify.warning('Invalid emote access: %s for avatar %s' % (self.emoteIndex, avatar.doId))
             return ToontownGlobals.P_InvalidIndex
                          
         avatar.emoteAccess[self.emoteIndex] = 1
@@ -93,25 +85,15 @@ class CatalogEmoteItem(CatalogItem.CatalogItem):
 
         toon.setH(180)
         model, ival = self.makeFrameModel(toon, 0)
-        
-
-        # Discard the ival from makeFrameModel, since we don't want to
-        # spin.
-
-        track, duration = Emote.globalEmote.doEmote(toon, self.emoteIndex, volume = self.volume)
-        
+        track, duration = Emote.globalEmote.doEmote(toon, self.emoteIndex, volume=self.volume)
         if duration == None:
             duration = 0
         name = "emote-item-%s" % (self.sequenceNumber)
         CatalogEmoteItem.sequenceNumber += 1
         if track != None:
-            track = Sequence(Sequence(track, duration = 0),
-                             Wait(duration + 2),
-                             name = name)
+            track = Sequence(Sequence(track, duration=0), Wait(duration + 2), name=name)
         else:
-            track = Sequence(Func(Emote.globalEmote.doEmote, toon, self.emoteIndex),
-                             Wait(duration + 4),
-                             name = name)
+            track = Sequence(Func(Emote.globalEmote.doEmote, toon, self.emoteIndex), Wait(duration + 4), name=name)
         self.pictureToon = toon
         return (model, track)
 
@@ -129,33 +111,19 @@ class CatalogEmoteItem(CatalogItem.CatalogItem):
         # assumes getPicture has been called previously
         if not hasattr(self, 'pictureToon'):
             return Sequence()
-        track, duration = Emote.globalEmote.doEmote(self.pictureToon, self.emoteIndex, volume = self.volume)
+        track, duration = Emote.globalEmote.doEmote(self.pictureToon, self.emoteIndex, volume=self.volume)
         if duration == None:
             duration = 0
         name = "emote-item-%s" % (self.sequenceNumber)
         CatalogEmoteItem.sequenceNumber += 1
         if track != None:
-            track = Sequence(Sequence(track, duration = 0),
-                             Wait(duration + 2),
-                             name = name)
+            track = Sequence(Sequence(track, duration=0), Wait(duration + 2), name=name)
         else:
-            track = Sequence(Func(Emote.globalEmote.doEmote, toon, self.emoteIndex),
-                             Wait(duration + 4),
-                             name = name)
+            track = Sequence(Func(Emote.globalEmote.doEmote, toon, self.emoteIndex), Wait(duration + 4), name=name)
         return track
-    
-    def cleanupPicture(self):
-        CatalogItem.CatalogItem.cleanupPicture(self)
-        assert self.pictureToon
-        self.pictureToon.emote.finish()
-        self.pictureToon.emote = None
-        self.pictureToon.delete()
-        self.pictureToon = None
-         
-    def output(self, store = ~0):
-        return "CatalogEmoteItem(%s%s)" % (
-            self.emoteIndex,
-            self.formatOptionalData(store))
+
+    def output(self, store = -1):
+        return 'CatalogEmoteItem(%s%s)' % (self.emoteIndex, self.formatOptionalData(store))
 
     def compareTo(self, other):
         return self.emoteIndex - other.emoteIndex
@@ -170,20 +138,14 @@ class CatalogEmoteItem(CatalogItem.CatalogItem):
     def decodeDatagram(self, di, versionNumber, store):
         CatalogItem.CatalogItem.decodeDatagram(self, di, versionNumber, store)
         self.emoteIndex = di.getUint8()
-        self.special = di.getBool()
-        #if versionNumber >= 6:
-           # self.loyaltyDays = di.getUint16()
-       # else:
-            #RAU this seeems safe, as an old user would never have the new loyalty items
-           # self.loyaltyDays = 0
+        self.isSpecial = di.getBool()
         if self.emoteIndex > len(OTPLocalizer.EmoteList):
             raise ValueError
         
     def encodeDatagram(self, dg, store):
         CatalogItem.CatalogItem.encodeDatagram(self, dg, store)
         dg.addUint8(self.emoteIndex)
-        dg.addBool(self.special)
-        #dg.addUint16(self.loyaltyDays)
-        
+        dg.addBool(self.isSpecial)
+
     def isGift(self):
-        return 1
+        return not self.getEmblemPrices()

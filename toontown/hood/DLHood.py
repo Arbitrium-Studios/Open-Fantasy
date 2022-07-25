@@ -8,7 +8,7 @@ from toontown.toonbase.ToontownGlobals import *
 class DLHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = DonaldsDreamland
+        self.id = TwilightDreamland
         # Create the town state data
         self.townLoaderClass = DLTownLoader.DLTownLoader
         # Create the safe zone state data

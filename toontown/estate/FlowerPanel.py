@@ -6,8 +6,8 @@ from direct.gui.DirectGui import *
 from panda3d.core import *
 from toontown.toonbase import TTLocalizer
 from direct.interval.IntervalGlobal import *
-from . import GardenGlobals
-from . import FlowerPhoto
+from toontown.estate import GardenGlobals
+from toontown.estate import FlowerPhoto
 
 class FlowerPanel(DirectFrame):
     """
@@ -15,26 +15,18 @@ class FlowerPanel(DirectFrame):
     """
     notify = DirectNotifyGlobal.directNotify.newCategory("FlowerPanel")
 
-    # special methods
-    def __init__(self, flower=None, parent=aspect2d, doneEvent=None, **kw):
-        """
-        Create a DirectFrame for displaying the flower and it's info.
-        """
-        assert self.notify.debugStateCall(self)
-        optiondefs = (
-            ('relief',                                    None, None),
-            ('state',                                 DGG.DISABLED, None),
-            ('image',                   DGG.getDefaultDialogGeom(), None),
-            ('image_color',  ToontownGlobals.GlobalDialogColor, None),
-            ('image_scale',                    (0.65, 1, 0.85), None),
-            ('text',                                        "", None),
-            ('text_scale',                                0.06, None),
-            ('text_fg',                           (0, 0, 0, 1), None),
-            ('text_pos',                          (0, 0.35, 0), None),
-            ('text_font',   ToontownGlobals.getInterfaceFont(), None),
-            ('text_wordwrap',                             13.5, None),
-            )
-        # Merge keyword options with default options
+    def __init__(self, flower = None, parent = aspect2d, doneEvent = None, **kw):
+        optiondefs = (('relief', None, None),
+         ('state', DGG.DISABLED, None),
+         ('image', DGG.getDefaultDialogGeom(), None),
+         ('image_color', ToontownGlobals.GlobalDialogColor, None),
+         ('image_scale', (0.65, 1, 0.85), None),
+         ('text', '', None),
+         ('text_scale', 0.06, None),
+         ('text_fg', (0, 0, 0, 1), None),
+         ('text_pos', (0, 0.35, 0), None),
+         ('text_font', ToontownGlobals.getInterfaceFont(), None),
+         ('text_wordwrap', 13.5, None))
         self.defineoptions(kw, optiondefs)
         # Initialize superclasses
         DirectFrame.__init__(self, parent)
@@ -54,69 +46,12 @@ class FlowerPanel(DirectFrame):
         self.parent = None
 
     def load(self):
-        assert self.notify.debugStateCall(self)
-        # flower detail panel
-        self.weight =  DirectLabel(
-            parent = self,
-            pos = (0, 0, -0.28),
-            relief = None,
-            state = DGG.NORMAL,
-            text = "",
-            text_scale = 0.05,
-            text_fg = (0, 0, 0, 1),
-            text_pos = (0, 0., 0),
-            text_font = ToontownGlobals.getInterfaceFont(),
-            text_wordwrap = 10.5
-            )
-        self.value =  DirectLabel(
-            parent = self,
-            pos = (0, 0, TTLocalizer.FPBlankLabelPos),
-            relief = None,
-            state = DGG.NORMAL,
-            text = "",
-            text_scale = TTLocalizer.FPBlankLabelTextScale,
-            text_fg = (0, 0, 0, 1),
-            text_pos = (0, 0, 0),
-            text_font = ToontownGlobals.getInterfaceFont(),
-            text_wordwrap = 10.5
-            )
-        self.mystery = DirectLabel(
-            parent = self,
-            pos = (-0.025, 0, -0.055),
-            relief = None,
-            state = DGG.NORMAL,
-            text = "?",
-            text_scale = 0.25,
-            text_fg = (0, 0, 0, 1),
-            text_pos = (0, 0, 0),
-            text_font = ToontownGlobals.getInterfaceFont(),
-            text_wordwrap = 10.5
-            )
-
-        self.extraLabel = DirectLabel(
-            parent = self,
-            relief = None,
-            state = DGG.NORMAL,
-            text = "",
-            text_fg = (0.2, 0.8, 0.4, 1),
-            text_font = ToontownGlobals.getSignFont(),
-            text_scale = 0.08,
-            pos = (0,0,0.26),
-            )
-
+        self.weight = DirectLabel(parent=self, pos=(0, 0, -0.28), relief=None, state=DGG.NORMAL, text='', text_scale=0.05, text_fg=(0, 0, 0, 1), text_pos=(0, 0.0, 0), text_font=ToontownGlobals.getInterfaceFont(), text_wordwrap=10.5)
+        self.value = DirectLabel(parent=self, pos=TTLocalizer.FPvaluePos, relief=None, state=DGG.NORMAL, text='', text_scale=TTLocalizer.FPvalue, text_fg=(0, 0, 0, 1), text_pos=(0, 0, 0), text_font=ToontownGlobals.getInterfaceFont(), text_wordwrap=10.5)
+        self.mystery = DirectLabel(parent=self, pos=(-0.025, 0, -0.055), relief=None, state=DGG.NORMAL, text='?', text_scale=0.25, text_fg=(0, 0, 0, 1), text_pos=(0, 0, 0), text_font=ToontownGlobals.getInterfaceFont(), text_wordwrap=10.5)
+        self.extraLabel = DirectLabel(parent=self, relief=None, state=DGG.NORMAL, text='', text_fg=(0.2, 0.8, 0.4, 1), text_font=ToontownGlobals.getSignFont(), text_scale=0.08, pos=(0, 0, 0.26))
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        # flower detail close button
-        self.cancel = DirectButton(
-            parent = self,
-            pos = (0.275, 0, -0.375),
-            relief = None,
-            state = DGG.NORMAL,
-            image = (buttons.find('**/CloseBtn_UP'),
-                     buttons.find('**/CloseBtn_DN'),
-                     buttons.find('**/CloseBtn_Rllvr')),
-            image_scale = (0.6, 1, 0.6),
-            command = self.handleCancel,            
-            )
+        self.cancel = DirectButton(parent=self, pos=(0.275, 0, -0.375), relief=None, state=DGG.NORMAL, image=(buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr')), image_scale=(0.6, 1, 0.6), command=self.handleCancel)
         buttons.removeNode()
         self.photo = FlowerPhoto.FlowerPhoto(parent=self)
         # make the scroll list
@@ -171,13 +106,10 @@ class FlowerPanel(DirectFrame):
         if self.doneEvent:
             messenger.send(self.doneEvent)
 
-    def show(self, code=GardenGlobals.FlowerItem):
-        assert self.notify.debugStateCall(self)
-        # if we are browsing flower we must be awake
+    def show(self, code = GardenGlobals.FlowerItem):
         messenger.send('wakeup')
-        self.photo.setSwimBounds(*self.swimBounds)
-        self.photo.setSwimColor(*self.swimColor)
-
+        apply(self.photo.setSwimBounds, self.swimBounds)
+        apply(self.photo.setSwimColor, self.swimColor)
         if code == GardenGlobals.FlowerItem:
             self.extraLabel.hide()
         elif code == GardenGlobals.FlowerItemNewEntry:

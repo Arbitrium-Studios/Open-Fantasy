@@ -1,8 +1,8 @@
-from . import DistributedLawnDecor
+from toontown.estate import DistributedLawnDecor
 from direct.interval.IntervalGlobal import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.showbase.ShowBase import *
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from toontown.toonbase import TTLocalizer
 class DistributedPlantBase(DistributedLawnDecor.DistributedLawnDecor):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPlantBase')
@@ -16,7 +16,7 @@ class DistributedPlantBase(DistributedLawnDecor.DistributedLawnDecor):
 
     def delete(self):
         self.notify.debug('delete')
-        for waterTrack in list(self.waterTrackDict.values()):
+        for waterTrack in self.waterTrackDict.values():
             if waterTrack:
                 waterTrack.finish()
         self.waterTrackDict = None
@@ -89,15 +89,11 @@ class DistributedPlantBase(DistributedLawnDecor.DistributedLawnDecor):
         return True
 
     def handleEnterPlot(self, colEntry = None):
-        assert self.notify.debugStateCall(self)
-        #print("Plot Entered; Collision = %s" % (optional))
-        #DistributedFlower.py will override and replace this
         dist = self.getDistance(localAvatar)
         self.accept("water-plant", self.__handleWatering)
         base.localAvatar.addShovelRelatedDoId(self.doId)
 
     def handleExitPlot(self, entry = None):
-        assert self.notify.debugStateCall(self)
         DistributedLawnDecor.DistributedLawnDecor.handleExitPlot(self, entry)
         base.localAvatar.removeShovelRelatedDoId(self.doId)
         self.ignore("water-plant")
@@ -249,22 +245,13 @@ class DistributedPlantBase(DistributedLawnDecor.DistributedLawnDecor):
         sound = loader.loadSfx('phase_5/audio/sfx/firehose_spray.ogg')
         sound.setPlayRate(0.75)
         waterTrack = Parallel()
-        waterTrack.append(
-            Sequence( Parallel(ActorInterval( toon, "water" ),
-                               SoundInterval( sound, node=toon, volume=0.5 )),
-                      Func( toon.loop, 'neutral' ),
-                      ),
-            
-            )
-
-        if hasattr(self,'dropShadow') and self.dropShadow:
+        waterTrack.append(Sequence(Parallel(ActorInterval(toon, 'water'), SoundInterval(sound, node=toon, volume=0.5)), Func(toon.loop, 'neutral')))
+        if hasattr(self, 'dropShadow') and self.dropShadow:
             newColor = self.dropShadow.getColor()
             alpha = min(1.0, newColor.getW() + (1/5.0))
             newColor.setW(alpha)
-            
-            waterTrack.append(
-                LerpColorInterval(self.dropShadow, 2.1, newColor)
-            )
+            waterTrack.append(LerpColorInterval(self.dropShadow, 2.1, newColor))
+        return waterTrack
 
         return waterTrack
     

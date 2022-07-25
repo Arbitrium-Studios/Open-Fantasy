@@ -20,9 +20,9 @@ def canAccess(avatarId, zoneId):
 def openToAll(zoneId, avatar):
     canonicalZoneId = ZoneUtil.getCanonicalHoodId(zoneId)
     if  canonicalZoneId in \
-       (ToontownGlobals.ToontownCentral,
+       (ToontownGlobals.ToontropolisPlaza,
         ToontownGlobals.MyEstate,
-        ToontownGlobals.GoofySpeedway,
+        ToontownGlobals.ToontropolisStadium,
         ToontownGlobals.Tutorial,
         ) or avatar.isInEstate():
         return True

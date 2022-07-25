@@ -143,36 +143,36 @@ class PetTraits:
         # for typical traits that are better when they're higher
         TraitType = TraitDistribution.TraitTypes.INCREASING
         Sz2MinMax = {
-            ToontownGlobals.ToontownCentral:   (.2, .65),
-            ToontownGlobals.DonaldsDock:       (.3, .7),
-            ToontownGlobals.DaisyGardens:      (.4, .75),
-            ToontownGlobals.MinniesMelodyland: (.5, .8),
-            ToontownGlobals.TheBrrrgh:         (.6, .85),
-            ToontownGlobals.DonaldsDreamland:  (.7, .9),
+            ToontownGlobals.ToontropolisPlaza:   (.2, .65),
+            ToontownGlobals.ToontropolisDocks:       (.3, .7),
+            ToontownGlobals.FloweringGrove:      (.4, .75),
+            ToontownGlobals.TheLandOfMusic: (.5, .8),
+            ToontownGlobals.TundraWonderland:         (.6, .85),
+            ToontownGlobals.TwilightDreamland:  (.7, .9),
             }
 
     class StdDecDistrib(TraitDistribution):
         # for typical traits that are better when they're lower
         TraitType = TraitDistribution.TraitTypes.DECREASING
         Sz2MinMax = {
-            ToontownGlobals.ToontownCentral:   (.35, .8),
-            ToontownGlobals.DonaldsDock:       (.3,  .7),
-            ToontownGlobals.DaisyGardens:      (.25, .6),
-            ToontownGlobals.MinniesMelodyland: (.2,  .5),
-            ToontownGlobals.TheBrrrgh:         (.15, .4),
-            ToontownGlobals.DonaldsDreamland:  (.1,  .3),
+            ToontownGlobals.ToontropolisPlaza:   (.35, .8),
+            ToontownGlobals.ToontropolisDocks:       (.3,  .7),
+            ToontownGlobals.FloweringGrove:      (.25, .6),
+            ToontownGlobals.TheLandOfMusic: (.2,  .5),
+            ToontownGlobals.TundraWonderland:         (.15, .4),
+            ToontownGlobals.TwilightDreamland:  (.1,  .3),
             }
 
     class ForgetfulnessDistrib(TraitDistribution):
         # for forgetfulness trait values
         TraitType = TraitDistribution.TraitTypes.DECREASING
         Sz2MinMax = {
-            ToontownGlobals.ToontownCentral:   (0., 1.),
-            ToontownGlobals.DonaldsDock:       (0., .9),
-            ToontownGlobals.DaisyGardens:      (0., .8),
-            ToontownGlobals.MinniesMelodyland: (0., .7),
-            ToontownGlobals.TheBrrrgh:         (0., .6),
-            ToontownGlobals.DonaldsDreamland:  (0., .5),
+            ToontownGlobals.ToontropolisPlaza:   (0., 1.),
+            ToontownGlobals.ToontropolisDocks:       (0., .9),
+            ToontownGlobals.FloweringGrove:      (0., .8),
+            ToontownGlobals.TheLandOfMusic: (0., .7),
+            ToontownGlobals.TundraWonderland:         (0., .6),
+            ToontownGlobals.TwilightDreamland:  (0., .5),
             }
 
     # ORDER IS VERY IMPORTANT

@@ -437,8 +437,8 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
         # not quite sure where to do this - we need to assign teleport access
         # to the toon when he enters Goofy Stadium
         zoneId = ZoneUtil.getCanonicalZoneId(newZoneId)
-        if zoneId == ToontownGlobals.GoofySpeedway:
-            if not self.hasTeleportAccess(ToontownGlobals.GoofySpeedway):
+        if zoneId == ToontownGlobals.ToontropolisStadium:
+            if not self.hasTeleportAccess(ToontownGlobals.ToontropolisStadium):
                 self.addTeleportAccess(zoneId)
         # NOTE: If others need to listen for zoneId changes then please remove the if statements
         elif zoneId == ToontownGlobals.ToonHall:
@@ -1670,7 +1670,27 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
     def getFishingRod(self):
         return self.fishingRod
 
-    ### fishing trophy list ###
+    def b_setMaxFishingRod(self, rodId):
+        if (not 0 <= rodId <= 4) or rodId <= self.maxFishingRod:
+            return
+
+        self.d_setMaxFishingRod(rodId)
+        self.setMaxFishingRod(rodId)
+
+    def d_setMaxFishingRod(self, rodId):
+        self.sendUpdate('setMaxFishingRod', [rodId])
+
+    def setMaxFishingRod(self, rodId):
+        self.maxFishingRod = rodId
+
+    def getMaxFishingRod(self):
+        return self.maxFishingRod
+    
+    def requestFishingRod(self, rodId):
+        if not 0 <= rodId <= self.maxFishingRod:
+            return
+        
+        self.b_setFishingRod(rodId)
 
     def b_setFishingTrophies(self, trophyList):
         # update the caught fish list

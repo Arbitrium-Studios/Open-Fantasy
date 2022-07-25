@@ -70,16 +70,16 @@ Chip   = "Tico"
 Dale   = "Teco"
 
 # common locations
-lTheBrrrgh = 'O Brrrgh'
-lDaisyGardens = 'Jardim da Margarida'
-lDonaldsDock = "Porto do Donald"
-lDonaldsDreamland = "Sonholândia do Donald"
-lMinniesMelodyland = "Melodilândia da Minnie"
-lToontownCentral = 'Centro de Toontown'
+lTundraWonderland = 'O Brrrgh'
+lFloweringGrove = 'Jardim da Margarida'
+lToontropolisDocks = "Porto do Donald"
+lTwilightDreamland = "Sonholândia do Donald"
+lTheLandOfMusic = "Melodilândia da Minnie"
+lToontropolisPlaza = 'Centro de Toontown'
 lToonHQ = 'Quartel dos Toons'
 lSellbotHQ = 'Sellbot HQ'
-lGoofySpeedway = "Autódromo do Pateta"
-lOutdoorZone = "Bosque de Bolotas de Tico e Teco"
+lToontropolisStadium = "Autódromo do Pateta"
+lAcornAcres = "Bosque de Bolotas de Tico e Teco"
 lGolfZone = "Minigolfe de Tico e Teco"
 lPartyHood = "Party Grounds"
 
@@ -219,15 +219,15 @@ GlobalStreetNames = {
     }
 
 # reference the location name as [-1]; it's guaranteed to be the last entry
-DonaldsDock       = ("para o",  "no",    lDonaldsDock)
-ToontownCentral   = ("para o",  "no",    lToontownCentral)
-TheBrrrgh         = ("para",    "em",    lTheBrrrgh)
-MinniesMelodyland = ("para a",  "na",    lMinniesMelodyland)
-DaisyGardens      = ("para os", "nos",   lDaisyGardens)
-OutdoorZone       = ("para a",  "na",    lOutdoorZone)
+ToontropolisDocks       = ("para o",  "no",    lToontropolisDocks)
+ToontropolisPlaza   = ("para o",  "no",    lToontropolisPlaza)
+TundraWonderland         = ("para",    "em",    lTundraWonderland)
+TheLandOfMusic = ("para a",  "na",    lTheLandOfMusic)
+FloweringGrove      = ("para os", "nos",   lFloweringGrove)
+AcornAcres       = ("para a",  "na",    lAcornAcres)
 FunnyFarm         = ("para a",  "na",    "Fazenda Divertida")
-GoofySpeedway     = ("para o",  "no",    lGoofySpeedway)
-DonaldsDreamland  = ("para a",  "na",    lDonaldsDreamland)
+ToontropolisStadium     = ("para o",  "no",    lToontropolisStadium)
+TwilightDreamland  = ("para a",  "na",    lTwilightDreamland)
 BossbotHQ         = ("para o",  "no",    lBossbotHQ)
 SellbotHQ         = ("para o",  "no",    lSellbotHQ)
 CashbotHQ         = ("para o",  "no",    lCashbotHQ)
@@ -740,7 +740,7 @@ INCOMPLETE_WRONG_NPC = 4
 COMPLETE = 5
 LEAVING = 6
 
-TheBrrrghTrackQuestDict = {
+TundraWonderlandTrackQuestDict = {
     GREETING : "",
     QUEST : "Agora, você está pronto.\aSaia e refresque a cabeça até descobrir que tipo você gostaria de escolher.\aEscolha bem, pois você não poderá mudar.\aQuando tiver certeza, volte aqui.",
     INCOMPLETE_PROGRESS : "Escolha bem.",
@@ -1606,7 +1606,7 @@ QuestDialogDict = {
              QUEST : "Um ponto de Risada? Acho que não!\aClaro, mas só se der um jeito em alguns desses Robôs da Lei antes." },
 
     # Johnny Cashmere will knit you a large bag if...
-    5303 : { QUEST : lTheBrrrgh+" está repleto de Cogs perigosos.\aSe fosse você, carregaria mais piadas por aqui.\aOuvi dizer que  _toNpcName_ pode fazer uma bolsa maior para você se estiver a fim de trabalhar._where_" },
+    5303 : { QUEST : lTundraWonderland+" está repleto de Cogs perigosos.\aSe fosse você, carregaria mais piadas por aqui.\aOuvi dizer que  _toNpcName_ pode fazer uma bolsa maior para você se estiver a fim de trabalhar._where_" },
     5304 : { GREETING: "",
              LEAVING : "",
              INCOMPLETE_PROGRESS : "Deve haver bastante Robôs da Lei lá fora.\aEntão mexa-se!" ,
@@ -4341,12 +4341,12 @@ SharedChatterGoodbyes = [
 
 MickeyChatter = (
         [ # Greetings specific to Mickey
-        "Bem-vindo ao "+lToontownCentral+".",
+        "Bem-vindo ao "+lToontropolisPlaza+".",
         "Oi, meu nome é " + Mickey + ". Qual é o seu?",
         ],
         [ # Comments
         "Ei, você viu o "+ Donald +"?",
-        "Vou ver o nevoeiro passar no "+lDonaldsDock+".",
+        "Vou ver o nevoeiro passar no "+lToontropolisDocks+".",
         "Se você vir o meu camarada "+Goofy+", dê um oi para ele por mim.",
         "Ouvi falar que a "+Daisy+" plantou novas flores no jardim."
         ],
@@ -4354,18 +4354,18 @@ MickeyChatter = (
         "\Vou para a Melodilândia ver a "+Minnie+"!",
         "Caramba, estou atrasado para meu encontro com a "+ Minnie +"!",
         "Parece que é hora de "+ Pluto +" jantar.",
-        "Acho que vou nadar no "+lDonaldsDock+".",
+        "Acho que vou nadar no "+lToontropolisDocks+".",
         "É hora de tirar um cochilo. Vou para a Sonholândia.",
         ]
     )
 
 VampireMickeyChatter = (
         [ # Greetings specific to Vampire Mickey
-        "Bem-vindo ao "+lToontownCentral+".",
+        "Bem-vindo ao "+lToontropolisPlaza+".",
         "Oi, meu nome é "+Mickey+". Qual é o seu?",
         "Feliz Halloween!",
         "Feliz Halloween, %!",
-        "Bem-vindo ao Centro da Cidade Assombrada... quero dizer ao "+lToontownCentral+"!",
+        "Bem-vindo ao Centro da Cidade Assombrada... quero dizer ao "+lToontropolisPlaza+"!",
         ],
         [ # Comments
         "É divertido se vestir para o Halloween!",
@@ -4403,9 +4403,9 @@ MinnieChatter = (
         "Sua roupa é legal, %.",
         "Ei, você viu o "+ Mickey +"?",
         "Se você vir meu amigo "+ Goofy +", dê um oi para ele por mim.",
-        "Uau, há milhares de "+ Cogs +" perto da "+lDonaldsDreamland+".",
-        "Ouvi falar que tem neblina no "+lDonaldsDock+".",
-        "Não deixe de experimentar o labirinto dos "+lDaisyGardens+".",
+        "Uau, há milhares de "+ Cogs +" perto da "+lTwilightDreamland+".",
+        "Ouvi falar que tem neblina no "+lToontropolisDocks+".",
+        "Não deixe de experimentar o labirinto dos "+lFloweringGrove+".",
         "Acho que vou catar algumas canções.",
         "Ei, %, olha aquilo lá.",
         "Adoro o som da música.",
@@ -4437,7 +4437,7 @@ DaisyChatter = (
         "Você viu o "+Donald+"? Eu não consigo encontrá-lo em lugar algum.",
         "Se você vir minha amiga "+Minnie+", por favor diga \"Oi\" por mim.",
         "Quanto melhor as ferramentas de jardinagem que você tem, melhor será seu jardim.",
-        "Existem muitos "+Cogs+" perto do "+lDonaldsDock+".",
+        "Existem muitos "+Cogs+" perto do "+lToontropolisDocks+".",
         "Regando seu jardim diariamente você deixa suas plantas felizes.",
         "Para cultivar uma Margarida Rosa, plante uma balinha amarela e uma vermelha juntas.",
         "É facil cultivar uma Margarida Amarela. Basta plantar uma balinha amarela.",
@@ -4446,14 +4446,14 @@ DaisyChatter = (
         [ # Goodbyes
         "Estou indo para Melodilândia para ver %s!" % Minnie,
         "Preciso correr para o meu picnic com %s!" % Donald,
-        "Acho que vou nadar no "+lDonaldsDock+".",
+        "Acho que vou nadar no "+lToontropolisDocks+".",
         "Oh, estou com sono. Acho que vou para a Sonholândia.",
         ]
     )
 
 ChipChatter = (
         [ # Greetings
-        "Boas-vindas a %s!" % lOutdoorZone,
+        "Boas-vindas a %s!" % lAcornAcres,
         "Olá, sou " + Chip + ". Qual é o seu nome?",
         "Não, eu sou " + Chip + ".",
         "É tão bom ver você, %!",
@@ -4465,9 +4465,9 @@ ChipChatter = (
         "Os buracos de golfe com vulcões são os mais desafiadores para mim.",
         ],
         [ # Goodbyes
-        "Vamos até " + lTheBrrrgh +" brincar com %s." % Pluto,
+        "Vamos até " + lTundraWonderland +" brincar com %s." % Pluto,
         "Vamos visitar %s e dar um jeito nele." % Donald,
-        "Acho que vou nadar no " + lDonaldsDock + ".",
+        "Acho que vou nadar no " + lToontropolisDocks + ".",
         "Oh, estou com sono. Acho que vou até a Sonholândia.",
         ]
     )
@@ -4478,7 +4478,7 @@ DaleChatter = (
         "É tão bom ver você, %!",
         "Olá, sou " + Dale + ". Qual é o seu nome?",
         "Olá, sou " + Chip + ".",
-        "Boas-vindas a %s!" % lOutdoorZone,
+        "Boas-vindas a %s!" % lAcornAcres,
         "Somos Tico e Teco!",
         ],
         [ # Comments
@@ -4496,7 +4496,7 @@ DaleChatter = (
 
 GoofyChatter = (
         [ # Greetings
-        "Bem-vindo aos "+lDaisyGardens+".",
+        "Bem-vindo aos "+lFloweringGrove+".",
         "Oi, meu nome é "+ Goofy +". Qual é o seu?",
         "Puxa, muito legal ver você %!",
         ],
@@ -4508,7 +4508,7 @@ GoofyChatter = (
         "Ei, você viu o "+ Donald +"?",
         "Se você vir o meu amigo "+ Mickey +", dê um oi para ele por mim.",
         "Ah, não! Esqueci de fazer o café da manhã do "+ Mickey +"!",
-        "Puxa, com certeza há muitos "+ Cogs +" perto do "+lDonaldsDock+".",
+        "Puxa, com certeza há muitos "+ Cogs +" perto do "+lToontropolisDocks+".",
         "Parece que a "+ Daisy +" plantou novas flores no jardim.",
         "Na filial da minha Loja de Piadas no Brrrgh, há Óculos hipnóticos em promoção por apenas uma balinha!",
         "As Lojas de piadas do Pateta oferecem as melhores gozações, truques e comédias de toda Toontown!",
@@ -4517,14 +4517,14 @@ GoofyChatter = (
         [ # Goodbyes
         "\Vou para Melodilândia para ver a  "+ Minnie +"!",
         "Caramba, estou atrasado para o meu jogo com o  "+ Donald + "!",
-        "Acho que vou nadar no Porto do "+lDonaldsDock+".",
+        "Acho que vou nadar no Porto do "+lToontropolisDocks+".",
         "É hora de tirar um cochilo. Vou para a Sonholândia.",
         ]
     )
 
-GoofySpeedwayChatter = (
+ToontropolisStadiumChatter = (
         [ # Greetings
-        "Bem-vindo a "+lGoofySpeedway+".",
+        "Bem-vindo a "+lToontropolisStadium+".",
         "Oi, meu nome é "+Goofy+". Qual é o seu?",
         "Puxa, muito legal ver você %!",
         ],
@@ -4536,7 +4536,7 @@ GoofySpeedwayChatter = (
         "Oi, você viu "+Donald+"?",
         "Se você vir meu amigo "+Mickey+", diz que eu mandei um alô.",
         "Ah, não! Esqueci de preparar para "+Mickey+" o café da manhã!",
-        "Puxa, com certeza há muitos "+Cogs+" perto de "+lDonaldsDock+".",
+        "Puxa, com certeza há muitos "+Cogs+" perto de "+lToontropolisDocks+".",
         "Na filial da minha Loja de Piadas no Brrrgh, há Óculos hipnóticos em promoção por apenas uma balinha!",
         "As Lojas de piadas do Pateta oferecem as melhores gozações, truques e comédias de toda Toontown!",
         "Nas Lojas de piadas do Pateta, todas as tortas na cara têm garantia de fazer rir, ou você tem as suas balinhas de volta!"
@@ -4544,7 +4544,7 @@ GoofySpeedwayChatter = (
         [ # Goodbyes
         "Vou para Melodilândia para ver %s!" % Mickey,
         "Caramba, estou atrasado para o meu jogo com %s!" % Donald,
-        "Acho que vou nadar no "+lDonaldsDock+".",
+        "Acho que vou nadar no "+lToontropolisDocks+".",
         "É hora de tirar um cochilo. Vou para a Sonholândia.",
         ]
     )
@@ -4556,13 +4556,13 @@ DonaldChatter = (
         ],
         [ # Comments
         "Às vezes este lugar me dá arrepios.",
-        "Não deixe de experimentar o labirinto dos "+lDaisyGardens+".",
+        "Não deixe de experimentar o labirinto dos "+lFloweringGrove+".",
         "Nossa, que dia legal!",
         "Ei, você viu o "+ Mickey +"?",
         "Se você vir meu parceiro "+ Goofy +", dê um oi para ele por mim.",
         "Acho que vou pescar esta tarde.",
-        "Uau, há um monte de "+ Cogs +" no "+lDonaldsDock+".",
-        "Escuta, eu não levei você ainda para um passeio no "+lDonaldsDock+"?",
+        "Uau, há um monte de "+ Cogs +" no "+lToontropolisDocks+".",
+        "Escuta, eu não levei você ainda para um passeio no "+lToontropolisDocks+"?",
         "Não vi a "+ Daisy +" o dia todo.",
         "Ouvi falar que a "+ Daisy +" plantou novas flores no jardim.",
         "Quack.",
@@ -4626,12 +4626,12 @@ AFDaisyChatter = (
         ],
         [ # Goodbyes
         "Oi, preciso falar com o Micky (Mickey). Você o viu?",
-        "Acho que vou nadar no "+lDonaldsDock+".",
+        "Acho que vou nadar no "+lToontropolisDocks+".",
         "Oh, estou com soninho. Acho que vou para a Sonholândia",
         ]
     )
 
-AFGoofySpeedwayChatter = (
+AFToontropolisStadiumChatter = (
         [ # Greetings
         "Feliz Semana da Preguiça, hã, dos April Toons (Toons de Abril)!",
         "Feliz Semana dos April Toons (Toons de Abril), %!",
@@ -4666,9 +4666,9 @@ AFDonaldChatter = (
         ]
     )    
 
-CLGoofySpeedwayChatter = (
+CLToontropolisStadiumChatter = (
         [ # Greetings
-        "Bem-vindo ao "+lGoofySpeedway+".",
+        "Bem-vindo ao "+lToontropolisStadium+".",
         "Oi, meu nome é "+Goofy+". Qual é o seu?",
         "Ohoh, que bom ver você %!",
         "Olá!  Perdoe minhas roupas sujas, estava consertando aquele Quadro de Pontuação quebrado.",
@@ -4687,7 +4687,7 @@ CLGoofySpeedwayChatter = (
         "Ei, você viu o "+Donald+"?",
         "Se vir o meu amigo "+Mickey+", mande lembranças a ele por mim.",
         "Puxa! Esqueci de preparar o café da manhã do "+Mickey+"!",
-        "Ohoh, tem um monte de "+Cogs+" perto do "+lDonaldsDock+".",
+        "Ohoh, tem um monte de "+Cogs+" perto do "+lToontropolisDocks+".",
         "Nos galhos do Brrrgh da minha Loja de Brincadeiras, os Óculos Hipnotizantes estão à venda por apenas 1 balinha!",
         "A Loja de Piadas do Pateta tem as melhores piadas, truques e brincadeiras divertidas de toda Toontown!",
         "Na Loja de Piadas do Pateta, até uma torta na cara é garantia de boas risadas ou você recebe suas balinhas de volta!"
@@ -4701,9 +4701,9 @@ CLGoofySpeedwayChatter = (
     )
         
 
-GPGoofySpeedwayChatter = (
+GPToontropolisStadiumChatter = (
         [ # Greetings
-        "Bem-vindo ao "+lGoofySpeedway+".",
+        "Bem-vindo ao "+lToontropolisStadium+".",
         "Bem-vindo ao Fim de Semana do Grande Prêmio!", 
         "Oi, meu nome é "+Goofy+". Qual é o seu?",
         "Ohoh, que bom ver você %!",
@@ -4720,7 +4720,7 @@ GPGoofySpeedwayChatter = (
         "Ohoh, você viu o "+Donald+"? Ele disse que estava vindo para o Grande Prêmio!",
         "Se vir o meu amigo "+Mickey+", diga a ele que está perdendo uma corrida incrível!",
         "Puxa! Esqueci de preparar o café da manhã do "+Mickey+"!",
-        "Ohoh, tem um monte de "+Cogs+" perto do "+lDonaldsDock+".",
+        "Ohoh, tem um monte de "+Cogs+" perto do "+lToontropolisDocks+".",
         "Nos galhos do Brrrgh da minha Loja de Brincadeiras, os Óculos Hipnotizantes estão à venda por apenas 1 balinha!",
         "A Loja de Piadas do Pateta tem as melhores piadas, truques e brincadeiras divertidas de toda Toontown!",
         "Na Loja de Piadas do Pateta, até uma torta na cara é garantia de boas risadas ou você recebe suas balinhas de volta!"
@@ -9643,7 +9643,7 @@ SummonDlgShopkeeper = "O Dono da Loja "
 # Polar Place cheesy effect chat phrases
 PolarPlaceEffect1 = NPCToonNames[3306] + ": Bem-vindo ao Lugar Polar!"
 PolarPlaceEffect2 = NPCToonNames[3306] + ": Tente isto."
-PolarPlaceEffect3 = NPCToonNames[3306] + ": A sua nova aparência só vai funcionar em " + lTheBrrrgh + "."
+PolarPlaceEffect3 = NPCToonNames[3306] + ": A sua nova aparência só vai funcionar em " + lTundraWonderland + "."
 
 # LaserGrid game Labels
 LaserGameMine = "Caça-Caveiras!"

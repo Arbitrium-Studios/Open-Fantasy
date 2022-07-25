@@ -5,22 +5,11 @@ from panda3d.core import Texture
 WSTTextureName = 0
 WSTColor = 1
 WSTBasePrice = 2
-
-# These index numbers are written to the database.  Don't mess with them.
-# Also see TTLocalizer.WainscotingNames.
-WainscotingTypes = {
-    # Plain
-    1000 : ("phase_3.5/maps/wall_paper_b3.jpg", CTFlatColorDark, 200),
-    # Wood version
-    1010 : ("phase_5.5/maps/wall_paper_b4_greyscale.jpg",
-            CTBasicWoodColorOnWhite, 200),
-    # Wood version - series 2
-    1020 : ("phase_5.5/maps/wainscotings_neutral.jpg", CTBasicWoodColorOnWhite, 200),
-    # Painted, valentines
-    1030 : ("phase_3.5/maps/wall_paper_b3.jpg", CTValentinesColors, 200),
-    # Painted, underwater colors
-    1040 : ("phase_3.5/maps/wall_paper_b3.jpg", CTUnderwaterColors, 200),
-    }
+WainscotingTypes = {1000: ('phase_3.5/maps/wall_paper_b3.jpg', CTFlatColorDark, 200),
+ 1010: ('phase_5.5/maps/wall_paper_b4_greyscale.jpg', CTBasicWoodColorOnWhite, 200),
+ 1020: ('phase_5.5/maps/wainscotings_neutral.jpg', CTBasicWoodColorOnWhite, 200),
+ 1030: ('phase_3.5/maps/wall_paper_b3.jpg', CTValentinesColors, 200),
+ 1040: ('phase_3.5/maps/wall_paper_b3.jpg', CTUnderwaterColors, 200)}
 
 class CatalogWainscotingItem(CatalogSurfaceItem):
     """CatalogWainscotingItem
@@ -75,10 +64,8 @@ class CatalogWainscotingItem(CatalogSurfaceItem):
 
         return (frame, None)
 
-    def output(self, store = ~0):
-        return "CatalogWainscotingItem(%s, %s%s)" % (
-            self.patternIndex, self.colorIndex,
-            self.formatOptionalData(store))
+    def output(self, store = -1):
+        return 'CatalogWainscotingItem(%s, %s%s)' % (self.patternIndex, self.colorIndex, self.formatOptionalData(store))
 
     def getFilename(self):
         return WainscotingTypes[self.patternIndex][WSTTextureName]
@@ -103,7 +90,6 @@ class CatalogWainscotingItem(CatalogSurfaceItem):
 
     def getColor(self):
         if self.colorIndex == None:
-            # If no color index is set yet, use first color in color list
             colorIndex = 0
         else:
             colorIndex = self.colorIndex
@@ -119,10 +105,7 @@ class CatalogWainscotingItem(CatalogSurfaceItem):
 
     def decodeDatagram(self, di, versionNumber, store):
         CatalogAtticItem.CatalogAtticItem.decodeDatagram(self, di, versionNumber, store)
-        if versionNumber < 3:
-            self.patternIndex = di.getUint8()
-        else:
-            self.patternIndex = di.getUint16()
+        self.patternIndex = di.getUint16()
         self.colorIndex = di.getUint8()
 
         # The following will generate an exception if

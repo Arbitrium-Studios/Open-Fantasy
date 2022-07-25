@@ -15,21 +15,11 @@ class CatalogManager(DistributedObject.DistributedObject):
     ### DistributedObject methods ###
 
     def generate(self):
-        """
-        This method is called when the DistributedObject is reintroduced
-        to the world, either for the first time or from the cache.
-        """
         if base.cr.catalogManager != None:
             base.cr.catalogManager.delete()
         base.cr.catalogManager = self
         DistributedObject.DistributedObject.generate(self)
-
-        # The first time a particular toon enters the world, start its
-        # catalog system running.
-        # We only want Toons to start the catalog manager running, however,
-        # not gateway avatars, etc.
-        if (hasattr(base.localAvatar, "catalogScheduleNextTime") and
-            base.localAvatar.catalogScheduleNextTime == 0):
+        if hasattr(base.localAvatar, 'catalogScheduleNextTime') and base.localAvatar.catalogScheduleNextTime == 0:
             self.d_startCatalog()
 
     def disable(self):

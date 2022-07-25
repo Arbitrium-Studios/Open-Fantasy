@@ -186,9 +186,9 @@ class DistributedHQInterior(DistributedObject.DistributedObject):
         self.randomGenerator = random.Random()
         self.randomGenerator.seed(self.zoneId)
 
-        # Pick a color list. For now, I've picked ToontownCentral.
+        # Pick a color list. For now, I've picked ToontropolisPlaza.
         # Maybe there will be a special color scheme for HQ interiors
-        self.colors = ToonInteriorColors.colors[ToontownCentral]
+        self.colors = ToonInteriorColors.colors[ToontropolisPlaza]
 
         # Pick a door model
         door = self.chooseDoor()

@@ -587,22 +587,22 @@ class DistributedDivingGame(DistributedMinigame):
         # difficulty patterns for each zone
         # NUMCRABS, SPEEDMULT, TIME
         self.difficultyPatterns = {
-            ToontownGlobals.ToontownCentral:
+            ToontownGlobals.ToontropolisPlaza:
             [ 1, 1.5, 65, 3
               ],
-            ToontownGlobals.DonaldsDock:
+            ToontownGlobals.ToontropolisDocks:
             [ 1, 1.3, 65, 1
               ],
-            ToontownGlobals.DaisyGardens:
+            ToontownGlobals.FloweringGrove:
             [ 2, 1.2, 65, 1
               ],
-            ToontownGlobals.MinniesMelodyland:
+            ToontownGlobals.TheLandOfMusic:
             [ 2, 1.0, 65, 1
               ],
-            ToontownGlobals.TheBrrrgh:
+            ToontownGlobals.TundraWonderland:
             [ 3, 1.0, 65, 1
               ],
-            ToontownGlobals.DonaldsDreamland:
+            ToontownGlobals.TwilightDreamland:
             [ 3, 1.0, 65, 1
               ],
             }

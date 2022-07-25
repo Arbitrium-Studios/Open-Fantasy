@@ -23,12 +23,12 @@ Pluto  = "Pluto"
 Flippy = "Flippy"
 
 # common locations
-lTheBrrrgh = 'Das Brrr'
-lDaisyGardens = 'Daisys Gärten'
-lDonaldsDock = "Donalds Dock"
-lDonaldsDreamland = "Donalds Traumland"
-lMinniesMelodyland = "Minnies Melodienland"
-lToontownCentral = 'Toontown Mitte'
+lTundraWonderland = 'Das Brrr'
+lFloweringGrove = 'Daisys Gärten'
+lToontropolisDocks = "Donalds Dock"
+lTwilightDreamland = "Donalds Traumland"
+lTheLandOfMusic = "Minnies Melodienland"
+lToontropolisPlaza = 'Toontown Mitte'
 lToonHQ = 'Toontown-\nZentrale'
 
 # common strings
@@ -490,7 +490,7 @@ INCOMPLETE_WRONG_NPC = 4
 COMPLETE = 5
 LEAVING = 6
 
-TheBrrrghTrackQuestDict = {
+TundraWonderlandTrackQuestDict = {
     GREETING : "",
     QUEST : "Jetzt bist du fertig.\aZiehe nun in die Welt und wandere umher, bis du weißt, welchen Ablauf du wählen möchtest.\aWähle klug, denn dies ist dein letzter Track.\aWenn du dir sicher bist, kehre zu mir zurück.",
     INCOMPLETE_PROGRESS : "Wähle mit Verstand.",
@@ -3747,15 +3747,15 @@ GlobalStreetNames = {
     }
 
 # reference the location name as [-1]; it's guaranteed to be the last entry
-DonaldsDock       = ("zu",     "in",     "Donalds Dock")
-ToontownCentral   = ("nach",     "in",     "Toontown Mitte")
-TheBrrrgh         = ("zu",     "in",     "Das Brrr")
-MinniesMelodyland = ("zu",     "in",     "Minnies Melodienland")
-DaisyGardens      = ("zu",     "in",     "Daisys Gärten")
+ToontropolisDocks       = ("zu",     "in",     "Donalds Dock")
+ToontropolisPlaza   = ("nach",     "in",     "Toontown Mitte")
+TundraWonderland         = ("zu",     "in",     "Das Brrr")
+TheLandOfMusic = ("zu",     "in",     "Minnies Melodienland")
+FloweringGrove      = ("zu",     "in",     "Daisys Gärten")
 ConstructionZone  = ("zur", "in der", "Bauzone")
 FunnyFarm         = ("zur", "auf der", "Spaßfarm")
 GoofyStadium      = ("zum",     "im",     "Goofy-Stadion")
-DonaldsDreamland  = ("zu",     "in",     "Donalds Traumland")
+TwilightDreamland  = ("zu",     "in",     "Donalds Traumland")
 BossbotHQ         = ("zum",     "im",     "Chefomat-Hauptquartier")
 SellbotHQ         = ("zum",     "im",     "Schachermat-HQ")
 CashbotHQ         = ("zum",     "im",     "Monetomat-Hauptquartier")

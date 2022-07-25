@@ -1694,7 +1694,7 @@
 +++ src/coghq/SellbotCogHQLoader.py	15 Jul 2005 18:57:08 -0000	1.16.6.1
 @@ -68,7 +68,7 @@
              dgText = DirectGui.OnscreenText(
-                 text = TTLocalizer.DaisyGardens[-1],
+                 text = TTLocalizer.FloweringGrove[-1],
                  font = ToontownGlobals.getSuitFont(),
 -                pos = (0,-0.3), scale = 0.1,
 +                pos = (0,-0.3), scale = TTLocalizer.SCLdgSign,
@@ -2835,7 +2835,7 @@
 +    #notify.setInfo(True)
      serverDataFolder = simbase.config.GetString('server-data-folder', "")
  
-     DefaultReward = { TTG.DonaldsDock: [BG.MIN_SUPER_JACKPOT, 1],
+     DefaultReward = { TTG.ToontropolisDocks: [BG.MIN_SUPER_JACKPOT, 1],
 @@ -110,7 +110,7 @@
  
          # CHEATS

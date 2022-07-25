@@ -2207,28 +2207,28 @@ QuestDict = {
     110 : ( TT_TIER, Cont, (TrolleyQuest,), Any, ToonHQ, NA, (145), DefaultDialog),
 
     120 : ( TT_TIER, OBSOLETE, (DeliverItemQuest, 5), ToonHQ, 2002, NA, 121, DefaultDialog),
-    121 : ( TT_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.ToontownCentral, 1, 2, VeryEasy, Any, 'type'), 2002, 2002, NA, 150, DefaultDialog),
+    121 : ( TT_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.ToontropolisPlaza, 1, 2, VeryEasy, Any, 'type'), 2002, 2002, NA, 150, DefaultDialog),
 
     130 : ( TT_TIER, OBSOLETE, (DeliverItemQuest, 6), ToonHQ, 2003, NA, 131, DefaultDialog),
-    131 : ( TT_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.ToontownCentral, 1, 3, VeryEasy, Any, 'type'), 2003, 2003, NA, 150, DefaultDialog),
+    131 : ( TT_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.ToontropolisPlaza, 1, 3, VeryEasy, Any, 'type'), 2003, 2003, NA, 150, DefaultDialog),
 
     140 : ( TT_TIER, OBSOLETE, (DeliverItemQuest, 4), ToonHQ, 2005, NA, 141, DefaultDialog),
-    141 : ( TT_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.ToontownCentral, 1, 1, VeryEasy, Any, 'type'), 2005, 2005, NA, 150, DefaultDialog),
+    141 : ( TT_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.ToontropolisPlaza, 1, 1, VeryEasy, Any, 'type'), 2005, 2005, NA, 150, DefaultDialog),
 
     # This quest replaces the deliver item quests
-    145 : ( TT_TIER, Cont, (RecoverItemQuest, ToontownGlobals.ToontownCentral, 1, 20, VeryEasy, Any, 'type'), ToonHQ, ToonHQ, NA, 150, DefaultDialog),
+    145 : ( TT_TIER, Cont, (RecoverItemQuest, ToontownGlobals.ToontropolisPlaza, 1, 20, VeryEasy, Any, 'type'), ToonHQ, ToonHQ, NA, 150, DefaultDialog),
 
     150 : ( TT_TIER, Cont, (FriendQuest,), Same, Same, NA, 175, DefaultDialog),
 
     # These are now bypassed, but left in as obsolete
     # because some players on the live site might still be working on them
-    160 : ( TT_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.ToontownCentral, 3, 'c'), Same, ToonHQ, NA, 175,
+    160 : ( TT_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza, 3, 'c'), Same, ToonHQ, NA, 175,
             TTLocalizer.QuestDialogDict[160]),
-    161 : ( TT_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.ToontownCentral, 3, 'l'), Same, ToonHQ, NA, 175,
+    161 : ( TT_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza, 3, 'l'), Same, ToonHQ, NA, 175,
             TTLocalizer.QuestDialogDict[161]),
-    162 : ( TT_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.ToontownCentral, 3, 's'), Same, ToonHQ, NA, 175,
+    162 : ( TT_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza, 3, 's'), Same, ToonHQ, NA, 175,
             TTLocalizer.QuestDialogDict[162]),
-    163 : ( TT_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.ToontownCentral, 3, 'm'), Same, ToonHQ, NA, 175,
+    163 : ( TT_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza, 3, 'm'), Same, ToonHQ, NA, 175,
             TTLocalizer.QuestDialogDict[163]),
 
     # If you change this questID (175) make sure you change the constant PHONE_QUEST_ID
@@ -2265,10 +2265,10 @@ QuestDict = {
             TTLocalizer.QuestDialogDict[400]),
 
     # Toontown central
-    1001 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontownCentral,  3, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    1002 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontownCentral,  4, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    1003 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontownCentral,  5, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    1004 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontownCentral,  6, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    1001 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontropolisPlaza,  3, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    1002 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontropolisPlaza,  4, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    1003 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontropolisPlaza,  5, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    1004 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontropolisPlaza,  6, Any), Any, ToonHQ, Any, NA, DefaultDialog),
 
     1005 : ( TT_TIER+2, Start, (CogQuest, Anywhere, 2, 'f'), Any, ToonHQ, Any, NA, DefaultDialog),
     1006 : ( TT_TIER+2, Start, (CogQuest, Anywhere, 2, 'p'), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -2289,25 +2289,25 @@ QuestDict = {
     1019 : ( TT_TIER+2, Start, (CogQuest, Anywhere, 1, 'tw'), Any, ToonHQ, Any, NA, DefaultDialog),
     1020 : ( TT_TIER+2, Start, (CogQuest, Anywhere, 1, 'dt'), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    1021 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontownCentral,  2, 2), Any, ToonHQ, Any, NA, DefaultDialog),
-    1022 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontownCentral,  6, 2), Any, ToonHQ, Any, NA, DefaultDialog),
-    1023 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontownCentral,  3, 2), Any, ToonHQ, Any, NA, DefaultDialog),
-    1024 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontownCentral,  4, 2), Any, ToonHQ, Any, NA, DefaultDialog),
-    1025 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontownCentral,  4, 3), Any, ToonHQ, Any, NA, DefaultDialog),
-    1026 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontownCentral,  6, 3), Any, ToonHQ, Any, NA, DefaultDialog),
+    1021 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza,  2, 2), Any, ToonHQ, Any, NA, DefaultDialog),
+    1022 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza,  6, 2), Any, ToonHQ, Any, NA, DefaultDialog),
+    1023 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza,  3, 2), Any, ToonHQ, Any, NA, DefaultDialog),
+    1024 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza,  4, 2), Any, ToonHQ, Any, NA, DefaultDialog),
+    1025 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza,  4, 3), Any, ToonHQ, Any, NA, DefaultDialog),
+    1026 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza,  6, 3), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    1027 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  2, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1028 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  2, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1029 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  2, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1030 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  2, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1031 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  3, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1032 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  3, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1033 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  3, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1034 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  3, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1035 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  5, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1036 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  5, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1037 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  5, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    1038 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontownCentral,  5, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1027 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  2, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1028 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  2, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1029 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  2, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1030 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  2, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1031 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  3, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1032 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  3, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1033 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  3, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1034 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  3, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1035 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  5, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1036 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  5, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1037 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  5, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    1038 : ( TT_TIER+2, Start, (CogTrackQuest, ToontownGlobals.ToontropolisPlaza,  5, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
     # More random quests for TT_TIER+2 are found after 1100.
 
@@ -2348,7 +2348,7 @@ QuestDict = {
              TTLocalizer.QuestDialogDict[1055]),
     1056 : ( TT_TIER+2, Cont, (VisitQuest,), Same, 2213, NA, (1057),
              TTLocalizer.QuestDialogDict[1056]),
-    1057 : ( TT_TIER+2, Cont, (CogLevelQuest, ToontownGlobals.ToontownCentral, 6, 3), Same, Same, NA, (1058),
+    1057 : ( TT_TIER+2, Cont, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza, 6, 3), Same, Same, NA, (1058),
              TTLocalizer.QuestDialogDict[1057]),
     1058 : ( TT_TIER+2, Cont, (DeliverItemQuest, 11), Same, 2128, 200, NA,
              TTLocalizer.QuestDialogDict[1058]),
@@ -2358,9 +2358,9 @@ QuestDict = {
              TTLocalizer.QuestDialogDict[1059]),
     1060 : ( TT_TIER+2, Start, (RecoverItemQuest, Anywhere, 1, 12, Medium, AnyFish), 2302, Same, NA, (1062),
              TTLocalizer.QuestDialogDict[1060]),
-    1061 : ( TT_TIER+2, Cont, (CogQuest, ToontownGlobals.ToontownCentral, 6, 'p'), Same, Same, 101, NA,
+    1061 : ( TT_TIER+2, Cont, (CogQuest, ToontownGlobals.ToontropolisPlaza, 6, 'p'), Same, Same, 101, NA,
              TTLocalizer.QuestDialogDict[1061]),
-    1062 : ( TT_TIER+2, Cont, (CogQuest, ToontownGlobals.ToontownCentral, 6, 'b'), Same, Same, 101, NA,
+    1062 : ( TT_TIER+2, Cont, (CogQuest, ToontownGlobals.ToontropolisPlaza, 6, 'b'), Same, Same, 101, NA,
              TTLocalizer.QuestDialogDict[1062]),
 
     # Two packages for Dr. ???  Reward is new track. 
@@ -2370,7 +2370,7 @@ QuestDict = {
              TTLocalizer.QuestDialogDict[1063]),
     1067 : ( TT_TIER+3, Cont, (DeliverItemQuest, 13), Same, 2112, NA, (1068),
              TTLocalizer.QuestDialogDict[1067]),
-    1068 : ( TT_TIER+3, Cont, (CogQuest, ToontownGlobals.ToontownCentral, 10, Any), Same, Same, NA, (1069, 1070, 1071),
+    1068 : ( TT_TIER+3, Cont, (CogQuest, ToontownGlobals.ToontropolisPlaza, 10, Any), Same, Same, NA, (1069, 1070, 1071),
              TTLocalizer.QuestDialogDict[1068]),
     1069 : ( TT_TIER+3, Cont, (RecoverItemQuest, Anywhere, 1, 13, Medium, 'm', 'track'), Same, Same, NA, (1072),
              TTLocalizer.QuestDialogDict[1069]),
@@ -2423,18 +2423,18 @@ QuestDict = {
     # Learn about Cog Radar.  Kill Cogs.  Gain +2 HP. 
     1090 : ( TT_TIER+2, Start, (VisitQuest,), Any, 2119, NA, (1091),
              TTLocalizer.QuestDialogDict[1090]),
-    1091 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontownCentral, 8, 2), 2119, ToonHQ, 101, NA,
+    1091 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza, 8, 2), 2119, ToonHQ, 101, NA,
              TTLocalizer.QuestDialogDict[1091]),
 
     # Next TT_TIER+2 id: 1093
 
 
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    1100 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 10, Any), Any, ToonHQ, NA, (1101), DefaultDialog),
+    1100 : ( TT_TIER+2, Start, (CogQuest, ToontownGlobals.ToontropolisPlaza, 10, Any), Any, ToonHQ, NA, (1101), DefaultDialog),
     1101 : ( TT_TIER+2, Cont, (DeliverItemQuest, 1000), Any, 2004, 1000, NA, DefaultDialog),
 
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    1102 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontownCentral, 8, 3), Any, ToonHQ, NA, (1103), DefaultDialog),
+    1102 : ( TT_TIER+2, Start, (CogLevelQuest, ToontownGlobals.ToontropolisPlaza, 8, 3), Any, ToonHQ, NA, (1103), DefaultDialog),
     1103 : ( TT_TIER+2, Cont, (DeliverItemQuest, 1000), Any, 2004, 1000, NA, DefaultDialog),
 
 
@@ -2494,9 +2494,9 @@ QuestDict = {
     # and also medium-level money (cashbot) cogs (levels 3-6).  It's
     # light on legal and sales cogs.
     
-      2101 : ( DD_TIER+1, Start, (CogQuest, ToontownGlobals.DonaldsDock, 3, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-      2102 : ( DD_TIER+1, Start, (CogQuest, ToontownGlobals.DonaldsDock, 4, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-      2103 : ( DD_TIER+1, Start, (CogQuest, ToontownGlobals.DonaldsDock, 5, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+      2101 : ( DD_TIER+1, Start, (CogQuest, ToontownGlobals.ToontropolisDocks, 3, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+      2102 : ( DD_TIER+1, Start, (CogQuest, ToontownGlobals.ToontropolisDocks, 4, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+      2103 : ( DD_TIER+1, Start, (CogQuest, ToontownGlobals.ToontropolisDocks, 5, Any), Any, ToonHQ, Any, NA, DefaultDialog),
       2104 : ( DD_TIER+1, Start, (CogQuest, Anywhere, 6, Any), Any, ToonHQ, Any, NA, DefaultDialog),
       2105 : ( DD_TIER+1, Start, (CogQuest, Anywhere, 7, Any), Any, ToonHQ, Any, NA, DefaultDialog),
       2106 : ( DD_TIER+1, Start, (CogQuest, Anywhere, 8, Any), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -2529,24 +2529,24 @@ QuestDict = {
       2129 : ( DD_TIER+1, Start, (CogQuest, Anywhere, 2, 'bs'), Any, ToonHQ, Any, NA, DefaultDialog),
       2130 : ( DD_TIER+1, Start, (CogQuest, Anywhere, 1, 'sd'), Any, ToonHQ, Any, NA, DefaultDialog),
 
-      2131 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.DonaldsDock, 2, 3), Any, ToonHQ, Any, NA, DefaultDialog),
-      2132 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.DonaldsDock, 3, 3), Any, ToonHQ, Any, NA, DefaultDialog),
-      2133 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.DonaldsDock, 2, 4), Any, ToonHQ, Any, NA, DefaultDialog),
-      2134 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.DonaldsDock, 4, 4), Any, ToonHQ, Any, NA, DefaultDialog),
-      2135 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.DonaldsDock, 4, 5), Any, ToonHQ, Any, NA, DefaultDialog),
-      2136 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.DonaldsDock, 5, 5), Any, ToonHQ, Any, NA, DefaultDialog),
-      2137 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.DonaldsDock, 4, 6), Any, ToonHQ, Any, NA, DefaultDialog),
-      2138 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.DonaldsDock, 6, 6), Any, ToonHQ, Any, NA, DefaultDialog),
+      2131 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.ToontropolisDocks, 2, 3), Any, ToonHQ, Any, NA, DefaultDialog),
+      2132 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.ToontropolisDocks, 3, 3), Any, ToonHQ, Any, NA, DefaultDialog),
+      2133 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.ToontropolisDocks, 2, 4), Any, ToonHQ, Any, NA, DefaultDialog),
+      2134 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.ToontropolisDocks, 4, 4), Any, ToonHQ, Any, NA, DefaultDialog),
+      2135 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.ToontropolisDocks, 4, 5), Any, ToonHQ, Any, NA, DefaultDialog),
+      2136 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.ToontropolisDocks, 5, 5), Any, ToonHQ, Any, NA, DefaultDialog),
+      2137 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.ToontropolisDocks, 4, 6), Any, ToonHQ, Any, NA, DefaultDialog),
+      2138 : ( DD_TIER+1, Start, (CogLevelQuest, ToontownGlobals.ToontropolisDocks, 6, 6), Any, ToonHQ, Any, NA, DefaultDialog),
 
-      2139 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.DonaldsDock, 3, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-      2140 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.DonaldsDock, 3, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-      2141 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.DonaldsDock, 3, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-      2142 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.DonaldsDock, 3, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+      2139 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 3, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+      2140 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 3, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+      2141 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 3, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+      2142 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 3, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
-      2143 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.DonaldsDock, 5, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-      2144 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.DonaldsDock, 5, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-      2145 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.DonaldsDock, 5, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-      2146 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.DonaldsDock, 5, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+      2143 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 5, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+      2144 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 5, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+      2145 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 5, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+      2146 : ( DD_TIER+1, Start, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 5, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
       2147 : ( DD_TIER+1, Start, (CogTrackQuest, Anywhere, 7, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
       2148 : ( DD_TIER+1, Start, (CogTrackQuest, Anywhere, 7, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -2609,20 +2609,20 @@ QuestDict = {
               TTLocalizer.QuestDialogDict[2209]),
     2210 : ( DD_TIER+1, Start, (VisitQuest,), 1302, 1301, NA, 2211,
              TTLocalizer.QuestDialogDict[2210]),
-    2211 : ( DD_TIER+1, Cont, (CogQuest, ToontownGlobals.DonaldsDock, 5, 'mm'), Same, Same, NA, 2212,
+    2211 : ( DD_TIER+1, Cont, (CogQuest, ToontownGlobals.ToontropolisDocks, 5, 'mm'), Same, Same, NA, 2212,
              TTLocalizer.QuestDialogDict[2211]),
     2212 : ( DD_TIER+1, Cont, (DeliverItemQuest, 2006), Same, 1302, NA, 2213,
              TTLocalizer.QuestDialogDict[2212]),
     2213 : ( DD_TIER+1, Cont, (VisitQuest,), Same, 1202, NA, 2214,
              TTLocalizer.QuestDialogDict[2213]),
-    2214 : ( DD_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.DonaldsDock, 3, 2007, Hard, Any), Same, Same, NA, 2215,
+    2214 : ( DD_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.ToontropolisDocks, 3, 2007, Hard, Any), Same, Same, NA, 2215,
              TTLocalizer.QuestDialogDict[2214]),
     2215 : ( DD_TIER+1, Cont, (DeliverItemQuest, 2008), Same, 1302, 301, NA,
              TTLocalizer.QuestDialogDict[2215]),
                             
 
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    2500 : ( DD_TIER+1, Start, (CogQuest, ToontownGlobals.DonaldsDock, 15, Any), Any, ToonHQ, NA, (2501), DefaultDialog),
+    2500 : ( DD_TIER+1, Start, (CogQuest, ToontownGlobals.ToontropolisDocks, 15, Any), Any, ToonHQ, NA, (2501), DefaultDialog),
     2501 : ( DD_TIER+1, Cont, (DeliverItemQuest, 1000), Any, 1007, 1000, NA, DefaultDialog),
 
 
@@ -2672,25 +2672,25 @@ QuestDict = {
     2907 : (DD_TIER+2, Cont, (DeliverItemQuest,2011), Same, 1203, NA, (2910, 2915, 2920),
            TTLocalizer.QuestDialogDict[2907]),
     2910 : (DD_TIER+2, Cont, (VisitQuest,), Same, 1107, NA, 2911, TTLocalizer.QuestDialog_2910),
-    2911 : (DD_TIER+2, Cont, (CogTrackQuest, ToontownGlobals.DonaldsDock, 4, 'm'), Same, Same, NA, 2925,
+    2911 : (DD_TIER+2, Cont, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 4, 'm'), Same, Same, NA, 2925,
            TTLocalizer.QuestDialogDict[2911]),
     2915 : (DD_TIER+2, Cont, (VisitQuest,), Same, 1204, NA, 2916, TTLocalizer.QuestDialog_2910),
-    2916 : (DD_TIER+2, Cont, (CogTrackQuest, ToontownGlobals.DonaldsDock, 2, 's'), Same, Same, NA, 2925,
+    2916 : (DD_TIER+2, Cont, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 2, 's'), Same, Same, NA, 2925,
            TTLocalizer.QuestDialogDict[2916]),
     2920 : (DD_TIER+2, Cont, (VisitQuest,), Same, 1204, NA, 2921, TTLocalizer.QuestDialog_2910),
-    2921 : (DD_TIER+2, Cont, (CogTrackQuest, ToontownGlobals.DonaldsDock, 6, 'c'), Same, Same, NA, 2925,
+    2921 : (DD_TIER+2, Cont, (CogTrackQuest, ToontownGlobals.ToontropolisDocks, 6, 'c'), Same, Same, NA, 2925,
            TTLocalizer.QuestDialogDict[2921]),
     2925 : (DD_TIER+2, Cont, (DeliverItemQuest, 2012), Same, 1203, NA, 2926,
             TTLocalizer.QuestDialogDict[2925]),
-    2926 : (DD_TIER+2, Cont, (BuildingQuest, ToontownGlobals.DonaldsDock, 1, Any, 2), Same, Same, 900, NA,
+    2926 : (DD_TIER+2, Cont, (BuildingQuest, ToontownGlobals.ToontropolisDocks, 1, Any, 2), Same, Same, 900, NA,
            TTLocalizer.QuestDialogDict[2926]),
 
 
 
     # Daisy Garden
-    3101 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.DaisyGardens, 8, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    3102 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.DaisyGardens, 10, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    3103 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.DaisyGardens, 12, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    3101 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.FloweringGrove, 8, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    3102 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.FloweringGrove, 10, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    3103 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.FloweringGrove, 12, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     3104 : ( DG_TIER, Start, (CogQuest, Anywhere, 14, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     3105 : ( DG_TIER, Start, (CogQuest, Anywhere, 16, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     3106 : ( DG_TIER, Start, (CogQuest, Anywhere, 18, Any), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -2733,15 +2733,15 @@ QuestDict = {
     3137 : ( DG_TIER, Start, (CogLevelQuest, Anywhere, 8, 6), Any, ToonHQ, Any, NA, DefaultDialog),
     3138 : ( DG_TIER, Start, (CogLevelQuest, Anywhere, 12, 6), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    3139 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.DaisyGardens, 6, 'm'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
-    3140 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.DaisyGardens, 6, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    3141 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.DaisyGardens, 6, 'c'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
-    3142 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.DaisyGardens, 6, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    3139 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.FloweringGrove, 6, 'm'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
+    3140 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.FloweringGrove, 6, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    3141 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.FloweringGrove, 6, 'c'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
+    3142 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.FloweringGrove, 6, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    3143 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.DaisyGardens, 10, 'm'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
-    3144 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.DaisyGardens, 10, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    3145 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.DaisyGardens, 10, 'c'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
-    3146 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.DaisyGardens, 10, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    3143 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.FloweringGrove, 10, 'm'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
+    3144 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.FloweringGrove, 10, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    3145 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.FloweringGrove, 10, 'c'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
+    3146 : ( DG_TIER, Start, (CogTrackQuest, ToontownGlobals.FloweringGrove, 10, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
     3147 : ( DG_TIER, Start, (CogTrackQuest, Anywhere, 14, 'm'), Any, ToonHQ, OBSOLETE, NA, DefaultDialog),
     3148 : ( DG_TIER, Start, (CogTrackQuest, Anywhere, 14, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -2765,7 +2765,7 @@ QuestDict = {
              TTLocalizer.QuestDialogDict[3200]),
     3201 : ( DG_TIER, Start, (DeliverItemQuest, 5001), 5101, 5206, NA, (3203),
              TTLocalizer.QuestDialogDict[3201]),
-    3203 : ( DG_TIER, Cont, (RecoverItemQuest, ToontownGlobals.DaisyGardens, 1, 5002, VeryHard, Any), Same, Same, 100, NA,
+    3203 : ( DG_TIER, Cont, (RecoverItemQuest, ToontownGlobals.FloweringGrove, 1, 5002, VeryHard, Any), Same, Same, 100, NA,
              TTLocalizer.QuestDialogDict[3203]),
 
     # The barber at Crop Top Barbers has lost a pair of scissors.  He
@@ -2780,23 +2780,23 @@ QuestDict = {
     # mailbox.  Recover all ten postcards.  Reward: +2 Laff.
     3206 : ( DG_TIER, Start, (VisitQuest,), Any, 5107, NA, (3207),
              TTLocalizer.QuestDialogDict[3206]),
-    3207 : ( DG_TIER, Start, (RecoverItemQuest, ToontownGlobals.DaisyGardens, 10, 5004, VeryEasy, 'dt'), 5107, Same, 101, NA,
+    3207 : ( DG_TIER, Start, (RecoverItemQuest, ToontownGlobals.FloweringGrove, 10, 5004, VeryEasy, 'dt'), 5107, Same, 101, NA,
              TTLocalizer.QuestDialogDict[3207]),
 
     # OBSOLETE: This quest has been made obsolete to make room for the Sellbot Cog HQ Quest
     # We've been getting complaints from the residents about all the
     # cold callers.  Thin these out a bit.  Then go after the
     # telemarketers too.  Reward: small bag (35 carry).
-    3208 : ( DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DaisyGardens, 10, 'cc'), Any, ToonHQ, NA, (3209),
+    3208 : ( DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.FloweringGrove, 10, 'cc'), Any, ToonHQ, NA, (3209),
              TTLocalizer.QuestDialogDict[3208]),
-    3209 : ( DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DaisyGardens, 10, 'tm'), Same, Same, 202, NA,
+    3209 : ( DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.FloweringGrove, 10, 'tm'), Same, Same, 202, NA,
              TTLocalizer.QuestDialogDict[3209]),
 
     # OBSOLETE: This quest has been made obsolete to make room for the
     # Sellbot Cog HQ Quest. We've been getting complaints from the residents
     # about all the blood suckers.  Thin these out a bunch.  Reward: small
     # bag (35 carry).
-    3247 : ( DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DaisyGardens, 20, 'b'), Any, ToonHQ, 202, NA,
+    3247 : ( DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.FloweringGrove, 20, 'b'), Any, ToonHQ, 202, NA,
              TTLocalizer.QuestDialogDict[3247]),
 
     # Oh no, The Squirting Flower is out of flowers!  Bring them ten
@@ -2811,13 +2811,13 @@ QuestDict = {
     # supplies.  Reward: small bag (35 carry).
     3212 : ( DG_TIER, OBSOLETE, (VisitQuest,), Any, 5208, NA, (3213),
              TTLocalizer.QuestDialogDict[3212]),
-    3213 : ( DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.DaisyGardens, 1, 5005, VeryHard, Any), 5208, Same, NA, (3214),
+    3213 : ( DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.FloweringGrove, 1, 5005, VeryHard, Any), 5208, Same, NA, (3214),
              TTLocalizer.QuestDialogDict[3213]),
-    3214 : ( DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.DaisyGardens, 1, 5006, VeryHard, Any), Same, Same, NA, (3215),
+    3214 : ( DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.FloweringGrove, 1, 5006, VeryHard, Any), Same, Same, NA, (3215),
              TTLocalizer.QuestDialogDict[3214]),
-    3215 : ( DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.DaisyGardens, 1, 5007, VeryHard, Any), Same, Same, NA, (3216),
+    3215 : ( DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.FloweringGrove, 1, 5007, VeryHard, Any), Same, Same, NA, (3216),
              TTLocalizer.QuestDialogDict[3215]),
-    3216 : ( DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.DaisyGardens, 1, 5008, VeryHard, Any), Same, Same, 202, NA,
+    3216 : ( DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.FloweringGrove, 1, 5008, VeryHard, Any), Same, Same, 202, NA,
              TTLocalizer.QuestDialogDict[3216]),
 
     # We're studying sprockets from Sellbots.  Get us a sprocket from a
@@ -2845,7 +2845,7 @@ QuestDict = {
     # cogs.  Reward: +1 Laff.
     3220 : ( DG_TIER, Start, (VisitQuest,), Any, 5207, NA, (3221),
              TTLocalizer.QuestDialogDict[3220]),
-    3221 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.DaisyGardens, 20, Any), 5207, Same, 100, NA,
+    3221 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.FloweringGrove, 20, Any), 5207, Same, 100, NA,
              TTLocalizer.QuestDialogDict[3221]),
 
     # Demonstrate your skills.  First, take back two one-story
@@ -2882,7 +2882,7 @@ QuestDict = {
              TTLocalizer.QuestDialog_3225),
     3234 : ( DG_TIER, Start, (DeliverItemQuest, 5011), 5108, 5207, NA, (3235), 
              TTLocalizer.QuestDialog_3225),
-    3235 : ( DG_TIER, Cont, (CogQuest, ToontownGlobals.DaisyGardens, 10, Any), Same, 5108, 100, NA,
+    3235 : ( DG_TIER, Cont, (CogQuest, ToontownGlobals.FloweringGrove, 10, Any), Same, 5108, 100, NA,
              TTLocalizer.QuestDialogDict[3235]),
                
     # OBSOLETE: This quest has been made obsolete to make room for the Sellbot Cog HQ Quest
@@ -2961,7 +2961,7 @@ QuestDict = {
     # Next DG_TIER id: 3264
 
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    3500 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.DaisyGardens, 25, Any), Any, ToonHQ, NA, (3501), DefaultDialog),
+    3500 : ( DG_TIER, Start, (CogQuest, ToontownGlobals.FloweringGrove, 25, Any), Any, ToonHQ, NA, (3501), DefaultDialog),
     3501 : ( DG_TIER, Cont, (DeliverItemQuest, 1000), Any, 5007, 1000, NA, DefaultDialog),
     
     # Minnies melodyland
@@ -3015,10 +3015,10 @@ QuestDict = {
     # good cog distribution otherwise.  The sellbots in MM are
     # mostly level 2..4, while other type cogs are level 3..6.
     
-    4101 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.MinniesMelodyland, 16, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    4102 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.MinniesMelodyland, 18, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    4103 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.MinniesMelodyland, 20, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    4104 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.MinniesMelodyland, 24, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    4101 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.TheLandOfMusic, 16, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    4102 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.TheLandOfMusic, 18, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    4103 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.TheLandOfMusic, 20, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    4104 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.TheLandOfMusic, 24, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     4105 : ( MM_TIER+1, Start, (CogQuest, Anywhere, 28, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     4106 : ( MM_TIER+1, Start, (CogQuest, Anywhere, 32, Any), Any, ToonHQ, Any, NA, DefaultDialog),
 
@@ -3059,15 +3059,15 @@ QuestDict = {
     4137 : ( MM_TIER+1, Start, (CogLevelQuest, Anywhere, 16, 6), Any, ToonHQ, Any, NA, DefaultDialog),
     4138 : ( MM_TIER+1, Start, (CogLevelQuest, Anywhere, 24, 6), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    4139 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 15, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    4140 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 15, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    4141 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 15, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    4142 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 15, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    4139 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 15, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    4140 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 15, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    4141 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 15, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    4142 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 15, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    4143 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 24, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    4144 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 24, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    4145 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 24, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    4146 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 24, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    4143 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 24, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    4144 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 24, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    4145 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 24, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    4146 : ( MM_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 24, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
     4147 : ( MM_TIER+1, Start, (CogTrackQuest, Anywhere, 30, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
     4148 : ( MM_TIER+1, Start, (CogTrackQuest, Anywhere, 30, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -3104,7 +3104,7 @@ QuestDict = {
              TTLocalizer.QuestDialogDict[4202]),
     4203 : ( MM_TIER+1, Cont, (VisitQuest,), Same, 4301, NA, 4204,
              TTLocalizer.QuestDialogDict[4203]),
-    4204 : ( MM_TIER+1, Cont, (CogQuest, ToontownGlobals.MinniesMelodyland, 10, Any), Same, Same, NA, 4205,
+    4204 : ( MM_TIER+1, Cont, (CogQuest, ToontownGlobals.TheLandOfMusic, 10, Any), Same, Same, NA, 4205,
              TTLocalizer.QuestDialogDict[4204]),
     4205 : ( MM_TIER+1, Cont, (DeliverItemQuest, 4002), Same, 4101, NA, 4206,
              TTLocalizer.QuestDialogDict[4205]),
@@ -3126,9 +3126,9 @@ QuestDict = {
     # to speak of...
     4211 : ( MM_TIER+1, Start, (VisitQuest,), ToonHQ, 4103, NA, 4212,
              TTLocalizer.QuestDialogDict[4211]),
-    4212 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.MinniesMelodyland, 10, 'nc'), 4103, Same, NA, 4213,
+    4212 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.TheLandOfMusic, 10, 'nc'), 4103, Same, NA, 4213,
              TTLocalizer.QuestDialogDict[4212]),
-    4213 : ( MM_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.MinniesMelodyland, 20, 'm'), Same, Same, NA, 4214,
+    4213 : ( MM_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TheLandOfMusic, 20, 'm'), Same, Same, NA, 4214,
              TTLocalizer.QuestDialogDict[4213]),
     4214 : ( MM_TIER+1, Cont, (BuildingQuest, Anywhere, 1, 'm', Any), Same, Same, 303, NA,
              TTLocalizer.QuestDialogDict[4214]),
@@ -3159,7 +3159,7 @@ QuestDict = {
             TTLocalizer.QuestDialogDict[4224]),
 
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    4500 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.MinniesMelodyland, 40, Any), Any, ToonHQ, NA, (4501), DefaultDialog),
+    4500 : ( MM_TIER+1, Start, (CogQuest, ToontownGlobals.TheLandOfMusic, 40, Any), Any, ToonHQ, NA, (4501), DefaultDialog),
     4501 : ( MM_TIER+1, Cont, (DeliverItemQuest, 1000), Any, 4008, 1000, NA, DefaultDialog),
  
     # 902: track completion
@@ -3172,7 +3172,7 @@ QuestDict = {
     # memory if you will reclaim a two story building on her street. Turns out it is taking
     # longer than she thought to remember the lyrics. Go reclaim a three story building. After
     # this she gives you the lyrics to take to Leo. Leo is overjoyed and finishes your track.
-    #902 : ( MM_TIER+2, Start, (CogQuest, ToontownGlobals.MinniesMelodyland, 10, Any), Any, ToonHQ, 900, NA, DefaultDialog),
+    #902 : ( MM_TIER+2, Start, (CogQuest, ToontownGlobals.TheLandOfMusic, 10, Any), Any, ToonHQ, 900, NA, DefaultDialog),
     902 : ( MM_TIER+2, Start, (VisitQuest,), Any, 4303, NA, 4903,
             TTLocalizer.QuestDialogDict[902]),
     4903 : ( MM_TIER+2, Start, (DeliverItemQuest, 4008), 4303, 4109, NA, 4904,
@@ -3247,42 +3247,42 @@ QuestDict = {
     5001 : ( BR_TIER, Cont, (TrackChoiceQuest,
                           ToontownBattleGlobals.SOUND_TRACK,
                           ToontownBattleGlobals.DROP_TRACK,),
-             Same, Same, 400, NA, TTLocalizer.TheBrrrghTrackQuestDict),
+             Same, Same, 400, NA, TTLocalizer.TundraWonderlandTrackQuestDict),
 
     5002 : ( BR_TIER, Cont, (TrackChoiceQuest,
                           ToontownBattleGlobals.SOUND_TRACK,
                           ToontownBattleGlobals.LURE_TRACK,),
-             Same, Same, 400, NA, TTLocalizer.TheBrrrghTrackQuestDict),
+             Same, Same, 400, NA, TTLocalizer.TundraWonderlandTrackQuestDict),
 
     5003 : ( BR_TIER, Cont, (TrackChoiceQuest,
                           ToontownBattleGlobals.HEAL_TRACK,
                           ToontownBattleGlobals.DROP_TRACK,),
-             Same, Same, 400, NA, TTLocalizer.TheBrrrghTrackQuestDict),
+             Same, Same, 400, NA, TTLocalizer.TundraWonderlandTrackQuestDict),
 
     5004 : ( BR_TIER, Cont, (TrackChoiceQuest,
                           ToontownBattleGlobals.HEAL_TRACK,
                           ToontownBattleGlobals.LURE_TRACK,),
-             Same, Same, 400, NA, TTLocalizer.TheBrrrghTrackQuestDict),
+             Same, Same, 400, NA, TTLocalizer.TundraWonderlandTrackQuestDict),
 
     5005 : ( BR_TIER, Cont, (TrackChoiceQuest,
                           ToontownBattleGlobals.TRAP_TRACK,
                           ToontownBattleGlobals.SOUND_TRACK,),
-             Same, Same, 400, NA, TTLocalizer.TheBrrrghTrackQuestDict),
+             Same, Same, 400, NA, TTLocalizer.TundraWonderlandTrackQuestDict),
 
     5006 : ( BR_TIER, Cont, (TrackChoiceQuest,
                           ToontownBattleGlobals.TRAP_TRACK,
                           ToontownBattleGlobals.HEAL_TRACK,),
-             Same, Same, 400, NA, TTLocalizer.TheBrrrghTrackQuestDict),
+             Same, Same, 400, NA, TTLocalizer.TundraWonderlandTrackQuestDict),
 
     5007 : ( BR_TIER, Cont, (TrackChoiceQuest,
                           ToontownBattleGlobals.TRAP_TRACK,
                           ToontownBattleGlobals.DROP_TRACK,),
-             Same, Same, 400, NA, TTLocalizer.TheBrrrghTrackQuestDict),
+             Same, Same, 400, NA, TTLocalizer.TundraWonderlandTrackQuestDict),
 
     5008 : ( BR_TIER, Cont, (TrackChoiceQuest,
                           ToontownBattleGlobals.TRAP_TRACK,
                           ToontownBattleGlobals.LURE_TRACK,),
-             Same, Same, 400, NA, TTLocalizer.TheBrrrghTrackQuestDict),
+             Same, Same, 400, NA, TTLocalizer.TundraWonderlandTrackQuestDict),
     
     # Optional quests to do while working on the bottleneck quest
     5020 : ( BR_TIER, Start, (CogQuest, Anywhere, 36, Any), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -3306,13 +3306,13 @@ QuestDict = {
     5038 : ( BR_TIER, Start, (CogLevelQuest, Anywhere, 10,  8), Any, ToonHQ, Any, NA, DefaultDialog),
     5039 : ( BR_TIER, Start, (CogLevelQuest, Anywhere, 12,  8), Any, ToonHQ, Any, NA, DefaultDialog),
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    5040 : ( BR_TIER, Start, (CogQuest, ToontownGlobals.TheBrrrgh, 75, Any), Any, ToonHQ, NA, (5041), DefaultDialog),
+    5040 : ( BR_TIER, Start, (CogQuest, ToontownGlobals.TundraWonderland, 75, Any), Any, ToonHQ, NA, (5041), DefaultDialog),
     5041 : ( BR_TIER, Cont, (DeliverItemQuest, 1000), Any, 3008, 1000, NA, DefaultDialog),
     # Elder quests
-    5060 : ( BR_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 5, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5061 : ( BR_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 5, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5062 : ( BR_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 5, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5063 : ( BR_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 5, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5060 : ( BR_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 5, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5061 : ( BR_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 5, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5062 : ( BR_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 5, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5063 : ( BR_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 5, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
     5064 : ( BR_TIER, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     5065 : ( BR_TIER, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     5066 : ( BR_TIER, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
@@ -3337,9 +3337,9 @@ QuestDict = {
 
     # The Brrgh is heavy on corporate (bossbot) cogs, light on legal.
     # All cogs are level 5..7.
-    5101 : ( BR_TIER+1, Start, (CogQuest, ToontownGlobals.TheBrrrgh, 36, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    5102 : ( BR_TIER+1, Start, (CogQuest, ToontownGlobals.TheBrrrgh, 40, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    5103 : ( BR_TIER+1, Start, (CogQuest, ToontownGlobals.TheBrrrgh, 42, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    5101 : ( BR_TIER+1, Start, (CogQuest, ToontownGlobals.TundraWonderland, 36, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    5102 : ( BR_TIER+1, Start, (CogQuest, ToontownGlobals.TundraWonderland, 40, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    5103 : ( BR_TIER+1, Start, (CogQuest, ToontownGlobals.TundraWonderland, 42, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     5104 : ( BR_TIER+1, Start, (CogQuest, Anywhere, 45, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     5105 : ( BR_TIER+1, Start, (CogQuest, Anywhere, 50, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     5106 : ( BR_TIER+1, Start, (CogQuest, Anywhere, 55, Any), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -3381,15 +3381,15 @@ QuestDict = {
     5137 : ( BR_TIER+1, Start, (CogLevelQuest, Anywhere, 2,  8), Any, ToonHQ, Any, NA, DefaultDialog),
     5138 : ( BR_TIER+1, Start, (CogLevelQuest, Anywhere, 8,  8), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    5139 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 32, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    5140 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 32, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    5141 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 32, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    5142 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 32, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    5139 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TundraWonderland, 32, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    5140 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TundraWonderland, 32, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    5141 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TundraWonderland, 32, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    5142 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TundraWonderland, 32, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    5143 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 40, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    5144 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 40, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    5145 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 40, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    5146 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 40, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    5143 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TundraWonderland, 40, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    5144 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TundraWonderland, 40, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    5145 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TundraWonderland, 40, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    5146 : ( BR_TIER+1, Start, (CogTrackQuest, ToontownGlobals.TundraWonderland, 40, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
     5147 : ( BR_TIER+1, Start, (CogTrackQuest, Anywhere, 45, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
     5148 : ( BR_TIER+1, Start, (CogTrackQuest, Anywhere, 45, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -3442,11 +3442,11 @@ QuestDict = {
     # Your eventual reward is the large bag (max gag = 50).
     5202 : ( BR_TIER+1, Start, (VisitQuest,), Any, 3108, NA, (5203),
              TTLocalizer.QuestDialogDict[5202]),
-    5203 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 1, 3002, VeryHard, Any), 3108, Same, NA, (5204),
+    5203 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 1, 3002, VeryHard, Any), 3108, Same, NA, (5204),
              TTLocalizer.QuestDialogDict[5203]),
     5204 : ( BR_TIER+1, Cont, (VisitQuest,), Same, 3205, NA, (5205),
              TTLocalizer.QuestDialogDict[5204]),
-    5205 : ( BR_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 3, 3003, Hard, AnyFish), Same, Same, NA, (5206),
+    5205 : ( BR_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 3, 3003, Hard, AnyFish), Same, Same, NA, (5206),
              TTLocalizer.QuestDialogDict[5205]),
     5206 : ( BR_TIER+1, Cont, (VisitQuest,), Same, 3210, NA, (5207),
              TTLocalizer.QuestDialogDict[5206]),
@@ -3466,17 +3466,17 @@ QuestDict = {
     # ring.  Deliver the ring to Vidalia to get max money = 120.
     5210 : ( BR_TIER+1, Start, (VisitQuest,), Any, 3206, NA, (5211, 5264, 5265, 5266),
              TTLocalizer.QuestDialogDict[5210]),
-    5211 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 1, 3004, Medium, 'le'), 3206, Same, NA, (5212),
+    5211 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 1, 3004, Medium, 'le'), 3206, Same, NA, (5212),
              TTLocalizer.QuestDialogDict[5211]),
-    5264 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 1, 3004, Hard, 'ls'), 3206, Same, NA, (5212),
+    5264 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 1, 3004, Hard, 'ls'), 3206, Same, NA, (5212),
              TTLocalizer.QuestDialogDict[5264]),
-    5265 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 1, 3004, Hard, 'm'), 3206, Same, NA, (5212),
+    5265 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 1, 3004, Hard, 'm'), 3206, Same, NA, (5212),
              TTLocalizer.QuestDialogDict[5265]),
-    5266 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 1, 3004, Hard, 'cr'), 3206, Same, NA, (5212),
+    5266 : ( BR_TIER+1, Start, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 1, 3004, Hard, 'cr'), 3206, Same, NA, (5212),
              TTLocalizer.QuestDialogDict[5266]),
     5212 : ( BR_TIER+1, Cont, (DeliverItemQuest, 3004), Same, 3111, NA, (5213),
              TTLocalizer.QuestDialogDict[5212]),
-    5213 : ( BR_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 10, 3005, Hard, Any), Same, Same, NA, (5214),
+    5213 : ( BR_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 10, 3005, Hard, Any), Same, Same, NA, (5214),
              TTLocalizer.QuestDialogDict[5213]),
     5214 : ( BR_TIER+1, Cont, (VisitQuest,), Same, 3119, NA, (5215),
              TTLocalizer.QuestDialogDict[5214]),
@@ -3524,13 +3524,13 @@ QuestDict = {
              TTLocalizer.QuestDialogDict[5227]),
     5228 : ( BR_TIER+1, Cont, (DeliverItemQuest, 3009), Same, 3207, NA, (5229, 5267, 5268, 5269),
              TTLocalizer.QuestDialogDict[5228]),
-    5229 : ( BR_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 8, 'm'), Same, Same, NA, (5230),
+    5229 : ( BR_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TundraWonderland, 8, 'm'), Same, Same, NA, (5230),
              TTLocalizer.QuestDialogDict[5229]),
-    5267 : ( BR_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 8, 's'), Same, Same, NA, (5230),
+    5267 : ( BR_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TundraWonderland, 8, 's'), Same, Same, NA, (5230),
              TTLocalizer.QuestDialogDict[5267]),
-    5268 : ( BR_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 8, 'l'), Same, Same, NA, (5230),
+    5268 : ( BR_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TundraWonderland, 8, 'l'), Same, Same, NA, (5230),
              TTLocalizer.QuestDialogDict[5268]),
-    5269 : ( BR_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TheBrrrgh, 8, 'c'), Same, Same, NA, (5230, 5270, 5271, 5272),
+    5269 : ( BR_TIER+1, Cont, (CogTrackQuest, ToontownGlobals.TundraWonderland, 8, 'c'), Same, Same, NA, (5230, 5270, 5271, 5272),
              TTLocalizer.QuestDialogDict[5269]),
     5230 : ( BR_TIER+1, Cont, (RecoverItemQuest, Anywhere, 1, 3010, Hard, 'rb'), Same, Same, NA, (5231),
              TTLocalizer.QuestDialogDict[5230]),
@@ -3558,7 +3558,7 @@ QuestDict = {
              TTLocalizer.QuestDialogDict[5244]),
     5245 : ( BR_TIER+1, Cont, (RecoverItemQuest, Anywhere, 1, 3017, Hard, AnyFish), Same, Same, NA, (5246),
              TTLocalizer.QuestDialogDict[5245]),
-    5246 : ( BR_TIER+1, Cont, (BuildingQuest, ToontownGlobals.TheBrrrgh, 5, Any, 1), Same, Same, 101, NA, # limited to this hood, so no need restricting the number of floors.
+    5246 : ( BR_TIER+1, Cont, (BuildingQuest, ToontownGlobals.TundraWonderland, 5, Any, 1), Same, Same, 101, NA, # limited to this hood, so no need restricting the number of floors.
              TTLocalizer.QuestDialogDict[5246]),
 
     # Lounge Lassard was setting up for a gig and the Cogs came in a took
@@ -3608,11 +3608,11 @@ QuestDict = {
     # and he will knit you a large bag (max gag = 50).
     5303 : ( BR_TIER+1, Start, (VisitQuest,), Any, 3318, NA, (5304),
              TTLocalizer.QuestDialogDict[5303]),
-    5304 : ( BR_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 1, 3024, VeryHard, 'l', 'track'), Same, Same, NA, (5305),
+    5304 : ( BR_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 1, 3024, VeryHard, 'l', 'track'), Same, Same, NA, (5305),
              TTLocalizer.QuestDialogDict[5304]),
     5305 : ( BR_TIER+1, Cont, (CogLevelQuest, Anywhere, 20, 7), Same, Same, NA, (5306),
              TTLocalizer.QuestDialogDict[5305]),
-    5306 : ( BR_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TheBrrrgh, 2, 3025, Hard, AnyFish), Same, Same, NA, (5307),
+    5306 : ( BR_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TundraWonderland, 2, 3025, Hard, AnyFish), Same, Same, NA, (5307),
              TTLocalizer.QuestDialogDict[5306]),
     5307 : ( BR_TIER+1, Cont, (BuildingQuest, Anywhere, 5, Any, 4), Same, Same, 204, NA,
              TTLocalizer.QuestDialogDict[5307]),
@@ -3632,16 +3632,16 @@ QuestDict = {
              TTLocalizer.QuestDialogDict[5312]),
 
     # Elder quests
-    5290 : ( BR_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 12, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5291 : ( BR_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 12, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5292 : ( BR_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 12, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5293 : ( BR_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 12, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5290 : ( BR_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 12, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5291 : ( BR_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 12, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5292 : ( BR_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 12, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5293 : ( BR_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 12, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
     5294 : ( BR_TIER+1, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     5295 : ( BR_TIER+1, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     5296 : ( BR_TIER+1, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     5297 : ( BR_TIER+1, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    5500 : ( BR_TIER+1, Start, (CogQuest, ToontownGlobals.TheBrrrgh, 75, Any), Any, ToonHQ, NA, (5501), DefaultDialog),
+    5500 : ( BR_TIER+1, Start, (CogQuest, ToontownGlobals.TundraWonderland, 75, Any), Any, ToonHQ, NA, (5501), DefaultDialog),
     5501 : ( BR_TIER+1, Cont, (DeliverItemQuest, 1000), Any, 3008, 1000, NA, DefaultDialog),
 
 
@@ -3707,13 +3707,13 @@ QuestDict = {
     5338 : ( BR_TIER+2, Start, (CogLevelQuest, Anywhere, 10,  8), Any, ToonHQ, Any, NA, DefaultDialog),
     5339 : ( BR_TIER+2, Start, (CogLevelQuest, Anywhere, 12,  8), Any, ToonHQ, Any, NA, DefaultDialog),
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    5340 : ( BR_TIER+2, Start, (CogQuest, ToontownGlobals.TheBrrrgh, 75, Any), Any, ToonHQ, NA, (5341), DefaultDialog),
+    5340 : ( BR_TIER+2, Start, (CogQuest, ToontownGlobals.TundraWonderland, 75, Any), Any, ToonHQ, NA, (5341), DefaultDialog),
     5341 : ( BR_TIER+2, Cont, (DeliverItemQuest, 1000), Any, 3008, 1000, NA, DefaultDialog),
     # Elder quests
-    5360 : ( BR_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 20, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5361 : ( BR_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 20, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5362 : ( BR_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 20, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
-    5363 : ( BR_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 20, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5360 : ( BR_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 20, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5361 : ( BR_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 20, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5362 : ( BR_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 20, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
+    5363 : ( BR_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 20, Any, NEWBIE_HP), Any, ToonHQ, 606, NA, DefaultDialog),
     5364 : ( BR_TIER+2, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     5365 : ( BR_TIER+2, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     5366 : ( BR_TIER+2, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 1, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
@@ -3738,11 +3738,11 @@ QuestDict = {
 
     # Dreamland
     # Cogs in DL are well-balanced.  Levels are 5..9.
-    6101 : ( DL_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 60, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    6102 : ( DL_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 65, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    6101 : ( DL_TIER, Start, (CogQuest, ToontownGlobals.TwilightDreamland, 60, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    6102 : ( DL_TIER, Start, (CogQuest, ToontownGlobals.TwilightDreamland, 65, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     # OBSOLETE: This quest has been made obsolete to make room for the
     # DL & Cashbot Cog HQ Quests -patricia
-    6103 : ( DL_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DonaldsDreamland, 70, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    6103 : ( DL_TIER, OBSOLETE, (CogQuest, ToontownGlobals.TwilightDreamland, 70, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     6104 : ( DL_TIER, Start, (CogQuest, Anywhere, 80, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     6105 : ( DL_TIER, Start, (CogQuest, Anywhere, 90, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     6106 : ( DL_TIER, Start, (CogQuest, Anywhere, 100, Any), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -3786,18 +3786,18 @@ QuestDict = {
     6137 : ( DL_TIER, Start, (CogLevelQuest, Anywhere, 15, 9), Any, ToonHQ, Any, NA, DefaultDialog),
     6138 : ( DL_TIER, Start, (CogLevelQuest, Anywhere, 10,10), Any, ToonHQ, Any, NA, DefaultDialog),
 
-    6139 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6140 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6139 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 50, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6140 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 50, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
     # OBSOLETE: This quest has been made obsolete by the
     # DL & Cashbot Cog HQ Quests -patricia
-    6141 : ( DL_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6142 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6141 : ( DL_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 50, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6142 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 50, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
     # OBSOLETE: This quest has been made obsolete by the
     # DL & Cashbot Cog HQ Quests -patricia
-    6143 : ( DL_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6144 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6145 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6146 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6143 : ( DL_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 55, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6144 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 55, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6145 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 55, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6146 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 55, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
 
     # OBSOLETE: This quest has been made obsolete by the
     # DL & Cashbot Cog HQ Quests -patricia
@@ -3817,10 +3817,10 @@ QuestDict = {
     6157 : ( DL_TIER, Start, (BuildingQuest, Anywhere, 2, 'c', 5), Any, ToonHQ, Any, NA, DefaultDialog),
     6158 : ( DL_TIER, Start, (BuildingQuest, Anywhere, 2, 'l', 5), Any, ToonHQ, Any, NA, DefaultDialog),
     # Elder quests
-    6160 : ( DL_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 25, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
-    6161 : ( DL_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 25, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
-    6162 : ( DL_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 25, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
-    6163 : ( DL_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 25, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
+    6160 : ( DL_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 25, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
+    6161 : ( DL_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 25, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
+    6162 : ( DL_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 25, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
+    6163 : ( DL_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 25, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     6164 : ( DL_TIER, Start, (BuildingNewbieQuest, Anywhere, 2, Any, 1, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
     6165 : ( DL_TIER, Start, (BuildingNewbieQuest, Anywhere, 2, Any, 1, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
     6166 : ( DL_TIER, Start, (BuildingNewbieQuest, Anywhere, 2, Any, 1, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
@@ -3861,12 +3861,12 @@ QuestDict = {
     # Powers Erge, though forgetful, will give you an LP boost
     # if you'll defeat some Cogs for him
     6201 : ( DL_TIER, Start, (VisitQuest,), Any, 9111, NA, 6202, TTLocalizer.QuestDialogDict[6201]),
-    6202 : ( DL_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 70, Any), 9111, Same, 100, NA, TTLocalizer.QuestDialogDict[6202]),
+    6202 : ( DL_TIER, Start, (CogQuest, ToontownGlobals.TwilightDreamland, 70, Any), 9111, Same, 100, NA, TTLocalizer.QuestDialogDict[6202]),
 
     # Susan Siesta wants to get rich but the Cogs are interfering.
     # Take out some Cog buildings and she'll give you the small backpack
     6206 : ( DL_TIER, Start, (VisitQuest,), Any, 9131, NA, 6207, TTLocalizer.QuestDialogDict[6206]),
-    6207 : ( DL_TIER, Start, (BuildingQuest, ToontownGlobals.DonaldsDreamland, 8, Any, 4), 9131, Same, 205, NA, TTLocalizer.QuestDialogDict[6207]),
+    6207 : ( DL_TIER, Start, (BuildingQuest, ToontownGlobals.TwilightDreamland, 8, Any, 4), 9131, Same, 205, NA, TTLocalizer.QuestDialogDict[6207]),
 
     # Lawful Linda is fixing her answering machine.
     # Help her & she'll give you a 2LP reward.
@@ -3878,7 +3878,7 @@ QuestDict = {
     # Scratch Rocco's back and he'll scratch yours.
     # In fact, he'll give you a 3 LP bonus.
     6221 : ( DL_TIER, Start, (VisitQuest,), Any, 9119, NA, 6222, TTLocalizer.QuestDialogDict[6221]),
-    6222 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 'c'), 9119, Same, 102, NA, TTLocalizer.QuestDialogDict[6222]),
+    6222 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 50, 'c'), 9119, Same, 102, NA, TTLocalizer.QuestDialogDict[6222]),
  
     # Nat & PJ will get you acquainted with the new 
     # HQ. And they'll give you your first suit part
@@ -3892,7 +3892,7 @@ QuestDict = {
     # these Cogs around. Clean up a bit and she'll reward you handsomely.
     # Reward: MaxMoneyReward 705 - 150 jellybeans
     6241 : ( DL_TIER, Start, (VisitQuest,), Any, 9219, NA, 6242, TTLocalizer.QuestDialogDict[6241]),
-    6242 : ( DL_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 25, 'nc'), 9219, Same, 705, NA, TTLocalizer.QuestDialogDict[6242]),
+    6242 : ( DL_TIER, Start, (CogQuest, ToontownGlobals.TwilightDreamland, 25, 'nc'), 9219, Same, 705, NA, TTLocalizer.QuestDialogDict[6242]),
 
     # Zari needs you to run some errands for her and maybe
     # wipe out some Cogs along the way. She'll make it worthwhile
@@ -3917,18 +3917,18 @@ QuestDict = {
     # Drowsy Dave will give you teleport access to DL
     # if he can stay awake long enough for you to finish.
     6271 : ( DL_TIER, Start, (VisitQuest,), Any, 9208, NA, 6272, TTLocalizer.QuestDialogDict[6271]),
-    6272 : ( DL_TIER, Start, (BuildingQuest, ToontownGlobals.DonaldsDreamland, 2, 'm', 5), 9208, Same, 305, NA, TTLocalizer.QuestDialogDict[6272]),
+    6272 : ( DL_TIER, Start, (BuildingQuest, ToontownGlobals.TwilightDreamland, 2, 'm', 5), 9208, Same, 305, NA, TTLocalizer.QuestDialogDict[6272]),
 
     # Teddy Blair has a piece of a cog suit to give you if you will
     # clear out some cogs. Of course, his ear plugs make it tough. 
     6281 : ( DL_TIER, Start, (VisitQuest,), Any, 9123, NA, 6282, TTLocalizer.QuestDialogDict[6281]),
-    6282 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 'm'), 9123, Same, 4001, NA, TTLocalizer.QuestDialogDict[6282]),
+    6282 : ( DL_TIER, Start, (CogTrackQuest, ToontownGlobals.TwilightDreamland, 55, 'm'), 9123, Same, 4001, NA, TTLocalizer.QuestDialogDict[6282]),
     
     # William Teller needs help! Those darn Cashbots swiped his 3
     # reading lamps! Retrieve them and he'll give you
     # another cog Suit piece.
     6291 : ( DL_TIER, Start, (VisitQuest,), Any, 9226, NA, 6292, TTLocalizer.QuestDialogDict[6291]),
-    6292 : ( DL_TIER, Start, (RecoverItemQuest, ToontownGlobals.DonaldsDreamland, 1, 6005, VeryHard, 'm', 'track'), 9226, Same, 4002, NA, TTLocalizer.QuestDialogDict[6292]),
+    6292 : ( DL_TIER, Start, (RecoverItemQuest, ToontownGlobals.TwilightDreamland, 1, 6005, VeryHard, 'm', 'track'), 9226, Same, 4002, NA, TTLocalizer.QuestDialogDict[6292]),
 
     # Cashbot HQ quests
     # HQ/Exterior - 7, 8, 9
@@ -4042,10 +4042,10 @@ QuestDict = {
     7157 : ( DL_TIER+1, Start, (BuildingQuest, Anywhere, 5, 'c', 5), Any, ToonHQ, Any, NA, DefaultDialog),
     7158 : ( DL_TIER+1, Start, (BuildingQuest, Anywhere, 5, 'l', 5), Any, ToonHQ, Any, NA, DefaultDialog),
     # Elder quests
-    7160 : ( DL_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 35, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
-    7161 : ( DL_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 35, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
-    7162 : ( DL_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 35, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
-    7163 : ( DL_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 35, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
+    7160 : ( DL_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 35, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
+    7161 : ( DL_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 35, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
+    7162 : ( DL_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 35, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
+    7163 : ( DL_TIER+1, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 35, Any, NEWBIE_HP), Any, ToonHQ, 607, NA, DefaultDialog),
     7164 : ( DL_TIER+1, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 2, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
     7165 : ( DL_TIER+1, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 2, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
     7166 : ( DL_TIER+1, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 2, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
@@ -4088,7 +4088,7 @@ QuestDict = {
     7202 : ( DL_TIER+1, Start, (VisitQuest,), 9124, 9128, NA, 7203, TTLocalizer.QuestDialogDict[7202]),
     7203 : ( DL_TIER+1, Cont, (DeliverItemQuest, 7001), Same, 9124, NA, 7204, TTLocalizer.QuestDialogDict[7203]),
     7204 : ( DL_TIER+1, Cont, (VisitQuest,), Same, 9128, NA, 7205, TTLocalizer.QuestDialogDict[7204]),
-    7205 : ( DL_TIER+1, Cont, (CogQuest, ToontownGlobals.DonaldsDreamland, 140, Any), Same, Same, NA, 7206, TTLocalizer.QuestDialogDict[7205]),
+    7205 : ( DL_TIER+1, Cont, (CogQuest, ToontownGlobals.TwilightDreamland, 140, Any), Same, Same, NA, 7206, TTLocalizer.QuestDialogDict[7205]),
     7206 : ( DL_TIER+1, Cont, (DeliverItemQuest, 7002), Same, 9124, 4003, NA, TTLocalizer.QuestDialogDict[7206]),
 
     # Here's a quest to pick up a Cog Suit part. 
@@ -4130,8 +4130,8 @@ QuestDict = {
     # and get a piece of Cog suit
     7239 : ( DL_TIER+1, Start, (VisitQuest,), Any, 9114, NA, 7240, TTLocalizer.QuestDialogDict[7239]),
     7240 : ( DL_TIER+1, Start, (VisitQuest,), 9114, 9215, NA, 7241, TTLocalizer.QuestDialogDict[7240]),
-    7241 : ( DL_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.DonaldsDreamland, 1, 7011, Hard, AnyFish), Same, Same, NA, 7242, TTLocalizer.QuestDialogDict[7241]),
-    7242 : ( DL_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.DonaldsDreamland, 1, 7012, VeryHard, AnyFish), Same, Same, NA, 7243, TTLocalizer.QuestDialogDict[7242]),
+    7241 : ( DL_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TwilightDreamland, 1, 7011, Hard, AnyFish), Same, Same, NA, 7242, TTLocalizer.QuestDialogDict[7241]),
+    7242 : ( DL_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.TwilightDreamland, 1, 7012, VeryHard, AnyFish), Same, Same, NA, 7243, TTLocalizer.QuestDialogDict[7242]),
     7243 : ( DL_TIER+1, Cont, (RecoverItemQuest, ToontownGlobals.CashbotHQ, 1, 7013, Hard, 'ls'), Same, Same, NA, 7244, TTLocalizer.QuestDialogDict[7243]),
     7244 : ( DL_TIER+1, Cont, (DeliverItemQuest, 7014), Same, 9114, 4007, NA, TTLocalizer.QuestDialogDict[7244]),
 
@@ -4163,7 +4163,7 @@ QuestDict = {
     7270 : ( DL_TIER+1, Start, (SupervisorQuest, ToontownGlobals.CashbotMintIntB, 6), Any, ToonHQ, Any, NA, DefaultDialog),
     
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    7500 : ( DL_TIER+1, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 100, Any), Any, ToonHQ, NA, (7501), DefaultDialog),
+    7500 : ( DL_TIER+1, Start, (CogQuest, ToontownGlobals.TwilightDreamland, 100, Any), Any, ToonHQ, NA, (7501), DefaultDialog),
     7501 : ( DL_TIER+1, Cont, (DeliverItemQuest, 1000), Any, 9010, 1000, NA, DefaultDialog),
 
 
@@ -4237,10 +4237,10 @@ QuestDict = {
     8158 : ( DL_TIER+2, Start, (BuildingQuest, Anywhere, 10, 'l', 5), Any, ToonHQ, Any, NA, DefaultDialog),
 
     # Elder quests
-    8160 : ( DL_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 40, Any, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
-    8161 : ( DL_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 40, Any, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
-    8162 : ( DL_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 40, Any, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
-    8163 : ( DL_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 40, Any, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
+    8160 : ( DL_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 40, Any, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
+    8161 : ( DL_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 40, Any, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
+    8162 : ( DL_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 40, Any, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
+    8163 : ( DL_TIER+2, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 40, Any, NEWBIE_HP), Any, ToonHQ, 608, NA, DefaultDialog),
     8164 : ( DL_TIER+2, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 3, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
     8165 : ( DL_TIER+2, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 3, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
     8166 : ( DL_TIER+2, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 3, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
@@ -4375,10 +4375,10 @@ QuestDict = {
     9157 : ( DL_TIER+3, Start, (BuildingQuest, Anywhere, 100, Any, 5), Any, ToonHQ, Any, NA, DefaultDialog),
     9158 : ( DL_TIER+3, Start, (BuildingQuest, Anywhere, 100, Any, 5), Any, ToonHQ, Any, NA, DefaultDialog),
     # Elder quests
-    9160 : ( DL_TIER+3, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 45, Any, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
-    9161 : ( DL_TIER+3, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 45, Any, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
-    9162 : ( DL_TIER+3, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 45, Any, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
-    9163 : ( DL_TIER+3, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 45, Any, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
+    9160 : ( DL_TIER+3, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 45, Any, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
+    9161 : ( DL_TIER+3, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 45, Any, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
+    9162 : ( DL_TIER+3, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 45, Any, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
+    9163 : ( DL_TIER+3, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 45, Any, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
     9164 : ( DL_TIER+3, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 3, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
     9165 : ( DL_TIER+3, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 3, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
     9166 : ( DL_TIER+3, Start, (BuildingNewbieQuest, Anywhere, 1, Any, 3, NEWBIE_HP), Any, ToonHQ, 609, NA, DefaultDialog),
@@ -4451,12 +4451,12 @@ QuestDict = {
     #9230 : ( DL_TIER+3, Start, (CFONewbieQuest, ToontownGlobals.CashbotHQ, 2, CASHBOT_HQ_NEWBIE_HP), Any, ToonHQ, 620, NA, DefaultDialog),
 
     # Clothing quest: defeat some cogs then deliver clothing ticket to NPCTailor
-    9500 : ( DL_TIER+3, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 1000, Any), Any, ToonHQ, NA, (9501), DefaultDialog),
+    9500 : ( DL_TIER+3, Start, (CogQuest, ToontownGlobals.TwilightDreamland, 1000, Any), Any, ToonHQ, NA, (9501), DefaultDialog),
     9501 : ( DL_TIER+3, Cont, (DeliverItemQuest, 1000), Any, 2004, 1000, NA, DefaultDialog),
 
 
     # Elder quests 
-    10001 : ( ELDER_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 50, Any, NEWBIE_HP), Any, ToonHQ, Any, NA, DefaultDialog),
+    10001 : ( ELDER_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 50, Any, NEWBIE_HP), Any, ToonHQ, Any, NA, DefaultDialog),
     10002 : ( ELDER_TIER, Start, (BuildingNewbieQuest, Anywhere, 4, Any, 1, NEWBIE_HP), Any, ToonHQ, Any, NA, DefaultDialog),
 
     # These have issues
@@ -4521,7 +4521,7 @@ QuestDict = {
     10203 : ( ELDER_TIER, Cont, (DeliverItemQuest, 1000), Any, ToonTailor, 1000, NA, DefaultDialog),
 
     # Clothing quest: help a newbie then deliver clothing ticket to NPCTailor
-    10204 : ( ELDER_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontownCentral, 60, Any, NEWBIE_HP), Any, ToonHQ, NA, (10205), DefaultDialog),
+    10204 : ( ELDER_TIER, Start, (CogNewbieQuest, ToontownGlobals.ToontropolisPlaza, 60, Any, NEWBIE_HP), Any, ToonHQ, NA, (10205), DefaultDialog),
     10205 : ( ELDER_TIER, Cont, (DeliverItemQuest, 1000), Any, ToonTailor, 1000, NA, DefaultDialog),
     
     # Clothing quest: help a newbie then deliver clothing ticket to NPCTailor
@@ -5646,7 +5646,7 @@ class CheesyEffectReward(Reward):
         if (hoodId == 0):
             whileStr = ""
         elif (hoodId == 1):
-            whileStr = (TTLocalizer.CheesyEffectExceptIn % (TTLocalizer.ToontownCentral[-1]))
+            whileStr = (TTLocalizer.CheesyEffectExceptIn % (TTLocalizer.ToontropolisPlaza[-1]))
         else:
             hoodName = base.cr.hoodMgr.getFullnameFromId(hoodId)
             whileStr = (TTLocalizer.CheesyEffectWhileYouAreIn % (hoodName))
@@ -5882,12 +5882,12 @@ RewardDict = {
     206 : (MaxGagCarryReward, 70, TTLocalizer.QuestsMediumBackpack),
     207 : (MaxGagCarryReward, 80, TTLocalizer.QuestsLargeBackpack),
 
-    300 : (TeleportReward, ToontownGlobals.ToontownCentral),
-    301 : (TeleportReward, ToontownGlobals.DonaldsDock),
-    302 : (TeleportReward, ToontownGlobals.DaisyGardens),
-    303 : (TeleportReward, ToontownGlobals.MinniesMelodyland),
-    304 : (TeleportReward, ToontownGlobals.TheBrrrgh),
-    305 : (TeleportReward, ToontownGlobals.DonaldsDreamland),
+    300 : (TeleportReward, ToontownGlobals.ToontropolisPlaza),
+    301 : (TeleportReward, ToontownGlobals.ToontropolisDocks),
+    302 : (TeleportReward, ToontownGlobals.FloweringGrove),
+    303 : (TeleportReward, ToontownGlobals.TheLandOfMusic),
+    304 : (TeleportReward, ToontownGlobals.TundraWonderland),
+    305 : (TeleportReward, ToontownGlobals.TwilightDreamland),
 
     # Dummy stand in reward
     400 : (TrackTrainingReward, None),
@@ -6060,7 +6060,7 @@ RewardDict = {
 
     # Cheesy effect reward ID's are in the 2000 range.  The ID's are
     # based on 2000 + hoodId / 10 + effect.  Most cheesy effects are
-    # not allowed in ToontownCentral, which is a generally sane land
+    # not allowed in ToontropolisPlaza, which is a generally sane land
     # and safe for newbies.  A particular HoodId means the effect will
     # only be observed while in that hood; a HoodId of 1 means any
     # hood except TTC, and a HoodId of 0 means any hood including TTC.
@@ -6567,7 +6567,6 @@ def checkReward(questId, forked=0):
     that it's the same reward
     'forked' is for internal use, do not override
     """
-    #print "checkReward: %s" % questId
     quest = QuestDict[questId]
     reward = quest[5]
     nextQuests = nextQuestList(quest[6])

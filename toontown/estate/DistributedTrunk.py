@@ -164,7 +164,7 @@ class DistributedTrunk(DistributedCloset.DistributedCloset):
             self._handlePurchaseDone()
         if self.closetGUI:
             self.closetGUI.resetClothes(self.oldStyle)
-        if self.popupInfo != None:
+        if self.popupInfo:
             self.popupInfo.destroy()
             self.popupInfo = None
         return
@@ -317,7 +317,7 @@ class DistributedTrunk(DistributedCloset.DistributedCloset):
         return
 
     def __popupNotOwnerPanel(self):
-        if self.popupInfo != None:
+        if self.popupInfo:
             self.popupInfo.destroy()
             self.popupInfo = None
         self.purchaseDoneEvent = self.uniqueName('purchaseDone')
@@ -348,7 +348,7 @@ class DistributedTrunk(DistributedCloset.DistributedCloset):
         return
 
     def __popupAreYouSurePanel(self):
-        if self.popupInfo != None:
+        if self.popupInfo:
             self.popupInfo.destroy()
             self.popupInfo = None
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')

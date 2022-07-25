@@ -1290,6 +1290,7 @@ class OTPClientRepository(ClientRepositoryBase):
             self.afkDialog.cleanup()
             self.afkDialog = None
         self.handler = None
+        return
 
     ##### LoginFSM: periodTimeout #####
 
@@ -2563,7 +2564,9 @@ class OTPClientRepository(ClientRepositoryBase):
 
         if district is not None:
             self.notify.debug('chose %s: pop %s' % (district.name, district.avatarCount))
-        return district
+            self.notify.debug(
+                'chose %s: pop %s' %
+                (district.name, district.avatarCount))
 
     def getShardName(self, shardId):
         """
@@ -3234,3 +3237,12 @@ class OTPClientRepository(ClientRepositoryBase):
         except:
             self.notify.debug("In isLocalId(), localAvatar not created yet")
             return False
+    ITAG_PERM = 'perm'
+    ITAG_AVATAR = 'avatar'
+    ITAG_SHARD = 'shard'
+    ITAG_WORLD = 'world'
+    ITAG_GAME = 'game'
+
+    def addTaggedInterest(self, parentId, zoneId, mainTag,
+                          desc, otherTags=[], event=None):
+        return self.addInterest(parentId, zoneId, desc, event)

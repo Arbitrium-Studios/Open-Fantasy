@@ -5,7 +5,7 @@ from toontown.safezone import OZTreasurePlannerAI
 from toontown.racing import DistributedStartingBlockAI
 from panda3d.core import *
 from toontown.racing.RaceGlobals import *
-from toontown.classicchars import DistributedGoofySpeedwayAI
+from toontown.classicchars import DistributedToontropolisStadiumAI
 from toontown.safezone import DistributedPicnicBasketAI
 from toontown.classicchars import DistributedChipAI
 from toontown.classicchars import DistributedDaleAI
@@ -15,6 +15,9 @@ import string
 from toontown.safezone import DistributedPicnicTableAI
 from toontown.safezone import DistributedChineseCheckersAI
 from toontown.safezone import DistributedCheckersAI
+from toontown.safezone import ButterflyGlobals
+if __debug__:
+    import pdb
 
 from panda3d.toontown import DNAData, DNAGroup, DNAVisGroup
 
@@ -25,7 +28,7 @@ class OZHoodDataAI(HoodDataAI.HoodDataAI):
     notify = DirectNotifyGlobal.directNotify.newCategory("OZHoodDataAI")
 
     def __init__(self, air, zoneId = None):
-        hoodId = ToontownGlobals.OutdoorZone
+        hoodId = ToontownGlobals.AcornAcres
         if zoneId == None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
@@ -61,6 +64,8 @@ class OZHoodDataAI(HoodDataAI.HoodDataAI):
         
         if simbase.config.GetBool('want-game-tables', 0):
             self.createGameTables()
+        self.createButterflies(ButterflyGlobals.DG)
+
 
 	#more hacks!
         #self.board = DChineseCheckersAI.DChineseCheckersAI(self.air, 'board',65,130,.2,0,0,0)
@@ -86,7 +91,7 @@ class OZHoodDataAI(HoodDataAI.HoodDataAI):
         #self.createLeaderBoards()
         #self.__cycleLeaderBoards()
 
-        #goofy = DistributedGoofySpeedwayAI.DistributedGoofySpeedwayAI(self.air)
+        #goofy = DistributedToontropolisStadiumAI.DistributedToontropolisStadiumAI(self.air)
         #goofy.generateWithRequired(self.zoneId)
         #goofy.start()
         #self.addDistObj(goofy)

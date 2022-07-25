@@ -1,17 +1,15 @@
 from toontown.toonbase.ToontownGlobals import *
 from direct.interval.IntervalGlobal import *
 from direct.distributed.ClockDelta import *
-from .HouseGlobals import *
+from . import HouseGlobals
 from toontown.effects import DistributedFireworkShow
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
-from panda3d.core import CollisionSphere
-from panda3d.core import CollisionNode
+from panda3d.core import CollisionSphere, CollisionNode
 from . import FireworksGui
 
 class DistributedFireworksCannon(DistributedFireworkShow.DistributedFireworkShow):
-
-    notify = directNotify.newCategory("DistributedFireworksCannon")
+    notify = directNotify.newCategory('DistributedFireworksCannon')
 
     def __init__(self, cr):
         DistributedFireworkShow.DistributedFireworkShow.__init__(self,cr)

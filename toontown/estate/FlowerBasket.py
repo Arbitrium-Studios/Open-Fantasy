@@ -1,6 +1,6 @@
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from direct.directnotify import DirectNotifyGlobal
-from . import FlowerBase
+from toontown.estate import FlowerBase
 
 class FlowerBasket:
     """
@@ -77,9 +77,9 @@ class FlowerBasket:
         import random
         numFish = random.randint(1,20)
         self.flowerList = []
-        for i in range(numFish):
-            species , variety= GardenGlobals.getRandomFlower()
-            self.addFlower(species,variety)
+        for i in xrange(numFish):
+            species, variety = GardenGlobals.getRandomFlower()
+            self.addFlower(species, variety)
 
     def getTotalValue(self):
         value = 0

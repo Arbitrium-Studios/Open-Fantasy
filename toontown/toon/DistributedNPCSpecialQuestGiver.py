@@ -83,9 +83,9 @@ class DistributedNPCSpecialQuestGiver(DistributedNPCToonBase):
         if hasattr(place, 'id'):
             myHoodId = place.id
         if  myHoodId in \
-           (ToontownGlobals.ToontownCentral,
+           (ToontownGlobals.ToontropolisPlaza,
             ToontownGlobals.MyEstate,
-            ToontownGlobals.GoofySpeedway,
+            ToontownGlobals.ToontropolisStadium,
             ToontownGlobals.Tutorial
             ):
             return True

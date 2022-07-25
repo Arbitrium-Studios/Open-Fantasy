@@ -1,18 +1,16 @@
-from . import DistributedLawnDecor
+from toontown.estate import DistributedLawnDecor
 from direct.directnotify import DirectNotifyGlobal
 from direct.showbase.ShowBase import *
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.estate import PlantingGUI
 from toontown.estate import PlantTreeGUI
 from direct.distributed import DistributedNode
-from panda3d.core import NodePath
-from panda3d.core import Vec3
+from panda3d.core import NodePath, Vec3
 
 class DistributedGardenBox(DistributedLawnDecor.DistributedLawnDecor):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedGardenPlot')
-    
-    
+
     def __init__(self, cr):
         DistributedLawnDecor.DistributedLawnDecor.__init__(self, cr)
         #self.defaultModel = "phase_8/models/props/flower_treasure.bam"
@@ -58,15 +56,9 @@ class DistributedGardenBox(DistributedLawnDecor.DistributedLawnDecor):
         self.model.reparentTo(self.rotateNode)
         self.stick2Ground()
 
-        #uncomment line below if we want the toons to walk on top of the planter
-        #self.model.find("**/collision").stash()
-
-        
     def handleEnterPlot(self, entry = None):
-        #print("Box entered")
         pass
 
-            
     def handleExitPlot(self, entry = None):
         DistributedLawnDecor.DistributedLawnDecor.handleExitPlot(self, entry)
         pass

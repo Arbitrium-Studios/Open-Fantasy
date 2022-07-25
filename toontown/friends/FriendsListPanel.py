@@ -1,6 +1,6 @@
 """FriendsListPanel module: contains the FriendsListPanel class"""
 
-from panda3d.core import *
+from pandac.PandaModules import *
 from direct.gui.DirectGui import *
 from panda3d.core import *
 from direct.fsm import StateData

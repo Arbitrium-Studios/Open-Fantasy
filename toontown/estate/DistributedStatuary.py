@@ -1,13 +1,13 @@
-from . import DistributedLawnDecor
+
+from toontown.estate import DistributedLawnDecor
 from direct.directnotify import DirectNotifyGlobal
 from direct.showbase.ShowBase import *
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 from toontown.toontowngui import TTDialog
 from toontown.toonbase import TTLocalizer
-from panda3d.core import NodePath
-from panda3d.core import Point3
+from panda3d.core import NodePath, Point3
 
 class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedStatuary')
@@ -85,7 +85,7 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
         radius = (xDiff * xDiff + yDiff*yDiff) ** 0.5
         #I don't understand why calcTightBounds is giving me such huge numbers back
         radius /= 3
-        self.notify.debug( 'xDiff=%s yDiff=%s radius = %s' % (xDiff, yDiff, radius))
+        self.notify.debug('xDiff=%s yDiff=%s radius = %s' % (xDiff, yDiff, radius))
         self.colSphereNode.setScale(radius)
         
     def getShovelCommand(self):
@@ -112,15 +112,8 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
         Confirm if the player really wants to remove or pick the plower.
         """
         fullName = self.name
-
-        #if we're clicking on buttons, we're not asleep
-        messenger.send('wakeup')        
-
-        self.confirmDialog = TTDialog.TTDialog(
-            style = TTDialog.YesNo,
-            text = TTLocalizer.ConfirmRemoveStatuary % {'item': fullName},
-            command = self.confirmCallback
-            )
+        messenger.send('wakeup')
+        self.confirmDialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=TTLocalizer.ConfirmRemoveStatuary % {'item': fullName}, command=self.confirmCallback)
         self.confirmDialog.show()
         base.cr.playGame.getPlace().detectedGardenPlotUse()
         
@@ -146,7 +139,6 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
             return
         self.handleRemove()
 
-
     def handleExitPlot(self, entry = None):
         DistributedLawnDecor.DistributedLawnDecor.handleExitPlot(self, entry)
         base.localAvatar.removeShovelRelatedDoId(self.doId)
@@ -157,12 +149,7 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
         self.startInteraction()
         itemName = GardenGlobals.PlantAttributes[self.typeIndex]['name']
         stringToShow = TTLocalizer.getResultPlantedSomethingSentence(itemName)
-                           
-        self.resultDialog = TTDialog.TTDialog(
-            style = TTDialog.Acknowledge,
-            text = stringToShow,
-            command = self.resultsCallback
-            )         
+        self.resultDialog = TTDialog.TTDialog(style=TTDialog.Acknowledge, text=stringToShow, command=self.resultsCallback)
 
     def resultsCallback(self, value):
         self.notify.debug('value=%d' % value)
@@ -170,4 +157,3 @@ class DistributedStatuary(DistributedLawnDecor.DistributedLawnDecor):
             self.resultDialog.destroy()
             self.resultDialog = None
         self.finishInteraction()
-

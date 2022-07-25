@@ -4,25 +4,10 @@ import types
 from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.PyDatagramIterator import PyDatagramIterator
 import functools
-class CatalogItemList:
-    """CatalogItemList
 
-    This class presents itself as a list of CatalogItem objects.  It
-    behaves like a normal Python list, except it supports lazy
-    decoding: it can be initialized from a blob received by the
-    network system; it won't attempt to decode the blob until some
-    properties of the catalog list are requested.  This saves some CPU
-    time for the majority of cases when we download the
-    CatalogItemList but don't care about inspecting it.
-    """
+class CatalogItemList:
 
     def __init__(self, source = None, store = 0):
-        # The source may be either a list, a string blob, or another
-        # CatalogItemList object.
-
-        # The store parameter indicates the bitmask of additional
-        # properties we will store in (or decode from) the blob along
-        # with each CatalogItem.  See CatalogItem.py.
         self.store = store
         
         # The data is stored in either or both of self.__blob and
@@ -39,9 +24,6 @@ class CatalogItemList:
         elif isinstance(source, CatalogItemList):
             # Copy from another CatalogItemList.
             if source.store == store:
-                # If the store types are the same, we can get away
-                # with copying the list (if it is defined), and also
-                # copying the blob.
                 if source.__list != None:
                     self.__list = source.__list[:]
                 self.__blob = source.__blob
@@ -60,8 +42,6 @@ class CatalogItemList:
 
     def getBlob(self, store = None):
         if store == None or store == self.store:
-            # If we are asking for a blob that matches our store type,
-            # we can just return our cached value.
             if self.__blob == None:
                 self.__encodeList()
             return self.__blob
@@ -80,8 +60,7 @@ class CatalogItemList:
         for item in self:
             #print ("item %s" %(item))
             if item:
-                if nextDeliveryDate == None or \
-                   item.deliveryDate < nextDeliveryDate:
+                if nextDeliveryDate == None or item.deliveryDate < nextDeliveryDate:
                     nextDeliveryDate = item.deliveryDate
 
         return nextDeliveryDate
@@ -96,8 +75,7 @@ class CatalogItemList:
         nextDeliveryItem = None
         for item in self:
             if item:
-                if nextDeliveryDate == None or \
-                   item.deliveryDate < nextDeliveryDate:
+                if nextDeliveryDate == None or item.deliveryDate < nextDeliveryDate:
                     nextDeliveryDate = item.deliveryDate
                     nextDeliveryItem = item
 
@@ -116,8 +94,7 @@ class CatalogItemList:
             else:
                 afterTime.append(item)
 
-        return (CatalogItemList(beforeTime, store = self.store),
-                CatalogItemList(afterTime, store = self.store))
+        return (CatalogItemList(beforeTime, store=self.store), CatalogItemList(afterTime, store=self.store))
 
     def extractOldestItems(self, count):
         # Extracts from the list the count oldest items.  Returns a
@@ -142,7 +119,13 @@ class CatalogItemList:
             for item in self.__list:
                 CatalogItem.encodeCatalogItem(dg, item, store)
         return dg.getMessage()
-        
+
+    def generateList(self):
+        if self.__list:
+            return self.__list
+        self.__list = self.__makeList(self.store)
+        return self.__list
+
     def __decodeList(self):
         # We shouldn't try to call this function twice.
       #  assert(self.__list == None)
@@ -240,25 +223,27 @@ class CatalogItemList:
             self.__decodeList()
         del self.__list[index]
         self.__blob = None
+        return
 
     def __getslice__(self, i, j):
         if self.__list == None:
             self.__decodeList()
-        return CatalogItemList(self.__list[i : j], store = self.store)
+        return CatalogItemList(self.__list[i:j], store=self.store)
 
     def __setslice__(self, i, j, s):
         if self.__list == None:
             self.__decodeList()
         if isinstance(s, CatalogItemList):
-            self.__list[i : j] = s.__list
+            self.__list[i:j] = s.__list
         else:
-            self.__list[i : j] = s
+            self.__list[i:j] = s
         self.__blob = None
+        return
 
     def __delslice__(self, i, j):
         if self.__list == None:
             self.__decodeList()
-        del self.__list[i : j]
+        del self.__list[i:j]
         self.__blob = None
 
     def __iadd__(self, other):
@@ -280,7 +265,10 @@ class CatalogItemList:
     def __str__(self):
         return self.output()
 
-    def output(self, store = ~0):
+    def getList(self):
+        return self.__list
+
+    def output(self, store = -1):
         if self.__list == None:
             self.__decodeList()
         inner = ""
@@ -288,3 +276,14 @@ class CatalogItemList:
             inner += ", %s" % (item.output(store))
         return "CatalogItemList([%s])" % (inner[2:])
 
+    def removeDuplicates(self, flags):
+        if not self.__list:
+            self.generateList()
+
+        found = False
+        for item in self.__list:
+            if item.getFlags() == flags:
+                if found:
+                    self.__list.remove(item)
+                    continue
+                found = True

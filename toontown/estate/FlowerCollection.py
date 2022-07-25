@@ -1,6 +1,6 @@
-from . import GardenGlobals
+from toontown.estate import GardenGlobals
 from direct.directnotify import DirectNotifyGlobal
-from . import FlowerBase
+from toontown.estate import FlowerBase
 
 class FlowerCollection:
     """
@@ -96,10 +96,9 @@ class FlowerCollection:
         """
         # Look for this flower type in our list
         for flower in self.flowerlist:
-            if ((flower.getVariety() == newFlower.getVariety()) and
-                (flower.getSpecies() == newFlower.getSpecies())):
-                    # Nope, nothing to update here
-                    return GardenGlobals.COLLECT_NO_UPDATE
+            if flower.getVariety() == newFlower.getVariety() and flower.getSpecies() == newFlower.getSpecies():
+                return GardenGlobals.COLLECT_NO_UPDATE
+
         if updateCollection:
             self.flowerlist.append(newFlower)
         return GardenGlobals.COLLECT_NEW_ENTRY

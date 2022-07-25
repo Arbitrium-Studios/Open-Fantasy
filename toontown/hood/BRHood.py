@@ -8,7 +8,7 @@ from toontown.toonbase.ToontownGlobals import *
 class BRHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = TheBrrrgh
+        self.id = TundraWonderland
         # Create the town state data
         self.townLoaderClass = BRTownLoader.BRTownLoader
         # Create the safe zone state data

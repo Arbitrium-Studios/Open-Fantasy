@@ -14,6 +14,7 @@ from . import Hood
 from toontown.estate import EstateLoader
 from toontown.estate import HouseGlobals
 from . import ZoneUtil
+from toontown.safezone import ButterflyGlobals
 
 class EstateHood(Hood.Hood):
     """

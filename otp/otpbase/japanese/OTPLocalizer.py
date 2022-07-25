@@ -2,14 +2,14 @@ import string
 from otp.otpbase.japanese.OTPLocalizer_Property import *
 
 # common locations
-lTheBrrrgh = 'ブルブルランド'
-lDaisyGardens = 'デイジーガーデン'
-lDonaldsDock = "ドナルドのハトバ"
-lDonaldsDreamland = "ドナルドのドリームランド"
-lMinniesMelodyland = "ミニーのメロディーランド"
-lToontownCentral = 'トゥーンタウンセントラル'
-lGoofySpeedway = "グーフィーサーキット"
-lOutdoorZone = "チップとデールのドングリ広場"
+lTundraWonderland = 'ブルブルランド'
+lFloweringGrove = 'デイジーガーデン'
+lToontropolisDocks = "ドナルドのハトバ"
+lTwilightDreamland = "ドナルドのドリームランド"
+lTheLandOfMusic = "ミニーのメロディーランド"
+lToontropolisPlaza = 'トゥーンタウンセントラル'
+lToontropolisStadium = "グーフィーサーキット"
+lAcornAcres = "チップとデールのドングリ広場"
 lGolfZone = "チップとデールのミニゴルフ"
 
 # common strings
@@ -1137,13 +1137,13 @@ SpeedChatStaticText = {
     1102 : "%sと戦おう！" % Cogs,
     1103 : "%sのビルを乗っ取ろう！" % Cog,
     1104 : "エレベーターに乗ろう！",
-    1105 : "%sへ行こう！" % lToontownCentral,
-    1106 : "%sへ行こう！" % lDonaldsDock,
-    1107 : "%sへ行こう！" % lMinniesMelodyland,
-    1108 : "%sへ行こう！" % lDaisyGardens,
-    1109 : "%sへ行こう！" % lTheBrrrgh,
-    1110 : "%sへ行こう！" % lDonaldsDreamland,
-    1111 : "%sへ行こう！" % lGoofySpeedway,
+    1105 : "%sへ行こう！" % lToontropolisPlaza,
+    1106 : "%sへ行こう！" % lToontropolisDocks,
+    1107 : "%sへ行こう！" % lTheLandOfMusic,
+    1108 : "%sへ行こう！" % lFloweringGrove,
+    1109 : "%sへ行こう！" % lTundraWonderland,
+    1110 : "%sへ行こう！" % lTwilightDreamland,
+    1111 : "%sへ行こう！" % lToontropolisStadium,
     1112 : "キミのおうちに行こう！",
     1113 : "セルボット本部に行こう！",
     1114 : "コグゼキュティブをやっつけよう！",
@@ -1157,7 +1157,7 @@ SpeedChatStaticText = {
     1122 : "ロウボットＨＱへ行こう！",
     1123 : "サイバンチョーと戦いに行こう！",
     1124 : "ケンサツキョクに行こう！",
-    1125 : "%sに行こう！" % lOutdoorZone,    
+    1125 : "%sに行こう！" % lAcornAcres,    
     1126 : "%sに行こう！" % lGolfZone,
     1127 : "ボスボット本部に行こう！",
     1128 : "CEOとたたかおう!",

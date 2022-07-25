@@ -21,39 +21,39 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
     # animation, minNumberOfLoops, maxNumberOfLoops, settleAnim, minPauseTime, maxPauseTime
     
     ZoneToIdles = { 
-        ToontownGlobals.ToontownCentral: (
+        ToontownGlobals.ToontropolisPlaza: (
         ('tt_a_ara_ttc_hydrant_idle0', 1, 1, None, 3, 10),
         ('tt_a_ara_ttc_hydrant_idle2', 1, 1, None, 3, 10),
         ('tt_a_ara_ttc_hydrant_idle1', 1, 1, None, 3, 10),
         ('tt_a_ara_ttc_hydrant_idleAwesome3', 1, 1, None, 3, 10),
         ),
         # dod hydrants are actually ttc
-        ToontownGlobals.DonaldsDock: (
+        ToontownGlobals.ToontropolisDocks: (
         ('tt_a_ara_ttc_hydrant_idle0', 1, 1, None, 3, 10),
         ('tt_a_ara_ttc_hydrant_idle2', 1, 1, None, 3, 10),
         ('tt_a_ara_ttc_hydrant_idle1', 1, 1, None, 3, 10),
         ('tt_a_ara_ttc_hydrant_idleAwesome3', 1, 1, None, 3, 10),
         ),
-        ToontownGlobals.DaisyGardens: (
+        ToontownGlobals.FloweringGrove: (
         ('tt_a_ara_dga_hydrant_idle0', 3, 10, 'tt_a_ara_dga_hydrant_idle0settle', 3, 10),
         ('tt_a_ara_dga_hydrant_idleLook1', 1, 1, None, 3, 10),
         ('tt_a_ara_dga_hydrant_idleSneeze2', 1, 1, None, 3, 10),
         ('tt_a_ara_dga_hydrant_idleAwesome3', 1, 1, None, 3, 10),
         ),
-        ToontownGlobals.MinniesMelodyland: (
+        ToontownGlobals.TheLandOfMusic: (
         ('tt_a_ara_mml_hydrant_idle0', 3, 10, 'tt_a_ara_mml_hydrant_idle0settle', 3, 10),
         ('tt_a_ara_mml_hydrant_idle2', 3, 10, 'tt_a_ara_mml_hydrant_idle2settle', 3, 10),
         ('tt_a_ara_mml_hydrant_idle1', 3, 10, 'tt_a_ara_mml_hydrant_idle1settle', 3, 10),
         ('tt_a_ara_mml_hydrant_idleAwesome3', 1, 1, None, 3, 10),
         ),
-        ToontownGlobals.TheBrrrgh: (
+        ToontownGlobals.TundraWonderland: (
         ('tt_a_ara_tbr_hydrant_idleShiver1', 1, 1, None, 3, 10),
         ('tt_a_ara_tbr_hydrant_idleRubNose0', 1, 1, None, 3, 10),
         ('tt_a_ara_tbr_hydrant_idleSneeze2', 1, 1, None, 3, 10),
         ('tt_a_ara_tbr_hydrant_idleAwesome3', 1, 1, None, 3, 10),
 
         ),
-        ToontownGlobals.DonaldsDreamland: (
+        ToontownGlobals.TwilightDreamland: (
         ('tt_a_ara_ddl_hydrant_idle0', 3, 10, None, 0, 0),
         ('tt_a_ara_ddl_hydrant_idle1', 1, 1, None, 0, 0),
         ('tt_a_ara_ddl_hydrant_idle2', 1, 1, None, 0, 0),
@@ -62,63 +62,63 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
      }
 
     ZoneToIdleIntoFightAnims = {
-        ToontownGlobals.ToontownCentral: 'tt_a_ara_ttc_hydrant_idleIntoFight',
+        ToontownGlobals.ToontropolisPlaza: 'tt_a_ara_ttc_hydrant_idleIntoFight',
         # dod hydrants are actually ttc
-        ToontownGlobals.DonaldsDock: 'tt_a_ara_ttc_hydrant_idleIntoFight',
-        ToontownGlobals.DaisyGardens: 'tt_a_ara_dga_hydrant_idleIntoFight',
-        ToontownGlobals.MinniesMelodyland: 'tt_a_ara_mml_hydrant_idleIntoFight',
-        ToontownGlobals.TheBrrrgh: 'tt_a_ara_tbr_hydrant_idleIntoFight',
-        ToontownGlobals.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_idleIntoFight',
+        ToontownGlobals.ToontropolisDocks: 'tt_a_ara_ttc_hydrant_idleIntoFight',
+        ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_hydrant_idleIntoFight',
+        ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_hydrant_idleIntoFight',
+        ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_hydrant_idleIntoFight',
+        ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_hydrant_idleIntoFight',
      }
 
     ZoneToVictoryAnims = {
-        ToontownGlobals.ToontownCentral: 'tt_a_ara_ttc_hydrant_victoryDance',
+        ToontownGlobals.ToontropolisPlaza: 'tt_a_ara_ttc_hydrant_victoryDance',
         # dod hydrants are actually ttc
-        ToontownGlobals.DonaldsDock: 'tt_a_ara_ttc_hydrant_victoryDance',
-        ToontownGlobals.DaisyGardens: 'tt_a_ara_dga_hydrant_victoryDance',
-        ToontownGlobals.MinniesMelodyland: 'tt_a_ara_mml_hydrant_victoryDance',
-        ToontownGlobals.TheBrrrgh: 'tt_a_ara_tbr_hydrant_victoryDance',
-        ToontownGlobals.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_victoryDance',
+        ToontownGlobals.ToontropolisDocks: 'tt_a_ara_ttc_hydrant_victoryDance',
+        ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_hydrant_victoryDance',
+        ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_hydrant_victoryDance',
+        ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_hydrant_victoryDance',
+        ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_hydrant_victoryDance',
      }
 
     ZoneToSadAnims = {
-        ToontownGlobals.ToontownCentral: 'tt_a_ara_ttc_hydrant_fightSad',
+        ToontownGlobals.ToontropolisPlaza: 'tt_a_ara_ttc_hydrant_fightSad',
         # dod hydrants are actually ttc
-        ToontownGlobals.DonaldsDock: 'tt_a_ara_ttc_hydrant_fightSad',
-        ToontownGlobals.DaisyGardens: 'tt_a_ara_dga_hydrant_fightSad',
-        ToontownGlobals.MinniesMelodyland: 'tt_a_ara_mml_hydrant_fightSad',
-        ToontownGlobals.TheBrrrgh: 'tt_a_ara_tbr_hydrant_fightSad',
-        ToontownGlobals.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_fightSad',
+        ToontownGlobals.ToontropolisDocks: 'tt_a_ara_ttc_hydrant_fightSad',
+        ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_hydrant_fightSad',
+        ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_hydrant_fightSad',
+        ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_hydrant_fightSad',
+        ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_hydrant_fightSad',
      }       
 
     ZoneToFightAnims = {
-        ToontownGlobals.ToontownCentral: (
+        ToontownGlobals.ToontropolisPlaza: (
         'tt_a_ara_ttc_hydrant_fightBoost',
         'tt_a_ara_ttc_hydrant_fightCheer',
         'tt_a_ara_ttc_hydrant_fightIdle',
         ),
         # dod hydrants are actually ttc
-        ToontownGlobals.DonaldsDock: (
+        ToontownGlobals.ToontropolisDocks: (
         'tt_a_ara_ttc_hydrant_fightBoost',
         'tt_a_ara_ttc_hydrant_fightCheer',
         'tt_a_ara_ttc_hydrant_fightIdle',
         ),
-        ToontownGlobals.DaisyGardens: (
+        ToontownGlobals.FloweringGrove: (
         'tt_a_ara_dga_hydrant_fightBoost',
         'tt_a_ara_dga_hydrant_fightCheer',
         'tt_a_ara_dga_hydrant_fightIdle',
         ),
-        ToontownGlobals.MinniesMelodyland: (
+        ToontownGlobals.TheLandOfMusic: (
         'tt_a_ara_mml_hydrant_fightBoost',
         'tt_a_ara_mml_hydrant_fightCheer',
         'tt_a_ara_mml_hydrant_fightIdle',
         ),
-        ToontownGlobals.TheBrrrgh: (
+        ToontownGlobals.TundraWonderland: (
         'tt_a_ara_tbr_hydrant_fightBoost',
         'tt_a_ara_tbr_hydrant_fightCheer',
         'tt_a_ara_tbr_hydrant_fightIdle',
         ),
-        ToontownGlobals.DonaldsDreamland: (
+        ToontownGlobals.TwilightDreamland: (
         'tt_a_ara_ddl_hydrant_fightBoost',
         'tt_a_ara_ddl_hydrant_fightCheer',
         'tt_a_ara_ddl_hydrant_fightIdle',
@@ -136,7 +136,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
 
     def setupActor(self, node):
         InteractiveAnimatedProp.InteractiveAnimatedProp.setupActor(self, node)
-        if not self.hoodId == ToontownGlobals.TheBrrrgh:
+        if not self.hoodId == ToontownGlobals.TundraWonderland:
             water = loader.loadModel('phase_5/models/char/tt_m_efx_hydrantSquirt')
             self.leftWater = water.find("**/efx_hydrantSquirtLeft")
             self.rightWater = water.find("**/efx_hydrantSquirtRight")
@@ -172,7 +172,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
         """We need to show and hide water parts for fightBoost."""
         result = False
         if ( ("fightBoost" in origAnimName) or ('fightCheer' in origAnimName) ) and \
-           not self.hoodId == ToontownGlobals.TheBrrrgh:
+           not self.hoodId == ToontownGlobals.TundraWonderland:
             result = True
         return result
 
@@ -180,7 +180,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
         """Return the actor interval sandwiched betweeh show and hide water."""
         result = Sequence()
         if ( ("fightBoost" in origAnimName) or ('fightCheer' in origAnimName) )  and \
-           not self.hoodId == ToontownGlobals.TheBrrrgh:
+           not self.hoodId == ToontownGlobals.TundraWonderland:
             result.append(Func(self.showWater))
             # a little bit of special info here we know fightBoost is fight0
             if 'fightBoost' in origAnimName:

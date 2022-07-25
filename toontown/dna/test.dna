@@ -233,7 +233,7 @@ store_suit_point [ 437 1 -147 -606 0 52 ]
 store_suit_point [ 438 0 -315 -225 0 ]
 store_suit_point [ 439 0 -114 -335 -2.26722e-007 ]
 store_suit_point [ 440 0 -114 -325 -2.26722e-007 ]
-group "toontownCentral" [
+group "ToontropolisPlaza" [
  visgroup "2101" [
   vis [   "2101"   "2102"   "2103"   "2104"   "2105"   "2106"   "2107"   "2132"   "2144"   "2155"   ]
   suit_edge [ 11 6 ]

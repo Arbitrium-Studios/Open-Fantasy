@@ -29,15 +29,15 @@ Chip   = "チップ"
 Dale   = "デール"
 
 # common locations
-lTheBrrrgh = 'ブルブルランド'
-lDaisyGardens = 'デイジーガーデン'
-lDonaldsDock = "ドナルドのハトバ"
-lDonaldsDreamland = "ドナルドのドリームランド"
-lMinniesMelodyland = "ミニーのメロディーランド"
-lToontownCentral = 'トゥーンタウンセントラル'
+lTundraWonderland = 'ブルブルランド'
+lFloweringGrove = 'デイジーガーデン'
+lToontropolisDocks = "ドナルドのハトバ"
+lTwilightDreamland = "ドナルドのドリームランド"
+lTheLandOfMusic = "ミニーのメロディーランド"
+lToontropolisPlaza = 'トゥーンタウンセントラル'
 lToonHQ = 'トゥーンＨＱ'
-lOutdoorZone = "チップとデールのどんぐり広場"
-lGoofySpeedway = "グーフィー・サーキット"
+lAcornAcres = "チップとデールのどんぐり広場"
+lToontropolisStadium = "グーフィー・サーキット"
 lGolfZone = "チップとデールのミニ・ゴルフ"
 
 lGagShop = 'ギャグショップ'
@@ -171,16 +171,16 @@ GlobalStreetNames = {
     }
 
 # reference the location name as [-1]; it's guaranteed to be the last entry
-DonaldsDock = ("", "", lDonaldsDock)
-ToontownCentral = ("", "", lToontownCentral)
-TheBrrrgh = ("", "", lTheBrrrgh)
-MinniesMelodyland = ("", "", lMinniesMelodyland)
-DaisyGardens = ("", "", lDaisyGardens)
+ToontropolisDocks = ("", "", lToontropolisDocks)
+ToontropolisPlaza = ("", "", lToontropolisPlaza)
+TundraWonderland = ("", "", lTundraWonderland)
+TheLandOfMusic = ("", "", lTheLandOfMusic)
+FloweringGrove = ("", "", lFloweringGrove)
 ConstructionZone = ("", "", "こうじちゅう")
-OutdoorZone = ("",     "",     lOutdoorZone)
+AcornAcres = ("",     "",     lAcornAcres)
 FunnyFarm = ("", "", "ファニー・ファーム")
-GoofySpeedway = ("", "", lGoofySpeedway)
-DonaldsDreamland = ("", "", lDonaldsDreamland)
+ToontropolisStadium = ("", "", lToontropolisStadium)
+TwilightDreamland = ("", "", lTwilightDreamland)
 BossbotHQ = ("", "", "ボスボットほんぶ")
 SellbotHQ = ("", "", "セルボットほんぶ")
 CashbotHQ = ("", "", "マネーボットほんぶ")
@@ -596,7 +596,7 @@ QuestsItemDict = {
     5009 : ["とりのえさ", "とりのえさ", ""],
     5010 : ["スプロケット", "スプロケット", ""],
     5011 : ["サラダ", "サラダ", ""],
-    5012 : [lDaisyGardens+"のかぎ", lDaisyGardens+"のかぎ", ""],
+    5012 : [lFloweringGrove+"のかぎ", lFloweringGrove+"のかぎ", ""],
     5013 : [lSellbotHQ+' 設計図', lSellbotHQ+' 設計図', ''],
     5014 : [lSellbotHQ+'のメモ', lSellbotHQ+'のメモ', ''],
     5015 : [lSellbotHQ+'のメモ', lSellbotHQ+'のメモ', ''],
@@ -687,7 +687,7 @@ INCOMPLETE_WRONG_NPC = 4
 COMPLETE = 5
 LEAVING = 6
 
-TheBrrrghTrackQuestDict = {
+TundraWonderlandTrackQuestDict = {
     GREETING : "",
     QUEST : "準備は整った。\aさあ、選びたいトラックがわかるまで世界中を旅してみよう。\aキミにとって最後のトラックになるから、良いものを選んでね。\aトラックを選んだらまたここに戻っておいで。！",
     INCOMPLETE_PROGRESS : "良いものを選んだほうがいいよ。",
@@ -1553,7 +1553,7 @@ QuestDialogDict = {
              QUEST : "ゲラゲラポイントが欲しいって？\aまず最初に悪いロウボット達をやっつけてからにしてくれ。" },
     
     # Johnny Cashmere will knit you a large bag if...
-    5303 : { QUEST : lTheBrrrgh+"が危険なコグ達であふれかえっているんだ。\aもし僕がキミなら、ここではギャグをもっと持ち歩くね。\aもしキミが足を棒にして働くんだったら、_toNpcName_が大きいバッグを作ることができるみたいだよ。_where_" },
+    5303 : { QUEST : lTundraWonderland+"が危険なコグ達であふれかえっているんだ。\aもし僕がキミなら、ここではギャグをもっと持ち歩くね。\aもしキミが足を棒にして働くんだったら、_toNpcName_が大きいバッグを作ることができるみたいだよ。_where_" },
     5304 : { GREETING: "",
              LEAVING : "",
              INCOMPLETE_PROGRESS : "まだロウボット達がそこら中にうようよしている。\aやっつけてくれ！" ,
@@ -4266,12 +4266,12 @@ SharedChatterGoodbyes = [
 
 MickeyChatter = (
         [ # Greetings specific to Mickey
-        lToontownCentral+"へようこそ！", #CC_mickey_chatter_greetings01.ogg
+        lToontropolisPlaza+"へようこそ！", #CC_mickey_chatter_greetings01.ogg
         "こんにちは！僕の名前は" + Mickey + "マウス。君の名前は？", #CC_mickey_chatter_greetings02.ogg
         ],
         [ # Comments
         "ねぇ、キミ！" + Donald + "を見かけなかった？", #CC_mickey_chatter_comments01.ogg
-        "これから、うっすらと霧の立ち込めた、"+lDonaldsDock+"に行こうと思うんだ！", #CC_mickey_chatter_comments02.ogg
+        "これから、うっすらと霧の立ち込めた、"+lToontropolisDocks+"に行こうと思うんだ！", #CC_mickey_chatter_comments02.ogg
         "もし僕の友達の" + Goofy + "に会ったら、よろしく言っておいてね。", #CC_mickey_chatter_comments03.ogg
         "ははっ！どうやら" + Daisy + "がお庭に新しいお花を植えたらしいよ。", #CC_mickey_chatter_comments04.ogg
         ],
@@ -4279,7 +4279,7 @@ MickeyChatter = (
         "これから、" + Minnie + "に会いにメロディーランドに行こうかなぁ。", #CC_mickey_chatter_goodbyes01.ogg
         "ああっ、" + Minnie + "とのデートにおくれちゃうよ！", #CC_mickey_chatter_goodbyes02.ogg
         "そろそろ" + Pluto + "に晩御飯の準備をしないと…", #CC_mickey_chatter_goodbyes03.ogg
-        "キミは"+lDonaldsDock+"に泳ぎに行ったことある？", #CC_mickey_chatter_goodbyes04.ogg
+        "キミは"+lToontropolisDocks+"に泳ぎに行ったことある？", #CC_mickey_chatter_goodbyes04.ogg
         "ドリームランドにおひるねしに行こうかなぁ…", #CC_mickey_chatter_goodbyes05.ogg
         ]
     )
@@ -4297,8 +4297,8 @@ MinnieChatter = (
         "ねぇ、" + Mickey + "を見かけなかった？", #CC_minnie_chatter_comments04.ogg
         "" + Goofy + "に会ったら、よろしくね。", #CC_minnie_chatter_comments05.ogg
         "たくさんの" + Cogs + "が" + Donald + "のドリームランドまわりにいるらしいわ。", #CC_minnie_chatter_comments06.ogg
-        lDonaldsDock+"には霧が立ち込めているみたいよ。", #CC_minnie_chatter_comments07.ogg
-        lDaisyGardens+"の迷路も試してみてね。", #CC_minnie_chatter_comments08.ogg
+        lToontropolisDocks+"には霧が立ち込めているみたいよ。", #CC_minnie_chatter_comments07.ogg
+        lFloweringGrove+"の迷路も試してみてね。", #CC_minnie_chatter_comments08.ogg
         "私も楽器を演奏してみようかしら。", #CC_minnie_chatter_comments091.ogg
         "ねぇ、あれを見て！", #CC_minnie_chatter_comments10.ogg
         "楽器の音色ってほんと素敵よね。", #CC_minnie_chatter_comments11.ogg
@@ -4330,7 +4330,7 @@ DaisyChatter = (
         "ねぇ、"+Donald+"を見かけなかった？どこ探しても見つからないのよ。",
         "私の友達の"+Minnie+"を見かけたら、よろしくって伝えてくださらない？",
         "いいガーデニングツールがあれば、植物もよく育つのよ。",
-        "たくさんの"+Cogs+"が"+lDonaldsDock+"にいるらしいのよ。",
+        "たくさんの"+Cogs+"が"+lToontropolisDocks+"にいるらしいのよ。",
         "毎日の水やりは植木をハッピーにするのよ！",
         "ピンクデイジーを育てたければ、黄色と赤のジェリービーンを植えてね。",
         "イエローデイジーを育てるには、黄色のジェリービーンを植えてね。",
@@ -4339,14 +4339,14 @@ DaisyChatter = (
         [ # Goodbyes
         "メロディーランドに%sに会いに行くところよ。" % Minnie,
         "%sとのピクニックに遅れちゃうわ～！" % Donald,
-        "これから"+lDonaldsDock+"に泳ぎに行こうかしら。",
+        "これから"+lToontropolisDocks+"に泳ぎに行こうかしら。",
         "ふぁ～っ。ちょっと眠くなったから、ドリームランドに行こうかしら。",
         ]
     )
 
 ChipChatter = (
         [ # Greetings
-        "%sにようこそ!" % lOutdoorZone,
+        "%sにようこそ!" % lAcornAcres,
         "やぁ、僕は" + Chip + "。キミの名前は？",
         "僕が" + Chip + "だよ！",
         "%、会えてほんとうにうれしいよ！",
@@ -4358,9 +4358,9 @@ ChipChatter = (
         "火山があるゴルフコースが一番むずかしいとおもうよ。",
         ],
         [ # Goodbyes
-        "これから" + lTheBrrrgh +"に行って%sとあそぶんだ！" % Pluto,
+        "これから" + lTundraWonderland +"に行って%sとあそぶんだ！" % Pluto,
         "これから%sに会いに行ってくるんだ。" % Donald,
-        "今日は" + lDonaldsDock + "までおよぎに行こうかなぁ♪",
+        "今日は" + lToontropolisDocks + "までおよぎに行こうかなぁ♪",
         "なんだかねむいなぁ…。ドリームランドでひとねむりしようかな。",
         ]
     )
@@ -4371,7 +4371,7 @@ DaleChatter = (
         "%、よくきてくれたね！",
         "こんにちは、僕" + Dale + "だよ。キミの名前は？",
         "僕は" + Chip + "だよ。",
-        "%sへようこそ！" % lOutdoorZone,
+        "%sへようこそ！" % lAcornAcres,
         "僕たちがチップとデールだよ。",
         ],
         [ # Comments
@@ -4389,7 +4389,7 @@ DaleChatter = (
 
 GoofyChatter = (
         [ # Greetings
-        "ようこそ、"+lDaisyGardens+"へ！", #CC_goofy_chatter_greetings01.ogg
+        "ようこそ、"+lFloweringGrove+"へ！", #CC_goofy_chatter_greetings01.ogg
         "僕の名前は" + Goofy + "。よろしくね。キミの名前は？", #CC_goofy_chatter_greetings02.ogg
         "おひょっ。キミにあえてうれしいよ。", #CC_goofy_chatter_greetings03.ogg
         ],
@@ -4410,16 +4410,16 @@ GoofyChatter = (
         [ # Goodbyes
         "これから、" + Minnie + "に会いに、メロディーランドに行くところなんだ。", #CC_goofy_chatter_goodbyes01.ogg
         "オヒョッ！急がないと遅れちゃう！" + Donald + "と約束してたんだ！", #CC_goofy_chatter_goodbyes02.ogg
-        lDonaldsDock+"に泳ぎに行こうかなぁ。", #CC_goofy_chatter_goodbyes03.ogg
+        lToontropolisDocks+"に泳ぎに行こうかなぁ。", #CC_goofy_chatter_goodbyes03.ogg
         "ふああ…お昼寝の時間みたい。ドリームランドに行かなくちゃ。", #CC_goofy_chatter_goodbyes04.ogg
         ]
     )
 
 
 
-GoofySpeedwayChatter = (
+ToontropolisStadiumChatter = (
         [ # Greetings
-        "ようこそ！"+lGoofySpeedway+"へ！",
+        "ようこそ！"+lToontropolisStadium+"へ！",
         "やあ、僕の名前は"+Goofy+"だよ。キミの名前を教えてよ。",
         "オヒョッ！キミに会えてうれしいよ%!",
         ],
@@ -4431,7 +4431,7 @@ GoofySpeedwayChatter = (
         "ねぇ、ちょっと！"+Donald+"を見なかった？",
         "おっと！"+Mickey+"の朝ごはんの準備をするのをすっかり忘れてたよ！",
         "もし僕のともだちの"+Mickey+"に会ったら、よろしく伝えてよ！",
-        "オヒョッ！"+lDonaldsDock+"に"+Cogs+"たちが、うようよしてるって！",
+        "オヒョッ！"+lToontropolisDocks+"に"+Cogs+"たちが、うようよしてるって！",
         "ブルブルランドのギャグショップでは、ぐるぐるめがねがなんと１ジェリービーンで売ってるよ！",
         "ボクのギャグショップではトゥーンタウン中で一番のジョークや笑いのたねを取りそろえてるんだよ！",
         "ギャグショップのパイは笑いの保障つき！笑わなかったらジェリービーンをちゃんとキミに返すよ！"
@@ -4439,7 +4439,7 @@ GoofySpeedwayChatter = (
         [ # Goodbyes
         "ちょっと%sに会いにメロディーランドに行ってくるよ。" % Mickey,
         "オヒョッ！%sとのゲームの約束におくれちゃう！" % Donald,
-        "ねえねえ、キミ！"+lDonaldsDock+"で泳ぎに行こうかな？",
+        "ねえねえ、キミ！"+lToontropolisDocks+"で泳ぎに行こうかな？",
         "あっ、お昼寝の時間だ！ドリームランドに行こうかなー。",
         ]
     )
@@ -4451,7 +4451,7 @@ DonaldChatter = (
         ],
         [ # Comments
         "ここではたまにこわいことがあるんだよ。", #CC_donald_chatter_comments01.ogg
-        "ねぇ、"+lDaisyGardens+"に行った？", #CC_donald_chatter_comments02.ogg
+        "ねぇ、"+lFloweringGrove+"に行った？", #CC_donald_chatter_comments02.ogg
         "今日もいい日だねっ！", #CC_donald_chatter_comments03.ogg
         "ねぇ、" + Mickey + "を見なかった？", #CC_donald_chatter_comments041.ogg
         "" + Goofy + "によろしくね。", #CC_donald_chatter_comments05.ogg
@@ -8892,7 +8892,7 @@ SummonDlgShopkeeper = "店主 "
 # Polar Place cheesy effect chat phrases
 PolarPlaceEffect1 = NPCToonNames[3306] + ": ポーラープレイスへようこそ！"
 PolarPlaceEffect2 = NPCToonNames[3306] + ": ちょっとこれを着てサイズを見てくれる？"
-PolarPlaceEffect3 = NPCToonNames[3306] + ": このかっこうは " + lTheBrrrgh + "でしか、着れないけどねー"
+PolarPlaceEffect3 = NPCToonNames[3306] + ": このかっこうは " + lTundraWonderland + "でしか、着れないけどねー"
 
 # LaserGrid game Labels
 LaserGameMine = "ガイコツを探せ！"

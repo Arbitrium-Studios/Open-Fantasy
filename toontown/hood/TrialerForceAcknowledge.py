@@ -33,9 +33,9 @@ class TrialerForceAcknowledge:
             return
         
         if ZoneUtil.getCanonicalHoodId(destHood) in \
-           (ToontownGlobals.ToontownCentral,
+           (ToontownGlobals.ToontropolisPlaza,
             ToontownGlobals.MyEstate,
-            ToontownGlobals.GoofySpeedway,
+            ToontownGlobals.ToontropolisStadium,
             ):
             # trialer going to TTC/Estate/Goofy Speedway, let them through
             letThrough()

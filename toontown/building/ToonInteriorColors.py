@@ -50,15 +50,15 @@ baseScheme = {
 
 
 colors={
-    DonaldsDock:{
+    ToontropolisDocks:{
         "TI_wainscotting":wainscottingBase,
         "TI_wallpaper":wallpaperBase,
         "TI_wallpaper_border":wallpaperBorderBase,
         "TI_door":doorBase,
         "TI_floor":floorBase,
     },
-    # NOTE: If you change ToontownCentral, change the Tutorial, too.
-    ToontownCentral:{
+    # NOTE: If you change ToontropolisPlaza, change the Tutorial, too.
+    ToontropolisPlaza:{
         "TI_wainscotting":wainscottingBase,
         "TI_wallpaper":wallpaperBase,
         "TI_wallpaper_border":wallpaperBorderBase,
@@ -67,13 +67,13 @@ colors={
         ],
         "TI_floor":floorBase,
     },
-    TheBrrrgh:baseScheme,
-    MinniesMelodyland:baseScheme,
-    DaisyGardens:baseScheme,
+    TundraWonderland:baseScheme,
+    TheLandOfMusic:baseScheme,
+    FloweringGrove:baseScheme,
     #ConstructionZone:baseScheme,
     #FunnyFarm:baseScheme,
-    GoofySpeedway:baseScheme,
-    DonaldsDreamland:{
+    ToontropolisStadium:baseScheme,
+    TwilightDreamland:{
         "TI_wainscotting":wainscottingBase,
         "TI_wallpaper":wallpaperBase,
         "TI_wallpaper_border":wallpaperBorderBase,

@@ -1,7 +1,8 @@
 from panda3d.core import *
+from panda3d.toontown import *
+from libotp import *
 from toontown.toonbase.ToonBaseGlobal import *
 from direct.gui.DirectGui import *
-from panda3d.core import *
 from direct.distributed.ClockDelta import *
 from toontown.minigame.OrthoWalk import *
 from string import *
@@ -14,12 +15,11 @@ from toontown.toon import Toon
 from direct.showbase import RandomNumGen
 from toontown.toonbase import TTLocalizer
 import random
-from otp.otpbase import PythonUtil
+from direct.showbase import PythonUtil
 from toontown.hood import Place
-from . import HouseGlobals
+from toontown.estate import HouseGlobals
 from toontown.building import ToonInteriorColors
 from direct.showbase.MessengerGlobal import messenger
-from panda3d.toontown import DNADoor
 
 class DistributedHouse(DistributedObject.DistributedObject):
     """
@@ -68,22 +68,20 @@ class DistributedHouse(DistributedObject.DistributedObject):
         DistributedObject.DistributedObject.delete(self)
 
     def clearNametag(self):
-        if self.nametag != None:
-           self.nametag.unmanage(base.marginManager)
-           self.nametag.setAvatar(NodePath())
-           self.nametag = None
+        if self.nametag:
+            self.nametag.unmanage(base.marginManager)
+            self.nametag.setAvatar(NodePath())
+            self.nametag = None
+        return
 
-    def load(self):        
-        self.notify.debug("load")
-
-        # Load the house once.  When we walk in a door, the house model will automatically
-        # get hidden by the EstateLoader.  Only remove the house node on deletion
+    def load(self):
+        self.notify.debug('load')
         if not self.house_loaded:
             if self.housePosInd == 1:
-                houseModelIndex = base.config.GetInt('want-custom-house',HouseGlobals.HOUSE_DEFAULT)
+                houseModelIndex = base.config.GetInt('want-custom-house', HouseGlobals.HOUSE_DEFAULT)
             else:
                 houseModelIndex = HouseGlobals.HOUSE_DEFAULT
-            houseModelIndex = base.config.GetInt('want-custom-house-all',houseModelIndex)
+            houseModelIndex = base.config.GetInt('want-custom-house-all', houseModelIndex)
             houseModel = self.cr.playGame.hood.loader.houseModels[houseModelIndex]
             self.house = houseModel.copyTo(self.cr.playGame.hood.loader.houseNode[self.housePosInd])
             self.house_loaded = 1
@@ -133,15 +131,7 @@ class DistributedHouse(DistributedObject.DistributedObject):
         #houseColor = HouseGlobals.houseColors[self.housePosInd]
         houseColor = HouseGlobals.stairWood
         color = Vec4(houseColor[0], houseColor[1], houseColor[2], 1)
-        #self.colors=ToonInteriorColors.colors[ToontownGlobals.MyEstate]
-        #color=self.randomGenerator.choice(self.colors["TI_door"])
-        DNADoor.setupDoor(doorNP,
-                          door_origin, door_origin,
-                          self.dnaStore,
-                          str(self.doId), color)
-
-        # put our name above the door
-        # SDN: this might change to be on the mailbox
+        DNADoor.setupDoor(doorNP, door_origin, door_origin, self.dnaStore, str(self.doId), color)
         self.__setupNamePlate()
         self.__setupFloorMat()
         self.__setupNametag()
@@ -208,9 +198,7 @@ class DistributedHouse(DistributedObject.DistributedObject):
             # don't bother putting an empty string up
             return
         else:
-            # make the name fit nicely on the floor mat
-            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self._name)
-
+            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self.name)
         nameText.setText(houseName)
         self._nameText = nameText
 
@@ -225,16 +213,14 @@ class DistributedHouse(DistributedObject.DistributedObject):
 
         sign_origin = self.house.find("**/sign_origin")
         pos = sign_origin.getPos()
-        sign_origin.setPosHpr(pos[0],pos[1],pos[2]+.15*textHeight,90,0,0)
-        self._namePlate = sign_origin.attachNewNode(self._nameText)
-        self._namePlate.setDepthWrite(0)
-        self._namePlate.setPos(0,-0.05,0)
-        self._namePlate.setScale(xScale)
-
+        sign_origin.setPosHpr(pos[0], pos[1], pos[2] + 0.15 * textHeight, 90, 0, 0)
+        self.namePlate = sign_origin.attachNewNode(self.nameText)
+        self.namePlate.setDepthWrite(0)
+        self.namePlate.setPos(0, -0.05, 0)
+        self.namePlate.setScale(xScale)
         return nameText
 
     def __setupFloorMat(self, changeColor = True):
-
         if self.floorMat:
             self.floorMat.removeNode()
             del self.floorMat
@@ -261,9 +247,7 @@ class DistributedHouse(DistributedObject.DistributedObject):
             # don't bother putting an empty string up
             return
         else:
-            # make the name fit nicely on the floor mat
-            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self._name)
-
+            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self.name)
         matText.setText(houseName)
         self.matText = matText
 
@@ -277,7 +261,7 @@ class DistributedHouse(DistributedObject.DistributedObject):
             xScale = 8.0 / textWidth
         mat_origin = self.house.find("**/mat_origin")
         pos = mat_origin.getPos()
-        mat_origin.setPosHpr(pos[0]-.15*textHeight,pos[1],pos[2],90,-90,0)
+        mat_origin.setPosHpr(pos[0] - 0.15 * textHeight, pos[1], pos[2], 90, -90, 0)
         self.floorMat = mat_origin.attachNewNode(self.matText)
         self.floorMat.setDepthWrite(0)
         self.floorMat.setPos(0,-.025,0)
@@ -291,7 +275,7 @@ class DistributedHouse(DistributedObject.DistributedObject):
         if (self._name == ""):
             houseName = ""
         else:
-            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self._name)
+            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self.name)
         self.nametag = NametagGroup()
         self.nametag.setFont(ToontownGlobals.getBuildingNametagFont())
         if TTLocalizer.BuildingNametagShadow:
@@ -434,9 +418,7 @@ class DistributedHouse(DistributedObject.DistributedObject):
             # don't bother putting an empty string up
             return
         else:
-            # make the name fit nicely on the floor mat
-            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self._name)
-
+            houseName = TTLocalizer.AvatarsHouse % TTLocalizer.GetPossesive(self.name)
         nameText.setText(houseName)
         self._nameText = nameText
 
@@ -454,10 +436,9 @@ class DistributedHouse(DistributedObject.DistributedObject):
         #debugAxis.reparentTo(sign_origin)
         #debugAxis.wrtReparentTo(render)
         pos = sign_origin.getPos()
-        sign_origin.setPosHpr(pos[0],pos[1],pos[2]+.15*textHeight,90,0,0)
-        self._namePlate = sign_origin.attachNewNode(self._nameText)
-        self._namePlate.setDepthWrite(0)
-        self._namePlate.setPos(0,-0.05,0)
-        self._namePlate.setScale(xScale)
-
+        sign_origin.setPosHpr(pos[0], pos[1], pos[2] + 0.15 * textHeight, 90, 0, 0)
+        self.namePlate = sign_origin.attachNewNode(self.nameText)
+        self.namePlate.setDepthWrite(0)
+        self.namePlate.setPos(0, -0.05, 0)
+        self.namePlate.setScale(xScale)
         return nameText

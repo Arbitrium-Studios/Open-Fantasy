@@ -1,4 +1,4 @@
-group "toontownCentral" [
+group "ToontropolisPlaza" [
  visgroup "14000:safe_zone" [
   vis [   "14000:safe_zone"   ]
   prop "toontown_central_beta_DNARoot" [

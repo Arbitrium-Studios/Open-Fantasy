@@ -3,12 +3,13 @@
 from toontown.toonbase.ToontownGlobals import *
 from toontown.toonbase.ToonBaseGlobal import *
 from panda3d.core import *
+from panda3d.toontown import *
 from direct.interval.IntervalGlobal import *
 from direct.distributed.ClockDelta import *
 
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObject
-from . import HouseGlobals
+from toontown.estate import HouseGlobals
 from toontown.catalog import CatalogItemList
 from toontown.catalog import CatalogItem
 from toontown.catalog import CatalogSurfaceItem
@@ -16,32 +17,18 @@ from toontown.catalog import CatalogWallpaperItem
 from toontown.catalog import CatalogFlooringItem
 from toontown.catalog import CatalogMouldingItem
 from toontown.catalog import CatalogWainscotingItem
-from panda3d.toontown import DNADoor
-
-WindowPlugNames = (
-    "**/windowcut_a*",
-    "**/windowcut_b*",
-    "**/windowcut_c*",
-    "**/windowcut_d*",
-    "**/windowcut_e*",
-    "**/windowcut_f*",
-    )
-
-RoomNames = (
-    "**/group2",
-    "**/group1",
-    )
-        
-WallNames = ("ceiling*", "wall_side_middle*", "wall_front_middle*",
-             "windowcut_*")
-MouldingNames = ("wall_side_top*", "wall_front_top*")
-FloorNames = ("floor*",)
-WainscotingNames = ("wall_side_bottom*", "wall_front_bottom*")
-BorderNames = ("wall_side_middle*_border", "wall_front_middle*_border",
-               "windowcut_*_border")
-        
-WallpaperPieceNames = (WallNames, MouldingNames, FloorNames, WainscotingNames,
-                       BorderNames)
+WindowPlugNames = ('**/windowcut_a*', '**/windowcut_b*', '**/windowcut_c*', '**/windowcut_d*', '**/windowcut_e*', '**/windowcut_f*')
+RoomNames = ('**/group2', '**/group1')
+WallNames = ('ceiling*', 'wall_side_middle*', 'wall_front_middle*', 'windowcut_*')
+MouldingNames = ('wall_side_top*', 'wall_front_top*')
+FloorNames = ('floor*',)
+WainscotingNames = ('wall_side_bottom*', 'wall_front_bottom*')
+BorderNames = ('wall_side_middle*_border', 'wall_front_middle*_border', 'windowcut_*_border')
+WallpaperPieceNames = (WallNames,
+ MouldingNames,
+ FloorNames,
+ WainscotingNames,
+ BorderNames)
 
 class DistributedHouseInterior(DistributedObject.DistributedObject):
     """
@@ -85,14 +72,8 @@ class DistributedHouseInterior(DistributedObject.DistributedObject):
         DistributedObject.DistributedObject.delete(self)
     
     def setup(self):
-        assert(self.debugPrint("setup()"))
-
-        dnaStore=base.cr.playGame.dnaStore
-
-        # Load the interior for this house
-        self.interior = loader.loadModel("phase_5.5/models/estate/tt_m_ara_int_estateHouseA")
-
-        assert(self.interior != None)
+        dnaStore = base.cr.playGame.dnaStore
+        self.interior = loader.loadModel('phase_5.5/models/estate/tt_m_ara_int_estateHouseA')
         self.interior.reparentTo(render)
         
         # Door:
@@ -111,17 +92,8 @@ class DistributedHouseInterior(DistributedObject.DistributedObject):
         # We do this instead of decals
         houseColor = HouseGlobals.atticWood
         color = Vec4(houseColor[0], houseColor[1], houseColor[2], 1)
-        DNADoor.setupDoor(doorNP, 
-                          door_origin, door_origin, 
-                          dnaStore,
-                          str(self.houseId), color)
-
-        # Setting the wallpaper texture with a priority overrides
-        # the door texture, if it's decalled.  So, we're going to
-        # move it out from the decal, and float it in front of
-        # the wall:
-        doorFrame = doorNP.find("door_*_flat")
-        #doorFrame.wrtReparentTo(self.interior)
+        DNADoor.setupDoor(doorNP, door_origin, door_origin, dnaStore, str(self.houseId), color)
+        doorFrame = doorNP.find('door_*_flat')
         doorFrame.setColor(color)
         assert(not doorFrame.isEmpty())
 
@@ -172,14 +144,13 @@ class DistributedHouseInterior(DistributedObject.DistributedObject):
             return
 
         numSurfaceTypes = CatalogSurfaceItem.NUM_ST_TYPES
-        numRooms = min(len(self.wallpaper) // numSurfaceTypes, len(RoomNames))
-
-        for room in range(numRooms):
+        numRooms = min(len(self.wallpaper) / numSurfaceTypes, len(RoomNames))
+        for room in xrange(numRooms):
             roomName = RoomNames[room]
             roomNode = self.interior.find(roomName)
 
             if not roomNode.isEmpty():
-                for surface in range(numSurfaceTypes):
+                for surface in xrange(numSurfaceTypes):
                     slot = room * numSurfaceTypes + surface
                     wallpaper = self.wallpaper[slot]
                     color = wallpaper.getColor()
@@ -204,8 +175,7 @@ class DistributedHouseInterior(DistributedObject.DistributedObject):
                             CatalogSurfaceItem.STWallpaper):
                             color2 = wallpaper.getBorderColor()
                             texture2 = wallpaper.loadBorderTexture()
-                            nodes = roomNode.findAllMatches(
-                                '**/%s_border' % (str))
+                            nodes = roomNode.findAllMatches('**/%s_border' % str)
                             for node in nodes:
                                 node.setColorScale(*color2)
                                 node.setTexture(texture2, 1)
@@ -267,29 +237,28 @@ class DistributedHouseInterior(DistributedObject.DistributedObject):
 
     
     def setWallpaper(self, items):
-        self.wallpaper = CatalogItemList.CatalogItemList(items, store = CatalogItem.Customization)
+        self.wallpaper = CatalogItemList.CatalogItemList(items, store=CatalogItem.Customization)
         if self.interior:
             self.__colorWalls()
     
     def setWindows(self, items):
-        self.windows = CatalogItemList.CatalogItemList(items, store = CatalogItem.Customization | CatalogItem.WindowPlacement)
+        self.windows = CatalogItemList.CatalogItemList(items, store=CatalogItem.Customization | CatalogItem.WindowPlacement)
         if self.interior:
             self.__setupWindows()
 
-    def testWallpaperCombo(self,
-                           wallpaperType, wallpaperColorIndex,
-                           borderIndex, borderColorIndex,
-                           mouldingType, mouldingColorIndex,
-                           flooringType, flooringColorIndex,
-                           wainscotingType, wainscotingColorIndex):
-        wallpaperItem = CatalogWallpaperItem.CatalogWallpaperItem(wallpaperType, wallpaperColorIndex, borderIndex, borderColorIndex )
+    def testWallpaperCombo(self, wallpaperType, wallpaperColorIndex, borderIndex, borderColorIndex, mouldingType, mouldingColorIndex, flooringType, flooringColorIndex, wainscotingType, wainscotingColorIndex):
+        wallpaperItem = CatalogWallpaperItem.CatalogWallpaperItem(wallpaperType, wallpaperColorIndex, borderIndex, borderColorIndex)
         mouldingItem = CatalogMouldingItem.CatalogMouldingItem(mouldingType, mouldingColorIndex)
         flooringItem = CatalogFlooringItem.CatalogFlooringItem(flooringType, flooringColorIndex)
         wainscotingItem = CatalogWainscotingItem.CatalogWainscotingItem(wainscotingType, wainscotingColorIndex)
-        self.wallpaper = CatalogItemList.CatalogItemList(
-            [wallpaperItem, mouldingItem, flooringItem, wainscotingItem,
-             wallpaperItem, mouldingItem, flooringItem, wainscotingItem],
-            store = CatalogItem.Customization)
+        self.wallpaper = CatalogItemList.CatalogItemList([wallpaperItem,
+         mouldingItem,
+         flooringItem,
+         wainscotingItem,
+         wallpaperItem,
+         mouldingItem,
+         flooringItem,
+         wainscotingItem], store=CatalogItem.Customization)
         if self.interior:
             self.__colorWalls()
         

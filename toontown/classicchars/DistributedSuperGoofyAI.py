@@ -1,7 +1,7 @@
 """DistributedSuperGoofyAI module: contains the DistributedMickeyAI class"""
 
 from otp.ai.AIBaseGlobal import *
-from toontown.classicchars import DistributedGoofySpeedwayAI
+from toontown.classicchars import DistributedToontropolisStadiumAI
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM, State
 from direct.fsm import State
@@ -12,7 +12,7 @@ from . import DistributedCCharBaseAI
 from . import CharStateDatasAI
 from toontown.toonbase import TTLocalizer
 
-class DistributedSuperGoofyAI(DistributedGoofySpeedwayAI.DistributedGoofySpeedwayAI):
+class DistributedSuperGoofyAI(DistributedToontropolisStadiumAI.DistributedToontropolisStadiumAI):
 
     notify = DirectNotifyGlobal.directNotify.newCategory("DistributedSuperGoofyAI")
 

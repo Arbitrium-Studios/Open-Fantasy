@@ -40,7 +40,7 @@ class PetTraitFixer(RepairAvatars.PetIterator):
     def processPet(self, pet, db):
         RepairAvatars.PetIterator.processPet(self, pet, db)
         # the safezone should be TTC
-        if pet.getSafeZone() != ToontownGlobals.ToontownCentral:
+        if pet.getSafeZone() != ToontownGlobals.ToontropolisPlaza:
             print((
                 'Warning: pet %s is a pet that does not need to be patched!' %
                 pet.doId))
@@ -100,7 +100,7 @@ class PetTraitFixer(RepairAvatars.PetIterator):
         # this will hold the names of modified values for the pet
         fields = []
 
-        if newSz != ToontownGlobals.ToontownCentral:
+        if newSz != ToontownGlobals.ToontropolisPlaza:
             print('newSafezone: %s' % newSz)
             # recalculate the pet's traits
             newTraits = PetTraits.PetTraits(pet.getTraitSeed(), newSz)

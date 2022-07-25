@@ -14,14 +14,8 @@ class BankGui(DirectFrame):
 
     notify = DirectNotifyGlobal.directNotify.newCategory("BankGui")
 
-    def __init__(self, doneEvent, allowWithdraw=1):
-        DirectFrame.__init__(self,
-                             relief = None,
-                             geom = DGG.getDefaultDialogGeom(),
-                             geom_color = ToontownGlobals.GlobalDialogColor,
-                             geom_scale = (1.33,1,1.1),
-                             pos = (0,0,0),
-                             )
+    def __init__(self, doneEvent, allowWithdraw = 1):
+        DirectFrame.__init__(self, relief=None, geom=DGG.getDefaultDialogGeom(), geom_color=ToontownGlobals.GlobalDialogColor, geom_scale=(1.33, 1, 1.1), pos=(0, 0, 0))
         self.initialiseoptions(BankGui)
         # Send this when we are done so whoever made us can get a callback
         self.doneEvent = doneEvent
@@ -29,104 +23,33 @@ class BankGui(DirectFrame):
         self.__transactionAmount = 0
 
         buttons = loader.loadModel('phase_3/models/gui/dialog_box_buttons_gui')
-        jarGui = loader.loadModel("phase_3.5/models/gui/jar_gui")
-        arrowGui = loader.loadModel("phase_3/models/gui/create_a_toon_gui")
-        bankModel = loader.loadModel("phase_5.5/models/estate/jellybeanBank.bam")
-        # If we set this on the entire bank, the billboard jellybeans goes away
-        # Let's just set it on the pig, the rest of the bank looks ok
-        bankModel.find("**/pig").setDepthWrite(1)
-        bankModel.find("**/pig").setDepthTest(1)
-
-        # Init buttons
-        okImageList = (buttons.find('**/ChtBx_OKBtn_UP'),
-                       buttons.find('**/ChtBx_OKBtn_DN'),
-                       buttons.find('**/ChtBx_OKBtn_Rllvr'))
-        cancelImageList = (buttons.find('**/CloseBtn_UP'),
-                           buttons.find('**/CloseBtn_DN'),
-                           buttons.find('**/CloseBtn_Rllvr'))
-        arrowImageList = (arrowGui.find("**/CrtATn_R_Arrow_UP"),
-                          arrowGui.find("**/CrtATn_R_Arrow_DN"),
-                          arrowGui.find("**/CrtATn_R_Arrow_RLVR"),
-                          arrowGui.find("**/CrtATn_R_Arrow_UP"))
-
-        self.cancelButton = DirectButton(
-            parent = self,
-            relief = None,
-            image = cancelImageList,
-            pos = (-0.2, 0, -0.4),
-            text = TTLocalizer.BankGuiCancel,
-            text_scale = 0.06,
-            text_pos = (0,-0.1),
-            command = self.__cancel,
-            )
-        self.okButton = DirectButton(
-            parent = self,
-            relief = None,
-            image = okImageList,
-            pos = (0.2, 0, -0.4),
-            text = TTLocalizer.BankGuiOk,
-            text_scale = 0.06,
-            text_pos = (0,-0.1),
-            command = self.__requestTransaction,
-            )
-
-        self.jarDisplay = DirectLabel(
-            parent = self,
-            relief = None,
-            pos = (-0.4,0,0),
-            scale = 0.7,
-            text = str(base.localAvatar.getMoney()),
-            text_scale = 0.2,
-            text_fg = (0.95, 0.95, 0, 1),
-            text_shadow = (0, 0, 0, 1),
-            text_pos = (0, -0.1, 0),
-            image = jarGui.find("**/Jar"),
-            text_font = ToontownGlobals.getSignFont(),
-            )
-        self.bankDisplay = DirectLabel(
-            parent = self,
-            relief = None,
-            pos = (0.4,0,0),
-            scale = 0.9,
-            text = str(base.localAvatar.getBankMoney()),
-            text_scale = 0.2,
-            text_fg = (0.95, 0.95, 0, 1),
-            text_shadow = (0, 0, 0, 1),
-            text_pos = (0, -0.1, 0),
-            geom = bankModel,
-            geom_scale = 0.08,
-            geom_pos = (0, 10, -0.26),
-            geom_hpr = (0, 0, 0),
-            text_font = ToontownGlobals.getSignFont(),
-            )
-
-        self.depositArrow = DirectButton(
-            parent = self,
-            relief = None,
-            image = arrowImageList,
-            image_scale = (1,1,1),
-            image3_color = Vec4(0.6,0.6,0.6,0.25),
-            pos = (0.01, 0, 0.15),
-            )
-        self.withdrawArrow = DirectButton(
-            parent = self,
-            relief = None,
-            image = arrowImageList,
-            image_scale = (-1,1,1),
-            image3_color = Vec4(0.6,0.6,0.6,0.25),
-            pos = (-0.01, 0, -0.15),
-            )
-
+        jarGui = loader.loadModel('phase_3.5/models/gui/jar_gui')
+        arrowGui = loader.loadModel('phase_3/models/gui/create_a_toon_gui')
+        bankModel = loader.loadModel('phase_5.5/models/estate/jellybeanBank.bam')
+        bankModel.setDepthWrite(1)
+        bankModel.setDepthTest(1)
+        bankModel.find('**/jellybeans').setDepthWrite(0)
+        bankModel.find('**/jellybeans').setDepthTest(0)
+        okImageList = (buttons.find('**/ChtBx_OKBtn_UP'), buttons.find('**/ChtBx_OKBtn_DN'), buttons.find('**/ChtBx_OKBtn_Rllvr'))
+        cancelImageList = (buttons.find('**/CloseBtn_UP'), buttons.find('**/CloseBtn_DN'), buttons.find('**/CloseBtn_Rllvr'))
+        arrowImageList = (arrowGui.find('**/CrtATn_R_Arrow_UP'),
+         arrowGui.find('**/CrtATn_R_Arrow_DN'),
+         arrowGui.find('**/CrtATn_R_Arrow_RLVR'),
+         arrowGui.find('**/CrtATn_R_Arrow_UP'))
+        self.cancelButton = DirectButton(parent=self, relief=None, image=cancelImageList, pos=(-0.2, 0, -0.4), text=TTLocalizer.BankGuiCancel, text_scale=0.06, text_pos=(0, -0.1), command=self.__cancel)
+        self.okButton = DirectButton(parent=self, relief=None, image=okImageList, pos=(0.2, 0, -0.4), text=TTLocalizer.BankGuiOk, text_scale=0.06, text_pos=(0, -0.1), command=self.__requestTransaction)
+        self.jarDisplay = DirectLabel(parent=self, relief=None, pos=(-0.4, 0, 0), scale=0.7, text=str(base.localAvatar.getMoney()), text_scale=0.2, text_fg=(0.95, 0.95, 0, 1), text_shadow=(0, 0, 0, 1), text_pos=(0, -0.1, 0), image=jarGui.find('**/Jar'), text_font=ToontownGlobals.getSignFont())
+        self.bankDisplay = DirectLabel(parent=self, relief=None, pos=(0.4, 0, 0), scale=0.9, text=str(base.localAvatar.getBankMoney()), text_scale=0.2, text_fg=(0.95, 0.95, 0, 1), text_shadow=(0, 0, 0, 1), text_pos=(0, -0.1, 0), geom=bankModel, geom_scale=0.08, geom_pos=(0, 10, -0.26), geom_hpr=(0, 0, 0), text_font=ToontownGlobals.getSignFont())
+        self.depositArrow = DirectButton(parent=self, relief=None, image=arrowImageList, image_scale=(1, 1, 1), image3_color=Vec4(0.6, 0.6, 0.6, 0.25), pos=(0.01, 0, 0.15))
+        self.withdrawArrow = DirectButton(parent=self, relief=None, image=arrowImageList, image_scale=(-1, 1, 1), image3_color=Vec4(0.6, 0.6, 0.6, 0.25), pos=(-0.01, 0, -0.15))
         self.depositArrow.bind(DGG.B1PRESS, self.__depositButtonDown)
         self.depositArrow.bind(DGG.B1RELEASE, self.__depositButtonUp)
 
         self.withdrawArrow.bind(DGG.B1PRESS, self.__withdrawButtonDown)
         self.withdrawArrow.bind(DGG.B1RELEASE, self.__withdrawButtonUp)
-
-        self.accept("bankAsleep", self.__cancel)
-        self.accept(localAvatar.uniqueName("moneyChange"), self.__moneyChange)
-        self.accept(localAvatar.uniqueName("bankMoneyChange"), self.__bankMoneyChange)
-
+        self.accept('bankAsleep', self.__cancel)
+        self.accept(localAvatar.uniqueName('moneyChange'), self.__moneyChange)
+        self.accept(localAvatar.uniqueName('bankMoneyChange'), self.__bankMoneyChange)
         if allowWithdraw:
             self.depositArrow.setPos(0.01, 0, 0.15)
             self.withdrawArrow.setPos(-0.01, 0, -0.15)
@@ -192,8 +115,10 @@ class BankGui(DirectFrame):
         # Update the text on the jar and bank with the new values
         self.jarDisplay['text'] = str(newJarMoney)
         self.bankDisplay['text'] = str(newBankMoney)
-        # Return the new states of our balances
-        return (hitLimit, newJarMoney, newBankMoney, self.__transactionAmount)
+        return (hitLimit,
+         newJarMoney,
+         newBankMoney,
+         self.__transactionAmount)
 
     def __runCounter(self, task):
         if ((task.time - task.prevTime) < task.delayTime):

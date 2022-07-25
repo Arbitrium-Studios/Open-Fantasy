@@ -63,11 +63,11 @@ from libotp.settings.Settings import Settings
 from panda3d.otp import CFThought, CFTimeout
 from panda3d.otp import WhisperPopup
 from toontown.quest import QuestMap
-
-# Checks whether we want to display the news page
-# which uses Awesomium to render HTML
-WantNewsPage = base.config.GetBool('want-news-page', ToontownGlobals.DefaultWantNewsPageSetting)
-from toontown.toontowngui import NewsPageButtonManager
+from toontown.toon.DistributedNPCToonBase import DistributedNPCToonBase
+from toontown.catalog import CatalogNotifyDialog
+WantNewsPage = base.config.GetBool(
+    'want-news-page',
+    ToontownGlobals.DefaultWantNewsPageSetting)
 if WantNewsPage:
     from toontown.shtiker import NewsPage
 
@@ -1697,15 +1697,12 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         self.hideFurnitureGui()
         self.hideClarabelleGui()
         clarabelleHidden = 1
-
         self.ignore(ToontownGlobals.FriendsListHotkey)
-#        import pdb; pdb.set_trace()
-
-        if self.friendsListButtonActive and \
-           self.friendsListButtonObscured <= 0:
+        if self.friendsListButtonActive and self.friendsListButtonObscured <= 0:
             self.bFriendsList.show()
-            self.accept(ToontownGlobals.FriendsListHotkey, self.sendFriendsListEvent)
-
+            self.accept(
+                ToontownGlobals.FriendsListHotkey,
+                self.sendFriendsListEvent)
             if self.clarabelleButtonObscured <= 0 and self.isTeleportAllowed():
                 if self.catalogNotify == ToontownGlobals.NewItems or \
                    self.mailboxNotify == ToontownGlobals.NewItems or \

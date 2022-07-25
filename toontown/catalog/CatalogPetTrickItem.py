@@ -25,10 +25,7 @@ class CatalogPetTrickItem(CatalogItem.CatalogItem):
         return 1
 
     def reachedPurchaseLimit(self, avatar):
-        # Returns true if the item cannot be bought because the avatar
-        # has already bought his limit on this item.
-        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder \
-           or self in avatar.awardMailboxContents or self in avatar.onAwardOrder:
+        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder or not hasattr(avatar, 'petTrickPhrases'):
             return 1
         return self.trickId in avatar.petTrickPhrases
         
@@ -67,19 +64,15 @@ class CatalogPetTrickItem(CatalogItem.CatalogItem):
         # Don't import this at the top of the file, since this code
         # must run on the AI.
         from toontown.pets import PetDNA, Pet
-
-        pet = Pet.Pet(forGui = 1)
-
-        # We use the avatar's own pet if he/she has a pet (and we know
-        # its DNA), otherwise use a random pet.
-        dna = avatar.petDNA
+        pet = Pet.Pet(forGui=1)
+        dna = avatar.getPetDNA()
         if dna == None:
             dna = PetDNA.getRandomPetDNA()
         pet.setDNA(dna)
         
         pet.setH(180)
+        pet.setScale(1.25)
         model, ival = self.makeFrameModel(pet, 0)
-        pet.setScale(2.0)
         pet.setP(-40)
 
         # Discard the ival from makeFrameModel, since we don't want to
@@ -89,9 +82,7 @@ class CatalogPetTrickItem(CatalogItem.CatalogItem):
         name = "petTrick-item-%s" % (self.sequenceNumber)
         CatalogPetTrickItem.sequenceNumber += 1
         if track != None:
-            track = Sequence(Sequence(track),
-                             ActorInterval(pet, 'neutral', duration = 2),
-                             name = name)
+            track = Sequence(Sequence(track), ActorInterval(pet, 'neutral', duration=2), name=name)
         else:
             pet.animFSM.request('neutral')
             track = Sequence(Wait(4),
@@ -108,11 +99,10 @@ class CatalogPetTrickItem(CatalogItem.CatalogItem):
         assert self.petPicture
         self.petPicture.delete()
         self.petPicture = None
-        
-    def output(self, store = ~0):
-        return "CatalogPetTrickItem(%s%s)" % (
-            self.trickId,
-            self.formatOptionalData(store))
+        return
+
+    def output(self, store = -1):
+        return 'CatalogPetTrickItem(%s%s)' % (self.trickId, self.formatOptionalData(store))
 
     def compareTo(self, other):
         return self.trickId - other.trickId
@@ -137,10 +127,8 @@ class CatalogPetTrickItem(CatalogItem.CatalogItem):
         
 
 def getAllPetTricks():
-    # Returns a list of all valid CatalogPetTrickItems.
     _list = []
     for trickId in list(PetTricks.TrickId2scIds.keys()):
         _list.append(CatalogPetTrickItem(trickId))
 
     return _list
-

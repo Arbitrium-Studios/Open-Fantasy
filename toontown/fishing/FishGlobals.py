@@ -87,7 +87,15 @@ RodPriceDict = {
     3: 1200,
     4: 2000,
     }
-
+TankPriceDict = {0: 0,
+ 40: 400,
+ 60: 800,
+ 80: 1200,
+ 100: 2000}
+NextTank = {20: 40,
+ 40: 60,
+ 60: 80,
+ 80: 100}
 # This is how much each rod changes the global rarity dice rolls These get
 # multiplied into the GlobalRarityDialBase, thus making the rare fish less
 # rare.  The rarity curve is controlled by this exponent in the dict
@@ -192,96 +200,96 @@ TTG = ToontownGlobals
 # Each SPECIES defines properties: (WEIGHT_MIN, WEIGHT_MAX, RARITY, ZONE_LIST)
 __fishDict = {
     0: ( ( 1, 3, 1, (Anywhere, ) ), # Balloon Fish
-         ( 1, 1, 4, (TTG.ToontownCentral, Anywhere) ), # Hot Air Balloon Fish
-         ( 3, 5, 5, (TTG.PunchlinePlace, TTG.TheBrrrgh) ), # Weather Balloon Fish
-         ( 3, 5, 3, (TTG.SillyStreet, TTG.DaisyGardens) ), # Water Balloon Fish
-         ( 1, 5, 2, (TTG.LoopyLane, TTG.ToontownCentral) ), # Red Balloon Fish
+         ( 1, 1, 4, (TTG.ToontropolisPlaza, Anywhere) ), # Hot Air Balloon Fish
+         ( 3, 5, 5, (TTG.PunchlinePlace, TTG.TundraWonderland) ), # Weather Balloon Fish
+         ( 3, 5, 3, (TTG.SillyStreet, TTG.FloweringGrove) ), # Water Balloon Fish
+         ( 1, 5, 2, (TTG.LoopyLane, TTG.ToontropolisPlaza) ), # Red Balloon Fish
          ),
-    2: ( ( 2, 6, 1, (TTG.DaisyGardens, Anywhere) ), # Cat Fish
-         ( 2, 6, 9, (TTG.ElmStreet, TTG.DaisyGardens) ), # Siamese Cat Fish
+    2: ( ( 2, 6, 1, (TTG.FloweringGrove, Anywhere) ), # Cat Fish
+         ( 2, 6, 9, (TTG.ElmStreet, TTG.FloweringGrove) ), # Siamese Cat Fish
          ( 5, 11, 4, (TTG.LullabyLane, ) ), # Alley Cat Fish
-         ( 2, 6, 3, (TTG.DaisyGardens, TTG.MyEstate) ), # Tabby Cat Fish
-         ( 5, 11, 2, (TTG.DonaldsDreamland, TTG.MyEstate) ), # Tom Cat Fish
+         ( 2, 6, 3, (TTG.FloweringGrove, TTG.MyEstate) ), # Tabby Cat Fish
+         ( 5, 11, 2, (TTG.TwilightDreamland, TTG.MyEstate) ), # Tom Cat Fish
          ),
-    4: ( ( 2, 8, 1, (TTG.ToontownCentral, Anywhere) ), # Clown Fish
-         ( 2, 8, 4, (TTG.ToontownCentral, Anywhere) ), # Sad Clown Fish
-         ( 2, 8, 2, (TTG.ToontownCentral, Anywhere) ), # Party Clown Fish
-         ( 2, 8, 6, (TTG.ToontownCentral, TTG.MinniesMelodyland) ), # Circus Clown Fish
+    4: ( ( 2, 8, 1, (TTG.ToontropolisPlaza, Anywhere) ), # Clown Fish
+         ( 2, 8, 4, (TTG.ToontropolisPlaza, Anywhere) ), # Sad Clown Fish
+         ( 2, 8, 2, (TTG.ToontropolisPlaza, Anywhere) ), # Party Clown Fish
+         ( 2, 8, 6, (TTG.ToontropolisPlaza, TTG.TheLandOfMusic) ), # Circus Clown Fish
          ),
-    6: ( ( 8, 12, 1, (TTG.TheBrrrgh, ) ), # Frozen Fish
+    6: ( ( 8, 12, 1, (TTG.TundraWonderland, ) ), # Frozen Fish
          ),
     8: ( ( 1, 5, 1, (Anywhere, ) ), # Star Fish
-         ( 2, 6, 2, (TTG.MinniesMelodyland, Anywhere) ), # Five Star Fish
-         ( 5, 10, 5, (TTG.MinniesMelodyland, Anywhere) ), # Rock Star Fish
+         ( 2, 6, 2, (TTG.TheLandOfMusic, Anywhere) ), # Five Star Fish
+         ( 5, 10, 5, (TTG.TheLandOfMusic, Anywhere) ), # Rock Star Fish
          ( 1, 5, 7, (TTG.MyEstate, Anywhere) ), # Shining Star Fish
          ( 1, 5, 10, (TTG.MyEstate, Anywhere) ), # All Star Fish
          ),
     10: ( ( 6, 10, 9, (TTG.MyEstate, Anywhere) ), # Holey Mackerel
           ),
-    12: ( ( 7, 15, 1, (TTG.DonaldsDock, Anywhere) ), # Dog Fish
-          ( 18, 20, 6, (TTG.DonaldsDock, TTG.MyEstate) ), # Bull Dog Fish
-          ( 1, 5, 5, (TTG.DonaldsDock, TTG.MyEstate) ), # Hot Dog Fish
-          ( 3, 7, 4, (TTG.DonaldsDock, TTG.MyEstate) ), # Dalmation Dog Fish
-          ( 1, 2, 2, (TTG.DonaldsDock, Anywhere) ), # Puppy Dog Fish
+    12: ( ( 7, 15, 1, (TTG.ToontropolisDocks, Anywhere) ), # Dog Fish
+          ( 18, 20, 6, (TTG.ToontropolisDocks, TTG.MyEstate) ), # Bull Dog Fish
+          ( 1, 5, 5, (TTG.ToontropolisDocks, TTG.MyEstate) ), # Hot Dog Fish
+          ( 3, 7, 4, (TTG.ToontropolisDocks, TTG.MyEstate) ), # Dalmation Dog Fish
+          ( 1, 2, 2, (TTG.ToontropolisDocks, Anywhere) ), # Puppy Dog Fish
           ),
-    14: ( ( 2, 6, 1, (TTG.DaisyGardens, TTG.MyEstate, Anywhere) ), # Amore Eel
-          ( 2, 6, 3, (TTG.DaisyGardens, TTG.MyEstate) ), # Electric Amore Eel
+    14: ( ( 2, 6, 1, (TTG.FloweringGrove, TTG.MyEstate, Anywhere) ), # Amore Eel
+          ( 2, 6, 3, (TTG.FloweringGrove, TTG.MyEstate) ), # Electric Amore Eel
           ),
-    16: ( ( 4, 12, 5, (TTG.MinniesMelodyland, Anywhere) ), # Nurse Shark
-          ( 4, 12, 7, (TTG.BaritoneBoulevard, TTG.MinniesMelodyland) ), # Clara Nurse Shark
-          ( 4, 12, 8, (TTG.TenorTerrace, TTG.MinniesMelodyland) ), # Florence Nurse Shark
+    16: ( ( 4, 12, 5, (TTG.TheLandOfMusic, Anywhere) ), # Nurse Shark
+          ( 4, 12, 7, (TTG.BaritoneBoulevard, TTG.TheLandOfMusic) ), # Clara Nurse Shark
+          ( 4, 12, 8, (TTG.TenorTerrace, TTG.TheLandOfMusic) ), # Florence Nurse Shark
           ),
 
     # NOTE: Do not change the locations of the King Crab. They have been discussed in
     # marketing materials as being in these spots.
-    18: ( ( 2, 4, 3, (TTG.DonaldsDock, Anywhere) ), # King Crab
-          ( 5, 8, 7, (TTG.TheBrrrgh, ) ), # Alaskan King Crab
+    18: ( ( 2, 4, 3, (TTG.ToontropolisDocks, Anywhere) ), # King Crab
+          ( 5, 8, 7, (TTG.TundraWonderland, ) ), # Alaskan King Crab
           ( 4, 6, 8, (TTG.LighthouseLane, ) ), # Old King Crab
           ),
     
-    20: ( ( 4, 6, 1, (TTG.DonaldsDreamland, ) ), # Moon Fish
-          ( 14, 18, 10, (TTG.DonaldsDreamland, ) ), # Full Moon Fish
+    20: ( ( 4, 6, 1, (TTG.TwilightDreamland, ) ), # Moon Fish
+          ( 14, 18, 10, (TTG.TwilightDreamland, ) ), # Full Moon Fish
           ( 6, 10, 8, (TTG.LullabyLane, ) ), # Half Moon Fish
-          ( 1, 1, 3, (TTG.DonaldsDreamland, ) ), # New Moon Fish
+          ( 1, 1, 3, (TTG.TwilightDreamland, ) ), # New Moon Fish
           ( 2, 6, 6, (TTG.LullabyLane, ) ), # Crescent Moon Fish
-          ( 10, 14, 4, (TTG.DonaldsDreamland, TTG.DaisyGardens) ), # Harvest Moon Fish
+          ( 10, 14, 4, (TTG.TwilightDreamland, TTG.FloweringGrove) ), # Harvest Moon Fish
           ),
-    22: ( ( 12, 16, 2, (TTG.MyEstate, TTG.DaisyGardens, Anywhere) ), # Sea Horse
-          ( 14, 18, 3, (TTG.MyEstate, TTG.DaisyGardens, Anywhere) ), # Rocking Sea Horse
-          ( 14, 20, 5, (TTG.MyEstate, TTG.DaisyGardens) ), # Clydesdale Sea Horse
-          ( 14, 20, 7, (TTG.MyEstate, TTG.DaisyGardens) ), # Arabian Sea Horse
+    22: ( ( 12, 16, 2, (TTG.MyEstate, TTG.FloweringGrove, Anywhere) ), # Sea Horse
+          ( 14, 18, 3, (TTG.MyEstate, TTG.FloweringGrove, Anywhere) ), # Rocking Sea Horse
+          ( 14, 20, 5, (TTG.MyEstate, TTG.FloweringGrove) ), # Clydesdale Sea Horse
+          ( 14, 20, 7, (TTG.MyEstate, TTG.FloweringGrove) ), # Arabian Sea Horse
           ),
     24: ( ( 9, 11, 3, (Anywhere, ) ), # Pool Shark
-          ( 8, 12, 5, (TTG.DaisyGardens, TTG.DonaldsDock) ), # Kiddie Pool Shark           
-          ( 8, 12, 6, (TTG.DaisyGardens, TTG.DonaldsDock) ), # Swimming Pool Shark
-          ( 8, 16, 7, (TTG.DaisyGardens, TTG.DonaldsDock) ), # Olympic Pool Shark           
+          ( 8, 12, 5, (TTG.FloweringGrove, TTG.ToontropolisDocks) ), # Kiddie Pool Shark           
+          ( 8, 12, 6, (TTG.FloweringGrove, TTG.ToontropolisDocks) ), # Swimming Pool Shark
+          ( 8, 16, 7, (TTG.FloweringGrove, TTG.ToontropolisDocks) ), # Olympic Pool Shark           
           ),
-    26: ( ( 10, 18, 2, (TTG.TheBrrrgh, ) ), # Brown Bear Acuda
-          ( 10, 18, 3, (TTG.TheBrrrgh, ) ), # Black Bear Acuda
-          ( 10, 18, 4, (TTG.TheBrrrgh, ) ), # Koala Bear Acuda
-          ( 10, 18, 5, (TTG.TheBrrrgh, ) ), # Honey Bear Acuda
-          ( 12, 20, 6, (TTG.TheBrrrgh, ) ), # Polar Bear Acuda
-          ( 14, 20, 7, (TTG.TheBrrrgh, ) ), # Panda Bear Acuda
-          ( 14, 20, 8, (TTG.SleetStreet, TTG.TheBrrrgh) ), # Kodiac Bear Acuda
-          ( 16, 20, 10, (TTG.WalrusWay, TTG.TheBrrrgh) ), # Grizzly Bear Acuda
+    26: ( ( 10, 18, 2, (TTG.TundraWonderland, ) ), # Brown Bear Acuda
+          ( 10, 18, 3, (TTG.TundraWonderland, ) ), # Black Bear Acuda
+          ( 10, 18, 4, (TTG.TundraWonderland, ) ), # Koala Bear Acuda
+          ( 10, 18, 5, (TTG.TundraWonderland, ) ), # Honey Bear Acuda
+          ( 12, 20, 6, (TTG.TundraWonderland, ) ), # Polar Bear Acuda
+          ( 14, 20, 7, (TTG.TundraWonderland, ) ), # Panda Bear Acuda
+          ( 14, 20, 8, (TTG.SleetStreet, TTG.TundraWonderland) ), # Kodiac Bear Acuda
+          ( 16, 20, 10, (TTG.WalrusWay, TTG.TundraWonderland) ), # Grizzly Bear Acuda
           ),
-    28: ( ( 2, 10, 2, (TTG.DonaldsDock, Anywhere) ), # Cutthroat Trout
-          ( 4, 10, 6, (TTG.BarnacleBoulevard, TTG.DonaldsDock) ), # Captain Cutthroat Trout
-          ( 4, 10, 7, (TTG.SeaweedStreet, TTG.DonaldsDock) ), # Scurvy Cutthroat Trout
+    28: ( ( 2, 10, 2, (TTG.ToontropolisDocks, Anywhere) ), # Cutthroat Trout
+          ( 4, 10, 6, (TTG.BarnacleBoulevard, TTG.ToontropolisDocks) ), # Captain Cutthroat Trout
+          ( 4, 10, 7, (TTG.SeaweedStreet, TTG.ToontropolisDocks) ), # Scurvy Cutthroat Trout
           ),
-    30: ( ( 13, 17, 5, (TTG.MinniesMelodyland, Anywhere) ), # Piano Tuna
-          ( 16, 20, 10, (TTG.AltoAvenue, TTG.MinniesMelodyland) ), # Grand Piano Tuna
-          ( 12, 18, 9, (TTG.TenorTerrace, TTG.MinniesMelodyland) ), # Baby Grand Piano Tuna
-          ( 12, 18, 6, (TTG.MinniesMelodyland, ) ), # Upright Piano Tuna
-          ( 12, 18, 7, (TTG.MinniesMelodyland, ) ), # Player Piano Tuna
+    30: ( ( 13, 17, 5, (TTG.TheLandOfMusic, Anywhere) ), # Piano Tuna
+          ( 16, 20, 10, (TTG.AltoAvenue, TTG.TheLandOfMusic) ), # Grand Piano Tuna
+          ( 12, 18, 9, (TTG.TenorTerrace, TTG.TheLandOfMusic) ), # Baby Grand Piano Tuna
+          ( 12, 18, 6, (TTG.TheLandOfMusic, ) ), # Upright Piano Tuna
+          ( 12, 18, 7, (TTG.TheLandOfMusic, ) ), # Player Piano Tuna
           ),
-    32: ( ( 1, 5, 2, (TTG.ToontownCentral, TTG.MyEstate, Anywhere) ), # PB&J Fish
-          ( 1, 5, 3, (TTG.TheBrrrgh, TTG.MyEstate, Anywhere) ), # Grape PB&J Fish
-          ( 1, 5, 4, (TTG.DaisyGardens, TTG.MyEstate) ), # Crunchy PB&J Fish
-          ( 1, 5, 5, (TTG.DonaldsDreamland, TTG.MyEstate) ), # Strawberry PB&J Fish
-          ( 1, 5, 10, (TTG.TheBrrrgh, TTG.DonaldsDreamland) ), # Concord Grape PB&J Fish
+    32: ( ( 1, 5, 2, (TTG.ToontropolisPlaza, TTG.MyEstate, Anywhere) ), # PB&J Fish
+          ( 1, 5, 3, (TTG.TundraWonderland, TTG.MyEstate, Anywhere) ), # Grape PB&J Fish
+          ( 1, 5, 4, (TTG.FloweringGrove, TTG.MyEstate) ), # Crunchy PB&J Fish
+          ( 1, 5, 5, (TTG.TwilightDreamland, TTG.MyEstate) ), # Strawberry PB&J Fish
+          ( 1, 5, 10, (TTG.TundraWonderland, TTG.TwilightDreamland) ), # Concord Grape PB&J Fish
           ),
-    34: ( ( 1, 20, 10, (TTG.DonaldsDreamland, Anywhere) ), # Devil Ray
+    34: ( ( 1, 20, 10, (TTG.TwilightDreamland, Anywhere) ), # Devil Ray
           ),
     }
 

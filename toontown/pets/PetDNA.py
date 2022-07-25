@@ -67,35 +67,35 @@ PetRarities2 = (
 # Remember, a particular type's rarity is the calculated over ALL
 
 PetRarities = {
-    "body": { ToontownGlobals.ToontownCentral:   { "threeStripe": 50,
+    "body": { ToontownGlobals.ToontropolisPlaza:   { "threeStripe": 50,
                                                    "tummy":       30,
                                                    "dots":        20,
                                                    },
-              ToontownGlobals.DonaldsDock:       { "threeStripe": 35,
+              ToontownGlobals.ToontropolisDocks:       { "threeStripe": 35,
                                                    "tummy":       30,
                                                    "dots":        20,
                                                    "tigerStripe": 15,
                                                    },
-              ToontownGlobals.DaisyGardens:      { "threeStripe": 15,
+              ToontownGlobals.FloweringGrove:      { "threeStripe": 15,
                                                    "tummy":       20,
                                                    "dots":        20,
                                                    "tigerStripe": 20,
                                                    "turtle":      15,
                                                    },
-              ToontownGlobals.MinniesMelodyland: { "threeStripe": 10,
+              ToontownGlobals.TheLandOfMusic: { "threeStripe": 10,
                                                    "tummy":       15,
                                                    "dots":        30,
                                                    "tigerStripe": 25,
                                                    "turtle":      20,
                                                    },
-              ToontownGlobals.TheBrrrgh:         { "threeStripe": 5,
+              ToontownGlobals.TundraWonderland:         { "threeStripe": 5,
                                                    "tummy":       10,
                                                    "dots":        20,
                                                    "tigerStripe": 25,
                                                    "turtle":      25,
                                                    "giraffe":     15,
                                                    },
-              ToontownGlobals.DonaldsDreamland:  { "threeStripe": 5,
+              ToontownGlobals.TwilightDreamland:  { "threeStripe": 5,
                                                    "tummy":       5,
                                                    "dots":        15,
                                                    "tigerStripe": 20,
@@ -169,7 +169,7 @@ PetEyeColors = (
 # 0 = female, 1 = male
 PetGenders = [0, 1] 
 
-def getRandomPetDNA(zoneId=ToontownGlobals.DonaldsDreamland):
+def getRandomPetDNA(zoneId=ToontownGlobals.TwilightDreamland):
     from random import choice
 
     head = choice(list(range(-1, len(HeadParts))))

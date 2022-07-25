@@ -8,7 +8,7 @@ from toontown.toonbase.ToontownGlobals import *
 class MMHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = MinniesMelodyland
+        self.id = TheLandOfMusic
         # Create the town state data
         self.townLoaderClass = MMTownLoader.MMTownLoader
         # Create the safe zone state data

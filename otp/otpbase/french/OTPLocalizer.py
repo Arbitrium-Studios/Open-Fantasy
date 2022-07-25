@@ -2,14 +2,14 @@ import string
 from otp.otpbase.french.OTPLocalizer_Property import *
 
 # common locations
-lTheBrrrgh = 'Le Glagla'
-lDaisyGardens = 'Le Jardin de Daisy'
-lDonaldsDock = "Quais Donald"
-lDonaldsDreamland = "Le Pays des Rêves de Donald"
-lMinniesMelodyland = "Le Pays Musical de Minnie"
-lToontownCentral = 'Toontown Centre'
-lGoofySpeedway = "Circuit Dingo"
-lOutdoorZone = "Forêt de glands de Tic et Tac"
+lTundraWonderland = 'Le Glagla'
+lFloweringGrove = 'Le Jardin de Daisy'
+lToontropolisDocks = "Quais Donald"
+lTwilightDreamland = "Le Pays des Rêves de Donald"
+lTheLandOfMusic = "Le Pays Musical de Minnie"
+lToontropolisPlaza = 'Toontown Centre'
+lToontropolisStadium = "Circuit Dingo"
+lAcornAcres = "Forêt de glands de Tic et Tac"
 lGolfZone = "Minigolf de Tic et Tac"
 
 # common strings
@@ -1136,7 +1136,7 @@ SpeedChatStaticText = {
     1122 : "Allons au QG des Loibots !",
     1123 : "Allons combattre le juge !",
     1124 : "Allons au bureau du Procureur !",
-    1125 : "Allons chez %s!" % lOutdoorZone,
+    1125 : "Allons chez %s!" % lAcornAcres,
     1126 : "Allons chez %s!" % lGolfZone,
     1127 : "Allons dans le QG des Chefbots !",
     1128 : "Allons combattre le directeur !",

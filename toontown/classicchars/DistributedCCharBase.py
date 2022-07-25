@@ -81,7 +81,7 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
         # Limit our rate-of-fall with the lifter.
         # 0 means we don't want to limit the velocity, this seems
         # to help when the ray is conflicting with a pos lerp which, for
-        # example, moves this character down a ramp in DaisyGardens.
+        # example, moves this character down a ramp in FloweringGrove.
         self.lifter.setMaxVelocity(0.0)
         self.lifter.addCollider(self.cRayNodePath, self)
 

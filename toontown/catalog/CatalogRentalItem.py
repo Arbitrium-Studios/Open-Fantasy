@@ -31,13 +31,8 @@ class CatalogRentalItem(CatalogItem.CatalogItem):
         return 0
         
     def reachedPurchaseLimit(self, avatar):
-        # Returns true if the item cannot be bought because the avatar
-        # has already bought his limit on this item.
-        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder \
-           or self in avatar.awardMailboxContents or self in avatar.onAwardOrder:
-            return 1
-        return 0
-        
+        return self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder
+
     def saveHistory(self):
         # Returns true if items of this type should be saved in the
         # back catalog, false otherwise.
@@ -51,29 +46,25 @@ class CatalogRentalItem(CatalogItem.CatalogItem):
     def getName(self):
         hours = int(self.duration / 60)
         if self.typeIndex == ToontownGlobals.RentalCannon:
-            return ("%s %s %s %s" % (hours, TTLocalizer.RentalHours, TTLocalizer.RentalOf , TTLocalizer.RentalCannon))
+            return '%s %s %s %s' % (hours,
+             TTLocalizer.RentalHours,
+             TTLocalizer.RentalOf,
+             TTLocalizer.RentalCannon)
         elif self.typeIndex == ToontownGlobals.RentalGameTable:
-            return ("%s %s %s" % (hours, TTLocalizer.RentalHours, TTLocalizer.RentalGameTable))
+            return '%s %s %s' % (hours, TTLocalizer.RentalHours, TTLocalizer.RentalGameTable)
         else:
             return TTLocalizer.RentalTypeName
             
 
     def recordPurchase(self, avatar, optional):
-        self.notify.debug("rental -- record purchase")
-        #if avatar:
-        #   avatar.addMoney(self.beanAmount)
-
         if avatar:
-            self.notify.debug("rental -- has avater")
-            #zoneId = avatar.zoneId
-            #estateOwnerDoId = simbase.air.estateMgr.zone2owner.get(zoneId)
-            estate = simbase.air.estateMgr.estate.get(avatar.doId)
+            self.notify.debug('rental -- has avatar')
+            estate = simbase.air.estateManager._lookupEstate(avatar)
             if estate:
                 self.notify.debug("rental -- has estate")
                 estate.rentItem(self.typeIndex, self.duration)
             else:
-                self.notify.debug("rental -- something not there")    
-                
+                self.notify.warning('rental -- something not there')
         return ToontownGlobals.P_ItemAvailable
 
     def getPicture(self, avatar):
@@ -94,10 +85,8 @@ class CatalogRentalItem(CatalogItem.CatalogItem):
 
         return self.makeFrameModel(model, spin)
 
-    def output(self, store = ~0):
-        return "CatalogRentalItem(%s%s)" % (
-            self.typeIndex,
-            self.formatOptionalData(store))
+    def output(self, store = -1):
+        return 'CatalogRentalItem(%s%s)' % (self.typeIndex, self.formatOptionalData(store))
 
     def compareTo(self, other):
         return self.typeIndex - other.typeIndex
@@ -115,12 +104,7 @@ class CatalogRentalItem(CatalogItem.CatalogItem):
 
     def decodeDatagram(self, di, versionNumber, store):
         CatalogItem.CatalogItem.decodeDatagram(self, di, versionNumber, store)
-        if versionNumber >= 7:
-            # we normally add new fields at the end, but this was already added at the start
-            # and I didn't want to make the situation worst
-            self.cost = di.getUint16()
-        else:
-            self.cost = 1000
+        self.cost = di.getUint16()
         self.duration = di.getUint16()
         self.typeIndex = di.getUint16()
         
@@ -139,28 +123,7 @@ class CatalogRentalItem(CatalogItem.CatalogItem):
         return 1
         
     def acceptItem(self, mailbox, index, callback):
-        # Accepts the item from the mailbox.  Some items will pop up a
-        # dialog querying the user for more information before
-        # accepting the item; other items will accept it immediately.
-
-        # In either case, the function will return immediately before
-        # the transaction is finished, but the given callback will be
-        # called later with three parameters: the return code (one of
-        # the P_* symbols defined in ToontownGlobals.py), followed by
-        # the item itself, and the supplied index number.
-
-        # The index is the position of this item within the avatar's
-        # mailboxContents list, which is used by the AI to know which
-        # item to remove from the list (and also to doublecheck that
-        # we're accepting the expected item).
-
-        # This method is only called on the client.
-        self.confirmRent = TTDialog.TTGlobalDialog(
-            doneEvent = "confirmRent",
-            message = TTLocalizer.MessageConfirmRent,
-            command = Functor(self.handleRentConfirm, mailbox, index, callback),
-            style = TTDialog.TwoChoice)
-        #self.confirmRent.msg = msg
+        self.confirmRent = TTDialog.TTGlobalDialog(doneEvent='confirmRent', message=TTLocalizer.MessageConfirmRent, command=Functor(self.handleRentConfirm, mailbox, index, callback), style=TTDialog.TwoChoice)
         self.confirmRent.show()
         #self.accept("confirmRent", Functor(self.handleRentConfirm, mailbox, index, callback))
         #self.__handleRentConfirm)
@@ -181,11 +144,10 @@ class CatalogRentalItem(CatalogItem.CatalogItem):
         
     
 def getAllRentalItems():
-    # Returns a list of all valid CatalogRentalItems.
-    _list = []
-    # no game tables for now
-    # TODO since all we offer so far is 48 hours of cannons, values pulled for CatalogGenerator
-    # do something else if we have different durations
-    for rentalType in (ToontownGlobals.RentalCannon, ):
-        _list.append(CatalogRentalItem(rentalType,2880,1000))
-    return _list
+    list = []
+    for rentalType in (ToontownGlobals.RentalCannon,):
+        list.append(CatalogRentalItem(rentalType, 2880, 1000))
+    for rentalType in (ToontownGlobals.RentalGameTable,):
+        list.append(CatalogRentalItem(rentalType, 2890, 1000))
+
+    return list

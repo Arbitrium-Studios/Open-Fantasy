@@ -2,14 +2,14 @@ import string
 from otp.otpbase.portuguese.OTPLocalizer_Property import *
 
 # common locations
-lTheBrrrgh = 'O Brrrgh'
-lDaisyGardens = 'Jardim da Margarida'
-lDonaldsDock = "Porto do Donald"
-lDonaldsDreamland = "Sonholândia do Donald"
-lMinniesMelodyland = "Melodilândia da Minnie"
-lToontownCentral = 'Centro de Toontown'
-lGoofySpeedway = "Autódromo do Pateta"
-lOutdoorZone = "Chip 'n Dale's Acorn Acres"
+lTundraWonderland = 'O Brrrgh'
+lFloweringGrove = 'Jardim da Margarida'
+lToontropolisDocks = "Porto do Donald"
+lTwilightDreamland = "Sonholândia do Donald"
+lTheLandOfMusic = "Melodilândia da Minnie"
+lToontropolisPlaza = 'Centro de Toontown'
+lToontropolisStadium = "Autódromo do Pateta"
+lAcornAcres = "Chip 'n Dale's Acorn Acres"
 lGolfZone = "Chip 'n Dale's MiniGolf"
 
 # common strings

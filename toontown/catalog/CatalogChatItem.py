@@ -4,9 +4,6 @@ from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPLocalizer
 from toontown.toonbase import TTLocalizer
 
-# Scandalous phrases not appropriate to toontown
-bannedPhrases = [ 11009 ]
-
 class CatalogChatItem(CatalogItem.CatalogItem):
     """CatalogChatItem
 
@@ -27,18 +24,7 @@ class CatalogChatItem(CatalogItem.CatalogItem):
         return 1
 
     def reachedPurchaseLimit(self, avatar):
-        # Returns true if the item cannot be bought because the avatar
-        # has already bought his limit on this item.
-        #assert avatar.onGiftOrder, "on gift order is None"
-        #print avatar.onGiftOrder
-        #print "self in onGiftOrder: %s" % (self in avatar.onGiftOrder)
-        if self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder \
-           or self in avatar.awardMailboxContents or self in avatar.onAwardOrder:        
-            return 1
-        #if avatar != localAvatar:
-            #pass
-            #import pdb; pdb.set_trace()   
-        return avatar.customMessages.count(self.customIndex) != 0
+        return self in avatar.onOrder or self in avatar.mailboxContents or self in avatar.onGiftOrder or avatar.customMessages.count(self.customIndex) != 0
 
     def getTypeName(self):
         return TTLocalizer.ChatTypeName
@@ -48,6 +34,9 @@ class CatalogChatItem(CatalogItem.CatalogItem):
 
     def getDisplayName(self):
         return OTPLocalizer.CustomSCStrings[self.customIndex]
+
+    def getDeliveryTime(self):
+        return 0
 
     def recordPurchase(self, avatar, optional):
         if avatar.customMessages.count(self.customIndex) != 0:
@@ -78,10 +67,8 @@ class CatalogChatItem(CatalogItem.CatalogItem):
             return TTLocalizer.CatalogAcceptChat
         return CatalogItem.CatalogItem.getAcceptItemErrorText(self, retcode)
 
-    def output(self, store = ~0):
-        return "CatalogChatItem(%s%s)" % (
-            self.customIndex,
-            self.formatOptionalData(store))
+    def output(self, store = -1):
+        return 'CatalogChatItem(%s%s)' % (self.customIndex, self.formatOptionalData(store))
 
     def compareTo(self, other):
         return self.customIndex - other.customIndex
@@ -137,8 +124,7 @@ class CatalogChatItem(CatalogItem.CatalogItem):
         self.callback = callback
         # pop up a toontown dialog with message picker
         from . import CatalogChatItemPicker
-        self.messagePicker = CatalogChatItemPicker.CatalogChatItemPicker(self.__handlePickerDone,
-                                                                         self.customIndex)
+        self.messagePicker = CatalogChatItemPicker.CatalogChatItemPicker(self.__handlePickerDone, self.customIndex)
         self.messagePicker.show()
         
 
@@ -149,14 +135,12 @@ class CatalogChatItem(CatalogItem.CatalogItem):
         self.index = index
         # pop up a toontown dialog with message picker
         from . import CatalogChatItemPicker
-        self.messagePicker = CatalogChatItemPicker.CatalogChatItemPicker(self.__handlePickerOnAccept,
-                                                                         self.customIndex)
+        self.messagePicker = CatalogChatItemPicker.CatalogChatItemPicker(self.__handlePickerOnAccept, self.customIndex)
         self.messagePicker.show()
-        
-    def __handlePickerOnAccept(self, status, pickedMessage=None):
-        print(("Picker Status%s" % (status)))
-        if (status == "pick"):
-            # user has deleted custom phrase, so add this one now
+
+    def __handlePickerOnAccept(self, status, pickedMessage = None):
+        print('Picker Status%s' % status)
+        if status == 'pick':
             self.mailbox.acceptItem(self, self.index, self.callback, pickedMessage)
         else:
             print("picker canceled")
@@ -169,13 +153,9 @@ class CatalogChatItem(CatalogItem.CatalogItem):
         del self.mailbox
 
 
-    def __handlePickerDone(self, status, pickedMessage=None):
-        if (status == "pick"):
-            # user has deleted custom phrase, so add this one now
-            CatalogItem.CatalogItem.requestPurchase(self,
-                                                    self.phone,
-                                                    self.callback,
-                                                    pickedMessage)
+    def __handlePickerDone(self, status, pickedMessage = None):
+        if status == 'pick':
+            CatalogItem.CatalogItem.requestPurchase(self, self.phone, self.callback, pickedMessage)
         self.messagePicker.hide()
         self.messagePicker.destroy()
         del self.messagePicker
@@ -183,9 +163,9 @@ class CatalogChatItem(CatalogItem.CatalogItem):
         del self.phone
 
     def getPicture(self, avatar):
-        chatBalloon = loader.loadModel("phase_3/models/props/chatbox.bam")
-        chatBalloon.find("**/top").setPos(1,0,5)
-        chatBalloon.find("**/middle").setScale(1,1,3)
+        chatBalloon = loader.loadModel('phase_3/models/props/chatbox')
+        chatBalloon.find('**/top').setPos(1, 0, 5)
+        chatBalloon.find('**/middle').setScale(1, 1, 3)
         frame = self.makeFrame()
         chatBalloon.reparentTo(frame)
 
@@ -218,17 +198,9 @@ class CatalogChatItem(CatalogItem.CatalogItem):
 
 
 def getChatRange(fromIndex, toIndex, *otherRanges):
-    # This function returns a list of the chat items within the
-    # indicated range(s).
-
-    # Make sure we got an even number of otherRanges
-    assert(len(otherRanges)%2 == 0)
-
     _list = []
-
-    froms = [fromIndex,]
-    tos = [toIndex,]
-
+    froms = [fromIndex]
+    tos = [toIndex]
     i = 0
     while i < len(otherRanges):
         froms.append(otherRanges[i])
@@ -237,7 +209,7 @@ def getChatRange(fromIndex, toIndex, *otherRanges):
     
     for chatId in list(OTPLocalizer.CustomSCStrings.keys()):
         for fromIndex, toIndex in zip(froms, tos):
-            if chatId >= fromIndex and chatId <= toIndex and (chatId not in bannedPhrases):
+            if chatId >= fromIndex and chatId <= toIndex and chatId not in bannedPhrases:
                 _list.append(CatalogChatItem(chatId))
-                
+
     return _list

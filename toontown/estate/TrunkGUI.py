@@ -46,7 +46,7 @@ class TrunkGUI(StateData.StateData):
         shuffleArrowDown = self.gui.find('**/tt_t_gui_mat_shuffleArrowDown')
         shuffleArrowRollover = self.gui.find('**/tt_t_gui_mat_shuffleArrowUp')
         shuffleArrowDisabled = self.gui.find('**/tt_t_gui_mat_shuffleArrowDisabled')
-        self.parentFrame = DirectFrame(relief=DGG.RAISED, pos=(0.98, 0, 0.416), frameColor=(1, 0, 0, 0))
+        self.parentFrame = DirectFrame(parent=base.a2dTopRight, relief=DGG.RAISED, pos=(-0.353333, 0, -0.584), frameColor=(1, 0, 0, 0))
 
         def addFrame(posZ, text):
             return DirectFrame(parent=self.parentFrame, image=shuffleFrame, image_scale=halfButtonInvertScale, relief=None, pos=(0, 0, posZ), hpr=(0, 0, 3), scale=1.2, frameColor=(1, 1, 1, 1), text=text, text_scale=0.0575, text_pos=(-0.001, -0.015), text_fg=(1, 1, 1, 1))
@@ -92,7 +92,7 @@ class TrunkGUI(StateData.StateData):
         if self.isOwner:
             trashcanGui = loader.loadModel('phase_3/models/gui/trashcan_gui.bam')
             trashImage = (trashcanGui.find('**/TrashCan_CLSD'), trashcanGui.find('**/TrashCan_OPEN'), trashcanGui.find('**/TrashCan_RLVR'))
-            self.trashPanel = DirectFrame(parent=aspect2d, image=DGG.getDefaultDialogGeom(), image_color=(1, 1, 0.75, 0.8), image_scale=(0.36, 0, 1.2), pos=(-.86, 0, 0.1), relief=None)
+            self.trashPanel = DirectFrame(parent=base.a2dTopLeft, image=DGG.getDefaultDialogGeom(), image_color=(1, 1, 0.75, 0.8), image_scale=(0.36, 0, 1.2), pos=(0.473333, 0, -0.9), relief=None)
 
             def addTrashButton(posZ, text, extraArg):
                 return DirectButton(parent=self.trashPanel, image=trashImage, relief=None, pos=(-0.09, 0, posZ), command=self.__handleDelete, text=text, extraArgs=[extraArg], scale=(0.5, 0.5, 0.5), text_font=ToontownGlobals.getInterfaceFont(), text_scale=0.12, text_pos=(0.3, 0), text_fg=(0.8, 0.2, 0.2, 1), text_shadow=(0, 0, 0, 1), textMayChange=0)
@@ -339,7 +339,7 @@ class TrunkGUI(StateData.StateData):
             return None
         hat = self.hats[self.hatChoice]
         self.toon.setHat(hat[0], hat[1], hat[2])
-        if self.swapHatEvent != None:
+        if self.swapHatEvent:
             messenger.send(self.swapHatEvent)
         messenger.send('wakeup')
 
@@ -354,7 +354,7 @@ class TrunkGUI(StateData.StateData):
             return None
         glasses = self.glasses[self.glassesChoice]
         self.toon.setGlasses(glasses[0], glasses[1], glasses[2])
-        if self.swapGlassesEvent != None:
+        if self.swapGlassesEvent:
             messenger.send(self.swapGlassesEvent)
         messenger.send('wakeup')
 
@@ -369,7 +369,7 @@ class TrunkGUI(StateData.StateData):
             return None
         backpack = self.backpacks[self.backpackChoice]
         self.toon.setBackpack(backpack[0], backpack[1], backpack[2])
-        if self.swapBackpackEvent != None:
+        if self.swapBackpackEvent:
             messenger.send(self.swapBackpackEvent)
         messenger.send('wakeup')
 
@@ -384,7 +384,7 @@ class TrunkGUI(StateData.StateData):
             return None
         shoes = self.shoes[self.shoesChoice]
         self.toon.setShoes(shoes[0], shoes[1], shoes[2])
-        if self.swapShoesEvent != None:
+        if self.swapShoesEvent:
             messenger.send(self.swapShoesEvent)
         messenger.send('wakeup')
 

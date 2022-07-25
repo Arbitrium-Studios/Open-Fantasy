@@ -55,8 +55,10 @@ class DistributedMailbox(DistributedObject.DistributedObject):
         r = randomGenerator.random()
         g = randomGenerator.random()
         b = randomGenerator.random()
-        self.nameColor = (r, g, b, 1)
-
+        self.nameColor = (r,
+         g,
+         b,
+         1)
         houseNode = self.cr.playGame.hood.loader.houseNode[self.housePosInd]
         estateNode = houseNode.getParent()
         
@@ -137,8 +139,7 @@ class DistributedMailbox(DistributedObject.DistributedObject):
                 p = FlagPitchEmpty
                 if self.fullIndicator:
                     p = FlagPitchFull
-                self.flagIval = self.flag.hprInterval(
-                    0.5, VBase3(0, p, 0),blendType = 'easeInOut')
+                self.flagIval = self.flag.hprInterval(0.5, VBase3(0, p, 0), blendType='easeInOut')
                 self.flagIval.start()
             
         
@@ -210,24 +211,19 @@ class DistributedMailbox(DistributedObject.DistributedObject):
         isLocalToon = (avId == base.localAvatar.doId)
         
         if isLocalToon:
-            DistributedMailbox.notify.debug("setMovie( mode=%d, avId=%d ) called on a local toon" %(mode, avId))
+            DistributedMailbox.notify.debug('setMovie( mode=%d, avId=%d ) called on a local toon' % (mode, avId))
         else:
-            DistributedMailbox.notify.debug("setMovie( mode=%d, avId=%d ) called on a non-local toon" %(mode, avId))
-
-        # This is an old movie in the server ram that has been cleared.
-        # Just return and do nothing
-        if (mode == MailboxGlobals.MAILBOX_MOVIE_CLEAR):
-            DistributedMailbox.notify.debug("setMovie: clear")
+            DistributedMailbox.notify.debug('setMovie( mode=%d, avId=%d ) called on a non-local toon' % (mode, avId))
+        if mode == MailboxGlobals.MAILBOX_MOVIE_CLEAR:
+            DistributedMailbox.notify.debug('setMovie: clear')
             return
         
         elif (mode == MailboxGlobals.MAILBOX_MOVIE_EXIT):
             # Play one of the two mailbox closing sounds
             if random.random() < 0.5:
-                sfx = base.loader.loadSfx(
-                    "phase_5.5/audio/sfx/mailbox_close_1.ogg")
+                sfx = base.loader.loadSfx('phase_5.5/audio/sfx/mailbox_close_1.ogg')
             else:
-                sfx= base.loader.loadSfx(
-                    "phase_5.5/audio/sfx/mailbox_close_2.ogg")
+                sfx = base.loader.loadSfx('phase_5.5/audio/sfx/mailbox_close_2.ogg')
             sfxTrack = SoundInterval(sfx, node=self.model)
             sfxTrack.start()                
             DistributedMailbox.notify.debug("setMovie: exit")
@@ -236,43 +232,27 @@ class DistributedMailbox(DistributedObject.DistributedObject):
         elif (mode == MailboxGlobals.MAILBOX_MOVIE_EMPTY):
             DistributedMailbox.notify.debug("setMovie: empty")
             if isLocalToon:
-                self.mailboxDialog = TTDialog.TTDialog(
-                    dialogName = 'MailboxEmpty',
-                    style = TTDialog.Acknowledge,
-                    text = TTLocalizer.DistributedMailboxEmpty,
-                    text_wordwrap = 15,
-                    fadeScreen = 1,
-                    command = self.__clearDialog,
-                    )
+                self.mailboxDialog = TTDialog.TTDialog(dialogName='MailboxEmpty', style=TTDialog.Acknowledge, text=TTLocalizer.DistributedMailboxEmpty, text_wordwrap=15, fadeScreen=1, command=self.__clearDialog)
             return
         
         elif (mode == MailboxGlobals.MAILBOX_MOVIE_WAITING):
             DistributedMailbox.notify.debug("setMovie: waiting")
             if isLocalToon:
-                self.mailboxDialog = TTDialog.TTDialog(
-                    dialogName = 'MailboxWaiting',
-                    style = TTDialog.Acknowledge,
-                    text = TTLocalizer.DistributedMailboxWaiting,
-                    text_wordwrap = 15,
-                    fadeScreen = 1,
-                    command = self.__clearDialog,
-                    )
+                self.mailboxDialog = TTDialog.TTDialog(dialogName='MailboxWaiting', style=TTDialog.Acknowledge, text=TTLocalizer.DistributedMailboxWaiting, text_wordwrap=15, fadeScreen=1, command=self.__clearDialog)
             return
         
         elif (mode == MailboxGlobals.MAILBOX_MOVIE_READY):
             DistributedMailbox.notify.debug("setMovie: ready")
             # Play one of the two mailbox opening sounds
             if random.random() < 0.5:
-                sfx= base.loader.loadSfx("phase_5.5/audio/sfx/mailbox_open_1.ogg")
+                sfx = base.loader.loadSfx('phase_5.5/audio/sfx/mailbox_open_1.ogg')
             else:
-                sfx= base.loader.loadSfx("phase_5.5/audio/sfx/mailbox_open_2.ogg")
+                sfx = base.loader.loadSfx('phase_5.5/audio/sfx/mailbox_open_2.ogg')
             sfxTrack = SoundInterval(sfx, node=self.model)
             sfxTrack.start()                
             # If you are local toon, show the mailbox gui
             if isLocalToon:
-                self.mailboxGui = MailboxScreen.MailboxScreen(
-                    self, base.localAvatar,
-                    self.mailboxGuiDoneEvent)
+                self.mailboxGui = MailboxScreen.MailboxScreen(self, base.localAvatar, self.mailboxGuiDoneEvent)
                 self.mailboxGui.show()
                 self.accept(self.mailboxGuiDoneEvent, self.__handleMailboxDone)
             return
@@ -280,41 +260,25 @@ class DistributedMailbox(DistributedObject.DistributedObject):
         elif (mode == MailboxGlobals.MAILBOX_MOVIE_NOT_OWNER):
             DistributedMailbox.notify.debug("setMovie: not owner")
             if isLocalToon:
-                self.mailboxDialog = TTDialog.TTDialog(
-                    dialogName = 'MailboxNotOwner',
-                    style = TTDialog.Acknowledge,
-                    text = TTLocalizer.DistributedMailboxNotOwner,
-                    text_wordwrap = 15,
-                    fadeScreen = 1,
-                    command = self.__clearDialog,
-                    )
+                self.mailboxDialog = TTDialog.TTDialog(dialogName='MailboxNotOwner', style=TTDialog.Acknowledge, text=TTLocalizer.DistributedMailboxNotOwner, text_wordwrap=15, fadeScreen=1, command=self.__clearDialog)
             return
 
         else:
-            DistributedMailbox.notify.warning("unknown mode in setMovie: %s" % (mode))
-        
+            DistributedMailbox.notify.warning('unknown mode in setMovie: %s' % mode)
 
     def acceptItem(self, item, index, callback, optional = -1):
-        # Requests the purchase of the given item from the AI.  When
-        # the AI responds, calls the callback function with three
-        # parameters: the appropriate code from MailboxGlobals.py,
-        # followed by the item itself, and the supplied item index
-        # number.
-        DistributedMailbox.notify.debug("acceptItem")
-
-        blob = item.getBlob(store = CatalogItem.Customization)
+        DistributedMailbox.notify.debug('acceptItem')
+        blob = item.getBlob(store=CatalogItem.Customization)
         context = self.getCallbackContext(callback, [item, index])
-        self.sendUpdate("acceptItemMessage", [context, blob, index, optional])
+        self.sendUpdate('acceptItemMessage', [context,
+         blob,
+         index,
+         optional])
 
-    def acceptInvite(self, item, acceptingIndex, callback, optional =-1):
-        """Tell the AI we are accepting an invite.
-
-        Call the callback when the AI responds. Note that acceptingIndex
-        is an index to all things in the mailbox, including simple mail.
-        """
-        DistributedMailbox.notify.debug("acceptInvite")
-        context = self.getCallbackContext(callback, [item,  acceptingIndex])
-        self.sendUpdate("acceptInviteMessage", [context, item.inviteKey])
+    def acceptInvite(self, item, acceptingIndex, callback, optional = -1):
+        DistributedMailbox.notify.debug('acceptInvite')
+        context = self.getCallbackContext(callback, [item, acceptingIndex])
+        self.sendUpdate('acceptInviteMessage', [context, item.inviteKey])
 
     def acceptItemResponse(self, context, retcode):
         DistributedMailbox.notify.debug("acceptItemResponse")
@@ -322,17 +286,21 @@ class DistributedMailbox(DistributedObject.DistributedObject):
             print("DistributedMailbox User Canceled")
         # Sent from the AI in response to acceptItemMessage.
         self.doCallbackContext(context, [retcode])
-        
+
     def discardItem(self, item, index, callback, optional = -1):
-        DistributedMailbox.notify.debug("discardItem")
-        # Discards an item
-        blob = item.getBlob(store = CatalogItem.Customization)
+        DistributedMailbox.notify.debug('discardItem')
+        blob = item.getBlob(store=CatalogItem.Customization)
         context = self.getCallbackContext(callback, [item, index])
-        self.sendUpdate("discardItemMessage", [context, blob, index, optional])
+        self.sendUpdate('discardItemMessage', [context,
+         blob,
+         index,
+         optional])
 
-    def rejectInvite(self, item, acceptingIndex, callback, optional =-1):
-        """Tell the AI we are rejecting an invite.
-
+    def rejectInvite(self, item, acceptingIndex, callback, optional = -1):
+        DistributedMailbox.notify.debug('rejectInvite')
+        context = self.getCallbackContext(callback, [item, acceptingIndex])
+        self.sendUpdate('rejectInviteMessage', [context, item.inviteKey])
+        """
         Call the callback when the AI responds. Note that acceptingIndex
         is an index to all things in the mailbox, including simple mail.
         """

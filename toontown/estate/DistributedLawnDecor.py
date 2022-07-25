@@ -4,12 +4,11 @@ from direct.distributed import ClockDelta
 from otp.otpbase.PythonUtil import lerp
 import math
 from direct.directnotify import DirectNotifyGlobal
-from panda3d.core import NodePath
 from direct.task import Task
 from toontown.toonbase import ToontownGlobals
 from direct.distributed import DistributedObject
 from direct.distributed import DistributedNode
-from otp.otpbase import PythonUtil
+from direct.showbase import PythonUtil
 from otp.avatar import ShadowCaster
 import random
 #import Branch
@@ -137,8 +136,7 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
         if self.collSphereOffset <= 0.1:
             colSphere = CollisionSphere(0,0,0,self.collSphereRadius)
         else:
-            colSphere = CollisionTube(0,-self.collSphereOffset,0, 0,self.collSphereOffset,0,self.collSphereRadius)
-        #colSphere.setScale(self.collSphereWidth, 1, 1)
+            colSphere = CollisionTube(0, -self.collSphereOffset, 0, 0, self.collSphereOffset, 0, self.collSphereRadius)
         colSphere.setTangible(0)
         #colNode = CollisionNode("plotSphere")
         colNode = CollisionNode(self.messageStartName)
@@ -151,7 +149,6 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
         self.accept(self.exitMessageName, self.handleExitPlot)
 
     def handleEnterPlot(self, optional = None):
-        #assert self.notify.debugStateCall(self)
         self.notify.debug('handleEnterPlot %d' % self.doId)
         #print("Plot Entered; Collision = %s" % (optional))
         #DistributedFlower.py will override and replace this
@@ -159,13 +156,8 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
 
     def handleExitPlot(self, optional = None):
         if base.localAvatar.inGardenAction == self:
-            base.localAvatar.handleEndPlantInteraction(self, replacement = self.expectingReplacement)
-        pass
-        #assert self.notify.debugStateCall(self)
-        #self.notify.debug('handleExitPlot %d' % self.doId)
-        #print("Plot Entered; Collision = %s" % (optional))
-        #DistributedFlower.py will override and replace this
-        
+            base.localAvatar.handleEndPlantInteraction(self, replacement=self.expectingReplacement)
+
     def handleWatering(self):
         self.handleExitPlot()
         base.localAvatar.removeShovelRelatedDoId(self.doId)
@@ -188,8 +180,8 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
     def setPosition(self, x, y, z):
         DistributedNode.DistributedNode.setPos(self, x, y, z)
         self.stick2Ground()
-        
-    def stick2Ground(self , taskfooler = 0):
+
+    def stick2Ground(self, taskfooler = 0):
         if self.isEmpty():
             return Task.done
         testPath = NodePath('testPath')
@@ -209,11 +201,11 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
         
         # fix the movie node
         if self.movieNode:
-            testPath.setPos(self.movieNode.getX(render),self.movieNode.getY(render),0)
+            testPath.setPos(self.movieNode.getX(render), self.movieNode.getY(render), 0)
             picker.traverse(render)
             if queue.getNumEntries() > 0:
                 queue.sortEntries()
-                for index in range(queue.getNumEntries()):
+                for index in xrange(queue.getNumEntries()):
                     entry = queue.getEntry(index)
                     if recurseParent(entry.getIntoNode(), 'terrain_DNARoot'):
                         self.movieNode.setZ(entry.getSurfacePoint(self)[2])
@@ -225,20 +217,16 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
         if queue.getNumEntries() > 0:
             #print("Sticking")
             queue.sortEntries()
-            for index in range(queue.getNumEntries()):
+            for index in xrange(queue.getNumEntries()):
                 entry = queue.getEntry(index)
                 #TODO clean up this next bit to be more generic
                 #if entry.getIntoNode().getParent(0).getParent(0).getParent(0).getName() == 'terrain_DNARoot':
                 if recurseParent(entry.getIntoNode(), 'terrain_DNARoot'):
-                #if str(entry.getIntoNodePath()) == "render/Estate/30000:estate/terrain_DNARoot/-PandaNode/group3/collision1":
                     self.setZ(entry.getSurfacePoint(render)[2] + self.stickUp + 0.1)
-                    #print("Stickup %s" % (self.stickUp))
-                    #print("Stick Height %s %s %s" % (entry.getSurfacePoint(render)[2],self.getX(),self.getY()))
                     self.stickParts()
                     return Task.done
 
-        taskMgr.doMethodLater(1.0, self.stick2Ground, uniqueName("groundsticker"))
-        #print("Not Sticking")
+        taskMgr.doMethodLater(1.0, self.stick2Ground, uniqueName('groundsticker'))
         return Task.done
         
     def stickParts(self):
@@ -279,7 +267,12 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
         you can't pick something you don't own
         """
         retval = True
-        # if there is no longer a localToon or it is not the owner, return false
+        self.notify.debug('base.localAvatar.doId : %s' % base.localAvatar.doId)
+        self.notify.debug('self.getOwnerId : %s ' % self.getOwnerId())
+        self.notify.debug("statue's DoId : %s " % self.doId)
+        if not hasattr(base, 'localAvatar') or not base.localAvatar.doId == self.getOwnerId():
+            retval = False
+        return retval
 
         self.notify.debug('base.localAvatar.doId : %s' %base.localAvatar.doId)
         self.notify.debug('self.getOwnerId : %s ' %self.getOwnerId())
@@ -331,34 +324,14 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
         node.reparentTo(render)
         node.setPos(displacement + self.getPos(render))
         node.lookAt(self)
-
-        # find the best H to turn the toon
-        heading = PythonUtil.fitDestAngle2Src( toon.getH( render ), node.getH(render) )
-        #heading = PythonUtil.closestDestAngle( toon.getH( render ), node.getH(render) )
-        hpr = toon.getHpr( render )
-        hpr.setX( heading )
-
+        heading = PythonUtil.fitDestAngle2Src(toon.getH(render), node.getH(render))
+        hpr = toon.getHpr(render)
+        hpr.setX(heading)
         finalX = node.getX(render)
         finalY = node.getY(render)
         finalZ = node.getZ(render)
         node.removeNode()
-
-        toonTrack = Sequence(
-            Parallel( ActorInterval( toon, "walk", loop=True, duration=1),
-                      Parallel(LerpPosInterval( toon, 1.,
-                                       Point3( finalX,
-                                               finalY,
-                                               toon.getZ(render)),     #finalZ ),
-                                       fluid = True,
-                                       bakeInStart = False,
-                                                ),
-                               #Func(self.unprint, "generateToonMoveTrack LerpPosInterval")
-                                       ),
-                      LerpHprInterval( toon, 1.,
-                                       hpr = hpr),
-                      ),
-            Func( toon.loop, 'neutral' ),
-            )
+        toonTrack = Sequence(Parallel(ActorInterval(toon, 'walk', loop=True, duration=1), Parallel(LerpPosInterval(toon, 1.0, Point3(finalX, finalY, toon.getZ(render)), fluid=True, bakeInStart=False)), LerpHprInterval(toon, 1.0, hpr=hpr)), Func(toon.loop, 'neutral'))
         return toonTrack
         
     def unprint(self, string):
@@ -378,27 +351,19 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
             self.notify.debug( "done interaction")
         else:
             self.notify.warning('base.cr.playGame.getPlace() does not have detectedGardenPlotDone')
-        # maybe they went bye-bye?
         if hasattr(base, 'localAvatar'):
             base.localAvatar.handleEndPlantInteraction(self)
 
     def startCamIval(self, avId):
         track = Sequence()
         if avId == localAvatar.doId:
-            track = Sequence(
-                Func(base.localAvatar.disableSmartCameraViews),
-                Func(base.localAvatar.setCameraPosForPetInteraction),
-                )
+            track = Sequence(Func(base.localAvatar.disableSmartCameraViews), Func(base.localAvatar.setCameraPosForPetInteraction))
         return track
     
     def stopCamIval(self, avId):
         track = Sequence()
         if avId == localAvatar.doId:
-            track = Sequence(
-                Func(base.localAvatar.unsetCameraPosForPetInteraction),
-                Wait(0.8),
-                Func(base.localAvatar.enableSmartCameraViews),
-                )
+            track = Sequence(Func(base.localAvatar.unsetCameraPosForPetInteraction), Wait(0.8), Func(base.localAvatar.enableSmartCameraViews))
         return track
     
     def canBeWatered(self):
@@ -444,13 +409,7 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
 
         moveTrack = self.generateToonMoveTrack(toon)
         digupTrack = self.generateDigupTrack(toon)
-        self.movie = Sequence(self.startCamIval(avId),
-                         moveTrack,
-                         Func(shovel.show),
-                         digupTrack,
-                         #self.stopCamIval(avId),
-                         )
-
+        self.movie = Sequence(self.startCamIval(avId), moveTrack, Func(shovel.show), digupTrack)
         if avId == localAvatar.doId:
             self.expectingReplacement = 1
             #track.append(Func(self.finishInteraction))
@@ -466,22 +425,7 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
         pos = self.model.getPos()
         pos.setZ(pos[2]-1)
         track = Parallel()
-        track.append(
-            Sequence( ActorInterval( toon, "start-dig" ),
-                      Parallel(ActorInterval( toon, "loop-dig", loop=1, duration=5.13 ),
-                               Sequence(Wait(0.25), SoundInterval(sound, node=toon, duration=0.55),
-                                        Wait(0.80), SoundInterval(sound, node=toon, duration=0.55),
-                                        Wait(1.35), SoundInterval(sound, node=toon, duration=0.55),
-                                        ),
-                               ),
-                      ActorInterval( toon, "start-dig", playRate=-1 ),
-                      LerpFunc(self.model.setAlphaScale, fromData=1, toData=0, duration=1),
-                      Func(toon.loop, 'neutral'),
-                      Func(toon.detachShovel),
-                      #LerpPosInterval(self.model, 3, pos),
-                      ),
-            )
-
+        track.append(Sequence(ActorInterval(toon, 'start-dig'), Parallel(ActorInterval(toon, 'loop-dig', loop=1, duration=5.13), Sequence(Wait(0.25), SoundInterval(sound, node=toon, duration=0.55), Wait(0.8), SoundInterval(sound, node=toon, duration=0.55), Wait(1.35), SoundInterval(sound, node=toon, duration=0.55))), ActorInterval(toon, 'start-dig', playRate=-1), LerpFunc(self.model.setAlphaScale, fromData=1, toData=0, duration=1), Func(toon.loop, 'neutral'), Func(toon.detachShovel)))
         return track
 
     def doFinishPlantingTrack(self, avId):
@@ -501,7 +445,6 @@ class DistributedLawnDecor(DistributedNode.DistributedNode, NodePath, ShadowCast
             self.model.setTransparency(1)
             self.model.setAlphaScale(0)
             self.movie.append(LerpFunc(self.model.setAlphaScale, fromData=0, toData=1, duration=3))
-
         self.movie.append(self.stopCamIval(avId))
         self.movie.append(Func( toon.detachShovel ))
         self.movie.append(Func( toon.loop, 'neutral'))
