@@ -112,7 +112,7 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             *ToontownGlobals.CashbotRTBattleOneStartPosHpr)
         state = random.getstate()
         random.seed(self.doId)
-        self.resistanceToon.suitType = SuitDNA.getRandomSuitByDept('m')
+        self.resistanceToon.suitType = 'rb'
         random.setstate(state)
         self.fakeGoons = []
         for i in range(self.numFakeGoons):

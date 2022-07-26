@@ -232,7 +232,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             *ToontownGlobals.BossbotRTIntroStartPosHpr)
         state = random.getstate()
         random.seed(self.doId)
-        self.resistanceToon.suitType = SuitDNA.getRandomSuitByDept('c')
+        self.resistanceToon.suitType = 'tbc'
         random.setstate(state)
 
     def __cleanupResistanceToon(self):
