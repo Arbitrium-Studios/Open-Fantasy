@@ -498,10 +498,10 @@ def doDefault(attack):
             attack['animName'] = 'throw-object'
             return doRedTape(attack)
         elif suitName == 'bs':
-            attack['id'] = RESTRAINING_ORDER
-            attack['name'] = 'RestrainingOrder'
-            attack['animName'] = 'throw-paper'
-            return doRestrainingOrder(attack)
+            attack['id'] = GLOWER_POWER
+            attack['name'] = 'GlowerPower'
+            attack['animName'] = 'glower'
+            return doGlowerPower(attack)
         elif suitName == 'sd':
             attack['id'] = SPIN
             attack['name'] = 'Spin'
@@ -2177,6 +2177,9 @@ def doGlowerPower(attack):
     elif suitName == 'tbc':
         leftPosPoints = [Point3(0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
         rightPosPoints = [Point3(-0.6, 4.5, 6), MovieUtil.PNT3_ZERO]
+    elif suitName == 'bs':
+        leftPosPoints = [Point3(0.1, 3.9, 4.5), MovieUtil.PNT3_ZERO]
+        rightPosPoints = [Point3(-0.1, 3.9, 4.5), MovieUtil.PNT3_ZERO]
     else:
         leftPosPoints = [Point3(0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
         rightPosPoints = [Point3(-0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
