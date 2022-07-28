@@ -1009,10 +1009,8 @@ def getSoundTrack(fileName, delay=0.01, duration=None, node=None):
         return Sequence(Wait(delay), SoundInterval(soundEffect, node=node))
 
 
-def getColorTrack(attack, part, color, delay = 0.0, duration = 1.0):
+def getColorTrack(attack, toon, part, color, delay = 0.0, duration = 1.0):
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
     headParts = toon.getHeadParts()
     torsoParts = toon.getTorsoParts()
     legsParts = toon.getLegsParts()
@@ -2841,7 +2839,7 @@ def doHotAir(attack):
     soundTrack = getSoundTrack('SA_hot_air.ogg', delay=1.6, node=suit)
     multiTrackList = Parallel(suitTrack, toonTrack, sprayTrack, soundTrack)
     if dmg > 0:
-        colorTrack = getColorTrack(attack, 'all', Vec4(0, 0, 0, 1), 4.0, 3.5)
+        colorTrack = getColorTrack(attack, toon, 'all', Vec4(0, 0, 0, 1), 4.0, 3.5)
         multiTrackList.append(baseFlameTrack)
         multiTrackList.append(flameTrack)
         multiTrackList.append(flecksTrack)
@@ -3528,7 +3526,7 @@ def doFired(attack):
     toonTrack = getToonTrack(attack, damageDelay=1.5, splicedDamageAnims=damageAnims, dodgeDelay=0.3, dodgeAnimNames=['sidestep'])
     soundTrack = getSoundTrack('SA_hot_air.ogg', delay=1.0, node=suit)
     if dmg > 0:
-        colorTrack = getColorTrack(attack, 'all', Vec4(0, 0, 0, 1), 2.0, 3.5)
+        colorTrack = getColorTrack(attack, toon, 'all', Vec4(0, 0, 0, 1), 2.0, 3.5)
         return Parallel(suitTrack, baseFlameTrack, flameTrack, flecksTrack, toonTrack, colorTrack, soundTrack)
     else:
         return Parallel(suitTrack, baseFlameSmallTrack, flameSmallTrack, flecksSmallTrack, toonTrack, soundTrack)
@@ -4160,6 +4158,7 @@ def doWithdrawal(attack):
     battle = attack['battle']
     if attack['group'] == ATK_TGT_SINGLE:
         target = attack['target']
+        toon = target['toon']
         dmg = target['hp']
         BattleParticles.loadParticles()
         particleEffect = BattleParticles.createParticleEffect('Withdrawal')
@@ -4170,7 +4169,7 @@ def doWithdrawal(attack):
         soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
         multiTrackList = Parallel(suitTrack, partTrack, toonTrack, soundTrack)
         if dmg > 0:
-            colorTrack = getColorTrack(attack, 'all', Vec4(0, 0, 0, 1), 1.6, 2.9)
+            colorTrack = getColorTrack(attack, toon, 'all', Vec4(0, 0, 0, 1), 1.6, 2.9)
             multiTrackList.append(colorTrack)
         return multiTrackList
     else:
@@ -4201,8 +4200,10 @@ def doWithdrawal(attack):
         soundTrack = getSoundTrack('SA_withdrawl.ogg', delay=1.4, node=suit)
         colorTracks = Parallel()
         for t in targets:
-            if t['hp'] > 0:
-                colorTrack = getColorTrack(attack, 'all', Vec4(0, 0, 0, 1), 1.6, 2.9)
+            toon = t['toon']
+            dmg = t['hp']
+            if dmg > 0:
+                colorTrack = getColorTrack(attack, toon, 'all', Vec4(0, 0, 0, 1), 1.6, 2.9)
                 colorTracks.append(colorTrack)
         return Parallel(suitTrack, partTrack, toonTracks, soundTrack, colorTrack)
 
