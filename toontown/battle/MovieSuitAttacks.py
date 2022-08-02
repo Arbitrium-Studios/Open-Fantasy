@@ -1872,7 +1872,7 @@ def doCanned(attack):
         soundTrack = Sequence(
             Wait(2.6),
             SoundInterval(globalBattleSoundCache.getSound('SA_canned_tossup_only.ogg'), node=suit),
-            SoundInterval(globalBattleSoundCache.getSound('SA_canned_impact_only.ogg'), node=suit)
+            SoundInterval(globalBattleSoundCache.getSound('SA_canned_impact_only.ogg'), node=toon)
         )
     else:
         land = toon.getPos(battle)
