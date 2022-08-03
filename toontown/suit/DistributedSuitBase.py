@@ -81,7 +81,8 @@ class DistributedSuitBase(
         else:
             nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self._name,
                                                             'dept': self.getStyleDept(),
-                                                            'level': self.getActualLevel()}
+                                                            'level': self.getActualLevel(),
+                                                            'mgr': ''}
             self.setDisplayName(nameInfo)
         return
 
