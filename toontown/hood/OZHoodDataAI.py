@@ -43,6 +43,7 @@ class OZHoodDataAI(HoodDataAI.HoodDataAI):
             dale.start()
             self.addDistObj(dale)
             self.classicChars.append(dale)
+            self.createButterflies(ButterflyGlobals.AA)
             chip.setDaleId(dale.doId)
         self.createButterflies(ButterflyGlobals.AA)
         self.treasurePlanner = OZTreasurePlannerAI.OZTreasurePlannerAI(
