@@ -1,6 +1,5 @@
 ### Wishlist and Ideas:
 
-    > 
     > Take inspiration from the publically available Design Documents in revamping the Toontown models with some modern ideas.
     > Move the spawn area of the HQ to a safe place instead of in the Cog's way.
     > When hovering on a chat box that's behind another one, it should bring that one forward
