@@ -18,8 +18,24 @@
 
 ### License:
 
-> Feel free to use with credit!
+> Feel free to use with credit! But an actual license will be coming eventually. So, by playing Toontown Fantasy, you agree to not do anything stupid, dangerous, or illegal with my source code.
+
+### Setup - Windows:
+
+> After cloning the repository, you will need to clone the resources repository inside the directory where you cloned the source repo.
+>
+> Secondly, you would have to clone, compile, and install a specific version of [Panda3D][PandaLink] to run this source code!
+>
+> Third, once you've finished that, install [Pip][PipLink] then open CMD and move to the Toontown Fantasy directory before using `Pip install -r requirements.txt` (Sometimes, you need to add the Panda3D/Python/Scripts directory prior to the `Pip` command for it to work!)
+>
+> Next, go into the `win32/` folder and right click on `start_all.bat` then click `Create shortcut` (on Windows 11, after right clicking `start_all.bat`, you have to press `Show more options` for Create Shortcut to work!)
+>
+> Once you've created a shortcut, highlight the shortcut and move it where ever you wish to launch the game from.
 
 [discordImg]: https://img.shields.io/discord/775528645086543895.svg?logo=discord&logoWidth=18&colorB=7289DA&Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&style=for-the-badge
 
 [discordLink]: https://discord.gg/9fgW8jAaf6
+
+[PandaLink]: https://github.com/PLAYERZER0STUDIOS/Open-Panda
+
+[PipLink]: https://pypi.org/project/pip/
