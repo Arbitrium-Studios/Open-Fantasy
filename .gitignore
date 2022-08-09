@@ -1,33 +1,40 @@
+# File Extension Ignores
+
 *.pyc
 *.pyo
 *.pyd
 *.log
-screenshots/
 *.so
 *.DS_Store
 .idea
-venv/
 *.json
+*.buildings
+*.trackRecords
+*.egg
+*.txt
+*.cfg
+*.mf
+*.yaml
+*.lnk
+
+# File Name Ignores
+
+Start Toontown Fantasy.lnk
 !win32/.vscode/tasks.json
 !linux/.vscode/tasks.json
 !darwin/.vscode/tasks.json
-*.buildings
-*.trackRecords
-local/
 errorCode
+
+# Folder Name Ignores
+
+local/
 screenshots/
-*.egg
 Housekeeper/
-*.txt
-*.cfg
 sign/
-*.mf
-*.yaml
 phase_3/maps/news
 news/
-resources/phase_3.5/maps/toontown_map - Backup.jpg
 toontown/installer
-*.lnk
-Start Toontown Fantasy.lnk
 build/
-sign/texture.jpg
+resources/
+venv/
+.vscode
