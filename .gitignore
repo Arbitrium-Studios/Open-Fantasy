@@ -35,6 +35,5 @@ phase_3/maps/news
 news/
 toontown/installer
 build/
-resources/
 venv/
 .vscode
