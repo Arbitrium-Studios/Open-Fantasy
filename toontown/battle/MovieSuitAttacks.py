@@ -1625,6 +1625,8 @@ def doTeeOff(attack):
         ballPosPoints = [Point3(4.2, 0, 0.1)]
     elif suitName == 'rb':
         ballPosPoints = [Point3(4.2, 0, 0.1)]
+    elif suitName == 'le':
+        ballPosPoints = [Point3(4.2, 0, 0.1)]
     else:
         ballPosPoints = [Point3(2.1, 0, 0.1)]
     ballPropTrack = Sequence(

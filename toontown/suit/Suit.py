@@ -133,6 +133,7 @@ sd = (('quick-jump', 'jump', 5),
       ('throw-paper', 'throw-paper', 5))
 le = (('throw-object', 'throw-object', 5),
       ('glower', 'glower', 5),
+      ('golf-club-swing', 'golf-club-swing', 5),
       ('throw-paper', 'throw-paper', 5))
 bw = (('gavel', 'gavel', 8),
       ('throw-object', 'throw-object', 5),
