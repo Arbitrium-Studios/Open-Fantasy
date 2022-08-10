@@ -1622,9 +1622,9 @@ def doTeeOff(attack):
     elif suitName == 'm':
         ballPosPoints = [Point3(3.2, 0, 0.1)]
     elif suitName == 'mh':
-        ballPosPoints = [Point3(4.2, 0, 0.1)]
+        ballPosPoints = [Point3(4.1, 0, 0.1)]
     elif suitName == 'rb':
-        ballPosPoints = [Point3(4.2, 0, 0.1)]
+        ballPosPoints = [Point3(4.1, 0, 0.1)]
     elif suitName == 'le':
         ballPosPoints = [Point3(4.2, 0, 0.1)]
     else:
