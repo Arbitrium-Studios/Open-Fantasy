@@ -10,7 +10,7 @@ class DLHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = DonaldsDreamland
+        self.id = TwilightSlumberland
         self.townLoaderClass = DLTownLoader.DLTownLoader
         self.safeZoneLoaderClass = DLSafeZoneLoader.DLSafeZoneLoader
         self.storageDNAFile = 'phase_8/dna/storage_DL.dna'

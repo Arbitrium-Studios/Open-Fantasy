@@ -30,9 +30,9 @@ def canAccess(avatarId, zoneId, function=''):
 def openToAll(zoneId, avatar):
     allowed = False
     canonicalZoneId = ZoneUtil.getCanonicalHoodId(zoneId)
-    allowedZones = [ToontownGlobals.ToontownCentral,
+    allowedZones = [ToontownGlobals.ToontropolisPlaza,
                     ToontownGlobals.MyEstate,
-                    ToontownGlobals.GoofySpeedway,
+                    ToontownGlobals.DowntownToontropolis,
                     ToontownGlobals.Tutorial]
     specialZones = [ToontownGlobals.SellbotLobby]
     if ToontownGlobals.SELLBOT_NERF_HOLIDAY in simbase.air.holidayManager.currentHolidays:

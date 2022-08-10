@@ -460,13 +460,12 @@ class Street(BattlePlace.BattlePlace):
         signs = geom.findAllMatches('**/*tunnelAheadSign*;+s')
         if signs.getNumPaths() > 0:
             streetSign = base.cr.streetSign
-            signTexturePath = streetSign.StreetSignBaseDir + \
-                '/' + streetSign.StreetSignFileName
+            signTexturePath = Filename('user/default/resources/default/phase_4/maps/street-sign.jpg')
             loaderTexturePath = Filename(str(signTexturePath))
             alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             inDreamland = False
             if place.zoneId and ZoneUtil.getCanonicalHoodId(
-                    place.zoneId) == ToontownGlobals.DonaldsDreamland:
+                    place.zoneId) == ToontownGlobals.TwilightSlumberland:
                 inDreamland = True
             alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             if Filename(signTexturePath).exists():

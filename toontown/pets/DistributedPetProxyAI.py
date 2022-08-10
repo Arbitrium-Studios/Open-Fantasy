@@ -20,7 +20,7 @@ class DistributedPetProxyAI(DistributedObjectAI.DistributedObjectAI):
         self.ownerId = 0
         self.petName = 'unnamed'
         self.traitSeed = 0
-        self.safeZone = ToontownGlobals.ToontownCentral
+        self.safeZone = ToontownGlobals.ToontropolisPlaza
         self.traitList = [0] * PetTraits.PetTraits.NumTraits
         self.head = -1
         self.ears = -1

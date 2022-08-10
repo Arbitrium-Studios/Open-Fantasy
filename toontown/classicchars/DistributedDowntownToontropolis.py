@@ -9,15 +9,15 @@ from toontown.toonbase import TTLocalizer
 from toontown.hood import DLHood
 
 
-class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
+class DistributedDowntownToontropolis(DistributedCCharBase.DistributedCCharBase):
     notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedGoofySpeedway')
+        'DistributedDowntownToontropolis')
 
     def __init__(self, cr):
         try:
-            self.DistributedGoofySpeedway_initialized
+            self.DistributedDowntownToontropolis_initialized
         except BaseException:
-            self.DistributedGoofySpeedway_initialized = 1
+            self.DistributedDowntownToontropolis_initialized = 1
             DistributedCCharBase.DistributedCCharBase.__init__(
                 self, cr, TTLocalizer.Goofy, 'g')
             self.fsm = ClassicFSM.ClassicFSM(
@@ -41,10 +41,10 @@ class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
 
     def delete(self):
         try:
-            self.DistributedGoofySpeedway_deleted
+            self.DistributedDowntownToontropolis_deleted
         except BaseException:
             del self.fsm
-            self.DistributedGoofySpeedway_deleted = 1
+            self.DistributedDowntownToontropolis_deleted = 1
             DistributedCCharBase.DistributedCCharBase.delete(self)
 
     def generate(self):

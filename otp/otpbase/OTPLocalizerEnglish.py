@@ -2,15 +2,15 @@ from pandac.PandaModules import TextPropertiesManager
 from pandac.PandaModules import TextProperties
 import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
-lTheBrrrgh = 'Tundra Wonderland'
-lDaisyGardens = 'Flowering Grove'
-lDonaldsDock = "Toontown Docks"
-lDonaldsDreamland = "Drowsy Dreamland"
-lMinniesMelodyland = "The Land of Melody"
-lToontownCentral = 'Toontown Central'
-lGoofySpeedway = 'Toontown Stadium'
-lOutdoorZone = "Acorn Acres"
-lGolfZone = "Toontown's MiniGolf"
+lTundraWonderland = 'Tundra Wonderland'
+lFloweringGrove = 'Flowering Grove'
+lToontropolisDocks = "Toontropolis City Shipyard"
+lTwilightSlumberland = "Drowsy Slumberland"
+lTheLandOfMusic = "The Land of Melody"
+lToontropolisPlaza = 'Toontropolis City Plaza'
+lDowntownToontropolis = 'Toontropolis City Stadium'
+lAcornAcres = "Acorn Acres"
+lGolfZone = "Toontropolis City Mini-Golf"
 lCancel = 'Cancel'
 lClose = 'Close'
 lOK = 'OK'
@@ -988,13 +988,13 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1102: "Let's go fight the %s!" % Cogs,
                                1103: "Let's go take over a %s building!" % Cog,
                                1104: "Let's go in the elevator!",
-                               1105: "Let's go to %s!" % lToontownCentral,
-                               1106: "Let's go to %s!" % lDonaldsDock,
-                               1107: "Let's go to %s!" % lMinniesMelodyland,
-                               1108: "Let's go to %s!" % lDaisyGardens,
-                               1109: "Let's go to %s!" % lTheBrrrgh,
-                               1110: "Let's go to %s!" % lDonaldsDreamland,
-                               1111: "Let's go to %s!" % lGoofySpeedway,
+                               1105: "Let's go to %s!" % lToontropolisPlaza,
+                               1106: "Let's go to %s!" % lToontropolisDocks,
+                               1107: "Let's go to %s!" % lTheLandOfMusic,
+                               1108: "Let's go to %s!" % lFloweringGrove,
+                               1109: "Let's go to %s!" % lTundraWonderland,
+                               1110: "Let's go to %s!" % lTwilightSlumberland,
+                               1111: "Let's go to %s!" % lDowntownToontropolis,
                                1112: "Let's go to my house!",
                                1113: "Let's go to your house!",
                                1114: "Let's go to Sellbot Headquarters!",
@@ -1008,7 +1008,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1122: "Let's go to Lawbot Headquarters!",
                                1123: "Let's go fight the Chief Justice!",
                                1124: "Let's go in the District Attorney's Office!",
-                               1125: "Let's go to %s!" % lOutdoorZone,
+                               1125: "Let's go to %s!" % lAcornAcres,
                                1126: "Let's go to %s!" % lGolfZone,
                                1127: "Let's go to Bossbot Headquarters!",
                                1128: "Let's go fight the CEO!",
@@ -1764,7 +1764,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                30100: "Happy April Toons' Week!",
                                30101: "Welcome to my April Toons' Week party!",
                                30102: 'The Silly Meter is back in Toon Hall!',
-                               30110: 'Mickey is in Daisy Gardens.',
+                               30110: 'Mickey is in the Flowering Grove.',
                                30111: 'Daisy is in Toontown Central.',
                                30112: 'Minnie is in The Brrrgh.',
                                30113: 'Pluto is in Melodyland.',
@@ -1907,7 +1907,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                30418: "It's the Boss!",
                                30450: "It's easy to be green!",
                                30451: 'Visit Green Bean Jeans and you can be green too!',
-                               30452: "It's on Oak Street in Daisy Gardens."}
+                               30452: "It's on Oak Street in the Flowering Grove."}
 SpeedChatStaticTextPirates = {50001: 'Aye',
                               50002: 'Nay',
                               50003: 'Yes',

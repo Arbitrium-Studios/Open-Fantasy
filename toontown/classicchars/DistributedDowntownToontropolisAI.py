@@ -10,15 +10,15 @@ from toontown.toonbase import TTLocalizer
 from . import CharStateDatasAI
 
 
-class DistributedGoofySpeedwayAI(
+class DistributedDowntownToontropolisAI(
         DistributedCCharBaseAI.DistributedCCharBaseAI):
     notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedGoofySpeedwayAI')
+        'DistributedDowntownToontropolisAI')
 
     def __init__(self, air):
         DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(
             self, air, TTLocalizer.Goofy)
-        self.fsm = ClassicFSM.ClassicFSM('DistributedGoofySpeedwayAI', [
+        self.fsm = ClassicFSM.ClassicFSM('DistributedDowntownToontropolisAI', [
             State.State('Off', self.enterOff, self.exitOff, [
                 'Lonely', 'TransitionToCostume', 'Walk']),
             State.State('Lonely', self.enterLonely, self.exitLonely, [

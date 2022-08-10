@@ -56,7 +56,7 @@ VampireMickey = 'VampireMickey'
 Minnie = 'Minnie'
 WitchMinnie = 'WitchMinnie'
 Donald = 'Donald'
-DonaldDock = 'DonaldDock'
+ToontropolisDock = 'ToontropolisDock'
 FrankenDonald = 'FrankenDonald'
 Daisy = 'Daisy'
 SockHopDaisy = 'SockHopDaisy'
@@ -69,17 +69,17 @@ Chip = 'Chip'
 Dale = 'Dale'
 JailbirdDale = 'JailbirdDale'
 PoliceChip = 'PoliceChip'
-lTheBrrrgh = 'Tundra Wonderland'
-lDaisyGardens = 'Flowering Grove'
-lDonaldsDock = "Toontown Docks"
-lDonaldsDreamland = "Drowsy Dreamland"
-lMinniesMelodyland = "The Land Of Music"
-lToontownCentral = 'Toontown Central'
+lTundraWonderland = 'Tundra Wonderland'
+lFloweringGrove = 'Flowering Grove'
+lToontropolisDocks = "Toontropolis City Shipyard"
+lTwilightSlumberland = "Drowsy Slumberland"
+lTheLandOfMusic = "The Land Of Music"
+lToontropolisPlaza = 'Toontropolis City Plaza'
 lToonHQ = 'Toon Headquarters'
 lSellbotHQ = 'Sellbot Headquarters'
-lGoofySpeedway = 'Toontown Stadium'
-lOutdoorZone = "Acorn Acres"
-lGolfZone = "Toontown's MiniGolf"
+lDowntownToontropolis = 'Toontropolis Stadium'
+lAcornAcres = "Acorn Acres"
+lGolfZone = "Toontropolis Mini-Golf"
 lPartyHood = 'Party Grounds'
 GlobalStreetNames = {20000: ('to', 'on', 'Tutorial Terrace'),
                      1000: ('to the', 'in the', 'Playground'),
@@ -127,15 +127,15 @@ GlobalStreetNames = {20000: ('to', 'on', 'Tutorial Terrace'),
                      13400: ('to the', 'in the', 'Lawbot B Office'),
                      13500: ('to the', 'in the', 'Lawbot C Office'),
                      13600: ('to the', 'in the', 'Lawbot D Office')}
-DonaldsDock = ('to', 'in', lDonaldsDock)
-ToontownCentral = ('to', 'in', lToontownCentral)
-TheBrrrgh = ('to', 'in', lTheBrrrgh)
-MinniesMelodyland = ('to', 'in', lMinniesMelodyland)
-DaisyGardens = ('to', 'in', lDaisyGardens)
-OutdoorZone = ('to', 'in', lOutdoorZone)
+ToontropolisDocks = ('to', 'in', lToontropolisDocks)
+ToontropolisPlaza = ('to', 'in', lToontropolisPlaza)
+TundraWonderland = ('to', 'in', lTundraWonderland)
+TheLandOfMusic = ('to', 'in', lTheLandOfMusic)
+FloweringGrove = ('to', 'in', lFloweringGrove)
+AcornAcres = ('to', 'in', lAcornAcres)
 FunnyFarm = ('to the', 'in the', 'Funny Farm')
-GoofySpeedway = ('to', 'in', lGoofySpeedway)
-DonaldsDreamland = ('to', 'in', lDonaldsDreamland)
+DowntownToontropolis = ('to', 'in', lDowntownToontropolis)
+TwilightSlumberland = ('to', 'in', lTwilightSlumberland)
 BossbotHQ = ('to', 'in', 'Bossbot Headquarters')
 SellbotHQ = ('to', 'in', 'Sellbot Headquarters')
 CashbotHQ = ('to', 'in', 'Cashbot Headquarters')
@@ -528,7 +528,7 @@ QuestsItemDict = {1: ['Pair of Glasses', 'Pairs of Glasses', 'a '],
                   5009: ['Bag of Bird Seed', 'Bags of Bird Seed', 'a '],
                   5010: ['Sprocket', 'Sprockets', 'a '],
                   5011: ['Salad', 'Salads', 'a '],
-                  5012: ['Key to ' + lDaisyGardens, 'Keys to ' + lDaisyGardens, 'a '],
+                  5012: ['Key to ' + lFloweringGrove, 'Keys to ' + lFloweringGrove, 'a '],
                   5013: [lSellbotHQ + ' Blueprints', lSellbotHQ + ' HQ Blueprints', 'some '],
                   5014: [lSellbotHQ + ' Memo', lSellbotHQ + ' Memos', 'a '],
                   5015: [lSellbotHQ + ' Memo', lSellbotHQ + ' Memos', 'a '],
@@ -607,7 +607,7 @@ INCOMPLETE_PROGRESS = 3
 INCOMPLETE_WRONG_NPC = 4
 COMPLETE = 5
 LEAVING = 6
-TheBrrrghTrackQuestDict = {GREETING: '',
+TundraWonderlandTrackQuestDict = {GREETING: '',
                            QUEST: 'Now you are ready.\x07Go out and walk the earth until you know which track you would like to choose.\x07Choose wisely, because this is your final track.\x07When you are certain, return to me.',
                            INCOMPLETE_PROGRESS: 'Choose wisely.',
                            INCOMPLETE_WRONG_NPC: 'Choose wisely.',
@@ -662,15 +662,15 @@ QuestDialogDict = {160: {GREETING: '',
                          LEAVING: QuestsDefaultLeaving},
                    1039: {QUEST: 'Visit _toNpcName_ if you want to get around town more easily._where_'},
                    1040: {QUEST: 'Visit _toNpcName_ if you want to get around town more easily._where_'},
-                   1041: {QUEST: 'Hi!  What brings you here?\x07Everybody uses their portable hole to travel around Toontown.\x07Why, you can teleport to your friends using the Friends List, or to any neighborhood using the map in the Shticker Book.\x07Of course, you have to earn that!\x07Say, I can turn on your teleport access to ' + lToontownCentral + ' if you help out a friend of mine.\x07Seems the Cogs are causing trouble over on Loopy Lane.  Go visit _toNpcName_._where_'},
-                   1042: {QUEST: 'Hi!  What brings you here?\x07Everybody uses their portable hole to travel around Toontown.\x07Why, you can teleport to your friends using the Friends List, or to any neighborhood using the map in the Shticker Book.\x07Of course, you have to earn that!\x07Say, I can turn on your teleport access to ' + lToontownCentral + ' if you help out a friend of mine.\x07Seems the Cogs are causing trouble over on Loopy Lane.  Go visit _toNpcName_._where_'},
-                   1043: {QUEST: 'Hi!  What brings you here?\x07Everybody uses their portable hole to travel around Toontown.\x07Why, you can teleport to your friends using the Friends List, or to any neighborhood using the map in the Shticker Book.\x07Of course, you have to earn that!\x07Say, I can turn on your teleport access to ' + lToontownCentral + ' if you help out a friend of mine.\x07Seems the Cogs are causing trouble over on Loopy Lane.  Go visit _toNpcName_._where_'},
+                   1041: {QUEST: 'Hi!  What brings you here?\x07Everybody uses their portable hole to travel around Toontown.\x07Why, you can teleport to your friends using the Friends List, or to any neighborhood using the map in the Shticker Book.\x07Of course, you have to earn that!\x07Say, I can turn on your teleport access to ' + lToontropolisPlaza + ' if you help out a friend of mine.\x07Seems the Cogs are causing trouble over on Loopy Lane.  Go visit _toNpcName_._where_'},
+                   1042: {QUEST: 'Hi!  What brings you here?\x07Everybody uses their portable hole to travel around Toontown.\x07Why, you can teleport to your friends using the Friends List, or to any neighborhood using the map in the Shticker Book.\x07Of course, you have to earn that!\x07Say, I can turn on your teleport access to ' + lToontropolisPlaza + ' if you help out a friend of mine.\x07Seems the Cogs are causing trouble over on Loopy Lane.  Go visit _toNpcName_._where_'},
+                   1043: {QUEST: 'Hi!  What brings you here?\x07Everybody uses their portable hole to travel around Toontown.\x07Why, you can teleport to your friends using the Friends List, or to any neighborhood using the map in the Shticker Book.\x07Of course, you have to earn that!\x07Say, I can turn on your teleport access to ' + lToontropolisPlaza + ' if you help out a friend of mine.\x07Seems the Cogs are causing trouble over on Loopy Lane.  Go visit _toNpcName_._where_'},
                    1044: {QUEST: 'Oh, thanks for stopping by.  I really need some help.\x07As you can see, I have no customers.\x07My secret recipe book is lost and nobody comes to my restaurant anymore.\x07I last saw it just before those Cogs took over my building.\x07Can you help me by recovering four of my famous recipes?',
                           LEAVING: '',
                           INCOMPLETE_PROGRESS: 'Any luck finding my recipes?'},
                    1045: {QUEST: 'Thank you so much!\x07Before long I will have the entire collection and can reopen my restaurant.\x07Oh, I have a note here for you - something about teleport access?\x07It says thanks for helping my friend and to deliver this to Toon Headquarters.\x07Well, thanks indeed - bye!',
                           LEAVING: '',
-                          COMPLETE: 'Ah, yes, says here you have been a great help to some of the fine folks out on Loopy Lane.\x07Says you need teleport access to ' + lToontownCentral + '.\x07Well, consider it done.\x07Now you can teleport back to the playground from almost anywhere in Toontown.\x07Just open your map and click on ' + lToontownCentral + '.'},
+                          COMPLETE: 'Ah, yes, says here you have been a great help to some of the fine folks out on Loopy Lane.\x07Says you need teleport access to ' + lToontropolisPlaza + '.\x07Well, consider it done.\x07Now you can teleport back to the playground from almost anywhere in Toontown.\x07Just open your map and click on ' + lToontropolisPlaza + '.'},
                    1046: {QUEST: 'The Cashbots have really been bothering the Funny Money Savings and Loan.\x07Stop by there and see if there is anything you can do._where_'},
                    1047: {QUEST: 'Cashbots have been sneaking into the bank and stealing our machines.\x07Please recover 5 adding machines from Cashbots.\x07To save you from running back and forth, just bring them all back at once.',
                           LEAVING: '',
@@ -684,7 +684,7 @@ QuestDialogDict = {160: {GREETING: '',
                           LEAVING: '',
                           COMPLETE: "Adding machines all fixed up?\x07Nice work.  I'm sure I've got something around here to reward you with..."},
                    1054: {QUEST: '_toNpcName_ needs some help with his clown cars._where_'},
-                   1055: {QUEST: "Yowza!  I can't find the tires to this here clown car anywhere!\x07Do ya think you could help me out?\x07I think Loopy Bob may have tossed them in the pond in the " + lToontownCentral + ' playground.\x07If you stand on one of the docks there you can try and fish out the tires for me.',
+                   1055: {QUEST: "Yowza!  I can't find the tires to this here clown car anywhere!\x07Do ya think you could help me out?\x07I think Loopy Bob may have tossed them in the pond in the " + lToontropolisPlaza + ' playground.\x07If you stand on one of the docks there you can try and fish out the tires for me.',
                           GREETING: 'Woohoo!',
                           LEAVING: '',
                           INCOMPLETE_PROGRESS: 'Are you having trouble fishing out all 4 tires?'},
@@ -701,11 +701,11 @@ QuestDialogDict = {160: {GREETING: '',
                    1060: {QUEST: "Thanks for stopping by!\x07Those Cogs have been stealing my ink, so I'm running very low.\x07Could you fish some octopus ink out of the pond for me?\x07Just stand on a dock near the pond to fish.",
                           LEAVING: '',
                           INCOMPLETE_PROGRESS: 'Are you having trouble fishing?'},
-                   1061: {QUEST: "Great - thanks for the ink!\x07You know what, maybe if you cleared away some of those Pencil Pushers...\x07I wouldn't run out of ink again so quickly.\x07Defeat 6 Pencil Pushers in " + lToontownCentral + ' for your reward.',
+                   1061: {QUEST: "Great - thanks for the ink!\x07You know what, maybe if you cleared away some of those Pencil Pushers...\x07I wouldn't run out of ink again so quickly.\x07Defeat 6 Pencil Pushers in " + lToontropolisPlaza + ' for your reward.',
                           LEAVING: '',
                           COMPLETE: 'Thanks!  Let me reward you for your help.',
                           INCOMPLETE_PROGRESS: 'I just saw some more Pencil Pushers.'},
-                   1062: {QUEST: "Great - thanks for the ink!\x07You know what, maybe if you cleared away some of those Bloodsuckers...\x07I wouldn't run out of ink again so quickly.\x07Defeat 6 Bloodsuckers in " + lToontownCentral + ' for your reward.',
+                   1062: {QUEST: "Great - thanks for the ink!\x07You know what, maybe if you cleared away some of those Bloodsuckers...\x07I wouldn't run out of ink again so quickly.\x07Defeat 6 Bloodsuckers in " + lToontropolisPlaza + ' for your reward.',
                           LEAVING: '',
                           COMPLETE: 'Thanks!  Let me reward you for your help.',
                           INCOMPLETE_PROGRESS: 'I just saw some more Bloodsuckers.'},
@@ -715,7 +715,7 @@ QuestDialogDict = {160: {GREETING: '',
                           INCOMPLETE_PROGRESS: 'No luck finding the package, huh?'},
                    1067: {QUEST: "That's it, all right!\x07Hey, the address is smudged...\x07All I can read is that it's for a Dr. - the rest is all blurry.\x07Maybe it's for _toNpcName_?  Could you take it to him?_where_",
                           LEAVING: ''},
-                   1068: {QUEST: "I wasn't expecting a package.  Maybe it's for Dr. I.M. Euphoric?\x07My assistant was going over there today anyway, so I'll have him check for you.\x07In the meantime, would you mind getting rid of some of the Cogs on my street?\x07Defeat 10 Cogs in " + lToontownCentral + '.',
+                   1068: {QUEST: "I wasn't expecting a package.  Maybe it's for Dr. I.M. Euphoric?\x07My assistant was going over there today anyway, so I'll have him check for you.\x07In the meantime, would you mind getting rid of some of the Cogs on my street?\x07Defeat 10 Cogs in " + lToontropolisPlaza + '.',
                           LEAVING: '',
                           INCOMPLETE_PROGRESS: "My assistant isn't back yet."},
                    1069: {QUEST: "Dr. Euphoric says he wasn't expecting a package either.\x07Unfortunately, a Cashbot stole it from my assistant on the way back.\x07Could you try and get it back?",
@@ -865,9 +865,9 @@ QuestDialogDict = {160: {GREETING: '',
                    3207: {QUEST: 'Hi, _avName_! Thanks for coming by!\x07A bunch of Double Talkers just broke in and stole a stack of postcards from my counter.\x07Please go out and defeat all those Double Talkers to get my postcards back!',
                           INCOMPLETE_PROGRESS: "That's not enough postcards! Keep looking!",
                           COMPLETE: 'Oh, thank you! Now I can deliver the mail on time! Here is your reward...'},
-                   3208: {QUEST: "We've been getting complaints from the residents lately about all of the Cold Callers.\x07See if you can defeat 10 Cold Callers to help out your fellow Toons in " + lDaisyGardens + '.'},
-                   3209: {QUEST: 'Thanks for taking care of those Cold Callers!\x07But now the Telemarketers have gotten out of hand.\x07Defeat 10 Telemarketers in ' + lDaisyGardens + ' and come back here for your reward.'},
-                   3247: {QUEST: "We've been getting complaints from the residents lately about all of the Bloodsuckers.\x07See if you can defeat 20 Bloodsuckers to help out your fellow Toons in " + lDaisyGardens + '.'},
+                   3208: {QUEST: "We've been getting complaints from the residents lately about all of the Cold Callers.\x07See if you can defeat 10 Cold Callers to help out your fellow Toons in " + lFloweringGrove + '.'},
+                   3209: {QUEST: 'Thanks for taking care of those Cold Callers!\x07But now the Telemarketers have gotten out of hand.\x07Defeat 10 Telemarketers in ' + lFloweringGrove + ' and come back here for your reward.'},
+                   3247: {QUEST: "We've been getting complaints from the residents lately about all of the Bloodsuckers.\x07See if you can defeat 20 Bloodsuckers to help out your fellow Toons in " + lFloweringGrove + '.'},
                    3210: {QUEST: 'Oh no, The Squirting Flower on Maple Street just ran out of flowers!\x07Take them ten of your own squirting flowers to help out.\x07Make sure you have 10 squirting flowers in your inventory first.',
                           LEAVING: '',
                           INCOMPLETE_PROGRESS: "I need to have 10 squirting flowers. You don't have enough!"},
@@ -891,23 +891,23 @@ QuestDialogDict = {160: {GREETING: '',
                    3245: {QUEST: 'Good job! Now we need a sprocket from a Back Stabber for comparison.\x07These sprockets are harder to catch, so keep trying.'},
                    3246: {QUEST: 'Great! Now we need just one more sprocket.\x07This time, we need a sprocket from a Spin Doctor.\x07When you catch one, bring it back for your reward.'},
                    3220: {QUEST: "I just heard that _toNpcName_ was asking around for you.\x07Why don't you drop by and see what she wants?_where_"},
-                   3221: {QUEST: 'Hi, _avName_! There you are!\x07I heard you were quite an expert in squirt attacks.\x07I need someone to set a good example for all the Toons in ' + lDaisyGardens + '.\x07Use your squirt attacks to defeat a bunch of Cogs.\x07Encourage your friends to use squirt too.\x07When you have defeated 20 Cogs, come back here for a reward!'},
+                   3221: {QUEST: 'Hi, _avName_! There you are!\x07I heard you were quite an expert in squirt attacks.\x07I need someone to set a good example for all the Toons in ' + lFloweringGrove + '.\x07Use your squirt attacks to defeat a bunch of Cogs.\x07Encourage your friends to use squirt too.\x07When you have defeated 20 Cogs, come back here for a reward!'},
                    3222: {QUEST: "It's time to demonstrate your Toonmanship.\x07If you successfully reclaim a number of Cog buildings, you'll earn the right to carry three quests.\x07First, defeat any two Cog buildings.\x07Feel free to call on your friends to help you out."},
                    3223: {QUEST: 'Great job on those buildings!\x07Now, defeat two more buildings.\x07These buildings must be at least two stories high, or higher.'},
                    3224: {QUEST: 'Fantastic!\x07Now just defeat two more buildings.\x07These buildings must be at least three stories high.\x07When you finish, come back for your reward!',
                           COMPLETE: 'You did it, _avName_!\x07You demonstrated your superior Toonmanship.',
                           GREETING: ''},
                    3225: {QUEST: "_toNpcName_ says she needs some help.\x07Why don't you go see what you can do to help out?_where_"},
-                   3235: {QUEST: "Oh, this is the salad I ordered!\x07Thank you for bringing it to me.\x07All those Cogs must have frightened away _toNpcName_'s regular delivery person again.\x07Why don't you do us a favor and defeat some of the Cogs out there?\x07Defeat 10 Cogs in " + lDaisyGardens + ' and then report back to _toNpcName_.',
+                   3235: {QUEST: "Oh, this is the salad I ordered!\x07Thank you for bringing it to me.\x07All those Cogs must have frightened away _toNpcName_'s regular delivery person again.\x07Why don't you do us a favor and defeat some of the Cogs out there?\x07Defeat 10 Cogs in " + lFloweringGrove + ' and then report back to _toNpcName_.',
                           INCOMPLETE_PROGRESS: "You're working on defeating Cogs for me?\x07That's wonderful! Keep up the good work!",
                           COMPLETE: 'Oh, thank you so much for defeating those Cogs!\x07Now maybe I can keep my regular delivery schedule.\x07Your reward is...',
                           INCOMPLETE_WRONG_NPC: "Go tell _toNpcName_ about the Cogs you've defeated._where_"},
                    3236: {QUEST: 'There are far too many Lawbots out there.\x07You can do your part to help!\x07Defeat 3 Lawbot buildings.'},
                    3237: {QUEST: 'Great job on those Lawbot buildings!\x07But now there are too many Sellbots!\x07Defeat 3 Sellbot buildings, then come back for your reward.'},
-                   3238: {QUEST: 'Oh no! A "Mingler" Cog has stolen the Key to ' + lDaisyGardens + '!\x07See if you can recover it.\x07Remember, The Mingler can be found only inside Sellbot buildings.'},
-                   3239: {QUEST: "You found a key all right, but it isn't the right one!\x07We need the Key to " + lDaisyGardens + '.\x07Keep looking! A "Mingler" Cog still has it!'},
-                   3242: {QUEST: 'Oh no! A Legal Eagle Cog has stolen the Key to ' + lDaisyGardens + '!\x07See if you can recover it.\x07Remember, Legal Eagles can be found only inside Lawbot buildings.'},
-                   3243: {QUEST: "You found a key all right, but it isn't the right one!\x07We need the Key to " + lDaisyGardens + '.\x07Keep looking! A Legal Eagle Cog still has it!'},
+                   3238: {QUEST: 'Oh no! A "Mingler" Cog has stolen the Key to ' + lFloweringGrove + '!\x07See if you can recover it.\x07Remember, The Mingler can be found only inside Sellbot buildings.'},
+                   3239: {QUEST: "You found a key all right, but it isn't the right one!\x07We need the Key to " + lFloweringGrove + '.\x07Keep looking! A "Mingler" Cog still has it!'},
+                   3242: {QUEST: 'Oh no! A Legal Eagle Cog has stolen the Key to ' + lFloweringGrove + '!\x07See if you can recover it.\x07Remember, Legal Eagles can be found only inside Lawbot buildings.'},
+                   3243: {QUEST: "You found a key all right, but it isn't the right one!\x07We need the Key to " + lFloweringGrove + '.\x07Keep looking! A Legal Eagle Cog still has it!'},
                    3240: {QUEST: "I've just heard from _toNpcName_ that a Legal Eagle stole a bag of his bird seed.\x07Defeat Legal Eagles until you recover Bud's bird seed, and take it to him.\x07Legal Eagles are only found inside Lawbot buildings._where_",
                           COMPLETE: 'Oh, thank you so much for finding my bird seed!\x07Your reward is...',
                           INCOMPLETE_WRONG_NPC: 'Good job getting that bird seed back!\x07Now take it to _toNpcName_._where_'},
@@ -1056,7 +1056,7 @@ QuestDialogDict = {160: {GREETING: '',
                           LEAVING: '',
                           INCOMPLETE_PROGRESS: 'Any luck finding my soccer ball?',
                           COMPLETE: 'Yeehaw! You found it!\x07 Here, take your reward...'},
-                   5202: {QUEST: lTheBrrrgh + " has been overrun with some of the toughest Cogs we've seen yet.\x07You will probably want to carry more gags around here.\x07I hear _toNpcName_ may have a large bag you can use to carry more gags._where_"},
+                   5202: {QUEST: lTundraWonderland + " has been overrun with some of the toughest Cogs we've seen yet.\x07You will probably want to carry more gags around here.\x07I hear _toNpcName_ may have a large bag you can use to carry more gags._where_"},
                    5203: {GREETING: 'Huh?  Are you on my sledding team?',
                           QUEST: "What's that?  You want a bag?\x07I had one somewhere around here... maybe it's in my toboggan?\x07Only... I haven't seen my toboggan since the big race!\x07Maybe one of those Cogs took it?",
                           LEAVING: 'Have you seen my toboggan?',
@@ -1334,7 +1334,7 @@ QuestDialogDict = {160: {GREETING: '',
                           COMPLETE: "I told you what?!?!\x07Thanks a bunch! Here's your Laff point!",
                           INCOMPLETE_PROGRESS: 'Hi!\x07What are you doing in here again!',
                           QUEST: 'A Laff point? I dont think so!\x07Sure, but only if you clear out some of these pesky Lawbots first.'},
-                   5303: {QUEST: lTheBrrrgh + " is teeming with very dangerous Cogs.\x07If I were you, I'd carry more gags around here.\x07I hear _toNpcName_ can make you a large bag if you are willing to do the legwork._where_"},
+                   5303: {QUEST: lTundraWonderland + " is teeming with very dangerous Cogs.\x07If I were you, I'd carry more gags around here.\x07I hear _toNpcName_ can make you a large bag if you are willing to do the legwork._where_"},
                    5304: {GREETING: '',
                           LEAVING: '',
                           INCOMPLETE_PROGRESS: 'There should be plenty of Lawbots out there.\x07So get to it!',
@@ -3262,9 +3262,9 @@ FADoorCodes_TALK_TO_HQ_TOM = 'Go get your reward from Toon Headquarters!'
 FADoorCodes_SUIT_APPROACHING = None
 FADoorCodes_BUILDING_TAKEOVER = "Watch out! There's a Cog in there!"
 FADoorCodes_SB_DISGUISE_INCOMPLETE = "You'll get caught going in there as a Toon! You need to complete your Sellbot Disguise first!\n\nBuild your Sellbot Disguise out of parts from the Factory."
-FADoorCodes_CB_DISGUISE_INCOMPLETE = "You'll get caught going in there as a Toon! You need to complete your Cashbot Disguise first!\n\nBuild your Cashbot Disguise by doing ToonTasks in Donald's Dreamland."
-FADoorCodes_LB_DISGUISE_INCOMPLETE = "You'll get caught going in there as a Toon! You need to complete your Lawbot Disguise first!\n\nBuild your Lawbot Disguise by doing the ToonTasks after Donald's Dreamland."
-FADoorCodes_BB_DISGUISE_INCOMPLETE = "You'll get caught going in there as a Toon! You need to complete your Bossbot Disguise first!\n\nBuild your Bossbot Disguise by doing the ToonTasks after Donald's Dreamland."
+FADoorCodes_CB_DISGUISE_INCOMPLETE = "You'll get caught going in there as a Toon! You need to complete your Cashbot Disguise first!\n\nBuild your Cashbot Disguise by doing ToonTasks in Twilight Slumberland."
+FADoorCodes_LB_DISGUISE_INCOMPLETE = "You'll get caught going in there as a Toon! You need to complete your Lawbot Disguise first!\n\nBuild your Lawbot Disguise by doing the ToonTasks after Twilight Slumberland."
+FADoorCodes_BB_DISGUISE_INCOMPLETE = "You'll get caught going in there as a Toon! You need to complete your Bossbot Disguise first!\n\nBuild your Bossbot Disguise by doing the ToonTasks after Twilight Slumberland."
 KnockKnockContestJokes = {2100: ['Wally', "Wally's not looking, hit him with a pie!"],
                           2200: {28: ['Biscuit', 'Biscuit out of here the Cogs are coming!'],
                                  41: ['Dewey', 'Dewey want to go defeat some more Cogs?'],
@@ -3441,13 +3441,13 @@ SharedChatterGoodbyes = ['I have to go now, bye!',
                          "I'm going to join a group and stop some " + Cogs + '.',
                          'It was nice to see you today, %.',
                          "I have a lot to do today. I'd better get busy."]
-MickeyChatter = (['Welcome to ' + lToontownCentral + '.', 'Hi, my name is ' + Mickey + ". What's yours?"], ['Hey, have you seen ' + Donald + '?',
-                                                                                                            "I'm going to go watch the fog roll in at " + lDonaldsDock + '.',
+MickeyChatter = (['Welcome to ' + lToontropolisPlaza + '.', 'Hi, my name is ' + Mickey + ". What's yours?"], ['Hey, have you seen ' + Donald + '?',
+                                                                                                            "I'm going to go watch the fog roll in at " + lToontropolisDocks + '.',
                                                                                                             'If you see my pal ' + Goofy + ', say hi to him for me.',
                                                                                                             'I hear ' + Daisy + ' has planted some new flowers in her garden.'], ["I'm going to MelodyLand to see " + Minnie + '!',
                                                                                                                                                                                   "Gosh, I'm late for my date with " + Minnie + '!',
                                                                                                                                                                                   "Looks like it's time for " + Pluto + "'s dinner.",
-                                                                                                                                                                                  "I think I'll go swimming at " + lDonaldsDock + '.',
+                                                                                                                                                                                  "I think I'll go swimming at " + lToontropolisDocks + '.',
                                                                                                                                                                                   "It's time for a nap. I'm going to Dreamland."])
 WinterMickeyCChatter = (["Hi, I'm Merry Mickey!",
                          'Welcome to Tinseltown... I mean, Toontown!',
@@ -3472,7 +3472,6 @@ WinterMickeyCChatter = (["Hi, I'm Merry Mickey!",
                                                                                                      'Shucks, sorry you have to go. So long!',
                                                                                                      "I'm going caroling with Minnie!"])
 ValentinesMickeyChatter = (["Hi, I'm Mickey!",
-                            'Welcome to ValenToontown Central!',
                             "Happy ValenToon's Day!",
                             "Happy ValenToon's Day, %"], ['Love is in the air! And butterflies!',
                                                           'Those hearts are good for Laff boosts!',
@@ -3496,7 +3495,7 @@ WinterMickeyDChatter = (["Hi, I'm Merry Mickey!",
                                                                                                      'Warm wishes to you!',
                                                                                                      'Shucks, sorry you have to go. So long!',
                                                                                                      "I'm going caroling with Minnie!"])
-VampireMickeyChatter = (['Welcome to ' + lToontownCentral + '.',
+VampireMickeyChatter = (['Welcome to ' + lToontropolisPlaza + '.',
                          'Hi, my name is ' + Mickey + ". What's yours?",
                          'Happy Halloween!',
                          'Happy Halloween, %!',
@@ -3533,8 +3532,8 @@ MinnieChatter = (['Welcome to Melodyland.', 'Hi, my name is ' + Minnie + ". What
                                                                                               'Hey, have you seen ' + Mickey + '?',
                                                                                               'If you see my friend ' + Goofy + ', say hi to him for me.',
                                                                                               'Wow, there are lots of ' + Cogs + ' near ' + Donald + "'s Dreamland.",
-                                                                                              "I heard it's foggy at the " + lDonaldsDock + '.',
-                                                                                              'Be sure and try the maze in ' + lDaisyGardens + '.',
+                                                                                              "I heard it's foggy at the " + lToontropolisDocks + '.',
+                                                                                              'Be sure and try the maze in ' + lFloweringGrove + '.',
                                                                                               "I think I'll go catch some tunes.",
                                                                                               'Hey %, look at that over there.',
                                                                                               'I love the sound of music.',
@@ -3610,13 +3609,13 @@ DaisyChatter = (['Welcome to my garden!', "Hello, I'm " + Daisy + ". What's your
                                                                                                                          'Have you seen ' + Donald + "? I can't find him anywhere.",
                                                                                                                          'If you see my friend ' + Minnie + ', please say "Hello" to her for me.',
                                                                                                                          'The better gardening tools you have the better plants you can grow.',
-                                                                                                                         'There are far too many ' + Cogs + ' near ' + lDonaldsDock + '.',
+                                                                                                                         'There are far too many ' + Cogs + ' near ' + lToontropolisDocks + '.',
                                                                                                                          'Watering your garden every day keeps your plants happy.',
                                                                                                                          'To grow a Pink Daisy plant a yellow and red Jellybean together.',
                                                                                                                          'Yellow daisies are easy to grow, just plant a yellow Jellybean.',
                                                                                                                          'If you see sand under a plant it needs water or it will wilt!'], ["I'm going to Melody Land to see %s!" % Minnie,
                                                                                                                                                                                             "I'm late for my picnic with %s!" % Donald,
-                                                                                                                                                                                            "I think I'll go swimming at " + lDonaldsDock + '.',
+                                                                                                                                                                                            "I think I'll go swimming at " + lToontropolisDocks + '.',
                                                                                                                                                                                             "Oh, I'm a little sleepy. I think I'll go to Dreamland."])
 ValentinesDaisyChatter = (["Hi, I'm Daisy!", "Happy ValenToon's Day!", "Happy ValenToon's Day, %"], ["I hope Donald doesn't get me another Amore Eel!",
                                                                                                      'Donald is taking me out to the Deep-see Diner!',
@@ -3680,13 +3679,13 @@ HalloweenDaisyChatter = (['Welcome to Daisy Ghosts... I mean Gardens!', 'Happy H
                                                                                                                      'I hope you are enjoying our Halloween fun!'], ['Donald is taking me Trick-or-Treating!', "I'm going to check out the fun Halloween decorations."])
 FieldOfficeDaisyChatter = [
     'Those Mover & Shaker Field Offices are popping up like weeds!']
-ChipChatter = (['Welcome to %s!' % lOutdoorZone,
+ChipChatter = (['Welcome to %s!' % lAcornAcres,
                 "Hello, I'm " + Chip + ". What's your name?",
                 "No, I'm " + Chip + '.',
                 "It's so nice to see you %!",
-                'We are Chip and Dale!'], ['I like golf.', 'We have the best acorns in Toontown.', 'The golf holes with volcanoes are the most challenging for me.'], ["We're going to the " + lTheBrrrgh + ' and play with %s.' % Pluto,
+                'We are Chip and Dale!'], ['I like golf.', 'We have the best acorns in Toontown.', 'The golf holes with volcanoes are the most challenging for me.'], ["We're going to the " + lTundraWonderland + ' and play with %s.' % Pluto,
                                                                                                                                                                        "We'll visit %s and fix him." % Donald,
-                                                                                                                                                                       "I think I'll go swimming at " + lDonaldsDock + '.',
+                                                                                                                                                                       "I think I'll go swimming at " + lToontropolisDocks + '.',
                                                                                                                                                                        "Oh, I'm a little sleepy. I think I'll go to Dreamland."])
 ValentinesChipChatter = (["I'm Chip!", "Happy ValenToon's Day!", "Happy ValenToon's Day, %!"], ["What did you get me for ValenToon's Day, Dale?",
                                                                                                 'Those hearts are good for Laff boosts!',
@@ -3710,7 +3709,7 @@ HalloweenChipChatter = (['Play some MiniGhoul... I mean Golf!', 'Happy Halloween
 DaleChatter = (["It's so nice to see you %!",
                 "Hello, I'm " + Dale + ". What's your name?",
                 "Hi I'm " + Chip + '.',
-                'Welcome to %s!' % lOutdoorZone,
+                'Welcome to %s!' % lAcornAcres,
                 'We are Chip and Dale!'], ['I like picnics.', 'Acorns are tasty, try some.', 'Those windmills can be hard too.'], ['Hihihi ' + Pluto + ' is fun to play with.',
                                                                                                                                    "Yeah, let's fix %s." % Donald,
                                                                                                                                    'A swim sounds refreshing.',
@@ -3736,20 +3735,20 @@ HalloweenDaleChatter = (['Happy Halloween, %!', 'Play some MiniGhoul... I mean G
                                                                                                              'Play golf and get a Howl-In-One',
                                                                                                              'Candy corns are sweeter than acorns.',
                                                                                                              'I hope you are enjoying our Halloween fun!'], ['%, watch out for Bloodsucker Cogs!'])
-GoofyChatter = (['Welcome to ' + lDaisyGardens + '.', 'Hi, my name is ' + Goofy + ". What's yours?", "Gawrsh, it's nice to see you %!"], ['Boy it sure is easy to get lost in the garden maze!',
+GoofyChatter = (['Welcome to ' + lFloweringGrove + '.', 'Hi, my name is ' + Goofy + ". What's yours?", "Gawrsh, it's nice to see you %!"], ['Boy it sure is easy to get lost in the garden maze!',
                                                                                                                                           'Be sure and try the maze here.',
                                                                                                                                           "I haven't seen " + Daisy + ' all day.',
                                                                                                                                           'I wonder where ' + Daisy + ' is.',
                                                                                                                                           'Hey, have you seen ' + Donald + '?',
                                                                                                                                           'If you see my friend ' + Mickey + ', say hi to him for me.',
                                                                                                                                           "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
-                                                                                                                                          'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lDonaldsDock + '.',
+                                                                                                                                          'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lToontropolisDocks + '.',
                                                                                                                                           'It looks like ' + Daisy + ' has planted some new flowers in her garden.',
                                                                                                                                           'At the Brrrgh branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                                           "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                                           "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ["I'm going to Melody Land to see %s!" % Mickey,
                                                                                                                                                                                                                                                           "Gosh, I'm late for my game with %s!" % Donald,
-                                                                                                                                                                                                                                                          "I think I'll go swimming at " + lDonaldsDock + '.',
+                                                                                                                                                                                                                                                          "I think I'll go swimming at " + lToontropolisDocks + '.',
                                                                                                                                                                                                                                                           "It's time for a nap. I'm going to Dreamland."])
 WinterGoofyChatter = (["I'm Goofy about the holidays!",
                        'Welcome to Snowball Speedway!',
@@ -3768,19 +3767,19 @@ ValentinesGoofyChatter = (["I'm Goofy about ValenToon's Day!", "Happy ValenToon'
                                                                                                                         'Show your sweetie a new kart!',
                                                                                                                         'Toons love their karts!',
                                                                                                                         'Make some new friends on the track!'], ['Drive safe, now!', 'Show some love out there!'])
-GoofySpeedwayChatter = (['Welcome to ' + lGoofySpeedway + '.', 'Hi, my name is ' + Goofy + ". What's yours?", "Gawrsh, it's nice to see you %!"], ['Boy, I saw a terrific race earlier.',
+DowntownToontropolisChatter = (['Welcome to ' + lDowntownToontropolis + '.', 'Hi, my name is ' + Goofy + ". What's yours?", "Gawrsh, it's nice to see you %!"], ['Boy, I saw a terrific race earlier.',
                                                                                                                                                    'Watch out for banana peels on the race track!',
                                                                                                                                                    'Have you upgraded your kart lately?',
                                                                                                                                                    'We just got in some new rims at the kart shop.',
                                                                                                                                                    'Hey, have you seen ' + Donald + '?',
                                                                                                                                                    'If you see my friend ' + Mickey + ', say hi to him for me.',
                                                                                                                                                    "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
-                                                                                                                                                   'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lDonaldsDock + '.',
+                                                                                                                                                   'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lToontropolisDocks + '.',
                                                                                                                                                    'At the Brrrgh branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                                                    "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                                                    "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ["I'm going to Melody Land to see %s!" % Mickey,
                                                                                                                                                                                                                                                                    "Gosh, I'm late for my game with %s!" % Donald,
-                                                                                                                                                                                                                                                                   "I think I'll go swimming at " + lDonaldsDock + '.',
+                                                                                                                                                                                                                                                                   "I think I'll go swimming at " + lToontropolisDocks + '.',
                                                                                                                                                                                                                                                                    "It's time for a nap. I'm going to Dreamland."])
 SuperGoofyChatter = (['Welcome to my Super Speedway!',
                       "Hi, I'm Super Goof! What's your name?",
@@ -3795,16 +3794,16 @@ SuperGoofyChatter = (['Welcome to my Super Speedway!',
                                                "It's fun to dress up for Halloween!",
                                                'I hope you are enjoying our Halloween fun!'], ['Gotta fly!',
                                                                                                'Hi-Ho and away I go!',
-                                                                                               "Should I fly or drive to Donald's Dock?",
+                                                                                               "Should I fly or drive to Toontropolis Ship Yard?",
                                                                                                'Gawrsh, have a Happy Halloween!'])
 DonaldChatter = (['Welcome to Dreamland.', "Hi, my name is %s. What's yours?" % Donald], ['Sometimes this place gives me the creeps.',
-                                                                                          'Be sure and try the maze in ' + lDaisyGardens + '.',
+                                                                                          'Be sure and try the maze in ' + lFloweringGrove + '.',
                                                                                           "Oh boy, I'm having a good day.",
                                                                                           'Hey, have you seen ' + Mickey + '?',
                                                                                           'If you see my buddy ' + Goofy + ', say hi to him for me.',
                                                                                           "I think I'll go fishing this afternoon.",
-                                                                                          'Wow, there are lots of ' + Cogs + ' at ' + lDonaldsDock + '.',
-                                                                                          "Hey, didn't I take you on a boat ride at " + lDonaldsDock + '?',
+                                                                                          'Wow, there are lots of ' + Cogs + ' at ' + lToontropolisDocks + '.',
+                                                                                          "Hey, didn't I take you on a boat ride at " + lToontropolisDocks + '?',
                                                                                           "I haven't seen " + Daisy + ' all day.',
                                                                                           'I hear ' + Daisy + ' has planted some new flowers in her garden.',
                                                                                           'Quack.'], ["I'm going to Melody Land to see %s!" % Minnie,
@@ -3966,7 +3965,7 @@ AFMickeyChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], 
                                                                                  "I'm not feeling like myself today!",
                                                                                  'Have you heard your Doodle talk yet?',
                                                                                  'Gravity has taken a holiday at the Estates!'], ["Have a wacky April Toons' Week!", 'Tell Mickey I said hi!'])
-AFMinnieChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ['Welcome to ' + lTheBrrrgh + "! I'm " + Pluto + '!',
+AFMinnieChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ['Welcome to ' + lTundraWonderland + "! I'm " + Pluto + '!',
                                                                                  "Hi, I'm " + Pluto + "! What's your name?",
                                                                                  "What, you've never seen a dog with mouse ears?",
                                                                                  "I'm not feeling like myself today!",
@@ -3977,7 +3976,7 @@ AFMinnieChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], 
                                                                                  "April Toons' Week is the silliest week of the year!",
                                                                                  'Have you heard your Doodle talk yet?',
                                                                                  'Gravity has taken a holiday at the Estates!'], ["Have a wacky April Toons' Week!", 'I have to go chase cars now!  Bye!'])
-AFDaisyChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ['Welcome to ' + lToontownCentral + "! I'm " + Mickey + ' Mouse!',
+AFDaisyChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ['Welcome to ' + lToontropolisPlaza + "! I'm " + Mickey + ' Mouse!',
                                                                                 "Hi, I'm " + Mickey + '! The happiest mouse in Toontown!',
                                                                                 'If you see ' + Daisy + ', tell her ' + Mickey + ' said hi!',
                                                                                 "What, you've never seen a mouse with feathers?",
@@ -3985,8 +3984,8 @@ AFDaisyChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], [
                                                                                 "I'm not feeling like myself today!",
                                                                                 "April Toons' Week is the silliest week of the year!",
                                                                                 'Have you heard your Doodle talk yet?',
-                                                                                'Gravity has taken a holiday at the Estates!'], ['Bye! Tell them ' + Mickey + ' sent you!', 'If you go to ' + lDaisyGardens + ', say hi to her for me!'])
-AFGoofySpeedwayChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ["Welcome to Dreamland! I'm " + Donald + '!',
+                                                                                'Gravity has taken a holiday at the Estates!'], ['Bye! Tell them ' + Mickey + ' sent you!', 'If you go to ' + lFloweringGrove + ', say hi to her for me!'])
+AFDowntownToontropolisChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ["Welcome to Dreamland! I'm " + Donald + '!',
                                                                                         "Hello, I'm " + Donald + '! Is it nap time yet?',
                                                                                         'A duck needs his beauty rest, you know!',
                                                                                         "What, you've never seen a duck with dog ears?",
@@ -4006,7 +4005,7 @@ AFDonaldChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], 
                                                                                  "I'm not feeling like myself today!",
                                                                                  'Have you heard your Doodle talk yet?',
                                                                                  'Gravity has taken a holiday at the Estates!'], ["Have a wacky April Toons' Week!", 'I need to work on my karts!  Bye!'])
-AFDonaldDockChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ["Everybody gets April Toons' Week off but me!",
+AFToontropolisDockChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ["Everybody gets April Toons' Week off but me!",
                                                                                      "I'm the only one who has to work this week!",
                                                                                      'I only get time off when I sleep!',
                                                                                      'All my friends are pretending to be somebody else!',
@@ -4034,7 +4033,7 @@ AFDaleChatter = (["Happy April Toons' Week!", "Happy April Toons' Week, %!"], ["
                                                                                "Nope, I'm " + Chip + ', ' + Dale + '.',
                                                                                'Yes, ' + Dale + ", I'm " + Chip + ', not ' + Dale + '.',
                                                                                'It sure is, ' + Chip + '! I mean, ' + Dale + '.'], ['Or ' + Dale + ' and ' + Chip + '!'])
-CLGoofySpeedwayChatter = (['Welcome to ' + lGoofySpeedway + '.',
+CLDowntownToontropolisChatter = (['Welcome to ' + lDowntownToontropolis + '.',
                            'Hi, my name is ' + Goofy + ". What's yours?",
                            "Gawrsh, it's nice to see you %!",
                            "Hi there!  Pardon my dusty clothes I've been busy fixin' that broken Leaderboard."], ['We better get this Leaderboard working soon, Grand Prix Weekend is coming up!',
@@ -4050,14 +4049,14 @@ CLGoofySpeedwayChatter = (['Welcome to ' + lGoofySpeedway + '.',
                                                                                                                   'Hey, have you seen ' + Donald + '?',
                                                                                                                   'If you see my friend ' + Mickey + ', say hi to him for me.',
                                                                                                                   "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
-                                                                                                                  'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lDonaldsDock + '.',
+                                                                                                                  'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lToontropolisDocks + '.',
                                                                                                                   'At the Brrrgh branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                   "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                   "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ['I better go get my kart a new paint job for the upcoming Grand Prix Weekend.',
                                                                                                                                                                                                                                   "Gosh, I better get workin' on this broken Leaderboard!",
                                                                                                                                                                                                                                   "Hope I'll see y'all on Grand Prix Weekend!  Goodbye!",
                                                                                                                                                                                                                                   "It's time for a nap. I'm going to Dreamland to dream about winnin' the Grand Prix."])
-GPGoofySpeedwayChatter = (['Welcome to ' + lGoofySpeedway + '.',
+GPDowntownToontropolisChatter = (['Welcome to ' + lDowntownToontropolis + '.',
                            'Welcome to Grand Prix Weekend!',
                            'Hi, my name is ' + Goofy + ". What's yours?",
                            "Gawrsh, it's nice to see you %!"], ['Are you excited about the Grand Prix Weekend?',
@@ -4071,7 +4070,7 @@ GPGoofySpeedwayChatter = (['Welcome to ' + lGoofySpeedway + '.',
                                                                 'Hey, have you seen ' + Donald + '? He said he was gonna come watch the Grand Prix!',
                                                                 'If you see my friend ' + Mickey + ", tell him he's missing some great racing!",
                                                                 "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
-                                                                'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lDonaldsDock + '.',
+                                                                'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lToontropolisDocks + '.',
                                                                 'At the Brrrgh branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                 "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                 "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ['Good luck in the Grand Prix!',
@@ -4476,7 +4475,7 @@ MusicCreateAToon = 'The New Toon in Town'
 MusicTtTheme = 'The Toontown Theme'
 MusicMinigameRace = 'Slow and Steady'
 MusicMgPairing = 'Remember Me?'
-MusicTcNbrhood = 'Toontown Central'
+MusicTcNbrhood = 'Toontropolis Plaza'
 MusicMgDiving = 'Treasure Lullaby'
 MusicMgCannonGame = 'Fire the Cannons!'
 MusicMgTwodgame = 'Running Toon'
@@ -5564,7 +5563,7 @@ ColorShopAll = 'Single Color'
 ClothesShopShorts = 'Shorts'
 ClothesShopShirt = 'Shirts'
 ClothesShopBottoms = 'Bottoms'
-PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontown Central?"
+PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontropolis Plaza?"
 MakeAToonSkipTutorial = 'Skip Toontorial'
 MakeAToonEnterTutorial = 'Enter Toontorial'
 MakeAToonDone = 'Done'
@@ -5786,7 +5785,7 @@ QuestScript121_1 = "Yum, thank you for the Candy Bar.\x07Say, if you can help me
 QuestScript130_1 = 'Good job finding the trolley!\x07By the way, I received a package for Professor Pete today.\x07It must be his new chalk he ordered.\x07Can you please take it to him?\x07He is over in the school house.'
 QuestScript131_1 = 'Oh, thanks for the chalk.\x07What?!?\x07Those Cogs stole my blackboard. Defeat Cogs to find my stolen blackboard.\x07When you find it, bring it back to me.'
 QuestScript140_1 = 'Good job finding the trolley!\x07By the way, I have this friend, Librarian Larry, who is quite a book worm.\x07I picked this book up for him last time I was over in ' + \
-    lDonaldsDock + '.\x07Could you take it over to him, he is usually in the Library.'
+    lToontropolisDocks + '.\x07Could you take it over to him, he is usually in the Library.'
 QuestScript141_1 = 'Oh, yes, this book almost completes my collection.\x07Let me see...\x07Uh oh...\x07Now where did I put my glasses?\x07I had them just before those Cogs took over my building.\x07Defeat Cogs to find my stolen glasses.\x07When you find them, bring them back to me for a reward.'
 QuestScript145_1 = 'I see you had no problem with the trolley!\x07Listen, the Cogs have stolen our blackboard eraser.\x07Go into the streets and fight Cogs until you recover the eraser.\x07To reach the streets go through one of the tunnels like this:'
 QuestScript145_2 = "When you find our eraser, bring it back here.\x07Don't forget, if you need gags, ride the trolley.\x07Also, if you need to recover Laff points, collect ice cream cones in the Playground."
@@ -8526,7 +8525,7 @@ TipDict = {TIP_NONE: ('',),
                          'Visit the Pet Shops every day to see what new Doodles they have.',
                          'Different neighborhoods have different Doodles offered for adoption.',
                          "Show off your stylin' ride and turbo-boost your Laff limit at Goofy Speedway.",
-                         'Enter Goofy Speedway through the tire-shaped tunnel in Toontown Central Playground.',
+                         'Enter Goofy Speedway through the tire-shaped tunnel in Toontropolis Plaza Playground.',
                          'Earn Laff points at Goofy Speedway.',
                          'Goofy Speedway has six different race tracks. '),
            TIP_STREET: ('There are four types of Cogs: Lawbots, Cashbots, Sellbots, and Bossbots.',
@@ -8572,8 +8571,8 @@ TipDict = {TIP_NONE: ('',),
                           'In the Ring Game, bonus points are awarded when the entire group successfully swims through its rings.',
                           'A perfect game of Match Minnie will double your points.',
                           'In the Tug-of-War you are awarded more Jellybeans if you play against a tougher Cog.',
-                          'Trolley Game difficulty varies by neighborhood; ' + lToontownCentral +
-                          ' has the easiest and ' + lDonaldsDreamland + ' has the hardest.',
+                          'Trolley Game difficulty varies by neighborhood; ' + lToontropolisPlaza +
+                          ' has the easiest and ' + lTwilightSlumberland + ' has the hardest.',
                           'Certain Trolley Games can only be played in a group.'),
            TIP_COGHQ: ('You must complete your Sellbot Disguise before visiting the V.P.',
                        'You must complete your Cashbot Disguise before visiting the C.F.O.',
@@ -8600,7 +8599,7 @@ TipDict = {TIP_NONE: ('',),
                        'Make sure you have full gags and a full Laff Meter before going to Cog Headquarters.',
                        'As you get promoted, your Cog disguise updates.',
                        'You must defeat the ' + Foreman + ' to recover a Sellbot Cog Disguise part.',
-                       "Earn Cashbot disguise suit parts as rewards for completing ToonTasks in Donald's Dreamland.",
+                       "Earn Cashbot disguise suit parts as rewards for completing ToonTasks in Twilight Slumberland.",
                        'Cashbots manufacture and distribute their currency, Cogbucks, in three Mints - Coin, Dollar and Bullion.',
                        'Wait until the C.F.O. is dizzy to throw a safe, or he will use it as a helmet! Hit the helmet with another safe to knock it off.',
                        'Earn Lawbot disguise suit parts as rewards for completing ToonTasks for Professor Flake.',
@@ -9185,7 +9184,7 @@ SummonDlgShopkeeper = 'The Shopkeeper '
 PolarPlaceEffect1 = NPCToonNames[3306] + ': Welcome to Polar Place!'
 PolarPlaceEffect2 = NPCToonNames[3306] + ': Try this on for size.'
 PolarPlaceEffect3 = NPCToonNames[3306] + \
-    ': Your new look will only work in ' + lTheBrrrgh + '.'
+    ': Your new look will only work in ' + lTundraWonderland + '.'
 GreenToonEffectMsg = NPCToonNames[5312] + ': You look Toontastic in green!'
 LaserGameMine = 'Skull Finder!'
 LaserGameRoll = 'Matching'
@@ -9946,7 +9945,7 @@ HolidayNamesInCalendar = {1: ('Summer Fireworks', 'Celebrate Summer with a firew
                           98: ('Double Bean Days - Fishing', ''),
                           99: ('Jellybean Week', 'Celebrate Jellybean Week with double Jellybean rewards!'),
                           101: ("Top Toons New Year's Day Marathon", "Chances to win every hour! See the What's New Blog for details!"),
-                          105: ('Toons go GREEN!', 'Toons make a green scene at Green Bean Jeans on Oak Street in Daisy Gardens!')}
+                          105: ('Toons go GREEN!', 'Toons make a green scene at Green Bean Jeans on Oak Street in the Flowering Grove!')}
 UnknownHoliday = 'Unknown Holiday %d'
 HolidayFormat = '%b %d '
 TimeZone = 'US/Pacific'
