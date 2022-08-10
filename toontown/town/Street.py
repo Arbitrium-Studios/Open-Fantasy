@@ -460,7 +460,7 @@ class Street(BattlePlace.BattlePlace):
         signs = geom.findAllMatches('**/*tunnelAheadSign*;+s')
         if signs.getNumPaths() > 0:
             streetSign = base.cr.streetSign
-            signTexturePath = Filename('user/default/resources/default/phase_4/maps/street-sign.jpg')
+            signTexturePath = Filename('resources/phase_4/maps/street-sign.jpg')
             loaderTexturePath = Filename(str(signTexturePath))
             alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             inDreamland = False
