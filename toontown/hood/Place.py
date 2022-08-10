@@ -447,19 +447,20 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
         base.cr.gameFSM.request(self.exitTo)
 
     def goHomeNow(self, curZoneId):
-        if localAvatar.hasActiveBoardingGroup():
-            rejectText = TTLocalizer.BoardingCannotLeaveZone
-            localAvatar.elevatorNotifier.showMe(rejectText)
-            return
-        hoodId = ToontownGlobals.MyEstate
-        self.requestLeave({'loader': 'safeZoneLoader',
-                           'where': 'estate',
-                           'how': 'teleportIn',
-                           'hoodId': hoodId,
-                           'zoneId': -1,
-                           'shardId': None,
-                           'avId': -1})
-        return
+        # if localAvatar.hasActiveBoardingGroup():
+        #     rejectText = TTLocalizer.BoardingCannotLeaveZone
+        #     localAvatar.elevatorNotifier.showMe(rejectText)
+        #     return
+        # hoodId = ToontownGlobals.MyEstate
+        # self.requestLeave({'loader': 'safeZoneLoader',
+        #                    'where': 'estate',
+        #                    'how': 'teleportIn',
+        #                    'hoodId': hoodId,
+        #                    'zoneId': -1,
+        #                    'shardId': None,
+        #                    'avId': -1})
+        # return
+        pass
 
     def startPartyNow(self, firstStart, hostId):
         if localAvatar.hasActiveBoardingGroup():
