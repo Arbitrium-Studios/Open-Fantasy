@@ -9,9 +9,9 @@
     > Add Skip button to the Trolley mini-games
     > Reformat the way the Resources folder is laid out
     > Allow us to scroll through the credits
-    > Add a special gift to people who sit through thet credits.
+    > Add a special gift to people who sit through the credits.
     > Change the music in the credits to the Victory Theme v2
-    > Add community voice acting for each of the characters with a moving mouth as seen here - https://www+youtube+com/watch?v=JVCnNDNE
+    > Add community voice acting for each of the important characters.
     > For playgrounds not available yet, add a barrier to the streets and on the map, to avoid crashes, if you have Global Teleport Access, make a menu popup saying that this playground is not available yet.
     > Add pupil customizations and colorizations with multi-colored pupils
     > Eventually replace Shtiker Books with Cell Phones with all new benefits
@@ -72,7 +72,6 @@
     > Overhaul Map Page to be able to scroll (or click down) to zoom into playgrounds to see streets, buildings, etc
     > Add a new street and have it lead outside of Toontown Central to an area called Toontropolis: https://github.com/DankMickey/Toontown-2.0-1
     > Implement this into Open-Fantasy: https://github.com/Toontown-Open-Source-Initiative/Toontown-VP-After-Death
-    > Make this branch of Toontown Fantasy used for singleplayer and subsequently all Cog battles can be done in singleplayer
     > Rebalance fishing so it's more fun!
     > Add the playground nametag Depth Mines over the Hills next to Toontown Stadium, TLOM, and CBHQ!
     > Add Street name to the Untitled Tunnel in Acorn Acres that leads to Funny Farm.
@@ -624,12 +623,16 @@
     > Make trap damage meet between TTR and Clash's trap damage!
     > Make TNT kill 12s
     > Make Railroad kill 13s
-    > Make ALL Clocks (Even Cog building ones) in Toontown reflect Toontown Time
-    > Make the Erase Attack by Pencil Pushers fade out your Toon all at once using the same functionality as the ghost command
+    > Make ALL Clocks (Even Cog building ones) in Toontown reflect Toontown Time aka PST since Toontown takes place in Calisota!
     > Remove Clothing Ticket Toontasks
     > Make all clothing purchasable via Jellybeans
     > Make all shaders match that which it is reflecting aka a Toon's shadow should be of itself, not a circle regardless what shaders you're using.
     > When we implement shaders, we should add CRT and VHS tape filters
     > Make the clouds be at various levels through out the day.
+    > Since we only need one District, I should remove the Districts page
+    > Add special event areas that only become available when 
+    > Rewrite the Toontown Online Story so it doesn't interfere with the DuckTales Storyline but instead goes with it.
+    > Sync the clocks back 20 years but still have each day go by 24 hours at a time.
+    > Work towards finishing the base game by the end of 2022
 
     > More soon!
