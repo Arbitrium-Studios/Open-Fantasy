@@ -24,6 +24,7 @@ Start Toontown Fantasy.lnk
 !linux/.vscode/tasks.json
 !darwin/.vscode/tasks.json
 errorCode
+PPYTHON_PATH
 
 # Folder Name Ignores
 
