@@ -78,7 +78,7 @@ PetRarities = {'body': {ToontownGlobals.ToontropolisPlaza: {'threeStripe': 50,
                                                     'tigerStripe': 25,
                                                     'turtle': 25,
                                                     'giraffe': 15},
-                        ToontownGlobals.TwilightSlumberland: {'threeStripe': 5,
+                        ToontownGlobals.TwilightDreamland: {'threeStripe': 5,
                                                            'tummy': 5,
                                                            'dots': 15,
                                                            'tigerStripe': 20,
@@ -180,7 +180,7 @@ PetEyeColors = (VBase4(0.29, 0.29, 0.69, 1.0),
 PetGenders = [0, 1]
 
 
-def getRandomPetDNA(zoneId=ToontownGlobals.TwilightSlumberland):
+def getRandomPetDNA(zoneId=ToontownGlobals.TwilightDreamland):
     from random import choice
     head = choice(list(range(-1, len(HeadParts))))
     ears = choice(list(range(-1, len(EarParts))))

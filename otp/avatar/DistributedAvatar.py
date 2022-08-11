@@ -140,6 +140,8 @@ class DistributedAvatar(DistributedActor, Avatar):
         return
 
     def hpChange(self, quietly=0):
+        if self == base.localAvatar:
+            Discord.setLaff(self.hp, self.maxHp)
         if hasattr(self, 'doId'):
             if self.hp is not None and self.maxHp is not None:
                 messenger.send(

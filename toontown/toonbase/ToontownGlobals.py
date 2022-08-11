@@ -156,7 +156,7 @@ FloweringGrove = 5000
 AcornAcres = 6000
 FunnyFarm = 7000
 DowntownToontropolis = 8000
-TwilightSlumberland = 9000
+TwilightDreamland = 9000
 BarnacleBoulevard = 1100
 SeaweedStreet = 1200
 LighthouseLane = 1300
@@ -180,7 +180,7 @@ HoodHierarchy = {ToontropolisPlaza: (SillyStreet, LoopyLane, PunchlinePlace),
                  TundraWonderland: (WalrusWay, SleetStreet, PolarPlace),
                  TheLandOfMusic: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
                  FloweringGrove: (ElmStreet, MapleStreet, OakStreet),
-                 TwilightSlumberland: (LullabyLane, PajamaPlace),
+                 TwilightDreamland: (LullabyLane, PajamaPlace),
                  DowntownToontropolis: ()}
 WelcomeValleyToken = 0
 BossbotHQ = 10000
@@ -220,7 +220,7 @@ cogDept2index = {'c': 0,
                  's': 3}
 cogIndex2dept = invertDict(cogDept2index)
 HQToSafezone = {SellbotHQ: FloweringGrove,
-                CashbotHQ: TwilightSlumberland,
+                CashbotHQ: TwilightDreamland,
                 LawbotHQ: TundraWonderland,
                 BossbotHQ: ToontropolisDocks}
 CogDeptNames = [TTLocalizer.Bossbot,
@@ -312,7 +312,7 @@ Hoods = (ToontropolisDocks,
          AcornAcres,
          FunnyFarm,
          DowntownToontropolis,
-         TwilightSlumberland,
+         TwilightDreamland,
          BossbotHQ,
          SellbotHQ,
          CashbotHQ,
@@ -325,7 +325,7 @@ HoodsForTeleportAll = (ToontropolisDocks,
                        FloweringGrove,
                        AcornAcres,
                        DowntownToontropolis,
-                       TwilightSlumberland,
+                       TwilightDreamland,
                        BossbotHQ,
                        SellbotHQ,
                        CashbotHQ,
@@ -456,7 +456,7 @@ phaseMap = {Tutorial: 4,
             TundraWonderland: 8,
             FloweringGrove: 8,
             FunnyFarm: 8,
-            TwilightSlumberland: 8,
+            TwilightDreamland: 8,
             AcornAcres: 8,
             BossbotHQ: 12,
             SellbotHQ: 9,
@@ -471,7 +471,7 @@ streetPhaseMap = {ToontropolisPlaza: 5,
                   TundraWonderland: 8,
                   FloweringGrove: 8,
                   FunnyFarm: 8,
-                  TwilightSlumberland: 8,
+                  TwilightDreamland: 8,
                   AcornAcres: 8,
                   BossbotHQ: 12,
                   SellbotHQ: 9,
@@ -486,7 +486,7 @@ dnaMap = {Tutorial: 'toontown_central',
           TundraWonderland: 'the_burrrgh',
           FloweringGrove: 'daisys_garden',
           FunnyFarm: 'not done yet',
-          TwilightSlumberland: 'donalds_dreamland',
+          TwilightDreamland: 'donalds_dreamland',
           AcornAcres: 'outdoor_zone',
           BossbotHQ: 'cog_hq_bossbot',
           SellbotHQ: 'cog_hq_sellbot',
@@ -501,7 +501,7 @@ hoodNameMap = {ToontropolisDocks: TTLocalizer.ToontropolisDocks,
                AcornAcres: TTLocalizer.AcornAcres,
                FunnyFarm: TTLocalizer.FunnyFarm,
                DowntownToontropolis: TTLocalizer.DowntownToontropolis,
-               TwilightSlumberland: TTLocalizer.TwilightSlumberland,
+               TwilightDreamland: TTLocalizer.TwilightDreamland,
                BossbotHQ: TTLocalizer.BossbotHQ,
                SellbotHQ: TTLocalizer.SellbotHQ,
                CashbotHQ: TTLocalizer.CashbotHQ,
@@ -519,7 +519,7 @@ safeZoneCountMap = {MyEstate: 8,
                     TundraWonderland: 8,
                     FloweringGrove: 9,
                     FunnyFarm: 500,
-                    TwilightSlumberland: 5,
+                    TwilightDreamland: 5,
                     AcornAcres: 500,
                     GolfZone: 500,
                     PartyHood: 500}
@@ -532,7 +532,7 @@ townCountMap = {MyEstate: 8,
                 TundraWonderland: 40,
                 FloweringGrove: 40,
                 FunnyFarm: 40,
-                TwilightSlumberland: 40,
+                TwilightDreamland: 40,
                 AcornAcres: 40,
                 PartyHood: 20}
 hoodCountMap = {MyEstate: 2,
@@ -544,7 +544,7 @@ hoodCountMap = {MyEstate: 2,
                 TundraWonderland: 2,
                 FloweringGrove: 2,
                 FunnyFarm: 2,
-                TwilightSlumberland: 2,
+                TwilightDreamland: 2,
                 AcornAcres: 2,
                 BossbotHQ: 2,
                 SellbotHQ: 43,
@@ -1690,7 +1690,7 @@ openDiscord = 'https://discord.gg/jy628fW'
 #  FloweringGrove: 30,
 #  TheLandOfMusic: 45,
 #  TundraWonderland: 60,
-#  TwilightSlumberland: 75
+#  TwilightDreamland: 75
 # }
 
 # def getTeleportButtonCost(hoodId):

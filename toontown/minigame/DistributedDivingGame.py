@@ -544,7 +544,7 @@ class DistributedDivingGame(DistributedMinigame):
                                                                1.0,
                                                                65,
                                                                1],
-                                   ToontownGlobals.TwilightSlumberland: [3,
+                                   ToontownGlobals.TwilightDreamland: [3,
                                                                       1.0,
                                                                       65,
                                                                       1]}

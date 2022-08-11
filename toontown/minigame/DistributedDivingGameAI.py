@@ -243,7 +243,7 @@ class DistributedDivingGameAI(DistributedMinigameAI):
                             ToontownGlobals.FloweringGrove: [2.5, fishProportions[2], 2.1],
                             ToontownGlobals.TheLandOfMusic: [2.0, fishProportions[3], 2.4],
                             ToontownGlobals.TundraWonderland: [2.0, fishProportions[4], 2.7],
-                            ToontownGlobals.TwilightSlumberland: [1.5, fishProportions[5], 3.0]}
+                            ToontownGlobals.TwilightDreamland: [1.5, fishProportions[5], 3.0]}
 
     def __init__(self, air, minigameId):
         try:

@@ -7,7 +7,7 @@ Models = {ToontownGlobals.ToontropolisPlaza: 'phase_4/models/props/icecream',
           ToontownGlobals.TundraWonderland: 'phase_8/models/props/snowflake_treasure',
           ToontownGlobals.TheLandOfMusic: 'phase_6/models/props/music_treasure',
           ToontownGlobals.FloweringGrove: 'phase_8/models/props/flower_treasure',
-          ToontownGlobals.TwilightSlumberland: 'phase_8/models/props/zzz_treasure'}
+          ToontownGlobals.TwilightDreamland: 'phase_8/models/props/zzz_treasure'}
 
 
 class DistributedCashbotBossTreasure(

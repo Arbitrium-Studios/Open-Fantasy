@@ -25,6 +25,7 @@ Start Toontown Fantasy.lnk
 !darwin/.vscode/tasks.json
 errorCode
 PPYTHON_PATH
+user/
 
 # Folder Name Ignores
 
@@ -38,3 +39,5 @@ toontown/installer
 build/
 venv/
 .vscode
+resources/
+resources

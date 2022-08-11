@@ -298,12 +298,12 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.generateHood(GSHoodDataAI, ToontownGlobals.DowntownToontropolis)
 
         # Donald's Dreamland
-        self.zoneTable[ToontownGlobals.TwilightSlumberland] = (
-            (ToontownGlobals.TwilightSlumberland, 1,
+        self.zoneTable[ToontownGlobals.TwilightDreamland] = (
+            (ToontownGlobals.TwilightDreamland, 1,
              0), (ToontownGlobals.LullabyLane, 1, 1),
             (ToontownGlobals.PajamaPlace, 1, 1)
         )
-        self.generateHood(DLHoodDataAI, ToontownGlobals.TwilightSlumberland)
+        self.generateHood(DLHoodDataAI, ToontownGlobals.TwilightDreamland)
 
         # Bossbot HQ
         self.zoneTable[ToontownGlobals.BossbotHQ] = (

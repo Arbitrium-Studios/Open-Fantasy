@@ -35,7 +35,7 @@ class PlayGame(StateData.StateData):
                       ToontownGlobals.TundraWonderland: BRHood.BRHood,
                       ToontownGlobals.TheLandOfMusic: MMHood.MMHood,
                       ToontownGlobals.FloweringGrove: DGHood.DGHood,
-                      ToontownGlobals.TwilightSlumberland: DLHood.DLHood,
+                      ToontownGlobals.TwilightDreamland: DLHood.DLHood,
                       ToontownGlobals.DowntownToontropolis: GSHood.GSHood,
                       ToontownGlobals.AcornAcres: OZHood.OZHood,
                       ToontownGlobals.Tutorial: TutorialHood.TutorialHood,
@@ -51,7 +51,7 @@ class PlayGame(StateData.StateData):
                       ToontownGlobals.TundraWonderland: 'BRHood',
                       ToontownGlobals.TheLandOfMusic: 'MMHood',
                       ToontownGlobals.FloweringGrove: 'DGHood',
-                      ToontownGlobals.TwilightSlumberland: 'DLHood',
+                      ToontownGlobals.TwilightDreamland: 'DLHood',
                       ToontownGlobals.DowntownToontropolis: 'GSHood',
                       ToontownGlobals.AcornAcres: 'OZHood',
                       ToontownGlobals.Tutorial: 'TutorialHood',
@@ -185,6 +185,7 @@ class PlayGame(StateData.StateData):
                                         'zoneId': zoneId,
                                         'shardId': None,
                                         'avId': avId}])
+        Discord.setZone(zoneId)
         return
 
     def exit(self):

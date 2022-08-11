@@ -72,7 +72,7 @@ PoliceChip = 'PoliceChip'
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
 lToontropolisDocks = "Toontropolis City Shipyard"
-lTwilightSlumberland = "Drowsy Slumberland"
+lTwilightDreamland = "Drowsy Slumberland"
 lTheLandOfMusic = "The Land Of Music"
 lToontropolisPlaza = 'Toontropolis City Plaza'
 lToonHQ = 'Toon Headquarters'
@@ -135,7 +135,7 @@ FloweringGrove = ('to', 'in', lFloweringGrove)
 AcornAcres = ('to', 'in', lAcornAcres)
 FunnyFarm = ('to the', 'in the', 'Funny Farm')
 DowntownToontropolis = ('to', 'in', lDowntownToontropolis)
-TwilightSlumberland = ('to', 'in', lTwilightSlumberland)
+TwilightDreamland = ('to', 'in', lTwilightDreamland)
 BossbotHQ = ('to', 'in', 'Bossbot Headquarters')
 SellbotHQ = ('to', 'in', 'Sellbot Headquarters')
 CashbotHQ = ('to', 'in', 'Cashbot Headquarters')
@@ -8572,7 +8572,7 @@ TipDict = {TIP_NONE: ('',),
                           'A perfect game of Match Minnie will double your points.',
                           'In the Tug-of-War you are awarded more Jellybeans if you play against a tougher Cog.',
                           'Trolley Game difficulty varies by neighborhood; ' + lToontropolisPlaza +
-                          ' has the easiest and ' + lTwilightSlumberland + ' has the hardest.',
+                          ' has the easiest and ' + lTwilightDreamland + ' has the hardest.',
                           'Certain Trolley Games can only be played in a group.'),
            TIP_COGHQ: ('You must complete your Sellbot Disguise before visiting the V.P.',
                        'You must complete your Cashbot Disguise before visiting the C.F.O.',

@@ -807,6 +807,7 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.resistanceToon.addActive()
 
     def enterElevator(self):
+        Discord.cfo()
         DistributedBossCog.DistributedBossCog.enterElevator(self)
         self.detachNode()
         self.resistanceToon.removeActive()

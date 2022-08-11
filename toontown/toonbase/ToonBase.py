@@ -192,6 +192,8 @@ class ToonBase(OTPBase.OTPBase):
         self.settings.updateSetting('show-fps', self.showFPS)
         self.wantLaffMeterOverHead = self.settings.getSetting('want-laff-meter-over-head', True)
         self.settings.updateSetting('want-laff-meter-over-head', self.wantLaffMeterOverHead)
+        self.wantRichPresence = self.settings.getSetting('rich-presence', True)
+        self.settings.updateSetting('rich-presence', self.wantRichPresence)
         self.toggleFPS(self.showFPS)
         self.settings.writeSettings()
         return
