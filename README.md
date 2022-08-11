@@ -18,7 +18,7 @@
 
 ### License:
 
-> Feel free to use with credit! But an actual license will be coming eventually. So, by playing Toontown Fantasy, you agree to not do anything stupid, dangerous, or illegal with my source code.
+> Check out the LICENSE file in the root folder of Toontown-Fantasy
 
 ### Setup - Windows:
 
