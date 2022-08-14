@@ -1,7 +1,22 @@
+import builtins, os
+
+class game:
+    name = 'uberDog'
+    process = 'server'
+
+builtins.game = game
 
 from panda3d.core import *
-import builtins
 
+loadPrcFile('etc/Configrc.prc')
+
+localPrc = 'etc/local.prc'
+
+if os.path.exists(localPrc):
+    loadPrcFile(localPrc)
+
+from otp.uberdog.UberDogGlobal import *
+from toontown.uberdog.ToontownUDRepository import ToontownUDRepository
 import argparse
 
 parser = argparse.ArgumentParser(description="Open Toontown - UberDOG Server")
@@ -23,9 +38,6 @@ parser.add_argument('config', nargs='*', default=['etc/Configrc.prc'],
                     help='PRC file(s) that will be loaded on this UberDOG instance.')
 args = parser.parse_args()
 
-for prc in args.config:
-    loadPrcFile(prc)
-
 localConfig = ''
 if args.base_channel:
     localConfig += 'air-base-channel %s\n' % args.base_channel
@@ -41,27 +53,9 @@ if args.eventlogger_ip:
 loadPrcFileData('UberDOG Args Config', localConfig)
 
 
-class game:
-    name = 'uberDog'
-    process = 'server'
+uber.air = ToontownUDRepository(config.GetInt('air-base-channel', 1000000), config.GetInt('air-stateserver', 4002))
 
-
-builtins.game = game
-
-loadPrcFile('etc/Configrc.prc')
-
-from otp.ai.AIBaseGlobal import *
-from toontown.uberdog.ToontownUDRepository import ToontownUDRepository
-
-simbase.air = ToontownUDRepository(
-    ConfigVariableInt(
-        'air-base-channel',
-        1000000).value,
-    ConfigVariableInt(
-        'air-stateserver',
-        4002).value)
-
-host = ConfigVariableString('air-connect', '127.0.0.1:7199').value
+host = config.GetString('air-connect', '127.0.0.1:7199')
 port = 7199
 if ':' in host:
     host, port = host.split(':', 1)

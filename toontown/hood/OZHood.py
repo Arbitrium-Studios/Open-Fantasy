@@ -11,7 +11,7 @@ class OZHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = AcornAcres
+        self.id = OutdoorZone
         self.safeZoneLoaderClass = OZSafeZoneLoader.OZSafeZoneLoader
         self.storageDNAFile = 'phase_6/dna/storage_OZ.dna'
         self.holidayStorageDNADict = {HALLOWEEN_PROPS: ['phase_6/dna/halloween_props_storage_OZ.dna'],

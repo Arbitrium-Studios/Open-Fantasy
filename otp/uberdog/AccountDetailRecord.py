@@ -1,8 +1,7 @@
+
 from otp.otpbase import OTPGlobals
 
-
 class SubDetailRecord:
-
     def __init__(self):
         self.subId = 0
         self.subOwnerId = 0
@@ -16,21 +15,19 @@ class SubDetailRecord:
 
     def __str__(self):
         s = ''
-        s += '========== Sub %d ==========\n' % self.subId
-        s += 'Sub Id: %d\n' % self.subId
-        s += 'Sub Owner Id: %d\n' % self.subOwnerId
-        s += 'Sub Name: %s\n' % self.subName
-        s += 'Sub Active: %s\n' % self.subActive
-        s += 'Sub Access: %s\n' % self.subAccess
-        s += 'Sub Level: %d\n' % self.subLevel
-        s += 'Sub MaxAvatars: %d\n' % self.subNumAvatars
-        s += 'Sub Concurrent: %d\n' % self.subNumConcur
-        s += 'Sub Founder: %d\n' % self.subFounder
+        s += "========== Sub %d ==========\n" % (self.subId)
+        s += "Sub Id: %d\n" % (self.subId)
+        s += "Sub Owner Id: %d\n" % (self.subOwnerId)
+        s += "Sub Name: %s\n" % (self.subName)
+        s += "Sub Active: %s\n" % (self.subActive)
+        s += "Sub Access: %s\n" % (self.subAccess)
+        s += "Sub Level: %d\n" % (self.subLevel)
+        s += "Sub MaxAvatars: %d\n" % (self.subNumAvatars)
+        s += "Sub Concurrent: %d\n" % (self.subNumConcur)
+        s += "Sub Founder: %d\n" % (self.subFounder)
         return s
-
-
+    
 class AccountDetailRecord:
-
     def __init__(self):
         self.openChatEnabled = False
         self.createFriendsWithChat = False
@@ -60,22 +57,21 @@ class AccountDetailRecord:
 
     def __str__(self):
         s = '========== Account %s ==========\n' % self.playerAccountId
-        s += 'OpenChatEnabled: %s\n' % self.openChatEnabled
-        s += 'WLChatEnabled: %s\n' % self.WLChatEnabled
-        s += 'CreateFriendsWithChat: %s\n' % self.createFriendsWithChat
-        s += 'ChatCodeCreation: %s\n' % self.chatCodeCreation
-        s += 'PiratesAccess: %s\n' % self.piratesAccess
-        s += 'FamilyAccountId: %d\n' % self.familyAccountId
-        s += 'PlayerAccountId: %d\n' % self.playerAccountId
-        s += 'PlayerName: %s\n' % self.playerName
-        s += 'AccountNameApproved: %d\n' % self.playerNameApproved
-        s += 'MaxAvatars: %d\n' % self.maxAvatars
-        s += 'MaxAvatarSlots: %d\n' % self.maxAvatarSlots
-        s += 'NumFamilyMembers: %d\n' % self.numFamilyMembers
-        s += 'FamilyMembers: %s\n' % self.familyMembers
-        s += 'NumSubs: %s\n' % self.numSubs
+        s += "OpenChatEnabled: %s\n" % self.openChatEnabled
+        s += "WLChatEnabled: %s\n" % self.WLChatEnabled
+        s += "CreateFriendsWithChat: %s\n" % self.createFriendsWithChat
+        s += "ChatCodeCreation: %s\n" % self.chatCodeCreation
+        s += "PiratesAccess: %s\n" % self.piratesAccess
+        s += "FamilyAccountId: %d\n" % self.familyAccountId
+        s += "PlayerAccountId: %d\n" % self.playerAccountId
+        s += "PlayerName: %s\n" % self.playerName
+        s += "AccountNameApproved: %d\n" % self.playerNameApproved
+        s += "MaxAvatars: %d\n" % self.maxAvatars
+        s += "MaxAvatarSlots: %d\n" % self.maxAvatarSlots
+        s += "NumFamilyMembers: %d\n" % self.numFamilyMembers
+        s += "FamilyMembers: %s\n" % self.familyMembers
+        s += "NumSubs: %s\n" % self.numSubs
         for subDetails in list(self.subDetails.values()):
             s += str(subDetails)
-
         s += '================================\n'
         return s

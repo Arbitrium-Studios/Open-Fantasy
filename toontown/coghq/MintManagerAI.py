@@ -5,9 +5,11 @@ from toontown.coghq import MintLayout
 from direct.showbase import DirectObject
 import random
 
-
 class MintManagerAI(DirectObject.DirectObject):
+
     notify = DirectNotifyGlobal.directNotify.newCategory('MintManagerAI')
+
+    # magic-word override
     mintId = None
 
     def __init__(self, air):
@@ -15,23 +17,29 @@ class MintManagerAI(DirectObject.DirectObject):
         self.air = air
 
     def getDoId(self):
+        # DistributedElevatorAI needs this
         return 0
 
     def createMint(self, mintId, players):
+        # check for ~mintId
         for avId in players:
             if bboard.has('mintId-%s' % avId):
                 mintId = bboard.get('mintId-%s' % avId)
                 break
 
         numFloors = ToontownGlobals.MintNumFloors[mintId]
+
         floor = random.randrange(numFloors)
+        # check for ~mintFloor
         for avId in players:
             if bboard.has('mintFloor-%s' % avId):
                 floor = bboard.get('mintFloor-%s' % avId)
+                # bounds check
                 floor = max(0, floor)
-                floor = min(floor, numFloors - 1)
+                floor = min(floor, numFloors-1)
                 break
 
+        # check for ~mintRoom
         for avId in players:
             if bboard.has('mintRoom-%s' % avId):
                 roomId = bboard.get('mintRoom-%s' % avId)

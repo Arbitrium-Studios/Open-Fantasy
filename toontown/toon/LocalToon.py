@@ -1253,8 +1253,8 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.__catalogNotifyDialog = None
         if base.config.GetBool('want-qa-regression', 0):
             self.notify.info('QA-REGRESSION: VISITESTATE: Visit estate')
-        # place.goHomeNow(self.lastHood)
-        pass
+        place.goHomeNow(self.lastHood)
+        # pass
         return
 
     def __startMoveFurniture(self):

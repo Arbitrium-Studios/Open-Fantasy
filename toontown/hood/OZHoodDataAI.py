@@ -6,7 +6,7 @@ from toontown.racing import DistributedStartingBlockAI
 from pandac.PandaModules import *
 from panda3d.toontown import *
 from toontown.racing.RaceGlobals import *
-from toontown.classicchars import DistributedDowntownToontropolisAI
+from toontown.classicchars import DistributedGoofySpeedwayAI
 from toontown.safezone import DistributedPicnicBasketAI
 from toontown.classicchars import DistributedChipAI
 from toontown.classicchars import DistributedDaleAI
@@ -22,7 +22,7 @@ class OZHoodDataAI(HoodDataAI.HoodDataAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('OZHoodDataAI')
 
     def __init__(self, air, zoneId=None):
-        hoodId = ToontownGlobals.AcornAcres
+        hoodId = ToontownGlobals.OutdoorZone
         if zoneId is None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)

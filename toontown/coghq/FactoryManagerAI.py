@@ -3,9 +3,11 @@ from . import DistributedFactoryAI
 from toontown.toonbase import ToontownGlobals
 from direct.showbase import DirectObject
 
-
 class FactoryManagerAI(DirectObject.DirectObject):
+
     notify = DirectNotifyGlobal.directNotify.newCategory('FactoryManagerAI')
+
+    # magic-word override
     factoryId = None
 
     def __init__(self, air):
@@ -13,6 +15,7 @@ class FactoryManagerAI(DirectObject.DirectObject):
         self.air = air
 
     def getDoId(self):
+        # DistributedElevatorAI needs this
         return 0
 
     def createFactory(self, factoryId, entranceId, players):

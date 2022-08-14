@@ -39,7 +39,6 @@ class DiscordRPC(object):
         9000: ["twlight-dreamland", "In Twlight Dreamland"],
         9100: ["twlight-dreamland", "On Lullaby Lane"],
         9200: ["twlight-dreamland", "On Pajama Place"],
-        # 9300: ["twlight-dreamland", "On Twilight Terrace"],
 
         10000: ["bossbot-hq", "At Bossbot Headquarters"],
         10100: ["bossbot-hq", "In The Chief Executive Officer's Clubhouse"],

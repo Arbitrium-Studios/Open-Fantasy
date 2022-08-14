@@ -10,7 +10,7 @@ from direct.fsm import ClassicFSM
 from direct.fsm import State
 from direct.controls.ControlManager import CollisionHandlerRayStart
 from toontown.toonbase import ToontownGlobals
-from toontown.toonbase.TTLocalizer import Donald, ToontropolisDock, WesternPluto, Pluto
+from toontown.toonbase.TTLocalizer import Donald, DonaldDock, WesternPluto, Pluto
 from toontown.effects import DustCloud
 from . import CCharChatter
 from . import CCharPaths
@@ -232,7 +232,7 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
                     if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds:
                         if self.getName() == Pluto:
                             chatFlags = CFTimeout | CFSpeech
-            elif self.getName() == ToontropolisDock:
+            elif self.getName() == DonaldDock:
                 chatFlags = CFTimeout | CFSpeech
                 self.nametag3d.hide()
             else:

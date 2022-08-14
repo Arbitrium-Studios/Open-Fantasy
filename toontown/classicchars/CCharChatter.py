@@ -8,7 +8,7 @@ MickeyChatter = TTLocalizer.MickeyChatter
 VampireMickeyChatter = TTLocalizer.VampireMickeyChatter
 MinnieChatter = TTLocalizer.MinnieChatter
 GoofyChatter = TTLocalizer.GoofyChatter
-DowntownToontropolisChatter = TTLocalizer.DowntownToontropolisChatter
+GoofySpeedwayChatter = TTLocalizer.GoofySpeedwayChatter
 DonaldChatter = TTLocalizer.DonaldChatter
 ChipChatter = TTLocalizer.ChipChatter
 DaleChatter = TTLocalizer.DaleChatter
@@ -139,33 +139,33 @@ def getChatter(charName, chatterType):
             return DaisyChatter
     elif charName == TTLocalizer.Goofy:
         if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
-            return TTLocalizer.AFDowntownToontropolisChatter
+            return TTLocalizer.AFGoofySpeedwayChatter
         elif chatterType == ToontownGlobals.CRASHED_LEADERBOARD:
-            return TTLocalizer.CLDowntownToontropolisChatter
+            return TTLocalizer.CLGoofySpeedwayChatter
         elif chatterType == ToontownGlobals.CIRCUIT_RACING_EVENT:
-            return TTLocalizer.GPDowntownToontropolisChatter
+            return TTLocalizer.GPGoofySpeedwayChatter
         elif chatterType == ToontownGlobals.WINTER_DECORATIONS or chatterType == ToontownGlobals.WINTER_CAROLING or chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS or chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
             return TTLocalizer.WinterGoofyChatter
         elif chatterType == ToontownGlobals.VALENTINES_DAY:
             return TTLocalizer.ValentinesGoofyChatter
         elif chatterType == ToontownGlobals.SILLY_CHATTER_ONE:
-            SillyDowntownToontropolisChatter = getExtendedChat(
-                DowntownToontropolisChatter, TTLocalizer.SillyPhase1Chatter)
-            return SillyDowntownToontropolisChatter
+            SillyGoofySpeedwayChatter = getExtendedChat(
+                GoofySpeedwayChatter, TTLocalizer.SillyPhase1Chatter)
+            return SillyGoofySpeedwayChatter
         elif chatterType == ToontownGlobals.SILLY_CHATTER_TWO:
-            SillyDowntownToontropolisChatter = getExtendedChat(
-                DowntownToontropolisChatter, TTLocalizer.SillyPhase2Chatter)
-            return SillyDowntownToontropolisChatter
+            SillyGoofySpeedwayChatter = getExtendedChat(
+                GoofySpeedwayChatter, TTLocalizer.SillyPhase2Chatter)
+            return SillyGoofySpeedwayChatter
         elif chatterType == ToontownGlobals.SILLY_CHATTER_THREE:
-            SillyDowntownToontropolisChatter = getExtendedChat(
-                DowntownToontropolisChatter, TTLocalizer.SillyPhase3Chatter)
-            return SillyDowntownToontropolisChatter
+            SillyGoofySpeedwayChatter = getExtendedChat(
+                GoofySpeedwayChatter, TTLocalizer.SillyPhase3Chatter)
+            return SillyGoofySpeedwayChatter
         elif chatterType == ToontownGlobals.SILLY_CHATTER_FOUR:
-            SillyDowntownToontropolisChatter = getExtendedChat(
-                DowntownToontropolisChatter, TTLocalizer.SillyPhase4Chatter)
-            return SillyDowntownToontropolisChatter
+            SillyGoofySpeedwayChatter = getExtendedChat(
+                GoofySpeedwayChatter, TTLocalizer.SillyPhase4Chatter)
+            return SillyGoofySpeedwayChatter
         else:
-            return DowntownToontropolisChatter
+            return GoofySpeedwayChatter
     elif charName == TTLocalizer.SuperGoofy:
         return TTLocalizer.SuperGoofyChatter
     elif charName == TTLocalizer.Donald or charName == TTLocalizer.FrankenDonald:
@@ -191,9 +191,9 @@ def getChatter(charName, chatterType):
             return fieldOfficeDreamlandChatter
         else:
             return DonaldChatter
-    elif charName == TTLocalizer.ToontropolisDock:
+    elif charName == TTLocalizer.DonaldDock:
         if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
-            return TTLocalizer.AFToontropolisDockChatter
+            return TTLocalizer.AFDonaldDockChatter
         elif chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:
             return TTLocalizer.HalloweenDonaldChatter
         elif chatterType == ToontownGlobals.SPOOKY_COSTUMES:

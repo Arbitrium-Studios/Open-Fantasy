@@ -67,9 +67,9 @@ class DistributedNPCSpecialQuestGiver(DistributedNPCToonBase):
         myHoodId = ZoneUtil.getCanonicalHoodId(place.zoneId)
         if hasattr(place, 'id'):
             myHoodId = place.id
-        if myHoodId in (ToontownGlobals.ToontropolisPlaza,
+        if myHoodId in (ToontownGlobals.ToontownCentral,
                         ToontownGlobals.MyEstate,
-                        ToontownGlobals.DowntownToontropolis,
+                        ToontownGlobals.GoofySpeedway,
                         ToontownGlobals.Tutorial):
             return True
         return False

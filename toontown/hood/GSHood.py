@@ -11,7 +11,7 @@ class GSHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = DowntownToontropolis
+        self.id = GoofySpeedway
         self.safeZoneLoaderClass = GSSafeZoneLoader.GSSafeZoneLoader
         self.storageDNAFile = 'phase_6/dna/storage_GS.dna'
         self.holidayStorageDNADict = {HALLOWEEN_PROPS: ['phase_6/dna/halloween_props_storage_GS.dna'],

@@ -5,7 +5,7 @@ from toontown.racing import DistributedStartingBlockAI
 from pandac.PandaModules import *
 from panda3d.toontown import *
 from toontown.racing.RaceGlobals import *
-from toontown.classicchars import DistributedDowntownToontropolisAI
+from toontown.classicchars import DistributedGoofySpeedwayAI
 from toontown.safezone import DistributedGolfKartAI
 if __debug__:
     import pdb

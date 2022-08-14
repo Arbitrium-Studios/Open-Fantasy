@@ -1,6 +1,6 @@
 @echo off
 cd ..
-title Toontown Fantasy UberDOG
+title Toontown Fantasy Uberdog
 
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
 set /P PPYTHON_PATH=<PPYTHON_PATH
@@ -12,7 +12,7 @@ set ASTRON_IP=127.0.0.1:7199
 set EVENTLOGGER_IP=127.0.0.1:7198
 set BASE_CHANNEL=1000000
 
-:main
+:uberdog
 
 %PPYTHON_PATH% ^
 	-m toontown.uberdog.UDStart ^
@@ -21,5 +21,8 @@ set BASE_CHANNEL=1000000
 	--stateserver %STATESERVER% ^
 	--messagedirector-ip %ASTRON_IP% ^
 	--eventlogger-ip %EVENTLOGGER_IP%
-PAUSE
-goto main
+
+pause
+goto uberdog
+
+
