@@ -1,9 +1,11 @@
-import time
+import json
+import os
 import random
+import time
 from ctypes import *
 from direct.task import Task 
 from pypresence import Presence
-import json
+
 class DiscordRPC(object):
     zone2imgdesc = { # A dict of ZoneID -> An image and a description
         1000: ["toontropolis-docks", "In Toontropolis Docks"],
@@ -211,14 +213,24 @@ class DiscordRPC(object):
         self.updateTask = None
 
     def enable(self):
-        clientId= open ('user/clientId.json', "r")
+        if os.path.exists('user/clientId.json'):
+            pass
+        else:
+            with open('user/clientId.json', 'w') as f:
+                data = {}
+                data['clientId'] = ''
+                json.dump(data, f, indent=2)
+                print("DEBUG: Creating JSON file for Client ID")
 
-        data = json.loads(clientId.read())
-        
-        for clientId in data['discord_id']:
+        clientId = open ('user/clientId.json', "r")
+
+        data = json.load(clientId)
+
+        for id in data['clientId']:
+            id = (data['clientId'])
             try:
                 if self.RPC is None:
-                    self.RPC = Presence(clientId)
+                    self.RPC = Presence(id)
             except BaseException:
                 print("DiscordRPC - Warning: Discord not found for this client.")
                 self.RPC = None
