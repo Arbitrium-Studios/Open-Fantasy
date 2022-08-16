@@ -23,5 +23,5 @@ for phase in os.listdir('.'):
     filename = phase + '.mf'
     print('Writing ', filename)
     filepath = os.path.join(dest, filename)
-    os.system('multify -c -f "%s" "%s"' % (filepath, phase))
+    os.system('C:/Open-Panda/bin/multify -c -f "%s" "%s"' % (filepath, phase))
 print ('Done Building Phase Files')
