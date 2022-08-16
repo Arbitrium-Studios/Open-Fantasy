@@ -74,7 +74,7 @@ AIMsgName2Id = {'STATESERVER_OBJECT_GENERATE_WITH_REQUIRED': 2001,
 AIMsgId2Names = invertDictLossless(AIMsgName2Id)
 if not __debug__ or __execWarnings__:
     print('EXECWARNING AIMsgTypes: %s' % AIMsgName2Id)
-    printStack()
+    
 for name, value in list(AIMsgName2Id.items()):
     exec('%s = %s' % (name, value))
 

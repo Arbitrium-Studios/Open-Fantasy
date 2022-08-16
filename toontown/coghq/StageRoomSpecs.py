@@ -53,7 +53,7 @@ CashbotStageConnectorRooms = (
 CashbotStageSpecModules = {}
 if not __debug__ or __execWarnings__:
     print('EXECWARNING StageRoomSpecs: %s' % CashbotStageRoomName2RoomId)
-    printStack()
+    
 for roomName, roomId in list(CashbotStageRoomName2RoomId.items()):
     exec('from toontown.coghq import %s' % roomName)
     CashbotStageSpecModules[roomId] = eval(roomName)

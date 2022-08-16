@@ -301,13 +301,13 @@ class TalkAssistant(DirectObject.DirectObject):
         try:
             if not __debug__ or __execWarnings__:
                 print('EXECWARNING TalkAssistant eval: %s' % message)
-                printStack()
+                
             return str(eval(message, globals(), TalkAssistant.ExecNamespace))
         except SyntaxError:
             try:
                 if not __debug__ or __execWarnings__:
                     print('EXECWARNING TalkAssistant exec: %s' % message)
-                    printStack()
+                    
                 exec(message, globals(), TalkAssistant.ExecNamespace)
                 return 'ok'
             except BaseException:

@@ -83,7 +83,7 @@ CashbotMintConnectorRooms = (
 CashbotMintSpecModules = {}
 if not __debug__ or __execWarnings__:
     print('EXECWARNING MintRoomSpecs: %s' % CashbotMintRoomName2RoomId)
-    printStack()
+    
 for roomName, roomId in list(CashbotMintRoomName2RoomId.items()):
     exec('from toontown.coghq import %s' % roomName)
     CashbotMintSpecModules[roomId] = eval(roomName)

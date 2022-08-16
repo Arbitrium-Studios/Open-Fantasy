@@ -106,7 +106,7 @@ class LevelSpec:
             print(
                 'EXECWARNING LevelSpec exec: %s' %
                 self.getSpecImportsModuleName())
-            printStack()
+            
         exec('from %s import *' % self.getSpecImportsModuleName())
         for key in list(spec.keys()):
             specCopy[key] = eval(repr(spec[key]))
@@ -415,7 +415,7 @@ class LevelSpec:
                 prettyString = self.getPrettyString()
             if not isClient():
                 print('EXECWARNING LevelSpec exec 2: %s' % prettyString)
-                printStack()
+                
             exec(prettyString)
             if self._recurKeyTest(levelSpec, self.specDict):
                 return 1

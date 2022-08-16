@@ -425,7 +425,7 @@ class DistributedPartyCannonActivity(DistributedPartyActivity):
         return Task.done
 
     def d_setLanded(self, toonId):
-        printStack()
+        
         self.notify.debug('d_setLanded %s' % toonId)
         if self.isLocalToonId(toonId):
             if self.cr:

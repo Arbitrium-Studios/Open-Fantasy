@@ -138,13 +138,13 @@ class ChatInputTyped(DirectObject.DirectObject):
         try:
             if not __debug__ or __execWarnings__:
                 print('EXECWARNING ChatInputNormal eval: %s' % message)
-                printStack()
+                
             return str(eval(message, globals(), ChatInputTyped.ExecNamespace))
         except SyntaxError:
             try:
                 if not __debug__ or __execWarnings__:
                     print('EXECWARNING ChatInputNormal exec: %s' % message)
-                    printStack()
+                    
                 exec(message, globals(), ChatInputTyped.ExecNamespace)
                 return 'ok'
             except BaseException:

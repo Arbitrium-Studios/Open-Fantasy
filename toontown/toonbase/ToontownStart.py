@@ -6,7 +6,10 @@ class game:
     name = 'toontown'
     process = 'client'
 
-
+import os
+if not os.path.exists('user/'):
+    os.mkdir('user/')
+    
 builtins.game = game()
 from panda3d.core import *
 import time
@@ -47,9 +50,7 @@ ToonBase.ToonBase()
 from toontown.rpc.DiscordRPC import DiscordRPC
 builtins.Discord = DiscordRPC()
 Discord.launching()
-if base.win is None:
-    print('Unable to open window; aborting.')
-    sys.exit()
+
 launcher.setPandaErrorCode(0)
 launcher.setPandaWindowOpen()
 ConfigVariableDouble('decompressor-step-time').setValue(0.01)

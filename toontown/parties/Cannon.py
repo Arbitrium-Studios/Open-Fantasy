@@ -8,7 +8,6 @@ from toontown.toon import ToonHead
 from toontown.minigame.CannonGameGlobals import *
 from toontown.toonbase import ToontownGlobals
 from toontown.parties.PartyUtils import toRadians, calcVelocity
-from direct.showbase.PythonUtil import StackTrace
 CANNON_ROTATION_MIN = -70
 CANNON_ROTATION_MAX = 70
 INITIAL_VELOCITY = 80.0
@@ -130,9 +129,6 @@ class Cannon:
         toonName = 'None'
         if toon:
             toonName = toon.getName()
-        self.notify.debug(
-            '__setToonInside self.toonInside=%s\nstack=%s' %
-            (toonName, StackTrace().compact()))
         self.toonInside.stopSmooth()
         self.toonOriginalScale = toon.getScale()
         toon.useLOD(1000)
@@ -200,9 +196,6 @@ class Cannon:
         toonName = 'None'
         if self.toonInside:
             toonName = self.toonInside.getName()
-        self.notify.debug(
-            '__cleanupToonInside self.toonInside=%s\nstack=%s' %
-            (toonName, StackTrace().compact()))
         if self.toonHead is not None:
             self.hideToonHead()
             if hasattr(self.toonInside, 'nametag'):

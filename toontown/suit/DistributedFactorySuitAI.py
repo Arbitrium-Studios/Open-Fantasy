@@ -2,7 +2,6 @@ from otp.ai.AIBaseGlobal import *
 from direct.directnotify import DirectNotifyGlobal
 from toontown.battle import SuitBattleGlobals
 from . import DistributedSuitBaseAI, SuitDialog
-from direct.showbase.PythonUtil import StackTrace
 
 
 class DistributedFactorySuitAI(DistributedSuitBaseAI.DistributedSuitBaseAI):
@@ -34,7 +33,6 @@ class DistributedFactorySuitAI(DistributedSuitBaseAI.DistributedSuitBaseAI):
                 self.notify.warning(
                     'delete, factoryIsNotGone, got Exception %s' %
                     str(e))
-                self.notify.warning('stackTrace=%s' % StackTrace().compact())
                 self.notify.warning('doId=%s' % self.doId)
                 if hasattr(self, 'levelDoId'):
                     self.notify.warning('levelDoId=%s' % self.levelDoId)

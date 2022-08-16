@@ -48,7 +48,7 @@ CashbotMintSpecModules = {}
 if not __debug__ or __execWarnings__:
     print('EXECWARNING CountryClubRoomSpecs: %s' %
           BossbotCountryClubRoomName2RoomId)
-    printStack()
+    
 for roomName, roomId in list(BossbotCountryClubRoomName2RoomId.items()):
     exec('from toontown.coghq import %s' % roomName)
     CashbotMintSpecModules[roomId] = eval(roomName)

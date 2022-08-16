@@ -904,7 +904,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
         flightResults = self.__calcFlightResults(avId, launchTime)
         if not __debug__ or __execWarnings__:
             print('EXECWARNING DistributedCannon: %s' % flightResults)
-            printStack()
+            
         for key in flightResults:
             exec("%s = flightResults['%s']" % (key, key))
 

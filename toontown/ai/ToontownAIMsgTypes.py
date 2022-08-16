@@ -7,7 +7,7 @@ TTAIMsgName2Id = {'DBSERVER_GET_ESTATE': 1040,
 TTAIMsgId2Names = invertDictLossless(TTAIMsgName2Id)
 if not __debug__ or __execWarnings__:
     print('EXECWARNING ToontownAIMsgTypes: %s' % TTAIMsgName2Id)
-    printStack()
+    
 for name, value in list(TTAIMsgName2Id.items()):
     exec('%s = %s' % (name, value))
 

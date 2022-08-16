@@ -221,13 +221,6 @@ class NewsPageButtonManager(FSM.FSM):
     def enterNormalWalk(self):
         if not self.buttonsLoaded:
             return
-        if localAvatar.getLastTimeReadNews() < base.cr.inGameNewsMgr.getLatestIssue():
-            self.__showNewIssueButton()
-            self.__blinkIval.resume()
-        else:
-            self.hideNewIssueButton()
-        self.gotoPrevPageButton.hide()
-        self.goto3dWorldButton.hide()
 
     def exitNormalWalk(self):
         if not self.buttonsLoaded:

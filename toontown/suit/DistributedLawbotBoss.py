@@ -3,7 +3,6 @@ from direct.interval.IntervalGlobal import *
 from toontown.battle.BattleProps import *
 from direct.distributed.ClockDelta import *
 from direct.showbase.PythonUtil import Functor
-from direct.showbase.PythonUtil import StackTrace
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 from panda3d.otp import *
@@ -2138,8 +2137,6 @@ class DistributedLawbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             self.notify.warning('returning from setTaunt, no attr nametag')
             gotError = True
         if gotError:
-            st = StackTrace()
-            print(st)
             return
         chatString = TTLocalizer.LawbotBossTaunts[1]
         if tauntIndex == 0:

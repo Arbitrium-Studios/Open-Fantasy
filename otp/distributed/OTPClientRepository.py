@@ -2317,7 +2317,6 @@ class OTPClientRepository(ClientRepositoryBase):
         else:
             ClientRepositoryBase.replayDeferredGenerate(self, msgType, extra)
 
-    @exceptionLogged(append=False)
     def handleDatagram(self, di):
         if self.notify.getDebug():
             print('ClientRepository received datagram:')

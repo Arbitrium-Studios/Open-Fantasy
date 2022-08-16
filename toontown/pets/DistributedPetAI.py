@@ -22,7 +22,6 @@ import random
 import time
 import string
 import copy
-from direct.showbase.PythonUtil import StackTrace
 
 
 class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI,
@@ -581,91 +580,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI,
         DistributedSmoothNodeAI.DistributedSmoothNodeAI.requestDelete(self)
 
     def _doDeleteCleanup(self):
-        self.trickLogger.destroy()
-        self.trickFailLogger.destroy()
-        self.feedLogger.destroy()
-        self.scratchLogger.destroy()
-        del self.trickLogger
-        del self.trickFailLogger
-        del self.feedLogger
-        del self.scratchLogger
-        taskMgr.remove(self.uniqueName('clearMovie'))
-        taskMgr.remove(self.uniqueName('PetMovieWait'))
-        taskMgr.remove(self.uniqueName('PetMovieClear'))
-        taskMgr.remove(self.uniqueName('PetMovieComplete'))
-        taskMgr.remove(self.getLockMoveTaskName())
-        taskMgr.remove(self.getMoveTaskName())
-        if hasattr(self, 'zoneId'):
-            self.announceZoneChange(ToontownGlobals.QuietZone, self.zoneId)
-        else:
-            myDoId = 'No doId'
-            myTaskName = 'No task name'
-            myStackTrace = StackTrace().trace
-            myOldStackTrace = 'No Trace'
-            if hasattr(self, 'doId'):
-                myDoId = self.doId
-            if task:
-                myTaskName = task.name
-            if hasattr(self, 'destroyDoStackTrace'):
-                myOldStackTrace = self.destroyDoStackTrace.trace
-            simbase.air.writeServerEvent(
-                'Pet RequestDelete duplicate',
-                myDoId,
-                'from task %s' %
-                myTaskName)
-            simbase.air.writeServerEvent(
-                'Pet RequestDelete duplicate StackTrace',
-                myDoId,
-                '%s' %
-                myStackTrace)
-            simbase.air.writeServerEvent(
-                'Pet RequestDelete duplicate OldStackTrace',
-                myDoId,
-                '%s' %
-                myOldStackTrace)
-            DistributedPetAI.notify.warning(
-                'double requestDelete from task %s' %
-                myTaskName)
-        self.setParent(ToontownGlobals.SPHidden)
-        if hasattr(self, 'activated'):
-            if self.activated:
-                self.activated = 0
-                self.brain.destroy()
-                del self.brain
-                self.actionFSM.destroy()
-                del self.actionFSM
-                self.exitPetLook()
-                self.destroyImpulses()
-                self.mover.destroy()
-                del self.mover
-                self.lockMover.destroy()
-                del self.lockMover
-                self.stopPosHprBroadcast()
-        if hasattr(self, 'mood'):
-            self.mood.destroy()
-            del self.mood
-        if hasattr(self, 'traits'):
-            del self.traits
-        try:
-            for funcName in self.__funcsToDelete:
-                del self.__dict__[funcName]
-
-        except BaseException:
-            pass
-
-        if hasattr(self, 'gaitFSM'):
-            if self.gaitFSM:
-                self.gaitFSM.requestFinalState()
-            del self.gaitFSM
-        if hasattr(self, 'unstickFSM'):
-            if self.unstickFSM:
-                self.unstickFSM.requestFinalState()
-            del self.unstickFSM
-        if __dev__:
-            del self.pscMoveResc
-        PetLookerAI.PetLookerAI.destroy(self)
-        self.ignoreAll()
-        self._hasCleanedUp = True
+        pass
 
     def delete(self):
         DistributedPetAI.notify.info(

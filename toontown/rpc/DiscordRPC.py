@@ -4,7 +4,7 @@ import random
 import time
 from ctypes import *
 from direct.task import Task 
-from pypresence import Presence
+from dependencies.pypresence import Presence
 
 class DiscordRPC(object):
     zone2imgdesc = { # A dict of ZoneID -> An image and a description

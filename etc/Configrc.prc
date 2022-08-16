@@ -1,5 +1,7 @@
 # Window Settings
-window-title Toontown Fantasy
+window-title Toontown Fantasy [DEV]
+win-origin -1 -1
+win-size 1280 720
 icon-filename phase_3/models/gui/toontown.ico
 cursor-filename phase_3/models/gui/toonmono.cur
 

@@ -301,7 +301,7 @@ class ChatInputWhiteListFrame(FSM.FSM, DirectFrame):
         try:
             if not __debug__ or __execWarnings__:
                 print('EXECWARNING ChatInputWhiteListFrame eval: %s' % message)
-                printStack()
+                
             return str(eval(message, globals(), ChatInputTyped.ExecNamespace))
         except SyntaxError:
             try:
@@ -309,7 +309,7 @@ class ChatInputWhiteListFrame(FSM.FSM, DirectFrame):
                     print(
                         'EXECWARNING ChatInputWhiteListFrame exec: %s' %
                         message)
-                    printStack()
+                    
                 exec(message, globals(), ChatInputTyped.ExecNamespace)
                 return 'ok'
             except BaseException:
