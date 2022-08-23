@@ -360,9 +360,11 @@ def __throwPie(throw, delay, hitCount, showCannon=1):
         if kbbonus > 0:
             bonusTrack.append(Wait(0.75))
             bonusTrack.append(Func(suit.showHpText, -kbbonus, 2, openEnded=0))
+            bonusTrack.append(Func(suit.updateHealthBar, kbbonus))
         if hpbonus > 0:
             bonusTrack.append(Wait(0.75))
             bonusTrack.append(Func(suit.showHpText, -hpbonus, 1, openEnded=0))
+            bonusTrack.append(Func(suit.updateHealthBar, hpbonus))
         suitResponseTrack = Parallel(suitResponseTrack, bonusTrack)
     return [toonTrack,
             soundTrack,
