@@ -125,7 +125,7 @@ ac = (('throw-object', 'throw-object', 5),
       ('stomp', 'stomp', 5),
       ('phone', 'phone', 5),
       ('throw-paper', 'throw-paper', 5))
-bs = (('throw-paper', 'throw-paper', 5),)
+bs = (('glower', 'glower', 5),)
 sd = (('quick-jump', 'jump', 5),
       ('stomp', 'stomp', 5),
       ('magic3', 'magic3', 5),
