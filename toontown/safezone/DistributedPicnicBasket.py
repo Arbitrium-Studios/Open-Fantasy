@@ -20,7 +20,7 @@ from enum import IntEnum
 
 
 class DistributedPicnicBasket(DistributedObject.DistributedObject):
-    seatState = IntEnum('seatState', ('Empty, Full, Eating'))
+    seatState = IntEnum('seatState', ('Empty', 'Full', 'Eating'))
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPicnicBasket')
 
     def __init__(self, cr):
