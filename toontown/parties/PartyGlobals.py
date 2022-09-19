@@ -1,7 +1,7 @@
 from pandac.PandaModules import BitMask32
 from pandac.PandaModules import Point3, VBase4
-from otp.otpbase import PythonUtil
 from toontown.toonbase import TTLocalizer
+from enum import IntEnum
 KICK_TO_PLAYGROUND_EVENT = 'parties_kickToPlayground'
 MaxSetInvites = 1000
 MaxSetPartiesInvitedTo = 100
@@ -55,56 +55,55 @@ AvailableGridSquares = 202
 TrashCanPosition = (-0.24, 0.0, -0.65)
 TrashCanScale = 0.7
 PartyEditorTrashBounds = ((-0.16, -0.38), (-0.05, -0.56))
-ActivityRequestStatus = PythonUtil.Enum(('Joining', 'Exiting'))
-InviteStatus = PythonUtil.Enum(('NotRead',
-                                'ReadButNotReplied',
-                                'Accepted',
-                                'Rejected'))
-InviteTheme = PythonUtil.Enum(('Birthday',
-                               'GenericMale',
-                               'GenericFemale',
-                               'Racing',
-                               'Valentoons',
-                               'VictoryParty',
-                               'Winter'))
-PartyStatus = PythonUtil.Enum(('Pending',
-                               'Cancelled',
-                               'Finished',
-                               'CanStart',
-                               'Started',
-                               'NeverStarted'))
-AddPartyErrorCode = PythonUtil.Enum(('AllOk',
-                                     'ValidationError',
-                                     'DatabaseError',
-                                     'TooManyHostedParties'))
-ChangePartyFieldErrorCode = PythonUtil.Enum(('AllOk',
-                                             'ValidationError',
-                                             'DatabaseError',
-                                             'AlreadyStarted',
-                                             'AlreadyRefunded'))
-ActivityTypes = PythonUtil.Enum(
-    ('HostInitiated', 'GuestInitiated', 'Continuous'))
-PartyGateDenialReasons = PythonUtil.Enum(('Unavailable', 'Full'))
-ActivityIds = PythonUtil.Enum(('PartyJukebox',
-                               'PartyCannon',
-                               'PartyTrampoline',
-                               'PartyCatch',
-                               'PartyDance',
-                               'PartyTugOfWar',
-                               'PartyFireworks',
-                               'PartyClock',
-                               'PartyJukebox40',
-                               'PartyDance20',
-                               'PartyCog',
-                               'PartyVictoryTrampoline',
-                               'PartyWinterCatch',
-                               'PartyWinterTrampoline',
-                               'PartyWinterCog',
-                               'PartyValentineDance',
-                               'PartyValentineDance20',
-                               'PartyValentineJukebox',
-                               'PartyValentineJukebox40',
-                               'PartyValentineTrampoline'))
+ActivityRequestStatus = IntEnum('ActivityRequestStatus', ('Joining', 'Exiting'))
+InviteStatus = IntEnum('InviteStatus', ('NotRead',
+ 'ReadButNotReplied',
+ 'Accepted',
+ 'Rejected'))
+InviteTheme = IntEnum('InviteTheme', ('Birthday',
+ 'GenericMale',
+ 'GenericFemale',
+ 'Racing',
+ 'Valentoons',
+ 'VictoryParty',
+ 'Winter'))
+PartyStatus = IntEnum('PartyStatus', ('Pending',
+ 'Cancelled',
+ 'Finished',
+ 'CanStart',
+ 'Started',
+ 'NeverStarted'))
+AddPartyErrorCode = IntEnum('AddPartyErrorCode', ('AllOk',
+ 'ValidationError',
+ 'DatabaseError',
+ 'TooManyHostedParties'))
+ChangePartyFieldErrorCode = IntEnum('ChangePartyFieldErrorCode', ('AllOk',
+ 'ValidationError',
+ 'DatabaseError',
+ 'AlreadyStarted',
+ 'AlreadyRefunded'))
+ActivityTypes = IntEnum('ActivityTypes', ('HostInitiated', 'GuestInitiated', 'Continuous'))
+PartyGateDenialReasons = IntEnum('PartyGateDenialReasons', ('Unavailable', 'Full'))
+ActivityIds = IntEnum('ActivityIds', ('PartyJukebox',
+ 'PartyCannon',
+ 'PartyTrampoline',
+ 'PartyCatch',
+ 'PartyDance',
+ 'PartyTugOfWar',
+ 'PartyFireworks',
+ 'PartyClock',
+ 'PartyJukebox40',
+ 'PartyDance20',
+ 'PartyCog',
+ 'PartyVictoryTrampoline',
+ 'PartyWinterCatch',
+ 'PartyWinterTrampoline',
+ 'PartyWinterCog',
+ 'PartyValentineDance',
+ 'PartyValentineDance20',
+ 'PartyValentineJukebox',
+ 'PartyValentineJukebox40',
+ 'PartyValentineTrampoline'))
 PartyEditorActivityOrder = [ActivityIds.PartyCog,
                             ActivityIds.PartyWinterCog,
                             ActivityIds.PartyJukebox,
@@ -143,38 +142,38 @@ ValentinePartyActivityIds = frozenset([ActivityIds.PartyValentineDance,
                                        ActivityIds.PartyValentineJukebox40,
                                        ActivityIds.PartyValentineTrampoline])
 ValentinePartyReplacementActivityIds = frozenset([ActivityIds.PartyDance,
-                                                  ActivityIds.PartyDance20,
-                                                  ActivityIds.PartyJukebox,
-                                                  ActivityIds.PartyJukebox40,
-                                                  ActivityIds.PartyTrampoline])
-DecorationIds = PythonUtil.Enum(('BalloonAnvil',
-                                 'BalloonStage',
-                                 'Bow',
-                                 'Cake',
-                                 'Castle',
-                                 'GiftPile',
-                                 'Horn',
-                                 'MardiGras',
-                                 'NoiseMakers',
-                                 'Pinwheel',
-                                 'GagGlobe',
-                                 'BannerJellyBean',
-                                 'CakeTower',
-                                 'HeartTarget',
-                                 'HeartBanner',
-                                 'FlyingHeart',
-                                 'Hydra',
-                                 'BannerVictory',
-                                 'CannonVictory',
-                                 'CogStatueVictory',
-                                 'TubeCogVictory',
-                                 'CogIceCreamVictory',
-                                 'cogIceCreamWinter',
-                                 'StageWinter',
-                                 'CogStatueWinter',
-                                 'snowman',
-                                 'snowDoodle',
-                                 'BalloonAnvilValentine'))
+ ActivityIds.PartyDance20,
+ ActivityIds.PartyJukebox,
+ ActivityIds.PartyJukebox40,
+ ActivityIds.PartyTrampoline])
+DecorationIds = IntEnum('DecorationIds', ('BalloonAnvil',
+ 'BalloonStage',
+ 'Bow',
+ 'Cake',
+ 'Castle',
+ 'GiftPile',
+ 'Horn',
+ 'MardiGras',
+ 'NoiseMakers',
+ 'Pinwheel',
+ 'GagGlobe',
+ 'BannerJellyBean',
+ 'CakeTower',
+ 'HeartTarget',
+ 'HeartBanner',
+ 'FlyingHeart',
+ 'Hydra',
+ 'BannerVictory',
+ 'CannonVictory',
+ 'CogStatueVictory',
+ 'TubeCogVictory',
+ 'CogIceCreamVictory',
+ 'cogIceCreamWinter',
+ 'StageWinter',
+ 'CogStatueWinter',
+ 'snowman',
+ 'snowDoodle',
+ 'BalloonAnvilValentine'))
 DECORATION_VOLUME = 1.0
 DECORATION_CUTOFF = 45
 VictoryPartyDecorationIds = frozenset([DecorationIds.Hydra,
@@ -197,11 +196,11 @@ ValentinePartyDecorationIds = frozenset([DecorationIds.BalloonAnvilValentine,
 ValentinePartyReplacementDecorationIds = frozenset(
     [DecorationIds.BalloonAnvil, DecorationIds.BannerJellyBean])
 UnreleasedDecorationIds = ()
-GoToPartyStatus = PythonUtil.Enum(('AllowedToGo',
-                                   'PartyFull',
-                                   'PrivateParty',
-                                   'PartyOver',
-                                   'PartyNotActive'))
+GoToPartyStatus = IntEnum('GoToPartyStatus', ('AllowedToGo',
+ 'PartyFull',
+ 'PrivateParty',
+ 'PartyOver',
+ 'PartyNotActive'))
 PlayGroundToPartyClockColors = {'the_burrrgh': (53.0 / 255.0,
                                                 116.0 / 255.0,
                                                 148.0 / 255.0,
@@ -521,8 +520,8 @@ DecorationInformationDict = {DecorationIds.BalloonAnvil: {'cost': int(10 * Party
                                                         'paidOnly': False,
                                                         'gridAsset': 'decoration_1x1'}}
 DefaultRulesTimeout = 10.0
-DenialReasons = PythonUtil.Enum(('Default', 'Full', 'SilentFail'), start=0)
-FireworkShows = PythonUtil.Enum(('Summer',), start=200)
+DenialReasons = IntEnum('DenialReasons', ('Default', 'Full', 'SilentFail'), start=0)
+FireworkShows = IntEnum('FireworkShows', ('Summer',), start=200)
 FireworksGlobalXOffset = 160.0
 FireworksGlobalYOffset = -20.0
 FireworksPostLaunchDelay = 5.0
@@ -531,7 +530,7 @@ RocketDirectionDelay = 2.0
 FireworksStartedEvent = 'PartyFireworksStarted'
 FireworksFinishedEvent = 'PartyFireworksFinished'
 FireworksTransitionToDisabledDelay = 3.0
-TeamActivityTeams = PythonUtil.Enum(('LeftTeam', 'RightTeam'), start=0)
+TeamActivityTeams = IntEnum('TeamActivityTeams', ('LeftTeam', 'RightTeam'), start=0)
 TeamActivityNeitherTeam = 3
 TeamActivityTextScale = 0.135
 TeamActivityStartDelay = 8.0
@@ -773,14 +772,14 @@ DanceAnimToName = {'right': TTLocalizer.DanceAnimRight,
                    'angry': TTLocalizer.DanceAnimAngry,
                    'left': TTLocalizer.DanceAnimLeft}
 DanceReverseLoopAnims = ['left',
-                         'right',
-                         'up',
-                         'down',
-                         'good-putt']
-ToonDancingStates = PythonUtil.Enum(('Init',
-                                     'DanceMove',
-                                     'Run',
-                                     'Cleanup'))
+ 'right',
+ 'up',
+ 'down',
+ 'good-putt']
+ToonDancingStates = IntEnum('ToonDancingStates', ('Init',
+ 'DanceMove',
+ 'Run',
+ 'Cleanup'))
 JUKEBOX_TIMEOUT = 30.0
 MUSIC_PATH = 'phase_%s/audio/bgm/'
 MUSIC_MIN_LENGTH_SECONDS = 50.0

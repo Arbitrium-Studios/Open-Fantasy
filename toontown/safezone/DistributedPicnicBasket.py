@@ -16,12 +16,12 @@ from otp.otpbase import PythonUtil
 from toontown.toon import ToonDNA
 from direct.showbase import RandomNumGen
 from toontown.battle.BattleSounds import *
+from enum import IntEnum
 
 
 class DistributedPicnicBasket(DistributedObject.DistributedObject):
-    seatState = Enum('Empty, Full, Eating')
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedPicnicBasket')
+    seatState = IntEnum('seatState', ('Empty, Full, Eating'))
+    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedPicnicBasket')
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
