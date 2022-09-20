@@ -255,7 +255,8 @@ class SuitPage(ShtikerPage.ShtikerPage):
                                                   0,
                                                   0.4),
                                        text=str(
-                                           localAvatar.emblems[ToontownGlobals.EmblemTypes.Silver]),
+                                           # localAvatar.emblems[ToontownGlobals.EmblemTypes.Silver]),
+                                             localAvatar.emblems[0]),
                                        text_fg=(0.95,
                                                 0.95,
                                                 0,
@@ -277,7 +278,8 @@ class SuitPage(ShtikerPage.ShtikerPage):
                                                 0,
                                                 0.4),
                                      text=str(
-                                         localAvatar.emblems[ToontownGlobals.EmblemTypes.Gold]),
+                                         # localAvatar.emblems[ToontownGlobals.EmblemTypes.Gold]),
+                                         localAvatar.emblems[1]),
                                      text_fg=(0.95,
                                               0.95,
                                               0,
