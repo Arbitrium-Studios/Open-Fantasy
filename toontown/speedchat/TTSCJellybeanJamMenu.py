@@ -1,19 +1,19 @@
-from otp.otpbase import PythonUtil
 from otp.speedchat.SCMenu import SCMenu
 from otp.speedchat.SCMenuHolder import SCMenuHolder
 from otp.speedchat.SCStaticTextTerminal import SCStaticTextTerminal
 from otp.otpbase import OTPLocalizer
+from enum import IntEnum
 JellybeanJamMenu = [(OTPLocalizer.JellybeanJamMenuSections[0], [30180,
-                                                                30181,
-                                                                30182,
-                                                                30183,
-                                                                30184,
-                                                                30185]), (OTPLocalizer.JellybeanJamMenuSections[1], [30186,
-                                                                                                                     30187,
-                                                                                                                     30188,
-                                                                                                                     30189,
-                                                                                                                     30190])]
-JellybeanJamPhases = PythonUtil.Enum('TROLLEY, FISHING, PARTIES')
+   30181,
+   30182,
+   30183,
+   30184,
+   30185]), (OTPLocalizer.JellybeanJamMenuSections[1], [30186,
+   30187,
+   30188,
+   30189,
+   30190])]
+JellybeanJamPhases = IntEnum('JellybeanJamPhases', ('TROLLEY', 'FISHING', 'PARTIES'))
 PhaseSpecifPhrases = [30180, 30181, 30182]
 
 

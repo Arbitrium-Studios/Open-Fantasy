@@ -23,6 +23,8 @@ class Settings:
             self.__settings = {}
 
     def writeSettings(self):
+        if not os.path.exists('user/'):
+            os.mkdir('user/')
         with open(self.__filename, 'w+') as f:
             json.dump(self.__settings, f, indent=4)
 
