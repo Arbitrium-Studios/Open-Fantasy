@@ -30,13 +30,13 @@ from toontown.parties.PartyGlobals import GoToPartyStatus
 
 class PlayGame(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('PlayGame')
-    Hood2ClassDict = {ToontownGlobals.ToontropolisPlaza: TTHood.TTHood,
-                      ToontownGlobals.ToontropolisDocks: DDHood.DDHood,
+    Hood2ClassDict = {ToontownGlobals.ToontownPlaza: TTHood.TTHood,
+                      ToontownGlobals.ToontownsShipyard: DDHood.DDHood,
                       ToontownGlobals.TundraWonderland: BRHood.BRHood,
                       ToontownGlobals.TheLandOfMusic: MMHood.MMHood,
                       ToontownGlobals.FloweringGrove: DGHood.DGHood,
                       ToontownGlobals.TwilightDreamland: DLHood.DLHood,
-                      ToontownGlobals.DowntownToontropolis: GSHood.GSHood,
+                      ToontownGlobals.DowntownToontown: GSHood.GSHood,
                       ToontownGlobals.AcornAcres: OZHood.OZHood,
                       ToontownGlobals.Tutorial: TutorialHood.TutorialHood,
                       ToontownGlobals.MyEstate: EstateHood.EstateHood,
@@ -46,13 +46,13 @@ class PlayGame(StateData.StateData):
                       ToontownGlobals.LawbotHQ: LawbotHQ.LawbotHQ,
                       ToontownGlobals.GolfZone: GZHood.GZHood,
                       ToontownGlobals.PartyHood: PartyHood.PartyHood}
-    Hood2StateDict = {ToontownGlobals.ToontropolisPlaza: 'TTHood',
-                      ToontownGlobals.ToontropolisDocks: 'DDHood',
+    Hood2StateDict = {ToontownGlobals.ToontownPlaza: 'TTHood',
+                      ToontownGlobals.ToontownsShipyard: 'DDHood',
                       ToontownGlobals.TundraWonderland: 'BRHood',
                       ToontownGlobals.TheLandOfMusic: 'MMHood',
                       ToontownGlobals.FloweringGrove: 'DGHood',
                       ToontownGlobals.TwilightDreamland: 'DLHood',
-                      ToontownGlobals.DowntownToontropolis: 'GSHood',
+                      ToontownGlobals.DowntownToontown: 'GSHood',
                       ToontownGlobals.AcornAcres: 'OZHood',
                       ToontownGlobals.Tutorial: 'TutorialHood',
                       ToontownGlobals.MyEstate: 'EstateHood',
@@ -341,7 +341,7 @@ class PlayGame(StateData.StateData):
             elif ZoneUtil.isCogHQZone(zoneId):
                 loader.beginBulkLoad('hood', TTLocalizer.HeadingToHood % {'to': toHoodPhrase,
                                                                           'hood': hoodName}, count, 1, TTLocalizer.TIP_COGHQ)
-            elif ZoneUtil.isDowntownToontropolisZone(zoneId):
+            elif ZoneUtil.isDowntownToontownZone(zoneId):
                 loader.beginBulkLoad('hood', TTLocalizer.HeadingToHood % {'to': toHoodPhrase,
                                                                           'hood': hoodName}, count, 1, TTLocalizer.TIP_KARTING)
             else:

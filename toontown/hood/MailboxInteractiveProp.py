@@ -11,7 +11,7 @@ class MailboxInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
         'MailboxInteractiveProp')
     BattleCheerText = TTLocalizer.InteractivePropTrackBonusTerms[
         ToontownBattleGlobals.THROW_TRACK]
-    ZoneToIdles = {ToontownGlobals.ToontropolisPlaza: (('tt_a_ara_ttc_mailbox_idle0',
+    ZoneToIdles = {ToontownGlobals.ToontownPlaza: (('tt_a_ara_ttc_mailbox_idle0',
                                                       3,
                                                       10,
                                                       'tt_a_ara_ttc_mailbox_idle0settle',
@@ -35,7 +35,7 @@ class MailboxInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                                       None,
                                                       3,
                                                       10)),
-                   ToontownGlobals.ToontropolisDocks: (('tt_a_ara_dod_mailbox_idle0',
+                   ToontownGlobals.ToontownsShipyard: (('tt_a_ara_dod_mailbox_idle0',
                                                   3,
                                                   10,
                                                   'tt_a_ara_dod_mailbox_idle0settle',
@@ -155,26 +155,26 @@ class MailboxInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                                        None,
                                                        0,
                                                        0))}
-    ZoneToIdleIntoFightAnims = {ToontownGlobals.ToontropolisPlaza: 'tt_a_ara_ttc_mailbox_idleIntoFight',
-                                ToontownGlobals.ToontropolisDocks: 'tt_a_ara_dod_mailbox_idleIntoFight',
+    ZoneToIdleIntoFightAnims = {ToontownGlobals.ToontownPlaza: 'tt_a_ara_ttc_mailbox_idleIntoFight',
+                                ToontownGlobals.ToontownsShipyard: 'tt_a_ara_dod_mailbox_idleIntoFight',
                                 ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_mailbox_idleIntoFight',
                                 ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_mailbox_idleIntoFight',
                                 ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_mailbox_idleIntoFight',
                                 ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_mailbox_idleIntoFight'}
-    ZoneToVictoryAnims = {ToontownGlobals.ToontropolisPlaza: 'tt_a_ara_ttc_mailbox_victoryDance',
-                          ToontownGlobals.ToontropolisDocks: 'tt_a_ara_dod_mailbox_victoryDance',
+    ZoneToVictoryAnims = {ToontownGlobals.ToontownPlaza: 'tt_a_ara_ttc_mailbox_victoryDance',
+                          ToontownGlobals.ToontownsShipyard: 'tt_a_ara_dod_mailbox_victoryDance',
                           ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_mailbox_victoryDance',
                           ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_mailbox_victoryDance',
                           ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_mailbox_victoryDance',
                           ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_mailbox_victoryDance'}
-    ZoneToSadAnims = {ToontownGlobals.ToontropolisPlaza: 'tt_a_ara_ttc_mailbox_fightSad',
-                      ToontownGlobals.ToontropolisDocks: 'tt_a_ara_dod_mailbox_fightSad',
+    ZoneToSadAnims = {ToontownGlobals.ToontownPlaza: 'tt_a_ara_ttc_mailbox_fightSad',
+                      ToontownGlobals.ToontownsShipyard: 'tt_a_ara_dod_mailbox_fightSad',
                       ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_mailbox_fightSad',
                       ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_mailbox_fightSad',
                       ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_mailbox_fightSad',
                       ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_mailbox_fightSad'}
-    ZoneToFightAnims = {ToontownGlobals.ToontropolisPlaza: ('tt_a_ara_ttc_mailbox_fightBoost', 'tt_a_ara_ttc_mailbox_fightCheer', 'tt_a_ara_ttc_mailbox_fightIdle'),
-                        ToontownGlobals.ToontropolisDocks: ('tt_a_ara_dod_mailbox_fightBoost', 'tt_a_ara_dod_mailbox_fightCheer', 'tt_a_ara_dod_mailbox_fightIdle'),
+    ZoneToFightAnims = {ToontownGlobals.ToontownPlaza: ('tt_a_ara_ttc_mailbox_fightBoost', 'tt_a_ara_ttc_mailbox_fightCheer', 'tt_a_ara_ttc_mailbox_fightIdle'),
+                        ToontownGlobals.ToontownsShipyard: ('tt_a_ara_dod_mailbox_fightBoost', 'tt_a_ara_dod_mailbox_fightCheer', 'tt_a_ara_dod_mailbox_fightIdle'),
                         ToontownGlobals.FloweringGrove: ('tt_a_ara_dga_mailbox_fightBoost', 'tt_a_ara_dga_mailbox_fightCheer', 'tt_a_ara_dga_mailbox_fightIdle'),
                         ToontownGlobals.TheLandOfMusic: ('tt_a_ara_mml_mailbox_fightBoost', 'tt_a_ara_mml_mailbox_fightCheer', 'tt_a_ara_mml_mailbox_fightIdle'),
                         ToontownGlobals.TundraWonderland: ('tt_a_ara_tbr_mailbox_fightBoost', 'tt_a_ara_tbr_mailbox_fightCheer', 'tt_a_ara_tbr_mailbox_fightIdle'),

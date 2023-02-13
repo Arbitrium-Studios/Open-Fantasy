@@ -14,7 +14,7 @@ class TTHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = ToontropolisPlaza
+        self.id = ToontownPlaza
         self.townLoaderClass = TTTownLoader.TTTownLoader
         self.safeZoneLoaderClass = TTSafeZoneLoader.TTSafeZoneLoader
         self.storageDNAFile = 'phase_4/dna/storage_TT.dna'

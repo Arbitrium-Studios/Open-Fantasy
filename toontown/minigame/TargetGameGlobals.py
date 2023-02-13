@@ -63,7 +63,7 @@ colorWhite['Red'] = 1.0
 colorWhite['Green'] = 1.0
 colorWhite['Blue'] = 1.0
 colorWhite['Alpha'] = 1.0
-difficultyPatterns = {ToontownGlobals.ToontropolisPlaza: [[8,
+difficultyPatterns = {ToontownGlobals.ToontownPlaza: [[8,
                                                          4,
                                                          2,
                                                          0],
@@ -85,7 +85,7 @@ difficultyPatterns = {ToontownGlobals.ToontropolisPlaza: [[8,
                                                          1],
                                                         10,
                                                         2],
-                      ToontownGlobals.ToontropolisDocks: [[7,
+                      ToontownGlobals.ToontownsShipyard: [[7,
                                                      4,
                                                      2,
                                                      0],

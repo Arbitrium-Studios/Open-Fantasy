@@ -271,11 +271,11 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
                         hoodsVisited.append(canonicalHood)
                         self.b_setHoodsVisited(hoodsVisited)
 
-                    if canonicalZoneId == ToontownGlobals.DowntownToontropolis:
+                    if canonicalZoneId == ToontownGlobals.DowntownToontown:
                         teleportAccess = self.getTeleportAccess()
-                        if ToontownGlobals.DowntownToontropolis not in teleportAccess:
+                        if ToontownGlobals.DowntownToontown not in teleportAccess:
                             teleportAccess.append(
-                                ToontownGlobals.DowntownToontropolis)
+                                ToontownGlobals.DowntownToontown)
                             self.b_setTeleportAccess(teleportAccess)
 
     def sendDeleteEvent(self):

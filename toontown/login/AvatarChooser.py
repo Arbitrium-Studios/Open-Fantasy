@@ -314,7 +314,7 @@ class AvatarChooser(StateData.StateData):
 
 
     def openDiscord(self):
-        webbrowser.open('https://discord.gg/9fgW8jAaf6')
+        webbrowser.open('https://discord.com/invite/5xmBA8stzY')
 
     def openCredits(self):
         from toontown.toontowngui import Credits

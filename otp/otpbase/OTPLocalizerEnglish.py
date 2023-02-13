@@ -4,13 +4,13 @@ import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
-lToontropolisDocks = "Toontropolis City Shipyard"
-lTwilightDreamland = "Drowsy Slumberland"
+lToontownsShipyard = "Toontown's Shipyard"
+lTwilightDreamland = "Twilight Dreamland"
 lTheLandOfMusic = "The Land of Melody"
-lToontropolisPlaza = 'Toontropolis City Plaza'
+lToontownPlaza = 'Toontown Plaza'
 lDowntownToontropolis = 'Toontropolis City Stadium'
 lAcornAcres = "Acorn Acres"
-lGolfZone = "Toontropolis City Mini-Golf"
+lGolfZone = "Fantasy Mini-Golf"
 lCancel = 'Cancel'
 lClose = 'Close'
 lOK = 'OK'
@@ -988,8 +988,8 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1102: "Let's go fight the %s!" % Cogs,
                                1103: "Let's go take over a %s building!" % Cog,
                                1104: "Let's go in the elevator!",
-                               1105: "Let's go to %s!" % lToontropolisPlaza,
-                               1106: "Let's go to %s!" % lToontropolisDocks,
+                               1105: "Let's go to %s!" % lToontownPlaza,
+                               1106: "Let's go to %s!" % lToontownsShipyard,
                                1107: "Let's go to %s!" % lTheLandOfMusic,
                                1108: "Let's go to %s!" % lFloweringGrove,
                                1109: "Let's go to %s!" % lTundraWonderland,

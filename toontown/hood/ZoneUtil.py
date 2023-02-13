@@ -4,7 +4,7 @@ zoneUtilNotify = DirectNotifyGlobal.directNotify.newCategory('ZoneUtil')
 tutorialDict = None
 
 
-def isDowntownToontropolisZone(zoneId):
+def isDowntownToontownZone(zoneId):
     return zoneId == 8000
 
 
@@ -30,7 +30,7 @@ def getStreetName(branchId):
 
 def getLoaderName(zoneId):
     if tutorialDict:
-        if zoneId == ToontropolisPlaza:
+        if zoneId == ToontownPlaza:
             loaderName = 'safeZoneLoader'
         else:
             loaderName = 'townLoader'
@@ -81,7 +81,7 @@ def getWhereName(zoneId, isToon):
             where = 'toonInterior'
         elif zoneId in tutorialDict['exteriors']:
             where = 'street'
-        elif zoneId == ToontropolisPlaza or zoneId == WelcomeValleyToken:
+        elif zoneId == ToontownPlaza or zoneId == WelcomeValleyToken:
             where = 'playground'
         else:
             zoneUtilNotify.error('No known zone: ' + str(zoneId))
@@ -142,13 +142,13 @@ def isWelcomeValley(zoneId):
 
 def getCanonicalZoneId(zoneId):
     if zoneId == WelcomeValleyToken:
-        zoneId = ToontropolisPlaza
+        zoneId = ToontownPlaza
     elif zoneId >= WelcomeValleyBegin and zoneId < WelcomeValleyEnd:
         zoneId = zoneId % 2000
         if zoneId < 1000:
-            zoneId = zoneId + ToontropolisPlaza
+            zoneId = zoneId + ToontownPlaza
         else:
-            zoneId = zoneId - 1000 + DowntownToontropolis
+            zoneId = zoneId - 1000 + DowntownToontown
     return zoneId
 
 
@@ -158,10 +158,10 @@ def getTrueZoneId(zoneId, currentZoneId):
     if currentZoneId >= WelcomeValleyBegin and currentZoneId < WelcomeValleyEnd:
         hoodId = getHoodId(zoneId)
         offset = currentZoneId - currentZoneId % 2000
-        if hoodId == ToontropolisPlaza:
-            return zoneId - ToontropolisPlaza + offset
-        elif hoodId == DowntownToontropolis:
-            return zoneId - DowntownToontropolis + offset + 1000
+        if hoodId == ToontownPlaza:
+            return zoneId - ToontownPlaza + offset
+        elif hoodId == DowntownToontown:
+            return zoneId - DowntownToontown + offset + 1000
     return zoneId
 
 
@@ -223,10 +223,10 @@ def getWakeInfo(hoodId=None, zoneId=None):
         if zoneId is None:
             zoneId = base.cr.playGame.getPlace().getZoneId()
         canonicalZoneId = getCanonicalZoneId(zoneId)
-        if canonicalZoneId == ToontropolisDocks:
+        if canonicalZoneId == ToontownsShipyard:
             wakeWaterHeight = DDWakeWaterHeight
             showWake = 1
-        elif canonicalZoneId == ToontropolisPlaza:
+        elif canonicalZoneId == ToontownPlaza:
             wakeWaterHeight = TTWakeWaterHeight
             showWake = 1
         elif canonicalZoneId == AcornAcres:

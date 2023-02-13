@@ -629,6 +629,10 @@
     > Make all shaders match that which it is reflecting aka a Toon's shadow should be of itself, not a circle regardless what shaders you're using.
     > When we implement shaders, we should add CRT and VHS tape filters
     > Make the clouds be at various levels through out the day.
+    > If you wait in front of Cogs anywhere, have the Cogs taunt the Toons
+    > If you want to train your Doodle, you should have one option:
+        > Play a doodle minigame like in Wizard101
+            > Each Minigame should be tailored to a certain trick.
     > Since we only need one District, I should remove the Districts page
     > Add special event areas that only become available when 
     > Rewrite the Toontown Online Story so it doesn't interfere with the DuckTales Storyline but instead goes with it.

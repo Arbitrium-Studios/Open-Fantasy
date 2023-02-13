@@ -11,6 +11,7 @@ class OtpAvatarManager(DistributedObject.DistributedObject):
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
         self.avatars = {}
+        self.placeBeforeObjects = 0 # Replace with base if doesn't work. - This is to fix teleporting to a friend on the streets from a safe zone.
 
     def delete(self):
         self.ignoreAll()

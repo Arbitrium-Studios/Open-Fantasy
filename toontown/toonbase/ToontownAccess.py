@@ -8,9 +8,9 @@ class ToontownAccess:
         if base.cr.isPaid():
             return True
         allowed = False
-        allowedZones = [ToontownGlobals.ToontropolisPlaza,
+        allowedZones = [ToontownGlobals.ToontownPlaza,
                         ToontownGlobals.MyEstate,
-                        ToontownGlobals.DowntownToontropolis,
+                        ToontownGlobals.DowntownToontown,
                         ToontownGlobals.Tutorial]
         specialZones = [ToontownGlobals.SellbotLobby]
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:

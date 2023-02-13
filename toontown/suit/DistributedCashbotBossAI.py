@@ -186,11 +186,11 @@ class DistributedCashbotBossAI(
         fpos = self.scene.getRelativePoint(
             self, Point3(v[0] + dx, v[1] + dy, 0))
         if goon.strength <= 10:
-            style = ToontownGlobals.ToontropolisPlaza
+            style = ToontownGlobals.ToontownPlaza
             healAmount = 3
         else:
             if goon.strength <= 15:
-                style = random.choice([ToontownGlobals.ToontropolisDocks,
+                style = random.choice([ToontownGlobals.ToontownsShipyard,
                                        ToontownGlobals.FloweringGrove,
                                        ToontownGlobals.TheLandOfMusic])
                 healAmount = 10

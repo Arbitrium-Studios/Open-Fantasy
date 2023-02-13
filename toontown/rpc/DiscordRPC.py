@@ -73,7 +73,7 @@ class DiscordRPC(object):
 
         16000: ["estate", "At A Toon Estate"],
 
-        17000: ['golf', "In Acorn Acres's Mini-Golf"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontropolis Stadium
+        17000: ['golf', "In Acorn Acres's Mini-Golf"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontown Stadium
     }
 
     def __init__(self):

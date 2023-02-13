@@ -44,10 +44,10 @@ class TTPlayground(Playground.Playground):
             self.dfa.enter(
                 base.cr.hoodMgr.getPhaseFromHood(
                     ToontownGlobals.MyEstate))
-        elif hood == ToontownGlobals.DowntownToontropolis:
+        elif hood == ToontownGlobals.DowntownToontown:
             self.dfa.enter(
                 base.cr.hoodMgr.getPhaseFromHood(
-                    ToontownGlobals.DowntownToontropolis))
+                    ToontownGlobals.DowntownToontown))
         elif hood == ToontownGlobals.PartyHood:
             self.dfa.enter(
                 base.cr.hoodMgr.getPhaseFromHood(

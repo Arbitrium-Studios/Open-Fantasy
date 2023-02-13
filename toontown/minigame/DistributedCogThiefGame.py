@@ -104,9 +104,9 @@ class DistributedCogThiefGame(DistributedMinigame):
         self.gameBoard.find('**/floor_BR').hide()
         self.gameBoard.find('**/floor_DL').hide()
         zone = self.getSafezoneId()
-        if zone == ToontownGlobals.ToontropolisPlaza:
+        if zone == ToontownGlobals.ToontownPlaza:
             self.gameBoard.find('**/floor_TT').show()
-        elif zone == ToontownGlobals.ToontropolisDocks:
+        elif zone == ToontownGlobals.ToontownsShipyard:
             self.gameBoard.find('**/floor_DD').show()
         elif zone == ToontownGlobals.FloweringGrove:
             self.gameBoard.find('**/floor_DG').show()

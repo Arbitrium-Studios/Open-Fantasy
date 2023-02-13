@@ -148,14 +148,14 @@ def getSuitFont():
     return SuitFont
 
 
-ToontropolisDocks = 1000
-ToontropolisPlaza = 2000
+ToontownsShipyard = 1000
+ToontownPlaza = 2000
 TundraWonderland = 3000
 TheLandOfMusic = 4000
 FloweringGrove = 5000
 AcornAcres = 6000
 FunnyFarm = 7000
-DowntownToontropolis = 8000
+DowntownToontown = 8000
 TwilightDreamland = 9000
 BarnacleBoulevard = 1100
 SeaweedStreet = 1200
@@ -175,13 +175,13 @@ OakStreet = 5300
 LullabyLane = 9100
 PajamaPlace = 9200
 ToonHall = 2513
-HoodHierarchy = {ToontropolisPlaza: (SillyStreet, LoopyLane, PunchlinePlace),
-                 ToontropolisDocks: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
+HoodHierarchy = {ToontownPlaza: (SillyStreet, LoopyLane, PunchlinePlace),
+                 ToontownsShipyard: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
                  TundraWonderland: (WalrusWay, SleetStreet, PolarPlace),
                  TheLandOfMusic: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
                  FloweringGrove: (ElmStreet, MapleStreet, OakStreet),
                  TwilightDreamland: (LullabyLane, PajamaPlace),
-                 DowntownToontropolis: ()}
+                 DowntownToontown: ()}
 WelcomeValleyToken = 0
 BossbotHQ = 10000
 BossbotLobby = 10100
@@ -222,7 +222,7 @@ cogIndex2dept = invertDict(cogDept2index)
 HQToSafezone = {SellbotHQ: FloweringGrove,
                 CashbotHQ: TwilightDreamland,
                 LawbotHQ: TundraWonderland,
-                BossbotHQ: ToontropolisDocks}
+                BossbotHQ: ToontownsShipyard}
 CogDeptNames = [TTLocalizer.Bossbot,
                 TTLocalizer.Lawbot,
                 TTLocalizer.Cashbot,
@@ -304,27 +304,27 @@ factoryId2factoryType = {MockupFactoryId: FT_FullSuit,
                          LawbotOfficeInt: FT_FullSuit}
 StreetNames = TTLocalizer.GlobalStreetNames
 StreetBranchZones = list(StreetNames.keys())
-Hoods = (ToontropolisDocks,
-         ToontropolisPlaza,
+Hoods = (ToontownsShipyard,
+         ToontownPlaza,
          TundraWonderland,
          TheLandOfMusic,
          FloweringGrove,
          AcornAcres,
          FunnyFarm,
-         DowntownToontropolis,
+         DowntownToontown,
          TwilightDreamland,
          BossbotHQ,
          SellbotHQ,
          CashbotHQ,
          LawbotHQ,
          GolfZone)
-HoodsForTeleportAll = (ToontropolisDocks,
-                       ToontropolisPlaza,
+HoodsForTeleportAll = (ToontownsShipyard,
+                       ToontownPlaza,
                        TundraWonderland,
                        TheLandOfMusic,
                        FloweringGrove,
                        AcornAcres,
-                       DowntownToontropolis,
+                       DowntownToontown,
                        TwilightDreamland,
                        BossbotHQ,
                        SellbotHQ,
@@ -448,11 +448,11 @@ MinigameReleaseDates = {IceGameId: (2008, 8, 5),
                         CogThiefGameId: (2008, 8, 27)}
 KeyboardTimeout = 300
 phaseMap = {Tutorial: 4,
-            ToontropolisPlaza: 4,
+            ToontownPlaza: 4,
             MyEstate: 5.5,
-            ToontropolisDocks: 6,
+            ToontownsShipyard: 6,
             TheLandOfMusic: 6,
-            DowntownToontropolis: 6,
+            DowntownToontown: 6,
             TundraWonderland: 8,
             FloweringGrove: 8,
             FunnyFarm: 8,
@@ -464,10 +464,10 @@ phaseMap = {Tutorial: 4,
             LawbotHQ: 11,
             GolfZone: 8,
             PartyHood: 13}
-streetPhaseMap = {ToontropolisPlaza: 5,
-                  ToontropolisDocks: 6,
+streetPhaseMap = {ToontownPlaza: 5,
+                  ToontownsShipyard: 6,
                   TheLandOfMusic: 6,
-                  DowntownToontropolis: 6,
+                  DowntownToontown: 6,
                   TundraWonderland: 8,
                   FloweringGrove: 8,
                   FunnyFarm: 8,
@@ -479,10 +479,10 @@ streetPhaseMap = {ToontropolisPlaza: 5,
                   LawbotHQ: 11,
                   PartyHood: 13}
 dnaMap = {Tutorial: 'toontown_central',
-          ToontropolisPlaza: 'toontown_central',
-          ToontropolisDocks: 'donalds_dock',
+          ToontownPlaza: 'toontown_central',
+          ToontownsShipyard: 'donalds_dock',
           TheLandOfMusic: 'minnies_melody_land',
-          DowntownToontropolis: 'goofy_speedway',
+          DowntownToontown: 'goofy_speedway',
           TundraWonderland: 'the_burrrgh',
           FloweringGrove: 'daisys_garden',
           FunnyFarm: 'not done yet',
@@ -493,14 +493,14 @@ dnaMap = {Tutorial: 'toontown_central',
           CashbotHQ: 'cog_hq_cashbot',
           LawbotHQ: 'cog_hq_lawbot',
           GolfZone: 'golf_zone'}
-hoodNameMap = {ToontropolisDocks: TTLocalizer.ToontropolisDocks,
-               ToontropolisPlaza: TTLocalizer.ToontropolisPlaza,
+hoodNameMap = {ToontownsShipyard: TTLocalizer.ToontownsShipyard,
+               ToontownPlaza: TTLocalizer.ToontownPlaza,
                TundraWonderland: TTLocalizer.TundraWonderland,
                TheLandOfMusic: TTLocalizer.TheLandOfMusic,
                FloweringGrove: TTLocalizer.FloweringGrove,
                AcornAcres: TTLocalizer.AcornAcres,
                FunnyFarm: TTLocalizer.FunnyFarm,
-               DowntownToontropolis: TTLocalizer.DowntownToontropolis,
+               DowntownToontown: TTLocalizer.DowntownToontown,
                TwilightDreamland: TTLocalizer.TwilightDreamland,
                BossbotHQ: TTLocalizer.BossbotHQ,
                SellbotHQ: TTLocalizer.SellbotHQ,
@@ -512,10 +512,10 @@ hoodNameMap = {ToontropolisDocks: TTLocalizer.ToontropolisDocks,
                PartyHood: TTLocalizer.PartyHood}
 safeZoneCountMap = {MyEstate: 8,
                     Tutorial: 6,
-                    ToontropolisPlaza: 6,
-                    ToontropolisDocks: 10,
+                    ToontownPlaza: 6,
+                    ToontownsShipyard: 10,
                     TheLandOfMusic: 5,
-                    DowntownToontropolis: 500,
+                    DowntownToontown: 500,
                     TundraWonderland: 8,
                     FloweringGrove: 9,
                     FunnyFarm: 500,
@@ -525,10 +525,10 @@ safeZoneCountMap = {MyEstate: 8,
                     PartyHood: 500}
 townCountMap = {MyEstate: 8,
                 Tutorial: 40,
-                ToontropolisPlaza: 37,
-                ToontropolisDocks: 40,
+                ToontownPlaza: 37,
+                ToontownsShipyard: 40,
                 TheLandOfMusic: 40,
-                DowntownToontropolis: 40,
+                DowntownToontown: 40,
                 TundraWonderland: 40,
                 FloweringGrove: 40,
                 FunnyFarm: 40,
@@ -537,10 +537,10 @@ townCountMap = {MyEstate: 8,
                 PartyHood: 20}
 hoodCountMap = {MyEstate: 2,
                 Tutorial: 2,
-                ToontropolisPlaza: 2,
-                ToontropolisDocks: 2,
+                ToontownPlaza: 2,
+                ToontownsShipyard: 2,
                 TheLandOfMusic: 2,
-                DowntownToontropolis: 2,
+                DowntownToontown: 2,
                 TundraWonderland: 2,
                 FloweringGrove: 2,
                 FunnyFarm: 2,
@@ -1681,12 +1681,12 @@ AV_TOUCH_COUNT_TIME = 300
 BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'
 
 
-openDiscord = 'https://discord.gg/jy628fW'
+openDiscord = 'https://discord.com/invite/5xmBA8stzY'
 
 # TELEPORT_BUTTON_DEFAULT_COST = 50
 # TELEPORT_BUTTON_COSTS = {
-#  ToontropolisPlaza: 5,
-#  ToontropolisDocks: 15,
+#  ToontownPlaza: 5,
+#  ToontownsShipyard: 15,
 #  FloweringGrove: 30,
 #  TheLandOfMusic: 45,
 #  TundraWonderland: 60,
