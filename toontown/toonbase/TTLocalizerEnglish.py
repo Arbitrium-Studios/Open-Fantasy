@@ -8571,7 +8571,7 @@ TipDict = {TIP_NONE: ('',),
                           'In the Ring Game, bonus points are awarded when the entire group successfully swims through its rings.',
                           'A perfect game of Match Minnie will double your points.',
                           'In the Tug-of-War you are awarded more Jellybeans if you play against a tougher Cog.',
-                          'Trolley Game difficulty varies by neighborhood; ' + lToontropolisPlaza +
+                          'Trolley Game difficulty varies by neighborhood; ' + lToontownPlaza +
                           ' has the easiest and ' + lTwilightDreamland + ' has the hardest.',
                           'Certain Trolley Games can only be played in a group.'),
            TIP_COGHQ: ('You must complete your Sellbot Disguise before visiting the V.P.',
