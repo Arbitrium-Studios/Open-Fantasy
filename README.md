@@ -34,8 +34,7 @@
 
 ### Patch Notes:
 
-> Added 360-degree camera.
-> 
+> Check out the Toontown Fantasy Website's [Release Notes](https://www.toontownfantasy.com/toon-hq/Release_Notes) page for the Patch Notes!
 
 [discordImg]: https://img.shields.io/discord/775528645086543895.svg?logo=discord&logoWidth=18&colorB=7289DA&Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&style=for-the-badge
 
