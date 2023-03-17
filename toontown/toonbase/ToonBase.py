@@ -249,6 +249,8 @@ class ToonBase(OTPBase.OTPBase):
         self.walking = pressed
 
     def takeScreenShot(self):
+        if not os.path.exists('user/'):
+            os.mkdir('user/')
         if not os.path.exists('user/screenshots/'):
             os.mkdir('user/screenshots/')
 
