@@ -94,10 +94,10 @@ m = (('smile', 'smile', 5),
 mh = (('smile', 'smile', 5),
       ('golf-club-swing', 'golf-club-swing', 5),
       ('song-and-dance', 'song-and-dance', 5))
-ff = (('throw-paper', 'throw-paper', 5),
-      ('cigar-smoke', 'cigar-smoke', 5),
+ff = (('cigar-smoke', 'cigar-smoke', 5),
       ('magic3', 'magic3', 5),
-      ('golf-club-swing', 'golf-club-swing', 5))
+      ('golf-club-swing', 'golf-club-swing', 5),
+      ('throw-paper', 'throw-paper', 5))
 sc = (('throw-paper', 'throw-paper', 3.5),
       ('glower', 'glower', 5))
 pp = (('throw-paper', 'throw-paper', 5),
