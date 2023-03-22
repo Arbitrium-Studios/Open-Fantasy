@@ -546,6 +546,12 @@ def doDefault(attack):
             attack['name'] = 'FountainPen'
             attack['animName'] = 'pen-squirt'
             return doFountainPen(attack)
+        elif suitName == 'ds':
+            attack['id'] = FIRED
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'Fired'
+            attack['animName'] = 'magic2'
+            return doFired(attack)
         elif suitName == 'hh':
             attack['id'] = FOUNTAIN_PEN
             attack['group'] = ATK_TGT_GROUP
