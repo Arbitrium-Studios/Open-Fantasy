@@ -564,10 +564,10 @@ def doDefault(attack):
             attack['animName'] = 'magic1'
             return doPowerTrip(attack)
         elif suitName == 'cp':
-            attack['id'] = PARADIGM_SHIFT
-            attack['name'] = 'ParadigmShift'
-            attack['animName'] = 'magic2'
-            return doParadigmShift(attack)
+            attack['id'] = POWER_TRIP
+            attack['name'] = 'PowerTrip'
+            attack['animName'] = 'magic1'
+            return doPowerTrip(attack)
         elif suitName == 'cc':
             attack['id'] = FREEZE_ASSETS
             attack['group'] = ATK_TGT_GROUP
