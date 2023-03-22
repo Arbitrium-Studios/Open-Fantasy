@@ -3356,36 +3356,71 @@ def doPowerTrip(attack):
 
 def doSandTrap(attack):
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
-    damageDelay = 1.3
-    dodgeDelay = 0.25
-    suitTrack = getSuitTrack(attack)
-    damageAnims = [['melt'], ['jump', 1.5, 0.4]]
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
-    puddle = globalPropPool.getProp('quicksand')
-    puddle.setHpr(Point3(120, 0, 0))
-    puddle.setScale(0.01)
-    puddleTrack = Sequence(
-        Func(battle.movie.needRestoreRenderProp, puddle),
-        Wait(damageDelay - 0.7),
-        Func(puddle.reparentTo, battle),
-        Func(puddle.setPos, toon.getPos(battle)),
-        LerpScaleInterval(puddle, 1.7, Point3(1.7, 1.7, 1.7), startScale=MovieUtil.PNT3_NEARZERO)
-    )
-    if dmg > 0:
-        puddleTrack.append(Wait(3.2))
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        dmg = target['hp']
+        damageDelay = 1.3
+        dodgeDelay = 0.25
+        suitTrack = getSuitTrack(attack)
+        damageAnims = [['melt'], ['jump', 1.5, 0.4]]
+        toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
+        puddle = globalPropPool.getProp('quicksand')
+        puddle.setHpr(Point3(120, 0, 0))
+        puddle.setScale(0.01)
+        puddleTrack = Sequence(
+            Func(battle.movie.needRestoreRenderProp, puddle),
+            Wait(damageDelay - 0.7),
+            Func(puddle.reparentTo, battle),
+            Func(puddle.setPos, toon.getPos(battle)),
+            LerpScaleInterval(puddle, 1.7, Point3(1.7, 1.7, 1.7), startScale=MovieUtil.PNT3_NEARZERO)
+        )
+        if dmg > 0:
+            puddleTrack.append(Wait(3.2))
+        else:
+            puddleTrack.append(Wait(0.3))
+        puddleTrack.append(LerpFunctionInterval(puddle.setAlphaScale, fromData=1, toData=0, duration=0.8))
+        puddleTrack.append(Func(MovieUtil.removeProp, puddle))
+        puddleTrack.append(Func(battle.movie.clearRenderProp, puddle))
+        if dmg > 0:
+            soundTrack = getSoundTrack('TL_quicksand.ogg', delay=0.5, node=toon)
+        else:
+            soundTrack = getSoundTrack('TL_quicksand.ogg', delay=0.5, duration=0.67, node=toon)
+        return Parallel(suitTrack, toonTrack, puddleTrack, soundTrack)
     else:
-        puddleTrack.append(Wait(0.3))
-    puddleTrack.append(LerpFunctionInterval(puddle.setAlphaScale, fromData=1, toData=0, duration=0.8))
-    puddleTrack.append(Func(MovieUtil.removeProp, puddle))
-    puddleTrack.append(Func(battle.movie.clearRenderProp, puddle))
-    if dmg > 0:
-        soundTrack = getSoundTrack('TL_quicksand.ogg', delay=0.5, node=toon)
-    else:
-        soundTrack = getSoundTrack('TL_quicksand.ogg', delay=0.5, duration=0.67, node=toon)
-    return Parallel(suitTrack, toonTrack, puddleTrack, soundTrack)
+        targets = attack['target']
+        damageDelay = 1.3
+        dodgeDelay = 0.25
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        damageAnims = [['melt'], ['jump', 1.5, 0.4]]
+        toonTracks = getToonTracks(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
+        puddleTracks = Parallel()
+        soundTracks = Parallel()
+        for t in targets:
+            toon = t['toon']
+            dmg = t['hp']
+            puddle = globalPropPool.getProp('quicksand')
+            puddle.setHpr(Point3(120, 0, 0))
+            puddle.setScale(0.01)
+            puddleTrack = Sequence(
+                Func(battle.movie.needRestoreRenderProp, puddle),
+                Wait(damageDelay - 0.7),
+                Func(puddle.reparentTo, battle),
+                Func(puddle.setPos, toon.getPos(battle)),
+                LerpScaleInterval(puddle, 1.7, Point3(1.7, 1.7, 1.7), startScale=MovieUtil.PNT3_NEARZERO)
+            )
+            if dmg > 0:
+                puddleTrack.append(Wait(3.2))
+            else:
+                puddleTrack.append(Wait(0.3))
+            puddleTrack.append(LerpFunctionInterval(puddle.setAlphaScale, fromData=1, toData=0, duration=0.8))
+            puddleTrack.append(Func(MovieUtil.removeProp, puddle))
+            puddleTrack.append(Func(battle.movie.clearRenderProp, puddle))
+            if dmg > 0:
+                soundTracks.append(getSoundTrack('TL_quicksand.ogg', delay=0.5, node=toon))
+            else:
+                soundTracks.append(getSoundTrack('TL_quicksand.ogg', delay=0.5, duration=0.67, node=toon))
+        return Parallel(suitTrack, toonTracks, puddleTracks, soundTracks)
 
 
 def doSongAndDance(attack):
