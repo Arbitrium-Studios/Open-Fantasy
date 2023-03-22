@@ -1079,6 +1079,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
                'SongAndDance': ('song-and-dance', ATK_TGT_GROUP),
                'SpeedDial': ('phone', ATK_TGT_SINGLE),
                'Spin': ('magic3', ATK_TGT_SINGLE),
+               'Stomper': ('effort', ATK_TGT_SINGLE),
                'Synergy': ('magic3', ATK_TGT_GROUP),
                'Tabulate': ('phone', ATK_TGT_SINGLE),
                'TeeOff': ('golf-club-swing', ATK_TGT_SINGLE),
@@ -1153,6 +1154,7 @@ SHRED = list(SuitAttacks.keys()).index('Shred')
 SONG_AND_DANCE = list(SuitAttacks.keys()).index('SongAndDance')
 SPEED_DIAL = list(SuitAttacks.keys()).index('SpeedDial')
 SPIN = list(SuitAttacks.keys()).index('Spin')
+STOMPER = list(SuitAttacks.keys()).index('Stomper')
 SYNERGY = list(SuitAttacks.keys()).index('Synergy')
 TABULATE = list(SuitAttacks.keys()).index('Tabulate')
 TEE_OFF = list(SuitAttacks.keys()).index('TeeOff')

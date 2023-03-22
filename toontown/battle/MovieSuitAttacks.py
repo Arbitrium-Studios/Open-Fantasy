@@ -244,6 +244,8 @@ def doSuitAttack(attack):
         suitTrack = doSpeedDial(attack)
     elif name == SPIN:
         suitTrack = doSpin(attack)
+    elif name == STOMPER:
+        suitTrack = doDefault(attack)
     elif name == SYNERGY:
         suitTrack = doSynergy(attack)
     elif name == TABULATE:
