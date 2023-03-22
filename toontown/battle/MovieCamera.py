@@ -533,6 +533,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=1.4))
     elif name == SPIN:
         camTrack.append(defaultCamera(openShotDuration=1.7))
+    elif name == STOMPER:
+        camTrack.append(defaultCamera(openShotDuration=0.9))
     elif name == SYNERGY:
         camTrack.append(defaultCamera(openShotDuration=1.7))
     elif name == TABULATE:
