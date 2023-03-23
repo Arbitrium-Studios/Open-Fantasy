@@ -661,6 +661,7 @@ def doDefault(attack):
             attack['id'] = POWER_TRIP
             attack['name'] = 'PowerTrip'
             attack['animName'] = 'magic1'
+            return doPowerTrip(attack)
         elif suitName == 'lc':
             attack['id'] = STOMPER
             attack['group'] = ATK_TGT_GROUP
