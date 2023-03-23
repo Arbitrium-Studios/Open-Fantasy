@@ -955,17 +955,13 @@ def getToonTakeDamageTrack(toon, died, dmg, delay, damageAnimNames=None, spliced
         for d in damageAnimNames:
             toonTrack.append(ActorInterval(toon, d))
 
-        indicatorTrack = Sequence(
-            Wait(delay + showDamageExtraTime),
-            Func(__doDamage, toon, dmg, died)
-        )
     else:
         splicedAnims = getSplicedAnimsTrack(splicedDamageAnims, actor=toon)
         toonTrack.append(splicedAnims)
-        indicatorTrack = Sequence(
-            Wait(delay + showDamageExtraTime),
-            Func(__doDamage, toon, dmg, died)
-        )
+    indicatorTrack = Sequence(
+        Wait(delay + showDamageExtraTime),
+        Func(__doDamage, toon, dmg, died)
+    )
     toonTrack.append(Func(toon.loop, 'neutral'))
     if died:
         toonTrack.append(Wait(5.0))
