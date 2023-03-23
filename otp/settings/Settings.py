@@ -6,6 +6,8 @@ class Settings:
 
     def __init__(self):
         self.__settings = {}
+        if not os.path.exists('user/'):
+            os.mkdir('user/')
         self.__filename = 'user/preferences.json'
 
     def doSavedSettingsExist(self):
