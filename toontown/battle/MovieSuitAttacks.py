@@ -3441,83 +3441,167 @@ def doSongAndDance(attack):
 def doStomper(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
-    if suit.getStyleDept() == 'l':
-        stomper = loader.loadModel('phase_11/models/lawbotHQ/LB_square_stomper')
-    else:
-        stomper = loader.loadModel('phase_9/models/cogHQ/square_stomper')
-    shaft = stomper.find('**/shaft')
-    shaft.setScale(0.75, 15.0, 0.75)
-    suitTrack = getSuitTrack(attack)
-    stomperPrepare = SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_switch_depressed.ogg'), node=stomper)
-    stomperPrepareTime = stomperPrepare.getDuration()
-    stomperLift = SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_stomper_raise.ogg'), node=stomper)
-    stomperLiftTime = stomperLift.getDuration()
-    smoke = loader.loadModel('phase_4/models/props/test_clouds')
-    smoke.reparentTo(toon)
-    smoke.setScale(0.5)
-    smoke.setColor(0.8, 0.7, 0.5, 1)
-    smoke.hide()
-    smoke.setBillboardPointEye()
-    stomperTrack = Sequence(
-        Parallel(
-            getPropAppearTrack(stomper, battle, [Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ() + 15), VBase3(0, 270, 0)], 0.0, Point3(1.5, 1, 1.5), stomperPrepareTime),
-            stomperPrepare
-        ),
-        LerpPosInterval(stomper, 0.25, Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ())),
-        Parallel(
-            SoundInterval(globalBattleSoundCache.getSound('CHQ_FACT_stomper_small.ogg'), node=stomper),
-            Sequence(
-                Wait(1.0),
-                Parallel(
-                    stomperLift,
-                    LerpPosInterval(stomper, stomperLiftTime, Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ() + 15))
-                ),
-                LerpScaleInterval(stomper, 1.5, Point3(0.0, 0.0, 0.0))
-            ),
-            Sequence(
-                Func(smoke.show),
-                Parallel(
-                    LerpScaleInterval(smoke, 0.5, 1),
-                    LerpColorScaleInterval(smoke, 0.5, Vec4(0.8, 0.7, 0.5, 0))
-                ),
-                Func(smoke.hide)
-            )
-        ),
-        Func(MovieUtil.removeProp, stomper)
-    )
-    if dmg > 0:
-        toonTrack = Sequence(
-            Func(toon.headsUp, battle, suit.getPos(battle)),
-            Wait(stomperPrepareTime + 0.25),
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        dmg = target['hp']
+        if suit.getStyleDept() == 'l':
+            stomper = loader.loadModel('phase_11/models/lawbotHQ/LB_square_stomper')
+        else:
+            stomper = loader.loadModel('phase_9/models/cogHQ/square_stomper')
+        shaft = stomper.find('**/shaft')
+        shaft.setScale(0.75, 15.0, 0.75)
+        suitTrack = getSuitTrack(attack)
+        stomperPrepare = SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_switch_depressed.ogg'), node=stomper)
+        stomperPrepareTime = stomperPrepare.getDuration()
+        stomperLift = SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_stomper_raise.ogg'), node=stomper)
+        stomperLiftTime = stomperLift.getDuration()
+        smoke = loader.loadModel('phase_4/models/props/test_clouds')
+        smoke.reparentTo(toon)
+        smoke.setScale(0.5)
+        smoke.setColor(0.8, 0.7, 0.5, 1)
+        smoke.hide()
+        smoke.setBillboardPointEye()
+        stomperTrack = Sequence(
             Parallel(
-                Func(toon.enterFlattened),
-                Func(toon.showHpText, -dmg, openEnded=0),
-                Func(__doDamage, toon, dmg, target['died'])
+                getPropAppearTrack(stomper, battle, [Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ() + 15), VBase3(0, 270, 0)], 0.0, Point3(1.5, 1, 1.5), stomperPrepareTime),
+                stomperPrepare
             ),
-            Wait(2.5),
+            LerpPosInterval(stomper, 0.25, Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ())),
             Parallel(
+                SoundInterval(globalBattleSoundCache.getSound('CHQ_FACT_stomper_small.ogg'), node=stomper),
                 Sequence(
-                    Wait(0.5),
-                    Func(toon.exitFlattened)
+                    Wait(1.0),
+                    Parallel(
+                        stomperLift,
+                        LerpPosInterval(stomper, stomperLiftTime, Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ() + 15))
+                    ),
+                    LerpScaleInterval(stomper, 1.5, Point3(0.0, 0.0, 0.0))
                 ),
-                SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/toon_decompress.ogg'), node=toon),
                 Sequence(
-                    ActorInterval(toon, 'jump'),
-                    Func(toon.loop, 'neutral')
+                    Func(smoke.show),
+                    Parallel(
+                        LerpScaleInterval(smoke, 0.5, 1),
+                        LerpColorScaleInterval(smoke, 0.5, Vec4(0.8, 0.7, 0.5, 0))
+                    ),
+                    Func(smoke.hide)
+                )
+            ),
+            Func(MovieUtil.removeProp, stomper)
+        )
+        if dmg > 0:
+            toonTrack = Sequence(
+                Func(toon.headsUp, battle, suit.getPos(battle)),
+                Wait(stomperPrepareTime + 0.25),
+                Parallel(
+                    Func(toon.enterFlattened),
+                    Func(toon.showHpText, -dmg, openEnded=0),
+                    Func(__doDamage, toon, dmg, target['died'])
+                ),
+                Wait(2.5),
+                Parallel(
+                    Sequence(
+                        Wait(0.5),
+                        Func(toon.exitFlattened)
+                    ),
+                    SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/toon_decompress.ogg'), node=toon),
+                    Sequence(
+                        ActorInterval(toon, 'jump'),
+                        Func(toon.loop, 'neutral')
+                    )
                 )
             )
-        )
-        if target['died']:
-            toonTrack.append(Wait(5.0))
+            if target['died']:
+                toonTrack.append(Wait(5.0))
+        else:
+            toonTrack = Sequence(
+                Func(toon.headsUp, battle, suit.getPos(battle)),
+                getToonDodgeTrack(target, 0.9, ['sidestep'], None, 0.5)
+            )
+        return Parallel(suitTrack, stomperTrack, toonTrack)
     else:
-        toonTrack = Sequence(
-            Func(toon.headsUp, battle, suit.getPos(battle)),
-            getToonDodgeTrack(target, 0.9, ['sidestep'], None, 0.5)
-        )
-    return Parallel(suitTrack, stomperTrack, toonTrack)
+        targets = attack['target']
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        stomperTracks = Parallel()
+        toonTracks = Parallel()
+        for t in targets:
+            toon = t['toon']
+            dmg = t['hp']
+            if suit.getStyleDept() == 'l':
+                stomper = loader.loadModel('phase_11/models/lawbotHQ/LB_square_stomper')
+            else:
+                stomper = loader.loadModel('phase_9/models/cogHQ/square_stomper')
+            shaft = stomper.find('**/shaft')
+            shaft.setScale(0.75, 15.0, 0.75)
+            stomperPrepare = SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_switch_depressed.ogg'), node=stomper)
+            stomperPrepareTime = stomperPrepare.getDuration()
+            stomperLift = SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/CHQ_FACT_stomper_raise.ogg'), node=stomper)
+            stomperLiftTime = stomperLift.getDuration()
+            smoke = loader.loadModel('phase_4/models/props/test_clouds')
+            smoke.reparentTo(toon)
+            smoke.setScale(0.5)
+            smoke.setColor(0.8, 0.7, 0.5, 1)
+            smoke.hide()
+            smoke.setBillboardPointEye()
+            stomperTrack = Sequence(
+                Parallel(
+                    getPropAppearTrack(stomper, battle, [Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ() + 15), VBase3(0, 270, 0)], 0.0, Point3(1.5, 1, 1.5), stomperPrepareTime),
+                    stomperPrepare
+                ),
+                LerpPosInterval(stomper, 0.25, Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ())),
+                Parallel(
+                    SoundInterval(globalBattleSoundCache.getSound('CHQ_FACT_stomper_small.ogg'), node=stomper),
+                    Sequence(
+                        Wait(1.0),
+                        Parallel(
+                            stomperLift,
+                            LerpPosInterval(stomper, stomperLiftTime, Point3(toon.getPos(battle).getX(), toon.getPos(battle).getY(), toon.getPos(battle).getZ() + 15))
+                        ),
+                        LerpScaleInterval(stomper, 1.5, Point3(0.0, 0.0, 0.0))
+                    ),
+                    Sequence(
+                        Func(smoke.show),
+                        Parallel(
+                            LerpScaleInterval(smoke, 0.5, 1),
+                            LerpColorScaleInterval(smoke, 0.5, Vec4(0.8, 0.7, 0.5, 0))
+                        ),
+                        Func(smoke.hide)
+                    )
+                ),
+                Func(MovieUtil.removeProp, stomper)
+            )
+            stomperTracks.append(stomperTrack)
+            if dmg > 0:
+                toonTrack = Sequence(
+                    Func(toon.headsUp, battle, suit.getPos(battle)),
+                    Wait(stomperPrepareTime + 0.25),
+                    Parallel(
+                        Func(toon.enterFlattened),
+                        Func(toon.showHpText, -dmg, openEnded=0),
+                        Func(__doDamage, toon, dmg, target['died'])
+                    ),
+                    Wait(2.5),
+                    Parallel(
+                        Sequence(
+                            Wait(0.5),
+                            Func(toon.exitFlattened)
+                        ),
+                        SoundInterval(base.loader.loadSfx('phase_9/audio/sfx/toon_decompress.ogg'), node=toon),
+                        Sequence(
+                            ActorInterval(toon, 'jump'),
+                            Func(toon.loop, 'neutral')
+                        )
+                    )
+                )
+                if target['died']:
+                    toonTrack.append(Wait(5.0))
+            else:
+                toonTrack = Sequence(
+                    Func(toon.headsUp, battle, suit.getPos(battle)),
+                    getToonDodgeTrack(target, 0.9, ['sidestep'], None, 0.5)
+                )
+            toonTracks.append(toonTrack)
+        return Parallel(suitTrack, stomperTracks, toonTracks)
 
 
 def getThrowEndPoint(suit, toon, battle, whichBounce):
