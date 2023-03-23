@@ -601,6 +601,12 @@ def doDefault(attack):
             attack['name'] = 'SongAndDance'
             attack['animName'] = 'song-and-dance'
             return doSongAndDance(attack)
+        elif suitName == 'ff':
+            attack['id'] = STOMPER
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'Stomper'
+            attack['animName'] = 'effort'
+            return doStomper(attack)
         elif suitName == 'sc':
             attack['id'] = FREEZE_ASSETS
             attack['group'] = ATK_TGT_GROUP
@@ -655,6 +661,12 @@ def doDefault(attack):
             attack['id'] = POWER_TRIP
             attack['name'] = 'PowerTrip'
             attack['animName'] = 'magic1'
+        elif suitName == 'lc':
+            attack['id'] = STOMPER
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'Stomper'
+            attack['animName'] = 'effort'
+            return doStomper(attack)
         else:
             attack['id'] = TRIP
             attack['name'] = 'Trip'
