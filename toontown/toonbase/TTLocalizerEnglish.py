@@ -3414,10 +3414,10 @@ SharedChatterComments = ["That's a great name, %.",
                          "I think I'll go fishing this afternoon.",
                          'Have fun in my neighborhood.',
                          'I hope you are enjoying your stay in Toontown!',
-                         "I heard it's snowing at the Brrrgh.",
+                         "I heard it's snowing at Tundra Wonderland.",
                          'Have you ridden the trolley today?',
                          'I like to meet new people.',
-                         'Wow, there are lots of ' + Cogs + ' in the Brrrgh.',
+                         'Wow, there are lots of ' + Cogs + ' in Tundra Wonderland.',
                          'I love to play tag. Do you?',
                          'Trolley games are fun to play.',
                          'I like to make people laugh.',
@@ -3744,7 +3744,7 @@ GoofyChatter = (['Welcome to ' + lFloweringGrove + '.', 'Hi, my name is ' + Goof
                                                                                                                                           "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
                                                                                                                                           'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lToontownsShipyard + '.',
                                                                                                                                           'It looks like ' + Daisy + ' has planted some new flowers in her garden.',
-                                                                                                                                          'At the Brrrgh branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
+                                                                                                                                          'At Tundra Wonderland branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                                           "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                                           "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ["I'm going to Melody Land to see %s!" % Mickey,
                                                                                                                                                                                                                                                           "Gosh, I'm late for my game with %s!" % Donald,
@@ -3775,7 +3775,7 @@ DowntownToontownChatter = (['Welcome to ' + lDowntownToontown + '.', 'Hi, my nam
                                                                                                                                                    'If you see my friend ' + Mickey + ', say hi to him for me.',
                                                                                                                                                    "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
                                                                                                                                                    'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lToontownsShipyard + '.',
-                                                                                                                                                   'At the Brrrgh branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
+                                                                                                                                                   'At Tundra Wonderland branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                                                    "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                                                    "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ["I'm going to Melody Land to see %s!" % Mickey,
                                                                                                                                                                                                                                                                    "Gosh, I'm late for my game with %s!" % Donald,
@@ -4050,7 +4050,7 @@ CLDowntownToontownChatter = (['Welcome to ' + lDowntownToontown + '.',
                                                                                                                   'If you see my friend ' + Mickey + ', say hi to him for me.',
                                                                                                                   "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
                                                                                                                   'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lToontownsShipyard + '.',
-                                                                                                                  'At the Brrrgh branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
+                                                                                                                  'At Tundra Wonderland branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                   "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                   "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ['I better go get my kart a new paint job for the upcoming Grand Prix Weekend.',
                                                                                                                                                                                                                                   "Gosh, I better get workin' on this broken Leaderboard!",
@@ -4071,7 +4071,7 @@ GPDowntownToontownChatter = (['Welcome to ' + lDowntownToontown + '.',
                                                                 'If you see my friend ' + Mickey + ", tell him he's missing some great racing!",
                                                                 "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
                                                                 'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lToontownsShipyard + '.',
-                                                                'At the Brrrgh branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
+                                                                'At Tundra Wonderland branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                 "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                 "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ['Good luck in the Grand Prix!',
                                                                                                                                                                                 "I'm going to catch the next race in the Grand Prix!",
@@ -4506,7 +4506,7 @@ MusicEncntrGeneralBgIndoor = 'Building Excitement'
 MusicTtElevator = 'Going Up?'
 MusicEncntrToonWinningIndoor = 'Toons Unite!'
 MusicEncntrGeneralSuitWinningIndoor = 'Cog-tastrophe!'
-MusicTbNbrhood = 'The Brrrgh'
+MusicTbNbrhood = 'Tundra Wonderland'
 MusicDlNbrhood = "Drowsy Dreamland"
 MusicDlSzActivity = 'Counting Sheep'
 MusicDgSz = 'Waltz of the Flowers'
@@ -8525,10 +8525,10 @@ TipDict = {TIP_NONE: ('',),
                          'Pet Shops get new Doodles to sell every day.',
                          'Visit the Pet Shops every day to see what new Doodles they have.',
                          'Different neighborhoods have different Doodles offered for adoption.',
-                         "Show off your stylin' ride and turbo-boost your Laff limit at Goofy Speedway.",
-                         'Enter Goofy Speedway through the tire-shaped tunnel in Toontropolis Plaza Playground.',
-                         'Earn Laff points at Goofy Speedway.',
-                         'Goofy Speedway has six different race tracks. '),
+                         "Show off your stylin' ride and turbo-boost your Laff limit at Downtown Toontown.",
+                         'Enter Downtown Toontown through the tire-shaped tunnel in Toontropolis Plaza Playground.',
+                         'Earn Laff points at Downtown Toontown.',
+                         'Downtown Toontown has six different race tracks. '),
            TIP_STREET: ('There are four types of Cogs: Lawbots, Cashbots, Sellbots, and Bossbots.',
                         'Each Gag Track has different amounts of accuracy and damage.',
                         'Sound gags will affect all Cogs but will wake up any lured Cogs.',
@@ -8644,15 +8644,15 @@ TipDict = {TIP_NONE: ('',),
                         'Did you know the color of your house matches the color of your Pick-A-Toon panel?'),
            TIP_KARTING: ("Buy a Roadster, TUV, or Cruiser kart in Goofy's Auto Shop.",
                          "Customize your kart with decals, rims and more in Goofy's Auto Shop.",
-                         'Earn tickets by kart racing at Goofy Speedway.',
+                         'Earn tickets by kart racing at Downtown Toontown.',
                          "Tickets are the only currency accepted at Goofy's Auto Shop.",
                          'Tickets are required as deposits to race.',
                          'A special page in the Shticker Book allows you to customize your kart.',
                          'A special page in the Shticker Book allows you to view records on each track.',
                          'A special page in the Shticker Book allows you to display trophies.',
-                         'Screwball Stadium is the easiest track at Goofy Speedway.',
-                         'Airborne Acres has the most hills and jumps of any track at Goofy Speedway.',
-                         'Blizzard Boulevard is the most challenging track at Goofy Speedway.'),
+                         'Screwball Stadium is the easiest track at Downtown Toontown.',
+                         'Airborne Acres has the most hills and jumps of any track at Downtown Toontown.',
+                         'Blizzard Boulevard is the most challenging track at Downtown Toontown.'),
            TIP_GOLF: ('Press the Tab key to see a top view of the golf course.', 'Press the Up Arrow key to point yourself towards the golf hole.', 'Swinging the club is just like throwing a pie.')}
 FishGenusNames = {0: 'Balloon Fish',
                   2: 'Cat Fish',
@@ -9117,9 +9117,9 @@ KartRace_RaceTimeoutNoRefund = 'You timed out of that race.  Your tickets have n
 KartRace_RacerTooSlow = 'You took too long to finish the race.  Your tickets have not been refunded.  Keep trying!'
 KartRace_PhotoFinish = 'Photo Finish!'
 KartRace_CircuitPoints = 'Circuit Points'
-CircuitRaceStart = 'The Toontown Grand Prix at Goofy Speedway is about to begin!  To win, collect the most points in three consecutive races!'
+CircuitRaceStart = 'The Toontown Grand Prix at Downtown Toontown is about to begin!  To win, collect the most points in three consecutive races!'
 CircuitRaceOngoing = 'Welcome! The Toontown Grand Prix is currently in progress.'
-CircuitRaceEnd = "That's all for today's Toontown Grand Prix at Goofy Speedway.  See you next week!"
+CircuitRaceEnd = "That's all for today's Toontown Grand Prix at Downtown Toontown.  See you next week!"
 TrickOrTreatMsg = 'You have already\nfound this treat!'
 WinterCarolingMsg = 'You have already been caroling here!'
 LawbotBossTempIntro0 = "Hmmm what's on the docket today?"
@@ -9628,7 +9628,7 @@ MoreXpHolidayEnd = 'Exclusive Test Toon double gag experience time has ended. Th
 JellybeanDayHolidayStart = "It's Jellybean Day! Get Double Jellybean rewards at Parties!"
 JellybeanDayHolidayEnd = "That's all for Jellybean Day. See you next year."
 PartyRewardDoubledJellybean = 'Double Jellybeans!'
-GrandPrixWeekendHolidayStart = "It's Grand Prix Weekend at Goofy Speedway! Free and paid players collect the most points in three consecutive races."
+GrandPrixWeekendHolidayStart = "It's Grand Prix Weekend at Downtown Toontown! Free and paid players collect the most points in three consecutive races."
 GrandPrixWeekendHolidayEnd = "That's all for Grand Prix Weekend. See you next year."
 KartRace_DoubleTickets = 'Double Tickets'
 SellbotNerfHolidayStart = 'Operation: Storm Sellbot is happening now! Battle the VP today!'
@@ -9654,7 +9654,7 @@ WinterDecorationsEnd = 'Winter Holiday is over - Happy New Year!'
 WackyWinterDecorationsStart = 'Brrr! Silly Meter goes from silly to chilly!'
 WinterCarolingStart = 'Caroling has come to Toontown. Sing for your Snowman Head - see the Blog for details!'
 ExpandedClosetsStart = 'Attention Toons: For a limited time, Members can purchase the new 50 item Closet from the Cattlelog for the low price of 50 Jellybeans!'
-KartingTicketsHolidayStart = 'Get double tickets from Practice races at Goofy Speedway today!'
+KartingTicketsHolidayStart = 'Get double tickets from Practice races at Downtown Toontown today!'
 IdesOfMarchStart = 'Toons go GREEN!'
 LogoutForced = 'You have done something wrong\n and are being logged out automatically,\n additionally your account may be frozen.\n Try going on a walk outside, it is fun.'
 CountryClubToonEnterElevator = '%s \nhas jumped in the golf kart.'
@@ -9887,8 +9887,8 @@ HolidayNamesInCalendar = {1: ('Summer Fireworks', 'Celebrate Summer with a firew
                           8: ('Toon Species Election', 'Vote on the new Toon species! Will it be Goat? Will it be Pig?'),
                           9: ('Black Cat Day', 'Happy Halloween! Create a Toontastic Black Cat Toon - Today Only!'),
                           13: ('Trick or Treat', 'Happy Halloween! Trick or treat throughout Toontown to get a nifty Halloween pumpkin head reward!'),
-                          14: ('Grand Prix', 'Grand Prix Monday at Goofy Speedway! To win, collect the most points in three consecutive races!'),
-                          16: ('Grand Prix Weekend', 'Free and Paid players compete in circuit races at Goofy Speedway!'),
+                          14: ('Grand Prix', 'Grand Prix Monday at Downtown Toontown! To win, collect the most points in three consecutive races!'),
+                          16: ('Grand Prix Weekend', 'Free and Paid players compete in circuit races at Downtown Toontown!'),
                           17: ('Trolley Tracks', 'Trolley Tracks Thursday! Board any Trolley with two or more Toons to play.'),
                           19: ('Silly Saturdays', 'Saturdays are silly with Fish Bingo and Grand Prix throughout the day!'),
                           24: ('Ides of March', 'Beware the Ides of March! Stop the Backstabber Cogs from invading Toontown!'),

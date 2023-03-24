@@ -407,7 +407,7 @@ A possible Easter Egg could happen whenever you're approaching Flippy for the fi
 + Make our own Racoon Toons --Scott/Froge/Anne
 + Crab Toons -- Zachary
 + Skunk Toons -- Scott/Froge/Anne
-+ When signing up to become a Resistance Ranger in Donald's Dreamland, on top of getting a salute, you also get custom Resistance Ranger clothes and accessories in the mail but instead of having you sign up, have it be a part of the taskline where you’re recruited for the Resistance? The stuff is sent in the mail and you go on to fight bigger cogs for later on in the taskline.
++ When signing up to become a Resistance Ranger in Twilight Dreamland, on top of getting a salute, you also get custom Resistance Ranger clothes and accessories in the mail but instead of having you sign up, have it be a part of the taskline where you’re recruited for the Resistance? The stuff is sent in the mail and you go on to fight bigger cogs for later on in the taskline.
 + Talking animations.
 
 Toon Tags Update:
@@ -417,7 +417,7 @@ Toon Tags Update:
 ~ Customizable Toon IDs (Hunter Boppen) but don’t allow people to create a Toontag that’s already taken by someone else. Like a first come first serve basis. -- Zachary
 + Shows who’s staff in the game. Could be a title below the name or a symbol above the name; or a symbol once you click the name tag. -- Revolution
 + Add the ability for the staff and streamers to hide their title or icon on other Toons so that you don’t attract any unwanted attention -- Zachary
-~ Cold callers doing more damage in the Brrrgh. --Flame
+~ Cold callers doing more damage in Tundra Wonderland. --Flame
 + Interactive furniture such as a playable piano -- Sir Fangar and Zachary
 + Cogs that turn their head and look at your Toon when they walk by like what’s in Toontown Frenchy
 + Mounts like hoverboards (Flame) or any mounts to get to places faster, even if it is as weak as driving your car down the street. -- Zachary
@@ -455,7 +455,7 @@ The Toon Tips Update:
     > Add Jellybeans you can earn by completing Toontasks
     > Add Teleport Button to Toontasks
     > Overhaul Map Page to be able to scroll (or click down) to zoom into playgrounds to see streets, buildings, etc
-    > Add a new street and have it lead outside of Toontown Central to an area called Toontropolis: https://github.com/DankMickey/Toontown-2.0-1
+    > Add a new street and have it lead outside of Toontown Plaza to an area called Toontropolis: https://github.com/DankMickey/Toontown-2.0-1
     > Implement this into Open-Fantasy: https://github.com/Toontown-Open-Source-Initiative/Toontown-VP-After-Death
     > Rebalance fishing so it's more fun!
     > Add the playground nametag Depth Mines over the Hills next to Toontown Stadium, TLOM, and CBHQ!
@@ -694,7 +694,7 @@ The Toon Tips Update:
             > Redraw the Street Sign Textures without the Classic Character's Heads.
             > Make the Pointers 3D
         > Remake the Fences to be 3D
-    > Re-rig the doors in Donald's Dreamland to better work with their models.
+    > Re-rig the doors in Twilight Dreamland to better work with their models.
     > When rewriting the taskline, give each Toon their own personality. Flippy is patriotic, Coach Zucchini is well...that should be pretty obvious, and more!
     > Make the Dialog for Toontasks continue after about 15-45 seconds while still allowing slow readers to read.
         > This should make it easy to add voice acting over it if we decide to do so.
@@ -711,12 +711,12 @@ The Toon Tips Update:
             > The playground overtaken by the Guildedbots is the Vibrant Valley Kingdom.
             > The boss should be a unisex king or queen 
     > Playground Updates:
-        > The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Central, Toontown Docks, Construction Zone, Flowering Grove, The Land of Music, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
+        > The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Plaza, Toontown Docks, Construction Zone, Flowering Grove, The Land of Music, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
         > Vibrant Valley Kingdom:
             > This area is accessed in the Prologue at first, it's where your Toon is from and had to escape from as the Cogs attacked during an event called Operation: Takeover.
         > Rework the taskline so it feels less grindy.
-        > Toontown Central:
-                > Replace the 2013 Toontown Central with the 2001 version but add the modern features like the following:
+        > Toontown Plaza:
+                > Replace the 2013 Toontown Plaza with the 2001 version but add the modern features like the following:
                     > Change the tunnels locations to the streets from direct links between playgrounds.
                     > Toontown School House
                         > Make the building look like a school like the Prolouge of ODS but change it up to look less like an Estate.
@@ -726,8 +726,8 @@ The Toon Tips Update:
                         > Redesign the interior to look like a Bank.
                         > Make Banker Bob function like a bank.
                     > Toon Headquarters
-                    > A street between the Flowering Grove and Toontown Central called "Wacky Avenue".
-                    > This street should be more of a sub-playground that links Toontown Central with Toontown Central, Tutorial Terrace, and the Flowering Grove.
+                    > A street between the Flowering Grove and Toontown Plaza called "Wacky Avenue".
+                    > This street should be more of a sub-playground that links Toontown Plaza with Toontown Plaza, Tutorial Terrace, and the Flowering Grove.
                     > This fixture should also be added to the map.
         > Toontown Docks:
             > Model the playground after the 2001 design with water leading out to sea.

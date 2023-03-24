@@ -70,7 +70,7 @@ class DiscordRPC(object):
 
         16000: ["toon-estate", "At A Toon Estate"],
 
-        17000: ['fantasy-golf', "In the Fantasy Mini-Golf Area"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontropolis Stadium
+        17000: ['fantasy-golf', "In the Fantasy Mini-Golf Area"], # Remove this once we've begun merging Downtown Toontown and the Mini-Golf Area into Toontropolis Stadium
 
     }
 
