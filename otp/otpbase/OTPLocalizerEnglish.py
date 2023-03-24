@@ -8,7 +8,7 @@ lToontownsShipyard = "Toontown's Shipyard"
 lTwilightDreamland = "Twilight Dreamland"
 lTheLandOfMusic = "The Land of Melody"
 lToontownPlaza = 'Toontown Plaza'
-lDowntownToontropolis = 'Toontropolis City Stadium'
+lDowntownToontown = 'Toontown City Stadium'
 lAcornAcres = "Acorn Acres"
 lGolfZone = "Fantasy Mini-Golf"
 lCancel = 'Cancel'
@@ -994,7 +994,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1108: "Let's go to %s!" % lFloweringGrove,
                                1109: "Let's go to %s!" % lTundraWonderland,
                                1110: "Let's go to %s!" % lTwilightDreamland,
-                               1111: "Let's go to %s!" % lDowntownToontropolis,
+                               1111: "Let's go to %s!" % lDowntownToontown,
                                1112: "Let's go to my house!",
                                1113: "Let's go to your house!",
                                1114: "Let's go to Sellbot Headquarters!",

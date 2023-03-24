@@ -690,7 +690,7 @@ The Toon Tips Update:
             > The playground overtaken by the Guildedbots is the Vibrant Valley Kingdom.
             > The boss should be a unisex king or queen 
     > Playground Updates:
-        > The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Plaza, Toontown Docks, Construction Zone, Flowering Grove, The Land of Music, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
+        > The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Plaza, Toontown Shipyard, Construction Zone, Flowering Grove, The Land of Music, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
         > Vibrant Valley Kingdom:
             > This area is accessed in the Prologue at first, it's where your Toon is from and had to escape from as the Cogs attacked during an event called Operation: Takeover.
         > Rework the taskline so it feels less grindy.
@@ -708,7 +708,7 @@ The Toon Tips Update:
                     > A street between the Flowering Grove and Toontown Plaza called "Wacky Avenue".
                     > This street should be more of a sub-playground that links Toontown Plaza with Toontown Plaza, Tutorial Terrace, and the Flowering Grove.
                     > This fixture should also be added to the map.
-        > Toontown Docks:
+        > Toontown Shipyard:
             > Model the playground after the 2001 design with water leading out to sea.
                 > There should be a barrier where you swim so you don't swim out too far.
             > The boat should be docked in one of the piers (for use at a later date.)
@@ -719,7 +719,7 @@ The Toon Tips Update:
             > Add Clothing Store.
             > Add Tunnels.
                 > Peanut Avenue which leads to the Flowering Grove
-                > Walnut Way which leads to Toontown Docks
+                > Walnut Way which leads to Toontown Shipyard
                 > Acorn Road which leads to Mount Toontown
                 > Cashew Lane which leads to the Execubot Headquarters' Street
             > Remove Chip 'N Dales' Mini-Golf Tunnel since that will be added into Toontown Stadium as an Activity.
@@ -787,7 +787,7 @@ The Toon Tips Update:
             > Expand upon the mountainous area to the edge of the main map.
             > Put the Toontown Mini-Golf Tunnel on the other side, adjacent to the Mountainous Fixture.
             > Add the tunnel to the Flowering Grove.
-        > Toontown Docks:
+        > Toontown Shipyard:
             > Combine the Dock fixtures for all streets
             > Extend the Docks to include a Pier
         > Downtown Toontown: 

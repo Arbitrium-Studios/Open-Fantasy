@@ -3794,7 +3794,7 @@ SuperGoofyChatter = (['Welcome to my Super Speedway!',
                                                "It's fun to dress up for Halloween!",
                                                'I hope you are enjoying our Halloween fun!'], ['Gotta fly!',
                                                                                                'Hi-Ho and away I go!',
-                                                                                               "Should I fly or drive to Toontropolis Ship Yard?",
+                                                                                               "Should I fly or drive to Toontown Shipyard?",
                                                                                                'Gawrsh, have a Happy Halloween!'])
 DonaldChatter = (['Welcome to Dreamland.', "Hi, my name is %s. What's yours?" % Donald], ['Sometimes this place gives me the creeps.',
                                                                                           'Be sure and try the maze in ' + lFloweringGrove + '.',
@@ -4475,7 +4475,7 @@ MusicCreateAToon = 'The New Toon in Town'
 MusicTtTheme = 'The Toontown Theme'
 MusicMinigameRace = 'Slow and Steady'
 MusicMgPairing = 'Remember Me?'
-MusicTcNbrhood = 'Toontropolis Plaza'
+MusicTcNbrhood = 'Toontown Plaza'
 MusicMgDiving = 'Treasure Lullaby'
 MusicMgCannonGame = 'Fire the Cannons!'
 MusicMgTwodgame = 'Running Toon'
@@ -4499,7 +4499,7 @@ MusicGsRaceRr = 'Route 66'
 MusicGzSz = 'The Putt-Putt Polka'
 MusicMmSz = 'Dancing in the Streets'
 MusicMmSzActivity = 'Here Comes Treble'
-MusicDdNbrhood = "Toontown Docks"
+MusicDdNbrhood = "Toontown Shipyard"
 MusicGsKartshop = 'Mr. Goofywrench'
 MusicDdSzActivity = 'Sea Shanty'
 MusicEncntrGeneralBgIndoor = 'Building Excitement'
@@ -5563,7 +5563,7 @@ ColorShopAll = 'Single Color'
 ClothesShopShorts = 'Shorts'
 ClothesShopShirt = 'Shirts'
 ClothesShopBottoms = 'Bottoms'
-PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontropolis Plaza?"
+PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontown Plaza?"
 MakeAToonSkipTutorial = 'Skip Toontorial'
 MakeAToonEnterTutorial = 'Enter Toontorial'
 MakeAToonDone = 'Done'
@@ -8525,7 +8525,7 @@ TipDict = {TIP_NONE: ('',),
                          'Visit the Pet Shops every day to see what new Doodles they have.',
                          'Different neighborhoods have different Doodles offered for adoption.',
                          "Show off your stylin' ride and turbo-boost your Laff limit at Downtown Toontown.",
-                         'Enter Downtown Toontown through the tire-shaped tunnel in Toontropolis Plaza Playground.',
+                         'Enter Downtown Toontown through the tire-shaped tunnel in Toontown Plaza Playground.',
                          'Earn Laff points at Downtown Toontown.',
                          'Downtown Toontown has six different race tracks. '),
            TIP_STREET: ('There are four types of Cogs: Lawbots, Cashbots, Sellbots, and Bossbots.',
