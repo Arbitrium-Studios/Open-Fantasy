@@ -1682,16 +1682,3 @@ BugReportSite = 'https://www.github.com/ThePlayerZero/Open-Fantasy/issues/new'
 
 
 openDiscord = 'https://discord.com/invite/5xmBA8stzY'
-
-# TELEPORT_BUTTON_DEFAULT_COST = 50
-# TELEPORT_BUTTON_COSTS = {
-#  ToontownPlaza: 5,
-#  ToontownsShipyard: 15,
-#  FloweringGrove: 30,
-#  TheLandOfMusic: 45,
-#  TundraWonderland: 60,
-#  TwilightDreamland: 75
-# }
-
-# def getTeleportButtonCost(hoodId):
-#     return TELEPORT_BUTTON_COSTS.get(hoodId, TELEPORT_BUTTON_DEFAULT_COST)

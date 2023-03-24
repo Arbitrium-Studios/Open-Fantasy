@@ -4883,6 +4883,7 @@ CdrResultAlreadyBeingWorn = "You've already received this item, and you are wear
 CdrResultAlreadyReceived = "You've already received this item."
 CdrResultTooManyFails = "We're sorry. You've tried to enter an incorrect code too many times. Please try again after some time."
 CdrResultServiceUnavailable = "We're sorry. This feature is temporarily unavailable. Please try again during your next login."
+ExtraOptionsPageTitle = "More Options"
 TrackPageTitle = 'Gag Track Training'
 TrackPageShortTitle = 'Gag Training'
 TrackPageSubtitle = 'Complete ToonTasks to learn how to use new gags!'
@@ -8500,7 +8501,7 @@ TipDict = {TIP_NONE: ('',),
                          'Some SpeedChat phrases play emotion animations on your Toon.',
                          'If the area you are in is crowded, try changing Districts. Go to the District Page in the Shticker Book and select a different one.',
                          'If you actively rescue buildings you will get a bronze, silver, or gold star above your Toon.',
-                         'If you rescue enough buildings to get a star above your head you may find your name on the blackboard in a Toon HQ.',
+                         'If you rescue enough buildings to get a star above your head and you may find your name on the blackboard in a Toon HQ.',
                          'Rescued buildings are sometimes recaptured by the Cogs. The only way to keep your star is to go out and rescue more buildings!',
                          'The names of your True Friends will appear in Blue.',
                          'See if you can collect all the fish in Toontown!',

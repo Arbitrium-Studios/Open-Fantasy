@@ -1,5 +1,5 @@
 # Window Settings
-window-title Toontown Fantasy
+window-title [DEV] Toontown Fantasy
 icon-filename phase_3/models/gui/toontown.ico
 cursor-filename phase_3/models/gui/toonmono.cur
 
@@ -19,7 +19,7 @@ default-model-extension .bam
 vfs-case-sensitive 0
 
 # Server Settings
-server-version Fantasy-v1.0.0
+server-version TTFan-dev-0.0.1
 server-failover 80 443
 tt-specific-login 1
 # If true, individual TCP packets are not sent immediately, but rather they are collected together and accumulated to be sent periodically as one larger TCP packet.  This cuts down on overhead from the TCP/IP protocol, especially if many small packets need to be sent on the same connection, but it introduces additional latency (since packets must be held before they can be sent).

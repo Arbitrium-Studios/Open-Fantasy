@@ -44,7 +44,7 @@ DirectGuiGlobals.setDefaultFontFunc(ToontownGlobals.getInterfaceFont)
 launcher.setPandaErrorCode(7)
 from . import ToonBase
 ToonBase.ToonBase()
-from toontown.rpc.DiscordRPC import DiscordRPC
+from toontown.discord.DiscordRPC import DiscordRPC
 builtins.Discord = DiscordRPC()
 Discord.launching()
 if base.win is None:

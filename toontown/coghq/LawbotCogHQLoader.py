@@ -42,6 +42,7 @@ class LawbotCogHQLoader(CogHQLoader.CogHQLoader):
         return
 
     def load(self, zoneId):
+        Discord.setZone(self.hood.id)
         CogHQLoader.CogHQLoader.load(self, zoneId)
         Toon.loadSellbotHQAnims()
 
