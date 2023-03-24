@@ -5,18 +5,16 @@ from direct.task import Task
 from pypresence import Presence
 class DiscordRPC(object):
 
-    docksList=["oneDocks", "twoDocks", "threeDocks"]
-    toontownDocks=random.choice(docksList)
     zone2imgdesc = { # A dict of ZoneID -> An image and a description
-        1000: [toontownDocks, "In Toontropolis Docks"],
-        1100: [toontownDocks, "On Barnacle Boulevard"],
-        1200: [toontownDocks, "On Seaweed Street"],
-        1300: [toontownDocks, "On Lighthouse Lane"],
+        1000: ["toontown-shipyard", "In Toontown Shipyard"],
+        1100: ["toontown-shipyard", "On Barnacle Boulevard"],
+        1200: ["toontown-shipyard", "On Seaweed Street"],
+        1300: ["toontown-shipyard", "On Lighthouse Lane"],
 
-        2000: ["toontown-central", "In Toontropolis Central"],
-        2100: ["toontown-central", "On Silly Street"],
-        2200: ["toontown-central", "On Loopy Lane"],
-        2300: ["toontown-central", "On Punchline Place"],
+        2000: ["toontown-plaza", "In Toontropolis Central"],
+        2100: ["toontown-plaza", "On Silly Street"],
+        2200: ["toontown-plaza", "On Loopy Lane"],
+        2300: ["toontown-plaza", "On Punchline Place"],
 
         3000: ["tundra-wonderland", "In Tundra Wonderland"],
         3100: ["tundra-wonderland", "On Walrus Way"],
@@ -69,11 +67,11 @@ class DiscordRPC(object):
         13500: ["lawbot-hq", "In The Lawbot Office C"],
         13600: ["lawbot-hq", "In The Lawbot Office D"],
 
-        14000: ["tutorial", "In The Toontorial"],
+        14000: ["toontorial-terrace", "In The Toontorial"],
 
-        16000: ["estate", "At A Toon Estate"],
+        16000: ["toon-estate", "At A Toon Estate"],
 
-        17000: ['golf', "In Acorn Acres's Mini-Golf"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontropolis Stadium
+        17000: ['fantasy-golf', "In the Fantasy Mini-Golf Area"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontropolis Stadium
 
     }
 
