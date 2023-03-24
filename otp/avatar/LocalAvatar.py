@@ -4,7 +4,7 @@ from direct.gui.DirectGui import *
 from direct.showbase.PythonUtil import *
 from direct.interval.IntervalGlobal import *
 from direct.showbase.InputStateGlobal import inputState
-from direct.controls import ControlManager
+from toontown.controls import ToontownControlManager
 from . import DistributedAvatar
 from direct.task import Task
 from otp.otpbase import OTPGlobals
@@ -19,6 +19,7 @@ from direct.controls.ObserverWalker import ObserverWalker
 from direct.controls.SwimWalker import SwimWalker
 from direct.controls.TwoDWalker import TwoDWalker
 from toontown.toon.OrbitalCamera import OrbitCamera
+from toontown.controls import ControlManager
 
 
 class LocalAvatar(DistributedAvatar.DistributedAvatar,
@@ -49,7 +50,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         base.pushCTrav(self.cTrav)
         self.cTrav.setRespectPrevTransform(1)
         self.avatarControlsEnabled = 0
-        self.controlManager = ControlManager.ControlManager(
+        self.controlManager = ToontownControlManager.ToontownControlManager(
             True, passMessagesThrough)
         self.initializeCollisions()
         self.initializeSmartCamera()
@@ -443,6 +444,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
             return
         self.avatarControlsEnabled = 0
         self.ignoreAnimationEvents()
+        self.controlManager.setWASDTurn(1)
         self.controlManager.disable()
         self.clearPageUpDown()
 
@@ -1120,7 +1122,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
     def sleepSwimTest(self, task):
         now = globalClock.getFrameTime()
         speed, rotSpeed, slideSpeed = self.controlManager.getSpeeds()
-        if speed != 0.0 or rotSpeed != 0.0 or inputState.isSet('jump'):
+        if speed != 0.0 or rotSpeed != 0.0 or slideSpeed != 0.0 or inputState.isSet('jump'):
             if not self.swimmingFlag:
                 self.swimmingFlag = 1
         elif self.swimmingFlag:
@@ -1199,7 +1201,8 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
                 self.emoteTrack = None
             if action == OTPGlobals.WALK_INDEX or action == OTPGlobals.REVERSE_INDEX:
                 self.walkSound()
-            elif action == OTPGlobals.RUN_INDEX:
+            elif (action == OTPGlobals.RUN_INDEX or action == OTPGlobals.STRAFE_LEFT_INDEX  
+                or action == OTPGlobals.STRAFE_RIGHT_INDEX):
                 self.runSound()
             else:
                 self.stopSound()

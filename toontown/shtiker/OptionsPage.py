@@ -1,6 +1,6 @@
 from panda3d.core import *
 from . import ShtikerPage
-# from toontown.controls.ControlSettingsDialog import ControlSettingsDialog
+from toontown.controls.ControlSettingsDialog import ControlSettingsDialog
 from toontown.toonbase import TTLocalizer, ToontownGlobals
 from toontown.toontowngui import TTDialog
 from direct.gui.DirectGui import *
@@ -12,6 +12,7 @@ from otp.speedchat import SCStaticTextTerminal
 from otp.otpbase import PythonUtil
 import webbrowser
 from direct.directnotify import DirectNotifyGlobal
+from otp.chat import ChatManager
 
 speedChatStyles = ((2000,
                     (200 / 255.0, 60 / 255.0, 229 / 255.0),
@@ -899,21 +900,21 @@ class ExtraOptionsTabPage(DirectFrame):
          button_textpos = (0, -0.02)
          options_text_scale = 0.052
          disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
-        #  self.CustomControls_Label = DirectLabel(parent=self, relief=None,
-        #                                          text='Custom Controls:',
-        #                                          text_align=TextNode.ALeft,
-        #                                          text_scale=options_text_scale,
-        #                                          text_wordwrap=10,
-        #                                          pos=(leftMargin, 0, textStartHeight))
-        #  self.CustomControls_button = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'),
-        #                                            guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')),
-        #                                            image_scale=button_image_scale,
-        #                                            text='Custom Controls',
-        #                                            text_scale=options_text_scale,
-        #                                            text_pos=button_textpos,
-        #                                            pos=(
-        #                                                buttonbase_xcoord, 0.0, buttonbase_ycoord),
-        #                                            command=self.openCustomControlsGUI)
+         self.CustomControls_Label = DirectLabel(parent=self, relief=None,
+                                                 text='Custom Controls:',
+                                                 text_align=TextNode.ALeft,
+                                                 text_scale=options_text_scale,
+                                                 text_wordwrap=10,
+                                                 pos=(leftMargin, 0, textStartHeight))
+         self.CustomControls_button = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'),
+                                                   guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')),
+                                                   image_scale=(0.7, 1, 1),
+                                                   text="Change",
+                                                   text_scale=options_text_scale,
+                                                   text_pos=button_textpos,
+                                                   pos=(
+                                                       buttonbase_xcoord, 0.0, buttonbase_ycoord),
+                                                   command=self.openCustomControlsGUI)
 
          self.richPresenceLabel = DirectLabel(parent=self, relief=None, text='Discord Rich Presence:',
                                               text_align=TextNode.ALeft, text_scale=options_text_scale,
@@ -935,8 +936,8 @@ class ExtraOptionsTabPage(DirectFrame):
          guiButton.removeNode()
          gui.removeNode()
 
-    # def openCustomControlsGUI(self):
-    #      ControlSettingsDialog()
+    def openCustomControlsGUI(self):
+        ControlSettingsDialog()
 
     def enter(self):
          self.show()
@@ -947,11 +948,12 @@ class ExtraOptionsTabPage(DirectFrame):
          if hasattr(self, 'settingsChanged'):
              if self.settingsChanged != 0:
                  base.settings.writeSettings()
+                 
 
     def unload(self):
-        #  self.CustomControls_button.destroy()
-        #  del self.CustomControls_Label
-        #  del self.CustomControls_button
+         self.CustomControls_button.destroy()
+         del self.CustomControls_Label
+         del self.CustomControls_button
          self.richPresenceLabel.destroy()
          del self.richPresenceLabel
          self.richPresenceButton.destroy()

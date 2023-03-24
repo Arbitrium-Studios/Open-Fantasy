@@ -1121,8 +1121,8 @@ class DistributedVehicle(
 
     def enableControls(self):
         self.canRace = True
-        self.accept('control', self.__controlPressed)
-        self.accept('control-up', self.__controlReleased)
+        self.accept(f'{base.JUMP}', self.__controlPressed)
+        self.accept(f'{base.JUMP}-up', self.__controlReleased)
         self.accept('InputState-forward', self.__upArrow)
         self.accept('InputState-reverse', self.__downArrow)
         self.accept('InputState-turnLeft', self.__leftArrow)
@@ -1131,8 +1131,8 @@ class DistributedVehicle(
     def disableControls(self):
         self.arrowVert = 0
         self.arrowHorz = 0
-        self.ignore('control')
-        self.ignore('control-up')
+        self.ignore(f'{base.JUMP}')
+        self.ignore(f'{base.JUMP}-up')
         self.ignore('tab')
         self.ignore('InputState-forward')
         self.ignore('InputState-reverse')

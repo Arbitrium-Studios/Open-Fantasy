@@ -335,9 +335,9 @@ class NewsPageButtonManager(FSM.FSM):
             ToontownGlobals.StickerBookHotkey,
             self.simulateEscapeKeyPress)
         self.accept(
-            ToontownGlobals.OptionsPageHotkey,
+            base.BOOK,
             self.simulateEscapeKeyPress)
 
     def ignoreEscapeKeyPress(self):
         self.ignore(ToontownGlobals.StickerBookHotkey)
-        self.ignore(ToontownGlobals.OptionsPageHotkey)
+        self.ignore(base.BOOK)

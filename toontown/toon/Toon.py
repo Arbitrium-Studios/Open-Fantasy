@@ -1579,7 +1579,7 @@ class Toon(Avatar.Avatar, ToonHead):
             if forwardSpeed >= ToontownGlobals.RunCutOff:
                 # Running 
                 action = OTPGlobals.RUN_INDEX
-            # TODO implement strafing when wasd support is added
+            
             elif forwardSpeed > ToontownGlobals.WalkCutOff:
                 # Walking
                 action = OTPGlobals.WALK_INDEX
@@ -1588,12 +1588,32 @@ class Toon(Avatar.Avatar, ToonHead):
                 action = OTPGlobals.REVERSE_INDEX
             elif rotateSpeed != 0.0:
                 action = OTPGlobals.WALK_INDEX
+            elif slideSpeed > ToontownGlobals.RunCutOff:
+                action = OTPGlobals.STRAFE_RIGHT_INDEX
+            elif slideSpeed < -ToontownGlobals.RunCutOff:
+                action = OTPGlobals.STRAFE_LEFT_INDEX
             else:
                 action = OTPGlobals.STAND_INDEX
             anim, rate = self.standWalkRunReverse[action]
             self.motion.enter()
             self.motion.setState(anim, rate)
-            self.orbitalCamera.setGeomNodeH(0)
+            if action == OTPGlobals.STRAFE_LEFT_INDEX:
+                # If toon starts strafing left rotate that character in that direction
+                base.localAvatar.orbitalCamera.setGeomNodeH(90)
+            elif action == OTPGlobals.STRAFE_RIGHT_INDEX:
+                # If toon starts strafing right rotate that character in that direction
+                base.localAvatar.orbitalCamera.setGeomNodeH(-90)
+            elif action == OTPGlobals.RUN_INDEX:
+                #If toon is already running but tries to strafe only rotate them a little 
+                 #Else just them to default h value
+                if slideSpeed > ToontownGlobals.RunCutOff:
+                    base.localAvatar.orbitalCamera.setGeomNodeH(-45)
+                elif slideSpeed < -ToontownGlobals.RunCutOff:
+                    base.localAvatar.orbitalCamera.setGeomNodeH(45)
+                else:
+                    base.localAvatar.orbitalCamera.setGeomNodeH(0)
+            else:
+                base.localAvatar.orbitalCamera.setGeomNodeH(0)
             if anim != self.playingAnim:
                 self.playingAnim = anim
                 self.playingRate = rate
@@ -1665,7 +1685,11 @@ class Toon(Avatar.Avatar, ToonHead):
         self.standWalkRunReverse = (('neutral', 1.0),
                                     ('walk', 1.0),
                                     ('run', 1.0),
-                                    ('walk', -1.0))
+                                    ('walk', -1.0),
+                                    ('walk', -1.0),
+                                    ("run", 1.0), #strafe left
+                                    ("run", 1.0), #strafe right 
+                                    )
         self.setSpeed(self.forwardSpeed, self.rotateSpeed, self.slideSpeed)
         self.setActiveShadow(1)
         return
@@ -1679,10 +1703,14 @@ class Toon(Avatar.Avatar, ToonHead):
     def enterSad(self, animMultiplier=1, ts=0, callback=None, extraArgs=[]):
         self.playingAnim = 'sad'
         self.playingRate = None
-        self.standWalkRunReverse = (('sad-neutral', 1.0),
-                                    ('sad-walk', 1.2),
-                                    ('sad-walk', 1.2),
-                                    ('sad-walk', -1.0))
+        self.standWalkRunReverse = (('catch-neutral', 1.0),
+                                    ('catch-run', 1.0),
+                                    ('catch-run', 1.0),
+                                    ('catch-run', -1.0),
+                                    ('catch-run', -1.0),
+                                    ("catch-run", 1.0), #strafe left
+                                    ("catch-run", 1.0), #strafe right
+                                    )
         self.setSpeed(0, 0, 0)
         Emote.globalEmote.disableBody(self, 'toon, enterSad')
         self.setActiveShadow(1)
@@ -1703,10 +1731,14 @@ class Toon(Avatar.Avatar, ToonHead):
                       callback=None, extraArgs=[]):
         self.playingAnim = None
         self.playingRate = None
-        self.standWalkRunReverse = (('catch-neutral', 1.0),
-                                    ('catch-run', 1.0),
-                                    ('catch-run', 1.0),
-                                    ('catch-run', -1.0))
+        self.standWalkRunReverse = (('catch-eatneutral', 1.0),
+                                    ('catch-eatnrun', 1.0),
+                                    ('catch-eatnrun', 1.0),
+                                    ('catch-eatnrun', -1.0),
+                                    ('catch-eatnrun', -1.0),
+                                    ("catch-eatnrun", -1.0),
+                                    ("catch-eatnrun", 1.0), #strafe left 
+                                    )
         self.setSpeed(self.forwardSpeed, self.rotateSpeed, self.slideSpeed)
         self.setActiveShadow(1)
         return

@@ -71,13 +71,6 @@ Make The Friendly Update which overhauls the Friendship system by reworking thin
 ~ Making the Friends button smaller for more screens to further enhance the already immersed game.
 ~ And more!
 
-The ChitChat Update which overhauls the Chat System by doing the following to the game...:
-
-~ allowing you to say anything unless it’s specifically blacklisted… (please, it makes so much more sense compared to the current system!)
-~ Reworking the True Friends System so that you don’t have to rely on Discord or irl social interactions to share a True Friends Code or completely removing True Friends all together.
-+ Adding back the Chat GUI that was shown in an Alpha or Beta version of Toontown Online except directly above it is a Chat Log that can be hidden and the opacity of the Chat Log AND the Chat Menu are changeable in the Shticker Book
-+ Adding the ability to use in-game emojis instead of typing the emote yourself and using an Emoji also triggers an animation to be played that coincides with the emote being used and the emoji button is found on the left of both the Speedchat Button and the Chat Button.
-
 Adding The Advanced Update to make the following changes to the game...:
 
 ~ Rename “Emotions” to “Animations”
@@ -165,12 +158,12 @@ The Cloth Update will include:
 + Long-sleeved pants/jeans --Bloxicon
 + Hoodies --Bloxicon
 + perhaps there could be a toggleable shirt overlay (one that makes the shirt look tucked in, one that makes it look like it goes over the shorts or skirt or whatever) -- Scott/Froge/Anne
-+ Add the ability to pick your default accessories like what Toontown House did in the Clothes shop in the Create-A-Toon screen (not the in-game clothing shop) --Zachary
++ Add the ability to pick your default accessories like what Toontown House did in the Clothes shop in the Create-A-Toon screen (not the in-game clothing shop) --Gracie
 + Addon ability to change all of your toon, possibly replacing clothing shop --Hunter
 + some accessories can give you minor buffs like slightly boosted gag accuracy or damage, perhaps even decreased damage taken from cogs --Scott/Froge/Anne
 + More types of gloves. You could either wear something more fancy when attending a ritzy party, choose more beat-up gloves for a hobo aesthetic, or even just go gloveless. -- Bloxicon
 + A way to give unwanted clothes to other toons like we could say we can give the shirt, pants/skirt, dress/jumpsuit to a friend or to a random person in the game that wants it.
-+ Maybe by having an in-game Wishlist for specific items that you want and somebody could gift it to you if they want to by either buying it or giving their own clothes to that person or persons. -- Dontai and Zachary
++ Maybe by having an in-game Wishlist for specific items that you want and somebody could gift it to you if they want to by either buying it or giving their own clothes to that person or persons. -- Dontai and Gracie
 + Have perks for every type of clothing except for the plain clothing
 
 The Graphics Update would include the following changes...:
@@ -183,8 +176,6 @@ The Graphics Update would include the following changes...:
 + A Button that is labeled “Dominate Hand” that, when tapped/clicked, opens a drop down menu that has four buttons that say: “Back”, “Left Hand”, “Right Hand”, & “Both Hands” that allows you to exit the drop down menu, use your left hand, your right hand, or both hands or use a slider that does the same thing.
 + In-Game Shaders
 + Playground Maps
-+ Add back Toon News
-+ Chat Log
 + Multithreaded Graphics
 + 60 FPS
 ~ Updates some of the Cog Head Textures
@@ -261,8 +252,8 @@ A Create-A-Toon update that would include...:
 - Personality Picker (for how your Toon reacts to what NPCs say)
 - Left hand, right hand, both hands/all hands picker.
 + More nose color options -- Scott/Froge/Anne
-+ More ear colored options --Zachary
-+ Multi-Colored Pupils and/or two different colors of pupils, plus an inverted eye color type for Cats and other animals that have different colored eyes. --Zachary
++ More ear colored options --Gracie
++ Multi-Colored Pupils and/or two different colors of pupils, plus an inverted eye color type for Cats and other animals that have different colored eyes. --Gracie
 + different eyelashes styles/toggleable eyelashes -- Scott/Froge/Anne
 - and more.
 
@@ -322,7 +313,6 @@ Others:
 + Add the sunken city of Penglantis to the game in the middle of the Atlantic Ocean
 + What if we had an AI System that allows text from another language to be translated to the language of Toontown that your Toon is playing on thus allowing people from all around the world to play Toontown without the language barriers that block the Toontown community as of right now…
 + A day and night cycle based in Toontown Time and not in the player’s time
-+ Add the chat that is seen from old screenshots of Toontown Online like in beta and/or alpha and above that add a chat log and both of these are transparent however you can still hide your chat and chat log together or separately
 + Cell phones for Toontown if we want a modern version of Toontown. 
 + Maybe we could take some content from my book (Twinkling Shadows: A Toontown Story) and implement them in the game or maybe make the entire thing canon
 + Make the house Cannon Game actually function like a party cannon game and not like it currently does.
@@ -354,9 +344,6 @@ The Infinity Tower:
 You can open your map anywhere by pressing the 'm' key or by pressing alt on your keyboard and the map shows everywhere so that you don't have to open your Shtiker Book every time you want to view the map.
 + Add the ability to actually friend a Cog but it works like 0.01% of the time and when it does, your friend Cog can help you in battle but it can only happen as long as a another Cog doesn't see you otherwise, the Cog is killed by its fellow comrades because the Chairman ordered it.
 + Bring back Partners and add a feature on the launcher and the website where we can feature stories, videos, YouTube and Twitch channels, and possibly even other games in case the others don't like our game or are done with the game and want something else to do until the next piece of story/content is out in the game.
-+ If a player cheats, don’t ban them yet. Force them to watch a video of your Toons being dipped in acid and then banning their account from anywhere between a termination to a Global ban (depending on how often they cheat and how much.)
-~ Instead of defaulting to the arrow keys, make the character be moveable via both WASD keys and Arrow Keys, open/close the chat by pressing enter, (if we add it) press v for voice chat or voice to text chat, escape or F8/B  to open the Shtiker Book or Phone (depending on what we do), and so on but this would be by default. And of course you can add custom key binds to it.
-This would match the keybinds to what PotCO’s keybinds were which make more sense than the arrow keys.
 + /~If we end up using unity instead of Panda3D, might I suggest a VR version Toontown: Market Crash where you can either use your controllers to move forward or you can teleport to a place and on other clients, it looks like you’re running.
 + Goose Species with an actual goose hjonking sound effect.
 + Sprocket Coins
@@ -395,32 +382,31 @@ Gold = 6 +  (difficulty x 1.5) ; in an area with a difficulty of 16, the chance 
 And you can either redeem them from your Shtiker Book or you can go all of the way to the Witch of the Mountain to redeem it there.
 + Have your Toon actually have the option to react and reply to the Toon/NPC they're talking to but have multiple options and have the dialog affect what the NPC says to make it feel even more like an MMORPG but add this feature like before the game releases to the public.
 And then slide some Easter eggs in there...
-A possible Easter Egg could happen whenever you're approaching Flippy for the first time outside of the Toontorial and this would utilize Multiverse Theory which is a real thing in the game because the Districts are separate universes, so maybe we could reference other Toontown games or Disney properties without directly mentioning them. -- Zachary & Scott/Froge/Anne
+A possible Easter Egg could happen whenever you're approaching Flippy for the first time outside of the Toontorial and this would utilize Multiverse Theory which is a real thing in the game because the Districts are separate universes, so maybe we could reference other Toontown games or Disney properties without directly mentioning them. -- Gracie & Scott/Froge/Anne
 + toon profiles that show toon id, gags, doodle, current tasks, laff, maybe even preferred pronouns? -- Scott/Froge/Anne
 + Challenge page in your book that has the daily and weekly tasks as well as permanent challenges that you can do as you progress through the game. Possibly giving you accessories, name tags, doodle accessories? Possibly even special houses? (Rewards are based on difficulty of the challenge, giving players something to work for besides laff and suits) -- Boomer
 ~ Toon Titties
 + Custom doodle stats (Which could cost more beans or something) could possibly only customize stats in the higher playgrounds
-+ Use the leaked concepts from TTO’s beginning in our game -- Zachary
++ Use the leaked concepts from TTO’s beginning in our game -- Gracie
 + When you buy a doodle have the option to customize it like what you want. Be able to pick the ears eyes nose tail color pattern stripes. -- Tegan
 + Make fishing's rng less terrible. Since this isn't a subscription-based game like tto, we really shouldn't need to waste weeks, even months on rolling the dice and hoping we get those new species we need. Perhaps we could make fishing less rare, or come up with a whole new idea? -- Scott/Froge/Anne
-+ If we actually end up doing human toons then we should have words recorded and uploaded to the cloud as an mp3 or ogg file and then we should develop an AI system that reads the words your Human Toon says and downloads the audio file of those words and put them together instead of using grunts and have two different audio types (aka male and female) for male and female Human Toons or just implement a voice chat ability for all species that could end up being moderated and if there's a bad word, have an ai automatically censor it or just don't censor it and the Toon can report the Toon for swearing on the vc or something like that. -- Zachary
 + Make our own Racoon Toons --Scott/Froge/Anne
-+ Crab Toons -- Zachary
++ Crab Toons -- Gracie
 + Skunk Toons -- Scott/Froge/Anne
 + When signing up to become a Resistance Ranger in Twilight Dreamland, on top of getting a salute, you also get custom Resistance Ranger clothes and accessories in the mail but instead of having you sign up, have it be a part of the taskline where you’re recruited for the Resistance? The stuff is sent in the mail and you go on to fight bigger cogs for later on in the taskline.
 + Talking animations.
 
 Toon Tags Update:
 
-+ Toon Tags so others know you’re the real deal or if you’re a fake -- Zachary
-+ The ability to click on your own name tag to see your own Toon, Toon stats, gags, toontasks, and probably your own Toon Tag so you don’t have to rely on using another Toon to see it and tell you it. -- Zachary
-~ Customizable Toon IDs (Hunter Boppen) but don’t allow people to create a Toontag that’s already taken by someone else. Like a first come first serve basis. -- Zachary
++ Toon Tags so others know you’re the real deal or if you’re a fake -- Gracie
++ The ability to click on your own name tag to see your own Toon, Toon stats, gags, toontasks, and probably your own Toon Tag so you don’t have to rely on using another Toon to see it and tell you it. -- Gracie
+~ Customizable Toon IDs (Hunter Boppen) but don’t allow people to create a Toontag that’s already taken by someone else. Like a first come first serve basis. -- Gracie
 + Shows who’s staff in the game. Could be a title below the name or a symbol above the name; or a symbol once you click the name tag. -- Revolution
-+ Add the ability for the staff and streamers to hide their title or icon on other Toons so that you don’t attract any unwanted attention -- Zachary
++ Add the ability for the staff and streamers to hide their title or icon on other Toons so that you don’t attract any unwanted attention -- Gracie
 ~ Cold callers doing more damage in Tundra Wonderland. --Flame
-+ Interactive furniture such as a playable piano -- Sir Fangar and Zachary
++ Interactive furniture such as a playable piano -- Sir Fangar and Gracie
 + Cogs that turn their head and look at your Toon when they walk by like what’s in Toontown Frenchy
-+ Mounts like hoverboards (Flame) or any mounts to get to places faster, even if it is as weak as driving your car down the street. -- Zachary
++ Mounts like hoverboards (Flame) or any mounts to get to places faster, even if it is as weak as driving your car down the street. -- Gracie
 ~ Easier suit promos, so like no more 7 back nines to get a promo -- C.E.O. Chief Peanut Butter
 + A museum for cogs with stats on how many of said cogs are defeated and also it should have Dinosaur Toon bones and extinct types of Toons as well as a Cog Display to really give it a museum vibe and on top of that, there are little documents that you can walk up to and press "read" to get some lore about that type of species and the museum should also have Top Toons in there and it should be playing the scrapped Museum theme ( https://www.youtube.com/watch?v=zIZf0zexKSQ ) as the interior music.
 + Dropped items that you find for defeating Cogs that you can sell to the Museum for Jellybeans that you can also view in your Shtiker Book how many items you have and of what kind.
@@ -440,8 +426,7 @@ The Toon Tips Update:
 ~ Replace loading screen with something interesting too look at.
 
 ### Wishlist and Ideas to merge with the list above:
-    > Add Accessories to the Toon Heads for Pick-A-Toon and the Friends system
-    > Replace True Friends with 18+ chat where you and anyone who you are Best Friends with, can see you swear
+    > Add Accessories to the Toon Heads for Pick-A-Toon
     > Add more areas for gaming!
     > Zoom out from the Toons in the Create-A-Toon section
     > Add more fonts for usage in Catalog
@@ -597,14 +582,8 @@ The Toon Tips Update:
             > This makes it so the Boss Battle itself functions like Toontown Rewritten's Boss Battle.
             > You should get Multiple Fires.
     > If you try to use a Fire on Executive or Manager Cogs, they should dodge it and use a cheat that lowers the accuracy of the Toon's Gags for a couple of Rounds.
-    > A Chat Overhaul Update:
-        > Replace the whitelist with a Blacklist
-                > Use a modified version of Profanity Filter that checks for not allowed words.
-                > If a word is said that isn't allowed, a report should automatically be filed and it should be censored.
-        > When we do the Blacklist update for the chat, I want to implement this chat menu for Type Chat from Toontown Online's Beta that you can type into. And use the Arrow button to switch to the OG chat system found here: https://cdn.discordapp.com/attachments/775528646349815817/994805297736585246/TTO_Beta_Chat.jpg
-        > Speedchat should still be accessible by keeping the 2013 TTO chat layout.
-        > The chat system should send your message in your set Speedchat color.
-        > To add onto the Customizability the game offers, in your Shtiker Book, there should be an Arrow Button that opens up to reveal an Advanced Color Chooser that you can choose between Hexidecimal and others just like the Create-A-Toon's Choose Your Color Menu.
+    > Remove Chat all together
+    > Remove the Friends List
     > A Battle Overhaul:
         > Adds Ranged Gag Track
         > Adds my own take on the Zap gag track.
@@ -829,8 +808,6 @@ The Toon Tips Update:
         > When you click on the GUI, it should pop up a brand new GUI formatted like a phone's weather app to show you the weather.
     > Reimplement the Taunt Emotion/Animation
     > Add a variation of the Surpised emote that can randomly play which uses the Surprise Emote from the Toontown Online trailer when the Toons see the Cogs.
-    > In place where the Emoticons would be in TTR, add an Emoji section to the Speedchat which allows you use emojis that are premade by our artist(s).
-        > The Emojis should be specific to the user's species
     > Add the ability for Cogs to Promote Mid-Battle when fighting along side a Manager Cog.
     > When the Manager Cog is defeated, it should turn into a v2.0 Cog, when you defeat it again, it's should turn into a SkeleCog like a v2.0 before being defeated.
     > Make being a specific Toon have specific pros and cons to influence the user's choice when creating a Toon (Horses are fast and strong; Cats can see better in the dark, can run faster (but not faster than horses), etc.
@@ -924,7 +901,6 @@ The Toon Tips Update:
     > Add an Other Option to the Report Options with a field to type in.
     > Add Trolling to the list of reportable options.
     > Add Health Bars to all bosses.
-    > Add "I'm out of Insert_Attack_Here" for use in the speedchat menu when you're out of Gags, Unites, etc.
     > Add Verification menu for Resource Packs
     > Nerf Toons Hit and Cogs Miss to be Accuracy Boost and Decreases.
     > Add i-card to SOS Cards to let us know what they do.
@@ -936,10 +912,8 @@ The Toon Tips Update:
     > Add CyberCogs
     > When you're in game, have the ability to Ask to Join a server for those using a custom server.
     > Make props always animated.
-    > Add the ability to choose how you want your Speedchat to be formatted.
     > NPC nametags to learn more about an NPC.
     > Inverted Shaders for those using darkmode.
-    > Implement Speedchat Thought Bubbles via right clicking on a Speedchat button.
     > Once we have a live version, there should be a mobile launcher for mobile.
     > When adding the Content Pack Chooser, you should be able to toggle one or more on or off.
     > Add Statistic Page.
