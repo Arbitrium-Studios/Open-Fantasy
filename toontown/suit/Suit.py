@@ -114,7 +114,7 @@ ls = (('throw-paper', 'throw-paper', 5),
       ('hold-pencil', 'hold-pencil', 5))
 rb = ()
 msv = (('glower', 'glower', 5),)
-bf = (('throw-paper', 'throw-paper', 5),
+bf = (('throw-paper', 'throw-paper', 3.5),
       ('shredder', 'shredder', 3.5),
       ('watercooler', 'watercooler', 5))
 b = (('throw-paper', 'throw-paper', 5),)
