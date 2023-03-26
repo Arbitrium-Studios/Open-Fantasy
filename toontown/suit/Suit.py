@@ -134,8 +134,7 @@ sd = (('quick-jump', 'jump', 5),
 le = (('throw-object', 'throw-object', 5),
       ('glower', 'glower', 5),
       ('throw-paper', 'throw-paper', 5))
-bw = (('gavel', 'gavel', 8),
-      ('throw-object', 'throw-object', 5),
+bw = (('throw-object', 'throw-object', 5),
       ('throw-paper', 'throw-paper', 5))
 lc = (('throw-paper', 'throw-paper', 5),
       ('magic3', 'magic3', 5))
