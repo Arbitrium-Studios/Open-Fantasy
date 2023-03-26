@@ -167,7 +167,7 @@ def doSuitAttack(attack):
     elif name == FREEZE_ASSETS:
         suitTrack = doFreezeAssets(attack)
     elif name == GAVEL:
-        suitTrack = doDefault(attack)
+        suitTrack = doGavel(attack)
     elif name == GLOWER_POWER:
         suitTrack = doGlowerPower(attack)
     elif name == GUILT_TRIP:
@@ -4878,6 +4878,31 @@ def doPeckingOrder(attack):
         dodgeAnimNames=['sidestep'],
         showMissedExtraTime=1.1)
     return Parallel(suitTrack, toonTrack, birdTracks)
+
+
+def doGavel(attack):
+    battle = attack['battle']
+    target = attack['target']
+    toon = target['toon']
+    gavel = loader.loadModel('phase_11/models/lawbotHQ/LB_gavel')
+    suitTrack = getSuitTrack(attack)
+    toonPos = toon.getPos(battle)
+    gavelPos = Point3(toonPos.getX(), toonPos.getY() + 8, 0)
+    propTrack = Sequence(
+        getPropAppearTrack(gavel, battle, [gavelPos, VBase3(0, 0, 0)], 0.0, scaleUpPoint=Point3(1), scaleUpTime=1.5),
+        LerpHprInterval(gavel, 0.5, VBase3(0, 90, 0)),
+        Parallel(
+            SoundInterval(base.loader.loadSfx('phase_11/audio/sfx/LB_gavel.ogg'), node=toon),
+            Sequence(
+                Wait(0.1),
+                LerpHprInterval(gavel, 0.5, VBase3(0, 0, 0)),
+                LerpScaleInterval(gavel, 1.5, Point3(0.0, 0.0, 0.0))
+            )
+        ),
+        Func(MovieUtil.removeProp, gavel)
+    )
+    toonTrack = getToonTrack(attack, 2.0, ['Squish'], 0.9, ['sidestep'])
+    return Parallel(suitTrack, propTrack, toonTrack)
 
 
 def doTrip(attack):
