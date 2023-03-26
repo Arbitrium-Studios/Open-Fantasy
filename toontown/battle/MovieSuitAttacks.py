@@ -625,6 +625,11 @@ def doDefault(attack):
             attack['name'] = 'FreezeAssets'
             attack['animName'] = 'glower'
             return doFreezeAssets(attack)
+        elif suitName == 'mb':
+            attack['id'] = FLOOD_THE_MARKET
+            attack['name'] = 'FloodTheMarket'
+            attack['animName'] = 'effort'
+            return doFloodTheMarket(attack)
         elif suitName == 'rb':
             attack['id'] = FLOOD_THE_MARKET
             attack['name'] = 'FloodTheMarket'
