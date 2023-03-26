@@ -4367,7 +4367,7 @@ def doBite(attack):
          ['conked', 0.01, 3.2]]
         dodgeAnims = [['cringe', 0.01, 0.7, 0.2],
          ['duck', 0.01, 1.6]]
-        toonTracks = getToonTracks(attack, damageDelay=3.2, splicedDamageAnims=damageAnims, dodgeDelay=2.9, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=2.4)
+        toonTracks = getToonTracks(attack, damageDelay=3.2, splicedDamageAnims=damageAnims, dodgeDelay=2.9, splicedDodgeAnims=dodgeAnims, showDamageExtraTime=2.4)
         return Parallel(suitTrack, toonTracks, propTracks)
 
 
