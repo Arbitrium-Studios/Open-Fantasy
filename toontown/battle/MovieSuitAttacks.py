@@ -654,6 +654,12 @@ def doDefault(attack):
             attack['name'] = 'FreezeAssets'
             attack['animName'] = 'glower'
             return doFreezeAssets(attack)
+        elif suitName == 'bf':
+            attack['id'] = WATERCOOLER
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'Watercooler'
+            attack['animName'] = 'watercooler'
+            return doWatercooler(attack)
         elif suitName == 'b':
             attack['id'] = WITHDRAWAL
             attack['group'] = ATK_TGT_GROUP
