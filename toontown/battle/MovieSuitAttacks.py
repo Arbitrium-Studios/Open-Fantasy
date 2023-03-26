@@ -514,10 +514,10 @@ def doDefault(attack):
             attack['animName'] = 'speak'
             return doLegalese(attack)
         elif suitName == 'bw':
-            attack['id'] = FINGER_WAG
-            attack['name'] = 'FingerWag'
-            attack['animName'] = 'finger-wag'
-            return doFingerWag(attack)
+            attack['id'] = GAVEL
+            attack['name'] = 'Gavel'
+            attack['animName'] = 'effort'
+            return doGavel(attack)
         elif suitName == 'lc':
             attack['id'] = RESTRAINING_ORDER
             attack['name'] = 'RestrainingOrder'
