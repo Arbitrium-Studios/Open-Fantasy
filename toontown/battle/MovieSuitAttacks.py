@@ -700,7 +700,7 @@ def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
     target = attack['target']
     toon = target['toon']
     targetPos = toon.getPos(battle)
-    taunt = getAttackTaunt(attack['name'], tauntIndex)
+    taunt = getAttackTaunt(attack['name'], tauntIndex, attack['suitName'])
     trapStorage = {}
     trapStorage['trap'] = None
     track = Sequence(
@@ -742,7 +742,7 @@ def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
 def getSuitAnimTrack(attack, delay=0, splicedAnims=None, playRate=1.0):
     suit = attack['suit']
     tauntIndex = attack['taunt']
-    taunt = getAttackTaunt(attack['name'], tauntIndex)
+    taunt = getAttackTaunt(attack['name'], tauntIndex, attack['suitName'])
     track = Sequence(
         Wait(delay),
         Func(

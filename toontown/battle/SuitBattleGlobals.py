@@ -1195,9 +1195,12 @@ def getAttackTauntIndex(attackName):
         return 1
 
 
-def getAttackTaunt(attackName, index=None):
+def getAttackTaunt(attackName, index=None, suitName=None):
     if attackName in SuitAttackTaunts:
-        taunts = SuitAttackTaunts[attackName]
+        try:
+            taunts = SuitAttackTaunts[attackName][suitName if suitName in SuitAttackTaunts[attackName] else None]
+        except:
+            taunts = SuitAttackTaunts[attackName]
     else:
         taunts = TTLocalizer.SuitAttackDefaultTaunts
     if index is not None:
