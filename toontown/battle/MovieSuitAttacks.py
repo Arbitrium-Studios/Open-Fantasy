@@ -953,7 +953,10 @@ def getToonTakeDamageTrack(toon, died, dmg, delay, damageAnimNames=None, spliced
     toonTrack.append(Wait(delay))
     if damageAnimNames:
         for d in damageAnimNames:
-            toonTrack.append(ActorInterval(toon, d))
+            if d == 'Squish':
+                toonTrack.append(Func(toon.b_setAnimState, 'Squish'))
+            else:
+                toonTrack.append(ActorInterval(toon, d))
 
     else:
         splicedAnims = getSplicedAnimsTrack(splicedDamageAnims, actor=toon)
