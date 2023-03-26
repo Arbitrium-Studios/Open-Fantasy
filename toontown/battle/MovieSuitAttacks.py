@@ -433,6 +433,7 @@ def doDefault(attack):
             return doTeeOff(attack)
         elif suitName == 'sc':
             attack['id'] = BOUNCE_CHECK
+            attack['group'] = ATK_TGT_SINGLE
             attack['name'] = 'BounceCheck'
             attack['animName'] = 'throw-paper'
             return doBounceCheck(attack)
@@ -615,11 +616,11 @@ def doDefault(attack):
             attack['animName'] = 'effort'
             return doStomper(attack)
         elif suitName == 'sc':
-            attack['id'] = FREEZE_ASSETS
+            attack['id'] = BOUNCE_CHECK
             attack['group'] = ATK_TGT_GROUP
-            attack['name'] = 'FreezeAssets'
-            attack['animName'] = 'glower'
-            return doFreezeAssets(attack)
+            attack['name'] = 'BounceCheck'
+            attack['animName'] = 'throw-paper'
+            return doBounceCheck(attack)
         elif suitName == 'pp':
             attack['id'] = FREEZE_ASSETS
             attack['group'] = ATK_TGT_GROUP
