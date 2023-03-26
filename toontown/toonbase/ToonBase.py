@@ -31,6 +31,11 @@ class ToonBase(OTPBase.OTPBase):
             sfx = self.settings.getSetting('sfx', True)
             toonChatSounds = self.settings.getSetting('toon-chat-sounds', True)
             res = self.settings.getSetting('resolution', (800, 600))
+            self.settings.updateSetting('windowed-mode', mode)
+            self.settings.updateSetting('music', music)
+            self.settings.updateSetting('sfx', sfx)
+            self.settings.updateSetting('toon-chat-sounds', toonChatSounds)
+            self.settings.updateSetting('resolution', res)
             if mode is None:
                 mode = 1
             if res is None:
@@ -62,6 +67,7 @@ class ToonBase(OTPBase.OTPBase):
                 pass
 
             sys.exit(1)
+        
         self.disableShowbaseMouse()
         base.debugRunningMultiplier /= OTPGlobals.ToonSpeedFactor
         self.toonChatSounds = ConfigVariableBool('toon-chat-sounds', 1).value
@@ -213,6 +219,11 @@ class ToonBase(OTPBase.OTPBase):
                     and base.MOVE_RIGHT != 'arrow_right')
         self.calculatedFOV = self.genFOV = self.settings.getSetting(
             "fov", ToontownGlobals.DefaultCameraFov)
+        self.settings.updateSetting("fov", self.genFOV)
+        self.textureQuality = self.settings.getSetting('texture-quality', 'High')
+        self.settings.updateSetting('texture-quality', self.textureQuality)
+        self.setTextureQuality(self.textureQuality)
+        self.settings.writeSettings()
         self.smoothAnimations = self.settings.getSetting('smooth-animations', False)
         self.settings.updateSetting('smooth-animations', self.smoothAnimations)
         self.showFPS = self.settings.getSetting('show-fps', False)
@@ -524,6 +535,23 @@ class ToonBase(OTPBase.OTPBase):
         self.cr.loginFSM.request('shutdown')
         self.notify.warning('Could not request shutdown; exiting anyway.')
         self.exitShow()
+
+    
+
+    def setTextureQuality(self, quality):
+        # set the texture quality to the specified value
+        # Credit to Mugendina for helping me with this code
+        # Limits the highest texture resolution for the player should help with old machines
+        # TODO add to settings gui
+        quality_to_res = {
+            'Very High' : -1,
+            'High': 1024,
+            'Medium': 512,
+            'Low': 256,
+            'Very Low': 128,
+        }
+        loadPrcFileData('', f'max-texture-dimension {quality_to_res[quality]}')
+        self.settings.updateSetting('texture-quality', quality)
 
     def panda3dRenderError(self):
         launcher.setPandaErrorCode(14)
