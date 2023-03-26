@@ -767,14 +767,9 @@ def getToonTrack(attack, damageDelay=1e-06, damageAnimNames=None, dodgeDelay=0.0
     animTrack.append(Func(toon.headsUp, battle, suitPos))
     if dmg > 0:
         animTrack.append(getToonTakeDamageTrack(toon, target['died'], dmg, damageDelay, damageAnimNames, splicedDamageAnims, showDamageExtraTime))
-        return animTrack
     else:
         animTrack.append(getToonDodgeTrack(target, dodgeDelay, dodgeAnimNames, splicedDodgeAnims, showMissedExtraTime))
-        indicatorTrack = Sequence(
-            Wait(dodgeDelay + showMissedExtraTime),
-            Func(MovieUtil.indicateMissed, toon)
-        )
-        return Parallel(animTrack, indicatorTrack)
+    return animTrack
 
 
 def getToonTracks(attack, damageDelay=1e-06, damageAnimNames=None, dodgeDelay=1e-06, dodgeAnimNames=None, splicedDamageAnims=None, splicedDodgeAnims=None, showDamageExtraTime=0.01, showMissedExtraTime=0.5):
@@ -800,8 +795,12 @@ def getToonDodgeTrack(target, dodgeDelay, dodgeAnimNames, splicedDodgeAnims, sho
 
     else:
         toonTrack.append(getSplicedAnimsTrack(splicedDodgeAnims, actor=toon))
+    indicatorTrack = Sequence(
+        Wait(dodgeDelay + showMissedExtraTime),
+        Func(MovieUtil.indicateMissed, toon)
+    )
     toonTrack.append(Func(toon.loop, 'neutral'))
-    return toonTrack
+    return Parallel(toonTrack, indicatorTrack)
 
 
 def getAllyToonsDodgeParallel(target):
