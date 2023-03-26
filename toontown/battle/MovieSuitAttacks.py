@@ -592,6 +592,12 @@ def doDefault(attack):
             attack['name'] = 'Shake'
             attack['animName'] = 'stomp'
             return doShake(attack)
+        elif suitName == 'tf':
+            attack['id'] = HANG_UP
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'HangUp'
+            attack['animName'] = 'phone'
+            return doHangUp(attack)
         elif suitName == 'm':
             attack['id'] = PARADIGM_SHIFT
             attack['name'] = 'ParadigmShift'
