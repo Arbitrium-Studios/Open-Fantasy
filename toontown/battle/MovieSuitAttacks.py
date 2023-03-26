@@ -464,6 +464,7 @@ def doDefault(attack):
             return doMarketCrash(attack)
         elif suitName == 'ls':
             attack['id'] = CHOMP
+            attack['group'] = ATK_TGT_SINGLE
             attack['name'] = 'Chomp'
             attack['animName'] = 'throw-paper'
             return doChomp(attack)
@@ -630,6 +631,12 @@ def doDefault(attack):
             attack['name'] = 'FloodTheMarket'
             attack['animName'] = 'effort'
             return doFloodTheMarket(attack)
+        elif suitName == 'ls':
+            attack['id'] = CHOMP
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'Chomp'
+            attack['animName'] = 'throw-paper'
+            return doChomp(attack)
         elif suitName == 'rb':
             attack['id'] = FLOOD_THE_MARKET
             attack['name'] = 'FloodTheMarket'
