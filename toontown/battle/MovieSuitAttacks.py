@@ -2101,53 +2101,105 @@ def doDownsize(attack):
 def doPinkSlip(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
-    paper = globalPropPool.getProp('pink-slip')
-    throwDelay = 3.03
-    throwDuration = 0.5
-    suitTrack = getSuitTrack(attack)
-    posPoints = [Point3(0.07, -0.06, -0.18), VBase3(-172.075, -26.715, -89.131)]
-    paperAppearTrack = Sequence(
-        getPropAppearTrack(paper, suit.getRightHand(), posPoints, 0.8, Point3(8, 8, 8), scaleUpTime=0.5),
-        Wait(1.73)
-    )
-    hitPoint = __toonGroundPoint(attack, toon, 0.2, parent=battle)
-    paperAppearTrack.append(Func(battle.movie.needRestoreRenderProp, paper))
-    paperAppearTrack.append(Func(paper.wrtReparentTo, battle))
-    paperAppearTrack.append(LerpPosInterval(paper, throwDuration, hitPoint))
-    if dmg > 0:
-        paperPause = 0.01
-        slidePoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ() + 4)
-        landPoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ())
-        paperAppearTrack.append(Wait(paperPause))
-        paperAppearTrack.append(LerpPosInterval(paper, 0.2, slidePoint))
-        paperAppearTrack.append(LerpPosInterval(paper, 1.1, landPoint))
-        paperSpinTrack = Sequence(
-            Wait(throwDelay),
-            LerpHprInterval(paper, throwDuration, VBase3(300, 0, 0)),
-            Wait(paperPause),
-            LerpHprInterval(paper, 1.3, VBase3(-200, 100, 100))
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        dmg = target['hp']
+        paper = globalPropPool.getProp('pink-slip')
+        throwDelay = 3.03
+        throwDuration = 0.5
+        suitTrack = getSuitTrack(attack)
+        posPoints = [Point3(0.07, -0.06, -0.18), VBase3(-172.075, -26.715, -89.131)]
+        paperAppearTrack = Sequence(
+            getPropAppearTrack(paper, suit.getRightHand(), posPoints, 0.8, Point3(8, 8, 8), scaleUpTime=0.5),
+            Wait(1.73)
         )
+        hitPoint = __toonGroundPoint(attack, toon, 0.2, parent=battle)
+        paperAppearTrack.append(Func(battle.movie.needRestoreRenderProp, paper))
+        paperAppearTrack.append(Func(paper.wrtReparentTo, battle))
+        paperAppearTrack.append(LerpPosInterval(paper, throwDuration, hitPoint))
+        if dmg > 0:
+            paperPause = 0.01
+            slidePoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ() + 4)
+            landPoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ())
+            paperAppearTrack.append(Wait(paperPause))
+            paperAppearTrack.append(LerpPosInterval(paper, 0.2, slidePoint))
+            paperAppearTrack.append(LerpPosInterval(paper, 1.1, landPoint))
+            paperSpinTrack = Sequence(
+                Wait(throwDelay),
+                LerpHprInterval(paper, throwDuration, VBase3(300, 0, 0)),
+                Wait(paperPause),
+                LerpHprInterval(paper, 1.3, VBase3(-200, 100, 100))
+            )
+        else:
+            slidePoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ())
+            paperAppearTrack.append(LerpPosInterval(paper, 0.5, slidePoint))
+            paperSpinTrack = Sequence(
+                Wait(throwDelay),
+                LerpHprInterval(paper, throwDuration, VBase3(300, 0, 0)),
+                LerpHprInterval(paper, 0.5, VBase3(10, 0, 0))
+            )
+        propTrack = Sequence()
+        propTrack.append(Parallel(paperAppearTrack, paperSpinTrack))
+        propTrack.append(LerpScaleInterval(paper, 0.4, MovieUtil.PNT3_NEARZERO))
+        propTrack.append(Func(MovieUtil.removeProp, paper))
+        propTrack.append(Func(battle.movie.clearRenderProp, paper))
+        damageAnims = [['jump', 0.01, 0.3, 0.7],
+         ['slip-forward', 0.01]]
+        toonTrack = getToonTrack(attack, damageDelay=2.81, splicedDamageAnims=damageAnims, dodgeDelay=2.8, dodgeAnimNames=['jump'], showDamageExtraTime=0.9)
+        soundTrack = getSoundTrack('SA_pink_slip.ogg', delay=2.9, duration=1.1, node=suit)
+        return Parallel(suitTrack, toonTrack, propTrack, soundTrack)
     else:
-        slidePoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ())
-        paperAppearTrack.append(LerpPosInterval(paper, 0.5, slidePoint))
-        paperSpinTrack = Sequence(
-            Wait(throwDelay),
-            LerpHprInterval(paper, throwDuration, VBase3(300, 0, 0)),
-            LerpHprInterval(paper, 0.5, VBase3(10, 0, 0))
-        )
-    propTrack = Sequence()
-    propTrack.append(Parallel(paperAppearTrack, paperSpinTrack))
-    propTrack.append(LerpScaleInterval(paper, 0.4, MovieUtil.PNT3_NEARZERO))
-    propTrack.append(Func(MovieUtil.removeProp, paper))
-    propTrack.append(Func(battle.movie.clearRenderProp, paper))
-    damageAnims = [['jump', 0.01, 0.3, 0.7],
-     ['slip-forward', 0.01]]
-    toonTrack = getToonTrack(attack, damageDelay=2.81, splicedDamageAnims=damageAnims, dodgeDelay=2.8, dodgeAnimNames=['jump'], showDamageExtraTime=0.9)
-    soundTrack = getSoundTrack('SA_pink_slip.ogg', delay=2.9, duration=1.1, node=suit)
-    return Parallel(suitTrack, toonTrack, propTrack, soundTrack)
+        targets = attack['target']
+        throwDelay = 3.03
+        throwDuration = 0.5
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        posPoints = [Point3(0.07, -0.06, -0.18), VBase3(-172.075, -26.715, -89.131)]
+        propTracks = Parallel()
+        for t in targets:
+            toon = t['toon']
+            dmg = t['hp']
+            paper = globalPropPool.getProp('pink-slip')
+            paperAppearTrack = Sequence(
+                getPropAppearTrack(paper, suit.getRightHand(), posPoints, 0.8, Point3(8, 8, 8), scaleUpTime=0.5),
+                Wait(1.73)
+            )
+            hitPoint = __toonGroundPoint(attack, toon, 0.2, parent=battle)
+            paperAppearTrack.append(Func(battle.movie.needRestoreRenderProp, paper))
+            paperAppearTrack.append(Func(paper.wrtReparentTo, battle))
+            paperAppearTrack.append(LerpPosInterval(paper, throwDuration, hitPoint))
+            if dmg > 0:
+                paperPause = 0.01
+                slidePoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ() + 4)
+                landPoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ())
+                paperAppearTrack.append(Wait(paperPause))
+                paperAppearTrack.append(LerpPosInterval(paper, 0.2, slidePoint))
+                paperAppearTrack.append(LerpPosInterval(paper, 1.1, landPoint))
+                paperSpinTrack = Sequence(
+                    Wait(throwDelay),
+                    LerpHprInterval(paper, throwDuration, VBase3(300, 0, 0)),
+                    Wait(paperPause),
+                    LerpHprInterval(paper, 1.3, VBase3(-200, 100, 100))
+                )
+            else:
+                slidePoint = Point3(hitPoint.getX(), hitPoint.getY() - 5, hitPoint.getZ())
+                paperAppearTrack.append(LerpPosInterval(paper, 0.5, slidePoint))
+                paperSpinTrack = Sequence(
+                    Wait(throwDelay),
+                    LerpHprInterval(paper, throwDuration, VBase3(300, 0, 0)),
+                    LerpHprInterval(paper, 0.5, VBase3(10, 0, 0))
+                )
+            propTrack = Sequence()
+            propTrack.append(Parallel(paperAppearTrack, paperSpinTrack))
+            propTrack.append(LerpScaleInterval(paper, 0.4, MovieUtil.PNT3_NEARZERO))
+            propTrack.append(Func(MovieUtil.removeProp, paper))
+            propTrack.append(Func(battle.movie.clearRenderProp, paper))
+            propTracks.append(propTrack)
+        damageAnims = [['jump', 0.01, 0.3, 0.7],
+         ['slip-forward', 0.01]]
+        toonTracks = getToonTracks(attack, damageDelay=2.81, splicedDamageAnims=damageAnims, dodgeDelay=2.8, dodgeAnimNames=['jump'], showDamageExtraTime=0.9)
+        soundTrack = getSoundTrack('SA_pink_slip.ogg', delay=2.9, duration=1.1, node=suit)
+        return Parallel(suitTrack, toonTracks, propTracks, soundTrack)
 
 
 def doReOrg(attack):
