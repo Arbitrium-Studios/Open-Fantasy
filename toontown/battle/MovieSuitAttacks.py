@@ -2578,59 +2578,117 @@ def doRolodex(attack):
 def doEvilEye(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
-    eye = globalPropPool.getProp('evil-eye')
-    damageDelay = 2.44
-    dodgeDelay = 1.64
-    suitName = attack['suitName']
-    if suitName == 'cr':
-        posPoints = [Point3(-0.46, 4.85, 5.28), VBase3(-155.0, -20.0, 0.0)]
-    elif suitName == 'tf':
-        posPoints = [Point3(-0.4, 3.65, 5.01), VBase3(-155.0, -20.0, 0.0)]
-    elif suitName == 'le':
-        posPoints = [Point3(-0.64, 4.45, 5.91), VBase3(-155.0, -20.0, 0.0)]
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        dmg = target['hp']
+        eye = globalPropPool.getProp('evil-eye')
+        damageDelay = 2.44
+        dodgeDelay = 1.64
+        suitName = attack['suitName']
+        if suitName == 'cr':
+            posPoints = [Point3(-0.46, 4.85, 5.28), VBase3(-155.0, -20.0, 0.0)]
+        elif suitName == 'tf':
+            posPoints = [Point3(-0.4, 3.65, 5.01), VBase3(-155.0, -20.0, 0.0)]
+        elif suitName == 'le':
+            posPoints = [Point3(-0.64, 4.45, 5.91), VBase3(-155.0, -20.0, 0.0)]
+        else:
+            posPoints = [Point3(-0.4, 3.65, 5.01), VBase3(-155.0, -20.0, 0.0)]
+        appearDelay = 0.8
+        suitHoldStart = 1.06
+        suitHoldStop = 1.69
+        suitHoldDuration = suitHoldStop - suitHoldStart
+        eyeHoldDuration = 1.1
+        moveDuration = 1.1
+        suitSplicedAnims = [['glower', 0.01, 0.01, suitHoldStart]]
+        suitSplicedAnims.extend(getSplicedLerpAnims('glower', suitHoldDuration, 1.1, startTime=suitHoldStart))
+        suitSplicedAnims.append(['glower', 0.01, suitHoldStop])
+        suitTrack = getSuitTrack(attack, splicedAnims=suitSplicedAnims)
+        eyeAppearTrack = Sequence(
+            Wait(suitHoldStart),
+            Func(__showProp, eye, suit, posPoints[0], posPoints[1]),
+            LerpScaleInterval(eye, suitHoldDuration, Point3(11, 11, 11)),
+            Wait(eyeHoldDuration * 0.3),
+            LerpHprInterval(eye, 0.02, Point3(205, 40, 0)),
+            Wait(eyeHoldDuration * 0.7),
+            Func(battle.movie.needRestoreRenderProp, eye),
+            Func(eye.wrtReparentTo, battle)
+        )
+        toonFace = __toonFacePoint(toon, parent=battle)
+        if dmg > 0:
+            lerpInterval = LerpPosInterval(eye, moveDuration, toonFace)
+        else:
+            lerpInterval = LerpPosInterval(eye, moveDuration, Point3(toonFace.getX(), toonFace.getY() - 5, toonFace.getZ() - 2))
+        eyeMoveTrack = lerpInterval
+        eyeRollTrack = LerpHprInterval(eye, moveDuration, Point3(0, 0, -180))
+        eyePropTrack = Sequence(
+            eyeAppearTrack,
+            Parallel(eyeMoveTrack, eyeRollTrack),
+            Func(battle.movie.clearRenderProp, eye),
+            Func(MovieUtil.removeProp, eye)
+        )
+        damageAnims = [['duck', 0.01, 0.01, 1.4],
+         ['cringe', 0.01, 0.3]]
+        toonTrack = getToonTrack(attack, splicedDamageAnims=damageAnims, damageDelay=damageDelay, dodgeDelay=dodgeDelay, dodgeAnimNames=['duck'], showDamageExtraTime=1.7, showMissedExtraTime=1.7)
+        soundTrack = getSoundTrack('SA_evil_eye.ogg', delay=1.3, node=suit)
+        return Parallel(suitTrack, toonTrack, eyePropTrack, soundTrack)
     else:
-        posPoints = [Point3(-0.4, 3.65, 5.01), VBase3(-155.0, -20.0, 0.0)]
-    appearDelay = 0.8
-    suitHoldStart = 1.06
-    suitHoldStop = 1.69
-    suitHoldDuration = suitHoldStop - suitHoldStart
-    eyeHoldDuration = 1.1
-    moveDuration = 1.1
-    suitSplicedAnims = [['glower', 0.01, 0.01, suitHoldStart]]
-    suitSplicedAnims.extend(getSplicedLerpAnims('glower', suitHoldDuration, 1.1, startTime=suitHoldStart))
-    suitSplicedAnims.append(['glower', 0.01, suitHoldStop])
-    suitTrack = getSuitTrack(attack, splicedAnims=suitSplicedAnims)
-    eyeAppearTrack = Sequence(
-        Wait(suitHoldStart),
-        Func(__showProp, eye, suit, posPoints[0], posPoints[1]),
-        LerpScaleInterval(eye, suitHoldDuration, Point3(11, 11, 11)),
-        Wait(eyeHoldDuration * 0.3),
-        LerpHprInterval(eye, 0.02, Point3(205, 40, 0)),
-        Wait(eyeHoldDuration * 0.7),
-        Func(battle.movie.needRestoreRenderProp, eye),
-        Func(eye.wrtReparentTo, battle)
-    )
-    toonFace = __toonFacePoint(toon, parent=battle)
-    if dmg > 0:
-        lerpInterval = LerpPosInterval(eye, moveDuration, toonFace)
-    else:
-        lerpInterval = LerpPosInterval(eye, moveDuration, Point3(toonFace.getX(), toonFace.getY() - 5, toonFace.getZ() - 2))
-    eyeMoveTrack = lerpInterval
-    eyeRollTrack = LerpHprInterval(eye, moveDuration, Point3(0, 0, -180))
-    eyePropTrack = Sequence(
-        eyeAppearTrack,
-        Parallel(eyeMoveTrack, eyeRollTrack),
-        Func(battle.movie.clearRenderProp, eye),
-        Func(MovieUtil.removeProp, eye)
-    )
-    damageAnims = [['duck', 0.01, 0.01, 1.4],
-     ['cringe', 0.01, 0.3]]
-    toonTrack = getToonTrack(attack, splicedDamageAnims=damageAnims, damageDelay=damageDelay, dodgeDelay=dodgeDelay, dodgeAnimNames=['duck'], showDamageExtraTime=1.7, showMissedExtraTime=1.7)
-    soundTrack = getSoundTrack('SA_evil_eye.ogg', delay=1.3, node=suit)
-    return Parallel(suitTrack, toonTrack, eyePropTrack, soundTrack)
+        targets = attack['target']
+        damageDelay = 2.44
+        dodgeDelay = 1.64
+        suitName = attack['suitName']
+        if suitName == 'cr':
+            posPoints = [Point3(-0.46, 4.85, 5.28), VBase3(-155.0, -20.0, 0.0)]
+        elif suitName == 'tf':
+            posPoints = [Point3(-0.4, 3.65, 5.01), VBase3(-155.0, -20.0, 0.0)]
+        elif suitName == 'le':
+            posPoints = [Point3(-0.64, 4.45, 5.91), VBase3(-155.0, -20.0, 0.0)]
+        else:
+            posPoints = [Point3(-0.4, 3.65, 5.01), VBase3(-155.0, -20.0, 0.0)]
+        appearDelay = 0.8
+        suitHoldStart = 1.06
+        suitHoldStop = 1.69
+        suitHoldDuration = suitHoldStop - suitHoldStart
+        eyeHoldDuration = 1.1
+        moveDuration = 1.1
+        suitSplicedAnims = [['glower', 0.01, 0.01, suitHoldStart]]
+        suitSplicedAnims.extend(getSplicedLerpAnims('glower', suitHoldDuration, 1.1, startTime=suitHoldStart))
+        suitSplicedAnims.append(['glower', 0.01, suitHoldStop])
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06, splicedAnims=suitSplicedAnims)
+        eyePropTracks = Parallel()
+        for t in targets:
+            toon = t['toon']
+            dmg = t['hp']
+            eye = globalPropPool.getProp('evil-eye')
+            eyeAppearTrack = Sequence(
+                Wait(suitHoldStart),
+                Func(__showProp, eye, suit, posPoints[0], posPoints[1]),
+                LerpScaleInterval(eye, suitHoldDuration, Point3(11, 11, 11)),
+                Wait(eyeHoldDuration * 0.3),
+                LerpHprInterval(eye, 0.02, Point3(205, 40, 0)),
+                Wait(eyeHoldDuration * 0.7),
+                Func(battle.movie.needRestoreRenderProp, eye),
+                Func(eye.wrtReparentTo, battle)
+            )
+            toonFace = __toonFacePoint(toon, parent=battle)
+            if dmg > 0:
+                lerpInterval = LerpPosInterval(eye, moveDuration, toonFace)
+            else:
+                lerpInterval = LerpPosInterval(eye, moveDuration, Point3(toonFace.getX(), toonFace.getY() - 5, toonFace.getZ() - 2))
+            eyeMoveTrack = lerpInterval
+            eyeRollTrack = LerpHprInterval(eye, moveDuration, Point3(0, 0, -180))
+            eyePropTrack = Sequence(
+                eyeAppearTrack,
+                Parallel(eyeMoveTrack, eyeRollTrack),
+                Func(battle.movie.clearRenderProp, eye),
+                Func(MovieUtil.removeProp, eye)
+            )
+            eyePropTracks.append(eyePropTrack)
+        damageAnims = [['duck', 0.01, 0.01, 1.4],
+         ['cringe', 0.01, 0.3]]
+        toonTracks = getToonTracks(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['duck'], showDamageExtraTime=1.7, showMissedExtraTime=1.7)
+        soundTrack = getSoundTrack('SA_evil_eye.ogg', delay=1.3, node=suit)
+        return Parallel(suitTrack, toonTracks, eyePropTracks, soundTrack)
 
 
 def doPlayHardball(attack):
