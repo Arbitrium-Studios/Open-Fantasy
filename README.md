@@ -4,15 +4,15 @@
 
 # What is Toontown Fantasy?
  
-> From the author of A Mother's Tales (2024) and the creator of THE PLAYER ZER0, comes the next generation of Toontown storytelling like you've never seen before! PLAYER ZER0 STUDIO's Toontown Fantasy is a re-envisioning of Disney's Toontown Online. Create a Toon to uncover the mystery behind the sudden invasion of Cogs and crack open their plans then thwart them before it is too late! The fate of the wider Tooniverse is in YOUR hands! Toontown Fantasy is coming soon to a universe near you...
+> From the author of the Sea of Memories (2024) and the creator of THE PLAYER ZER0, comes the next generation of Toontown storytelling like you've never seen before! PLAYER ZER0 STUDIO's Toontown Fantasy is a re-envisioning of Disney's Toontown Online. Create a Toon to uncover the mystery behind the sudden invasion of Cogs and crack open their plans then thwart them before it is too late! The fate of the wider Tooniverse is in YOUR hands! Toontown Fantasy is coming soon to a universe near you...
 
 ### Staff Members:
 
-> See the Authors.md file
+> Head over to the [Join the Team](https://toontownfantasy.com/toon-hq/Join_The_Team) page on the Toontown Fantasy website to see the staff members!
 
 ### Contributing:
 
-> If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
+> If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge! Then you will be added to the [Credits](https://www.toontownfantasy.com/help/faq/Credits) page on the Toontown Fantasy page.
 
 > If you would no longer like to be associated with Open-Fantasy, please notify Gracie on the PLAYER ZER0 STUDIOS [Discord][discordLink] server.
 
