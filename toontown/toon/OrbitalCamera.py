@@ -47,7 +47,8 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         self.camParent = self.escapementNode.attachNewNode('orbitCamParent')
         self._paramStack = []
         self.setDefaultParams()
-
+        self.DistanceCheckTaskName = 'OrbitCamDistanceTask'
+        taskMgr.add(self.checkSubjectDist, self.DistanceCheckTaskName, priority=40)
         self._isAtRear = True
         self._rotateToRearIval = None
         self.toggleFov = False
@@ -76,6 +77,8 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         self.lodCenter = NodePath()
         self.lodCenterEnv = NodePath()
         self.accept('change_movement', self.change_movement)
+
+        
 
     def change_movement(self, action, speed_normal, speed_running, speed_sliding):
         run_angle = -45 if speed_sliding > 0 else 45
@@ -106,6 +109,7 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         CameraMode.CameraMode.destroy(self)
         NodePath.removeNode(self)
         ParamObj.destroy(self)
+        taskMgr.remove(self.DistanceCheckTaskName)
         return
 
     def getName(self):
@@ -527,19 +531,12 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
         taskMgr.add(self._collisionCheckTask, OrbitCamera.CollisionCheckTaskName, priority=45)
 
     def _stopCollisionCheck(self):
-        # while len(self._hiddenGeoms):
-        # self._unfadeGeom(self._hiddenGeoms.keys()[0])
-        #
-        # del self._hiddenGeoms
-        #  del self._fadeOutIvals
-        #   del self._fadeInIvals
         taskMgr.remove(OrbitCamera.CollisionCheckTaskName)
         self._cTrav.removeCollider(self._collSolidNp)
         del self._cHandlerQueue
         del self._cTrav
         self._collSolidNp.detachNode()
         del self._collSolidNp
-        self.showOrHide(self.subject)
 
     def _fadeGeom(self, np):
         if np in self._fadeInIvals:
@@ -675,15 +672,10 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
             camera.setPos(self.camOffset)
             camera.setZ(0)
             return task.cont
-        self.showOrHide(self.subject)
         cPoint = collEntry.getSurfacePoint(self)
         offset = 0.9
         camera.setPos(cPoint + cNormal * offset)
         distance = camera.getDistance(self)
-        if distance < 1.8 or self.subject.isDisguised:
-            self.subject.getGeomNode().hide()
-        else:
-            self.subject.getGeomNode().show()
 
         self._cTrav.traverse(render)
         return Task.cont
@@ -717,3 +709,11 @@ class OrbitCamera(CameraMode.CameraMode, NodePath, ParamObj):
             self.subject.getGeomNode().hide()
         else:
             self.subject.getGeomNode().show()
+
+    def checkSubjectDist(self, task):
+        distance = camera.getDistance(self)
+        if distance < 1.8 or self.subject.isDisguised:
+            self.subject.getGeomNode().hide()
+        else:
+            self.subject.getGeomNode().show()
+        return task.cont
