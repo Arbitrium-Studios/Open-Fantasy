@@ -930,11 +930,12 @@ class TalkAssistant(DirectObject.DirectObject):
             if self.isThought(message):
                 chatFlags = CFThought
             base.localAvatar.sendUpdate('setTalk', [0,
-                                                    0,
-                                                    '',
-                                                    message,
-                                                    [],
-                                                    0])
+             0,
+             '',
+             message,
+             [],
+             0])
+            base.cr.chatHandler.sendChatMessage(message)
             messenger.send('chatUpdate', [message, chatFlags])
         return error
 
@@ -952,11 +953,12 @@ class TalkAssistant(DirectObject.DirectObject):
             receiver = base.cr.identifyAvatar(receiverAvId)
             if receiver:
                 base.localAvatar.sendUpdate('setTalkWhisper', [0,
-                                                               0,
-                                                               '',
-                                                               message,
-                                                               [],
-                                                               0], sendToId=receiverAvId)
+                 0,
+                 '',
+                 message,
+                 [],
+                 0], sendToId=receiverAvId)
+        base.cr.chatHandler.sendWhisperMessage(message, receiverAvId)
         return error
 
     def sendAccountTalk(self, message, receiverAccount):

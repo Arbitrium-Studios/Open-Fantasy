@@ -446,9 +446,8 @@ class OTPClientRepository(ClientRepositoryBase):
         self.__doId2pendingInterest = {}
         self.centralLogger = self.generateGlobalObject(
             OtpDoGlobals.OTP_DO_ID_CENTRAL_LOGGER, 'CentralLogger')
-        if __astron__:
-            self.astronLoginManager = self.generateGlobalObject(
-                OtpDoGlobals.OTP_DO_ID_ASTRON_LOGIN_MANAGER, 'AstronLoginManager')
+        self.astronLoginManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_ASTRON_LOGIN_MANAGER, 'AstronLoginManager')
+        self.chatHandler = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_CHAT_HANDLER, 'ChatHandler')
 
     def startLeakDetector(self):
         if hasattr(self, 'leakDetector'):
