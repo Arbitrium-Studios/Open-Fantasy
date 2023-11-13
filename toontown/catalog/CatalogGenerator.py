@@ -1789,10 +1789,17 @@ class CatalogGenerator:
             item = MetaItems[item]
         selection = []
         if isinstance(item, CatalogItem.CatalogItem):
+<<<<<<< HEAD
             if not item.notOfferedTo(avatar):
                 item.saleItem = saleItem
                 selection.append(item)
         elif item is not None:
+=======
+           
+            item.saleItem = saleItem
+            selection.append(item)
+        elif item != None:
+>>>>>>> bcff94ff (experimental: get rid of gender exclusive items)
             list = item[:]
             for i in range(chooseCount):
                 if len(list) == 0:
@@ -1808,8 +1815,12 @@ class CatalogGenerator:
         index = random.randrange(len(list))
         item = list[index]
         del list[index]
+<<<<<<< HEAD
         while item.notOfferedTo(avatar) or item.reachedPurchaseLimit(
                 avatar) or item in duplicateItems or item in avatar.backCatalog or item in avatar.weeklyCatalog:
+=======
+        while item.reachedPurchaseLimit(avatar) or item in duplicateItems or item in avatar.backCatalog or item in avatar.weeklyCatalog:
+>>>>>>> bcff94ff (experimental: get rid of gender exclusive items)
             if len(list) == 0:
                 return None
             index = random.randrange(len(list))

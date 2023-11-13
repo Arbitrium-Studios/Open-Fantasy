@@ -621,6 +621,7 @@ class CatalogItemPanel(DirectFrame):
                 return
             elif self.parentCatalogScreen.gotAvatar == 1:
                 avatar = self.parentCatalogScreen.giftAvatar
+<<<<<<< HEAD
                 if self['item'].forBoysOnly() and avatar.getStyle().getGender(
                 ) == 'f' or self['item'].forGirlsOnly() and avatar.getStyle().getGender() == 'm':
                     self.giftButton.show()
@@ -629,6 +630,10 @@ class CatalogItemPanel(DirectFrame):
                     self.auxText['text'] = auxText
                     return
                 elif self['item'].reachedPurchaseLimit(avatar):
+=======
+                
+                if self['item'].reachedPurchaseLimit(avatar):
+>>>>>>> bcff94ff (experimental: get rid of gender exclusive items)
                     self.giftButton.show()
                     self.giftButton['state'] = DGG.DISABLED
                     auxText = TTLocalizer.CatalogPurchasedGiftText

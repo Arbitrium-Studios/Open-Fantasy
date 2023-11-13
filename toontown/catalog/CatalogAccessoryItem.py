@@ -19,6 +19,7 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
     def storedInTrunk(self):
         return 1
 
+<<<<<<< HEAD
     def notOfferedTo(self, avatar):
         article = AccessoryTypes[self.accessoryType][ATArticle]
         if article in [AHat,
@@ -54,6 +55,11 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
             return 1
         else:
             return 0
+=======
+
+
+
+>>>>>>> bcff94ff (experimental: get rid of gender exclusive items)
 
     def getPurchaseLimit(self):
         return 1
