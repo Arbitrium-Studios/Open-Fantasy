@@ -1070,11 +1070,11 @@ class Toon(Avatar.Avatar, ToonHead):
     def generateToonClothes(self, fromNet=0):
         swappedTorso = 0
         if self.hasLOD():
-            if self.style.getGender() == 'f' and fromNet == 0:
+            if fromNet == 0:
                 try:
-                    bottomPair = ToonDNA.GirlBottoms[self.style.botTex]
-                except BaseException:
-                    bottomPair = ToonDNA.GirlBottoms[0]
+                    bottomPair = ToonDNA.Bottoms[self.style.botTex]
+                except:
+                    bottomPair = ToonDNA.Bottoms[0]
 
                 if len(self.style.torso) < 2:
                     self.sendLogSuspiciousEvent(
@@ -1120,27 +1120,16 @@ class Toon(Avatar.Avatar, ToonHead):
                 sleeveColor = ToonDNA.ClothesColors[self.style.sleeveTexColor]
             except BaseException:
                 sleeveColor = ToonDNA.ClothesColors[0]
-
-            if self.style.getGender() == 'm':
-                try:
-                    texName = ToonDNA.BoyShorts[self.style.botTex]
-                except BaseException:
-                    texName = ToonDNA.BoyShorts[0]
-
-            else:
-                try:
-                    texName = ToonDNA.GirlBottoms[self.style.botTex][0]
-                except BaseException:
-                    texName = ToonDNA.GirlBottoms[0][0]
+            try:
+                texName = ToonDNA.Bottoms[self.style.botTex][0]
+            except:
+                texName = ToonDNA.Bottoms[0][0]
 
             bottomTex = loader.loadTexture(texName, okMissing=True)
             if bottomTex is None:
-                self.sendLogSuspiciousEvent(
-                    'failed to load texture %s' % texName)
-                if self.style.getGender() == 'm':
-                    bottomTex = loader.loadTexture(ToonDNA.BoyShorts[0])
-                else:
-                    bottomTex = loader.loadTexture(ToonDNA.GirlBottoms[0][0])
+                self.sendLogSuspiciousEvent('failed to load texture %s' % texName)
+               
+                bottomTex = loader.loadTexture(ToonDNA.Bottoms[0][0])
             bottomTex.setMinfilter(Texture.FTLinearMipmapLinear)
             bottomTex.setMagfilter(Texture.FTLinear)
             try:
