@@ -63,10 +63,14 @@ TAILOR_COUNTDOWN_TIME = 300
 RTDNAFile = '/RTDNAFile.txt'
 saveDNA = False
 
+<<<<<<< HEAD
 
 def getRandomDNA(seed, gender):
+=======
+def getRandomDNA(seed, eyelashes):
+>>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
     randomDNA = ToonDNA.ToonDNA()
-    randomDNA.newToonRandom(seed, gender, 1)
+    randomDNA.newToonRandom(seed, eyelashes, 1)
     return randomDNA.asTuple()
 
 
@@ -82,7 +86,7 @@ def createNPC(air, npcId, desc, zoneId, posIndex=0, questCallback=None):
     from . import DistributedNPCSpecialQuestGiverAI
     from . import DistributedNPCFlippyInToonHallAI
     from . import DistributedNPCScientistAI
-    canonicalZoneId, name, dnaType, gender, protected, type = desc
+    canonicalZoneId, name, dnaType, eyelashes, protected, type = desc
     if type == NPC_REGULAR:
         npc = DistributedNPCToonAI.DistributedNPCToonAI(
             air, npcId, questCallback=questCallback)
@@ -117,7 +121,7 @@ def createNPC(air, npcId, desc, zoneId, posIndex=0, questCallback=None):
     npc.setName(name)
     dna = ToonDNA.ToonDNA()
     if dnaType == 'r':
-        dnaList = getRandomDNA(npcId, gender)
+        dnaList = getRandomDNA(npcId, eyelashes)
     else:
         dnaList = dnaType
     if saveDNA:
@@ -175,14 +179,14 @@ def createLocalNPC(npcId):
     if npcId not in NPCToonDict:
         return None
     desc = NPCToonDict[npcId]
-    canonicalZoneId, name, dnaType, gender, protected, type = desc
+    canonicalZoneId, name, dnaType, eyelashes, protected, type = desc
     npc = Toon.Toon()
     npc.setName(name)
     npc.setPickable(0)
     npc.setPlayerType(NametagGroup.CCNonPlayer)
     dna = ToonDNA.ToonDNA()
     if dnaType == 'r':
-        dnaList = getRandomDNA(npcId, gender)
+        dnaList = getRandomDNA(npcId, eyelashes)
     else:
         dnaList = dnaType
     dna.newToonFromProperties(*dnaList)

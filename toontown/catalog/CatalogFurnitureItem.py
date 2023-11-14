@@ -1113,10 +1113,7 @@ class CatalogFurnitureItem(CatalogAtticItem.CatalogAtticItem):
 
 
 def nextAvailableCloset(avatar, duplicateItems):
-    if avatar.getStyle().getGender() == 'm':
-        index = 0
-    else:
-        index = 1
+    index = 0
     if not hasattr(avatar, 'maxClothes'):
         return None
     closetIds = ClothesToCloset.get(avatar.getMaxClothes())
@@ -1136,10 +1133,7 @@ def nextAvailableCloset(avatar, duplicateItems):
 
 
 def get50ItemCloset(avatar, duplicateItems):
-    if avatar.getStyle().getGender() == 'm':
-        index = 0
-    else:
-        index = 1
+    index = 0
     closetId = MaxClosetIds[index]
     item = CatalogFurnitureItem(closetId)
     if item in avatar.onOrder or item in avatar.mailboxContents:
@@ -1164,10 +1158,8 @@ def getAllClosets():
 
 
 def get50ItemTrunk(avatar, duplicateItems):
-    if avatar.getStyle().getGender() == 'm':
-        index = 0
-    else:
-        index = 1
+    index = 0
+    
     trunkId = MaxTrunkIds[index]
     item = CatalogFurnitureItem(trunkId)
     if item in avatar.onOrder or item in avatar.mailboxContents:

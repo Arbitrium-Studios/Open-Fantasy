@@ -92,12 +92,32 @@ class NameGenerator:
 
     def getFemaleNameParts(self):
         return self._getNameParts({1: 0,
+<<<<<<< HEAD
                                    2: 0,
                                    4: 1,
                                    5: 1,
                                    6: 2,
                                    7: 2,
                                    8: 3})
+=======
+         2: 0,
+         4: 1,
+         5: 1,
+         6: 2,
+         7: 2,
+         8: 3})
+    
+    def getAllNameParts(self):
+        return self._getNameParts({0: 0,
+         1: 0,
+         2: 0,
+         3: 1,
+         4: 1,
+         5: 1,
+         6: 2,
+         7: 2,
+         8: 3})
+>>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
 
     def getLastNamePrefixesCapped(self):
         return self.capPrefixes
@@ -241,21 +261,13 @@ class NameGenerator:
         retString = ''
         if titleFlag:
             titleList = self.neutralTitles[:]
-            if boy:
-                titleList += self.boyTitles
-            elif girl:
-                titleList += self.girlTitles
-            else:
-                self.error('Must be boy or girl.')
+            titleList += self.boyTitles
+            titleList += self.girlTitles
             retString += random.choice(titleList) + ' '
         if firstFlag:
             firstList = self.neutralFirsts[:]
-            if boy:
-                firstList += self.boyFirsts
-            elif girl:
-                firstList += self.girlFirsts
-            else:
-                self.error('Must be boy or girl.')
+            firstList += self.boyFirsts
+            firstList += self.girlFirsts
             retString += random.choice(firstList)
             if lastFlag:
                 retString += ' '
@@ -267,12 +279,16 @@ class NameGenerator:
             retString += lastPrefix + lastSuffix
         return retString
 
+<<<<<<< HEAD
     def randomNameMoreinfo(self, boy=0, girl=0):
         if boy and girl:
             self.error("A name can't be both boy and girl!")
         if not boy and not girl:
             boy = random.choice([0, 1])
             girl = not boy
+=======
+    def randomNameMoreinfo(self):
+>>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         uberFlag = random.choice(['title-first',
                                   'title-last',
                                   'first',
@@ -300,20 +316,14 @@ class NameGenerator:
         uberReturn[1] = firstFlag
         uberReturn[2] = lastFlag
         titleList = self.neutralTitles[:]
-        if boy:
-            titleList += self.boyTitles
-        elif girl:
-            titleList += self.girlTitles
+        titleList += self.boyTitles
+        titleList += self.girlTitles
         else:
             self.error('Must be boy or girl.')
         uberReturn[3] = random.choice(titleList)
         firstList = self.neutralFirsts[:]
-        if boy:
-            firstList += self.boyFirsts
-        elif girl:
-            firstList += self.girlFirsts
-        else:
-            self.error('Must be boy or girl.')
+        firstList += self.boyFirsts
+        firstList += self.girlFirsts
         uberReturn[4] = random.choice(firstList)
         lastPrefix = random.choice(self.lastPrefixes)
         lastSuffix = random.choice(self.lastSuffixes)
@@ -343,10 +353,7 @@ class NameGenerator:
             name = self.randomName(boy, girl)
             width = self.text.calcWidth(name)
             widthStr = str(width)
-            if boy:
-                print('Boy: ' + name + ' (' + widthStr + ' units)')
-            if girl:
-                print('Girl: ' + name + ' (' + widthStr + ' units)')
+            print(name + ' (' + widthStr + ' units)')
             i += 1
 
     def percentOver(self, limit=9.0, samples=1000):

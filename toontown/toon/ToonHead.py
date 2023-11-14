@@ -806,7 +806,7 @@ class ToonHead(Actor.Actor):
         return reachedTarget
 
     def setupEyelashes(self, style):
-        if style.getGender() == 'm':
+        if style.getEyelashes():
             if self.__eyelashOpen:
                 self.__eyelashOpen.removeNode()
                 self.__eyelashOpen = None

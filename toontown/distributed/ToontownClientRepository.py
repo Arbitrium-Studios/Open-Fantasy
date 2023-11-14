@@ -130,6 +130,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                 for head in ToonDNA.getHeadList(species):
                     for torso in ToonDNA.toonTorsoTypes:
                         for legs in ToonDNA.toonLegTypes:
+<<<<<<< HEAD
                             for gender in ('m', 'f'):
                                 print('species: %s, head: %s, torso: %s, legs: %s, gender: %s' % (species,
                                                                                                   head,
@@ -141,6 +142,18 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                                              torso,
                                              legs,
                                              gender))
+=======
+                                print('species: %s, head: %s, torso: %s, legs: %s' % (species,
+                                 head,
+                                 torso,
+                                 legs,
+                                 ))
+                                dna = ToonDNA.ToonDNA()
+                                dna.newToon((head,
+                                 torso,
+                                 legs
+                                 ))
+>>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
                                 toon = Toon.Toon()
                                 try:
                                     toon.setDNA(dna)

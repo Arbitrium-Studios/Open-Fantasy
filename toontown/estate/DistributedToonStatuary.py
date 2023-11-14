@@ -23,14 +23,15 @@ def dnaCodeFromToonDNA(dna):
 
         return i
 
-    if dna.gender == 'f':
-        genderTypeNum = 0
+
+    if dna.eyelashes == 0:
+        eyelashesTypeNum = 0
     else:
-        genderTypeNum = 1
+        eyelashesTypeNum = 1
     legTypeNum = findItemNumInList(dna.legs, ToonDNA.toonLegTypes) << 1
     torsoTypeNum = findItemNumInList(dna.torso, ToonDNA.toonTorsoTypes) << 3
     headTypeNum = findItemNumInList(dna.head, ToonDNA.toonHeadTypes) << 7
-    return headTypeNum | torsoTypeNum | legTypeNum | genderTypeNum
+    return headTypeNum | torsoTypeNum | legTypeNum | eyelashesTypeNum
 
 
 class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
@@ -51,6 +52,7 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
             self.worldScale)
         self.getToonPropertiesFromOptional()
         dna = ToonDNA.ToonDNA()
+<<<<<<< HEAD
         dna.newToonFromProperties(
             self.headType,
             self.torsoType,
@@ -66,6 +68,9 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
             0,
             0,
             0)
+=======
+        dna.newToonFromProperties(self.headType, self.torsoType, self.legType, self.eyelashes, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+>>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         self.setupStoneToon(dna)
         self.poseToonFromTypeIndex(self.typeIndex)
         self.toon.reparentTo(self.model)
@@ -81,7 +86,7 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
         self.toon.initializeBodyCollisions('toonStatue')
         self.toon.stopBlink()
         self.toon.stopLookAround()
-        self.gender = self.toon.style.gender
+        self.eyelashes = self.toon.style.eyelashes
         self.speciesType = self.toon.style.getAnimal()
         self.headType = self.toon.style.head
         self.removeTextures()
@@ -104,7 +109,7 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
         self.toon.pose('victory', 30)
         self.toon.setH(180)
         self.speciesType = self.toon.style.getAnimal()
-        self.gender = self.toon.style.gender
+        self.eyelashes = self.toon.style.eyelashes
 
     def setupCollision(self):
         DistributedStatuary.DistributedStatuary.setupCollision(self)
@@ -190,7 +195,7 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
         tsLashes = TextureStage('tsLashes')
         tsLashes.setPriority(2)
         tsLashes.setMode(tsLashes.MDecal)
-        if self.gender == 'f':
+        if self.eyelashes:
             if self.toon.hasLOD():
                 head = self.toon.getPart('head', '1000')
             else:
@@ -214,14 +219,14 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
         self.optional = optional
 
     def getToonPropertiesFromOptional(self):
-        genderTypeNum = self.optional & 1
+        eyelashesTypeNum = self.optional & 1
         legTypeNum = (self.optional & 6) >> 1
         torsoTypeNum = (self.optional & 120) >> 3
         headTypeNum = (self.optional & 65408) >> 7
-        if genderTypeNum == 0:
-            self.gender = 'f'
+        if eyelashesTypeNum == 0:
+            self.eyelashes = 0
         else:
-            self.gender = 'm'
+            self.eyelashes = 1
         if legTypeNum <= len(ToonDNA.toonLegTypes):
             self.legType = ToonDNA.toonLegTypes[legTypeNum]
         if torsoTypeNum <= len(ToonDNA.toonTorsoTypes):

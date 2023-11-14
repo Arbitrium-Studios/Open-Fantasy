@@ -11,6 +11,7 @@ class MakeClothesGUI(ClothesGUI.ClothesGUI):
 
     def setupScrollInterface(self):
         self.dna = self.toon.getStyle()
+<<<<<<< HEAD
         gender = self.dna.getGender()
         if gender != self.gender:
             self.tops = ToonDNA.getRandomizedTops(
@@ -20,14 +21,15 @@ class MakeClothesGUI(ClothesGUI.ClothesGUI):
             self.gender = gender
             self.topChoice = 0
             self.bottomChoice = 0
+=======
+>>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         self.setupButtons()
 
     def setupButtons(self):
         ClothesGUI.ClothesGUI.setupButtons(self)
         if len(self.dna.torso) == 1:
-            if self.gender == 'm':
-                torsoStyle = 's'
-            elif self.girlInShorts == 1:
+           
+            if self.toonInShorts == 1:
                 torsoStyle = 's'
             else:
                 torsoStyle = 'd'

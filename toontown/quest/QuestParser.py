@@ -537,57 +537,10 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         self.setVar(varName, dialogue)
         return
 
-    def parseLoadCCDialogue(self, line):
-        token, varName, filenameTemplate = line
-        if self.toon.getStyle().gender == 'm':
-            classicChar = 'mickey'
-        else:
-            classicChar = 'minnie'
-        filename = filenameTemplate % classicChar
-        if base.config.GetString('language', 'english') == 'japanese':
-            dialogue = base.loader.loadSfx(filename)
-        else:
-            dialogue = None
-        self.setVar(varName, dialogue)
-        return
 
-    def parseLoadChar(self, line):
-        token, name, charType = line
-        char = Char.Char()
-        dna = CharDNA.CharDNA()
-        dna.newChar(charType)
-        char.setDNA(dna)
-        if charType == 'mk' or charType == 'mn':
-            char.startEarTask()
-        char.nametag.manage(base.marginManager)
-        char.addActive()
-        char.hideName()
-        self.setVar(name, char)
 
-    def parseLoadClassicChar(self, line):
-        token, name = line
-        char = Char.Char()
-        dna = CharDNA.CharDNA()
-        if self.toon.getStyle().gender == 'm':
-            charType = 'mk'
-        else:
-            charType = 'mn'
-        dna.newChar(charType)
-        char.setDNA(dna)
-        char.startEarTask()
-        char.nametag.manage(base.marginManager)
-        char.addActive()
-        char.hideName()
-        self.setVar(name, char)
-        self.chars.append(char)
+    
 
-    def parseUnloadChar(self, line):
-        token, name = line
-        char = self.getVar(name)
-        track = Sequence()
-        track.append(Func(self.__unloadChar, char))
-        track.append(Func(self.delVar, name))
-        return track
 
     def parseLoadSuit(self, line):
         token, name, suitType = line
@@ -777,6 +730,7 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         return Func(avatar.setLocalPageChat, chatString,
                     quitButton, extraChatFlags, dialogueList)
 
+<<<<<<< HEAD
     def parseCCChatConfirm(self, line):
         lineLength = len(line)
         avatarName = line[1]
@@ -807,6 +761,11 @@ class NPCMoviePlayer(DirectObject.DirectObject):
             line[4:])
         return Func(avatar.setLocalPageChat, chatString,
                     quitButton, extraChatFlags, dialogueList)
+=======
+   
+
+
+>>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
 
     def parsePlaySfx(self, line):
         if len(line) == 2:
