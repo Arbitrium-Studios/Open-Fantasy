@@ -64,9 +64,13 @@ RTDNAFile = '/RTDNAFile.txt'
 saveDNA = False
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 def getRandomDNA(seed, gender):
 =======
+=======
+
+>>>>>>> 88f4b583 (Toon: Gender Removal is complete)
 def getRandomDNA(seed, eyelashes):
 >>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
     randomDNA = ToonDNA.ToonDNA()
@@ -149,7 +153,8 @@ def createNPC(air, npcId, desc, zoneId, posIndex=0, questCallback=None):
             rtDnaFile = open(RTDNAFile, 'w')
             rtDnaFile.writelines(rtDNA)
         rtDnaFile.close()
-    dna.newToonFromProperties(*dnaList)
+
+    dna.newToonFromProperties(*dnaList, isNPC=True)
     npc.setDNAString(dna.makeNetString())
     npc.setHp(15)
     npc.setMaxHp(15)
@@ -189,7 +194,7 @@ def createLocalNPC(npcId):
         dnaList = getRandomDNA(npcId, eyelashes)
     else:
         dnaList = dnaType
-    dna.newToonFromProperties(*dnaList)
+    dna.newToonFromProperties(*dnaList, isNPC=True)
     npc.setDNAString(dna.makeNetString())
     npc.animFSM.request('neutral')
     return npc
