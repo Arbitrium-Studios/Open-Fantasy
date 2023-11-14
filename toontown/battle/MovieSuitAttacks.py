@@ -182,6 +182,8 @@ def doSuitAttack(attack):
         suitTrack = doHotAir(attack)
     elif name == JARGON:
         suitTrack = doJargon(attack)
+    elif name == KICKBACK:
+        suitTrack = doDefault(attack)
     elif name == LEGALESE:
         suitTrack = doLegalese(attack)
     elif name == LIQUIDATE:
@@ -341,6 +343,7 @@ def doDefault(attack):
     if attack['group'] == ATK_TGT_SINGLE:
         if suitName == 'f':
             attack['id'] = CLIPON_TIE
+            attack['group'] = ATK_TGT_SINGLE
             attack['name'] = 'ClipOnTie'
             attack['animName'] = 'throw-paper'
             return doClipOnTie(attack)
@@ -531,7 +534,13 @@ def doDefault(attack):
             attack['animName'] = 'speak'
             return doMumboJumbo(attack)
     else:
-        if suitName == 'p':
+        if suitName == 'f':
+            attack['id'] = CLIPON_TIE
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'FountainPen'
+            attack['animName'] = 'throw-paper'
+            return doClipOnTie(attack)
+        elif suitName == 'p':
             attack['id'] = FOUNTAIN_PEN
             attack['group'] = ATK_TGT_GROUP
             attack['name'] = 'FountainPen'
@@ -560,6 +569,12 @@ def doDefault(attack):
             attack['name'] = 'FountainPen'
             attack['animName'] = 'pen-squirt'
             return doFountainPen(attack)
+        elif suitName == 'cr':
+            attack['id'] = EVIL_EYE
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'EvilEye'
+            attack['animName'] = 'glower'
+            return doEvilEye(attack)
         elif suitName == 'tbc':
             attack['id'] = POWER_TRIP
             attack['name'] = 'PowerTrip'
@@ -682,6 +697,12 @@ def doDefault(attack):
             attack['name'] = 'ParadigmShift'
             attack['animName'] = 'magic2'
             return doParadigmShift(attack)
+        elif suitName == 'le':
+            attack['id'] = EVIL_EYE
+            attack['group'] = ATK_TGT_GROUP
+            attack['name'] = 'EvilEye'
+            attack['animName'] = 'glower'
+            return doEvilEye(attack)
         elif suitName == 'bw':
             attack['id'] = POWER_TRIP
             attack['name'] = 'PowerTrip'
@@ -894,8 +915,9 @@ def getPropAppearTrack(prop, parent, posPoints, appearDelay, scaleUpPoint=Point3
     return propTrack
 
 
-def getPropThrowTrack(attack, prop, hitPoints=[], missPoints=[], hitDuration=0.5, missDuration=0.5, hitPointNames='none', missPointNames='none', lookAt='none', groundPointOffSet=0, missScaleDown=None, parent=render):
-    target = attack['target']
+def getPropThrowTrack(attack, prop, hitPoints=[], missPoints=[], hitDuration=0.5, missDuration=0.5, hitPointNames='none', missPointNames='none', lookAt='none', groundPointOffSet=0, missScaleDown=None, parent=render, target=None):
+    if target == None:
+        target = attack['target']
     toon = target['toon']
     dmg = target['hp']
     battle = attack['battle']
@@ -1094,38 +1116,75 @@ def getColorTrack(attack, toon, part, color, delay = 0.0, duration = 1.0):
 
 def doClipOnTie(attack):
     suit = attack['suit']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
-    tie = globalPropPool.getProp('clip-on-tie')
-    throwDelay = {
-        'a': 2.17,
-        'b': 2.17,
-        'c': 1.45
-    }
-    damageDelay = {
-        'a': 3.3,
-        'b': 3.3,
-        'c': 2.61
-    }
-    dodgeDelay = {
-        'a': 3.1,
-        'b': 3.1,
-        'c': 2.34
-    }
-    suitTrack = getSuitTrack(attack)
-    posPoints = [Point3(0.66, 0.51, 0.28), VBase3(-69.652, -17.199, 67.96)]
-    tiePropTrack = Sequence(getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, MovieUtil.PNT3_ONE, scaleUpTime=0.5, poseExtraArgs=['clip-on-tie', 0]))
-    suitType = getSuitBodyType(attack['suitName'])
-    if dmg > 0:
-        tiePropTrack.append(ActorInterval(tie, 'clip-on-tie', duration=throwDelay[suitType], startTime=1.1))
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        dmg = target['hp']
+        tie = globalPropPool.getProp('clip-on-tie')
+        throwDelay = {
+            'a': 2.17,
+            'b': 2.17,
+            'c': 1.45
+        }
+        damageDelay = {
+            'a': 3.3,
+            'b': 3.3,
+            'c': 2.61
+        }
+        dodgeDelay = {
+            'a': 3.1,
+            'b': 3.1,
+            'c': 2.34
+        }
+        suitTrack = getSuitTrack(attack)
+        posPoints = [Point3(0.66, 0.51, 0.28), VBase3(-69.652, -17.199, 67.96)]
+        tiePropTrack = Sequence(getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, MovieUtil.PNT3_ONE, scaleUpTime=0.5, poseExtraArgs=['clip-on-tie', 0]))
+        suitType = getSuitBodyType(attack['suitName'])
+        if dmg > 0:
+            tiePropTrack.append(ActorInterval(tie, 'clip-on-tie', duration=throwDelay[suitType], startTime=1.1))
+        else:
+            tiePropTrack.append(Wait(throwDelay[suitType]))
+        tiePropTrack.append(Func(tie.setHpr, Point3(0, -90, 0)))
+        tiePropTrack.append(getPropThrowTrack(attack, tie, [__toonFacePoint(toon)], [__toonGroundPoint(attack, toon, 0.1)], hitDuration=0.4, missDuration=0.8, missScaleDown=1.2))
+        toonTrack = getToonTrack(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
+        throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay[suitType] + 1, node=suit)
+        return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound)
     else:
-        tiePropTrack.append(Wait(throwDelay[suitType]))
-    tiePropTrack.append(Func(tie.setHpr, Point3(0, -90, 0)))
-    tiePropTrack.append(getPropThrowTrack(attack, tie, [__toonFacePoint(toon)], [__toonGroundPoint(attack, toon, 0.1)], hitDuration=0.4, missDuration=0.8, missScaleDown=1.2))
-    toonTrack = getToonTrack(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
-    throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay[suitType] + 1, node=suit)
-    return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound)
+        targets = attack['target']
+        throwDelay = {
+            'a': 2.17,
+            'b': 2.17,
+            'c': 1.45
+        }
+        damageDelay = {
+            'a': 3.3,
+            'b': 3.3,
+            'c': 2.61
+        }
+        dodgeDelay = {
+            'a': 3.1,
+            'b': 3.1,
+            'c': 2.34
+        }
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        posPoints = [Point3(0.66, 0.51, 0.28), VBase3(-69.652, -17.199, 67.96)]
+        tiePropTracks = Parallel()
+        suitType = getSuitBodyType(attack['suitName'])
+        for t in targets:
+            toon = t['toon']
+            dmg = t['hp']
+            tie = globalPropPool.getProp('clip-on-tie')
+            tiePropTrack = Sequence(getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, MovieUtil.PNT3_ONE, scaleUpTime=0.5, poseExtraArgs=['clip-on-tie', 0]))
+            if dmg > 0:
+                tiePropTrack.append(ActorInterval(tie, 'clip-on-tie', duration=throwDelay[suitType], startTime=1.1))
+            else:
+                tiePropTrack.append(Wait(throwDelay[suitType]))
+            tiePropTrack.append(Func(tie.setHpr, Point3(0, -90, 0)))
+            tiePropTrack.append(getPropThrowTrack(attack, tie, [__toonFacePoint(toon)], [__toonGroundPoint(attack, toon, 0.1)], hitDuration=0.4, missDuration=0.8, missScaleDown=1.2, target=t))
+            tiePropTracks.append(tiePropTrack)
+        toonTracks = getToonTracks(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
+        throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay[suitType] + 1, node=suit)
+        return Parallel(suitTrack, toonTracks, tiePropTracks, throwSound)
 
 
 def doPoundKey(attack):
@@ -5135,7 +5194,7 @@ def doMumboJumbo(attack):
     toonTrack = getToonTrack(attack, 3.2, ['cringe'], 2.2, ['sidestep'])
     soundTrack = getSoundTrack('SA_mumbo_jumbo.ogg', delay=2.5, node=suit)
     multiTrackList = Parallel(suitTrack, toonTrack, soundTrack, partTrack, partTrack2)
-    if dmg > 0:
+    if dmg != 0:
         multiTrackList.append(partTrack3)
         multiTrackList.append(partTrack4)
         multiTrackList.append(partTrack5)

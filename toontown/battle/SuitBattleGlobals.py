@@ -1052,6 +1052,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
                'HeadShrink': ('magic1', ATK_TGT_SINGLE),
                'HotAir': ('speak', ATK_TGT_SINGLE),
                'Jargon': ('speak', ATK_TGT_SINGLE),
+               'Kickback': ('effort', ATK_TGT_SINGLE),
                'Legalese': ('speak', ATK_TGT_SINGLE),
                'LegalStorm': ('effort', ATK_TGT_SINGLE),
                'Liquidate': ('magic1', ATK_TGT_SINGLE),
@@ -1127,6 +1128,7 @@ HANG_UP = list(SuitAttacks.keys()).index('HangUp')
 HEAD_SHRINK = list(SuitAttacks.keys()).index('HeadShrink')
 HOT_AIR = list(SuitAttacks.keys()).index('HotAir')
 JARGON = list(SuitAttacks.keys()).index('Jargon')
+KICKBACK = list(SuitAttacks.keys()).index('Kickback')
 LEGALESE = list(SuitAttacks.keys()).index('Legalese')
 LEGAL_STORM = list(SuitAttacks.keys()).index('LegalStorm')
 LIQUIDATE = list(SuitAttacks.keys()).index('Liquidate')
