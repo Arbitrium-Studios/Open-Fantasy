@@ -501,10 +501,15 @@ def __trapMarbles(trap, trapProps, explode):
 
 def __trapQuicksand(trap, trapProps, explode):
     toon = trap['toon']
-    suit = trap['target'][0]['suit']
-    notify.debug(
-        'toon: %s lays quicksand in front of suit: %d' %
-        (toon.getName(), suit.doId))
+    if 'npc' in trap:
+        toon = trap['npc']
+    targets = trap['target']
+    for target in targets:
+        suit = target['suit']
+        notify.debug(
+            'toon: %s lays quicksand in front of suit: %d' %
+            (toon.getName(), suit.doId))
+
     quicksand = trapProps[0]
     return __createPlacedTrapMultiTrack(
         trap, quicksand, 'quicksand', explode=explode)
