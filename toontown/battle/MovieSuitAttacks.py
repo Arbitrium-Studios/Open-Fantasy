@@ -1800,39 +1800,77 @@ def doSynergy(attack):
 def doTeeOff(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    club = globalPropPool.getProp('golf-club')
-    ball = globalPropPool.getProp('golf-ball')
-    suitTrack = getSuitTrack(attack)
-    clubPosPoints = [MovieUtil.PNT3_ZERO, VBase3(63.097, 43.988, -18.435)]
-    clubPropTrack = getPropTrack(club, suit.getLeftHand(), clubPosPoints, 0.5, 5.2, Point3(1.1, 1.1, 1.1))
-    suitName = attack['suitName']
-    if suitName == 'ym':
-        ballPosPoints = [Point3(2.1, 0, 0.1)]
-    elif suitName == 'tbc':
-        ballPosPoints = [Point3(4.1, 0, 0.1)]
-    elif suitName == 'm':
-        ballPosPoints = [Point3(3.2, 0, 0.1)]
-    elif suitName == 'mh':
-        ballPosPoints = [Point3(4.2, 0, 0.1)]
-    elif suitName == 'rb':
-        ballPosPoints = [Point3(4.2, 0, 0.1)]
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        club = globalPropPool.getProp('golf-club')
+        ball = globalPropPool.getProp('golf-ball')
+        suitTrack = getSuitTrack(attack)
+        clubPosPoints = [MovieUtil.PNT3_ZERO, VBase3(63.097, 43.988, -18.435)]
+        clubPropTrack = getPropTrack(club, suit.getLeftHand(), clubPosPoints, 0.5, 5.2, Point3(1.1, 1.1, 1.1))
+        suitName = attack['suitName']
+        if suitName == 'ym':
+            ballPosPoints = [Point3(2.1, 0, 0.1)]
+        elif suitName == 'tbc':
+            ballPosPoints = [Point3(4.1, 0, 0.1)]
+        elif suitName == 'm':
+            ballPosPoints = [Point3(3.2, 0, 0.1)]
+        elif suitName == 'mh':
+            ballPosPoints = [Point3(4.2, 0, 0.1)]
+        elif suitName == 'rb':
+            ballPosPoints = [Point3(4.2, 0, 0.1)]
+        else:
+            ballPosPoints = [Point3(2.1, 0, 0.1)]
+        ballPropTrack = Sequence(
+            getPropAppearTrack(ball, suit, ballPosPoints, 1.7, Point3(1.5, 1.5, 1.5)),
+            Func(battle.movie.needRestoreRenderProp, ball),
+            Func(ball.wrtReparentTo, render),
+            Wait(2.15)
+        )
+        missPoint = lambda ball = ball, toon = toon: __toonMissPoint(ball, toon)
+        ballPropTrack.append(getPropThrowTrack(attack, ball, [__toonFacePoint(toon)], [missPoint]))
+        ballPropTrack.append(Func(battle.movie.clearRenderProp, ball))
+        dodgeDelay = suitTrack.getDuration() - 4.35
+        toonTrack = getToonTrack(attack, suitTrack.getDuration() - 2.25, ['conked'], dodgeDelay, ['duck'], showMissedExtraTime=1.7)
+        soundTrack = getSoundTrack('SA_tee_off.ogg', delay=4.1, node=suit)
+        return Parallel(suitTrack, toonTrack, clubPropTrack, ballPropTrack, soundTrack)
     else:
-        ballPosPoints = [Point3(2.1, 0, 0.1)]
-    ballPropTrack = Sequence(
-        getPropAppearTrack(ball, suit, ballPosPoints, 1.7, Point3(1.5, 1.5, 1.5)),
-        Func(battle.movie.needRestoreRenderProp, ball),
-        Func(ball.wrtReparentTo, render),
-        Wait(2.15)
-    )
-    missPoint = lambda ball = ball, toon = toon: __toonMissPoint(ball, toon)
-    ballPropTrack.append(getPropThrowTrack(attack, ball, [__toonFacePoint(toon)], [missPoint]))
-    ballPropTrack.append(Func(battle.movie.clearRenderProp, ball))
-    dodgeDelay = suitTrack.getDuration() - 4.35
-    toonTrack = getToonTrack(attack, suitTrack.getDuration() - 2.25, ['conked'], dodgeDelay, ['duck'], showMissedExtraTime=1.7)
-    soundTrack = getSoundTrack('SA_tee_off.ogg', delay=4.1, node=suit)
-    return Parallel(suitTrack, toonTrack, clubPropTrack, ballPropTrack, soundTrack)
+        targets = attack['target']
+        club = globalPropPool.getProp('golf-club')
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        clubPosPoints = [MovieUtil.PNT3_ZERO, VBase3(63.097, 43.988, -18.435)]
+        clubPropTrack = getPropTrack(club, suit.getLeftHand(), clubPosPoints, 0.5, 5.2, Point3(1.1, 1.1, 1.1))
+        soundTrack = getSoundTrack('SA_tee_off.ogg', delay=4.1, node=suit)
+        suitName = attack['suitName']
+        if suitName == 'ym':
+            ballPosPoints = [Point3(2.1, 0, 0.1)]
+        elif suitName == 'tbc':
+            ballPosPoints = [Point3(4.1, 0, 0.1)]
+        elif suitName == 'm':
+            ballPosPoints = [Point3(3.2, 0, 0.1)]
+        elif suitName == 'mh':
+            ballPosPoints = [Point3(4.2, 0, 0.1)]
+        elif suitName == 'rb':
+            ballPosPoints = [Point3(4.2, 0, 0.1)]
+        else:
+            ballPosPoints = [Point3(2.1, 0, 0.1)]
+        ballPropTracks = Parallel()
+        for t in targets:
+            toon = t['toon']
+            ball = globalPropPool.getProp('golf-ball')
+            ballPropTrack = Sequence(
+                getPropAppearTrack(ball, suit, ballPosPoints, 1.7, Point3(1.5, 1.5, 1.5)),
+                Func(battle.movie.needRestoreRenderProp, ball),
+                Func(ball.wrtReparentTo, render),
+                Wait(2.15)
+            )
+            missPoint = lambda ball = ball, toon = toon: __toonMissPoint(ball, toon)
+            ballPropTrack.append(getPropThrowTrack(attack, ball, [__toonFacePoint(toon)], [missPoint]))
+            ballPropTrack.append(Func(battle.movie.clearRenderProp, ball))
+            ballPropTracks.append(ballPropTrack)
+        dodgeDelay = suitTrack.getDuration() - 4.35
+        toonTracks = getToonTracks(attack, suitTrack.getDuration() - 2.25, ['conked'], dodgeDelay, ['duck'], showMissedExtraTime=1.7)
+        return Parallel(suitTrack, toonTracks, clubPropTrack, ballPropTracks, soundTrack)
 
 
 def doBrainStorm(attack):
