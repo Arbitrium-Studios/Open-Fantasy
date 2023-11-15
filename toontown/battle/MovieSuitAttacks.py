@@ -537,7 +537,7 @@ def doDefault(attack):
         if suitName == 'f':
             attack['id'] = CLIPON_TIE
             attack['group'] = ATK_TGT_GROUP
-            attack['name'] = 'FountainPen'
+            attack['name'] = 'ClipOnTie'
             attack['animName'] = 'throw-paper'
             return doClipOnTie(attack)
         elif suitName == 'p':
