@@ -142,8 +142,8 @@ def doSuitAttack(attack):
         suitTrack = doDemotion(attack)
     elif name == DOUBLE_TALK:
         suitTrack = doDoubleTalk(attack)
-    elif name == DOUBLE_WINDSOR:
-        suitTrack = doDoubleWindsor(attack)
+    elif name == DOUBLE_WINDSOR or name == HALF_WINDSOR:
+        suitTrack = doWindsor(attack)
     elif name == DOWNSIZE:
         suitTrack = doDownsize(attack)
     elif name == EVICTION_NOTICE:
@@ -172,8 +172,6 @@ def doSuitAttack(attack):
         suitTrack = doGlowerPower(attack)
     elif name == GUILT_TRIP:
         suitTrack = doGuiltTrip(attack)
-    elif name == HALF_WINDSOR:
-        suitTrack = doHalfWindsor(attack)
     elif name == HANG_UP:
         suitTrack = doHangUp(attack)
     elif name == HEAD_SHRINK:
@@ -417,7 +415,7 @@ def doDefault(attack):
             attack['id'] = DOUBLE_WINDSOR
             attack['name'] = 'DoubleWindsor'
             attack['animName'] = 'throw-paper'
-            return doDoubleWindsor(attack)
+            return doWindsor(attack)
         elif suitName == 'm':
             attack['id'] = SCHMOOZE
             attack['name'] = 'Schmooze'
@@ -2494,13 +2492,12 @@ def doGlowerPower(attack):
     return Parallel(suitTrack, toonTrack, soundTrack, leftKnifeTracks, rightKnifeTracks)
 
 
-def doHalfWindsor(attack):
+def doWindsor(attack):
     suit = attack['suit']
     battle = attack['battle']
     target = attack['target']
     toon = target['toon']
-    dmg = target['hp']
-    tie = globalPropPool.getProp('half-windsor')
+    tie = globalPropPool.getProp('%s-windsor' % ('double' if attack['id'] == DOUBLE_WINDSOR else 'half'))
     throwDelay = 2.17
     damageDelay = 3.4
     dodgeDelay = 2.4
@@ -3442,33 +3439,6 @@ def doHangUp(attack):
         toonTracks = getToonTracks(attack, 5.5, ['slip-backward'], 4.7, ['jump'])
         soundTrack = getSoundTrack('SA_hangup.ogg', delay=1.3, node=suit)
         return Parallel(suitTrack, toonTracks, propTrack, soundTrack)
-
-
-def doDoubleWindsor(attack):
-    suit = attack['suit']
-    battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    tie = globalPropPool.getProp('double-windsor')
-    throwDelay = 2.17
-    damageDelay = 3.4
-    dodgeDelay = 2.4
-    suitTrack = getSuitTrack(attack)
-    posPoints = [Point3(0.02, 0.88, 0.48), VBase3(99, -3, -108.2)]
-    tiePropTrack = getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, Point3(7, 7, 7), scaleUpTime=0.5)
-    tiePropTrack.append(Wait(throwDelay))
-    missPoint = __toonMissBehindPoint(toon, parent=battle)
-    missPoint.setX(missPoint.getX() - 1.1)
-    missPoint.setZ(missPoint.getZ() + 4)
-    hitPoint = __toonFacePoint(toon, parent=battle)
-    hitPoint.setX(hitPoint.getX() - 1.1)
-    hitPoint.setY(hitPoint.getY() - 0.7)
-    hitPoint.setZ(hitPoint.getZ() + 0.9)
-    tiePropTrack.append(getPropThrowTrack(attack, tie, [hitPoint], [missPoint], hitDuration=0.4, missDuration=0.8, missScaleDown=0.3, parent=battle))
-    damageAnims = [['conked', 0.01, 0.01, 0.4],
-     ['cringe', 0.01, 0.7]]
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
-    return Parallel(suitTrack, toonTrack, tiePropTrack)
 
 
 def doRedTape(attack):

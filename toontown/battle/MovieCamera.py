@@ -423,7 +423,7 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=1.7))
     elif name == DOUBLE_TALK:
         camTrack.append(defaultCamera(openShotDuration=3.9))
-    elif name == DOUBLE_WINDSOR:
+    elif name == DOUBLE_WINDSOR or name == HALF_WINDSOR:
         camTrack.append(defaultCamera(openShotDuration=2.8))
     elif name == DOWNSIZE:
         camTrack.append(defaultCamera())
@@ -447,8 +447,6 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.6))
     elif name == FREEZE_ASSETS:
         camTrack.append(defaultCamera(openShotDuration=2.5))
-    elif name == HALF_WINDSOR:
-        camTrack.append(defaultCamera(openShotDuration=2.8))
     elif name == HEAD_SHRINK:
         camTrack.append(defaultCamera(openShotDuration=1.3))
     elif name == GAVEL:
