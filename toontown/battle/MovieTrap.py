@@ -134,229 +134,165 @@ def getSoundTrack(fileName, delay=0.01, duration=None, node=None):
         return Sequence(Wait(delay), SoundInterval(soundEffect, node=node))
 
 
-def __createThrownTrapMultiTrack(
-        trap, propList, propName, propPos=None, propHpr=None, anim=0, explode=0):
+def __createThrownTrapMultiTrack(trap, propList, propName, propPos=None, propHpr=None, anim=0, explode=0):
     toon = trap['toon']
+    if 'npc' in trap:
+        toon = trap['npc']
     level = trap['level']
     battle = trap['battle']
-    target = trap['target']
-    suit = target[0]['suit']
-    targetPos = suit.getPos(battle)
-    thrownProp = propList[0]
-    unthrownProp = propList[1]
-    torso = toon.style.torso
-    torso = torso[0]
-    if torso == 'l':
-        throwDelay = 2.3
-    elif torso == 'm':
-        throwDelay = 2.3
-    else:
-        throwDelay = 1.9
-    throwDuration = 0.9
-    animBreakPoint = throwDelay + throwDuration
-    animDelay = 3.1
-    trapTrack = ToontownBattleGlobals.TRAP_TRACK
-    trapTrackNames = ToontownBattleGlobals.AvProps[trapTrack]
-    trapName = trapTrackNames[level]
-    hands = toon.getRightHands()
-    propTrack = Sequence()
-    if propPos and propHpr:
-        propTrack.append(
-            Func(
-                MovieUtil.showProps,
-                propList,
-                hands,
-                propPos,
-                propHpr))
-    else:
-        propTrack.append(Func(MovieUtil.showProps, propList, hands))
-    if anim == 1:
-        pTracks = Parallel()
-        for prop in propList:
-            pTracks.append(
-                ActorInterval(
-                    prop,
-                    propName,
-                    duration=animBreakPoint))
 
-        propTrack.append(pTracks)
-    throwTrack = Sequence()
-    throwTrack.append(Wait(throwDelay))
-    throwTrack.append(Func(unthrownProp.reparentTo, hidden))
-    throwTrack.append(Func(toon.update))
-    if suit.battleTrap != NO_TRAP:
-        notify.debug(
-            'trapSuit() - trap: %d destroyed existing trap: %d' %
-            (level, suit.battleTrap))
-        battle.removeTrap(suit)
-    if trapName == 'rake':
-        trapProp = globalPropPool.getProp('rake-react')
-    else:
-        trapProp = MovieUtil.copyProp(thrownProp)
-    suit.battleTrapProp = trapProp
-    suit.battleTrap = level
-    suit.battleTrapIsFresh = 1
-    if trapName == 'banana':
-        trapPoint, trapHpr = battle.getActorPosHpr(suit)
-        trapPoint.setY(MovieUtil.SUIT_TRAP_DISTANCE)
-        slidePoint = Vec3(
-            trapPoint.getX(),
-            trapPoint.getY() - 2,
-            trapPoint.getZ())
-        throwingTrack = createThrowingTrack(
-            thrownProp, slidePoint, duration=0.9, parent=battle)
-        moveTrack = LerpPosInterval(
-            thrownProp, 0.8, pos=trapPoint, other=battle)
-        animTrack = ActorInterval(
-            thrownProp, propName, startTime=animBreakPoint)
-        slideTrack = Parallel(moveTrack, animTrack)
-        motionTrack = Sequence(throwingTrack, slideTrack)
-        hprTrack = LerpHprInterval(thrownProp, 1.7, hpr=Point3(0, 0, 0))
-        soundTrack = getSoundTrack('TL_banana.ogg', node=toon)
-        scaleTrack = LerpScaleInterval(
-            thrownProp, 1.7, scale=MovieUtil.PNT3_ONE)
-        throwTrack.append(Wait(0.25))
-        throwTrack.append(Func(thrownProp.wrtReparentTo, suit))
-        throwTrack.append(
-            Parallel(
-                motionTrack,
-                hprTrack,
-                scaleTrack,
-                soundTrack))
-    elif trapName == 'tnt':
-        trapPoint, trapHpr = battle.getActorPosHpr(suit)
-        trapPoint.setY(MovieUtil.SUIT_TRAP_TNT_DISTANCE - 3.9)
-        trapPoint.setZ(trapPoint.getZ() + 0.4)
-        throwingTrack = createThrowingTrack(
-            thrownProp, trapPoint, duration=throwDuration, parent=battle)
-        hprTrack = LerpHprInterval(thrownProp, 0.9, hpr=Point3(0, 90, 0))
-        scaleTrack = LerpScaleInterval(
-            thrownProp, 0.9, scale=MovieUtil.PNT3_ONE)
-        soundTrack = getSoundTrack(
-            'TL_dynamite.ogg',
-            delay=0.8,
-            duration=0.7,
-            node=suit)
-        throwTrack.append(Wait(0.2))
-        throwTrack.append(
-            Parallel(
-                throwingTrack,
-                hprTrack,
-                scaleTrack,
-                soundTrack))
-    elif trapName == 'marbles':
-        trapPoint, trapHpr = battle.getActorPosHpr(suit)
-        trapPoint.setY(MovieUtil.SUIT_TRAP_MARBLES_DISTANCE)
-        flingDuration = 0.2
-        rollDuration = 1.0
-        throwDuration = flingDuration + rollDuration
-        landPoint = Point3(0, trapPoint.getY() + 2, trapPoint.getZ())
-        throwPoint = Point3(0, trapPoint.getY(), trapPoint.getZ())
-        moveTrack = Sequence(
-            Func(
-                thrownProp.wrtReparentTo, suit), Func(
-                thrownProp.setHpr, Point3(
-                    94, 0, 0)), LerpPosInterval(
-                    thrownProp, flingDuration, pos=landPoint, other=suit), LerpPosInterval(
-                        thrownProp, rollDuration, pos=throwPoint, other=suit))
-        animTrack = ActorInterval(
-            thrownProp, propName, startTime=throwDelay + 0.9)
-        scaleTrack = LerpScaleInterval(
-            thrownProp, throwDuration, scale=MovieUtil.PNT3_ONE)
-        soundTrack = getSoundTrack('TL_marbles.ogg', delay=0.1, node=toon)
-        throwTrack.append(Wait(0.2))
-        throwTrack.append(
-            Parallel(
-                moveTrack,
-                animTrack,
-                scaleTrack,
-                soundTrack))
-    elif trapName == 'rake':
-        trapPoint, trapHpr = battle.getActorPosHpr(suit)
-        trapPoint.setY(MovieUtil.SUIT_TRAP_RAKE_DISTANCE)
-        throwDuration = 1.1
-        throwingTrack = createThrowingTrack(
-            thrownProp, trapPoint, duration=throwDuration, parent=suit)
-        hprTrack = LerpHprInterval(
-            thrownProp, throwDuration, hpr=VBase3(
-                63.43, -90.0, 63.43))
-        scaleTrack = LerpScaleInterval(
-            thrownProp, 0.9, scale=Point3(
-                0.7, 0.7, 0.7))
-        soundTrack = SoundInterval(globalBattleSoundCache.getSound(
-            'TL_rake_throw_only.ogg'), duration=1.1, node=suit)
-        throwTrack.append(Wait(0.2))
-        throwTrack.append(
-            Parallel(
-                throwingTrack,
-                hprTrack,
-                scaleTrack,
-                soundTrack))
-    else:
-        notify.warning(
-            '__createThrownTrapMultiTrack() - Incorrect trap:                          %s thrown from toon' %
-            trapName)
-
-    def placeTrap(trapProp, suit, battle=battle, trapName=trapName):
-        if not trapProp or trapProp.isEmpty():
-            return
-        trapProp.wrtReparentTo(suit)
-        trapProp.show()
-        if trapName == 'rake':
-            trapProp.setPos(0, MovieUtil.SUIT_TRAP_RAKE_DISTANCE, 0)
-            trapProp.setHpr(Point3(0, 270, 0))
-            trapProp.setScale(Point3(0.7, 0.7, 0.7))
-            rakeOffset = MovieUtil.getSuitRakeOffset(suit)
-            trapProp.setY(trapProp.getY() + rakeOffset)
-        elif trapName == 'banana':
-            trapProp.setHpr(0, 0, 0)
-            trapProp.setPos(0, MovieUtil.SUIT_TRAP_DISTANCE, -0.35)
-            trapProp.pose(trapName, trapProp.getNumFrames(trapName) - 1)
-        elif trapName == 'marbles':
-            trapProp.setHpr(Point3(94, 0, 0))
-            trapProp.setPos(0, MovieUtil.SUIT_TRAP_MARBLES_DISTANCE, 0)
-            trapProp.pose(trapName, trapProp.getNumFrames(trapName) - 1)
-        elif trapName == 'tnt':
-            trapProp.setHpr(0, 90, 0)
-            trapProp.setPos(0, MovieUtil.SUIT_TRAP_TNT_DISTANCE, 0.4)
-        else:
-            notify.warning(
-                'placeTrap() - Incorrect trap: %s placed on a suit' %
-                trapName)
-
-    dustNode = hidden.attachNewNode('DustNode')
-
-    def placeDustExplosion(
-            dustNode=dustNode, thrownProp=thrownProp, battle=battle):
+    def placeDustExplosion(dustNode, thrownProp, battle):
         dustNode.reparentTo(battle)
         dustNode.setPos(thrownProp.getPos(battle))
+    
+    throwTracks = Parallel()
+    targets = trap['target']
+    for target in targets:
+        suit = target['suit']
+        targetPos = suit.getPos(battle)
+        thrownProp = propList[0]
+        unthrownProp = propList[1]
+        torso = toon.style.torso
+        torso = torso[0]
+        if torso == 'l' or torso == 'm':
+            throwDelay = 2.3
+        else:
+            throwDelay = 1.9
+        throwDuration = 0.9
+        animBreakPoint = throwDelay + throwDuration
+        animDelay = 3.1
+        trapTrack = ToontownBattleGlobals.TRAP_TRACK
+        trapTrackNames = ToontownBattleGlobals.AvProps[trapTrack]
+        trapName = trapTrackNames[level]
+        hands = toon.getRightHands()
+        propTrack = Sequence()
+        if propPos and propHpr:
+            propTrack.append(Func(MovieUtil.showProps, propList, hands, propPos, propHpr))
+        else:
+            propTrack.append(Func(MovieUtil.showProps, propList, hands))
+        if anim == 1:
+            pTracks = Parallel()
+            for prop in propList:
+                pTracks.append(ActorInterval(prop, propName, duration=animBreakPoint))
 
-    if explode == 1:
-        throwTrack.append(Func(thrownProp.wrtReparentTo, hidden))
-        throwTrack.append(Func(placeDustExplosion))
-        throwTrack.append(
-            createCartoonExplosionTrack(
-                dustNode,
-                'dust',
-                explosionPoint=Point3(
-                    0,
-                    0,
-                    0)))
-        throwTrack.append(Func(battle.removeTrap, suit))
-    else:
-        throwTrack.append(Func(placeTrap, trapProp, suit))
-        if trapName == 'tnt':
-            tip = trapProp.find('**/joint_attachEmitter')
-            sparks = BattleParticles.createParticleEffect(file='tnt')
-            trapProp.sparksEffect = sparks
-            throwTrack.append(Func(sparks.start, tip))
-    throwTrack.append(Func(MovieUtil.removeProps, propList))
+            propTrack.append(pTracks)
+        throwTrack = Sequence()
+        throwTrack.append(Wait(throwDelay))
+        throwTrack.append(Func(unthrownProp.reparentTo, hidden))
+        throwTrack.append(Func(toon.update))
+        if suit.battleTrap != NO_TRAP:
+            notify.debug('trapSuit() - trap: %d destroyed existing trap: %d' % (level, suit.battleTrap))
+            battle.removeTrap(suit)
+        if trapName == 'rake':
+            trapProp = globalPropPool.getProp('rake-react')
+        else:
+            trapProp = MovieUtil.copyProp(thrownProp)
+        suit.battleTrapProp = trapProp
+        suit.battleTrap = level
+        suit.battleTrapIsFresh = 1
+        if trapName == 'banana':
+            trapPoint, trapHpr = battle.getActorPosHpr(suit)
+            trapPoint.setY(MovieUtil.SUIT_TRAP_DISTANCE)
+            slidePoint = Vec3(trapPoint.getX(), trapPoint.getY() - 2, trapPoint.getZ())
+            throwingTrack = createThrowingTrack(thrownProp, slidePoint, duration=0.9, parent=battle)
+            moveTrack = LerpPosInterval(thrownProp, 0.8, pos=trapPoint, other=battle)
+            animTrack = ActorInterval(thrownProp, propName, startTime=animBreakPoint)
+            slideTrack = Parallel(moveTrack, animTrack)
+            motionTrack = Sequence(throwingTrack, slideTrack)
+            hprTrack = LerpHprInterval(thrownProp, 1.7, hpr=Point3(0, 0, 0))
+            soundTrack = getSoundTrack('TL_banana.ogg', node=toon)
+            scaleTrack = LerpScaleInterval(thrownProp, 1.7, scale=MovieUtil.PNT3_ONE)
+            throwTrack.append(Wait(0.25))
+            throwTrack.append(Func(thrownProp.wrtReparentTo, suit))
+            throwTrack.append(Parallel(motionTrack, hprTrack, scaleTrack, soundTrack))
+        elif trapName == 'tnt':
+            trapPoint, trapHpr = battle.getActorPosHpr(suit)
+            trapPoint.setY(MovieUtil.SUIT_TRAP_TNT_DISTANCE - 3.9)
+            trapPoint.setZ(trapPoint.getZ() + 0.4)
+            throwingTrack = createThrowingTrack(thrownProp, trapPoint, duration=throwDuration, parent=battle)
+            hprTrack = LerpHprInterval(thrownProp, 0.9, hpr=Point3(0, 90, 0))
+            scaleTrack = LerpScaleInterval(thrownProp, 0.9, scale=MovieUtil.PNT3_ONE)
+            soundTrack = getSoundTrack('TL_dynamite.ogg', delay=0.8, duration=0.7, node=suit)
+            throwTrack.append(Wait(0.2))
+            throwTrack.append(Parallel(throwingTrack, hprTrack, scaleTrack, soundTrack))
+        elif trapName == 'marbles':
+            trapPoint, trapHpr = battle.getActorPosHpr(suit)
+            trapPoint.setY(MovieUtil.SUIT_TRAP_MARBLES_DISTANCE)
+            flingDuration = 0.2
+            rollDuration = 1.0
+            throwDuration = flingDuration + rollDuration
+            landPoint = Point3(0, trapPoint.getY() + 2, trapPoint.getZ())
+            throwPoint = Point3(0, trapPoint.getY(), trapPoint.getZ())
+            moveTrack = Sequence(
+                Func(thrownProp.wrtReparentTo, suit),
+                Func(thrownProp.setHpr, Point3(94, 0, 0)),
+                LerpPosInterval(thrownProp, flingDuration, pos=landPoint, other=suit),
+                LerpPosInterval(thrownProp, rollDuration, pos=throwPoint, other=suit)
+            )
+            animTrack = ActorInterval(thrownProp, propName, startTime=throwDelay + 0.9)
+            scaleTrack = LerpScaleInterval(thrownProp, throwDuration, scale=MovieUtil.PNT3_ONE)
+            soundTrack = getSoundTrack('TL_marbles.ogg', delay=0.1, node=toon)
+            throwTrack.append(Wait(0.2))
+            throwTrack.append(Parallel(moveTrack, animTrack, scaleTrack, soundTrack))
+        elif trapName == 'rake':
+            trapPoint, trapHpr = battle.getActorPosHpr(suit)
+            trapPoint.setY(MovieUtil.SUIT_TRAP_RAKE_DISTANCE)
+            throwDuration = 1.1
+            throwingTrack = createThrowingTrack(thrownProp, trapPoint, duration=throwDuration, parent=suit)
+            hprTrack = LerpHprInterval(thrownProp, throwDuration, hpr=VBase3(63.43, -90.0, 63.43))
+            scaleTrack = LerpScaleInterval(thrownProp, 0.9, scale=Point3(0.7, 0.7, 0.7))
+            soundTrack = SoundInterval(globalBattleSoundCache.getSound('TL_rake_throw_only.ogg'), duration=1.1, node=suit)
+            throwTrack.append(Wait(0.2))
+            throwTrack.append(Parallel(throwingTrack, hprTrack, scaleTrack, soundTrack))
+        else:
+            notify.warning('__createThrownTrapMultiTrack() - Incorrect trap:                          %s thrown from toon' % trapName)
+
+        def placeTrap(trapProp, suit, battle=battle, trapName=trapName):
+            if not trapProp or trapProp.isEmpty():
+                return
+            trapProp.wrtReparentTo(suit)
+            trapProp.show()
+            if trapName == 'rake':
+                trapProp.setPos(0, MovieUtil.SUIT_TRAP_RAKE_DISTANCE, 0)
+                trapProp.setHpr(Point3(0, 270, 0))
+                trapProp.setScale(Point3(0.7, 0.7, 0.7))
+                rakeOffset = MovieUtil.getSuitRakeOffset(suit)
+                trapProp.setY(trapProp.getY() + rakeOffset)
+            elif trapName == 'banana':
+                trapProp.setHpr(0, 0, 0)
+                trapProp.setPos(0, MovieUtil.SUIT_TRAP_DISTANCE, -0.35)
+                trapProp.pose(trapName, trapProp.getNumFrames(trapName) - 1)
+            elif trapName == 'marbles':
+                trapProp.setHpr(Point3(94, 0, 0))
+                trapProp.setPos(0, MovieUtil.SUIT_TRAP_MARBLES_DISTANCE, 0)
+                trapProp.pose(trapName, trapProp.getNumFrames(trapName) - 1)
+            elif trapName == 'tnt':
+                trapProp.setHpr(0, 90, 0)
+                trapProp.setPos(0, MovieUtil.SUIT_TRAP_TNT_DISTANCE, 0.4)
+            else:
+                notify.warning('placeTrap() - Incorrect trap: %s placed on a suit' % trapName)
+
+        dustNode = hidden.attachNewNode('DustNode')
+        if explode == 1:
+            throwTrack.append(Func(thrownProp.wrtReparentTo, hidden))
+            throwTrack.append(Func(placeDustExplosion, dustNode, thrownProp, battle))
+            throwTrack.append(createCartoonExplosionTrack(dustNode, 'dust', explosionPoint=Point3(0, 0, 0)))
+            throwTrack.append(Func(battle.removeTrap, suit))
+        else:
+            throwTrack.append(Func(placeTrap, trapProp, suit))
+            if trapName == 'tnt':
+                tip = trapProp.find('**/joint_attachEmitter')
+                sparks = BattleParticles.createParticleEffect(file='tnt')
+                trapProp.sparksEffect = sparks
+                throwTrack.append(Func(sparks.start, tip))
+        throwTrack.append(Func(MovieUtil.removeProps, propList))
+        throwTracks.append(throwTrack)
     toonTrack = Sequence(
-        Func(
-            toon.headsUp, battle, targetPos), ActorInterval(
-            toon, 'toss'), Func(
-                toon.loop, 'neutral'))
-    return Parallel(propTrack, throwTrack, toonTrack)
+        Func(toon.headsUp, battle, targetPos),
+        ActorInterval(toon, 'toss'),
+        Func(toon.loop, 'neutral')
+    )
+    return Parallel(propTrack, throwTracks, toonTrack)
 
 
 def __createPlacedTrapMultiTrack(
@@ -466,10 +402,15 @@ def __createPlacedTrapMultiTrack(
 
 def __trapBanana(trap, trapProps, explode):
     toon = trap['toon']
-    suit = trap['target'][0]['suit']
-    notify.debug(
-        'toon: %s lays banana peel in front of suit: %d' %
-        (toon.getName(), suit.doId))
+    if 'npc' in trap:
+        toon = trap['npc']
+    targets = trap['target']
+    for target in targets:
+        suit = target['suit']
+        notify.debug(
+            'toon: %s lays banana peel in front of suit: %d' %
+            (toon.getName(), suit.doId))
+    
     bananas = trapProps
     return __createThrownTrapMultiTrack(
         trap, bananas, 'banana', anim=1, explode=explode)
@@ -477,10 +418,15 @@ def __trapBanana(trap, trapProps, explode):
 
 def __trapRake(trap, trapProps, explode):
     toon = trap['toon']
-    suit = trap['target'][0]['suit']
-    notify.debug(
-        'toon: %s lays rake in front of suit: %d' %
-        (toon.getName(), suit.doId))
+    if 'npc' in trap:
+        toon = trap['npc']
+    targets = trap['target']
+    for target in targets:
+        suit = target['suit']
+        notify.debug(
+            'toon: %s lays rake in front of suit: %d' %
+            (toon.getName(), suit.doId))
+    
     rakes = trapProps
     return __createThrownTrapMultiTrack(
         trap, rakes, 'rake', anim=1, explode=explode)
@@ -488,10 +434,15 @@ def __trapRake(trap, trapProps, explode):
 
 def __trapMarbles(trap, trapProps, explode):
     toon = trap['toon']
-    suit = trap['target'][0]['suit']
-    notify.debug(
-        'toon: %s lays marbles in front of suit: %d' %
-        (toon.getName(), suit.doId))
+    if 'npc' in trap:
+        toon = trap['npc']
+    targets = trap['target']
+    for target in targets:
+        suit = target['suit']
+        notify.debug(
+            'toon: %s lays marbles in front of suit: %d' %
+            (toon.getName(), suit.doId))
+    
     bothMarbles = trapProps
     pos = Point3(0, 0, 0)
     hpr = Point3(0, 0, -30)
@@ -533,10 +484,15 @@ def __trapTrapdoor(trap, trapProps, explode):
 
 def __trapTNT(trap, trapProps, explode):
     toon = trap['toon']
-    suit = trap['target'][0]['suit']
-    notify.debug(
-        'toon: %s lays TNT in front of suit: %d' %
-        (toon.getName(), suit.doId))
+    if 'npc' in trap:
+        toon = trap['npc']
+    targets = trap['target']
+    for target in targets:
+        suit = target['suit']
+        notify.debug(
+            'toon: %s lays TNT in front of suit: %d' %
+            (toon.getName(), suit.doId))
+    
     tnts = trapProps
     return __createThrownTrapMultiTrack(
         trap, tnts, 'tnt', anim=0, explode=explode)
