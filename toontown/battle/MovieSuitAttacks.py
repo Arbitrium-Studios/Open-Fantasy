@@ -505,6 +505,7 @@ def doDefault(attack):
             return doRedTape(attack)
         elif suitName == 'bs':
             attack['id'] = RESTRAINING_ORDER
+            attack['group'] = ATK_TGT_SINGLE
             attack['name'] = 'RestrainingOrder'
             attack['animName'] = 'throw-paper'
             return doRestrainingOrder(attack)
@@ -525,6 +526,7 @@ def doDefault(attack):
             return doGavel(attack)
         elif suitName == 'lc':
             attack['id'] = RESTRAINING_ORDER
+            attack['group'] = ATK_TGT_SINGLE
             attack['name'] = 'RestrainingOrder'
             attack['animName'] = 'throw-paper'
             return doRestrainingOrder(attack)
@@ -5343,31 +5345,61 @@ def doGuiltTrip(attack):
 def doRestrainingOrder(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    dmg = target['hp']
-    paper = globalPropPool.getProp('shredder-paper')
-    suitTrack = getSuitTrack(attack)
-    posPoints = [Point3(-0.04, 0.15, -1.38), VBase3(10.584, -11.945, 18.316)]
-    propTrack = Sequence(
-        getPropAppearTrack(paper, suit.getRightHand(), posPoints, 0.8, MovieUtil.PNT3_ONE, scaleUpTime=0.5),
-        Wait(1.73)
-    )
-    hitPoint = __toonFacePoint(toon, parent=battle)
-    hitPoint.setX(hitPoint.getX() - 1.4)
-    missPoint = __toonGroundPoint(attack, toon, 0.7, parent=battle)
-    missPoint.setX(missPoint.getX() - 1.1)
-    propTrack.append(getPropThrowTrack(attack, paper, [hitPoint], [missPoint], parent=battle))
-    damageAnims = [['conked', 0.01, 0.3, 0.2],
-     ['struggle', 0.01, 0.2]]
-    toonTrack = getToonTrack(attack, damageDelay=3.4, splicedDamageAnims=damageAnims, dodgeDelay=2.8, dodgeAnimNames=['sidestep'])
-    if dmg > 0:
-        restraintCloud = BattleParticles.createParticleEffect(file='restrainingOrderCloud')
-        restraintCloud.setPos(hitPoint.getX(), hitPoint.getY() + 0.5, hitPoint.getZ())
-        cloudTrack = getPartTrack(restraintCloud, 3.5, 0.2, [restraintCloud, battle, 0])
-        return Parallel(suitTrack, cloudTrack, toonTrack, propTrack)
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        dmg = target['hp']
+        paper = globalPropPool.getProp('shredder-paper')
+        suitTrack = getSuitTrack(attack)
+        posPoints = [Point3(-0.04, 0.15, -1.38), VBase3(10.584, -11.945, 18.316)]
+        propTrack = Sequence(
+            getPropAppearTrack(paper, suit.getRightHand(), posPoints, 0.8, MovieUtil.PNT3_ONE, scaleUpTime=0.5),
+            Wait(1.73)
+        )
+        hitPoint = __toonFacePoint(toon, parent=battle)
+        hitPoint.setX(hitPoint.getX() - 1.4)
+        missPoint = __toonGroundPoint(attack, toon, 0.7, parent=battle)
+        missPoint.setX(missPoint.getX() - 1.1)
+        propTrack.append(getPropThrowTrack(attack, paper, [hitPoint], [missPoint], parent=battle))
+        damageAnims = [['conked', 0.01, 0.3, 0.2],
+         ['struggle', 0.01, 0.2]]
+        toonTrack = getToonTrack(attack, damageDelay=3.4, splicedDamageAnims=damageAnims, dodgeDelay=2.8, dodgeAnimNames=['sidestep'])
+        if dmg > 0:
+            restraintCloud = BattleParticles.createParticleEffect(file='restrainingOrderCloud')
+            restraintCloud.setPos(hitPoint.getX(), hitPoint.getY() + 0.5, hitPoint.getZ())
+            cloudTrack = getPartTrack(restraintCloud, 3.5, 0.2, [restraintCloud, battle, 0])
+            return Parallel(suitTrack, cloudTrack, toonTrack, propTrack)
+        else:
+            return Parallel(suitTrack, toonTrack, propTrack)
     else:
-        return Parallel(suitTrack, toonTrack, propTrack)
+        targets = attack['target']
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        posPoints = [Point3(-0.04, 0.15, -1.38), VBase3(10.584, -11.945, 18.316)]
+        propTracks = Parallel()
+        damageAnims = [['conked', 0.01, 0.3, 0.2],
+         ['struggle', 0.01, 0.2]]
+        toonTracks = getToonTracks(attack, damageDelay=3.4, splicedDamageAnims=damageAnims, damageDelay=2.8, dodgeAnimNames=['sidestep'])
+        cloudTracks = Parallel()
+        for t in targets:
+            toon = t['toon']
+            dmg = t['hp']
+            paper = globalPropPool.getProp('shredder-paper')
+            propTrack = Sequence(
+                getPropAppearTrack(paper, suit.getRightHand(), posPoints, 0.8, MovieUtil.PNT3_ONE, scaleUpTime=0.5),
+                Wait(1.73)
+            )
+            hitPoint = __toonFacePoint(toon, parent=battle)
+            hitPoint.setX(hitPoint.getX() - 1.4)
+            missPoint = __toonGroundPoint(attack, toon, 0.7, parent=battle)
+            missPoint.setX(missPoint.getX() - 1.1)
+            propTrack.append(getPropThrowTrack(attack, paper, [hitPoint], [missPoint], parent=battle))
+            propTracks.append(propTrack)
+            if dmg > 0:
+                restraintCloud = BattleParticles.createParticleEffect(file='restrainingOrderCloud')
+                restraintCloud.setPos(hitPoint.getX(), hitPoint.getY() + 0.5, hitPoint.getZ())
+                cloudTrack = getPartTrack(restraintCloud, 3.5, 0.2, [restraintCloud, battle, 0])
+                cloudTracks.append(cloudTrack)
+        return Parallel(suitTrack, cloudTracks, toonTracks, propTracks)
 
 
 def doSpin(attack):
