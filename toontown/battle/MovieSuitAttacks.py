@@ -711,11 +711,11 @@ def doDefault(attack):
             attack['animName'] = 'magic1'
             return doPowerTrip(attack)
         elif suitName == 'lc':
-            attack['id'] = STOMPER
+            attack['id'] = RESTRAINING_ORDER
             attack['group'] = ATK_TGT_GROUP
-            attack['name'] = 'Stomper'
-            attack['animName'] = 'effort'
-            return doStomper(attack)
+            attack['name'] = 'RestrainingOrder'
+            attack['animName'] = 'throw-paper'
+            return doRestrainingOrder(attack)
         else:
             attack['id'] = TRIP
             attack['name'] = 'Trip'
