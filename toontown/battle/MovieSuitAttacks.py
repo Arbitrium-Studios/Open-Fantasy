@@ -609,11 +609,11 @@ def doDefault(attack):
             attack['animName'] = 'stomp'
             return doShake(attack)
         elif suitName == 'tf':
-            attack['id'] = HANG_UP
+            attack['id'] = DOUBLE_WINDSOR
             attack['group'] = ATK_TGT_GROUP
-            attack['name'] = 'HangUp'
-            attack['animName'] = 'phone'
-            return doHangUp(attack)
+            attack['name'] = 'DoubleWindsor'
+            attack['animName'] = 'throw-paper'
+            return doWindsor(attack)
         elif suitName == 'm':
             attack['id'] = PARADIGM_SHIFT
             attack['name'] = 'ParadigmShift'
