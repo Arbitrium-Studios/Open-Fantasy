@@ -352,6 +352,7 @@ def doDefault(attack):
             return doWriteOff(attack)
         elif suitName == 'ym':
             attack['id'] = RUBBER_STAMP
+            attack['group'] = ATK_TGT_SINGLE
             attack['name'] = 'RubberStamp'
             attack['animName'] = 'rubber-stamp'
             return doRubberStamp(attack)
@@ -1662,44 +1663,87 @@ def doWriteOff(attack):
 def doRubberStamp(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    toon = target['toon']
-    suitTrack = getSuitTrack(attack)
-    stamp = globalPropPool.getProp('rubber-stamp')
-    pad = globalPropPool.getProp('pad')
-    cancelled = __makeCancelledNodePath()
-    suitType = getSuitBodyType(attack['suitName'])
-    if suitType == 'a':
-        padPosPoints = [Point3(-0.65, 0.83, -0.04), VBase3(5.625, 4.456, -165.125)]
-        stampPosPoints = [Point3(-0.64, -0.17, -0.03), MovieUtil.PNT3_ZERO]
-    elif suitType == 'c':
-        padPosPoints = [Point3(0.19, -0.55, -0.21), VBase3(-166.76, -4.001, -1.658)]
-        stampPosPoints = [Point3(-0.64, -0.08, 0.11), MovieUtil.PNT3_ZERO]
+    if attack['group'] == ATK_TGT_SINGLE:
+        target = attack['target']
+        toon = target['toon']
+        suitTrack = getSuitTrack(attack)
+        stamp = globalPropPool.getProp('rubber-stamp')
+        pad = globalPropPool.getProp('pad')
+        cancelled = __makeCancelledNodePath()
+        suitType = getSuitBodyType(attack['suitName'])
+        if suitType == 'a':
+            padPosPoints = [Point3(-0.65, 0.83, -0.04), VBase3(5.625, 4.456, -165.125)]
+            stampPosPoints = [Point3(-0.64, -0.17, -0.03), MovieUtil.PNT3_ZERO]
+        elif suitType == 'c':
+            padPosPoints = [Point3(0.19, -0.55, -0.21), VBase3(-166.76, -4.001, -1.658)]
+            stampPosPoints = [Point3(-0.64, -0.08, 0.11), MovieUtil.PNT3_ZERO]
+        else:
+            padPosPoints = [Point3(-0.65, 0.83, -0.04), VBase3(5.625, 4.456, -165.125)]
+            stampPosPoints = [Point3(-0.64, -0.17, -0.03), MovieUtil.PNT3_ZERO]
+        padPropTrack = getPropTrack(pad, suit.getLeftHand(), padPosPoints, 1e-06, 3.2)
+        missPoint = lambda cancelled = cancelled, toon = toon: __toonMissPoint(cancelled, toon)
+        propTrack = Sequence(
+            Func(__showProp, stamp, suit.getRightHand(), stampPosPoints[0], stampPosPoints[1]),
+            LerpScaleInterval(stamp, 0.5, MovieUtil.PNT3_ONE),
+            Wait(2.6),
+            Func(battle.movie.needRestoreRenderProp, cancelled),
+            Func(cancelled.reparentTo, render),
+            Func(cancelled.setScale, 0.6),
+            Func(cancelled.setPosHpr, stamp, 0.81, -1.11, -0.16, 0, 0, 90),
+            Func(cancelled.setP, 0),
+            Func(cancelled.setR, 0),
+            getPropThrowTrack(attack, cancelled, [__toonFacePoint(toon)], [missPoint]),
+            Func(MovieUtil.removeProp, cancelled),
+            Func(battle.movie.clearRenderProp, cancelled),
+            Wait(0.3),
+            LerpScaleInterval(stamp, 0.5, MovieUtil.PNT3_NEARZERO),
+            Func(MovieUtil.removeProp, stamp)
+        )
+        toonTrack = getToonTrack(attack, 3.4, ['conked'], 1.9, ['sidestep'])
+        soundTrack = getSoundTrack('SA_rubber_stamp.ogg', delay=1.3, duration=1.1, node=suit)
+        return Parallel(suitTrack, toonTrack, propTrack, padPropTrack, soundTrack)
     else:
-        padPosPoints = [Point3(-0.65, 0.83, -0.04), VBase3(5.625, 4.456, -165.125)]
-        stampPosPoints = [Point3(-0.64, -0.17, -0.03), MovieUtil.PNT3_ZERO]
-    padPropTrack = getPropTrack(pad, suit.getLeftHand(), padPosPoints, 1e-06, 3.2)
-    missPoint = lambda cancelled = cancelled, toon = toon: __toonMissPoint(cancelled, toon)
-    propTrack = Sequence(
-        Func(__showProp, stamp, suit.getRightHand(), stampPosPoints[0], stampPosPoints[1]),
-        LerpScaleInterval(stamp, 0.5, MovieUtil.PNT3_ONE),
-        Wait(2.6),
-        Func(battle.movie.needRestoreRenderProp, cancelled),
-        Func(cancelled.reparentTo, render),
-        Func(cancelled.setScale, 0.6),
-        Func(cancelled.setPosHpr, stamp, 0.81, -1.11, -0.16, 0, 0, 90),
-        Func(cancelled.setP, 0),
-        Func(cancelled.setR, 0),
-        getPropThrowTrack(attack, cancelled, [__toonFacePoint(toon)], [missPoint]),
-        Func(MovieUtil.removeProp, cancelled),
-        Func(battle.movie.clearRenderProp, cancelled),
-        Wait(0.3),
-        LerpScaleInterval(stamp, 0.5, MovieUtil.PNT3_NEARZERO),
-        Func(MovieUtil.removeProp, stamp)
-    )
-    toonTrack = getToonTrack(attack, 3.4, ['conked'], 1.9, ['sidestep'])
-    soundTrack = getSoundTrack('SA_rubber_stamp.ogg', delay=1.3, duration=1.1, node=suit)
-    return Parallel(suitTrack, toonTrack, propTrack, padPropTrack, soundTrack)
+        targets = attack['target']
+        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        pad = globalPropPool.getProp('pad')
+        suitType = getSuitBodyType(attack['suitName'])
+        if suitType == 'a':
+            padPosPoints = [Point3(-0.65, 0.83, -0.04), VBase3(5.625, 4.456, -165.125)]
+            stampPosPoints = [Point3(-0.64, -0.17, -0.03), MovieUtil.PNT3_ZERO]
+        elif suitType == 'c':
+            padPosPoints = [Point3(0.19, -0.55, -0.21), VBase3(-166.76, -4.001, -1.658)]
+            stampPosPoints = [Point3(-0.64, -0.08, 0.11), MovieUtil.PNT3_ZERO]
+        else:
+            padPosPoints = [Point3(-0.65, 0.83, -0.04), VBase3(5.625, 4.456, -165.125)]
+            stampPosPoints = [Point3(-0.64, -0.17, -0.03), MovieUtil.PNT3_ZERO]
+        padPropTrack = getPropTrack(pad, suit.getLeftHand(), padPosPoints, 1e-06, 3.2)
+        propTracks = Parallel()
+        for t in targets:
+            toon = t['toon']
+            stamp = globalPropPool.getProp('rubber-stamp')
+            cancelled = __makeCancelledNodePath()
+            missPoint = lambda cancelled = cancelled, toon = toon: __toonMissPoint(cancelled, toon)
+            propTrack = Sequence(
+                Func(__showProp, stamp, suit.getRightHand(), stampPosPoints[0], stampPosPoints[1]),
+                LerpScaleInterval(stamp, 0.5, MovieUtil.PNT3_ONE),
+                Wait(2.6),
+                Func(battle.movie.needRestoreRenderProp, cancelled),
+                Func(cancelled.reparentTo, render),
+                Func(cancelled.setScale, 0.6),
+                Func(cancelled.setPosHpr, stamp, 0.81, -1.11, -0.16, 0, 0, 90),
+                Func(cancelled.setP, 0),
+                Func(cancelled.setR, 0),
+                getPropThrowTrack(attack, cancelled, [__toonFacePoint(toon)], [missPoint], target=t),
+                Func(MovieUtil.removeProp, cancelled),
+                Func(battle.movie.clearRenderProp, cancelled),
+                Wait(0.3),
+                LerpScaleInterval(stamp, 0.5, MovieUtil.PNT3_NEARZERO),
+                Func(MovieUtil.removeProp, stamp)
+            )
+            propTracks.append(propTrack)
+        toonTracks = getToonTracks(attack, 3.4, ['conked'], 1.9, ['sidestep'])
+        soundTrack = getSoundTrack('SA_rubber_stamp.ogg', delay=1.3, duration=1.1, node=suit)
+        return Parallel(suitTrack, toonTracks, propTracks, padPropTrack, soundTrack)
 
 
 def doRazzleDazzle(attack):
