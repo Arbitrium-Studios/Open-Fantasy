@@ -551,10 +551,11 @@ def doDefault(attack):
             attack['animName'] = 'pen-squirt'
             return doFountainPen(attack)
         elif suitName == 'ym':
-            attack['id'] = SYNERGY
-            attack['name'] = 'Synergy'
-            attack['animName'] = 'magic3'
-            return doSynergy(attack)
+            attack['id'] = RUBBER_STAMP
+            attacl['group'] = ATK_TGT_GROUP
+            attack['name'] = 'RubberStamp'
+            attack['animName'] = 'rubber-stamp'
+            return doRubberStamp(attack)
         elif suitName == 'mm':
             attack['id'] = FOUNTAIN_PEN
             attack['group'] = ATK_TGT_GROUP
