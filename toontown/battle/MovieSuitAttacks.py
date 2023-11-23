@@ -3678,7 +3678,8 @@ def doRedTape(attack):
             )
             hitPoint = lambda toon = toon: __toonTorsoPoint(toon)
             propTrack.append(getPropThrowTrack(attack, tape, [hitPoint], [__toonGroundPoint(attack, toon, 0.7)], target=t))
-            propTracks.append(propTrack)hips = toon.getHipsParts()
+            propTracks.append(propTrack)
+            hips = toon.getHipsParts()
             animal = toon.style.getAnimal()
             scale = ToontownGlobals.toonBodyScales[animal]
             legs = toon.style.legs
