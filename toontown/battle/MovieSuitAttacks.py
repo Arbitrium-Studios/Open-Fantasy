@@ -2101,22 +2101,22 @@ def doBuzzWord(attack):
 
     partDelay = {
         'a': 4.0,
-        'b': 1.3,
+        'b': 4.0,
         'c': 4.0
     }
     partDuration = {
         'a': 2.2,
-        'b': 2,
+        'b': 2.2,
         'c': 2.2
     }
     damageDelay = {
         'a': 4.5,
-        'b': 2.5,
+        'b': 4.5,
         'c': 4.5
     }
     dodgeDelay = {
         'a': 3.8,
-        'b': 1.8,
+        'b': 3.8,
         'c': 3.8
     }
     suitName = attack['suitName']
