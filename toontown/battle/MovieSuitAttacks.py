@@ -703,11 +703,11 @@ def doDefault(attack):
             attack['animName'] = 'magic2'
             return doParadigmShift(attack)
         elif suitName == 'le':
-            attack['id'] = EVIL_EYE
+            attack['id'] = LEGAL_STORM
             attack['group'] = ATK_TGT_GROUP
-            attack['name'] = 'EvilEye'
-            attack['animName'] = 'glower'
-            return doEvilEye(attack)
+            attack['name'] = 'LegalStorm'
+            attack['animName'] = 'effort'
+            return doBrainStorm(attack)
         elif suitName == 'bw':
             attack['id'] = POWER_TRIP
             attack['name'] = 'PowerTrip'
