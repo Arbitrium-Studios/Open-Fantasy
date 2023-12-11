@@ -1002,7 +1002,7 @@ class Movie(DirectObject.DirectObject):
 
                     tdict['leftToons'] = leftToons
                     tdict['rightToons'] = rightToons
-                    adict['target'] = tdict
+                    adict['target'] = [tdict]
                 else:
                     self.notify.warning('got suit attack not group or single!')
                 if targetGone == 0:
