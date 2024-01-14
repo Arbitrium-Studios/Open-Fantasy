@@ -3488,104 +3488,54 @@ def doTremor(attack):
 def doHangUp(attack):
     suit = attack['suit']
     battle = attack['battle']
-    if attack['group'] == ATK_TGT_SINGLE:
-        phone = globalPropPool.getProp('phone')
-        receiver = globalPropPool.getProp('receiver')
-        suitTrack = getSuitTrack(attack)
-        suitType = getSuitBodyType(attack['suitName'])
-        if suitType == 'a':
-            phonePosPoints = [Point3(-0.23, 0.01, -0.26), VBase3(5.939, 2.763, -177.591)]
-            receiverPosPoints = [Point3(-0.13, -0.07, -0.06), VBase3(-1.854, 2.434, -177.579)]
-            receiverAdjustScale = Point3(0.8, 0.8, 0.8)
-            pickupDelay = 0.44
-            dialDuration = 3.07
-            finalPhoneDelay = 0.01
-            scaleUpPoint = Point3(0.75, 0.75, 0.75)
-        elif suitType == 'b':
-            phonePosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
-            receiverPosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
-            receiverAdjustScale = MovieUtil.PNT3_ONE
-            pickupDelay = 0.74
-            dialDuration = 3.07
-            finalPhoneDelay = 0.69
-            scaleUpPoint = MovieUtil.PNT3_ONE
-        else:
-            phonePosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
-            receiverPosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
-            pickupDelay = 0.74
-            dialDuration = 3.14
-            finalPhoneDelay = 0.62
-            scaleUpPoint = MovieUtil.PNT3_ONE
-        propTrack = Sequence(
-            Wait(0.3),
-            Func(__showProp, phone, suit.getLeftHand(), phonePosPoints[0], phonePosPoints[1]),
-            Func(__showProp, receiver, suit.getLeftHand(), receiverPosPoints[0], receiverPosPoints[1]),
-            LerpScaleInterval(phone, 0.5, scaleUpPoint, MovieUtil.PNT3_NEARZERO),
-            Wait(pickupDelay),
-            Func(receiver.wrtReparentTo, suit.getRightHand())
-        )
-        if suitType == 'a' or suitType == 'b':
-            propTrack.append(LerpScaleInterval(receiver, 0.01, receiverAdjustScale))
-            propTrack.append(LerpPosHprInterval(receiver, 0.0001, Point3(-0.53, 0.21, -0.54), VBase3(-99.49, -35.27, 1.84)))
-        else:
-            propTrack.append(LerpPosHprInterval(receiver, 0.0001, Point3(-0.45, 0.48, -0.62), VBase3(-87.47, -18.21, 7.82)))
-        propTrack.append(Wait(dialDuration))
-        propTrack.append(Func(receiver.wrtReparentTo, phone))
-        propTrack.append(Wait(finalPhoneDelay))
-        propTrack.append(LerpScaleInterval(phone, 0.5, MovieUtil.PNT3_NEARZERO))
-        propTrack.append(Func(MovieUtil.removeProps, [receiver, phone]))
-        toonTrack = getToonTrack(attack, 5.5, ['slip-backward'], 4.7, ['jump'])
-        soundTrack = getSoundTrack('SA_hangup.ogg', delay=1.3, node=suit)
-        return Parallel(suitTrack, toonTrack, propTrack, soundTrack)
+    phone = globalPropPool.getProp('phone')
+    receiver = globalPropPool.getProp('receiver')
+    suitTrack = getSuitTrack(attack) if attack['group'] == ATK_TGT_SINGLE else getSuitAnimTrack(attack, delay=1e-06)
+    suitType = getSuitBodyType(attack['suitName'])
+    if suitType == 'a':
+        phonePosPoints = [Point3(-0.23, 0.01, -0.26), VBase3(5.939, 2.763, -177.591)]
+        receiverPosPoints = [Point3(-0.13, -0.07, -0.06), VBase3(-1.854, 2.434, -177.579)]
+        receiverAdjustScale = Point3(0.8, 0.8, 0.8)
+        pickupDelay = 0.44
+        dialDuration = 3.07
+        finalPhoneDelay = 0.01
+        scaleUpPoint = Point3(0.75, 0.75, 0.75)
+    elif suitType == 'b':
+        phonePosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
+        receiverPosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
+        receiverAdjustScale = MovieUtil.PNT3_ONE
+        pickupDelay = 0.74
+        dialDuration = 3.07
+        finalPhoneDelay = 0.69
+        scaleUpPoint = MovieUtil.PNT3_ONE
     else:
-        phone = globalPropPool.getProp('phone')
-        receiver = globalPropPool.getProp('receiver')
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
-        suitType = getSuitBodyType(attack['suitName'])
-        if suitType == 'a':
-            phonePosPoints = [Point3(-0.23, 0.01, -0.26), VBase3(5.939, 2.763, -177.591)]
-            receiverPosPoints = [Point3(-0.13, -0.07, -0.06), VBase3(-1.854, 2.434, -177.579)]
-            receiverAdjustScale = Point3(0.8, 0.8, 0.8)
-            pickupDelay = 0.44
-            dialDuration = 3.07
-            finalPhoneDelay = 0.01
-            scaleUpPoint = Point3(0.75, 0.75, 0.75)
-        elif suitType == 'b':
-            phonePosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
-            receiverPosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
-            receiverAdjustScale = MovieUtil.PNT3_ONE
-            pickupDelay = 0.74
-            dialDuration = 3.07
-            finalPhoneDelay = 0.69
-            scaleUpPoint = MovieUtil.PNT3_ONE
-        else:
-            phonePosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
-            receiverPosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
-            pickupDelay = 0.74
-            dialDuration = 3.14
-            finalPhoneDelay = 0.62
-            scaleUpPoint = MovieUtil.PNT3_ONE
-        propTrack = Sequence(
-            Wait(0.3),
-            Func(__showProp, phone, suit.getLeftHand(), phonePosPoints[0], phonePosPoints[1]),
-            Func(__showProp, receiver, suit.getLeftHand(), receiverPosPoints[0], receiverPosPoints[1]),
-            LerpScaleInterval(phone, 0.5, scaleUpPoint, MovieUtil.PNT3_NEARZERO),
-            Wait(pickupDelay),
-            Func(receiver.wrtReparentTo, suit.getRightHand())
-        )
-        if suitType == 'a' or suitType == 'b':
-            propTrack.append(LerpScaleInterval(receiver, 0.01, receiverAdjustScale))
-            propTrack.append(LerpPosHprInterval(receiver, 0.0001, Point3(-0.53, 0.21, -0.54), VBase3(-99.49, -35.27, 1.84)))
-        else:
-            propTrack.append(LerpPosHprInterval(receiver, 0.0001, Point3(-0.45, 0.48, -0.62), VBase3(-87.47, -18.21, 7.82)))
-        propTrack.append(Wait(dialDuration))
-        propTrack.append(Func(receiver.wrtReparentTo, phone))
-        propTrack.append(Wait(finalPhoneDelay))
-        propTrack.append(LerpScaleInterval(phone, 0.5, MovieUtil.PNT3_NEARZERO))
-        propTrack.append(Func(MovieUtil.removeProps, [receiver, phone]))
-        toonTracks = getToonTracks(attack, 5.5, ['slip-backward'], 4.7, ['jump'])
-        soundTrack = getSoundTrack('SA_hangup.ogg', delay=1.3, node=suit)
-        return Parallel(suitTrack, toonTracks, propTrack, soundTrack)
+        phonePosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
+        receiverPosPoints = [Point3(0.23, 0.17, -0.11), VBase3(5.939, 2.763, -177.591)]
+        pickupDelay = 0.74
+        dialDuration = 3.14
+        finalPhoneDelay = 0.62
+        scaleUpPoint = MovieUtil.PNT3_ONE
+    propTrack = Sequence(
+        Wait(0.3),
+        Func(__showProp, phone, suit.getLeftHand(), phonePosPoints[0], phonePosPoints[1]),
+        Func(__showProp, receiver, suit.getLeftHand(), receiverPosPoints[0], receiverPosPoints[1]),
+        LerpScaleInterval(phone, 0.5, scaleUpPoint, MovieUtil.PNT3_NEARZERO),
+        Wait(pickupDelay),
+        Func(receiver.wrtReparentTo, suit.getRightHand())
+    )
+    if suitType == 'a' or suitType == 'b':
+        propTrack.append(LerpScaleInterval(receiver, 0.01, receiverAdjustScale))
+        propTrack.append(LerpPosHprInterval(receiver, 0.0001, Point3(-0.53, 0.21, -0.54), VBase3(-99.49, -35.27, 1.84)))
+    else:
+        propTrack.append(LerpPosHprInterval(receiver, 0.0001, Point3(-0.45, 0.48, -0.62), VBase3(-87.47, -18.21, 7.82)))
+    propTrack.append(Wait(dialDuration))
+    propTrack.append(Func(receiver.wrtReparentTo, phone))
+    propTrack.append(Wait(finalPhoneDelay))
+    propTrack.append(LerpScaleInterval(phone, 0.5, MovieUtil.PNT3_NEARZERO))
+    propTrack.append(Func(MovieUtil.removeProps, [receiver, phone]))
+    toonTracks = getToonTracks(attack, 5.5, ['slip-backward'], 4.7, ['jump'])
+    soundTrack = getSoundTrack('SA_hangup.ogg', delay=1.3, node=suit)
+    return Parallel(suitTrack, toonTracks, propTrack, soundTrack)
 
 
 def doRedTape(attack):
