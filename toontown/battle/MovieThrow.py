@@ -10,7 +10,7 @@ import random
 import functools
 from . import MovieCamera
 from . import MovieUtil
-from .MovieUtil import calcAvgSuitPos
+from .MovieUtil import calcAvgAvatarPos
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieThrow')
 hitSoundFiles = (
     'AA_tart_only.ogg',
@@ -527,7 +527,7 @@ def __throwGroupPie(throw, delay, groupHitDict):
     sidestep = throw['sidestep']
     hpbonus = throw['hpbonus']
     numTargets = len(throw['target'])
-    avgSuitPos = calcAvgSuitPos(throw)
+    avgSuitPos = calcAvgAvatarPos(throw, 'suit')
     origHpr = toon.getHpr(battle)
     toonTrack = Sequence()
     toonFace = Func(toon.headsUp, battle, avgSuitPos)

@@ -721,9 +721,7 @@ def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
     suit = attack['suit']
     battle = attack['battle']
     tauntIndex = attack['taunt']
-    target = attack['target']
-    toon = target[0]['toon']
-    targetPos = toon.getPos(battle)
+    targetPos = MovieUtil.calcAvgAvatarPos(attack, 'toon')
     taunt = getAttackTaunt(attack['name'], tauntIndex, attack['suitName'])
     trapStorage = {}
     trapStorage['trap'] = None
@@ -763,7 +761,7 @@ def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
     return track
 
 
-def getSuitAnimTrack(attack, delay=0, splicedAnims=None, playRate=1.0):
+def getSuitAnimTrack(attack, delay=0.0, splicedAnims=None, playRate=1.0):
     suit = attack['suit']
     tauntIndex = attack['taunt']
     taunt = getAttackTaunt(attack['name'], tauntIndex, attack['suitName'])
@@ -1170,7 +1168,7 @@ def doClipOnTie(attack):
             'b': 3.1,
             'c': 2.34
         }
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         posPoints = [Point3(0.66, 0.51, 0.28), VBase3(-69.652, -17.199, 67.96)]
         tiePropTracks = Parallel()
         suitType = getSuitBodyType(attack['suitName'])
@@ -1425,7 +1423,7 @@ def doFountainPen(attack):
             tip = pen.find('**/joint_toSpray')
             return tip.getPos(render)
         
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         propTrack = Sequence(
             Wait(0.01),
             Func(__showProp, pen, suit.getRightHand(), MovieUtil.PNT3_ZERO),
@@ -1704,7 +1702,7 @@ def doRubberStamp(attack):
         return Parallel(suitTrack, toonTrack, propTrack, padPropTrack, soundTrack)
     else:
         targets = attack['target']
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         pad = globalPropPool.getProp('pad')
         suitType = getSuitBodyType(attack['suitName'])
         if suitType == 'a':
@@ -1783,7 +1781,7 @@ def doRazzleDazzle(attack):
         targets = attack['target']
         sign = globalPropPool.getProp('smile')
         BattleParticles.loadParticles()
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitAnimTrack(attack)
         signPosPoints = [Point3(0.0, -0.42, -0.04),
                          VBase3(105.715, 73.977, 65.932)]
         signPropTrack = Sequence(
@@ -1879,7 +1877,7 @@ def doTeeOff(attack):
     else:
         targets = attack['target']
         club = globalPropPool.getProp('golf-club')
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         clubPosPoints = [MovieUtil.PNT3_ZERO, VBase3(63.097, 43.988, -18.435)]
         clubPropTrack = getPropTrack(club, suit.getLeftHand(), clubPosPoints, 0.5, 5.2, Point3(1.1, 1.1, 1.1))
         soundTrack = getSoundTrack('SA_tee_off.ogg', delay=4.1, node=suit)
@@ -2011,7 +2009,7 @@ def doBrainStorm(attack):
             'b': 3.3,
             'c': 3.3
         }
-        suitTrack = getSuitAnimTrack(attack, delay=0.9)
+        suitTrack = getSuitTrack(attack, delay=0.9)
         initialCloudHeight = suit.height + 3
         cloudPosPoints = [Point3(0, 3, initialCloudHeight), VBase3(180, 0, 0)]
         cloudPropTracks = Parallel()
@@ -2371,7 +2369,7 @@ def doPinkSlip(attack):
         targets = attack['target']
         throwDelay = 3.03
         throwDuration = 0.5
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         posPoints = [Point3(0.07, -0.06, -0.18), VBase3(-172.075, -26.715, -89.131)]
         propTracks = Parallel()
         for t in targets:
@@ -2647,7 +2645,7 @@ def doWindsor(attack):
         throwDelay = 2.17
         damageDelay = 3.4
         dodgeDelay = 2.4
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         posPoints = [Point3(0.02, 0.88, 0.48), VBase3(99, -3, -108.2)]
         tiePropTracks = Parallel()
         for t in targets:
@@ -2900,7 +2898,7 @@ def doEvilEye(attack):
         suitSplicedAnims = [['glower', 0.01, 0.01, suitHoldStart]]
         suitSplicedAnims.extend(getSplicedLerpAnims('glower', suitHoldDuration, 1.1, startTime=suitHoldStart))
         suitSplicedAnims.append(['glower', 0.01, suitHoldStop])
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06, splicedAnims=suitSplicedAnims)
+        suitTrack = getSuitTrack(attack, splicedAnims=suitSplicedAnims)
         eyePropTracks = Parallel()
         for t in targets:
             toon = t['toon']
@@ -3211,7 +3209,7 @@ def doFreezeAssets(attack):
             'b': 2.3,
             'c': 2.3
         }
-        suitTrack = getSuitAnimTrack(attack, delay=0.9)
+        suitTrack = getSuitTrack(attack, delay=0.9)
         initialCloudHeight = suit.height + 3
         cloudPosPoints = [Point3(0, 3, initialCloudHeight), MovieUtil.PNT3_ZERO]
         cloudPropTracks = Parallel()
@@ -3495,7 +3493,7 @@ def doHangUp(attack):
     battle = attack['battle']
     phone = globalPropPool.getProp('phone')
     receiver = globalPropPool.getProp('receiver')
-    suitTrack = getSuitTrack(attack) if attack['group'] == ATK_TGT_SINGLE else getSuitAnimTrack(attack, delay=1e-06)
+    suitTrack = getSuitTrack(attack)
     suitType = getSuitBodyType(attack['suitName'])
     if suitType == 'a':
         phonePosPoints = [Point3(-0.23, 0.01, -0.26), VBase3(5.939, 2.763, -177.591)]
@@ -3601,7 +3599,7 @@ def doRedTape(attack):
         return multiTrackList
     else:
         targets = attack['target']
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         suitType = getSuitBodyType(attack['suitName'])
         if suitType == 'a':
             tapePosPoints = [Point3(-0.24, 0.09, -0.38), VBase3(-1.152, 86.581, -76.784)]
@@ -3814,7 +3812,7 @@ def doSandTrap(attack):
         targets = attack['target']
         damageDelay = 1.3
         dodgeDelay = 0.25
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         damageAnims = [['melt'], ['jump', 1.5, 0.4]]
         toonTracks = getToonTracks(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
         puddleTracks = Parallel()
@@ -3937,7 +3935,7 @@ def doStomper(attack):
         return Parallel(suitTrack, stomperTrack, toonTrack)
     else:
         targets = attack['target']
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         stomperTracks = Parallel()
         toonTracks = Parallel()
         for t in targets:
@@ -4103,7 +4101,7 @@ def doBounceCheck(attack):
             'b': 5.1,
             'c': 4.4
         }
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         checkPropTracks = Parallel()
         suitType = getSuitBodyType(attack['suitName'])
         toonTracks = getToonTracks(attack, damageDelay[suitType], ['conked'], dodgeDelay[suitType], ['sidestep'])
@@ -4208,7 +4206,7 @@ def doWatercooler(attack):
             spout = watercooler.find('**/joint_toSpray')
             return spout.getPos(render)
         
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         posPoints = [Point3(0.48, 0.11, -0.92), VBase3(20.403, 33.158, 69.511)]
         propTrack = Sequence(
             Wait(1.01),
@@ -4314,7 +4312,7 @@ def doFired(attack):
     else:
         targets = attack['target']
         BattleParticles.loadParticles()
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         damageAnims = [['cringe', 0.01, 0.7, 0.62],
          ['slip-forward', 1e-05, 0.4, 1.2]]
         baseFlameTracks = Parallel()
@@ -4625,7 +4623,7 @@ def doLiquidate(attack):
             'b': 2.45,
             'c': 2.45
         }
-        suitTrack = getSuitAnimTrack(attack, delay=0.9)
+        suitTrack = getSuitTrack(attack, delay=0.9)
         initialCloudHeight = suit.height + 3
         cloudPosPoints = [Point3(0, 3, initialCloudHeight), VBase3(180, 0, 0)]
         cloudPropTracks = Parallel()
@@ -4816,7 +4814,7 @@ def doBite(attack):
         suitDelay = 1.73
         throwDelay = propDelay + propScaleUpTime + suitDelay
         throwDuration = 0.4
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         posPoints = [Point3(-0.05, 0.41, -0.54), VBase3(4.465, -3.563, 51.479)]
         propTracks = Parallel()
         for t in targets:
@@ -4995,7 +4993,7 @@ def doChomp(attack):
         suitDelay = 1.73
         throwDelay = propDelay + propScaleUpTime + suitDelay
         throwDuration = 0.4
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         posPoints = [Point3(-0.05, 0.41, -0.54), VBase3(4.465, -3.563, 51.479)]
         propTracks = Parallel()
         for t in targets:
@@ -5406,7 +5404,7 @@ def doRestrainingOrder(attack):
             return Parallel(suitTrack, toonTrack, propTrack)
     else:
         targets = attack['target']
-        suitTrack = getSuitAnimTrack(attack, delay=1e-06)
+        suitTrack = getSuitTrack(attack)
         posPoints = [Point3(-0.04, 0.15, -1.38), VBase3(10.584, -11.945, 18.316)]
         propTracks = Parallel()
         damageAnims = [['conked', 0.01, 0.3, 0.2],

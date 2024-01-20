@@ -10,7 +10,7 @@ import random
 import functools
 from . import MovieCamera
 from . import MovieUtil
-from .MovieUtil import calcAvgSuitPos
+from .MovieUtil import calcAvgAvatarPos
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieThrow')
 hitSoundFiles = (
     'AA_tart_only.ogg',

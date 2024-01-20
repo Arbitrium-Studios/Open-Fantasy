@@ -849,13 +849,15 @@ def createSuitStunInterval(suit, before, after):
         0.0, p2[2] - 1.0)), Func(stars.loop, 'stun'), Wait(after), Func(stars.cleanup), Func(stars.removeNode))
 
 
-def calcAvgSuitPos(throw):
-    battle = throw['battle']
-    avgSuitPos = Point3(0, 0, 0)
-    numTargets = len(throw['target'])
+def calcAvgAvatarPos(attack, avatar):
+    if not (avatar == 'suit' or avatar == 'toon'):
+        notify.error('avatar is not suit or toon!')
+    battle = attack['battle']
+    avgAvatarPos = Point3(0, 0, 0)
+    numTargets = len(attack['target'])
     for i in range(numTargets):
-        suit = throw['target'][i]['suit']
-        avgSuitPos += suit.getPos(battle)
-
-    avgSuitPos /= numTargets
-    return avgSuitPos
+        av = attack['target'][i][avatar]
+        avgAvatarPos += av.getPos(battle)
+    
+    avgAvatarPos /= numTargets
+    return avgAvatarPos

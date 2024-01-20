@@ -6,7 +6,7 @@ from . import MovieCamera
 from direct.directnotify import DirectNotifyGlobal
 from . import MovieUtil
 from . import MovieNPCSOS
-from .MovieUtil import calcAvgSuitPos
+from .MovieUtil import calcAvgAvatarPos
 from direct.showutil import Effects
 import functools
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieDrop')
@@ -195,7 +195,7 @@ def __doGroupDrops(groupDrops):
     for drop in groupDrops:
         battle = drop['battle']
         level = drop['level']
-        centerPos = calcAvgSuitPos(drop)
+        centerPos = calcAvgAvatarPos(drop, 'suit')
         targets = drop['target']
         numTargets = len(targets)
         closestTarget = -1
