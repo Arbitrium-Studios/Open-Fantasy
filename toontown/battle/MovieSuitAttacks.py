@@ -1063,6 +1063,14 @@ def getSplicedLerpAnims(animName, origDuration, newDuration, startTime=0, fps=30
     return anims
 
 
+def hitAtleastOneToon(targets):
+    for t in targets:
+        if t['hp'] > 0:
+            return True
+    
+    return False
+
+
 def getSoundTrack(fileName, delay=0.01, duration=0, volume=1, startTime=0, node=None):
     return Sequence(Wait(delay), SoundInterval(globalBattleSoundCache.getSound(fileName), duration=duration, volume=volume, startTime=startTime, node=node))
 
@@ -1814,11 +1822,6 @@ def doSynergy(attack):
     battle = attack['battle']
     targets = attack['target']
     damageDelay = 1.7
-    hitAtleastOneToon = 0
-    for t in targets:
-        if t['hp'] > 0:
-            hitAtleastOneToon = 1
-
     particleEffect = BattleParticles.createParticleEffect('Synergy')
     waterfallEffect = BattleParticles.createParticleEffect(file='synergyWaterfall')
     suitTrack = getSuitAnimTrack(attack)
@@ -1829,7 +1832,7 @@ def doSynergy(attack):
     dodgeAnims.append(['jump', 0, 0.91])
     toonTracks = getToonTracks(attack, damageDelay=damageDelay, damageAnimNames=['slip-forward'], dodgeDelay=0.91, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.0)
     synergySoundTrack = getSoundTrack('SA_synergy.ogg', delay=0.9, node=suit)
-    if hitAtleastOneToon > 0:
+    if hitAtleastOneToon(targets):
         fallingSoundTrack = getSoundTrack('Toon_bodyfall_synergy.ogg', delay=damageDelay + 0.5, node=suit)
         return Parallel(suitTrack, partTrack, waterfallTrack, synergySoundTrack, fallingSoundTrack, toonTracks)
     else:
@@ -3656,11 +3659,6 @@ def doParadigmShift(attack):
     suit = attack['suit']
     battle = attack['battle']
     targets = attack['target']
-    hitAtleastOneToon = 0
-    for t in targets:
-        if t['hp'] > 0:
-            hitAtleastOneToon = 1
-
     damageDelay = 1.95
     dodgeDelay = 0.95
     sprayEffect = BattleParticles.createParticleEffect('ShiftSpray')
@@ -3724,7 +3722,7 @@ def doParadigmShift(attack):
     dodgeAnims.extend(getSplicedLerpAnims('jump', 0.31, 1.0, startTime=0.6))
     dodgeAnims.append(['jump', 0, 0.91])
     toonTracks = getToonTracks(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, splicedDodgeAnims=dodgeAnims, showDamageExtraTime=2.7)
-    if hitAtleastOneToon == 1:
+    if hitAtleastOneToon(targets):
         soundTrack = getSoundTrack('SA_paradigm_shift.ogg', delay=2.1, node=suit)
         return Parallel(suitTrack, sprayTrack, soundTrack, liftTracks, toonTracks, toonRiseTracks)
     else:
