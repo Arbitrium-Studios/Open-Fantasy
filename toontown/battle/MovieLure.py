@@ -67,6 +67,7 @@ def getSoundTrack(fileName, delay=0.01, duration=None, node=None):
 
 
 def __createFishingPoleMultiTrack(lure, dollar, dollarName):
+    from toontown.fishing.FishGlobals import RodFileDict
     toon = lure['toon']
     target = lure['target']
     battle = lure['battle']
@@ -79,7 +80,10 @@ def __createFishingPoleMultiTrack(lure, dollar, dollarName):
     revived = target['revived']
     reachAnimDuration = 3.5
     trapProp = suit.battleTrapProp
-    pole = globalPropPool.getProp('fishing-pole')
+    try:
+        pole = Actor.Actor(RodFileDict[toon.getFishingRod()], {'fishing-pole': 'phase_4/models/props/fishing-pole-chan'})
+    except:
+        pole = globalPropPool.getProp('fishing-pole')
     pole2 = MovieUtil.copyProp(pole)
     poles = [pole, pole2]
     hands = toon.getRightHands()
