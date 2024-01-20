@@ -816,7 +816,7 @@ class Movie(DirectObject.DirectObject):
                                 tdict = {}
                                 tdict['toon'] = target
                                 tdict['hp'] = hps[targetIndex]
-                                adict['target'] = tdict
+                                adict['target'] = [tdict]
                             else:
                                 targetGone = 1
                 elif attackAffectsGroup(track, level, ta[TOON_TRACK_COL]):

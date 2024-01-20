@@ -149,8 +149,8 @@ def __getSoundTrack(level, delay, duration=None, node=None):
 
 def __healTickle(heal, hasInteractivePropHealBonus):
     toon = heal['toon']
-    target = heal['target']['toon']
-    hp = heal['target']['hp']
+    target = heal['target'][0]['toon']
+    hp = heal['target'][0]['hp']
     ineffective = heal['sidestep']
     level = heal['level']
     track = Sequence(__runToHealSpot(heal))
@@ -340,9 +340,9 @@ def __healJoke(heal, hasInteractivePropHealBonus):
 
 def __healSmooch(heal, hasInteractivePropHealBonus):
     toon = heal['toon']
-    target = heal['target']['toon']
+    target = heal['target'][0]['toon']
     level = heal['level']
-    hp = heal['target']['hp']
+    hp = heal['target'][0]['hp']
     ineffective = heal['sidestep']
     track = Sequence(__runToHealSpot(heal))
     lipstick = globalPropPool.getProp('lipstick')
@@ -543,48 +543,70 @@ def __healDance(heal, hasInteractivePropHealBonus):
 
 
 def __healSprinkle(heal, hasInteractivePropHealBonus):
-    toon = heal['toon']
-    target = heal['target']['toon']
-    hp = heal['target']['hp']
+    npcId = 0
+    if 'npcId' in heal:
+        npcId = heal['npcId']
+        toon = NPCToons.createLocalNPC(npcId)
+        if toon is None:
+            return
+    else:
+        toon = heal['toon']
+    targets = heal['target']
     ineffective = heal['sidestep']
     level = heal['level']
-    track = Sequence(__runToHealSpot(heal))
-    sprayEffect = BattleParticles.createParticleEffect(file='pixieSpray')
-    dropEffect = BattleParticles.createParticleEffect(file='pixieDrop')
-    explodeEffect = BattleParticles.createParticleEffect(file='pixieExplode')
-    poofEffect = BattleParticles.createParticleEffect(file='pixiePoof')
-    wallEffect = BattleParticles.createParticleEffect(file='pixieWall')
+    battle = heal['battle']
+    if npcId != 0:
+        track = Sequence(MovieNPCSOS.teleportIn(heal, toon))
+    else:
+        track = Sequence(__runToHealSpot(heal))
 
-    def face90(toon=toon, target=target):
-        vec = Point3(target.getPos() - toon.getPos())
+    def face90(target, toon, battle):
+        vec = Point3(target.getPos(battle) - toon.getPos(battle))
         vec.setZ(0)
         temp = vec[0]
         vec.setX(-vec[1])
         vec.setY(temp)
-        targetPoint = Point3(toon.getPos() + vec)
-        toon.headsUp(render, targetPoint)
+        targetPoint = Point3(toon.getPos(battle) + vec)
+        toon.headsUp(battle, targetPoint)
 
     delay = 2.5
-    mtrack = Parallel(
-        __getPartTrack(
-            sprayEffect, 1.5, 0.5, [
-                sprayEffect, toon, 0]), __getPartTrack(
-            dropEffect, 1.9, 2.0, [
-                dropEffect, target, 0]), __getPartTrack(
-            explodeEffect, 2.7, 1.0, [
-                explodeEffect, toon, 0]), __getPartTrack(
-            poofEffect, 3.4, 1.0, [
-                poofEffect, target, 0]), __getPartTrack(
-            wallEffect, 4.05, 1.2, [
-                wallEffect, toon, 0]), __getSoundTrack(
-            level, 2, duration=4.1, node=toon), Sequence(
-            Func(face90), ActorInterval(
-                toon, 'sprinkle-dust')), Sequence(
-            Wait(delay), Func(
-                __healToon, target, hp, ineffective, hasInteractivePropHealBonus)))
-    track.append(mtrack)
-    track.append(__returnToBase(heal))
-    track.append(Func(target.clearChat))
+    effectTrack = Parallel()
+    for target in targets:
+        targetToon = target['toon']
+        hp = target['hp']
+        sprayEffect = BattleParticles.createParticleEffect(file='pixieSpray')
+        dropEffect = BattleParticles.createParticleEffect(file='pixieDrop')
+        explodeEffect = BattleParticles.createParticleEffect(file='pixieExplode')
+        poofEffect = BattleParticles.createParticleEffect(file='pixiePoof')
+        wallEffect = BattleParticles.createParticleEffect(file='pixieWall')
+        mtrack = Parallel(
+            __getPartTrack(sprayEffect, 1.5, 0.5, [sprayEffect, toon, 0]),
+            __getPartTrack(dropEffect, 1.9, 2.0, [dropEffect, targetToon, 0]),
+            __getPartTrack(explodeEffect, 2.7, 1.0, [explodeEffect, toon, 0]),
+            __getPartTrack(poofEffect, 3.4, 1.0, [poofEffect, targetToon, 0]),
+            __getPartTrack(wallEffect, 4.05, 1.2, [wallEffect, toon, 0]),
+            __getSoundTrack(level, 2, duration=4.1, node=toon),
+            Sequence(
+                Func(face90, targetToon, toon, battle),
+                ActorInterval(toon, 'sprinkle-dust')
+            ),
+            Sequence(
+                Wait(delay),
+                Func(__healToon, targetToon, hp, ineffective, hasInteractivePropHealBonus)
+            )
+        )
+        effectTrack.append(mtrack)
+    
+    track.append(effectTrack)
+    if npcId != 0:
+        track.append(Func(toon.setHpr, Vec3(180.0, 0.0, 0.0)))
+        track.append(MovieNPCSOS.teleportOut(heal, toon))
+    else:
+        track.append(__returnToBase(heal))
+    for target in targets:
+        targetToon = target['toon']
+        track.append(Func(targetToon.clearChat))
+    
     return track
 
 
