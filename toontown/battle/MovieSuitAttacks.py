@@ -2666,7 +2666,7 @@ def doWindsor(attack):
         damageAnims = [['conked', 0.01, 0.01, 0.4],
          ['cringe', 0.01, 0.7]]
         toonTracks = getToonTracks(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
-        return Parallel(suitTrack)
+        return Parallel(suitTrack, toonTracks, tiePropTracks)
 
 
 def doHeadShrink(attack):
