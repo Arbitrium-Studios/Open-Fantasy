@@ -2640,7 +2640,8 @@ def doWindsor(attack):
         damageAnims = [['conked', 0.01, 0.01, 0.4],
          ['cringe', 0.01, 0.7]]
         toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
-        return Parallel(suitTrack, toonTrack, tiePropTrack)
+        throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay + 1, node=suit)
+        return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound)
     else:
         targets = attack['target']
         throwDelay = 2.17
@@ -2666,7 +2667,8 @@ def doWindsor(attack):
         damageAnims = [['conked', 0.01, 0.01, 0.4],
          ['cringe', 0.01, 0.7]]
         toonTracks = getToonTracks(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
-        return Parallel(suitTrack, toonTracks, tiePropTracks)
+        throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay + 1, node=suit)
+        return Parallel(suitTrack, toonTracks, tiePropTracks, throwSound)
 
 
 def doHeadShrink(attack):
