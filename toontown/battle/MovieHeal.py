@@ -750,48 +750,66 @@ def __healDive(heal, hasInteractivePropHealBonus):
     toonscale = toonNode.getScale()
     toonFacing = toon.getHpr()
     propTrack = Sequence(
-        Func(
-            MovieUtil.showProp, glass, render, glassPos), Func(
-            MovieUtil.showProp, ladder, render, ladderPos), Func(
-                toonsLook, toonsInBattle, placeNode, Point3(
-                    0, 0, 0)), Func(
-                        placeNode.setPos, lookBase), LerpScaleInterval(
-                            ladder, ladderGrowTime, scaleUpPoint, startScale=MovieUtil.PNT3_NEARZERO), Func(
-                                placeNode.setPos, lookTop), Wait(2.1), MovieCamera.toonGroupHighShot(
-                                    None, 0), Wait(2.1), Func(
-                                        placeNode.setPos, LookGlass), Wait(0.4), MovieCamera.allGroupLowShot(
-                                            None, 0), Wait(1.8), LerpScaleInterval(
-                                                ladder, ladderGrowTime, MovieUtil.PNT3_NEARZERO, startScale=scaleUpPoint), Func(
-                                                    MovieUtil.removeProps, diveProps))
+        Func(MovieUtil.showProp, glass, render, glassPos),
+        Func(MovieUtil.showProp, ladder, render, ladderPos),
+        Func(toonsLook, toonsInBattle, placeNode, Point3(0, 0, 0)),
+        Func(placeNode.setPos, lookBase),
+        LerpScaleInterval(ladder, ladderGrowTime, scaleUpPoint, startScale=MovieUtil.PNT3_NEARZERO),
+        Func(placeNode.setPos, lookTop),
+        Wait(2.1),
+        MovieCamera.toonGroupHighShot(None, 0),
+        Wait(2.1),
+        Func(placeNode.setPos, LookGlass),
+        Wait(0.4),
+        MovieCamera.allGroupLowShot(None, 0),
+        Wait(1.8),
+        LerpScaleInterval(ladder, ladderGrowTime, MovieUtil.PNT3_NEARZERO, startScale=scaleUpPoint),
+        Func(MovieUtil.removeProps, diveProps)
+    )
     mtrack = Parallel(
-        propTrack, __getSoundTrack(
-            level, 0.6, duration=9.0, node=toon), Sequence(
+        propTrack,
+        __getSoundTrack(level, 0.6, duration=9.0, node=toon),
+        Sequence(
             Parallel(
                 Sequence(
-                    ActorInterval(
-                        toon, 'walk', loop=0, duration=walkToLadderTime), ActorInterval(
-                            toon, 'neutral', loop=0, duration=0.1)), LerpPosInterval(
-                                toon, walkToLadderTime, climbladderPos), Wait(ladderGrowTime)), Parallel(
-                                    ActorInterval(
-                                        toon, 'climb', loop=0, endFrame=116), Sequence(
-                                            Wait(4.6), Func(
-                                                toonNode.setTransparency, 1), LerpColorScaleInterval(
-                                                    toonNode, 0.25, VBase4(
-                                                        1, 1.0, 1, 0.0), blendType='easeInOut'), LerpScaleInterval(
-                                                            toonNode, 0.01, 0.1, startScale=toonscale), LerpHprInterval(
-                                                                toon, 0.01, toonFacing), LerpPosInterval(
-                                                                    toon, 0.0, glassToonPos), Func(
-                                                                        toonNode.clearTransparency), Func(
-                                                                            toonNode.clearColorScale), Parallel(
-                                                                                ActorInterval(
-                                                                                    toon, 'swim', loop=1, startTime=0.0, endTime=1.0), Wait(1.0))), Sequence(
-                                                                                        Wait(4.6), Func(
-                                                                                            splash.play), Wait(1.0), Func(
-                                                                                                splash.destroy))), Wait(0.5), Parallel(
-                                                                                                    ActorInterval(
-                                                                                                        toon, 'jump', loop=0, startTime=0.2), LerpScaleInterval(
-                                                                                                            toonNode, 0.5, toonscale, startScale=0.1), Func(
-                                                                                                                stopLook, toonsInBattle))), targetTrack)
+                    ActorInterval(toon, 'walk', loop=0, duration=walkToLadderTime),
+                    ActorInterval(toon, 'neutral', loop=0, duration=0.1)
+                ),
+                LerpPosInterval(toon, walkToLadderTime, climbladderPos),
+                Wait(ladderGrowTime)
+            ),
+            Parallel(
+                ActorInterval(toon, 'climb', loop=0, endFrame=116),
+                Sequence(
+                    Wait(4.6),
+                    Func(toonNode.setTransparency, 1),
+                    LerpColorScaleInterval(toonNode, 0.25, VBase4(1, 1.0, 1, 0.0), blendType='easeInOut'),
+                    LerpScaleInterval(toonNode, 0.01, 0.1, startScale=toonscale),
+                    LerpHprInterval(toon, 0.01, toonFacing),
+                    LerpPosInterval(toon, 0.0, glassToonPos),
+                    Func(toonNode.clearTransparency),
+                    Func(toonNode.clearColorScale),
+                    Parallel(
+                        ActorInterval(toon, 'swim', loop=1, startTime=0.0, endTime=1.0),
+                        Wait(1.0)
+                    )
+                ),
+                Sequence(
+                    Wait(4.6),
+                    Func(splash.play),
+                    Wait(1.0),
+                    Func(splash.destroy)
+                )
+            ),
+            Wait(0.5),
+            Parallel(
+                ActorInterval(toon, 'jump', loop=0, startTime=0.2),
+                LerpScaleInterval(toonNode, 0.5, toonscale, startScale=0.1),
+                Func(stopLook, toonsInBattle)
+            )
+        ),
+        targetTrack
+    )
     track.append(mtrack)
     if npcId != 0:
         track.append(MovieNPCSOS.teleportOut(heal, toon))
