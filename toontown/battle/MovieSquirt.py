@@ -135,8 +135,8 @@ def __doSquirt(squirt, delay, fShowStun, uberClone=0):
     else:
         notify.debug('toon: %s squirts prop: %d at suit: %d for hp: %d' % (squirt['toon'].getName(),
                                                                            squirt['level'],
-                                                                           squirt['target']['suit'].doId,
-                                                                           squirt['target']['hp']))
+                                                                           squirt['target'][0]['suit'].doId,
+                                                                           squirt['target'][0]['hp']))
     if uberClone:
         ival = squirtfn_array[squirt['level']](
             squirt, delay, fShowStun, uberClone)
