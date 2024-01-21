@@ -254,17 +254,14 @@ def chooseThrowCloseShot(throws, suitThrowsDict,
     return track
 
 
-def chooseSquirtShot(squirts, suitSquirtsDict, attackDuration):
+def chooseSquirtShot(squirts, suitSquirtsDict, attackDuration, enterDuration=0.0, exitDuration=0.0):
+    enterShot = chooseNPCEnterShot(squirts, enterDuration)
     openShot = chooseSquirtOpenShot(squirts, suitSquirtsDict, attackDuration)
     openDuration = openShot.getDuration()
     openName = openShot.getName()
-    closeShot = chooseSquirtCloseShot(
-        squirts,
-        suitSquirtsDict,
-        openDuration,
-        openName,
-        attackDuration)
-    track = Sequence(openShot, closeShot)
+    closeShot = chooseSquirtCloseShot(squirts, suitSquirtsDict, openDuration, openName, attackDuration)
+    exitShot = chooseNPCExitShot(squirts, exitDuration)
+    track = Sequence(enterShot, openShot, closeShot, exitShot)
     return track
 
 

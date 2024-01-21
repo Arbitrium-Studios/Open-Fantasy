@@ -10,6 +10,7 @@ from direct.directnotify import DirectNotifyGlobal
 from . import BattleParticles
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import ToontownBattleGlobals
+from . import MovieNPCSOS
 import random
 import functools
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieSquirt')
@@ -43,6 +44,7 @@ def doSquirts(squirts):
     if len(squirts) == 0:
         return (None, None)
 
+    npcArrivals, npcDepartures, npcs = MovieNPCSOS.doNPCTeleports(squirts)
     suitSquirtsDict = {}
     doneUber = 0
     skip = 0
@@ -59,7 +61,7 @@ def doSquirts(squirts):
                 else:
                     suitSquirtsDict[suitId] = [squirt]
         else:
-            suitId = squirt['target']['suit'].doId
+            suitId = squirt['target'][0]['suit'].doId
             if suitId in suitSquirtsDict:
                 suitSquirtsDict[suitId].append(squirt)
             else:
@@ -85,10 +87,12 @@ def doSquirts(squirts):
                 mtrack.append(Sequence(Wait(delay), ival))
             delay = delay + TOON_SQUIRT_SUIT_DELAY
 
+    squirtTrack = Sequence(npcArrivals, mtrack, npcDepartures)
     camDuration = mtrack.getDuration()
-    camTrack = MovieCamera.chooseSquirtShot(
-        squirts, suitSquirtsDict, camDuration)
-    return (mtrack, camTrack)
+    enterDuration = npcArrivals.getDuration()
+    exitDuration = npcDepartures.getDuration()
+    camTrack = MovieCamera.chooseSquirtShot(squirts, suitSquirtsDict, camDuration, enterDuration, exitDuration)
+    return (squirtTrack, camTrack)
 
 
 def __doSuitSquirts(squirts):
@@ -168,8 +172,7 @@ def __getSplashTrack(point, scale, delay, battle, splashHold=0.01):
         splash, 'splash-from-splat'), Wait(splashHold), Func(MovieUtil.removeProp, splash), Func(battle.movie.clearRenderProp, splash))
 
 
-def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, leftSuits, rightSuits,
-                   battle, toon, fShowStun, beforeStun=0.5, afterStun=1.8, geyser=0, uberRepeat=0, revived=0):
+def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, leftSuits, rightSuits, battle, toon, fShowStun, beforeStun=0.5, afterStun=1.8, geyser=0, uberRepeat=0, revived=0):
     if hp > 0:
         suitTrack = Sequence()
         sival = ActorInterval(suit, anim)
@@ -180,27 +183,16 @@ def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, lef
             animTrack = Sequence()
             animTrack.append(ActorInterval(suit, anim, duration=0.2))
             if suitType == 'a':
-                animTrack.append(
-                    ActorInterval(
-                        suit,
-                        'slip-forward',
-                        startTime=2.43))
+                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.43))
             elif suitType == 'b':
-                animTrack.append(
-                    ActorInterval(
-                        suit,
-                        'slip-forward',
-                        startTime=1.94))
+                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=1.94))
             elif suitType == 'c':
-                animTrack.append(
-                    ActorInterval(
-                        suit,
-                        'slip-forward',
-                        startTime=2.58))
+                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.58))
             animTrack.append(Func(battle.unlureSuit, suit))
             moveTrack = Sequence(
-                Wait(0.2), LerpPosInterval(
-                    suit, 0.6, pos=suitPos, other=battle))
+                Wait(0.2),
+                LerpPosInterval(suit, 0.6, pos=suitPos, other=battle)
+            )
             sival = Parallel(animTrack, moveTrack)
         elif geyser:
             suitStartPos = suit.getPos()
@@ -220,40 +212,21 @@ def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, lef
                 startFlailFrame = 15
                 endFlailFrame = 15
             sival = Sequence(
-                ActorInterval(
-                    suit,
-                    'slip-backward',
-                    playRate=0.5,
-                    startFrame=0,
-                    endFrame=startFlailFrame - 1),
-                Func(
-                    suit.pingpong,
-                    'slip-backward',
-                    fromFrame=startFlailFrame,
-                    toFrame=endFlailFrame),
+                ActorInterval(suit, 'slip-backward', playRate=0.5, startFrame=0, endFrame=startFlailFrame - 1),
+                Func(suit.pingpong, 'slip-backward', fromFrame=startFlailFrame, toFrame=endFlailFrame),
                 Wait(0.5),
-                ActorInterval(
-                    suit,
-                    'slip-backward',
-                    playRate=1.0,
-                    startFrame=endFlailFrame))
-            sUp = LerpPosInterval(
-                suit,
-                1.1,
-                suitEndPos,
-                startPos=suitStartPos,
-                fluid=1)
-            sDown = LerpPosInterval(
-                suit, 0.6, suitStartPos, startPos=suitEndPos, fluid=1)
+                ActorInterval(suit, 'slip-backward', playRate=1.0, startFrame=endFlailFrame)
+            )
+            sUp = LerpPosInterval(suit, 1.1, suitEndPos, startPos=suitStartPos, fluid=1)
+            sDown = LerpPosInterval(suit, 0.6, suitStartPos, startPos=suitEndPos, fluid=1)
         elif fShowStun == 1:
             sival = Parallel(
-                ActorInterval(
-                    suit, anim), MovieUtil.createSuitStunInterval(
-                    suit, beforeStun, afterStun))
+                ActorInterval(suit, anim),
+                MovieUtil.createSuitStunInterval(suit, beforeStun, afterStun)
+            )
         else:
             sival = ActorInterval(suit, anim)
-        showDamage = Func(suit.showHpText, -
-                          hp, openEnded=0, attackTrack=SQUIRT_TRACK)
+        showDamage = Func(suit.showHpText, - hp, openEnded=0, attackTrack=SQUIRT_TRACK)
         updateHealthBar = Func(suit.updateHealthBar, hp)
         suitTrack.append(Wait(tContact))
         suitTrack.append(showDamage)
@@ -269,28 +242,21 @@ def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, lef
         bonusTrack = Sequence(Wait(tContact))
         if kbbonus > 0:
             bonusTrack.append(Wait(0.75))
-            bonusTrack.append(Func(suit.showHpText, -
-                                   kbbonus, 2, openEnded=0, attackTrack=SQUIRT_TRACK))
+            bonusTrack.append(Func(suit.showHpText, - kbbonus, 2, openEnded=0, attackTrack=SQUIRT_TRACK))
             bonusTrack.append(Func(suit.updateHealthBar, kbbonus))
         if hpbonus > 0:
             bonusTrack.append(Wait(0.75))
-            bonusTrack.append(Func(suit.showHpText, -
-                                   hpbonus, 1, openEnded=0, attackTrack=SQUIRT_TRACK))
+            bonusTrack.append(Func(suit.showHpText, - hpbonus, 1, openEnded=0, attackTrack=SQUIRT_TRACK))
             bonusTrack.append(Func(suit.updateHealthBar, hpbonus))
         if died != 0:
-            suitTrack.append(
-                MovieUtil.createSuitDeathTrack(
-                    suit, toon, battle))
+            suitTrack.append(MovieUtil.createSuitDeathTrack(suit, toon, battle))
         else:
             suitTrack.append(Func(suit.loop, 'neutral'))
         if revived != 0:
-            suitTrack.append(
-                MovieUtil.createSuitReviveTrack(
-                    suit, toon, battle))
+            suitTrack.append(MovieUtil.createSuitReviveTrack(suit, toon, battle))
         return Parallel(suitTrack, bonusTrack)
     else:
-        return MovieUtil.createSuitDodgeMultitrack(
-            tDodge, suit, leftSuits, rightSuits)
+        return MovieUtil.createSuitDodgeMultitrack(tDodge, suit, leftSuits, rightSuits)
 
 
 def say(statement):

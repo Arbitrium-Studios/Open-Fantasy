@@ -78,9 +78,7 @@ def doTraps(traps):
                 tnt2 = MovieUtil.copyProp(tnt)
                 trapPropList.append([tnt, tnt2])
             else:
-                notify.warning(
-                    '__doTraps() - Incorrect trap level:                 %d' %
-                    level)
+                notify.warning('__doTraps() - Incorrect trap level:                 %d' % level)
 
         if len(trapList) == 1 and not hasUberTrapConflict:
             ival = __doTrapLevel(trapList[0], trapPropList[0])
@@ -101,8 +99,7 @@ def doTraps(traps):
     camDuration = mtrack.getDuration()
     enterDuration = npcArrivals.getDuration()
     exitDuration = npcDepartures.getDuration()
-    camTrack = MovieCamera.chooseTrapShot(
-        traps, camDuration, enterDuration, exitDuration)
+    camTrack = MovieCamera.chooseTrapShot(traps, camDuration, enterDuration, exitDuration)
     return (trapTrack, camTrack)
 
 
