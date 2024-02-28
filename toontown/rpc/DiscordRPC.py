@@ -128,7 +128,7 @@ class DiscordRPC(object):
 
     def setLaff(self, hp, maxHp):
         if base.wantRichPresence:
-            self.state = '{0}: {1}/{2}'.format(base.localAvatar.name, hp, maxHp)
+            self.state = '{0}: {1}/{2}'.format(base.localAvatar.getName(), hp, maxHp)
             self.setData()
 
     def updateTasks(self, task):
