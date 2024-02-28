@@ -5,6 +5,7 @@ import random
 from toontown.launcher import DownloadForceAcknowledge
 from direct.task.Task import Task
 from toontown.hood import ZoneUtil
+# from . import dayNight
 
 
 class TTPlayground(Playground.Playground):
@@ -31,6 +32,11 @@ class TTPlayground(Playground.Playground):
         t = random.random() * 20.0 + 1
         taskMgr.doMethodLater(t, self.__birds, 'TT-birds')
         return Task.done
+    
+    def dayNight(self, task):
+    #     task.audioMgr.playMusic(self.dayMusic)
+    #     task.audioMgr.playMusic(self.dayMusic)
+        return
 
     def doRequestLeave(self, requestStatus):
         self.fsm.request('trialerFA', [requestStatus])
