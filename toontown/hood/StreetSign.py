@@ -8,9 +8,9 @@ class StreetSign(DistributedObject.DistributedObject):
     RedownloadTaskName = 'RedownloadStreetSign'
     StreetSignFileName = config.GetString(
         'street-sign-filename', 'street-sign.jpg')
-    StreetSignBaseDir = config.GetString('street-sign-base-dir', 'sign')
+    StreetSignBaseDir = config.GetString('street-sign-base-dir', '')
     StreetSignUrl = base.config.GetString(
-        'street-sign-url', 'https://cdn.arbitriumstudios.com/ttfan-assets/phase_4/maps/')
+        'street-sign-url', 'https://cdn.arbitriumstudios.com/ttfan-assets/phase_4/maps/sign/')
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
