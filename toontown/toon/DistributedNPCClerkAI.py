@@ -71,7 +71,9 @@ class DistributedNPCClerkAI(DistributedNPCToonBaseAI):
     def sendClearMovie(self, task):
         avId = self.air.getAvatarIdFromSender()
         self.ignore(self.air.getAvatarExitEvent(avId))
-        self.busy.remove(avId)
+        # make sure the avId is in the busy list before removing it
+        if avId in self.busy:
+            self.busy.remove(avId)
         self.timedOut = 0
         self.sendUpdate('setMovie', [NPCToons.PURCHASE_MOVIE_CLEAR,
                                      self.npcId,
