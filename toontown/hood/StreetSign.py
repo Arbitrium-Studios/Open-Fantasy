@@ -10,7 +10,7 @@ class StreetSign(DistributedObject.DistributedObject):
         'street-sign-filename', 'street-sign.jpg')
     StreetSignBaseDir = config.GetString('street-sign-base-dir', 'sign')
     StreetSignUrl = base.config.GetString(
-        'street-sign-url', 'https://www.playerzerostudios.com/assets/phase_4/maps/')
+        'street-sign-url', 'https://cdn.arbitriumstudios.com/ttfan-assets/phase_4/maps/')
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
@@ -63,5 +63,5 @@ class StreetSign(DistributedObject.DistributedObject):
         if not self.ch.isValid():
             self.redownloadingStreetSign = False
             return task.done
-        self.notify.info('Down downloading street sign')
+        self.notify.info('Downloading street sign')
         return task.done
