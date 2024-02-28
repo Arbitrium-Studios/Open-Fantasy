@@ -1142,7 +1142,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
 
     def trackAnimToSpeed(self, task):
         speed, rotSpeed, slideSpeed = self.controlManager.getSpeeds()
-        if speed != 0.0 or rotSpeed != 0.0 or inputState.isSet('jump'):
+        if speed != 0.0 or rotSpeed != 0.0 or slideSpeed != 0.0 or inputState.isSet('jump'):
             if not self.movingFlag:
                 self.movingFlag = 1
                 self.stopLookAround()
