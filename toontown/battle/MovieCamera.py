@@ -379,7 +379,7 @@ def chooseSuitShot(attack, attackDuration):
     groupStatus = attack['group']
     target = attack['target']
     if groupStatus == ATK_TGT_SINGLE:
-        toon = target['toon']
+        toon = target[0]['toon']
     suit = attack['suit']
     name = attack['id']
     battle = attack['battle']
@@ -392,7 +392,7 @@ def chooseSuitShot(attack, attackDuration):
                 attack['suit'], target, attack['battle'], attackDuration, openShotDuration)
         else:
             return randomAttackCam(
-                attack['suit'], target['toon'], attack['battle'], attackDuration, openShotDuration, 'suit')
+                attack['suit'], target[0]['toon'], attack['battle'], attackDuration, openShotDuration, 'suit')
 
     if name == AUDIT:
         camTrack.append(defaultCamera())
