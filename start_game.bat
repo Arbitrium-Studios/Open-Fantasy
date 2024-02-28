@@ -37,12 +37,14 @@ echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo Starting Localhost!
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 cd scripts
-echo Launching the AI Server...
-START ai-server-win32.bat
 echo Launching Astron...
-START astron-cluster-win32.bat
+START start_astron_server.bat
 echo Launching the Uberdog Server...
-START uberdog-server-win32.bat
+START start_uberdog_server.bat
+echo Launching the AI Server...
+START start_candy_cliffs_ai_server.bat
+START start_nutty_river_ai_server.bat
+START start_toon_valley_ai_server.bat
 cd ..
 SET TT_GAMESERVER=127.0.0.1
 goto game
