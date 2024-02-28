@@ -6,72 +6,75 @@ from pypresence import Presence
 class DiscordRPC(object):
 
     zone2imgdesc = { # A dict of ZoneID -> An image and a description
-        1000: ["toontown-shipyard", "In Toontown Shipyard"],
-        1100: ["toontown-shipyard", "On Barnacle Boulevard"],
-        1200: ["toontown-shipyard", "On Seaweed Street"],
-        1300: ["toontown-shipyard", "On Lighthouse Lane"],
+        
+        # Add Doodlevania
 
-        2000: ["toontown-plaza", "In Toontropolis Central"],
-        2100: ["toontown-plaza", "On Silly Street"],
-        2200: ["toontown-plaza", "On Loopy Lane"],
-        2300: ["toontown-plaza", "On Punchline Place"],
+        1000: ["toontown-shipyard", "in Toontown Shipyard"],
+        1100: ["toontown-shipyard", "on Barnacle Boulevard"],
+        1200: ["toontown-shipyard", "on Seaweed Street"],
+        1300: ["toontown-shipyard", "on Lighthouse Lane"],
 
-        3000: ["tundra-wonderland", "In Tundra Wonderland"],
-        3100: ["tundra-wonderland", "On Walrus Way"],
-        3200: ["tundra-wonderland", "On Sleet Street"],
-        3300: ["tundra-wonderland", "On Polar Place"],
+        2000: ["toontown-central", "in Toontown Central"],
+        2100: ["toontown-central", "on Silly Street"],
+        2200: ["toontown-central", "on Loopy Lane"],
+        2300: ["toontown-central", "on Punchline Place"],
 
-        4000: ["the-land-of-music", "In the Land of Music"],
-        4100: ["the-land-of-music", "On Alto Avenue"],
-        4200: ["the-land-of-music", "On Baritone Boulevard"],
-        4300: ["the-land-of-music", "On Tenor Terrace"],
+        3000: ["tundra-wonderland", "in Tundra Wonderland"],
+        3100: ["tundra-wonderland", "on Walrus Way"],
+        3200: ["tundra-wonderland", "on Sleet Street"],
+        3300: ["tundra-wonderland", "on Polar Place"],
 
-        5000: ["flowering-grove", "In the Flovering Grove"],
-        5100: ["flowering-grove", "On Elm Street"],
-        5200: ["flowering-grove", "On Maple Street"],
-        5300: ["flowering-grove", "On Oak Street"],
+        4000: ["the-land-of-music", "in the Land of Music"],
+        4100: ["the-land-of-music", "on Alto Avenue"],
+        4200: ["the-land-of-music", "on Baritone Boulevard"],
+        4300: ["the-land-of-music", "on Tenor Terrace"],
 
-        6000: ["acorn-acres", "At Acorn Acres"],
+        5000: ["flowering-grove", "in the Flovering Grove"],
+        5100: ["flowering-grove", "on Elm Street"],
+        5200: ["flowering-grove", "on Maple Street"],
+        5300: ["flowering-grove", "on Oak Street"],
+
+        6000: ["acorn-acres", "in Acorn Acres"],
 
 
-        8000: ["toontown-stadium", "In Toontropolis Stadium"],
+        8000: ["toontown-stadium", "in Toontown Stadium"],
 
-        9000: ["twlight-dreamland", "In Twlight Dreamland"],
-        9100: ["twlight-dreamland", "On Lullaby Lane"],
-        9200: ["twlight-dreamland", "On Pajama Place"],
-        # 9300: ["twlight-dreamland", "On Twilight Terrace"],
+        9000: ["twlight-dreamland", "in Twlight Dreamland"],
+        9100: ["twlight-dreamland", "on Lullaby Lane"],
+        9200: ["twlight-dreamland", "on Pajama Place"],
+        # 9300: ["twlight-dreamland", "on Twilight Terrace"],
 
-        10000: ["bossbot-hq", "At Bossbot Headquarters"],
-        10100: ["bossbot-hq", "In The Chief Executive Officer's Clubhouse"],
-        10200: ["bossbot-hq", "In The Chief Executive Officer's Clubhouse"],
-        10500: ["bossbot-hq", "In The Front Three"],
-        10600: ["bossbot-hq", "In The Middle Six"],
-        10700: ["bossbot-hq", "In The Back Nine"],
+        10000: ["bossbot-hq", "at Bossbot Headquarters"],
+        10100: ["bossbot-hq", "in The Chief Executive Officer's Clubhouse"],
+        10200: ["bossbot-hq", "in The Chief Executive Officer's Clubhouse"],
+        10500: ["bossbot-hq", "in The Front Three"],
+        10600: ["bossbot-hq", "in The Middle Six"],
+        10700: ["bossbot-hq", "in The Back Nine"],
 
-        11000: ["sellbot-hq", "At Sellbot Headquarters"],
-        11100: ["sellbot-hq", "In The Vice President's Lobby"],
-        11200: ["sellbot-hq", "In The Sellbot HQ Factory Exterior"],
-        11500: ["sellbot-hq", "In The Sellbot Factory"],
+        11000: ["sellbot-hq", "at Sellbot Headquarters"],
+        11100: ["sellbot-hq", "in The Vice President's Lobby"],
+        11200: ["sellbot-hq", "in The Sellbot HQ Factory Exterior"],
+        11500: ["sellbot-hq", "in The Sellbot Factory"],
 
-        12000: ["cashbot-hq", "At Cashbot Headquarters"],
-        12100: ["cashbot-hq", "In The Chief Financial Officer's Lobby"],
-        12500: ["cashbot-hq", "In The Cashbot Coin Mint"],
-        12600: ["cashbot-hq", "In The Cashbot Dollar Mint"],
-        12700: ["cashbot-hq", "In The Cashbot Bullion Mint"],
+        12000: ["cashbot-hq", "at Cashbot Headquarters"],
+        12100: ["cashbot-hq", "in The Chief Financial Officer's Lobby"],
+        12500: ["cashbot-hq", "in The Cashbot Coin Mint"],
+        12600: ["cashbot-hq", "in The Cashbot Dollar Mint"],
+        12700: ["cashbot-hq", "in The Cashbot Bullion Mint"],
 
-        13000: ["lawbot-hq", "At Lawbot Headquarters"],
-        13100: ["lawbot-hq", "In The Chief Justice's Lobby"],
-        13200: ["lawbot-hq", "In The DA's Office Lobby"],
-        13300: ["lawbot-hq", "In The Lawbot Office A"],
-        13400: ["lawbot-hq", "In The Lawbot Office B"],
-        13500: ["lawbot-hq", "In The Lawbot Office C"],
-        13600: ["lawbot-hq", "In The Lawbot Office D"],
+        13000: ["lawbot-hq", "at Lawbot Headquarters"],
+        13100: ["lawbot-hq", "in The Chief Justice's Lobby"],
+        13200: ["lawbot-hq", "in The DA's Office Lobby"],
+        13300: ["lawbot-hq", "in The Lawbot Office A"],
+        13400: ["lawbot-hq"`, "in The Lawbot Office B"],
+        13500: ["lawbot-hq", "in The Lawbot Office C"],
+        13600: ["lawbot-hq", "in The Lawbot Office D"],
 
-        14000: ["toontorial-terrace", "In The Toontorial"],
+        14000: ["toontorial-terrace", "in The Toontorial"],
 
-        16000: ["toon-estate", "At A Toon Estate"],
+        16000: ["toon-estate", "at A Toon Estate"],
 
-        17000: ['fantasy-golf', "In the Fantasy Mini-Golf Area"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontropolis Stadium
+        17000: ['mini-golf', "in the Toontown Mini-Golf Area"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontown Stadium
 
     }
 
@@ -98,7 +101,7 @@ class DiscordRPC(object):
 
     def allowBoarding(self, size):
         if base.wantRichPresence:
-            self.state = 'In a boarding group'
+            self.state = 'in a boarding group'
             self.partySize = 1
             self.maxParty = size
             self.setData()
@@ -178,7 +181,7 @@ class DiscordRPC(object):
     def building(self):
         if base.wantRichPresence:
             self.image = 'building'
-            self.details = 'In a building.'
+            self.details = 'in a building.'
             self.setData()
 
 

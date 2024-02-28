@@ -45,7 +45,7 @@ class WelcomeValleyManagerAI(DistributedObjectAI):
     def createWelcomeValleyZones(self):
         self.notify.info('Creating Welcome Valley zones...')
 
-        # Toontropolis Central
+        # Toontown Central
         self.air.generateHood(TTHoodDataAI, 22000)
 
         # Goofy Speedway

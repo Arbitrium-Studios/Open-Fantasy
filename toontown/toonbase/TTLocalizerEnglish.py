@@ -71,13 +71,13 @@ JailbirdDale = 'JailbirdDale'
 PoliceChip = 'PoliceChip'
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
-lToontropolisDocks = "Toontropolis Docks"
+lToontropolisDocks = "Toontown Shipyard"
 lTwilightDreamland = "Twilight Dreamland"
 lTheLandOfMusic = "The Land Of Music"
-lToontropolisCenter = 'Toontropolis Central'
+lToontropolisCenter = 'Toontown Central'
 lToonHQ = 'Toon Headquarters'
 lSellbotHQ = 'Sellbot Headquarters'
-lToontropolisStadium = 'Toontropolis Stadium'
+lToontropolisStadium = 'Toontown Stadium'
 lAcornAcres = "Acorn Acres"
 lGolfZone = "Toontropolis's MiniGolf"
 lPartyHood = 'Party Grounds'
@@ -3473,7 +3473,7 @@ WinterMickeyCChatter = (["Hi, I'm Merry Mickey!",
                                                                                                      'Shucks, sorry you have to go. So long!',
                                                                                                      "I'm going caroling with Minnie!"])
 ValentinesMickeyChatter = (["Hi, I'm Mickey!",
-                            'Welcome to ValenToontropolis Central!',
+                            'Welcome to ValenToontown Central!',
                             "Happy ValenToon's Day!",
                             "Happy ValenToon's Day, %"], ['Love is in the air! And butterflies!',
                                                           'Those hearts are good for Laff boosts!',
@@ -4477,7 +4477,7 @@ MusicCreateAToon = 'The New Toon in Town'
 MusicTtTheme = 'The Toontown Theme'
 MusicMinigameRace = 'Slow and Steady'
 MusicMgPairing = 'Remember Me?'
-MusicTcNbrhood = 'Toontropolis Central'
+MusicTcNbrhood = 'Toontown Central'
 MusicMgDiving = 'Treasure Lullaby'
 MusicMgCannonGame = 'Fire the Cannons!'
 MusicMgTwodgame = 'Running Toon'
@@ -4501,8 +4501,8 @@ MusicGsRaceRr = 'Route 66'
 MusicGzSz = 'The Putt-Putt Polka'
 MusicMmSz = 'Dancing in the Streets'
 MusicMmSzActivity = 'Here Comes Treble'
-MusicDdNbrhood = "Toontropolis Docks"
-MusicDdNbrhood = "Toontropolis Docks"
+MusicDdNbrhood = "Toontown Shipyard"
+MusicDdNbrhood = "Toontown Shipyard"
 MusicGsKartshop = 'Mr. Goofywrench'
 MusicDdSzActivity = 'Sea Shanty'
 MusicEncntrGeneralBgIndoor = 'Building Excitement'
@@ -5567,7 +5567,7 @@ ColorShopAll = 'Single Color'
 ClothesShopShorts = 'Shorts'
 ClothesShopShirt = 'Shirts'
 ClothesShopBottoms = 'Bottoms'
-PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontropolis Central?"
+PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontown Central?"
 MakeAToonSkipTutorial = 'Skip Toontorial'
 MakeAToonEnterTutorial = 'Enter Toontorial'
 MakeAToonDone = 'Done'
@@ -8528,10 +8528,10 @@ TipDict = {TIP_NONE: ('',),
                          'Pet Shops get new Doodles to sell every day.',
                          'Visit the Pet Shops every day to see what new Doodles they have.',
                          'Different neighborhoods have different Doodles offered for adoption.',
-                         "Show off your stylin' ride and turbo-boost your Laff limit at Toontropolis Stadium.",
-                         'Enter Toontropolis Stadium through the tire-shaped tunnel in Toontropolis Central Playground.',
-                         'Earn Laff points at Toontropolis Stadium.',
-                         'Toontropolis Stadium has six different race tracks. '),
+                         "Show off your stylin' ride and turbo-boost your Laff limit at Toontown Stadium.",
+                         'Enter Toontown Stadium through the tire-shaped tunnel in Toontown Central Playground.',
+                         'Earn Laff points at Toontown Stadium.',
+                         'Toontown Stadium has six different race tracks. '),
            TIP_STREET: ('There are four types of Cogs: Lawbots, Cashbots, Sellbots, and Bossbots.',
                         'Each Gag Track has different amounts of accuracy and damage.',
                         'Sound gags will affect all Cogs but will wake up any lured Cogs.',
@@ -8647,15 +8647,15 @@ TipDict = {TIP_NONE: ('',),
                         'Did you know the color of your house matches the color of your Pick-A-Toon panel?'),
            TIP_KARTING: ("Buy a Roadster, TUV, or Cruiser kart in Goofy's Auto Shop.",
                          "Customize your kart with decals, rims and more in Goofy's Auto Shop.",
-                         'Earn tickets by kart racing at Toontropolis Stadium.',
+                         'Earn tickets by kart racing at Toontown Stadium.',
                          "Tickets are the only currency accepted at Goofy's Auto Shop.",
                          'Tickets are required as deposits to race.',
                          'A special page in the Shticker Book allows you to customize your kart.',
                          'A special page in the Shticker Book allows you to view records on each track.',
                          'A special page in the Shticker Book allows you to display trophies.',
-                         'Screwball Stadium is the easiest track at Toontropolis Stadium.',
-                         'Airborne Acres has the most hills and jumps of any track at Toontropolis Stadium.',
-                         'Blizzard Boulevard is the most challenging track at Toontropolis Stadium.'),
+                         'Screwball Stadium is the easiest track at Toontown Stadium.',
+                         'Airborne Acres has the most hills and jumps of any track at Toontown Stadium.',
+                         'Blizzard Boulevard is the most challenging track at Toontown Stadium.'),
            TIP_GOLF: ('Press the Tab key to see a top view of the golf course.', 'Press the Up Arrow key to point yourself towards the golf hole.', 'Swinging the club is just like throwing a pie.')}
 FishGenusNames = {0: 'Balloon Fish',
                   2: 'Cat Fish',
@@ -9120,9 +9120,9 @@ KartRace_RaceTimeoutNoRefund = 'You timed out of that race.  Your tickets have n
 KartRace_RacerTooSlow = 'You took too long to finish the race.  Your tickets have not been refunded.  Keep trying!'
 KartRace_PhotoFinish = 'Photo Finish!'
 KartRace_CircuitPoints = 'Circuit Points'
-CircuitRaceStart = 'The Toontown Grand Prix at Toontropolis Stadium is about to begin!  To win, collect the most points in three consecutive races!'
+CircuitRaceStart = 'The Toontown Grand Prix at Toontown Stadium is about to begin!  To win, collect the most points in three consecutive races!'
 CircuitRaceOngoing = 'Welcome! The Toontown Grand Prix is currently in progress.'
-CircuitRaceEnd = "That's all for today's Toontown Grand Prix at Toontropolis Stadium.  See you next week!"
+CircuitRaceEnd = "That's all for today's Toontown Grand Prix at Toontown Stadium.  See you next week!"
 TrickOrTreatMsg = 'You have already\nfound this treat!'
 WinterCarolingMsg = 'You have already been caroling here!'
 LawbotBossTempIntro0 = "Hmmm what's on the docket today?"
@@ -9631,7 +9631,7 @@ MoreXpHolidayEnd = 'Exclusive Test Toon double gag experience time has ended. Th
 JellybeanDayHolidayStart = "It's Jellybean Day! Get Double Jellybean rewards at Parties!"
 JellybeanDayHolidayEnd = "That's all for Jellybean Day. See you next year."
 PartyRewardDoubledJellybean = 'Double Jellybeans!'
-GrandPrixWeekendHolidayStart = "It's Grand Prix Weekend at Toontropolis Stadium! Free and paid players collect the most points in three consecutive races."
+GrandPrixWeekendHolidayStart = "It's Grand Prix Weekend at Toontown Stadium! Free and paid players collect the most points in three consecutive races."
 GrandPrixWeekendHolidayEnd = "That's all for Grand Prix Weekend. See you next year."
 KartRace_DoubleTickets = 'Double Tickets'
 SellbotNerfHolidayStart = 'Operation: Storm Sellbot is happening now! Battle the VP today!'
@@ -9657,7 +9657,7 @@ WinterDecorationsEnd = 'Winter Holiday is over - Happy New Year!'
 WackyWinterDecorationsStart = 'Brrr! Silly Meter goes from silly to chilly!'
 WinterCarolingStart = 'Caroling has come to Toontown. Sing for your Snowman Head - see the Blog for details!'
 ExpandedClosetsStart = 'Attention Toons: For a limited time, Members can purchase the new 50 item Closet from the Cattlelog for the low price of 50 Jellybeans!'
-KartingTicketsHolidayStart = 'Get double tickets from Practice races at Toontropolis Stadium today!'
+KartingTicketsHolidayStart = 'Get double tickets from Practice races at Toontown Stadium today!'
 IdesOfMarchStart = 'Toons go GREEN!'
 LogoutForced = 'You have done something wrong\n and are being logged out automatically,\n additionally your account may be frozen.\n Try going on a walk outside, it is fun.'
 CountryClubToonEnterElevator = '%s \nhas jumped in the golf kart.'
@@ -9890,8 +9890,8 @@ HolidayNamesInCalendar = {1: ('Summer Fireworks', 'Celebrate Summer with a firew
                           8: ('Toon Species Election', 'Vote on the new Toon species! Will it be Goat? Will it be Pig?'),
                           9: ('Black Cat Day', 'Happy Halloween! Create a Toontastic Black Cat Toon - Today Only!'),
                           13: ('Trick or Treat', 'Happy Halloween! Trick or treat throughout Toontown to get a nifty Halloween pumpkin head reward!'),
-                          14: ('Grand Prix', 'Grand Prix Monday at Toontropolis Stadium! To win, collect the most points in three consecutive races!'),
-                          16: ('Grand Prix Weekend', 'Free and Paid players compete in circuit races at Toontropolis Stadium!'),
+                          14: ('Grand Prix', 'Grand Prix Monday at Toontown Stadium! To win, collect the most points in three consecutive races!'),
+                          16: ('Grand Prix Weekend', 'Free and Paid players compete in circuit races at Toontown Stadium!'),
                           17: ('Trolley Tracks', 'Trolley Tracks Thursday! Board any Trolley with two or more Toons to play.'),
                           19: ('Silly Saturdays', 'Saturdays are silly with Fish Bingo and Grand Prix throughout the day!'),
                           24: ('Ides of March', 'Beware the Ides of March! Stop the Backstabber Cogs from invading Toontown!'),
