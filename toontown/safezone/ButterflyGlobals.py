@@ -6,17 +6,16 @@ LANDED = 2
 states = {OFF: 'off',
           FLYING: 'Flying',
           LANDED: 'Landed'}
-NUM_BUTTERFLIES = (6, 36, 13, 25)
-NUM_BUTTERFLY_AREAS = (4, 1, 4, 1)
+NUM_BUTTERFLIES = (6, 36, 5)
+NUM_BUTTERFLY_AREAS = (4, 1, 4)
 BUTTERFLY_SPEED = 2.0
-BUTTERFLY_HEIGHT = (2.2, 3.2, 2.2, 2.2)
-BUTTERFLY_TAKEOFF = (1.4, 1.8, 1.4, 1.4)
-BUTTERFLY_LANDING = (1.4, 1.8, 1.8, 1.4)
+BUTTERFLY_HEIGHT = (2.2, 3.2, 2.2)
+BUTTERFLY_TAKEOFF = (1.4, 1.8, 1.4)
+BUTTERFLY_LANDING = (1.4, 1.8, 1.4)
 MAX_LANDED_TIME = 20.0
 TTC = 0
 DG = 1
-AA = 2
-ESTATE = 3
+ESTATE = 2
 ButterflyPoints = (((Point3(84.0, -116.0, 3.5),
                      Point3(95.0, -144.0, 2.6),
                      Point3(94.0, -145.0, 2.6),

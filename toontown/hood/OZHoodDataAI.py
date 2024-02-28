@@ -14,7 +14,6 @@ from toontown.distributed import DistributedTimerAI
 from toontown.safezone import DistributedPicnicTableAI
 from toontown.safezone import DistributedChineseCheckersAI
 from toontown.safezone import DistributedCheckersAI
-from toontown.safezone import ButterflyGlobals
 if __debug__:
     import pdb
 
@@ -44,7 +43,6 @@ class OZHoodDataAI(HoodDataAI.HoodDataAI):
             self.addDistObj(dale)
             self.classicChars.append(dale)
             chip.setDaleId(dale.doId)
-        self.createButterflies(ButterflyGlobals.AA)
         self.treasurePlanner = OZTreasurePlannerAI.OZTreasurePlannerAI(
             self.zoneId)
         self.treasurePlanner.start()
