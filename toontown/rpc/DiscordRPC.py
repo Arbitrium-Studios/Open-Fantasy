@@ -66,7 +66,7 @@ class DiscordRPC(object):
         13100: ["lawbot-hq", "in The Chief Justice's Lobby"],
         13200: ["lawbot-hq", "in The DA's Office Lobby"],
         13300: ["lawbot-hq", "in The Lawbot Office A"],
-        13400: ["lawbot-hq"`, "in The Lawbot Office B"],
+        13400: ["lawbot-hq", "in The Lawbot Office B"],
         13500: ["lawbot-hq", "in The Lawbot Office C"],
         13600: ["lawbot-hq", "in The Lawbot Office D"],
 
