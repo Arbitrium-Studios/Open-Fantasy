@@ -252,8 +252,8 @@ class DistributedCatchGame(DistributedMinigame):
     def defineConstants(self):
         self.notify.debug('defineConstants')
         self.DropPlacerType = RegionDropPlacer
-        fruits = {ToontownGlobals.ToontropolisCenter: 'apple',
-                  ToontownGlobals.ToontropolisDocks: 'orange',
+        fruits = {ToontownGlobals.ToontownCenter: 'apple',
+                  ToontownGlobals.ToontownShipyards: 'orange',
                   ToontownGlobals.FloweringGrove: 'pear',
                   ToontownGlobals.TheLandOfMusic: 'coconut',
                   ToontownGlobals.TundraWonderland: 'watermelon',

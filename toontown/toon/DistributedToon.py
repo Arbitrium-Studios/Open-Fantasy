@@ -438,14 +438,14 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
         try:
             hoodPhase = base.cr.hoodMgr.getPhaseFromHood(zoneId)
         except BaseException:
-            self.defaultZone = ToontropolisCenter
+            self.defaultZone = ToontownCenter
             return
 
         if ZoneUtil.getCanonicalHoodId(zoneId) == FunnyFarm:
-            self.defaultZone = ToontropolisCenter
+            self.defaultZone = ToontownCenter
             return
         if not base.cr.isPaid() or launcher and not launcher.getPhaseComplete(hoodPhase):
-            self.defaultZone = ToontropolisCenter
+            self.defaultZone = ToontownCenter
         else:
             self.defaultZone = zoneId
 
@@ -1148,7 +1148,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
                 currentHoodId = None
 
             if hoodId == 1:
-                if currentHoodId == ToontownGlobals.ToontropolisCenter:
+                if currentHoodId == ToontownGlobals.ToontownCenter:
                     effect = CENormal
             elif currentHoodId is not None and currentHoodId != hoodId:
                 effect = CENormal
@@ -1310,7 +1310,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
         return
 
     def playSplashEffect(self, x, y, z):
-        if localAvatar.zoneId not in [ToontownGlobals.ToontropolisDocks, ToontownGlobals.AcornAcres] and (
+        if localAvatar.zoneId not in [ToontownGlobals.ToontownShipyards, ToontownGlobals.AcornAcres] and (
                 not hasattr(localAvatar, 'inEstate') or localAvatar.inEstate != 1):
             if random.random() < 0.1:
                 self.sendLogSuspiciousEvent(

@@ -145,7 +145,7 @@ class DistributedHQInterior(DistributedObject.DistributedObject):
     def setupDoors(self):
         self.randomGenerator = random.Random()
         self.randomGenerator.seed(self.zoneId)
-        self.colors = ToonInteriorColors.colors[ToontropolisCenter]
+        self.colors = ToonInteriorColors.colors[ToontownCenter]
         door = self.chooseDoor()
         doorOrigins = render.findAllMatches('**/door_origin*')
         numDoorOrigins = doorOrigins.getNumPaths()

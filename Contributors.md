@@ -4,7 +4,7 @@
 
 ### Contributors:
 + Battery on Discord for helping me fix the Tuple error!
-+ DarthM on Discord for helping implement Custom Controls, patch various bugs, and more!
++ darthanonymous on Discord for helping implement Custom Controls, patch various bugs, and more!
 + Something Random for beginning work on the new GUI for the Custom Controls!
 + TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
 + DTM1218 for letting me use parts of Declashified 

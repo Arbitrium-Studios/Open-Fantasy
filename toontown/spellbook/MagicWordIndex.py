@@ -112,10 +112,10 @@ class MagicWord:
     # is it a safezone?
 
     Str2szId = {
-        'ttc': ToontownGlobals.ToontropolisCenter,
-        'tt': ToontownGlobals.ToontropolisCenter,
-        'tc': ToontownGlobals.ToontropolisCenter,
-        'dd': ToontownGlobals.ToontropolisDocks,
+        'ttc': ToontownGlobals.ToontownCenter,
+        'tt': ToontownGlobals.ToontownCenter,
+        'tc': ToontownGlobals.ToontownCenter,
+        'dd': ToontownGlobals.ToontownShipyards,
         'dg': ToontownGlobals.FloweringGrove,
         'mml': ToontownGlobals.TheLandOfMusic,
         'mm': ToontownGlobals.TheLandOfMusic,
@@ -173,8 +173,8 @@ class MagicWord:
         executedWord = None
         validTargets = len(self.targets)
         now = time.strftime("%c")
-        if not os.path.exists('user/logs/magic-words/'):
-            os.makedirs('user/logs/magic-words/')
+        if not os.path.exists('users/logs/magic-words/'):
+            os.makedirs('users/logs/magic-words/')
         for avId in self.targets:
             invoker = None
             toon = None
@@ -230,7 +230,7 @@ class MagicWord:
                                           executedWord)
 
         # darth you do know this thing is clientside right o_O
-        with open('user/logs/magic-words/magic-words-log.txt', 'a') as magicWordLogFile:
+        with open('users/logs/magic-words/magic-words-log.txt', 'a') as magicWordLogFile:
             magicWordLogFile.write(
                 f"{now} | {self.invokerId}: {self.__class__.__name__}\n")
         # If you're only using the Magic Word on one person and there is a

@@ -246,21 +246,21 @@ class ToontownAIRepository(ToontownInternalRepository):
         NPCToons.generateZone2NpcDict()
 
         # Donald's Dock
-        self.zoneTable[ToontownGlobals.ToontropolisDocks] = (
-            (ToontownGlobals.ToontropolisDocks, 1,
+        self.zoneTable[ToontownGlobals.ToontownShipyards] = (
+            (ToontownGlobals.ToontownShipyards, 1,
              0), (ToontownGlobals.BarnacleBoulevard, 1, 1),
             (ToontownGlobals.SeaweedStreet, 1,
              1), (ToontownGlobals.LighthouseLane, 1, 1)
         )
-        self.generateHood(DDHoodDataAI, ToontownGlobals.ToontropolisDocks)
+        self.generateHood(DDHoodDataAI, ToontownGlobals.ToontownShipyards)
 
         # Toontown Central
-        self.zoneTable[ToontownGlobals.ToontropolisCenter] = (
-            (ToontownGlobals.ToontropolisCenter, 1,
+        self.zoneTable[ToontownGlobals.ToontownCenter] = (
+            (ToontownGlobals.ToontownCenter, 1,
              0), (ToontownGlobals.SillyStreet, 1, 1),
             (ToontownGlobals.LoopyLane, 1, 1), (ToontownGlobals.PunchlinePlace, 1, 1)
         )
-        self.generateHood(TTHoodDataAI, ToontownGlobals.ToontropolisCenter)
+        self.generateHood(TTHoodDataAI, ToontownGlobals.ToontownCenter)
 
         # The Brrrgh
         self.zoneTable[ToontownGlobals.TundraWonderland] = (
@@ -292,10 +292,10 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.generateHood(OZHoodDataAI, ToontownGlobals.AcornAcres)
 
         # Toontown Stadium
-        self.zoneTable[ToontownGlobals.ToontropolisStadium] = (
-            (ToontownGlobals.ToontropolisStadium, 1, 0),
+        self.zoneTable[ToontownGlobals.ToontownStadium] = (
+            (ToontownGlobals.ToontownStadium, 1, 0),
         )
-        self.generateHood(GSHoodDataAI, ToontownGlobals.ToontropolisStadium)
+        self.generateHood(GSHoodDataAI, ToontownGlobals.ToontownStadium)
 
         # Donald's Dreamland
         self.zoneTable[ToontownGlobals.TwilightDreamland] = (

@@ -11,19 +11,19 @@ from direct.task import Task
 from toontown.toonbase import TTLocalizer
 
 
-class DistributedToontropolisDock(DistributedCCharBase.DistributedCCharBase):
+class DistributedToontownShipyard(DistributedCCharBase.DistributedCCharBase):
     notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedToontropolisDock')
+        'DistributedToontownShipyard')
 
     def __init__(self, cr):
         try:
-            self.DistributedToontropolisDock_initialized
+            self.DistributedToontownShipyard_initialized
         except BaseException:
-            self.DistributedToontropolisDock_initialized = 1
+            self.DistributedToontownShipyard_initialized = 1
             DistributedCCharBase.DistributedCCharBase.__init__(
-                self, cr, TTLocalizer.ToontropolisDock, 'dw')
+                self, cr, TTLocalizer.ToontownShipyard, 'dw')
             self.fsm = ClassicFSM.ClassicFSM(
-                'DistributedToontropolisDock', [
+                'DistributedToontownShipyard', [
                     State.State(
                         'Off', self.enterOff, self.exitOff, ['Neutral']), State.State(
                         'Neutral', self.enterNeutral, self.exitNeutral, ['Off'])], 'Off', 'Off')
@@ -41,9 +41,9 @@ class DistributedToontropolisDock(DistributedCCharBase.DistributedCCharBase):
 
     def delete(self):
         try:
-            self.DistributedToontropolisDock_deleted
+            self.DistributedToontownShipyard_deleted
         except BaseException:
-            self.DistributedToontropolisDock_deleted = 1
+            self.DistributedToontownShipyard_deleted = 1
             del self.fsm
             DistributedCCharBase.DistributedCCharBase.delete(self)
 
@@ -52,7 +52,7 @@ class DistributedToontropolisDock(DistributedCCharBase.DistributedCCharBase):
         boat = base.cr.playGame.hood.loader.boat
         self.setPos(0, -1, 3.95)
         self.reparentTo(boat)
-        self.neutralDoneEvent = self.taskName('ToontropolisDock-neutral-done')
+        self.neutralDoneEvent = self.taskName('ToontownShipyard-neutral-done')
         self.neutral = CharStateDatas.CharNeutralState(
             self.neutralDoneEvent, self)
         self.fsm.request('Neutral')

@@ -1530,9 +1530,9 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
 
     def construct(self):
         zone = self.getSafezoneId()
-        if zone == ToontownGlobals.ToontropolisCenter:
+        if zone == ToontownGlobals.ToontownCenter:
             self.constructTTC()
-        elif zone == ToontownGlobals.ToontropolisDocks:
+        elif zone == ToontownGlobals.ToontownShipyards:
             self.constructDD()
         elif zone == ToontownGlobals.FloweringGrove:
             self.constructDG()
@@ -1545,9 +1545,9 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
 
     def destruct(self):
         zone = self.getSafezoneId()
-        if zone == ToontownGlobals.ToontropolisCenter:
+        if zone == ToontownGlobals.ToontownCenter:
             self.destructTTC()
-        elif zone == ToontownGlobals.ToontropolisDocks:
+        elif zone == ToontownGlobals.ToontownShipyards:
             self.destructDD()
         elif zone == ToontownGlobals.FloweringGrove:
             self.destructDG()

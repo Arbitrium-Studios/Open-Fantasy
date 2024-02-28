@@ -10,7 +10,7 @@ class DDHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = ToontropolisDocks
+        self.id = ToontownShipyards
         self.townLoaderClass = DDTownLoader.DDTownLoader
         self.safeZoneLoaderClass = DDSafeZoneLoader.DDSafeZoneLoader
         self.storageDNAFile = 'phase_6/dna/storage_DD.dna'

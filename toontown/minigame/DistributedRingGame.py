@@ -378,8 +378,8 @@ class DistributedRingGame(DistributedMinigame):
 
     def __generateRings(self):
         self.ringGroups = []
-        difficultyDistributions = {ToontownGlobals.ToontropolisCenter: [14, 2, 0],
-                                   ToontownGlobals.ToontropolisDocks: [10, 6, 0],
+        difficultyDistributions = {ToontownGlobals.ToontownCenter: [14, 2, 0],
+                                   ToontownGlobals.ToontownShipyards: [10, 6, 0],
                                    ToontownGlobals.FloweringGrove: [4, 12, 0],
                                    ToontownGlobals.TheLandOfMusic: [4, 8, 4],
                                    ToontownGlobals.TundraWonderland: [4, 6, 6],
@@ -387,7 +387,7 @@ class DistributedRingGame(DistributedMinigame):
         for distr in list(difficultyDistributions.values()):
             sum = reduce(lambda x, y: x + y, distr)
 
-        difficultyPatterns = {ToontownGlobals.ToontropolisCenter: [[0] * 14 + [1] * 2 + [2] * 0, [0,
+        difficultyPatterns = {ToontownGlobals.ToontownCenter: [[0] * 14 + [1] * 2 + [2] * 0, [0,
                                                                                                0,
                                                                                                0,
                                                                                                0,
@@ -410,7 +410,7 @@ class DistributedRingGame(DistributedMinigame):
                                                                                                         0,
                                                                                                         0,
                                                                                                         1]],
-                              ToontownGlobals.ToontropolisDocks: [[0] * 10 + [1] * 6 + [2] * 0, [0,
+                              ToontownGlobals.ToontownShipyards: [[0] * 10 + [1] * 6 + [2] * 0, [0,
                                                                                            0,
                                                                                            0,
                                                                                            0,

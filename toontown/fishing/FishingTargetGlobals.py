@@ -8,7 +8,7 @@ POS_START_INDEX = 1
 POS_END_INDEX = 4
 RADIUS_INDEX = 4
 WATER_LEVEL_INDEX = 5
-__targetInfoDict = {ToontownGlobals.ToontropolisCenter: (2,
+__targetInfoDict = {ToontownGlobals.ToontownCenter: (2,
                                                       -81,
                                                       31,
                                                       -4.8,
@@ -32,7 +32,7 @@ __targetInfoDict = {ToontownGlobals.ToontropolisCenter: (2,
                                                      -1.4,
                                                      13,
                                                      -1.4 - 0.486),
-                    ToontownGlobals.ToontropolisDocks: (2,
+                    ToontownGlobals.ToontownShipyards: (2,
                                                   -17,
                                                   130,
                                                   1.73,

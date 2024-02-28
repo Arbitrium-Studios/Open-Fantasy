@@ -158,7 +158,7 @@ __goofyWaypoints = (('f',
                            'q',
                            1,
                            []))
-__ToontropolisStadiumPaths = {'a': (Point3(-9.0, -19.517, -0.323), ('b', 'k')),
+__ToontownStadiumPaths = {'a': (Point3(-9.0, -19.517, -0.323), ('b', 'k')),
                         'b': (Point3(-30.047, -1.578, -0.373), ('a', 'c')),
                         'c': (Point3(-10.367, 49.042, -0.373), ('b', 'd')),
                         'd': (Point3(38.439, 44.348, -0.373), ('c', 'e')),
@@ -169,7 +169,7 @@ __ToontropolisStadiumPaths = {'a': (Point3(-9.0, -19.517, -0.323), ('b', 'k')),
                         'i': (Point3(5.981, -147.606, -0.013), ('h', 'j')),
                         'j': (Point3(-24.898, -120.618, -0.013), ('i', 'k')),
                         'k': (Point3(-2.71, -90.315, -0.011), ('j', 'a'))}
-__ToontropolisStadiumWaypoints = (('a',
+__ToontownStadiumWaypoints = (('a',
                              'k',
                              1,
                              []), ('k',
@@ -347,9 +347,9 @@ def getPaths(charName, location=0):
         if location == 0:
             return __goofyPaths
         else:
-            return __ToontropolisStadiumPaths
+            return __ToontownStadiumPaths
     elif charName == TTLocalizer.SuperGoofy:
-        return __ToontropolisStadiumPaths
+        return __ToontownStadiumPaths
     elif charName == TTLocalizer.Donald or charName == TTLocalizer.FrankenDonald:
         return __donaldPaths
     elif charName == TTLocalizer.Pluto:
@@ -360,7 +360,7 @@ def getPaths(charName, location=0):
         return __chipPaths
     elif charName == TTLocalizer.Dale or charName == TTLocalizer.JailbirdDale:
         return __chipPaths
-    elif charName == TTLocalizer.ToontropolisDock:
+    elif charName == TTLocalizer.ToontownShipyard:
         return {'a': (Point3(0, 0, 0), 'a')}
 
 
@@ -373,8 +373,8 @@ def __getWaypointList(paths):
         return __daisyWaypoints
     elif paths == __goofyPaths:
         return __goofyWaypoints
-    elif paths == __ToontropolisStadiumPaths:
-        return __ToontropolisStadiumWaypoints
+    elif paths == __ToontownStadiumPaths:
+        return __ToontownStadiumWaypoints
     elif paths == __donaldPaths:
         return __donaldWaypoints
     elif paths == __plutoPaths:

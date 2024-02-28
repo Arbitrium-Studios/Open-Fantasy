@@ -46,7 +46,7 @@ uberdogs:
 roles:
     - type: clientagent
       bind: 0.0.0.0:7198
-      version: "Fantasy-v1.0.0"
+      version: "Fantasy_Dev"
       client:
           relocate: true
           add_interest: enabled

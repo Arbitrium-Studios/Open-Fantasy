@@ -9,7 +9,7 @@ class TrashcanInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
     notify = DirectNotifyGlobal.directNotify.newCategory(
         'TrashcanInteractiveProp')
     BattleCheerText = TTLocalizer.InteractivePropTrackBonusTerms[ToontownBattleGlobals.HEAL_TRACK]
-    ZoneToIdles = {ToontownGlobals.ToontropolisCenter: (('tt_a_ara_ttc_trashcan_idleTake2',
+    ZoneToIdles = {ToontownGlobals.ToontownCenter: (('tt_a_ara_ttc_trashcan_idleTake2',
                                                       1,
                                                       1,
                                                       None,
@@ -33,7 +33,7 @@ class TrashcanInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                                       None,
                                                       3,
                                                       10)),
-                   ToontownGlobals.ToontropolisDocks: (('tt_a_ara_dod_trashcan_idleBounce2',
+                   ToontownGlobals.ToontownShipyards: (('tt_a_ara_dod_trashcan_idleBounce2',
                                                   3,
                                                   10,
                                                   'tt_a_ara_dod_trashcan_idle0settle',
@@ -153,26 +153,26 @@ class TrashcanInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                                        None,
                                                        0,
                                                        0))}
-    ZoneToIdleIntoFightAnims = {ToontownGlobals.ToontropolisCenter: 'tt_a_ara_ttc_trashcan_idleIntoFight',
-                                ToontownGlobals.ToontropolisDocks: 'tt_a_ara_dod_trashcan_idleIntoFight',
+    ZoneToIdleIntoFightAnims = {ToontownGlobals.ToontownCenter: 'tt_a_ara_ttc_trashcan_idleIntoFight',
+                                ToontownGlobals.ToontownShipyards: 'tt_a_ara_dod_trashcan_idleIntoFight',
                                 ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_trashcan_idleIntoFight',
                                 ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_trashcan_idleIntoFight',
                                 ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_trashcan_idleIntoFight',
                                 ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_trashcan_idleIntoFight'}
-    ZoneToVictoryAnims = {ToontownGlobals.ToontropolisCenter: 'tt_a_ara_ttc_trashcan_victoryDance',
-                          ToontownGlobals.ToontropolisDocks: 'tt_a_ara_dod_trashcan_victoryDance',
+    ZoneToVictoryAnims = {ToontownGlobals.ToontownCenter: 'tt_a_ara_ttc_trashcan_victoryDance',
+                          ToontownGlobals.ToontownShipyards: 'tt_a_ara_dod_trashcan_victoryDance',
                           ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_trashcan_victoryDance',
                           ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_trashcan_victoryDance',
                           ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_trashcan_victoryDance',
                           ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_trashcan_victoryDance'}
-    ZoneToSadAnims = {ToontownGlobals.ToontropolisCenter: 'tt_a_ara_ttc_trashcan_fightSad',
-                      ToontownGlobals.ToontropolisDocks: 'tt_a_ara_dod_trashcan_fightSad',
+    ZoneToSadAnims = {ToontownGlobals.ToontownCenter: 'tt_a_ara_ttc_trashcan_fightSad',
+                      ToontownGlobals.ToontownShipyards: 'tt_a_ara_dod_trashcan_fightSad',
                       ToontownGlobals.FloweringGrove: 'tt_a_ara_dga_trashcan_fightSad',
                       ToontownGlobals.TheLandOfMusic: 'tt_a_ara_mml_trashcan_fightSad',
                       ToontownGlobals.TundraWonderland: 'tt_a_ara_tbr_trashcan_fightSad',
                       ToontownGlobals.TwilightDreamland: 'tt_a_ara_ddl_trashcan_fightSad'}
-    ZoneToFightAnims = {ToontownGlobals.ToontropolisCenter: ('tt_a_ara_ttc_trashcan_fightBoost', 'tt_a_ara_ttc_trashcan_fightCheer', 'tt_a_ara_ttc_trashcan_fightIdle'),
-                        ToontownGlobals.ToontropolisDocks: ('tt_a_ara_dod_trashcan_fightBoost', 'tt_a_ara_dod_trashcan_fightCheer', 'tt_a_ara_dod_trashcan_fightIdle'),
+    ZoneToFightAnims = {ToontownGlobals.ToontownCenter: ('tt_a_ara_ttc_trashcan_fightBoost', 'tt_a_ara_ttc_trashcan_fightCheer', 'tt_a_ara_ttc_trashcan_fightIdle'),
+                        ToontownGlobals.ToontownShipyards: ('tt_a_ara_dod_trashcan_fightBoost', 'tt_a_ara_dod_trashcan_fightCheer', 'tt_a_ara_dod_trashcan_fightIdle'),
                         ToontownGlobals.FloweringGrove: ('tt_a_ara_dga_trashcan_fightBoost', 'tt_a_ara_dga_trashcan_fightCheer', 'tt_a_ara_dga_trashcan_fightIdle'),
                         ToontownGlobals.TheLandOfMusic: ('tt_a_ara_mml_trashcan_fightBoost',
                                                             'tt_a_ara_mml_trashcan_fightCheer0',

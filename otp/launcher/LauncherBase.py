@@ -53,9 +53,9 @@ class LauncherBase(DirectObject):
                                                    ltime[4],
                                                    ltime[5])
         logPrefix = self.getLogFileName() + '-'
-        if not os.path.exists('logs/'):
-            os.makedirs('logs/')
-        logfile = os.path.join('logs', logPrefix + logSuffix + '.log')
+        if not os.path.exists('users/logs/'):
+            os.mkdir('users/logs/')
+        logfile = os.path.join('users/logs', logPrefix + logSuffix + '.log')
         self.errorfile = 'errorCode'
         log = open(logfile, 'a')
         logOut = LogAndOutput(sys.__stdout__, log)

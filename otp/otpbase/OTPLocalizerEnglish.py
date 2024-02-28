@@ -4,11 +4,11 @@ import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
-lToontropolisDocks = "Toontown Shipyard"
+lToontownShipyards = "Toontown Shipyard"
 lTwilightDreamland = "Twlight Dreamland"
 lTheLandOfMusic = "The Land of Melody"
-lToontropolisCenter = 'Toontown Central'
-lToontropolisStadium = 'Toontown Stadium'
+lToontownCenter = 'Toontown Central'
+lToontownStadium = 'Toontown Stadium'
 lAcornAcres = "Acorn Acres"
 lGolfZone = "Toontown Mini-Golf"
 lCancel = 'Cancel'
@@ -988,13 +988,13 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1102: "Let's go fight the %s!" % Cogs,
                                1103: "Let's go take over a %s building!" % Cog,
                                1104: "Let's go in the elevator!",
-                               1105: "Let's go to %s!" % lToontropolisCenter,
-                               1106: "Let's go to %s!" % lToontropolisDocks,
+                               1105: "Let's go to %s!" % lToontownCenter,
+                               1106: "Let's go to %s!" % lToontownShipyards,
                                1107: "Let's go to %s!" % lTheLandOfMusic,
                                1108: "Let's go to %s!" % lFloweringGrove,
                                1109: "Let's go to %s!" % lTundraWonderland,
                                1110: "Let's go to %s!" % lTwilightDreamland,
-                               1111: "Let's go to %s!" % lToontropolisStadium,
+                               1111: "Let's go to %s!" % lToontownStadium,
                                1112: "Let's go to my house!",
                                1113: "Let's go to your house!",
                                1114: "Let's go to Sellbot Headquarters!",

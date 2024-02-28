@@ -278,8 +278,8 @@ class ToonBase(OTPBase.OTPBase):
         self.walking = pressed
 
     def takeScreenShot(self):
-        if not os.path.exists('screenshots/'):
-            os.mkdir('screenshots/')
+        if not os.path.exists('users/screenshots/'):
+            os.mkdir('users/screenshots/')
 
         namePrefix = 'screenshot'
         namePrefix = 'screenshots/' + launcher.logPrefix + namePrefix
