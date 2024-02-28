@@ -217,15 +217,8 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
             self.hasLocalAvatar = 1
         return
 
-<<<<<<< HEAD
-    def setState(self, mode, avId, ownerId, gender, topList, botList):
-        self.notify.debug(
-            'setState, mode=%s, avId=%s, ownerId=%d' %
-            (mode, avId, ownerId))
-=======
     def setState(self, mode, avId, ownerId, topList, botList):
         self.notify.debug('setState, mode=%s, avId=%s, ownerId=%d' % (mode, avId, ownerId))
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         self.isOwner = avId == ownerId
         if mode == ClosetGlobals.CLOSED:
             self.fsm.request('closed')

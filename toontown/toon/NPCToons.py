@@ -63,16 +63,8 @@ TAILOR_COUNTDOWN_TIME = 300
 RTDNAFile = '/RTDNAFile.txt'
 saveDNA = False
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-def getRandomDNA(seed, gender):
-=======
-=======
-
->>>>>>> 88f4b583 (Toon: Gender Removal is complete)
 def getRandomDNA(seed, eyelashes):
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
     randomDNA = ToonDNA.ToonDNA()
     randomDNA.newToonRandom(seed, eyelashes, 1)
     return randomDNA.asTuple()

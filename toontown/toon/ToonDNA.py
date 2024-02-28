@@ -1369,13 +1369,8 @@ def getRandomGirlBottomAndColor(type):
     return (style[0], random.choice(style[1]))
 
 
-<<<<<<< HEAD
-def getRandomizedTops(gender, tailorId=MAKE_A_TOON, generator=None):
-    if generator is None:
-=======
 def getRandomizedTops(tailorId = MAKE_A_TOON, generator = None):
     if generator == None:
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         generator = random
     collection = TailorCollections[tailorId]
     collection = collection[SHIRTS][:]
@@ -1393,13 +1388,8 @@ def getRandomizedTops(tailorId = MAKE_A_TOON, generator = None):
     return tops
 
 
-<<<<<<< HEAD
-def getRandomizedBottoms(gender, tailorId=MAKE_A_TOON, generator=None):
-    if generator is None:
-=======
 def getRandomizedBottoms(tailorId = MAKE_A_TOON, generator = None):
     if generator == None:
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         generator = random
     collection = TailorCollections[tailorId]
 
@@ -1454,11 +1444,7 @@ def getBottoms(tailorId = MAKE_A_TOON):
     return bottoms
 
 
-<<<<<<< HEAD
-def getAllBottoms(gender, output='both'):
-=======
 def getAllBottoms(output = 'both'):
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
     bottoms = []
     for style in list(BottomStyles.keys()):
        
@@ -2122,12 +2108,9 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             notify.error("tuple must be in format ('%s', '%s', '%s', '%s')")
         return
 
-<<<<<<< HEAD
-    def newToonFromProperties(self, head, torso, legs, eyelashes, armColor, gloveColor, legColor, 
-                              headColor, topTexture, topTextureColor, sleeveTexture, 
-                              sleeveTextureColor, bottomTexture, bottomTextureColor):
-=======
-    def newToonFromProperties(self, head, torso, legs, eyelashes, armColor, gloveColor, legColor, headColor, topTexture, topTextureColor, sleeveTexture, sleeveTextureColor, bottomTexture, bottomTextureColor, isNPC=0):
+    def newToonFromProperties(self, head, torso, legs, eyelashes, armColor, gloveColor, 
+                              legColor, headColor, topTexture, topTextureColor, sleeveTexture, 
+                              sleeveTextureColor, bottomTexture, bottomTextureColor, isNPC=0):
         if eyelashes == 'm':
             eyelashes = 1
             kind = 'm'
@@ -2137,7 +2120,6 @@ class ToonDNA(AvatarDNA.AvatarDNA):
         if isNPC:
             # convert the old bottom id to the new one
             bottomTexture = convertNPCSBottoms(bottomTexture, kind)
->>>>>>> 88f4b583 (Toon: Gender Removal is complete)
         self.type = 't'
         self.head = head
         self.torso = torso
@@ -2208,17 +2190,10 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             generator = random
         self.type = 't'
         self.legs = generator.choice(toonLegTypes + ['m',
-<<<<<<< HEAD
-                                                     'l',
-                                                     'l',
-                                                     'l'])
-        self.gender = gender
-=======
          'l',
          'l',
          'l'])
         self.eyelashes = eyelashes
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         if not npc:
             if stage == MAKE_A_TOON:
                 if not base.cr.isPaid():

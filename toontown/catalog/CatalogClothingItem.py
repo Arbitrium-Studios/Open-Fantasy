@@ -402,18 +402,10 @@ class CatalogClothingItem(CatalogItem.CatalogItem):
             defn = ToonDNA.BottomStyles[str]
             dna.botTex = defn[0]
             dna.botTexColor = defn[1][self.colorIndex]
-<<<<<<< HEAD
-        if dna.getGender() == 'f':
-            try:
-                bottomPair = ToonDNA.GirlBottoms[dna.botTex]
-            except BaseException:
-                bottomPair = ToonDNA.GirlBottoms[0]
-=======
         try:
             bottomPair = ToonDNA.Bottoms[dna.botTex]
         except:
             bottomPair = ToonDNA.Bottoms[0]
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
 
         if dna.torso[1] == 's' and bottomPair[1] == ToonDNA.SKIRT:
             dna.torso = dna.torso[0] + 'd'

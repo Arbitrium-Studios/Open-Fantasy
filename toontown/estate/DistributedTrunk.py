@@ -45,16 +45,8 @@ class DistributedTrunk(DistributedCloset.DistributedCloset):
         print('backpackList = %s' % self.av.getBackpackList())
         print('shoesList = %s' % self.av.getShoesList())
 
-<<<<<<< HEAD
-    def setState(self, mode, avId, ownerId, gender, hatList,
-                 glassesList, backpackList, shoesList):
-        self.notify.debug(
-            'setState, mode=%s, avId=%s, ownerId=%d' %
-            (mode, avId, ownerId))
-=======
     def setState(self, mode, avId, ownerId, hatList, glassesList, backpackList, shoesList):
         self.notify.debug('setState, mode=%s, avId=%s, ownerId=%d' % (mode, avId, ownerId))
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         self.isOwner = avId == ownerId
         if mode == ClosetGlobals.CLOSED:
             self.fsm.request('closed')

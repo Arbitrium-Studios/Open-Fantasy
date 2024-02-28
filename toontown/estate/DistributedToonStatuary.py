@@ -52,25 +52,7 @@ class DistributedToonStatuary(DistributedStatuary.DistributedStatuary):
             self.worldScale)
         self.getToonPropertiesFromOptional()
         dna = ToonDNA.ToonDNA()
-<<<<<<< HEAD
-        dna.newToonFromProperties(
-            self.headType,
-            self.torsoType,
-            self.legType,
-            self.gender,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0)
-=======
         dna.newToonFromProperties(self.headType, self.torsoType, self.legType, self.eyelashes, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         self.setupStoneToon(dna)
         self.poseToonFromTypeIndex(self.typeIndex)
         self.toon.reparentTo(self.model)

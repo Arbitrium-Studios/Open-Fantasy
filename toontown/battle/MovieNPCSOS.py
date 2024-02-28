@@ -120,16 +120,9 @@ def teleportOut(attack, npc):
 
     if npc.style.torso[1] == 'd':
         a = ActorInterval(npc, 'curtsy')
-<<<<<<< HEAD
-    b = Func(
-        npc.setChatAbsolute,
-        TTLocalizer.MovieNPCSOSGoodbye,
-        CFSpeech | CFTimeout)
-=======
     else:
         a = ActorInterval(npc, 'bow')
     b = Func(npc.setChatAbsolute, TTLocalizer.MovieNPCSOSGoodbye, CFSpeech | CFTimeout)
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
     c = npc.getTeleportOutTrack()
     d = Func(npc.removeActive)
     e = Func(npc.detachNode)

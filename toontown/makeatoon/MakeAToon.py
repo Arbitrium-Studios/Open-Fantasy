@@ -232,14 +232,7 @@ class MakeAToon(StateData.StateData):
                          0.01), frameColor=(0, 0, 0, 0.05), state='normal')
         ee.bind(DGG.B1PRESS, lambda x, ee=ee: self.toggleSlide())
         self.eee = ee
-<<<<<<< HEAD
-        self.room = loader.loadModel(
-            'phase_3/models/makeatoon/tt_m_ara_mat_room')
-        self.genderWalls = self.room.find('**/genderWalls')
-        self.genderProps = self.room.find('**/genderProps')
-=======
         self.room = loader.loadModel('phase_3/models/makeatoon/tt_m_ara_mat_room')
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         self.bodyWalls = self.room.find('**/bodyWalls')
         self.bodyProps = self.room.find('**/bodyProps')
         self.colorWalls = self.room.find('**/colorWalls')

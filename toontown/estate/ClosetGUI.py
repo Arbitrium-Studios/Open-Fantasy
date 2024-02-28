@@ -280,25 +280,6 @@ class ClosetGUI(ClothesGUI.ClothesGUI):
         if self.swapEvent is not None:
             messenger.send(self.swapEvent)
 
-<<<<<<< HEAD
-    def __handleGenderBender(self, type):
-        if type == 1:
-            if self.toon.style.gender != self.ownerGender and self.toon.style.gender == 'f':
-                self.toon.swapToonTorso(
-                    self.toon.style.torso[0] + 's', genClothes=0)
-                self.toon.loop('neutral', 0)
-                self.swappedTorso = 1
-            self.toon.style.gender = self.ownerGender
-        else:
-            self.toon.style.gender = self.gender
-            if self.toon.style.gender != self.ownerGender and self.toon.style.gender == 'm':
-                self.toon.swapToonTorso(
-                    self.toon.style.torso[0] + 's', genClothes=0)
-                self.toon.loop('neutral', 0)
-                self.swappedTorso = 1
-
-=======
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
     def removeTop(self, index):
         listLen = len(self.tops)
         if index < listLen:

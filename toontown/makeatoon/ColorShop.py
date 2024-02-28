@@ -43,15 +43,7 @@ class ColorShop(StateData.StateData):
         self.startColor = 0
         self.acceptOnce('last', self.__handleBackward)
         self.acceptOnce('next', self.__handleForward)
-<<<<<<< HEAD
-        choicePool = [
-            self.getGenderColorList(
-                self.dna), self.getGenderColorList(
-                self.dna), self.getGenderColorList(
-                self.dna)]
-=======
         choicePool = [self.getColorList(self.dna), self.getColorList(self.dna), self.getColorList(self.dna)]
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
         self.shuffleButton.setChoicePool(choicePool)
         self.accept(self.shuffleFetchMsg, self.changeColor)
         self.acceptOnce('MAT-newToonCreated', self.shuffleButton.cleanHistory)

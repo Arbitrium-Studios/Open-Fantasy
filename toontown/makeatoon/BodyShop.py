@@ -193,11 +193,6 @@ class BodyShop(StateData.StateData):
                                                                                   shuffleArrowRollover,
                                                                                   shuffleArrowDisabled), image_scale=halfButtonScale, image1_scale=halfButtonHoverScale, image2_scale=halfButtonHoverScale, pos=(-0.2, 0, 0), command=self.__swapLegs, extraArgs=[-1])
         self.legRButton = DirectButton(parent=self.legsFrame, relief=None, image=(shuffleArrowUp,
-<<<<<<< HEAD
-                                                                                  shuffleArrowDown,
-                                                                                  shuffleArrowRollover,
-                                                                                  shuffleArrowDisabled), image_scale=halfButtonInvertScale, image1_scale=halfButtonInvertHoverScale, image2_scale=halfButtonInvertHoverScale, pos=(0.2, 0, 0), command=self.__swapLegs, extraArgs=[1])
-=======
          shuffleArrowDown,
          shuffleArrowRollover,
          shuffleArrowDisabled), image_scale=halfButtonInvertScale, image1_scale=halfButtonInvertHoverScale, image2_scale=halfButtonInvertHoverScale, pos=(0.2, 0, 0), command=self.__swapLegs, extraArgs=[1])
@@ -239,7 +234,6 @@ class BodyShop(StateData.StateData):
             command=self.__swapEyelashes,
             extraArgs=[1],
         )
->>>>>>> 88f4b583 (Toon: Gender Removal is complete)
         self.memberButton = DirectButton(relief=None, image=(upsellTex,
                                                              upsellTex,
                                                              upsellTex,

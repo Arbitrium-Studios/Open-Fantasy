@@ -774,42 +774,7 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         return Func(avatar.setLocalPageChat, chatString,
                     quitButton, extraChatFlags, dialogueList)
 
-<<<<<<< HEAD
-    def parseCCChatConfirm(self, line):
-        lineLength = len(line)
-        avatarName = line[1]
-        avatar = self.getVar(avatarName)
-        if self.toon.getStyle().gender == 'm':
-            chatString = eval('TTLocalizer.' + line[2] % 'Mickey')
-        else:
-            chatString = eval('TTLocalizer.' + line[2] % 'Minnie')
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
-            line[3:])
-        return Func(avatar.setLocalPageChat, chatString,
-                    quitButton, extraChatFlags, dialogueList)
-
-    def parseCCChatToConfirm(self, line):
-        lineLength = len(line)
-        avatarKey = line[1]
-        avatar = self.getVar(avatarKey)
-        toAvatarKey = line[2]
-        toAvatar = self.getVar(toAvatarKey)
-        localizerAvatarName = toAvatar.getName().capitalize()
-        toAvatarName = eval('TTLocalizer.' + localizerAvatarName)
-        if self.toon.getStyle().gender == 'm':
-            chatString = eval('TTLocalizer.' + line[3] % 'Mickey')
-        else:
-            chatString = eval('TTLocalizer.' + line[3] % 'Minnie')
-        chatString = chatString.replace('%s', toAvatarName)
-        quitButton, extraChatFlags, dialogueList = self.parseExtraChatArgs(
-            line[4:])
-        return Func(avatar.setLocalPageChat, chatString,
-                    quitButton, extraChatFlags, dialogueList)
-=======
    
-
-
->>>>>>> 3a834352 (Toon: Even more progress on removal of gender)
 
     def parsePlaySfx(self, line):
         if len(line) == 2:

@@ -19,47 +19,9 @@ class CatalogAccessoryItem(CatalogItem.CatalogItem):
     def storedInTrunk(self):
         return 1
 
-<<<<<<< HEAD
-    def notOfferedTo(self, avatar):
-        article = AccessoryTypes[self.accessoryType][ATArticle]
-        if article in [AHat,
-                       AGlasses,
-                       ABackpack,
-                       AShoes]:
-            return 0
-        forBoys = article in [ABoysHat,
-                              ABoysGlasses,
-                              ABoysBackpack,
-                              ABoysShoes]
-        if avatar.getStyle().getGender() == 'm':
-            return not forBoys
-        else:
-            return forBoys
-
-    def forBoysOnly(self):
-        article = AccessoryTypes[self.accessoryType][ATArticle]
-        if article in [ABoysHat,
-                       ABoysGlasses,
-                       ABoysBackpack,
-                       ABoysShoes]:
-            return 1
-        else:
-            return 0
-
-    def forGirlsOnly(self):
-        article = AccessoryTypes[self.accessoryType][ATArticle]
-        if article in [AGirlsHat,
-                       AGirlsGlasses,
-                       AGirlsBackpack,
-                       AGirlsShoes]:
-            return 1
-        else:
-            return 0
-=======
 
 
 
->>>>>>> bcff94ff (experimental: get rid of gender exclusive items)
 
     def getPurchaseLimit(self):
         return 1
