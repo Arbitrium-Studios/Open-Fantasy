@@ -31,3 +31,4 @@ toontown/installer
 Start Toontown Fantasy.lnk
 build/
 sign/texture.jpg
+win32/.vscode/
