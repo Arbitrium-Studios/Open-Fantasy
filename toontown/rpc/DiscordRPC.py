@@ -29,7 +29,7 @@ class DiscordRPC(object):
         4200: ["the-land-of-music", "on Baritone Boulevard"],
         4300: ["the-land-of-music", "on Tenor Terrace"],
 
-        5000: ["flowering-grove", "in the Flovering Grove"],
+        5000: ["flowering-grove", "in the Flowering Grove"],
         5100: ["flowering-grove", "on Elm Street"],
         5200: ["flowering-grove", "on Maple Street"],
         5300: ["flowering-grove", "on Oak Street"],
