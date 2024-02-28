@@ -7,7 +7,6 @@ from panda3d.toontown import *
 from toontown.racing.RaceGlobals import *
 from toontown.classicchars import DistributedToontropolisStadiumAI
 from toontown.safezone import DistributedGolfKartAI
-from toontown.safezone import ButterflyGlobals
 if __debug__:
     import pdb
 
@@ -26,7 +25,6 @@ class GZHoodDataAI(HoodDataAI.HoodDataAI):
         HoodDataAI.HoodDataAI.startup(self)
         self.createStartingBlocks()
         self.createGolfKarts()
-        self.createButterflies(ButterflyGlobals.AA)
 
     def cleanup(self):
         taskMgr.removeTasksMatching(str(self) + '_leaderBoardSwitch')
