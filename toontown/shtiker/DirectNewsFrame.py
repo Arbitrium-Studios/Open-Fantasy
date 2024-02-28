@@ -25,7 +25,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DirectNewsFrame')
     NewsIndexFilename = ConfigVariableString(
         'news-index-filename', 'http_news_index.txt').value
-    NewsOverHttp = ConfigVariableBool('news-over-http', True).value
+    NewsOverHttp = ConfigVariableBool('news-over-http', False).value
     CacheIndexFilename = 'cache_index.txt'
     SectionIdents = ['hom',
                      'new',
