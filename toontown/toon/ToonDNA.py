@@ -359,6 +359,8 @@ GirlShirts = [(0, 0),
               (22, 0)]
 
 
+
+
 def isValidBoyShirt(index):
     for pair in BoyShirts:
         if index == pair[0]:
@@ -375,1292 +377,896 @@ def isValidGirlShirt(index):
     return 0
 
 
+
 Sleeves = ['phase_3/maps/desat_sleeve_1.jpg',
-           'phase_3/maps/desat_sleeve_2.jpg',
-           'phase_3/maps/desat_sleeve_3.jpg',
-           'phase_3/maps/desat_sleeve_4.jpg',
-           'phase_3/maps/desat_sleeve_5.jpg',
-           'phase_3/maps/desat_sleeve_6.jpg',
-           'phase_3/maps/desat_sleeve_7.jpg',
-           'phase_3/maps/desat_sleeve_8.jpg',
-           'phase_3/maps/desat_sleeve_9.jpg',
-           'phase_3/maps/desat_sleeve_10.jpg',
-           'phase_3/maps/desat_sleeve_15.jpg',
-           'phase_3/maps/desat_sleeve_16.jpg',
-           'phase_3/maps/desat_sleeve_19.jpg',
-           'phase_3/maps/desat_sleeve_20.jpg',
-           'phase_4/maps/female_sleeve1b.jpg',
-           'phase_4/maps/female_sleeve2.jpg',
-           'phase_4/maps/female_sleeve3.jpg',
-           'phase_4/maps/male_sleeve1.jpg',
-           'phase_4/maps/male_sleeve2_palm.jpg',
-           'phase_4/maps/male_sleeve3c.jpg',
-           'phase_4/maps/shirt_Sleeve_ghost.jpg',
-           'phase_4/maps/shirt_Sleeve_pumkin.jpg',
-           'phase_4/maps/holidaySleeve1.jpg',
-           'phase_4/maps/holidaySleeve3.jpg',
-           'phase_4/maps/female_sleeve1b.jpg',
-           'phase_4/maps/female_sleeve5New.jpg',
-           'phase_4/maps/male_sleeve4New.jpg',
-           'phase_4/maps/sleeve6New.jpg',
-           'phase_4/maps/SleeveMaleNew7.jpg',
-           'phase_4/maps/female_sleeveNew6.jpg',
-           'phase_4/maps/Vday5Sleeve.jpg',
-           'phase_4/maps/Vda6Sleeve.jpg',
-           'phase_4/maps/Vday_shirt4sleeve.jpg',
-           'phase_4/maps/Vday2cSleeve.jpg',
-           'phase_4/maps/sleeveTieDye.jpg',
-           'phase_4/maps/male_sleeve1.jpg',
-           'phase_4/maps/StPats_sleeve.jpg',
-           'phase_4/maps/StPats_sleeve2.jpg',
-           'phase_4/maps/ContestfishingVestSleeve1.jpg',
-           'phase_4/maps/ContestFishtankSleeve1.jpg',
-           'phase_4/maps/ContestPawSleeve1.jpg',
-           'phase_4/maps/CowboySleeve1.jpg',
-           'phase_4/maps/CowboySleeve2.jpg',
-           'phase_4/maps/CowboySleeve3.jpg',
-           'phase_4/maps/CowboySleeve4.jpg',
-           'phase_4/maps/CowboySleeve5.jpg',
-           'phase_4/maps/CowboySleeve6.jpg',
-           'phase_4/maps/4thJulySleeve1.jpg',
-           'phase_4/maps/4thJulySleeve2.jpg',
-           'phase_4/maps/shirt_sleeveCat7_01.jpg',
-           'phase_4/maps/shirt_sleeveCat7_02.jpg',
-           'phase_4/maps/contest_backpack_sleeve.jpg',
-           'phase_4/maps/Contest_leder_sleeve.jpg',
-           'phase_4/maps/contest_mellon_sleeve2.jpg',
-           'phase_4/maps/contest_race_sleeve.jpg',
-           'phase_4/maps/PJSleeveBlue.jpg',
-           'phase_4/maps/PJSleeveRed.jpg',
-           'phase_4/maps/PJSleevePurple.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_valentine1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_valentine2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_desat4.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_gardening1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_gardening2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_party1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_party2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_summer1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_summer2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_marathon1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_toonTask1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_toonTask2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley2.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_winter1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween3.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween4.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_valentine3.jpg',
-           'phase_4/maps/tt_t_chr_shirtSleeve_scientist.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_mailbox.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_trashcan.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_loonyLabs.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_hydrant.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_whistle.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_cogbuster.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_mostCogsDefeated01.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_victoryParty01.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_victoryParty02.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_sellbotIcon.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_sellbotVPIcon.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_sellbotCrusher.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_jellyBeans.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_doodle.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween5.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloweenTurtle.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_greentoon1.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_getConnectedMoverShaker.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_racingGrandPrix.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_lawbotIcon.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_lawbotVPIcon.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_lawbotCrusher.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_bee.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_pirate.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_supertoon.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_vampire.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_dinosaur.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing04.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf03.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_mostCogsDefeated02.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing03.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding3.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley03.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing05.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf04.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween06.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_winter03.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween07.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_winter02.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing06.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing07.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf05.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing04.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing05.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_mostCogsDefeated03.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_mostCogsDefeated04.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley04.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley05.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding4.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding05.jpg',
-           'phase_4/maps/tt_t_chr_avt_shirtSleeve_anniversary.jpg']
+ 'phase_3/maps/desat_sleeve_2.jpg',
+ 'phase_3/maps/desat_sleeve_3.jpg',
+ 'phase_3/maps/desat_sleeve_4.jpg',
+ 'phase_3/maps/desat_sleeve_5.jpg',
+ 'phase_3/maps/desat_sleeve_6.jpg',
+ 'phase_3/maps/desat_sleeve_7.jpg',
+ 'phase_3/maps/desat_sleeve_8.jpg',
+ 'phase_3/maps/desat_sleeve_9.jpg',
+ 'phase_3/maps/desat_sleeve_10.jpg',
+ 'phase_3/maps/desat_sleeve_15.jpg',
+ 'phase_3/maps/desat_sleeve_16.jpg',
+ 'phase_3/maps/desat_sleeve_19.jpg',
+ 'phase_3/maps/desat_sleeve_20.jpg',
+ 'phase_4/maps/female_sleeve1b.jpg',
+ 'phase_4/maps/female_sleeve2.jpg',
+ 'phase_4/maps/female_sleeve3.jpg',
+ 'phase_4/maps/male_sleeve1.jpg',
+ 'phase_4/maps/male_sleeve2_palm.jpg',
+ 'phase_4/maps/male_sleeve3c.jpg',
+ 'phase_4/maps/shirt_Sleeve_ghost.jpg',
+ 'phase_4/maps/shirt_Sleeve_pumkin.jpg',
+ 'phase_4/maps/holidaySleeve1.jpg',
+ 'phase_4/maps/holidaySleeve3.jpg',
+ 'phase_4/maps/female_sleeve1b.jpg',
+ 'phase_4/maps/female_sleeve5New.jpg',
+ 'phase_4/maps/male_sleeve4New.jpg',
+ 'phase_4/maps/sleeve6New.jpg',
+ 'phase_4/maps/SleeveMaleNew7.jpg',
+ 'phase_4/maps/female_sleeveNew6.jpg',
+ 'phase_4/maps/Vday5Sleeve.jpg',
+ 'phase_4/maps/Vda6Sleeve.jpg',
+ 'phase_4/maps/Vday_shirt4sleeve.jpg',
+ 'phase_4/maps/Vday2cSleeve.jpg',
+ 'phase_4/maps/sleeveTieDye.jpg',
+ 'phase_4/maps/male_sleeve1.jpg',
+ 'phase_4/maps/StPats_sleeve.jpg',
+ 'phase_4/maps/StPats_sleeve2.jpg',
+ 'phase_4/maps/ContestfishingVestSleeve1.jpg',
+ 'phase_4/maps/ContestFishtankSleeve1.jpg',
+ 'phase_4/maps/ContestPawSleeve1.jpg',
+ 'phase_4/maps/CowboySleeve1.jpg',
+ 'phase_4/maps/CowboySleeve2.jpg',
+ 'phase_4/maps/CowboySleeve3.jpg',
+ 'phase_4/maps/CowboySleeve4.jpg',
+ 'phase_4/maps/CowboySleeve5.jpg',
+ 'phase_4/maps/CowboySleeve6.jpg',
+ 'phase_4/maps/4thJulySleeve1.jpg',
+ 'phase_4/maps/4thJulySleeve2.jpg',
+ 'phase_4/maps/shirt_sleeveCat7_01.jpg',
+ 'phase_4/maps/shirt_sleeveCat7_02.jpg',
+ 'phase_4/maps/contest_backpack_sleeve.jpg',
+ 'phase_4/maps/Contest_leder_sleeve.jpg',
+ 'phase_4/maps/contest_mellon_sleeve2.jpg',
+ 'phase_4/maps/contest_race_sleeve.jpg',
+ 'phase_4/maps/PJSleeveBlue.jpg',
+ 'phase_4/maps/PJSleeveRed.jpg',
+ 'phase_4/maps/PJSleevePurple.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_valentine1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_valentine2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_desat4.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_gardening1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_gardening2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_party1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_party2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_summer1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_summer2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_marathon1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_toonTask1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_toonTask2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_winter1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween3.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween4.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_valentine3.jpg',
+ 'phase_4/maps/tt_t_chr_shirtSleeve_scientist.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_mailbox.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_trashcan.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_loonyLabs.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_hydrant.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_whistle.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_cogbuster.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_mostCogsDefeated01.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_victoryParty01.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_victoryParty02.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_sellbotIcon.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_sellbotVPIcon.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_sellbotCrusher.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_jellyBeans.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_doodle.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween5.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloweenTurtle.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_greentoon1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_getConnectedMoverShaker.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_racingGrandPrix.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_lawbotIcon.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_lawbotVPIcon.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_lawbotCrusher.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_bee.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_pirate.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_supertoon.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_vampire.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_dinosaur.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing04.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf03.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_mostCogsDefeated02.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing03.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding3.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley03.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing05.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf04.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween06.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_winter03.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_halloween07.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_winter02.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing06.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_fishing07.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_golf05.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing04.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_racing05.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_mostCogsDefeated03.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_mostCogsDefeated04.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley04.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_trolley05.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding4.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_saveBuilding05.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shirtSleeve_anniversary.jpg']
+# we will keep original boyshorts and girlbottoms for npcs 
+# TODO remove these once we find a better way to handle these for NPCS
+
 BoyShorts = ['phase_3/maps/desat_shorts_1.jpg',
-             'phase_3/maps/desat_shorts_2.jpg',
-             'phase_3/maps/desat_shorts_4.jpg',
-             'phase_3/maps/desat_shorts_6.jpg',
-             'phase_3/maps/desat_shorts_7.jpg',
-             'phase_3/maps/desat_shorts_8.jpg',
-             'phase_3/maps/desat_shorts_9.jpg',
-             'phase_3/maps/desat_shorts_10.jpg',
-             'phase_4/maps/VdayShorts2.jpg',
-             'phase_4/maps/shorts4.jpg',
-             'phase_4/maps/shorts1.jpg',
-             'phase_4/maps/shorts5.jpg',
-             'phase_4/maps/CowboyShorts1.jpg',
-             'phase_4/maps/CowboyShorts2.jpg',
-             'phase_4/maps/4thJulyShorts1.jpg',
-             'phase_4/maps/shortsCat7_01.jpg',
-             'phase_4/maps/Blue_shorts_1.jpg',
-             'phase_4/maps/Red_shorts_1.jpg',
-             'phase_4/maps/Purple_shorts_1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_winter1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_winter2.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_winter3.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_winter4.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_valentine1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_valentine2.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_fishing1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_gardening1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_party1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_racing1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_summer1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_golf1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_halloween1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_halloween2.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_saveBuilding1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_trolley1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_halloween4.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_halloween3.jpg',
-             'phase_4/maps/tt_t_chr_shorts_scientistA.jpg',
-             'phase_4/maps/tt_t_chr_shorts_scientistB.jpg',
-             'phase_4/maps/tt_t_chr_shorts_scientistC.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_cogbuster.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_sellbotCrusher.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_halloween5.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_halloweenTurtle.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_greentoon1.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_racingGrandPrix.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_lawbotCrusher.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_bee.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_pirate.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_supertoon.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_vampire.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_dinosaur.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_golf03.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_racing03.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_golf04.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_golf05.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_racing04.jpg',
-             'phase_4/maps/tt_t_chr_avt_shorts_racing05.jpg']
+ 'phase_3/maps/desat_shorts_2.jpg',
+ 'phase_3/maps/desat_shorts_4.jpg',
+ 'phase_3/maps/desat_shorts_6.jpg',
+ 'phase_3/maps/desat_shorts_7.jpg',
+ 'phase_3/maps/desat_shorts_8.jpg',
+ 'phase_3/maps/desat_shorts_9.jpg',
+ 'phase_3/maps/desat_shorts_10.jpg',
+ 'phase_4/maps/VdayShorts2.jpg',
+ 'phase_4/maps/shorts4.jpg',
+ 'phase_4/maps/shorts1.jpg',
+ 'phase_4/maps/shorts5.jpg',
+ 'phase_4/maps/CowboyShorts1.jpg',
+ 'phase_4/maps/CowboyShorts2.jpg',
+ 'phase_4/maps/4thJulyShorts1.jpg',
+ 'phase_4/maps/shortsCat7_01.jpg',
+ 'phase_4/maps/Blue_shorts_1.jpg',
+ 'phase_4/maps/Red_shorts_1.jpg',
+ 'phase_4/maps/Purple_shorts_1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_winter1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_winter2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_winter3.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_winter4.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_valentine1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_valentine2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_fishing1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_gardening1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_party1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_racing1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_summer1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_golf1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_halloween1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_halloween2.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_saveBuilding1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_trolley1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_halloween4.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_halloween3.jpg',
+ 'phase_4/maps/tt_t_chr_shorts_scientistA.jpg',
+ 'phase_4/maps/tt_t_chr_shorts_scientistB.jpg',
+ 'phase_4/maps/tt_t_chr_shorts_scientistC.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_cogbuster.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_sellbotCrusher.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_halloween5.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_halloweenTurtle.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_greentoon1.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_racingGrandPrix.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_lawbotCrusher.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_bee.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_pirate.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_supertoon.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_vampire.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_dinosaur.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_golf03.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_racing03.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_golf04.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_golf05.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_racing04.jpg',
+ 'phase_4/maps/tt_t_chr_avt_shorts_racing05.jpg']
 SHORTS = 0
 SKIRT = 1
 GirlBottoms = [('phase_3/maps/desat_skirt_1.jpg', SKIRT),
-               ('phase_3/maps/desat_skirt_2.jpg', SKIRT),
-               ('phase_3/maps/desat_skirt_3.jpg', SKIRT),
-               ('phase_3/maps/desat_skirt_4.jpg', SKIRT),
-               ('phase_3/maps/desat_skirt_5.jpg', SKIRT),
-               ('phase_3/maps/desat_shorts_1.jpg', SHORTS),
-               ('phase_3/maps/desat_shorts_5.jpg', SHORTS),
-               ('phase_3/maps/desat_skirt_6.jpg', SKIRT),
-               ('phase_3/maps/desat_skirt_7.jpg', SKIRT),
-               ('phase_3/maps/desat_shorts_10.jpg', SHORTS),
-               ('phase_4/maps/female_skirt1.jpg', SKIRT),
-               ('phase_4/maps/female_skirt2.jpg', SKIRT),
-               ('phase_4/maps/female_skirt3.jpg', SKIRT),
-               ('phase_4/maps/VdaySkirt1.jpg', SKIRT),
-               ('phase_4/maps/skirtNew5.jpg', SKIRT),
-               ('phase_4/maps/shorts5.jpg', SHORTS),
-               ('phase_4/maps/CowboySkirt1.jpg', SKIRT),
-               ('phase_4/maps/CowboySkirt2.jpg', SKIRT),
-               ('phase_4/maps/4thJulySkirt1.jpg', SKIRT),
-               ('phase_4/maps/skirtCat7_01.jpg', SKIRT),
-               ('phase_4/maps/Blue_shorts_1.jpg', SHORTS),
-               ('phase_4/maps/Red_shorts_1.jpg', SHORTS),
-               ('phase_4/maps/Purple_shorts_1.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_skirt_winter1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_winter2.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_winter3.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_winter4.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_valentine1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_valentine2.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_fishing1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_gardening1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_party1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_racing1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_summer1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_golf1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_halloween1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_halloween2.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_saveBuilding1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_trolley1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_halloween3.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_halloween4.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_shorts_scientistA.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_shorts_scientistB.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_shorts_scientistC.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_shorts_cogbuster.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_shorts_sellbotCrusher.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_shorts_halloween5.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_shorts_halloweenTurtle.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_skirt_greentoon1.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_racingGrandPrix.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_shorts_lawbotCrusher.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_shorts_bee.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_shorts_pirate.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_skirt_pirate.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_shorts_supertoon.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_shorts_vampire.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_shorts_dinosaur.jpg', SHORTS),
-               ('phase_4/maps/tt_t_chr_avt_skirt_golf02.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_racing03.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_golf03.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_golf04.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_racing04.jpg', SKIRT),
-               ('phase_4/maps/tt_t_chr_avt_skirt_racing05.jpg', SKIRT)]
+ ('phase_3/maps/desat_skirt_2.jpg', SKIRT),
+ ('phase_3/maps/desat_skirt_3.jpg', SKIRT),
+ ('phase_3/maps/desat_skirt_4.jpg', SKIRT),
+ ('phase_3/maps/desat_skirt_5.jpg', SKIRT),
+ ('phase_3/maps/desat_shorts_1.jpg', SHORTS),
+ ('phase_3/maps/desat_shorts_5.jpg', SHORTS),
+ ('phase_3/maps/desat_skirt_6.jpg', SKIRT),
+ ('phase_3/maps/desat_skirt_7.jpg', SKIRT),
+ ('phase_3/maps/desat_shorts_10.jpg', SHORTS),
+ ('phase_4/maps/female_skirt1.jpg', SKIRT),
+ ('phase_4/maps/female_skirt2.jpg', SKIRT),
+ ('phase_4/maps/female_skirt3.jpg', SKIRT),
+ ('phase_4/maps/VdaySkirt1.jpg', SKIRT),
+ ('phase_4/maps/skirtNew5.jpg', SKIRT),
+ ('phase_4/maps/shorts5.jpg', SHORTS),
+ ('phase_4/maps/CowboySkirt1.jpg', SKIRT),
+ ('phase_4/maps/CowboySkirt2.jpg', SKIRT),
+ ('phase_4/maps/4thJulySkirt1.jpg', SKIRT),
+ ('phase_4/maps/skirtCat7_01.jpg', SKIRT),
+ ('phase_4/maps/Blue_shorts_1.jpg', SHORTS),
+ ('phase_4/maps/Red_shorts_1.jpg', SHORTS),
+ ('phase_4/maps/Purple_shorts_1.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_skirt_winter1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_winter2.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_winter3.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_winter4.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_valentine1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_valentine2.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_fishing1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_gardening1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_party1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_racing1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_summer1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_golf1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_halloween1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_halloween2.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_saveBuilding1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_trolley1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_halloween3.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_halloween4.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_shorts_scientistA.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_shorts_scientistB.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_shorts_scientistC.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_shorts_cogbuster.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_shorts_sellbotCrusher.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_shorts_halloween5.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_shorts_halloweenTurtle.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_skirt_greentoon1.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_racingGrandPrix.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_shorts_lawbotCrusher.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_shorts_bee.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_shorts_pirate.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_skirt_pirate.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_shorts_supertoon.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_shorts_vampire.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_shorts_dinosaur.jpg', SHORTS),
+ ('phase_4/maps/tt_t_chr_avt_skirt_golf02.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_racing03.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_golf03.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_golf04.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_racing04.jpg', SKIRT),
+ ('phase_4/maps/tt_t_chr_avt_skirt_racing05.jpg', SKIRT)]
+
+
+Bottoms = GirlBottoms
+# add all shorts in BoyShorts to Bottoms 
+for short in BoyShorts:
+    Bottoms.append((short, SHORTS))
+
+# remove any duplicates
+for bottom in Bottoms:
+    if Bottoms.count(bottom) > 1:
+        Bottoms.remove(bottom)
+
+    
+
+
+
+
+# a function to convert old NPC bottom id to new bottoms id
+def convertNPCSBottoms(oldId, kind):
+    if kind == 'm':
+        for index, short in enumerate(BoyShorts):
+            if index == oldId:
+                return Bottoms.index((short, SHORTS))
+    elif kind == 'f':
+        for index, bottom in enumerate(GirlBottoms):
+            if index == oldId:
+                if bottom[1] == SKIRT:
+                    return Bottoms.index((bottom[0], SKIRT))
+                else:
+                    return Bottoms.index((bottom[0], SHORTS))
+    return oldId
+
+
+
+
+        
+
+
 ClothesColors = [VBase4(0.933594, 0.265625, 0.28125, 1.0),
-                 VBase4(0.863281, 0.40625, 0.417969, 1.0),
-                 VBase4(0.710938, 0.234375, 0.4375, 1.0),
-                 VBase4(0.992188, 0.480469, 0.167969, 1.0),
-                 VBase4(0.996094, 0.898438, 0.320312, 1.0),
-                 VBase4(0.550781, 0.824219, 0.324219, 1.0),
-                 VBase4(0.242188, 0.742188, 0.515625, 1.0),
-                 VBase4(0.433594, 0.90625, 0.835938, 1.0),
-                 VBase4(0.347656, 0.820312, 0.953125, 1.0),
-                 VBase4(0.191406, 0.5625, 0.773438, 1.0),
-                 VBase4(0.285156, 0.328125, 0.726562, 1.0),
-                 VBase4(0.460938, 0.378906, 0.824219, 1.0),
-                 VBase4(0.546875, 0.28125, 0.75, 1.0),
-                 VBase4(0.570312, 0.449219, 0.164062, 1.0),
-                 VBase4(0.640625, 0.355469, 0.269531, 1.0),
-                 VBase4(0.996094, 0.695312, 0.511719, 1.0),
-                 VBase4(0.832031, 0.5, 0.296875, 1.0),
-                 VBase4(0.992188, 0.480469, 0.167969, 1.0),
-                 VBase4(0.550781, 0.824219, 0.324219, 1.0),
-                 VBase4(0.433594, 0.90625, 0.835938, 1.0),
-                 VBase4(0.347656, 0.820312, 0.953125, 1.0),
-                 VBase4(0.96875, 0.691406, 0.699219, 1.0),
-                 VBase4(0.996094, 0.957031, 0.597656, 1.0),
-                 VBase4(0.855469, 0.933594, 0.492188, 1.0),
-                 VBase4(0.558594, 0.589844, 0.875, 1.0),
-                 VBase4(0.726562, 0.472656, 0.859375, 1.0),
-                 VBase4(0.898438, 0.617188, 0.90625, 1.0),
-                 VBase4(1.0, 1.0, 1.0, 1.0),
-                 VBase4(0.0, 0.2, 0.956862, 1.0),
-                 VBase4(0.972549, 0.094117, 0.094117, 1.0),
-                 VBase4(0.447058, 0.0, 0.90196, 1.0)]
-ShirtStyles = {'bss1': [0, 0, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (10, 10),
-                               (11, 11),
-                               (12, 12),
-                               (27, 27)]],
-               'bss2': [1, 1, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (10, 10),
-                               (11, 11),
-                               (12, 12)]],
-               'bss3': [2, 2, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (10, 10),
-                               (11, 11),
-                               (12, 12)]],
-               'bss4': [3, 3, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (10, 10),
-                               (11, 11),
-                               (12, 12)]],
-               'bss5': [4, 4, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (9, 9),
-                               (10, 10),
-                               (11, 11),
-                               (12, 12)]],
-               'bss6': [5, 5, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (10, 10),
-                               (11, 11),
-                               (12, 12)]],
-               'bss7': [8, 8, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (27, 27)]],
-               'bss8': [9, 9, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (10, 10),
-                               (11, 11),
-                               (12, 12)]],
-               'bss9': [10, 0, [(0, 0),
-                                (1, 1),
-                                (2, 2),
-                                (3, 3),
-                                (4, 4),
-                                (5, 5),
-                                (6, 6),
-                                (7, 7),
-                                (8, 8),
-                                (9, 9),
-                                (10, 10),
-                                (11, 11),
-                                (12, 12),
-                                (27, 27)]],
-               'bss10': [11, 0, [(0, 0),
-                                 (1, 1),
-                                 (2, 2),
-                                 (3, 3),
-                                 (4, 4),
-                                 (5, 5),
-                                 (6, 6),
-                                 (7, 7),
-                                 (8, 8),
-                                 (9, 9),
-                                 (10, 10),
-                                 (11, 11),
-                                 (12, 12),
-                                 (27, 27)]],
-               'bss11': [14, 10, [(0, 0),
-                                  (1, 1),
-                                  (2, 2),
-                                  (3, 3),
-                                  (4, 4),
-                                  (5, 5),
-                                  (6, 6),
-                                  (7, 7),
-                                  (8, 8),
-                                  (9, 9),
-                                  (10, 10),
-                                  (11, 11),
-                                  (12, 12)]],
-               'bss12': [16, 0, [(27, 27),
-                                 (27, 4),
-                                 (27, 5),
-                                 (27, 6),
-                                 (27, 7),
-                                 (27, 8),
-                                 (27, 9)]],
-               'bss13': [17, 0, [(0, 0),
-                                 (1, 1),
-                                 (2, 2),
-                                 (3, 3),
-                                 (4, 4),
-                                 (5, 5),
-                                 (6, 6),
-                                 (7, 7),
-                                 (8, 8),
-                                 (9, 9),
-                                 (10, 10),
-                                 (11, 11),
-                                 (12, 12)]],
-               'bss14': [18, 12, [(0, 0),
-                                  (1, 1),
-                                  (2, 2),
-                                  (3, 3),
-                                  (4, 4),
-                                  (5, 5),
-                                  (6, 6),
-                                  (8, 8),
-                                  (9, 9),
-                                  (11, 11),
-                                  (12, 12),
-                                  (27, 27)]],
-               'bss15': [19, 13, [(0, 0),
-                                  (1, 1),
-                                  (2, 2),
-                                  (3, 3),
-                                  (4, 4),
-                                  (5, 5),
-                                  (6, 6),
-                                  (7, 7),
-                                  (8, 8),
-                                  (9, 9),
-                                  (10, 10),
-                                  (11, 11),
-                                  (12, 12),
-                                  (27, 27)]],
-               'gss1': [0, 0, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (21, 21),
-                               (22, 22),
-                               (23, 23),
-                               (24, 24),
-                               (25, 25),
-                               (26, 26),
-                               (27, 27)]],
-               'gss2': [1, 1, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (21, 21),
-                               (22, 22),
-                               (23, 23),
-                               (24, 24),
-                               (25, 25),
-                               (26, 26)]],
-               'gss3': [2, 2, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (21, 21),
-                               (22, 22),
-                               (23, 23),
-                               (24, 24),
-                               (25, 25),
-                               (26, 26)]],
-               'gss4': [3, 3, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (21, 21),
-                               (22, 22),
-                               (23, 23),
-                               (24, 24),
-                               (25, 25),
-                               (26, 26)]],
-               'gss5': [5, 5, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (21, 21),
-                               (22, 22),
-                               (23, 23),
-                               (24, 24),
-                               (25, 25),
-                               (26, 26)]],
-               'gss6': [6, 6, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (21, 21),
-                               (22, 22),
-                               (23, 23),
-                               (24, 24),
-                               (25, 25),
-                               (26, 26)]],
-               'gss7': [7, 7, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (21, 21),
-                               (22, 22),
-                               (23, 23),
-                               (24, 24),
-                               (25, 25),
-                               (26, 26)]],
-               'gss8': [9, 9, [(0, 0),
-                               (1, 1),
-                               (2, 2),
-                               (3, 3),
-                               (4, 4),
-                               (5, 5),
-                               (6, 6),
-                               (7, 7),
-                               (8, 8),
-                               (9, 9),
-                               (11, 11),
-                               (12, 12),
-                               (21, 21),
-                               (22, 22),
-                               (23, 23),
-                               (24, 24),
-                               (25, 25),
-                               (26, 26)]],
-               'gss9': [12, 0, [(27, 27)]],
-               'gss10': [13, 11, [(0, 0),
-                                  (1, 1),
-                                  (2, 2),
-                                  (3, 3),
-                                  (4, 4),
-                                  (5, 5),
-                                  (6, 6),
-                                  (7, 7),
-                                  (8, 8),
-                                  (9, 9),
-                                  (10, 10),
-                                  (11, 11),
-                                  (12, 12),
-                                  (21, 21),
-                                  (22, 22),
-                                  (23, 23),
-                                  (24, 24),
-                                  (25, 25),
-                                  (26, 26)]],
-               'gss11': [15, 11, [(0, 0),
-                                  (1, 1),
-                                  (2, 2),
-                                  (3, 3),
-                                  (4, 4),
-                                  (5, 5),
-                                  (6, 6),
-                                  (7, 7),
-                                  (8, 8),
-                                  (9, 9),
-                                  (10, 10),
-                                  (11, 11),
-                                  (12, 12),
-                                  (21, 21),
-                                  (22, 22),
-                                  (23, 23),
-                                  (24, 24),
-                                  (25, 25),
-                                  (26, 26)]],
-               'gss12': [16, 0, [(27, 27),
-                                 (27, 4),
-                                 (27, 5),
-                                 (27, 6),
-                                 (27, 7),
-                                 (27, 8),
-                                 (27, 9)]],
-               'gss13': [20, 0, [(0, 0),
-                                 (1, 1),
-                                 (2, 2),
-                                 (3, 3),
-                                 (4, 4),
-                                 (5, 5),
-                                 (6, 6),
-                                 (7, 7),
-                                 (8, 8),
-                                 (9, 9),
-                                 (10, 10),
-                                 (11, 11),
-                                 (12, 12),
-                                 (21, 21),
-                                 (22, 22),
-                                 (23, 23),
-                                 (24, 24),
-                                 (25, 25),
-                                 (26, 26)]],
-               'gss14': [21, 0, [(0, 0),
-                                 (1, 1),
-                                 (2, 2),
-                                 (3, 3),
-                                 (4, 4),
-                                 (5, 5),
-                                 (6, 6),
-                                 (7, 7),
-                                 (8, 8),
-                                 (9, 9),
-                                 (10, 10),
-                                 (11, 11),
-                                 (12, 12),
-                                 (21, 21),
-                                 (22, 22),
-                                 (23, 23),
-                                 (24, 24),
-                                 (25, 25),
-                                 (26, 26)]],
-               'gss15': [22, 0, [(0, 0),
-                                 (1, 1),
-                                 (2, 2),
-                                 (3, 3),
-                                 (4, 4),
-                                 (5, 5),
-                                 (6, 6),
-                                 (7, 7),
-                                 (8, 8),
-                                 (9, 9),
-                                 (10, 10),
-                                 (11, 11),
-                                 (12, 12),
-                                 (21, 21),
-                                 (22, 22),
-                                 (23, 23),
-                                 (24, 24),
-                                 (25, 25),
-                                 (26, 26)]],
-               'c_ss1': [25, 16, [(27, 27)]],
-               'c_ss2': [27, 18, [(27, 27)]],
-               'c_ss3': [38, 27, [(27, 27)]],
-               'c_bss1': [26, 17, [(27, 27)]],
-               'c_bss2': [28, 19, [(27, 27)]],
-               'c_bss3': [37, 26, [(27, 27)]],
-               'c_bss4': [39, 28, [(27, 27)]],
-               'c_gss1': [23, 14, [(27, 27)]],
-               'c_gss2': [24, 15, [(27, 27)]],
-               'c_gss3': [35, 24, [(27, 27)]],
-               'c_gss4': [36, 25, [(27, 27)]],
-               'c_gss5': [40, 29, [(27, 27)]],
-               'c_ss4': [45, 34, [(27, 27)]],
-               'c_ss5': [46, 35, [(27, 27)]],
-               'c_ss6': [52, 41, [(27, 27)]],
-               'c_ss7': [53, 42, [(27, 27)]],
-               'c_ss8': [54, 43, [(27, 27)]],
-               'c_ss9': [55, 44, [(27, 27)]],
-               'c_ss10': [56, 45, [(27, 27)]],
-               'c_ss11': [57, 46, [(27, 27)]],
-               'hw_ss1': [29, 20, [(27, 27)]],
-               'hw_ss2': [30, 21, [(27, 27)]],
-               'hw_ss3': [114, 101, [(27, 27)]],
-               'hw_ss4': [115, 102, [(27, 27)]],
-               'hw_ss5': [122, 109, [(27, 27)]],
-               'hw_ss6': [123, 110, [(27, 27)]],
-               'hw_ss7': [124, 111, [(27, 27)]],
-               'hw_ss8': [125, 112, [(27, 27)]],
-               'hw_ss9': [126, 113, [(27, 27)]],
-               'wh_ss1': [31, 22, [(27, 27)]],
-               'wh_ss2': [32, 22, [(27, 27)]],
-               'wh_ss3': [33, 23, [(27, 27)]],
-               'wh_ss4': [34, 23, [(27, 27)]],
-               'vd_ss1': [41, 30, [(27, 27)]],
-               'vd_ss2': [42, 31, [(27, 27)]],
-               'vd_ss3': [43, 32, [(27, 27)]],
-               'vd_ss4': [44, 33, [(27, 27)]],
-               'vd_ss5': [69, 58, [(27, 27)]],
-               'vd_ss6': [70, 59, [(27, 27)]],
-               'vd_ss7': [96, 85, [(27, 27)]],
-               'sd_ss1': [47, 36, [(27, 27)]],
-               'sd_ss2': [48, 37, [(27, 27)]],
-               'sd_ss3': [116, 103, [(27, 27)]],
-               'tc_ss1': [49, 38, [(27, 27)]],
-               'tc_ss2': [50, 39, [(27, 27)]],
-               'tc_ss3': [51, 40, [(27, 27)]],
-               'tc_ss4': [62, 51, [(27, 27)]],
-               'tc_ss5': [63, 52, [(27, 27)]],
-               'tc_ss6': [64, 53, [(27, 27)]],
-               'tc_ss7': [65, 54, [(27, 27)]],
-               'j4_ss1': [58, 47, [(27, 27)]],
-               'j4_ss2': [59, 48, [(27, 27)]],
-               'c_ss12': [60, 49, [(27, 27)]],
-               'c_ss13': [61, 50, [(27, 27)]],
-               'pj_ss1': [66, 55, [(27, 27)]],
-               'pj_ss2': [67, 56, [(27, 27)]],
-               'pj_ss3': [68, 57, [(27, 27)]],
-               'sa_ss1': [71, 60, [(27, 27)]],
-               'sa_ss2': [72, 61, [(27, 27)]],
-               'sa_ss3': [73, 62, [(27, 27)]],
-               'sa_ss4': [74, 63, [(27, 27)]],
-               'sa_ss5': [75, 64, [(27, 27)]],
-               'sa_ss6': [76, 65, [(27, 27)]],
-               'sa_ss7': [77, 66, [(27, 27)]],
-               'sa_ss8': [78, 67, [(27, 27)]],
-               'sa_ss9': [79, 68, [(27, 27)]],
-               'sa_ss10': [80, 69, [(27, 27)]],
-               'sa_ss11': [81, 70, [(27, 27)]],
-               'sa_ss12': [82, 71, [(27, 27)]],
-               'sa_ss13': [83, 72, [(27, 27)]],
-               'sa_ss14': [84, 73, [(27, 27)]],
-               'sa_ss15': [85, 74, [(27, 27)]],
-               'sa_ss16': [86, 75, [(27, 27)]],
-               'sa_ss17': [87, 76, [(27, 27)]],
-               'sa_ss18': [88, 77, [(27, 27)]],
-               'sa_ss19': [89, 78, [(27, 27)]],
-               'sa_ss20': [90, 79, [(27, 27)]],
-               'sa_ss21': [91, 80, [(27, 27)]],
-               'sa_ss22': [92, 81, [(27, 27)]],
-               'sa_ss23': [93, 82, [(27, 27)]],
-               'sa_ss24': [94, 83, [(27, 27)]],
-               'sa_ss25': [95, 84, [(27, 27)]],
-               'sa_ss26': [106, 93, [(27, 27)]],
-               'sa_ss27': [110, 97, [(27, 27)]],
-               'sa_ss28': [111, 98, [(27, 27)]],
-               'sa_ss29': [120, 107, [(27, 27)]],
-               'sa_ss30': [121, 108, [(27, 27)]],
-               'sa_ss31': [118, 105, [(27, 27)]],
-               'sa_ss32': [127, 114, [(27, 27)]],
-               'sa_ss33': [128, 115, [(27, 27)]],
-               'sa_ss34': [129, 116, [(27, 27)]],
-               'sa_ss35': [130, 117, [(27, 27)]],
-               'sa_ss36': [131, 118, [(27, 27)]],
-               'sa_ss37': [132, 119, [(27, 27)]],
-               'sa_ss38': [133, 120, [(27, 27)]],
-               'sa_ss39': [134, 121, [(27, 27)]],
-               'sa_ss40': [135, 122, [(27, 27)]],
-               'sa_ss41': [136, 123, [(27, 27)]],
-               'sa_ss42': [137, 124, [(27, 27)]],
-               'sa_ss43': [138, 125, [(27, 27)]],
-               'sa_ss44': [139, 126, [(27, 27)]],
-               'sa_ss45': [140, 127, [(27, 27)]],
-               'sa_ss46': [141, 128, [(27, 27)]],
-               'sa_ss47': [142, 129, [(27, 27)]],
-               'sa_ss48': [143, 130, [(27, 27)]],
-               'sa_ss49': [144, 116, [(27, 27)]],
-               'sa_ss50': [145, 131, [(27, 27)]],
-               'sa_ss51': [146, 133, [(27, 27)]],
-               'sa_ss52': [147, 134, [(27, 27)]],
-               'sa_ss53': [148, 135, [(27, 27)]],
-               'sa_ss54': [149, 136, [(27, 27)]],
-               'sa_ss55': [150, 137, [(27, 27)]],
-               'sc_1': [97, 86, [(27, 27)]],
-               'sc_2': [98, 86, [(27, 27)]],
-               'sc_3': [99, 86, [(27, 27)]],
-               'sil_1': [100, 87, [(27, 27)]],
-               'sil_2': [101, 88, [(27, 27)]],
-               'sil_3': [102, 89, [(27, 27)]],
-               'sil_4': [103, 90, [(27, 27)]],
-               'sil_5': [104, 91, [(27, 27)]],
-               'sil_6': [105, 92, [(27, 27)]],
-               'sil_7': [107, 94, [(27, 27)]],
-               'sil_8': [108, 95, [(27, 27)]],
-               'emb_us1': [103, 90, [(27, 27)]],
-               'emb_us2': [100, 87, [(27, 27)]],
-               'emb_us3': [101, 88, [(27, 27)]],
-               'sb_1': [109, 96, [(27, 27)]],
-               'jb_1': [112, 99, [(27, 27)]],
-               'jb_2': [113, 100, [(27, 27)]],
-               'ugcms': [117, 104, [(27, 27)]],
-               'lb_1': [119, 106, [(27, 27)]]}
-BottomStyles = {'bbs1': [0, [0,
-                             1,
-                             2,
-                             4,
-                             6,
-                             9,
-                             10,
-                             11,
-                             12,
-                             13,
-                             14,
-                             15,
-                             16,
-                             17,
-                             18,
-                             19,
-                             20]],
-                'bbs2': [1, [0,
-                             1,
-                             2,
-                             4,
-                             6,
-                             9,
-                             10,
-                             11,
-                             12,
-                             13,
-                             14,
-                             15,
-                             16,
-                             17,
-                             18,
-                             19,
-                             20]],
-                'bbs3': [2, [0,
-                             1,
-                             2,
-                             4,
-                             6,
-                             9,
-                             10,
-                             11,
-                             12,
-                             13,
-                             14,
-                             15,
-                             16,
-                             17,
-                             18,
-                             19,
-                             20]],
-                'bbs4': [3, [0,
-                             1,
-                             2,
-                             4,
-                             6,
-                             8,
-                             9,
-                             11,
-                             12,
-                             13,
-                             15,
-                             16,
-                             17,
-                             18,
-                             19,
-                             20,
-                             27]],
-                'bbs5': [4, [0,
-                             1,
-                             2,
-                             4,
-                             6,
-                             9,
-                             10,
-                             11,
-                             12,
-                             13,
-                             14,
-                             15,
-                             16,
-                             17,
-                             18,
-                             19,
-                             20]],
-                'bbs6': [5, [0,
-                             1,
-                             2,
-                             4,
-                             6,
-                             9,
-                             10,
-                             11,
-                             12,
-                             14,
-                             15,
-                             16,
-                             17,
-                             18,
-                             19,
-                             20,
-                             27]],
-                'bbs7': [6, [0,
-                             1,
-                             2,
-                             4,
-                             6,
-                             9,
-                             10,
-                             11,
-                             12,
-                             13,
-                             14,
-                             15,
-                             16,
-                             17,
-                             18,
-                             20,
-                             27]],
-                'bbs8': [7, [0,
-                             1,
-                             2,
-                             4,
-                             6,
-                             9,
-                             10,
-                             11,
-                             12,
-                             13,
-                             14,
-                             15,
-                             16,
-                             17,
-                             18,
-                             19,
-                             20,
-                             27]],
-                'vd_bs1': [8, [27]],
-                'vd_bs2': [23, [27]],
-                'vd_bs3': [24, [27]],
-                'c_bs1': [9, [27]],
-                'c_bs2': [10, [27]],
-                'c_bs5': [15, [27]],
-                'sd_bs1': [11, [27]],
-                'sd_bs2': [44, [27]],
-                'pj_bs1': [16, [27]],
-                'pj_bs2': [17, [27]],
-                'pj_bs3': [18, [27]],
-                'wh_bs1': [19, [27]],
-                'wh_bs2': [20, [27]],
-                'wh_bs3': [21, [27]],
-                'wh_bs4': [22, [27]],
-                'hw_bs1': [47, [27]],
-                'hw_bs2': [48, [27]],
-                'hw_bs5': [49, [27]],
-                'hw_bs6': [50, [27]],
-                'hw_bs7': [51, [27]],
-                'gsk1': [0, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26,
-                             27]],
-                'gsk2': [1, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26]],
-                'gsk3': [2, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26]],
-                'gsk4': [3, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26]],
-                'gsk5': [4, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26]],
-                'gsk6': [7, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26,
-                             27]],
-                'gsk7': [8, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26,
-                             27]],
-                'gsh1': [5, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26,
-                             27]],
-                'gsh2': [6, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26,
-                             27]],
-                'gsh3': [9, [0,
-                             1,
-                             2,
-                             3,
-                             4,
-                             5,
-                             6,
-                             7,
-                             8,
-                             9,
-                             11,
-                             12,
-                             21,
-                             22,
-                             23,
-                             24,
-                             25,
-                             26,
-                             27]],
-                'c_gsk1': [10, [27]],
-                'c_gsk2': [11, [27]],
-                'c_gsk3': [12, [27]],
-                'vd_gs1': [13, [27]],
-                'vd_gs2': [27, [27]],
-                'vd_gs3': [28, [27]],
-                'c_gsk4': [14, [27]],
-                'sd_gs1': [15, [27]],
-                'sd_gs2': [48, [27]],
-                'c_gsk5': [16, [27]],
-                'c_gsk6': [17, [27]],
-                'c_bs3': [12, [27]],
-                'c_bs4': [13, [27]],
-                'j4_bs1': [14, [27]],
-                'j4_gs1': [18, [27]],
-                'c_gsk7': [19, [27]],
-                'pj_gs1': [20, [27]],
-                'pj_gs2': [21, [27]],
-                'pj_gs3': [22, [27]],
-                'wh_gsk1': [23, [27]],
-                'wh_gsk2': [24, [27]],
-                'wh_gsk3': [25, [27]],
-                'wh_gsk4': [26, [27]],
-                'sa_bs1': [25, [27]],
-                'sa_bs2': [26, [27]],
-                'sa_bs3': [27, [27]],
-                'sa_bs4': [28, [27]],
-                'sa_bs5': [29, [27]],
-                'sa_bs6': [30, [27]],
-                'sa_bs7': [31, [27]],
-                'sa_bs8': [32, [27]],
-                'sa_bs9': [33, [27]],
-                'sa_bs10': [34, [27]],
-                'sa_bs11': [35, [27]],
-                'sa_bs12': [36, [27]],
-                'sa_bs13': [41, [27]],
-                'sa_bs14': [46, [27]],
-                'sa_bs15': [45, [27]],
-                'sa_bs16': [52, [27]],
-                'sa_bs17': [53, [27]],
-                'sa_bs18': [54, [27]],
-                'sa_bs19': [55, [27]],
-                'sa_bs20': [56, [27]],
-                'sa_bs21': [57, [27]],
-                'sa_gs1': [29, [27]],
-                'sa_gs2': [30, [27]],
-                'sa_gs3': [31, [27]],
-                'sa_gs4': [32, [27]],
-                'sa_gs5': [33, [27]],
-                'sa_gs6': [34, [27]],
-                'sa_gs7': [35, [27]],
-                'sa_gs8': [36, [27]],
-                'sa_gs9': [37, [27]],
-                'sa_gs10': [38, [27]],
-                'sa_gs11': [39, [27]],
-                'sa_gs12': [40, [27]],
-                'sa_gs13': [45, [27]],
-                'sa_gs14': [50, [27]],
-                'sa_gs15': [49, [27]],
-                'sa_gs16': [57, [27]],
-                'sa_gs17': [58, [27]],
-                'sa_gs18': [59, [27]],
-                'sa_gs19': [60, [27]],
-                'sa_gs20': [61, [27]],
-                'sa_gs21': [62, [27]],
-                'sc_bs1': [37, [27]],
-                'sc_bs2': [38, [27]],
-                'sc_bs3': [39, [27]],
-                'sc_gs1': [41, [27]],
-                'sc_gs2': [42, [27]],
-                'sc_gs3': [43, [27]],
-                'sil_bs1': [40, [27]],
-                'sil_gs1': [44, [27]],
-                'hw_bs3': [42, [27]],
-                'hw_gs3': [46, [27]],
-                'hw_bs4': [43, [27]],
-                'hw_gs4': [47, [27]],
-                'hw_gs1': [51, [27]],
-                'hw_gs2': [52, [27]],
-                'hw_gs5': [54, [27]],
-                'hw_gs6': [55, [27]],
-                'hw_gs7': [56, [27]],
-                'hw_gsk1': [53, [27]]}
+ VBase4(0.863281, 0.40625, 0.417969, 1.0),
+ VBase4(0.710938, 0.234375, 0.4375, 1.0),
+ VBase4(0.992188, 0.480469, 0.167969, 1.0),
+ VBase4(0.996094, 0.898438, 0.320312, 1.0),
+ VBase4(0.550781, 0.824219, 0.324219, 1.0),
+ VBase4(0.242188, 0.742188, 0.515625, 1.0),
+ VBase4(0.433594, 0.90625, 0.835938, 1.0),
+ VBase4(0.347656, 0.820312, 0.953125, 1.0),
+ VBase4(0.191406, 0.5625, 0.773438, 1.0),
+ VBase4(0.285156, 0.328125, 0.726562, 1.0),
+ VBase4(0.460938, 0.378906, 0.824219, 1.0),
+ VBase4(0.546875, 0.28125, 0.75, 1.0),
+ VBase4(0.570312, 0.449219, 0.164062, 1.0),
+ VBase4(0.640625, 0.355469, 0.269531, 1.0),
+ VBase4(0.996094, 0.695312, 0.511719, 1.0),
+ VBase4(0.832031, 0.5, 0.296875, 1.0),
+ VBase4(0.992188, 0.480469, 0.167969, 1.0),
+ VBase4(0.550781, 0.824219, 0.324219, 1.0),
+ VBase4(0.433594, 0.90625, 0.835938, 1.0),
+ VBase4(0.347656, 0.820312, 0.953125, 1.0),
+ VBase4(0.96875, 0.691406, 0.699219, 1.0),
+ VBase4(0.996094, 0.957031, 0.597656, 1.0),
+ VBase4(0.855469, 0.933594, 0.492188, 1.0),
+ VBase4(0.558594, 0.589844, 0.875, 1.0),
+ VBase4(0.726562, 0.472656, 0.859375, 1.0),
+ VBase4(0.898438, 0.617188, 0.90625, 1.0),
+ VBase4(1.0, 1.0, 1.0, 1.0),
+ VBase4(0.0, 0.2, 0.956862, 1.0),
+ VBase4(0.972549, 0.094117, 0.094117, 1.0),
+ VBase4(0.447058, 0.0, 0.90196, 1.0)]
+
+ShirtStyles = {
+    # name : [ shirtIdx, sleeveIdx, [(ShirtColorIdx, sleeveColorIdx), ... ]]
+    # -------------------------------------------------------------------------
+    # Boy styles
+    # -------------------------------------------------------------------------
+    # solid
+    'bss1': [0, 0, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                    (27, 27)]],
+    # single stripe
+    'bss2': [1, 1, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)]],
+    # collar
+    'bss3': [2, 2, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)]],
+    # double stripe
+    'bss4': [3, 3, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)]],
+    # multiple stripes
+    'bss5': [4, 4, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (9, 9), (10, 10), (11, 11), (12, 12)]],
+    # collar w/ pocket
+    'bss6': [5, 5, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)]],
+    # hawaiian
+    'bss7': [8, 8, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (8, 8), (9, 9), (11, 11), (12, 12), (27, 27)]],
+    # collar w/ 2 pockets
+    'bss8': [9, 9, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)]],
+    # bowling shirt
+    'bss9': [10, 0, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                     (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                     (27, 27)]],
+    # vest (special)
+    'bss10': [11, 0, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                      (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                      (27, 27)]],
+    # collar w/ ruffles
+    'bss11': [14, 10, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                       (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)]],
+    # soccer jersey (special)
+    'bss12': [16, 0, [(27, 27), (27, 4), (27, 5), (27, 6), (27, 7),
+                      (27, 8), (27, 9)]],
+    # lightning bolt (special)
+    'bss13': [17, 0, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                      (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)]],
+    # jersey 19 (special)
+    'bss14': [18, 12, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                       (8, 8), (9, 9), (11, 11), (12, 12), (27, 27)]],
+    # guayavera
+    'bss15': [19, 13, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                       (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                       (27, 27)]],
+    # -------------------------------------------------------------------------
+    # Girl styles
+    # -------------------------------------------------------------------------
+    # solid
+    'gss1': [0, 0, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (11, 11), (12, 12), (21, 21),
+                    (22, 22), (23, 23), (24, 24), (25, 25), (26, 26),
+                    (27, 27)]],
+    # single stripe
+    'gss2': [1, 1, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (11, 11), (12, 12), (21, 21),
+                    (22, 22), (23, 23), (24, 24), (25, 25), (26, 26)]],
+    # collar
+    'gss3': [2, 2, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (11, 11), (12, 12), (21, 21),
+                    (22, 22), (23, 23), (24, 24), (25, 25), (26, 26)]],
+    # double stripes
+    'gss4': [3, 3, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (11, 11), (12, 12), (21, 21),
+                    (22, 22), (23, 23), (24, 24), (25, 25), (26, 26)]],
+    # collar w/ pocket
+    'gss5': [5, 5, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (11, 11), (12, 12), (21, 21),
+                    (22, 22), (23, 23), (24, 24), (25, 25), (26, 26)]],
+    # flower print
+    'gss6': [6, 6, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (11, 11), (12, 12), (21, 21),
+                    (22, 22), (23, 23), (24, 24), (25, 25), (26, 26)]],
+    # flower trim (special)
+    'gss7': [7, 7, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (11, 11), (12, 12), (21, 21),
+                    (22, 22), (23, 23), (24, 24), (25, 25), (26, 26)]],
+    # collar w/ 2 pockets
+    'gss8': [9, 9, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                    (7, 7), (8, 8), (9, 9), (11, 11), (12, 12), (21, 21),
+                    (22, 22), (23, 23), (24, 24), (25, 25), (26, 26)]],
+    # denim vest (special)
+    'gss9': [12, 0, [(27, 27)]],
+    # peasant
+    'gss10': [13, 11, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                       (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                       (21, 21), (22, 22), (23, 23), (24, 24), (25, 25),
+                       (26, 26)]],
+    # peasant w/ mid stripe
+    'gss11': [15, 11, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                       (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                       (21, 21), (22, 22), (23, 23), (24, 24), (25, 25),
+                       (26, 26)]],
+    # soccer jersey (special)
+    'gss12': [16, 0, [(27, 27), (27, 4), (27, 5), (27, 6), (27, 7),
+                      (27, 8), (27, 9)]],
+    # hearts
+    'gss13': [20, 0, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                      (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                      (21, 21), (22, 22), (23, 23), (24, 24), (25, 25),
+                      (26, 26)]],
+    # stars (special)
+    'gss14': [21, 0, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                      (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                      (21, 21), (22, 22), (23, 23), (24, 24), (25, 25),
+                      (26, 26)]],
+    # flower
+    'gss15': [22, 0, [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                      (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12),
+                      (21, 21), (22, 22), (23, 23), (24, 24), (25, 25),
+                      (26, 26)]],
+
+    # Special Catalog-only shirts.
+
+    # yellow hooded - Series 1
+    'c_ss1': [25, 16, [(27, 27), ]],
+
+    # yellow with palm tree - Series 1
+    'c_ss2': [27, 18, [(27, 27), ]],
+
+    # purple with stars - Series 2
+    'c_ss3': [38, 27, [(27, 27), ]],
+
+    # blue stripes (boys only) - Series 1
+    'c_bss1': [26, 17, [(27, 27), ]],
+
+    # orange (boys only) - Series 1
+    'c_bss2': [28, 19, [(27, 27), ]],
+
+    # lime green with stripe (boys only) - Series 2
+    'c_bss3': [37, 26, [(27, 27), ]],
+
+    # red kimono with checkerboard (boys only) - Series 2
+    'c_bss4': [39, 28, [(27, 27), ]],
+
+    # blue with yellow stripes (girls only) - Series 1
+    'c_gss1': [23, 14, [(27, 27), ]],
+
+    # pink and beige with flower (girls only) - Series 1
+    'c_gss2': [24, 15, [(27, 27), ]],
+
+    # Blue and gold with wavy stripes (girls only) - Series 2
+    'c_gss3': [35, 24, [(27, 27), ]],
+
+    # Blue and pink with bow (girls only) - Series 2
+    'c_gss4': [36, 25, [(27, 27), ]],
+
+    # Aqua kimono white stripe (girls only) - UNUSED
+    'c_gss5': [40, 29, [(27, 27), ]],
+
+    # Tie dye shirt (boys and girls) - Series 3
+    'c_ss4': [45, 34, [(27, 27), ]],
+
+    # light blue with blue and white stripe (boys only) - Series 3
+    'c_ss5': [46, 35, [(27, 27), ]],
+
+    # cowboy shirt 1-6 : Series 4
+    'c_ss6': [52, 41, [(27, 27), ]],
+    'c_ss7': [53, 42, [(27, 27), ]],
+    'c_ss8': [54, 43, [(27, 27), ]],
+    'c_ss9': [55, 44, [(27, 27), ]],
+    'c_ss10': [56, 45, [(27, 27), ]],
+    'c_ss11': [57, 46, [(27, 27), ]],
+
+    # Special Holiday-themed shirts.
+
+    # Halloween ghost
+    'hw_ss1': [29, 20, [(27, 27), ]],
+    # Halloween pumpkin
+    'hw_ss2': [30, 21, [(27, 27), ]],
+
+    'hw_ss3': [114, 101, [(27, 27)]],
+    'hw_ss4': [115, 102, [(27, 27)]],
+    'hw_ss5': [122, 109, [(27, 27)]],
+    'hw_ss6': [123, 110, [(27, 27)]],
+    'hw_ss7': [124, 111, [(27, 27)]],
+    'hw_ss8': [125, 112, [(27, 27)]],
+    'hw_ss9': [126, 113, [(27, 27)]],
+    # Winter Holiday
+    'wh_ss1': [31, 22, [(27, 27), ]],
+    # Winter Holiday
+    'wh_ss2': [32, 22, [(27, 27), ]],
+    # Winter Holiday
+    'wh_ss3': [33, 23, [(27, 27), ]],
+    # Winter Holiday
+    'wh_ss4': [34, 23, [(27, 27), ]],
+
+    # Valentines day, pink with red hearts (girls)
+    'vd_ss1': [41, 30, [(27, 27), ]],
+    # Valentines day, red with white hearts
+    'vd_ss2': [42, 31, [(27, 27), ]],
+    # Valentines day, white with winged hearts (boys)
+    'vd_ss3': [43, 32, [(27, 27), ]],
+    # Valentines day, pink with red flamed heart
+    'vd_ss4': [44, 33, [(27, 27), ]],
+    # 2009 Valentines day, white with red cupid
+    'vd_ss5': [69, 58, [(27, 27), ]],
+    # 2009 Valentines day, blue with green and red hearts
+    'vd_ss6': [70, 59, [(27, 27), ]],
+    # 2010 Valentines day, red with white wings
+    'vd_ss7': [96, 85, [(27, 27), ]],
+    # St Pat's Day, four leaf clover shirt
+    'sd_ss1': [47, 36, [(27, 27), ]],
+    # St Pat's Day, pot o gold shirt
+    'sd_ss2': [48, 37, [(27, 27), ]],
+    'sd_ss3': [116, 103, [(27, 27)]],
+
+    # T-Shirt Contest, Fishing Vest
+    'tc_ss1': [49, 38, [(27, 27), ]],
+    # T-Shirt Contest, Fish Bowl
+    'tc_ss2': [50, 39, [(27, 27), ]],
+    # T-Shirt Contest, Paw Print
+    'tc_ss3': [51, 40, [(27, 27), ]],
+    # T-Shirt Contest, Backpack
+    'tc_ss4': [62, 51, [(27, 27), ]],
+    # T-Shirt Contest, Lederhosen
+    'tc_ss5': [63, 52, [(27, 27), ]],
+    # T-Shirt Contest, Watermelon
+    'tc_ss6': [64, 53, [(27, 27), ]],
+    # T-Shirt Contest, Race Shirt
+    'tc_ss7': [65, 54, [(27, 27), ]],
+
+    # July 4th, Flag
+    'j4_ss1': [58, 47, [(27, 27), ]],
+    # July 4th, Fireworks
+    'j4_ss2': [59, 48, [(27, 27), ]],
+
+    # Catalog series 7, Green w/ yellow buttons
+    'c_ss12': [60, 49, [(27, 27), ]],
+
+    # Catalog series 7, Purple w/ big flower
+    'c_ss13': [61, 50, [(27, 27), ]],
+
+    # Pajama series
+    'pj_ss1': [66, 55, [(27, 27), ]],  # Blue Banana Pajama shirt
+    'pj_ss2': [67, 56, [(27, 27), ]],  # Red Horn Pajama shirt
+    'pj_ss3': [68, 57, [(27, 27), ]],  # Purple Glasses Pajama shirt
+
+    # Special Award Clothes
+    'sa_ss1': [71, 60, [(27, 27), ]],
+    'sa_ss2': [72, 61, [(27, 27), ]],
+    'sa_ss3': [73, 62, [(27, 27), ]],
+    'sa_ss4': [74, 63, [(27, 27), ]],
+    'sa_ss5': [75, 64, [(27, 27), ]],
+    'sa_ss6': [76, 65, [(27, 27), ]],
+    'sa_ss7': [77, 66, [(27, 27), ]],
+    'sa_ss8': [78, 67, [(27, 27), ]],
+    'sa_ss9': [79, 68, [(27, 27), ]],
+    'sa_ss10': [80, 69, [(27, 27), ]],
+    'sa_ss11': [81, 70, [(27, 27), ]],
+    'sa_ss12': [82, 71, [(27, 27), ]],
+    'sa_ss13': [83, 72, [(27, 27), ]],
+    'sa_ss14': [84, 73, [(27, 27), ]],
+    'sa_ss15': [85, 74, [(27, 27), ]],
+    'sa_ss16': [86, 75, [(27, 27), ]],
+    'sa_ss17': [87, 76, [(27, 27), ]],
+    'sa_ss18': [88, 77, [(27, 27), ]],
+    'sa_ss19': [89, 78, [(27, 27), ]],
+    'sa_ss20': [90, 79, [(27, 27), ]],
+    'sa_ss21': [91, 80, [(27, 27), ]],
+    'sa_ss22': [92, 81, [(27, 27), ]],
+    'sa_ss23': [93, 82, [(27, 27), ]],
+    'sa_ss24': [94, 83, [(27, 27), ]],
+    'sa_ss25': [95, 84, [(27, 27), ]],
+    'sa_ss26': [106, 93, [(27, 27), ]],  # Most Cogs Defeated Shirt
+    'sa_ss27': [110, 97, [(27, 27)]],
+    'sa_ss28': [111, 98, [(27, 27)]],
+    'sa_ss29': [120, 107, [(27, 27)]],
+    'sa_ss30': [121, 108, [(27, 27)]],
+    'sa_ss31': [118, 105, [(27, 27)]],
+    'sa_ss32': [127, 114, [(27, 27)]],
+    'sa_ss33': [128, 115, [(27, 27)]],
+    'sa_ss34': [129, 116, [(27, 27)]],
+    'sa_ss35': [130, 117, [(27, 27)]],
+    'sa_ss36': [131, 118, [(27, 27)]],
+    'sa_ss37': [132, 119, [(27, 27)]],
+    'sa_ss38': [133, 120, [(27, 27)]],
+    'sa_ss39': [134, 121, [(27, 27)]],
+    'sa_ss40': [135, 122, [(27, 27)]],
+    'sa_ss41': [136, 123, [(27, 27)]],
+    'sa_ss42': [137, 124, [(27, 27)]],
+    'sa_ss43': [138, 125, [(27, 27)]],
+    'sa_ss44': [139, 126, [(27, 27)]],
+    'sa_ss45': [140, 127, [(27, 27)]],
+    'sa_ss46': [141, 128, [(27, 27)]],
+    'sa_ss47': [142, 129, [(27, 27)]],
+    'sa_ss48': [143, 130, [(27, 27)]],
+    'sa_ss49': [144, 116, [(27, 27)]],
+    'sa_ss50': [145, 131, [(27, 27)]],
+    'sa_ss51': [146, 133, [(27, 27)]],
+    'sa_ss52': [147, 134, [(27, 27)]],
+    'sa_ss53': [148, 135, [(27, 27)]],
+    'sa_ss54': [149, 136, [(27, 27)]],
+    'sa_ss55': [150, 137, [(27, 27)]],
+    # Scientists
+    'sc_1': [97, 86, [(27, 27), ]],
+    'sc_2': [98, 86, [(27, 27), ]],
+    'sc_3': [99, 86, [(27, 27), ]],
+
+    # Silly Story Shirts
+    'sil_1': [100, 87, [(27, 27), ]],  # Silly Mailbox Shirt
+    'sil_2': [101, 88, [(27, 27), ]],  # Silly Trashcan Shirt
+    'sil_3': [102, 89, [(27, 27), ]],  # Loony Labs Shirt
+    'sil_4': [103, 90, [(27, 27), ]],  # Silly Hydrant Shirt
+    'sil_5': [104, 91, [(27, 27), ]],  # Sillymeter Whistle Shirt
+    'sil_6': [105, 92, [(27, 27), ]],  # Silly Cogbuster Shirt
+    'sil_7': [107, 94, [(27, 27), ]],  # Victory Party Shirt 1
+    'sil_8': [108, 95, [(27, 27), ]],  # Victory Party Shirt 2
+    # name : [ shirtIdx, sleeveIdx, [(ShirtColorIdx, sleeveColorIdx), ... ]]
+
+    'emb_us1': [103, 90, [(27, 27)]],
+    'emb_us2': [100, 87, [(27, 27)]],
+    'emb_us3': [101, 88, [(27, 27)]],
+    'sb_1': [109, 96, [(27, 27)]],
+    'jb_1': [112, 99, [(27, 27)]],
+    'jb_2': [113, 100, [(27, 27)]],
+    'ugcms': [117, 104, [(27, 27)]],
+    'lb_1': [119, 106, [(27, 27)]]
+}
+BottomStyles = {
+    # name : [ bottomIdx, [bottomColorIdx, ...]]
+    # -------------------------------------------------------------------------
+    # Boy styles (shorts)
+    # -------------------------------------------------------------------------
+    # plain w/ pockets
+    'bbs1': [5, [0, 1, 2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                 20]],
+    # belt
+    'bbs2': [79, [0, 1, 2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                  20]],
+    # cargo
+    'bbs3': [80, [0, 1, 2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                  20]],
+    # hawaiian
+    'bbs4': [81, [0, 1, 2, 4, 6, 8, 9, 11, 12, 13, 15, 16, 17, 18, 19, 20,
+                  27]],
+    # side stripes (special)
+    'bbs5': [82, [0, 1, 2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                  20]],
+    # soccer shorts
+    'bbs6': [83, [0, 1, 2, 4, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20,
+                  27]],
+    # side flames (special)
+    'bbs7': [84, [0, 1, 2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                  20, 27]],
+    # denim
+    'bbs8': [9, [0, 1, 2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                 20, 27]],
+    # Valentines shorts
+    'vd_bs1': [85, [27, ]],
+    # Green with red heart
+    'vd_bs2': [86, [27, ]],
+    # Blue denim with green and red heart
+    'vd_bs3': [87, [27, ]],
+
+    # Catalog only shorts
+    # Orange with blue side stripes
+    'c_bs1': [88, [27, ]],
+
+    # Blue with gold cuff stripes
+    'c_bs2': [89, [27, ]],
+
+    # Green stripes - series 7
+    'c_bs5': [90, [27, ]],
+
+    # St. Pats leprechaun shorts
+    'sd_bs1': [15, [27, ]],
+    'sd_bs2': [49, [27]],
+
+    # Pajama shorts
+    'pj_bs1': [20, [27, ]],  # Blue Banana Pajama pants
+    'pj_bs2': [21, [27, ]],  # Red Horn Pajama pants
+    'pj_bs3': [22, [27, ]],  # Purple Glasses Pajama pants
+
+    # Winter Holiday Shorts
+    'wh_bs1': [91, [27, ]],  # Winter Holiday Shorts Style 1
+    'wh_bs2': [92, [27, ]],  # Winter Holiday Shorts Style 2
+    'wh_bs3': [93, [27, ]],  # Winter Holiday Shorts Style 3
+    'wh_bs4': [94, [27, ]],  # Winter Holiday Shorts Style 4
+
+    # Halloween Holiday Shorts
+    'hw_bs1': [54, [27]],
+    'hw_bs2': [55, [27]],
+    'hw_bs5': [56, [27]],
+    'hw_bs6': [57, [27]],
+    'hw_bs7': [58, [27]],
+
+    # -------------------------------------------------------------------------
+    # Girl styles (shorts and skirts)
+    # -------------------------------------------------------------------------
+    # skirts
+    # -------------------------------------------------------------------------
+    # solid
+    'gsk1': [0, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26, 27]],
+    # polka dots (special)
+    'gsk2': [1, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26]],
+    # vertical stripes
+    'gsk3': [2, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26]],
+    # horizontal stripe
+    'gsk4': [3, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26]],
+    # flower print
+    'gsk5': [4, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26]],
+    # 2 pockets (special)
+    'gsk6': [7, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26, 27]],
+    # denim
+    'gsk7': [8, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26, 27]],
+
+    # shorts
+    # -------------------------------------------------------------------------
+    # plain w/ pockets
+    'gsh1': [5, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26, 27]],
+    # flower
+    'gsh2': [6, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26, 27]],
+    # denim
+    'gsh3': [9, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 21, 22, 23, 24, 25,
+                 26, 27]],
+
+    # Special catalog-only skirts and shorts.
+
+    # blue skirt with tan border and button
+    'c_gsk1': [10, [27, ]],
+
+    # purple skirt with pink and ribbon
+    'c_gsk2': [11, [27, ]],
+
+    # teal skirt with yellow and star
+    'c_gsk3': [12, [27, ]],
+
+    # Valentines skirt (note, do not name with gsk, otherwise NPC might randomly get this skirt)
+    # red skirt with hearts
+    'vd_gs1': [13, [27, ]],
+    # Pink flair skirt with polka hearts
+    'vd_gs2': [27, [27, ]],
+    # Blue denim skirt with green and red heart
+    'vd_gs3': [28, [27, ]],
+
+    # rainbow skirt - Series 3
+    'c_gsk4': [14, [27, ]],
+
+    # St. Pats day shorts
+    'sd_gs1': [15, [27, ]],
+    'sd_gs2': [48, [27]],
+
+    # Western skirts
+    'c_gsk5': [16, [27, ]],
+    'c_gsk6': [17, [27, ]],
+
+    # Western shorts
+    'c_bs3': [12, [27, ]],
+    'c_bs4': [13, [27, ]],
+
+    # July 4th shorts
+    'j4_bs1': [14, [27, ]],
+
+    # July 4th Skirt
+    'j4_gs1': [18, [27, ]],
+
+    # Blue with flower - series 7
+    'c_gsk7': [19, [27, ]],
+
+    # pajama shorts
+    'pj_gs1': [20, [27, ]],  # Blue Banana Pajama pants
+    'pj_gs2': [21, [27, ]],  # Red Horn Pajama pants
+    'pj_gs3': [22, [27, ]],  # Purple Glasses Pajama pants
+
+    # Winter Holiday Skirts
+    'wh_gsk1': [23, [27, ]],  # Winter Holiday Skirt Style 1
+    'wh_gsk2': [24, [27, ]],  # Winter Holiday Skirt Style 2
+    'wh_gsk3': [25, [27, ]],  # Winter Holiday Skirt Style 3
+    'wh_gsk4': [26, [27, ]],  # Winter Holiday Skirt Style 4
+
+    # Special award clothes
+    'sa_bs1': [25, [27, ]],
+    'sa_bs2': [26, [27, ]],
+    'sa_bs3': [27, [27, ]],
+    'sa_bs4': [28, [27, ]],
+    'sa_bs5': [29, [27, ]],
+    'sa_bs6': [30, [27, ]],
+    'sa_bs7': [31, [27, ]],
+    'sa_bs8': [32, [27, ]],
+    'sa_bs9': [33, [27, ]],
+    'sa_bs10': [34, [27, ]],
+    'sa_bs11': [35, [27, ]],
+    'sa_bs12': [36, [27, ]],
+    'sa_bs13': [41, [27]],
+    'sa_bs14': [46, [27]],
+    'sa_bs15': [45, [27]],
+    'sa_bs16': [52, [27]],
+    'sa_bs17': [53, [27]],
+    'sa_bs18': [54, [27]],
+    'sa_bs19': [55, [27]],
+    'sa_bs20': [56, [27]],
+    'sa_bs21': [57, [27]],
+    # Special award clothes
+    'sa_gs1': [29, [27, ]],
+    'sa_gs2': [30, [27, ]],
+    'sa_gs3': [31, [27, ]],
+    'sa_gs4': [32, [27, ]],
+    'sa_gs5': [33, [27, ]],
+    'sa_gs6': [34, [27, ]],
+    'sa_gs7': [35, [27, ]],
+    'sa_gs8': [36, [27, ]],
+    'sa_gs9': [37, [27, ]],
+    'sa_gs10': [38, [27, ]],
+    'sa_gs11': [39, [27, ]],
+    'sa_gs12': [40, [27, ]],
+    'sa_gs13': [45, [27]],
+    'sa_gs14': [50, [27]],
+    'sa_gs15': [49, [27]],
+    'sa_gs16': [57, [27]],
+    'sa_gs17': [58, [27]],
+    'sa_gs18': [59, [27]],
+    'sa_gs19': [60, [27]],
+    'sa_gs20': [61, [27]],
+    'sa_gs21': [62, [27]],
+    # Scientists
+    'sc_bs1': [37, [27, ]],
+    'sc_bs2': [38, [27, ]],
+    'sc_bs3': [39, [27, ]],
+
+    'sc_gs1': [41, [27, ]],
+    'sc_gs2': [42, [27, ]],
+    'sc_gs3': [43, [27, ]],
+
+    'sil_bs1': [40, [27, ]],  # Silly Cogbuster Shorts
+    'sil_gs1': [44, [27, ]],  # Silly Cogbuster Shorts
+    'hw_bs3': [42, [27]],
+    'hw_gs3': [46, [27]],
+    'hw_bs4': [43, [27]],
+    'hw_gs4': [47, [27]],
+    'hw_gs1': [51, [27]],
+    'hw_gs2': [52, [27]],
+    'hw_gs5': [54, [27]],
+    'hw_gs6': [55, [27]],
+    'hw_gs7': [56, [27]],
+    'hw_gsk1': [53, [27]]
+}
 MAKE_A_TOON = 1
 TAMMY_TAILOR = 2004
 LONGJOHN_LEROY = 1007
@@ -1668,82 +1274,49 @@ TAILOR_HARMONY = 4008
 BONNIE_BLOSSOM = 5007
 WARREN_BUNDLES = 3008
 WORNOUT_WAYLON = 9010
-TailorCollections = {MAKE_A_TOON: [['bss1', 'bss2'],
-                                   ['gss1', 'gss2'],
-                                   ['bbs1', 'bbs2'],
-                                   ['gsk1', 'gsh1']],
-                     TAMMY_TAILOR: [['bss1', 'bss2'],
-                                    ['gss1', 'gss2'],
-                                    ['bbs1', 'bbs2'],
-                                    ['gsk1', 'gsh1']],
-                     LONGJOHN_LEROY: [['bss3', 'bss4', 'bss14'],
-                     ['gss3', 'gss4', 'gss14'],
-                     ['bbs3', 'bbs4'],
-                     ['gsk2', 'gsh2']],
-                     TAILOR_HARMONY: [['bss5', 'bss6', 'bss10'],
-                     ['gss5', 'gss6', 'gss9'],
-                     ['bbs5'],
-                     ['gsk3', 'gsh3']],
-                     BONNIE_BLOSSOM: [['bss7', 'bss8', 'bss12'],
-                     ['gss8', 'gss10', 'gss12'],
-                     ['bbs6'],
-                     ['gsk4', 'gsk5']],
-                     WARREN_BUNDLES: [['bss9', 'bss13'],
-                     ['gss7', 'gss11'],
-                     ['bbs7'],
-                     ['gsk6']],
-                     WORNOUT_WAYLON: [['bss11', 'bss15'],
-                     ['gss13', 'gss15'],
-                     ['bbs8'],
-                     ['gsk7']]}
-BOY_SHIRTS = 0
-GIRL_SHIRTS = 1
-BOY_SHORTS = 2
-GIRL_BOTTOMS = 3
+TailorCollections = {
+    # TailorId: [ [ Shirts ], [ Bottoms ] ]
+    MAKE_A_TOON : [ ['bss1', 'bss2', 'gss1', 'gss2'],
+                    ['bbs1', 'bbs2', 'gsk1', 'gsh1'] ],
+    TAMMY_TAILOR : [ ['bss1', 'bss2', 'gss1', 'gss2'],
+                        ['bbs1', 'bbs2', 'gsk1', 'gsh1'] ],
+    LONGJOHN_LEROY : [ ['bss3', 'bss4', 'bss14', 'gss3', 'gss4', 'gss14'],
+                        ['bbs3', 'bbs4', 'gsk2', 'gsh2'] ],
+    TAILOR_HARMONY : [ ['bss5', 'bss6', 'bss10', 'gss5', 'gss6', 'gss9'],
+                        ['bbs5', 'gsk3', 'gsh3'] ],
+    BONNIE_BLOSSOM : [ ['bss7', 'bss8', 'bss12', 'gss8', 'gss10', 'gss12'],
+                        ['bbs6', 'gsk4', 'gsk5'] ],
+    WARREN_BUNDLES : [ ['bss9','bss13', 'gss7', 'gss11'],
+                        ['bbs7', 'gsk6'] ],
+    WORNOUT_WAYLON : [ ['bss11', 'bss15', 'gss13', 'gss15'],
+                        ['bbs8', 'gsk7'] ],
+
+        
+}
+SHIRTS = 0
+BOTTOMS = 1
 HAT = 1
 GLASSES = 2
 BACKPACK = 4
 SHOES = 8
-MakeAToonBoyBottoms = []
-MakeAToonBoyShirts = []
-MakeAToonGirlBottoms = []
-MakeAToonGirlShirts = []
-MakeAToonGirlSkirts = []
-MakeAToonGirlShorts = []
-for style in TailorCollections[MAKE_A_TOON][BOY_SHORTS]:
-    index = BottomStyles[style][0]
-    MakeAToonBoyBottoms.append(index)
 
-for style in TailorCollections[MAKE_A_TOON][BOY_SHIRTS]:
+
+MakeAToonShirts = []
+MakeAToonBottoms = []
+for style in TailorCollections[MAKE_A_TOON][SHIRTS]:
     index = ShirtStyles[style][0]
-    MakeAToonBoyShirts.append(index)
-
-for style in TailorCollections[MAKE_A_TOON][GIRL_BOTTOMS]:
+    MakeAToonShirts.append(index)
+for style in TailorCollections[MAKE_A_TOON][BOTTOMS]:
     index = BottomStyles[style][0]
-    MakeAToonGirlBottoms.append(index)
-
-for style in TailorCollections[MAKE_A_TOON][GIRL_SHIRTS]:
-    index = ShirtStyles[style][0]
-    MakeAToonGirlShirts.append(index)
-
-for index in MakeAToonGirlBottoms:
-    flag = GirlBottoms[index][1]
-    if flag == SKIRT:
-        MakeAToonGirlSkirts.append(index)
-    elif flag == SHORTS:
-        MakeAToonGirlShorts.append(index)
-    else:
-        notify.error('Invalid flag')
+    MakeAToonBottoms.append(index)
 
 
-def getRandomTop(gender, tailorId=MAKE_A_TOON, generator=None):
-    if generator is None:
+
+def getRandomTop(tailorId = MAKE_A_TOON, generator = None):
+    if generator == None:
         generator = random
     collection = TailorCollections[tailorId]
-    if gender == 'm':
-        style = generator.choice(collection[BOY_SHIRTS])
-    else:
-        style = generator.choice(collection[GIRL_SHIRTS])
+    style = generator.choice(collection[SHIRTS])
     styleList = ShirtStyles[style]
     colors = generator.choice(styleList[2])
     return (styleList[0],
@@ -1752,22 +1325,17 @@ def getRandomTop(gender, tailorId=MAKE_A_TOON, generator=None):
             colors[1])
 
 
-def getRandomBottom(gender, tailorId=MAKE_A_TOON,
-                    generator=None, girlBottomType=None):
-    if generator is None:
+def getRandomBottom(tailorId = MAKE_A_TOON, generator = None, girlBottomType = None):
+    if generator == None:
         generator = random
     collection = TailorCollections[tailorId]
-    if gender == 'm':
-        style = generator.choice(collection[BOY_SHORTS])
-    elif girlBottomType is None:
-        style = generator.choice(collection[GIRL_BOTTOMS])
+    if girlBottomType is None:
+        style = generator.choice(collection[BOTTOMS])
     elif girlBottomType == SKIRT:
-        skirtCollection = [style for style in collection[GIRL_BOTTOMS]
-                           if GirlBottoms[BottomStyles[style][0]][1] == SKIRT]
+        skirtCollection = [style for style in collection[BOTTOMS] if Bottoms[BottomStyles[style][0]][1] == SKIRT]
         style = generator.choice(skirtCollection)
     elif girlBottomType == SHORTS:
-        shortsCollection = [style for style in collection[GIRL_BOTTOMS]
-                            if GirlBottoms[BottomStyles[style][0]][1] == SHORTS]
+        shortsCollection = [style for style in collection[BOTTOMS] if Bottoms[BottomStyles[style][0]][1] == SHORTS]
         style = generator.choice(shortsCollection)
     else:
         notify.error('Bad girlBottomType: %s' % girlBottomType)
@@ -1801,14 +1369,11 @@ def getRandomGirlBottomAndColor(type):
     return (style[0], random.choice(style[1]))
 
 
-def getRandomizedTops(gender, tailorId=MAKE_A_TOON, generator=None):
-    if generator is None:
+def getRandomizedTops(tailorId = MAKE_A_TOON, generator = None):
+    if generator == None:
         generator = random
     collection = TailorCollections[tailorId]
-    if gender == 'm':
-        collection = collection[BOY_SHIRTS][:]
-    else:
-        collection = collection[GIRL_SHIRTS][:]
+    collection = collection[SHIRTS][:]
     tops = []
     random.shuffle(collection)
     for style in collection:
@@ -1823,14 +1388,12 @@ def getRandomizedTops(gender, tailorId=MAKE_A_TOON, generator=None):
     return tops
 
 
-def getRandomizedBottoms(gender, tailorId=MAKE_A_TOON, generator=None):
-    if generator is None:
+def getRandomizedBottoms(tailorId = MAKE_A_TOON, generator = None):
+    if generator == None:
         generator = random
     collection = TailorCollections[tailorId]
-    if gender == 'm':
-        collection = collection[BOY_SHORTS][:]
-    else:
-        collection = collection[GIRL_BOTTOMS][:]
+
+    collection = collection[BOTTOMS][:]
     bottoms = []
     random.shuffle(collection)
     for style in collection:
@@ -1842,11 +1405,8 @@ def getRandomizedBottoms(gender, tailorId=MAKE_A_TOON, generator=None):
     return bottoms
 
 
-def getTops(gender, tailorId=MAKE_A_TOON):
-    if gender == 'm':
-        collection = TailorCollections[tailorId][BOY_SHIRTS]
-    else:
-        collection = TailorCollections[tailorId][GIRL_SHIRTS]
+def getTops(tailorId = MAKE_A_TOON):
+    collection = TailorCollections[tailorId][SHIRTS]
     tops = []
     for style in collection:
         for color in ShirtStyles[style][2]:
@@ -1858,11 +1418,10 @@ def getTops(gender, tailorId=MAKE_A_TOON):
     return tops
 
 
-def getAllTops(gender):
+def getAllTops():
     tops = []
     for style in list(ShirtStyles.keys()):
-        if gender == 'm':
-            if style[0] == 'g' or style[:3] == 'c_g':
+        if style[0] == 'g' or style[:3] == 'c_g':
                 continue
         elif style[0] == 'b' or style[:3] == 'c_b':
             continue
@@ -1875,11 +1434,8 @@ def getAllTops(gender):
     return tops
 
 
-def getBottoms(gender, tailorId=MAKE_A_TOON):
-    if gender == 'm':
-        collection = TailorCollections[tailorId][BOY_SHORTS]
-    else:
-        collection = TailorCollections[tailorId][GIRL_BOTTOMS]
+def getBottoms(tailorId = MAKE_A_TOON):
+    collection = TailorCollections[tailorId][BOTTOMS]
     bottoms = []
     for style in collection:
         for color in BottomStyles[style][1]:
@@ -1888,20 +1444,16 @@ def getBottoms(gender, tailorId=MAKE_A_TOON):
     return bottoms
 
 
-def getAllBottoms(gender, output='both'):
+def getAllBottoms(output = 'both'):
     bottoms = []
     for style in list(BottomStyles.keys()):
-        if gender == 'm':
-            if style[0] == 'g' or style[:3] == 'c_g' or style[:4] == 'vd_g' or style[:4] == 'sd_g' or style[:4] == 'j4_g' or style[:
-                                                                                                                                   4] == 'pj_g' or style[:4] == 'wh_g' or style[:4] == 'sa_g' or style[:4] == 'sc_g' or style[:5] == 'sil_g' or style[:4] == 'hw_g':
+       
+        if style[0] == 'g' or style[:3] == 'c_g' or style[:4] == 'vd_g' or style[:4] == 'sd_g' or style[:4] == 'j4_g' or style[:4] == 'pj_g' or style[:4] == 'wh_g' or style[:4] == 'sa_g' or style[:4] == 'sc_g' or style[:5] == 'sil_g' or style[:4] == 'hw_g':
                 continue
         elif style[0] == 'b' or style[:3] == 'c_b' or style[:4] == 'vd_b' or style[:4] == 'sd_b' or style[:4] == 'j4_b' or style[:4] == 'pj_b' or style[:4] == 'wh_b' or style[:4] == 'sa_b' or style[:4] == 'sc_b' or style[:5] == 'sil_b' or style[:4] == 'hw_b':
             continue
         bottomIdx = BottomStyles[style][0]
-        if gender == 'f':
-            textureType = GirlBottoms[bottomIdx][1]
-        else:
-            textureType = SHORTS
+        textureType = Bottoms[bottomIdx][1]
         if output == 'both' or output == 'skirts' and textureType == SKIRT or output == 'shorts' and textureType == SHORTS:
             for color in BottomStyles[style][1]:
                 bottoms.append((bottomIdx, color))
@@ -1910,89 +1462,59 @@ def getAllBottoms(gender, output='both'):
 
 
 allColorsList = [VBase4(1.0, 1.0, 1.0, 1.0),
-                 VBase4(0.96875, 0.691406, 0.699219, 1.0),
-                 VBase4(0.933594, 0.265625, 0.28125, 1.0),
-                 VBase4(0.863281, 0.40625, 0.417969, 1.0),
-                 VBase4(0.710938, 0.234375, 0.4375, 1.0),
-                 VBase4(0.570312, 0.449219, 0.164062, 1.0),
-                 VBase4(0.640625, 0.355469, 0.269531, 1.0),
-                 VBase4(0.996094, 0.695312, 0.511719, 1.0),
-                 VBase4(0.832031, 0.5, 0.296875, 1.0),
-                 VBase4(0.992188, 0.480469, 0.167969, 1.0),
-                 VBase4(0.996094, 0.898438, 0.320312, 1.0),
-                 VBase4(0.996094, 0.957031, 0.597656, 1.0),
-                 VBase4(0.855469, 0.933594, 0.492188, 1.0),
-                 VBase4(0.550781, 0.824219, 0.324219, 1.0),
-                 VBase4(0.242188, 0.742188, 0.515625, 1.0),
-                 VBase4(0.304688, 0.96875, 0.402344, 1.0),
-                 VBase4(0.433594, 0.90625, 0.835938, 1.0),
-                 VBase4(0.347656, 0.820312, 0.953125, 1.0),
-                 VBase4(0.191406, 0.5625, 0.773438, 1.0),
-                 VBase4(0.558594, 0.589844, 0.875, 1.0),
-                 VBase4(0.285156, 0.328125, 0.726562, 1.0),
-                 VBase4(0.460938, 0.378906, 0.824219, 1.0),
-                 VBase4(0.546875, 0.28125, 0.75, 1.0),
-                 VBase4(0.726562, 0.472656, 0.859375, 1.0),
-                 VBase4(0.898438, 0.617188, 0.90625, 1.0),
-                 VBase4(0.7, 0.7, 0.8, 1.0),
-                 VBase4(0.3, 0.3, 0.35, 1.0)]
-defaultBoyColorList = [1,
-                       2,
-                       3,
-                       4,
-                       5,
-                       6,
-                       7,
-                       8,
-                       9,
-                       10,
-                       11,
-                       12,
-                       13,
-                       14,
-                       15,
-                       16,
-                       17,
-                       18,
-                       19,
-                       20,
-                       21,
-                       22,
-                       23,
-                       24]
-defaultGirlColorList = [1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9,
-                        10,
-                        11,
-                        12,
-                        13,
-                        14,
-                        15,
-                        16,
-                        17,
-                        18,
-                        19,
-                        20,
-                        21,
-                        22,
-                        23,
-                        24]
-allColorsListApproximations = [
-    VBase4(
-        round(
-            x[0], 3), round(
-                x[1], 3), round(
-                    x[2], 3), round(
-                        x[3], 3)) for x in allColorsList]
-allowedColors = set([allColorsListApproximations[x] for x in set(
-    defaultBoyColorList + defaultGirlColorList + [26])])
+ VBase4(0.96875, 0.691406, 0.699219, 1.0),
+ VBase4(0.933594, 0.265625, 0.28125, 1.0),
+ VBase4(0.863281, 0.40625, 0.417969, 1.0),
+ VBase4(0.710938, 0.234375, 0.4375, 1.0),
+ VBase4(0.570312, 0.449219, 0.164062, 1.0),
+ VBase4(0.640625, 0.355469, 0.269531, 1.0),
+ VBase4(0.996094, 0.695312, 0.511719, 1.0),
+ VBase4(0.832031, 0.5, 0.296875, 1.0),
+ VBase4(0.992188, 0.480469, 0.167969, 1.0),
+ VBase4(0.996094, 0.898438, 0.320312, 1.0),
+ VBase4(0.996094, 0.957031, 0.597656, 1.0),
+ VBase4(0.855469, 0.933594, 0.492188, 1.0),
+ VBase4(0.550781, 0.824219, 0.324219, 1.0),
+ VBase4(0.242188, 0.742188, 0.515625, 1.0),
+ VBase4(0.304688, 0.96875, 0.402344, 1.0),
+ VBase4(0.433594, 0.90625, 0.835938, 1.0),
+ VBase4(0.347656, 0.820312, 0.953125, 1.0),
+ VBase4(0.191406, 0.5625, 0.773438, 1.0),
+ VBase4(0.558594, 0.589844, 0.875, 1.0),
+ VBase4(0.285156, 0.328125, 0.726562, 1.0),
+ VBase4(0.460938, 0.378906, 0.824219, 1.0),
+ VBase4(0.546875, 0.28125, 0.75, 1.0),
+ VBase4(0.726562, 0.472656, 0.859375, 1.0),
+ VBase4(0.898438, 0.617188, 0.90625, 1.0),
+ VBase4(0.7, 0.7, 0.8, 1.0),
+ VBase4(0.3, 0.3, 0.35, 1.0)]
+defaultColorList = [1,
+ 2,
+ 3,
+ 4,
+ 5,
+ 6,
+ 7,
+ 8,
+ 9,
+ 10,
+ 11,
+ 12,
+ 13,
+ 14,
+ 15,
+ 16,
+ 17,
+ 18,
+ 19,
+ 20,
+ 21,
+ 22,
+ 23,
+ 24]
+
+allColorsListApproximations = [VBase4(round(x[0], 3), round(x[1], 3), round(x[2], 3), round(x[3], 3)) for x in allColorsList]
+allowedColors = set([allColorsListApproximations[x] for x in set(defaultColorList + [26])])
 HatModels = [None,
              'phase_4/models/accessories/tt_m_chr_avt_acc_hat_baseball',
              'phase_4/models/accessories/tt_m_chr_avt_acc_hat_safari',
@@ -2429,21 +1951,18 @@ class ToonDNA(AvatarDNA.AvatarDNA):
         return
 
     def __str__(self):
-        string = 'type = toon\n'
-        string = string + 'gender = %s\n' % self.gender
-        string = string + \
-            'head = %s, torso = %s, legs = %s\n' % (
-                self.head, self.torso, self.legs)
-        string = string + 'arm color = %d\n' % self.armColor
-        string = string + 'glove color = %d\n' % self.gloveColor
-        string = string + 'leg color = %d\n' % self.legColor
-        string = string + 'head color = %d\n' % self.headColor
-        string = string + 'top texture = %d\n' % self.topTex
-        string = string + 'top texture color = %d\n' % self.topTexColor
-        string = string + 'sleeve texture = %d\n' % self.sleeveTex
-        string = string + 'sleeve texture color = %d\n' % self.sleeveTexColor
-        string = string + 'bottom texture = %d\n' % self.botTex
-        string = string + 'bottom texture color = %d\n' % self.botTexColor
+        string = f'type = toon\n'
+        string += f'head = {self.head}, eyelashes = {self.eyelashes}, torso = {self.torso}, legs = {self.legs}\n'
+        string += f'arm color = {self.armColor}\n'
+        string += f'glove color = {self.gloveColor}\n'
+        string += f'leg color = {self.legColor}\n'
+        string += f'head color = {self.headColor}\n'
+        string += f'top texture = {self.topTex}\n'
+        string += f'top texture color = {self.topTexColor}\n'
+        string += f'sleeve texture = {self.sleeveTex}\n'
+        string += f'sleeve texture color = {self.sleeveTexColor}\n'
+        string += f'bottom texture = {self.botTex}\n'
+        string += f'bottom texture color = {self.botTexColor}\n'
         return string
 
     def clone(self):
@@ -2459,12 +1978,9 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             torsoIndex = toonTorsoTypes.index(self.torso)
             legsIndex = toonLegTypes.index(self.legs)
             dg.addUint8(headIndex)
+            dg.addUint8(self.eyelashes)
             dg.addUint8(torsoIndex)
             dg.addUint8(legsIndex)
-            if self.gender == 'm':
-                dg.addUint8(1)
-            else:
-                dg.addUint8(0)
             dg.addUint8(self.topTex)
             dg.addUint8(self.topTexColor)
             dg.addUint8(self.sleeveTex)
@@ -2490,19 +2006,17 @@ class ToonDNA(AvatarDNA.AvatarDNA):
         if type not in ('t',):
             return False
         headIndex = dgi.getUint8()
+        eyelashes = dgi.getUint8()
         torsoIndex = dgi.getUint8()
         legsIndex = dgi.getUint8()
         if headIndex >= len(toonHeadTypes):
+            return False
+        if eyelashes > 1 or eyelashes < 0:
             return False
         if torsoIndex >= len(toonTorsoTypes):
             return False
         if legsIndex >= len(toonLegTypes):
             return False
-        gender = dgi.getUint8()
-        if gender == 1:
-            gender = 'm'
-        else:
-            gender = 'f'
         topTex = dgi.getUint8()
         topTexColor = dgi.getUint8()
         sleeveTex = dgi.getUint8()
@@ -2521,7 +2035,7 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             return False
         if sleeveTexColor >= len(ClothesColors):
             return False
-        if botTex >= choice(gender == 'm', len(BoyShorts), len(GirlBottoms)):
+        if botTex >= len(Bottoms):
             return False
         if botTexColor >= len(ClothesColors):
             return False
@@ -2541,16 +2055,12 @@ class ToonDNA(AvatarDNA.AvatarDNA):
         self.type = dgi.getFixedString(1)
         if self.type == 't':
             headIndex = dgi.getUint8()
+            self.eyelashes = dgi.getUint8()
             torsoIndex = dgi.getUint8()
             legsIndex = dgi.getUint8()
             self.head = toonHeadTypes[headIndex]
             self.torso = toonTorsoTypes[torsoIndex]
             self.legs = toonLegTypes[legsIndex]
-            gender = dgi.getUint8()
-            if gender == 1:
-                self.gender = 'm'
-            else:
-                self.gender = 'f'
             self.topTex = dgi.getUint8()
             self.topTexColor = dgi.getUint8()
             self.sleeveTex = dgi.getUint8()
@@ -2581,7 +2091,7 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             self.head = dna[0]
             self.torso = dna[1]
             self.legs = dna[2]
-            self.gender = dna[3]
+            self.eyelashes = dna[3]
             self.topTex = 0
             self.topTexColor = 0
             self.sleeveTex = 0
@@ -2598,13 +2108,23 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             notify.error("tuple must be in format ('%s', '%s', '%s', '%s')")
         return
 
-    def newToonFromProperties(self, head, torso, legs, gender, armColor, gloveColor, legColor, headColor,
-                              topTexture, topTextureColor, sleeveTexture, sleeveTextureColor, bottomTexture, bottomTextureColor):
+    def newToonFromProperties(self, head, torso, legs, eyelashes, armColor, gloveColor, 
+                              legColor, headColor, topTexture, topTextureColor, sleeveTexture, 
+                              sleeveTextureColor, bottomTexture, bottomTextureColor, isNPC=0):
+        if eyelashes == 'm':
+            eyelashes = 1
+            kind = 'm'
+        elif eyelashes == 'f':
+            eyelashes = 0
+            kind = 'f'
+        if isNPC:
+            # convert the old bottom id to the new one
+            bottomTexture = convertNPCSBottoms(bottomTexture, kind)
         self.type = 't'
         self.head = head
         self.torso = torso
         self.legs = legs
-        self.gender = gender
+        self.eyelashes = eyelashes
         self.armColor = armColor
         self.gloveColor = gloveColor
         self.legColor = legColor
@@ -2616,16 +2136,19 @@ class ToonDNA(AvatarDNA.AvatarDNA):
         self.botTex = bottomTexture
         self.botTexColor = bottomTextureColor
 
-    def updateToonProperties(self, head=None, torso=None, legs=None, gender=None, armColor=None, gloveColor=None, legColor=None, headColor=None, topTexture=None,
-                             topTextureColor=None, sleeveTexture=None, sleeveTextureColor=None, bottomTexture=None, bottomTextureColor=None, shirt=None, bottom=None):
+    def updateToonProperties(self, head = None, torso = None, legs = None, eyelashes = None, 
+                             armColor = None, gloveColor = None, legColor = None,
+                             headColor = None, topTexture = None, topTextureColor = None, 
+                             sleeveTexture = None, sleeveTextureColor = None, bottomTexture = None, 
+                             bottomTextureColor = None, shirt = None, bottom = None):
         if head:
             self.head = head
         if torso:
             self.torso = torso
         if legs:
             self.legs = legs
-        if gender:
-            self.gender = gender
+        if eyelashes:
+            self.eyelashes = eyelashes
         if armColor:
             self.armColor = armColor
         if gloveColor:
@@ -2659,7 +2182,7 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             self.botTex = defn[0]
             self.botTexColor = defn[1][colorIndex]
 
-    def newToonRandom(self, seed=None, gender='m', npc=0, stage=None):
+    def newToonRandom(self, seed = None, eyelashes = 0, npc = 0, stage = None):
         if seed:
             generator = random.Random()
             generator.seed(seed)
@@ -2667,10 +2190,10 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             generator = random
         self.type = 't'
         self.legs = generator.choice(toonLegTypes + ['m',
-                                                     'l',
-                                                     'l',
-                                                     'l'])
-        self.gender = gender
+         'l',
+         'l',
+         'l'])
+        self.eyelashes = eyelashes
         if not npc:
             if stage == MAKE_A_TOON:
                 if not base.cr.isPaid():
@@ -2683,56 +2206,40 @@ class ToonDNA(AvatarDNA.AvatarDNA):
                 self.head = generator.choice(toonHeadTypes)
         else:
             self.head = generator.choice(toonHeadTypes[:22])
-        top, topColor, sleeve, sleeveColor = getRandomTop(
-            gender, generator=generator)
-        bottom, bottomColor = getRandomBottom(gender, generator=generator)
-        if gender == 'm':
-            self.torso = generator.choice(toonTorsoTypes[:3])
-            self.topTex = top
-            self.topTexColor = topColor
-            self.sleeveTex = sleeve
-            self.sleeveTexColor = sleeveColor
-            self.botTex = bottom
-            self.botTexColor = bottomColor
-            color = generator.choice(defaultBoyColorList)
-            self.armColor = color
-            self.legColor = color
-            self.headColor = color
+        top, topColor, sleeve, sleeveColor = getRandomTop(generator=generator)
+        bottom, bottomColor = getRandomBottom(generator=generator)
+        self.torso = generator.choice(toonTorsoTypes[:6])
+        self.topTex = top
+        self.topTexColor = topColor
+        self.sleeveTex = sleeve
+        self.sleeveTexColor = sleeveColor
+        if self.torso[1] == 'd':
+            bottom, bottomColor = getRandomBottom(generator=generator, girlBottomType=SKIRT)
         else:
-            self.torso = generator.choice(toonTorsoTypes[:6])
-            self.topTex = top
-            self.topTexColor = topColor
-            self.sleeveTex = sleeve
-            self.sleeveTexColor = sleeveColor
-            if self.torso[1] == 'd':
-                bottom, bottomColor = getRandomBottom(
-                    gender, generator=generator, girlBottomType=SKIRT)
-            else:
-                bottom, bottomColor = getRandomBottom(
-                    gender, generator=generator, girlBottomType=SHORTS)
-            self.botTex = bottom
-            self.botTexColor = bottomColor
-            color = generator.choice(defaultGirlColorList)
-            self.armColor = color
-            self.legColor = color
-            self.headColor = color
+            bottom, bottomColor = getRandomBottom(generator=generator, girlBottomType=SHORTS)
+        self.botTex = bottom
+        self.botTexColor = bottomColor
+        color = generator.choice(defaultColorList)
+        self.armColor = color
+        self.legColor = color
+        self.headColor = color
         self.gloveColor = 0
 
     def asTuple(self):
         return (self.head,
-                self.torso,
-                self.legs,
-                self.gender,
-                self.armColor,
-                self.gloveColor,
-                self.legColor,
-                self.headColor,
-                self.topTex,
-                self.topTexColor,
-                self.sleeveTex,
-                self.sleeveTexColor,
-                self.botTex,
-                self.botTexColor)
+         self.torso,
+         self.legs,
+         self.eyelashes,
+         self.armColor,
+         self.gloveColor,
+         self.legColor,
+         self.headColor,
+         self.topTex,
+         self.topTexColor,
+         self.sleeveTex,
+         self.sleeveTexColor,
+         self.botTex,
+         self.botTexColor)
 
     def getType(self):
         if self.type == 't':
@@ -2799,8 +2306,10 @@ class ToonDNA(AvatarDNA.AvatarDNA):
         else:
             notify.error('unknown leg size: ', self.legs)
 
-    def getGender(self):
-        return self.gender
+
+    
+    def getEyelashes(self):
+        return self.eyelashes
 
     def getClothes(self):
         if len(self.torso) == 1:

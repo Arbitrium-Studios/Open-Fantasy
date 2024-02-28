@@ -47,7 +47,6 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
         self.purchaseDoneEvent = ''
         self.swapEvent = ''
         self.locked = 0
-        self.gender = None
         self.topDeleted = 0
         self.bottomDeleted = 0
         self.closetTrack = None
@@ -137,7 +136,6 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
             self.popupInfo = None
         if self.av:
             del self.av
-        del self.gender
         del self.closetSphere
         del self.closetSphereNode
         del self.closetSphereNodePath
@@ -219,12 +217,9 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
             self.hasLocalAvatar = 1
         return
 
-    def setState(self, mode, avId, ownerId, gender, topList, botList):
-        self.notify.debug(
-            'setState, mode=%s, avId=%s, ownerId=%d' %
-            (mode, avId, ownerId))
+    def setState(self, mode, avId, ownerId, topList, botList):
+        self.notify.debug('setState, mode=%s, avId=%s, ownerId=%d' % (mode, avId, ownerId))
         self.isOwner = avId == ownerId
-        self.ownerGender = gender
         if mode == ClosetGlobals.CLOSED:
             self.fsm.request('closed')
             return
@@ -233,7 +228,6 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
             self.av = self.cr.doId2do.get(self.customerId, None)
             if self.av:
                 if base.localAvatar.getDoId() == self.customerId:
-                    self.gender = self.av.style.gender
                     self.topList = topList
                     self.botList = botList
                     self.oldTopList = self.topList[0:]
@@ -249,11 +243,7 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
                 self.fsm.request('open')
         return
 
-    def _revertGender(self):
-        if self.gender:
-            self.av.style.gender = self.gender
-            self.av.loop('neutral')
-
+ 
     def popupChangeClothesGUI(self, task):
         self.notify.debug('popupChangeClothesGUI')
         self.purchaseDoneEvent = self.uniqueName('purchaseDone')
@@ -275,8 +265,6 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
                 self.topList,
                 self.botList)
             self.closetGUI.load()
-            if self.gender != self.ownerGender:
-                self.closetGUI.setGender(self.ownerGender)
             self.closetGUI.enter(base.localAvatar)
             self.closetGUI.showButtons()
             style = self.av.getStyle()
@@ -408,7 +396,7 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
         return
 
     def printInfo(self):
-        print('avid: %s, gender: %s' % (self.av.doId, self.av.style.gender))
+        print('avid: %s' % (self.av.doId))
         print('current top = %s,%s,%s,%s and  bot = %s,%s,' % (self.av.style.topTex,
                                                                self.av.style.topTexColor,
                                                                self.av.style.sleeveTex,
@@ -427,7 +415,6 @@ class DistributedCloset(DistributedFurnitureItem.DistributedFurnitureItem):
             return
         elif mode == ClosetGlobals.CLOSET_MOVIE_COMPLETE:
             if self.isLocalToon:
-                self._revertGender()
                 print('-----------ending trunk interaction-----------')
                 self.printInfo()
                 print('-------------------------------------------------')

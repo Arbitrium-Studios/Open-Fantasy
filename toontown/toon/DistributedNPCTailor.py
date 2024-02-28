@@ -160,9 +160,7 @@ class DistributedNPCTailor(DistributedNPCToonBase):
                     self.popupPurchaseGUI,
                     self.uniqueName('popupPurchaseGUI'))
                 print('-----------Starting tailor interaction-----------')
-                print(
-                    'avid: %s, gender: %s' %
-                    (self.av.doId, self.av.style.gender))
+                print('avid: %s' % (self.av.doId))
                 print('current top = %s,%s,%s,%s and  bot = %s,%s,' % (self.av.style.topTex,
                                                                        self.av.style.topTexColor,
                                                                        self.av.style.sleeveTex,
@@ -178,9 +176,7 @@ class DistributedNPCTailor(DistributedNPCToonBase):
                 CFSpeech | CFTimeout)
             if self.av and self.isLocalToon:
                 print('-----------ending tailor interaction-----------')
-                print(
-                    'avid: %s, gender: %s' %
-                    (self.av.doId, self.av.style.gender))
+                print('avid: %s' % (self.av.doId))
                 print('current top = %s,%s,%s,%s and  bot = %s,%s,' % (self.av.style.topTex,
                                                                        self.av.style.topTexColor,
                                                                        self.av.style.sleeveTex,
