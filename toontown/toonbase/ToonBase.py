@@ -282,7 +282,7 @@ class ToonBase(OTPBase.OTPBase):
             os.mkdir('users/screenshots/')
 
         namePrefix = 'screenshot'
-        namePrefix = 'screenshots/' + launcher.logPrefix + namePrefix
+        namePrefix = 'users/screenshots/' + launcher.logPrefix + namePrefix
         timedif = globalClock.getRealTime() - self.lastScreenShotTime
         if self.glitchCount > 10 and self.walking:
             return
