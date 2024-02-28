@@ -5226,11 +5226,12 @@ def doEvictionNotice(attack):
     missPoint = __toonGroundPoint(attack, toon, 0.7, parent=battle)
     missPoint.setX(missPoint.getX() - 1.1)
     propTrack.append(getPropThrowTrack(attack, paper, [hitPoint], [missPoint], hitDuration=0.375, missDuration=0.375, parent=battle))
+    toonTrack = Sequence(Func(toon.headsUp, battle, suit.getPos(battle)))
     if dmg > 0:
         # Will work on the eviction part later.
-        toonTrack = getToonTakeDamageTrack(toon, target['died'], dmg, 2.55, ['conked'], None, 0.01)
+        toonTrack.append(getToonTakeDamageTrack(toon, target['died'], dmg, 2.55, ['conked'], None, 0.01))
     else:
-        toonTrack = getToonDodgeTrack(target, 2.1, ['jump'], None, 0.5)
+        toonTrack.append(getToonDodgeTrack(target, 2.1, ['jump'], None, 0.5))
     return Parallel(suitTrack, toonTrack, propTrack)
 
 
