@@ -5409,7 +5409,7 @@ def doRestrainingOrder(attack):
         propTracks = Parallel()
         damageAnims = [['conked', 0.01, 0.3, 0.2],
          ['struggle', 0.01, 0.2]]
-        toonTracks = getToonTracks(attack, damageDelay=3.4, splicedDamageAnims=damageAnims, dodgeAnimNames=['sidestep'])
+        toonTracks = getToonTracks(attack, damageDelay=3.4, splicedDamageAnims=damageAnims, dodgeDelay=2.8, dodgeAnimNames=['sidestep'])
         cloudTracks = Parallel()
         for t in targets:
             toon = t['toon']
