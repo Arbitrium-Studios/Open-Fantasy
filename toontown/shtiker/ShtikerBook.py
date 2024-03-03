@@ -130,30 +130,18 @@ class ShtikerBook(DirectFrame, StateData.StateData):
         self['image'] = bookModel.find('**/big_book')
         self['image_scale'] = (2, 1, 1.5)
         self.resetFrameSize()
-        self.bookOpenButton = DirectButton(
-            image=(
-                bookModel.find('**/BookIcon_CLSD'),
-                bookModel.find('**/BookIcon_OPEN'),
-                bookModel.find('**/BookIcon_RLVR')),
-            relief=None,
-            pos=(
-                1.175,
-                0,
-                -0.83),
-            scale=0.305,
-            command=self.__open)
-        self.bookCloseButton = DirectButton(
-            image=(
-                bookModel.find('**/BookIcon_OPEN'),
-                bookModel.find('**/BookIcon_CLSD'),
-                bookModel.find('**/BookIcon_RLVR2')),
-            relief=None,
-            pos=(
-                1.175,
-                0,
-                -0.83),
-            scale=0.305,
-            command=self.__close)
+        self.bookOpenButton = DirectButton(image=(bookModel.find('**/BookIcon_CLSD'), 
+                                                 bookModel.find('**/BookIcon_OPEN'),
+                                                 bookModel.find('**/BookIcon_RLVR')), 
+                                           relief=None, pos=(-0.16, 0, 0.17),
+                                           parent=base.a2dBottomRight,
+                                           scale=0.305, command=self.__open)
+        self.bookCloseButton = DirectButton(image=(bookModel.find('**/BookIcon_OPEN'), 
+                                                   bookModel.find('**/BookIcon_CLSD'), 
+                                                   bookModel.find('**/BookIcon_RLVR2')), 
+                                            relief=None, pos=(-0.16, 0, 0.17),
+                                            parent = base.a2dBottomRight,
+                                            scale=0.305, command=self.__close)
         self.bookOpenButton.hide()
         self.bookCloseButton.hide()
         self.nextArrow = DirectButton(

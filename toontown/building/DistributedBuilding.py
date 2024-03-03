@@ -196,7 +196,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
                 self.handleInsideVictorElevator)
             camera.reparentTo(render)
             camera.setPosHpr(self.elevatorNodePath, 0, -32.5, 9.4, 0, 348, 0)
-            base.camLens.setFov(52.0)
+            base.camLens.setMinFov(52.0/(4/3))
             anyOthers = 0
             for v in self.victorList:
                 if v != 0 and v != base.localAvatar.doId:

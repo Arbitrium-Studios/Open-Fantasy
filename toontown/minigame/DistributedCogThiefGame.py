@@ -41,7 +41,7 @@ class DistributedCogThiefGame(DistributedMinigame):
                     'play', self.enterPlay, self.exitPlay, ['cleanup']), State.State(
                     'cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
         self.addChildGameFSM(self.gameFSM)
-        self.cameraTopView = (0, 0, 55, 0, -90.0, 0)
+        self.cameraTopView = (0, 0, 43, 0, -90.0, 0)
         self.barrels = []
         self.cogInfo = {}
         self.lastTimeControlPressed = 0
