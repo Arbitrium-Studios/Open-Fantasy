@@ -1025,14 +1025,10 @@ class Movie(DirectObject.DirectObject):
                 targetField = a.get('target')
                 if targetField is None:
                     continue
-                if a['group'] == ATK_TGT_GROUP:
-                    for target in targetField:
-                        if target['died'] and target['toon'].doId == base.localAvatar.doId:
-                            isLocalToonSad = True
-
-                elif a['group'] == ATK_TGT_SINGLE:
-                    if targetField['died'] and targetField['toon'].doId == base.localAvatar.doId:
+                for target in targetField:
+                    if target['died'] and target['toon'].doId == base.localAvatar.doId:
                         isLocalToonSad = True
+                
                 if isLocalToonSad:
                     break
 
