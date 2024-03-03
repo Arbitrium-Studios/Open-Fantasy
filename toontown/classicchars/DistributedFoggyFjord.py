@@ -11,19 +11,19 @@ from direct.task import Task
 from toontown.toonbase import TTLocalizer
 
 
-class DistributedToontownShipyard(DistributedCCharBase.DistributedCCharBase):
+class DistributedFoggyFjord(DistributedCCharBase.DistributedCCharBase):
     notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedToontownShipyard')
+        'DistributedFoggyFjord')
 
     def __init__(self, cr):
         try:
-            self.DistributedToontownShipyard_initialized
+            self.DistributedFoggyFjord_initialized
         except BaseException:
-            self.DistributedToontownShipyard_initialized = 1
+            self.DistributedFoggyFjord_initialized = 1
             DistributedCCharBase.DistributedCCharBase.__init__(
-                self, cr, TTLocalizer.ToontownShipyard, 'dw')
+                self, cr, TTLocalizer.FoggyFjord, 'dw')
             self.fsm = ClassicFSM.ClassicFSM(
-                'DistributedToontownShipyard', [
+                'DistributedFoggyFjord', [
                     State.State(
                         'Off', self.enterOff, self.exitOff, ['Neutral']), State.State(
                         'Neutral', self.enterNeutral, self.exitNeutral, ['Off'])], 'Off', 'Off')
@@ -41,9 +41,9 @@ class DistributedToontownShipyard(DistributedCCharBase.DistributedCCharBase):
 
     def delete(self):
         try:
-            self.DistributedToontownShipyard_deleted
+            self.DistributedFoggyFjord_deleted
         except BaseException:
-            self.DistributedToontownShipyard_deleted = 1
+            self.DistributedFoggyFjord_deleted = 1
             del self.fsm
             DistributedCCharBase.DistributedCCharBase.delete(self)
 
@@ -52,7 +52,7 @@ class DistributedToontownShipyard(DistributedCCharBase.DistributedCCharBase):
         boat = base.cr.playGame.hood.loader.boat
         self.setPos(0, -1, 3.95)
         self.reparentTo(boat)
-        self.neutralDoneEvent = self.taskName('ToontownShipyard-neutral-done')
+        self.neutralDoneEvent = self.taskName('FoggyFjord-neutral-done')
         self.neutral = CharStateDatas.CharNeutralState(
             self.neutralDoneEvent, self)
         self.fsm.request('Neutral')

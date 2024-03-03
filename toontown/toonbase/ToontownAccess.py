@@ -8,7 +8,7 @@ class ToontownAccess:
         if base.cr.isPaid():
             return True
         allowed = False
-        allowedZones = [ToontownGlobals.ToontownCenter,
+        allowedZones = [ToontownGlobals.ToontownCentral,
                         ToontownGlobals.MyEstate,
                         ToontownGlobals.ToontownStadium,
                         ToontownGlobals.Tutorial]

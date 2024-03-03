@@ -29,7 +29,7 @@ class TrialerForceAcknowledge:
             letThrough()
             return
         if ZoneUtil.getCanonicalHoodId(destHood) in (
-                ToontownGlobals.ToontownCenter, ToontownGlobals.MyEstate, ToontownGlobals.ToontownStadium):
+                ToontownGlobals.ToontownCentral, ToontownGlobals.MyEstate, ToontownGlobals.ToontownStadium):
             letThrough()
             return
         else:

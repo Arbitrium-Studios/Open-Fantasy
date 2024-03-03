@@ -378,16 +378,16 @@ class DistributedRingGame(DistributedMinigame):
 
     def __generateRings(self):
         self.ringGroups = []
-        difficultyDistributions = {ToontownGlobals.ToontownCenter: [14, 2, 0],
-                                   ToontownGlobals.ToontownShipyards: [10, 6, 0],
+        difficultyDistributions = {ToontownGlobals.ToontownCentral: [14, 2, 0],
+                                   ToontownGlobals.FoggyFjords: [10, 6, 0],
                                    ToontownGlobals.FloweringGrove: [4, 12, 0],
-                                   ToontownGlobals.TheLandOfMusic: [4, 8, 4],
+                                   ToontownGlobals.HarmonyHaven: [4, 8, 4],
                                    ToontownGlobals.TundraWonderland: [4, 6, 6],
                                    ToontownGlobals.TwilightDreamland: [2, 6, 8]}
         for distr in list(difficultyDistributions.values()):
             sum = reduce(lambda x, y: x + y, distr)
 
-        difficultyPatterns = {ToontownGlobals.ToontownCenter: [[0] * 14 + [1] * 2 + [2] * 0, [0,
+        difficultyPatterns = {ToontownGlobals.ToontownCentral: [[0] * 14 + [1] * 2 + [2] * 0, [0,
                                                                                                0,
                                                                                                0,
                                                                                                0,
@@ -410,7 +410,7 @@ class DistributedRingGame(DistributedMinigame):
                                                                                                         0,
                                                                                                         0,
                                                                                                         1]],
-                              ToontownGlobals.ToontownShipyards: [[0] * 10 + [1] * 6 + [2] * 0, [0,
+                              ToontownGlobals.FoggyFjords: [[0] * 10 + [1] * 6 + [2] * 0, [0,
                                                                                            0,
                                                                                            0,
                                                                                            0,
@@ -440,7 +440,7 @@ class DistributedRingGame(DistributedMinigame):
                                                                                                      1,
                                                                                                      1,
                                                                                                      1] * 2],
-                              ToontownGlobals.TheLandOfMusic: [[0] * 4 + [1] * 8 + [2] * 4,
+                              ToontownGlobals.HarmonyHaven: [[0] * 4 + [1] * 8 + [2] * 4,
                                                                   [0,
                                                                    0,
                                                                    1,

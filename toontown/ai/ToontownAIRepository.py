@@ -246,21 +246,21 @@ class ToontownAIRepository(ToontownInternalRepository):
         NPCToons.generateZone2NpcDict()
 
         # Donald's Dock
-        self.zoneTable[ToontownGlobals.ToontownShipyards] = (
-            (ToontownGlobals.ToontownShipyards, 1,
+        self.zoneTable[ToontownGlobals.FoggyFjords] = (
+            (ToontownGlobals.FoggyFjords, 1,
              0), (ToontownGlobals.BarnacleBoulevard, 1, 1),
             (ToontownGlobals.SeaweedStreet, 1,
              1), (ToontownGlobals.LighthouseLane, 1, 1)
         )
-        self.generateHood(DDHoodDataAI, ToontownGlobals.ToontownShipyards)
+        self.generateHood(DDHoodDataAI, ToontownGlobals.FoggyFjords)
 
         # Toontown Central
-        self.zoneTable[ToontownGlobals.ToontownCenter] = (
-            (ToontownGlobals.ToontownCenter, 1,
+        self.zoneTable[ToontownGlobals.ToontownCentral] = (
+            (ToontownGlobals.ToontownCentral, 1,
              0), (ToontownGlobals.SillyStreet, 1, 1),
             (ToontownGlobals.LoopyLane, 1, 1), (ToontownGlobals.PunchlinePlace, 1, 1)
         )
-        self.generateHood(TTHoodDataAI, ToontownGlobals.ToontownCenter)
+        self.generateHood(TTHoodDataAI, ToontownGlobals.ToontownCentral)
 
         # The Brrrgh
         self.zoneTable[ToontownGlobals.TundraWonderland] = (
@@ -270,13 +270,13 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.generateHood(BRHoodDataAI, ToontownGlobals.TundraWonderland)
 
         # Minnie's Melodyland
-        self.zoneTable[ToontownGlobals.TheLandOfMusic] = (
-            (ToontownGlobals.TheLandOfMusic, 1,
+        self.zoneTable[ToontownGlobals.HarmonyHaven] = (
+            (ToontownGlobals.HarmonyHaven, 1,
              0), (ToontownGlobals.AltoAvenue, 1, 1),
             (ToontownGlobals.BaritoneBoulevard, 1,
              1), (ToontownGlobals.TenorTerrace, 1, 1)
         )
-        self.generateHood(MMHoodDataAI, ToontownGlobals.TheLandOfMusic)
+        self.generateHood(MMHoodDataAI, ToontownGlobals.HarmonyHaven)
 
         # Daisy Gardens
         self.zoneTable[ToontownGlobals.FloweringGrove] = (

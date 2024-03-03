@@ -30,7 +30,7 @@ def getStreetName(branchId):
 
 def getLoaderName(zoneId):
     if tutorialDict:
-        if zoneId == ToontownCenter:
+        if zoneId == ToontownCentral:
             loaderName = 'safeZoneLoader'
         else:
             loaderName = 'townLoader'
@@ -81,7 +81,7 @@ def getWhereName(zoneId, isToon):
             where = 'toonInterior'
         elif zoneId in tutorialDict['exteriors']:
             where = 'street'
-        elif zoneId == ToontownCenter or zoneId == WelcomeValleyToken:
+        elif zoneId == ToontownCentral or zoneId == WelcomeValleyToken:
             where = 'playground'
         else:
             zoneUtilNotify.error('No known zone: ' + str(zoneId))
@@ -142,11 +142,11 @@ def isWelcomeValley(zoneId):
 
 def getCanonicalZoneId(zoneId):
     if zoneId == WelcomeValleyToken:
-        zoneId = ToontownCenter
+        zoneId = ToontownCentral
     elif zoneId >= WelcomeValleyBegin and zoneId < WelcomeValleyEnd:
         zoneId = zoneId % 2000
         if zoneId < 1000:
-            zoneId = zoneId + ToontownCenter
+            zoneId = zoneId + ToontownCentral
         else:
             zoneId = zoneId - 1000 + ToontownStadium
     return zoneId
@@ -158,8 +158,8 @@ def getTrueZoneId(zoneId, currentZoneId):
     if currentZoneId >= WelcomeValleyBegin and currentZoneId < WelcomeValleyEnd:
         hoodId = getHoodId(zoneId)
         offset = currentZoneId - currentZoneId % 2000
-        if hoodId == ToontownCenter:
-            return zoneId - ToontownCenter + offset
+        if hoodId == ToontownCentral:
+            return zoneId - ToontownCentral + offset
         elif hoodId == ToontownStadium:
             return zoneId - ToontownStadium + offset + 1000
     return zoneId
@@ -223,10 +223,10 @@ def getWakeInfo(hoodId=None, zoneId=None):
         if zoneId is None:
             zoneId = base.cr.playGame.getPlace().getZoneId()
         canonicalZoneId = getCanonicalZoneId(zoneId)
-        if canonicalZoneId == ToontownShipyards:
+        if canonicalZoneId == FoggyFjords:
             wakeWaterHeight = DDWakeWaterHeight
             showWake = 1
-        elif canonicalZoneId == ToontownCenter:
+        elif canonicalZoneId == ToontownCentral:
             wakeWaterHeight = TTWakeWaterHeight
             showWake = 1
         elif canonicalZoneId == AcornAcres:

@@ -30,10 +30,10 @@ from toontown.parties.PartyGlobals import GoToPartyStatus
 
 class PlayGame(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('PlayGame')
-    Hood2ClassDict = {ToontownGlobals.ToontownCenter: TTHood.TTHood,
-                      ToontownGlobals.ToontownShipyards: DDHood.DDHood,
+    Hood2ClassDict = {ToontownGlobals.ToontownCentral: TTHood.TTHood,
+                      ToontownGlobals.FoggyFjords: DDHood.DDHood,
                       ToontownGlobals.TundraWonderland: BRHood.BRHood,
-                      ToontownGlobals.TheLandOfMusic: MMHood.MMHood,
+                      ToontownGlobals.HarmonyHaven: MMHood.MMHood,
                       ToontownGlobals.FloweringGrove: DGHood.DGHood,
                       ToontownGlobals.TwilightDreamland: DLHood.DLHood,
                       ToontownGlobals.ToontownStadium: GSHood.GSHood,
@@ -46,10 +46,10 @@ class PlayGame(StateData.StateData):
                       ToontownGlobals.LawbotHQ: LawbotHQ.LawbotHQ,
                       ToontownGlobals.GolfZone: GZHood.GZHood,
                       ToontownGlobals.PartyHood: PartyHood.PartyHood}
-    Hood2StateDict = {ToontownGlobals.ToontownCenter: 'TTHood',
-                      ToontownGlobals.ToontownShipyards: 'DDHood',
+    Hood2StateDict = {ToontownGlobals.ToontownCentral: 'TTHood',
+                      ToontownGlobals.FoggyFjords: 'DDHood',
                       ToontownGlobals.TundraWonderland: 'BRHood',
-                      ToontownGlobals.TheLandOfMusic: 'MMHood',
+                      ToontownGlobals.HarmonyHaven: 'MMHood',
                       ToontownGlobals.FloweringGrove: 'DGHood',
                       ToontownGlobals.TwilightDreamland: 'DLHood',
                       ToontownGlobals.ToontownStadium: 'GSHood',

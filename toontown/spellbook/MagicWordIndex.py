@@ -112,13 +112,13 @@ class MagicWord:
     # is it a safezone?
 
     Str2szId = {
-        'ttc': ToontownGlobals.ToontownCenter,
-        'tt': ToontownGlobals.ToontownCenter,
-        'tc': ToontownGlobals.ToontownCenter,
-        'dd': ToontownGlobals.ToontownShipyards,
+        'ttc': ToontownGlobals.ToontownCentral,
+        'tt': ToontownGlobals.ToontownCentral,
+        'tc': ToontownGlobals.ToontownCentral,
+        'dd': ToontownGlobals.FoggyFjords,
         'dg': ToontownGlobals.FloweringGrove,
-        'mml': ToontownGlobals.TheLandOfMusic,
-        'mm': ToontownGlobals.TheLandOfMusic,
+        'mml': ToontownGlobals.HarmonyHaven,
+        'mm': ToontownGlobals.HarmonyHaven,
         'br': ToontownGlobals.TundraWonderland,
         'ddl': ToontownGlobals.TwilightDreamland,
         'dl': ToontownGlobals.TwilightDreamland,

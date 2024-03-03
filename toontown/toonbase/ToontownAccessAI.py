@@ -30,7 +30,7 @@ def canAccess(avatarId, zoneId, function=''):
 def openToAll(zoneId, avatar):
     allowed = False
     canonicalZoneId = ZoneUtil.getCanonicalHoodId(zoneId)
-    allowedZones = [ToontownGlobals.ToontownCenter,
+    allowedZones = [ToontownGlobals.ToontownCentral,
                     ToontownGlobals.MyEstate,
                     ToontownGlobals.ToontownStadium,
                     ToontownGlobals.Tutorial]

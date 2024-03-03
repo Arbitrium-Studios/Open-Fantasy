@@ -15,10 +15,10 @@ def QuantizeDifficultyOverride(diffOverride):
 
 NoDifficultyOverride = 2147483647
 NoTrolleyZoneOverride = -1
-SafeZones = [ToontownGlobals.ToontownCenter,
-             ToontownGlobals.ToontownShipyards,
+SafeZones = [ToontownGlobals.ToontownCentral,
+             ToontownGlobals.FoggyFjords,
              ToontownGlobals.FloweringGrove,
-             ToontownGlobals.TheLandOfMusic,
+             ToontownGlobals.HarmonyHaven,
              ToontownGlobals.TundraWonderland,
              ToontownGlobals.TwilightDreamland]
 

@@ -524,11 +524,11 @@ class DistributedDivingGame(DistributedMinigame):
         if DistributedMinigame.setGameReady(self):
             return
         self.dead = 0
-        self.difficultyPatterns = {ToontownGlobals.ToontownCenter: [1,
+        self.difficultyPatterns = {ToontownGlobals.ToontownCentral: [1,
                                                                      1.5,
                                                                      65,
                                                                      3],
-                                   ToontownGlobals.ToontownShipyards: [1,
+                                   ToontownGlobals.FoggyFjords: [1,
                                                                  1.3,
                                                                  65,
                                                                  1],
@@ -536,7 +536,7 @@ class DistributedDivingGame(DistributedMinigame):
                                                                   1.2,
                                                                   65,
                                                                   1],
-                                   ToontownGlobals.TheLandOfMusic: [2,
+                                   ToontownGlobals.HarmonyHaven: [2,
                                                                        1.0,
                                                                        65,
                                                                        1],

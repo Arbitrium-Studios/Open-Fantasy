@@ -18,7 +18,7 @@ from toontown.classicchars import DistributedJailbirdDale/AI
 from toontown.classicchars import DistributedToontownStadium/AI
 from toontown.classicchars import DistributedDonald/AI
 from toontown.classicchars import DistributedFrankenDonald/AI
-from toontown.classicchars import DistributedToontownShipyard/AI
+from toontown.classicchars import DistributedFoggyFjord/AI
 from toontown.classicchars import DistributedPluto/AI
 from toontown.classicchars import DistributedWesternPluto/AI
 from toontown.safezone import DistributedTrolley/AI
@@ -673,7 +673,7 @@ dclass DistributedDonald : DistributedCCharBase {
 dclass DistributedFrankenDonald : DistributedDonald {
 };
 
-dclass DistributedToontownShipyard : DistributedCCharBase {
+dclass DistributedFoggyFjord : DistributedCCharBase {
 };
 
 dclass DistributedPluto : DistributedCCharBase {

@@ -360,7 +360,7 @@ def getPaths(charName, location=0):
         return __chipPaths
     elif charName == TTLocalizer.Dale or charName == TTLocalizer.JailbirdDale:
         return __chipPaths
-    elif charName == TTLocalizer.ToontownShipyard:
+    elif charName == TTLocalizer.FoggyFjord:
         return {'a': (Point3(0, 0, 0), 'a')}
 
 

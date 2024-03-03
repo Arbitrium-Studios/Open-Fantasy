@@ -9,10 +9,10 @@ class DiscordRPC(object):
         
         # Add Doodlevania
 
-        1000: ["toontown-shipyard", "in Toontown Shipyard"],
-        1100: ["toontown-shipyard", "on Barnacle Boulevard"],
-        1200: ["toontown-shipyard", "on Seaweed Street"],
-        1300: ["toontown-shipyard", "on Lighthouse Lane"],
+        1000: ["foggy-fjord", "in Foggy Fjord"],
+        1100: ["foggy-fjord", "on Barnacle Boulevard"],
+        1200: ["foggy-fjord", "on Seaweed Street"],
+        1300: ["foggy-fjord", "on Lighthouse Lane"],
 
         2000: ["toontown-central", "in Toontown Central"],
         2100: ["toontown-central", "on Silly Street"],
@@ -24,10 +24,10 @@ class DiscordRPC(object):
         3200: ["tundra-wonderland", "on Sleet Street"],
         3300: ["tundra-wonderland", "on Polar Place"],
 
-        4000: ["the-land-of-music", "in the Land of Music"],
-        4100: ["the-land-of-music", "on Alto Avenue"],
-        4200: ["the-land-of-music", "on Baritone Boulevard"],
-        4300: ["the-land-of-music", "on Tenor Terrace"],
+        4000: ["harmony-haven", "in Harmony Haven"],
+        4100: ["harmony-haven", "on Alto Avenue"],
+        4200: ["harmony-haven", "on Baritone Boulevard"],
+        4300: ["harmony-haven", "on Tenor Terrace"],
 
         5000: ["flowering-grove", "in the Flowering Grove"],
         5100: ["flowering-grove", "on Elm Street"],
@@ -180,8 +180,8 @@ class DiscordRPC(object):
 
     def building(self):
         if base.wantRichPresence:
-            self.image = 'building'
-            self.details = 'in a building.'
+            self.image = 'cog-building'
+            self.details = 'in a Cog Building.'
             self.setData()
 
 
