@@ -24,38 +24,52 @@ class Credits:
         #run
         self.extremelylargecredits = '''
 \n\1limeText\1Credits:\2
-\n\1limeText\1Management Team:\2
-Gracie | Director/Owner
-Pizza Taco Burger | Co-Owner
-\n\1limeText\1Technical Team:\2
-The Professor | Developer
-Something Random | Developer
-Sighost | Developer
-THE PLAYER ZER0 aka Gracie T. Lovelight | Developer
-\n\1limeText\1Creative Team:\2
-SirDapperPenguin | 3D Modeler
-Jardin | Artist
-April | Artist
-+ AiGenics | Story Writer
-+ THE PLAYER ZER0 aka Gracie T. Lovelight | Story Writer
-+ Pizza Taco Burger | Storyline Writer
-\n\1limeText\1Contributors:\2
-+ Battery on Discord for helping me fix the Tuple error!
-+ DarthM on Discord for various features including Credits, Genderless Toons, etc.
-+ TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
-+ DTM1218
-+ ToonJoey for letting us use Project: Bikehorn assets for most of the uncompress Toontown Online textures https://github.com/toonjoey/toontown-project-bikehorn
-+ Nora for letting me use the Credits Button and more!
-+ leothegreat2003#4524 for helping me find the bug that caused the Streets to not work!
-+ Flameout56, the creator of Toontown HD for allowing me to use the resources to upgrade Open-Fantasy's resources.
 
-\n\1limeText\1Special Thanks To:\2
-+ Satire6 for releasing Pandora & Anesidora to the public!
-+ Toontown Rewritten for reviving the spirit of Toontown and its community!
-+ Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
-+ Jesse Schell for fighting for Toontown Online's Official Return
+\n\1limeText\1The Auteurs of Life (Project Leaders):\2
 
-\n\1limeText\Thanks for everything!\2
+- Gracie Lovelight
+- Pizza Taco Burger
+
+\1limeText\1The Architects of Realities (Programmers):\2
+
+- Professor Control
+- DarthMDev/darthanonymous
+- Something Random
+- Sighost
+- Nayla/Nayla
+- Gracie Lovelight
+- Battery on Discord for helping me fix a Tuple error!
+- J3 on Discord for fixing a bug and helping rename The Land of Music!
+- TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
+- DTM1218 for letting me use parts of Declashified to improve the game!
+- leothegreat2003#4524 for helping me find the bug that caused the Streets to not work and incorrect NPC locations!
+- HunterBoppen for helping to fixing district resets, security vulnerabilities, and more
+- CloudCityDev for helping with security patches
+- Wizzerinus for helping fix various bugs in the aforementioned orbital camera
+
+\1limeText\1The Artisans of Nature (Artists):\2
+
+- Jardin
+- April
+- AiGenics
+- ToonJoey
+- Gracie Lovelight
+
+The Sculptors of Creation (Modelers):
+
+- SirDapperPenguin
+
+\1limeText\1Special Thanks to:\2
+
+- Pizza Taco Burger, Princess Rainbow, Cuddles Crinklemuffin, the Magnificent Eleven, Flippy Jr. of Toontown Relived, and more for inspiring me to write the story!
+- Toontown Galaxy team for letting us their orbital camera
+- Open-Toontown for creating the source code Toontown Fantasy is based in!
+- Satire6 for releasing Pandora & Anesidora to the public!
+- Toontown Rewritten for reviving the spirit of Toontown and its community!
+- Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
+- Jesse Schell for pitching Toontown Online to Disney and fighting for its eventual return
+
+And YOU for playing the game!
         '''
         self.text = OnscreenText(text = self.extremelylargecredits, style = 3, fg = (1, 1, 1, 1), align = TextNode.ACenter, scale = 0.08, wordwrap = 30, parent = aspect2d)
         self.text.setPos(0, -1)
@@ -76,7 +90,7 @@ April | Artist
         LerpColorScaleInterval(self.screenCover, 1, Vec4(1, 1, 1, 1), startColorScale = Vec4(1, 1, 1, 0)),
         LerpColorScaleInterval(self.text, 1, Vec4(1, 1, 1, 1), startColorScale = Vec4(1, 1, 1, 0)),
         Wait(1),
-        self.text.posInterval(35, Point3(0, 0, 6)),
+        self.text.posInterval(40, Point3(0, 0, 6.906)),
         Wait(1),
         LerpColorScaleInterval(self.screenCover, 1, Vec4(1, 1, 1, 0), startColorScale = Vec4(1, 1, 1, 1)),
         Func(self.removeCredits)

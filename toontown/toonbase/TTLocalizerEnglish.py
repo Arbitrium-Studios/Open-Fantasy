@@ -4837,6 +4837,7 @@ OptionsPageTitle = 'Options'
 OptionsTabTitle = 'Options\n& Codes'
 OptionsPagePurchase = 'Subscribe'
 OptionsPageLogout = 'Logout'
+OptionsPageReportBug = 'Report Bug'
 OptionsPageExitToontown = 'Exit Toontown'
 OptionsPageMusicOnLabel = 'Music is on.'
 OptionsPageMusicOffLabel = 'Music is off.'
@@ -10034,7 +10035,7 @@ InteractivePropTrackBonusTerms = {0: 'Super Toon-Up!',
                                   6: ''}
 
 PlayingCardUnknown = 'Card Name is unknown'
-ExtraOptionsPageTitle = 'Extra Options'
+ExtraOptionsPageTitle = 'Extra'
 ControlSettingsTitle = 'Control Settings'
 ControlSettingsInfoLabelDefault = 'Change your input settings here.'
 ControlSettingsInfoLabelChangeKey = 'Press a key combination\ncreate your new hotkey.'

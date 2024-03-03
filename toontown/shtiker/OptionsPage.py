@@ -494,7 +494,7 @@ class OptionsTabPage(DirectFrame):
                 textRowHeight *
                 5),
             command=self.__doDisplaySettings)
-        self.BugReportButton = DirectButton(parent=self, relief=None, text="Report Bug", text_pos=(0, -0.01), text_fg=(0, 0, 0, 1), text_scale=(0.045), image=(
+        self.BugReportButton = DirectButton(parent=self, relief=None, text=TTLocalizer.OptionsPageReportBug, text_pos=(0, -0.01), text_fg=(0, 0, 0, 1), text_scale=(0.045), image=(
                                                                                      guiButton.find('**/QuitBtn_UP'),
                 guiButton.find('**/QuitBtn_DN'),
                 guiButton.find('**/QuitBtn_RLVR')), image3_color=Vec4(1, 1, 1, 0.5), scale=(1.0, 1.0, 1.0), pos=(-0.5, 0.5, buttonbase_ycoord - textRowHeight * 7), command=self.showReportNotice)
