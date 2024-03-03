@@ -15,7 +15,7 @@ class DDSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
         self.playgroundClass = DDPlayground.DDPlayground
         self.musicFile = 'phase_6/audio/bgm/DD_nbrhood.ogg'
         self.activityMusicFile = 'phase_6/audio/bgm/DD_SZ_activity.ogg'
-        self.dnaFile = 'phase_6/dna/donalds_dock_sz.dna'
+        self.dnaFile = 'phase_6/dna/foggy_fjord_sz.dna'
         self.safeZoneStorageDNAFile = 'phase_6/dna/storage_DD_sz.dna'
 
     def load(self):

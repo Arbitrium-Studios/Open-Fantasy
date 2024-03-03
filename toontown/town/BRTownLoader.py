@@ -15,7 +15,7 @@ class BRTownLoader(TownLoader.TownLoader):
     def load(self, zoneId):
         TownLoader.TownLoader.load(self, zoneId)
         Suit.loadSuits(3)
-        dnaFile = 'phase_8/dna/the_burrrgh_' + \
+        dnaFile = 'phase_8/dna/tundra_wonderland_' + \
             str(self.canonicalBranchZone) + '.dna'
         self.createHood(dnaFile)
 

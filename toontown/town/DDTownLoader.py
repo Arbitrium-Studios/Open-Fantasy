@@ -15,7 +15,7 @@ class DDTownLoader(TownLoader.TownLoader):
     def load(self, zoneId):
         TownLoader.TownLoader.load(self, zoneId)
         Suit.loadSuits(2)
-        dnaFile = 'phase_6/dna/donalds_dock_' + \
+        dnaFile = 'phase_6/dna/foggy_fjord_' + \
             str(self.canonicalBranchZone) + '.dna'
         self.createHood(dnaFile)
 

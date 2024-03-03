@@ -30,9 +30,9 @@ class GZPlayground(Playground.Playground):
         Playground.Playground.load(self)
         self.hub = loader.loadModel('phase_6/models/golf/golf_hub2')
         self.hub.reparentTo(render)
-        self.dnaroot = render.find('**/goofy_speedway_DNARoot')
+        self.dnaroot = render.find('**/toontown_stadium_DNARoot')
         self.dnaroot = base.cr.playGame.hood.loader.geom.find(
-            '**/goofy_speedway_DNARoot')
+            '**/toontown_stadium_DNARoot')
         if not self.dnaroot.isEmpty():
             self.dnaroot.removeNode()
 

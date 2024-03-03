@@ -15,7 +15,7 @@ class MMTownLoader(TownLoader.TownLoader):
     def load(self, zoneId):
         TownLoader.TownLoader.load(self, zoneId)
         Suit.loadSuits(2)
-        dnaFile = 'phase_6/dna/minnies_melody_land_' + \
+        dnaFile = 'phase_6/dna/harmony_haven_' + \
             str(self.canonicalBranchZone) + '.dna'
         self.createHood(dnaFile)
 

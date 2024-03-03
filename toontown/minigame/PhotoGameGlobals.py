@@ -89,7 +89,7 @@ AREA_DATA[ToontownGlobals.FoggyFjords]['TIME'] = 110
 AREA_DATA[ToontownGlobals.FoggyFjords]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
 AREA_DATA[ToontownGlobals.FoggyFjords]['DNA_TRIO'] = (
-    'phase_6/dna/storage_DD_sz.dna', 'phase_6/dna/storage_DD.dna', 'phase_6/dna/donalds_dock_sz.dna')
+    'phase_6/dna/storage_DD_sz.dna', 'phase_6/dna/storage_DD.dna', 'phase_6/dna/foggy_fjord_sz.dna')
 AREA_DATA[ToontownGlobals.FoggyFjords]['TRIPOD_OFFSET'] = Point3(0, -4.0, 9.0)
 AREA_DATA[ToontownGlobals.FoggyFjords]['START_HPR'] = Point3(
     218.211, -6.7879, 0)
@@ -227,7 +227,7 @@ AREA_DATA[ToontownGlobals.HarmonyHaven]['TIME'] = 95
 AREA_DATA[ToontownGlobals.HarmonyHaven]['CAMERA_INTIAL_POSTION'] = Point3(
     0, -50, 20)
 AREA_DATA[ToontownGlobals.HarmonyHaven]['DNA_TRIO'] = (
-    'phase_6/dna/storage_MM_sz.dna', 'phase_6/dna/storage_MM.dna', 'phase_6/dna/minnies_melody_land_sz.dna')
+    'phase_6/dna/storage_MM_sz.dna', 'phase_6/dna/storage_MM.dna', 'phase_6/dna/harmony_haven_sz.dna')
 AREA_DATA[ToontownGlobals.HarmonyHaven]['TRIPOD_OFFSET'] = Point3(
     0, 0, 6.0)
 AREA_DATA[ToontownGlobals.HarmonyHaven]['START_HPR'] = Point3(
@@ -293,7 +293,7 @@ AREA_DATA[ToontownGlobals.TundraWonderland]['TIME'] = 90
 AREA_DATA[ToontownGlobals.TundraWonderland]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
 AREA_DATA[ToontownGlobals.TundraWonderland]['DNA_TRIO'] = (
-    'phase_8/dna/storage_BR_sz.dna', 'phase_8/dna/storage_BR.dna', 'phase_8/dna/the_burrrgh_sz.dna')
+    'phase_8/dna/storage_BR_sz.dna', 'phase_8/dna/storage_BR.dna', 'phase_8/dna/tundra_wonderland_sz.dna')
 AREA_DATA[ToontownGlobals.TundraWonderland]['TRIPOD_OFFSET'] = Point3(0, 0, 6.0)
 AREA_DATA[ToontownGlobals.TundraWonderland]['START_HPR'] = Point3(
     -49.401, -11.6266, 0)
