@@ -5,7 +5,6 @@ from direct.actor.Actor import Actor
 from direct.gui.DirectGui import *
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import ToonBase
-from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
 from panda3d.core import AudioSound
 from direct.showbase.DirectObject import DirectObject
