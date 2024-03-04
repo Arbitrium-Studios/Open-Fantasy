@@ -5,11 +5,35 @@ from direct.actor.Actor import Actor
 from direct.gui.DirectGui import *
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import ToonBase
+from direct.showbase.ShowBase import ShowBase
+from direct.task import Task
+from panda3d.core import AudioSound
+from direct.showbase.DirectObject import DirectObject
 
-class Credits:
+class Credits(DirectObject):
 
     def __init__(self):
         #setup
+        # self.base = base
+        self.fade_out_and_in("fade_task")
+
+        # Load the first music track
+        self.track1 = base.loader.loadMusic("phase_3/audio/bgm/tt_theme.ogg")
+
+        # Load the second music track
+        self.track2 = base.loader.loadMusic("phase_9/audio/bgm/CogHQ_finale.ogg")
+
+        # Set the volume for the first track
+        self.track1.setVolume(1.0)
+
+        # Play the first track
+        self.track1.play()
+
+        # Set up event handling
+        self.accept('fade_task', self.fade_out_and_in)
+
+        # Schedule the fade-out and fade-in task
+        taskMgr.add(self.fade_task, "fade_task")
         self.creditsSequence = None
         self.text = None
         self.roleText = None
@@ -69,7 +93,34 @@ Jesse Schell for fighting for Toontown Online's Official Return
         base.accept('space', self.removeCredits)
         base.accept('escape', self.removeCredits)
 
+    def fade_out_and_in(self, task):
+        self.fade_out_and_in(track1, track2)
+        # Check if the first track is still playing
+        if self.track1.status() == AudioSound.PLAYING:
+            # Gradually decrease the volume of the first track
+            current_volume = self.track1.getVolume()
+            if current_volume > 0.01:
+                self.track1.setVolume(current_volume - 0.01)
+            else:
+                # Stop the first track when volume is low
+                self.track1.stop()
+                self.track1.setVolume(1.0)
+
+                # Play the second track
+                self.track2.play()
+
+        # Check if the second track is still playing
+        if self.track2.status() == AudioSound.PLAYING:
+            # Gradually increase the volume of the second track
+            current_volume = self.track2.getVolume()
+            if current_volume < 1.0:
+                self.track2.setVolume(current_volume + 0.01)
+
+        # Return task.cont to keep the task running
+        return Task.cont
+
     def startCredits(self):
+        self.fade_task.start()
         self.creditsSequence = Sequence(
         LerpColorScaleInterval(self.screenCover, 1, Vec4(1, 1, 1, 1), startColorScale = Vec4(1, 1, 1, 0)),
         LerpColorScaleInterval(self.text, 1, Vec4(1, 1, 1, 1), startColorScale = Vec4(1, 1, 1, 0)),
@@ -84,6 +135,7 @@ Jesse Schell for fighting for Toontown Online's Official Return
         base.ignore('space')
         base.ignore('escape')
         base.transitions.noFade()
+        self.fade_task.destroy()
         if self.creditsSequence:
             self.creditsSequence.finish()
             self.creditsSequence = None
