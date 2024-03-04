@@ -6,7 +6,7 @@ lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
 lFoggyFjords = "Foggy Fjord"
 lTwilightDreamland = "Twlight Dreamland"
-lHarmonyHaven = "The Land of Melody"
+lHarmoniousHaven = "The Land of Melody"
 lToontownCentral = 'Toontown Central'
 lToontownStadium = 'Toontown Stadium'
 lFunnyFarms = 'Funny Farms'
@@ -991,7 +991,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1104: "Let's go in the elevator!",
                                1105: "Let's go to %s!" % lToontownCentral,
                                1106: "Let's go to %s!" % lFoggyFjords,
-                               1107: "Let's go to %s!" % lHarmonyHaven,
+                               1107: "Let's go to %s!" % lHarmoniousHaven,
                                1108: "Let's go to %s!" % lFloweringGrove,
                                1109: "Let's go to %s!" % lTundraWonderland,
                                1110: "Let's go to %s!" % lTwilightDreamland,

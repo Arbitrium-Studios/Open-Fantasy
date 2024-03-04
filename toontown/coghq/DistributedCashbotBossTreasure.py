@@ -5,7 +5,7 @@ from pandac.PandaModules import Point3
 Models = {ToontownGlobals.ToontownCentral: 'phase_4/models/props/icecream',
           ToontownGlobals.FoggyFjords: 'phase_6/models/props/starfish_treasure',
           ToontownGlobals.TundraWonderland: 'phase_8/models/props/snowflake_treasure',
-          ToontownGlobals.HarmonyHaven: 'phase_6/models/props/music_treasure',
+          ToontownGlobals.HarmoniousHaven: 'phase_6/models/props/music_treasure',
           ToontownGlobals.FloweringGrove: 'phase_8/models/props/flower_treasure',
           ToontownGlobals.TwilightDreamland: 'phase_8/models/props/zzz_treasure'}
 

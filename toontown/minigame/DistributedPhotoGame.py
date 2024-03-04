@@ -1536,7 +1536,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
             self.constructDD()
         elif zone == ToontownGlobals.FloweringGrove:
             self.constructDG()
-        elif zone == ToontownGlobals.HarmonyHaven:
+        elif zone == ToontownGlobals.HarmoniousHaven:
             self.constructMM()
         elif zone == ToontownGlobals.TundraWonderland:
             self.constructBR()
@@ -1551,7 +1551,7 @@ class DistributedPhotoGame(DistributedMinigame, PhotoGameBase.PhotoGameBase):
             self.destructDD()
         elif zone == ToontownGlobals.FloweringGrove:
             self.destructDG()
-        elif zone == ToontownGlobals.HarmonyHaven:
+        elif zone == ToontownGlobals.HarmoniousHaven:
             self.destructMM()
         elif zone == ToontownGlobals.TundraWonderland:
             self.destructBR()

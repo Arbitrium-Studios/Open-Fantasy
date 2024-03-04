@@ -255,7 +255,7 @@ class DistributedCatchGame(DistributedMinigame):
         fruits = {ToontownGlobals.ToontownCentral: 'apple',
                   ToontownGlobals.FoggyFjords: 'orange',
                   ToontownGlobals.FloweringGrove: 'pear',
-                  ToontownGlobals.HarmonyHaven: 'coconut',
+                  ToontownGlobals.HarmoniousHaven: 'coconut',
                   ToontownGlobals.TundraWonderland: 'watermelon',
                   ToontownGlobals.TwilightDreamland: 'pineapple'}
         self.fruitName = fruits[self.getSafezoneId()]

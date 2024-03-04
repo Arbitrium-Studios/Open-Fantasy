@@ -24,7 +24,7 @@ class DiscordRPC(object):
         3200: ["tundra-wonderland", "on Sleet Street"],
         3300: ["tundra-wonderland", "on Polar Place"],
 
-        4000: ["harmony-haven", "in Harmony Haven"],
+        4000: ["harmony-haven", "in Harmonious Haven"],
         4100: ["harmony-haven", "on Alto Avenue"],
         4200: ["harmony-haven", "on Baritone Boulevard"],
         4300: ["harmony-haven", "on Tenor Terrace"],

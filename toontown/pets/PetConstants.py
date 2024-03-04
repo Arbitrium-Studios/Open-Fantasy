@@ -57,6 +57,6 @@ TELEPORT_OUT_DURATION = 4.5
 ZoneToCostRange = {ToontownGlobals.ToontownCentral: (100, 500),
                    ToontownGlobals.FoggyFjords: (600, 1700),
                    ToontownGlobals.FloweringGrove: (1000, 2500),
-                   ToontownGlobals.HarmonyHaven: (1500, 3000),
+                   ToontownGlobals.HarmoniousHaven: (1500, 3000),
                    ToontownGlobals.TundraWonderland: (2500, 4000),
                    ToontownGlobals.TwilightDreamland: (3000, 5000)}

@@ -381,7 +381,7 @@ class DistributedRingGame(DistributedMinigame):
         difficultyDistributions = {ToontownGlobals.ToontownCentral: [14, 2, 0],
                                    ToontownGlobals.FoggyFjords: [10, 6, 0],
                                    ToontownGlobals.FloweringGrove: [4, 12, 0],
-                                   ToontownGlobals.HarmonyHaven: [4, 8, 4],
+                                   ToontownGlobals.HarmoniousHaven: [4, 8, 4],
                                    ToontownGlobals.TundraWonderland: [4, 6, 6],
                                    ToontownGlobals.TwilightDreamland: [2, 6, 8]}
         for distr in list(difficultyDistributions.values()):
@@ -440,7 +440,7 @@ class DistributedRingGame(DistributedMinigame):
                                                                                                      1,
                                                                                                      1,
                                                                                                      1] * 2],
-                              ToontownGlobals.HarmonyHaven: [[0] * 4 + [1] * 8 + [2] * 4,
+                              ToontownGlobals.HarmoniousHaven: [[0] * 4 + [1] * 8 + [2] * 4,
                                                                   [0,
                                                                    0,
                                                                    1,

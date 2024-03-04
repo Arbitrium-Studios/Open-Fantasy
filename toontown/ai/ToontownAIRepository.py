@@ -270,13 +270,13 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.generateHood(BRHoodDataAI, ToontownGlobals.TundraWonderland)
 
         # Minnie's Melodyland
-        self.zoneTable[ToontownGlobals.HarmonyHaven] = (
-            (ToontownGlobals.HarmonyHaven, 1,
+        self.zoneTable[ToontownGlobals.HarmoniousHaven] = (
+            (ToontownGlobals.HarmoniousHaven, 1,
              0), (ToontownGlobals.AltoAvenue, 1, 1),
             (ToontownGlobals.BaritoneBoulevard, 1,
              1), (ToontownGlobals.TenorTerrace, 1, 1)
         )
-        self.generateHood(MMHoodDataAI, ToontownGlobals.HarmonyHaven)
+        self.generateHood(MMHoodDataAI, ToontownGlobals.HarmoniousHaven)
 
         # Daisy Gardens
         self.zoneTable[ToontownGlobals.FloweringGrove] = (

@@ -110,7 +110,7 @@ class DistributedCogThiefGame(DistributedMinigame):
             self.gameBoard.find('**/floor_DD').show()
         elif zone == ToontownGlobals.FloweringGrove:
             self.gameBoard.find('**/floor_DG').show()
-        elif zone == ToontownGlobals.HarmonyHaven:
+        elif zone == ToontownGlobals.HarmoniousHaven:
             self.gameBoard.find('**/floor_MM').show()
         elif zone == ToontownGlobals.TundraWonderland:
             self.gameBoard.find('**/floor_BR').show()

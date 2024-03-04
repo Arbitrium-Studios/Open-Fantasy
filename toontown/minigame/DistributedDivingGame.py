@@ -536,7 +536,7 @@ class DistributedDivingGame(DistributedMinigame):
                                                                   1.2,
                                                                   65,
                                                                   1],
-                                   ToontownGlobals.HarmonyHaven: [2,
+                                   ToontownGlobals.HarmoniousHaven: [2,
                                                                        1.0,
                                                                        65,
                                                                        1],

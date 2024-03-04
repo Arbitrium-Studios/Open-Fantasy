@@ -18,7 +18,7 @@ NoTrolleyZoneOverride = -1
 SafeZones = [ToontownGlobals.ToontownCentral,
              ToontownGlobals.FoggyFjords,
              ToontownGlobals.FloweringGrove,
-             ToontownGlobals.HarmonyHaven,
+             ToontownGlobals.HarmoniousHaven,
              ToontownGlobals.TundraWonderland,
              ToontownGlobals.TwilightDreamland]
 

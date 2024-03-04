@@ -192,7 +192,7 @@ class DistributedCashbotBossAI(
             if goon.strength <= 15:
                 style = random.choice([ToontownGlobals.FoggyFjords,
                                        ToontownGlobals.FloweringGrove,
-                                       ToontownGlobals.HarmonyHaven])
+                                       ToontownGlobals.HarmoniousHaven])
                 healAmount = 10
             else:
                 style = random.choice(

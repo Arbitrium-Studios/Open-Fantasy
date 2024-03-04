@@ -684,7 +684,7 @@ The Toon Tips Update:
     > Implement my version of Toontown Relived NPC Toon Menu but using the Toon Menu used in-game.
     > Make Knock Knock Doors heal you on the Street, giving there to be a reason to use the doors.
     > Add the Silly Meter back into Toon Hall but don't take it out for repairs, just leave it not functional.
-    > Make the instruments in Harmony Haven playable when you step on them.
+    > Make the instruments in Harmonious Haven playable when you step on them.
     > Make the text spoken in DDL, thought bubbles.
     > Model Overhaul Update:
         > Remake the Treasure Icons in 3D like what Corporate Clash did.
@@ -711,7 +711,7 @@ The Toon Tips Update:
             > The playground overtaken by the Guildedbots is the Vibrant Valley Kingdom.
             > The boss should be a unisex king or queen 
     > Playground Updates:
-        > The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Central, Toontown Docks, Construction Zone, Flowering Grove, Harmony Haven, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
+        > The Storyline should go Vibrant Valley Kingdom - Part 1, Toontown Central, Toontown Docks, Construction Zone, Flowering Grove, Harmonious Haven, Funny Farm, Tundra Wonderland, Drowsy Dreamland, Acorn Acres, Vibrant Valley Kingdom - Part 2, Overclocked Task Force, 
         > Vibrant Valley Kingdom:
             > This area is accessed in the Prologue at first, it's where your Toon is from and had to escape from as the Cogs attacked during an event called Operation: Takeover.
         > Rework the taskline so it feels less grindy.
@@ -749,7 +749,7 @@ The Toon Tips Update:
             > Add more trees around the playground.
             > Flatten FG so the streets and buildings are on the same level.
             > Replace the daffodil with the giant flower in the middle of FG
-        > Harmony Haven:
+        > Harmonious Haven:
             > Have all instruments you step on play a noise from their corresponding instrument like they do in Toontown 2.0
         > In Drowsy Dreamland, do the following:
             > Make the pillow walkable

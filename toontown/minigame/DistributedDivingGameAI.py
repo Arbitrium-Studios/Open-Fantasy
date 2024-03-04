@@ -241,7 +241,7 @@ class DistributedDivingGameAI(DistributedMinigameAI):
     difficultyPatternsAI = {ToontownGlobals.ToontownCentral: [3.5, fishProportions[0], 1.5],
                             ToontownGlobals.FoggyFjords: [3.0, fishProportions[1], 1.8],
                             ToontownGlobals.FloweringGrove: [2.5, fishProportions[2], 2.1],
-                            ToontownGlobals.HarmonyHaven: [2.0, fishProportions[3], 2.4],
+                            ToontownGlobals.HarmoniousHaven: [2.0, fishProportions[3], 2.4],
                             ToontownGlobals.TundraWonderland: [2.0, fishProportions[4], 2.7],
                             ToontownGlobals.TwilightDreamland: [1.5, fishProportions[5], 3.0]}
 
