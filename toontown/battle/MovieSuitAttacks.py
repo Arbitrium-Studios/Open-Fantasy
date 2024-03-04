@@ -1081,7 +1081,7 @@ def getColorTrack(attack, toon, part, color, delay = 0.0, duration = 1.0):
 
     def changeColor(parts):
         track = Parallel()
-        for partNum in xrange(0, parts.getNumPaths()):
+        for partNum in range(0, parts.getNumPaths()):
             nextPart = parts.getPath(partNum)
             track.append(Func(nextPart.setColorScale, color))
 
@@ -1089,7 +1089,7 @@ def getColorTrack(attack, toon, part, color, delay = 0.0, duration = 1.0):
 
     def resetColor(parts):
         track = Parallel()
-        for partNum in xrange(0, parts.getNumPaths()):
+        for partNum in range(0, parts.getNumPaths()):
             nextPart = parts.getPath(partNum)
             track.append(Func(nextPart.clearColorScale))
 
@@ -3058,7 +3058,7 @@ def doCigarSmoke(attack):
 
     def changeColor(parts):
         track = Parallel()
-        for partNum in xrange(0, parts.getNumPaths()):
+        for partNum in range(0, parts.getNumPaths()):
             nextPart = parts.getPath(partNum)
             track.append(Func(nextPart.setColorScale, Vec4(0.5, 0.5, 0.5, 1)))
 
@@ -3066,7 +3066,7 @@ def doCigarSmoke(attack):
 
     def resetColor(parts):
         track = Parallel()
-        for partNum in xrange(0, parts.getNumPaths()):
+        for partNum in range(0, parts.getNumPaths()):
             nextPart = parts.getPath(partNum)
             track.append(Func(nextPart.clearColorScale))
 
