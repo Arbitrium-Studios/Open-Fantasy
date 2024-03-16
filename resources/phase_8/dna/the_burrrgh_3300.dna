@@ -469,52 +469,31 @@ group "theBurrrgh" [
        letters [ "T" ]
       ]
       text [
-       letters [ "U" ]
+       letters [ "h" ]
       ]
       text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "R" ]
-      ]
-      text [
-       letters [ "A" ]
+       letters [ "e" ]
       ]
       text [
        letters [ " " ]
       ]
       text [
-       letters [ "W" ]
+       letters [ "B" ]
       ]
       text [
-       letters [ "O" ]
+       letters [ "r" ]
       ]
       text [
-       letters [ "N" ]
+       letters [ "r" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "r" ]
       ]
       text [
-       letters [ "E" ]
+       letters [ "g" ]
       ]
       text [
-       letters [ "R" ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "A" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "D" ]
+       letters [ "h" ]
       ]
       text [
        letters [ " " ]

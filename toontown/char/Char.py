@@ -255,9 +255,9 @@ class Char(Avatar.Avatar):
         self.eyesClosed = None
         if self._name == 'mickey' or self._name == 'minnie':
             self.eyesOpen = loader.loadTexture(
-                'phase_3/maps/eyes1.jpg', 'phase_3/maps/eyes1_a.rgb')
+                'phase_3/maps/eyes1.png', 'phase_3/maps/eyes1_a.rgb')
             self.eyesClosed = loader.loadTexture(
-                'phase_3/maps/mickey_eyes_closed.jpg',
+                'phase_3/maps/mickey_eyes_closed.png',
                 'phase_3/maps/mickey_eyes_closed_a.rgb')
             self.eyes = self.find('**/1200/**/eyes')
             self.eyes.setBin('transparent', 0)
@@ -291,10 +291,10 @@ class Char(Avatar.Avatar):
 
         elif self._name == 'pluto':
             self.eyesOpen = loader.loadTexture(
-                'phase_6/maps/plutoEyesOpen.jpg',
+                'phase_6/maps/plutoEyesOpen.png',
                 'phase_6/maps/plutoEyesOpen_a.rgb')
             self.eyesClosed = loader.loadTexture(
-                'phase_6/maps/plutoEyesClosed.jpg',
+                'phase_6/maps/plutoEyesClosed.png',
                 'phase_6/maps/plutoEyesClosed_a.rgb')
             self.eyes = self.find('**/1000/**/eyes')
             self.lpupil = self.find('**/1000/**/joint_pupilL')
@@ -327,10 +327,10 @@ class Char(Avatar.Avatar):
             self.drawInFront('joint_pupil?', 'eyes*', -3)
         elif self._name == 'chip' or self._name == 'dale':
             self.eyesOpen = loader.loadTexture(
-                'phase_6/maps/dale_eye1.jpg',
+                'phase_6/maps/dale_eye1.png',
                 'phase_6/maps/dale_eye1_a.rgb')
             self.eyesClosed = loader.loadTexture(
-                'phase_6/maps/chip_dale_eye1_blink.jpg',
+                'phase_6/maps/chip_dale_eye1_blink.png',
                 'phase_6/maps/chip_dale_eye1_blink_a.rgb')
             self.eyes = self.find('**/eyes')
             self.lpupil = self.find('**/pupil_left')

@@ -253,17 +253,17 @@ class Pet(Avatar.Avatar):
             self.leftHighlight.hide()
         if self.style[8]:
             self.eyesOpenTexture = loader.loadTexture(
-                'phase_4/maps/BeanEyeBoys2.jpg',
+                'phase_4/maps/BeanEyeBoys2.png',
                 'phase_4/maps/BeanEyeBoys2_a.rgb')
             self.eyesClosedTexture = loader.loadTexture(
-                'phase_4/maps/BeanEyeBoysBlink.jpg',
+                'phase_4/maps/BeanEyeBoysBlink.png',
                 'phase_4/maps/BeanEyeBoysBlink_a.rgb')
         else:
             self.eyesOpenTexture = loader.loadTexture(
-                'phase_4/maps/BeanEyeGirlsNew.jpg',
+                'phase_4/maps/BeanEyeGirlsNew.png',
                 'phase_4/maps/BeanEyeGirlsNew_a.rgb')
             self.eyesClosedTexture = loader.loadTexture(
-                'phase_4/maps/BeanEyeGirlsBlinkNew.jpg',
+                'phase_4/maps/BeanEyeGirlsBlinkNew.png',
                 'phase_4/maps/BeanEyeGirlsBlinkNew_a.rgb')
         self.eyesOpenTexture.setMinfilter(Texture.FTLinear)
         self.eyesOpenTexture.setMagfilter(Texture.FTLinear)

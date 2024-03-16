@@ -142,44 +142,47 @@ group "daisysGarden" [
       code [ "TT_Comedy" ]
       color [ 0.439216 0.247059 0.184314 1 ]
       pos [ 0 0 -1.4 ]
-      scale [ 0.8 1 0.8 ]
+      scale [ 1.2 1 1.2 ]
       wiggle [ 3 ]
       stomp [ 0.0367716 ]
       text [
-       letters [ "F" ]
+       letters [ "D" ]
       ]
       text [
-       letters [ "O" ]
+       letters [ "o" ]
       ]
       text [
-       letters [ "G" ]
+       letters [ "n" ]
       ]
       text [
-       letters [ "G" ]
+       letters [ "a" ]
       ]
       text [
-       letters [ "Y" ]
+       letters [ "l" ]
+      ]
+      text [
+       letters [ "d" ]
+      ]
+      text [
+       letters [ "'" ]
+      ]
+      text [
+       letters [ "s" ]
       ]
       text [
        letters [ " " ]
       ]
       text [
-       letters [ "F" ]
-      ]
-      text [
-       letters [ "J" ]
-      ]
-      text [
-       letters [ "" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "R" ]
-      ]
-      text [
        letters [ "D" ]
+      ]
+      text [
+       letters [ "o" ]
+      ]
+      text [
+       letters [ "c" ]
+      ]
+      text [
+       letters [ "k" ]
       ]
      ]
     ]

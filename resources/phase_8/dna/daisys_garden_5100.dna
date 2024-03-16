@@ -684,31 +684,19 @@ group "daisysGarden" [
       width [ 33.5514 ]
       height [ 33.5514 ]
       text [
-       letters [ "F" ]
+       letters [ "D" ]
       ]
       text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "W" ]
-      ]
-      text [
-       letters [ "E" ]
-      ]
-      text [
-       letters [ "R" ]
+       letters [ "A" ]
       ]
       text [
        letters [ "I" ]
       ]
       text [
-       letters [ "N" ]
+       letters [ "S" ]
       ]
       text [
-       letters [ "G" ]
+       letters [ "Y" ]
       ]
       text [
        letters [ " " ]
@@ -717,16 +705,22 @@ group "daisysGarden" [
        letters [ "G" ]
       ]
       text [
+       letters [ "A" ]
+      ]
+      text [
        letters [ "R" ]
       ]
       text [
-       letters [ "O" ]
-      ]
-      text [
-       letters [ "V" ]
+       letters [ "D" ]
       ]
       text [
        letters [ "E" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
      ]
     ]

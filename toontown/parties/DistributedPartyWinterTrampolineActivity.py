@@ -10,4 +10,4 @@ class DistributedPartyWinterTrampolineActivity(
             cr,
             doJellyBeans,
             doTricks,
-            'phase_13/maps/tt_t_ara_pty_trampolineWinter.jpg')
+            'phase_13/maps/tt_t_ara_pty_trampolineWinter.png')

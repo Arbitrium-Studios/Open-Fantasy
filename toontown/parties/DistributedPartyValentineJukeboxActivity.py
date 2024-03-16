@@ -16,7 +16,7 @@ class DistributedPartyValentineJukeboxActivity(
     def load(self):
         DistributedPartyJukeboxActivityBase.load(self)
         newTexture = loader.loadTexture(
-            'phase_13/maps/tt_t_ara_pty_jukeboxValentineA.jpg',
+            'phase_13/maps/tt_t_ara_pty_jukeboxValentineA.png',
             'phase_13/maps/tt_t_ara_pty_jukeboxValentineA_a.rgb')
         case = self.jukebox.find('**/jukeboxGlass')
         if not case.isEmpty():

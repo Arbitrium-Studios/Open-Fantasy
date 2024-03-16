@@ -177,7 +177,7 @@ store_suit_point [ 292, STREET_POINT, 730 85 -0.5 ]
 store_suit_point [ 293, STREET_POINT, 730 95 -0.5 ]
 store_suit_point [ 294, FRONT_DOOR_POINT, 720 65 0, 23 ]
 store_suit_point [ 295, FRONT_DOOR_POINT, 712 116 0, 24 ]
-group "ToontropolisCenter" [
+group "toontownCentral" [
  visgroup "2301" [
   vis [   "2303"   "2304"   "2305"   "2302"   "2301"   ]
   battle_cell [ 20 20 20 20 -0.5 ]
@@ -13814,40 +13814,43 @@ group "ToontropolisCenter" [
       width [ 36.3888 ]
       height [ 36.3888 ]
       text [
-       letters [ "F" ]
+       letters [ "D" ]
       ]
       text [
        letters [ "O" ]
       ]
       text [
-       letters [ "G" ]
+       letters [ "N" ]
       ]
       text [
-       letters [ "G" ]
+       letters [ "A" ]
       ]
       text [
-       letters [ "Y" ]
+       letters [ "L" ]
+      ]
+      text [
+       letters [ "D" ]
+      ]
+      text [
+       letters [ "'" ]
+      ]
+      text [
+       letters [ "S" ]
       ]
       text [
        letters [ " " ]
       ]
       text [
-       letters [ "F" ]
-      ]
-      text [
-       letters [ "J" ]
-      ]
-      text [
-       letters [ "" ]
+       letters [ "D" ]
       ]
       text [
        letters [ "O" ]
       ]
       text [
-       letters [ "R" ]
+       letters [ "C" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "K" ]
       ]
      ]
     ]

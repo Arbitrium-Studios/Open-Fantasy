@@ -617,7 +617,7 @@ class ItemSelector(DirectFrame):
             self.locator1.setPos(0, 0, 0.035)
             self.locator2.setPos(0.0, 0.0, 0.0)
             tex = loader.loadTexture(
-                'phase_6/maps/NoAccessoryIcon3.jpg',
+                'phase_6/maps/NoAccessoryIcon3.png',
                 'phase_6/maps/NoAccessoryIcon3_a.rgb')
             self.uiImagePlane.component('geom0').setTexture(tex, self.texCount)
             self.texCount += 1
@@ -812,7 +812,7 @@ class ItemSelector(DirectFrame):
                                           KartDNA.bwwType]:
                 texNodePath = getTexCardNode(self.currItem)
                 tex = loader.loadTexture(
-                    'phase_6/maps/%s.jpg' %
+                    'phase_6/maps/%s.png' %
                     texNodePath,
                     'phase_6/maps/%s_a.rgb' %
                     texNodePath)
@@ -822,13 +822,13 @@ class ItemSelector(DirectFrame):
                 else:
                     texNodePath = getTexCardNode(self.currItem)
                 tex = loader.loadTexture(
-                    'phase_6/maps/%s.jpg' %
+                    'phase_6/maps/%s.png' %
                     texNodePath,
                     'phase_6/maps/%s_a.rgb' %
                     texNodePath)
             elif self.currAccessoryType in [KartDNA.bodyColor, KartDNA.accColor]:
                 tex = loader.loadTexture(
-                    'phase_6/maps/Kartmenu_paintbucket.jpg',
+                    'phase_6/maps/Kartmenu_paintbucket.png',
                     'phase_6/maps/Kartmenu_paintbucket_a.rgb')
                 if self.currItem == InvalidEntry:
                     self.uiImagePlane.component(
@@ -841,7 +841,7 @@ class ItemSelector(DirectFrame):
                 kartDecal = getDecalId(kart.kartDNA[KartDNA.bodyType])
                 texNodePath = getTexCardNode(self.currItem)
                 tex = loader.loadTexture(
-                    'phase_6/maps/%s.jpg' %
+                    'phase_6/maps/%s.png' %
                     texNodePath %
                     kartDecal,
                     'phase_6/maps/%s_a.rgb' %
@@ -849,7 +849,7 @@ class ItemSelector(DirectFrame):
                     kartDecal)
             else:
                 tex = loader.loadTexture(
-                    'phase_6/maps/NoAccessoryIcon3.jpg',
+                    'phase_6/maps/NoAccessoryIcon3.png',
                     'phase_6/maps/NoAccessoryIcon3_a.rgb')
             colorTypeList = [KartDNA.bodyColor, KartDNA.accColor]
             if self.currItem == InvalidEntry:
@@ -873,7 +873,7 @@ class ItemSelector(DirectFrame):
                 'geom0').setColorScale(1.0, 1.0, 1.0, 1.0)
             self.uiImagePlane.component('geom0').setTexture(
                 loader.loadTexture(
-                    'phase_6/maps/NoAccessoryIcon3.jpg',
+                    'phase_6/maps/NoAccessoryIcon3.png',
                     'phase_6/maps/NoAccessoryIcon3_a.rgb'),
                 self.texCount)
             self.texCount += 1

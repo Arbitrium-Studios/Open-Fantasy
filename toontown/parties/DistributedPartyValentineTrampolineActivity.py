@@ -10,4 +10,4 @@ class DistributedPartyValentineTrampolineActivity(
             cr,
             doJellyBeans,
             doTricks,
-            'phase_13/maps/tt_t_ara_pty_trampolineValentine.jpg')
+            'phase_13/maps/tt_t_ara_pty_trampolineValentine.png')
