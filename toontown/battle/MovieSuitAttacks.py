@@ -543,7 +543,7 @@ def doDefault(attack):
             return doFountainPen(attack)
         elif suitName == 'ym':
             attack['id'] = RUBBER_STAMP
-            attacl['group'] = ATK_TGT_GROUP
+            attack['group'] = ATK_TGT_GROUP
             attack['name'] = 'RubberStamp'
             attack['animName'] = 'rubber-stamp'
             return doRubberStamp(attack)
