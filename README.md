@@ -22,7 +22,7 @@
 
 ### Setup - Windows:
 
-> After cloning the repository, you will need to clone the resources repository inside the directory where you cloned the source repo.
+> After cloning the repository, you will need to navigate to the root repository via command prompt and use `git submodule update --init` to grab the submodules which includes the resources repository
 >
 > Secondly, you would have to clone, compile, and install a specific version of [Panda3D][PandaLink] to run this source code!
 >
