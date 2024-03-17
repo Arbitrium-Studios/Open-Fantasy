@@ -2243,6 +2243,7 @@ def doDownsize(attack):
 def doPinkSlip(attack):
     suit = attack['suit']
     battle = attack['battle']
+    targets = attack['target']
     if attack['group'] == ATK_TGT_SINGLE:
         target = attack['target']
         toon = target[0]['toon']
@@ -2497,12 +2498,7 @@ def doSacked(attack):
 def doGlowerPower(attack):
     suit = attack['suit']
     battle = attack['battle']
-    leftKnives = []
-    rightKnives = []
-    for i in range(0, 3):
-        leftKnives.append(globalPropPool.getProp('dagger'))
-        rightKnives.append(globalPropPool.getProp('dagger'))
-
+    targets = attack['target']
     suitTrack = getSuitTrack(attack)
     suitName = attack['suitName']
     if suitName == 'hh':
@@ -2514,43 +2510,56 @@ def doGlowerPower(attack):
     else:
         leftPosPoints = [Point3(0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
         rightPosPoints = [Point3(-0.4, 3.8, 3.7), MovieUtil.PNT3_ZERO]
-    leftKnifeTracks = Parallel()
-    rightKnifeTracks = Parallel()
-    for i in range(0, 3):
-        knifeDelay = 0.11
-        leftTrack = Sequence(
-            Wait(1.1),
-            Wait(i * knifeDelay),
-            getPropAppearTrack(leftKnives[i], suit, leftPosPoints, 1e-06, Point3(0.4, 0.4, 0.4), scaleUpTime=0.1),
-            getPropThrowTrack(attack, leftKnives[i], hitPointNames=['face'], missPointNames=['miss'], hitDuration=0.3, missDuration=0.3)
-        )
-        leftKnifeTracks.append(leftTrack)
-        rightTrack = Sequence(
-            Wait(1.1),
-            Wait(i * knifeDelay),
-            getPropAppearTrack(rightKnives[i], suit, rightPosPoints, 1e-06, Point3(0.4, 0.4, 0.4), scaleUpTime=0.1),
-            getPropThrowTrack(attack, rightKnives[i], hitPointNames=['face'], missPointNames=['miss'], hitDuration=0.3, missDuration=0.3)
-        )
-        rightKnifeTracks.append(rightTrack)
+    allLeftKnifeTracks = Parallel()
+    allRightKnifeTracks = Parallel()
+    for t in targets:
+        leftKnives = []
+        rightKnives = []
+        for i in range(0, 3):
+            leftKnives.append(globalPropPool.getProp('dagger'))
+            rightKnives.append(globalPropPool.getProp('dagger'))
+
+        leftKnifeTracks = Parallel()
+        rightKnifeTracks = Parallel()
+        for i in range(0, 3):
+            knifeDelay = 0.11
+            leftTrack = Sequence(
+                Wait(1.1),
+                Wait(i * knifeDelay),
+                getPropAppearTrack(leftKnives[i], suit, leftPosPoints, 1e-06, Point3(0.4, 0.4, 0.4), scaleUpTime=0.1),
+                getPropThrowTrack(attack, leftKnives[i], hitPointNames=['face'], missPointNames=['miss'], hitDuration=0.3, missDuration=0.3, target=t)
+            )
+            leftKnifeTracks.append(leftTrack)
+            rightTrack = Sequence(
+                Wait(1.1),
+                Wait(i * knifeDelay),
+                getPropAppearTrack(rightKnives[i], suit, rightPosPoints, 1e-06, Point3(0.4, 0.4, 0.4), scaleUpTime=0.1),
+                getPropThrowTrack(attack, rightKnives[i], hitPointNames=['face'], missPointNames=['miss'], hitDuration=0.3, missDuration=0.3, target=t)
+            )
+            rightKnifeTracks.append(rightTrack)
+        
+        allLeftKnifeTracks.append(leftKnifeTracks)
+        allRightKnifeTracks.append(rightKnifeTracks)
 
     damageAnims = [['slip-backward', 0.01, 0.35]]
-    toonTrack = getToonTrack(attack, damageDelay=1.6, splicedDamageAnims=damageAnims, dodgeDelay=0.7, dodgeAnimNames=['sidestep'])
+    toonTracks = getToonTracks(attack, damageDelay=1.6, splicedDamageAnims=damageAnims, dodgeDelay=0.7, dodgeAnimNames=['sidestep'])
     soundTrack = getSoundTrack('SA_glower_power.ogg', delay=1.1, node=suit)
-    return Parallel(suitTrack, toonTrack, soundTrack, leftKnifeTracks, rightKnifeTracks)
+    return Parallel(suitTrack, toonTracks, soundTrack, allLeftKnifeTracks, allRightKnifeTracks)
 
 
 def doWindsor(attack):
     suit = attack['suit']
     battle = attack['battle']
-    if attack['group'] == ATK_TGT_SINGLE:
-        target = attack['target']
-        toon = target[0]['toon']
+    targets = attack['target']
+    throwDelay = 2.17
+    damageDelay = 3.4
+    dodgeDelay = 2.4
+    suitTrack = getSuitTrack(attack)
+    posPoints = [Point3(0.02, 0.88, 0.48), VBase3(99, -3, -108.2)]
+    tiePropTracks = Parallel()
+    for t in targets:
+        toon = t['toon']
         tie = globalPropPool.getProp('%s-windsor' % ('double' if attack['id'] == DOUBLE_WINDSOR else 'half'))
-        throwDelay = 2.17
-        damageDelay = 3.4
-        dodgeDelay = 2.4
-        suitTrack = getSuitTrack(attack)
-        posPoints = [Point3(0.02, 0.88, 0.48), VBase3(99, -3, -108.2)]
         tiePropTrack = getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, Point3(7, 7, 7), scaleUpTime=0.5)
         tiePropTrack.append(Wait(throwDelay))
         missPoint = __toonMissBehindPoint(toon, parent=battle)
@@ -2560,39 +2569,14 @@ def doWindsor(attack):
         hitPoint.setX(hitPoint.getX() - 1.1)
         hitPoint.setY(hitPoint.getY() - 0.7)
         hitPoint.setZ(hitPoint.getZ() + 0.9)
-        tiePropTrack.append(getPropThrowTrack(attack, tie, [hitPoint], [missPoint], hitDuration=0.4, missDuration=0.8, missScaleDown=0.3, parent=battle))
-        damageAnims = [['conked', 0.01, 0.01, 0.4],
-         ['cringe', 0.01, 0.7]]
-        toonTrack = getToonTrack(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
-        throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay + 1, node=suit)
-        return Parallel(suitTrack, toonTrack, tiePropTrack, throwSound)
-    else:
-        targets = attack['target']
-        throwDelay = 2.17
-        damageDelay = 3.4
-        dodgeDelay = 2.4
-        suitTrack = getSuitTrack(attack)
-        posPoints = [Point3(0.02, 0.88, 0.48), VBase3(99, -3, -108.2)]
-        tiePropTracks = Parallel()
-        for t in targets:
-            toon = t['toon']
-            tie = globalPropPool.getProp('%s-windsor' % ('double' if attack['id'] == DOUBLE_WINDSOR else 'half'))
-            tiePropTrack = getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, Point3(7, 7, 7), scaleUpTime=0.5)
-            tiePropTrack.append(Wait(throwDelay))
-            missPoint = __toonMissBehindPoint(toon, parent=battle)
-            missPoint.setX(missPoint.getX() - 1.1)
-            missPoint.setZ(missPoint.getZ() + 4)
-            hitPoint = __toonFacePoint(toon, parent=battle)
-            hitPoint.setX(hitPoint.getX() - 1.1)
-            hitPoint.setY(hitPoint.getY() - 0.7)
-            hitPoint.setZ(hitPoint.getZ() + 0.9)
-            tiePropTrack.append(getPropThrowTrack(attack, tie, [hitPoint], [missPoint], hitDuration=0.4, missDuration=0.8, missScaleDown=0.3, parent=battle, target=t))
-            tiePropTracks.append(tiePropTrack)
-        damageAnims = [['conked', 0.01, 0.01, 0.4],
-         ['cringe', 0.01, 0.7]]
-        toonTracks = getToonTracks(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
-        throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay + 1, node=suit)
-        return Parallel(suitTrack, toonTracks, tiePropTracks, throwSound)
+        tiePropTrack.append(getPropThrowTrack(attack, tie, [hitPoint], [missPoint], hitDuration=0.4, missDuration=0.8, missScaleDown=0.3, parent=battle, target=t))
+        tiePropTracks.append(tiePropTrack)
+    
+    damageAnims = [['conked', 0.01, 0.01, 0.4],
+     ['cringe', 0.01, 0.7]]
+    toonTracks = getToonTracks(attack, damageDelay=damageDelay, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay, dodgeAnimNames=['sidestep'])
+    throwSound = getSoundTrack('SA_powertie_throw.ogg', delay=throwDelay + 1, node=suit)
+    return Parallel(suitTrack, toonTracks, tiePropTracks, throwSound)
 
 
 def doHeadShrink(attack):
