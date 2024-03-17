@@ -11,8 +11,8 @@ place_model "phase_6/models/modules/trolley_station_DD" [
 	store_node [ "prop" "prop_trolley_station" ]
 	]
 
-place_model "phase_6/models/neighborhoods/donalds_dock" [
- 	store_node [ "prop" "donalds_dock" ]
+place_model "phase_6/models/neighborhoods/foggy_fjord" [
+ 	store_node [ "prop" "foggy_fjord" ]
 	]
 
 place_model "phase_6/models/modules/gagShop_DD" [

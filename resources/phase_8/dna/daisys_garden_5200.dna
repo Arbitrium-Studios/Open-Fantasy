@@ -683,19 +683,31 @@ group "daisysGarden" [
       width [ 43.5654 ]
       height [ 43.5654 ]
       text [
-       letters [ "D" ]
+       letters [ "F" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "L" ]
+      ]
+      text [
+       letters [ "O" ]
+      ]
+      text [
+       letters [ "W" ]
+      ]
+      text [
+       letters [ "E" ]
+      ]
+      text [
+       letters [ "R" ]
       ]
       text [
        letters [ "I" ]
       ]
       text [
-       letters [ "S" ]
+       letters [ "N" ]
       ]
       text [
-       letters [ "Y" ]
+       letters [ "G" ]
       ]
       text [
        letters [ " " ]
@@ -704,22 +716,16 @@ group "daisysGarden" [
        letters [ "G" ]
       ]
       text [
-       letters [ "A" ]
-      ]
-      text [
        letters [ "R" ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "O" ]
+      ]
+      text [
+       letters [ "V" ]
       ]
       text [
        letters [ "E" ]
-      ]
-      text [
-       letters [ "N" ]
-      ]
-      text [
-       letters [ "S" ]
       ]
      ]
     ]
@@ -10929,43 +10935,40 @@ group "daisysGarden" [
       width [ 43.5654 ]
       height [ 43.5654 ]
       text [
-       letters [ "D" ]
+       letters [ "F" ]
       ]
       text [
        letters [ "O" ]
       ]
       text [
-       letters [ "N" ]
+       letters [ "G" ]
       ]
       text [
-       letters [ "A" ]
+       letters [ "G" ]
       ]
       text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "'" ]
-      ]
-      text [
-       letters [ "S" ]
+       letters [ "Y" ]
       ]
       text [
        letters [ " " ]
       ]
       text [
-       letters [ "D" ]
+       letters [ "F" ]
+      ]
+      text [
+       letters [ "J" ]
+      ]
+      text [
+       letters [ "" ]
       ]
       text [
        letters [ "O" ]
       ]
       text [
-       letters [ "C" ]
+       letters [ "R" ]
       ]
       text [
-       letters [ "K" ]
+       letters [ "D" ]
       ]
      ]
     ]

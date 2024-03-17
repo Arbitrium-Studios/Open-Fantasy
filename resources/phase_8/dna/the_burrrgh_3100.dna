@@ -7486,31 +7486,52 @@ group "theBurrrgh" [
        letters [ "T" ]
       ]
       text [
-       letters [ "H" ]
+       letters [ "U" ]
       ]
       text [
-       letters [ "E" ]
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "D" ]
+      ]
+      text [
+       letters [ "R" ]
+      ]
+      text [
+       letters [ "A" ]
       ]
       text [
        letters [ " " ]
       ]
       text [
-       letters [ "B" ]
+       letters [ "W" ]
+      ]
+      text [
+       letters [ "O" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "D" ]
+      ]
+      text [
+       letters [ "E" ]
       ]
       text [
        letters [ "R" ]
       ]
       text [
-       letters [ "R" ]
+       letters [ "L" ]
       ]
       text [
-       letters [ "R" ]
+       letters [ "A" ]
       ]
       text [
-       letters [ "G" ]
+       letters [ "N" ]
       ]
       text [
-       letters [ "H" ]
+       letters [ "D" ]
       ]
      ]
     ]
