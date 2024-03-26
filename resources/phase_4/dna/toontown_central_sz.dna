@@ -1,4 +1,4 @@
-group "ToontropolisCenter" [
+group "toontownCentral" [
  visgroup "2000:safe_zone" [
   vis [   "2000:safe_zone"   ]
   prop "npc_origin_3" [

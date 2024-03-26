@@ -2,7 +2,7 @@ store_suit_point [ 0, STREET_POINT, 25 25 -0.5 ]
 store_suit_point [ 1, STREET_POINT, 25 15 -0.5 ]
 store_suit_point [ 2, STREET_POINT, 55 15 -0.5 ]
 store_suit_point [ 3, STREET_POINT, 55 25 -0.5 ]
-group "ToontropolisCenterTutorial" [
+group "toontownCentralTutorial" [
  visgroup "20001" [
   vis [   "20001"   ]
   suit_edge [ 0 1 ]

@@ -15,7 +15,7 @@ class DGTownLoader(TownLoader.TownLoader):
     def load(self, zoneId):
         TownLoader.TownLoader.load(self, zoneId)
         Suit.loadSuits(3)
-        dnaFile = 'phase_8/dna/daisys_garden_' + \
+        dnaFile = 'phase_8/dna/flowering_grove_' + \
             str(self.canonicalBranchZone) + '.dna'
         self.createHood(dnaFile)
 

@@ -272,7 +272,7 @@ store_suit_point [ 506, STREET_POINT, -257 -231 -0.5 ]
 store_suit_point [ 507, SIDE_DOOR_POINT, -218 -90 0, 4 ]
 store_suit_point [ 508, FRONT_DOOR_POINT, -153 -537 0, 53 ]
 store_suit_point [ 509, SIDE_DOOR_POINT, -180 -629 0, 33 ]
-group "ToontropolisCenter" [
+group "toontownCentral" [
  visgroup "2101" [
   vis [   "2101"   "2102"   "2103"   "2104"   "2105"   "2106"   "2107"   "2132"   "2144"   "2155"   ]
   suit_edge [ 11 6 ]

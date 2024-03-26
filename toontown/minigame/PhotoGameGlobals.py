@@ -166,7 +166,7 @@ AREA_DATA[ToontownGlobals.FloweringGrove]['TIME'] = 100
 AREA_DATA[ToontownGlobals.FloweringGrove]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
 AREA_DATA[ToontownGlobals.FloweringGrove]['DNA_TRIO'] = (
-    'phase_8/dna/storage_DG_sz.dna', 'phase_8/dna/storage_DG.dna', 'phase_8/dna/daisys_garden_sz.dna')
+    'phase_8/dna/storage_DG_sz.dna', 'phase_8/dna/storage_DG.dna', 'phase_8/dna/flowering_grove_sz.dna')
 AREA_DATA[ToontownGlobals.FloweringGrove]['TRIPOD_OFFSET'] = Point3(0, 0, 6.0)
 AREA_DATA[ToontownGlobals.FloweringGrove]['START_HPR'] = Point3(0.0, 0.0, 0.0)
 AREA_DATA[ToontownGlobals.FloweringGrove]['PATHS'] = ([Point3(-37.252, 25.513, 0.025),

@@ -227,7 +227,7 @@ store_suit_point [ 585, SIDE_DOOR_POINT, 151 105 0, 18 ]
 store_suit_point [ 586, FRONT_DOOR_POINT, 154 119 0, 18 ]
 store_suit_point [ 587, SIDE_DOOR_POINT, 150 135 0, 17 ]
 store_suit_point [ 588, SIDE_DOOR_POINT, 158 0.999984 0, 21 ]
-group "theBurrrgh" [
+group "tundrawonderland" [
  visgroup "3101" [
   vis [   "3101"   "3102"   "3103"   "3127"   "3128"   "3129"   "3105"   "3104"   ]
   suit_edge [ 428 429 ]

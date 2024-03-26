@@ -192,7 +192,7 @@ store_suit_point [ 238, STREET_POINT, 212 155 -0.5 ]
 store_suit_point [ 239, STREET_POINT, 195 155 -0.5 ]
 store_suit_point [ 240, FRONT_DOOR_POINT, 212 144 0, 17 ]
 store_suit_point [ 241, SIDE_DOOR_POINT, 243 141 0, 17 ]
-group "theBurrrgh" [
+group "tundrawonderland" [
  visgroup "3201" [
   vis [   "3201"   "3202"   "3203"   "3204"   "3225"   ]
   suit_edge [ 2 0 ]

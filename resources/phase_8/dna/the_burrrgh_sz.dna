@@ -1,4 +1,4 @@
-group "theBurrrgh" [
+group "tundrawonderland" [
  visgroup "3000:safe_zone" [
   vis [   "3000:safe_zone"   ]
   group "fishing_pond_1" [
