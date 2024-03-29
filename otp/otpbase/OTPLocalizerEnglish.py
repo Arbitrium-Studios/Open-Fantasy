@@ -4,7 +4,7 @@ import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
-lFoggyFjords = "Foggy Fjord"
+lFoggyFjords = "Foggy Fjords"
 lTwilightDreamland = "Twlight Dreamland"
 lHarmonyHaven = "The Land of Melody"
 lToontownCentral = 'Toontown Central'

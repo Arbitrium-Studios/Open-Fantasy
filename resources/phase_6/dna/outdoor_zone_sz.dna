@@ -181,6 +181,9 @@ group "daisysGarden" [
       text [
        letters [ "D" ]
       ]
+      text [
+       letters [ "S" ]
+      ]
      ]
     ]
    ]
