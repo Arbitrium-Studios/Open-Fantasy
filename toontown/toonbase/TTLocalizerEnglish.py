@@ -4268,7 +4268,7 @@ LauncherPhaseNames = {0: 'Initialization',
                       12: Bossbot + ' HQ',
                       13: 'Parties'}
 LauncherProgress = '%(name)s (%(current)s of %(total)s)'
-LauncherStartingMessage = 'Starting Toontown Fantasy... '
+LauncherStartingMessage = "Starting PLAYER ZER0 STUDIO's Toontown Fantasy... "
 LauncherDownloadFile = 'Downloading update for ' + LauncherProgress + '...'
 LauncherDownloadFileBytes = 'Downloading update for ' + \
     LauncherProgress + ': %(bytes)s'
@@ -4289,7 +4289,7 @@ LauncherDownloadServerFileList = 'Updating Toontown...'
 LauncherCreatingDownloadDb = 'Updating Toontown...'
 LauncherDownloadClientFileList = 'Updating Toontown...'
 LauncherFinishedDownloadDb = 'Updating Toontown... '
-LauncherStartingGame = 'Starting Toontown...'
+LauncherStartingGame = "Starting PLAYER ZER0 STUDIO's Toontown Fantasy..."
 LauncherRecoverFiles = 'Updating Toontown. Recovering files...'
 LauncherCheckUpdates = 'Checking for updates for ' + LauncherProgress
 LauncherVerifyPhase = 'Updating Toontown...'

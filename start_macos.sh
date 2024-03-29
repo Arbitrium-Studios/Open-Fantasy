@@ -64,9 +64,8 @@ END
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Username [!] This does get stored in your source code so beware!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-                read -p "Username: " ttUsername
-                read -p "Password: " ttPassowrd
-                export LOGIN_TOKEN=$ttUsername$ttPassowrd
+                read $User
+                export LOGIN_TOKEN=$User
                 clear
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Welcome to Toontown Fantasy, $ttUsername!
@@ -90,12 +89,11 @@ END
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Username [!] This does get stored in your source code so beware!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-                read -p "Username: " ttUsername
-                read -p "Password: " ttPassowrd
-                export LOGIN_TOKEN=$ttUsername$ttPassowrd
+                read $User
+                export LOGIN_TOKEN=$User
                 clear
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-                echo Welcome to Toontown Fantasy, $ttUsername!
+                echo Welcome to Toontown Fantasy, $User!
                 echo The Tooniverse Awaits You!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 while [ true ]

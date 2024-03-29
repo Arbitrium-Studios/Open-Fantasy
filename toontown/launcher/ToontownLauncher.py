@@ -35,7 +35,7 @@ logErr = LogAndOutput(sys.__stderr__, log)
 sys.stdout = logOut
 sys.stderr = logErr
 
-print('\n\nStarting Toontown...')
+print("\n\nStarting PLAYER ZER0 STUDIO's Toontown Fantasy...")
 
 if 1:
     print(
@@ -51,7 +51,7 @@ if 1:
 
 class ToontownLauncher(LauncherBase):
     GameName = 'Toontown'
-    LauncherPhases = [3, 3.5, 4, 5, 5.5, 6, 7, 8, 9, 10, 11, 12, 13]
+    LauncherPhases = [3, 3.5, 4, 5, 5.5, 6, 7, 8, 9, 10, 11, 12, 13, 13.5]
     Localizer = TTLocalizer
 
     def __init__(self):
