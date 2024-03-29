@@ -65,7 +65,8 @@ echo Welcome to Toontown Fantasy, %TT_Username%!
 echo The Tooniverse Awaits You!
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 :startgame
-title Toontown Fantasy
+title PLAYER ZER0 STUDIO's Toontown Fantasy
+timeout 4
 %PPYTHON_PATH% -m toontown.launcher.QuickStartLauncher
 PAUSE
 goto startgame
