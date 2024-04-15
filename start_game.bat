@@ -40,6 +40,7 @@ START start_nutty_river_ai_server.bat
 START start_toon_valley_ai_server.bat
 cd ..
 SET TT_GAMESERVER=127.0.0.1
+timeout 4
 goto game
 
 :connect
@@ -66,7 +67,6 @@ echo The Tooniverse Awaits You!
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 :startgame
 title PLAYER ZER0 STUDIO's Toontown Fantasy
-timeout 4
 %PPYTHON_PATH% -m toontown.launcher.QuickStartLauncher
 PAUSE
 goto startgame
