@@ -139,7 +139,7 @@ class DistributedBattle(DistributedBattleBase.DistributedBattleBase):
             TauntCamHeight = random.choice((MidTauntCamHeight, 1, 11))
             camTrack = Sequence()
             camTrack.append(Func(camera.wrtReparentTo, suit))
-            camTrack.append(Func(base.camLens.setFov, self.camFOFov))
+            camTrack.append(Func(base.camLens.setMinFov, self.camFOFov/(4/3)))
             camTrack.append(
                 Func(
                     camera.setPos,
@@ -148,7 +148,7 @@ class DistributedBattle(DistributedBattleBase.DistributedBattleBase):
                     TauntCamHeight))
             camTrack.append(Func(camera.lookAt, suit, suitOffsetPnt))
             camTrack.append(Wait(delay))
-            camTrack.append(Func(base.camLens.setFov, self.camFov))
+            camTrack.append(Func(base.camLens.setMinFov, self.camFOFov/(4/3)))
             camTrack.append(Func(camera.wrtReparentTo, self))
             camTrack.append(Func(camera.setPos, self.camFOPos))
             camTrack.append(Func(camera.lookAt, suit.getPos(self)))

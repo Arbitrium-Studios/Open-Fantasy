@@ -247,7 +247,7 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
                                       font=ToontownGlobals.getSignFont(),
                                       mayChange=True)
         self.timer = PartyUtils.getNewToontownTimer()
-        self.timer.reparentTo(self.screenPlaneElements)
+        self.timer.posInTopRightCorner()
         return
 
     def loadSounds(self):

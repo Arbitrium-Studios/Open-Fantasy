@@ -49,12 +49,12 @@ class DistributedVineGame(DistributedMinigame):
             ['cleanup']),
             State.State('cleanup', self.enterCleanup, self.exitCleanup, [])], 'off', 'cleanup')
         self.addChildGameFSM(self.gameFSM)
-        self.cameraTopView = (17.6, 6.18756, 43.9956, 0, -89, 0)
+        self.cameraTopView = (17.6, 6.18756, 31.9956, 0, -89, 0)
         self.cameraThreeQuarterView = (0, -63.2, 16.3, 0, 0, 0)
-        self.cameraSidePos = Point3(0, -63.2, 16.3)
-        self.cameraTwoVineSidePos = Point3(0, -53, 17.3)
+        self.cameraSidePos = Point3(0, -63.2, 4.3)
+        self.cameraTwoVineSidePos = Point3(0, -39, 15.3)
         self.cameraTwoVineAdj = 5
-        self.cameraSideView = (-15, -53, 17.3, 0, 0, 0)
+        self.cameraSideView = (-15, -28, 15.3, 0, 0, 0)
         self.localPhysicsNP = None
         self.vines = []
         self.physicsHandler = None
@@ -198,7 +198,11 @@ class DistributedVineGame(DistributedMinigame):
                 fallingInfo=self.FallingNot)
 
         self.scorePanels = []
+        self.gameBoardR = self.gameBoard.copyTo(render)
         self.gameBoard.reparentTo(render)
+        self.gameBoardR.setPosHpr(-700, 0, 0, 0, 0, 0)
+        self.gameBoardL = self.gameBoard.copyTo(render)
+        self.gameBoardL.setPosHpr(700, 0, 0, 0, 0, 0)
         self.moveCameraToSide()
         self.arrowKeys = ArrowKeys.ArrowKeys()
         handlers = [self.upArrowKeyHandler,

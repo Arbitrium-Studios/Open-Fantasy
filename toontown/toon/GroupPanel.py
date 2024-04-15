@@ -70,11 +70,12 @@ class GroupPanel(DirectObject.DirectObject):
             frameZPos = 0.0278943
             quitButtonZPos = -0.30366
         guiButtons = loader.loadModel('phase_9/models/gui/tt_m_gui_brd_status')
-        self.frame = DirectFrame(
-            relief=None, image=bgImage, image_scale=(
-                0.5, 1, 0.5), image_pos=(
-                0, 0, bgImageZPos), textMayChange=1, pos=(
-                -1.044, 0, frameZPos))
+        self.frame = DirectFrame(relief=None, 
+                                 parent = base.a2dLeftCenter,
+                                 image=bgImage, image_scale=(0.5, 1, 0.5), 
+                                 image_pos=(0, 0, bgImageZPos), 
+                                 textMayChange=1, 
+                                 pos = (0.32, 0, frameZPos))
         self.frameBounds = self.frame.getBounds()
         leaveButtonGui = loader.loadModel(
             'phase_3.5/models/gui/tt_m_gui_brd_leaveBtn')

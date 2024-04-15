@@ -313,7 +313,7 @@ class DistributedTugOfWarGame(DistributedMinigame):
             self.setupTrack.finish()
             del self.setupTrack
             self.setupTrack = None
-        base.camLens.setFov(ToontownGlobals.DefaultCameraFov)
+        base.camLens.setMinFov(ToontownGlobals.DefaultCameraFov/(4/3))
         base.camLens.setNearFar(
             ToontownGlobals.DefaultCameraNear,
             ToontownGlobals.DefaultCameraFar)
