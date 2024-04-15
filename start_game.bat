@@ -4,26 +4,6 @@ title PLAYER ZER0 STUDIO's Toontown Fantasy Launcher
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
 set /P PPYTHON_PATH=<PPYTHON_PATH
 
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo What do you want to do?
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo.
-
-cls
-echo ===============================================================
-echo What do you want to launch!
-echo ===============================================================
-echo. 
-echo #1 - Locally Host a Server
-echo #2 - Connect to an Existing Server
-echo #3 - Exit
-echo.
-choice /C:123 /n /m "Selection: "%1
-if errorlevel ==3 EXIT
-if errorlevel ==2 goto connect
-if errorlevel ==1 goto localhost
-
-
 :localhost
 cls 
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -41,15 +21,6 @@ START start_toon_valley_ai_server.bat
 cd ..
 SET TT_GAMESERVER=127.0.0.1
 timeout 4
-goto game
-
-:connect
-cls
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo What Server are you connecting to!
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-set /P TT_GAMESERVER="Server IP: "
-set /P TT_Username="Username: "
 goto game
 
 :game
