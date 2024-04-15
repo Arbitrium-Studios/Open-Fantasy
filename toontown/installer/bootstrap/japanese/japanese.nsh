@@ -5,12 +5,12 @@
 !undef PRODUCT_WEB_SITE
 !undef PRODUCT_HELP_LINK
 
-!define PRODUCT_NAME "ƒgƒD[ƒ“ƒ^ƒEƒ“EƒIƒ“ƒ‰ƒCƒ“"
-!define PROG_GROUPNAME "ƒgƒD[ƒ“ƒ^ƒEƒ“EƒIƒ“ƒ‰ƒCƒ“"
+!define PRODUCT_NAME "ï¿½gï¿½Dï¿½[ï¿½ï¿½ï¿½^ï¿½Eï¿½ï¿½ï¿½Eï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½"
+!define PROG_GROUPNAME "ï¿½gï¿½Dï¿½[ï¿½ï¿½ï¿½^ï¿½Eï¿½ï¿½ï¿½Eï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½"
 
-!define UNINSTALLER_NAME "ƒAƒ“ƒCƒ“ƒXƒg[ƒ‹"
-!define UNINSTALL_LINK_NAME "ƒAƒ“ƒCƒ“ƒXƒg[ƒ‹ ${PRODUCT_NAME} IE Helper"
+!define UNINSTALLER_NAME "ï¿½Aï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Xï¿½gï¿½[ï¿½ï¿½"
+!define UNINSTALL_LINK_NAME "ï¿½Aï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Xï¿½gï¿½[ï¿½ï¿½ ${PRODUCT_NAME} IE Helper"
 
-!define PRODUCT_WEB_SITE 'http://toontown.disney.co.jp/'
+!define PRODUCT_WEB_SITE 'http://toontownfantasy.com/'
 !define PRODUCT_HELP_LINK "${PRODUCT_WEB_SITE}"
 

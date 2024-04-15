@@ -3,11 +3,11 @@
 !include FileFunc.nsh
 
 ; Localization Constants
-!define PRODUCT_NAME "Disney Toontown Online ${PRODUCT_RELEASE}"
+!define PRODUCT_NAME "PLAYER ZER0 STUDIO's Toontown Fantasy ${PRODUCT_RELEASE}"
 !define PROG_GROUPNAME "${PRODUCT_NAME}"
 !define UNINSTALLER_NAME "uninst"
 !define UNINSTALL_LINK_NAME "Uninstall Toontown IE Helper"
-!define PRODUCT_WEB_SITE "http://www.toontown.com/"
+!define PRODUCT_WEB_SITE "http://www.toontownfantasy.com/"
 !define PRODUCT_HELP_LINK "${PRODUCT_WEB_SITE}"
 
 ; if there's any language overrides

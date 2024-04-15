@@ -101,7 +101,7 @@ get_proxyname_using_jsproxy(const char *pAutoProxyScriptURL)
     */
 
    // in this case, just find what proxy we need to get to the TT homepage url
-   const char *szURLtoTest="http://www.toontown.com";
+   const char *szURLtoTest="http://www.toontownfantasy.com";
    DWORD URLlen=strlen(szURLtoTest);
 
    if(!(*pInternetGetProxyInfo)((LPSTR)szURLtoTest,URLlen,

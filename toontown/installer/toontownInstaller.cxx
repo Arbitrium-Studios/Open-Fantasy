@@ -76,7 +76,7 @@ static void DBG(const char *msg) {
 #endif
 //#define DONT_PATCH_JUST_REINSTALL
 
-const char *Installer_ProgramName="Disney's Toontown Online";  // MUST match value set in launcher.wse
+const char *Installer_ProgramName="PLAYER ZER0 STUDIO's Toontown Fantasy";  // MUST match value set in launcher.wse
 #define TOTAL_INSTALLEDSIZE 113355411   // just measured TT dirsize for 1.0.19.9, approximate is good enough 4 now
 
 // these should always be enabled, unless you are dbging
