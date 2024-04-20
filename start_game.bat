@@ -6,7 +6,7 @@ set /P PPYTHON_PATH=<PPYTHON_PATH
 
 echo Getting submodules
 
-call git submodule update --init
+call git submodule update --init --recursive
 
 echo Getting Requirements
 

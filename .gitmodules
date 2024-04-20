@@ -1,6 +1,10 @@
 [submodule "Fantasy-Resources"]
 	path = resources
 	url = https://github.com/Arbitrium-Studios/Fantasy-Resources
+
 [submodule "dependencies/TTFan_P3D"]
 	path = dependencies/panda3d
-	url = https://github.com/Arbitrium-Studios/TTFan_P3D.git
+	url = https://github.com/Arbitrium-Studios/TTFan_P3D
+[submodule "dependencies/panda3d"]
+	path = dependencies/panda3d
+	url = https://github.com/Arbitrium-Studios/panda3d.git
