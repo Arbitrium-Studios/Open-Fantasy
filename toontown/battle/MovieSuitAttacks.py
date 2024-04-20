@@ -615,16 +615,10 @@ def doDefault(attack):
             attack['animName'] = 'effort'
             return doBrainStorm(attack)
     elif suitName == 'bw':
-        if groupStatus == ATK_TGT_SINGLE:
-            attack['id'] = GAVEL
-            attack['name'] = 'Gavel'
-            attack['animName'] = 'effort'
-            return doGavel(attack)
-        else:
-            attack['id'] = POWER_TRIP
-            attack['name'] = 'PowerTrip'
-            attack['animName'] = 'magic1'
-            return doPowerTrip(attack)
+        attack['id'] = GAVEL
+        attack['name'] = 'Gavel'
+        attack['animName'] = 'effort'
+        return doGavel(attack)
     elif suitName == 'lc':
         attack['id'] = RESTRAINING_ORDER
         attack['name'] = 'RestrainingOrder'
