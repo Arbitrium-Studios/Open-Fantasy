@@ -5486,27 +5486,26 @@ def doPeckingOrder(attack):
 
 def doGavel(attack):
     battle = attack['battle']
-    target = attack['target']
-    toon = target[0]['toon']
-    gavel = loader.loadModel('phase_11/models/lawbotHQ/LB_gavel')
+    targets = attack['target']
     suitTrack = getSuitTrack(attack)
-    toonPos = toon.getPos(battle)
-    gavelPos = Point3(toonPos.getX(), toonPos.getY() + 8, 0)
-    propTrack = Sequence(
-        getPropAppearTrack(gavel, battle, [gavelPos, VBase3(0, 0, 0)], 0.0, scaleUpPoint=Point3(1), scaleUpTime=1.5),
-        LerpHprInterval(gavel, 0.5, VBase3(0, 90, 0)),
-        Parallel(
-            SoundInterval(base.loader.loadSfx('phase_11/audio/sfx/LB_gavel.ogg'), node=toon),
-            Sequence(
-                Wait(0.1),
-                LerpHprInterval(gavel, 0.5, VBase3(0, 0, 0)),
-                LerpScaleInterval(gavel, 1.5, Point3(0.0, 0.0, 0.0))
-            )
-        ),
-        Func(MovieUtil.removeProp, gavel)
-    )
-    toonTrack = getToonTrack(attack, 2.0, ['Squish'], 0.9, ['sidestep'])
-    return Parallel(suitTrack, propTrack, toonTrack)
+    propTracks = Parallel()
+    for t in targets:
+        toon = t['toon']
+        gavel = loader.loadModel('phase_11/models/lawbotHQ/LB_gavel')
+        toonPos = toon.getPos(battle)
+        gavelPos = Point3(toonPos.getX(), toonPos.getY() + 8, 0)
+        propTrack = Sequence(
+            getPropAppearTrack(gavel, battle, [gavelPos, VBase3(0, 0, 0)], 0.0, scaleUpPoint=Point3(1), scaleUpTime=1.5),
+            LerpHprInterval(gavel, 0.5, VBase3(0, 90, 0)),
+            Func(base.playSfx, base.loader.loadSfx('phase_11/audio/sfx/LB_gavel.ogg'), node=toon),
+            Wait(0.1),
+            LerpHprInterval(gavel, 0.5, VBase3(0, 0, 0)),
+            LerpScaleInterval(gavel, 1.5, MovieUtil.PNT3_NEARZERO),
+            Func(MovieUtil.removeProp, gavel)
+        )
+        propTracks.append(propTrack)
+    toonTracks = getToonTracks(attack, 2.0, ['Squish'], 0.9, ['sidestep'])
+    return Parallel(suitTrack, propTracks, toonTracks)
 
 
 def doTrip(attack):
