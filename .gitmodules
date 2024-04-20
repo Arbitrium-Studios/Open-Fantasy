@@ -1,6 +1,6 @@
-[submodule "Fantasy-Resources"]
+[submodule "resources/"]
 	path = resources
-	url = https://github.com/Arbitrium-Studios/Fantasy-Resources
+	url = https://github.com/Arbitrium-Studios/resources.git
 
 [submodule "dependencies/panda3d"]
 	path = dependencies/panda3d

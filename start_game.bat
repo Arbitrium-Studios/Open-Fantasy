@@ -8,12 +8,16 @@ echo Getting submodules
 
 call git submodule update --init --recursive
 
+echo Cloning resources
+
+call git clone https://github.com/Arbitrium-Studios/resources.git
+
 echo Getting Requirements
 
 call "dependencies\panda3d\python\Scripts\pip.exe" install -r requirements.txt
 
 :localhost
-cls 
+
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo Starting Localhost!
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
