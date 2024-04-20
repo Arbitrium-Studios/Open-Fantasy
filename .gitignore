@@ -7,7 +7,7 @@ FantasyLevelEditor/
 users/
 Housekeeper/
 news/
-/resources
+resources/
 dependencies/panda3d/
 
 # GitHub WILL ignore these files:
