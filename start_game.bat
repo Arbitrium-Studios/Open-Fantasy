@@ -10,7 +10,7 @@ call git submodule update --init
 
 echo Getting Requirements
 
-call "C:\Open-Panda\python\Scripts\pip.exe" install -r requirements.txt
+call "dependencies\panda3d\python\Scripts\pip.exe" install -r requirements.txt
 
 :localhost
 cls 
