@@ -4,6 +4,14 @@ title PLAYER ZER0 STUDIO's Toontown Fantasy Launcher
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
 set /P PPYTHON_PATH=<PPYTHON_PATH
 
+echo Getting submodules
+
+call git submodule update --init
+
+echo Getting Requirements
+
+call "C:\Open-Panda\python\Scripts\pip.exe" install -r requirements.txt
+
 :localhost
 cls 
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

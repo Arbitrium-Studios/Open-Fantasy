@@ -8,6 +8,7 @@ users/
 Housekeeper/
 news/
 /resources
+dependencies/panda3d/
 
 # GitHub WILL ignore these files:
 
