@@ -6,10 +6,6 @@
  
 > From the author of A Mother's Tales (2023) and the creator of THE PLAYER ZER0, comes the next generation of Toontown storytelling like you've never seen before! PLAYER ZER0 STUDIO's Toontown Fantasy is a re-envisioning of Disney's Toontown Online. Make your own Toon as you adventure across the planet, saving Toons from the evil Cogs whom are dead-set on turning your world into a corporate wasteland for their latest business venture! The future of Toontown is in YOUR fingertips! Only time will tell! Toontown Fantasy is coming soon to a universe near you...
 
-### Staff Members:
-
-> See the Authors.md file
-
 ### Contributing:
 
 > If you'd like to help out with features, create a branch and pull the code and implement it. Then join the Discord to tell me what you've changed and I'll review it and whether or not the code is good, I will approve the merge!
@@ -22,15 +18,13 @@
 
 ### Setup - Windows:
 
-> After cloning the repository, you will need to clone the resources repository inside the directory where you cloned the source repo.
->
-> Secondly, you would have to clone, compile, and install a specific version of [Panda3D][PandaLink] to run this source code!
->
-> Third, once you've finished that, install [Pip][PipLink] then open CMD and move to the Toontown Fantasy directory before using `Pip install -r requirements.txt` (Sometimes, you need to add the Panda3D/Python/Scripts directory prior to the `Pip` command for it to work!)
->
-> Next, go into the `win32/` folder and right click on `start_all.bat` then click `Create shortcut` (on Windows 11, after right clicking `start_all.bat`, you have to press `Show more options` for Create Shortcut to work!)
->
-> Once you've created a shortcut, highlight the shortcut and move it where ever you wish to launch the game from.
+> Make sure you have [git-scm](https://git-scm.com/downloads) installed/
+> Locate the place on your computer that you'd like to clone the repository at.
+> Press shift, then right click that folder and open the Command Prompt (or whatever terminal you use.)
+> Type `git clone https://github.com/Arbitrium-Studios/Open-Fantasy.git` and press enter
+> When that's finished cloning, go into the `Open-Fantasy` folder then start `start_game.bat`.
+> Then wait as the game loads!
+> If you wish, you can create a shortcut for the game.
 
 ### Patch Notes:
 
@@ -39,7 +33,3 @@
 [discordImg]: https://img.shields.io/discord/775528645086543895.svg?logo=discord&logoWidth=18&colorB=7289DA&Discord-PLAYER%20ZER0%20STUDIOS-7289DA?logo=discord&logoWidth=18&style=for-the-badge
 
 [discordLink]: https://discord.gg/9fgW8jAaf6
-
-[PandaLink]: https://github.com/PLAYERZER0STUDIOS/Open-Panda
-
-[PipLink]: https://pypi.org/project/pip/
