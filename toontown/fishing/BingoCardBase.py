@@ -4,12 +4,10 @@ from toontown.fishing import BingoGlobals
 from direct.showbase import RandomNumGen
 from math import ceil, pow
 
-
 class BingoCardBase:
     notify = DirectNotifyGlobal.directNotify.newCategory('BingoCardBase')
 
-    def __init__(self, cardSize=BingoGlobals.CARD_SIZE,
-                 rowSize=BingoGlobals.CARD_ROWS, colSize=BingoGlobals.CARD_COLS):
+    def __init__(self, cardSize = BingoGlobals.CARD_SIZE, rowSize = BingoGlobals.CARD_ROWS, colSize = BingoGlobals.CARD_COLS):
         self.rowSize = rowSize
         self.colSize = colSize
         self.cardSize = cardSize
@@ -69,12 +67,10 @@ class BingoCardBase:
 
     def cellUpdateCheck(self, id, genus, species):
         if id >= self.cardSize:
-            self.notify.warning(
-                'cellUpdateCheck: Invalid Cell Id %s. Id greater than Card Size.')
+            self.notify.warning('cellUpdateCheck: Invalid Cell Id %s. Id greater than Card Size.')
             return
         elif id < 0:
-            self.notify.warning(
-                'cellUpdateCheck: Invalid Cell Id %s. Id less than zero.')
+            self.notify.warning('cellUpdateCheck: Invalid Cell Id %s. Id less than zero.')
             return
         fishTuple = (genus, species)
         if self.cellList[id][0] == genus or fishTuple == FishGlobals.BingoBoot:
@@ -89,14 +85,14 @@ class BingoCardBase:
 
     def rowCheck(self, rowId):
         for colId in range(self.colSize):
-            if not self.gameState & 1 << self.rowSize * rowId + colId:
+            if not self.gameState & 1 << int(self.rowSize * rowId) + colId:
                 return 0
 
         return 1
 
     def colCheck(self, colId):
         for rowId in range(self.rowSize):
-            if not self.gameState & 1 << self.rowSize * rowId + colId:
+            if not self.gameState & 1 << int(self.rowSize * rowId) + colId:
                 return 0
 
         return 1
@@ -105,7 +101,7 @@ class BingoCardBase:
         checkNum = self.rowSize + 1
         if not id % checkNum:
             for i in range(self.rowSize):
-                if not self.gameState & 1 << i * checkNum:
+                if not self.gameState & 1 << int(i * checkNum):
                     return 0
 
             return 1
@@ -116,7 +112,7 @@ class BingoCardBase:
         checkNum = self.rowSize - 1
         if not id % checkNum and not id == self.cardSize - 1:
             for i in range(self.rowSize):
-                if not self.gameState & 1 << i * checkNum + checkNum:
+                if not self.gameState & 1 << int(i * checkNum) + checkNum:
                     return 0
 
             return 1

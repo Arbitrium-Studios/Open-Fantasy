@@ -39,3 +39,4 @@ Start Toontown Fantasy.lnk
 *.ogg
 *.jpg
 *.rgb
+/dependencies/panda3d

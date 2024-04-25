@@ -1,13 +1,12 @@
 from direct.directnotify import DirectNotifyGlobal
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from . import FishGlobals
-
 
 class DirectRegion(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory('DirectRegion')
 
-    def __init__(self, parent=aspect2d):
+    def __init__(self, parent = aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode('DirectRegion'))
 
@@ -46,11 +45,10 @@ class DirectRegion(NodePath):
             ll = render2d.getRelativePoint(card, newBounds[0])
             ur = render2d.getRelativePoint(card, newBounds[1])
             newBounds = [ll.getX(),
-                         ur.getX(),
-                         ll.getZ(),
-                         ur.getZ()]
-            newBounds = [max(0.0, min(1.0, (x + 1.0) / 2.0))
-                         for x in newBounds]
+             ur.getX(),
+             ll.getZ(),
+             ur.getZ()]
+            newBounds = [max(0.0, min(1.0, (x + 1.0) / 2.0)) for x in newBounds]
             self.cDr = base.win.makeDisplayRegion(*newBounds)
             self.cDr.setSort(10)
             self.cDr.setClearColor(card.getColor())
@@ -73,7 +71,7 @@ class DirectRegion(NodePath):
 class FishPhoto(NodePath):
     notify = DirectNotifyGlobal.directNotify.newCategory('FishPhoto')
 
-    def __init__(self, fish=None, parent=aspect2d):
+    def __init__(self, fish = None, parent = aspect2d):
         NodePath.__init__(self)
         self.assign(parent.attachNewNode('FishPhoto'))
         self.fish = fish
@@ -121,8 +119,7 @@ class FishPhoto(NodePath):
         center = (bMin + bMax) / 2.0
         actor.setPos(-center[0], -center[1], -center[2])
         genus = self.fish.getGenus()
-        fishInfo = FishGlobals.FishFileDict.get(
-            genus, FishGlobals.FishFileDict[-1])
+        fishInfo = FishGlobals.FishFileDict.get(genus, FishGlobals.FishFileDict[-1])
         fishPos = fishInfo[5]
         if fishPos:
             actor.setPos(fishPos[0], fishPos[1], fishPos[2])
@@ -132,7 +129,7 @@ class FishPhoto(NodePath):
         pitch.setY(2)
         return frame
 
-    def show(self, showBackground=0):
+    def show(self, showBackground = 0):
         messenger.send('wakeup')
         if self.fishFrame:
             self.actor.cleanup()
@@ -144,8 +141,7 @@ class FishPhoto(NodePath):
         self.fishFrame = self.makeFishFrame(self.actor)
         if showBackground:
             if not hasattr(self, 'background'):
-                background = loader.loadModel(
-                    'phase_3.5/models/gui/stickerbook_gui')
+                background = loader.loadModel('phase_3.5/models/gui/stickerbook_gui')
                 background = background.find('**/Fish_BG')
                 self.background = background
             self.background.setPos(0, 15, 0)
@@ -156,15 +152,7 @@ class FishPhoto(NodePath):
             self.actor.setPlayRate(playRate, 'intro')
             self.actor.setPlayRate(playRate, 'swim')
         introDuration = self.actor.getDuration('intro')
-        track = Parallel(
-            Sequence(
-                Func(
-                    self.actor.play,
-                    'intro'),
-                Wait(introDuration),
-                Func(
-                    self.actor.loop,
-                    'swim')))
+        track = Parallel(Sequence(Func(self.actor.play, 'intro'), Wait(introDuration), Func(self.actor.loop, 'swim')))
         if self.sound:
             soundTrack = Sequence(Wait(delay), Func(self.sound.play))
             if loop:

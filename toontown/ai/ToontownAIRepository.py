@@ -19,6 +19,7 @@ from toontown.coghq.PromotionManagerAI import PromotionManagerAI
 from toontown.distributed.ToontownDistrictAI import ToontownDistrictAI
 from toontown.distributed.ToontownDistrictStatsAI import ToontownDistrictStatsAI
 from toontown.distributed.ToontownInternalRepository import ToontownInternalRepository
+from toontown.ai.FishManagerAI import FishManagerAI
 from toontown.hood import ZoneUtil
 from toontown.hood.BRHoodDataAI import BRHoodDataAI
 from toontown.hood.BossbotHQDataAI import BossbotHQDataAI
@@ -80,6 +81,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.cogPageManager = None
         self.raceMgr = None
         self.countryClubMgr = None
+        self.fishManager = None
         self.factoryMgr = None
         self.mintMgr = None
         self.lawMgr = None
@@ -163,6 +165,9 @@ class ToontownAIRepository(ToontownInternalRepository):
 
         # Create our Cog page manager...
         self.cogPageManager = CogPageManagerAI(self)
+
+        # Create our fish manager...
+        self.fishManager = FishManagerAI(self)
 
         # Create our race manager...
         self.raceMgr = RaceManagerAI(self)
@@ -357,6 +362,13 @@ class ToontownAIRepository(ToontownInternalRepository):
             phase = '6'
 
         return 'phase_%s/dna/%s_%s.dna' % (phase, hood, canonicalZoneId)
+    
+    # def findFishingPonds(self, dnaData, zoneId, area):
+    #     return [], []  # TODO
+
+    def findPartyHats(self, dnaData, zoneId):
+        return []
+
 
     def lookupDNAFileName(self, dnaFileName):
         searchPath = DSearchPath()
@@ -383,12 +395,6 @@ class ToontownAIRepository(ToontownInternalRepository):
 
     def loadDNAFileAI(self, dnaStore, dnaFileName):
         return loadDNAFileAI(dnaStore, dnaFileName)
-
-    def findFishingPonds(self, dnaData, zoneId, area):
-        return [], []  # TODO
-
-    def findPartyHats(self, dnaData, zoneId):
-        return []  # TODO
 
     def findRacingPads(self, dnaData, zoneId, area,
                        type='racing_pad', overrideDNAZone=False):

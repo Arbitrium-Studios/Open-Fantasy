@@ -2,12 +2,10 @@ from direct.directnotify import DirectNotifyGlobal
 from toontown.fishing import BingoGlobals
 from toontown.fishing import BingoCardBase
 
-
 class NormalBingo(BingoCardBase.BingoCardBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('NormalBingo')
 
-    def __init__(self, cardSize=BingoGlobals.CARD_SIZE,
-                 rowSize=BingoGlobals.CARD_ROWS, colSize=BingoGlobals.CARD_COLS):
+    def __init__(self, cardSize = BingoGlobals.CARD_SIZE, rowSize = BingoGlobals.CARD_ROWS, colSize = BingoGlobals.CARD_COLS):
         BingoCardBase.BingoCardBase.__init__(self, cardSize, rowSize, colSize)
         self.gameType = BingoGlobals.NORMAL_CARD
 

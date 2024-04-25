@@ -1,7 +1,6 @@
 from . import FishBase
 from . import FishGlobals
 
-
 class FishTank:
 
     def __init__(self):
@@ -38,8 +37,7 @@ class FishTank:
 
     def hasBiggerFish(self, genus, species, weight):
         for fish in self.fishList:
-            if fish.getGenus() == genus and fish.getSpecies(
-            ) == species and fish.getWeight() >= weight:
+            if fish.getGenus() == genus and fish.getSpecies() == species and fish.getWeight() >= weight:
                 return 1
 
         return 0

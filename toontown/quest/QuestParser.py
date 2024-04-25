@@ -49,9 +49,14 @@ def clear():
 
 def readFile(filename):
     global curId
-    scriptFile = StreamReader(vfs.openReadFile(filename, 1), 1)
-    gen = tokenize.tokenize(scriptFile.readline)
+    script = io.StringIO(QuestScripts.script)
+
+    def readLine():
+        return script.readline().replace('\r', '')
+
+    gen = tokenize.generate_tokens(readLine)
     line = getLineOfTokens(gen)
+
     while line is not None:
         if line == []:
             line = getLineOfTokens(gen)
@@ -59,12 +64,12 @@ def readFile(filename):
         if line[0] == 'ID':
             parseId(line)
         elif curId is None:
-            notify.error('Every script must begin with an ID')
+            notify.error('A script must begin with an ID')
         else:
             lineDict[curId].append(line)
         line = getLineOfTokens(gen)
 
-    return
+    script.close()
 
 
 def getLineOfTokens(gen):
@@ -1129,11 +1134,11 @@ class NPCMoviePlayer(DirectObject.DirectObject):
             return Wait(0.0)
 
 
-searchPath = DSearchPath()
-if __debug__:
-    searchPath.appendDirectory(Filename('resources/phase_3/etc'))
-scriptFile = Filename('QuestScripts.txt')
-found = vfs.resolveFilename(scriptFile, searchPath)
-if not found:
-    notify.error('Could not find QuestScripts.txt file')
-readFile(scriptFile)
+# searchPath = DSearchPath()
+# if __debug__:
+#     searchPath.appendDirectory(Filename('resources/phase_3/etc'))
+# scriptFile = Filename('QuestScripts.txt')
+# found = vfs.resolveFilename(scriptFile, searchPath)
+# if not found:
+#     notify.error('Could not find QuestScripts.txt file')
+# readFile(scriptFile)

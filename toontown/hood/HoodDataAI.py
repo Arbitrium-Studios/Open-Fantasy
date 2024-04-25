@@ -1,9 +1,11 @@
 from direct.directnotify import DirectNotifyGlobal
 from . import ZoneUtil
 from toontown.building import DistributedBuildingMgrAI
+from toontown.fishing.DistributedFishingPondAI import DistributedFishingPondAI
 from toontown.suit import DistributedSuitPlannerAI
 from toontown.safezone import ButterflyGlobals
 from toontown.safezone import DistributedButterflyAI
+from toontown.safezone.DistributedFishingSpotAI import DistributedFishingSpotAI
 from pandac.PandaModules import *
 from panda3d.toontown import *
 from toontown.toon import NPCToons
@@ -22,6 +24,7 @@ class HoodDataAI:
         self.doId2do = {}
         self.replacementHood = None
         self.redirectingToMe = []
+        self.fishingPonds = []
         self.hoodPopulation = 0
         self.pgPopulation = 0
         return
@@ -77,6 +80,41 @@ class HoodDataAI:
 
         return
 
+    def findFishingPonds(self, dnaGroup, zoneId, area):
+        fishingPonds = []
+        fishingPondGroups = []
+        if isinstance(dnaGroup, DNAGroup) and ('fishing_pond' in dnaGroup.getName()):
+            fishingPondGroups.append(dnaGroup)
+
+            fishingPond = DistributedFishingPondAI(simbase.air)
+            fishingPond.setArea(area)
+            fishingPond.generateWithRequired(zoneId)
+            fishingPond.start()
+            fishingPonds.append(fishingPond)
+        elif isinstance(dnaGroup, DNAVisGroup):
+            zoneId = int(dnaGroup.getName().split(':')[0])
+        for i in range(dnaGroup.getNumChildren()):
+            (foundFishingPonds, foundFishingPondGroups) = self.findFishingPonds(dnaGroup.at(i), zoneId, area)
+            fishingPonds.extend(foundFishingPonds)
+            fishingPondGroups.extend(foundFishingPondGroups)
+        return (fishingPonds, fishingPondGroups)
+
+    def findFishingSpots(self, dnaGroup, fishingPond):
+        fishingSpots = []
+        if isinstance(dnaGroup, DNAGroup) and ('fishing_spot' in dnaGroup.getName()):
+            fishingSpot = DistributedFishingSpotAI(simbase.air)
+            fishingSpot.setPondDoId(fishingPond.doId)
+            x, y, z = dnaGroup.getPos()
+            h, p, r = dnaGroup.getHpr()
+            fishingSpot.setPosHpr(x, y, z, h, p, r)
+            fishingSpot.generateWithRequired(fishingPond.zoneId)
+
+            fishingSpots.append(fishingSpot)
+        for i in range(dnaGroup.getNumChildren()):
+            foundFishingSpots = self.findFishingSpots(dnaGroup.at(i), fishingPond)
+            fishingSpots.extend(foundFishingSpots)
+        return fishingSpots
+
     def createFishingPonds(self):
         self.fishingPonds = []
         fishingPondGroups = []
@@ -85,10 +123,15 @@ class HoodDataAI:
             dnaData = self.air.dnaDataMap.get(zone[0], None)
             if isinstance(dnaData, DNAData):
                 area = ZoneUtil.getCanonicalZoneId(zoneId)
-                foundFishingPonds, foundFishingPondGroups = self.air.findFishingPonds(
-                    dnaData, zoneId, area)
-                self.fishingPonds += foundFishingPonds
-                fishingPondGroups += foundFishingPondGroups
+                (foundFishingPonds, foundFishingPondGroups) = self.findFishingPonds(dnaData, zoneId, area)
+                self.fishingPonds.extend(foundFishingPonds)
+                fishingPondGroups.extend(foundFishingPondGroups)
+        for fishingPond in self.fishingPonds:
+            NPCToons.createNpcsInZone(self.air, fishingPond.zoneId)
+        fishingSpots = []
+        for (dnaGroup, fishingPond) in zip(fishingPondGroups, self.fishingPonds):
+            fishingSpots.extend(self.findFishingSpots(dnaGroup, fishingPond))
+
 
         for distObj in self.fishingPonds:
             self.addDistObj(distObj)

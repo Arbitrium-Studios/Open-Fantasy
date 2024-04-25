@@ -53,9 +53,14 @@ class DistributedBattleBaseAI(
         self.toonParts = {}
         self.battleCalc = BattleCalculatorAI.BattleCalculatorAI(
             self, tutorialFlag)
+        # If there is an invasion, double the exp for the duration of this battle
+        # Now, if the invasion ends midway through this battle, the players will
+        # continue getting credit. This is ok I guess.
         if self.air.suitInvasionManager.getInvading():
             mult = getInvasionMultiplier()
             self.battleCalc.setSkillCreditMultiplier(mult)
+
+        # see if we have the double xp holiday up
         if self.air.holidayManager.isMoreXpHolidayRunning():
             mult = getMoreXpHolidayMultiplier()
             self.battleCalc.setSkillCreditMultiplier(mult)

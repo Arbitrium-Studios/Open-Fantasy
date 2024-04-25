@@ -1,13 +1,12 @@
 from direct.fsm import FSM
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.fishing import FishPhoto
 from toontown.fishing import BingoGlobals
-
 
 class BingoCardCell(DirectButton, FSM.FSM):
     notify = DirectNotifyGlobal.directNotify.newCategory('BingoCardCell')
@@ -17,17 +16,17 @@ class BingoCardCell(DirectButton, FSM.FSM):
         self.color = color
         buttonToUse = self.model.find('**/mickeyButton')
         optiondefs = (('relief', None, None),
-                      ('state', DGG.DISABLED, None),
-                      ('image', buttonToUse, None),
-                      ('image_color', self.color, None),
-                      ('image_hpr', (0, 90, 0), None),
-                      ('image_pos', (0, 0, 0), None),
-                      ('pressEffect', False, None))
+         ('state', DGG.DISABLED, None),
+         ('image', buttonToUse, None),
+         ('image_color', self.color, None),
+         ('image_hpr', (0, 90, 0), None),
+         ('image_pos', (0, 0, 0), None),
+         ('pressEffect', False, None))
         self.defineoptions(kw, optiondefs)
         DirectButton.__init__(self, parent)
         FSM.FSM.__init__(self, 'BingoCardCell')
         self.initialiseoptions(BingoCardCell)
-        self._parent = parent
+        self.parent = parent
         self.fish = fish
         self.cellId = cellId
         self.request('Off')
@@ -40,11 +39,7 @@ class BingoCardCell(DirectButton, FSM.FSM):
         button.setHpr(0, 90, 0)
         button.setPos(0, 0, 0)
         button.setScale(BingoGlobals.CellImageScale)
-        button.setColor(
-            self.color[0],
-            self.color[1],
-            self.color[2],
-            self.color[3])
+        button.setColor(self.color[0], self.color[1], self.color[2], self.color[3])
         self['image'] = button
         self.setImage()
 
@@ -76,7 +71,7 @@ class BingoCardCell(DirectButton, FSM.FSM):
     def getFishSpecies(self):
         return self.fish.getSpecies()
 
-    def enable(self, callback=None):
+    def enable(self, callback = None):
         self.request('On', callback)
 
     def disable(self):
@@ -95,9 +90,7 @@ class BingoCardCell(DirectButton, FSM.FSM):
         elif request == 'Off':
             return request
         else:
-            self.notify.debug(
-                'filterOff: Invalid State Transition from Off to %s' %
-                request)
+            self.notify.debug('filterOff: Invalid State Transition from Off to %s' % request)
 
     def enterOn(self, args):
         self['state'] = DGG.NORMAL
@@ -108,6 +101,4 @@ class BingoCardCell(DirectButton, FSM.FSM):
         if request == 'Off':
             return request
         else:
-            self.notify.debug(
-                'filterOn: Invalid State Transition from Off to %s' %
-                request)
+            self.notify.debug('filterOn: Invalid State Transition from Off to %s' % request)
