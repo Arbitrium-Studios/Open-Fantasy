@@ -4,7 +4,7 @@ import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
-lFoggyFjords = "Foggy Fjord"
+lFoggyFjords = "Foggy Fjords"
 lTwilightDreamland = "Twlight Dreamland"
 lHarmoniousHaven = "The Land of Melody"
 lToontownCentral = 'Toontown Central'
@@ -2862,6 +2862,7 @@ HotkeyCategoryNames = {
  }
 
 
+# MovementHotKeys = 0
 HotkeyUp = 0
 HotkeyDown = 1
 HotkeyLeft = 2
@@ -2891,11 +2892,12 @@ HotkeyNames = {
        HotkeyTasks: 'Open Tasks',
        HotkeyInventory: 'Open Inventory',
        HotkeyFriends: 'Open Friends',
-       HotkeyMap: 'Open map',
-       HotkeyScreenshot: 'screenshot',
-       HotkeyChat: 'chat', 
+       HotkeyMap: 'Open Map',
+       HotkeyScreenshot: 'Take Screenshot',
+       HotkeyChat: 'Open Chat', 
        HotkeySecondaryBook: 'Open Book Secondary',
        HotkeyChatLog: 'Open Chat Log',
+       # MovementHotKeys: HotkeyUp + HotkeyLeft + HotkeyDown + HotkeyRight,
 }
 }
 

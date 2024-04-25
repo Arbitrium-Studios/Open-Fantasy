@@ -21,7 +21,7 @@ class ControlManager(DirectObject):
         self.reloadHotkeys(True)
         
 
-    def reloadHotkeys(self, realtime=False):
+    def reloadHotkeys(self, realtime=True):
         self.ignoreAll()
         disableChat = 1
         activeHotkeys = []

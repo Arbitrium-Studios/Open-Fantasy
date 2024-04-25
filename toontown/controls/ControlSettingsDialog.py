@@ -148,6 +148,7 @@ class ControlSettingsDialog(DirectFrame):
     def __apply(self):
         self.applyChanges()
         self.infoLabel['text'] = TTLocalizer.ControlSettingsChangesApplied
+        self.exit()
 
     def __cancel(self):
         self.exit()
