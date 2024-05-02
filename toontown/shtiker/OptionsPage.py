@@ -1202,9 +1202,9 @@ class ExtraOptionsTabPage(DirectFrame):
     def __setRichPresenceLabel(self):
         if base.wantRichPresence:
             self.richPresenceLabel['text'] = ['Discord Rich Presence: On']
-            self.richPresenceButton['text'] = ['Toggle Rich Presence off']
+            self.richPresenceButton['text'] = ['Toggle Rich Presence Off']
         else:
             self.richPresenceLabel['text'] = ['Discord Rich Presence: Off']
-            self.richPresenceButton['text'] = ['Toggle Rich Presence on']
+            self.richPresenceButton['text'] = ['Toggle Rich Presence On']
 
     BugReportSite = 'https://github.com/Arbitrium-Studios/Open-Fantasy/issues/new'
