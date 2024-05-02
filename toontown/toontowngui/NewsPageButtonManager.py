@@ -36,10 +36,10 @@ class NewsPageButtonManager(FSM.FSM):
         btnGui.removeNode()
         bookModel.removeNode()
         oldScale = 0.5
-        newScale = 0.9
+        newScale = 0.85
         shtickerBookScale = 0.305
-        newPos = VBase3(0.914, 0, 0.862)
-        shtickerBookPos = VBase3(1.175, 0, -0.83)
+        newPos = VBase3(1.53, 0, 0.862)
+        shtickerBookPos = VBase3(1.175, 0, -0.93)
         textScale = 0.06
         self.newIssueButton = DirectButton(
             relief=None,
