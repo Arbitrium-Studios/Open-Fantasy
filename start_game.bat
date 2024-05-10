@@ -4,24 +4,22 @@ title PLAYER ZER0 STUDIO's Toontown Fantasy Launcher
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
 set /P PPYTHON_PATH=<PPYTHON_PATH
 
-echo Getting submodules
-
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+echo Getting Submodules
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 call git submodule update --init --recursive
-
-echo Cloning resources
-
 call git clone https://github.com/Arbitrium-Studios/resources.git
 
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo Getting Requirements
-
-call "dependencies\panda3d\python\Scripts\pip.exe" install -r requirements.txt
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+call "../dependencies\panda3d\python\Scripts\pip.exe" install -r requirements.txt
 
 :localhost
-
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo Starting Localhost!
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-cd scripts
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+cd "scripts"
 echo Launching Astron...
 START start_astron_server.bat
 echo Launching the Uberdog Server...
@@ -36,18 +34,16 @@ timeout 4
 goto game
 
 :game
-cls
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo Username [!] This does get stored in your source code so beware!
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+echo Your Username is your username and does get stored in your source code so beware!
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 set TT_Username=%username%
 echo.
-cls
+
 SET LOGIN_TOKEN=%TT_Username%
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo Welcome to Toontown Fantasy, %TT_Username%!
-echo The Tooniverse Awaits You!
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+echo The Tooniverse awaits you, %TT_Username%!
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 :startgame
 title PLAYER ZER0 STUDIO's Toontown Fantasy
 %PPYTHON_PATH% -m toontown.launcher.QuickStartLauncher
