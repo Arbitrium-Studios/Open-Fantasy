@@ -1987,12 +1987,12 @@ ReportPanelCategoryHacking = 'Hacking'
 ReportPanelConfirmations = ('You are about to report that %s has used obscene, bigoted or sexually explicit language.',
                             'You are about to report that %s is being unsafe by giving out or requesting a phone number, address, last name, email address, password or account name.',
                             'You are about to report that %s is bullying, harassing, or using extreme behavior to disrupt the game.',
-                            "You are about to report that %s has created a name that does not follow PLAYER ZER0 STUDIOS's Guidelines.",
+                            "You are about to report that %s has created a name that does not follow the Arbitrium Studios Guidelines.",
                             'You are about to report that %s has hacked/tampered with the game or used third party software.')
 ReportPanelWarning = "We take reporting very seriously. Your report will be viewed by a Moderator who will take appropriate action for anyone breaking our rules. If your account is found to have participated in breaking the rules, or if you make false reports or abuse the 'Report a Player' system, a Moderator may take action against your account. Are you absolutely sure you want to report this player?"
 ReportPanelThanks = 'Thank you! Your report has been sent to a Moderator for review. There is no need to contact us again about the issue. The moderation team will take appropriate action for a player found breaking our rules.'
 ReportPanelRemovedFriend = 'We have automatically removed %s from your Toon Friends List.'
-ReportPanelRemovedPlayerFriend = "We have automatically removed %s as a Player friend so as such you will not see them as your friend in any PLAYER ZER0 STUDIOS' Products going forward."
+ReportPanelRemovedPlayerFriend = "We have automatically removed %s as a Player friend so as such you will not see them as your friend in any Arbitrium Studios products (PLAYER ZER0 STUDIO or otherwise) going forward."
 ReportPanelAlreadyReported = 'You have already reported %s during this session. A Moderator will review your previous report.'
 IgnorePanelTitle = 'Ignore A Player'
 IgnorePanelAddIgnore = 'Would you like to ignore %s for the rest of this session?'
@@ -4203,7 +4203,7 @@ FriendInviterPlayer = 'Player'
 FriendInviterThatPlayer = 'That player'
 FriendInviterBegin = 'What type of friend would you like to make?'
 FriendInviterToonFriendInfo = 'A friend only in Toontown'
-FriendInviterPlayerFriendInfo = "A friend across the PLAYER ZER0 STUDIOS' network!"
+FriendInviterPlayerFriendInfo = "A friend across the Gateway!"
 FriendInviterToonTooMany = 'You have too many toon friends to add another one now. You will have to remove some toon friends if you want to make friends with %s. You could also try making player friends them.'
 FriendInviterPlayerTooMany = 'You have too many player friends to add another one now. You will have to remove some player friends if you want to make friends with %s. You could also try making toon friends with them.'
 FriendInviterToonAlready = '%s is already your toon friend.'

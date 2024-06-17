@@ -23,53 +23,78 @@ class Credits:
 
         #run
         self.extremelylargecredits = '''
-\n\1limeText\1Credits:\2
+\1limeText\1Credits:\2
 
-\n\1limeText\1The Auteurs of Life (Project Leaders):\2
+\1limeText\1The Auteurs of Life (Project Leaders):\2
 
-- Gracie Lovelight
-- Pizza Taco Burger
+- Co-Director Gracie "THE PLAYER ZER0" Lovelight
+- Co-Director Pizza Taco Burger
 
 \1limeText\1The Architects of Realities (Programmers):\2
 
 - Professor Control
-- DarthMDev/darthanonymous
-- Something Random
-- Sighost
-- Nayla/Nayla
-- Gracie Lovelight
-- Battery on Discord for helping me fix a Tuple error!
-- J3 on Discord for fixing a bug and helping rename The Land of Music!
-- TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
-- DTM1218 for letting me use parts of Declashified to improve the game!
-- leothegreat2003#4524 for helping me find the bug that caused the Streets to not work and incorrect NPC locations!
-- HunterBoppen for helping to fixing district resets, security vulnerabilities, and more
-- CloudCityDev for helping with security patches
-- Wizzerinus for helping fix various bugs in the aforementioned orbital camera
+- DarthMDev aka darthanonymous aka MichaelGDev48
+- Gracie "THE PLAYER ZER0" Lovelight
+- SomethingRandom0768 for beginning to develop the Custom Control Support and adding Linux support.
+- (Retired) TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
+- (Retired) HunterBoppen for helping to fixing district resets, security vulnerabilities, and more
+- (Retired) CloudCityDev for helping with security patches
 
 \1limeText\1The Artisans of Nature (Artists):\2
 
-- Jardin
-- April
-- AiGenics
-- ToonJoey
-- Gracie Lovelight
+- Gracie "THE PLAYER ZER0" Lovelight
+- Milo Charming Magician aka CyndaneraX
+- (Retired) AiGenics
+- (Retired) Jardin
+- (Retired) April
 
-The Sculptors of Creation (Modelers):
+\1limeText\1The Animators of Life (Animators):\2
 
-- SirDapperPenguin
+- Milo Charming Magician aka CyndaneraX
+
+\1limeText\1The Sculptors of Creation (Modelers):\2
+
+- Gracie "THE PLAYER ZER0" Lovelight
+- (Retired) SirDapperPenguin
+
+\1limeText\1The Conductors of Harmony (Musicians):\2
+
+- Milo Charming Magician aka CyndaneraX
+
+\1limeText\1The Scribes of Fate (Writers):\2
+
+- Gracie "THE PLAYER ZER0" Lovelight
+- Pizza Taco Burger
+
+\1limeText\1The Patrons' Assistants (Customer Support):\2
+
+- Gracie "THE PLAYER ZER0" Lovelight
+- (Retired) Rouge
+
+\1limeText\1Allies of Continuance (Contributors):\2
+
+- Battery on Discord for helping me fix a Tuple error!
+- J3 on Discord for helping to patch one of those pesky bugs!
+- leothegreat2003#4524 for helping me find the bug that caused the Streets to not work and incorrect NPC locations!
+- Wizzerinus for helping fix various bugs in the orbital camera
+- TechieBlort for the Doodle Accuracy code 
 
 \1limeText\1Special Thanks to:\2
 
-- Pizza Taco Burger, Princess Rainbow, Cuddles Crinklemuffin, the Magnificent Eleven, Flippy Jr. of Toontown Relived, and more for inspiring me to write the story!
-- Toontown Galaxy team for letting us their orbital camera
 - Open-Toontown for creating the source code Toontown Fantasy is based in!
+- DTM1218 for letting me use parts of Declashified to improve the game!
+- Toontown Galaxy team for letting us use their Panda3D & Orbital Camera
+- Princess Rainbow, Cuddles Crinklemuffin, the Magnificent Eleven, and so many others for inspiring the stories!
 - Satire6 for releasing Pandora & Anesidora to the public!
+- ToonJoey for letting us use Project: Bikehorn as a basis for our HD Textures
+- Flameout56 for allowing me to use the Toontown HD resources to further update the game's resources.
+- The Panda3D Team for continuously maintaining the engine
 - Toontown Rewritten for reviving the spirit of Toontown and its community!
 - Disney Virtual Reality Studios and Schell Games for creating this ever-green video game!
-- Jesse Schell for pitching Toontown Online to Disney and fighting for its eventual return
+- Jesse Schell for pitching Toontown Online to Disney and fighting for its return!
 
-And YOU for playing the game!
+\1limeText\1And YOU for playing the game!\2
+
         '''
         self.text = OnscreenText(text = self.extremelylargecredits, style = 3, fg = (1, 1, 1, 1), align = TextNode.ACenter, scale = 0.08, wordwrap = 30, parent = aspect2d)
         self.text.setPos(0, -1)
@@ -82,7 +107,7 @@ And YOU for playing the game!
         self.logo.setColorScale(1, 1, 1, 1)
         self.startCredits()
         base.transitions.fadeScreen(0)
-        base.accept('space', self.removeCredits)
+        # base.accept('space', self.removeCredits) # This works however I'm commenting this out because I don't think the "Space Bar" should be the button to exit it.
         base.accept('escape', self.removeCredits)
 
     def startCredits(self):
@@ -97,7 +122,7 @@ And YOU for playing the game!
         ).start()
 
     def removeCredits(self):
-        base.ignore('space')
+        # base.ignore('space') # This works however I'm commenting this out because I don't think the "Space Bar" should be the button to exit it.
         base.ignore('escape')
         base.transitions.noFade()
         if self.creditsSequence:
