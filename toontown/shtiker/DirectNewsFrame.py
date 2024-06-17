@@ -427,12 +427,12 @@ class DirectNewsFrame(DirectObject.DirectObject):
             self.createdTime = base.cr.inGameNewsMgr.getLatestIssue()
         elif self.NewsOverHttp and not self.redownloadingNews:
             if not self.active:
-                self.redownloadNews()
+                self.redownloadNews() # To Do: Grab news in launcher while downloading update and then rewrite all of this to check then grab the news locally.
 
     def getInGameNewsUrl(self):
         result = ConfigVariableString(
             'fallback-news-url',
-            'http://cdn.toontown.disney.go.com/toontown/en/gamenews/').value
+            'https://cdn.arbitriumstudios.com/bibliotheca_fusi_assets/player_zer0_studio/toontown_fantasy/game/resources/default/english/phase_3.5/gamenews/').value # Original fallback-news-url: http://cdn.toontown.disney.go.com/toontown/en/gamenews/ & new redirected fallback-news-url: https://web.archive.org/web/20230718194723/http://cdn.toontown.disney.go.com/toontown/en/gamenews/
         override = ConfigVariableString('in-game-news-url', '').value
         if override:
             self.notify.info(

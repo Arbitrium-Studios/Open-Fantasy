@@ -1,4 +1,4 @@
-<img src="https://cdn.arbitriumstudios.com/bibliotheca_fusi_assets/player_zer0_studio/toontown_fantasy/game/resources/default/phase_3/maps/toontown-logo.png" align="right" width="200" />
+<img src="https://cdn.arbitriumstudios.com/bibliotheca_fusi_assets/player_zer0_studio/toontown_fantasy/game/resources/default/english/phase_3/maps/toontown-logo.png" align="right" width="200" />
 
 # Toontown-Fantasy [![Discord][discordImg]][discordLink]
 

@@ -10,7 +10,7 @@ class StreetSign(DistributedObject.DistributedObject):
         'street-sign-filename', 'street-sign.jpg')
     StreetSignBaseDir = config.GetString('street-sign-base-dir', '') # Leave this blank
     StreetSignUrl = base.config.GetString(
-        'street-sign-url', 'https://cdn.arbitriumstudios.com/bibliotheca_fusi_assets/player_zer0_studio/toontown_fantasy/game/resources/default/phase_4/maps') # Leave this without the "/" (which is applied further down) and keep it as the directory the image will be found in otherwise streets will crash.
+        'street-sign-url', 'https://cdn.arbitriumstudios.com/bibliotheca_fusi_assets/player_zer0_studio/toontown_fantasy/game/resources/default/english/phase_4/maps') # Leave this without the "/" (which is applied further down) and keep it as the directory the image will be found in otherwise streets will crash.
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
