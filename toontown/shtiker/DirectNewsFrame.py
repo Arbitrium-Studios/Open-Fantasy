@@ -432,7 +432,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
     def getInGameNewsUrl(self):
         result = ConfigVariableString(
             'fallback-news-url',
-            'https://cdn.arbitriumstudios.com/bibliotheca_fusi_assets/player_zer0_studio/toontown_fantasy/game/resources/default/english/phase_3.5/gamenews/').value # Original fallback-news-url: http://cdn.toontown.disney.go.com/toontown/en/gamenews/ & new redirected fallback-news-url: https://web.archive.org/web/20230718194723/http://cdn.toontown.disney.go.com/toontown/en/gamenews/
+            'https://cdn.arbitriumstudios.com/bf-assets/tl_420b/tnbot/c1_tpott/pzs_ttfan/game/resources/default/english/phase_3.5/gamenews/').value # Original fallback-news-url: http://cdn.toontown.disney.go.com/toontown/en/gamenews/ & new redirected fallback-news-url: https://web.archive.org/web/20230718194723/http://cdn.toontown.disney.go.com/toontown/en/gamenews/
         override = ConfigVariableString('in-game-news-url', '').value
         if override:
             self.notify.info(
