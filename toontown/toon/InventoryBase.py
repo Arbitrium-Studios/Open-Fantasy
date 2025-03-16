@@ -289,9 +289,9 @@ class InventoryBase(DirectObject.DirectObject):
                                 unpaid and gagIsPaidOnly(track, level)):
                             self.addItem(track, level)
 
-        addedAnything = 1
+        addedAnything = True
         while addedAnything:
-            addedAnything = 0
+            addedAnything = False
             result = 0
             for track in range(len(Tracks)):
                 if self.toon.hasTrackAccess(track):
@@ -309,7 +309,7 @@ class InventoryBase(DirectObject.DirectObject):
                         level -= 1
 
                     if result > 0:
-                        addedAnything = 1
+                        addedAnything = True
 
         self.calcTotalProps()
         return None

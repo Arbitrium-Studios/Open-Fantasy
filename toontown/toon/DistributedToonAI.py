@@ -395,7 +395,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
 
     def checkAccessorySanity(self, accessoryType, idx, textureIdx, colorIdx):
         if idx == 0 and textureIdx == 0 and colorIdx == 0:
-            return 1
+            return True
         if accessoryType == ToonDNA.HAT:
             stylesDict = ToonDNA.HatStyles
             accessoryTypeStr = 'Hat'
@@ -409,7 +409,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
             stylesDict = ToonDNA.ShoesStyles
             accessoryTypeStr = 'Shoes'
         else:
-            return 0
+            return False
         try:
             styleStr = list(stylesDict.keys())[list(
                 stylesDict.values()).index([idx, textureIdx, colorIdx])]
@@ -425,12 +425,13 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
                                                                                                                idx,
                                                                                                                textureIdx,
                                                                                                                colorIdx))
-                return 0
+                return False
             if not simbase.config.GetBool(
                     'want-check-accessory-sanity', False):
-                return 1
+                return True
             accessoryItem = CatalogAccessoryItem.CatalogAccessoryItem(
                 accessoryItemId)
+            # Don't want a return of an Integer, but I genuinely do not know what to do with this.  I could not find the isItemReleased function anywhere that could tell me if it returned an int or a bool.  Leave this alone for now, it should not break anything.
             result = self.air.catalogManager.isItemReleased(accessoryItem)
             if result == 0:
                 self.air.writeServerEvent(
@@ -444,7 +445,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
                                                                                                            idx,
                                                                                                            textureIdx,
                                                                                                            colorIdx))
-            return 0
+            return False
 
     def b_setHat(self, idx, textureIdx, colorIdx):
         self.d_setHat(idx, textureIdx, colorIdx)

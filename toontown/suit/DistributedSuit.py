@@ -240,8 +240,8 @@ class DistributedSuit(DistributedSuitBase.DistributedSuitBase, DelayDeletable):
                 (self.doId, self.spDoId))
             self.sp = self.cr.doId2do.get(self.spDoId, None)
         if self.sp is None:
-            return 0
-        return 1
+            return False
+        return True
 
     def setPathPosition(self, index, timestamp):
         if not self.verifySuitPlanner():

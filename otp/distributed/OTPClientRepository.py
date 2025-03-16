@@ -1851,23 +1851,20 @@ class OTPClientRepository(ClientRepositoryBase):
 
     def isFreeTimeExpired(self):
         if self.accountOldAuth:
-            return 0
-        if ConfigVariableBool('free-time-expired', 0).value:
-            return 1
-        if ConfigVariableBool('unlimited-free-time', 0).value:
-            return 0
+            return False
+        if ConfigVariableBool('free-time-expired', False).value:
+            return True
+        if ConfigVariableBool('unlimited-free-time', False).value:
+            return False
         if self.freeTimeExpiresAt == -1:
-            return 0
+            return False
         if self.freeTimeExpiresAt == 0:
-            return 1
+            return True
         if self.freeTimeExpiresAt < -1:
             self.notify.warning(
                 'freeTimeExpiresAt is less than -1 (%s)' %
                 self.freeTimeExpiresAt)
-        if self.freeTimeExpiresAt < time.time():
-            return 1
-        else:
-            return 0
+        return self.freeTimeExpiresAt < time.time()
 
     def freeTimeLeft(self):
         if self.freeTimeExpiresAt == -1 or self.freeTimeExpiresAt == 0:
@@ -1912,10 +1909,7 @@ class OTPClientRepository(ClientRepositoryBase):
             return False
 
     def allowAnyTypedChat(self):
-        if self.allowSecretChat() or self.allowWhiteListChat() or self.allowOpenChat():
-            return True
-        else:
-            return False
+        return self.allowSecretChat() or self.allowWhiteListChat() or self.allowOpenChat()
 
     def allowOpenChat(self):
         return self.openChatAllowed

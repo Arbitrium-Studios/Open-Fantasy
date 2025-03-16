@@ -1148,10 +1148,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
             trackAccess = self.toon.getTrackAccess()
             return trackAccess[track] >= level + 1
         curSkill = self.toon.experience.getExp(track)
-        if curSkill < Levels[track][level]:
-            return 0
-        else:
-            return 1
+        return curSkill >= Levels[track][level]
 
     def itemIsCredit(self, track, level):
         if self.toon.earnedExperience:

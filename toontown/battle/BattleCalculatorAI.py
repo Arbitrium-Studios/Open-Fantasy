@@ -598,9 +598,9 @@ class BattleCalculatorAI:
         if suit == 1:
             for dmg in attack[SUIT_HP_COL]:
                 if dmg > 0:
-                    return 1
+                    return True
 
-            return 0
+            return False
         else:
             track = self.__getActualTrack(attack)
             return not attack[TOON_ACCBONUS_COL] and track != NO_ATTACK
@@ -619,7 +619,7 @@ class BattleCalculatorAI:
 
             return 0
 
-    def __attackDamageForTgt(self, attack, tgtPos, suit=0):
+    def __attackDamageForTgt(self, attack, tgtPos, suit=False):
         if suit:
             return attack[SUIT_HP_COL][tgtPos]
         else:
@@ -1009,7 +1009,7 @@ class BattleCalculatorAI:
         else:
             tgtList = self.__createToonTargetList(toonId)
             for t in tgtList:
-                if self.__suitIsLured(t.getDoId()) and t.getDoId() not in self.delayedUnlures and (self.__attackDamageForTgt(self.battle.toonAttacks[toonId], self.battle.activeSuits.index(t), suit=0) > 0 or ignoreDamageCheck):
+                if self.__suitIsLured(t.getDoId()) and t.getDoId() not in self.delayedUnlures and (self.__attackDamageForTgt(self.battle.toonAttacks[toonId], self.battle.activeSuits.index(t), suit=False) > 0 or ignoreDamageCheck):
                     self.delayedUnlures.append(t.getDoId())
 
     def __calculateToonAttacks(self):
@@ -1117,10 +1117,10 @@ class BattleCalculatorAI:
 
     def __suitAtkHit(self, attackIndex):
         if self.suitsAlwaysHit:
-            return 1
+            return True
         else:
             if self.suitsAlwaysMiss:
-                return 0
+                return False
         theSuit = self.battle.activeSuits[attackIndex]
         atkType = self.battle.suitAttacks[attackIndex][SUIT_ATK_COL]
         atkInfo = SuitBattleGlobals.getSuitAttack(theSuit.dna.name, theSuit.getLevel(), atkType)
@@ -1131,8 +1131,8 @@ class BattleCalculatorAI:
         if self.notify.getDebug():
             self.notify.debug('Suit attack rolled ' + str(randChoice) + ' to hit with an accuracy of ' + str(acc) + ' (attackAcc: ' + str(atkAcc) + ' suitAcc: ' + str(suitAcc) + ')')
         if randChoice < acc:
-            return 1
-        return 0
+            return True
+        return False
 
     def __suitAtkAffectsGroup(self, attack):
         atkType = attack[SUIT_ATK_COL]
@@ -1218,10 +1218,9 @@ class BattleCalculatorAI:
                 self.notify.debug('Toon ' + str(t) + ' now has ' + str(self.__getToonHp(t)) + ' health')
 
     def __suitCanAttack(self, suitId):
-        if self.__combatantDead(suitId, toon=0) or self.__suitIsLured(
-                suitId) or self.__combatantJustRevived(suitId):
-            return 0
-        return 1
+        if self.__combatantDead(suitId, toon=0) or self.__suitIsLured(suitId) or self.__combatantJustRevived(suitId):
+            return False
+        return True
 
     def __updateSuitAtkStat(self, toonId):
         if toonId in self.suitAtkStats:
@@ -1465,7 +1464,7 @@ class BattleCalculatorAI:
         self.notify.debug('Lured suits reported to battle: ' + repr(luredSuits))
         return luredSuits
 
-    def __suitIsLured(self, suitId, prevRound=0):
+    def __suitIsLured(self, suitId, prevRound=False):
         inList = suitId in self.currentlyLuredSuits
         if prevRound:
             return inList and self.currentlyLuredSuits[suitId][0] != -1
