@@ -553,6 +553,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=1.2))
     elif name == WRITE_OFF:
         camTrack.append(defaultCamera())
+    elif name == WRITE_UP:
+        camTrack.append(defaultCamera(openShotDuration=2.0))
     else:
         notify.warning(
             'unknown attack id in chooseSuitShot: %d using default cam' %

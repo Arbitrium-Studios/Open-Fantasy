@@ -2587,7 +2587,8 @@ SuitAttackNames = {'Audit': 'Audit!',
                    'UndergroundLiquidity': 'Underground Liquidity!',
                    'Watercooler': 'Watercooler!',
                    'Withdrawal': 'Withdrawal!',
-                   'WriteOff': 'Write Off!'}
+                   'WriteOff': 'Write Off!',
+                   'WriteUp': 'Write Up!'}
 SuitAttackTaunts = {'Audit': ["I believe your books don't balance.",
                               "Looks like you're in the red.",
                               'Let me help you with your books.',
@@ -3234,7 +3235,14 @@ SuitAttackTaunts = {'Audit': ["I believe your books don't balance.",
                                  'You can forget about a bonus.',
                                  "I'll shuffle your accounts around.",
                                  "You're about to suffer some losses.",
-                                 'This is going to hurt your bottom line.']}
+                                 'This is going to hurt your bottom line.'],
+                    'WriteUp': ['That is a severe offense.',
+                                'Up you go!',
+                                'This infraction will be remembered.',
+                                "Oh, no you didn't!",
+                                "You'll find this very up-\x04setting.",
+                                'However will you make this up?',
+                                "You can't make this stuff up."]}
 BuildingWaitingForVictors = ('Waiting for other players...',)
 ElevatorHopOff = 'Hop off'
 ElevatorStayOff = "If you hop off, you'll need to wait\nfor the elevator to leave or empty."

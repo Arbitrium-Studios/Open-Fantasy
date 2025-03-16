@@ -264,6 +264,8 @@ def doSuitAttack(attack):
         suitTrack = doWithdrawal(attack)
     elif name == WRITE_OFF:
         suitTrack = doWriteOff(attack)
+    elif name == WRITE_UP:
+        suitTrack = doWriteUp(attack)
     else:
         notify.warning('unknown attack: %d substituting Finger Wag' % name)
         suitTrack = doDefault(attack)
@@ -1308,7 +1310,29 @@ def doFingerWag(attack):
     return Parallel(suitTrack, toonTrack, partTrack, soundTrack)
 
 
+def getPadAndPencilTrack(suit, delay = 0.5, playRate = 1.0):
+    '''
+    This definition serves as a convenient way to make the pencil and pad appear based on what Write Off already does.
+    '''
+
+    # Create the props.
+    pad = globalPropPool.getProp('pad')
+    pen = globalPropPool.getProp('pencil')
+    
+    # Position everything and return it as a prop.
+    padPosPoints = [Point3(-0.25, 1.38, -0.08), VBase3(-19.078, -6.603, -171.594)]
+    padPropTrack = getPropTrack(pad, suit.getLeftHand(), padPosPoints, delay / playRate, 2.57 / playRate, Point3(1.89, 1.89, 1.89), scaleUpTime=0.5 / playRate, scaleDownTime=0.5 / playRate)
+    pencilPosPoints = [Point3(-0.47, 1.08, 0.28), VBase3(21.045, 12.702, -176.374)]
+    extraArgsForShowProp = [pen, suit.getRightHand()]
+    extraArgsForShowProp.extend(pencilPosPoints)
+    penPropTrack = getPropTrack(pen, suit.getRightHand(), pencilPosPoints, delay / playRate, 2.8 / playRate, scaleUpPoint=Point3(1.5, 1.5, 1.5), scaleUpTime=0.5 / playRate, scaleDownTime=0.5 / playRate, startScale=Point3(0.01))
+    return padPropTrack, penPropTrack
+
+
 def doWriteOff(attack):
+    '''
+    TODO: With the new getPenAndPencilTrack() method, it serves as a more convenient option over what is already used.  That said, since pencilPropTrack has to spew a checkmark, how I am going to implement it is... uncertain.  Must figure out how.
+    '''
     suit = attack['suit']
     battle = attack['battle']
     target = attack['target']
@@ -1350,6 +1374,106 @@ def doWriteOff(attack):
         SoundInterval(globalBattleSoundCache.getSound('SA_writeoff_ding_only.ogg'), node=suit)
     )
     return Parallel(suitTrack, toonTrack, padPropTrack, pencilPropTrack, soundTrack)
+
+
+def doWriteUp(attack):
+    suit = attack['suit']
+    battle = attack['battle']
+    target = attack['target']
+    toon = target[0]['toon']
+    dmg = target[0]['hp']
+    suitDelay = 2.3
+    suitTrack = getSuitTrack(attack)
+    padPropTrack, penPropTrack = getPadAndPencilTrack(suit)
+
+    '''
+    NOTE from Professor Control: I genuinely have no idea how to make particle effects, so I opted to make faux particle effects.
+    In the future, we could probably improve this by having someone who knows how to make particle effects make particle effects.
+    '''
+    partTracks = Parallel()
+    '''First set of arrows.'''
+    numArrows = 10 # Control the amount of arrows.
+    radius = 2.0
+    partTrack = Parallel()
+    for i in range(numArrows):
+        arrow = loader.loadModel('phase_3.5/models/gui/matching_game_gui').find('**/minnieArrow')
+        arrow.setScale(Point3(5.0))
+        arrow.setBillboardPointEye()
+        arrow.setR(270) # Arrow points up.
+        arrow.setColorScale(1.0, 0.0, 0.0, 1.0)
+        # The X and Y coordinates should be right on the circle.  The way to calculate it, though?  Trigonometry, of course!
+        angle = random.random() * 2.0 * math.pi # Have a random angle decided.  360-degree limit, but due to the angle being in radians, use such units.  360 degrees in radians is 2 times pi.
+        x = radius * math.cos(angle) + toon.getX(battle)
+        y = radius * math.sin(angle) + toon.getY(battle)
+        oneArrowTrack = Sequence(
+            Wait(2.3 + (i * 0.25)), # The delay for the arrow.
+            Func(arrow.reparentTo, battle),
+            Func(arrow.setPos, Point3(x, y, 0)), # Maybe I'll have to change the Z-coordinate.
+            Track(
+                (0.0, LerpFunctionInterval(arrow.setZ, 0.8, 0, 3, blendType='easeOut')),
+                (0.6, LerpFunctionInterval(arrow.setAlphaScale, 0.2, 1, 0))
+            ),
+            Func(MovieUtil.removeProp, arrow)
+        )
+        partTrack.append(oneArrowTrack)
+        
+    partTracks.append(partTrack)
+    '''Second set of arrows.'''
+    numArrows = 20
+    partTrack2 = Parallel() # For the more narrow effect that comes if the Toon is hit.
+    for i in range(numArrows):
+        radius = random.random() # Have the arrows burst up.  Due to it being more in the center, the arrows will be somewhat more centered.
+        arrow = loader.loadModel('phase_3.5/models/gui/matching_game_gui').find('**/minnieArrow')
+        arrow.setScale(Point3(4.0))
+        arrow.setBillboardPointEye()
+        arrow.setR(270) # Arrow points up.
+        arrow.setColorScale(1.0, 0.0, 0.0, 1.0)
+        angle = random.random() * 2.0 * math.pi
+        x = radius * math.cos(angle) + toon.getX(battle)
+        y = radius * math.sin(angle) + toon.getY(battle)
+        partTrack2.append(Sequence(
+            Wait(3.2 + i * 0.1), # The delay for the arrow.
+            Func(arrow.reparentTo, battle),
+            Func(arrow.setPos, Point3(x, y, 0)), # Maybe I'll have to change the Z-coordinate.
+            Track(
+                (0.0, LerpFunctionInterval(arrow.setZ, 1.0, 0, 20, blendType='easeOut')),
+                (0.6, LerpFunctionInterval(arrow.setAlphaScale, 0.25, 1, 0))
+            ),
+            Func(MovieUtil.removeProp, arrow)
+        ))
+
+    if dmg > 0:
+        partTracks.append(partTrack2)
+
+    '''Prepare the Toon for lift-off!'''
+    # Get the initial position.
+    toonX, toonY, toonZ = toon.getPos()
+
+    # Create the sound effect and make it slightly faster than it normally is.
+    soundEffect = loader.loadSfx('phase_6/audio/sfx/KART_getGag.ogg')
+    soundEffect.setPlayRate(1.5)
+    upTrack = Sequence(
+        Wait(suitDelay + 0.9),
+        Func(base.playSfx, soundEffect, node=toon),
+        # Launch the Toon into the air!
+        LerpPosInterval(toon, 1.1, Point3(toonX, toonY, toonZ + 25)),
+        # Wait a little...
+        Wait(0.7),
+        # ...and bring the Toon back down.
+        LerpPosInterval(toon, 1.0, Point3(toonX, toonY, toonZ), blendType='easeIn'),
+        # Finish with the Toon letting out an "Oomph!" as they hit the ground.
+        Func(base.playSfx, loader.loadSfx('phase_4/audio/sfx/MG_cannon_hit_dirt.ogg'), node=toon)
+    )
+
+    damageAnims = [['slip-forward', 0.01, 0.01, 0.4],
+     ['slip-forward', 2.3, 0.41]]
+    toonTrack = getToonTrack(attack, damageDelay=3.2, splicedDamageAnims=damageAnims, dodgeDelay=2.8, dodgeAnimNames=['duck'], showDamageExtraTime=3.4)
+    soundTrack = getSoundTrack('SA_writeoff_pen_only.ogg', delay=2.3, node=suit)
+    if dmg > 0:
+        return Parallel(suitTrack, toonTrack, padPropTrack, penPropTrack, partTracks, upTrack, soundTrack)
+    else:
+        # Do not lift the Toon if they do not get hurt.
+        return Parallel(suitTrack, toonTrack, padPropTrack, penPropTrack, partTracks, soundTrack)
 
 
 def doRubberStamp(attack):

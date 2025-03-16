@@ -1252,7 +1252,8 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
                'UndergroundLiquidity': ('magic1', ATK_TGT_SINGLE),
                'Watercooler': ('watercooler', ATK_TGT_SINGLE),
                'Withdrawal': ('magic1', ATK_TGT_GROUP),
-               'WriteOff': ('hold-pencil', ATK_TGT_SINGLE)}
+               'WriteOff': ('hold-pencil', ATK_TGT_SINGLE),
+               'WriteUp': ('hold-pencil', ATK_TGT_SINGLE)}
 AUDIT = list(SuitAttacks.keys()).index('Audit')
 BITE = list(SuitAttacks.keys()).index('Bite')
 BOUNCE_CHECK = list(SuitAttacks.keys()).index('BounceCheck')
@@ -1329,6 +1330,7 @@ UNDERGROUND_LIQUIDITY = list(SuitAttacks.keys()).index('UndergroundLiquidity')
 WATERCOOLER = list(SuitAttacks.keys()).index('Watercooler')
 WITHDRAWAL = list(SuitAttacks.keys()).index('Withdrawal')
 WRITE_OFF = list(SuitAttacks.keys()).index('WriteOff')
+WRITE_UP = list(SuitAttacks.keys()).index('WriteUp')
 
 
 def getFaceoffTaunt(suitName, doId):
