@@ -876,6 +876,29 @@ dclass DistributedCashbotBossGoon : DistributedCashbotBossObject {
   destroyGoon() broadcast clsend airecv;
 };
 
+struct toonAttack {
+  int8 id;
+  int8 tr;
+  int8 le;
+  int32 tg;
+  int16[] hp;
+  int16 ac;
+  int16 hpb;
+  int16[] kbb;
+  int8 died;
+  int8 revive;
+}
+
+struct suitAttack {
+  int8 sid;
+  int8 at;
+  int8 stg;
+  int16[] dm;
+  int8 sd;
+  int8 sb;
+  int8 st;
+}
+
 dclass DistributedBattleBase : DistributedObject {
   setLevelDoId(uint32) required broadcast ram;
   setBattleCellId(uint32) required broadcast ram;
@@ -885,7 +908,7 @@ dclass DistributedBattleBase : DistributedObject {
   setInitialSuitPos(int16/10, int16/10, int16/10) required broadcast ram;
   setMembers(uint32[], string, string, string, string, string, uint32[], string, string, string, string, int16) required broadcast ram;
   adjust(int16) broadcast;
-  setMovie(int8, uint32[], uint32[], int8, int8, int8, int32, int16[], int16, int16, int16[], int8, int8, int8, int8, int8, int32, int16[], int16, int16, int16[], int8, int8, int8, int8, int8, int32, int16[], int16, int16, int16[], int8, int8, int8, int8, int8, int32, int16[], int16, int16, int16[], int8, int8, int8, int8, int8, int16[], int8, int8, int8, int8, int8, int8, int16[], int8, int8, int8, int8, int8, int8, int16[], int8, int8, int8, int8, int8, int8, int16[], int8, int8, int8) required broadcast ram;
+  setMovie(int8, uint32[], uint32[], toonAttack, toonAttack, toonAttack, toonAttack, suitAttack, suitAttack, suitAttack, suitAttack) required broadcast ram;
   setChosenToonAttacks(uint32[], int16[], int16[], int32[]) broadcast ram;
   setBattleExperience(int32, int16[], int16[], uint32[], int16[], int16[], int16[], int16[], uint32[], int32, int16[], int16[], uint32[], int16[], int16[], int16[], int16[], uint32[], int32, int16[], int16[], uint32[], int16[], int16[], int16[], int16[], uint32[], int32, int16[], int16[], uint32[], int16[], int16[], int16[], int16[], uint32[], uint8[], int16[], uint32[]) required broadcast ram;
   denyLocalToonJoin();
