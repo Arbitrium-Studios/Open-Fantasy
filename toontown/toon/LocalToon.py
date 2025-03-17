@@ -22,7 +22,7 @@ from toontown.shtiker import ShtikerBook
 from toontown.shtiker import InventoryPage
 from toontown.shtiker import MapPage
 from toontown.shtiker import OptionsPage
-from toontown.shtiker import ShardPage
+# from toontown.shtiker import ShardPage
 from toontown.shtiker import QuestPage
 from toontown.shtiker import TrackPage
 from toontown.shtiker import KartPage
@@ -265,7 +265,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         base.whiteList.unload()
         self.book.unload()
         del self.optionsPage
-        del self.shardPage
+        # del self.shardPage
         del self.mapPage
         del self.invPage
         del self.questPage
