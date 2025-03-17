@@ -339,6 +339,7 @@ class DistributedBattleBaseAI(
         p.append(self.activeToons)
         p.append(suitIds)
         for t in self.activeToons:
+            toonAttack = []
             if t in self.toonAttacks:
                 ta = self.toonAttacks[t]
                 index = -1
@@ -346,8 +347,7 @@ class DistributedBattleBaseAI(
                 if id != -1:
                     index = self.activeToons.index(id)
                 track = ta[TOON_TRACK_COL]
-                if (track == NO_ATTACK or attackAffectsGroup(track,
-                                                             ta[TOON_LVL_COL])) and track != NPCSOS and track != PETSOS:
+                if (track == NO_ATTACK or attackAffectsGroup(track, ta[TOON_LVL_COL])) and track != NPCSOS and track != PETSOS:
                     target = -1
                     if track == HEAL:
                         if ta[TOON_LVL_COL] == 1:
@@ -363,22 +363,22 @@ class DistributedBattleBaseAI(
                     target = suitIds.index(ta[TOON_TGT_COL])
                 else:
                     target = -1
-                p = p + [index,
-                         track,
-                         ta[TOON_LVL_COL],
-                         target]
-                p = p + ta[4:]
+                toonAttack.extend([index, track, ta[TOON_LVL_COL], target])
+                toonAttack.extend(ta[4:])
             else:
                 index = self.activeToons.index(t)
                 attack = getToonAttack(index)
-                p = p + attack
+                toonAttack.extend(attack)
+            p.append(toonAttack)
 
+        # NOTE: This seems to fill in the arguments for if a Toon is absent from battle.  We could remove this due to our plans to make Toontown Fantasy singleplayer.
         for i in range(4 - len(self.activeToons)):
-            p = p + getToonAttack(-1)
+            p.append(getToonAttack(-1))
 
         for sa in self.suitAttacks:
             index = -1
             id = sa[SUIT_ID_COL]
+            suitAttack = []
             if id != -1:
                 index = suitIds.index(id)
             if sa[SUIT_ATK_COL] == -1:
@@ -391,13 +391,14 @@ class DistributedBattleBaseAI(
                         sa[SUIT_ATK_COL])
                 else:
                     toonId = self.activeToons[targetIndex]
-            p = p + [index, sa[SUIT_ATK_COL], targetIndex]
+            suitTrack += [index, sa[SUIT_ATK_COL], targetIndex]
             sa[SUIT_TAUNT_COL] = 0
             if sa[SUIT_ATK_COL] != -1:
                 suit = self.findSuit(id)
                 sa[SUIT_TAUNT_COL] = getAttackTauntIndexFromIndex(
                     suit, sa[SUIT_ATK_COL])
-            p = p + sa[3:]
+            suitAttack.extend(sa[3:])
+            p.append(suitTrack)
 
         return p
 
