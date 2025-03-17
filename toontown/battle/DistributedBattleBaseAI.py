@@ -391,14 +391,14 @@ class DistributedBattleBaseAI(
                         sa[SUIT_ATK_COL])
                 else:
                     toonId = self.activeToons[targetIndex]
-            suitTrack += [index, sa[SUIT_ATK_COL], targetIndex]
+            suitAttack += [index, sa[SUIT_ATK_COL], targetIndex]
             sa[SUIT_TAUNT_COL] = 0
             if sa[SUIT_ATK_COL] != -1:
                 suit = self.findSuit(id)
                 sa[SUIT_TAUNT_COL] = getAttackTauntIndexFromIndex(
                     suit, sa[SUIT_ATK_COL])
             suitAttack.extend(sa[3:])
-            p.append(suitTrack)
+            p.append(suitAttack)
 
         return p
 
