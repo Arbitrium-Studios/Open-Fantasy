@@ -630,18 +630,10 @@ class Movie(DirectObject.DirectObject):
                               id3]
         self.uberList = uberList
 
-    def genAttackDicts(self, toons, suits, toonAttack0, toonAttack1, toonAttack2, toonAttack3, suitAttack0, suitAttack1, suitAttack2, suitAttack3):
+    def genAttackDicts(self, toons, suits, toonAttacks, suitAttacks):
         if self.track and self.track.isPlaying():
             self.notify.warning('genAttackDicts() - track is playing!')
-        toonAttacks = (toonAttack0,
-                       toonAttack1,
-                       toonAttack2,
-                       toonAttack3)
         self.__genToonAttackDicts(toons, suits, toonAttacks)
-        suitAttacks = (suitAttack0,
-                       suitAttack1,
-                       suitAttack2,
-                       suitAttack3)
         self.__genSuitAttackDicts(toons, suits, suitAttacks)
 
     def __genToonAttackDicts(self, toons, suits, toonAttacks):

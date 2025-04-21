@@ -598,13 +598,13 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         self.adjustFsm.request('Adjusting',
                                [globalClockDelta.localElapsedTime(timestamp)])
 
-    def setMovie(self, active, toons, suits, toonAttack0, toonAttack1, toonAttack2, toonAttack3, suitAttack0, suitAttack1, suitAttack2, suitAttack3):
+    def setMovie(self, active, toons, suits, toonAttacks, suitAttacks):
         if self.__battleCleanedUp:
             return
         self.notify.debug('setMovie()')
         if int(active) == 1:
             self.notify.debug('setMovie() - movie is active')
-            self.movie.genAttackDicts(toons, suits, toonAttack0, toonAttack1, toonAttack2, toonAttack3, suitAttack0, suitAttack1, suitAttack2, suitAttack3)
+            self.movie.genAttackDicts(toons, suits, toonAttacks, suitAttacks)
 
     def setChosenToonAttacks(self, ids, tracks, levels, targets):
         if self.__battleCleanedUp:

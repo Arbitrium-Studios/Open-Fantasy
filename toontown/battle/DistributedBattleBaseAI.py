@@ -338,6 +338,7 @@ class DistributedBattleBaseAI(
         p = [self.movieHasBeenMade]
         p.append(self.activeToons)
         p.append(suitIds)
+        toonAttacks = []
         for t in self.activeToons:
             toonAttack = []
             if t in self.toonAttacks:
@@ -369,12 +370,15 @@ class DistributedBattleBaseAI(
                 index = self.activeToons.index(t)
                 attack = getToonAttack(index)
                 toonAttack.extend(attack)
-            p.append(toonAttack)
+            toonAttacks.append(toonAttack)
 
         # NOTE: This seems to fill in the arguments for if a Toon is absent from battle.  We could remove this due to our plans to make Toontown Fantasy singleplayer.
         for i in range(4 - len(self.activeToons)):
-            p.append(getToonAttack(-1))
+            toonAttacks.append(getToonAttack(-1))
+        
+        p.append(toonAttacks)
 
+        suitAttacks = []
         for sa in self.suitAttacks:
             index = -1
             id = sa[SUIT_ID_COL]
@@ -398,8 +402,9 @@ class DistributedBattleBaseAI(
                 sa[SUIT_TAUNT_COL] = getAttackTauntIndexFromIndex(
                     suit, sa[SUIT_ATK_COL])
             suitAttack.extend(sa[3:])
-            p.append(suitAttack)
+            suitAttacks.append(suitAttack)
 
+        p.append(suitAttacks)
         return p
 
     def d_setChosenToonAttacks(self):
