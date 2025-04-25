@@ -1,7 +1,0 @@
-[submodule "resources/"]
-	path = resources
-	url = https://github.com/Arbitrium-Studios/resources.git
-
-[submodule "dependencies/panda3d"]
-	path = dependencies/panda3d
-	url = https://github.com/Arbitrium-Studios/panda3d.git
