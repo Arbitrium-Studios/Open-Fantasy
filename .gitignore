@@ -17,6 +17,7 @@
 !darwin/.vscode/tasks.json
 errorCode
 Start Toontown Fantasy.lnk
+scripts/test_scripts.bat
 
 # GitHub WILL ignore these file extensions:
 
