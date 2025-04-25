@@ -7,8 +7,7 @@
 /users/
 /Housekeeper/
 /news/
-# /resources/
-# /dependencies/panda3d/
+/dependencies/panda3d/
 
 # GitHub WILL ignore these files:
 
@@ -18,8 +17,6 @@
 !darwin/.vscode/tasks.json
 errorCode
 Start Toontown Fantasy.lnk
-copy.gitmodules
-start_game - Copy.bat
 
 # GitHub WILL ignore these file extensions:
 
