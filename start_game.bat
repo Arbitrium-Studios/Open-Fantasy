@@ -45,7 +45,7 @@ goto :set_panda3d
 
 :set_panda3d
 cd %CD%
-cd %ROOT_PATH%/%DEPENDENCIES_PATH%
+cd %ROOT_PATH%\%DEPENDENCIES_PATH%
 echo Directory path is: %CD%
 set PANDA3D_PATH=panda3d
 echo Panda3d folder path will be: %CD%\%PANDA3D_PATH%
@@ -74,13 +74,12 @@ if exist %PANDA3D_PATH% (
     call git pull https://github.com/Arbitrium-Studios/panda3d.git main --allow-unrelated-histories
     @REM pause rem for debugging purposes
     goto :ppython
-    @REM goto :panda3d
 ) else (
     echo The Panda3D folder does not exist, creating it now.
     @REM mkdir %PANDA3D_PATH%
     echo Created the Panda3D folder at %ROOT_PATH%\%PANDA3D_PATH%
     echo CURRENT_DIR at Panda3D Else is now set to: %CD%
-    pause rem for debugging purposes
+    @REM pause rem for debugging purposes
     goto :panda3d_version
 )
 
@@ -94,7 +93,7 @@ echo.
 :panda3d_version
 
 set INPUT=-1
-set /P INPUT=Selection: 
+set \P INPUT=Selection: 
 
 if %INPUT%==1 (
     echo Pre-Compiled Panda3D version has been selected.
@@ -107,7 +106,7 @@ if %INPUT%==1 (
     goto :set_panda3d
 @REM ) else if %INPUT%==2 (
 @REM     echo Local Panda3D version selected.
-@REM     set /P PANDA3D_PATH="Please Enter the path to your local Panda3D folder: "
+@REM     set \P PANDA3D_PATH="Please Enter the path to your local Panda3D folder: "
 @REM     echo PANDA3D_PATH is now set to: %PANDA3D_PATH%
 @REM     pause
 @REM     goto :set_panda3d
@@ -124,12 +123,20 @@ echo Setting Python Path
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 cd %ROOT_PATH%
-echo Current directory at PPYTHON_PATH is: %CD%
+echo Current directory at PYTHON_PATH is: %CD%
+echo.
+echo Current directory at requirements is: %CD%
+echo ROOT_PATH is: %CD%
+echo Dependencies path is: %DEPENDENCIES_PATH%
+rem Read the contents of PYTHON_PATH into %PYTHON_PATH%:
+@REM set %DEPENDENCIES_PATH%/variables
+@REM set \P PYTHON_PATH=<PYTHON_PATH
+@REM echo PPYTHON PATH is set as: %PYTHON_PATH%
+set PYTHON_PATH=%ROOT_PATH%\%DEPENDENCIES_PATH%\%PANDA3D_PATH%\python\ppython.exe
+echo PYTHON_PATH is set as: %PYTHON_PATH%
+set PIP_PATH=%ROOT_PATH%\%DEPENDENCIES_PATH%\%PANDA3D_PATH%\python\Scripts\pip.exe
+echo PIP_PATH is: %PIP_PATH%
 
-rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
-set /P PPYTHON_PATH=<dependencies/variables/PPYTHON_PATH
-echo Python path is: %PPYTHON_PATH%
-set PIP_PATH=/panda3d/python/Scripts/pip.exe
 @REM pause
 goto :requirements
 
@@ -138,8 +145,20 @@ echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo Getting Requirements
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-call %PPYTHON_PATH% %ROOT_PATH%/%DEPENDENCIES_PATH%/%PIP_PATH% install -r %ROOT_PATH%/requirements.txt
-call %PPYTHON_PATH% -m %ROOT_PATH%/%DEPENDENCIES_PATH%/%PIP_PATH% install --upgrade pip
+
+@REM pause
+@REM set PYTHON_PATH = "dependencies\panda3d\python\ppython.exe"
+
+cd %ROOT_PATH%
+echo Current directory at Requirements is: %CD%
+
+set GET_PIP_PATH = dependencies\get-pip.py
+
+call "dependencies/panda3d/python/python.exe" "dependencies/get-pip.py" --no-warn-script-location
+
+@REM "%PYTHON_PATH%" %GET_PIP_PATH%
+@REM call %PYTHON_PATH% -m %ROOT_PATH%\%DEPENDENCIES_PATH%\%PIP_PATH% install --upgrade pip
+@REM call %PYTHON_PATH% %ROOT_PATH%\%DEPENDENCIES_PATH%\%PIP_PATH% install -r %ROOT_PATH%\requirements.txt
 
 goto :submodules
 
@@ -147,13 +166,13 @@ goto :submodules
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo Getting Submodules
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-%PPYTHON_PATH% %DEPENDENCIES_PATH%/initialize.py
+%PYTHON_PATH% %DEPENDENCIES_PATH%/initialize.py
 @REM call git submodule update --init --recursive
 @REM pause
 
 @REM echo Checking for updates from the development branch.
 @REM call git fetch origin development && git status --porcelain
-@REM call git diff --quiet HEAD..origin/development
+@REM call git diff --quiet HEAD..origin\development
 @REM if errorlevel 1 (
 @REM     echo Updates found, pulling changes...
 @REM     call git pull origin development
@@ -168,6 +187,7 @@ echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 echo All done!
 @REM pause
+echo Current directory is: %CD%
 goto :localhost
 
 :localhost
@@ -175,7 +195,7 @@ echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo Starting Localhost!
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-cd %CD%/%SCRIPTS_DIR%
+cd %CD%\%SCRIPTS_DIR%
 echo Current directory is: %CD%
 echo Launching Astron...
 START start_astron_server.bat
@@ -201,6 +221,6 @@ echo The Tooniverse awaits you, %TT_Username%!
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 :startgame
 title PLAYER ZER0 STUDIO's Toontown Fantasy
-%PPYTHON_PATH% -m toontown.launcher.QuickStartLauncher
-PAUSE
+%PYTHON_PATH% -m toontown.launcher.QuickStartLauncher
+pause
 goto startgame
