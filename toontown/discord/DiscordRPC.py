@@ -217,7 +217,7 @@ class DiscordRPC(object):
         self.updateTask = None
 
     def enable(self):
-        clientId = "994119909929914419" # This is also called the Application ID on the Discord Developer Portal
+        clientId = "1384706254978420816" # This is also called the Application ID on the Discord Developer Portal
         try:
             if self.RPC is None:
                 self.RPC = Presence(clientId)

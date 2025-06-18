@@ -1,6 +1,7 @@
 import os
 import datetime
 import functools
+# from pathlib import Path
 from panda3d.core import Filename, DSearchPath, ConfigVariableString, ConfigVariableBool
 from panda3d.core import HTTPClient, Ramfile, DocumentSpec
 from direct.showbase import DirectObject
@@ -16,7 +17,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
     TaskName = 'HtmlViewUpdateTask'
     TaskChainName = 'RedownladTaskChain'
     RedownloadTaskName = 'RedownloadNewsTask'
-    NewsBaseDir = ConfigVariableString('news-base-dir', '/httpNews').value
+    NewsBaseDir = ConfigVariableString('news-base-dir', '/news').value # Was set to: httpNews
     NewsStageDir = ConfigVariableString('news-stage-dir', 'news').value
     FrameDimensions = (-1.30666637421,
                        1.30666637421,
@@ -25,7 +26,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DirectNewsFrame')
     NewsIndexFilename = ConfigVariableString(
         'news-index-filename', 'http_news_index.txt').value
-    NewsOverHttp = ConfigVariableBool('news-over-http', False).value
+    NewsOverHttp = ConfigVariableBool('news-over-http', True).value
     CacheIndexFilename = 'cache_index.txt'
     SectionIdents = ['hom',
                      'new',
@@ -155,31 +156,37 @@ class DirectNewsFrame(DirectObject.DirectObject):
         return homeFileNames
 
     def findNewsDir(self):
+
         if self.NewsOverHttp:
             return self.NewsStageDir
         searchPath = DSearchPath()
         if AppRunnerGlobal.appRunner:
             searchPath.appendDirectory(
-                Filename.expandFrom('$TT_3_5_ROOT/phase_3.5/models/news'))
+                Filename.expandFrom('resources/phase_3.5/models'))
         else:
-            basePath = os.path.expandvars('$TTMODELS') or './ttmodels'
+            resourcesFolder = "/resources"
+            os.environ["TTMODELS"] = "/phase_3.5/models"
+            basePath = os.path.expandvars('$TTMODELS')
             searchPath.appendDirectory(
                 Filename.fromOsSpecific(
+                    resourcesFolder + 
                     basePath +
-                    '/built/' +
                     self.NewsBaseDir))
             searchPath.appendDirectory(Filename(self.NewsBaseDir))
+
         pfile = Filename(self.NewsIndexFilename)
         found = vfs.resolveFilename(pfile, searchPath)
         if not found:
             self.notify.warning(
                 'findNewsDir - no path: %s' %
                 self.NewsIndexFilename)
+            print(f"There is no path for findNewsDir: {self.NewsIndexFilename}")
             self.setErrorMessage(
                 TTLocalizer.NewsPageErrorDownloadingFile %
                 self.NewsIndexFilename)
             return None
         self.notify.debug('found index file %s' % pfile)
+        print(f"Found index file: {pfile.getFullpath()}")
         realDir = pfile.getDirname()
         return realDir
 
@@ -432,17 +439,17 @@ class DirectNewsFrame(DirectObject.DirectObject):
     def getInGameNewsUrl(self):
         result = ConfigVariableString(
             'fallback-news-url',
-            'https://web.archive.org/web/20230718194723/http://cdn.toontown.disney.go.com/toontown/en/gamenews/').value # Original fallback-news-url: http://cdn.toontown.disney.go.com/toontown/en/gamenews/
-        override = ConfigVariableString('in-game-news-url', 'https://cdn.arbitriumstudios.com/bf_assets/tuou/tl_420/tlv_b/tnbot/c1_tpott/pzs_ttfan/game/resources/default/english/phase_3.5/gamenews/').value # Assets currently missing, while I am grabbing them, it will temporarily fallback to the archive
+            'http://dolimg.com/toontown/en/gamenews/').value
+        override = ConfigVariableString('in-game-news-url', '').value
         if override:
             self.notify.info(
-                'got an override url,  using %s for in game news' %
+                'got an override url, using %s for in game news' %
                 override)
             result = override
         else:
             try:
                 launcherUrl = base.launcher.getValue(
-                    'GAME_IN_GAME_NEWS_URL', '')
+                    'GAME_IN_GAME_NEWS_URL', 'https://cdn.arbitriumstudios.com/bf_assets/media/player_zer0_studio/toontown_fantasy/game/english/resources/phase_3.5/models/gamenews/img/news/')
                 if launcherUrl:
                     result = launcherUrl
                     self.notify.info(

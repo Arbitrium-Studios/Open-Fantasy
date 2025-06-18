@@ -18,7 +18,7 @@ WIN_HEIGHT = 600
 
 
 class IssueFrame(DirectFrame):
-    NewsBaseDir = config.GetString('news-base-dir', '/httpNews')
+    NewsBaseDir = config.GetString('news-base-dir', '/news')
     FrameDimensions = (-1.30666637421,
                        1.30666637421,
                        -0.751666665077,
@@ -185,7 +185,7 @@ class IssueFrame(DirectFrame):
                                                                                                                                              image), pos=position, image_scale=imageScale)
         return
 
-    def loadHomePageButtons(self, section, pageFrame):
+    def loadHomePageButtons(self, section, subsection, pageFrame):
         buttonNames = ['',
                        'tt_i_art_btn_HomNew',
                        'tt_i_art_btn_HomEvt',
