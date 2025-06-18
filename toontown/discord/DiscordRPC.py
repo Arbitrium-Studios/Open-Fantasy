@@ -36,7 +36,6 @@ class DiscordRPC(object):
 
         6000: ["acorn-acres", "in Acorn Acres"],
 
-
         8000: ["toontown-stadium", "in Toontown Stadium"],
 
         9000: ["twlight-dreamland", "in Twlight Dreamland"],
@@ -70,7 +69,7 @@ class DiscordRPC(object):
         13500: ["lawbot-hq", "in The Lawbot Office C"],
         13600: ["lawbot-hq", "in The Lawbot Office D"],
 
-        14000: ["toontorial-terrace", "in The Toontorial"],
+        14000: ["toontorial", "in The Toontorial"],
 
         16000: ["toon-estate", "at A Toon Estate"],
 
@@ -218,7 +217,7 @@ class DiscordRPC(object):
         self.updateTask = None
 
     def enable(self):
-        clientId = "994119909929914419"
+        clientId = "994119909929914419" # This is also called the Application ID on the Discord Developer Portal
         try:
             if self.RPC is None:
                 self.RPC = Presence(clientId)
