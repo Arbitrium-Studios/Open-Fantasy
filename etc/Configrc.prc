@@ -1,5 +1,5 @@
 # Window Settings
-window-title (Dev Build) PLAYER ZER0 STUDIO'S Toontown Fantasy
+window-title (Dev Build) PLAYER ZER0 STUDIO's Toontown Fantasy
 icon-filename phase_3/models/gui/toontown.ico
 cursor-filename phase_3/models/gui/toonmono.cur
 
