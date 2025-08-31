@@ -245,7 +245,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         # First, generate our zone2NpcDict...
         NPCToons.generateZone2NpcDict()
 
-        # Donald's Dock
+        # Foggy Fjord
         self.zoneTable[ToontownGlobals.FoggyFjords] = (
             (ToontownGlobals.FoggyFjords, 1,
              0), (ToontownGlobals.BarnacleBoulevard, 1, 1),
@@ -278,7 +278,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         )
         self.generateHood(MMHoodDataAI, ToontownGlobals.HarmoniousHaven)
 
-        # Daisy Gardens
+        # Flowering Grove
         self.zoneTable[ToontownGlobals.FloweringGrove] = (
             (ToontownGlobals.FloweringGrove, 1, 0), (ToontownGlobals.ElmStreet, 1, 1),
             (ToontownGlobals.MapleStreet, 1, 1), (ToontownGlobals.OakStreet, 1, 1)
