@@ -33,7 +33,7 @@ class Credits:
 \1limeText\1The Architects of Realities (Programmers):\2
 
 - Professor Control
-- DarthMDev aka darthanonymous aka MichaelGDev48
+- DarthMDev aka darthanonymous
 - Gracie "THE PLAYER ZER0" Lovelight
 - SomethingRandom0768 for beginning to develop the Custom Control Support and adding Linux support.
 - (Retired) TrueBlueDogemon on Discord for implementing various Quality of Life features including Multiple SOS Cards.
