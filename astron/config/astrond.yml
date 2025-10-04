@@ -1,5 +1,5 @@
 daemon:
-    name: Open Toontown Astron Cluster
+    name: Toontown Fantasy Astron Cluster
 
 general:
     eventlogger: 127.0.0.1:7197

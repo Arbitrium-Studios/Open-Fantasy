@@ -7,7 +7,7 @@ from otp.ai.TimeManagerAI import TimeManagerAI
 from otp.distributed.OtpDoGlobals import *
 from toontown.ai.HolidayManagerAI import HolidayManagerAI
 from toontown.ai.NewsManagerAI import NewsManagerAI
-# from toontown.ai.WelcomeValleyManagerAI import WelcomeValleyManagerAI
+from toontown.ai.WelcomeValleyManagerAI import WelcomeValleyManagerAI
 from toontown.building.DistributedTrophyMgrAI import DistributedTrophyMgrAI
 from toontown.catalog.CatalogManagerAI import CatalogManagerAI
 from toontown.coghq.CogSuitManagerAI import CogSuitManagerAI
@@ -86,7 +86,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.cogSuitMgr = None
         self.timeManager = None
         self.newsManager = None
-        # self.welcomeValleyManager = None
+        self.welcomeValleyManager = None
         self.inGameNewsMgr = None
         self.catalogManager = None
         self.trophyMgr = None
@@ -202,8 +202,8 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.newsManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
         # Generate our Welcome Valley manager...
-        # self.welcomeValleyManager = WelcomeValleyManagerAI(self)
-        # self.welcomeValleyManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+        self.welcomeValleyManager = WelcomeValleyManagerAI(self)
+        self.welcomeValleyManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
         # Generate our in-game news manager...
         self.inGameNewsMgr = DistributedInGameNewsMgrAI(self)
@@ -337,7 +337,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.generateHood(GZHoodDataAI, ToontownGlobals.GolfZone)
 
         # Welcome Valley zones
-        # self.welcomeValleyManager.createWelcomeValleyZones()
+        self.welcomeValleyManager.createWelcomeValleyZones()
 
         # Assign the initial suit buildings.
         for suitPlanner in list(self.suitPlanners.values()):

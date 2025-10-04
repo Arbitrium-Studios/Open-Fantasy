@@ -183,9 +183,6 @@ class DiscordRPC(object):
             self.details = 'in a Cog Building.'
             self.setData()
 
-
-    
-
     def startTasks(self):
         if base.wantRichPresence:
             taskMgr.doMethodLater(10, self.updateTasks, 'UpdateTask')
@@ -193,18 +190,20 @@ class DiscordRPC(object):
     def setDistrict(self, name):
         if base.wantRichPresence:
             self.smallTxt = name
+            print(f'setDistrict is set to {name}')
 
-    def setZone(self,zone): # Set image and text based on the zone
+    def setZone(self, zone): # Set image and text based on the zone
         if not isinstance(zone, int) or not base.wantRichPresence:
             return
         zone -= zone % 100
-        data = self.zone2imgdesc.get(zone,None)
+        print(f'The zone is set to "{zone}"')
+        data = self.zone2imgdesc.get(zone, None)
         if data:
             self.image = data[0]
             self.details = data[1]
             self.setData()
         else:
-            print("Error: Zone Not Found!")
+            print(f"Error: Zone Not Found!: {zone}")
 
     def disable(self):
         try:

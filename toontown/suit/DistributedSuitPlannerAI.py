@@ -110,9 +110,9 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         self.targetNumSuitBuildings -= self.targetNumCogdos
         if self.MinimumOfOne:
             self.targetNumSuitBuildings = max(self.targetNumSuitBuildings, 1)
-        # if ZoneUtil.isWelcomeValley(self.zoneId):
-        #     self.targetNumCogdos = 0
-        #     self.targetNumSuitBuildings = 0
+        if ZoneUtil.isWelcomeValley(self.zoneId):
+            self.targetNumCogdos = 0
+            self.targetNumSuitBuildings = 0
         self.pendingBuildingTracks = []
         self.pendingBuildingHeights = []
         self.pendingCogdoHeights = []

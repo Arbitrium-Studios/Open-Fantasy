@@ -386,7 +386,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
 
     def announceZoneChange(self, newZoneId, oldZoneId):
         from toontown.pets import PetObserve
-        # self.air.welcomeValleyManager.toonSetZone(self.doId, newZoneId)
+        self.air.welcomeValleyManager.toonSetZone(self.doId, newZoneId)
         broadcastZones = [oldZoneId, newZoneId]
         if self.isInEstate() or self.wasInEstate():
             broadcastZones = union(broadcastZones, self.estateZones)
@@ -3506,9 +3506,9 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
                 'suspicious', self.doId, 'bogus cog summons')
             self.sendUpdate('cogSummonsResponse', ['fail', suitIndex, 0])
             return
-        # if ZoneUtil.isWelcomeValley(self.zoneId):
-        #     self.sendUpdate('cogSummonsResponse', ['fail', suitIndex, 0])
-        #     return
+        if ZoneUtil.isWelcomeValley(self.zoneId):
+            self.sendUpdate('cogSummonsResponse', ['fail', suitIndex, 0])
+            return
         returnCode = None
         if type == 'single':
             returnCode = self.doSummonSingleCog(suitIndex)

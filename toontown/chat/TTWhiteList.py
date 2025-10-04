@@ -82,7 +82,7 @@ class TTWhiteList(WhiteList, DirectObject):
     def getWhitelistUrl(self):
         result = ConfigVariableString(
             'fallback-whitelist-url',
-            'https://cdn.arbitriumstudios.com/bf_assets/tuou/tl_420/tlv_b/tnbot/c1_tpott/pzs_ttfan/game/resources/default/english/phase_3/etc/').value
+            'https://cdn.arbitriumstudios.com/bf_assets/player_zer0_studio/media/toontown_fantasy/game/english/resources/phase_3/etc/').value
         override = ConfigVariableString('whitelist-url', '').value
         if override:
             self.notify.info(

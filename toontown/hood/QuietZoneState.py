@@ -268,28 +268,28 @@ class QuietZoneState(StateData.StateData):
         allowRedirect = self._requestStatus.get('allowRedirect', 1)
         if avId != -1:
             allowRedirect = 0
-        # if not base.cr.welcomeValleyManager:
-        #     newZoneId = ZoneUtil.getCanonicalZoneId(zoneId)
-        #     if newZoneId != zoneId:
-        #         self.gotZoneRedirect(newZoneId)
-        #         return
+        if not base.cr.welcomeValleyManager:
+            newZoneId = ZoneUtil.getCanonicalZoneId(zoneId)
+            if newZoneId != zoneId:
+                self.gotZoneRedirect(newZoneId)
+                return
         if allowRedirect and ZoneUtil.isWelcomeValley(zoneId):
-            # self.notify.info('Requesting AI redirect from zone %s.' % zoneId)
-            # if base.slowQuietZone:
+            self.notify.info('Requesting AI redirect from zone %s.' % zoneId)
+            if base.slowQuietZone:
 
-            #     def rZI(task, zoneId=zoneId, self=self):
-            #         base.cr.welcomeValleyManager.requestZoneId(
-            #             zoneId, self.gotZoneRedirect)
-            #         return Task.done
+                def rZI(task, zoneId=zoneId, self=self):
+                    base.cr.welcomeValleyManager.requestZoneId(
+                        zoneId, self.gotZoneRedirect)
+                    return Task.done
 
-            #     taskMgr.doMethodLater(
-            #         base.slowQuietZoneDelay,
-            #         rZI,
-            #         'slowQuietZone-welcomeValleyRedirect')
-            # else:
-            #     base.cr.welcomeValleyManager.requestZoneId(
-            #         zoneId, self.gotZoneRedirect)
-            pass
+                taskMgr.doMethodLater(
+                    base.slowQuietZoneDelay,
+                    rZI,
+                    'slowQuietZone-welcomeValleyRedirect')
+            else:
+                base.cr.welcomeValleyManager.requestZoneId(
+                    zoneId, self.gotZoneRedirect)
+            # pass
         else:
             self.fsm.request('waitForSetZoneResponse')
 
@@ -308,7 +308,7 @@ class QuietZoneState(StateData.StateData):
         return
 
     def enterWaitForSetZoneResponse(self):
-        # self.notify.debug('enterWaitForSetZoneResponse(requestStatus=' + str(self._requestStatus) + ')')
+        self.notify.debug('enterWaitForSetZoneResponse(requestStatus=' + str(self._requestStatus) + ')')
         if not self.Disable:
             messenger.send(
                 self.getEnterWaitForSetZoneResponseMsg(), [
@@ -329,7 +329,7 @@ class QuietZoneState(StateData.StateData):
         return
 
     def enterWaitForSetZoneComplete(self):
-        # self.notify.debug('enterWaitForSetZoneComplete(requestStatus=' + str(self._requestStatus) + ')')
+        self.notify.debug('enterWaitForSetZoneComplete(requestStatus=' + str(self._requestStatus) + ')')
         if not self.Disable:
             base.cr.handlerArgs = self._requestStatus
             if base.slowQuietZone:

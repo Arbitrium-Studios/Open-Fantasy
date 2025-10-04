@@ -154,7 +154,7 @@ echo Current directory at Requirements is: %CD%
 
 set GET_PIP_PATH = dependencies\get-pip.py
 
-call "dependencies/panda3d/python/python.exe" "dependencies/get-pip.py" --no-warn-script-location
+call %PYTHON_PATH% "%GET_PIP_PATH%" --no-warn-script-location
 
 @REM "%PYTHON_PATH%" %GET_PIP_PATH%
 @REM call %PYTHON_PATH% -m %ROOT_PATH%\%DEPENDENCIES_PATH%\%PIP_PATH% install --upgrade pip

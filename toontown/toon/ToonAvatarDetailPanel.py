@@ -201,9 +201,9 @@ class ToonAvatarDetailPanel(DirectFrame):
         if online:
             shardName = base.cr.getShardName(av.defaultShard)
             hoodName = base.cr.hoodMgr.getFullnameFromId(av.lastHood)
-            # if ZoneUtil.isWelcomeValley(av.lastHood):
-            #     shardName = '%s (%s)' % (
-            #         TTLocalizer.WelcomeValley[-1], shardName)
+            if ZoneUtil.isWelcomeValley(av.lastHood):
+                shardName = '%s (%s)' % (
+                    TTLocalizer.WelcomeValley[-1], shardName)
             if self.playerInfo:
                 guiButton = loader.loadModel('phase_3/models/gui/quit_button')
                 self.gotoAvatarButton = DirectButton(

@@ -73,7 +73,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         self.trophyManager = None
         self.bankManager = None
         self.catalogManager = None
-        # self.welcomeValleyManager = None
+        self.welcomeValleyManager = None
         self.newsManager = None
         self.streetSign = None
         self.distributedDistrict = None
@@ -771,7 +771,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                 'FriendManager',
                 'NewsManager',
                 'ToontownMagicWordManager',
-                # 'WelcomeValleyManager',
+                'WelcomeValleyManager',
                 'DistributedTrophyMgr',
                 'CatalogManager',
                 'DistributedBankMgr',
