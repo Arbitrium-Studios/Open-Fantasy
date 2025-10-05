@@ -18,7 +18,7 @@ WIN_HEIGHT = 600
 
 
 class IssueFrame(DirectFrame):
-    NewsBaseDir = config.GetString('news-base-dir', '/resources/phase_3.5/models/')
+    NewsBaseDir = config.GetString('news-base-dir', '/resources/phase_3.5/models')
     FrameDimensions = (-1.30666637421,
                        1.30666637421,
                        -0.751666665077,
@@ -68,7 +68,7 @@ class IssueFrame(DirectFrame):
             while not endSearch:
                 justName = self.ContentPattern % (
                     self.dateStr, ident, curSubSection + 1)
-                fullName = Filename(self.newsDir + '/news/' + justName)
+                fullName = Filename(self.newsDir + '' + justName)
                 if self.strFilenames:
                     if justName in self.strFilenames:
                         subSectionList.append(fullName)

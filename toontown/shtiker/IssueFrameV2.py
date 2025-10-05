@@ -57,7 +57,7 @@ class IssueFrameV2(IssueFrame.IssueFrame):
             while not endSearch:
                 justName = self.ContentPattern % (
                     self.dateStr, ident, curSubSection + 1)
-                fullName = Filename(self.newsDir + '/' + justName)
+                fullName = Filename(self.newsDir + '' + justName)
                 if self.strFilenames:
                     if justName in self.strFilenames:
                         subSectionList.append(fullName)

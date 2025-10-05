@@ -1,5 +1,4 @@
 import subprocess
-import os
 
 def get_uninitialized_submodules():
     result = subprocess.run(['git', 'submodule', 'status'], capture_output=True, text=True)

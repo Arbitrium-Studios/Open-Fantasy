@@ -75,13 +75,6 @@ if %INPUT%==1 (
     goto :scripts
 )
 
-
-
-
-
-
-
-
 echo.
 
 :set_dependencies

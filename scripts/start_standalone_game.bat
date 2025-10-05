@@ -35,10 +35,6 @@ echo .
 echo Current directory at requirements is: %CD%
 echo ROOT_PATH is: %CD%
 echo Dependencies path is: %DEPENDENCIES_PATH%
-rem Read the contents of PYTHON_PATH into %PYTHON_PATH%:
-@REM set %DEPENDENCIES_PATH%/variables
-@REM set \P PYTHON_PATH=<PYTHON_PATH
-@REM echo PPYTHON PATH is set as: %PYTHON_PATH%
 set PYTHON_PATH=%ROOT_PATH%\%DEPENDENCIES_PATH%\%PANDA3D_PATH%\python\ppython.exe
 echo PYTHON_PATH is set as: %PYTHON_PATH%
 
