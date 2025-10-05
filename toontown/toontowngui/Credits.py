@@ -28,7 +28,7 @@ class Credits:
 \1limeText\1The Auteurs of Life (Project Leaders):\2
 
 - Co-Director Gracie "THE PLAYER ZER0" Lovelight
-- Co-Director Pizza Taco Burger
+- (Retired) Co-Director Pizza Taco Burger
 
 \1limeText\1The Architects of Realities (Programmers):\2
 

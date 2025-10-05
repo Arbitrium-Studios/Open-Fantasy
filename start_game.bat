@@ -137,6 +137,9 @@ echo PYTHON_PATH is set as: %PYTHON_PATH%
 set PIP_PATH=%ROOT_PATH%\%DEPENDENCIES_PATH%\%PANDA3D_PATH%\python\Scripts\pip.exe
 echo PIP_PATH is: %PIP_PATH%
 
+echo PYTHON_VER is set to:
+call %PYTHON_PATH% --version
+
 @REM pause
 goto :requirements
 

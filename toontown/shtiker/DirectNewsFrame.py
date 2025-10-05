@@ -17,8 +17,8 @@ class DirectNewsFrame(DirectObject.DirectObject):
     TaskName = 'HtmlViewUpdateTask'
     TaskChainName = 'RedownladTaskChain'
     RedownloadTaskName = 'RedownloadNewsTask'
-    NewsBaseDir = ConfigVariableString('news-base-dir', '/news').value # Was set to: httpNews
-    NewsStageDir = ConfigVariableString('news-stage-dir', 'news').value
+    NewsBaseDir = ConfigVariableString('news-base-dir', '/news/').value # Was set to: httpNews
+    NewsStageDir = ConfigVariableString('news-stage-dir', 'resources/phase_3.5/models').value
     FrameDimensions = (-1.30666637421,
                        1.30666637421,
                        -0.751666665077,
@@ -164,15 +164,19 @@ class DirectNewsFrame(DirectObject.DirectObject):
             searchPath.appendDirectory(
                 Filename.expandFrom('resources/phase_3.5/models'))
         else:
+            newsCombinedPath = self.NewsStageDir + self.NewsBaseDir
             resourcesFolder = "/resources"
             os.environ["TTMODELS"] = "/phase_3.5/models"
             basePath = os.path.expandvars('$TTMODELS')
             searchPath.appendDirectory(
                 Filename.fromOsSpecific(
-                    resourcesFolder + 
-                    basePath +
+                    # resourcesFolder + 
+                    # basePath +
+                    self.NewsStageDir +
                     self.NewsBaseDir))
-            searchPath.appendDirectory(Filename(self.NewsBaseDir))
+            
+            searchPath.appendDirectory(Filename(newsCombinedPath))
+            print(f'News directory found at: {newsCombinedPath}')
 
         pfile = Filename(self.NewsIndexFilename)
         found = vfs.resolveFilename(pfile, searchPath)

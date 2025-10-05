@@ -86,7 +86,7 @@ class DiscordRPC(object):
         self.imageTxt = 'Toontown Fantasy' #Hover text for main image 
         self.smallLogo = 'game-icon' #small image in corner
         self.state = '   ' #Displayed underneath details, used for boarding groups
-        self.smallTxt = 'Loading'
+        self.smallTxt = 'Loading...'
         self.partySize = 1
         self.maxParty = 1
 
@@ -139,48 +139,58 @@ class DiscordRPC(object):
     def avChoice(self):
         if base.wantRichPresence:
             self.image = 'toontown-logo'
-            self.details = 'Picking a Toon.'
+            self.details = 'Picking a Toon'
             self.state = '  '
+            # print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def launching(self):
         if base.wantRichPresence:
             self.image = 'toontown-logo'
-            self.details = 'Loading...'
+            self.details = 'Loading into Toontown'
+            print(f'DiscordRPC: User is {self.details}...')
             self.setData()
 
     def making(self):
         if base.wantRichPresence:
             self.image = 'toontown-logo'
             self.details = 'Making a Toon.'
+            print(f'DiscordRPC: User is {self.details}!')
+            self.setData()
 
     def vp(self):
         if base.wantRichPresence:
             self.image = 'vp'
-            self.details = 'Fighting the V.P..'
+            self.details = 'Fighting the V.P.'
+            print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def cfo(self):
         if base.wantRichPresence:
             self.image = 'cfo'
             self.details = 'Fighting the C.F.O.'
+            print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def cj(self):
         if base.wantRichPresence:
             self.image = 'cj'
             self.details = 'Fighting the C.J.'
+            print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def ceo(self):
         if base.wantRichPresence:
             self.image = 'ceo'
-            self.details = 'Fighting the CEO.'
+            self.details = 'Fighting the C.E.O.'
+            print(f'DiscordRPC: User is {self.details}!')
+            self.setData()
 
     def building(self):
         if base.wantRichPresence:
             self.image = 'cog-building'
-            self.details = 'in a Cog Building.'
+            self.details = 'in a Cog Building'
+            print(f'DiscordRPC: User is {self.details}.')
             self.setData()
 
     def startTasks(self):
@@ -190,7 +200,7 @@ class DiscordRPC(object):
     def setDistrict(self, name):
         if base.wantRichPresence:
             self.smallTxt = name
-            print(f'setDistrict is set to {name}')
+            print(f'Current district is "{name}".')
 
     def setZone(self, zone): # Set image and text based on the zone
         if not isinstance(zone, int) or not base.wantRichPresence:
@@ -211,7 +221,7 @@ class DiscordRPC(object):
             if self.RPC is not None:
                 self.RPC.close()
         except BaseException:
-            print('DiscordRPC: Warning: Discord not open or invalid client id')
+            print('DiscordRPC Warning: Discord not open or invalid client id')
         self.RPC = None
         self.updateTask = None
 
@@ -221,12 +231,10 @@ class DiscordRPC(object):
             if self.RPC is None:
                 self.RPC = Presence(clientId)
         except BaseException:
-            print("DiscordRPC: Warning : Discord not found for this client.")
+            print("DiscordRPC Warning : Discord not found for this client.")
             self.RPC = None
         try:
             if base.wantRichPresence and self.RPC is not None:
                 self.RPC.connect()
         except BaseException:
-            print("DiscordRPC: Warning: Failed to connect to discord client.")
-
-
+            print("DiscordRPC Warning: Failed to connect to discord client.")
