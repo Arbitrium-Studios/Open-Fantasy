@@ -22,6 +22,9 @@ vfs-case-sensitive 0
 server-version Fantasy_Dev
 server-failover 80 443
 tt-specific-login 1
+# Single-player mode - When enabled, game will attempt to run without external servers
+# Currently not fully implemented - server components still required
+want-single-player 0
 # If true, individual TCP packets are not sent immediately, but rather they are collected together and accumulated to be sent periodically as one larger TCP packet.  This cuts down on overhead from the TCP/IP protocol, especially if many small packets need to be sent on the same connection, but it introduces additional latency (since packets must be held before they can be sent).
 collect-tcp 1
 
