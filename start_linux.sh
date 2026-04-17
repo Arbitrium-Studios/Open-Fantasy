@@ -39,21 +39,23 @@ while true; do
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Starting Localhost!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-                cd scripts
+                # cd ../../
+                # cd scripts
                 echo Launching the AI Server...
                 xterm -e sh ai-server-linux.sh &
                 echo Launching Astron...
                 xterm -e sh astron-cluster-linux.sh &
                 echo Launching the Uberdog Server...
                 xterm -e sh uberdog-server-linux.sh &
-                cd ..
+                # cd ..
+                cd ../../
                 export TT_GAMESERVER=127.0.0.1
                 clear
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Username [!] This does get stored in your source code so beware!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 read $User
-                export LOGIN_TOKEN=$User
+                export TTFAN_LOGIN_TOKEN=$User
                 clear
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Welcome to Toontown Fantasy, $User!
@@ -78,7 +80,7 @@ while true; do
                 echo Username [!] This does get stored in your source code so beware!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 read $User
-                export LOGIN_TOKEN=$User
+                export TTFAN_LOGIN_TOKEN=$User
                 clear
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Welcome to Toontown Fantasy, $ttUsername!

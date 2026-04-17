@@ -1,5 +1,5 @@
 # Window Settings
-window-title Toontown Fantasy
+window-title PLAYER ZER0 STUDIO's Toontown Fantasy
 
 # Resources settings
 model-path resources/

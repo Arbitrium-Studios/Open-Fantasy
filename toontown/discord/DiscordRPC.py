@@ -3,10 +3,13 @@ import random
 from ctypes import *
 from direct.task import Task 
 from pypresence import Presence
+from toontown.toonbase import ToontownGlobals
+from toontown.toonbase import TTLocalizer
+
 class DiscordRPC(object):
 
     zone2imgdesc = { # A dict of ZoneID -> An image and a description
-        
+
         # Add Doodlevania
 
         1000: ["foggy-fjord", "in Foggy Fjord"],
@@ -82,48 +85,41 @@ class DiscordRPC(object):
         self.enable()
         self.updateTask = None
         self.details = "Loading" # text next to photo
-        self.image = 'toontown-logo' #Main image
-        self.imageTxt = 'Toontown Fantasy' #Hover text for main image 
-        self.smallLogo = 'game-icon' #small image in corner
-        self.state = '   ' #Displayed underneath details, used for boarding groups
-        self.smallTxt = 'Loading...'
-        self.partySize = 1
-        self.maxParty = 1
-
+        self.image = 'toontown-logo' #Sets the main image displayed on the Discord profile
+        self.imageTxt = TTLocalizer.setGameName #Hover text for main image 
+        self.smallLogo = 'game-icon' # Set the image that appears in the bottom-right corner of the main image
+        self.state = '   ' # Set the text that appears underneath the details (used for boarding groups)
+        self.smallTxt = 'Loading...' # Sets the text that appears when you hover over the smaller logo
 
     def stopBoarding(self):
         if base.wantRichPresence:
-            self.partySize = 1
             self.state = '  '
-            self.maxParty = 1
             self.setData()
 
     def allowBoarding(self, size):
         if base.wantRichPresence:
             self.state = 'in a boarding group'
-            self.partySize = 1
-            self.maxParty = size
             self.setData()
 
     def setBoarding(self, size):
         if base.wantRichPresence:
-            self.PartySize = size
             self.setData()
 
     def setData(self, details=None, image=None, imageTxt=None):
         if details is None:
             details = self.details
+
         if image is None:
             image = self.image
+
         if imageTxt is None:
             imageTxt = self.imageTxt
-        smallLogo = self.smallLogo
-        smallTxt = self.smallTxt
+
+        smallLogo = self.smallLogo # Set the image that appears in the bottom-right corner of the main image
+        smallTxt = self.smallTxt # Sets the text that appears when you hover over the smaller logo
         state = self.state
-        party = self.partySize
-        maxSize = self.maxParty
         if self.RPC is not None and base.wantRichPresence:
-            self.RPC.update(state=state,details=details , large_image=image, large_text=imageTxt,  small_image=smallLogo, small_text=smallTxt, party_size=[party, maxSize])
+            self.RPC.update(state=state,details=details, large_image=image, large_text=imageTxt, small_image=smallLogo, small_text=smallTxt)
 
     def setLaff(self, hp, maxHp):
         if base.wantRichPresence:
@@ -135,7 +131,7 @@ class DiscordRPC(object):
             self.updateTask = True
             self.setData()
             return task.again
-    
+
     def avChoice(self):
         if base.wantRichPresence:
             self.image = 'toontown-logo'
@@ -148,59 +144,59 @@ class DiscordRPC(object):
         if base.wantRichPresence:
             self.image = 'toontown-logo'
             self.details = 'Loading into Toontown'
-            print(f'DiscordRPC: User is {self.details}...')
+            # print(f'DiscordRPC: User is {self.details}...')
             self.setData()
 
     def making(self):
         if base.wantRichPresence:
             self.image = 'toontown-logo'
-            self.details = 'Making a Toon.'
-            print(f'DiscordRPC: User is {self.details}!')
+            self.details = 'Making a Toon...'
+            # print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def vp(self):
         if base.wantRichPresence:
-            self.image = 'vp'
+            self.image = 'sellbot_hq_vp'
             self.details = 'Fighting the V.P.'
-            print(f'DiscordRPC: User is {self.details}!')
+            # print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def cfo(self):
         if base.wantRichPresence:
-            self.image = 'cfo'
+            self.image = 'cashbot_hq_cfo'
             self.details = 'Fighting the C.F.O.'
-            print(f'DiscordRPC: User is {self.details}!')
+            # print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def cj(self):
         if base.wantRichPresence:
-            self.image = 'cj'
+            self.image = 'lawbot_hq_cj'
             self.details = 'Fighting the C.J.'
-            print(f'DiscordRPC: User is {self.details}!')
+            # print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def ceo(self):
         if base.wantRichPresence:
-            self.image = 'ceo'
+            self.image = 'bossbot_hq_ceo'
             self.details = 'Fighting the C.E.O.'
-            print(f'DiscordRPC: User is {self.details}!')
+            # print(f'DiscordRPC: User is {self.details}!')
             self.setData()
 
     def building(self):
         if base.wantRichPresence:
             self.image = 'cog-building'
             self.details = 'in a Cog Building'
-            print(f'DiscordRPC: User is {self.details}.')
+            # print(f'DiscordRPC: User is {self.details}.')
             self.setData()
 
     def startTasks(self):
         if base.wantRichPresence:
             taskMgr.doMethodLater(10, self.updateTasks, 'UpdateTask')
 
-    def setDistrict(self, name):
+    def setServerVersion(self, serverVersion):
         if base.wantRichPresence:
-            self.smallTxt = name
-            print(f'Current district is "{name}".')
+            self.smallTxt = serverVersion
+            print(f'Current server version is "{serverVersion}".')
 
     def setZone(self, zone): # Set image and text based on the zone
         if not isinstance(zone, int) or not base.wantRichPresence:

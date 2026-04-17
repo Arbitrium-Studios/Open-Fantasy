@@ -1,3 +1,4 @@
+from panda3d.core import loadPrcFile, ConfigVariableString
 from toontown.golf import GolfGlobals
 from toontown.racing import RaceGlobals
 from toontown.toonbase.TTLocalizerEnglishProperty import *
@@ -50,7 +51,10 @@ GM_NAMES = ('TOON COUNCIL',
             'GC')
 BuildingNametagFont = 'phase_3/models/fonts/MickeyFont'
 BuildingNametagShadow = None
-ProductPrefix = 'TT'
+ProductPrefix = 'TTFan' # Was "TT"
+loadPrcFile('etc/Configrc.prc')
+window_title_config = ConfigVariableString('window-title', "PLAYER ZER0 STUDIO's Toontown Fantasy") # Falls back to "PLAYER ZER0 STUDIO's Toontown Fantasy" if no title is given
+setGameName = window_title_config.getValue()
 Mickey = 'Mickey'
 VampireMickey = 'VampireMickey'
 Minnie = 'Minnie'
@@ -3235,7 +3239,7 @@ SuitAttackTaunts = {'Audit': ["I believe your books don't balance.",
                                  'You can forget about a bonus.',
                                  "I'll shuffle your accounts around.",
                                  "You're about to suffer some losses.",
-                                 'This is going to hurt your bottom line.'],
+                                 'This is going to ottom line.'],
                     'WriteUp': ['That is a severe offense.',
                                 'Up you go!',
                                 'This infraction will be remembered.',
@@ -4291,16 +4295,16 @@ LauncherExtractingPercent = 'Extracting update for ' + \
 LauncherPatchingFile = 'Applying update for ' + LauncherProgress + '...'
 LauncherPatchingPercent = 'Applying update for ' + \
     LauncherProgress + ': %(percent)s%%'
-LauncherConnectProxyAttempt = 'Connecting to Toontown: %s (proxy: %s) attempt: %s'
-LauncherConnectAttempt = 'Connecting to PLAYER ZER0 STUDIO' + "'" + 's Toontown Fantasy...: %s attempt %s'
-LauncherDownloadServerFileList = 'Updating PLAYER ZER0 STUDIO' + "'" + 's Toontown Fantasy...'
-LauncherCreatingDownloadDb = 'Updating PLAYER ZER0 STUDIO' + "'" + 's Toontown Fantasy...'
-LauncherDownloadClientFileList = 'Updating PLAYER ZER0 STUDIO' + "'" + 's Toontown Fantasy...'
-LauncherFinishedDownloadDb = 'Updating PLAYER ZER0 STUDIO' + "'" + 's Toontown Fantasy...'
-LauncherStartingGame = "Starting PLAYER ZER0 STUDIO's Toontown Fantasy..."
-LauncherRecoverFiles = 'Updating PLAYER ZER0 STUDIO' + "'" + 's Toontown Fantasy... Recovering files...'
+LauncherConnectProxyAttempt = 'Connecting to {setGameName}: %s (proxy: %s) attempt: %s'
+LauncherConnectAttempt = f'Connecting to {setGameName}...: %s attempt %s'
+LauncherDownloadServerFileList = f'Updating {setGameName}...'
+LauncherCreatingDownloadDb = f'Updating {setGameName}...'
+LauncherDownloadClientFileList = f'Updating {setGameName}...'
+LauncherFinishedDownloadDb = f'Updating {setGameName}...'
+LauncherStartingGame = f"Starting {setGameName}..."
+LauncherRecoverFiles = f'Updating {setGameName}... Recovering files...'
 LauncherCheckUpdates = 'Checking for updates for ' + LauncherProgress
-LauncherVerifyPhase = 'Updating PLAYER ZER0 STUDIO' + "'" + 's Toontown Fantasy...'
+LauncherVerifyPhase = f'Updating {setGameName}...'
 LoadingDownloadWatcherUpdate = 'Loading %s'
 AvatarChoiceMakeAToon = 'Make A\nToon'
 AvatarChoicePlayThisToon = 'Play\nThis Toon'
@@ -4499,7 +4503,7 @@ MusicMMatchBg2 = 'Jazzy Minnie'
 MusicMgTarget = "Soarin' Over Toontown"
 MusicFfSafezone = 'The Funny Farm'
 MusicDdSz = 'Waddling Way'
-MusicMmNbrhood = "Harmonious Haven"
+MusicMmNbrhood = "The Haven of Harmonies"
 MusicGzPlaygolf = "Let's Play Golf!"
 MusicGsSz = 'Racing Attitude'
 MusicOzSz = "Acres of Fun!"

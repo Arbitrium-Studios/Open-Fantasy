@@ -39,7 +39,7 @@ while true; do
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Starting Localhost!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-                cd scripts
+                cd ../../scripts
                 echo Launching Astron...
                 osascript <<END 
 tell application "Terminal"
@@ -58,14 +58,15 @@ tell application "Terminal"
 do script "cd \"`pwd`\";sh ai-server-macos.sh;sleep 10m"
 end tell
 END
-                cd ..
+                # cd ..
+                cd ../../
                 export TT_GAMESERVER=127.0.0.1
                 clear
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Username [!] This does get stored in your source code so beware!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 read $User
-                export LOGIN_TOKEN=$User
+                export TTFAN_LOGIN_TOKEN=$User
                 clear
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Welcome to Toontown Fantasy, $ttUsername!
@@ -90,7 +91,7 @@ END
                 echo Username [!] This does get stored in your source code so beware!
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 read $User
-                export LOGIN_TOKEN=$User
+                export TTFAN_LOGIN_TOKEN=$User
                 clear
                 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
                 echo Welcome to Toontown Fantasy, $User!

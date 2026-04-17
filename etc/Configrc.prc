@@ -1,5 +1,5 @@
 # Window Settings
-window-title (Dev Build) PLAYER ZER0 STUDIO's Toontown Fantasy
+window-title PLAYER ZER0 STUDIO's Toontown Fantasy
 icon-filename phase_3/models/gui/toontown.ico
 cursor-filename phase_3/models/gui/toonmono.cur
 
@@ -22,7 +22,7 @@ vfs-case-sensitive 0
 server-version Fantasy_Dev
 server-failover 80 443
 tt-specific-login 1
-# If true, individual TCP packets are not sent immediately, but rather they are collected together and accumulated to be sent periodically as one larger TCP packet.  This cuts down on overhead from the TCP/IP protocol, especially if many small packets need to be sent on the same connection, but it introduces additional latency (since packets must be held before they can be sent).
+# If true, individual TCP packets are not sent immediately, but rather they are collected together and accumulated to be sent periodically as one larger TCP packet. This cuts down on overhead from the TCP/IP protocol, especially if many small packets need to be sent on the same connection, but it introduces additional latency (since packets must be held before they can be sent).
 collect-tcp 1
 
 # Developer Options
@@ -55,7 +55,7 @@ default-directnotify-level info
 console-output 1
 
 # Panda3D/DirectX
-# Configure this true if you have a buggy graphics driver that doesn't correctly implement the third parameter, NumVertices, of DrawIndexedPrimitive().  In particular, the NVIDIA Quadro driver version 6.14.10.7184 seems to treat this as a maximum vertex index, rather than a delta between the maximum and minimum vertex index.  Turn this on if you are seeing stray triangles, or you are not seeing all of your triangles.  Enabling this should work around this bug, at the cost of some additional rendering overhead on the GPU. 
+# Configure this true if you have a buggy graphics driver that doesn't correctly implement the third parameter, NumVertices, of DrawIndexedPrimitive(). In particular, the NVIDIA Quadro driver version 6.14.10.7184 seems to treat this as a maximum vertex index, rather than a delta between the maximum and minimum vertex index. Turn this on if you are seeing stray triangles, or you are not seeing all of your triangles. Enabling this should work around this bug, at the cost of some additional rendering overhead on the GPU. 
 dx-broken-max-index 1
 # Set this true to show ime texts on the chat panel and hide the IME default windows. This is a mechanism to work around DX8/9 interface.
 ime-aware 1

@@ -16,7 +16,7 @@ class QuickLauncher(LauncherBase):
         self.useTTSpecificLogin = ConfigVariableBool(
             'tt-specific-login', 0).value
         if self.useTTSpecificLogin:
-            self.toontownPlayTokenKey = 'LOGIN_TOKEN'
+            self.toontownPlayTokenKey = 'TTFAN_LOGIN_TOKEN' # Was LOGIN_TOKEN
         else:
             self.toontownPlayTokenKey = 'PLAYTOKEN'
         print('useTTSpecificLogin=%s' % self.useTTSpecificLogin)
@@ -39,7 +39,7 @@ class QuickLauncher(LauncherBase):
         return self.getValue('GAME_SERVER', '')
 
     def getLogFileName(self):
-        return 'pzs_Toontown_Fantasy' # Was pzs_TTFan_gl
+        return 'PZS_TTFan' # Was pzs_TTFan_gl
 
     def getBlue(self):
         blue = self.getValue(self.toontownBlueKey)

@@ -1,17 +1,18 @@
 from pandac.PandaModules import TextPropertiesManager
 from pandac.PandaModules import TextProperties
+from panda3d.core import loadPrcFile, ConfigVariableString
 import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
-lFoggyFjords = "Foggy Fjords"
-lTwilightDreamland = "Twlight Dreamland"
-lHarmoniousHaven = "The Land of Melody"
+lFoggyFjords = "Foggy Fjord"
+lTwilightDreamland = "Twilight Dreamland"
+lHarmoniousHaven = "Harmonious Haven"
 lToontownCentral = 'Toontown Central'
 lToontownStadium = 'Toontown Stadium'
 lFunnyFarms = 'Funny Farms'
 lAcornAcres = "Acorn Acres"
-lGolfZone = "Toontown Mini-Golf"
+lGolfZone = "Toontown's MiniGolf"
 lCancel = 'Cancel'
 lClose = 'Close'
 lOK = 'OK'
@@ -511,7 +512,7 @@ SuitFaceoffTaunts = {'b': ['Do you have a donation for me?',
                            'Good, it takes two to mingle.',
                            "Let's mingle.",
                            'This looks like a good place to mingle.',
-                           "Well,isn't this cozy?",
+                           "Well, isn't this cozy?",
                            "You're mingling with defeat.",
                            "I'm going to mingle in your business.",
                            "Are you sure you're ready to mingle?"],
@@ -2917,3 +2918,11 @@ def timeElapsedString(timeDelta):
         return '1 minute ago'
     else:
         return '%s minutes ago' % (timeDelta.seconds / 60)
+
+arbitriumStudios = "Arbitrium Studios"
+playerZeroStudio = "PLAYER ZER0 STUDIO"
+toontownFantasy = "Toontown Fantasy"
+
+loadPrcFile('etc/Configrc.prc')
+window_title_config = ConfigVariableString('window-title', f"{playerZeroStudio}'s {toontownFantasy}") # Defaults back to "PLAYER ZER0 STUDIO's Toontown Fantasy" if no title is given
+setGameName = window_title_config.getValue()

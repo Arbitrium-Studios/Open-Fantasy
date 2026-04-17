@@ -7,7 +7,7 @@ from direct.showbase import DConfig
 from direct.showbase.DirectObject import DirectObject
 from direct.task.MiniTask import MiniTaskManager
 from direct.directnotify.DirectNotifyGlobal import *
-
+from otp.otpbase import OTPLocalizer
 
 class LogAndOutput:
 
@@ -63,7 +63,7 @@ class LauncherBase(DirectObject):
         logErr = LogAndOutput(sys.__stderr__, log)
         sys.stdout = logOut
         sys.stderr = logErr
-        print('\n\nStarting %s...' % self.GameName)
+        print('\n\nStarting %s...' % OTPLocalizer.setGameName)
         print(
             'Current time: ' +
             time.asctime(

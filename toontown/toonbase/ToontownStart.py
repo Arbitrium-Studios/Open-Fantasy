@@ -91,6 +91,7 @@ version = OnscreenText(
     serverVersion, parent=base.a2dBottomLeft, pos=(
         0.033, 0.025), scale=0.06, fg=Vec4(
             0, 0, 1, 0.6), align=TextNode.ALeft)
+Discord.setServerVersion(serverVersion)
 loader.beginBulkLoad(
     'init',
     TTLocalizer.LoaderLabel,

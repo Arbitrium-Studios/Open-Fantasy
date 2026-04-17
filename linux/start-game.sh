@@ -1,6 +1,6 @@
 #!/bin/sh
-cd ..
+cd ../../
 
-export LOGIN_TOKEN=dev
+export TTFAN_LOGIN_TOKEN=dev
 
 python3 -m toontown.launcher.QuickStartLauncher

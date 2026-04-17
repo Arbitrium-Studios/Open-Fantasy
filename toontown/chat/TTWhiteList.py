@@ -48,7 +48,7 @@ class TTWhiteList(WhiteList, DirectObject):
         if not self.WhitelistOverHttp:
             return
         self.percentDownload = 0.0
-        self.notify.info('starting redownloadWhitelist')
+        self.notify.info('starting Whitelist redownload')
         self.startRedownload = datetime.datetime.now()
         self.redownloadingWhitelist = True
         self.addDownloadingTextTask()

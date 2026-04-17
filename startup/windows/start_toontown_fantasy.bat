@@ -13,20 +13,30 @@ echo.
 
 set PREVIOUS_DIR="..\"
 
-cd /d %PREVIOUS_DIR%
+cd /d %PREVIOUS_DIR%%PREVIOUS_DIR%
 echo Current directory is: %CD%
 echo.
 
+set "PackageDependencies=%CD%\dependencies\packages"
+set "getPipPackageDependencies=%CD%\dependencies\packages\%GET_PIP%"
+
+set "PYTHON_PATH_FILE=%CD%\PYTHON_PATH"
+set "PPYTHON_PATH_FILE=%CD%\PPYTHON_PATH"
+
+set "DEPENDENCIES_DIR=dependencies"
+set "PANDA3D_DIR=panda3d"
+set "Panda3DPath=C:\Open-Panda"
+
+set "DEPENDENCIES_PATH=%CD%\%DEPENDENCIES_DIR%"
+set "PANDA3D_PATH=%CD%\%DEPENDENCIES_DIR%\%PANDA3D_DIR%"
+
 set "MainDirectory="%CD%""
-@REM echo Main Directory is %MainDirectory%
-@REM echo.
 
 echo Current Directory is %CD%
 echo.
 
 set "RootPath=%CD%"
 
-@REM set "RootPath="%CD%""
 set "RootPathAlt=%CD%"
 echo Root Directory is "%RootPath%"
 echo.
@@ -54,66 +64,33 @@ if exist "%PYTHON_PATH_FILE%" (
     goto :ending
 )
 
-echo Python Path is set to "%PYTHON_PATH%"
-echo.
-
-if not defined %projectAbbreviationUpper%_PYTHON_PATH (
-
-    if exist %CUSTOM_PYTHON_PATH% (
-        echo The "CUSTOM_PYTHON_PATH" exists at %CUSTOM_PYTHON_PATH%
-        echo.
-
-        if not defined %projectAbbreviationUpper%_PYTHON_PATH
-        setx %projectAbbreviationUpper%_PYTHON_PATH "%CUSTOM_PYTHON_PATH%"
-        echo.
-
-        echo The "%projectAbbreviationUpper%_PYTHON_PATH" variable is set as "%CUSTOM_PYTHON_PATH%"
-        echo.
-
-        dir /ad %CUSTOM_PYTHON_PATH% | find "<SYMLINKD>" >nul
-        if %errorlevel% equ 0 (
-            echo The given directory is a symbolic link folder.
-            echo.
-        ) else (
-            echo The given directory is a normal folder, NOT a symbolic link folder.
-            echo.
-        )
-    )
-
-)
-
 if not defined PYTHON_PATH (
     set CUSTOM_PYTHON_PATH=%RootPath%\%DEPENDENCIES_PATH%\%PANDA3D_PATH%\python\ppython.exe
 ) else (
     set CUSTOM_PYTHON_PATH=%PYTHON_PATH%
 )
 
-@REM echo The "CUSTOM_PYTHON_PATH" variable is set as: %CUSTOM_PYTHON_PATH%
-@REM echo.
+echo The "CUSTOM_PYTHON_PATH" variable is set as: %CUSTOM_PYTHON_PATH%
+echo.
 
-@REM echo PYTHON_PATH is set as: %CUSTOM_PYTHON_PATH%
-@REM echo.
+setx %projectAbbreviationUpper%_PYTHON_PATH "%CUSTOM_PYTHON_PATH%"
+echo.
 
-if exist %CUSTOM_PYTHON_PATH% (
-    echo The "CUSTOM_PYTHON_PATH" exists at %CUSTOM_PYTHON_PATH%
-    echo.
+echo The "%projectAbbreviationUpper%_PYTHON_PATH" variable is set as "%CUSTOM_PYTHON_PATH%"
+echo.
 
-    if not defined %projectAbbreviationUpper%_PYTHON_PATH
-    setx %projectAbbreviationUpper%_PYTHON_PATH "%CUSTOM_PYTHON_PATH%"
-    echo.
-
-    echo The "%projectAbbreviationUpper%_PYTHON_PATH" variable is set as "%CUSTOM_PYTHON_PATH%"
-    echo.
-
-    dir /ad %CUSTOM_PYTHON_PATH% | find "<SYMLINKD>" >nul
-    if %errorlevel% equ 0 (
-        echo The given directory is a symbolic link folder.
-        echo.
-    ) else (
-        echo The given directory is a normal folder, NOT a symbolic link folder.
-        echo.
-    )
-)
+@REM if exist %CUSTOM_PYTHON_PATH% (
+@REM     echo The "CUSTOM_PYTHON_PATH" exists at %CUSTOM_PYTHON_PATH%
+@REM     echo.
+@REM     dir /ad %CUSTOM_PYTHON_PATH% | find "<SYMLINKD>" >nul
+@REM     if %errorlevel% equ 0 (
+@REM         echo The given directory is a symbolic link folder.
+@REM         echo.
+@REM     ) else (
+@REM         echo The given directory is a normal folder, NOT a symbolic link folder.
+@REM         echo.
+@REM     )
+@REM )
 
 goto :localhost
 

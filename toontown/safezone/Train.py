@@ -118,10 +118,11 @@ class Train(DirectObject):
         trainShouldStop = random.randrange(0, 4)
         nextRun = Sequence(Func(self.__showStart))
         if trainShouldStop == 0:
-            waitTime = 3
-            totalTime = random.randrange(4, (self.MarkDelta - waitTime) / 2)
+            waitTime = self.MarkDelta - 3 // 2
+            totalTime = random.randrange(4, waitTime)
             sfxStopTime = 4.3
-            halfway = (self.trackStartPos + self.trackEndPos) / 2
+            halfway_add = self.trackStartPos + self.trackEndPos
+            halfway = halfway_add // 2
             halfway.setX(150)
             nextRun.append(
                 Parallel(

@@ -1974,7 +1974,7 @@ class OTPClientRepository(ClientRepositoryBase):
             self.notify.debug(
                 'chose %s: pop %s' %
                 (district.name, district.avatarCount))
-            Discord.setDistrict(district.name)
+            # Discord.setDistrict(district.name)
         return district
 
     def getShardName(self, shardId):

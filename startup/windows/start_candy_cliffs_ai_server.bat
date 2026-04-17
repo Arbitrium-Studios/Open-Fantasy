@@ -1,7 +1,7 @@
 @echo off
 title Start Toontown Fantasy - AI (District) Server
 
-cd ../
+cd ../../
 set ROOT_PATH=%CD%
 echo Root path is: %ROOT_PATH%
 echo.
