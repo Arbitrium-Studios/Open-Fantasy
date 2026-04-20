@@ -1,12 +1,27 @@
 @echo off
-set "projectName=PLAYER ZER0 STUDIO's Toontown Fantasy"
-title %projectName% Launcher
+SetLocal DisableDelayedExpansion
+
+set "projectOwnerName=PLAYER ZER0 STUDIO"
+set "projectName=Toontown Fantasy"
+set "projectNameFull=%projectOwnerName%'s %projectName%"
+title %projectNameFull% Launcher
 set "projectAbbreviation=TTFan"
 set "projectAbbreviationUpper=TTFAN"
 
+:: Placing any variables here allows for them to placed as is.
+:: The placement of variables such as "exclaimStr" here allows exclamation points...
+:: to be used in echos by surrounding the variable in exclamation points like the following:
+:: !exclaimStr!
+set "exclaimStr=!"
+
+SetLocal EnableDelayedExpansion
+
+goto :root
+
 :root
+
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo Starting %projectName%
+echo                     Checking Variables and Files...
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo.
 
@@ -26,8 +41,8 @@ set "STARTUP_WIN_DIR=windows"
 goto :set_dependencies
 
 :set_dependencies
-cd %RootPath%
-set DEPENDENCIES_PATH=dependencies
+cd /d "%RootPath%"
+set "DEPENDENCIES_PATH=dependencies"
 if exist %DEPENDENCIES_PATH% (
     goto :set_panda3d
 ) else (
@@ -41,20 +56,22 @@ if exist %DEPENDENCIES_PATH% (
 :panda3d
 
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo Getting %projectName%'s compiled Panda3D
+echo Getting %projectNameFull%'s compiled Panda3D!exclaimStr!
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo.
 
 echo Directory path is: %RootPath%
 echo.
+
 goto :set_panda3d
 
 :set_panda3d
-cd %CD%
-cd %RootPath%\%DEPENDENCIES_PATH%
-set PANDA3D_PATH=panda3d
+@REM cd /d "%CD%"
+cd /d "%RootPath%\%DEPENDENCIES_PATH%"
+set "PANDA3D_PATH=panda3d"
+
 if exist %PANDA3D_PATH% (
-    cd /d %PANDA3D_PATH%
+    cd /d "%PANDA3D_PATH%"
     goto :ppython
 ) else (
     echo The Panda3D folder does not exist, creating it now.
@@ -65,12 +82,12 @@ if exist %PANDA3D_PATH% (
     goto :panda3d_version
 )
 
-echo Choose what Panda3D version you want to use!
+echo Choose what Panda3D version you want to use!exclaimStr!
 echo.
 echo #1 - Pre-Compiled
-@REM echo.
-@REM echo #2 - Local Panda3D Version
 echo.
+@REM echo #2 - Local Panda3D Version
+@REM echo.
 
 :panda3d_version
 
@@ -94,8 +111,6 @@ if %INPUT%==1 (
     goto :panda3d
 )
 
-echo.
-
 :ppython
 
 set "PYTHON_PATH_FILE=%RootPath%\PYTHON_PATH"
@@ -111,51 +126,35 @@ if exist "%PYTHON_PATH_FILE%" (
     goto :ending
 )
 
-if not defined PYTHON_PATH (
-    set CUSTOM_PYTHON_PATH=%RootPath%\%DEPENDENCIES_PATH%\%PANDA3D_PATH%\python\ppython.exe
+if not defined %projectAbbreviationUpper%_PYTHON_PATH (
+    setx %projectAbbreviationUpper%_PYTHON_PATH "%CUSTOM_PYTHON_PATH%"
+    echo.
 ) else (
     set CUSTOM_PYTHON_PATH=%PYTHON_PATH%
 )
 
-setx %projectAbbreviationUpper%_PYTHON_PATH "%CUSTOM_PYTHON_PATH%"
-echo.
+set "PIP_PATH=%RootPath%\%DEPENDENCIES_PATH%\%PANDA3D_PATH%\python\Scripts\pip.exe"
 
-echo The "%projectAbbreviationUpper%_PYTHON_PATH" variable is set as "%CUSTOM_PYTHON_PATH%"
-echo.
+cd /d "%RootPath%"
 
-set PIP_PATH=%RootPath%\%DEPENDENCIES_PATH%\%PANDA3D_PATH%\python\Scripts\pip.exe
+set "GET_PIP_PATH=dependencies\get-pip.py"
 
-cd %RootPath%
+if exist "%CUSTOM_PYTHON_PATH%" (
+    echo Yep, the "CUSTOM_PYTHON_PATH" exists at "%CUSTOM_PYTHON_PATH%"!
+    echo.
+    goto :login
+) else (
+    echo The "CUSTOM_PYTHON_PATH" does not exist at "%CUSTOM_PYTHON_PATH%"...
+    echo.
+    goto :ending
+)
 
-set GET_PIP_PATH = dependencies\get-pip.py
-
-goto :localhost
-
-:localhost
-
-cd %CD%\%STARTUP_DIR%\%STARTUP_WIN_DIR%
-
-echo Launching Astron...
-start start_astron_server.bat
-
-echo Launching the Uberdog Server...
-start start_uberdog_server.bat
-
-echo Launching the AI Server...
-start start_toon_valley_ai_server.bat
-
-cd /d %RootPath%
-set TT_GAMESERVER=127.0.0.1
-timeout 3
-echo.
-goto :login
+@REM goto :login
 
 :login
 
 set "Fallback_TTFan_Username=%username%"
 set "DefaultTTFanUsernameStr=Enter input Python Path (or press ENTER to use the following default version "%Fallback_TTFan_Username%"]): "
-echo The "Fallback_TTFan_Username" variable is set to %Fallback_TTFan_Username%
-echo.
 
 if not defined TTFan_Username (
     goto :warningEcho
@@ -176,11 +175,11 @@ if not defined TTFan_Username (
 :warningEcho
 
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo Your Username is your username and does get stored in your source code so beware!
+echo Your Username is your username and does get stored in your source code so beware!exclaimStr!
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo.
 
-echo The Tooniverse needs your help! To take your first step towards the adventure of a lifetime,
+echo The Tooniverse needs your help!exclaimStr! To take your first step towards the adventure of a lifetime,
 echo please enter a username to use with this computer...
 echo.
 echo Please note that if you clear your user environment variables, you can re-enter your previous username to regain access to your account.
@@ -199,27 +198,53 @@ goto :defineUsernameInSystemVariables
 
 set "TTFAN_LOGIN_TOKEN=%TTFan_Username%"
 
+goto :localhost
+
+:localhost
+@REM cls
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+echo                  Starting %projectNameFull%!exclaimStr!
+echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+echo.
+
+cd /d "%CD%\%STARTUP_DIR%\%STARTUP_WIN_DIR%"
+
+echo Launching Astron...
+start start_astron_server.bat
+
+echo Launching the Uberdog Server...
+start start_uberdog_server.bat
+
+echo Launching the AI Server...
+start start_toon_valley_ai_server.bat
+
+echo Launching the game client...
+echo.
+
+cd /d "%RootPath%"
+set TT_GAMESERVER=127.0.0.1
+
 goto :StartGameWithWelcome
 
-:ending
-
-pause
-cls
-goto :root
-endlocal
-
 :StartGameWithWelcome
-cls
+
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo     %greetingString% to %projectName%, %TTFAN_LOGIN_TOKEN%!
+echo     %greetingString% to %projectNameFull%, %TTFAN_LOGIN_TOKEN%!exclaimStr!
 echo            The vast, ever-expanding Tooniverse awaits you...
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo.
 
 :StartGame
 
-title %projectName%
+title %projectNameFull%
 %CUSTOM_PYTHON_PATH% -m toontown.launcher.QuickStartLauncher
+
 pause
-echo.
 goto :StartGame
+
+:ending
+
+pause
+@REM cls
+goto :root
+endlocal
