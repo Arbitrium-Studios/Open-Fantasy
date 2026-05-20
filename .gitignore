@@ -24,6 +24,8 @@ PYTHON_PATH
 [Ss]cripts
 pyvenv.cfg
 .venv
+/.venv/
+/.vscode/
 pip-selfcheck.json
 
 # Ignore Housekeeper
@@ -39,7 +41,6 @@ pip-selfcheck.json
 /scripts/python/
 scripts/test_scripts.bat
 scripts/python/Testing.py
-/startup/windows/start_standalone_game.bat
 
 # Ignore Variables:
 

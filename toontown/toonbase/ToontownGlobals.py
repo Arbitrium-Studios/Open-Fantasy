@@ -1679,8 +1679,6 @@ AV_TOUCH_COUNT_LIMIT = 5
 AV_TOUCH_COUNT_TIME = 300
 
 BugReportSite = 'https://github.com/Arbitrium-Studios/Open-Fantasy/issues/new'
-
-
 openDiscord = 'https://discord.com/invite/5xmBA8stzY'
 
 # TELEPORT_BUTTON_DEFAULT_COST = 50
@@ -1736,10 +1734,6 @@ HotkeyGroupDefaults = {
     HotkeySecondaryBook: 'f8',
     HotkeyChatlog: 'f11'
 }
-
-
-
-
 
 SpecialKeys = {
     'page_up': 'Page Up',
