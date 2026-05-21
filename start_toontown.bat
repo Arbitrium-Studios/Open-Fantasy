@@ -306,21 +306,18 @@ set "INPUT_AS_PYTHON_PATH=%CUSTOM_AS_PYTHON_PATH%"
 :: Cleans the " character
 set "INPUT_AS_PYTHON_PATH=!INPUT_AS_PYTHON_PATH:"=!"
 
-echo User Input is set to %INPUT_AS_PYTHON_PATH%
+echo The "INPUT_AS_PYTHON_PATH" variable is set to "%INPUT_AS_PYTHON_PATH%"
 echo.
 
 if "!INPUT_AS_PYTHON_PATH:~-10!"=="%PythonExe%" (
     echo The following input ends with %PythonExe%: "%INPUT_AS_PYTHON_PATH%"
     echo.
-    goto :question_userInput_existence
 ) else if "!INPUT_AS_PYTHON_PATH:~-11!"=="%PPythonExe%" (
     echo The following input ends with %PPythonExe%: "%INPUT_AS_PYTHON_PATH%"
     echo.
-    goto :question_userInput_existence
 ) else (
     echo Error: Input does not end with "%PythonExe%" or "%PPythonExe%".
     echo.
-    goto :ending
 )
 
 :question_userInput_existence
@@ -389,12 +386,12 @@ if exist "%CUSTOM_AS_PYTHON_PATH%" (
         echo The specified "CUSTOM_AS_PYTHON_PATH" exists at %CUSTOM_AS_PYTHON_PATH%.
         echo.
 
-        if /i "%CUSTOM_AS_PYTHON_PATH:~-10%"=="!PythonExe!" (
+        if /i "%CUSTOM_AS_PYTHON_PATH:~-10%"=="python.exe" (
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
             goto :check_path_in_environment_variables
-        ) else if /i "%CUSTOM_AS_PYTHON_PATH:~-11%"=="!PPythonExe!" (
+        ) else if /i "%CUSTOM_AS_PYTHON_PATH:~-11%"=="ppython.exe" (
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
@@ -457,7 +454,6 @@ if exist "%ENTERED_PYTHON_PATH%" (
     goto :entered_python_path_exists
 ) else (
     set "typed_python_path=%DefaultPythonPath%"
-    @REM cls
     echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
     echo Enter the path to your version of %pythonVersionStr% in Open-Panda3D:
     echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -492,13 +488,13 @@ for %%a in (%listOfPanda3DFolderNames%) do (
 if "!foundPanda3DFolder!"=="true" (
     if exist "%ENTERED_PYTHON_PATH%" (
 
-        if /i "%ENTERED_PYTHON_PATH:~-10%"=="!PythonExe!" (
+        if /i "%ENTERED_PYTHON_PATH:~-10%"=="python.exe" (
             set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
             goto :ensure_panda3d_directory
-        ) else if /i "%ENTERED_PYTHON_PATH:~-11%"=="!PPythonExe!" (
+        ) else if /i "%ENTERED_PYTHON_PATH:~-11%"=="ppython.exe" (
             set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
@@ -535,10 +531,10 @@ if defined CUSTOM_AS_PYTHON_PATH (
     )
     goto :ensure_panda3d_directory
 ) else (
-    echo The "CUSTOM_AS_PYTHON_PATH" variable is NOT in the environment variables...
+    echo The "Please check the path and try again." variable is NOT in the environment variables...
     echo.
-    setx CUSTOM_AS_PYTHON_PATH "%SELECTED_PYTHON_PATH%" /m
-    echo The "CUSTOM_AS_PYTHON_PATH" variable has been permanently added to the system variables...
+    setx Please check the path and try again. "%SELECTED_PYTHON_PATH%" /m
+    echo The "Please check the path and try again." variable has been permanently added to the system variables...
     echo.
     goto :set_custom_python_path
 )
@@ -563,14 +559,14 @@ if exist "%PackageDependencies%" (
 ) else (
     echo Unable to locate the "PackageDependencies" directory at "%PackageDependencies%" Setting the install directory to the current directory at "%CD%"
     echo.
-    set "OpenPanda3DInstallerDirectory="%CD%""
+    set "OpenPanda3DInstallerDirectory=%CD%"
     set "OpenPanda3DInstallerPath=%CD%\%OpenPanda3DInstallerExecutableName%"
 )
 
-echo The directory the Open-Panda3D installer will be downloaded to is %OpenPanda3DInstallerDirectory%
+echo The directory the Open-Panda3D installer will be downloaded to is "%OpenPanda3DInstallerDirectory%"
 echo.
 
-cd /d %OpenPanda3DInstallerDirectory%
+cd /d "%OpenPanda3DInstallerDirectory%"
 
 goto :OpenPanda3DInstaller
 
@@ -589,15 +585,15 @@ if not exist "%OpenPanda3DInstallerPath%" (
         goto :ending
     )
 ) else (
-    echo Installer already downloaded in the following directory: %OpenPanda3DInstallerPath%
+    echo Installer already downloaded in the following directory: "%OpenPanda3DInstallerPath%"
     echo.
-    del %OpenPanda3DInstallerExecutableName%
+    del "%OpenPanda3DInstallerExecutableName%"
     goto :OpenPanda3DInstaller
 )
 
 :start_python_installer
 
-echo When you are asked to do so, please make sure the box to add the path to your system environment variables is checked. After the installer has finished, please make sure to restart your computer and re-run this batch file. If the "CUSTOM_AS_PYTHON_PATH" variable still cannot be found, try option "#2 - Select Python Path from Windows Path".
+echo When you are asked to do so, please make sure the box to add the path to your system environment variables is checked. After the installer has finished, please make sure to restart your computer and re-run this batch file. If the "AS_PYTHON_PATH" variable still cannot be found, try option "#2 - Select Python Path from Windows Path".
 echo.
 echo If it still doesn't work, re-open this batch and select the "#1 - Enter Custom Python Path" option when prompted.
 echo.
@@ -606,7 +602,7 @@ echo.
 echo After all of this, if you are still unable to continue, please file a bug report.
 echo.
 
-call %OpenPanda3DInstallerDirectory%\%OpenPanda3DInstallerExecutableName%
+call "%OpenPanda3DInstallerDirectory%\%OpenPanda3DInstallerExecutableName%"
 
 timeout /t 30 /nobreak > nul
 
