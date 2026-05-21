@@ -4,6 +4,7 @@ import random
 from direct.directnotify import DirectNotifyGlobal
 from otp.otpbase import OTPLocalizer
 from toontown.toonbase import TTLocalizer
+from . import StatusEffects
 notify = DirectNotifyGlobal.directNotify.newCategory('SuitBattleGlobals')
 debugAttackSequence = {}
 
@@ -114,6 +115,77 @@ def getSuitAttack(suitName, suitLevel, attackNum=-1):
     else:
         adict['group'] = SuitAttacks[name][1]
     return adict
+
+
+class Targeting:
+    '''
+    Use this class to replace the constants and better determine how the attacks will target a Toon.
+    '''
+
+    def __init__(self, side, numTargets, selfTarget = 'can'):
+        '''
+        :param str side: Which side the Cog will choose to aim for, either 'toon' or 'suit'.
+        :param int|str numTargets: The number of targets that will be affected by the attack, which is either an int or 'all'.\n
+                                   This parameter is only really relevant if side is 'suit', as Toontown Fantasy is single-player, but it can be used for determining camera angles.
+        :param str selfTarget: Whether or not an attacker can target themselves with an attack.  Valid choices are 'can', which means the attacker can target themselves if given the chance, 'must', which means the attacker must be one of the targets, or 'cannot', which means the attacker cannot be selected.\n
+                               This is ignored if side is 'toon'.
+        '''
+        if not isinstance(side, str):
+            raise TypeError
+        if side not in ('toon', 'suit'):
+            raise ValueError("side is supposed to be either 'toon' or 'suit', but it's '{}' here!".format(side))
+        # Here, numTargets can alternatively be 'all' rather than an int.
+        if isinstance(numTargets, int):
+            if numTargets < 0:
+                raise ValueError("numTargets int must be greater than or equal to 0 (it's {} here)!".format(numTargets))
+        elif numTargets != 'all':
+            raise TypeError
+        if not isinstance(selfTarget, str):
+            raise TypeError
+        if selfTarget not in ('can', 'must', 'cannot'):
+            raise ValueError("selfTarget is supposed to be 'can', 'must', or 'cannot', but it's '{}' here!".format(selfTarget))
+        self.side = side
+        self.numTargets = numTargets
+        self.selfTarget = selfTarget
+
+
+class SuitAttack:
+    '''
+    Instead of using tuples, we will use this object for a Cog's attack.
+    '''
+
+    def __init__(self, name, hp, acc, freq, effects = (), targets = None):
+        '''
+        :param str name: The Cog attack that will be displayed via the movie.
+        :param tuple hp: The hit points of the attack by level.
+        :param tuple acc: The accuracy of the attack by level.
+        :param tuple freq: The frequency of the attack by level.
+        :param tuple effects: A list of effects that will be applied if the attack lands.  They must be a StatusEffect!
+        :param Targeting|None targets: Who will be affected by the attack.
+        '''
+        if not isinstance(name, str):
+            raise TypeError
+        if not isinstance(hp, tuple):
+            raise TypeError
+        if not isinstance(acc, tuple):
+            raise TypeError
+        if not isinstance(freq, tuple):
+            raise TypeError
+        if not isinstance(effects, tuple):
+            raise TypeError
+        if targets in (ATK_TGT_UNKNOWN, ATK_TGT_SINGLE, ATK_TGT_GROUP):
+            pass # TODO: Stop relying on constants for targeting.
+        elif not isinstance(targets, (Targeting, type(None))):
+            raise TypeError
+        self.name = name
+        self.hp = hp
+        self.acc = acc
+        self.freq = freq
+        self.effects = effects
+        if targets == None:
+            self.targets = SuitAttacks[self.name][1] # If it's None, then we can have a default.
+        else:
+            self.targets = targets
 
 
 ATK_TGT_UNKNOWN = 1
