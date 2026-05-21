@@ -148,10 +148,9 @@ if exist "%SelectedPythonPathFile%" (
     echo.
     set "CUSTOM_PYTHON_PATH=%SelectedPythonPathFile%"
 ) else (
-    echo Error: The specified file was not found.
-    echo Please check the path and try again.
+    echo The "SelectedPythonPathFile" does not exist at "%SelectedPythonPathFile%".
     echo.
-    goto :SelectPythonDirectory
+    goto :set_python_path
 )
 
 echo The "CUSTOM_PYTHON_PATH" variable is set to %CUSTOM_PYTHON_PATH%
