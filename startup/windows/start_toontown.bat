@@ -35,6 +35,7 @@ if "!CURRENT_DIR_NAME!" EQU "windows" (
 )
 
 set "ROOT_DIR=%CD%"
+
 set "pythonPathFileName=PYTHON_PATH"
 set "PYTHON_PATH_FILE=%ROOT_DIR%\%pythonPathFileName%"
 

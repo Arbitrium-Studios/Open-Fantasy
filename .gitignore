@@ -1,17 +1,21 @@
 # GitHub WILL ignore these folders:
 
-# Ignore Various Toontown Fantasy-related items
+# Ignore items related to Toontown Fantasy:
 
 /build/
 /FantasyLevelEditor/
 dependencies/panda3d
 /startup/unix/
-Start Toontown Fantasy.lnk
+*.lnk
 /users/
 dependencies/variables/.env
 dependencies/variables/PANDA3D_PATH
 PYTHON_PATH
 /startup/windows/run_setup.bat
+
+# Ignore items related to THE S.T.A.I.C.Y. B0T
+
+/startup/windows/*staicy*.bat
 
 # Ignore Virtual Environments + Virtualenv
 # https://realpython.com/python-virtual-environments-a-primer/#the-virtualenv-project

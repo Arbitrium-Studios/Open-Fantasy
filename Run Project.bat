@@ -12,50 +12,68 @@ set "exclaimStr=!"
 
 SetLocal EnableDelayedExpansion
 
-set "projectOwnerName=PLAYER ZER0 STUDIO"
-set "projectName=Toontown Fantasy"
-set "projectNameFull=!projectOwnerName!'s !projectName!"
-title Launching !projectNameFull!'s Standalone Launcher
-set "projectAbbreviation=TTFan"
-set "projectAbbreviationUpper=TTFAN"
-set "wantToClearLogs=False"
+for /f "tokens=*" %%a in ('git remote get-url origin') do set "url=%%a"
+:: Remove potential .git suffix and extract the part after the last slash
 
-set "PREVIOUS_DIR=..\"
+for %%f in ("%url:/=\%") do set "repo_name=%%~nf"
+echo Repository Name: %repo_name%
+echo.
 
-set "ROOT_DIR=%~dp0"
-set "ROOT_DIR=%ROOT_DIR:~0,-1%"
-
-if "%CD%" NEQ "%ROOT_DIR%" (
-    cd /d "%ROOT_DIR%"
-)
-
-set "SCRIPTS_PATH=%ROOT_DIR%\scripts"
-set "SCRIPTS_DIR=scripts"
 set "STARTUP_DIR=startup"
 set "STARTUP_WIN_DIR=windows"
-set "STARTUP_PATH=%ROOT_DIR%\%STARTUP_DIR%\%STARTUP_WIN_DIR%"
-set "ASTRON_PATH=!STARTUP_PATH!\start_astron_server.bat"
-set "UBERDOG_PATH=!STARTUP_PATH!\start_uberdog_server.bat"
-set "AI_PATH=!STARTUP_PATH!\start_toon_valley_ai_server.bat"
 
-echo ---------------------------------------------------------------------------------------
-echo              Starting !projectNameFull!!exclaimStr!
-echo ---------------------------------------------------------------------------------------
-echo.
+if "%repo_name%" EQU "THE_STAICY_B0T" (
+    set "projectOwnerName=Nexus Application"
+    set "ROOT_DIR=%~dp0"
+    set "ROOT_DIR=!ROOT_DIR:~0,-1!"
 
-echo The %projectNameFull%'s Abbreviation is set to "%projectAbbreviation%"
-echo.
+    if "%CD%" NEQ "!ROOT_DIR!" (
+        cd /d "!ROOT_DIR!"
+    )
 
-if "%ROOT_DIR%" EQU "%CD%" (
-    echo The Current and Root Directories are set to: "%CD%"
-    echo.
+    for %%I in (.) do set "DirectoryName=%%~nxI"
+    if "!DirectoryName!" EQU "windows" (
+        set "ROOT_DIR=!CD!"
+    )
+    set "STARTUP_PATH=!ROOT_DIR!\!STARTUP_DIR!\!STARTUP_WIN_DIR!"
+
+    set "projectAbbreviation=TSB"
+    for %%I in (.) do set "PROJECT_NAME=%%~nxI"
+    set "projectName=!PROJECT_NAME!"
+    set "projectNameFull=!projectOwnerName!'s !projectName!"
+    title Launching !projectNameFull!
+
+    set "LAUNCHER_PATH=!STARTUP_PATH!\start_staicy.bat"
+) else if "%repo_name%" EQU "Open-Fantasy" (
+    set "projectOwnerName=PLAYER ZER0 STUDIO"
+    set "projectName=Toontown Fantasy"
+    set "projectNameFull=!projectOwnerName!'s !projectName!"
+    title Launching !projectNameFull!'s Standalone Launcher
+    set "projectAbbreviation=TTFan"
+
+    set "ROOT_DIR=%~dp0"
+    set "ROOT_DIR=!ROOT_DIR:~0,-1!"
+
+    if "%CD%" NEQ "!ROOT_DIR!" (
+        cd /d "!ROOT_DIR!"
+    )
+
+    set "SCRIPTS_PATH=!ROOT_DIR!\scripts"
+    set "SCRIPTS_DIR=scripts"
+    set "STARTUP_PATH=!ROOT_DIR!\!STARTUP_DIR!\!STARTUP_WIN_DIR!"
+    set "ASTRON_PATH=!STARTUP_PATH!\start_astron_server.bat"
+    set "UBERDOG_PATH=!STARTUP_PATH!\start_uberdog_server.bat"
+    set "AI_PATH=!STARTUP_PATH!\start_toon_valley_ai_server.bat"
+    set "LAUNCHER_PATH=!STARTUP_PATH!\start_toontown.bat"
+
 ) else (
-    echo Current Directory is %CD%
-    echo.
-
-    echo Root Directory is "%ROOT_DIR%"
-    echo.
+    goto :unsupported
 )
+
+set "wantDirLoggingCLS=False"
+
+echo The Current Directory is "%CD%"
+echo.
 
 set "GetPipWeb=https://bootstrap.pypa.io/get-pip.py"
 set "GET_PIP=get-pip.py"
@@ -83,6 +101,7 @@ set "OP3D_v1.11.1=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/d
 set "OP3D_v1.11.2=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v1.11.2-Pre_Release/!PANDA3D_TYPE_FULL!-1.11.2-py3.13.exe"
 set "OpenPanda3DInstallerExecutableName=!PANDA3D_TYPE_FULL!-!latestVersionOfOpenPanda3D!-py3.13.!Executable!"
 set "LatestOfficialOpenPanda3DInstaller=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v!latestVersionOfOpenPanda3D!-Pre_Release/!OpenPanda3DInstallerExecutableName!"
+set "OpenPanda3DInstallerPath=%PackageDependencies%\%OpenPanda3DInstallerExecutableName%"
 
 set "pythonPathFileName=PYTHON_PATH"
 set "PYTHON_PATH_FILE=%ROOT_DIR%\%pythonPathFileName%"
@@ -120,19 +139,15 @@ REM Read the contents of PYTHON_PATH into %PYTHON_PATH%:
 if exist "%PYTHON_PATH_FILE%" (
     echo The "PYTHON_PATH_FILE" exists at "%PYTHON_PATH_FILE%"
     echo.
-    @REM set /p CUSTOM_PYTHON_PATH=<PYTHON_PATH
     set /P CUSTOM_PYTHON_PATH=<PYTHON_PATH
-    @REM goto :python_check
 ) else if exist "%PPYTHON_PATH_FILE%" (
     set /P CUSTOM_PYTHON_PATH=<PPYTHON_PATH
     echo Python Path is set to %PYTHON_PATH%
     echo.
-    @REM goto :python_check
 ) else (
     echo The PYTHON_PATH file does NOT exist.
     echo.
     goto :set_python_path
-    @REM goto :SelectPythonDirectory
 )
 
 :: Use quotes to handle paths with spaces
@@ -160,90 +175,78 @@ if exist "%SelectedPythonPathFile%" (
     goto :set_python_path
 )
 
-echo The "CUSTOM_PYTHON_PATH" variable is set to %CUSTOM_PYTHON_PATH%
+echo The "CUSTOM_PYTHON_PATH" variable is set to "%CUSTOM_PYTHON_PATH%"
 echo.
 
 if defined AS_PYTHON_PATH (
-    if "%projectAbbreviation%" == "TTFan" (
-        if exist "%PRESET_PANDA3D_PATH%" (
-            if "!PRESET_PANDA3D_PATH:~-10!"=="!PythonExe!" (
-                set "REBUILT_PYTHON_PATH=%PRESET_PANDA3D_PATH%"
-                echo The "REBUILT_PYTHON_PATH" variable is set to "!REBUILT_PYTHON_PATH!"
-                echo.
-                goto :setCustomPanda3DPathWithoutRebuilt
-            ) else if "!PRESET_PANDA3D_PATH:~-11!"=="!PPythonExe!" (
-                set "REBUILT_PYTHON_PATH=%PRESET_PANDA3D_PATH%"
-                echo The "REBUILT_PYTHON_PATH" variable is set to "!REBUILT_PYTHON_PATH!"
-                echo.
-                goto :setCustomPanda3DPathWithoutRebuilt
-            ) else (
-                set "OPEN_PANDA_PATH=%PRESET_PANDA3D_PATH%"
-                echo The "OPEN_PANDA_PATH" variable is set to "!OPEN_PANDA_PATH!"
-                echo.
-                goto :setCustomPanda3DPath
-            )
-        )
-    ) else (
-        echo The selected Project Abbreviation is not supported: %projectAbbreviation%
-        echo.
-        goto :ending
-    )
-) else (
-    if "%projectAbbreviation%" == "TTFan" (
-        if exist "%PRESET_PANDA3D_PATH%" (
-            echo The "PRESET_PANDA3D_PATH" variable is set to %PRESET_PANDA3D_PATH%.
+    if exist "%PRESET_PANDA3D_PATH%" (
+        if "!PRESET_PANDA3D_PATH:~-10!"=="!PythonExe!" (
+            set "REBUILT_PYTHON_PATH=%PRESET_PANDA3D_PATH%"
+            echo The "REBUILT_PYTHON_PATH" variable is set to "!REBUILT_PYTHON_PATH!"
             echo.
+            goto :setCustomPanda3DPathWithoutRebuilt
+        ) else if "!PRESET_PANDA3D_PATH:~-11!"=="!PPythonExe!" (
+            set "REBUILT_PYTHON_PATH=%PRESET_PANDA3D_PATH%"
+            echo The "REBUILT_PYTHON_PATH" variable is set to "!REBUILT_PYTHON_PATH!"
+            echo.
+            goto :setCustomPanda3DPathWithoutRebuilt
+        ) else (
             set "OPEN_PANDA_PATH=%PRESET_PANDA3D_PATH%"
+            echo The "OPEN_PANDA_PATH" variable is set to "!OPEN_PANDA_PATH!"
+            echo.
             goto :setCustomPanda3DPath
         )
     ) else (
-        echo The selected Project Abbreviation is not supported: %projectAbbreviation%
+        echo The "PRESET_PANDA3D_PATH" variable does not exist at "%PRESET_PANDA3D_PATH%"
         echo.
-        goto :ending
+        set "PRESET_PANDA3D_PATH=%AS_PYTHON_PATH%"
+        set "REBUILT_PYTHON_PATH=%AS_PYTHON_PATH%"
+        goto :setCustomPanda3DPathWithoutRebuilt
+    )
+) else (
+    if exist "%PRESET_PANDA3D_PATH%" (
+        echo The "PRESET_PANDA3D_PATH" variable is set to %PRESET_PANDA3D_PATH%.
+        echo.
+        set "OPEN_PANDA_PATH=%PRESET_PANDA3D_PATH%"
+        goto :setCustomPanda3DPath
+    ) else (
+        set "OPEN_PANDA_PATH=%CUSTOM_PYTHON_PATH%"
+        goto :setCustomPanda3DPath
     )
 )
 
 :setCustomPanda3DPath
 
-set "REBUILT_PYTHON_PATH=%OPEN_PANDA_PATH%\python\python.exe"
+set "REBUILT_PYTHON_PATH=%OPEN_PANDA_PATH%\!pythonName!\!PythonExe!"
 
 :setCustomPanda3DPathWithoutRebuilt
 
-if exist %REBUILT_PYTHON_PATH% (
+if exist "%REBUILT_PYTHON_PATH%" (
     set "CUSTOM_PYTHON_PATH=%REBUILT_PYTHON_PATH%"
 
-    if "%projectAbbreviation%" == "TTFan" (
-        echo The "AS_PYTHON_PATH" variable is not yet defined.
-        echo.
-
-        if not defined AS_PYTHON_PATH (
-            setx AS_PYTHON_PATH "%REBUILT_PYTHON_PATH%"
+    if not defined AS_PYTHON_PATH (
+        setx AS_PYTHON_PATH "%REBUILT_PYTHON_PATH%"
+        goto :Update_PYTHON_PATH_File
+    ) else (
+        if "%AS_PYTHON_PATH%" == "%REBUILT_PYTHON_PATH%" (
+            echo The "AS_PYTHON_PATH" and the "REBUILT_PYTHON_PATH" variables are the exact same and set to "%REBUILT_PYTHON_PATH%"
+            echo.
             goto :Update_PYTHON_PATH_File
         ) else (
-            if "%AS_PYTHON_PATH%" == "%REBUILT_PYTHON_PATH%" (
-                echo The "AS_PYTHON_PATH" and the "REBUILT_PYTHON_PATH" variables are the exact same and set to "%REBUILT_PYTHON_PATH%"
-                echo.
-                goto :Update_PYTHON_PATH_File
-            ) else (
-                echo The "AS_PYTHON_PATH" and the "REBUILT_PYTHON_PATH" variables are NOT the same.
-                echo.
+            echo The "AS_PYTHON_PATH" and the "REBUILT_PYTHON_PATH" variables are NOT the same.
+            echo.
 
-                echo The "REBUILT_PYTHON_PATH" variable exists at "%REBUILT_PYTHON_PATH%"
-                echo.
-                echo The "AS_PYTHON_PATH" variable is set to "%AS_PYTHON_PATH%"
-                echo.
-                echo Do you wish to update the "AS_PYTHON_PATH" variable to use the REBUILT_PYTHON_PATH variable?
-                echo.
-                choice /C YN /M "(Y)es/(N)o "
-                echo.
-                if ErrorLevel 2 goto :NoPythonPathUpdate
-                if ErrorLevel 1 goto :YesUpdatePythonPath
-            )
+            echo The "REBUILT_PYTHON_PATH" variable exists at "%REBUILT_PYTHON_PATH%"
+            echo.
+            echo The "AS_PYTHON_PATH" variable is set to "%AS_PYTHON_PATH%"
+            echo.
+            echo Do you wish to update the "AS_PYTHON_PATH" variable to use the REBUILT_PYTHON_PATH variable?
+            echo.
+            choice /C YN /M "(Y)es/(N)o "
+            echo.
+            if ErrorLevel 2 goto :NoPythonPathUpdate
+            if ErrorLevel 1 goto :YesUpdatePythonPath
         )
-    ) else (
-        echo The selected Project Abbreviation is not supported: %projectAbbreviation%
-        echo.
-        goto :ending
     )
 ) else (
     echo The "REBUILT_PYTHON_PATH" variable does NOT exist at "%REBUILT_PYTHON_PATH%"
@@ -306,7 +309,7 @@ goto :Update_PYTHON_PATH_File
 
 :Update_PYTHON_PATH_File
 
-echo Current Directory is %CD%
+echo The Current Directory is "%CD%"
 echo.
 
 if "%CUSTOM_AS_PYTHON_PATH%"=="" (
@@ -343,16 +346,10 @@ if "!INPUT_AS_PYTHON_PATH:~-10!"=="%PythonExe%" (
 :: Check if the specified file exists
 if exist "%INPUT_AS_PYTHON_PATH%" (
 
-    echo Success: The file exists at the given directory: %INPUT_AS_PYTHON_PATH%
-    echo.
-
-    echo Current Directory is %CD%
+    echo Yes, the contents of the "INPUT_AS_PYTHON_PATH" variable exist at the given directory: "%INPUT_AS_PYTHON_PATH%"
     echo.
 
     cd /d "%ROOT_DIR%"
-
-    echo Current Directory is %CD%
-    echo.
 
     :: Create or update the necessary file
     echo | set /p=""%INPUT_AS_PYTHON_PATH%"" > %pythonPathFileName%
@@ -370,21 +367,27 @@ if exist "%INPUT_AS_PYTHON_PATH%" (
 :create_symbolic_link
 
 if not exist "%SYMBOLIC_PANDA3D_PATH%" (
-    if exist "%INPUT_AS_PYTHON_PATH%" (
-        cd /d "%DEPENDENCIES_PATH%"
-
-        mklink /d "%PANDA3D_DIR%" %AS_PYTHON_PATH%
-
-        echo User Input is set to %INPUT_AS_PYTHON_PATH%
-        echo.
-        cd /d "%ROOT_DIR%"
-
-    ) else (
-        echo Error: The specified file was not found.
+    if not exist "%INPUT_AS_PYTHON_PATH%" (
+        echo Error: The specified python path was not found.
         echo Please check the path and try again.
         echo.
-        goto :custom_panda3d_directory
+        goto :set_python_path
+    ) else (
+        cd /d "%DEPENDENCIES_PATH%"
+
+        if exist "!DefaultPanda3DPath!" (
+            mklink /d "%PANDA3D_DIR%" "!DefaultPanda3DPath!"
+            echo.
+        )
+
+        echo The "INPUT_AS_PYTHON_PATH" variable is set to "%INPUT_AS_PYTHON_PATH%"
+        echo.
+        cd /d "%ROOT_DIR%"
+        set "CUSTOM_AS_PYTHON_PATH=%INPUT_AS_PYTHON_PATH%"
+        goto :launcher
     )
+) else (
+    goto :launcher
 )
 
 goto :python_check
@@ -404,27 +407,31 @@ if exist "%CUSTOM_AS_PYTHON_PATH%" (
         echo The specified "CUSTOM_AS_PYTHON_PATH" exists at %CUSTOM_AS_PYTHON_PATH%.
         echo.
 
-        if /i "%CUSTOM_AS_PYTHON_PATH:~-10%"=="python.exe" (
+        if /i "%CUSTOM_AS_PYTHON_PATH:~-10%"=="!PythonExe!" (
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
             goto :check_path_in_environment_variables
-        ) else if /i "%CUSTOM_AS_PYTHON_PATH:~-11%"=="ppython.exe" (
+        ) else if /i "%CUSTOM_AS_PYTHON_PATH:~-11%"=="p!PythonExe!" (
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
             goto :check_path_in_environment_variables
         ) else (
-            echo The string does NOT end with python.exe
+            echo The string does NOT end with !PythonExe!
             echo.
             goto :set_python_path
         )
     )
 ) else (
-    echo The "CUSTOM_AS_PYTHON_PATH" variable does not exist...
-    echo.
-    goto :set_python_path
+    goto :doesNotExistPythonPath
 )
+
+:doesNotExistPythonPath
+
+echo The python path variable you provided does not exist...
+echo.
+goto :set_python_path
 
 :set_python_path
 
@@ -439,6 +446,7 @@ echo.
 
 set INPUT=-1
 set /P INPUT=Selection: 
+echo.
 
 if %INPUT%==1 (
     goto :set_custom_python_path
@@ -465,6 +473,8 @@ echo.
 set /P "DefaultPythonPath=%DefaultPythonPathStr%"
 echo.
 set "ENTERED_PYTHON_PATH=%DefaultPythonPath%"
+
+:set_custom_python_path_functionality_textless
 
 if exist "%ENTERED_PYTHON_PATH%" (
     echo The "ENTERED_PYTHON_PATH" variable is set to "%ENTERED_PYTHON_PATH%"
@@ -506,20 +516,20 @@ for %%a in (%listOfPanda3DFolderNames%) do (
 if "!foundPanda3DFolder!"=="true" (
     if exist "%ENTERED_PYTHON_PATH%" (
 
-        if /i "%ENTERED_PYTHON_PATH:~-10%"=="python.exe" (
+        if /i "%ENTERED_PYTHON_PATH:~-10%"=="!PythonExe!" (
             set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
             goto :ensure_panda3d_directory
-        ) else if /i "%ENTERED_PYTHON_PATH:~-11%"=="ppython.exe" (
+        ) else if /i "%ENTERED_PYTHON_PATH:~-11%"=="p!PythonExe!" (
             set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
             goto :ensure_panda3d_directory
         ) else (
-            echo The string does NOT end with python.exe
+            echo The string does NOT end with !PythonExe!
             echo.
             goto :set_custom_python_path
         )
@@ -536,34 +546,15 @@ if "!foundPanda3DFolder!"=="true" (
 
 :check_path_in_environment_variables
 
-set "SELECTED_PYTHON_PATH=%CUSTOM_AS_PYTHON_PATH%"
-
-if defined CUSTOM_AS_PYTHON_PATH (
-    echo The variable "CUSTOM_AS_PYTHON_PATH" already exists at: %CUSTOM_AS_PYTHON_PATH%
+if defined AS_PYTHON_PATH (
+    echo The variable "AS_PYTHON_PATH" already exists at: %AS_PYTHON_PATH%
     echo.
-    set "SystemPythonPath=%CUSTOM_AS_PYTHON_PATH%"
-    if not defined python (
-        setx python "%SystemPythonPath%" /m
-        echo The "python" variable has been permanently added to the system variables...
-        echo.
-    )
+    set "SYMBOLIC_PANDA3D_PATH=%AS_PYTHON_PATH%"
     goto :ensure_panda3d_directory
 ) else (
-    echo The "Please check the path and try again." variable is NOT in the environment variables...
-    echo.
-    setx Please check the path and try again. "%SELECTED_PYTHON_PATH%" /m
-    echo The "Please check the path and try again." variable has been permanently added to the system variables...
+    echo The "AS_PYTHON_PATH" variable is not in the user environment variables...
     echo.
     goto :set_custom_python_path
-)
-
-if "%CUSTOM_AS_PYTHON_PATH%" == "%SELECTED_PYTHON_PATH%" (
-    echo The "CUSTOM_AS_PYTHON_PATH" system variable and the "SELECTED_PYTHON_PATH" variable are both the same.
-    echo.
-    echo - Python_Path_Updated Variable: %SELECTED_PYTHON_PATH%
-    echo - CUSTOM_AS_PYTHON_PATH Variable: %CUSTOM_AS_PYTHON_PATH%
-    echo.
-    goto :ensure_panda3d_directory
 )
 
 :install_python
@@ -573,12 +564,10 @@ if exist "%PackageDependencies%" (
     echo.
     cd /d "%PackageDependencies%"
     set "OpenPanda3DInstallerDirectory=%PackageDependencies%"
-    set "OpenPanda3DInstallerPath=%PackageDependencies%\%OpenPanda3DInstallerExecutableName%"
 ) else (
     echo Unable to locate the "PackageDependencies" directory at "%PackageDependencies%" Setting the install directory to the current directory at "%CD%"
     echo.
     set "OpenPanda3DInstallerDirectory=%CD%"
-    set "OpenPanda3DInstallerPath=%CD%\%OpenPanda3DInstallerExecutableName%"
 )
 
 echo The directory the Open-Panda3D installer will be downloaded to is "%OpenPanda3DInstallerDirectory%"
@@ -590,69 +579,70 @@ goto :OpenPanda3DInstaller
 
 :OpenPanda3DInstaller
 
-if not exist "%OpenPanda3DInstallerPath%" (
-    call curl %LatestOfficialOpenPanda3DInstaller% -o %OpenPanda3DInstallerExecutableName%
-    if %ERRORLEVEL% equ 0 (
-        echo Successfully downloaded the installer!exclaimStr! Running installation script...
+if not exist "!OpenPanda3DInstallerPath!" (
+    echo Downloading "!OpenPanda3DInstallerExecutableName!" into the "!PackageDependencies!" directory!
+    echo.
+
+    bitsadmin /transfer "DownloadOpenPanda3DJob" /priority high "!LatestOfficialOpenPanda3DInstaller!" "!OpenPanda3DInstallerPath!"
+    echo.
+
+    if %ERRORLEVEL% EQU 0 (
+        echo Successfully downloaded the installer!exclaimStr!
         echo.
         goto :start_python_installer
     ) else (
-        echo Failed to download %GET_PIP%. Please check your internet connection or try again later.
+        echo Failed to download !LatestOfficialOpenPanda3DInstaller! with error code %ERRORLEVEL%. Please check your internet connection or try again later.
         echo.
-        goto :file_cleanup
         goto :ending
     )
 ) else (
-    echo Installer already downloaded in the following directory: "%OpenPanda3DInstallerPath%"
+    echo The "!OpenPanda3DInstallerExecutableName!" installer already exists in the "!PackageDependencies!" directory!
     echo.
-    del "%OpenPanda3DInstallerExecutableName%"
-    goto :OpenPanda3DInstaller
+    goto :file_cleanup
 )
 
 :start_python_installer
 
-echo When you are asked to do so, please make sure the box to add the path to your system environment variables is checked. After the installer has finished, please make sure to restart your computer and re-run this batch file. If the "AS_PYTHON_PATH" variable still cannot be found, try option "#2 - Select Python Path from Windows Path".
-echo.
-echo If it still doesn't work, re-open this batch and select the "#1 - Enter Custom Python Path" option when prompted.
-echo.
-echo Before doing anything else, open your file exploreer and navigate to the directory where you installed Panda3D, then enter the python folder, right click on the "python" folder in the navigation bar, left click "Copy Address as Text", then back in the command prompt, press "Control+V" to paste the address (It should look something like this "C:\Open-Panda\python") then add another back slash ("\") then enter "python.exe" (full address should look something like this: "C:\Open-Panda\python\python.exe")
-echo.
-echo After all of this, if you are still unable to continue, please file a bug report.
+echo Running installation script...
 echo.
 
-call "%OpenPanda3DInstallerDirectory%\%OpenPanda3DInstallerExecutableName%"
+echo Please note that if you enter a custom installation directory/drive when installing Open-Panda3D, please make note of what it is. You will be asked to enter it. Otherwise, the script should do the rest of the work for you!
+echo.
 
-timeout /t 30 /nobreak > nul
+start /wait "" "!OpenPanda3DInstallerPath!"
 
-pause
-goto :ending
+echo Finished installing "!OpenPanda3DInstallerExecutableName!".
+echo.
+
+timeout /t 5 /nobreak > nul
+
+if exist "!OpenPanda3DInstallerPath!" (
+    del "!OpenPanda3DInstallerPath!"
+    echo Deleted the "!OpenPanda3DInstallerExecutableName!" file.
+    echo.
+)
+
+if exist "%DefaultPanda3DPath%" (
+    set "ENTERED_PYTHON_PATH=%DefaultPanda3DPath%"
+    goto :set_custom_python_path_functionality_textless
+) else (
+    :set_custom_python_path
+)
 
 :ensure_panda3d_directory
 
 cd /d "%ROOT_DIR%"
 
-echo Current Directory is %CD%
-echo.
-
 if exist "%SYMBOLIC_PANDA3D_PATH%" (
     echo Found the "SYMBOLIC_PANDA3D_PATH" file at %SYMBOLIC_PANDA3D_PATH%
     echo.
-    set "PANDA3D_PATH=SYMBOLIC_PANDA3D_PATH"
-    goto :pip_check
+    set "CUSTOM_AS_PYTHON_PATH=%SYMBOLIC_PANDA3D_PATH%"
+    set "INPUT_AS_PYTHON_PATH=%SYMBOLIC_PANDA3D_PATH%"
+    goto :question_userInput_existence
 ) else (
-    echo Could not find the "PANDA3D_PATH" file at %PANDA3D_PATH%
+    echo Could not find the "SYMBOLIC_PANDA3D_PATH" file at %SYMBOLIC_PANDA3D_PATH%
     echo.
-    if exist "%DEPENDENCIES_PATH%" (
-        cd /d "%DEPENDENCIES_PATH%"
-        mklink /d "%PANDA3D_DIR%" "%DefaultPanda3DPath%"
-        echo Successfully created a symbolic link between the "%PANDA3D_DIR%" folder and the "%DefaultPanda3DPath%" directory!exclaimStr!
-        echo.
-        goto :pip_check
-    ) else (
-        echo Error: Could not find the "DEPENDENCIES_PATH" file at "%DEPENDENCIES_PATH%"
-        echo.
-        goto :ending
-    )
+    goto :doesNotExistPythonPath
 )
 
 :pip_check
@@ -661,7 +651,7 @@ if exist "%SYMBOLIC_PANDA3D_PATH%" (
 if %ERRORLEVEL% equ 0 (
     echo Pip is installed.
     echo.
-    goto :file_cleanup
+    goto :launcher
 ) else (
     echo Pip not installed. Please wait while I download the latest version of Pip...
     echo.
@@ -729,121 +719,71 @@ goto :file_cleanup
 
 :file_cleanup
 
-if exist "%OpenPanda3DInstallerPath%" (
-    set "previousDirectory=%CD%"
-    cd /d "%OpenPanda3DInstallerPath%"
-    del "%OpenPanda3DInstallerExecutableName%"
-    cd /d "%previousDirectory%"
+if exist "!OpenPanda3DInstallerPath!" (
+    del "!OpenPanda3DInstallerPath!"
 )
 
-if exist "%getPipPackageDependencies%" (
-    set "previousDirectory=%CD%"
-    cd /d "%PackageDependencies%"
-    del "%GET_PIP%"
-    cd /d "%previousDirectory%"
+if exist "!getPipPackageDependencies!" (
+    del "!getPipPackageDependencies!"
 )
 
-goto :login
+goto :ending
 
-:login
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo Your Username is your username and does get stored in your source code so beware!
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo.
+:launcher
 
-if not defined !projectAbbreviation!_Username (
-    goto :warningEcho
+if "%CD%" NEQ "!ROOT_DIR!" (
+    cd /d "!ROOT_DIR!"
+)
 
-    :setUsername
-    set /P TTFan_Username="Username: "
+if "%projectAbbreviation%" == "TSB" (
+    if exist "!LAUNCHER_PATH!" (
+        echo Starting !projectNameFull!
+        echo.
+        call "!LAUNCHER_PATH!"
+        goto :ending
+    )
+) else if "%projectAbbreviation%" == "TTFan" (
+    echo Launching Astron...
+    if exist "!ASTRON_PATH!" (
+        start !ASTRON_PATH!
+    )
+
+    echo Launching the Uberdog Server...
+    if exist "!UBERDOG_PATH!" (
+        start !UBERDOG_PATH!
+    )
+
+    echo Launching the AI Server...
+    if exist "!AI_PATH!" (
+        start !AI_PATH!
+    )
+
+    timeout /t 2 /nobreak > nul
+
+    echo Launching the game client...
     echo.
 
-    echo.
-    set TTFAN_PLAYCOOKIE=%TTFan_Username%
-
-    set "greetingString=Welcome"
-    goto :createUsername
+    if exist "!LAUNCHER_PATH!" (
+        call !LAUNCHER_PATH!
+        goto :ending
+    ) else (
+        goto :unsupported
+    )
 ) else (
-    set TTFAN_PLAYCOOKIE=%TTFan_Username%
-    set "greetingString=Welcome back"
-    goto :defineUsernameInSystemVariables
+    goto :unsupported
 )
 
-:warningEcho
+goto :ending
 
-echo The Tooniverse needs your help! To take your first step towards the adventure of a lifetime,
-echo please enter a username to use with this computer...
+:unsupported
+
+echo The selected project abbreviation is not supported: %projectAbbreviation%
 echo.
-echo Please note that if you clear your user environment variables, you can re-enter your previous username to regain access to your account.
-echo.
-
-goto :setUsername
-
-:createUsername
-
-if not defined !projectAbbreviation!_Username (
-    setx !projectAbbreviation!_Username "%TTFan_Username%"
-    set "TTFAN_LOGIN_TOKEN=%TTFan_Username%"
-)
-
-if "%wantToClearLogs%" EQU "True" (
-    cls
-)
-
-goto :defineUsernameInSystemVariables
-
-:defineUsernameInSystemVariables
-
-set "TTFAN_LOGIN_TOKEN=%TTFan_Username%"
-
-goto :localhost
-
-:localhost
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo Starting Localhost!
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo.
-
-cd /d "!ROOT_DIR!"
-
-echo Launching Astron...
-start !ASTRON_PATH!
-
-echo Launching the Uberdog Server...
-start !UBERDOG_PATH!
-
-echo Launching the AI Server...
-start !AI_PATH!
-
-echo Launching the game client...
-echo.
-
-cd /d "%RootPath%"
-set TT_GAMESERVER=127.0.0.1
-
-goto :StartGameWithWelcome
-
-:StartGameWithWelcome
-if "%wantToClearLogs%" EQU "True" (
-    cls
-)
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo     %greetingString% to %projectName%, %TTFAN_LOGIN_TOKEN%!
-echo            The vast, ever-expanding Tooniverse awaits you...
-echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-echo.
-
-:StartGame
-
-title !projectNameFull!
-"%CUSTOM_AS_PYTHON_PATH%" -m toontown.launcher.QuickStartLauncher
-pause
-
 goto :ending
 
 :ending
 
 pause
 cls
+goto :launcher
 endlocal
-goto :root
