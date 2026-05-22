@@ -18,10 +18,16 @@ set "projectNameFull=!projectOwnerName!'s !projectName!"
 title Launching !projectNameFull!'s Standalone Launcher
 set "projectAbbreviation=TTFan"
 set "projectAbbreviationUpper=TTFAN"
+set "wantToClearLogs=False"
 
 set "PREVIOUS_DIR=..\"
 
-set "ROOT_DIR=%CD%"
+set "ROOT_DIR=%~dp0"
+set "ROOT_DIR=%ROOT_DIR:~0,-1%"
+
+if "%CD%" NEQ "%ROOT_DIR%" (
+    cd /d "%ROOT_DIR%"
+)
 
 set "SCRIPTS_PATH=%ROOT_DIR%\scripts"
 set "SCRIPTS_DIR=scripts"
@@ -124,8 +130,8 @@ if exist "%PYTHON_PATH_FILE%" (
 ) else (
     echo The PYTHON_PATH file does NOT exist.
     echo.
-    @REM goto :set_python_path
-    goto :SelectPythonDirectory
+    goto :set_python_path
+    @REM goto :SelectPythonDirectory
 )
 
 :: Use quotes to handle paths with spaces
@@ -158,14 +164,23 @@ echo.
 
 if defined AS_PYTHON_PATH (
     if "%projectAbbreviation%" == "TTFan" (
-        echo The %projectNameFull%'s Abbreviation is set to "%projectAbbreviation%"
-        echo.
-
         if exist "%PRESET_PANDA3D_PATH%" (
-            echo The "PRESET_PANDA3D_PATH" variable is set to %PRESET_PANDA3D_PATH%.
-            echo.
-            set "OPEN_PANDA_PATH=%PRESET_PANDA3D_PATH%"
-            goto :setCustomPanda3DPath
+            if "!PRESET_PANDA3D_PATH:~-10!"=="!PythonExe!" (
+                set "REBUILT_PYTHON_PATH=%PRESET_PANDA3D_PATH%"
+                echo The "REBUILT_PYTHON_PATH" variable is set to "!REBUILT_PYTHON_PATH!"
+                echo.
+                goto :setCustomPanda3DPathWithoutRebuilt
+            ) else if "!PRESET_PANDA3D_PATH:~-11!"=="!PPythonExe!" (
+                set "REBUILT_PYTHON_PATH=%PRESET_PANDA3D_PATH%"
+                echo The "REBUILT_PYTHON_PATH" variable is set to "!REBUILT_PYTHON_PATH!"
+                echo.
+                goto :setCustomPanda3DPathWithoutRebuilt
+            ) else (
+                set "OPEN_PANDA_PATH=%PRESET_PANDA3D_PATH%"
+                echo The "OPEN_PANDA_PATH" variable is set to "!OPEN_PANDA_PATH!"
+                echo.
+                goto :setCustomPanda3DPath
+            )
         )
     ) else (
         echo The selected Project Abbreviation is not supported: %projectAbbreviation%
@@ -190,6 +205,9 @@ if defined AS_PYTHON_PATH (
 :setCustomPanda3DPath
 
 set "REBUILT_PYTHON_PATH=%OPEN_PANDA_PATH%\python\python.exe"
+
+:setCustomPanda3DPathWithoutRebuilt
+
 if exist %REBUILT_PYTHON_PATH% (
     set "CUSTOM_PYTHON_PATH=%REBUILT_PYTHON_PATH%"
 
@@ -638,7 +656,7 @@ if exist "%SYMBOLIC_PANDA3D_PATH%" (
 
 :pip_check
 
-%CUSTOM_AS_PYTHON_PATH% -m pip --version >nul 2>&1
+"%CUSTOM_AS_PYTHON_PATH%" -m pip --version >nul 2>&1
 if %ERRORLEVEL% equ 0 (
     echo Pip is installed.
     echo.
@@ -687,13 +705,13 @@ if exist "%RequirementsInPath%" (
     ) else (
         echo Installing "pip-tools"
         echo.
-        %CUSTOM_AS_PYTHON_PATH% -m pip install "pip-tools"
+        "%CUSTOM_AS_PYTHON_PATH%" -m pip install "pip-tools"
         echo Compiling the %RequirementsIn% into a %RequirementsTXT% file.
         echo.
         pip-compile %RequirementsIn%
         echo Installing the contents of the %RequirementsTXT% file.
         echo.
-        %CUSTOM_AS_PYTHON_PATH% -m pip install -r %RequirementsTXT%
+        "%CUSTOM_AS_PYTHON_PATH%" -m pip install -r %RequirementsTXT%
         echo.
         goto :file_cleanup
     ) 
@@ -766,7 +784,9 @@ if not defined !projectAbbreviation!_Username (
     set "TTFAN_LOGIN_TOKEN=%TTFan_Username%"
 )
 
-@REM cls
+if "%wantToClearLogs%" EQU "True" (
+    cls
+)
 
 goto :defineUsernameInSystemVariables
 
@@ -802,7 +822,9 @@ set TT_GAMESERVER=127.0.0.1
 goto :StartGameWithWelcome
 
 :StartGameWithWelcome
-cls
+if "%wantToClearLogs%" EQU "True" (
+    cls
+)
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo     %greetingString% to %projectName%, %TTFAN_LOGIN_TOKEN%!
 echo            The vast, ever-expanding Tooniverse awaits you...
@@ -812,7 +834,7 @@ echo.
 :StartGame
 
 title !projectNameFull!
-%CUSTOM_AS_PYTHON_PATH% -m toontown.launcher.QuickStartLauncher
+"%CUSTOM_AS_PYTHON_PATH%" -m toontown.launcher.QuickStartLauncher
 pause
 
 goto :ending
