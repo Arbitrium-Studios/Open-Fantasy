@@ -71,10 +71,11 @@ set "RequirementsInPath=%ROOT_DIR%\%RequirementsIn%"
 set "RequirementsTXTPath=%ROOT_DIR%\%RequirementsTXT%"
 set "RequirementsInDownload=https://cdn.arbitriumstudios.com/application_assets/bots/tsb_assets/dependencies/packages/requirements.in"
 
-set "OpenPanda3DInstallerExecutableName=!PANDA3D_TYPE!-1.11.2-py3.13.exe"
+set "latestVersionOfOpenPanda3D=1.11.2"
 set "OP3D_v1.11.1=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v1.11.1/!PANDA3D_TYPE!-1.11.1-py3.11-x64.exe"
 set "OP3D_v1.11.2=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v1.11.2-Pre_Release/!PANDA3D_TYPE_FULL!-1.11.2-py3.13.exe"
-set "LatestOfficialOpenPanda3DInstaller=%OP3D_v1.11.2%"
+set "OpenPanda3DInstallerExecutableName=!PANDA3D_TYPE_FULL!-!latestVersionOfOpenPanda3D!-py3.13.!Executable!"
+set "LatestOfficialOpenPanda3DInstaller=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v!latestVersionOfOpenPanda3D!-Pre_Release/!OpenPanda3DInstallerExecutableName!"
 
 set "pythonPathFileName=PYTHON_PATH"
 set "PYTHON_PATH_FILE=%ROOT_DIR%\%pythonPathFileName%"
