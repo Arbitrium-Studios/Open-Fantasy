@@ -65,6 +65,13 @@ set "getPipPackageDependencies=%ROOT_DIR%\dependencies\packages\%GET_PIP%"
 set "PANDA3D_TYPE=Open-Panda"
 set "PANDA3D_TYPE_FULL=!PANDA3D_TYPE!3D"
 
+set "pythonInterpreter="
+set "pythonName=python"
+set "ppythonName=ppython"
+set "Executable=exe"
+set "PythonExe=%pythonName%.%Executable%"
+set "PPythonExe=%ppythonName%.%Executable%"
+
 set "RequirementsIn=requirements.in"
 set "RequirementsTXT=requirements.txt"
 set "RequirementsInPath=%ROOT_DIR%\%RequirementsIn%"
@@ -83,13 +90,6 @@ set "PPYTHON_PATH_FILE=%ROOT_DIR%\P%pythonPathFileName%"
 
 set "DEPENDENCIES_DIR=dependencies"
 set "PANDA3D_DIR=panda3d"
-
-set "pythonInterpreter="
-set "pythonName=python"
-set "ppythonName=ppython"
-set "Executable=exe"
-set "PythonExe=%pythonName%.%Executable%"
-set "PPythonExe=%ppythonName%.%Executable%"
 
 set "DEPENDENCIES_PATH=%ROOT_DIR%\%DEPENDENCIES_DIR%"
 set "SYMBOLIC_PANDA3D_PATH=%ROOT_DIR%\%DEPENDENCIES_DIR%\%PANDA3D_DIR%"
@@ -572,7 +572,7 @@ if exist "%PackageDependencies%" (
     echo Found the "PackageDependencies" directory at "%PackageDependencies%"
     echo.
     cd /d "%PackageDependencies%"
-    set "OpenPanda3DInstallerDirectory="%PackageDependencies%""
+    set "OpenPanda3DInstallerDirectory=%PackageDependencies%"
     set "OpenPanda3DInstallerPath=%PackageDependencies%\%OpenPanda3DInstallerExecutableName%"
 ) else (
     echo Unable to locate the "PackageDependencies" directory at "%PackageDependencies%" Setting the install directory to the current directory at "%CD%"
@@ -667,10 +667,11 @@ if %ERRORLEVEL% equ 0 (
     echo.
     cd /d "!PackageDependencies!"
     if exist "%GET_PIP%" (
-        del %GET_PIP%
+        del "%GET_PIP%"
     )
 
     call curl %GetPipWeb% -o %GET_PIP%
+
     if %ERRORLEVEL% equ 0 (
         echo Download successful!exclaimStr! Running installation script...
         echo.
@@ -680,7 +681,7 @@ if %ERRORLEVEL% equ 0 (
             echo Successfully installed Pip!exclaimStr!
             echo.
             cd /d "!PackageDependencies!"
-            del %GET_PIP%
+            del "%GET_PIP%"
             cd /d "!ROOT_DIR!"
         ) else (
             echo Failed to install Pip. Please make sure Open-Panda is installed and Open-Panda3D's Python in the PATH.
@@ -701,7 +702,7 @@ if exist "%RequirementsInPath%" (
     if exist "%RequirementsTXTPath%" (
         echo Found the "%RequirementsTXT%"
         echo.
-        del %RequirementsTXT%
+        del "%RequirementsTXT%"
         goto :install_pip_packages
     ) else (
         echo Installing "pip-tools"
@@ -729,16 +730,16 @@ goto :file_cleanup
 :file_cleanup
 
 if exist "%OpenPanda3DInstallerPath%" (
-    set "previousDirectory="%CD%""
+    set "previousDirectory=%CD%"
     cd /d "%OpenPanda3DInstallerPath%"
-    del %OpenPanda3DInstallerExecutableName%
-    cd /d %previousDirectory%
+    del "%OpenPanda3DInstallerExecutableName%"
+    cd /d "%previousDirectory%"
 )
 
 if exist "%getPipPackageDependencies%" (
-    set "previousDirectory="%CD%""
+    set "previousDirectory=%CD%"
     cd /d "%PackageDependencies%"
-    del %GET_PIP%
+    del "%GET_PIP%"
     cd /d "%previousDirectory%"
 )
 
