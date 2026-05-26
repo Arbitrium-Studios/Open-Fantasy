@@ -375,10 +375,12 @@ if not exist "%SYMBOLIC_PANDA3D_PATH%" (
     ) else (
         cd /d "%DEPENDENCIES_PATH%"
 
-        if exist "!DefaultPanda3DPath!" (
-            mklink /d "%PANDA3D_DIR%" "!DefaultPanda3DPath!"
-            echo.
-        )
+        mklink /d "%PANDA3D_DIR%" "!INPUT_AS_PYTHON_PATH!"
+        echo.
+        @REM if exist "!DefaultPanda3DPath!" (
+        @REM     mklink /d "%PANDA3D_DIR%" "!DefaultPanda3DPath!"
+        @REM     echo.
+        @REM )
 
         echo The "INPUT_AS_PYTHON_PATH" variable is set to "%INPUT_AS_PYTHON_PATH%"
         echo.
@@ -479,6 +481,7 @@ set "ENTERED_PYTHON_PATH=%DefaultPythonPath%"
 if exist "%ENTERED_PYTHON_PATH%" (
     echo The "ENTERED_PYTHON_PATH" variable is set to "%ENTERED_PYTHON_PATH%"
     echo.
+    set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
     goto :entered_python_path_exists
 ) else (
     set "typed_python_path=%DefaultPythonPath%"
@@ -516,18 +519,21 @@ for %%a in (%listOfPanda3DFolderNames%) do (
 if "!foundPanda3DFolder!"=="true" (
     if exist "%ENTERED_PYTHON_PATH%" (
 
+        set "INPUT_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
         if /i "%ENTERED_PYTHON_PATH:~-10%"=="!PythonExe!" (
             set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
-            echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
+            echo The specified python path exists at "!CUSTOM_AS_PYTHON_PATH!"!exclaimStr!
             echo.
 
-            goto :ensure_panda3d_directory
+            @REM goto :ensure_panda3d_directory
+            goto :create_symbolic_link
         ) else if /i "%ENTERED_PYTHON_PATH:~-11%"=="p!PythonExe!" (
             set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
-            echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
+            echo The specified python path exists at "!CUSTOM_AS_PYTHON_PATH!"!exclaimStr!
             echo.
 
-            goto :ensure_panda3d_directory
+            @REM goto :ensure_panda3d_directory
+            goto :create_symbolic_link
         ) else (
             echo The string does NOT end with !PythonExe!
             echo.
@@ -745,26 +751,26 @@ if "%projectAbbreviation%" == "TSB" (
 ) else if "%projectAbbreviation%" == "TTFan" (
     echo Launching Astron...
     if exist "!ASTRON_PATH!" (
-        start !ASTRON_PATH!
+        start "" "!ASTRON_PATH!"
     )
 
     echo Launching the Uberdog Server...
     if exist "!UBERDOG_PATH!" (
-        start !UBERDOG_PATH!
+        start "" "!UBERDOG_PATH!"
     )
 
     echo Launching the AI Server...
     if exist "!AI_PATH!" (
-        start !AI_PATH!
+        start "" "!AI_PATH!"
     )
 
-    timeout /t 2 /nobreak > nul
+    timeout /t 3 /nobreak > nul
 
     echo Launching the game client...
     echo.
 
     if exist "!LAUNCHER_PATH!" (
-        call !LAUNCHER_PATH!
+        call "!LAUNCHER_PATH!"
         goto :ending
     ) else (
         goto :unsupported
