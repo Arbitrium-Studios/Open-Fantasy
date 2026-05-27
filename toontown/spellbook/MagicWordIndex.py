@@ -1390,7 +1390,7 @@ class GetInvasion(MagicWord):
         if invMgr.getInvading():
             cogType, skeleton = invMgr.getCogType()
             numRemaining = invMgr.getNumCogsRemaining()
-            cogName = SuitBattleGlobals.SuitAttributes[cogType]['name']
+            cogName = SuitBattleGlobals.SuitAttributesDict[cogType]['name']
             if skeleton:
                 cogName = TTLocalizer.Skeleton + " " + cogName
             response = (
@@ -1414,7 +1414,7 @@ class StartInvasion(MagicWord):
         if invMgr.getInvading():
             cogType = invMgr.getCogType()
             numRemaining = invMgr.getNumCogsRemaining()
-            cogName = SuitBattleGlobals.SuitAttributes[cogType[0]]['name']
+            cogName = SuitBattleGlobals.SuitAttributesDict[cogType[0]]['name']
             response = (
                 "Invasion already in progress: %s, %s" %
                 (cogName, numRemaining))
@@ -1428,7 +1428,7 @@ class StartInvasion(MagicWord):
                     skeleton = args[2]
                 else:
                     skeleton = 0
-                cogNameDict = SuitBattleGlobals.SuitAttributes.get(cogType)
+                cogNameDict = SuitBattleGlobals.SuitAttributesDict.get(cogType)
                 if cogNameDict:
                     cogName = cogNameDict['name']
                     if skeleton:
@@ -1671,7 +1671,7 @@ class SummonSuit(MagicWord):
                                         revives=revives)
                 if suit:
                     response = "Here comes %s." % (
-                        SuitBattleGlobals.SuitAttributes[suit.dna.name]['name'])
+                        SuitBattleGlobals.SuitAttributesDict[suit.dna.name]['name'])
                 else:
                     response = "Could not create suit."
 
@@ -2632,7 +2632,7 @@ class SetCogSuit(MagicWord):
 
             deptIndex = SuitDNA.suitDepts.index(dept)
             _type = SuitDNA.getSuitType(cogType)
-            minLevel = SuitBattleGlobals.SuitAttributes[cogType]['level']
+            minLevel = SuitBattleGlobals.SuitAttributesDict[cogType]['level']
 
             # determine max level (usually minLevel + 4, but 50 for last cog)
             if _type >= (SuitDNA.suitsPerDept - 1):

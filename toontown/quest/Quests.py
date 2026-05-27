@@ -212,7 +212,7 @@ class Quest:
         self.check(1, 'invalid newbie level: %s' % level)
 
     def checkCogType(self, type):
-        types = [Any] + list(SuitBattleGlobals.SuitAttributes.keys())
+        types = [Any] + list(SuitBattleGlobals.SuitAttributesDict.keys())
         self.check(type in types, 'invalid cog type: %s' % type)
 
     def checkCogTrack(self, track):
@@ -309,7 +309,7 @@ class Quest:
             holderType)
         if holderType == 'type':
             holders = [Any, AnyFish] + \
-                list(SuitBattleGlobals.SuitAttributes.keys())
+                list(SuitBattleGlobals.SuitAttributesDict.keys())
             self.check(
                 holder in holders, 'invalid recovery item holder: %s for holderType: %s' %
                 (holder, holderType))
@@ -522,11 +522,11 @@ class CogQuest(LocationBasedQuest):
             if cogType == Any:
                 return TTLocalizer.Cog
             else:
-                return SuitBattleGlobals.SuitAttributes[cogType]['singularname']
+                return SuitBattleGlobals.SuitAttributesDict[cogType]['singularname']
         elif cogType == Any:
             return TTLocalizer.Cogs
         else:
-            return SuitBattleGlobals.SuitAttributes[cogType]['pluralname']
+            return SuitBattleGlobals.SuitAttributesDict[cogType]['pluralname']
 
     def getObjectiveStrings(self):
         cogName = self.getCogNameString()
@@ -1677,7 +1677,7 @@ class RecoverItemQuest(LocationBasedQuest):
         elif holder == AnyFish:
             holderName = TTLocalizer.AFish
         elif holderType == 'type':
-            holderName = SuitBattleGlobals.SuitAttributes[holder]['pluralname']
+            holderName = SuitBattleGlobals.SuitAttributesDict[holder]['pluralname']
         elif holderType == 'level':
             holderName = TTLocalizer.QuestsRecoverItemQuestHolderString % {'level': TTLocalizer.Level,
                                                                            'holder': holder,
@@ -1748,7 +1748,7 @@ class RecoverItemQuest(LocationBasedQuest):
         elif holder == AnyFish:
             holderName = TTLocalizer.TheFish
         elif holderType == 'type':
-            holderName = SuitBattleGlobals.SuitAttributes[holder]['pluralname']
+            holderName = SuitBattleGlobals.SuitAttributesDict[holder]['pluralname']
         elif holderType == 'level':
             holderName = TTLocalizer.QuestsRecoverItemQuestHolderString % {'level': TTLocalizer.Level,
                                                                            'holder': holder,

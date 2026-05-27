@@ -628,7 +628,7 @@ class Suit(Avatar.Avatar):
             self.generateBody()
             self.generateHead('yesman')
             self.setHeight(8.95)
-        self.setName(SuitBattleGlobals.SuitAttributes[dna.name]['name'])
+        self.setName(SuitBattleGlobals.SuitAttributesDict[dna.name]['name'])
         self.getGeomNode().setScale(self.scale)
         self.generateHealthBar()
         self.generateCorporateMedallion()

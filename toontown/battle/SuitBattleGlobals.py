@@ -88,7 +88,7 @@ class SuitAttack:
             self.targets = targets
 
 
-class SuitAttributesClass: # TODO: Rename to SuitAttributes when the dict with the aforementioned name is changed.
+class SuitAttributes:
     
     def __init__(self, *, name: str, singularname: str, pluralname: str, level: int, hp: tuple[int, ...], defense: tuple[int, ...], freq: tuple[int, ...], acc: tuple[int, ...], attacks: tuple[SuitAttack, ...]) -> None:
         '''
@@ -130,13 +130,13 @@ def pickFromFreqList(freqList):
 
 
 def getActualFromRelativeLevel(name: str, relLevel):
-    data = SuitAttributes[name]
+    data = SuitAttributesDict[name]
     actualLevel = data['level'] + relLevel
     return actualLevel
 
 
 def getSuitVitals(name: str, level=-1):
-    data = SuitAttributes[name]
+    data = SuitAttributesDict[name]
     if level == -1:
         level = pickFromFreqList(data['freq'])
     dict = {}
@@ -200,7 +200,7 @@ def pickSuitAttack(attacks: tuple[SuitAttack, ...], suitLevel: int):
 
 
 def getSuitAttack(suitName: str, suitLevel: int, attackNum: int = -1) -> dict:
-    attackChoices: tuple[SuitAttack, ...] = SuitAttributes[suitName]['attacks']
+    attackChoices: tuple[SuitAttack, ...] = SuitAttributesDict[suitName]['attacks']
     if attackNum == -1:
         notify.debug('getSuitAttack: picking attacking for %s' % suitName)
         attackNum = pickSuitAttack(attackChoices, suitLevel)
@@ -222,7 +222,7 @@ def getSuitAttack(suitName: str, suitLevel: int, attackNum: int = -1) -> dict:
 ATK_TGT_UNKNOWN: Literal[1] = 1
 ATK_TGT_SINGLE: Literal[2] = 2
 ATK_TGT_GROUP: Literal[3] = 3
-SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky,
+SuitAttributesDict = {'f': {'name': TTLocalizer.SuitFlunky,
        'singularname': TTLocalizer.SuitFlunkyS,
        'pluralname': TTLocalizer.SuitFlunkyP,
        'level': 0,

@@ -42,7 +42,7 @@ class DistributedSuitBaseAI(
         return
 
     def setLevel(self, lvl=None):
-        attributes = SuitBattleGlobals.SuitAttributes[self.dna.name]
+        attributes = SuitBattleGlobals.SuitAttributesDict[self.dna.name]
         if lvl:
             self.level = lvl - attributes['level'] - 1
         else:

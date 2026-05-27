@@ -64,8 +64,8 @@ class NewsManager(DistributedObject.DistributedObject):
                                                                                                          cogType,
                                                                                                          numRemaining,
                                                                                                          skeleton))
-        cogName = SuitBattleGlobals.SuitAttributes[cogType]['name']
-        cogNameP = SuitBattleGlobals.SuitAttributes[cogType]['pluralname']
+        cogName = SuitBattleGlobals.SuitAttributesDict[cogType]['name']
+        cogNameP = SuitBattleGlobals.SuitAttributesDict[cogType]['pluralname']
         if skeleton:
             cogName = TTLocalizer.Skeleton
             cogNameP = TTLocalizer.SkeletonP
