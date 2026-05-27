@@ -53,7 +53,7 @@ scripts/python/Testing.py
 
 # Ignore Submodules:
 
-/dependencies/panda3d/
+panda3d
 
 # GitHub WILL ignore these files:
 

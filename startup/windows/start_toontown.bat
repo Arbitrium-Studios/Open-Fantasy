@@ -1,5 +1,7 @@
 @echo off
 
+timeout /t 2 /nobreak > nul
+
 :root
 
 SetLocal EnableDelayedExpansion
@@ -66,14 +68,18 @@ if "%wantDirLogging%" EQU "True" (
     echo.
 )
 
-if exist "%PYTHON_PATH_FILE%" (
-    echo The "PYTHON_PATH_FILE" exists at "%PYTHON_PATH_FILE%"
-    echo.
-    set /P CUSTOM_PYTHON_PATH=<PYTHON_PATH
+if defined AS_PYTHON_PATH (
+    set "CUSTOM_PYTHON_PATH=%AS_PYTHON_PATH%"
 ) else (
-    echo The PYTHON_PATH file does NOT exist.
-    echo.
-    goto :ending
+    if exist "%PYTHON_PATH_FILE%" (
+        if "%wantDirLogging%" EQU "True" (
+            echo The "PYTHON_PATH_FILE" exists at "%PYTHON_PATH_FILE%"
+            echo.
+        )
+        set /P CUSTOM_PYTHON_PATH=<PYTHON_PATH
+    ) else (
+        goto :does_not_exist
+    )
 )
 
 goto :localhost
@@ -148,7 +154,12 @@ echo.
 
 title !projectNameFull!
 %CUSTOM_PYTHON_PATH% -m toontown.launcher.QuickStartLauncher
-pause
+goto :ending
+
+:does_not_exist
+
+echo The PYTHON_PATH file does NOT exist.
+echo.
 goto :ending
 
 :ending

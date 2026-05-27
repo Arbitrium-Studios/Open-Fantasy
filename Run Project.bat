@@ -70,10 +70,20 @@ if "%repo_name%" EQU "THE_STAICY_B0T" (
     goto :unsupported
 )
 
+set "wantExtraLogging=False"
 set "wantDirLoggingCLS=False"
 
-echo The Current Directory is "%CD%"
-echo.
+set "fileName=%~nx0"
+
+if "%wantExtraLogging%" EQU "True" (
+    echo Hello from the "!fileName!" file!exclaimStr!
+    echo.
+)
+
+if "%wantExtraLogging%" EQU "True" (
+    echo The Current Directory is "%CD%"
+    echo.
+)
 
 set "GetPipWeb=https://bootstrap.pypa.io/get-pip.py"
 set "GET_PIP=get-pip.py"
@@ -99,8 +109,9 @@ set "RequirementsInDownload=https://cdn.arbitriumstudios.com/application_assets/
 set "latestVersionOfOpenPanda3D=1.11.2"
 set "OP3D_v1.11.1=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v1.11.1/!PANDA3D_TYPE!-1.11.1-py3.11-x64.exe"
 set "OP3D_v1.11.2=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v1.11.2-Pre_Release/!PANDA3D_TYPE_FULL!-1.11.2-py3.13.exe"
-set "OpenPanda3DInstallerExecutableName=!PANDA3D_TYPE_FULL!-!latestVersionOfOpenPanda3D!-py3.13.!Executable!"
-set "LatestOfficialOpenPanda3DInstaller=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v!latestVersionOfOpenPanda3D!-Pre_Release/!OpenPanda3DInstallerExecutableName!"
+set "OpenPanda3DInstallerExecutableName=!PANDA3D_TYPE_FULL!-v!latestVersionOfOpenPanda3D!-py3.13.!Executable!"
+set "LatestOfficialOpenPanda3DInstaller=https://github.com/Arbitrium-Studios/!PANDA3D_TYPE!/releases/download/v!latestVersionOfOpenPanda3D!/!OpenPanda3DInstallerExecutableName!"
+
 set "OpenPanda3DInstallerPath=%PackageDependencies%\%OpenPanda3DInstallerExecutableName%"
 
 set "pythonPathFileName=PYTHON_PATH"
@@ -180,12 +191,12 @@ echo.
 
 if defined AS_PYTHON_PATH (
     if exist "%PRESET_PANDA3D_PATH%" (
-        if "!PRESET_PANDA3D_PATH:~-10!"=="!PythonExe!" (
+        if "!PRESET_PANDA3D_PATH:~-10!" EQU "!PythonExe!" (
             set "REBUILT_PYTHON_PATH=%PRESET_PANDA3D_PATH%"
             echo The "REBUILT_PYTHON_PATH" variable is set to "!REBUILT_PYTHON_PATH!"
             echo.
             goto :setCustomPanda3DPathWithoutRebuilt
-        ) else if "!PRESET_PANDA3D_PATH:~-11!"=="!PPythonExe!" (
+        ) else if "!PRESET_PANDA3D_PATH:~-11!" EQU "!PPythonExe!" (
             set "REBUILT_PYTHON_PATH=%PRESET_PANDA3D_PATH%"
             echo The "REBUILT_PYTHON_PATH" variable is set to "!REBUILT_PYTHON_PATH!"
             echo.
@@ -262,7 +273,7 @@ echo The "CUSTOM_PYTHON_PATH" variable is set to "%CUSTOM_PYTHON_PATH%"
 echo The "REBUILT_PYTHON_PATH" variable is set to "%REBUILT_PYTHON_PATH%"
 echo.
 
-if not "%CUSTOM_PYTHON_PATH%"=="" if not "%REBUILT_PYTHON_PATH%"=="" (
+if not "%CUSTOM_PYTHON_PATH%" EQU "" if not "%REBUILT_PYTHON_PATH%" EQU "" (
     if "%REBUILT_PYTHON_PATH%" == "%CUSTOM_PYTHON_PATH%" (
         if not "%AS_PYTHON_PATH%" == "%CUSTOM_PYTHON_PATH%" (
             echo "%AS_PYTHON_PATH%" does not equal "%CUSTOM_PYTHON_PATH%"
@@ -312,13 +323,13 @@ goto :Update_PYTHON_PATH_File
 echo The Current Directory is "%CD%"
 echo.
 
-if "%CUSTOM_AS_PYTHON_PATH%"=="" (
-    if not "%AS_PYTHON_PATH%"=="" (
+if "%CUSTOM_AS_PYTHON_PATH%" EQU "" (
+    if not "%AS_PYTHON_PATH%" EQU "" (
         set "CUSTOM_AS_PYTHON_PATH=%AS_PYTHON_PATH%"
     )
 )
 
-echo The "CUSTOM_AS_PYTHON_PATH" variable is set to %CUSTOM_AS_PYTHON_PATH%
+echo The "CUSTOM_AS_PYTHON_PATH" variable is set to "%CUSTOM_AS_PYTHON_PATH%"
 echo.
 
 :: Use quotes to handle paths with spaces
@@ -330,10 +341,10 @@ set "INPUT_AS_PYTHON_PATH=!INPUT_AS_PYTHON_PATH:"=!"
 echo The "INPUT_AS_PYTHON_PATH" variable is set to "%INPUT_AS_PYTHON_PATH%"
 echo.
 
-if "!INPUT_AS_PYTHON_PATH:~-10!"=="%PythonExe%" (
+if "!INPUT_AS_PYTHON_PATH:~-10!" EQU "%PythonExe%" (
     echo The following input ends with %PythonExe%: "%INPUT_AS_PYTHON_PATH%"
     echo.
-) else if "!INPUT_AS_PYTHON_PATH:~-11!"=="%PPythonExe%" (
+) else if "!INPUT_AS_PYTHON_PATH:~-11!" EQU "%PPythonExe%" (
     echo The following input ends with %PPythonExe%: "%INPUT_AS_PYTHON_PATH%"
     echo.
 ) else (
@@ -343,20 +354,62 @@ if "!INPUT_AS_PYTHON_PATH:~-10!"=="%PythonExe%" (
 
 :question_userInput_existence
 
+set "INPUT_AS_PYTHON_PATH_ADJUSTED=!INPUT_AS_PYTHON_PATH:/=\!"
+
+echo The "INPUT_AS_PYTHON_PATH_ADJUSTED" variable is set to "!INPUT_AS_PYTHON_PATH_ADJUSTED!"
+echo.
+
+set "pythonDirDelim=\"
+
+echo The "pythonDirDelim" variable is set to "!pythonDirDelim!"
+echo.
+
+set "modified_python_path_input_string=!INPUT_AS_PYTHON_PATH_ADJUSTED:%pythonDirDelim%=,!"
+
+set "beforePythonDir="
+for /f "tokens=1-4 delims=," %%a in ("!modified_python_path_input_string!") do (
+    set "beforePythonDir=%%a\%%b"
+    if "%wantExtraLogging%" EQU "True" (
+        echo Token 1: %%a
+        echo Token 2: %%b
+        echo Token 3: %%c
+        echo Token 4: %%d
+        echo.
+        echo The "beforePythonDir" variable is set to "!beforePythonDir!"
+        echo.
+    )
+)
+
 :: Check if the specified file exists
 if exist "%INPUT_AS_PYTHON_PATH%" (
 
     echo Yes, the contents of the "INPUT_AS_PYTHON_PATH" variable exist at the given directory: "%INPUT_AS_PYTHON_PATH%"
     echo.
 
-    cd /d "%ROOT_DIR%"
+    if "!CD!" NEQ "!ROOT_DIR!" (
+        cd /d "!ROOT_DIR!"
+    )
 
     :: Create or update the necessary file
     echo | set /p=""%INPUT_AS_PYTHON_PATH%"" > %pythonPathFileName%
 
     echo Updated the "%pythonPathFileName%" file to %INPUT_AS_PYTHON_PATH%
     echo.
-    goto :create_symbolic_link
+
+    if not defined AS_PYTHON_PATH (
+        setx AS_PYTHON_PATH "!INPUT_AS_PYTHON_PATH!"
+    )
+
+    if "%AS_PYTHON_PATH%" NEQ "!INPUT_AS_PYTHON_PATH!" (
+        setx AS_PYTHON_PATH "!INPUT_AS_PYTHON_PATH!"
+    )
+
+    if not exist "!SYMBOLIC_PANDA3D_PATH!" (
+        goto :create_symbolic_link
+    )
+
+    set "CUSTOM_AS_PYTHON_PATH=%INPUT_AS_PYTHON_PATH%"
+    goto :launcher
 ) else (
     echo Error: The specified file was not found.
     echo Please check the path and try again.
@@ -373,18 +426,22 @@ if not exist "%SYMBOLIC_PANDA3D_PATH%" (
         echo.
         goto :set_python_path
     ) else (
-        cd /d "%DEPENDENCIES_PATH%"
 
-        mklink /d "%PANDA3D_DIR%" "!INPUT_AS_PYTHON_PATH!"
-        echo.
-        @REM if exist "!DefaultPanda3DPath!" (
-        @REM     mklink /d "%PANDA3D_DIR%" "!DefaultPanda3DPath!"
-        @REM     echo.
-        @REM )
+        if "!beforePythonDir!" NEQ "" (
+            if exist "!beforePythonDir!" (
+                cd /d "!DEPENDENCIES_PATH!"
+                mklink /d "!PANDA3D_DIR!" "!beforePythonDir!"
+                echo.
+            )
+        )
 
         echo The "INPUT_AS_PYTHON_PATH" variable is set to "%INPUT_AS_PYTHON_PATH%"
         echo.
-        cd /d "%ROOT_DIR%"
+
+        if "!CD!" NEQ "!ROOT_DIR!" (
+            cd /d "!ROOT_DIR!"
+        )
+
         set "CUSTOM_AS_PYTHON_PATH=%INPUT_AS_PYTHON_PATH%"
         goto :launcher
     )
@@ -401,20 +458,20 @@ goto :python_check
 
 :python_check
 if exist "%CUSTOM_AS_PYTHON_PATH%" (
-    if "%CUSTOM_AS_PYTHON_PATH%"=="" (
+    if "%CUSTOM_AS_PYTHON_PATH%" EQU "" (
         echo The specified "CUSTOM_AS_PYTHON_PATH" is blank: "%CUSTOM_AS_PYTHON_PATH%"
         echo.
         goto :set_python_path
     ) else (
-        echo The specified "CUSTOM_AS_PYTHON_PATH" exists at %CUSTOM_AS_PYTHON_PATH%.
+        echo The specified "CUSTOM_AS_PYTHON_PATH" exists at "%CUSTOM_AS_PYTHON_PATH%".
         echo.
 
-        if /i "%CUSTOM_AS_PYTHON_PATH:~-10%"=="!PythonExe!" (
+        if /i "%CUSTOM_AS_PYTHON_PATH:~-10%" EQU "!PythonExe!" (
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
             goto :check_path_in_environment_variables
-        ) else if /i "%CUSTOM_AS_PYTHON_PATH:~-11%"=="p!PythonExe!" (
+        ) else if /i "%CUSTOM_AS_PYTHON_PATH:~-11%" EQU "p!PythonExe!" (
             echo The specified python path exists at "%CUSTOM_AS_PYTHON_PATH%"!exclaimStr!
             echo.
 
@@ -511,28 +568,26 @@ goto :untyped_python_path
 set "listOfPanda3DFolderNames=Panda Panda3D Open-Panda3D Open-Panda"
 set "foundPanda3DFolder=false"
 for %%a in (%listOfPanda3DFolderNames%) do (
-    if not "!ENTERED_PYTHON_PATH:%%a=!"=="!ENTERED_PYTHON_PATH!" (
+    if not "!ENTERED_PYTHON_PATH:%%a=!" EQU "!ENTERED_PYTHON_PATH!" (
         set "foundPanda3DFolder=true"
     )
 )
 
-if "!foundPanda3DFolder!"=="true" (
+if "!foundPanda3DFolder!" EQU "true" (
     if exist "%ENTERED_PYTHON_PATH%" (
 
         set "INPUT_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
-        if /i "%ENTERED_PYTHON_PATH:~-10%"=="!PythonExe!" (
+        if /i "%ENTERED_PYTHON_PATH:~-10%" EQU "!PythonExe!" (
             set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
             echo The specified python path exists at "!CUSTOM_AS_PYTHON_PATH!"!exclaimStr!
             echo.
 
-            @REM goto :ensure_panda3d_directory
             goto :create_symbolic_link
-        ) else if /i "%ENTERED_PYTHON_PATH:~-11%"=="p!PythonExe!" (
+        ) else if /i "%ENTERED_PYTHON_PATH:~-11%" EQU "p!PythonExe!" (
             set "CUSTOM_AS_PYTHON_PATH=%ENTERED_PYTHON_PATH%"
             echo The specified python path exists at "!CUSTOM_AS_PYTHON_PATH!"!exclaimStr!
             echo.
 
-            @REM goto :ensure_panda3d_directory
             goto :create_symbolic_link
         ) else (
             echo The string does NOT end with !PythonExe!
@@ -586,7 +641,7 @@ goto :OpenPanda3DInstaller
 :OpenPanda3DInstaller
 
 if not exist "!OpenPanda3DInstallerPath!" (
-    echo Downloading "!OpenPanda3DInstallerExecutableName!" into the "!PackageDependencies!" directory!
+    echo Downloading "!OpenPanda3DInstallerExecutableName!" into the "!PackageDependencies!" directory!exclaimStr!
     echo.
 
     bitsadmin /transfer "DownloadOpenPanda3DJob" /priority high "!LatestOfficialOpenPanda3DInstaller!" "!OpenPanda3DInstallerPath!"
@@ -602,7 +657,7 @@ if not exist "!OpenPanda3DInstallerPath!" (
         goto :ending
     )
 ) else (
-    echo The "!OpenPanda3DInstallerExecutableName!" installer already exists in the "!PackageDependencies!" directory!
+    echo The "!OpenPanda3DInstallerExecutableName!" installer already exists in the "!PackageDependencies!" directory!exclaimStr!
     echo.
     goto :file_cleanup
 )
@@ -654,6 +709,7 @@ if exist "%SYMBOLIC_PANDA3D_PATH%" (
 :pip_check
 
 "%CUSTOM_AS_PYTHON_PATH%" -m pip --version >nul 2>&1
+
 if %ERRORLEVEL% equ 0 (
     echo Pip is installed.
     echo.
@@ -672,7 +728,7 @@ if %ERRORLEVEL% equ 0 (
         echo Download successful!exclaimStr! Running installation script...
         echo.
         cd /d "!ROOT_DIR!"
-        %CUSTOM_AS_PYTHON_PATH% "!getPipPackageDependencies!"
+        "%CUSTOM_AS_PYTHON_PATH%" "!getPipPackageDependencies!"
         if %ERRORLEVEL% equ 0 (
             echo Successfully installed Pip!exclaimStr!
             echo.

@@ -2,6 +2,9 @@
 
 :start_uberdog
 
+echo The Current Directory is "%CD%"
+echo.
+
 SetLocal EnableDelayedExpansion
 set "projectOwnerName=PLAYER ZER0 STUDIO"
 set "projectName=Toontown Fantasy"
@@ -46,6 +49,7 @@ if "%wantDirLogging%" EQU "True" (
 
 set "DEPENDENCIES_PATH=dependencies"
 
+
 if "%wantDirLogging%" EQU "True" (
     echo Dependencies path is: %DEPENDENCIES_PATH%
     echo.
@@ -59,16 +63,18 @@ if "%wantDirLogging%" EQU "True" (
     echo.
 )
 
-if exist "%PYTHON_PATH_FILE%" (
-    if "%wantDirLogging%" EQU "True" (
-        echo The "PYTHON_PATH_FILE" exists at "%PYTHON_PATH_FILE%"
-        echo.
-    )
-    set /P CUSTOM_PYTHON_PATH=<PYTHON_PATH
+if defined AS_PYTHON_PATH (
+    set "CUSTOM_PYTHON_PATH=%AS_PYTHON_PATH%"
 ) else (
-    echo The PYTHON_PATH file does NOT exist.
-    echo.
-    goto :ending
+    if exist "%PYTHON_PATH_FILE%" (
+        if "%wantDirLogging%" EQU "True" (
+            echo The "PYTHON_PATH_FILE" exists at "%PYTHON_PATH_FILE%"
+            echo.
+        )
+        set /P CUSTOM_PYTHON_PATH=<PYTHON_PATH
+    ) else (
+        goto :does_not_exist
+    )
 )
 
 if "%wantDirLogging%" EQU "True" (
@@ -92,7 +98,12 @@ set BASE_CHANNEL=1000000
 	--messagedirector-ip %ASTRON_IP% ^
 	--eventlogger-ip %EVENTLOGGER_IP%
 
-pause
+goto :ending
+
+:does_not_exist
+
+echo The PYTHON_PATH file does NOT exist.
+echo.
 goto :ending
 
 :ending
