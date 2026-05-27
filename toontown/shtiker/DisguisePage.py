@@ -349,7 +349,7 @@ class DisguisePage(ShtikerPage.ShtikerPage):
         else:
             self.progressTitle = self.meritTitle
         self.progressTitle.show()
-        self.cogName['text'] = SuitBattleGlobals.SuitAttributesDict[cog]['name']
+        self.cogName['text'] = SuitBattleGlobals.SuitAttributesDict[cog].name
         cogLevel = base.localAvatar.cogLevels[index]
         self.cogLevel['text'] = TTLocalizer.DisguisePageCogLevel % str(
             cogLevel + 1)

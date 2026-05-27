@@ -1377,7 +1377,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
         cogTypeStr = SuitDNA.suitHeadTypes[self.cogTypes[dept]]
         lastCog = self.cogTypes[dept] >= SuitDNA.suitsPerDept - 1
         if not lastCog:
-            maxLevel = SuitBattleGlobals.SuitAttributesDict[cogTypeStr]['level'] + 4
+            maxLevel = SuitBattleGlobals.SuitAttributesDict[cogTypeStr].level + 4
         else:
             maxLevel = ToontownGlobals.MaxCogSuitLevel
         if newLevel > maxLevel:
@@ -1385,7 +1385,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
                 self.cogTypes[dept] += 1
                 self.d_setCogTypes(self.cogTypes)
                 cogTypeStr = SuitDNA.suitHeadTypes[self.cogTypes[dept]]
-                self.cogLevels[dept] = SuitBattleGlobals.SuitAttributesDict[cogTypeStr]['level']
+                self.cogLevels[dept] = SuitBattleGlobals.SuitAttributesDict[cogTypeStr].level
                 self.d_setCogLevels(self.cogLevels)
         else:
             self.cogLevels[dept] += 1
@@ -1409,7 +1409,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
         deptIndex = SuitDNA.suitDepts.index(dept)
         cogType = self.cogTypes[deptIndex]
         cogTypeStr = SuitDNA.suitHeadTypes[cogType]
-        lowestCogLevel = SuitBattleGlobals.SuitAttributesDict[cogTypeStr]['level']
+        lowestCogLevel: int = SuitBattleGlobals.SuitAttributesDict[cogTypeStr].level
         multiple = 5 * cogType
         additional = self.cogLevels[deptIndex] - lowestCogLevel
         numPromotions = multiple + additional

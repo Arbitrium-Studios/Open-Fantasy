@@ -515,18 +515,18 @@ class CogQuest(LocationBasedQuest):
             return TTLocalizer.QuestsCogQuestProgress % {'progress': questDesc[4],
                                                          'numCogs': self.getNumCogs()}
 
-    def getCogNameString(self):
+    def getCogNameString(self) -> str:
         numCogs = self.getNumCogs()
         cogType = self.getCogType()
         if numCogs == 1:
             if cogType == Any:
                 return TTLocalizer.Cog
             else:
-                return SuitBattleGlobals.SuitAttributesDict[cogType]['singularname']
+                return SuitBattleGlobals.SuitAttributesDict[cogType].singularname
         elif cogType == Any:
             return TTLocalizer.Cogs
         else:
-            return SuitBattleGlobals.SuitAttributesDict[cogType]['pluralname']
+            return SuitBattleGlobals.SuitAttributesDict[cogType].pluralname
 
     def getObjectiveStrings(self):
         cogName = self.getCogNameString()
@@ -1677,7 +1677,7 @@ class RecoverItemQuest(LocationBasedQuest):
         elif holder == AnyFish:
             holderName = TTLocalizer.AFish
         elif holderType == 'type':
-            holderName = SuitBattleGlobals.SuitAttributesDict[holder]['pluralname']
+            holderName = SuitBattleGlobals.SuitAttributesDict[holder].pluralname
         elif holderType == 'level':
             holderName = TTLocalizer.QuestsRecoverItemQuestHolderString % {'level': TTLocalizer.Level,
                                                                            'holder': holder,
@@ -1748,7 +1748,7 @@ class RecoverItemQuest(LocationBasedQuest):
         elif holder == AnyFish:
             holderName = TTLocalizer.TheFish
         elif holderType == 'type':
-            holderName = SuitBattleGlobals.SuitAttributesDict[holder]['pluralname']
+            holderName = SuitBattleGlobals.SuitAttributesDict[holder].pluralname
         elif holderType == 'level':
             holderName = TTLocalizer.QuestsRecoverItemQuestHolderString % {'level': TTLocalizer.Level,
                                                                            'holder': holder,

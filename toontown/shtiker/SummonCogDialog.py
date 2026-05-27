@@ -50,7 +50,7 @@ class SummonCogDialog(DirectFrame, StateData.StateData):
         base.summonDialog = self
         self.popup = None
         self.suitName = SuitDNA.suitHeadTypes[self.suitIndex]
-        self.suitFullName = SuitBattleGlobals.SuitAttributesDict[self.suitName]['name']
+        self.suitFullName: str = SuitBattleGlobals.SuitAttributesDict[self.suitName].name
         return
 
     def unload(self):

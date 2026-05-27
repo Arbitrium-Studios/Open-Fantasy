@@ -42,15 +42,15 @@ class DistributedSuitBaseAI(
         return
 
     def setLevel(self, lvl=None):
-        attributes = SuitBattleGlobals.SuitAttributesDict[self.dna.name]
+        attributes: SuitBattleGlobals.SuitAttributes = SuitBattleGlobals.SuitAttributesDict[self.dna.name]
         if lvl:
-            self.level = lvl - attributes['level'] - 1
+            self.level = lvl - attributes.level - 1
         else:
-            self.level = SuitBattleGlobals.pickFromFreqList(attributes['freq'])
+            self.level = SuitBattleGlobals.pickFromFreqList(attributes.freq)
         self.notify.debug('Assigning level ' + str(lvl))
         if hasattr(self, 'doId'):
             self.d_setLevelDist(self.level)
-        hp = attributes['hp'][self.level]
+        hp = attributes.hp[self.level]
         self.maxHP = hp
         self.currHP = hp
 

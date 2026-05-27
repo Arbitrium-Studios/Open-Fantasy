@@ -242,7 +242,7 @@ class BattleCalculatorAI:
     def __targetDefense(self, suit, atkTrack):
         if atkTrack == HEAL:
             return 0
-        suitDef = SuitBattleGlobals.SuitAttributesDict[suit.dna.name]['def'][suit.getLevel()]
+        suitDef = SuitBattleGlobals.SuitAttributesDict[suit.dna.name].defense[suit.getLevel()]
         return -suitDef
 
     def __createToonTargetList(self, attackIndex):
@@ -1073,7 +1073,7 @@ class BattleCalculatorAI:
 
     def __calcSuitAtkType(self, attackIndex):
         theSuit = self.battle.activeSuits[attackIndex]
-        attacks = SuitBattleGlobals.SuitAttributesDict[theSuit.dna.name]['attacks']
+        attacks: tuple[SuitBattleGlobals.SuitAttack, ...] = SuitBattleGlobals.SuitAttributesDict[theSuit.dna.name].attacks
         atk = SuitBattleGlobals.pickSuitAttack(attacks, theSuit.getLevel())
         return atk
 
@@ -1125,7 +1125,7 @@ class BattleCalculatorAI:
         atkType = self.battle.suitAttacks[attackIndex][SUIT_ATK_COL]
         atkInfo = SuitBattleGlobals.getSuitAttack(theSuit.dna.name, theSuit.getLevel(), atkType)
         atkAcc = atkInfo['acc']
-        suitAcc = SuitBattleGlobals.SuitAttributesDict[theSuit.dna.name]['acc'][theSuit.getLevel()]
+        suitAcc = SuitBattleGlobals.SuitAttributesDict[theSuit.dna.name].acc[theSuit.getLevel()]
         acc = atkAcc
         randChoice = random.randint(0, 99)
         if self.notify.getDebug():

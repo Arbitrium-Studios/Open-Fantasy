@@ -53,8 +53,8 @@ class SuitBase:
                                                           'level': self.getActualLevel(),
                                                           'mgr': '\nManager' if self.getManager() else ''}
         self.setDisplayName(nameWLevel)
-        attributes = SuitBattleGlobals.SuitAttributesDict[self.dna.name]
-        self.maxHP = attributes['hp'][self.level]
+        attributes: SuitBattleGlobals.SuitAttributes = SuitBattleGlobals.SuitAttributesDict[self.dna.name]
+        self.maxHP = attributes.hp[self.level]
         self.currHP = self.maxHP
 
     def getSkelecog(self):
