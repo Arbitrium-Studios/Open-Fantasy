@@ -203,7 +203,8 @@ def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, lef
                 suitStartPos[1] + suitFloat[1],
                 suitStartPos[2] + suitFloat[2])
             suitType = getSuitBodyType(suit.getStyleName())
-            sival = Sequence(
+            startFlailFrame: int
+            endFlailFrame: int
             match suitType:
                 case 'a':
                     startFlailFrame = 16
@@ -214,6 +215,7 @@ def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, lef
                 case _:
                     startFlailFrame = 15
                     endFlailFrame = 15
+            sival: Sequence = Sequence(
                 ActorInterval(suit, 'slip-backward', playRate=0.5, startFrame=0, endFrame=startFlailFrame - 1),
                 Func(suit.pingpong, 'slip-backward', fromFrame=startFlailFrame, toFrame=endFlailFrame),
                 Wait(0.5),
