@@ -113,162 +113,164 @@ def __throwBouncePoint(startPoint, endPoint):
     return Point3(midPoint)
 
 
-def doSuitAttack(attack):
-    notify.debug('building suit attack in doSuitAttack: %s' % attack['name'])
-    name = attack['id']
-    if name == AUDIT:
-        suitTrack = doAudit(attack)
-    elif name == BITE:
-        suitTrack = doBite(attack)
-    elif name == BOUNCE_CHECK:
-        suitTrack = doBounceCheck(attack)
-    elif name == BRAIN_STORM or name == LEGAL_STORM:
-        suitTrack = doBrainStorm(attack)
-    elif name == BUZZ_WORD:
-        suitTrack = doBuzzWord(attack)
-    elif name == CALCULATE:
-        suitTrack = doCalculate(attack)
-    elif name == CANNED:
-        suitTrack = doCanned(attack)
-    elif name == CHOMP:
-        suitTrack = doChomp(attack)
-    elif name == CIGAR_SMOKE:
-        suitTrack = doCigarSmoke(attack)
-    elif name == CLIPON_TIE:
-        suitTrack = doClipOnTie(attack)
-    elif name == CRUNCH:
-        suitTrack = doCrunch(attack)
-    elif name == DEMOTION:
-        suitTrack = doDemotion(attack)
-    elif name == DOUBLE_TALK:
-        suitTrack = doDoubleTalk(attack)
-    elif name == DOUBLE_WINDSOR or name == HALF_WINDSOR:
-        suitTrack = doWindsor(attack)
-    elif name == DOWNSIZE:
-        suitTrack = doDownsize(attack)
-    elif name == EVICTION_NOTICE:
-        suitTrack = doEvictionNotice(attack)
-    elif name == EVIL_EYE:
-        suitTrack = doEvilEye(attack)
-    elif name == FILIBUSTER:
-        suitTrack = doFilibuster(attack)
-    elif name == FILL_WITH_LEAD:
-        suitTrack = doFillWithLead(attack)
-    elif name == FINGER_WAG:
-        suitTrack = doFingerWag(attack)
-    elif name == FIRED:
-        suitTrack = doFired(attack)
-    elif name == FIVE_O_CLOCK_SHADOW:
-        suitTrack = doFiveOClockShadow(attack)
-    elif name == FLOOD_THE_MARKET:
-        suitTrack = doFloodTheMarket(attack)
-    elif name == FOUNTAIN_PEN:
-        suitTrack = doFountainPen(attack)
-    elif name == FREEZE_ASSETS:
-        suitTrack = doFreezeAssets(attack)
-    elif name == GAVEL:
-        suitTrack = doGavel(attack)
-    elif name == GLOWER_POWER:
-        suitTrack = doGlowerPower(attack)
-    elif name == GUILT_TRIP:
-        suitTrack = doGuiltTrip(attack)
-    elif name == HANG_UP:
-        suitTrack = doHangUp(attack)
-    elif name == HEAD_SHRINK:
-        suitTrack = doHeadShrink(attack)
-    elif name == HOT_AIR:
-        suitTrack = doHotAir(attack)
-    elif name == JARGON:
-        suitTrack = doJargon(attack)
-    elif name == KICKBACK:
-        suitTrack = doDefault(attack)
-    elif name == LEGALESE:
-        suitTrack = doLegalese(attack)
-    elif name == LIQUIDATE:
-        suitTrack = doLiquidate(attack)
-    elif name == MARKET_CRASH:
-        suitTrack = doMarketCrash(attack)
-    elif name == MUMBO_JUMBO:
-        suitTrack = doMumboJumbo(attack)
-    elif name == PARADIGM_SHIFT:
-        suitTrack = doParadigmShift(attack)
-    elif name == PECKING_ORDER:
-        suitTrack = doPeckingOrder(attack)
-    elif name == PENNY_PINCH:
-        suitTrack = doPennyPinch(attack)
-    elif name == PICK_POCKET:
-        suitTrack = doPickPocket(attack)
-    elif name == PINK_SLIP:
-        suitTrack = doPinkSlip(attack)
-    elif name == PLAY_HARDBALL:
-        suitTrack = doPlayHardball(attack)
-    elif name == POUND_KEY:
-        suitTrack = doPoundKey(attack)
-    elif name == POWER_TIE:
-        suitTrack = doPowerTie(attack)
-    elif name == POWER_TRIP:
-        suitTrack = doPowerTrip(attack)
-    elif name == QUAKE:
-        suitTrack = doQuake(attack)
-    elif name == RAZZLE_DAZZLE:
-        suitTrack = doRazzleDazzle(attack)
-    elif name == RED_TAPE:
-        suitTrack = doRedTape(attack)
-    elif name == RE_ORG:
-        suitTrack = doReOrg(attack)
-    elif name == RESTRAINING_ORDER:
-        suitTrack = doRestrainingOrder(attack)
-    elif name == ROLODEX:
-        suitTrack = doRolodex(attack)
-    elif name == RUBBER_STAMP:
-        suitTrack = doRubberStamp(attack)
-    elif name == RUB_OUT:
-        suitTrack = doRubOut(attack)
-    elif name == SACKED:
-        suitTrack = doSacked(attack)
-    elif name == SANDTRAP:
-        suitTrack = doSandTrap(attack)
-    elif name == SCHMOOZE:
-        suitTrack = doSchmooze(attack)
-    elif name == SENSORY_OVERLOAD:
-        suitTrack = doDefault(attack)
-    elif name == SHAKE:
-        suitTrack = doShake(attack)
-    elif name == SHRED:
-        suitTrack = doShred(attack)
-    elif name == SONG_AND_DANCE:
-        suitTrack = doSongAndDance(attack)
-    elif name == SPEED_DIAL:
-        suitTrack = doSpeedDial(attack)
-    elif name == SPIN:
-        suitTrack = doSpin(attack)
-    elif name == STOMPER:
-        suitTrack = doStomper(attack)
-    elif name == SYNERGY:
-        suitTrack = doSynergy(attack)
-    elif name == TABULATE:
-        suitTrack = doTabulate(attack)
-    elif name == TEE_OFF:
-        suitTrack = doTeeOff(attack)
-    elif name == THROW_BOOK:
-        suitTrack = doDefault(attack)
-    elif name == TREMOR:
-        suitTrack = doTremor(attack)
-    elif name == TRIP:
-        suitTrack = doTrip(attack)
-    elif name == UNDERGROUND_LIQUIDITY:
-        suitTrack = doUndergroundLiquidity(attack)
-    elif name == WATERCOOLER:
-        suitTrack = doWatercooler(attack)
-    elif name == WITHDRAWAL:
-        suitTrack = doWithdrawal(attack)
-    elif name == WRITE_OFF:
-        suitTrack = doWriteOff(attack)
-    elif name == WRITE_UP:
-        suitTrack = doWriteUp(attack)
-    else:
-        notify.warning('unknown attack: %d substituting Finger Wag' % name)
-        suitTrack = doDefault(attack)
+def doSuitAttack(attack: dict):
+    name: str = attack['name']
+    notify.debug('building suit attack in doSuitAttack: %s' % name)
+    suitTrack: MetaInterval
+    match name:
+        case 'Audit':
+            suitTrack = doAudit(attack)
+        case 'Bite':
+            suitTrack = doBite(attack)
+        case 'BounceCheck':
+            suitTrack = doBounceCheck(attack)
+        case 'BrainStorm' | 'LegalStorm':
+            suitTrack = doBrainStorm(attack)
+        case 'BuzzWord':
+            suitTrack = doBuzzWord(attack)
+        case 'Calculate':
+            suitTrack = doCalculate(attack)
+        case 'Canned':
+            suitTrack = doCanned(attack)
+        case 'Chomp':
+            suitTrack = doChomp(attack)
+        case 'CigarSmoke':
+            suitTrack = doCigarSmoke(attack)
+        case 'ClipOnTie':
+            suitTrack = doClipOnTie(attack)
+        case 'Crunch':
+            suitTrack = doCrunch(attack)
+        case 'Demotion':
+            suitTrack = doDemotion(attack)
+        case 'DoubleTalk':
+            suitTrack = doDoubleTalk(attack)
+        case 'DoubleWindsor' | 'HalfWindsor':
+            suitTrack = doWindsor(attack)
+        case 'Downsize':
+            suitTrack = doDownsize(attack)
+        case 'EvictionNotice':
+            suitTrack = doEvictionNotice(attack)
+        case 'EvilEye':
+            suitTrack = doEvilEye(attack)
+        case 'Filibuster':
+            suitTrack = doFilibuster(attack)
+        case 'FillWithLead':
+            suitTrack = doFillWithLead(attack)
+        case 'FingerWag':
+            suitTrack = doFingerWag(attack)
+        case 'Fired':
+            suitTrack = doFired(attack)
+        case 'FiveOClockShadow':
+            suitTrack = doFiveOClockShadow(attack)
+        case 'FloodTheMarket':
+            suitTrack = doFloodTheMarket(attack)
+        case 'FountainPen':
+            suitTrack = doFountainPen(attack)
+        case 'FreezeAssets':
+            suitTrack = doFreezeAssets(attack)
+        case 'Gavel':
+            suitTrack = doGavel(attack)
+        case 'GlowerPower':
+            suitTrack = doGlowerPower(attack)
+        case 'GuiltTrip':
+            suitTrack = doGuiltTrip(attack)
+        case 'HangUp':
+            suitTrack = doHangUp(attack)
+        case 'HeadShrink':
+            suitTrack = doHeadShrink(attack)
+        case 'HotAir':
+            suitTrack = doHotAir(attack)
+        case 'Jargon':
+            suitTrack = doJargon(attack)
+        case 'Kickback':
+            suitTrack = doDefault(attack)
+        case 'Legalese':
+            suitTrack = doLegalese(attack)
+        case 'Liquidate':
+            suitTrack = doLiquidate(attack)
+        case 'MarketCrash':
+            suitTrack = doMarketCrash(attack)
+        case 'MumboJumbo':
+            suitTrack = doMumboJumbo(attack)
+        case 'ParadigmShift':
+            suitTrack = doParadigmShift(attack)
+        case 'PeckingOrder':
+            suitTrack = doPeckingOrder(attack)
+        case 'PennyPinch':
+            suitTrack = doPennyPinch(attack)
+        case 'PickPocket':
+            suitTrack = doPickPocket(attack)
+        case 'PinkSlip':
+            suitTrack = doPinkSlip(attack)
+        case 'PlayHardball':
+            suitTrack = doPlayHardball(attack)
+        case 'PoundKey':
+            suitTrack = doPoundKey(attack)
+        case 'PowerTie':
+            suitTrack = doPowerTie(attack)
+        case 'PowerTrip':
+            suitTrack = doPowerTrip(attack)
+        case 'Quake':
+            suitTrack = doQuake(attack)
+        case 'RazzleDazzle':
+            suitTrack = doRazzleDazzle(attack)
+        case 'RedTape':
+            suitTrack = doRedTape(attack)
+        case 'ReOrg':
+            suitTrack = doReOrg(attack)
+        case 'RestrainingOrder':
+            suitTrack = doRestrainingOrder(attack)
+        case 'Rolodex':
+            suitTrack = doRolodex(attack)
+        case 'RubberStamp':
+            suitTrack = doRubberStamp(attack)
+        case 'RubOut':
+            suitTrack = doRubOut(attack)
+        case 'Sacked':
+            suitTrack = doSacked(attack)
+        case 'SandTrap':
+            suitTrack = doSandTrap(attack)
+        case 'Schmooze':
+            suitTrack = doSchmooze(attack)
+        case 'SensoryOverload':
+            suitTrack = doDefault(attack)
+        case 'Shake':
+            suitTrack = doShake(attack)
+        case 'Shred':
+            suitTrack = doShred(attack)
+        case 'SongAndDance':
+            suitTrack = doSongAndDance(attack)
+        case 'SpeedDial':
+            suitTrack = doSpeedDial(attack)
+        case 'Spin':
+            suitTrack = doSpin(attack)
+        case 'Stomper':
+            suitTrack = doStomper(attack)
+        case 'Synergy':
+            suitTrack = doSynergy(attack)
+        case 'Tabulate':
+            suitTrack = doTabulate(attack)
+        case 'TeeOff':
+            suitTrack = doTeeOff(attack)
+        case 'ThrowBook':
+            suitTrack = doDefault(attack)
+        case 'Tremor':
+            suitTrack = doTremor(attack)
+        case 'Trip':
+            suitTrack = doTrip(attack)
+        case 'UndergroundLiquidity':
+            suitTrack = doUndergroundLiquidity(attack)
+        case 'Watercooler':
+            suitTrack = doWatercooler(attack)
+        case 'Withdrawal':
+            suitTrack = doWithdrawal(attack)
+        case 'WriteOff':
+            suitTrack = doWriteOff(attack)
+        case 'WriteUp':
+            suitTrack = doWriteUp(attack)
+        case _:
+            notify.warning('unknown attack: %s substituting Finger Wag' % name)
+            suitTrack = doDefault(attack)
     camTrack = MovieCamera.chooseSuitShot(attack, suitTrack.getDuration())
     battle = attack['battle']
     targets = attack['target']
@@ -334,187 +336,150 @@ def doDefault(attack):
     suitName = attack['suitName']
     match suitName:
         case 'f':
-            attack['id'] = CLIPON_TIE
             attack['name'] = 'ClipOnTie'
             attack['animName'] = 'throw-paper'
             return doClipOnTie(attack)
         case 'p':
-            attack['id'] = WRITE_OFF
             attack['name'] = 'WriteOff'
             attack['animName'] = 'hold-pencil'
             return doWriteOff(attack)
         case 'ym':
-            attack['id'] = RUBBER_STAMP
             attack['name'] = 'RubberStamp'
             attack['animName'] = 'rubber-stamp'
             return doRubberStamp(attack)
         case 'mm':
-            attack['id'] = DEMOTION
             attack['name'] = 'Demotion'
             attack['animName'] = 'magic1'
             return doDemotion(attack)
         case 'ds':
-            attack['id'] = DOWNSIZE
             attack['name'] = 'Downsize'
             attack['animName'] = 'magic2'
             return doDownsize(attack)
         case 'hh':
-            attack['id'] = HEAD_SHRINK
             attack['name'] = 'HeadShrink'
             attack['animName'] = 'magic1'
             return doHeadShrink(attack)
         case 'cr':
-            attack['id'] = PICK_POCKET
             attack['name'] = 'PickPocket'
             attack['animName'] = 'pickpocket'
             return doPickPocket(attack)
         case 'tbc':
-            attack['id'] = TEE_OFF
             attack['name'] = 'TeeOff'
             attack['animName'] = 'golf-club-swing'
             return doTeeOff(attack)
         case 'cp':
-            attack['id'] = TEE_OFF
             attack['name'] = 'TeeOff'
             attack['animName'] = 'golf-club-swing'
             return doTeeOff(attack)
         case 'cc':
-            attack['id'] = FREEZE_ASSETS
             attack['name'] = 'FreezeAssets'
             attack['animName'] = 'glower'
             return doFreezeAssets(attack)
         case 'tm':
-            attack['id'] = POUND_KEY
             attack['name'] = 'PoundKey'
             attack['animName'] = 'phone'
             return doPoundKey(attack)
         case 'nd':
-            attack['id'] = ROLODEX
             attack['name'] = 'Rolodex'
             attack['animName'] = 'roll-o-dex'
             return doRolodex(attack)
         case 'gh':
-            attack['id'] = FILIBUSTER
             attack['name'] = 'Filibuster'
             attack['animName'] = 'speak'
             return doFilibuster(attack)
         case 'ms':
-            attack['id'] = SHAKE
             attack['name'] = 'Shake'
             attack['animName'] = 'stomp'
             return doShake(attack)
         case 'tf':
-            attack['id'] = DOUBLE_WINDSOR
             attack['name'] = 'DoubleWindsor'
             attack['animName'] = 'throw-paper'
             return doWindsor(attack)
         case 'm':
-            attack['id'] = SCHMOOZE
             attack['name'] = 'Schmooze'
             attack['animName'] = 'speak'
             return doSchmooze(attack)
         case 'mh':
-            attack['id'] = RAZZLE_DAZZLE
             attack['name'] = 'RazzleDazzle'
             attack['animName'] = 'smile'
             return doRazzleDazzle(attack)
         case 'ff':
-            attack['id'] = TEE_OFF
             attack['name'] = 'TeeOff'
             attack['animName'] = 'golf-club-swing'
             return doTeeOff(attack)
         case 'sc':
-            attack['id'] = BOUNCE_CHECK
             attack['name'] = 'BounceCheck'
             attack['animName'] = 'throw-paper'
             return doBounceCheck(attack)
         case 'pp':
-            attack['id'] = PENNY_PINCH
             attack['name'] = 'PennyPinch'
             attack['animName'] = 'pickpocket'
             return doPennyPinch(attack)
         case 'tw':
-            attack['id'] = FREEZE_ASSETS
             attack['name'] = 'FreezeAssets'
             attack['animName'] = 'glower'
             return doFreezeAssets(attack)
         case 'bc':
-            attack['id'] = AUDIT
             attack['name'] = 'Audit'
             attack['animName'] = 'phone'
             return doAudit(attack)
         case 'nc':
-            attack['id'] = CRUNCH
             attack['name'] = 'Crunch'
             attack['animName'] = 'throw-object'
             return doCrunch(attack)
         case 'mb':
-            attack['id'] = MARKET_CRASH
             attack['name'] = 'MarketCrash'
             attack['animName'] = 'throw-paper'
             return doMarketCrash(attack)
         case 'ls':
-            attack['id'] = CHOMP
             attack['name'] = 'Chomp'
             attack['animName'] = 'throw-paper'
             return doChomp(attack)
         case 'rb':
-            attack['id'] = PICK_POCKET
             attack['name'] = 'PickPocket'
             attack['animName'] = 'pickpocket'
             return doPickPocket(attack)
         case 'msv':
-            attack['id'] = FREEZE_ASSETS
             attack['name'] = 'FreezeAssets'
             attack['animName'] = 'glower'
             return doFreezeAssets(attack)
         case 'bf':
-            attack['id'] = CANNED
             attack['name'] = 'Canned'
             attack['animName'] = 'throw-paper'
             return doCanned(attack)
         case 'b':
-            attack['id'] = BITE
             attack['name'] = 'Bite'
             attack['animName'] = 'throw-paper'
             return doBite(attack)
         case 'dt':
-            attack['id'] = DOUBLE_TALK
             attack['name'] = 'DoubleTalk'
             attack['animName'] = 'speak'
             return doDoubleTalk(attack)
         case 'ac':
-            attack['id'] = RED_TAPE
             attack['name'] = 'RedTape'
             attack['animName'] = 'throw-object'
             return doRedTape(attack)
         case 'bs':
-            attack['id'] = GLOWER_POWER
             attack['name'] = 'GlowerPower'
             attack['animName'] = 'glower'
             return doGlowerPower(attack)
         case 'sd':
-            attack['id'] = SPIN
             attack['name'] = 'Spin'
             attack['animName'] = 'magic3'
             return doSpin(attack)
         case 'le':
-            attack['id'] = LEGALESE
             attack['name'] = 'Legalese'
             attack['animName'] = 'speak'
             return doLegalese(attack)
         case 'bw':
-            attack['id'] = GAVEL
             attack['name'] = 'Gavel'
             attack['animName'] = 'effort'
             return doGavel(attack)
         case 'lc':
-            attack['id'] = RESTRAINING_ORDER
             attack['name'] = 'RestrainingOrder'
             attack['animName'] = 'throw-paper'
             return doRestrainingOrder(attack)
         case _:
-            attack['id'] = MUMBO_JUMBO
             attack['name'] = 'MumboJumbo'
             attack['animName'] = 'speak'
             return doMumboJumbo(attack)
@@ -1623,7 +1588,7 @@ def doBrainStorm(attack):
     snowEffect = BattleParticles.createParticleEffect('BrainStorm')
     snowEffect2 = BattleParticles.createParticleEffect('BrainStorm')
     snowEffect3 = BattleParticles.createParticleEffect('BrainStorm')
-    if attack['id'] == LEGAL_STORM:
+    if attack['name'] == 'LegalStorm':
         effectColor = Vec4(0.4, 0, 0, 1)
         BattleParticles.setEffectTexture(snowEffect, 'legalese-hc', color=effectColor)
         BattleParticles.setEffectTexture(snowEffect2, 'legalese-qpq', color=effectColor)
@@ -2195,10 +2160,10 @@ def doWindsor(attack):
     battle = attack['battle']
     target = attack['target']
     toon = target[0]['toon']
-    tie = globalPropPool.getProp('%s-windsor' % ('double' if attack['id'] == DOUBLE_WINDSOR else 'half'))
     throwDelay = 2.17
     damageDelay = 3.4
     dodgeDelay = 2.4
+    tie = globalPropPool.getProp('double-windsor' if attack['name'] == 'DoubleWindsor' else 'half-windsor')
     suitTrack = getSuitTrack(attack)
     posPoints = [Point3(0.02, 0.88, 0.48), VBase3(99, -3, -108.2)]
     tiePropTrack = getPropAppearTrack(tie, suit.getRightHand(), posPoints, 0.5, Point3(7, 7, 7), scaleUpTime=0.5)
