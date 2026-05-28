@@ -15,6 +15,7 @@ from direct.particles import ParticleEffect
 from . import BattleParticles
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
+from typing import Optional
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieSuitAttacks')
 
 
