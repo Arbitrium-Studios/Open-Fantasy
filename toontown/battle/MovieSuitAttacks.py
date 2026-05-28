@@ -332,9 +332,6 @@ def doDefault(attack):
     notify.debug('building suit attack in doDefault')
     groupStatus = attack['group']
     suitName = attack['suitName']
-
-
-def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
     match suitName:
         case 'f':
             attack['id'] = CLIPON_TIE
@@ -521,6 +518,9 @@ def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
             attack['name'] = 'MumboJumbo'
             attack['animName'] = 'speak'
             return doMumboJumbo(attack)
+
+
+def getSuitTrack(attack: dict, delay: float = 1e-06, splicedAnims: Optional[list[list]] = None, playRate: float = 1.0) -> Sequence:
     suit = attack['suit']
     battle = attack['battle']
     tauntIndex = attack['taunt']
