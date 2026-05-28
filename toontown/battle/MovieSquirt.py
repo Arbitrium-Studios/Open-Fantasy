@@ -182,12 +182,13 @@ def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, lef
             suitType = getSuitBodyType(suit.getStyleName())
             animTrack = Sequence()
             animTrack.append(ActorInterval(suit, anim, duration=0.2))
-            if suitType == 'a':
-                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.43))
-            elif suitType == 'b':
-                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=1.94))
-            elif suitType == 'c':
-                animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.58))
+            match suitType:
+                case 'a':
+                    animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.43))
+                case 'b':
+                    animTrack.append(ActorInterval(suit, 'slip-forward', startTime=1.94))
+                case 'c':
+                    animTrack.append(ActorInterval(suit, 'slip-forward', startTime=2.58))
             animTrack.append(Func(battle.unlureSuit, suit))
             moveTrack = Sequence(
                 Wait(0.2),
@@ -202,16 +203,17 @@ def __getSuitTrack(suit, tContact, tDodge, hp, hpbonus, kbbonus, anim, died, lef
                 suitStartPos[1] + suitFloat[1],
                 suitStartPos[2] + suitFloat[2])
             suitType = getSuitBodyType(suit.getStyleName())
-            if suitType == 'a':
-                startFlailFrame = 16
-                endFlailFrame = 16
-            elif suitType == 'b':
-                startFlailFrame = 15
-                endFlailFrame = 15
-            else:
-                startFlailFrame = 15
-                endFlailFrame = 15
             sival = Sequence(
+            match suitType:
+                case 'a':
+                    startFlailFrame = 16
+                    endFlailFrame = 16
+                case 'b':
+                    startFlailFrame = 15
+                    endFlailFrame = 15
+                case _:
+                    startFlailFrame = 15
+                    endFlailFrame = 15
                 ActorInterval(suit, 'slip-backward', playRate=0.5, startFrame=0, endFrame=startFlailFrame - 1),
                 Func(suit.pingpong, 'slip-backward', fromFrame=startFlailFrame, toFrame=endFlailFrame),
                 Wait(0.5),

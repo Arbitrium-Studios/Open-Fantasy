@@ -301,26 +301,27 @@ def unloadBossbotHQAnims():
 
 
 def loadPhaseAnims(phaseStr='phase_3', loadFlag=1):
-    if phaseStr == 'phase_3':
-        animList = Phase3AnimList
-    elif phaseStr == 'phase_3.5':
-        animList = Phase3_5AnimList
-    elif phaseStr == 'phase_4':
-        animList = Phase4AnimList
-    elif phaseStr == 'phase_5':
-        animList = Phase5AnimList
-    elif phaseStr == 'phase_5.5':
-        animList = Phase5_5AnimList
-    elif phaseStr == 'phase_6':
-        animList = Phase6AnimList
-    elif phaseStr == 'phase_9':
-        animList = Phase9AnimList
-    elif phaseStr == 'phase_10':
-        animList = Phase10AnimList
-    elif phaseStr == 'phase_12':
-        animList = Phase12AnimList
-    else:
-        self.notify.error('Unknown phase string %s' % phaseStr)
+    match phaseStr:
+        case 'phase_3':
+            animList = Phase3AnimList
+        case 'phase_3.5':
+            animList = Phase3_5AnimList
+        case 'phase_4':
+            animList = Phase4AnimList
+        case 'phase_5':
+            animList = Phase5AnimList
+        case 'phase_5.5':
+            animList = Phase5_5AnimList
+        case 'phase_6':
+            animList = Phase6AnimList
+        case 'phase_9':
+            animList = Phase9AnimList
+        case 'phase_10':
+            animList = Phase10AnimList
+        case 'phase_12':
+            animList = Phase12AnimList
+        case _:
+            self.notify.error('Unknown phase string %s' % phaseStr)
     for key in list(LegDict.keys()):
         for anim in animList:
             if loadFlag:
@@ -3185,18 +3186,19 @@ class Toon(Avatar.Avatar, ToonHead):
         suit = Suit.Suit()
         dna = SuitDNA.SuitDNA()
         if rental == True:
-            if SuitDNA.suitDepts[deptIndex] == 's':
-                suitType = 'cc'
-            elif SuitDNA.suitDepts[deptIndex] == 'm':
-                suitType = 'sc'
-            elif SuitDNA.suitDepts[deptIndex] == 'l':
-                suitType = 'bf'
-            elif SuitDNA.suitDepts[deptIndex] == 'c':
-                suitType = 'f'
-            else:
-                self.notify.warning(
-                    'Suspicious: Incorrect rental suit department requested')
-                suitType = 'cc'
+            match SuitDNA.suitDepts[deptIndex]:
+                case 's':
+                    suitType = 'cc'
+                case 'm':
+                    suitType = 'sc'
+                case 'l':
+                    suitType = 'bf'
+                case 'c':
+                    suitType = 'f'
+                case _:
+                    self.notify.warning(
+                        'Suspicious: Incorrect rental suit department requested')
+                    suitType = 'cc'
         dna.newSuit(suitType)
         suit.setStyle(dna)
         suit.isDisguised = 1

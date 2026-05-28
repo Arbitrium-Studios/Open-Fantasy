@@ -123,64 +123,65 @@ def createParticleEffect(name=None, file=None, numParticles=None, color=None):
     if not name:
         fileName = file + '.ptf'
         return loadParticleFile(fileName)
-    if name == 'GearExplosion':
-        return __makeGearExplosion(numParticles)
-    elif name == 'BigGearExplosion':
-        return __makeGearExplosion(numParticles, 'Big')
-    elif name == 'WideGearExplosion':
-        return __makeGearExplosion(numParticles, 'Wide')
-    elif name == 'BrainStorm':
-        return loadParticleFile('brainStorm.ptf')
-    elif name == 'BuzzWord':
-        return loadParticleFile('buzzWord.ptf')
-    elif name == 'Calculate':
-        return loadParticleFile('calculate.ptf')
-    elif name == 'Confetti':
-        return loadParticleFile('confetti.ptf')
-    elif name == 'DemotionFreeze':
-        return loadParticleFile('demotionFreeze.ptf')
-    elif name == 'DemotionSpray':
-        return loadParticleFile('demotionSpray.ptf')
-    elif name == 'DoubleTalkLeft':
-        return loadParticleFile('doubleTalkLeft.ptf')
-    elif name == 'DoubleTalkRight':
-        return loadParticleFile('doubleTalkRight.ptf')
-    elif name == 'FingerWag':
-        return loadParticleFile('fingerwag.ptf')
-    elif name == 'FiredFlame':
-        return loadParticleFile('firedFlame.ptf')
-    elif name == 'FreezeAssets':
-        return loadParticleFile('freezeAssets.ptf')
-    elif name == 'GlowerPower':
-        return loadParticleFile('glowerPowerKnives.ptf')
-    elif name == 'HotAir':
-        return loadParticleFile('hotAirSpray.ptf')
-    elif name == 'PoundKey':
-        return loadParticleFile('poundkey.ptf')
-    elif name == 'ShiftSpray':
-        return loadParticleFile('shiftSpray.ptf')
-    elif name == 'ShiftLift':
-        return __makeShiftLift()
-    elif name == 'Shred':
-        return loadParticleFile('shred.ptf')
-    elif name == 'Smile':
-        return loadParticleFile('smile.ptf')
-    elif name == 'SpriteFiredFlecks':
-        return loadParticleFile('spriteFiredFlecks.ptf')
-    elif name == 'Synergy':
-        return loadParticleFile('synergy.ptf')
-    elif name == 'Waterfall':
-        return loadParticleFile('waterfall.ptf')
-    elif name == 'PoundKey':
-        return loadParticleFile('poundkey.ptf')
-    elif name == 'RubOut':
-        return __makeRubOut(color)
-    elif name == 'SplashLines':
-        return loadParticleFile('splashlines.ptf')
-    elif name == 'Withdrawal':
-        return loadParticleFile('withdrawal.ptf')
-    else:
-        notify.warning('createParticleEffect() - no name: %s' % name)
+    match name:
+        case 'GearExplosion':
+            return __makeGearExplosion(numParticles)
+        case 'BigGearExplosion':
+            return __makeGearExplosion(numParticles, 'Big')
+        case 'WideGearExplosion':
+            return __makeGearExplosion(numParticles, 'Wide')
+        case 'BrainStorm':
+            return loadParticleFile('brainStorm.ptf')
+        case 'BuzzWord':
+            return loadParticleFile('buzzWord.ptf')
+        case 'Calculate':
+            return loadParticleFile('calculate.ptf')
+        case 'Confetti':
+            return loadParticleFile('confetti.ptf')
+        case 'DemotionFreeze':
+            return loadParticleFile('demotionFreeze.ptf')
+        case 'DemotionSpray':
+            return loadParticleFile('demotionSpray.ptf')
+        case 'DoubleTalkLeft':
+            return loadParticleFile('doubleTalkLeft.ptf')
+        case 'DoubleTalkRight':
+            return loadParticleFile('doubleTalkRight.ptf')
+        case 'FingerWag':
+            return loadParticleFile('fingerwag.ptf')
+        case 'FiredFlame':
+            return loadParticleFile('firedFlame.ptf')
+        case 'FreezeAssets':
+            return loadParticleFile('freezeAssets.ptf')
+        case 'GlowerPower':
+            return loadParticleFile('glowerPowerKnives.ptf')
+        case 'HotAir':
+            return loadParticleFile('hotAirSpray.ptf')
+        case 'PoundKey':
+            return loadParticleFile('poundkey.ptf')
+        case 'ShiftSpray':
+            return loadParticleFile('shiftSpray.ptf')
+        case 'ShiftLift':
+            return __makeShiftLift()
+        case 'Shred':
+            return loadParticleFile('shred.ptf')
+        case 'Smile':
+            return loadParticleFile('smile.ptf')
+        case 'SpriteFiredFlecks':
+            return loadParticleFile('spriteFiredFlecks.ptf')
+        case 'Synergy':
+            return loadParticleFile('synergy.ptf')
+        case 'Waterfall':
+            return loadParticleFile('waterfall.ptf')
+        case 'PoundKey':
+            return loadParticleFile('poundkey.ptf')
+        case 'RubOut':
+            return __makeRubOut(color)
+        case 'SplashLines':
+            return loadParticleFile('splashlines.ptf')
+        case 'Withdrawal':
+            return loadParticleFile('withdrawal.ptf')
+        case _:
+            notify.warning('createParticleEffect() - no name: %s' % name)
     return None
 
 
@@ -193,12 +194,13 @@ def setEffectTexture(effect, name, color=None):
 
 
 def __makeGearExplosion(numParticles=None, style='Normal'):
-    if style == 'Normal':
-        effect = loadParticleFile('gearExplosion.ptf')
-    elif style == 'Big':
-        effect = loadParticleFile('gearExplosionBig.ptf')
-    elif style == 'Wide':
-        effect = loadParticleFile('gearExplosionWide.ptf')
+    match style:
+        case 'Normal':
+            effect = loadParticleFile('gearExplosion.ptf')
+        case 'Big':
+            effect = loadParticleFile('gearExplosionBig.ptf')
+        case 'Wide':
+            effect = loadParticleFile('gearExplosionWide.ptf')
     if numParticles:
         particles = effect.getParticlesNamed('particles-1')
         particles.setPoolSize(numParticles)

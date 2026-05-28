@@ -332,194 +332,195 @@ def doDefault(attack):
     notify.debug('building suit attack in doDefault')
     groupStatus = attack['group']
     suitName = attack['suitName']
-    if suitName == 'f':
-        attack['id'] = CLIPON_TIE
-        attack['name'] = 'ClipOnTie'
-        attack['animName'] = 'throw-paper'
-        return doClipOnTie(attack)
-    elif suitName == 'p':
-        attack['id'] = WRITE_OFF
-        attack['name'] = 'WriteOff'
-        attack['animName'] = 'hold-pencil'
-        return doWriteOff(attack)
-    elif suitName == 'ym':
-        attack['id'] = RUBBER_STAMP
-        attack['name'] = 'RubberStamp'
-        attack['animName'] = 'rubber-stamp'
-        return doRubberStamp(attack)
-    elif suitName == 'mm':
-        attack['id'] = DEMOTION
-        attack['name'] = 'Demotion'
-        attack['animName'] = 'magic1'
-        return doDemotion(attack)
-    elif suitName == 'ds':
-        attack['id'] = DOWNSIZE
-        attack['name'] = 'Downsize'
-        attack['animName'] = 'magic2'
-        return doDownsize(attack)
-    elif suitName == 'hh':
-        attack['id'] = HEAD_SHRINK
-        attack['name'] = 'HeadShrink'
-        attack['animName'] = 'magic1'
-        return doHeadShrink(attack)
-    elif suitName == 'cr':
-        attack['id'] = PICK_POCKET
-        attack['name'] = 'PickPocket'
-        attack['animName'] = 'pickpocket'
-        return doPickPocket(attack)
-    elif suitName == 'tbc':
-        attack['id'] = TEE_OFF
-        attack['name'] = 'TeeOff'
-        attack['animName'] = 'golf-club-swing'
-        return doTeeOff(attack)
-    elif suitName == 'cp':
-        attack['id'] = TEE_OFF
-        attack['name'] = 'TeeOff'
-        attack['animName'] = 'golf-club-swing'
-        return doTeeOff(attack)
-    elif suitName == 'cc':
-        attack['id'] = FREEZE_ASSETS
-        attack['name'] = 'FreezeAssets'
-        attack['animName'] = 'glower'
-        return doFreezeAssets(attack)
-    elif suitName == 'tm':
-        attack['id'] = POUND_KEY
-        attack['name'] = 'PoundKey'
-        attack['animName'] = 'phone'
-        return doPoundKey(attack)
-    elif suitName == 'nd':
-        attack['id'] = ROLODEX
-        attack['name'] = 'Rolodex'
-        attack['animName'] = 'roll-o-dex'
-        return doRolodex(attack)
-    elif suitName == 'gh':
-        attack['id'] = FILIBUSTER
-        attack['name'] = 'Filibuster'
-        attack['animName'] = 'speak'
-        return doFilibuster(attack)
-    elif suitName == 'ms':
-        attack['id'] = SHAKE
-        attack['name'] = 'Shake'
-        attack['animName'] = 'stomp'
-        return doShake(attack)
-    elif suitName == 'tf':
-        attack['id'] = DOUBLE_WINDSOR
-        attack['name'] = 'DoubleWindsor'
-        attack['animName'] = 'throw-paper'
-        return doWindsor(attack)
-    elif suitName == 'm':
-        attack['id'] = SCHMOOZE
-        attack['name'] = 'Schmooze'
-        attack['animName'] = 'speak'
-        return doSchmooze(attack)
-    elif suitName == 'mh':
-        attack['id'] = RAZZLE_DAZZLE
-        attack['name'] = 'RazzleDazzle'
-        attack['animName'] = 'smile'
-        return doRazzleDazzle(attack)
-    elif suitName == 'ff':
-        attack['id'] = TEE_OFF
-        attack['name'] = 'TeeOff'
-        attack['animName'] = 'golf-club-swing'
-        return doTeeOff(attack)
-    elif suitName == 'sc':
-        attack['id'] = BOUNCE_CHECK
-        attack['name'] = 'BounceCheck'
-        attack['animName'] = 'throw-paper'
-        return doBounceCheck(attack)
-    elif suitName == 'pp':
-        attack['id'] = PENNY_PINCH
-        attack['name'] = 'PennyPinch'
-        attack['animName'] = 'pickpocket'
-        return doPennyPinch(attack)
-    elif suitName == 'tw':
-        attack['id'] = FREEZE_ASSETS
-        attack['name'] = 'FreezeAssets'
-        attack['animName'] = 'glower'
-        return doFreezeAssets(attack)
-    elif suitName == 'bc':
-        attack['id'] = AUDIT
-        attack['name'] = 'Audit'
-        attack['animName'] = 'phone'
-        return doAudit(attack)
-    elif suitName == 'nc':
-        attack['id'] = CRUNCH
-        attack['name'] = 'Crunch'
-        attack['animName'] = 'throw-object'
-        return doCrunch(attack)
-    elif suitName == 'mb':
-        attack['id'] = MARKET_CRASH
-        attack['name'] = 'MarketCrash'
-        attack['animName'] = 'throw-paper'
-        return doMarketCrash(attack)
-    elif suitName == 'ls':
-        attack['id'] = CHOMP
-        attack['name'] = 'Chomp'
-        attack['animName'] = 'throw-paper'
-        return doChomp(attack)
-    elif suitName == 'rb':
-        attack['id'] = PICK_POCKET
-        attack['name'] = 'PickPocket'
-        attack['animName'] = 'pickpocket'
-        return doPickPocket(attack)
-    elif suitName == 'msv':
-        attack['id'] = FREEZE_ASSETS
-        attack['name'] = 'FreezeAssets'
-        attack['animName'] = 'glower'
-        return doFreezeAssets(attack)
-    elif suitName == 'bf':
-        attack['id'] = CANNED
-        attack['name'] = 'Canned'
-        attack['animName'] = 'throw-paper'
-        return doCanned(attack)
-    elif suitName == 'b':
-        attack['id'] = BITE
-        attack['name'] = 'Bite'
-        attack['animName'] = 'throw-paper'
-        return doBite(attack)
-    elif suitName == 'dt':
-        attack['id'] = DOUBLE_TALK
-        attack['name'] = 'DoubleTalk'
-        attack['animName'] = 'speak'
-        return doDoubleTalk(attack)
-    elif suitName == 'ac':
-        attack['id'] = RED_TAPE
-        attack['name'] = 'RedTape'
-        attack['animName'] = 'throw-object'
-        return doRedTape(attack)
-    elif suitName == 'bs':
-        attack['id'] = GLOWER_POWER
-        attack['name'] = 'GlowerPower'
-        attack['animName'] = 'glower'
-        return doGlowerPower(attack)
-    elif suitName == 'sd':
-        attack['id'] = SPIN
-        attack['name'] = 'Spin'
-        attack['animName'] = 'magic3'
-        return doSpin(attack)
-    elif suitName == 'le':
-        attack['id'] = LEGALESE
-        attack['name'] = 'Legalese'
-        attack['animName'] = 'speak'
-        return doLegalese(attack)
-    elif suitName == 'bw':
-        attack['id'] = GAVEL
-        attack['name'] = 'Gavel'
-        attack['animName'] = 'effort'
-        return doGavel(attack)
-    elif suitName == 'lc':
-        attack['id'] = RESTRAINING_ORDER
-        attack['name'] = 'RestrainingOrder'
-        attack['animName'] = 'throw-paper'
-        return doRestrainingOrder(attack)
-    else:
-        attack['id'] = MUMBO_JUMBO
-        attack['name'] = 'MumboJumbo'
-        attack['animName'] = 'speak'
-        return doMumboJumbo(attack)
 
 
 def getSuitTrack(attack, delay=1e-06, splicedAnims=None, playRate=1.0):
+    match suitName:
+        case 'f':
+            attack['id'] = CLIPON_TIE
+            attack['name'] = 'ClipOnTie'
+            attack['animName'] = 'throw-paper'
+            return doClipOnTie(attack)
+        case 'p':
+            attack['id'] = WRITE_OFF
+            attack['name'] = 'WriteOff'
+            attack['animName'] = 'hold-pencil'
+            return doWriteOff(attack)
+        case 'ym':
+            attack['id'] = RUBBER_STAMP
+            attack['name'] = 'RubberStamp'
+            attack['animName'] = 'rubber-stamp'
+            return doRubberStamp(attack)
+        case 'mm':
+            attack['id'] = DEMOTION
+            attack['name'] = 'Demotion'
+            attack['animName'] = 'magic1'
+            return doDemotion(attack)
+        case 'ds':
+            attack['id'] = DOWNSIZE
+            attack['name'] = 'Downsize'
+            attack['animName'] = 'magic2'
+            return doDownsize(attack)
+        case 'hh':
+            attack['id'] = HEAD_SHRINK
+            attack['name'] = 'HeadShrink'
+            attack['animName'] = 'magic1'
+            return doHeadShrink(attack)
+        case 'cr':
+            attack['id'] = PICK_POCKET
+            attack['name'] = 'PickPocket'
+            attack['animName'] = 'pickpocket'
+            return doPickPocket(attack)
+        case 'tbc':
+            attack['id'] = TEE_OFF
+            attack['name'] = 'TeeOff'
+            attack['animName'] = 'golf-club-swing'
+            return doTeeOff(attack)
+        case 'cp':
+            attack['id'] = TEE_OFF
+            attack['name'] = 'TeeOff'
+            attack['animName'] = 'golf-club-swing'
+            return doTeeOff(attack)
+        case 'cc':
+            attack['id'] = FREEZE_ASSETS
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
+        case 'tm':
+            attack['id'] = POUND_KEY
+            attack['name'] = 'PoundKey'
+            attack['animName'] = 'phone'
+            return doPoundKey(attack)
+        case 'nd':
+            attack['id'] = ROLODEX
+            attack['name'] = 'Rolodex'
+            attack['animName'] = 'roll-o-dex'
+            return doRolodex(attack)
+        case 'gh':
+            attack['id'] = FILIBUSTER
+            attack['name'] = 'Filibuster'
+            attack['animName'] = 'speak'
+            return doFilibuster(attack)
+        case 'ms':
+            attack['id'] = SHAKE
+            attack['name'] = 'Shake'
+            attack['animName'] = 'stomp'
+            return doShake(attack)
+        case 'tf':
+            attack['id'] = DOUBLE_WINDSOR
+            attack['name'] = 'DoubleWindsor'
+            attack['animName'] = 'throw-paper'
+            return doWindsor(attack)
+        case 'm':
+            attack['id'] = SCHMOOZE
+            attack['name'] = 'Schmooze'
+            attack['animName'] = 'speak'
+            return doSchmooze(attack)
+        case 'mh':
+            attack['id'] = RAZZLE_DAZZLE
+            attack['name'] = 'RazzleDazzle'
+            attack['animName'] = 'smile'
+            return doRazzleDazzle(attack)
+        case 'ff':
+            attack['id'] = TEE_OFF
+            attack['name'] = 'TeeOff'
+            attack['animName'] = 'golf-club-swing'
+            return doTeeOff(attack)
+        case 'sc':
+            attack['id'] = BOUNCE_CHECK
+            attack['name'] = 'BounceCheck'
+            attack['animName'] = 'throw-paper'
+            return doBounceCheck(attack)
+        case 'pp':
+            attack['id'] = PENNY_PINCH
+            attack['name'] = 'PennyPinch'
+            attack['animName'] = 'pickpocket'
+            return doPennyPinch(attack)
+        case 'tw':
+            attack['id'] = FREEZE_ASSETS
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
+        case 'bc':
+            attack['id'] = AUDIT
+            attack['name'] = 'Audit'
+            attack['animName'] = 'phone'
+            return doAudit(attack)
+        case 'nc':
+            attack['id'] = CRUNCH
+            attack['name'] = 'Crunch'
+            attack['animName'] = 'throw-object'
+            return doCrunch(attack)
+        case 'mb':
+            attack['id'] = MARKET_CRASH
+            attack['name'] = 'MarketCrash'
+            attack['animName'] = 'throw-paper'
+            return doMarketCrash(attack)
+        case 'ls':
+            attack['id'] = CHOMP
+            attack['name'] = 'Chomp'
+            attack['animName'] = 'throw-paper'
+            return doChomp(attack)
+        case 'rb':
+            attack['id'] = PICK_POCKET
+            attack['name'] = 'PickPocket'
+            attack['animName'] = 'pickpocket'
+            return doPickPocket(attack)
+        case 'msv':
+            attack['id'] = FREEZE_ASSETS
+            attack['name'] = 'FreezeAssets'
+            attack['animName'] = 'glower'
+            return doFreezeAssets(attack)
+        case 'bf':
+            attack['id'] = CANNED
+            attack['name'] = 'Canned'
+            attack['animName'] = 'throw-paper'
+            return doCanned(attack)
+        case 'b':
+            attack['id'] = BITE
+            attack['name'] = 'Bite'
+            attack['animName'] = 'throw-paper'
+            return doBite(attack)
+        case 'dt':
+            attack['id'] = DOUBLE_TALK
+            attack['name'] = 'DoubleTalk'
+            attack['animName'] = 'speak'
+            return doDoubleTalk(attack)
+        case 'ac':
+            attack['id'] = RED_TAPE
+            attack['name'] = 'RedTape'
+            attack['animName'] = 'throw-object'
+            return doRedTape(attack)
+        case 'bs':
+            attack['id'] = GLOWER_POWER
+            attack['name'] = 'GlowerPower'
+            attack['animName'] = 'glower'
+            return doGlowerPower(attack)
+        case 'sd':
+            attack['id'] = SPIN
+            attack['name'] = 'Spin'
+            attack['animName'] = 'magic3'
+            return doSpin(attack)
+        case 'le':
+            attack['id'] = LEGALESE
+            attack['name'] = 'Legalese'
+            attack['animName'] = 'speak'
+            return doLegalese(attack)
+        case 'bw':
+            attack['id'] = GAVEL
+            attack['name'] = 'Gavel'
+            attack['animName'] = 'effort'
+            return doGavel(attack)
+        case 'lc':
+            attack['id'] = RESTRAINING_ORDER
+            attack['name'] = 'RestrainingOrder'
+            attack['animName'] = 'throw-paper'
+            return doRestrainingOrder(attack)
+        case _:
+            attack['id'] = MUMBO_JUMBO
+            attack['name'] = 'MumboJumbo'
+            attack['animName'] = 'speak'
+            return doMumboJumbo(attack)
     suit = attack['suit']
     battle = attack['battle']
     tauntIndex = attack['taunt']
