@@ -88,46 +88,16 @@ def getToonAttack(id, track=NO_ATTACK, level=-1, target=-1):
             0]
 
 
-def getDefaultSuitAttacks():
-    suitAttacks = [[NO_ID,
-                    NO_ATTACK,
-                    -1,
-                    [],
-                    0,
-                    0,
-                    0],
-                   [NO_ID,
-                    NO_ATTACK,
-                    -1,
-                    [],
-                    0,
-                    0,
-                    0],
-                   [NO_ID,
-                    NO_ATTACK,
-                    -1,
-                    [],
-                    0,
-                    0,
-                    0],
-                   [NO_ID,
-                    NO_ATTACK,
-                    -1,
-                    [],
-                    0,
-                    0,
-                    0]]
+def getDefaultSuitAttacks() -> list[list]:
+    suitAttacks = [getDefaultSuitAttack(),
+                   getDefaultSuitAttack(),
+                   getDefaultSuitAttack(),
+                   getDefaultSuitAttack()]
     return suitAttacks
 
 
-def getDefaultSuitAttack():
-    return [NO_ID,
-            NO_ATTACK,
-            -1,
-            [],
-            0,
-            0,
-            0]
+def getDefaultSuitAttack() -> list:
+    return [NO_ID, NO_ATTACK, -1, [], 0, 0, 0]
 
 
 def findToonAttack(toons, attacks, track):

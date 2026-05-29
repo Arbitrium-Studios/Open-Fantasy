@@ -119,9 +119,9 @@ class DistributedBattleBaseAI(
         self.adjustingTimer = Timer()
         return
 
-    def clearAttacks(self):
+    def clearAttacks(self) -> None:
         self.toonAttacks = {}
-        self.suitAttacks = getDefaultSuitAttacks()
+        self.suitAttacks = []
 
     def requestDelete(self):
         if hasattr(self, 'fsm'):
@@ -1781,7 +1781,7 @@ class DistributedBattleBaseAI(
         if len(self.activeSuits) == 0 and len(self.pendingSuits) == 0:
             lastActiveSuitDied = 1
         self.notify.debug('calculate hit points, %s' % self.suitAttacks)
-        for i in range(4):
+        for i in range(len(self.suitAttacks)):
             attack = self.suitAttacks[i][SUIT_ATK_COL]
             if attack != NO_ATTACK:
                 suitId = self.suitAttacks[i][SUIT_ID_COL]

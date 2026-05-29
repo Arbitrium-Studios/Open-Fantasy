@@ -1235,57 +1235,58 @@ class BattleCalculatorAI:
         self.notify.debug('\n')
 
     def __calculateSuitAttacks(self) -> None:
-        for i in range(len(self.battle.suitAttacks)):
-            if i < len(self.battle.activeSuits):
-                suitId = self.battle.activeSuits[i].doId
-                if not self.__suitCanAttack(suitId):
-                    if self.notify.getDebug():
-                        self.notify.debug("Suit %d can't attack" % suitId)
-                    continue
-                if self.battle.pendingSuits.count(self.battle.activeSuits[i]) > 0 or self.battle.joiningSuits.count(self.battle.activeSuits[i]) > 0:
-                    continue
-                attack = self.battle.suitAttacks[i]
-                attack[SUIT_ID_COL] = suitId
-                attack[SUIT_ATK_COL] = self.__calcSuitAtkType(attack)
-                attack[SUIT_TGT_COL] = self.__calcSuitTarget(attack)
-                if attack[SUIT_TGT_COL] == -1:
-                    self.battle.suitAttacks[i] = getDefaultSuitAttack()
-                    attack = self.battle.suitAttacks[i]
-                    self.notify.debug('clearing suit attack, no avail targets')
-                self.__calcSuitAtkHp(attack)
-                if attack[SUIT_ATK_COL] != NO_ATTACK:
-                    if self.__suitAtkAffectsGroup(attack):
-                        for currTgt in self.battle.activeToons:
-                            self.__updateSuitAtkStat(currTgt)
-
-                    else:
-                        tgtId = self.battle.activeToons[attack[SUIT_TGT_COL]]
-                        self.__updateSuitAtkStat(tgtId)
-                targets = self.__createSuitTargetList(attack)
-                allTargetsDead = 1
-                for currTgt in targets:
-                    if self.__getToonHp(currTgt) > 0:
-                        allTargetsDead = 0
-                        break
-
-                if allTargetsDead:
-                    self.battle.suitAttacks[i] = getDefaultSuitAttack()
-                    if self.notify.getDebug():
-                        self.notify.debug('clearing suit attack, targets dead')
-                        self.notify.debug(
-                            'suit attack is now ' +
-                            repr(
-                                self.battle.suitAttacks[i]))
-                        self.notify.debug(
-                            'all attacks: ' +
-                            repr(
-                                self.battle.suitAttacks))
-                    attack = self.battle.suitAttacks[i]
-                if self.__attackHasHit(attack, suit=1):
-                    self.__applySuitAttackDamages(attack)
+        for i in range(len(self.battle.activeSuits)):
+            suitId = self.battle.activeSuits[i].doId
+            if not self.__suitCanAttack(suitId):
                 if self.notify.getDebug():
-                    self.notify.debug('Suit attack: ' + str(self.battle.suitAttacks[i]))
-                attack[SUIT_BEFORE_TOONS_COL] = 0
+                    self.notify.debug("Suit %d can't attack" % suitId)
+                continue
+            if self.battle.pendingSuits.count(self.battle.activeSuits[i]) > 0 or self.battle.joiningSuits.count(self.battle.activeSuits[i]) > 0:
+                continue
+            attack = getDefaultSuitAttack()
+            attack[SUIT_ID_COL] = suitId
+            attack[SUIT_ATK_COL] = self.__calcSuitAtkType(attack)
+            attack[SUIT_TGT_COL] = self.__calcSuitTarget(attack)
+            if attack[SUIT_TGT_COL] == -1:
+                attack = getDefaultSuitAttack()
+                self.notify.debug('clearing suit attack, no avail targets')
+            for j in range(len(self.battle.activeToons)):
+                attack[SUIT_HP_COL].append(-1)
+
+            self.__calcSuitAtkHp(attack)
+            if attack[SUIT_ATK_COL] != NO_ATTACK:
+                if self.__suitAtkAffectsGroup(attack):
+                    for currTgt in self.battle.activeToons:
+                        self.__updateSuitAtkStat(currTgt)
+
+                else:
+                    tgtId = self.battle.activeToons[attack[SUIT_TGT_COL]]
+                    self.__updateSuitAtkStat(tgtId)
+            targets = self.__createSuitTargetList(attack)
+            allTargetsDead = 1
+            for currTgt in targets:
+                if self.__getToonHp(currTgt) > 0:
+                    allTargetsDead = 0
+                    break
+
+            if allTargetsDead:
+                attack = getDefaultSuitAttack()
+                if self.notify.getDebug():
+                    self.notify.debug('clearing suit attack, targets dead')
+                    self.notify.debug(
+                        'suit attack is now ' +
+                        repr(
+                            attack))
+                    self.notify.debug(
+                        'all attacks: ' +
+                        repr(
+                            self.battle.suitAttacks))
+            if self.__attackHasHit(attack, suit=1):
+                self.__applySuitAttackDamages(attack)
+            if self.notify.getDebug():
+                self.notify.debug('Suit attack: ' + str(attack))
+            attack[SUIT_BEFORE_TOONS_COL] = 0
+            self.battle.suitAttacks.append(attack)
 
     def __updateLureTimeouts(self):
         if self.notify.getDebug():
@@ -1368,10 +1369,6 @@ class BattleCalculatorAI:
             for j in range(longest):
                 self.battle.toonAttacks[t][TOON_HP_COL].append(-1)
                 self.battle.toonAttacks[t][TOON_KBBONUS_COL].append(-1)
-
-        for i in range(4):
-            for j in range(len(self.battle.activeToons)):
-                self.battle.suitAttacks[i][SUIT_HP_COL].append(-1)
 
         toonsHit, cogsMiss = self.__initRound()
         for suit in self.battle.activeSuits:
