@@ -1071,14 +1071,13 @@ class BattleCalculatorAI:
             return 1
         return 0
 
-    def __calcSuitAtkType(self, attackIndex):
-        theSuit = self.battle.activeSuits[attackIndex]
+    def __calcSuitAtkType(self, attack: list):
+        theSuit = self.battle.findSuit(attack[SUIT_ID_COL])
         attacks: tuple[SuitBattleGlobals.SuitAttack, ...] = SuitBattleGlobals.SuitAttributesDict[theSuit.dna.name].attacks
         atk = SuitBattleGlobals.pickSuitAttack(attacks, theSuit.getLevel())
         return atk
 
-    def __calcSuitTarget(self, attackIndex):
-        attack = self.battle.suitAttacks[attackIndex]
+    def __calcSuitTarget(self, attack: list):
         suitId = attack[SUIT_ID_COL]
         if suitId in self.SuitAttackers and random.randint(0, 99) < 75:
             totalDamage = 0
@@ -1115,14 +1114,14 @@ class BattleCalculatorAI:
         self.notify.debug('Suit randomly attacking toon ' + str(self.battle.activeToons[chosen]))
         return chosen
 
-    def __suitAtkHit(self, attackIndex):
+    def __suitAtkHit(self, attack: list) -> bool:
         if self.suitsAlwaysHit:
             return True
         else:
             if self.suitsAlwaysMiss:
                 return False
-        theSuit = self.battle.activeSuits[attackIndex]
-        atkType = self.battle.suitAttacks[attackIndex][SUIT_ATK_COL]
+        theSuit = self.battle.findSuit(attack[SUIT_ID_COL])
+        atkType = attack[SUIT_ATK_COL]
         atkInfo = SuitBattleGlobals.getSuitAttack(theSuit.dna.name, theSuit.getLevel(), atkType)
         atkAcc = atkInfo['acc']
         suitAcc = SuitBattleGlobals.SuitAttributesDict[theSuit.dna.name].acc[theSuit.getLevel()]
@@ -1134,14 +1133,13 @@ class BattleCalculatorAI:
             return True
         return False
 
-    def __suitAtkAffectsGroup(self, attack):
+    def __suitAtkAffectsGroup(self, attack: list):
         atkType = attack[SUIT_ATK_COL]
         theSuit = self.battle.findSuit(attack[SUIT_ID_COL])
         atkInfo = SuitBattleGlobals.getSuitAttack(theSuit.dna.name, theSuit.getLevel(), atkType)
         return atkInfo['group'] != SuitBattleGlobals.ATK_TGT_SINGLE
 
-    def __createSuitTargetList(self, attackIndex):
-        attack = self.battle.suitAttacks[attackIndex]
+    def __createSuitTargetList(self, attack: list) -> list:
         targetList = []
         if attack[SUIT_ATK_COL] == NO_ATTACK:
             self.notify.debug('No attack, no targets')
@@ -1161,9 +1159,8 @@ class BattleCalculatorAI:
 
         return targetList
 
-    def __calcSuitAtkHp(self, attackIndex):
-        targetList = self.__createSuitTargetList(attackIndex)
-        attack = self.battle.suitAttacks[attackIndex]
+    def __calcSuitAtkHp(self, attack: list) -> None:
+        targetList: list = self.__createSuitTargetList(attack)
         for currTarget in range(len(targetList)):
             toonId = targetList[currTarget]
             toon = self.battle.getToon(toonId)
@@ -1174,7 +1171,7 @@ class BattleCalculatorAI:
                 if self.TOONS_TAKE_NO_DAMAGE:
                     result = 0
                 else:
-                    if self.__suitAtkHit(attackIndex):
+                    if self.__suitAtkHit(attack):
                         atkType = attack[SUIT_ATK_COL]
                         theSuit = self.battle.findSuit(attack[SUIT_ID_COL])
                         atkInfo = SuitBattleGlobals.getSuitAttack(
@@ -1199,8 +1196,7 @@ class BattleCalculatorAI:
             return 0
         return
 
-    def __applySuitAttackDamages(self, attackIndex):
-        attack = self.battle.suitAttacks[attackIndex]
+    def __applySuitAttackDamages(self, attack: list) -> None:
         if self.APPLY_HEALTH_ADJUSTMENTS:
             for t in self.battle.activeToons:
                 position = self.battle.activeToons.index(t)
@@ -1238,11 +1234,10 @@ class BattleCalculatorAI:
 
         self.notify.debug('\n')
 
-    def __calculateSuitAttacks(self):
+    def __calculateSuitAttacks(self) -> None:
         for i in range(len(self.battle.suitAttacks)):
             if i < len(self.battle.activeSuits):
                 suitId = self.battle.activeSuits[i].doId
-                self.battle.suitAttacks[i][SUIT_ID_COL] = suitId
                 if not self.__suitCanAttack(suitId):
                     if self.notify.getDebug():
                         self.notify.debug("Suit %d can't attack" % suitId)
@@ -1250,14 +1245,14 @@ class BattleCalculatorAI:
                 if self.battle.pendingSuits.count(self.battle.activeSuits[i]) > 0 or self.battle.joiningSuits.count(self.battle.activeSuits[i]) > 0:
                     continue
                 attack = self.battle.suitAttacks[i]
-                attack[SUIT_ID_COL] = self.battle.activeSuits[i].doId
-                attack[SUIT_ATK_COL] = self.__calcSuitAtkType(i)
-                attack[SUIT_TGT_COL] = self.__calcSuitTarget(i)
+                attack[SUIT_ID_COL] = suitId
+                attack[SUIT_ATK_COL] = self.__calcSuitAtkType(attack)
+                attack[SUIT_TGT_COL] = self.__calcSuitTarget(attack)
                 if attack[SUIT_TGT_COL] == -1:
                     self.battle.suitAttacks[i] = getDefaultSuitAttack()
                     attack = self.battle.suitAttacks[i]
                     self.notify.debug('clearing suit attack, no avail targets')
-                self.__calcSuitAtkHp(i)
+                self.__calcSuitAtkHp(attack)
                 if attack[SUIT_ATK_COL] != NO_ATTACK:
                     if self.__suitAtkAffectsGroup(attack):
                         for currTgt in self.battle.activeToons:
@@ -1266,7 +1261,7 @@ class BattleCalculatorAI:
                     else:
                         tgtId = self.battle.activeToons[attack[SUIT_TGT_COL]]
                         self.__updateSuitAtkStat(tgtId)
-                targets = self.__createSuitTargetList(i)
+                targets = self.__createSuitTargetList(attack)
                 allTargetsDead = 1
                 for currTgt in targets:
                     if self.__getToonHp(currTgt) > 0:
@@ -1287,7 +1282,7 @@ class BattleCalculatorAI:
                                 self.battle.suitAttacks))
                     attack = self.battle.suitAttacks[i]
                 if self.__attackHasHit(attack, suit=1):
-                    self.__applySuitAttackDamages(i)
+                    self.__applySuitAttackDamages(attack)
                 if self.notify.getDebug():
                     self.notify.debug('Suit attack: ' + str(self.battle.suitAttacks[i]))
                 attack[SUIT_BEFORE_TOONS_COL] = 0
