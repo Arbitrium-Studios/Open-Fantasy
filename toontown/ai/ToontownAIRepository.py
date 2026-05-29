@@ -246,13 +246,13 @@ class ToontownAIRepository(ToontownInternalRepository):
         NPCToons.generateZone2NpcDict()
 
         # Foggy Fjord
-        self.zoneTable[ToontownGlobals.FoggyFjords] = (
-            (ToontownGlobals.FoggyFjords, 1,
+        self.zoneTable[ToontownGlobals.FoggyFjord] = (
+            (ToontownGlobals.FoggyFjord, 1,
              0), (ToontownGlobals.BarnacleBoulevard, 1, 1),
             (ToontownGlobals.SeaweedStreet, 1,
              1), (ToontownGlobals.LighthouseLane, 1, 1)
         )
-        self.generateHood(DDHoodDataAI, ToontownGlobals.FoggyFjords)
+        self.generateHood(DDHoodDataAI, ToontownGlobals.FoggyFjord)
 
         # Toontown Central
         self.zoneTable[ToontownGlobals.ToontownCentral] = (

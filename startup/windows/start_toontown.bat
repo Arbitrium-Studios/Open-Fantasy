@@ -1,7 +1,5 @@
 @echo off
 
-timeout /t 2 /nobreak > nul
-
 :root
 
 SetLocal EnableDelayedExpansion
@@ -153,7 +151,8 @@ echo.
 :StartGame
 
 title !projectNameFull!
-%CUSTOM_PYTHON_PATH% -m toontown.launcher.QuickStartLauncher
+"%CUSTOM_PYTHON_PATH%" -m toontown.launcher.QuickStartLauncher
+echo.
 goto :ending
 
 :does_not_exist

@@ -1,7 +1,6 @@
 from panda3d.core import *
 from .DistributedNPCToonBase import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from . import NPCToons
 from toontown.toonbase import TTLocalizer
 from toontown.fishing import FishSellGUI

@@ -222,7 +222,7 @@ def getWakeInfo(hoodId=None, zoneId=None):
         if zoneId is None:
             zoneId = base.cr.playGame.getPlace().getZoneId()
         canonicalZoneId = getCanonicalZoneId(zoneId)
-        if canonicalZoneId == FoggyFjords:
+        if canonicalZoneId == FoggyFjord:
             wakeWaterHeight = DDWakeWaterHeight
             showWake = 1
         elif canonicalZoneId == ToontownCentral:

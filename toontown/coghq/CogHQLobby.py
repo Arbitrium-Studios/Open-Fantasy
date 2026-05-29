@@ -4,7 +4,7 @@ from direct.fsm import State
 from toontown.hood import Place
 from toontown.building import Elevator
 from toontown.toonbase import ToontownGlobals
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.otp import *
 from otp.distributed.TelemetryLimiter import RotationLimitToH, TLGatherAllAvs
 
@@ -60,6 +60,8 @@ class CogHQLobby(Place.Place):
 
     def enter(self, requestStatus):
         self.zoneId = requestStatus['zoneId']
+        if base.wantRichPresence:
+            base.discord.setZone(self.zoneId)
         Place.Place.enter(self)
         self.fsm.enterInitialState()
         base.playMusic(self.loader.music, looping=1, volume=0.8)

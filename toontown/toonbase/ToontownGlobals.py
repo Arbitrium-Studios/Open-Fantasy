@@ -148,7 +148,7 @@ def getSuitFont():
     return SuitFont
 
 
-FoggyFjords = 1000
+FoggyFjord = 1000
 ToontownCentral = 2000
 TundraWonderland = 3000
 HarmoniousHaven = 4000
@@ -174,9 +174,10 @@ MapleStreet = 5200
 OakStreet = 5300
 LullabyLane = 9100
 PajamaPlace = 9200
+TwilightTerrace = 9300
 ToonHall = 2513
 HoodHierarchy = {ToontownCentral: (SillyStreet, LoopyLane, PunchlinePlace),
-                 FoggyFjords: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
+                 FoggyFjord: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
                  TundraWonderland: (WalrusWay, SleetStreet, PolarPlace),
                  HarmoniousHaven: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
                  FloweringGrove: (ElmStreet, MapleStreet, OakStreet),
@@ -206,6 +207,7 @@ LawbotStageIntB = 13400
 LawbotStageIntC = 13500
 LawbotStageIntD = 13600
 Tutorial = 15000
+TutorialTerrace = 20000
 MyEstate = 16000
 GolfZone = 17000
 PartyHood = 18000
@@ -222,7 +224,7 @@ cogIndex2dept = invertDict(cogDept2index)
 HQToSafezone = {SellbotHQ: FloweringGrove,
                 CashbotHQ: TwilightDreamland,
                 LawbotHQ: TundraWonderland,
-                BossbotHQ: FoggyFjords}
+                BossbotHQ: FoggyFjord}
 CogDeptNames = [TTLocalizer.Bossbot,
                 TTLocalizer.Lawbot,
                 TTLocalizer.Cashbot,
@@ -304,7 +306,7 @@ factoryId2factoryType = {MockupFactoryId: FT_FullSuit,
                          LawbotOfficeInt: FT_FullSuit}
 StreetNames = TTLocalizer.GlobalStreetNames
 StreetBranchZones = list(StreetNames.keys())
-Hoods = (FoggyFjords,
+Hoods = (FoggyFjord,
          ToontownCentral,
          TundraWonderland,
          HarmoniousHaven,
@@ -318,7 +320,7 @@ Hoods = (FoggyFjords,
          CashbotHQ,
          LawbotHQ,
          GolfZone)
-HoodsForTeleportAll = (FoggyFjords,
+HoodsForTeleportAll = (FoggyFjord,
                        ToontownCentral,
                        TundraWonderland,
                        HarmoniousHaven,
@@ -450,7 +452,7 @@ KeyboardTimeout = 300
 phaseMap = {Tutorial: 4,
             ToontownCentral: 4,
             MyEstate: 5.5,
-            FoggyFjords: 6,
+            FoggyFjord: 6,
             HarmoniousHaven: 6,
             ToontownStadium: 6,
             TundraWonderland: 8,
@@ -465,7 +467,7 @@ phaseMap = {Tutorial: 4,
             GolfZone: 8,
             PartyHood: 13}
 streetPhaseMap = {ToontownCentral: 5,
-                  FoggyFjords: 6,
+                  FoggyFjord: 6,
                   HarmoniousHaven: 6,
                   ToontownStadium: 6,
                   TundraWonderland: 8,
@@ -480,7 +482,7 @@ streetPhaseMap = {ToontownCentral: 5,
                   PartyHood: 13}
 dnaMap = {Tutorial: 'toontown_central',
           ToontownCentral: 'toontown_central',
-          FoggyFjords: 'donalds_dock',
+          FoggyFjord: 'donalds_dock',
           HarmoniousHaven: 'minnies_melody_land',
           ToontownStadium: 'goofy_speedway',
           TundraWonderland: 'the_burrrgh',
@@ -493,7 +495,7 @@ dnaMap = {Tutorial: 'toontown_central',
           CashbotHQ: 'cog_hq_cashbot',
           LawbotHQ: 'cog_hq_lawbot',
           GolfZone: 'golf_zone'}
-hoodNameMap = {FoggyFjords: TTLocalizer.FoggyFjords,
+hoodNameMap = {FoggyFjord: TTLocalizer.FoggyFjord,
                ToontownCentral: TTLocalizer.ToontownCentral,
                TundraWonderland: TTLocalizer.TundraWonderland,
                HarmoniousHaven: TTLocalizer.HarmoniousHaven,
@@ -513,7 +515,7 @@ hoodNameMap = {FoggyFjords: TTLocalizer.FoggyFjords,
 safeZoneCountMap = {MyEstate: 8,
                     Tutorial: 6,
                     ToontownCentral: 6,
-                    FoggyFjords: 10,
+                    FoggyFjord: 10,
                     HarmoniousHaven: 5,
                     ToontownStadium: 500,
                     TundraWonderland: 8,
@@ -526,7 +528,7 @@ safeZoneCountMap = {MyEstate: 8,
 townCountMap = {MyEstate: 8,
                 Tutorial: 40,
                 ToontownCentral: 37,
-                FoggyFjords: 40,
+                FoggyFjord: 40,
                 HarmoniousHaven: 40,
                 ToontownStadium: 40,
                 TundraWonderland: 40,
@@ -538,7 +540,7 @@ townCountMap = {MyEstate: 8,
 hoodCountMap = {MyEstate: 2,
                 Tutorial: 2,
                 ToontownCentral: 2,
-                FoggyFjords: 2,
+                FoggyFjord: 2,
                 HarmoniousHaven: 2,
                 ToontownStadium: 2,
                 TundraWonderland: 2,
@@ -1684,7 +1686,7 @@ openDiscord = 'https://discord.com/invite/5xmBA8stzY'
 # TELEPORT_BUTTON_DEFAULT_COST = 50
 # TELEPORT_BUTTON_COSTS = {
 #  ToontownCentral: 5,
-#  FoggyFjords: 15,
+#  FoggyFjord: 15,
 #  FloweringGrove: 30,
 #  HarmoniousHaven: 45,
 #  TundraWonderland: 60,
@@ -1750,3 +1752,8 @@ SpecialKeys = {
     'print_screen': 'Print Screen',
     'caps_lock': 'Caps Lock'
 } 
+
+canEnableRichPresenceKey = f'CAN_ENABLE_RICH_PRESENCE_AGAIN_KEY'
+hasFinishedCoolDownKey = f'HAS_FINISHED_COOLDOWN_KEY'
+defaultToontownPlayTokenKey = 'TTFAN_LOGIN_TOKEN' # Was LOGIN_TOKEN
+fallbackToontownPlayTokenKey = 'PLAYTOKEN'

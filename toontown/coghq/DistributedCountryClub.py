@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.distributed.ClockDelta import *
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
@@ -85,6 +85,8 @@ class DistributedCountryClub(DistributedObject.DistributedObject):
     def setCountryClubId(self, id):
         DistributedCountryClub.notify.debug('setCountryClubId: %s' % id)
         self.countryClubId = id
+        if base.wantRichPresence:
+            base.discord.setZone(id)
 
     def setFloorNum(self, num):
         DistributedCountryClub.notify.debug('floorNum: %s' % num)

@@ -44,9 +44,6 @@ DirectGuiGlobals.setDefaultFontFunc(ToontownGlobals.getInterfaceFont)
 launcher.setPandaErrorCode(7)
 from . import ToonBase
 ToonBase.ToonBase()
-from toontown.discord.DiscordRPC import DiscordRPC
-builtins.Discord = DiscordRPC()
-Discord.launching()
 if base.win is None:
     print('Unable to open window; aborting.')
     sys.exit()
@@ -91,7 +88,8 @@ version = OnscreenText(
     serverVersion, parent=base.a2dBottomLeft, pos=(
         0.033, 0.025), scale=0.06, fg=Vec4(
             0, 0, 1, 0.6), align=TextNode.ALeft)
-Discord.setServerVersion(serverVersion)
+if base.wantRichPresence:
+    base.discord.setServerVersion(serverVersion)
 loader.beginBulkLoad(
     'init',
     TTLocalizer.LoaderLabel,
@@ -123,7 +121,8 @@ del version
 base.loader = base.loader
 builtins.loader = base.loader
 autoRun = ConfigVariableBool('toontown-auto-run', 1)
-Discord.startTasks()
+if base.wantRichPresence:
+    base.discord.startTasks()
 if autoRun and launcher.isDummy() and (
         not Thread.isTrueThreads() or __name__ == '__main__'):
     try:

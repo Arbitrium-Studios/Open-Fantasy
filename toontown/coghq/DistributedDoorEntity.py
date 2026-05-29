@@ -1,5 +1,4 @@
-from pandac.PandaModules import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from direct.distributed.ClockDelta import *
 from toontown.toonbase import ToontownGlobals
@@ -12,6 +11,7 @@ from toontown.toonbase import TTLocalizer
 from otp.level import BasicEntities
 from direct.fsm import State
 from otp.level import VisibilityBlocker
+from panda3d.direct import ShowInterval, HideInterval
 
 
 class DistributedDoorEntityLock(

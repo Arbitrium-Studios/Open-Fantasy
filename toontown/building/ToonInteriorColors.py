@@ -19,7 +19,7 @@ baseScheme = {'TI_wainscotting': wainscottingBase,
               'TI_wallpaper_border': wallpaperBorderBase,
               'TI_door': doorBase,
               'TI_floor': floorBase}
-colors = {FoggyFjords: {'TI_wainscotting': wainscottingBase,
+colors = {FoggyFjord: {'TI_wainscotting': wainscottingBase,
                         'TI_wallpaper': wallpaperBase,
                         'TI_wallpaper_border': wallpaperBorderBase,
                         'TI_door': doorBase,

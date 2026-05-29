@@ -1,5 +1,6 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from . import ToonHood
+from toontown.toonbase import ToontownGlobals
 from toontown.town import DDTownLoader
 from toontown.safezone import DDSafeZoneLoader
 from toontown.toonbase.ToontownGlobals import *
@@ -10,14 +11,14 @@ class DDHood(ToonHood.ToonHood):
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(
             self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = FoggyFjords
+        self.id = ToontownGlobals.FoggyFjord
         self.townLoaderClass = DDTownLoader.DDTownLoader
         self.safeZoneLoaderClass = DDSafeZoneLoader.DDSafeZoneLoader
         self.storageDNAFile = 'phase_6/dna/storage_DD.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['phase_6/dna/winter_storage_DD.dna'],
-                                      WACKY_WINTER_DECORATIONS: ['phase_6/dna/winter_storage_DD.dna'],
-                                      HALLOWEEN_PROPS: ['phase_6/dna/halloween_props_storage_DD.dna'],
-                                      SPOOKY_PROPS: ['phase_6/dna/halloween_props_storage_DD.dna']}
+        self.holidayStorageDNADict = {ToontownGlobals.WINTER_DECORATIONS: ['phase_6/dna/winter_storage_DD.dna'],
+                                      ToontownGlobals.WACKY_WINTER_DECORATIONS: ['phase_6/dna/winter_storage_DD.dna'],
+                                      ToontownGlobals.HALLOWEEN_PROPS: ['phase_6/dna/halloween_props_storage_DD.dna'],
+                                      ToontownGlobals.SPOOKY_PROPS: ['phase_6/dna/halloween_props_storage_DD.dna']}
         self.skyFile = 'phase_3.5/models/props/BR_sky'
         self.titleColor = (0.8, 0.6, 0.5, 1.0)
         self.whiteFogColor = Vec4(0.8, 0.8, 0.8, 1)

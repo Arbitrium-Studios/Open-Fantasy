@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from .DistributedMinigame import *
 from direct.interval.IntervalGlobal import *
@@ -253,7 +253,7 @@ class DistributedCatchGame(DistributedMinigame):
         self.notify.debug('defineConstants')
         self.DropPlacerType = RegionDropPlacer
         fruits = {ToontownGlobals.ToontownCentral: 'apple',
-                  ToontownGlobals.FoggyFjords: 'orange',
+                  ToontownGlobals.FoggyFjord: 'orange',
                   ToontownGlobals.FloweringGrove: 'pear',
                   ToontownGlobals.HarmoniousHaven: 'coconut',
                   ToontownGlobals.TundraWonderland: 'watermelon',

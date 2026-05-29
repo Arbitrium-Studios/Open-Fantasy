@@ -1,10 +1,9 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase import ToontownGlobals
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 import random
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from toontown.toonbase import TTLocalizer
 from . import HouseGlobals
 from . import Estate

@@ -1,5 +1,5 @@
 from toontown.toon import ToonDNA
-from pandac.PandaModules import VBase4
+from panda3d.core import VBase4
 from toontown.toonbase import TTLocalizer, ToontownGlobals
 from otp.otpbase import PythonUtil
 NumFields = 9
@@ -58,7 +58,7 @@ PetRarities2 = (('leopard', 0.005),
 PetRarities = {'body': {ToontownGlobals.ToontownCentral: {'threeStripe': 50,
                                                           'tummy': 30,
                                                           'dots': 20},
-                        ToontownGlobals.FoggyFjords: {'threeStripe': 35,
+                        ToontownGlobals.FoggyFjord: {'threeStripe': 35,
                                                       'tummy': 30,
                                                       'dots': 20,
                                                       'tigerStripe': 15},

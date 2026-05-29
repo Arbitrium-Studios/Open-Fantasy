@@ -339,8 +339,9 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
 
     def enterElevator(self, ts=0):
         self.currentFloor += 1
-        # TODO specific departments and floors eventually
-        Discord.building()
+        if base.wantRichPresence:
+            # TODO specific departments and floors eventually
+            base.discord.building()
         self.cr.playGame.getPlace().currentFloor = self.currentFloor
         self.setElevatorLights(self.elevatorModelIn)
         self.setElevatorLights(self.elevatorModelOut)
@@ -493,5 +494,6 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         return
 
     def exitReward(self):
-        Discord.setZone(self.extZoneId)
+        if base.wantRichPresence:
+            base.discord.setZone(self.extZoneId)
         return None

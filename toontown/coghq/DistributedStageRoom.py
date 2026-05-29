@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
@@ -53,6 +53,8 @@ class DistributedStageRoom(DistributedLevel.DistributedLevel,
     def setStageId(self, stageId):
         self.notify.debug('stageId: %s' % stageId)
         StageRoomBase.StageRoomBase.setStageId(self, stageId)
+        if base.wantRichPresence:
+            base.discord.setZone(stageId)
 
     def setRoomId(self, roomId):
         self.notify.debug('roomId: %s' % roomId)

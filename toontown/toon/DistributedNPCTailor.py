@@ -1,7 +1,6 @@
 from panda3d.core import *
 from .DistributedNPCToonBase import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from . import NPCToons
 from direct.task.Task import Task
 from . import TailorClothesGUI

@@ -3,7 +3,7 @@ import string
 import os
 import sys
 import datetime
-from pandac.PandaModules import loadPrcFileData, WindowProperties
+from panda3d.core import loadPrcFileData, WindowProperties
 from otp.otpgui import OTPDialog
 from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPRender
@@ -23,7 +23,9 @@ class DisplayOptions:
 
     def loadFromSettings(self):
         base.settings.readSettings()
+        display = not base.settings.getSetting('display-mode', 'windowed')
         mode = not base.settings.getSetting('windowed-mode', True)
+        self.notify.info(f'The display mode is set to {mode}.')
         music = base.settings.getSetting('music', True)
         sfx = base.settings.getSetting('sfx', True)
         toonChatSounds = base.settings.getSetting('toon-chat-sounds', True)
@@ -35,6 +37,8 @@ class DisplayOptions:
             str(mode))
         if mode is None:
             mode = 1
+        if display is None:
+            display = 'windowed'
         if res is None:
             res = (1280, 720)
         if not base.settings.doSavedSettingsExist():

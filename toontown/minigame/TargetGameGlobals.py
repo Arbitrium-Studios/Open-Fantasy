@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 ENDLESS_GAME = config.GetBool('endless-ring-game', 0)
@@ -85,7 +85,7 @@ difficultyPatterns = {ToontownGlobals.ToontownCentral: [[8,
                                                          1],
                                                         10,
                                                         2],
-                      ToontownGlobals.FoggyFjords: [[7,
+                      ToontownGlobals.FoggyFjord: [[7,
                                                      4,
                                                      2,
                                                      0],

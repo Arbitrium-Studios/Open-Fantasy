@@ -13,11 +13,12 @@ from panda3d.otp import *
 import sys
 import os
 import math
+from toontown.controls import ControlManager as TTControlManager
+from toontown.discord.DiscordRPC import DiscordRPC
 from toontown.toonbase import ToontownAccess
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownBattleGlobals
 from toontown.launcher import ToontownDownloadWatcher
-from toontown.controls import ControlManager as TTControlManager
 
 class ToonBase(OTPBase.OTPBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('ToonBase')
@@ -221,11 +222,22 @@ class ToonBase(OTPBase.OTPBase):
         self.settings.updateSetting('show-fps', self.showFPS)
         self.wantLaffMeterOverHead = self.settings.getSetting('want-laff-meter-over-head', True)
         self.settings.updateSetting('want-laff-meter-over-head', self.wantLaffMeterOverHead)
-        self.wantRichPresence = self.settings.getSetting('rich-presence', True)
+        # self.wantRichPresence = self.settings.getSetting('rich-presence', True)
+        self.wantRichPresence = self.settings.get('rich-presence')
         self.settings.updateSetting('rich-presence', self.wantRichPresence)
         self.toggleFPS(self.showFPS)
         self.settings.writeSettings()
+        self.discord = DiscordRPC()
+        if self.wantRichPresence:
+            self.discord.launching()
+        self.setRichPresence()
         return
+
+    def setRichPresence(self):
+        if self.wantRichPresence:
+            self.discord.enable()
+        else:
+            self.discord.disable()
 
     def windowEvent(self, win):
         OTPBase.OTPBase.windowEvent(self, win)

@@ -1,9 +1,8 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from direct.interval.IntervalGlobal import *
 from .DistributedMinigame import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from direct.fsm import ClassicFSM, State
 from direct.fsm import State
 from toontown.toonbase import ToontownTimer

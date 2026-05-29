@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import ToontownGlobals
 from toontown.coghq import DistributedCashbotBossCraneAI
@@ -190,7 +190,7 @@ class DistributedCashbotBossAI(
             healAmount = 3
         else:
             if goon.strength <= 15:
-                style = random.choice([ToontownGlobals.FoggyFjords,
+                style = random.choice([ToontownGlobals.FoggyFjord,
                                        ToontownGlobals.FloweringGrove,
                                        ToontownGlobals.HarmoniousHaven])
                 healAmount = 10

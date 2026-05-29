@@ -2,6 +2,7 @@ from panda3d.core import *
 from . import ShtikerPage
 from toontown.controls.ControlSettingsDialog import ControlSettingsDialog
 from toontown.toonbase import TTLocalizer, ToontownGlobals
+from toontown.launcher.QuickLauncher import QuickLauncher
 from toontown.toontowngui import TTDialog
 from direct.gui.DirectGui import *
 from . import DisplaySettingsDialog
@@ -12,6 +13,8 @@ from otp.speedchat import SCStaticTextTerminal
 from otp.otpbase import PythonUtil
 import webbrowser
 from direct.directnotify import DirectNotifyGlobal
+import time
+import ast
 
 speedChatStyles = ((2000,
                     (200 / 255.0, 60 / 255.0, 229 / 255.0),
@@ -206,7 +209,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
         self.optionsTabPage.unload()
         del self.title
         ShtikerPage.ShtikerPage.unload(self)
-        
+
         if self.extraOptionsTab is not None:
             self.extraOptionsTab.destroy()
             self.extraOptionsTab = None
@@ -568,14 +571,17 @@ class OptionsTabPage(DirectFrame):
     def exit(self):
         self.ignore('confirmDone')
         self.hide()
-        if self.settingsChanged != 0:
-            base.settings.writeSettings()
+        self.updateSettings()
         self.speedChatStyleText.exit()
         if self.displaySettingsChanged:
             taskMgr.doMethodLater(
                 self.DisplaySettingsDelay,
                 self.writeDisplaySettings,
                 self.DisplaySettingsTaskName)
+
+    def updateSettings(self):
+        if self.settingsChanged != 0:
+            base.settings.writeSettings()
 
     def unload(self):
         self.writeDisplaySettings()
@@ -620,6 +626,7 @@ class OptionsTabPage(DirectFrame):
             base.settings.updateSetting('music', True)
         self.settingsChanged = 1
         self.__setMusicButton()
+        self.updateSettings()
 
     def __setMusicButton(self):
         if base.musicActive:
@@ -639,6 +646,7 @@ class OptionsTabPage(DirectFrame):
             base.settings.updateSetting('sfx', True)
         self.settingsChanged = 1
         self.__setSoundFXButton()
+        self.updateSettings()
 
     def __doToggleToonChatSounds(self):
         messenger.send('wakeup')
@@ -650,6 +658,7 @@ class OptionsTabPage(DirectFrame):
             base.settings.updateSetting('toon-chat-sounds', True)
         self.settingsChanged = 1
         self.__setToonChatSoundsButton()
+        self.updateSettings()
 
     def __setSoundFXButton(self):
         if base.sfxActive:
@@ -684,6 +693,7 @@ class OptionsTabPage(DirectFrame):
             base.settings.updateSetting('accepting-new-friends', True)
         self.settingsChanged = 1
         self.__setAcceptFriendsButton()
+        self.updateSettings()
 
     def __doToggleAcceptWhispers(self):
         messenger.send('wakeup')
@@ -848,7 +858,7 @@ class OptionsTabPage(DirectFrame):
             messenger.send(self._parent.doneEvent)
 
     def showReportNotice(self):
-        self.dialog = TTDialog.TTDialog(style=TTDialog.YesNo, text="WARNING!\n\nIn order to report the bug, you have to open your web browser. It is an external link. You must fill out the Issue with the bug, how to replicate, add your logs, and screenshots in order for us to fully understand!", command=self.confirmBugReport)
+        self.dialog = TTDialog.TTDialog(style=TTDialog.YesNo, text=TTLocalizer.ReportABugWarningMessage, command=self.confirmBugReport)
         self.dialog.show()
 
     def confirmBugReport(self, value):
@@ -1097,10 +1107,17 @@ class CodesTabPage(DirectFrame):
         self.submitButton['state'] = DGG.NORMAL
 
 class ExtraOptionsTabPage(DirectFrame):
+
     # TODO add scrollbar frame so we can add unlimited number of options
     notify = directNotify.newCategory('ExtraOptionsTabPage')
 
     def __init__(self, parent=aspect2d):
+        self.cooldownTaskLoopDiscordRPC = None
+        self.hasCooldownFinished = bool(True)
+        self.hasFinishedCoolDownKey = ToontownGlobals.hasFinishedCoolDownKey
+        self.toggle_cooldown_time = 30.0
+        self.toggleRichPresenceCooldownTimer = None
+        self.wantDynamicButton = bool(False) # This is here so I can figure out the fix for 
         self._parent = parent
         DirectFrame.__init__(
             self, parent=self._parent, relief=None, pos=(
@@ -1113,98 +1130,154 @@ class ExtraOptionsTabPage(DirectFrame):
         DirectFrame.destroy(self)
 
     def load(self):
-         guiButton = loader.loadModel('phase_3/models/gui/quit_button')
-         gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
-         titleHeight = 0.61
-         textStartHeight = 0.45
-         textRowHeight = 0.145
-         leftMargin = -0.72
-         buttonbase_xcoord = 0.35
-         buttonbase_ycoord = 0.45
-         button_image_scale = (0.7, 1, 1)
-         controls_button_image_scale = (1, 1, 1)
-         rich_presence_image_scale = (1.5, 1, 1)
-         button_image_scale = (1.0)
-         button_textpos = (0, -0.02)
-         options_text_scale = 0.052
-         disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
-         self.CustomControls_Label = DirectLabel(parent=self, relief=None,
-                                                 text='Custom Controls:',
-                                                 text_align=TextNode.ALeft,
-                                                 text_scale=options_text_scale,
-                                                 text_wordwrap=10,
-                                                 pos=(leftMargin, 0, textStartHeight))
-         self.CustomControls_button = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'),
-                                                   guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')),
-                                                   image_scale=controls_button_image_scale,
-                                                   text='Custom Controls',
-                                                   text_scale=options_text_scale,
-                                                   text_pos=button_textpos,
-                                                   pos=(
-                                                       buttonbase_xcoord, 0.0, buttonbase_ycoord),
-                                                   command=self.openCustomControlsGUI)
+        guiButton = loader.loadModel('phase_3/models/gui/quit_button')
+        gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+        titleHeight = 0.61
+        textStartHeight = 0.45
+        textRowHeight = 0.145
+        leftMargin = -0.72
+        buttonbase_xcoord = 0.35
+        buttonbase_ycoord = 0.45
+        button_image_scale = (0.7, 1, 1)
+        controls_button_image_scale = (1, 1, 1)
+        rich_presence_image_scale = (1.5, 1, 1)
+        button_image_scale = (1.0)
+        button_textpos = (0, -0.02)
+        options_text_scale = 0.052
+        disabled_arrow_color = Vec4(0.6, 0.6, 0.6, 1.0)
+        self.CustomControls_Label = DirectLabel(parent=self, relief=None,
+                                                text='Custom Controls:',
+                                                text_align=TextNode.ALeft,
+                                                text_scale=options_text_scale,
+                                                text_wordwrap=10,
+                                                pos=(leftMargin, 0, textStartHeight))
+        self.CustomControls_button = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'),
+                                                guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')),
+                                                image_scale=controls_button_image_scale,
+                                                text='Custom Controls',
+                                                text_scale=options_text_scale,
+                                                text_pos=button_textpos,
+                                                pos=(
+                                                    buttonbase_xcoord, 0.0, buttonbase_ycoord),
+                                                command=self.openCustomControlsGUI)
 
 
 
-         self.richPresenceLabel = DirectLabel(parent=self, relief=None, text='Discord Rich Presence:',
-                                              text_align=TextNode.ALeft, text_scale=options_text_scale,
-                                              text_wordwrap=16, pos=(leftMargin, 0, textStartHeight - 0.2))
-         self.richPresenceButton = DirectButton(
-             parent=self,
-             relief=None,
-             image=(guiButton.find("**/QuitBtn_UP"),
-                    guiButton.find("**/QuitBtn_DN"),
-                    guiButton.find("**/QuitBtn_RLVR"),
-                    ),
-             image_scale=rich_presence_image_scale,
-             text="Toggle Rich Presence",
-             text_scale=options_text_scale,
-             text_pos=button_textpos,
-             pos=(buttonbase_xcoord, 0, buttonbase_ycoord - 0.2),
-             command=self.toggleRichPresence)
-         self.__setRichPresenceLabel()       
+        self.richPresenceLabel = DirectLabel(parent=self, relief=None, text='Discord Rich Presence:',
+                                            text_align=TextNode.ALeft, text_scale=options_text_scale,
+                                            text_wordwrap=16, pos=(leftMargin, 0, textStartHeight - 0.2))
+        self.richPresenceButton = DirectButton(
+            parent=self,
+            relief=None,
+            image=(guiButton.find("**/QuitBtn_UP"),
+                guiButton.find("**/QuitBtn_DN"),
+                guiButton.find("**/QuitBtn_RLVR"),
+                ),
+            image_scale=rich_presence_image_scale,
+            text="Toggle Rich Presence",
+            text_scale=options_text_scale,
+            text_pos=button_textpos,
+            pos=(buttonbase_xcoord, 0, buttonbase_ycoord - 0.2),
+            command=self.toggleRichPresence)
+        self.__setRichPresenceLabel()
 
-         guiButton.removeNode()
-         gui.removeNode()
+        guiButton.removeNode()
+        gui.removeNode()
 
     def openCustomControlsGUI(self):
-         ControlSettingsDialog()
+        ControlSettingsDialog()
 
     def enter(self):
-         self.show()
-         self.settingsChanged = 0
+        self.show()
+        self.settingsChanged = 0
 
     def exit(self):
-         self.hide()
-         if hasattr(self, 'settingsChanged'):
-             if self.settingsChanged != 0:
-                 base.settings.writeSettings()
+        self.hide()
+        self.updateSettings()
+
+    def updateSettings(self):
+        if hasattr(self, 'settingsChanged'):
+            if self.settingsChanged != 0:
+                base.settings.writeSettings()
 
     def unload(self):
-         self.CustomControls_button.destroy()
-         del self.CustomControls_Label
-         del self.CustomControls_button
-         self.richPresenceLabel.destroy()
-         del self.richPresenceLabel
-         self.richPresenceButton.destroy()
-         del self.richPresenceButton
-         
+        self.CustomControls_button.destroy()
+        del self.CustomControls_Label
+        del self.CustomControls_button
+        self.richPresenceLabel.destroy()
+        del self.richPresenceLabel
+        self.richPresenceButton.destroy()
+        del self.richPresenceButton
+
     def toggleRichPresence(self):
-         self.settingsChanged = 1
-         base.settings.updateSetting('rich-presence', not base.wantRichPresence)
-         base.wantRichPresence = not base.wantRichPresence
-         self.__setRichPresenceLabel()
-         if base.wantRichPresence:
-             Discord.enable()
-         else:
-             Discord.disable()
+        self.canEnableRichPresenceKey = ToontownGlobals.canEnableRichPresenceKey
+        self.canEnableRichPresence = QuickLauncher.getValue(self, key=self.canEnableRichPresenceKey, default=f'True')
+        self.canEnableRichPresence = ast.literal_eval(self.canEnableRichPresence.strip().title())
+        self.canEnableRichPresence = bool(self.canEnableRichPresence)
+
+        if not self.canEnableRichPresence:
+            self.canEnableRichPresenceUpdated = bool(not self.canEnableRichPresence)
+            ExtraOptionsTabPage.notify.debug(f'Cannot update Rich Presence from {self.canEnableRichPresence} to {self.canEnableRichPresenceUpdated} yet...')
+        else:
+            self.settingsChanged = 1
+            wantRichPresenceNow = base.wantRichPresence
+            ExtraOptionsTabPage.notify.debug(f'wantRichPresenceNow is set to {wantRichPresenceNow}...')
+            base.settings.updateSetting('rich-presence', not base.wantRichPresence)
+            base.wantRichPresence = not base.wantRichPresence
+            ExtraOptionsTabPage.notify.debug(f'wantRichPresence (in toggleRichPresence) is set to {base.wantRichPresence}!')
+
+            if base.wantRichPresence:
+                base.discord.enable()
+            else:
+                base.discord.disable()
+            self.updateSettings()
+            self.__setRichPresenceLabel()
 
     def __setRichPresenceLabel(self):
+
+        ExtraOptionsTabPage.notify.debug(f'wantRichPresence (in __setRichPresenceLabel) is set to {base.wantRichPresence}!')
+
+        discordRichPresenceLabel = f'Discord Rich Presence:'
+
         if base.wantRichPresence:
-            self.richPresenceLabel['text'] = ['Discord Rich Presence: On']
-            self.richPresenceButton['text'] = ['Toggle Rich Presence Off']
+            richPresenceStatus = f'Off'
         else:
-            self.richPresenceLabel['text'] = ['Discord Rich Presence: Off']
-            self.richPresenceButton['text'] = ['Toggle Rich Presence On']
+            richPresenceStatus = f'On'
+
+        self.richPresenceLabel['text'] = [f'{discordRichPresenceLabel}']
+
+        if not self.wantDynamicButton:
+            self.richPresenceButton['text'] = [f'Turn {richPresenceStatus}']
+        else:
+            import threading
+            self.canEnableRichPresence = QuickLauncher.getValue(self, key=ToontownGlobals.canEnableRichPresenceKey, default=None)
+            if self.canEnableRichPresence is None:
+                self.canEnableRichPresence = 'True'
+            self.canEnableRichPresence = ast.literal_eval(self.canEnableRichPresence.strip().title())
+            self.canEnableRichPresence = bool(self.canEnableRichPresence)
+            waitToToggleAgainDial = 'Please wait...'
+            if self.canEnableRichPresence:
+                self.richPresenceButton['text'] = [f'Turn {richPresenceStatus}']
+            else:
+                self.richPresenceButton['text'] = [f'{waitToToggleAgainDial}']
+
+                self.toggleRichPresenceCooldownTimer = threading.Timer(self.toggle_cooldown_time, self.__setRichPresenceLabelUpdated)
+                self.toggleRichPresenceCooldownTimer.start()
+
+    def __setRichPresenceLabelUpdated(self):
+
+        if self.wantDynamicButton:
+            self.canEnableRichPresence = QuickLauncher.getValue(self, key=ToontownGlobals.canEnableRichPresenceKey, default=None)
+            if self.canEnableRichPresence is None:
+                self.canEnableRichPresence = 'True'
+            self.canEnableRichPresence = ast.literal_eval(self.canEnableRichPresence.strip().title())
+            self.canEnableRichPresence = bool(self.canEnableRichPresence)
+
+            if base.wantRichPresence:
+                richPresenceStatus = f'Off'
+            else:
+                richPresenceStatus = f'On'
+
+            self.richPresenceButton['text'] = [f'Turn {richPresenceStatus}']
 
     BugReportSite = 'https://github.com/Arbitrium-Studios/Open-Fantasy/issues/new'

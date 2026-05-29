@@ -1,5 +1,5 @@
 import math
-from pandac.PandaModules import Point3
+from panda3d.core import Point3
 from toontown.toonbase import ToontownGlobals
 InputTimeout = 15
 TireMovieTimeout = 120
@@ -38,19 +38,19 @@ ExpandFeetPerSec = 5
 ScoreCountUpRate = 0.15
 ShowScoresDuration = 4.0
 NumTreasures = {ToontownGlobals.ToontownCentral: 2,
-                ToontownGlobals.FoggyFjords: 2,
+                ToontownGlobals.FoggyFjord: 2,
                 ToontownGlobals.FloweringGrove: 2,
                 ToontownGlobals.HarmoniousHaven: 2,
                 ToontownGlobals.TundraWonderland: 1,
                 ToontownGlobals.TwilightDreamland: 1}
 NumPenalties = {ToontownGlobals.ToontownCentral: 0,
-                ToontownGlobals.FoggyFjords: 1,
+                ToontownGlobals.FoggyFjord: 1,
                 ToontownGlobals.FloweringGrove: 1,
                 ToontownGlobals.HarmoniousHaven: 1,
                 ToontownGlobals.TundraWonderland: 2,
                 ToontownGlobals.TwilightDreamland: 2}
 Obstacles = {ToontownGlobals.ToontownCentral: (),
-             ToontownGlobals.FoggyFjords: ((0, 0),),
+             ToontownGlobals.FoggyFjord: ((0, 0),),
              ToontownGlobals.FloweringGrove: ((MinWall[0] / 2, 0), (MaxWall[0] / 2, 0)),
              ToontownGlobals.HarmoniousHaven: ((0, MinWall[1] / 2), (0, MaxWall[1] / 2)),
              ToontownGlobals.TundraWonderland: ((MinWall[0] / 2, 0),
@@ -64,7 +64,7 @@ Obstacles = {ToontownGlobals.ToontownCentral: (),
                                                  MinWall[1] / 2),
                                                 (MaxWall[0] / 2, MaxWall[1] / 2))}
 ObstacleShapes = {ToontownGlobals.ToontownCentral: True,
-                  ToontownGlobals.FoggyFjords: True,
+                  ToontownGlobals.FoggyFjord: True,
                   ToontownGlobals.FloweringGrove: True,
                   ToontownGlobals.HarmoniousHaven: True,
                   ToontownGlobals.TundraWonderland: False,

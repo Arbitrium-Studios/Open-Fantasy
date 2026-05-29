@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from . import DistributedCCharBase
 from direct.directnotify import DirectNotifyGlobal
@@ -10,67 +10,68 @@ from direct.fsm import StateData
 from direct.task import Task
 from toontown.toonbase import TTLocalizer
 
-
 class DistributedFoggyFjord(DistributedCCharBase.DistributedCCharBase):
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedFoggyFjord')
+    pass
+    # notify = DirectNotifyGlobal.directNotify.newCategory('DistributedFoggyFjord')
 
-    def __init__(self, cr):
-        try:
-            self.DistributedFoggyFjord_initialized
-        except BaseException:
-            self.DistributedFoggyFjord_initialized = 1
-            DistributedCCharBase.DistributedCCharBase.__init__(
-                self, cr, TTLocalizer.FoggyFjord, 'dw')
-            self.fsm = ClassicFSM.ClassicFSM(
-                'DistributedFoggyFjord', [
-                    State.State(
-                        'Off', self.enterOff, self.exitOff, ['Neutral']), State.State(
-                        'Neutral', self.enterNeutral, self.exitNeutral, ['Off'])], 'Off', 'Off')
-            self.fsm.enterInitialState()
-            self.nametag.setName(TTLocalizer.Donald)
-            self.handleHolidays()
+    # def __init__(self, cr):
+    #     try:
+    #         self.DistributedFoggyFjord_initialized
+    #     except:
+    #         self.DistributedFoggyFjord_initialized = 1
+    #         DistributedCCharBase.DistributedCCharBase.__init__(self, cr, TTLocalizer.pFoggyFjord, 'dw')
+    #         self.fsm = ClassicFSM.ClassicFSM('DistributedFoggyFjord', [State.State('Off', self.enterOff, self.exitOff, ['Neutral']), State.State('Neutral', self.enterNeutral, self.exitNeutral, ['Off'])], 'Off', 'Off')
+    #         self.fsm.enterInitialState()
+    #         self.nametag.setName(TTLocalizer.Donald)
+    #         self.handleHolidays()
 
-    def disable(self):
-        self.fsm.requestFinalState()
-        DistributedCCharBase.DistributedCCharBase.disable(self)
-        taskMgr.remove('enterNeutralTask')
-        del self.neutralDoneEvent
-        del self.neutral
-        self.fsm.requestFinalState()
+    # def disable(self):
+    #     self.fsm.requestFinalState()
+    #     # DistributedCCharBase.DistributedCCharBase.disable(self)
+    #     # taskMgr.remove('enterNeutralTask')
+    #     # del self.neutralDoneEvent
+    #     # del self.neutral
+    #     self.fsm.requestFinalState()
 
-    def delete(self):
-        try:
-            self.DistributedFoggyFjord_deleted
-        except BaseException:
-            self.DistributedFoggyFjord_deleted = 1
-            del self.fsm
-            DistributedCCharBase.DistributedCCharBase.delete(self)
+    # def delete(self):
+    #     try:
+    #         self.DistributedFoggyFjord_deleted
+    #     except:
+    #         self.DistributedFoggyFjord_deleted = 1
+    #         del self.fsm
+    #         # DistributedCCharBase.DistributedCCharBase.delete(self)
 
-    def generate(self):
-        DistributedCCharBase.DistributedCCharBase.generate(self)
-        boat = base.cr.playGame.hood.loader.boat
-        self.setPos(0, -1, 3.95)
-        self.reparentTo(boat)
-        self.neutralDoneEvent = self.taskName('FoggyFjord-neutral-done')
-        self.neutral = CharStateDatas.CharNeutralState(
-            self.neutralDoneEvent, self)
-        self.fsm.request('Neutral')
+    # def generate(self):
+    # #     DistributedCCharBase.DistributedCCharBase.generate(self)
+    # #     boat = base.cr.playGame.hood.loader.boat
+    # #     self.setPos(0, -1, 3.95)
+    # #     self.reparentTo(boat)
+    # #     self.neutralDoneEvent = self.taskName('FoggyFjord-neutral-done')
+    # #     self.neutral = CharStateDatas.CharNeutralState(self.neutralDoneEvent, self)
+    # #     self.fsm.request('Neutral')
+    #     pass
 
-    def enterOff(self):
-        pass
+    # def enterOff(self):
+    #     pass
 
-    def exitOff(self):
-        pass
+    # def exitOff(self):
+    #     pass
 
-    def enterNeutral(self):
-        self.notify.debug('Neutral ' + self.getName() + '...')
-        self.neutral.enter()
-        self.acceptOnce(self.neutralDoneEvent, self.__decideNextState)
+    # def enterNeutral(self):
+    #     self.notify.debug('Neutral ' + self.getName() + '...')
+    #     self.neutral.enter()
+    #     self.acceptOnce(self.neutralDoneEvent, self.__decideNextState)
 
-    def exitNeutral(self):
-        self.ignore(self.neutralDoneEvent)
-        self.neutral.exit()
+    # def exitNeutral(self):
+    #     self.ignore(self.neutralDoneEvent)
+    #     self.neutral.exit()
 
-    def __decideNextState(self, doneStatus):
-        self.fsm.request('Neutral')
+    # def __decideNextState(self, doneStatus):
+    #     self.fsm.request('Neutral')
+
+    # def getCCLocation(self):
+    #     if self.diffPath is None:
+    #         return 1
+    #     else:
+    #         return 0
+    #     return

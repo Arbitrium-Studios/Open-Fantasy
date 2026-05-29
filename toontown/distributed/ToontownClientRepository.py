@@ -312,6 +312,9 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                         self.allowSecretChat())
                 self.notify.info('================')
 
+        if base.wantRichPresence:
+            base.discord.loading()
+
         if done == 'chose':
             self.avChoice.exit()
             if avatarChoice.approvedName != '':

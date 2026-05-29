@@ -188,10 +188,11 @@ def recordCreationStack(cls):
 
 def recordFunctorCreationStacks():
     global Functor
-    from pandac.PandaModules import getConfigShowbase
-    config = getConfigShowbase()
+    from panda3d.core import ConfigVariableBool
+    # from panda3d.core import getConfigShowbase
+    # config = getConfigShowbase()
     # off by default, very slow
-    if __dev__ and config.GetBool('record-functor-creation-stacks', 0):
+    if __dev__ and ConfigVariableBool('record-functor-creation-stacks', 0):
         if not hasattr(Functor, '_functorCreationStacksRecorded'):
             Functor = recordCreationStackStr(Functor)
             Functor._functorCreationStacksRecorded = True

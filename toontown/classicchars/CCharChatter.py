@@ -191,7 +191,7 @@ def getChatter(charName, chatterType):
             return fieldOfficeDreamlandChatter
         else:
             return DonaldChatter
-    elif charName == TTLocalizer.FoggyFjord:
+    elif charName == TTLocalizer.pFoggyFjord:
         if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
             return TTLocalizer.AFFoggyFjordChatter
         elif chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:

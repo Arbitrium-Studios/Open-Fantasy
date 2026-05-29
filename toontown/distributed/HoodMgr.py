@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.showbase import DirectObject
 from direct.directnotify import DirectNotifyGlobal
 from toontown.launcher import DownloadForceAcknowledge
@@ -111,7 +111,7 @@ class HoodMgr(DirectObject.DirectObject):
                                         -179.23,
                                         0,
                                         0])
-    dropPoints = {ToontownGlobals.FoggyFjords: ([-28.0,
+    dropPoints = {ToontownGlobals.FoggyFjord: ([-28.0,
                                                  -2.5,
                                                  5.8,
                                                  120.0,
@@ -771,7 +771,7 @@ class HoodMgr(DirectObject.DirectObject):
                                               -777.98,
                                               0,
                                               0])}
-    hoodName2Id = {'dd': ToontownGlobals.FoggyFjords,
+    hoodName2Id = {'dd': ToontownGlobals.FoggyFjord,
                    'tt': ToontownGlobals.ToontownCentral,
                    'br': ToontownGlobals.TundraWonderland,
                    'mm': ToontownGlobals.HarmoniousHaven,
@@ -785,7 +785,7 @@ class HoodMgr(DirectObject.DirectObject):
                    'cashhq': ToontownGlobals.CashbotHQ,
                    'lawhq': ToontownGlobals.LawbotHQ,
                    'gz': ToontownGlobals.GolfZone}
-    hoodId2Name = {ToontownGlobals.FoggyFjords: 'dd',
+    hoodId2Name = {ToontownGlobals.FoggyFjord: 'dd',
                    ToontownGlobals.ToontownCentral: 'tt',
                    ToontownGlobals.Tutorial: 'tt',
                    ToontownGlobals.TundraWonderland: 'br',

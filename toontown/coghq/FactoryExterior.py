@@ -6,7 +6,7 @@ from otp.distributed.TelemetryLimiter import RotationLimitToH, TLGatherAllAvs
 from toontown.toonbase import ToontownGlobals
 from toontown.hood import ZoneUtil
 from toontown.building import Elevator
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.otp import *
 from panda3d.toontown import *
 
@@ -91,6 +91,8 @@ class FactoryExterior(BattlePlace.BattlePlace):
 
     def enter(self, requestStatus):
         self.zoneId = requestStatus['zoneId']
+        if base.wantRichPresence:
+            base.discord.setZone(self.zoneId)
         BattlePlace.BattlePlace.enter(self)
         self.fsm.enterInitialState()
         base.playMusic(self.loader.music, looping=1, volume=0.8)

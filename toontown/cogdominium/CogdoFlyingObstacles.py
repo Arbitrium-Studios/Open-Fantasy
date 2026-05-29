@@ -1,11 +1,11 @@
-from pandac.PandaModules import TransformState
+from panda3d.core import TransformState
 import random
 from direct.showbase.DirectObject import DirectObject
 from direct.interval.IntervalGlobal import LerpFunc, ActorInterval, LerpPosInterval
 from direct.interval.MetaInterval import Sequence
 from direct.directutil import Mopath
 from otp.otpbase import PythonUtil
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase import ToontownGlobals
 from toontown.suit import Suit
 from toontown.suit import SuitDNA

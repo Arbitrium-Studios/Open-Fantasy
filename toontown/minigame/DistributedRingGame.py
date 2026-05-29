@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from direct.interval.IntervalGlobal import *
 from .DistributedMinigame import *
@@ -379,7 +379,7 @@ class DistributedRingGame(DistributedMinigame):
     def __generateRings(self):
         self.ringGroups = []
         difficultyDistributions = {ToontownGlobals.ToontownCentral: [14, 2, 0],
-                                   ToontownGlobals.FoggyFjords: [10, 6, 0],
+                                   ToontownGlobals.FoggyFjord: [10, 6, 0],
                                    ToontownGlobals.FloweringGrove: [4, 12, 0],
                                    ToontownGlobals.HarmoniousHaven: [4, 8, 4],
                                    ToontownGlobals.TundraWonderland: [4, 6, 6],
@@ -410,7 +410,7 @@ class DistributedRingGame(DistributedMinigame):
                                                                                                         0,
                                                                                                         0,
                                                                                                         1]],
-                              ToontownGlobals.FoggyFjords: [[0] * 10 + [1] * 6 + [2] * 0, [0,
+                              ToontownGlobals.FoggyFjord: [[0] * 10 + [1] * 6 + [2] * 0, [0,
                                                                                            0,
                                                                                            0,
                                                                                            0,

@@ -1,5 +1,5 @@
 from toontown.toonbase import ToontownGlobals
-from pandac.PandaModules import BitMask32
+from panda3d.core import BitMask32
 ShowScoresDuration = 4.0
 EndlessGame = config.GetBool('endless-2d-game', 0)
 ScoreToJellyBeansMultiplier = 5
@@ -12,32 +12,32 @@ CameraStartingPosition = (-28,
                           0,
                           0)
 GameDuration = {ToontownGlobals.ToontownCentral: 150,
-                ToontownGlobals.FoggyFjords: 145,
+                ToontownGlobals.FoggyFjord: 145,
                 ToontownGlobals.FloweringGrove: 140,
                 ToontownGlobals.HarmoniousHaven: 135,
                 ToontownGlobals.TundraWonderland: 130,
                 ToontownGlobals.TwilightDreamland: 125}
 BaseBonusOnCompletion = {ToontownGlobals.ToontownCentral: 15,
-                         ToontownGlobals.FoggyFjords: 17,
+                         ToontownGlobals.FoggyFjord: 17,
                          ToontownGlobals.FloweringGrove: 19,
                          ToontownGlobals.HarmoniousHaven: 21,
                          ToontownGlobals.TundraWonderland: 23,
                          ToontownGlobals.TwilightDreamland: 25}
 BonusPerSecondLeft = 0.8
 ScoreLossPerEnemyCollision = {ToontownGlobals.ToontownCentral: -1,
-                              ToontownGlobals.FoggyFjords: -1,
+                              ToontownGlobals.FoggyFjord: -1,
                               ToontownGlobals.FloweringGrove: -1,
                               ToontownGlobals.HarmoniousHaven: -1,
                               ToontownGlobals.TundraWonderland: -1,
                               ToontownGlobals.TwilightDreamland: -1}
 ScoreLossPerFallDown = {ToontownGlobals.ToontownCentral: -0,
-                        ToontownGlobals.FoggyFjords: -0,
+                        ToontownGlobals.FoggyFjord: -0,
                         ToontownGlobals.FloweringGrove: -0,
                         ToontownGlobals.HarmoniousHaven: -0,
                         ToontownGlobals.TundraWonderland: -0,
                         ToontownGlobals.TwilightDreamland: -0}
 ScoreLossPerStomperSquish = {ToontownGlobals.ToontownCentral: -1,
-                             ToontownGlobals.FoggyFjords: -1,
+                             ToontownGlobals.FoggyFjord: -1,
                              ToontownGlobals.FloweringGrove: -1,
                              ToontownGlobals.HarmoniousHaven: -1,
                              ToontownGlobals.TundraWonderland: -1,
@@ -48,7 +48,7 @@ SectionWeights = {ToontownGlobals.ToontownCentral: ((0, 25),
                                                     (3, 15),
                                                     (4, 10),
                                                     (5, 0)),
-                  ToontownGlobals.FoggyFjords: ((0, 15),
+                  ToontownGlobals.FoggyFjord: ((0, 15),
                                                 (1, 25),
                                                 (2, 25),
                                                 (3, 15),
@@ -79,31 +79,31 @@ SectionWeights = {ToontownGlobals.ToontownCentral: ((0, 25),
                                                      (4, 25),
                                                      (5, 25))}
 NumSections = {ToontownGlobals.ToontownCentral: 5,
-               ToontownGlobals.FoggyFjords: 5,
+               ToontownGlobals.FoggyFjord: 5,
                ToontownGlobals.FloweringGrove: 5,
                ToontownGlobals.HarmoniousHaven: 5,
                ToontownGlobals.TundraWonderland: 5,
                ToontownGlobals.TwilightDreamland: 5}
 PercentMaxEnemies = {ToontownGlobals.ToontownCentral: 50,
-                     ToontownGlobals.FoggyFjords: 60,
+                     ToontownGlobals.FoggyFjord: 60,
                      ToontownGlobals.FloweringGrove: 70,
                      ToontownGlobals.HarmoniousHaven: 80,
                      ToontownGlobals.TundraWonderland: 90,
                      ToontownGlobals.TwilightDreamland: 100}
 PercentMaxTreasures = {ToontownGlobals.ToontownCentral: 100,
-                       ToontownGlobals.FoggyFjords: 100,
+                       ToontownGlobals.FoggyFjord: 100,
                        ToontownGlobals.FloweringGrove: 100,
                        ToontownGlobals.HarmoniousHaven: 100,
                        ToontownGlobals.TundraWonderland: 100,
                        ToontownGlobals.TwilightDreamland: 100}
 PercentMaxSpawnPoints = {ToontownGlobals.ToontownCentral: 100,
-                         ToontownGlobals.FoggyFjords: 90,
+                         ToontownGlobals.FoggyFjord: 90,
                          ToontownGlobals.FloweringGrove: 80,
                          ToontownGlobals.HarmoniousHaven: 70,
                          ToontownGlobals.TundraWonderland: 60,
                          ToontownGlobals.TwilightDreamland: 50}
 PercentMaxStompers = {ToontownGlobals.ToontownCentral: 50,
-                      ToontownGlobals.FoggyFjords: 60,
+                      ToontownGlobals.FoggyFjord: 60,
                       ToontownGlobals.FloweringGrove: 70,
                       ToontownGlobals.HarmoniousHaven: 80,
                       ToontownGlobals.TundraWonderland: 90,

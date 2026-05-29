@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from toontown.distributed.ToontownMsgTypes import *
 from toontown.hood import ZoneUtil
@@ -80,7 +80,8 @@ class SafeZoneLoader(StateData.StateData):
         self.fsm.request(stateName, [requestStatus])
 
     def createSafeZone(self, dnaFile):
-        Discord.setZone(self.hood.id)
+        if base.wantRichPresence:
+            base.discord.setZone(self.hood.id)
         if self.safeZoneStorageDNAFile:
             loader.loadDNAFile(self.hood.dnaStore, self.safeZoneStorageDNAFile)
         node = loader.loadDNAFile(self.hood.dnaStore, dnaFile)

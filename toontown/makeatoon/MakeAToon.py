@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.distributed.ToontownMsgTypes import *
 from toontown.char import Char
 from otp.avatar import Avatar
@@ -88,8 +88,9 @@ class MakeAToon(StateData.StateData):
         return self.toon
 
     def enter(self):
+        if base.wantRichPresence:
+            base.discord.making()
         self.notify.debug('Starting Make A Toon.')
-        Discord.making()
         if base.config.GetBool('want-qa-regression', 0):
             self.notify.info('QA-REGRESSION: MAKEATOON: Starting Make A Toon')
         base.cr.centralLogger.writeClientEvent('MAT - startingMakeAToon')

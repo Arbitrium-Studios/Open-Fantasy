@@ -1,5 +1,5 @@
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.otp import *
 from direct.interval.IntervalGlobal import *
 from direct.distributed.ClockDelta import *

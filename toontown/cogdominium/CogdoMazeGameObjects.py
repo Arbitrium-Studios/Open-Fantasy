@@ -1,6 +1,7 @@
-from pandac.PandaModules import CollisionSphere, CollisionTube, CollisionNode
-from pandac.PandaModules import NodePath, BitMask32
-from pandac.PandaModules import Point3, Point4, WaitInterval, Vec3, Vec4
+from panda3d.core import CollisionSphere, CollisionTube, CollisionNode
+from panda3d.core import NodePath, BitMask32
+from panda3d.core import Point3, Point4, Vec3, Vec4
+from panda3d.direct import WaitInterval
 from direct.interval.IntervalGlobal import LerpScaleInterval, LerpColorScaleInterval, LerpPosInterval, LerpFunc
 from direct.interval.IntervalGlobal import Func, Sequence, Parallel
 from direct.showbase.DirectObject import DirectObject

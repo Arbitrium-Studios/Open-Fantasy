@@ -1,8 +1,7 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
-from direct.particles import ParticleEffect
-from direct.particles import Particles
-from direct.particles import ForceGroup
+from panda3d.physics import BaseParticleRenderer, BaseParticleEmitter
+from direct.particles import ParticleEffect, Particles, ForceGroup
 import random
 
 

@@ -732,6 +732,7 @@ class OTPClientRepository(ClientRepositoryBase):
     def enterShutdown(self, errorCode=None):
         self.handler = self.handleMessageType
         self.sendDisconnect()
+        self.cancelTimers()
         self.notify.info('Exiting cleanly')
         base.exitShow(errorCode)
 
@@ -960,7 +961,6 @@ class OTPClientRepository(ClientRepositoryBase):
     def enterAfkTimeout(self):
         self.sendSetAvatarIdMsg(0)
         msg = OTPLocalizer.AfkForceAcknowledgeMessage
-        Discord.setData(details='Sleeping', image='sleeping', imageTxt='AFK')
         dialogClass = OTPGlobals.getDialogClass()
         self.afkDialog = dialogClass(
             text=msg,
@@ -978,7 +978,9 @@ class OTPClientRepository(ClientRepositoryBase):
             self.afkDialog.cleanup()
             self.afkDialog = None
         self.handler = None
-        Discord.setData()
+        if base.wantRichPresence:
+            if hasattr(base, 'discord'):
+                base.discord.setData()
         return
 
     @report(types=['args', 'deltaStamp'], dConfigParam='teleport')
@@ -1838,7 +1840,6 @@ class OTPClientRepository(ClientRepositoryBase):
                                    zoneId,
                                    avId]
         localAvatar.setLeftDistrict()
-        Discord.setDistrict(base.cr.activeDistrictMap[shardId].name)
         self.removeShardInterest(self._handleOldShardGone)
 
     @report(types=['args', 'deltaStamp'], dConfigParam='teleport')
@@ -1974,7 +1975,6 @@ class OTPClientRepository(ClientRepositoryBase):
             self.notify.debug(
                 'chose %s: pop %s' %
                 (district.name, district.avatarCount))
-            # Discord.setDistrict(district.name)
         return district
 
     def getShardName(self, shardId):
@@ -2368,6 +2368,13 @@ class OTPClientRepository(ClientRepositoryBase):
             self.notify.info('Sent disconnect message to server')
             self.disconnect()
         self.stopHeartbeat()
+
+    def cancelTimers(self):
+        import threading
+        for thread in threading.enumerate():
+            if isinstance(thread, threading.Timer):
+                thread.cancel()
+                self.notify.info(f'Cancelled timer: {thread.name}')
 
     def _isPlayerDclass(self, dclass):
         return False

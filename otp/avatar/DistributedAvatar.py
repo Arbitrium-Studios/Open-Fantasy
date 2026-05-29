@@ -1,6 +1,6 @@
 import time
 import string
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.distributed import DistributedNode
 from direct.actor.DistributedActor import DistributedActor
 from direct.interval.IntervalGlobal import *
@@ -140,8 +140,6 @@ class DistributedAvatar(DistributedActor, Avatar):
         return
 
     def hpChange(self, quietly=0):
-        if self == base.localAvatar:
-            Discord.setLaff(self.hp, self.maxHp)
         if hasattr(self, 'doId'):
             if self.hp is not None and self.maxHp is not None:
                 messenger.send(
@@ -149,6 +147,9 @@ class DistributedAvatar(DistributedActor, Avatar):
                         self.hp, self.maxHp, quietly])
             if self.hp is not None and self.hp > 0:
                 messenger.send(self.uniqueName('positiveHP'))
+
+        if self == base.localAvatar and base.wantRichPresence:
+            base.discord.setLaff(self.hp, self.maxHp)
         return
 
     def died(self):

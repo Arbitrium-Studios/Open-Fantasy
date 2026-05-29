@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.battle.BattleProps import *
 from toontown.battle.BattleSounds import *
 from toontown.distributed.ToontownMsgTypes import *
@@ -102,6 +102,9 @@ class TownLoader(StateData.StateData):
         TexturePool.garbageCollect()
 
     def enter(self, requestStatus):
+        if base.wantRichPresence:
+            base.discord.setZone(self.zoneId)
+
         teleportDebug(requestStatus, 'TownLoader.enter(%s)' % requestStatus)
         self.fsm.enterInitialState()
         teleportDebug(

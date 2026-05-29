@@ -77,10 +77,8 @@ if defined AS_PYTHON_PATH (
     )
 )
 
-if "%wantDirLogging%" EQU "True" (
-    if "%wantDirLoggingCLS%" EQU "True" (
-        cls
-    )
+if "%wantDirLoggingCLS%" EQU "True" (
+    cls
 )
 
 rem Define some constants for our UberDOG server:

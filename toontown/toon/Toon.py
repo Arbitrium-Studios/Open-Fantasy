@@ -23,8 +23,7 @@ from toontown.distributed import DelayDelete
 from . import AccessoryGlobals
 import importlib
 import functools
-from panda3d.direct import ShowInterval
-from panda3d.direct import HideInterval
+from panda3d.direct import ShowInterval, HideInterval
 
 def teleportDebug(requestStatus, msg, onlyIfToAv=True):
     if teleportNotify.getDebug():
@@ -2362,6 +2361,8 @@ class Toon(Avatar.Avatar, ToonHead):
         self.loop('neutral')
         self.setPlayRate(animMultiplier * 0.4, 'neutral')
         self.setChatAbsolute(SLEEP_STRING, CFThought)
+        if base.wantRichPresence:
+            base.discord.sleeping()
         if self == base.localAvatar:
             print('adding timeout task')
             taskMgr.doMethodLater(

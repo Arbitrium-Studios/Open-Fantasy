@@ -8,23 +8,20 @@ from toontown.classicchars import CharStateDatasAI
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 
-
 class DistributedFoggyFjordAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'DistributedFoggyFjordAI')
+    notify = DirectNotifyGlobal.directNotify.newCategory('DistributedFoggyFjordAI')
 
     def __init__(self, air):
-        DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(
-            self, air, TTLocalizer.FoggyFjord)
+        DistributedCCharBaseAI.DistributedCCharBaseAI.__init__(self, air, TTLocalizer.pFoggyFjord)
         self.fsm = ClassicFSM.ClassicFSM('DistributedFoggyFjordAI', [
-            State.State('Off', self.enterOff, self.exitOff, [
-                'Lonely', 'TransitionToCostume']),
-            State.State('Lonely', self.enterLonely, self.exitLonely, [
-                'Chatty', 'TransitionToCostume']),
-            State.State('Chatty', self.enterChatty, self.exitChatty, [
-                'Lonely', 'TransitionToCostume']),
-            State.State('TransitionToCostume', self.enterTransitionToCostume, self.exitTransitionToCostume, [
-                'Off'])], 'Off', 'Off')
+         State.State('Off', self.enterOff, self.exitOff, [
+          'Lonely', 'TransitionToCostume']),
+         State.State('Lonely', self.enterLonely, self.exitLonely, [
+          'Chatty', 'TransitionToCostume']),
+         State.State('Chatty', self.enterChatty, self.exitChatty, [
+          'Lonely', 'TransitionToCostume']),
+         State.State('TransitionToCostume', self.enterTransitionToCostume, self.exitTransitionToCostume, [
+          'Off'])], 'Off', 'Off')
         self.fsm.enterInitialState()
         self.handleHolidays()
 
@@ -40,11 +37,9 @@ class DistributedFoggyFjordAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
     def generate(self):
         DistributedCCharBaseAI.DistributedCCharBaseAI.generate(self)
         self.lonelyDoneEvent = self.taskName('FoggyFjord-lonely-done')
-        self.lonely = CharStateDatasAI.CharLonelyStateAI(
-            self.lonelyDoneEvent, self)
+        self.lonely = CharStateDatasAI.CharLonelyStateAI(self.lonelyDoneEvent, self)
         self.chattyDoneEvent = self.taskName('FoggyFjord-chatty-done')
-        self.chatty = CharStateDatasAI.CharChattyStateAI(
-            self.chattyDoneEvent, self)
+        self.chatty = CharStateDatasAI.CharChattyStateAI(self.chattyDoneEvent, self)
 
     def start(self):
         self.fsm.request('Lonely')
@@ -88,12 +83,18 @@ class DistributedFoggyFjordAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         if len(self.nearbyAvatars) == 1:
             self.fsm.request('Chatty')
         else:
-            self.notify.debug(
-                'avatarEnterNextState: num avatars: ' + str(len(self.nearbyAvatars)))
+            self.notify.debug('avatarEnterNextState: num avatars: ' + str(len(self.nearbyAvatars)))
 
     def avatarExitNextState(self):
         if len(self.nearbyAvatars) == 0:
             self.fsm.request('Lonely')
+
+    def getCCLocation(self):
+        if self.diffPath is None:
+            return 1
+        else:
+            return 0
+        return
 
     def enterTransitionToCostume(self):
         pass

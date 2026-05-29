@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from . import DistributedCCharBase
 from . import DistributedDonald
@@ -35,27 +35,28 @@ class DistributedFrankenDonald(DistributedDonald.DistributedDonald):
 
     def disable(self):
         self.fsm.requestFinalState()
-        DistributedCCharBase.DistributedCCharBase.disable(self)
-        del self.neutralDoneEvent
-        del self.neutral
-        del self.walkDoneEvent
-        del self.walk
+        # DistributedCCharBase.DistributedCCharBase.disable(self)
+        # del self.neutralDoneEvent
+        # del self.neutral
+        # del self.walkDoneEvent
+        # del self.walk
         self.fsm.requestFinalState()
 
     def generate(self):
-        DistributedCCharBase.DistributedCCharBase.generate(self, self.diffPath)
-        name = self.getName()
-        self.neutralDoneEvent = self.taskName(name + '-neutral-done')
-        self.neutral = CharStateDatas.CharNeutralState(
-            self.neutralDoneEvent, self)
-        self.walkDoneEvent = self.taskName(name + '-walk-done')
-        if self.diffPath is None:
-            self.walk = CharStateDatas.CharWalkState(self.walkDoneEvent, self)
-        else:
-            self.walk = CharStateDatas.CharWalkState(
-                self.walkDoneEvent, self, self.diffPath)
-        self.fsm.request('Neutral')
-        return
+        # DistributedCCharBase.DistributedCCharBase.generate(self, self.diffPath)
+        # name = self.getName()
+        # self.neutralDoneEvent = self.taskName(name + '-neutral-done')
+        # self.neutral = CharStateDatas.CharNeutralState(
+        #     self.neutralDoneEvent, self)
+        # self.walkDoneEvent = self.taskName(name + '-walk-done')
+        # if self.diffPath is None:
+        #     self.walk = CharStateDatas.CharWalkState(self.walkDoneEvent, self)
+        # else:
+        #     self.walk = CharStateDatas.CharWalkState(
+        #         self.walkDoneEvent, self, self.diffPath)
+        # self.fsm.request('Neutral')
+        # return
+        pass
 
     def enterNeutral(self):
         self.notify.debug('Neutral ' + self.getName() + '...')

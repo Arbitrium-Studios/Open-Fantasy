@@ -2,7 +2,7 @@ import urllib.request
 import urllib.parse
 import urllib.error
 import os
-from pandac.PandaModules import HTTPClient, Ramfile
+from panda3d.core import HTTPClient, Ramfile
 from direct.directnotify import DirectNotifyGlobal
 
 

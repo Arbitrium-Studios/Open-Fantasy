@@ -1,18 +1,18 @@
-from pandac.PandaModules import TextPropertiesManager
-from pandac.PandaModules import TextProperties
-from panda3d.core import loadPrcFile, ConfigVariableString
+from panda3d.core import TextPropertiesManager
+from panda3d.core import TextProperties
+from panda3d.core import loadPrcFile, loadPrcFileData, ConfigVariableString
 import string
 from otp.otpbase.OTPLocalizerEnglishProperty import *
 lTundraWonderland = 'Tundra Wonderland'
 lFloweringGrove = 'Flowering Grove'
-lFoggyFjords = "Foggy Fjord"
-lTwilightDreamland = "Twilight Dreamland"
-lHarmoniousHaven = "Harmonious Haven"
+lFoggyFjord = 'Foggy Fjord'
+lTwilightDreamland = 'Twilight Dreamland'
+lHarmoniousHaven = 'Harmonious Haven'
 lToontownCentral = 'Toontown Central'
 lToontownStadium = 'Toontown Stadium'
 lFunnyFarms = 'Funny Farms'
-lAcornAcres = "Acorn Acres"
-lGolfZone = "Toontown's MiniGolf"
+lAcornAcres = 'Acorn Acres'
+lGolfZone = 'Toontown Mini-Golf'
 lCancel = 'Cancel'
 lClose = 'Close'
 lOK = 'OK'
@@ -970,7 +970,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                1103: "Let's go take over a %s building!" % Cog,
                                1104: "Let's go in the elevator!",
                                1105: "Let's go to %s!" % lToontownCentral,
-                               1106: "Let's go to %s!" % lFoggyFjords,
+                               1106: "Let's go to %s!" % lFoggyFjord,
                                1107: "Let's go to %s!" % lHarmoniousHaven,
                                1108: "Let's go to %s!" % lFloweringGrove,
                                1109: "Let's go to %s!" % lTundraWonderland,
@@ -2919,10 +2919,14 @@ def timeElapsedString(timeDelta):
     else:
         return '%s minutes ago' % (timeDelta.seconds / 60)
 
-arbitriumStudios = "Arbitrium Studios"
-playerZeroStudio = "PLAYER ZER0 STUDIO"
-toontownFantasy = "Toontown Fantasy"
+lArbitriumStudios = 'Arbitrium Studios'
+lPlayerZeroStudio = 'PLAYER ZER0 STUDIO'
+lToontownFantasy = 'Toontown Fantasy'
 
 loadPrcFile('etc/Configrc.prc')
-window_title_config = ConfigVariableString('window-title', f"{playerZeroStudio}'s {toontownFantasy}") # Defaults back to "PLAYER ZER0 STUDIO's Toontown Fantasy" if no title is given
+
+prc_data = f"{lPlayerZeroStudio}'s {lToontownFantasy}"
+loadPrcFileData('', f"window-title {prc_data}")
+
+window_title_config = ConfigVariableString('window-title', f'{prc_data}') # Defaults back to "PLAYER ZER0 STUDIO's Toontown Fantasy" if no title is given
 setGameName = window_title_config.getValue()

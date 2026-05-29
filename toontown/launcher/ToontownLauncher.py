@@ -10,7 +10,7 @@ ltime = 1 and time.localtime()
 logSuffix = '%02d%02d%02d_%02d%02d%02d' % (ltime[0] - 2000, ltime[1], ltime[2],
                                            ltime[3], ltime[4], ltime[5])
 
-logfile = 'pzs_Toontown_Fantasy-' + logSuffix + '.log'
+logfile = 'PZS_TTFan-' + logSuffix + '.log'
 
 
 class LogAndOutput:
@@ -35,7 +35,7 @@ logErr = LogAndOutput(sys.__stderr__, log)
 sys.stdout = logOut
 sys.stderr = logErr
 
-print("\n\nStarting PLAYER ZER0 STUDIO's Toontown Fantasy...")
+print(f'\n\nStarting {TTLocalizer.setGameName}...')
 
 if 1:
     print(
@@ -66,10 +66,14 @@ class ToontownLauncher(LauncherBase):
             sys.exit()
 
         self.toontownBlueKey = 'TOONTOWN_BLUE'
-        self.toontownPlayTokenKey = 'TOONTOWN_PLAYTOKEN'
+
+        from toontown.launcher.QuickLauncher import QuickLauncher
+        self.toontownPlayTokenKey = QuickLauncher.getToontownFantasyPlayTokenKey(self)
+
         self.launcherMessageKey = 'LAUNCHER_MESSAGE'
         self.game2DoneKey = 'GAME2_DONE'
-        self.toontownRegistryKey = 'Software\\Disney\\Disney Online\\Toontown'
+        # self.toontownRegistryKey = 'Software\\Disney\\Disney Online\\Toontown'
+        self.toontownRegistryKey = 'Software\\Arbitrium Studios\\PLAYER ZER0 STUDIO\\Toontown Fantasy'
         if self.testServerFlag:
             self.toontownRegistryKey = '%s%s' % (
                 self.toontownRegistryKey, 'Test')

@@ -7,6 +7,7 @@ from toontown.toonbase import TTLocalizer
 from toontown.toontowngui import TTDialog
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase.DisplayOptions import DisplayOptions
+from panda3d.otp import NametagGlobals
 
 
 class DisplaySettingsDialog(DirectFrame, StateData.StateData):

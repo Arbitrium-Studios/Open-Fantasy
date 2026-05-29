@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 GAME_TIME = 60
@@ -83,17 +83,17 @@ AREA_DATA[ToontownGlobals.ToontownCentral]['ANIMATIONS'] = ([('wave', 2.0), (Non
                                                             ('slip-forward', 2.0), (None, 1.0), (None, 1.0)], [('shrug', 2.0), (None, 1.0)])
 AREA_DATA[ToontownGlobals.ToontownCentral]['MOVEMODES'] = (
     [('walk', 1.0), ('run', 0.4)], [('run', 0.4)], [('walk', 1.0), ('sad-walk', 2.5)])
-AREA_DATA[ToontownGlobals.FoggyFjords] = {}
-AREA_DATA[ToontownGlobals.FoggyFjords]['FILMCOUNT'] = 28
-AREA_DATA[ToontownGlobals.FoggyFjords]['TIME'] = 110
-AREA_DATA[ToontownGlobals.FoggyFjords]['CAMERA_INTIAL_POSTION'] = Point3(
+AREA_DATA[ToontownGlobals.FoggyFjord] = {}
+AREA_DATA[ToontownGlobals.FoggyFjord]['FILMCOUNT'] = 28
+AREA_DATA[ToontownGlobals.FoggyFjord]['TIME'] = 110
+AREA_DATA[ToontownGlobals.FoggyFjord]['CAMERA_INTIAL_POSTION'] = Point3(
     0, 50, 20)
-AREA_DATA[ToontownGlobals.FoggyFjords]['DNA_TRIO'] = (
+AREA_DATA[ToontownGlobals.FoggyFjord]['DNA_TRIO'] = (
     'phase_6/dna/storage_DD_sz.dna', 'phase_6/dna/storage_DD.dna', 'phase_6/dna/donalds_dock_sz.dna')
-AREA_DATA[ToontownGlobals.FoggyFjords]['TRIPOD_OFFSET'] = Point3(0, -4.0, 9.0)
-AREA_DATA[ToontownGlobals.FoggyFjords]['START_HPR'] = Point3(
+AREA_DATA[ToontownGlobals.FoggyFjord]['TRIPOD_OFFSET'] = Point3(0, -4.0, 9.0)
+AREA_DATA[ToontownGlobals.FoggyFjord]['START_HPR'] = Point3(
     218.211, -6.7879, 0)
-AREA_DATA[ToontownGlobals.FoggyFjords]['PATHS'] = ([Point3(-115.6, 39.4, 5.692),
+AREA_DATA[ToontownGlobals.FoggyFjord]['PATHS'] = ([Point3(-115.6, 39.4, 5.692),
                                                     Point3(-109.9, -14, 5.692),
                                                     Point3(-112.652, -
                                                            46.7, 5.692),
@@ -144,18 +144,18 @@ AREA_DATA[ToontownGlobals.FoggyFjords]['PATHS'] = ([Point3(-115.6, 39.4, 5.692),
                                                     Point3(-55.102,
                                                            4.041, 0.2),
                                                     Point3(-54.247, 16.051, 0.2)])
-AREA_DATA[ToontownGlobals.FoggyFjords]['PATHANIMREL'] = (0,
+AREA_DATA[ToontownGlobals.FoggyFjord]['PATHANIMREL'] = (0,
                                                          0,
                                                          1,
                                                          2,
                                                          3)
-AREA_DATA[ToontownGlobals.FoggyFjords]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)],
+AREA_DATA[ToontownGlobals.FoggyFjord]['ANIMATIONS'] = ([('wave', 2.0), (None, 1.0)],
                                                         [('slip-forward', 2.0),
                                                          (None, 1.0), (None, 1.0)],
                                                         [('shrug', 2.0),
                                                          (None, 1.0)],
                                                         [(None, 1.0)])
-AREA_DATA[ToontownGlobals.FoggyFjords]['MOVEMODES'] = ([('walk', 1.0)],
+AREA_DATA[ToontownGlobals.FoggyFjord]['MOVEMODES'] = ([('walk', 1.0)],
                                                        [('run', 0.4)],
                                                        [('walk', 1.0),
                                                         ('sad-walk', 2.5)],

@@ -43,7 +43,10 @@ http-timeout 30
 extra-ssl-handshake-time 20.0
 # Compute the SSL random seed early on.
 early-random-seed 1
+
+# News
 news-over-http #f
+## news-index-filename http_news_index.txt
 
 # Notify Settings
 notify-level-collide warning

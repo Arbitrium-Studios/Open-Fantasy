@@ -18,7 +18,7 @@ from toontown.battle import RewardPanel
 from toontown.distributed import DelayDelete
 from toontown.chat import ResistanceChat
 from toontown.coghq import CogDisguiseGlobals
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.otp import *
 import random
 import math
@@ -807,7 +807,8 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.resistanceToon.addActive()
 
     def enterElevator(self):
-        Discord.cfo()
+        if base.wantRichPresence:
+            base.discord.cfo()
         DistributedBossCog.DistributedBossCog.enterElevator(self)
         self.detachNode()
         self.resistanceToon.removeActive()

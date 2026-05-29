@@ -1,8 +1,9 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
+from panda3d.direct import ShowInterval, HideInterval
 
 
 class DistributedTreasure(DistributedObject.DistributedObject):

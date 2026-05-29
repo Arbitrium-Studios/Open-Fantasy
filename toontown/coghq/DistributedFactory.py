@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
@@ -57,6 +57,8 @@ class DistributedFactory(
 
     def setFactoryId(self, id):
         FactoryBase.FactoryBase.setFactoryId(self, id)
+        if base.wantRichPresence:
+            base.discord.setZone(id)
 
     def setForemanConfronted(self, avId):
         if avId == base.localAvatar.doId:

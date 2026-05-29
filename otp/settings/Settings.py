@@ -3,6 +3,15 @@ import os
 
 
 class Settings:
+    defaultSettings = {
+        "music": True,
+        "sfx": True,
+        "show-fps": False,
+        "want-laff-meter-over-head": False,
+        "rich-presence": False,
+        "windowed-mode": True,
+        "accepting-new-friends": True,
+    }
 
     def __init__(self):
         self.__settings = {}
@@ -23,6 +32,9 @@ class Settings:
                 self.__settings = json.load(f)
         except BaseException:
             self.__settings = {}
+
+    def get(self, setting: str):
+        return self.__settings.get(setting)
 
     def writeSettings(self):
         with open(self.__filename, 'w+') as f:

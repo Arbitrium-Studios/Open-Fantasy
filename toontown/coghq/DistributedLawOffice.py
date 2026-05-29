@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
@@ -43,6 +43,8 @@ class DistributedLawOffice(DistributedObject, LawOfficeBase.LawOfficeBase):
 
     def setLawOfficeId(self, id):
         LawOfficeBase.LawOfficeBase.setLawOfficeId(self, id)
+        if base.wantRichPresence:
+            base.discord.setZone(id)
 
     def levelAnnounceGenerate(self):
         self.notify.debug('levelAnnounceGenerate')

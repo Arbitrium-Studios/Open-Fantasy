@@ -528,7 +528,7 @@ class DistributedDivingGame(DistributedMinigame):
                                                                      1.5,
                                                                      65,
                                                                      3],
-                                   ToontownGlobals.FoggyFjords: [1,
+                                   ToontownGlobals.FoggyFjord: [1,
                                                                  1.3,
                                                                  65,
                                                                  1],

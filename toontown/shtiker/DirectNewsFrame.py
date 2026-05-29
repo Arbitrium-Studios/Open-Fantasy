@@ -26,7 +26,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('DirectNewsFrame')
     NewsIndexFilename = ConfigVariableString(
         'news-index-filename', 'http_news_index.txt').value
-    NewsOverHttp = ConfigVariableBool('news-over-http', True).value
+    NewsOverHttp = ConfigVariableBool('news-over-http', False).value
     CacheIndexFilename = 'cache_index.txt'
     SectionIdents = ['hom',
                      'new',
@@ -165,9 +165,13 @@ class DirectNewsFrame(DirectObject.DirectObject):
                 Filename.expandFrom('resources/phase_3.5/models'))
         else:
             # newsCombinedPath = self.NewsStageDir + self.NewsBaseDir
+            newsDir = self.NewsStageDir
             resourcesFolder = "/resources"
             os.environ["TTMODELS"] = "/phase_3.5/models"
             basePath = os.path.expandvars('$TTMODELS')
+            basePathStrQuotated = f'"basePath"'
+            basePathQuotated = f'"{basePath}"'
+            print(f'The {basePathStrQuotated} is set to {basePathQuotated}!\n')
             searchPath.appendDirectory(
                 Filename.fromOsSpecific(
                     resourcesFolder + 

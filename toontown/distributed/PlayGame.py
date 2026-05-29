@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.toontown import *
 from toontown.toonbase.ToonBaseGlobal import *
 from direct.directnotify import DirectNotifyGlobal
@@ -31,7 +31,7 @@ from toontown.parties.PartyGlobals import GoToPartyStatus
 class PlayGame(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('PlayGame')
     Hood2ClassDict = {ToontownGlobals.ToontownCentral: TTHood.TTHood,
-                      ToontownGlobals.FoggyFjords: DDHood.DDHood,
+                      ToontownGlobals.FoggyFjord: DDHood.DDHood,
                       ToontownGlobals.TundraWonderland: BRHood.BRHood,
                       ToontownGlobals.HarmoniousHaven: MMHood.MMHood,
                       ToontownGlobals.FloweringGrove: DGHood.DGHood,
@@ -47,7 +47,7 @@ class PlayGame(StateData.StateData):
                       ToontownGlobals.GolfZone: GZHood.GZHood,
                       ToontownGlobals.PartyHood: PartyHood.PartyHood}
     Hood2StateDict = {ToontownGlobals.ToontownCentral: 'TTHood',
-                      ToontownGlobals.FoggyFjords: 'DDHood',
+                      ToontownGlobals.FoggyFjord: 'DDHood',
                       ToontownGlobals.TundraWonderland: 'BRHood',
                       ToontownGlobals.HarmoniousHaven: 'MMHood',
                       ToontownGlobals.FloweringGrove: 'DGHood',
@@ -166,6 +166,8 @@ class PlayGame(StateData.StateData):
         return
 
     def enter(self, hoodId, zoneId, avId):
+        if base.wantRichPresence:
+            base.discord.setZone(zoneId)
         if hoodId == ToontownGlobals.Tutorial:
             loaderName = 'townLoader'
             whereName = 'toonInterior'
@@ -185,7 +187,6 @@ class PlayGame(StateData.StateData):
                                         'zoneId': zoneId,
                                         'shardId': None,
                                         'avId': avId}])
-        Discord.setZone(zoneId)
         return
 
     def exit(self):

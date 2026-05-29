@@ -1,4 +1,5 @@
-from pandac.PandaModules import *
+from panda3d.core import *
+from direct.showbase import DConfig
 from direct.directnotify.DirectNotifyGlobal import *
 from direct.showbase.MessengerGlobal import *
 from direct.showbase.BulletinBoardGlobal import *
@@ -9,8 +10,7 @@ from direct.showbase.PythonUtil import *
 from otp.otpbase import PythonUtil
 from direct.interval.IntervalManager import ivalMgr
 from direct.task import Task
-from direct.showbase import EventManager
-from direct.showbase import ExceptionVarDump
+from direct.showbase import EventManager, ExceptionVarDump
 import math
 import sys
 import time
@@ -21,35 +21,35 @@ class AIBase:
     notify = directNotify.newCategory('AIBase')
 
     def __init__(self):
-        self.config = getConfigShowbase()
-        __builtins__['__dev__'] = self.config.GetBool('want-dev', 0)
-        __builtins__['__astron__'] = self.config.GetBool('astron-support', 1)
-        __builtins__['__execWarnings__'] = self.config.GetBool(
+        self.config = DConfig
+        __builtins__['__dev__'] = ConfigVariableBool('want-dev', 0)
+        __builtins__['__astron__'] = ConfigVariableBool('astron-support', 1)
+        __builtins__['__execWarnings__'] = ConfigVariableBool(
             'want-exec-warnings', 0)
         logStackDump = (
-            self.config.GetBool(
+            ConfigVariableBool(
                 'log-stack-dump',
-                (not __debug__)) or self.config.GetBool(
+                (not __debug__)) or ConfigVariableBool(
                 'ai-log-stack-dump',
                 (not __debug__)))
-        uploadStackDump = self.config.GetBool('upload-stack-dump', 0)
+        uploadStackDump = ConfigVariableBool('upload-stack-dump', 0)
         if logStackDump or uploadStackDump:
             ExceptionVarDump.install(logStackDump, uploadStackDump)
-        if self.config.GetBool('use-vfs', 1):
+        if ConfigVariableBool('use-vfs', 1):
             vfs = VirtualFileSystem.getGlobalPtr()
         else:
             vfs = None
-        self.wantTk = self.config.GetBool('want-tk', 0)
-        self.AISleep = self.config.GetFloat('ai-sleep', 0.04)
-        self.AIRunningNetYield = self.config.GetBool('ai-running-net-yield', 0)
-        self.AIForceSleep = self.config.GetBool('ai-force-sleep', 0)
+        self.wantTk = ConfigVariableBool('want-tk', 0)
+        self.AISleep = ConfigVariableDouble('ai-sleep', 0.04)
+        self.AIRunningNetYield = ConfigVariableBool('ai-running-net-yield', 0)
+        self.AIForceSleep = ConfigVariableBool('ai-force-sleep', 0)
         self.eventMgr = eventMgr
         self.messenger = messenger
         self.bboard = bulletinBoard
         self.taskMgr = taskMgr
-        Task.TaskManager.taskTimerVerbose = self.config.GetBool(
+        Task.TaskManager.taskTimerVerbose = ConfigVariableBool(
             'task-timer-verbose', 0)
-        Task.TaskManager.extendedExceptions = self.config.GetBool(
+        Task.TaskManager.extendedExceptions = ConfigVariableBool(
             'extended-exceptions', 0)
         self.sfxManagerList = None
         self.musicManager = None
@@ -66,68 +66,70 @@ class AIBase:
         __builtins__['globalClock'] = globalClock
         __builtins__['vfs'] = vfs
         __builtins__['hidden'] = self.hidden
-        AIBase.notify.info('__dev__ == %s' % __dev__)
-        AIBase.notify.info('__astron__ == %s' % __astron__)
+        # AIBase.notify.info('__dev__ == %s' % __dev__)
+        AIBase.notify.debug('__dev__ == %s' % __dev__)
+        AIBase.notify.debug('__astron__ == %s' % __astron__)
         PythonUtil.recordFunctorCreationStacks()
-        __builtins__['wantTestObject'] = self.config.GetBool(
+        __builtins__['wantTestObject'] = ConfigVariableBool(
             'want-test-object', 0)
-        self.wantStats = self.config.GetBool('want-pstats', 0)
-        Task.TaskManager.pStatsTasks = self.config.GetBool('pstats-tasks', 0)
+        self.wantStats = ConfigVariableBool('want-pstats', 0)
+        Task.TaskManager.pStatsTasks = ConfigVariableBool('pstats-tasks', 0)
         taskMgr.resumeFunc = PStatClient.resumeAfterPause
         defaultValue = 1
         if __dev__:
             defaultValue = 0
-        wantFakeTextures = self.config.GetBool(
+        wantFakeTextures = ConfigVariableBool(
             'want-fake-textures-ai', defaultValue)
         if wantFakeTextures:
+            from panda3d.core import loadPrcFileData
             loadPrcFileData('aibase', 'textures-header-only 1')
-        self.wantPets = self.config.GetBool('want-pets', 1)
+        self.wantPets = ConfigVariableBool('want-pets', 1)
         if self.wantPets:
             if game.name == 'toontown':
                 from toontown.pets import PetConstants
-                self.petMoodTimescale = self.config.GetFloat(
+                self.petMoodTimescale = ConfigVariableDouble(
                     'pet-mood-timescale', 1.0)
-                self.petMoodDriftPeriod = self.config.GetFloat(
+                self.petMoodDriftPeriod = ConfigVariableDouble(
                     'pet-mood-drift-period', PetConstants.MoodDriftPeriod)
-                self.petThinkPeriod = self.config.GetFloat(
+                self.petThinkPeriod = ConfigVariableDouble(
                     'pet-think-period', PetConstants.ThinkPeriod)
-                self.petMovePeriod = self.config.GetFloat(
+                self.petMovePeriod = ConfigVariableDouble(
                     'pet-move-period', PetConstants.MovePeriod)
-                self.petPosBroadcastPeriod = self.config.GetFloat(
+                self.petPosBroadcastPeriod = ConfigVariableDouble(
                     'pet-pos-broadcast-period', PetConstants.PosBroadcastPeriod)
-        self.wantBingo = self.config.GetBool('want-fish-bingo', 1)
-        self.wantKarts = self.config.GetBool('wantKarts', 1)
-        self.newDBRequestGen = self.config.GetBool(
+        self.wantBingo = ConfigVariableBool('want-fish-bingo', 1)
+        self.wantKarts = ConfigVariableBool('wantKarts', 1)
+        self.newDBRequestGen = ConfigVariableBool(
             'new-database-request-generate', 1)
-        self.waitShardDelete = self.config.GetBool('wait-shard-delete', 1)
-        self.blinkTrolley = self.config.GetBool('blink-trolley', 0)
-        self.fakeDistrictPopulations = self.config.GetBool(
+        self.waitShardDelete = ConfigVariableBool('wait-shard-delete', 1)
+        self.blinkTrolley = ConfigVariableBool('blink-trolley', 0)
+        self.fakeDistrictPopulations = ConfigVariableBool(
             'fake-district-populations', 0)
-        self.wantSwitchboard = self.config.GetBool('want-switchboard', 0)
-        self.wantSwitchboardHacks = self.config.GetBool(
+        self.wantSwitchboard = ConfigVariableBool('want-switchboard', 0)
+        self.wantSwitchboardHacks = ConfigVariableBool(
             'want-switchboard-hacks', 0)
-        self.GEMdemoWhisperRecipientDoid = self.config.GetBool(
+        self.GEMdemoWhisperRecipientDoid = ConfigVariableBool(
             'gem-demo-whisper-recipient-doid', 0)
-        self.sqlAvailable = self.config.GetBool('sql-available', 1)
+        self.sqlAvailable = ConfigVariableBool('sql-available', 1)
         self.createStats()
         self.restart()
         return
 
     def setupCpuAffinities(self, minChannel):
         if game.name == 'uberDog':
-            affinityMask = self.config.GetInt('uberdog-cpu-affinity-mask', -1)
+            affinityMask = ConfigVariableInt('uberdog-cpu-affinity-mask', -1)
         else:
-            affinityMask = self.config.GetInt('ai-cpu-affinity-mask', -1)
+            affinityMask = ConfigVariableInt('ai-cpu-affinity-mask', -1)
         if affinityMask != -1:
             TrueClock.getGlobalPtr().setCpuAffinity(affinityMask)
         else:
-            autoAffinity = self.config.GetBool('auto-single-cpu-affinity', 0)
+            autoAffinity = ConfigVariableBool('auto-single-cpu-affinity', 0)
             if game.name == 'uberDog':
-                affinity = self.config.GetInt('uberdog-cpu-affinity', -1)
+                affinity = ConfigVariableInt('uberdog-cpu-affinity', -1)
                 if autoAffinity and affinity == -1:
                     affinity = 2
             else:
-                affinity = self.config.GetInt('ai-cpu-affinity', -1)
+                affinity = ConfigVariableInt('ai-cpu-affinity', -1)
                 if autoAffinity and affinity == -1:
                     affinity = 1
             if affinity != -1:

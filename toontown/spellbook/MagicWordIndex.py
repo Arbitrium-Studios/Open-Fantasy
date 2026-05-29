@@ -115,7 +115,7 @@ class MagicWord:
         'ttc': ToontownGlobals.ToontownCentral,
         'tt': ToontownGlobals.ToontownCentral,
         'tc': ToontownGlobals.ToontownCentral,
-        'dd': ToontownGlobals.FoggyFjords,
+        'dd': ToontownGlobals.FoggyFjord,
         'dg': ToontownGlobals.FloweringGrove,
         'mml': ToontownGlobals.HarmoniousHaven,
         'mm': ToontownGlobals.HarmoniousHaven,

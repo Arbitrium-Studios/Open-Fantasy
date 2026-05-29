@@ -241,7 +241,7 @@ class Avatar(Actor, ShadowCaster):
                 return
         self._name = name
         if hasattr(self, 'nametag'):
-            self.nametag.setName(name)
+            self.nametag.setName(self._name)
 
     def setDisplayName(self, str):
         if hasattr(self, 'isDisguised'):

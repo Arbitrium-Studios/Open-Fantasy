@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from . import SafeZoneLoader
 from . import DDPlayground
 from direct.fsm import State
@@ -28,6 +28,9 @@ class DDSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
             'phase_4/audio/sfx/AV_swim_single_stroke.ogg')
         self.submergeSound = base.loader.loadSfx(
             'phase_5.5/audio/sfx/AV_jump_in_water.ogg')
+        # self.water = self.geom.find('**/water')
+        # self.water.setTransparency(1)
+        # self.water.setColorScale(1, 1, 1, 0.8) # Was setColor
         water = self.geom.find('**/water')
         water.setTransparency(1)
         water.setColor(1, 1, 1, 0.8)

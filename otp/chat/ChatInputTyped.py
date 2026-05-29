@@ -2,7 +2,7 @@ from direct.showbase import DirectObject
 from otp.otpbase import OTPGlobals
 import sys
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.otpbase import OTPLocalizer
 
 
@@ -131,7 +131,7 @@ class ChatInputTyped(DirectObject.DirectObject):
         if not ChatInputTyped.ExecNamespace:
             ChatInputTyped.ExecNamespace = {}
             exec(
-                'from pandac.PandaModules import *',
+                'from panda3d.core import *',
                 globals(),
                 self.ExecNamespace)
             self.importExecNamespace()

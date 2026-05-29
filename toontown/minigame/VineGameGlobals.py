@@ -1,5 +1,5 @@
 from toontown.toonbase import ToontownGlobals
-from pandac.PandaModules import BitMask32
+from panda3d.core import BitMask32
 NumVines = 20
 GameDuration = 70
 ShowScoresDuration = 4.0
@@ -219,7 +219,7 @@ CourseWeights = {ToontownGlobals.ToontownCentral: ((0, 25),
                                                    (1, 25),
                                                    (2, 25),
                                                    (3, 25)),
-                 ToontownGlobals.FoggyFjords: ((1, 25),
+                 ToontownGlobals.FoggyFjord: ((1, 25),
                                                (2, 25),
                                                (3, 25),
                                                (4, 25)),
@@ -241,19 +241,19 @@ CourseWeights = {ToontownGlobals.ToontownCentral: ((0, 25),
                                                     (7, 20),
                                                     (8, 20))}
 BaseBonusOnEndVine = {ToontownGlobals.ToontownCentral: 4,
-                      ToontownGlobals.FoggyFjords: 5,
+                      ToontownGlobals.FoggyFjord: 5,
                       ToontownGlobals.FloweringGrove: 6,
                       ToontownGlobals.HarmoniousHaven: 7,
                       ToontownGlobals.TundraWonderland: 8,
                       ToontownGlobals.TwilightDreamland: 9}
 BatInfo = {ToontownGlobals.ToontownCentral: ((60, 0, 0.35),),
-           ToontownGlobals.FoggyFjords: ((60, 0, 0.25), (30, 30)),
+           ToontownGlobals.FoggyFjord: ((60, 0, 0.25), (30, 30)),
            ToontownGlobals.FloweringGrove: ((60, 0, 0.25), (15, 30)),
            ToontownGlobals.HarmoniousHaven: ((60, 0, 0.25), (10, 25)),
            ToontownGlobals.TundraWonderland: ((60, 0, 0.25), (30, 30), (30, 20)),
            ToontownGlobals.TwilightDreamland: ((60, 0, 0.25), (30, 30), (10, 20))}
 SpiderLimits = {ToontownGlobals.ToontownCentral: 1,
-                ToontownGlobals.FoggyFjords: 2,
+                ToontownGlobals.FoggyFjord: 2,
                 ToontownGlobals.FloweringGrove: 2,
                 ToontownGlobals.HarmoniousHaven: 3,
                 ToontownGlobals.TundraWonderland: 3,

@@ -5,7 +5,7 @@ from direct.distributed.ClockDelta import *
 from direct.showbase.PythonUtil import Functor
 from direct.showbase.PythonUtil import StackTrace
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from panda3d.otp import *
 from direct.fsm import FSM
 from direct.fsm import ClassicFSM
@@ -816,7 +816,8 @@ class DistributedLawbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.witnessToon.addActive()
 
     def enterElevator(self):
-        Discord.cj()
+        if base.wantRichPresence:
+            base.discord.cj()
         self.notify.debug('----- enterElevator')
         DistributedBossCog.DistributedBossCog.enterElevator(self)
         self.witnessToon.removeActive()

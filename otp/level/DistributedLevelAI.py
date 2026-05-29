@@ -1,4 +1,4 @@
-from pandac import PandaModules as PM
+# from pandac import PandaModules as PM
 from otp.ai.AIBaseGlobal import *
 from direct.distributed.ClockDelta import *
 from direct.distributed import DistributedObjectAI

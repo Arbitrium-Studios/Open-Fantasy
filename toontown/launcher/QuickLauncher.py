@@ -2,7 +2,7 @@ import os
 from direct.showbase.EventManagerGlobal import *
 from panda3d.core import *
 from otp.launcher.LauncherBase import LauncherBase
-from toontown.toonbase import TTLocalizer
+from toontown.toonbase import TTLocalizer, ToontownGlobals
 
 
 class QuickLauncher(LauncherBase):
@@ -15,10 +15,7 @@ class QuickLauncher(LauncherBase):
         LauncherBase.__init__(self)
         self.useTTSpecificLogin = ConfigVariableBool(
             'tt-specific-login', 0).value
-        if self.useTTSpecificLogin:
-            self.toontownPlayTokenKey = 'TTFAN_LOGIN_TOKEN' # Was LOGIN_TOKEN
-        else:
-            self.toontownPlayTokenKey = 'PLAYTOKEN'
+        self.toontownPlayTokenKey = self.getToontownFantasyPlayTokenKey()
         print('useTTSpecificLogin=%s' % self.useTTSpecificLogin)
         self.secretNeedsParentPasswordKey = False
         self.chatEligibleKey = True
@@ -26,11 +23,25 @@ class QuickLauncher(LauncherBase):
         self.maybeStartGame()
         self.mainLoop()
 
+    def getToontownFantasyPlayTokenKey(self):
+        self.useTTSpecificLogin = ConfigVariableBool(
+        'tt-specific-login', 0).value
+
+        if self.useTTSpecificLogin:
+            self.toontownPlayTokenKey = ToontownGlobals.defaultToontownPlayTokenKey
+        else:
+            # self.toontownPlayTokenKey = 'PLAYTOKEN'
+            self.toontownPlayTokenKey = ToontownGlobals.fallbackToontownPlayTokenKey
+        print(f'The toontownPlayTokenKey variable is set to {self.toontownPlayTokenKey}')
+        return self.toontownPlayTokenKey
+
     def getValue(self, key, default=None):
         return os.environ.get(key, default)
 
     def setValue(self, key, value):
-        os.environ[key] = str(value)
+        if not isinstance(value, str):
+            value = str(value)
+        os.environ[key] = value
 
     def getTestServerFlag(self):
         return self.getValue('IS_TEST_SERVER', 0)
@@ -39,7 +50,7 @@ class QuickLauncher(LauncherBase):
         return self.getValue('GAME_SERVER', '')
 
     def getLogFileName(self):
-        return 'PZS_TTFan' # Was pzs_TTFan_gl
+        return 'PZS_TTFan'
 
     def getBlue(self):
         blue = self.getValue(self.toontownBlueKey)
@@ -47,6 +58,11 @@ class QuickLauncher(LauncherBase):
         if blue == 'NO BLUE':
             blue = None
         return blue
+
+    def getUsername(self):
+        toontownPlayTokenKey = self.toontownPlayTokenKey
+        self.username = QuickLauncher.getValue(self, key=toontownPlayTokenKey, default=None)
+        return self.username
 
     def getPlayToken(self):
         playToken = self.getValue(self.toontownPlayTokenKey)

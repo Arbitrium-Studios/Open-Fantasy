@@ -1310,7 +1310,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
         return
 
     def playSplashEffect(self, x, y, z):
-        if localAvatar.zoneId not in [ToontownGlobals.FoggyFjords, ToontownGlobals.AcornAcres] and (
+        if localAvatar.zoneId not in [ToontownGlobals.FoggyFjord, ToontownGlobals.AcornAcres] and (
                 not hasattr(localAvatar, 'inEstate') or localAvatar.inEstate != 1):
             if random.random() < 0.1:
                 self.sendLogSuspiciousEvent(

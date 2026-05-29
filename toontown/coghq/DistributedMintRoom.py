@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
@@ -52,6 +52,8 @@ class DistributedMintRoom(DistributedLevel.DistributedLevel,
     def setMintId(self, mintId):
         self.notify.debug('mintId: %s' % mintId)
         MintRoomBase.MintRoomBase.setMintId(self, mintId)
+        if base.wantRichPresence:
+            base.discord.setZone(mintId)
 
     def setRoomId(self, roomId):
         self.notify.debug('roomId: %s' % roomId)
