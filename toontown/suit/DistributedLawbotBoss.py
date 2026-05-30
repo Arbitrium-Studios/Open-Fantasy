@@ -1899,10 +1899,10 @@ class DistributedLawbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 self, 'Ff_speech', loop=1))
         return bossTrack
 
-    def makeEpilogueMovie(self):
-        epSpeech = TTLocalizer.WitnessToonCongratulations
+    def makeEpilogueMovie(self) -> Sequence:
+        epSpeech: str = TTLocalizer.WitnessToonCongratulations
         epSpeech = self.__talkAboutPromotion(epSpeech)
-        bossTrack = Sequence(
+        bossTrack: Sequence = Sequence(
             Func(
                 self.witnessToon.animFSM.request, 'neutral'), Func(
                 self.witnessToon.setLocalPageChat, epSpeech, 0))
@@ -1985,7 +1985,7 @@ class DistributedLawbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 toon.loop('neutral')
                 toon.show()
 
-    def __talkAboutPromotion(self, speech):
+    def __talkAboutPromotion(self, speech: str) -> str:
         if self.prevCogSuitLevel < ToontownGlobals.MaxCogSuitLevel:
             newCogSuitLevel = localAvatar.getCogLevels()[
                 CogDisguiseGlobals.dept2deptIndex(

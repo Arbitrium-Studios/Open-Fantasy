@@ -13,13 +13,13 @@ SkipMovie = 0
 BaseHp = 15
 Tracks = TTLocalizer.BattleGlobalTracks
 NPCTracks = TTLocalizer.BattleGlobalNPCTracks
-TrackColors = ((211 / 255.0, 148 / 255.0, 255 / 255.0),
-               (249 / 255.0, 255 / 255.0, 93 / 255.0),
-               (79 / 255.0, 190 / 255.0, 76 / 255.0),
-               (93 / 255.0, 108 / 255.0, 239 / 255.0),
-               (255 / 255.0, 145 / 255.0, 66 / 255.0),
-               (255 / 255.0, 65 / 255.0, 199 / 255.0),
-               (67 / 255.0, 243 / 255.0, 255 / 255.0))
+TrackColors: tuple[tuple[float, float, float], ...] = ((211 / 255.0, 148 / 255.0, 255 / 255.0),
+                                                       (249 / 255.0, 255 / 255.0, 93 / 255.0),
+                                                       (79 / 255.0, 190 / 255.0, 76 / 255.0),
+                                                       (93 / 255.0, 108 / 255.0, 239 / 255.0),
+                                                       (255 / 255.0, 145 / 255.0, 66 / 255.0),
+                                                       (255 / 255.0, 65 / 255.0, 199 / 255.0),
+                                                       (67 / 255.0, 243 / 255.0, 255 / 255.0))
 HEAL_TRACK = 0
 TRAP_TRACK = 1
 LURE_TRACK = 2
@@ -106,7 +106,7 @@ def gagIsPaidOnly(track, level):
     return Levels[track][level] > UnpaidMaxSkills[track]
 
 
-def gagIsVelvetRoped(track, level):
+def gagIsVelvetRoped(track, level) -> bool:
     if level > 0:
         if track in [4, 5]:
             if level > 3:
@@ -767,7 +767,7 @@ def getFactoryMeritMultiplier(factoryId):
     return 4.0
 
 
-def getMintCreditMultiplier(mintId):
+def getMintCreditMultiplier(mintId) -> float:
     return {CashbotMintIntA: 2.0,
      CashbotMintIntB: 2.5,
      CashbotMintIntC: 3.0}.get(mintId, 1.0)

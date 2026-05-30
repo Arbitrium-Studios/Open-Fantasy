@@ -2,11 +2,11 @@ from direct.particles.ParticleEffect import *
 import os
 from direct.directnotify import DirectNotifyGlobal
 notify = DirectNotifyGlobal.directNotify.newCategory('BattleParticles')
-TutorialParticleEffects = (
+TutorialParticleEffects: tuple[str, ...] = (
     'gearExplosionBig.ptf',
     'gearExplosionSmall.ptf',
     'gearExplosion.ptf')
-ParticleNames = (
+ParticleNames: tuple[str, ...] = (
     'audit-div',
     'audit-five',
     'audit-four',
@@ -65,7 +65,7 @@ particleModel = None
 particleSearchPath = None
 
 
-def loadParticles():
+def loadParticles() -> None:
     global particleModel
     if particleModel is None:
         particleModel = loader.loadModel(
@@ -73,7 +73,7 @@ def loadParticles():
     return
 
 
-def unloadParticles():
+def unloadParticles() -> None:
     global particleModel
     if particleModel is not None:
         particleModel.removeNode()
@@ -92,7 +92,7 @@ def getParticle(name):
     return None
 
 
-def loadParticleFile(name):
+def loadParticleFile(name) -> ParticleEffect | None:
     global particleSearchPath
     if particleSearchPath is None:
         particleSearchPath = DSearchPath()
@@ -114,12 +114,12 @@ def loadParticleFile(name):
         notify.warning('loadParticleFile() - no path: %s' % name)
         return
     notify.debug('Loading particle file: %s' % pfile)
-    effect = ParticleEffect()
+    effect: ParticleEffect = ParticleEffect()
     effect.loadConfig(pfile)
     return effect
 
 
-def createParticleEffect(name=None, file=None, numParticles=None, color=None):
+def createParticleEffect(name=None, file=None, numParticles=None, color=None) -> ParticleEffect | None:
     if not name:
         fileName = file + '.ptf'
         return loadParticleFile(fileName)
@@ -185,7 +185,7 @@ def createParticleEffect(name=None, file=None, numParticles=None, color=None):
     return None
 
 
-def setEffectTexture(effect, name, color=None):
+def setEffectTexture(effect: ParticleEffect, name, color=None) -> None:
     particles = effect.getParticlesNamed('particles-1')
     np = getParticle(name)
     if color:
@@ -207,8 +207,8 @@ def __makeGearExplosion(numParticles=None, style='Normal'):
     return effect
 
 
-def __makeRubOut(color=None):
-    effect = loadParticleFile('demotionUnFreeze.ptf')
+def __makeRubOut(color=None) -> ParticleEffect:
+    effect: ParticleEffect = loadParticleFile('demotionUnFreeze.ptf')
     loadParticles()
     setEffectTexture(effect, 'snow-particle')
     particles = effect.getParticlesNamed('particles-1')
@@ -223,8 +223,8 @@ def __makeRubOut(color=None):
     return effect
 
 
-def __makeShiftLift():
-    effect = loadParticleFile('pixieDrop.ptf')
+def __makeShiftLift() -> ParticleEffect:
+    effect: ParticleEffect = loadParticleFile('pixieDrop.ptf')
     particles = effect.getParticlesNamed('particles-1')
     particles.renderer.setCenterColor(Vec4(1, 1, 0, 0.9))
     particles.renderer.setEdgeColor(Vec4(1, 1, 0, 0.6))

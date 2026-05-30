@@ -775,7 +775,7 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 toon.loop('neutral')
                 toon.show()
 
-    def __talkAboutPromotion(self, speech):
+    def __talkAboutPromotion(self, speech: str) -> str:
         if self.prevCogSuitLevel < ToontownGlobals.MaxCogSuitLevel:
             newCogSuitLevel = localAvatar.getCogLevels()[
                 CogDisguiseGlobals.dept2deptIndex(
@@ -1040,7 +1040,7 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             else:
                 trackName = TTLocalizer.BattleGlobalTracks[value]
                 instructions = TTLocalizer.ResistanceToonRestockInstructions % trackName
-        speech = TTLocalizer.ResistanceToonCongratulations % (
+        speech: str = TTLocalizer.ResistanceToonCongratulations % (
             text, instructions)
         speech = self.__talkAboutPromotion(speech)
         self.resistanceToon.setLocalPageChat(speech, 0)

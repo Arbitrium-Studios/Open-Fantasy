@@ -778,7 +778,7 @@ class BattleCalculatorAI:
                 else:
                     self.kbBonuses[tgtPos][track] = [[attackIndex, dmg]]
 
-    def __clearBonuses(self, hp=1):
+    def __clearBonuses(self, hp=1) -> None:
         if hp:
             self.hpBonuses = [{}, {}, {}, {}]
         else:
@@ -1065,7 +1065,7 @@ class BattleCalculatorAI:
     def __unlureAtk(self, attackIndex, toon=1):
         attack = self.battle.toonAttacks[attackIndex]
         track = self.__getActualTrack(attack)
-        if toon and (track == THROW or track == SQUIRT or track == SOUND):
+        if toon and track in (THROW, SQUIRT, SOUND):
             if self.notify.getDebug():
                 self.notify.debug('attack is an unlure')
             return 1
@@ -1213,12 +1213,12 @@ class BattleCalculatorAI:
                 self.toonHPAdjusts[t] -= attack[SUIT_HP_COL][position]
                 self.notify.debug('Toon ' + str(t) + ' now has ' + str(self.__getToonHp(t)) + ' health')
 
-    def __suitCanAttack(self, suitId):
+    def __suitCanAttack(self, suitId) -> bool:
         if self.__combatantDead(suitId, toon=0) or self.__suitIsLured(suitId) or self.__combatantJustRevived(suitId):
             return False
         return True
 
-    def __updateSuitAtkStat(self, toonId):
+    def __updateSuitAtkStat(self, toonId) -> None:
         if toonId in self.suitAtkStats:
             self.suitAtkStats[toonId] += 1
         else:
@@ -1417,7 +1417,7 @@ class BattleCalculatorAI:
         self.__clearTrapCreator(toonId)
         self.__clearLurer(toonId)
 
-    def suitLeftBattle(self, suitId):
+    def suitLeftBattle(self, suitId) -> None:
         if self.notify.getDebug():
             self.notify.debug('suitLeftBattle(): ' + str(suitId))
         self.__removeLured(suitId)
@@ -1452,11 +1452,11 @@ class BattleCalculatorAI:
             self.toonSkillPtsGained, toonId, track)
 
     def getLuredSuits(self):
-        luredSuits = list(self.currentlyLuredSuits.keys())
+        luredSuits: list = list(self.currentlyLuredSuits.keys())
         self.notify.debug('Lured suits reported to battle: ' + repr(luredSuits))
         return luredSuits
 
-    def __suitIsLured(self, suitId, prevRound=False):
+    def __suitIsLured(self, suitId, prevRound: bool = False):
         inList = suitId in self.currentlyLuredSuits
         if prevRound:
             return inList and self.currentlyLuredSuits[suitId][0] != -1

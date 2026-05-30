@@ -51,8 +51,7 @@ class DistributedBattleBaseAI(
         self.toonOrigMerits = {}
         self.toonMerits = {}
         self.toonParts = {}
-        self.battleCalc = BattleCalculatorAI.BattleCalculatorAI(
-            self, tutorialFlag)
+        self.battleCalc: BattleCalculatorAI.BattleCalculatorAI = BattleCalculatorAI.BattleCalculatorAI(self, tutorialFlag)
         if self.air.suitInvasionManager.getInvading():
             mult = getInvasionMultiplier()
             self.battleCalc.setSkillCreditMultiplier(mult)
@@ -558,10 +557,7 @@ class DistributedBattleBaseAI(
         self.toons.append(avId)
         toon = simbase.air.doId2do.get(avId)
         if toon:
-            if hasattr(self, 'doId'):
-                toon.b_setBattleId(self.doId)
-            else:
-                toon.b_setBattleId(-1)
+            toon.b_setBattleId(getattr(self, 'doId', -1))
             messageToonAdded = 'Battle adding toon %s' % avId
             messenger.send(messageToonAdded, [avId])
         if self.fsm is not None and self.fsm.getCurrentState().getName() == 'PlayMovie':
@@ -712,6 +708,7 @@ class DistributedBattleBaseAI(
             self.__requestAdjust()
 
     def __removeSuit(self, suit):
+    def __removeSuit(self, suit) -> None:
         self.notify.debug('__removeSuit(%d)' % suit.doId)
         if self.suits.count(suit) != 0:
             self.suits.remove(suit)

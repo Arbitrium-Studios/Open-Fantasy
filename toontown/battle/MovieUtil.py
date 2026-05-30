@@ -138,7 +138,7 @@ def getActorIntervals(props, anim):
     return tracks
 
 
-def getScaleIntervals(props, duration, startScale, endScale):
+def getScaleIntervals(props, duration: float, startScale, endScale) -> Parallel:
     tracks = Parallel()
     for prop in props:
         tracks.append(
@@ -209,7 +209,7 @@ def removeReviveSuit(suit, deathSuit):
     suit.reseatHealthBarForSkele()
 
 
-def virtualize(deathsuit):
+def virtualize(deathsuit) -> None:
     actorNode = deathsuit.find('**/__Actor_modelRoot')
     actorCollection = actorNode.findAllMatches('*')
     parts = ()
@@ -681,14 +681,14 @@ T_TELEPORT_ANIM = 3.3
 T_HOLE_CLOSES = 0.3
 
 
-def getToonTeleportOutInterval(toon):
+def getToonTeleportOutInterval(toon) -> Parallel:
     holeActors = toon.getHoleActors()
     holes = [holeActors[0], holeActors[1]]
     hole = holes[0]
     hole2 = holes[1]
     hands = toon.getRightHands()
-    delay = T_HOLE_LEAVES_HAND
-    dur = T_TELEPORT_ANIM
+    delay: float = T_HOLE_LEAVES_HAND
+    dur: float = T_TELEPORT_ANIM
     holeTrack = Sequence()
     holeTrack.append(Func(showProps, holes, hands))
     (holeTrack.append(Wait(0.5)),)
@@ -815,7 +815,6 @@ def startSparksIval(tntProp):
     return Func(sparks.start, tip)
 
 
-def indicateMissed(actor, duration=1.1, scale=0.7):
     actor.showHpString(
         TTLocalizer.AttackMissed,
         duration=duration,

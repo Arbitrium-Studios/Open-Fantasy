@@ -75,7 +75,7 @@ def attackAffectsGroup(track, level, type=None):
         return 0
 
 
-def getToonAttack(id, track=NO_ATTACK, level=-1, target=-1):
+def getToonAttack(id, track=NO_ATTACK, level=-1, target=-1) -> list:
     return [id,
             track,
             level,
@@ -282,6 +282,6 @@ class BattleBase:
         self.notify.debug('buildJoinPointList() - plist: %s' % plist)
         return plist
 
-    def addHelpfulToon(self, toonId):
+    def addHelpfulToon(self, toonId) -> None:
         if toonId not in self.helpfulToons:
             self.helpfulToons.append(toonId)

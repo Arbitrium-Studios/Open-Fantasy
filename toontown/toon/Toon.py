@@ -359,15 +359,15 @@ def compileGlobalAnimList():
                  Phase9AnimList,
                  Phase10AnimList,
                  Phase12AnimList]
-    phaseStrList = ['phase_3',
-                    'phase_3.5',
-                    'phase_4',
-                    'phase_5',
-                    'phase_5.5',
-                    'phase_6',
-                    'phase_9',
-                    'phase_10',
-                    'phase_12']
+    phaseStrList: list[str] = ['phase_3',
+                               'phase_3.5',
+                               'phase_4',
+                               'phase_5',
+                               'phase_5.5',
+                               'phase_6',
+                               'phase_9',
+                               'phase_10',
+                               'phase_12']
     for animList in phaseList:
         phaseStr = phaseStrList[phaseList.index(animList)]
         for key in list(LegDict.keys()):
@@ -390,7 +390,7 @@ def compileGlobalAnimList():
                     HeadAnimDict[key][anim[0]] = file
 
 
-def loadDialog():
+def loadDialog() -> None:
     loadPath = 'phase_3.5/audio/dial/'
 
     DogDialogueFiles = (
@@ -3177,15 +3177,15 @@ class Toon(Avatar.Avatar, ToonHead):
                 None, lerpTime, keepDefault=1))
         return Sequence()
 
-    def putOnSuit(self, suitType, setDisplayName=True, rental=False):
+    def putOnSuit(self, suitType, setDisplayName=True, rental=False) -> None:
         if self.isDisguised:
             self.takeOffSuit()
         if launcher and not launcher.getPhaseComplete(5):
             return
         from toontown.suit import Suit
         deptIndex = suitType
-        suit = Suit.Suit()
-        dna = SuitDNA.SuitDNA()
+        suit: Suit.Suit = Suit.Suit()
+        dna: SuitDNA.SuitDNA = SuitDNA.SuitDNA()
         if rental == True:
             match SuitDNA.suitDepts[deptIndex]:
                 case 's':
@@ -3267,7 +3267,7 @@ class Toon(Avatar.Avatar, ToonHead):
                                                                              'mgr': ''})
             self.nametag.setNameWordwrap(9.0)
 
-    def takeOffSuit(self):
+    def takeOffSuit(self) -> None:
         if not self.isDisguised:
             return
         suitType = self.suit.style.name

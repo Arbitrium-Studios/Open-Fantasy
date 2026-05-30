@@ -499,20 +499,21 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         return Sequence(bossTrack, Func(self.getGeomNode().setH,
                         0), name=self.uniqueName('BattleTwo'))
 
-    def cagedToonMovieFunction(self, instruct, cageIndex):
+    def cagedToonMovieFunction(self, instruct: int, cageIndex) -> None:
         self.notify.debug('cagedToonMovieFunction()')
         if not (hasattr(self, 'cagedToon') and hasattr(self.cagedToon,
                 'nametag') and hasattr(self.cagedToon, 'nametag3d')):
             return
-        if instruct == 1:
-            self.cagedToon.nametag3d.setScale(2)
-        elif instruct == 2:
-            self.cagedToon.setChatAbsolute(
-                TTLocalizer.CagedToonDrop[cageIndex], CFSpeech)
-        elif instruct == 3:
-            self.cagedToon.nametag3d.setScale(1)
-        elif instruct == 4:
-            self.cagedToon.clearChat()
+        match instruct:
+            case 1:
+                self.cagedToon.nametag3d.setScale(2)
+            case 2:
+                self.cagedToon.setChatAbsolute(
+                    TTLocalizer.CagedToonDrop[cageIndex], CFSpeech)
+            case 3:
+                self.cagedToon.nametag3d.setScale(1)
+            case 4:
+                self.cagedToon.clearChat()
 
     def makeEndOfBattleMovie(self, hasLocalToon):
         name = self.uniqueName('CageDrop')
@@ -564,7 +565,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         duration = bossTrack.getDuration()
         return bossTrack
 
-    def __talkAboutPromotion(self, speech):
+    def __talkAboutPromotion(self, speech: str) -> str:
         if not self.localToonPromoted:
             pass
         elif self.prevCogSuitLevel < ToontownGlobals.MaxCogSuitLevel:
@@ -582,11 +583,11 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                 ToontownGlobals.MaxCogSuitLevel + 1)
         return speech
 
-    def __makeCageOpenMovie(self):
-        speech = TTLocalizer.CagedToonThankYou
+    def __makeCageOpenMovie(self) -> Sequence:
+        speech: str = TTLocalizer.CagedToonThankYou
         speech = self.__talkAboutPromotion(speech)
         name = self.uniqueName('CageOpen')
-        seq = Sequence(
+        seq: Sequence = Sequence(
             Func(self.cage.setPos, self.cagePos[4]),
             Func(self.cageDoor.setHpr, VBase3(0, 0, 0)),
             Func(self.cagedToon.setPos, Point3(0, -2, 0)),

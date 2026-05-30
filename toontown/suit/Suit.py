@@ -8,9 +8,9 @@ from toontown.battle import SuitBattleGlobals
 from direct.task.Task import Task
 from toontown.battle import BattleProps
 from toontown.toonbase import TTLocalizer
-aSize = 6.06
-bSize = 5.29
-cSize = 4.14
+aSize: float = 6.06
+bSize: float = 5.29
+cSize: float = 4.14
 SuitDialogArray = []
 SkelSuitDialogArray = []
 AllSuits = (('walk', 'walk'),
@@ -233,7 +233,7 @@ def loadSuitAnims(suit, flag=1):
             loader.unloadModel(animName)
 
 
-def loadDialog(level):
+def loadDialog(level) -> None:
     global SuitDialogArray
     if len(SuitDialogArray) > 0:
         return
@@ -252,7 +252,7 @@ def loadDialog(level):
         SuitDialogArray.append(SuitDialogArray[2])
 
 
-def loadSkelDialog():
+def loadSkelDialog() -> None:
     global SkelSuitDialogArray
     if len(SkelSuitDialogArray) > 0:
         return
@@ -270,12 +270,12 @@ def loadSkelDialog():
                                statement]
 
 
-def unloadDialog(level):
+def unloadDialog(level) -> None:
     global SuitDialogArray
     SuitDialogArray = []
 
 
-def unloadSkelDialog():
+def unloadSkelDialog() -> None:
     global SkelSuitDialogArray
     SkelSuitDialogArray = []
 
@@ -284,7 +284,7 @@ def attachSuitHead(node, suitName):
     suitIndex = SuitDNA.suitHeadTypes.index(suitName)
     suitDNA = SuitDNA.SuitDNA()
     suitDNA.newSuit(suitName)
-    suit = Suit()
+    suit: Suit = Suit()
     suit.setDNA(suitDNA)
     headParts = suit.getHeadParts()
     head = node.attachNewNode('head')
@@ -394,7 +394,7 @@ class Suit(Avatar.Avatar):
             self.initializeDropShadow()
             self.initializeNametag3d()
 
-    def generateSuit(self):
+    def generateSuit(self) -> None:
         dna = self.style
         self.headParts = []
         self.headColor = None

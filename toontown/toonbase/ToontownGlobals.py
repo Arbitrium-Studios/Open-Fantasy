@@ -4,13 +4,13 @@ from otp.otpbase.OTPGlobals import *
 from otp.otpbase.PythonUtil import Enum
 from direct.showbase.PythonUtil import invertDict
 from panda3d.core import BitMask32, Vec4
-MapHotkeyOn = 'alt'
-MapHotkeyOff = 'alt-up'
-MapHotkey = 'alt'
-AccountDatabaseChannelId = 4008
-ToonDatabaseChannelId = 4021
-DoodleDatabaseChannelId = 4023
-DefaultDatabaseChannelId = AccountDatabaseChannelId
+MapHotkeyOn: str = 'alt'
+MapHotkeyOff: str = 'alt-up'
+MapHotkey: str = 'alt'
+AccountDatabaseChannelId: int = 4008
+ToonDatabaseChannelId: int = 4021
+DoodleDatabaseChannelId: int = 4023
+DefaultDatabaseChannelId: int = AccountDatabaseChannelId
 DatabaseIdFromClassName = {'Account': AccountDatabaseChannelId}
 CogHQCameraFov = 60.0
 BossBattleCameraFov = 72.0
@@ -27,7 +27,7 @@ FurnitureDragBitmask = BitMask32(128)
 PetLookatPetBitmask = BitMask32(256)
 PetLookatNonPetBitmask = BitMask32(512)
 BanquetTableBitmask = BitMask32(1024)
-FullPies = 65535
+FullPies: int = 65535
 CogHQCameraFar = 900.0
 CogHQCameraNear = 1.0
 CashbotHQCameraFar = 2000.0
@@ -246,11 +246,11 @@ def cogHQZoneId2dept(zone):
     return cogIndex2dept[cogHQZoneId2deptIndex(zone)]
 
 
-def dept2cogHQ(dept):
-    dept2hq = {'c': BossbotHQ,
-               'l': LawbotHQ,
-               'm': CashbotHQ,
-               's': SellbotHQ}
+def dept2cogHQ(dept: str) -> int:
+    dept2hq: dict[str, int] = {'c': BossbotHQ,
+                               'l': LawbotHQ,
+                               'm': CashbotHQ,
+                               's': SellbotHQ}
     return dept2hq[dept]
 
 
@@ -1680,8 +1680,8 @@ AV_TOUCH_CHECK_TIMELIMIT_CL = 0.002
 AV_TOUCH_COUNT_LIMIT = 5
 AV_TOUCH_COUNT_TIME = 300
 
-BugReportSite = 'https://github.com/Arbitrium-Studios/Open-Fantasy/issues/new'
-openDiscord = 'https://discord.com/invite/5xmBA8stzY'
+BugReportSite: str = 'https://github.com/Arbitrium-Studios/Open-Fantasy/issues/new'
+openDiscord: str = 'https://discord.com/invite/5xmBA8stzY'
 
 # TELEPORT_BUTTON_DEFAULT_COST = 50
 # TELEPORT_BUTTON_COSTS = {
@@ -1737,7 +1737,7 @@ HotkeyGroupDefaults = {
     HotkeyChatlog: 'f11'
 }
 
-SpecialKeys = {
+SpecialKeys: dict[str, str] = {
     'page_up': 'Page Up',
     'page_down': 'Page Down',
     'escape': 'Esc',

@@ -1402,4 +1402,4 @@ def getAttackTaunt(attackName, index=None, suitName=None):
     return
 
 
-SuitAttackTaunts = TTLocalizer.SuitAttackTaunts
+SuitAttackTaunts: dict[str, list[str]] = TTLocalizer.SuitAttackTaunts

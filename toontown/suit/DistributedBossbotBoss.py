@@ -931,16 +931,16 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.unstash()
         self.epilogueMusic.stop()
 
-    def makeEpilogueMovie(self):
-        epSpeech = TTLocalizer.BossbotRTCongratulations
+    def makeEpilogueMovie(self) -> Sequence:
+        epSpeech: str = TTLocalizer.BossbotRTCongratulations
         epSpeech = self.__talkAboutPromotion(epSpeech)
-        bossTrack = Sequence(
+        bossTrack: Sequence = Sequence(
             Func(
                 self.resistanceToon.animFSM.request, 'neutral'), Func(
                 self.resistanceToon.setLocalPageChat, epSpeech, 0))
         return bossTrack
 
-    def __talkAboutPromotion(self, speech):
+    def __talkAboutPromotion(self, speech: str) -> str:
         if self.prevCogSuitLevel < ToontownGlobals.MaxCogSuitLevel:
             newCogSuitLevel = localAvatar.getCogLevels()[
                 CogDisguiseGlobals.dept2deptIndex(

@@ -1,3 +1,5 @@
+from typing import Literal
+
 import random
 from panda3d.core import *
 from direct.directnotify.DirectNotifyGlobal import *
@@ -103,7 +105,7 @@ suitsPerDept = 8
 goonTypes = ['pg', 'sg']
 
 
-def getSuitBodyType(name):
+def getSuitBodyType(name) -> Literal['a', 'b', 'c'] | None:
     if name in suitATypes:
         return 'a'
     elif name in suitBTypes:
@@ -114,7 +116,7 @@ def getSuitBodyType(name):
         print('Unknown body type for suit name: ', name)
 
 
-def getSuitDept(name):
+def getSuitDept(name: str):
     index = suitHeadTypes.index(name)
     if index < suitsPerDept:
         return suitDepts[0]

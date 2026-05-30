@@ -56,7 +56,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         self.hide()
         return
 
-    def setBattleCreditMultiplier(self, mult):
+    def setBattleCreditMultiplier(self, mult) -> None:
         self.__battleCreditMultiplier = mult
 
     def getBattleCreditMultiplier(self):
