@@ -32,8 +32,8 @@ class BattleCalculatorAI:
     immortalSuits = simbase.config.GetBool('immortal-suits', 0)
     propAndOrganicBonusStack = simbase.config.GetBool('prop-and-organic-bonus-stack', 0)
 
-    def __init__(self, battle, tutorialFlag=0):
-        self.battle = battle
+    def __init__(self, battle: DistributedBattleBaseAI.DistributedBattleBaseAI, tutorialFlag=0) -> None:
+        self.battle: DistributedBattleBaseAI.DistributedBattleBaseAI | None = battle
         self.SuitAttackers = {}
         self.currentlyLuredSuits = {}
         self.successfulLures = {}
