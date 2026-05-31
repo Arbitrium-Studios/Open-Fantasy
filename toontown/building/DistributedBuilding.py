@@ -302,7 +302,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
     def exitBecomingSuit(self):
         pass
 
-    def enterSuit(self, ts):
+    def enterSuit(self, ts) -> None:
         self.makePropSad()
         self.setToSuit()
 
@@ -327,7 +327,8 @@ class DistributedBuilding(DistributedObject.DistributedObject):
     def exitBecomingCogdoFromCogdo(self):
         pass
 
-    def enterCogdo(self, ts):
+    def enterCogdo(self, ts) -> None:
+        self.makePropSad()
         self.setToCogdo()
 
     def exitCogdo(self):
@@ -1379,7 +1380,7 @@ class DistributedBuilding(DistributedObject.DistributedObject):
                 self.notify.warning('no hood self.interactiveProp is None')
         return result
 
-    def makePropSad(self):
+    def makePropSad(self) -> None:
         self.notify.debug('makePropSad')
         if self.getInteractiveProp():
             if self.getInteractiveProp().state == 'Sad':
