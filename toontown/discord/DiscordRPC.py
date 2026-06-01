@@ -289,7 +289,7 @@ class DiscordRPC(object):
 
         self.large_image = 'cog-building'
         self.details = 'in a Cog Building'
-        DiscordRPC.notify.info(f'Player has entered a cog building!')
+        DiscordRPC.notify.info(f'{self.username} has entered a cog building!')
         self.setData()
 
     def sleeping(self):
@@ -298,7 +298,7 @@ class DiscordRPC(object):
 
         self.smallLogo = 'sleeping'
         self.details = f'{self.smallLogo}'.capitalize()
-        DiscordRPC.notify.info(f'Player has fallen asleep!')
+        DiscordRPC.notify.info(f'{self.username} has fallen asleep!')
         self.setData()
 
     def startTasks(self):

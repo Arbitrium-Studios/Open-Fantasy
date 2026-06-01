@@ -491,7 +491,7 @@ def createSuitDeathTrack(suit, toon, battle, npcs=[]):
              singleGear,
              battle,
              worldRelative=0,
-             duration=5.7,
+             duration=1.0,
              cleanup=True)),
         (5.2,
          ParticleInterval(

@@ -1,6 +1,6 @@
 from panda3d.core import *
 from direct.interval.IntervalGlobal import *
-from panda3d.physics import BaseParticleRenderer, BaseParticleEmitter
+from panda3d.physics import *
 from direct.particles import ParticleEffect, Particles, ForceGroup
 import random
 
