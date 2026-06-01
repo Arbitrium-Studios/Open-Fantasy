@@ -707,7 +707,6 @@ class DistributedBattleBaseAI(
             self.needAdjust = 1
             self.__requestAdjust()
 
-    def __removeSuit(self, suit):
     def __removeSuit(self, suit) -> None:
         self.notify.debug('__removeSuit(%d)' % suit.doId)
         if self.suits.count(suit) != 0:

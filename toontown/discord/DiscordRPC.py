@@ -356,6 +356,9 @@ class DiscordRPC(object):
         except PyPresenceException as discordPresenceExceptionError:
             DiscordRPC.notify.error(f'Error: DiscordRPC could not be disabled for the following reason:\n\n{discordPresenceExceptionError}')
             self.RPC = None
+        except BaseException as enableExceptionError:
+            DiscordRPC.notify.error(f'Error: DiscordRPC could not be disabled for the following reason:\n\n{enableExceptionError}')
+            self.RPC = None
 
     def disable(self):
         try:
@@ -365,9 +368,9 @@ class DiscordRPC(object):
                 DiscordRPC.notify.info(f'DiscordRPC has been disabled.')
         except DiscordNotFound:
             DiscordRPC.notify.error(f'Error: Discord could not be found for this client.')
-        except Exception as disableExceptionError:
-            DiscordRPC.notify.error(f'Error: DiscordRPC could not be disabled for the following reason:\n\n{disableExceptionError}')
         except PyPresenceException as PyPresenceExceptionError:
             DiscordRPC.notify.warning(f'Error: DiscordRPC could not be disabled for the following reason:\n\n{PyPresenceExceptionError}')
+        except BaseException as disableExceptionError:
+            DiscordRPC.notify.error(f'Error: DiscordRPC could not be disabled for the following reason:\n\n{disableExceptionError}')
         self.RPC = None
         self.updateTask = None
