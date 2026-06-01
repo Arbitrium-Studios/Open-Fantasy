@@ -70,7 +70,7 @@ def __healToon(toon, hp, gender, callerToonId, ineffective=0):
     return
 
 
-def __teleportIn(attack, pet, pos=Point3(0, 0, 0), hpr=Vec3(180.0, 0.0, 0.0)):
+def __teleportIn(attack: dict, pet: Pet.Pet, pos=Point3(0, 0, 0), hpr=Vec3(180.0, 0.0, 0.0)):
     a = Func(pet.reparentTo, attack['battle'])
     b = Func(pet.setPos, pos)
     c = Func(pet.setHpr, hpr)
@@ -98,7 +98,7 @@ def __doPet(attack, level, hp):
 
 def __healJuggle(heal):
     petProxyId = heal['petId']
-    pet = Pet.Pet()
+    pet: Pet.Pet = Pet.Pet()
     gender = 0
     if petProxyId in base.cr.doId2do:
         petProxy = base.cr.doId2do[petProxyId]

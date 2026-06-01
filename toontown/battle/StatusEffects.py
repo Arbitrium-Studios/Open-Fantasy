@@ -10,13 +10,15 @@ class StatusEffect:
 
     def __init__(self, currRounds: int, maxRounds: int | None = None) -> None:
         '''
-        :param int currRounds: Determines how many rounds are currently left for this status effect.  Use -1 if this status effect is permanent unless forcefully removed.
-        :param int|None maxRounds: The maximum number of rounds this status effect can go for.  This can be as short as one round.  None means that there is no limit as to how many turns this status effect can have.
+        Parameters:
+            currRounds (int): Determines how many rounds are currently left for this status effect.  Use -1 if this status effect is permanent unless forcefully removed.
+            maxRounds (int|None): The maximum number of rounds this status effect can go for.  This can be as short as one round.  None means that there is no limit as to how many turns this status effect can have.
 
-        :raise TypeError: TypeError is raised if currRounds is not an int.<br/>
-                          TypeError is raised if maxRounds is not an int or a NoneType.
-        :raise ValueError: ValueError is raised if currRounds is less than -1.<br/>
-                           ValueError is raised if maxRounds is neither None nor at least 1.
+        Raises:
+            TypeError: TypeError is raised if currRounds is not an int.<br/>
+                       TypeError is raised if maxRounds is not an int or a NoneType.
+            ValueError: ValueError is raised if currRounds is less than -1.<br/>
+                        ValueError is raised if maxRounds is neither None nor at least 1.
         '''
         if not isinstance(currRounds, int):
             raise TypeError

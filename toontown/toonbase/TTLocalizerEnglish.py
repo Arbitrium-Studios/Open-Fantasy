@@ -54,9 +54,9 @@ BuildingNametagFont: str = 'phase_3/models/fonts/MickeyFont'
 BuildingNametagShadow = None
 ProductPrefix: Literal['TTFan'] = 'TTFan' # Was "TT"
 
-lArbitriumStudios = 'Arbitrium Studios'
-lPlayerZeroStudio = 'PLAYER ZER0 STUDIO'
-lToontownFantasy = 'Toontown Fantasy'
+lArbitriumStudios: str = 'Arbitrium Studios'
+lPlayerZeroStudio: str = 'PLAYER ZER0 STUDIO'
+lToontownFantasy: str = 'Toontown Fantasy'
 
 prc_data = f"{lPlayerZeroStudio}'s {lToontownFantasy}"
 loadPrcFileData('', f"window-title {prc_data}")
@@ -294,12 +294,12 @@ QuestsDefaultTierNotDone: tuple[str, ...] = (
     'Hello, _avName_! You must finish your current ToonTasks before getting a new one.',
     'Hi there! You need to finish the ToonTasks you are working on in order to get a new one.',
     'Hi, _avName_! Before I can give you a new ToonTask, you need to finish the ones you have.')
-QuestsDefaultQuest = None
-QuestsDefaultVisitQuestDialog = ('I heard _toNpcName_ is looking for you._where_',
-                                 'Stop by and see _toNpcName_ when you get a chance._where_',
-                                 'Pay a visit to _toNpcName_ next time you are over that way._where_',
-                                 'If you get a chance, stop in and say hi to _toNpcName_._where_',
-                                 '_toNpcName_ will give you your next ToonTask._where_')
+QuestsDefaultQuest: None = None
+QuestsDefaultVisitQuestDialog: tuple[str, ...] = ('I heard _toNpcName_ is looking for you._where_',
+                                                  'Stop by and see _toNpcName_ when you get a chance._where_',
+                                                  'Pay a visit to _toNpcName_ next time you are over that way._where_',
+                                                  'If you get a chance, stop in and say hi to _toNpcName_._where_',
+                                                  '_toNpcName_ will give you your next ToonTask._where_')
 QuestsLocationArticle = ''
 
 
@@ -332,12 +332,12 @@ QuestsCogLevelQuestDefeat = 'Defeat %s'
 QuestsCogLevelQuestDesc = 'a Level %(level)s+ %(name)s'
 QuestsCogLevelQuestDescC = '%(count)s Level %(level)s+ %(name)s'
 QuestsCogLevelQuestDescI = 'some Level %(level)s+ %(name)s'
-QuestsCogLevelQuestSCString = 'I need to defeat %(objective)s%(location)s.'
-QuestsBuildingQuestFloorNumbers = ('',
-                                   'two+',
-                                   'three+',
-                                   'four+',
-                                   'five')
+QuestsCogLevelQuestSCString: str = 'I need to defeat %(objective)s%(location)s.'
+QuestsBuildingQuestFloorNumbers: tuple[str, ...] = ('',
+                                                    'two+',
+                                                    'three+',
+                                                    'four+',
+                                                    'five')
 QuestsBuildingQuestBuilding = 'Building'
 QuestsBuildingQuestBuildings = 'Buildings'
 QuestsBuildingQuestHeadline = 'DEFEAT'
@@ -1942,18 +1942,18 @@ ChatGarblerMonkey = ['ooh', 'ooo', 'ahh']
 ChatGarblerBear = ['growl', 'grrr']
 ChatGarblerPig = ['oink', 'oik', 'snort']
 ChatGarblerDefault = ['blah']
-Bossbot = 'Bossbot'
-Lawbot = 'Lawbot'
-Cashbot = 'Cashbot'
-Sellbot = 'Sellbot'
-BossbotS = 'a Bossbot'
-LawbotS = 'a Lawbot'
-CashbotS = 'a Cashbot'
-SellbotS = 'a Sellbot'
-BossbotP = 'Bossbots'
-LawbotP = 'Lawbots'
-CashbotP = 'Cashbots'
-SellbotP = 'Sellbots'
+Bossbot: str = 'Bossbot'
+Lawbot: str = 'Lawbot'
+Cashbot: str = 'Cashbot'
+Sellbot: str = 'Sellbot'
+BossbotS: str = 'a Bossbot'
+LawbotS: str = 'a Lawbot'
+CashbotS: str = 'a Cashbot'
+SellbotS: str = 'a Sellbot'
+BossbotP: str = 'Bossbots'
+LawbotP: str = 'Lawbots'
+CashbotP: str = 'Cashbots'
+SellbotP: str = 'Sellbots'
 BossbotSkelS = 'a Bossbot Skelecog'
 LawbotSkelS = 'a Lawbot Skelecog'
 CashbotSkelS = 'a Cashbot Skelecog'
@@ -2005,11 +2005,11 @@ ReportPanelCategoryPii = 'Sharing/Requesting Personal Info'
 ReportPanelCategoryRude = 'Rude or Mean Behavior'
 ReportPanelCategoryName = 'Bad Name'
 ReportPanelCategoryHacking = 'Hacking'
-ReportPanelConfirmations = ('You are about to report that %s has used obscene, bigoted or sexually explicit language.',
-                            'You are about to report that %s is being unsafe by giving out or requesting a phone number, address, last name, email address, password or account name.',
-                            'You are about to report that %s is bullying, harassing, or using extreme behavior to disrupt the game.',
-                            "You are about to report that %s has created a name that does not follow the Arbitrium Studios Guidelines.",
-                            'You are about to report that %s has hacked/tampered with the game or used third party software.')
+ReportPanelConfirmations: tuple[str, ...] = ('You are about to report that %s has used obscene, bigoted or sexually explicit language.',
+                                             'You are about to report that %s is being unsafe by giving out or requesting a phone number, address, last name, email address, password or account name.',
+                                             'You are about to report that %s is bullying, harassing, or using extreme behavior to disrupt the game.',
+                                             "You are about to report that %s has created a name that does not follow the Arbitrium Studios Guidelines.",
+                                             'You are about to report that %s has hacked/tampered with the game or used third party software.')
 ReportPanelWarning = "We take reporting very seriously. Your report will be viewed by a Moderator who will take appropriate action for anyone breaking our rules. If your account is found to have participated in breaking the rules, or if you make false reports or abuse the 'Report a Player' system, a Moderator may take action against your account. Are you absolutely sure you want to report this player?"
 ReportPanelThanks = 'Thank you! Your report has been sent to a Moderator for review. There is no need to contact us again about the issue. The moderation team will take appropriate action for a player found breaking our rules.'
 ReportPanelRemovedFriend = 'We have automatically removed %s from your Toon Friends List.'
@@ -2071,9 +2071,9 @@ TeleportPanelOK: Literal['OK'] = lOK
 TeleportPanelCancel = lCancel
 TeleportPanelYes = lYes
 TeleportPanelNo = lNo
-TeleportPanelCheckAvailability = 'Trying to go to %s.'
-TeleportPanelNotAvailable = '%s is busy right now; try again later.'
-TeleportPanelIgnored = '%s is ignoring you.'
+TeleportPanelCheckAvailability: str = 'Trying to go to %s.'
+TeleportPanelNotAvailable: str = '%s is busy right now; try again later.'
+TeleportPanelIgnored: str = '%s is ignoring you.'
 TeleportPanelNotOnline = "%s isn't online right now."
 TeleportPanelWentAway = '%s went away.'
 TeleportPanelUnknownHood = "You don't know how to get to %s!"
@@ -4365,7 +4365,7 @@ InventoryPageTrackFull = 'You have all the gags in the %s track.'
 InventoryPagePluralPoints = 'You will get a new\n%(trackName)s gag when you\nget %(numPoints)s more %(trackName)s points.'
 InventoryPageSinglePoint = 'You will get a new\n%(trackName)s gag when you\nget %(numPoints)s more %(trackName)s point.'
 InventoryPageNoAccess = 'You do not have access to the %s track yet.'
-NPCFriendPageTitle = 'SOS Toons'
+NPCFriendPageTitle: str = 'SOS Toons'
 PartyDateFormat = '%(mm)s %(dd)d, %(yyyy).4d'
 PartyTimeFormat = '%d:%.2d %s'
 PartyTimeFormatMeridiemAM = 'am'
@@ -5463,8 +5463,8 @@ TugOfWarGameReady = 'Ready...'
 TugOfWarGameEnd = 'Good game!'
 TugOfWarGameTie = 'You tied!'
 TugOfWarPowerMeter = 'Power meter'
-PatternGameTitle = 'Match %s' % Minnie
-PatternGameInstructions = Minnie + ' will show you a dance sequence. ' + \
+PatternGameTitle: str = 'Match %s' % Minnie
+PatternGameInstructions: str = Minnie + ' will show you a dance sequence. ' + \
     'Try to repeat ' + Minnie + "'s dance just the way you see it using the arrow keys!"
 PatternGameWatch = 'Watch these dance steps...'
 PatternGameGo = 'GO!'
@@ -5908,7 +5908,7 @@ SellbotRentalSuitMessage = "Wear this Rental Suit so you can get close enough to
 SellbotCogSuitNoMeritsMessage = "Your Sellbot Disguise will get you in, but since you don't have enough merits, you won't earn a promotion.\n\nIf you rescue the trapped Toon, you will earn an SOS Toon reward!"
 SellbotCogSuitHasMeritsMessage = "It's Operation: Storm Sellbot!\n\nBring 5 or more Rental Suit Toons with you to defeat the VP and earn credit towards a reward!"
 
-ReportABugWarningMessage = 'WARNING!\n\nIn order to report the bug, you have to open your web browser. It is an external link. You must fill out the Issue with the bug, how to replicate, add your logs, and screenshots in order for us to fully understand!'
+ReportABugWarningMessage: str = 'WARNING!\n\nIn order to report the bug, you have to open your web browser. It is an external link. You must fill out the Issue with the bug, how to replicate, add your logs, and screenshots in order for us to fully understand!'
 
 FurnitureTypeName = 'Furniture'
 PaintingTypeName = 'Painting'
@@ -8771,23 +8771,23 @@ FishSpeciesNames: dict[int, tuple[str, ...]] = {0: ('Balloon Fish',
                                                      'Strawberry PB&J Fish',
                                                      'Concord Grape PB&J Fish'),
                                                 34: ('Devil Ray',)}
-CogPartNames = ('Upper Left Leg',
-                'Lower Left Leg',
-                'Left Foot',
-                'Upper Right Leg',
-                'Lower Right Leg',
-                'Right Foot',
-                'Left Shoulder',
-                'Right Shoulder',
-                'Chest',
-                'Health Meter',
-                'Pelvis',
-                'Upper Left Arm',
-                'Lower Left Arm',
-                'Left Hand',
-                'Upper Right Arm',
-                'Lower Right Arm',
-                'Right Hand')
+CogPartNames: tuple[str, ...] = ('Upper Left Leg',
+                                 'Lower Left Leg',
+                                 'Left Foot',
+                                 'Upper Right Leg',
+                                 'Lower Right Leg',
+                                 'Right Foot',
+                                 'Left Shoulder',
+                                 'Right Shoulder',
+                                 'Chest',
+                                 'Health Meter',
+                                 'Pelvis',
+                                 'Upper Left Arm',
+                                 'Lower Left Arm',
+                                 'Left Hand',
+                                 'Upper Right Arm',
+                                 'Lower Right Arm',
+                                 'Right Hand')
 CogPartNamesSimple = ('Upper Torso',)
 SellbotLegFactorySpecMainEntrance = 'Front Entrance'
 SellbotLegFactorySpecLobby = 'Lobby'

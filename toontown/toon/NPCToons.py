@@ -181,7 +181,7 @@ def createLocalNPC(npcId):
     npc.setName(name)
     npc.setPickable(0)
     npc.setPlayerType(NametagGroup.CCNonPlayer)
-    dna = ToonDNA.ToonDNA()
+    dna: ToonDNA.ToonDNA = ToonDNA.ToonDNA()
     if dnaType == 'r':
         dnaList = getRandomDNA(npcId, eyelashes)
     else:

@@ -1,3 +1,5 @@
+from typing import TypeAlias
+
 from direct.actor import Actor
 from otp.avatar import Avatar
 from . import SuitDNA
@@ -13,131 +15,134 @@ bSize: float = 5.29
 cSize: float = 4.14
 SuitDialogArray = []
 SkelSuitDialogArray = []
-AllSuits = (('walk', 'walk'),
-            ('run', 'walk'),
-            ('neutral', 'neutral'))
-AllSuitsMinigame = (('victory', 'victory'),
-                    ('flail', 'flailing'),
-                    ('tug-o-war', 'tug-o-war'),
-                    ('slip-backward', 'slip-backward'),
-                    ('slip-forward', 'slip-forward'))
-AllSuitsTutorialBattle = (('lose', 'lose'),
-                          ('pie-small-react', 'pie-small'),
-                          ('squirt-small-react', 'squirt-small'))
-AllSuitsBattle = (('drop-react', 'anvil-drop'),
-                  ('flatten', 'drop'),
-                  ('sidestep-left', 'sidestep-left'),
-                  ('sidestep-right', 'sidestep-right'),
-                  ('squirt-large-react', 'squirt-large'),
-                  ('landing', 'landing'),
-                  ('reach', 'walknreach'),
-                  ('rake-react', 'rake'),
-                  ('hypnotized', 'hypnotize'),
-                  ('soak', 'soak'),
-                  ('pen-squirt', 'fountain-pen'),
-                  ('finger-wag', 'finger-wag'),
-                  ('magic1', 'magic1'),
-                  ('effort', 'effort'),
-                  ('speak', 'speak'),
-                  ('magic2', 'magic2'),
-                  ('pickpocket', 'pickpocket'))
-SuitsCEOBattle = (('sit', 'sit'),
-                  ('sit-eat-in', 'sit-eat-in'),
-                  ('sit-eat-loop', 'sit-eat-loop'),
-                  ('sit-eat-out', 'sit-eat-out'),
-                  ('sit-angry', 'sit-angry'),
-                  ('sit-hungry-left', 'leftsit-hungry'),
-                  ('sit-hungry-right', 'rightsit-hungry'),
-                  ('sit-lose', 'sit-lose'),
-                  ('tray-walk', 'tray-walk'),
-                  ('tray-neutral', 'tray-neutral'),
-                  ('sit-lose', 'sit-lose'))
-f = (('throw-paper', 'throw-paper', 3.5),
-     ('phone', 'phone', 3.5),
-     ('shredder', 'shredder', 3.5))
-p = (('pencil-sharpener', 'pencil-sharpener', 5),
-     ('hold-eraser', 'hold-eraser', 5),
-     ('hold-pencil', 'hold-pencil', 5))
-ym = (('golf-club-swing', 'golf-club-swing', 5),
-      ('magic3', 'magic3', 5),
-      ('rubber-stamp', 'rubber-stamp', 5),
-      ('smile', 'smile', 5))
-mm = ()
-ds = (('throw-paper', 'throw-paper', 5),)
-hh = (('glower', 'glower', 5),
-      ('throw-paper', 'throw-paper', 5),
-      ('roll-o-dex', 'roll-o-dex', 5))
-cr = (('throw-paper', 'throw-paper', 3.5),
-      ('glower', 'glower', 5))
-tbc = (('cigar-smoke', 'cigar-smoke', 5),
-       ('glower', 'glower', 5),
-       ('golf-club-swing', 'golf-club-swing', 5))
-cp = (('golf-club-swing', 'golf-club-swing', 5),)
-cc = (('glower', 'glower', 5),
-      ('phone', 'phone', 3.5),
-      ('watercooler', 'watercooler', 5))
-tm = (('roll-o-dex', 'roll-o-dex', 5),
-      ('phone', 'phone', 5))
-nd = (('roll-o-dex', 'roll-o-dex', 5),
-      ('magic3', 'magic3', 5),
-      ('smile', 'smile', 5),
-      ('phone', 'phone', 5))
-gh = (('rubber-stamp', 'rubber-stamp', 5),)
-ms = (('stomp', 'stomp', 5),
-      ('quick-jump', 'jump', 5))
-tf = (('phone', 'phone', 5),
-      ('throw-paper', 'throw-paper', 5),
-      ('throw-object', 'throw-object', 5),
-      ('glower', 'glower', 5))
-m = (('smile', 'smile', 5),
-     ('golf-club-swing', 'golf-club-swing', 5))
-mh = (('smile', 'smile', 5),
-      ('golf-club-swing', 'golf-club-swing', 5),
-      ('song-and-dance', 'song-and-dance', 5))
-ff = (('cigar-smoke', 'cigar-smoke', 5),
-      ('magic3', 'magic3', 5),
-      ('golf-club-swing', 'golf-club-swing', 5),
-      ('throw-paper', 'throw-paper', 5))
-sc = (('throw-paper', 'throw-paper', 3.5),
-      ('glower', 'glower', 5))
-pp = (('throw-paper', 'throw-paper', 5),
-      ('glower', 'glower', 5))
-tw = (('throw-paper', 'throw-paper', 3.5),
-      ('glower', 'glower', 5))
-bc = (('phone', 'phone', 5),
-      ('hold-pencil', 'hold-pencil', 5))
-nc = (('phone', 'phone', 5),
-      ('throw-object', 'throw-object', 5))
-mb = (('throw-paper', 'throw-paper', 3.5),)
-ls = (('throw-paper', 'throw-paper', 5),
-      ('throw-object', 'throw-object', 5),
-      ('hold-pencil', 'hold-pencil', 5))
-rb = ()
-msv = (('glower', 'glower', 5),)
-bf = (('throw-paper', 'throw-paper', 3.5),
-      ('shredder', 'shredder', 3.5),
-      ('watercooler', 'watercooler', 5))
-b = (('throw-paper', 'throw-paper', 5),)
-dt = (('rubber-stamp', 'rubber-stamp', 5),
-      ('throw-paper', 'throw-paper', 5))
-ac = (('throw-object', 'throw-object', 5),
-      ('roll-o-dex', 'roll-o-dex', 5),
-      ('stomp', 'stomp', 5),
-      ('phone', 'phone', 5),
-      ('throw-paper', 'throw-paper', 5))
-bs = (('glower', 'glower', 5),)
-sd = (('quick-jump', 'jump', 5),
-      ('stomp', 'stomp', 5),
-      ('magic3', 'magic3', 5),
-      ('hold-pencil', 'hold-pencil', 5),
-      ('throw-paper', 'throw-paper', 5))
-le = (('throw-object', 'throw-object', 5),
-      ('glower', 'glower', 5),
-      ('throw-paper', 'throw-paper', 5))
-bw = (('throw-object', 'throw-object', 5),
-      ('throw-paper', 'throw-paper', 5))
-lc = (('throw-paper', 'throw-paper', 5),
-      ('magic3', 'magic3', 5))
+AllSuits: tuple[tuple[str, str], ...] = (('walk', 'walk'),
+                                         ('run', 'walk'),
+                                         ('neutral', 'neutral'))
+AllSuitsMinigame: tuple[tuple[str, str], ...] = (('victory', 'victory'),
+                                                 ('flail', 'flailing'),
+                                                 ('tug-o-war', 'tug-o-war'),
+                                                 ('slip-backward', 'slip-backward'),
+                                                 ('slip-forward', 'slip-forward'))
+AllSuitsTutorialBattle: tuple[tuple[str, str], ...] = (('lose', 'lose'),
+                                                       ('pie-small-react', 'pie-small'),
+                                                       ('squirt-small-react', 'squirt-small'))
+AllSuitsBattle: tuple[tuple[str, str], ...] = (('drop-react', 'anvil-drop'),
+                                               ('flatten', 'drop'),
+                                               ('sidestep-left', 'sidestep-left'),
+                                               ('sidestep-right', 'sidestep-right'),
+                                               ('squirt-large-react', 'squirt-large'),
+                                               ('landing', 'landing'),
+                                               ('reach', 'walknreach'),
+                                               ('rake-react', 'rake'),
+                                               ('hypnotized', 'hypnotize'),
+                                               ('soak', 'soak'),
+                                               ('pen-squirt', 'fountain-pen'),
+                                               ('finger-wag', 'finger-wag'),
+                                               ('magic1', 'magic1'),
+                                               ('effort', 'effort'),
+                                               ('speak', 'speak'),
+                                               ('magic2', 'magic2'),
+                                               ('pickpocket', 'pickpocket'))
+SuitsCEOBattle: tuple[tuple[str, str], ...] = (('sit', 'sit'),
+                                               ('sit-eat-in', 'sit-eat-in'),
+                                               ('sit-eat-loop', 'sit-eat-loop'),
+                                               ('sit-eat-out', 'sit-eat-out'),
+                                               ('sit-angry', 'sit-angry'),
+                                               ('sit-hungry-left', 'leftsit-hungry'),
+                                               ('sit-hungry-right', 'rightsit-hungry'),
+                                               ('sit-lose', 'sit-lose'),
+                                               ('tray-walk', 'tray-walk'),
+                                               ('tray-neutral', 'tray-neutral'),
+                                               ('sit-lose', 'sit-lose'))
+suitAnimList: TypeAlias = tuple[tuple[str, str, int | float], ...]
+f: suitAnimList = (('throw-paper', 'throw-paper', 3.5),
+                   ('phone', 'phone', 3.5),
+                   ('shredder', 'shredder', 3.5))
+p: suitAnimList = (('pencil-sharpener', 'pencil-sharpener', 5),
+                   ('hold-eraser', 'hold-eraser', 5),
+                   ('hold-pencil', 'hold-pencil', 5))
+ym: suitAnimList = (('golf-club-swing', 'golf-club-swing', 5),
+                    ('magic3', 'magic3', 5),
+                    ('rubber-stamp', 'rubber-stamp', 5),
+                    ('smile', 'smile', 5))
+mm: suitAnimList = ()
+ds: suitAnimList = (('throw-paper', 'throw-paper', 5),)
+hh: suitAnimList = (('glower', 'glower', 5),
+                    ('throw-paper', 'throw-paper', 5),
+                    ('roll-o-dex', 'roll-o-dex', 5))
+cr: suitAnimList = (('throw-paper', 'throw-paper', 3.5),
+                    ('glower', 'glower', 5))
+tbc: suitAnimList = (('cigar-smoke', 'cigar-smoke', 5),
+                     ('glower', 'glower', 5),
+                     ('golf-club-swing', 'golf-club-swing', 5))
+cp: suitAnimList = (('golf-club-swing', 'golf-club-swing', 5),)
+cc: suitAnimList = (('glower', 'glower', 5),
+                    ('phone', 'phone', 3.5),
+                    ('watercooler', 'watercooler', 5))
+tm: suitAnimList = (('roll-o-dex', 'roll-o-dex', 5),
+                    ('phone', 'phone', 5))
+nd: suitAnimList = (('roll-o-dex', 'roll-o-dex', 5),
+                    ('magic3', 'magic3', 5),
+                    ('smile', 'smile', 5),
+                    ('phone', 'phone', 5))
+gh: suitAnimList = (('rubber-stamp', 'rubber-stamp', 5),)
+ms: suitAnimList = (('stomp', 'stomp', 5),
+                    ('quick-jump', 'jump', 5))
+tf: suitAnimList = (('phone', 'phone', 5),
+                    ('throw-paper', 'throw-paper', 5),
+                    ('throw-object', 'throw-object', 5),
+                    ('glower', 'glower', 5))
+m: suitAnimList = (('smile', 'smile', 5),
+                   ('golf-club-swing', 'golf-club-swing', 5))
+mh: suitAnimList = (('smile', 'smile', 5),
+                    ('golf-club-swing', 'golf-club-swing', 5),
+                    ('song-and-dance', 'song-and-dance', 5))
+ff: suitAnimList = (('cigar-smoke', 'cigar-smoke', 5),
+                    ('magic3', 'magic3', 5),
+                    ('golf-club-swing', 'golf-club-swing', 5),
+                    ('throw-paper', 'throw-paper', 5))
+sc: suitAnimList = (('throw-paper', 'throw-paper', 3.5),
+                    ('glower', 'glower', 5))
+pp: suitAnimList = (('throw-paper', 'throw-paper', 5),
+                    ('glower', 'glower', 5))
+tw: suitAnimList = (('throw-paper', 'throw-paper', 3.5),
+                    ('glower', 'glower', 5))
+bc: suitAnimList = (('phone', 'phone', 5),
+                    ('hold-pencil', 'hold-pencil', 5))
+nc: suitAnimList = (('phone', 'phone', 5),
+                    ('throw-object', 'throw-object', 5))
+mb: suitAnimList = (('throw-paper', 'throw-paper', 3.5),)
+ls: suitAnimList = (('throw-paper', 'throw-paper', 5),
+                    ('throw-object', 'throw-object', 5),
+                    ('hold-pencil', 'hold-pencil', 5))
+rb: suitAnimList = ()
+msv: suitAnimList = (('glower', 'glower', 5),)
+bf: suitAnimList = (('throw-paper', 'throw-paper', 3.5),
+                    ('shredder', 'shredder', 3.5),
+                    ('watercooler', 'watercooler', 5))
+b: suitAnimList = (('throw-paper', 'throw-paper', 5),)
+dt: suitAnimList = (('rubber-stamp', 'rubber-stamp', 5),
+                    ('throw-paper', 'throw-paper', 5))
+ac: suitAnimList = (('throw-object', 'throw-object', 5),
+                    ('roll-o-dex', 'roll-o-dex', 5),
+                    ('stomp', 'stomp', 5),
+                    ('phone', 'phone', 5),
+                    ('throw-paper', 'throw-paper', 5))
+bs: suitAnimList = (('glower', 'glower', 5),)
+sd: suitAnimList = (('quick-jump', 'jump', 5),
+                    ('stomp', 'stomp', 5),
+                    ('magic3', 'magic3', 5),
+                    ('hold-pencil', 'hold-pencil', 5),
+                    ('throw-paper', 'throw-paper', 5))
+le: suitAnimList = (('throw-object', 'throw-object', 5),
+                    ('glower', 'glower', 5),
+                    ('throw-paper', 'throw-paper', 5))
+bw: suitAnimList = (('throw-object', 'throw-object', 5),
+                    ('throw-paper', 'throw-paper', 5))
+lc: suitAnimList = (('throw-paper', 'throw-paper', 5),
+                    ('magic3', 'magic3', 5))
+ModelDict: dict[str, tuple[str, int | float]]
+TutorialModelDict: dict[str, tuple[str, int | float]]
 if not ConfigVariableBool('want-new-cogs', 0).value:
     ModelDict = {'a': ('/models/char/suitA-', 4),
                  'b': ('/models/char/suitB-', 4),
@@ -152,17 +157,17 @@ else:
     TutorialModelDict = {'a': ('/models/char/tt_a_ene_cga_', 4),
                          'b': ('/models/char/tt_a_ene_cgb_', 4),
                          'c': ('/models/char/tt_a_ene_cgc_', 3.5)}
-HeadModelDict = {'a': ('/models/char/suitA-', 4),
-                 'b': ('/models/char/suitB-', 4),
-                 'c': ('/models/char/suitC-', 3.5)}
+HeadModelDict: dict[str, tuple[str, int | float]] = {'a': ('/models/char/suitA-', 4),
+                                                     'b': ('/models/char/suitB-', 4),
+                                                     'c': ('/models/char/suitC-', 3.5)}
 
 
-def loadTutorialSuit():
+def loadTutorialSuit() -> None:
     loader.loadModel('phase_3.5/models/char/suitC-mod').node()
     loadDialog(1)
 
 
-def loadSuits(level):
+def loadSuits(level) -> None:
     loadSuitModelsAndAnims(level, flag=1)
     loadDialog(level)
 
@@ -201,7 +206,7 @@ def loadSuitModelsAndAnims(level, flag=0):
             loader.unloadModel('phase_' + str(headPhase) + headModel + 'heads')
 
 
-def cogExists(filePrefix):
+def cogExists(filePrefix: str) -> bool:
     searchPath = DSearchPath()
     if __debug__:
         searchPath.appendDirectory(Filename('resources/phase_3.5'))
@@ -381,15 +386,15 @@ class Suit(Avatar.Avatar):
         return 2
 
     def setDNAString(self, dnaString):
-        self.dna = SuitDNA.SuitDNA()
+        self.dna: SuitDNA.SuitDNA = SuitDNA.SuitDNA()
         self.dna.makeFromNetString(dnaString)
         self.setDNA(self.dna)
 
-    def setDNA(self, dna):
+    def setDNA(self, dna: SuitDNA.SuitDNA) -> None:
         if self.style:
             pass
         else:
-            self.style = dna
+            self.style: SuitDNA.SuitDNA = dna
             self.generateSuit()
             self.initializeDropShadow()
             self.initializeNametag3d()
@@ -649,8 +654,8 @@ class Suit(Avatar.Avatar):
         self.loadAnims(animDict)
         self.setSuitClothes()
 
-    def generateAnimDict(self):
-        animDict = {}
+    def generateAnimDict(self) -> dict[str, str]:
+        animDict: dict[str, str] = {}
         filePrefix, bodyPhase = ModelDict[self.style.body]
         for anim in AllSuits:
             animDict[anim[0]] = 'phase_' + \
@@ -683,6 +688,7 @@ class Suit(Avatar.Avatar):
                 for anim in SuitsCEOBattle:
                     animDict[anim[0]] = 'phase_12/models/char/suitC-' + anim[1]
 
+        animList: suitAnimList
         try:
             animList = eval(self.style.name)
         except NameError:
@@ -694,13 +700,13 @@ class Suit(Avatar.Avatar):
 
         return animDict
 
-    def initializeBodyCollisions(self, collIdStr):
+    def initializeBodyCollisions(self, collIdStr) -> None:
         Avatar.Avatar.initializeBodyCollisions(self, collIdStr)
         if not self.ghostMode:
             self.collNode.setCollideMask(
                 self.collNode.getIntoCollideMask() | ToontownGlobals.PieBitmask)
 
-    def setSuitClothes(self, modelRoot=None):
+    def setSuitClothes(self, modelRoot=None) -> None:
         if not modelRoot:
             modelRoot = self
         dept = self.style.dept
@@ -754,7 +760,7 @@ class Suit(Avatar.Avatar):
         else:
             __doItTheOldWay__()
 
-    def makeWaiter(self, modelRoot=None):
+    def makeWaiter(self, modelRoot=None) -> None:
         if not modelRoot:
             modelRoot = self
         self.isWaiter = 1
@@ -771,7 +777,7 @@ class Suit(Avatar.Avatar):
         modelRoot.find('**/arms').setTexture(armTex, 1)
         modelRoot.find('**/legs').setTexture(legTex, 1)
 
-    def makeRentalSuit(self, suitType, modelRoot=None):
+    def makeRentalSuit(self, suitType, modelRoot=None) -> None:
         if not modelRoot:
             modelRoot = self.getGeomNode()
         if suitType == 's':
@@ -889,7 +895,7 @@ class Suit(Avatar.Avatar):
         self.healthBar.hide()
         self.healthCondition = 0
 
-    def reseatHealthBarForSkele(self):
+    def reseatHealthBarForSkele(self) -> None:
         self.healthBar.setPos(0.0, 0.1, 0.0)
 
     def updateHealthBar(self, hp, forceUpdate=0):
@@ -990,7 +996,7 @@ class Suit(Avatar.Avatar):
         dropShadow.reparentTo(shadowJoint)
         return self.loseActor
 
-    def cleanupLoseActor(self):
+    def cleanupLoseActor(self) -> None:
         self.notify.debug('cleanupLoseActor()')
         if self.loseActor is not None:
             self.notify.debug('cleanupLoseActor() - got one')

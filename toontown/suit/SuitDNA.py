@@ -195,7 +195,7 @@ class SuitDNA(AvatarDNA.AvatarDNA):
             notify.error('unknown avatar type: ', self.type)
         return dg.getMessage()
 
-    def makeFromNetString(self, string):
+    def makeFromNetString(self, string) -> None:
         dg = PyDatagram(string)
         dgi = PyDatagramIterator(dg)
         self.type = dgi.getFixedString(1)

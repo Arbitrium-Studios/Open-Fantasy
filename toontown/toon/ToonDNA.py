@@ -2110,7 +2110,7 @@ class ToonDNA(AvatarDNA.AvatarDNA):
 
     def newToonFromProperties(self, head, torso, legs, eyelashes, armColor, gloveColor, 
                               legColor, headColor, topTexture, topTextureColor, sleeveTexture, 
-                              sleeveTextureColor, bottomTexture, bottomTextureColor, isNPC=0):
+                              sleeveTextureColor, bottomTexture, bottomTextureColor, isNPC=0) -> None:
         if eyelashes == 'm':
             eyelashes = 1
             kind = 'm'
@@ -2248,27 +2248,28 @@ class ToonDNA(AvatarDNA.AvatarDNA):
             notify.error('Invalid DNA type: ', self.type)
         return type
 
-    def getAnimal(self):
-        if self.head[0] == 'd':
-            return 'dog'
-        elif self.head[0] == 'c':
-            return 'cat'
-        elif self.head[0] == 'm':
-            return 'mouse'
-        elif self.head[0] == 'h':
-            return 'horse'
-        elif self.head[0] == 'r':
-            return 'rabbit'
-        elif self.head[0] == 'f':
-            return 'duck'
-        elif self.head[0] == 'p':
-            return 'monkey'
-        elif self.head[0] == 'b':
-            return 'bear'
-        elif self.head[0] == 's':
-            return 'pig'
-        else:
-            notify.error('unknown headStyle: ', self.head[0])
+    def getAnimal(self) -> str:
+        match self.head[0]:
+            case 'd':
+                return 'dog'
+            case 'c':
+                return 'cat'
+            case 'm':
+                return 'mouse'
+            case 'h':
+                return 'horse'
+            case 'r':
+                return 'rabbit'
+            case 'f':
+                return 'duck'
+            case 'p':
+                return 'monkey'
+            case 'b':
+                return 'bear'
+            case 's':
+                return 'pig'
+            case _:
+                notify.error('unknown headStyle: ', self.head[0])
 
     def getHeadSize(self):
         if self.head[1] == 'l':
