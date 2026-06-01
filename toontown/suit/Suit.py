@@ -634,6 +634,14 @@ class Suit(Avatar.Avatar):
                 self.generateBody()
                 self.generateHead('yesman')
                 self.setHeight(8.95)
+            case 'ff':
+                self.scale = 6.0 / aSize
+                self.handColor = SuitDNA.salesPolyColor
+                self.generateBody()
+                self.generateHead('yesman')
+                self.makeSkeleton()
+                self.setHeight(7.1)
+                self.setPickable(0)
         self.setName(SuitBattleGlobals.SuitAttributesDict[dna.name].name)
         self.getGeomNode().setScale(self.scale)
         self.generateHealthBar()
