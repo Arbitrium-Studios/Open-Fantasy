@@ -463,8 +463,9 @@ class ToontownAIRepository(ToontownInternalRepository):
         return 'distObjDelete-%d' % avId
 
     def getAvatarDisconnectReason(self, avId):
+        from otp.otpbase import OTPGlobals
         return self.timeManager.avId2disconnectcode.get(
-            avId, ToontownGlobals.DisconnectUnknown)
+            avId, OTPGlobals.DisconnectUnknown)
 
     def getZoneDataStore(self):
         return self.zoneDataStore
