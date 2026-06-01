@@ -746,14 +746,15 @@ class Suit(Avatar.Avatar):
             self.nametagJoint = self.find('**/joint_nameTag')
 
         if ConfigVariableBool('want-new-cogs', 0).value:
-            if dept == 'c':
-                texType = 'bossbot'
-            elif dept == 'm':
-                texType = 'cashbot'
-            elif dept == 'l':
-                texType = 'lawbot'
-            elif dept == 's':
-                texType = 'sellbot'
+            match dept:
+                case 'c':
+                    texType = 'bossbot'
+                case 'm':
+                    texType = 'cashbot'
+                case 'l':
+                    texType = 'lawbot'
+                case 's':
+                    texType = 'sellbot'
             if self.find('**/body').isEmpty():
                 __doItTheOldWay__()
             else:
@@ -844,14 +845,15 @@ class Suit(Avatar.Avatar):
         if tie.isEmpty():
             self.notify.warning('skelecog has no tie model!!!')
             return
-        if dept == 'c':
-            tieTex = loader.loadTexture('phase_5/maps/cog_robot_tie_boss.jpg')
-        elif dept == 's':
-            tieTex = loader.loadTexture('phase_5/maps/cog_robot_tie_sales.jpg')
-        elif dept == 'l':
-            tieTex = loader.loadTexture('phase_5/maps/cog_robot_tie_legal.jpg')
-        elif dept == 'm':
-            tieTex = loader.loadTexture('phase_5/maps/cog_robot_tie_money.jpg')
+        match dept:
+            case 'c':
+                tieTex = loader.loadTexture('phase_5/maps/cog_robot_tie_boss.jpg')
+            case 's':
+                tieTex = loader.loadTexture('phase_5/maps/cog_robot_tie_sales.jpg')
+            case 'l':
+                tieTex = loader.loadTexture('phase_5/maps/cog_robot_tie_legal.jpg')
+            case 'm':
+                tieTex = loader.loadTexture('phase_5/maps/cog_robot_tie_money.jpg')
         tieTex.setMinfilter(Texture.FTLinearMipmapLinear)
         tieTex.setMagfilter(Texture.FTLinear)
         tie.setTexture(tieTex, 1)
@@ -865,14 +867,15 @@ class Suit(Avatar.Avatar):
                 chestNull = self.find('**/joint_attachMeter')
         else:
             chestNull = self.find('**/joint_attachMeter')
-        if dept == 'c':
-            self.corpMedallion = icons.find('**/CorpIcon').copyTo(chestNull)
-        elif dept == 's':
-            self.corpMedallion = icons.find('**/SalesIcon').copyTo(chestNull)
-        elif dept == 'l':
-            self.corpMedallion = icons.find('**/LegalIcon').copyTo(chestNull)
-        elif dept == 'm':
-            self.corpMedallion = icons.find('**/MoneyIcon').copyTo(chestNull)
+        match dept:
+            case 'c':
+                self.corpMedallion = icons.find('**/CorpIcon').copyTo(chestNull)
+            case 's':
+                self.corpMedallion = icons.find('**/SalesIcon').copyTo(chestNull)
+            case 'l':
+                self.corpMedallion = icons.find('**/LegalIcon').copyTo(chestNull)
+            case 'm':
+                self.corpMedallion = icons.find('**/MoneyIcon').copyTo(chestNull)
         self.corpMedallion.setPosHprScale(
             0.02, 0.05, 0.04, 180.0, 0.0, 0.0, 0.51, 0.51, 0.51)
         self.corpMedallion.setColor(self.medallionColors[dept])
