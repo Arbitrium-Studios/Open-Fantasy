@@ -1,3 +1,5 @@
+from typing import Literal
+
 from direct.interval.IntervalGlobal import *
 from .BattleBase import *
 from .BattleProps import *
@@ -222,7 +224,7 @@ def virtualize(deathsuit) -> None:
             thing.setBin('fixed', 1)
 
 
-def createTrainTrackAppearTrack(dyingSuit, toon, battle, npcs):
+def createTrainTrackAppearTrack(dyingSuit, toon, battle, npcs) -> Sequence:
     retval = Sequence()
     return retval
     possibleSuits = []
@@ -580,20 +582,20 @@ def createToonDodgeMultitrack(tDodge, toon, leftToons, rightToons):
     return Sequence(Wait(tDodge), toonTracks)
 
 
-def createSuitTeaseMultiTrack(suit, delay=0.01):
-    suitTrack = Sequence(
+def createSuitTeaseMultiTrack(suit, delay: float = 0.01) -> Parallel:
+    suitTrack: Sequence = Sequence(
         Wait(delay), ActorInterval(
             suit, 'victory', startTime=0.5, endTime=1.9), Func(
             suit.loop, 'neutral'))
-    missedTrack = Sequence(Wait(delay + 0.2), Func(indicateMissed, suit, 0.9))
+    missedTrack: Sequence = Sequence(Wait(delay + 0.2), Func(indicateMissed, suit, 0.9))
     return Parallel(suitTrack, missedTrack)
 
 
 SPRAY_LEN = 1.5
 
 
-def getSprayTrack(battle, color, origin, target, dScaleUp, dHold,
-                  dScaleDown, horizScale=1.0, vertScale=1.0, parent=render):
+def getSprayTrack(battle, color, origin, target, dScaleUp: float, dHold: float,
+                  dScaleDown, horizScale=1.0, vertScale=1.0, parent=render) -> Sequence:
     track = Sequence()
     sprayProp = globalPropPool.getProp('spray')
     sprayScale = hidden.attachNewNode('spray-parent')
@@ -738,91 +740,91 @@ def getToonTeleportInInterval(toon):
     return Parallel(holeAnimTrack, jumpTrack)
 
 
-def getSuitRakeOffset(suit):
+def getSuitRakeOffset(suit) -> float:
     suitName = suit.getStyleName()
-    if suitName == 'gh':
-        return 1.4
-    elif suitName == 'f':
-        return 1.0
-    elif suitName == 'cc':
-        return 0.7
-    elif suitName == 'tw':
-        return 1.3
-    elif suitName == 'bf':
-        return 1.0
-    elif suitName == 'sc':
-        return 0.8
-    elif suitName == 'ym':
-        return 0.1
-    elif suitName == 'mm':
-        return 0.05
-    elif suitName == 'tm':
-        return 0.07
-    elif suitName == 'nd':
-        return 0.07
-    elif suitName == 'pp':
-        return 0.04
-    elif suitName == 'bc':
-        return 0.36
-    elif suitName == 'b':
-        return 0.41
-    elif suitName == 'dt':
-        return 0.31
-    elif suitName == 'ac':
-        return 0.39
-    elif suitName == 'ds':
-        return 0.41
-    elif suitName == 'hh':
-        return 0.8
-    elif suitName == 'cr':
-        return 2.1
-    elif suitName == 'tbc':
-        return 1.4
-    elif suitName == 'bs':
-        return 0.4
-    elif suitName == 'sd':
-        return 1.02
-    elif suitName == 'le':
-        return 1.3
-    elif suitName == 'bw':
-        return 1.4
-    elif suitName == 'nc':
-        return 0.6
-    elif suitName == 'mb':
-        return 1.85
-    elif suitName == 'ls':
-        return 1.4
-    elif suitName == 'rb':
-        return 1.6
-    elif suitName == 'ms':
-        return 0.7
-    elif suitName == 'tf':
-        return 0.75
-    elif suitName == 'm':
-        return 0.9
-    elif suitName == 'mh':
-        return 1.3
-    else:
-        notify.warning(
-            'getSuitRakeOffset(suit) - Unknown suit name: %s' %
-            suitName)
-        return 0
+    match suitName:
+        case 'gh':
+            return 1.4
+        case 'f':
+            return 1.0
+        case 'cc':
+            return 0.7
+        case 'tw':
+            return 1.3
+        case 'bf':
+            return 1.0
+        case 'sc':
+            return 0.8
+        case 'ym':
+            return 0.1
+        case 'mm':
+            return 0.05
+        case 'tm':
+            return 0.07
+        case 'nd':
+            return 0.07
+        case 'pp':
+            return 0.04
+        case 'bc':
+            return 0.36
+        case 'b':
+            return 0.41
+        case 'dt':
+            return 0.31
+        case 'ac':
+            return 0.39
+        case 'ds':
+            return 0.41
+        case 'hh':
+            return 0.8
+        case 'cr':
+            return 2.1
+        case 'tbc':
+            return 1.4
+        case 'bs':
+            return 0.4
+        case 'sd':
+            return 1.02
+        case 'le':
+            return 1.3
+        case 'bw':
+            return 1.4
+        case 'nc':
+            return 0.6
+        case 'mb':
+            return 1.85
+        case 'ls':
+            return 1.4
+        case 'rb':
+            return 1.6
+        case 'ms':
+            return 0.7
+        case 'tf':
+            return 0.75
+        case 'm':
+            return 0.9
+        case 'mh':
+            return 1.3
+        case _:
+            notify.warning('getSuitRakeOffset(suit) - Unknown suit name: %s' % suitName)
+            return 0.0
 
 
-def startSparksIval(tntProp):
+def startSparksIval(tntProp) -> Func:
     tip = tntProp.find('**/joint_attachEmitter')
-    sparks = BattleParticles.createParticleEffect(file='tnt')
+    sparks: ParticleEffect.ParticleEffect = BattleParticles.createParticleEffect(file='tnt')
     return Func(sparks.start, tip)
 
 
+def indicateMissed(actor, duration: float = 1.1, scale: float = 0.7):
     actor.showHpString(
         TTLocalizer.AttackMissed,
         duration=duration,
         scale=scale)
 
 
-def createKapowExplosionTrack(parent, explosionPoint=None, scale=1.0):
-    explosionTrack = Sequence()
+def createKapowExplosionTrack(parent, explosionPoint=None, scale: float = 1.0) -> Sequence:
+    explosionTrack: Sequence = Sequence()
     explosion = loader.loadModel('phase_3.5/models/props/explosion.bam')
     explosion.setBillboardPointEye()
     explosion.setDepthWrite(False)
@@ -848,12 +850,12 @@ def createSuitStunInterval(suit, before, after):
         0.0, p2[2] - 1.0)), Func(stars.loop, 'stun'), Wait(after), Func(stars.cleanup), Func(stars.removeNode))
 
 
-def calcAvgAvatarPos(attack, avatar):
-    if not (avatar == 'suit' or avatar == 'toon'):
+def calcAvgAvatarPos(attack: dict[str, any], avatar: Literal['suit', 'toon']):
+    if avatar not in ('suit', 'toon'):
         notify.error('avatar is not suit or toon!')
     battle = attack['battle']
     avgAvatarPos = Point3(0, 0, 0)
-    numTargets = len(attack['target'])
+    numTargets: int = len(attack['target'])
     for i in range(numTargets):
         av = attack['target'][i][avatar]
         avgAvatarPos += av.getPos(battle)
