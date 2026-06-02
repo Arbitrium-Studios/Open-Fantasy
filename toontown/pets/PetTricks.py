@@ -81,33 +81,34 @@ def getTrickIval(pet, trickId):
     animRate = random.uniform(0.9, 1.1)
     waitTime = random.uniform(0.0, 1.0)
     if isinstance(anims, str):
-        if trickId == Tricks.JUMP:
-            animIval = Parallel()
-            animIval.append(ActorInterval(pet, anims, playRate=animRate))
-            animIval.append(
-                Sequence(
-                    Wait(0.36),
-                    ProjectileInterval(
+        match trickId:
+            case Tricks.JUMP:
+                animIval = Parallel()
+                animIval.append(ActorInterval(pet, anims, playRate=animRate))
+                animIval.append(
+                    Sequence(
+                        Wait(0.36),
+                        ProjectileInterval(
+                            pet,
+                            startPos=pet.getPos(),
+                            endPos=pet.getPos(),
+                            duration=1.0,
+                            gravityMult=0.5)))
+            case Tricks.ROLLOVER:
+                animIval = Sequence()
+                animIval.append(ActorInterval(pet, anims, playRate=animRate))
+                animIval.append(
+                    ActorInterval(
                         pet,
-                        startPos=pet.getPos(),
-                        endPos=pet.getPos(),
-                        duration=1.0,
-                        gravityMult=0.5)))
-        elif trickId == Tricks.ROLLOVER:
-            animIval = Sequence()
-            animIval.append(ActorInterval(pet, anims, playRate=animRate))
-            animIval.append(
-                ActorInterval(
-                    pet,
-                    anims,
-                    playRate=-
-                    1.0 *
-                    animRate))
-        elif trickId == Tricks.SPEAK:
-            animIval = ActorInterval(
-                pet, anims, startFrame=10, playRate=animRate)
-        else:
-            animIval = ActorInterval(pet, anims, playRate=animRate)
+                        anims,
+                        playRate=-
+                        1.0 *
+                        animRate))
+            case Tricks.SPEAK:
+                animIval = ActorInterval(
+                    pet, anims, startFrame=10, playRate=animRate)
+            case _:
+                animIval = ActorInterval(pet, anims, playRate=animRate)
     else:
         animIval = Sequence()
         for anim in anims:
