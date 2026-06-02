@@ -690,14 +690,15 @@ def getPropThrowTrack(attack, prop, hitPoints=[], missPoints=[], hitDuration=0.5
 
     def getLambdas(list, prop, toon):
         for i in range(len(list)):
-            if list[i] == 'face':
-                list[i] = lambda toon = toon: __toonFacePoint(toon)
-            elif list[i] == 'miss':
-                list[i] = lambda prop = prop, toon = toon: __toonMissPoint(prop, toon)
-            elif list[i] == 'bounceHit':
-                list[i] = lambda prop = prop, toon = toon: __throwBounceHitPoint(prop, toon)
-            elif list[i] == 'bounceMiss':
-                list[i] = lambda prop = prop, toon = toon: __throwBounceMissPoint(prop, toon)
+            match list[i]:
+                case 'face':
+                    list[i] = lambda toon = toon: __toonFacePoint(toon)
+                case 'miss':
+                    list[i] = lambda prop = prop, toon = toon: __toonMissPoint(prop, toon)
+                case 'bounceHit':
+                    list[i] = lambda prop = prop, toon = toon: __throwBounceHitPoint(prop, toon)
+                case 'bounceMiss':
+                    list[i] = lambda prop = prop, toon = toon: __throwBounceMissPoint(prop, toon)
 
         return list
 
@@ -871,18 +872,18 @@ def getColorTrack(attack, toon, part, color, delay = 0.0, duration = 1.0):
         Wait(delay),
         Func(battle.movie.needRestoreColor)
     )
-    if part == 'head' or part == 'all':
+    if part in ('head', 'all'):
         colorTrack.append(changeColor(headParts))
-    if part == 'torso' or part == 'all':
+    if part in ('torso', 'all'):
         colorTrack.append(changeColor(torsoParts))
-    if part == 'legs' or part == 'all':
+    if part in ('legs', 'all'):
         colorTrack.append(changeColor(legsParts))
     colorTrack.append(Wait(duration))
-    if part == 'head' or part == 'all':
+    if part in ('head', 'all'):
         colorTrack.append(resetColor(headParts))
-    if part == 'torso' or part == 'all':
+    if part in ('torso', 'all'):
         colorTrack.append(resetColor(torsoParts))
-    if part == 'legs' or part == 'all':
+    if part in ('legs', 'all'):
         colorTrack.append(resetColor(legsParts))
     colorTrack.append(Func(battle.movie.clearRestoreColor))
     return colorTrack
@@ -966,10 +967,11 @@ def getPhoneTrack(suit, delay: float = 0.3, playRate: float = 1.0) -> Sequence:
             finalPhoneDelay = 0.62
             scaleUpPoint = MovieUtil.PNT3_ONE
     propTrack: Sequence = Sequence(
+        Wait(delay),
         Func(__showProp, phone, suit.getLeftHand(), phonePosPoints[0], phonePosPoints[1]),
         Func(__showProp, receiver, suit.getLeftHand(), receiverPosPoints[0], receiverPosPoints[1]),
         LerpScaleInterval(phone, 0.5 / playRate, scaleUpPoint, MovieUtil.PNT3_NEARZERO),
-        Wait(pickupDelay),
+        Wait(pickupDelay / playRate),
         Func(receiver.wrtReparentTo, suit.getRightHand())
     )
     if suitType in ('a', 'b'):
