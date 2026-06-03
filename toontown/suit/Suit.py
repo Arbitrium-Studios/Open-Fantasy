@@ -400,12 +400,12 @@ class Suit(Avatar.Avatar):
             self.initializeNametag3d()
 
     def generateSuit(self) -> None:
-        dna = self.style
+        dna: SuitDNA.SuitDNA = self.style
         self.headParts = []
         self.headColor = None
         self.headTexture = None
         self.loseActor = None
-        self.isSkeleton = 0
+        self.isSkeleton = False
         self.isManager = 0
         match dna.name:
             case 'f':
@@ -1057,7 +1057,7 @@ class Suit(Avatar.Avatar):
             if not self.shadowJoint.isEmpty():
                 dropShadow.reparentTo(self.shadowJoint)
         self.loop(anim)
-        self.isSkeleton = 1
+        self.isSkeleton = True
 
     def getHeadParts(self):
         return self.headParts
