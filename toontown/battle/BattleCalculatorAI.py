@@ -698,22 +698,22 @@ class BattleCalculatorAI:
 
         return totalDamages
 
-    def __combatantDead(self, avId, toon):
+    def __combatantDead(self, avId, toon) -> bool:
         if toon:
             if self.__getToonHp(avId) <= 0:
-                return 1
+                return True
         else:
             suit = self.battle.findSuit(avId)
             if suit.getHP() <= 0:
-                return 1
-        return 0
+                return True
+        return False
 
-    def __combatantJustRevived(self, avId):
+    def __combatantJustRevived(self, avId) -> bool:
         suit = self.battle.findSuit(avId)
         if suit.reviveCheckAndClear():
-            return 1
+            return True
         else:
-            return 0
+            return False
 
     def __addAttackExp(self, attack, track=-1, level=-1, attackerId=-1):
         trk = -1
@@ -784,15 +784,15 @@ class BattleCalculatorAI:
         else:
             self.kbBonuses = [{}, {}, {}, {}]
 
-    def __bonusExists(self, tgtSuit, hp=1):
+    def __bonusExists(self, tgtSuit, hp=1) -> bool:
         tgtPos = self.activeSuits.index(tgtSuit)
         if hp:
             bonusLen = len(self.hpBonuses[tgtPos])
         else:
             bonusLen = len(self.kbBonuses[tgtPos])
         if bonusLen > 0:
-            return 1
-        return 0
+            return True
+        return False
 
     def __processBonuses(self, hp=1):
         if hp:

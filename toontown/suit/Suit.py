@@ -347,7 +347,7 @@ class Suit(Avatar.Avatar):
         self.healthBar = None
         self.healthCondition = 0
         self.isDisguised = 0
-        self.isWaiter = 0
+        self.isWaiter: bool = False
         self.isRental = 0
         self.isManager = 0
         return
@@ -772,7 +772,7 @@ class Suit(Avatar.Avatar):
     def makeWaiter(self, modelRoot=None) -> None:
         if not modelRoot:
             modelRoot = self
-        self.isWaiter = 1
+        self.isWaiter = True
         torsoTex = loader.loadTexture('phase_3.5/maps/waiter_m_blazer.jpg')
         torsoTex.setMinfilter(Texture.FTLinearMipmapLinear)
         torsoTex.setMagfilter(Texture.FTLinear)

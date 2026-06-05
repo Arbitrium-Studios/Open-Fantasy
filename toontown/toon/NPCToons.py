@@ -192,15 +192,15 @@ def createLocalNPC(npcId):
     return npc
 
 
-def isZoneProtected(zoneId):
+def isZoneProtected(zoneId) -> bool:
     npcs = []
     npcIdList = zone2NpcDict.get(zoneId, [])
     for npcId in npcIdList:
         npcDesc = NPCToonDict.get(npcId)
         if npcDesc[4]:
-            return 1
+            return True
 
-    return 0
+    return False
 
 
 lnames = TTLocalizer.NPCToonNames
