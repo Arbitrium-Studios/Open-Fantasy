@@ -41,15 +41,15 @@ def doLures(lures):
 def __doLureLevel(lure, npcs):
     level = lure['level']
     if level == 0:
-        return __lureOneDollar(lure)
+        return __lureOneDollar(lure, npcs)
     elif level == 1:
         return __lureSmallMagnet(lure, npcs)
     elif level == 2:
-        return __lureFiveDollar(lure)
+        return __lureFiveDollar(lure, npcs)
     elif level == 3:
         return __lureLargeMagnet(lure, npcs)
     elif level == 4:
-        return __lureTenDollar(lure)
+        return __lureTenDollar(lure, npcs)
     elif level == 5:
         return __lureHypnotize(lure, npcs)
     elif level == 6:
@@ -57,27 +57,25 @@ def __doLureLevel(lure, npcs):
     return None
 
 
-def getSoundTrack(fileName, delay=0.01, duration=None, node=None):
+def getSoundTrack(fileName, delay: float = 0.01, duration: float = 0.0, node = None) -> Sequence:
     soundEffect = globalBattleSoundCache.getSound(fileName)
-    if duration:
-        return Sequence(Wait(delay), SoundInterval(
-            soundEffect, duration=duration, node=node))
-    else:
-        return Sequence(Wait(delay), SoundInterval(soundEffect, node=node))
+    return Sequence(Wait(delay), SoundInterval(soundEffect, duration=duration, node=node))
 
 
-def __createFishingPoleMultiTrack(lure, dollar, dollarName):
+def __createFishingPoleMultiTrack(lure, dollar, dollarName: str, npcs = []):
     from toontown.fishing.FishGlobals import RodFileDict
     toon = lure['toon']
-    target = lure['target']
+    if 'npc' in lure:
+        toon = lure['npc']
+    targets = lure['target']
     battle = lure['battle']
     sidestep = lure['sidestep']
-    hp = target['hp']
-    kbbonus = target['kbbonus']
-    suit = target['suit']
-    targetPos = suit.getPos(battle)
-    died = target['died']
-    revived = target['revived']
+    hp = targets[0]['hp']
+    kbbonus = targets[0]['kbbonus']
+    suit = targets[0]['suit']
+    targetPos = MovieUtil.calcAvgAvatarPos(lure, 'suit')
+    died = targets[0]['died']
+    revived = targets[0]['revived']
     reachAnimDuration = 3.5
     trapProp = suit.battleTrapProp
     try:
@@ -88,7 +86,7 @@ def __createFishingPoleMultiTrack(lure, dollar, dollarName):
     poles = [pole, pole2]
     hands = toon.getRightHands()
 
-    def positionDollar(dollar, suit):
+    def positionDollar(dollar, suit) -> None:
         dollar.reparentTo(suit)
         dollar.setPos(0, MovieUtil.SUIT_LURE_DOLLAR_DISTANCE, 0)
 
@@ -237,7 +235,7 @@ def __createHypnoGogglesMultiTrack(lure, npcs=[]):
     hpr = Point3(-96.55, 36.14, -170.59)
     scale = Point3(1.5, 1.5, 1.5)
     hands = toon.getLeftHands()
-    gogglesTrack = Sequence(
+    gogglesTrack: Sequence = Sequence(
         Wait(0.6),
         Func(MovieUtil.showProps, bothGoggles, hands, pos, hpr, scale),
         ActorInterval(goggles, 'hypno-goggles', duration=2.2),
@@ -340,29 +338,30 @@ def __createSuitDamageTrack(battle, suit, hp, lure, trapProp):
     trapName = trapTrackNames[trapLevel]
     result = Sequence()
 
-    def reparentTrap(trapProp=trapProp, battle=battle):
+    def reparentTrap(trapProp=trapProp, battle=battle) -> None:
         if trapProp and not trapProp.isEmpty():
             trapProp.wrtReparentTo(battle)
 
     result.append(Func(reparentTrap))
     parent = battle
     if suit.battleTrapIsFresh == 1:
-        if trapName == 'quicksand' or trapName == 'trapdoor':
-            trapProp.hide()
-            trapProp.reparentTo(suit)
-            trapProp.setPos(Point3(0, MovieUtil.SUIT_TRAP_DISTANCE, 0))
-            trapProp.setHpr(Point3(0, 0, 0))
-            trapProp.wrtReparentTo(battle)
-        elif trapName == 'rake':
-            trapProp.hide()
-            trapProp.reparentTo(suit)
-            trapProp.setPos(0, MovieUtil.SUIT_TRAP_RAKE_DISTANCE, 0)
-            trapProp.setHpr(Point3(0, 270, 0))
-            trapProp.setScale(Point3(0.7, 0.7, 0.7))
-            rakeOffset = MovieUtil.getSuitRakeOffset(suit)
-            trapProp.setY(trapProp.getY() + rakeOffset)
-        else:
-            parent = render
+        match trapName:
+            case 'quicksand' | 'trapdoor':
+                trapProp.hide()
+                trapProp.reparentTo(suit)
+                trapProp.setPos(Point3(0, MovieUtil.SUIT_TRAP_DISTANCE, 0))
+                trapProp.setHpr(Point3(0, 0, 0))
+                trapProp.wrtReparentTo(battle)
+            case 'rake':
+                trapProp.hide()
+                trapProp.reparentTo(suit)
+                trapProp.setPos(0, MovieUtil.SUIT_TRAP_RAKE_DISTANCE, 0)
+                trapProp.setHpr(Point3(0, 270, 0))
+                trapProp.setScale(Point3(0.7, 0.7, 0.7))
+                rakeOffset = MovieUtil.getSuitRakeOffset(suit)
+                trapProp.setY(trapProp.getY() + rakeOffset)
+            case _:
+                parent = render
     if trapName == 'banana':
         slidePos = trapProp.getPos(parent)
         slidePos.setY(slidePos.getY() - 5.1)
@@ -382,11 +381,11 @@ def __createSuitDamageTrack(battle, suit, hp, lure, trapProp):
             Func(suit.updateHealthBar, hp)
         )
         soundTrack = Sequence(
-    elif trapName == 'rake' or trapName == 'rake-react':
             SoundInterval(globalBattleSoundCache.getSound('AA_pie_throw_only.ogg'), duration=0.55, node=suit),
             SoundInterval(globalBattleSoundCache.getSound('Toon_bodyfall_synergy.ogg'), node=suit)
         )
         result.append(Parallel(moveTrack, animTrack, suitTrack, damageTrack, soundTrack))
+    elif trapName in ('rake', 'rake-react'):
         hpr = trapProp.getHpr(parent)
         upHpr = Vec3(hpr[0], 179.9999, hpr[2])
         bounce1Hpr = Vec3(hpr[0], 120, hpr[2])
