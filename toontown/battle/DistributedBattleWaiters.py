@@ -52,40 +52,36 @@ class DistributedBattleWaiters(DistributedBattleFinal.DistributedBattleFinal):
             suit.setPos(destPos)
             suit.setHpr(destHpr)
 
-    def showSuitsFalling(self, suits, ts, name, callback):
+    def showSuitsFalling(self, suits, ts, name, callback) -> None:
         if self.bossCog is None:
             return
-        suitTrack = Parallel()
-        delay = 0
+        suitTrack: Parallel = Parallel()
+        delay: float = 0.0
         for suit in suits:
             suit.makeWaiter()
             suit.setState('Battle')
             if suit.dna.dept == 'l':
                 suit.reparentTo(self.bossCog)
                 suit.setPos(0, 0, 0)
-            if suit in self.joiningSuits:
+            if len(self.activeSuits) > 0: # Have the Cogs take the reserve positions if there are Cogs currently fighting.  Replaces the suit in self.joiningSuits condition.
                 i = len(self.pendingSuits) + self.joiningSuits.index(suit)
                 destPos, h = self.suitPendingPoints[i]
                 destHpr = VBase3(h, 0, 0)
             else:
                 destPos, destHpr = self.getActorPosHpr(suit, self.suits)
-            startPos = destPos + \
-                Point3(0, 0, SuitTimings.fromSky *
-                       ToontownGlobals.SuitWalkSpeed)
-            self.notify.debug('startPos for %s = %s' % (suit, startPos))
+            startPos = destPos + Point3(0, 0, SuitTimings.fromSky * ToontownGlobals.SuitWalkSpeed)
+            self.notify.debug('startPos for {} = {}'.format(suit, startPos))
             suit.reparentTo(self)
             suit.setPos(startPos)
             suit.headsUp(self)
             flyIval = suit.beginSupaFlyMove(destPos, True, 'flyIn')
-            suitTrack.append(
-                Track(
-                    (delay,
-                     Sequence(
-                         flyIval,
-                         Func(
-                             suit.loop,
-                             'neutral')))))
-            delay += 1
+            suitTrack.append(Track(
+                (delay, Sequence(
+                    flyIval,
+                    Func(suit.loop, 'neutral')
+                ))
+            ))
+            delay += 1.0
 
         if self.hasLocalToon():
             camera.reparentTo(self)
@@ -93,8 +89,8 @@ class DistributedBattleWaiters(DistributedBattleFinal.DistributedBattleFinal):
                 camera.setPosHpr(20, -4, 7, 60, 0, 0)
             else:
                 camera.setPosHpr(-20, -4, 7, -60, 0, 0)
-        done = Func(callback)
-        track = Sequence(suitTrack, done, name=name)
+        done: Func = Func(callback)
+        track: Sequence = Sequence(suitTrack, done, name=name)
         track.start(ts)
         self.storeInterval(track, name)
         return

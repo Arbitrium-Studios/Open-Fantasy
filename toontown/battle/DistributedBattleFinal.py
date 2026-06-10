@@ -110,17 +110,19 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
         if self.hasLocalToon():
             self.d_joinDone(base.localAvatar.doId, suit.doId)
 
-    def showSuitsJoining(self, suits, ts, name, callback):
+    def showSuitsJoining(self, suits, ts, name, callback) -> None:
         if self.bossCog is None:
             return
+        openDoor: Func
+        closeDoor: Func
         if self.battleSide:
             openDoor = Func(self.bossCog.doorB.request, 'open')
             closeDoor = Func(self.bossCog.doorB.request, 'close')
         else:
             openDoor = Func(self.bossCog.doorA.request, 'open')
             closeDoor = Func(self.bossCog.doorA.request, 'close')
-        suitTrack = Parallel()
-        delay = 0
+        suitTrack: Parallel = Parallel()
+        delay: float = 0.0
         for suit in suits:
             suit.setState('Battle')
             if suit.dna.dept == 'l':
@@ -129,33 +131,26 @@ class DistributedBattleFinal(DistributedBattleBase.DistributedBattleBase):
             suit.setPos(self.bossCog, 0, 0, 0)
             suit.headsUp(self)
             suit.setScale(3.8 / suit.height)
-            if suit in self.joiningSuits:
+            if len(self.activeSuits) > 0: # Have the Cogs take the reserve positions if there are Cogs currently fighting.  Replaces the suit in self.joiningSuits condition.
                 i = len(self.pendingSuits) + self.joiningSuits.index(suit)
                 destPos, h = self.suitPendingPoints[i]
                 destHpr = VBase3(h, 0, 0)
             else:
                 destPos, destHpr = self.getActorPosHpr(suit, self.suits)
-            suitTrack.append(
-                Track(
-                    (delay,
-                     self.createAdjustInterval(
-                         suit,
-                         destPos,
-                         destHpr)),
-                    (delay + 1.5,
-                     suit.scaleInterval(
-                         1.5,
-                         1))))
-            delay += 1
+            suitTrack.append(Track(
+                (delay, self.createAdjustInterval(suit, destPos, destHpr)),
+                (delay + 1.5, suit.scaleInterval(1.5, 1))
+            ))
+            delay += 1.0
 
         if self.hasLocalToon():
             camera.reparentTo(self)
-            if random.choice([0, 1]):
+            if random.random() >= 0.5:
                 camera.setPosHpr(20, -4, 7, 60, 0, 0)
             else:
                 camera.setPosHpr(-20, -4, 7, -60, 0, 0)
-        done = Func(callback)
-        track = Sequence(openDoor, suitTrack, closeDoor, done, name=name)
+        done: Func = Func(callback)
+        track: Sequence = Sequence(openDoor, suitTrack, closeDoor, done, name=name)
         track.start(ts)
         self.storeInterval(track, name)
         return

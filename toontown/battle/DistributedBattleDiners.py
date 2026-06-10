@@ -49,26 +49,24 @@ class DistributedBattleDiners(DistributedBattleFinal.DistributedBattleFinal):
             suit.setPos(destPos)
             suit.setHpr(destHpr)
 
-    def showSuitsFalling(self, suits, ts, name, callback):
+    def showSuitsFalling(self, suits, ts, name, callback) -> None:
         if self.bossCog is None:
             return
-        suitTrack = Parallel()
-        delay = 0
+        suitTrack: Parallel = Parallel()
+        delay: float = 0.0
         for suit in suits:
             suit.setState('Battle')
             if suit.dna.dept == 'l':
                 suit.reparentTo(self.bossCog)
                 suit.setPos(0, 0, 0)
-            if suit in self.joiningSuits:
+            if len(self.activeSuits) > 0: # Have the Cogs take the reserve positions if there are Cogs currently fighting.  Replaces the suit in self.joiningSuits condition.
                 i = len(self.pendingSuits) + self.joiningSuits.index(suit)
                 destPos, h = self.suitPendingPoints[i]
                 destHpr = VBase3(h, 0, 0)
             else:
                 destPos, destHpr = self.getActorPosHpr(suit, self.suits)
-            startPos = destPos + \
-                Point3(0, 0, SuitTimings.fromSky *
-                       ToontownGlobals.SuitWalkSpeed)
-            self.notify.debug('startPos for %s = %s' % (suit, startPos))
+            startPos = destPos + Point3(0, 0, SuitTimings.fromSky * ToontownGlobals.SuitWalkSpeed)
+            self.notify.debug('startPos for {} = {}'.format(suit, startPos))
             suit.reparentTo(self)
             suit.setPos(startPos)
             suit.headsUp(self)
@@ -76,27 +74,25 @@ class DistributedBattleDiners(DistributedBattleFinal.DistributedBattleFinal):
             chairInfo = self.bossCog.claimOneChair()
             if chairInfo:
                 moveIval = self.createDinerMoveIval(suit, destPos, chairInfo)
-            suitTrack.append(
-                Track(
-                    (delay,
-                     Sequence(
-                         moveIval,
-                         Func(
-                             suit.loop,
-                             'neutral')))))
-            delay += 1
+            suitTrack.append(Track(
+                (delay, Sequence(
+                    moveIval,
+                    Func(suit.loop, 'neutral')
+                ))
+            ))
+            delay += 1.0
 
         if self.hasLocalToon():
             camera.reparentTo(self)
-            self.notify.debug('self.battleSide =%s' % self.battleSide)
+            self.notify.debug('self.battleSide ={}'.format(self.battleSide))
             camHeading = -20
             camX = -4
             if self.battleSide == 0:
                 camHeading = 20
                 camX = 4
             camera.setPosHpr(camX, -15, 7, camHeading, 0, 0)
-        done = Func(callback)
-        track = Sequence(suitTrack, done, name=name)
+        done: Func = Func(callback)
+        track: Sequence = Sequence(suitTrack, done, name=name)
         track.start(ts)
         self.storeInterval(track, name)
         return
