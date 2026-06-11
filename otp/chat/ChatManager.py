@@ -39,7 +39,7 @@ def removeThoughtPrefix(message):
 
 class ChatManager(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('ChatManager')
-    execChat = ConfigVariableBool('exec-chat', 0).value
+    execChat = ConfigVariableBool('exec-chat', False).value
 
     def __init__(self, cr, localAvatar):
         self.cr = cr
@@ -412,7 +412,7 @@ class ChatManager(DirectObject.DirectObject):
                     'enterNormalChat', self.fsm.request, [
                         'whisperChat', [
                             avatarName, avatarId]])
-        if ConfigVariableBool('force-typed-whisper-enabled', 0).value:
+        if ConfigVariableBool('force-typed-whisper-enabled', False).value:
             self.whisperButton['state'] = 'normal'
             self.enablewhisperButton()
         return

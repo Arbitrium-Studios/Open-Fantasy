@@ -86,7 +86,6 @@ class ToontownControlManager(ControlManager.ControlManager):
         if self.currentControls:
             self.currentControls.enableAvatarControls()
 
-   
 
     def setWASDTurn(self, turn):
         self.__WASDTurn = turn
@@ -139,7 +138,7 @@ class ToontownControlManager(ControlManager.ControlManager):
 
         if self.currentControls:
             self.currentControls.disableAvatarControls()
-            
+
         if self.passMessagesThrough: # for not breaking toontown          
             #if base.wantWASD:
             self.notify.info('Custom Controls are enabled.')
@@ -153,7 +152,7 @@ class ToontownControlManager(ControlManager.ControlManager):
              #   self.istNormal.append(inputState.watchWithModifiers("reverse", "arrow_down", inputSource=inputState.ArrowKeys))
            #     self.istNormal.append(inputState.watchWithModifiers("turnLeft", "arrow_left", inputSource=inputState.ArrowKeys))
             #    self.istNormal.append(inputState.watchWithModifiers("turnRight", "arrow_right", inputSource=inputState.ArrowKeys))
-            
+
     def disableWASD(self):#Disables WASD for when chat is open.
        # if base.wantWASD:
         self.forceTokens=[#Forces all keys to return 0. This won't affect chat input.
@@ -173,8 +172,8 @@ class ToontownControlManager(ControlManager.ControlManager):
                 "slideRight", 0, 'ControlManager.disableWASD')                  
         ]
         self.notify.info('disableWASD()')
-                
-                
+
+
     def enableWASD(self):#Enables WASD after chat is closed.
         #if base.wantWASD:
         if self.forceTokens:
@@ -182,14 +181,13 @@ class ToontownControlManager(ControlManager.ControlManager):
                 token.release()
             self.forceTokens = []
             self.notify.info('enableWASD')
-                
+
     def reload(self):
         """
         Reload the controlmanager in-game
         """
         #base.wantWASD = base.wan
 
-        
         #if base.wantWASD:       
         for token in self.istNormal:
             token.release()#Release arrow key input

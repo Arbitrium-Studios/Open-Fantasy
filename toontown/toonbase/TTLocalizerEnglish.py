@@ -58,10 +58,10 @@ lArbitriumStudios: str = 'Arbitrium Studios'
 lPlayerZeroStudio: str = 'PLAYER ZER0 STUDIO'
 lToontownFantasy: str = 'Toontown Fantasy'
 
+loadPrcFile('etc/Configrc.prc')
+
 prc_data = f"{lPlayerZeroStudio}'s {lToontownFantasy}"
 loadPrcFileData('', f"window-title {prc_data}")
-
-loadPrcFile('etc/Configrc.prc')
 
 window_title_config = ConfigVariableString('window-title', f'{prc_data}') # Falls back to "PLAYER ZER0 STUDIO's Toontown Fantasy" if no title is given
 setGameName = window_title_config.getValue()
@@ -122,11 +122,11 @@ GlobalStreetNames = {20000: ('to', 'on', 'Tutorial Terrace'),
                      9200: ('to', 'on', 'Pajama Place'),
                      9300: ('to', 'on', 'Twilight Terrace'),
                      10000: ('to the', 'in the', 'Country Club'),
-                     10100: ('to the', 'in the', 'Bossbot Lobby'),
-                     10200: ('to the', 'in the', 'The Clubhouse'),
-                     10500: ('to the', 'in the', 'The Front Three'),
-                     10600: ('to the', 'in the', 'The Middle Six'),
-                     10700: ('to the', 'in the', 'The Back Nine'),
+                     10100: ('to the', 'in the', 'Bossbot Clubhouse Lobby'),
+                     10200: ('to', 'in', 'The Clubhouse'),
+                     10500: ('to', 'in', 'The Front Three'),
+                     10600: ('to', 'in', 'The Middle Six'),
+                     10700: ('to', 'in', 'The Back Nine'),
                      11000: ('to the', 'in the', 'Sellbot Courtyard'),
                      11100: ('to the', 'in the', 'Sellbot Lobby'),
                      11200: ('to the', 'in the', 'Sellbot Factory'),
@@ -139,10 +139,10 @@ GlobalStreetNames = {20000: ('to', 'on', 'Tutorial Terrace'),
                      13000: ('to the', 'in the', 'Lawbot Courtyard'),
                      13100: ('to the', 'in the', 'Courthouse Lobby'),
                      13200: ('to the', 'in the', "DA's Office Lobby"),
-                     13300: ('to the', 'in the', 'Lawbot A Office'),
-                     13400: ('to the', 'in the', 'Lawbot B Office'),
-                     13500: ('to the', 'in the', 'Lawbot C Office'),
-                     13600: ('to the', 'in the', 'Lawbot D Office')}
+                     13300: ('to the', 'in the', 'Lawbot Office A'),
+                     13400: ('to the', 'in the', 'Lawbot Office B'),
+                     13500: ('to the', 'in the', 'Lawbot Office C'),
+                     13600: ('to the', 'in the', 'Lawbot Office D')}
 ToontownCentral = ('to', 'in', lToontownCentral)
 TundraWonderland = ('to', 'in', lTundraWonderland)
 HarmoniousHaven = ('to', 'in', lHarmoniousHaven)
@@ -151,21 +151,74 @@ AcornAcres = ('to', 'in', lAcornAcres)
 FunnyFarms = ('to', 'in', lFunnyFarms)
 ToontownStadium = ('to', 'in', lToontownStadium)
 TwilightDreamland = ('to', 'in', lTwilightDreamland)
-BossbotHQ = ('to', 'in', 'Bossbot Headquarters')
-SellbotHQ = ('to', 'in', 'Sellbot Headquarters')
-CashbotHQ = ('to', 'in', 'Cashbot Headquarters')
-LawbotHQ = ('to', 'in', 'Lawbot Headquarters')
+
+BossbotHQ = ('to', 'in', 'Bossbot Headquarters', 'Bossbot HQ')
+lBossbotHeadquarters = BossbotHQ[2]
+lBossbotHQ = BossbotHQ[3]
+lInBossbotHQ = f'{BossbotHQ[1]} {lBossbotHQ}'
+BossbotClubhouse = ('to the', 'in the', 'Bossbot Clubhouse')
+lBossbotClubhouse = BossbotClubhouse[2]
+lInTheBossbotClubhouse = f'{BossbotClubhouse[1]} {lBossbotClubhouse}'
+lFightingTheCEO = 'Fighting the C.E.O.'
+lBossbotClubhouseRPC = f'Serving Tables {lInTheBossbotClubhouse} {lInBossbotHQ}'
+
+SellbotHQ = ('to', 'in', 'Sellbot Headquarters', 'Sellbot HQ')
+lSellbotHeadquarters = SellbotHQ[2]
+lSellbotHQ = SellbotHQ[3]
+lInSellbotHQ = f'{SellbotHQ[1]} {lSellbotHQ}'
+SellbotTowers = ('to', 'in', 'atop', 'at the top of', 'Sellbot Towers')
+lSellbotTowers = SellbotTowers[4]
+lFightingTheVP = 'Fighting the V.P.'
+# lInTheSellbotHQ = f'{GlobalStreetNames[ToontownGlobals.SellbotHQ][-2]}'.capitalize()
+lAtopSellbotTowers = f'{SellbotTowers[2]} {lSellbotTowers}, {lInSellbotHQ}'
+lSellbotTowersRPC = f'Seeking a promotion {SellbotTowers[3]} {lSellbotTowers} {lInSellbotHQ}'
+
+CashbotHQ = ('to', 'in', 'Cashbot Headquarters', 'Cashbot HQ')
+lCashbotHeadquarters = f'{CashbotHQ[2]}'
+lCashbotHQ = CashbotHQ[3]
+lInCashbotHQ = f'{CashbotHQ[1]} {lCashbotHQ}'
+CashbotVault = ('to the', 'in the', 'the', 'Cashbot Vault')
+lCashbotVault = CashbotVault[3]
+lTheCashbotVault = f'{CashbotVault[2]} {lCashbotVault}'
+lFightingTheCFO = 'Fighting the C.F.O.'
+lCashbotVaultRPC = f'Crashing {lTheCashbotVault} {lInCashbotHQ}'
+CashbotVaultLobby = ('to the', 'in the', 'the', f'{lCashbotVault} Lobby')
+lCashbotVaultLobby = CashbotVaultLobby[3]
+
+LawbotHQ = ('to', 'in', 'Lawbot Headquarters', 'Lawbot HQ')
+lLawbotHeadquarters = LawbotHQ[2]
+lLawbotHQ = LawbotHQ[3]
+lInLawbotHQ = f'{LawbotHQ[1]} {lLawbotHQ}'
+LawbotCourthouse = ('to the', 'in the', 'Lawbot Courthouse')
+lLawbotCourthouse = LawbotCourthouse[2]
+lInTheLawbotCourthouse = f'{LawbotCourthouse[1]} {lLawbotCourthouse}'
+lFightingTheCJ = 'Fighting the C.J.'
+lLawbotCourthouseRPC = f'Advocating for the Defendant {lInTheLawbotCourthouse} {lInLawbotHQ}'
+
+lInACogBuilding = 'In a C.O.G. Building'
+
 Tutorial = ('to the', 'in the', 'Toon-torial')
-MyEstate = ('to', 'in', 'your house')
+MyEstate = ('to', 'in', 'at', 'your house', 'home', 'estate')
+lHome = MyEstate[4]
+lAtHome = f'{MyEstate[2]} {lHome}'
+lEstate = MyEstate[5]
+
 WelcomeValley = ('to', 'in', 'Welcome Valley')
 GolfZone = ('to', 'in', 'Toontown Mini-Golf')
 lGolfZone = GolfZone[2]
 PartyHood = ('to the', 'in the', lPartyHood)
 
-lBossbotHQ = BossbotHQ[2]
-lSellbotHQ = SellbotHQ[2]
-lCashbotHQ = CashbotHQ[2]
-lLawbotHQ = LawbotHQ[2]
+lPlayerAtHome = f'Hanging out {lAtHome}'
+lPlayerInToontownCentral = f'Chatting in {lToontownCentral}'
+lPlayerInFoggyFjord = f'Sailing around {lFoggyFjord}'
+lPlayerInTundraWonderland = f'Chilling in {lTundraWonderland}'
+lPlayerInFloweringGrove = f'Smelling the flowers in {lFloweringGrove}'
+lPlayerInHarmoniousHaven = f'Feeling the flow of {lHarmoniousHaven}'
+lPlayerInAcornAcres = f'Wandering through {lAcornAcres}'
+lPlayerAtMiniGolf = f'Putting around {lGolfZone}'
+lPlayerInFunnyFarms = f'Uncovering the mysteries of {lFunnyFarms}'
+lPlayerInToontownStadium = f'Drifting through {lToontownStadium}'
+lPlayerInTwilightDreamland = f'Dreaming in {lTwilightDreamland}'
 
 Factory = 'Factory'
 Headquarters = 'Headquarters'
@@ -551,11 +604,11 @@ QuestsItemDict = {1: ['Pair of Glasses', 'Pairs of Glasses', 'a '],
                   5010: ['Sprocket', 'Sprockets', 'a '],
                   5011: ['Salad', 'Salads', 'a '],
                   5012: ['Key to ' + lFloweringGrove, 'Keys to ' + lFloweringGrove, 'a '],
-                  5013: [lSellbotHQ + ' Blueprints', lSellbotHQ + ' HQ Blueprints', 'some '],
-                  5014: [lSellbotHQ + ' Memo', lSellbotHQ + ' Memos', 'a '],
-                  5015: [lSellbotHQ + ' Memo', lSellbotHQ + ' Memos', 'a '],
-                  5016: [lSellbotHQ + ' Memo', lSellbotHQ + ' Memos', 'a '],
-                  5017: [lSellbotHQ + ' Memo', lSellbotHQ + ' Memos', 'a '],
+                  5013: [lSellbotHeadquarters + ' Blueprints', lSellbotHeadquarters + ' HQ Blueprints', 'some '],
+                  5014: [lSellbotHeadquarters + ' Memo', lSellbotHeadquarters + ' Memos', 'a '],
+                  5015: [lSellbotHeadquarters + ' Memo', lSellbotHeadquarters + ' Memos', 'a '],
+                  5016: [lSellbotHeadquarters + ' Memo', lSellbotHeadquarters + ' Memos', 'a '],
+                  5017: [lSellbotHeadquarters + ' Memo', lSellbotHeadquarters + ' Memos', 'a '],
                   3001: ['Soccer ball', 'Soccer balls', 'a '],
                   3002: ['Toboggan', 'Toboggans', 'a '],
                   3003: ['Ice cube', 'Ice cubes', 'an '],
@@ -3293,9 +3346,9 @@ FADoorCodes_TALK_TO_HQ_TOM = 'Go get your reward from Toon Headquarters!'
 FADoorCodes_SUIT_APPROACHING = None
 FADoorCodes_BUILDING_TAKEOVER = "Watch out! There's a Cog in there!"
 FADoorCodes_SB_DISGUISE_INCOMPLETE: str = "You'll get caught going in there as a Toon! You need to complete your Sellbot Disguise first!\n\nBuild your Sellbot Disguise out of parts from the Factory."
-FADoorCodes_CB_DISGUISE_INCOMPLETE: str = "You'll get caught going in there as a Toon! You need to complete your Cashbot Disguise first!\n\nBuild your Cashbot Disguise by doing ToonTasks in Twilight Dreamland."
-FADoorCodes_LB_DISGUISE_INCOMPLETE: str = "You'll get caught going in there as a Toon! You need to complete your Lawbot Disguise first!\n\nBuild your Lawbot Disguise by doing the ToonTasks after Twilight Dreamland."
-FADoorCodes_BB_DISGUISE_INCOMPLETE: str = "You'll get caught going in there as a Toon! You need to complete your Bossbot Disguise first!\n\nBuild your Bossbot Disguise by doing the ToonTasks after Twilight Dreamland."
+FADoorCodes_CB_DISGUISE_INCOMPLETE: str = f"You'll get caught going in there as a Toon! You need to complete your Cashbot Disguise first!\n\nBuild your Cashbot Disguise by doing ToonTasks in {lTwilightDreamland}."
+FADoorCodes_LB_DISGUISE_INCOMPLETE: str = f"You'll get caught going in there as a Toon! You need to complete your Lawbot Disguise first!\n\nBuild your Lawbot Disguise by doing the ToonTasks after {lTwilightDreamland}."
+FADoorCodes_BB_DISGUISE_INCOMPLETE: str = f"You'll get caught going in there as a Toon! You need to complete your Bossbot Disguise first!\n\nBuild your Bossbot Disguise by doing the ToonTasks after {lTwilightDreamland}."
 KnockKnockContestJokes = {2100: ['Wally', "Wally's not looking, hit him with a pie!"],
                           2200: {28: ['Biscuit', 'Biscuit out of here the Cogs are coming!'],
                                  41: ['Dewey', 'Dewey want to go defeat some more Cogs?'],
@@ -3445,10 +3498,10 @@ SharedChatterComments = ["That's a great name, %.",
                          "I think I'll go fishing this afternoon.",
                          'Have fun in my neighborhood.',
                          'I hope you are enjoying your stay in Toontown!',
-                         "I heard it's snowing at Tundra Wonderland.",
+                         f"I heard it's snowing at {lTundraWonderland}.",
                          'Have you ridden the trolley today?',
                          'I like to meet new people.',
-                         'Wow, there are lots of ' + Cogs + ' in Tundra Wonderland.',
+                         'Wow, there are lots of ' + Cogs + f' in {lTundraWonderland}.',
                          'I love to play tag. Do you?',
                          'Trolley games are fun to play.',
                          'I like to make people laugh.',
@@ -3503,7 +3556,7 @@ WinterMickeyCChatter = (["Hi, I'm Merry Mickey!",
                                                                                                      'Shucks, sorry you have to go. So long!',
                                                                                                      "I'm going caroling with Minnie!"])
 ValentinesMickeyChatter = (["Hi, I'm Mickey!",
-                            'Welcome to ValenToontown Central!',
+                            f'Welcome to Valen{lToontownCentral}!',
                             "Happy ValenToon's Day!",
                             "Happy ValenToon's Day, %"], ['Love is in the air! And butterflies!',
                                                           'Those hearts are good for Laff boosts!',
@@ -3776,7 +3829,7 @@ GoofyChatter = (['Welcome to ' + lFloweringGrove + '.', 'Hi, my name is ' + Goof
                                                                                                                                           "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
                                                                                                                                           'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lFoggyFjord + '.',
                                                                                                                                           'It looks like ' + Daisy + ' has planted some new flowers in her garden.',
-                                                                                                                                          'At Tundra Wonderland branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
+                                                                                                                                          f'At {lTundraWonderland} branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                                           "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                                           "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ["I'm going to Melody Land to see %s!" % Mickey,
                                                                                                                                                                                                                                                           "Gosh, I'm late for my game with %s!" % Donald,
@@ -3807,7 +3860,7 @@ ToontownStadiumChatter = (['Welcome to ' + lToontownStadium + '.', 'Hi, my name 
                                                                                                                                                    'If you see my friend ' + Mickey + ', say hi to him for me.',
                                                                                                                                                    "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
                                                                                                                                                    'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lFoggyFjord + '.',
-                                                                                                                                                   'At Tundra Wonderland branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
+                                                                                                                                                   f'At {lTundraWonderland} branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                                                    "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                                                    "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ["I'm going to Melody Land to see %s!" % Mickey,
                                                                                                                                                                                                                                                                    "Gosh, I'm late for my game with %s!" % Donald,
@@ -3826,7 +3879,7 @@ SuperGoofyChatter = (['Welcome to my Super Speedway!',
                                                "It's fun to dress up for Halloween!",
                                                'I hope you are enjoying our Halloween fun!'], ['Gotta fly!',
                                                                                                'Hi-Ho and away I go!',
-                                                                                               "Should I fly or drive to Foggy Fjord?",
+                                                                                               f"Should I fly or drive to {lFoggyFjord}?",
                                                                                                'Gawrsh, have a Happy Halloween!'])
 DonaldChatter = (['Welcome to Dreamland.', "Hi, my name is %s. What's yours?" % Donald], ['Sometimes this place gives me the creeps.',
                                                                                           'Be sure and try the maze in ' + lFloweringGrove + '.',
@@ -4082,7 +4135,7 @@ CLToontownStadiumChatter = (['Welcome to ' + lToontownStadium + '.',
                                                                                                                   'If you see my friend ' + Mickey + ', say hi to him for me.',
                                                                                                                   "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
                                                                                                                   'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lFoggyFjord + '.',
-                                                                                                                  'At Tundra Wonderland branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
+                                                                                                                  f'At {lTundraWonderland} branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                                                                   "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                                                                   "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ['I better go get my kart a new paint job for the upcoming Grand Prix Weekend.',
                                                                                                                                                                                                                                   "Gosh, I better get workin' on this broken Leaderboard!",
@@ -4103,7 +4156,7 @@ GPToontownStadiumChatter = (['Welcome to ' + lToontownStadium + '.',
                                                                 'If you see my friend ' + Mickey + ", tell him he's missing some great racing!",
                                                                 "D'oh! I forgot to fix " + Mickey + "'s breakfast!",
                                                                 'Gawrsh there sure are a lot of ' + Cogs + ' near ' + lFoggyFjord + '.',
-                                                                'At Tundra Wonderland branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
+                                                                f'At {lTundraWonderland} branch of my Gag Shop, Hypno-Goggles are on sale for only 1 Jellybean!',
                                                                 "Goofy's Gag Shops offer the best jokes, tricks, and funnybone-ticklers in all of Toontown!",
                                                                 "At Goofy's Gag Shops, every pie in the face is guaranteed to make a laugh or you get your Jellybeans back!"], ['Good luck in the Grand Prix!',
                                                                                                                                                                                 "I'm going to catch the next race in the Grand Prix!",
@@ -4454,11 +4507,11 @@ PartyPlannerDateText = 'Date'
 PartyPlannerTimeText = 'Time'
 PartyPlannerTTTimeText = 'Toontown Time'
 PartyPlannerEditorInstructionsIdle = 'Click on the Party Activity or Decoration you would like to purchase.'
-PartyPlannerEditorInstructionsClickedElementActivity = 'Click Buy or Drag the Activity Icon onto the Party Grounds Map'
-PartyPlannerEditorInstructionsClickedElementDecoration = 'Click Buy or Drag the Decoration onto the Party Grounds Map'
-PartyPlannerEditorInstructionsDraggingActivity = 'Drag the Activity onto the Party Grounds Map.'
-PartyPlannerEditorInstructionsDraggingDecoration = 'Drag the Activity onto the Party Grounds Map.'
-PartyPlannerEditorInstructionsPartyGrounds = 'Click and Drag items to move them around the Party Grounds Map'
+PartyPlannerEditorInstructionsClickedElementActivity = f'Click Buy or Drag the Activity Icon onto the {lPartyHood} Map'
+PartyPlannerEditorInstructionsClickedElementDecoration = f'Click Buy or Drag the Decoration onto the {lPartyHood} Map'
+PartyPlannerEditorInstructionsDraggingActivity = f'Drag the Activity onto the {lPartyHood} Map.'
+PartyPlannerEditorInstructionsDraggingDecoration = f'Drag the Activity onto the {lPartyHood} Map.'
+PartyPlannerEditorInstructionsPartyGrounds = f'Click and Drag items to move them around the {lPartyHood} Map'
 PartyPlannerEditorInstructionsTrash = 'Drag an Activity or Decoration here to remove it.'
 PartyPlannerEditorInstructionsNoRoom = 'There is no room to place that activity.'
 PartyPlannerEditorInstructionsRemoved = '%(removed)s removed since %(added)s was added.'
@@ -4466,8 +4519,8 @@ PartyPlannerBeans = 'beans'
 PartyPlannerTotalCost = 'Total Cost:\n%d beans'
 PartyPlannerSoldOut = 'SOLD OUT'
 PartyPlannerBuy = 'BUY'
-PartyPlannerPartyGrounds = 'PARTY GROUNDS MAP'
-PartyPlannerOkWithGroundsLayout = 'Are you done moving your Party Activities and Decorations around the Party Grounds Map?'
+PartyPlannerPartyGrounds = f'{lPartyHood} MAP'.upper()
+PartyPlannerOkWithGroundsLayout = f'Are you done moving your Party Activities and Decorations around the {lPartyHood} Map?'
 PartyPlannerChooseFutureTime = 'Please choose a time in the future.'
 PartyPlannerInviteButton = 'Send Invites'
 PartyPlannerInviteButtonNoFriends = 'Plan Party'
@@ -4506,7 +4559,7 @@ MusicCreateAToon = 'The New Toon in Town'
 MusicTtTheme = 'The Toontown Theme'
 MusicMinigameRace = 'Slow and Steady'
 MusicMgPairing = 'Remember Me?'
-MusicTcNbrhood = 'Toontown Central'
+MusicTcNbrhood = lToontownCentral
 MusicMgDiving = 'Treasure Lullaby'
 MusicMgCannonGame = 'Fire the Cannons!'
 MusicMgTwodgame = 'Running Toon'
@@ -4530,22 +4583,21 @@ MusicGsRaceRr = 'Route 66'
 MusicGzSz = 'The Putt-Putt Polka'
 MusicMmSz = 'Dancing in the Streets'
 MusicMmSzActivity = 'Here Comes Treble'
-MusicDdNbrhood = "Foggy Fjord"
-MusicDdNbrhood = "Foggy Fjord"
+MusicDdNbrhood = lFoggyFjord
 MusicGsKartshop = 'Mr. Goofywrench'
 MusicDdSzActivity = 'Sea Shanty'
 MusicEncntrGeneralBgIndoor = 'Building Excitement'
 MusicTtElevator = 'Going Up?'
 MusicEncntrToonWinningIndoor = 'Toons Unite!'
 MusicEncntrGeneralSuitWinningIndoor = 'Cog-tastrophe!'
-MusicTbNbrhood = 'Tundra Wonderland'
-MusicDlNbrhood = "Twlight Dreamland"
+MusicTbNbrhood = lTundraWonderland
+MusicDlNbrhood = lTwilightDreamland
 MusicDlSzActivity = 'Counting Sheep'
 MusicDgSz = 'Waltz of the Flowers'
 MusicDlSz = 'Sleepwalking'
 MusicTbSzActivity = 'Snow Problem'
 MusicTbSz = 'Shiver and Shimmy'
-MusicDgNbrhood = "Flowering Grove"
+MusicDgNbrhood = lFloweringGrove
 MusicEncntrHallOfFame = 'The Hall of Fame'
 MusicEncntrSuitHqNbrhood = 'Dollars and Cents'
 MusicChqFactBg = 'Cog Factory'
@@ -5597,7 +5649,7 @@ ColorShopAll = 'Single Color'
 ClothesShopShorts = 'Shorts'
 ClothesShopShirt = 'Shirts'
 ClothesShopBottoms = 'Bottoms'
-PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontown Central?"
+PromptTutorial = f"Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to {lToontownCentral}?"
 MakeAToonSkipTutorial = 'Skip Toontorial'
 MakeAToonEnterTutorial = 'Enter Toontorial'
 MakeAToonDone = 'Done'
@@ -6444,8 +6496,8 @@ AwardMgrShirt = 'shirt'
 SpecialEventMailboxStrings = {1: 'A special item from the Toon Council just for you!',
                               2: "Here is your Melville's Fishing Tournament prize! Congratulations!",
                               3: "Here is your Billy Budd's Fishing Tournament prize! Congratulations!",
-                              4: 'Here is your Acorn Acres April Invitational prize! Congratulations!',
-                              5: 'Here is your Acorn Acres C.U.P. Championship prize! Congratulations!',
+                              4: f'Here is your {lAcornAcres} April Invitational prize! Congratulations!',
+                              5: f'Here is your {lAcornAcres} C.U.P. Championship prize! Congratulations!',
                               6: 'Here is your Gift-Giving Extravaganza prize! Congratulations!',
                               7: "Here is your Top Toons New Year's Day Marathon prize! Congratulations!",
                               8: 'Here is your Perfect Trolley Games Weekend prize! Congratulations!',
@@ -6974,8 +7026,8 @@ WindowViewNames = {10: 'Large Garden',
 SpecialEventNames = {1: 'Generic Award',
                      2: "Melville's Fishing Tournament",
                      3: "Billy Budd's Fishing Tournament",
-                     4: 'Acorn Acres April Invitational',
-                     5: 'Acorn Acres C.U.P. Championship',
+                     4: f'{lAcornAcres} April Invitational',
+                     5: f'{lAcornAcres} C.U.P. Championship',
                      6: 'Gift-Giving Extravaganza',
                      7: "Top Toons New Year's Day Marathon",
                      8: 'Perfect Trolley Games Weekend',
@@ -8483,7 +8535,7 @@ BlockerLoadingTexts = ['Scrubbing pie tins',
                        'Cleaning Hypno-glasses',
                        'Unbottling ink for Toon News',
                        'Clipping TNT fuses',
-                       "Setting up 'Under Construction' sign in Acorn Acres",
+                       f"Setting up 'Under Construction' sign in {lAcornAcres}",
                        'Waking Donald Duck',
                        'Teaching new moves to dancing fire hydrants',
                        'Binding Shticker Books',
@@ -8561,10 +8613,10 @@ TipDict: dict[int, tuple[str, ...]] = {TIP_NONE: ('',),
                                                      'Pet Shops get new Doodles to sell every day.',
                                                      'Visit the Pet Shops every day to see what new Doodles they have.',
                                                      'Different neighborhoods have different Doodles offered for adoption.',
-                                                     "Show off your stylin' ride and turbo-boost your Laff limit at Toontown Stadium.",
-                                                     'Enter Toontown Stadium through the tire-shaped tunnel in Toontown Central Playground.',
-                                                     'Earn Laff points at Toontown Stadium.',
-                                                     'Toontown Stadium has six different race tracks. '),
+                                                     f"Show off your stylin' ride and turbo-boost your Laff limit at {lToontownStadium}.",
+                                                     f'Enter {lToontownStadium} through the tire-shaped tunnel in {lToontownCentral} Playground.',
+                                                     f'Earn Laff points at {lToontownStadium}.',
+                                                     f'{lToontownStadium} has six different race tracks. '),
                                        TIP_STREET: ('There are four types of Cogs: Lawbots, Cashbots, Sellbots, and Bossbots.',
                                                     'Each Gag Track has different amounts of accuracy and damage.',
                                                     'Sound gags will affect all Cogs but will wake up any lured Cogs.',
@@ -8636,7 +8688,7 @@ TipDict: dict[int, tuple[str, ...]] = {TIP_NONE: ('',),
                                                    'Make sure you have full gags and a full Laff Meter before going to Cog Headquarters.',
                                                    'As you get promoted, your Cog disguise updates.',
                                                    'You must defeat the ' + Foreman + ' to recover a Sellbot Cog Disguise part.',
-                                                   "Earn Cashbot disguise suit parts as rewards for completing ToonTasks in Twilight Dreamland.",
+                                                   f"Earn Cashbot disguise suit parts as rewards for completing ToonTasks in {lTwilightDreamland}.",
                                                    'Cashbots manufacture and distribute their currency, Cogbucks, in three Mints - Coin, Dollar and Bullion.',
                                                    'Wait until the C.F.O. is dizzy to throw a safe, or he will use it as a helmet! Hit the helmet with another safe to knock it off.',
                                                    'Earn Lawbot disguise suit parts as rewards for completing ToonTasks for Professor Flake.',
@@ -8680,15 +8732,15 @@ TipDict: dict[int, tuple[str, ...]] = {TIP_NONE: ('',),
                                                     'Did you know the color of your house matches the color of your Pick-A-Toon panel?'),
                                        TIP_KARTING: ("Buy a Roadster, TUV, or Cruiser kart in Goofy's Auto Shop.",
                                                      "Customize your kart with decals, rims and more in Goofy's Auto Shop.",
-                                                     'Earn tickets by kart racing at Toontown Stadium.',
+                                                     f'Earn tickets by kart racing at {lToontownStadium}.',
                                                      "Tickets are the only currency accepted at Goofy's Auto Shop.",
                                                      'Tickets are required as deposits to race.',
                                                      'A special page in the Shticker Book allows you to customize your kart.',
                                                      'A special page in the Shticker Book allows you to view records on each track.',
                                                      'A special page in the Shticker Book allows you to display trophies.',
-                                                     'Screwball Stadium is the easiest track at Toontown Stadium.',
-                                                     'Airborne Acres has the most hills and jumps of any track at Toontown Stadium.',
-                                                     'Blizzard Boulevard is the most challenging track at Toontown Stadium.'),
+                                                     f'Screwball Stadium is the easiest track at {lToontownStadium}.',
+                                                     f'Airborne Acres has the most hills and jumps of any track at {lToontownStadium}.',
+                                                     f'Blizzard Boulevard is the most challenging track at {lToontownStadium}.'),
                                        TIP_GOLF: ('Press the Tab key to see a top view of the golf course.', 'Press the Up Arrow key to point yourself towards the golf hole.', 'Swinging the club is just like throwing a pie.')}
 FishGenusNames: dict[int, str] = {0: 'Balloon Fish',
                                   2: 'Cat Fish',
@@ -9153,9 +9205,9 @@ KartRace_RaceTimeoutNoRefund = 'You timed out of that race.  Your tickets have n
 KartRace_RacerTooSlow = 'You took too long to finish the race.  Your tickets have not been refunded.  Keep trying!'
 KartRace_PhotoFinish = 'Photo Finish!'
 KartRace_CircuitPoints = 'Circuit Points'
-CircuitRaceStart = 'The Toontown Grand Prix at Toontown Stadium is about to begin!  To win, collect the most points in three consecutive races!'
+CircuitRaceStart = f'The Toontown Grand Prix at {lToontownStadium} is about to begin!  To win, collect the most points in three consecutive races!'
 CircuitRaceOngoing = 'Welcome! The Toontown Grand Prix is currently in progress.'
-CircuitRaceEnd = "That's all for today's Toontown Grand Prix at Toontown Stadium.  See you next week!"
+CircuitRaceEnd = f"That's all for today's Toontown Grand Prix at {lToontownStadium}.  See you next week!"
 TrickOrTreatMsg = 'You have already\nfound this treat!'
 WinterCarolingMsg = 'You have already been caroling here!'
 LawbotBossTempIntro0 = "Hmmm what's on the docket today?"
@@ -9664,7 +9716,7 @@ MoreXpHolidayEnd = 'Exclusive Test Toon double gag experience time has ended. Th
 JellybeanDayHolidayStart = "It's Jellybean Day! Get Double Jellybean rewards at Parties!"
 JellybeanDayHolidayEnd = "That's all for Jellybean Day. See you next year."
 PartyRewardDoubledJellybean = 'Double Jellybeans!'
-GrandPrixWeekendHolidayStart = "It's Grand Prix Weekend at Toontown Stadium! Free and paid players collect the most points in three consecutive races."
+GrandPrixWeekendHolidayStart = f"It's Grand Prix Weekend at {lToontownStadium}! Free and paid players collect the most points in three consecutive races."
 GrandPrixWeekendHolidayEnd = "That's all for Grand Prix Weekend. See you next year."
 KartRace_DoubleTickets = 'Double Tickets'
 SellbotNerfHolidayStart = 'Operation: Storm Sellbot is happening now! Battle the VP today!'
@@ -9690,7 +9742,7 @@ WinterDecorationsEnd = 'Winter Holiday is over - Happy New Year!'
 WackyWinterDecorationsStart = 'Brrr! Silly Meter goes from silly to chilly!'
 WinterCarolingStart = 'Caroling has come to Toontown. Sing for your Snowman Head - see the Blog for details!'
 ExpandedClosetsStart = 'Attention Toons: For a limited time, Members can purchase the new 50 item Closet from the Cattlelog for the low price of 50 Jellybeans!'
-KartingTicketsHolidayStart = 'Get double tickets from Practice races at Toontown Stadium today!'
+KartingTicketsHolidayStart = f'Get double tickets from Practice races at {lToontownStadium} today!'
 IdesOfMarchStart = 'Toons go GREEN!'
 LogoutForced = 'You have done something wrong\n and are being logged out automatically,\n additionally your account may be frozen.\n Try going on a walk outside, it is fun.'
 CountryClubToonEnterElevator = '%s \nhas jumped in the golf kart.'
@@ -9923,8 +9975,8 @@ HolidayNamesInCalendar = {1: ('Summer Fireworks', 'Celebrate Summer with a firew
                           8: ('Toon Species Election', 'Vote on the new Toon species! Will it be Goat? Will it be Pig?'),
                           9: ('Black Cat Day', 'Happy Halloween! Create a Toontastic Black Cat Toon - Today Only!'),
                           13: ('Trick or Treat', 'Happy Halloween! Trick or treat throughout Toontown to get a nifty Halloween pumpkin head reward!'),
-                          14: ('Grand Prix', 'Grand Prix Monday at Toontown Stadium! To win, collect the most points in three consecutive races!'),
-                          16: ('Grand Prix Weekend', 'Free and Paid players compete in circuit races at Toontown Stadium!'),
+                          14: ('Grand Prix', f'Grand Prix Monday at {lToontownStadium}! To win, collect the most points in three consecutive races!'),
+                          16: ('Grand Prix Weekend', f'Free and Paid players compete in circuit races at {lToontownStadium}!'),
                           17: ('Trolley Tracks', 'Trolley Tracks Thursday! Board any Trolley with two or more Toons to play.'),
                           19: ('Silly Saturdays', 'Saturdays are silly with Fish Bingo and Grand Prix throughout the day!'),
                           24: ('Ides of March', 'Beware the Ides of March! Stop the Backstabber Cogs from invading Toontown!'),
@@ -9982,7 +10034,7 @@ HolidayNamesInCalendar = {1: ('Summer Fireworks', 'Celebrate Summer with a firew
                           98: ('Double Bean Days - Fishing', ''),
                           99: ('Jellybean Week', 'Celebrate Jellybean Week with double Jellybean rewards!'),
                           101: ("Top Toons New Year's Day Marathon", "Chances to win every hour! See the What's New Blog for details!"),
-                          105: ('Toons go GREEN!', 'Toons make a green scene at Green Bean Jeans on Oak Street in Flowering Grove!')}
+                          105: ('Toons go GREEN!', f'Toons make a green scene at Green Bean Jeans on Oak Street in {lFloweringGrove}!')}
 UnknownHoliday = 'Unknown Holiday %d'
 HolidayFormat = '%b %d '
 TimeZone = 'US/Pacific'
@@ -10082,3 +10134,23 @@ ChatLogTabWhispers = 'Whispers'
 ChatLogTabGlobal = 'Global'
 ChatLogTabSystem = 'System'
 ChatLogSendToGuild = 'Send to guild'
+
+# DiscordRPC
+lInBoardingGroup = 'In a boarding group...'
+lPickingAToon = 'Picking a Toon...'
+lStartingGame = 'Starting {}...'
+lBootingUpGame = 'Booting up {}...'
+lMakingAToon = 'Making a Toon...'
+lLoadingIntoGame = 'Loading into {}...'
+lAdventuringAcrossToontown = 'Adventuring across Toontown!'
+lSleeping = 'Sleeping...'
+lSleepingIn = 'Sleeping in'
+lDivingInto = 'Diving into'
+lChatting = 'Chatting'
+lChilling = 'Chilling'
+
+
+
+lPlayerInFoggyFjord = (f'{lFoggyFjord}') # Diving into / Sleeping in
+lPlayerInToontownCentral = ('{}', 'in', f'{lToontownCentral}') # Chatting / Sleeping in
+lPlayerInTundraWonderland = ('{} in', f'{TundraWonderland}') # Chilling / Sleeping in

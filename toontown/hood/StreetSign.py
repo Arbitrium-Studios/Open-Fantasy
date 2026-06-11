@@ -5,20 +5,20 @@ from direct.distributed import DistributedObject
 
 
 class StreetSign(DistributedObject.DistributedObject):
-    RedownloadTaskName = 'RedownloadStreetSign'
-    StreetSignFileName = config.GetString(
-        'street-sign-filename', 'street-sign.jpg')
-    StreetSignBaseDir = config.GetString('street-sign-base-dir', 'resources/phase_4/maps')
-    StreetSignUrl = base.config.GetString(
-        'street-sign-url', 'https://cdn.arbitriumstudios.com/bf_assets/tuou/tl_420/tlv_b/tnbot/c1_tpott/pzs_ttfan/game/resources/default/english/phase_4/maps/')
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
+        self.RedownloadTaskName = 'RedownloadStreetSign'
+        self.StreetSignFileName = config.GetString(
+            'street-sign-filename', 'street-sign.jpg')
+        self.StreetSignBaseDir = config.GetString('street-sign-base-dir', 'resources/phase_4/maps')
+        self.StreetSignUrl = base.config.GetString(
+            'street-sign-url', 'https://cdn.arbitriumstudios.com/bf_assets/tuou/tl_420/tlv_b/tnbot/c1_tpott/pzs_ttfan/game/resources/default/english/phase_4/maps/')
         self.downloadingStreetSign = False
         self.percentDownloaded = 0.0
         self.startDownload = datetime.datetime.now()
         self.endDownload = datetime.datetime.now()
-        self.notify.info('Street sign url is %s' % self.StreetSignUrl)
+        self.notify.info('Street sign url is {}'.format(self.StreetSignUrl + self.StreetSignFileName))
         self.redownloadStreetSign()
 
     def replaceTexture(self):

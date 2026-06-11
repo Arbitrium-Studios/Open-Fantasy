@@ -25,7 +25,8 @@ class ToonBase(OTPBase.OTPBase):
 
     def __init__(self):
         self.settings = Settings()
-        if not ConfigVariableInt('ignore-user-options', 0).value:
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
             self.settings.readSettings()
             mode = not self.settings.getSetting('windowed-mode', True)
             music = self.settings.getSetting('music', True)
@@ -61,13 +62,12 @@ class ToonBase(OTPBase.OTPBase):
                 launcher.setPandaErrorCode(7)
             except BaseException:
                 pass
-
             sys.exit(1)
         self.disableShowbaseMouse()
         base.debugRunningMultiplier /= OTPGlobals.ToonSpeedFactor
-        self.toonChatSounds = ConfigVariableBool('toon-chat-sounds', 1).value
+        self.toonChatSounds = ConfigVariableBool('toon-chat-sounds', True).value
         self.placeBeforeObjects = ConfigVariableBool(
-            'place-before-objects', 1).value
+            'place-before-objects', True).value
         self.endlessQuietZone = False
         self.wantDynamicShadows = 0
         self.exitErrorCode = 0
@@ -117,7 +117,8 @@ class ToonBase(OTPBase.OTPBase):
         if 'launcher' in __builtins__ and launcher:
             launcher.setPandaErrorCode(11)
         globalClock.setMaxDt(0.2)
-        if ConfigVariableBool('want-particles', 1).value == 1:
+        self.wantParticles = ConfigVariableBool('want-particles', True).value
+        if self.wantParticles:
             self.notify.debug('Enabling particles')
             self.enableParticles()
         self.SCREENSHOT = self.controlManager.getKeyName("HotKeys", ToontownGlobals.HotkeyScreenshot).lower()
@@ -129,11 +130,11 @@ class ToonBase(OTPBase.OTPBase):
         oldLoader.destroy()
         self.accept('PandaPaused', self.disableAllAudio)
         self.accept('PandaRestarted', self.enableAllAudio)
-        self.friendMode = ConfigVariableBool('switchboard-friends', 0).value
-        self.wantPets = ConfigVariableBool('want-pets', 1).value
-        self.wantBingo = ConfigVariableBool('want-fish-bingo', 1).value
-        self.wantKarts = ConfigVariableBool('want-karts', 1).value
-        self.wantNewSpecies = ConfigVariableBool('want-new-species', 0).value
+        self.friendMode = ConfigVariableBool('switchboard-friends', False).value
+        self.wantPets = ConfigVariableBool('want-pets', True).value
+        self.wantBingo = ConfigVariableBool('want-fish-bingo', True).value
+        self.wantKarts = ConfigVariableBool('want-karts', True).value
+        self.wantNewSpecies = ConfigVariableBool('want-new-species', False).value
         self.inactivityTimeout = ConfigVariableDouble(
             'inactivity-timeout', ToontownGlobals.KeyboardTimeout).value
         if self.inactivityTimeout:
@@ -142,16 +143,16 @@ class ToonBase(OTPBase.OTPBase):
                 self.inactivityTimeout)
             self.mouseWatcherNode.setInactivityTimeout(self.inactivityTimeout)
         self.randomMinigameAbort = ConfigVariableBool(
-            'random-minigame-abort', 0).value
+            'random-minigame-abort', False).value
         self.randomMinigameDisconnect = ConfigVariableBool(
-            'random-minigame-disconnect', 0).value
+            'random-minigame-disconnect', False).value
         self.randomMinigameNetworkPlugPull = ConfigVariableBool(
-            'random-minigame-netplugpull', 0).value
-        self.autoPlayAgain = ConfigVariableBool('auto-play-again', 0).value
+            'random-minigame-netplugpull', False).value
+        self.autoPlayAgain = ConfigVariableBool('auto-play-again', False).value
         self.skipMinigameReward = ConfigVariableBool(
-            'skip-minigame-reward', 0).value
+            'skip-minigame-reward', False).value
         self.wantMinigameDifficulty = ConfigVariableBool(
-            'want-minigame-difficulty', 0).value
+            'want-minigame-difficulty', False).value
         self.minigameDifficulty = ConfigVariableDouble(
             'minigame-difficulty', -1.0).value
         if self.minigameDifficulty == -1.0:
@@ -169,29 +170,29 @@ class ToonBase(OTPBase.OTPBase):
         if cogdoGameSafezoneId != -1:
             self.cogdoGameSafezoneId = cogdoGameSafezoneId
         ToontownBattleGlobals.SkipMovie = ConfigVariableBool(
-            'skip-battle-movies', 0).value
+            'skip-battle-movies', False).value
         self.creditCardUpFront = ConfigVariableInt(
             'credit-card-up-front', -1).value
         if self.creditCardUpFront == -1:
             del self.creditCardUpFront
         else:
             self.creditCardUpFront = self.creditCardUpFront != 0
-        self.housingEnabled = ConfigVariableBool('want-housing', 1).value
-        self.cannonsEnabled = ConfigVariableBool('estate-cannons', 0).value
-        self.fireworksEnabled = ConfigVariableBool('estate-fireworks', 0).value
-        self.dayNightEnabled = ConfigVariableBool('estate-day-night', 0).value
+        self.housingEnabled = ConfigVariableBool('want-estates', True).value
+        self.cannonsEnabled = ConfigVariableBool('estate-cannons', False).value
+        self.fireworksEnabled = ConfigVariableBool('estate-fireworks', False).value
+        self.dayNightEnabled = ConfigVariableBool('estate-day-night', False).value
         self.cloudPlatformsEnabled = ConfigVariableBool(
-            'estate-clouds', 0).value
-        self.greySpacing = ConfigVariableBool('allow-greyspacing', 0).value
-        self.goonsEnabled = ConfigVariableBool('estate-goon', 0).value
+            'estate-clouds', False).value
+        self.greySpacing = ConfigVariableBool('allow-greyspacing', False).value
+        self.goonsEnabled = ConfigVariableBool('estate-goon', False).value
         self.restrictTrialers = ConfigVariableBool(
-            'restrict-trialers', 1).value
-        self.roamingTrialers = ConfigVariableBool('roaming-trialers', 1).value
-        self.slowQuietZone = ConfigVariableBool('slow-quiet-zone', 0).value
+            'restrict-trialers', True).value
+        self.roamingTrialers = ConfigVariableBool('roaming-trialers', True).value
+        self.slowQuietZone = ConfigVariableBool('slow-quiet-zone', False).value
         self.slowQuietZoneDelay = ConfigVariableDouble(
             'slow-quiet-zone-delay', 5).value
         self.killInterestResponse = ConfigVariableBool(
-            'kill-interest-response', 0).value
+            'kill-interest-response', False).value
         tpMgr = TextPropertiesManager.getGlobalPtr()
         WLDisplay = TextProperties()
         WLDisplay.setSlant(0.3)
@@ -222,9 +223,17 @@ class ToonBase(OTPBase.OTPBase):
         self.settings.updateSetting('show-fps', self.showFPS)
         self.wantLaffMeterOverHead = self.settings.getSetting('want-laff-meter-over-head', True)
         self.settings.updateSetting('want-laff-meter-over-head', self.wantLaffMeterOverHead)
-        # self.wantRichPresence = self.settings.getSetting('rich-presence', True)
-        self.wantRichPresence = self.settings.get('rich-presence')
+        self.wantRichPresence = self.settings.getSetting('rich-presence', False)
         self.settings.updateSetting('rich-presence', self.wantRichPresence)
+
+        self.wantLanguageSelection = ConfigVariableBool('want-language-selection', True).value
+        defaultLanguage = ConfigVariableString('default-language', 'english').value
+        self.chosenLanguage = self.settings.getSetting('language', f'{defaultLanguage}')
+        self.settings.updateSetting('language', self.chosenLanguage)
+
+        self.wantSleep = self.settings.getSetting('want-sleep', True)
+        self.settings.updateSetting('want-sleep', self.wantSleep)
+
         self.toggleFPS(self.showFPS)
         self.settings.writeSettings()
         self.discord = DiscordRPC()
@@ -241,7 +250,8 @@ class ToonBase(OTPBase.OTPBase):
 
     def windowEvent(self, win):
         OTPBase.OTPBase.windowEvent(self, win)
-        if not ConfigVariableInt('keep-aspect-ratio', 0).value:
+        self.keepAspectRatio = ConfigVariableBool('keep-aspect-ratio', False).value
+        if not self.keepAspectRatio:
             return
         x = max(1, win.getXSize())
         y = max(1, win.getYSize())
@@ -290,11 +300,14 @@ class ToonBase(OTPBase.OTPBase):
         self.walking = pressed
 
     def takeScreenShot(self):
-        if not os.path.exists('users/screenshots/'):
-            os.mkdir('users/screenshots/')
-
+        usersDir = 'users'
         namePrefix = 'screenshot'
-        namePrefix = 'users/screenshots/' + launcher.logPrefix + namePrefix
+        screenshotsDir = f'{namePrefix}s'
+        userScreenshotsDir = f'{usersDir}/{screenshotsDir}'
+        if not os.path.exists(f'{userScreenshotsDir}'):
+            os.mkdir(f'{userScreenshotsDir}')
+
+        namePrefix = f'{userScreenshotsDir}/' + launcher.logPrefix + namePrefix
         timedif = globalClock.getRealTime() - self.lastScreenShotTime
         if self.glitchCount > 10 and self.walking:
             return
@@ -305,7 +318,7 @@ class ToonBase(OTPBase.OTPBase):
             self.screenshot(namePrefix=namePrefix)
             self.lastScreenShotTime = globalClock.getRealTime()
             return
-        coordOnScreen = ConfigVariableBool('screenshot-coords', 0).value
+        coordOnScreen = ConfigVariableBool('screenshot-coords', False).value
         self.localAvatar.stopThisFrame = 1
         ctext = self.localAvatar.getAvPosStr()
         self.screenshotStr = ''

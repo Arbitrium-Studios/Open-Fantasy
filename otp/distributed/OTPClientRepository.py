@@ -170,7 +170,7 @@ class OTPClientRepository(ClientRepositoryBase):
         else:
             self.http = HTTPClient()
 
-        self.accountOldAuth = ConfigVariableBool('account-old-auth', 0).value
+        self.accountOldAuth = ConfigVariableBool('account-old-auth', False).value
         self.accountOldAuth = ConfigVariableBool('%s-account-old-auth' % game.name,
                                                  self.accountOldAuth).value
         self.useNewTTDevLogin = ConfigVariableBool(
@@ -199,15 +199,15 @@ class OTPClientRepository(ClientRepositoryBase):
             self.notify.info('loginInterface: LoginTTAccount')
 
         self.secretChatAllowed = ConfigVariableBool(
-            'allow-secret-chat', 0).value
-        self.openChatAllowed = ConfigVariableBool('allow-open-chat', 0).value
+            'allow-secret-chat', False).value
+        self.openChatAllowed = ConfigVariableBool('allow-open-chat', False).value
         self.secretChatNeedsParentPassword = ConfigVariableBool(
             'secret-chat-needs-parent-password',
-            0).value or (
+            False).value or (
             self.launcher and self.launcher.getNeedPwForSecretKey())
         self.parentPasswordSet = ConfigVariableBool(
             'parent-password-set',
-            0).value or (
+            False).value or (
             self.launcher and self.launcher.getParentPasswordSet())
         self.userSignature = ConfigVariableString('signature', 'none').value
         self.freeTimeExpiresAt = -1
@@ -219,18 +219,18 @@ class OTPClientRepository(ClientRepositoryBase):
         self.parentMgr.registerParent(OTPGlobals.SPHidden, NodePath())
         self.timeManager = None
         if ConfigVariableBool(
-                'detect-leaks', 0).value or ConfigVariableBool('client-detect-leaks', 0).value:
+                'detect-leaks', False).value or ConfigVariableBool('client-detect-leaks', False).value:
             self.startLeakDetector()
 
-        if ConfigVariableBool('detect-messenger-leaks', 0).value or ConfigVariableBool(
-                'ai-detect-messenger-leaks', 0).value:
+        if ConfigVariableBool('detect-messenger-leaks', False).value or ConfigVariableBool(
+                'ai-detect-messenger-leaks', False).value:
             self.messengerLeakDetector = MessengerLeakDetector.MessengerLeakDetector(
                 'client messenger leak detector')
-            if ConfigVariableBool('leak-messages', 0).value:
+            if ConfigVariableBool('leak-messages', False).value:
                 MessengerLeakDetector._leakMessengerObject()
 
         if ConfigVariableBool(
-                'run-garbage-reports', 0).value or ConfigVariableBool('client-run-garbage-reports', 0).value:
+                'run-garbage-reports', False).value or ConfigVariableBool('client-run-garbage-reports', False).value:
             noneValue = -1.0
             reportWait = ConfigVariableDouble(
                 'garbage-report-wait', noneValue).value
@@ -245,11 +245,11 @@ class OTPClientRepository(ClientRepositoryBase):
 
         self._proactiveLeakChecks = ConfigVariableBool(
             'proactive-leak-checks',
-            1).value or ConfigVariableBool(
+            True).value or ConfigVariableBool(
             'client-proactive-leak-checks',
-            1).value
+            True).value
         self._crashOnProactiveLeakDetect = ConfigVariableBool(
-            'crash-on-proactive-leak-detect', 1).value
+            'crash-on-proactive-leak-detect', True).value
         self.activeDistrictMap = {}
         self.telemetryLimiter = TelemetryLimiter()
         self.serverVersion = serverVersion
@@ -438,9 +438,9 @@ class OTPClientRepository(ClientRepositoryBase):
         self.playGame = playGame(self.gameFSM, self.gameDoneEvent)
         self.shardListHandle = None
         self.uberZoneInterest = None
-        self.wantSwitchboard = ConfigVariableBool('want-switchboard', 0).value
+        self.wantSwitchboard = ConfigVariableBool('want-switchboard', False).value
         self.wantSwitchboardHacks = ConfigVariableBool(
-            'want-switchboard-hacks', 0).value
+            'want-switchboard-hacks', False).value
         self.__pendingGenerates = {}
         self.__pendingMessages = {}
         self.__doId2pendingInterest = {}
@@ -757,7 +757,7 @@ class OTPClientRepository(ClientRepositoryBase):
     @report(types=['args', 'deltaStamp'], dConfigParam='teleport')
     def waitForGetGameListResponse(self):
         if self.isGameListCorrect():
-            if ConfigVariableBool('game-server-tests', 0).value:
+            if ConfigVariableBool('game-server-tests', False).value:
                 from otp.distributed import GameServerTestSuite
                 GameServerTestSuite.GameServerTestSuite(self)
             self.loginFSM.request('waitForShardList')
@@ -1320,7 +1320,7 @@ class OTPClientRepository(ClientRepositoryBase):
             else:
                 logFunc = self.notify.warning
                 allowExit = False
-            if ConfigVariableBool('direct-gui-edit', 0).value:
+            if ConfigVariableBool('direct-gui-edit', False).value:
                 logFunc('There are leaks: %s tasks, %s events, %s ivals, %s garbage cycles\nLeaked Events may be due to direct gui editing' % (leakedTasks,
                                                                                                                                                leakedEvents,
                                                                                                                                                leakedIvals,
@@ -1770,7 +1770,7 @@ class OTPClientRepository(ClientRepositoryBase):
         avId = self.handlerArgs['avId']
         if not self.SupportTutorial or base.localAvatar.tutorialAck:
             self.gameFSM.request('playGame', [hoodId, zoneId, avId])
-        elif ConfigVariableBool('force-tutorial', 1).value:
+        elif ConfigVariableBool('force-tutorial', True).value:
             if hasattr(
                     self, 'skipTutorialRequest') and self.skipTutorialRequest:
                 self.gameFSM.request('playGame', [hoodId, zoneId, avId])
@@ -1898,7 +1898,7 @@ class OTPClientRepository(ClientRepositoryBase):
         self.__isPaid = isPaid
 
     def allowFreeNames(self):
-        return ConfigVariableInt('allow-free-names', 1).value
+        return ConfigVariableBool('allow-free-names', True).value
 
     def allowSecretChat(self):
         return self.secretChatAllowed or self.productName == 'Terra-DMC' and self.isBlue() and self.secretChatAllowed

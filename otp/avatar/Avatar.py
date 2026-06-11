@@ -12,7 +12,7 @@ from otp.otpbase import OTPRender
 from otp.otpbase.PythonUtil import recordCreationStack
 teleportNotify = DirectNotifyGlobal.directNotify.newCategory('Teleport')
 teleportNotify.showTime = True
-if ConfigVariableBool('want-teleport-debug', 1).value:
+if ConfigVariableBool('want-teleport-debug', True).value:
     teleportNotify.setDebug(1)
 
 

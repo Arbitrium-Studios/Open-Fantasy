@@ -10,7 +10,10 @@ set "projectNameFull=!projectOwnerName!'s !projectName!"
 title (Standalone) !projectNameFull!'s Launcher
 set "projectAbbreviation=TTFan"
 set "projectAbbreviationUpper=TTFAN"
+
 set "wantDirLogging=False"
+set "wantLoggingCLS=True"
+set "wantEofLoggingCLS=True"
 
 if "!projectName!" NEQ "Toontown Fantasy" (
     echo The specified project name is not supported: "!projectName!"
@@ -130,7 +133,9 @@ goto :setUsername
 setx TTFan_Username "%TTFan_Username%"
 set "TTFAN_LOGIN_TOKEN=%TTFan_Username%"
 
-cls
+if "%wantLoggingCLS%" EQU "True" (
+    cls
+)
 
 goto :defineUsernameInSystemVariables
 
@@ -141,7 +146,11 @@ set "TTFAN_LOGIN_TOKEN=%TTFan_Username%"
 goto :StartGameWithWelcome
 
 :StartGameWithWelcome
-cls
+
+if "%wantLoggingCLS%" EQU "True" (
+    cls
+)
+
 echo = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 echo     %greetingString% to %projectName%, %TTFAN_LOGIN_TOKEN%!
 echo            The vast, ever-expanding Tooniverse awaits you...
@@ -164,6 +173,14 @@ goto :ending
 :ending
 
 pause
-cls
-endlocal
+if "%wantLoggingCLS%" EQU "True" if "%wantEofLoggingCLS%" EQU "True" (
+    cls
+)
 goto :root
+pause
+
+:exitScript
+
+pause
+EndLocal
+exit

@@ -353,15 +353,31 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
         base.localAvatar.book.showButton()
         base.localAvatar.book.enter()
         base.localAvatar.setGuiConflict(1)
-        base.localAvatar.startSleepWatch(self.__handleFallingAsleep)
+
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.__handleFallingAsleep)
         self.accept('bookDone', self.__handleBook)
         base.localAvatar.b_setAnimState('ReadBook', 1)
         self.enablePeriodTimer()
 
     def __handleFallingAsleep(self, task):
-        base.localAvatar.book.exit()
-        base.localAvatar.b_setAnimState(
-            'CloseBook', 1, callback=self.__handleFallingAsleepBookClose)
+
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.book.exit()
+                base.localAvatar.b_setAnimState(
+                    'CloseBook', 1, callback=self.__handleFallingAsleepBookClose)
         return Task.done
 
     def __handleFallingAsleepBookClose(self):
@@ -900,7 +916,15 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
         base.localAvatar.setTeleportAvailable(1)
         base.localAvatar.laffMeter.start()
         base.localAvatar.obscureMoveFurnitureButton(1)
-        base.localAvatar.startSleepWatch(self.__handleFallingAsleepBanking)
+
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.__handleFallingAsleepBanking)
         self.enablePeriodTimer()
 
     def __handleFallingAsleepBanking(self, arg):
@@ -923,7 +947,15 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
         base.localAvatar.setTeleportAvailable(1)
         base.localAvatar.laffMeter.start()
         base.localAvatar.obscureMoveFurnitureButton(1)
-        base.localAvatar.startSleepWatch(self.__handleFallingAsleepPhone)
+
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.__handleFallingAsleepPhone)
         self.enablePeriodTimer()
 
     def __handleFallingAsleepPhone(self, arg):
@@ -950,7 +982,15 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
             base.localAvatar.setTeleportAvailable(1)
         base.localAvatar.laffMeter.start()
         base.localAvatar.obscureMoveFurnitureButton(1)
-        base.localAvatar.startSleepWatch(self.__handleFallingAsleepStopped)
+
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.__handleFallingAsleepStopped)
         self.enablePeriodTimer()
 
     def __handleFallingAsleepStopped(self, arg):

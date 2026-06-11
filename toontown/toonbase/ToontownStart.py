@@ -83,7 +83,7 @@ else:
     music = None
 from direct.gui.DirectGui import *
 serverVersion = ConfigVariableString('server-version', 'no_version_set').value
-print('ToontownStart: serverVersion: ', serverVersion)
+print('ToontownStart: serverVersion:', serverVersion)
 version = OnscreenText(
     serverVersion, parent=base.a2dBottomLeft, pos=(
         0.033, 0.025), scale=0.06, fg=Vec4(

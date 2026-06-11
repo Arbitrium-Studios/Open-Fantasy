@@ -424,7 +424,7 @@ class Char(Avatar.Avatar):
         if self.dialogueArray:
             self.notify.warning('loadDialogue() called twice.')
         self.unloadDialogue()
-        language = base.config.GetString('language', 'english')
+        language = base.settings.getSetting(setting='language')
         if char == 'mk':
             dialogueFile = base.loader.loadSfx('phase_3/audio/dial/mickey.ogg')
             for i in range(0, 6):

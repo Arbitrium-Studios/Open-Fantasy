@@ -53,10 +53,12 @@ class LauncherBase(DirectObject):
                                                    ltime[4],
                                                    ltime[5])
         logPrefix = self.getLogFileName() + '-'
-        if not os.path.exists('users/'):
-            os.mkdir('users/')
-            os.mkdir('users/logs/')
-        logfile = os.path.join('users/logs', logPrefix + logSuffix + '.log')
+        usersDir = 'users'
+        logsDir = 'logs'
+        userLogsDir = f'{usersDir}/{logsDir}'
+        if not os.path.exists(f'{userLogsDir}'):
+            os.mkdir(f'{userLogsDir}')
+        logfile = os.path.join(f'{userLogsDir}', logPrefix + logSuffix + '.log')
         self.errorfile = 'errorCode'
         log = open(logfile, 'a')
         logOut = LogAndOutput(sys.__stdout__, log)
@@ -73,13 +75,13 @@ class LauncherBase(DirectObject):
             time.tzname[0])
         print('sys.path = ', sys.path)
         print('sys.argv = ', sys.argv)
-        if ConfigVariableBool('log-private-info', 0).value:
+        if ConfigVariableBool('log-private-info', False).value:
             print('os.environ = ', os.environ)
         self.miniTaskMgr = MiniTaskManager()
         self.nout = MultiplexStream()
         Notify.ptr().setOstreamPtr(self.nout, 0)
         self.nout.addFile(Filename(logfile))
-        if ConfigVariableBool('console-output', 0).value:
+        if ConfigVariableBool('console-output', False).value:
             self.nout.addStandardOutput()
             sys.stdout.console = True
             sys.stderr.console = True

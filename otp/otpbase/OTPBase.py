@@ -11,12 +11,10 @@ class OTPBase(ShowBase):
     def __init__(self, windowType=None):
         self.wantEnviroDR = False
         ShowBase.__init__(self, windowType=windowType)
-        __builtins__['__astron__'] = ConfigVariableBool(
-            'astron-support', 1).value
-        __builtins__['__execWarnings__'] = ConfigVariableBool(
-            'want-exec-warnings', 0).value
+        __builtins__['__astron__'] = ConfigVariableBool('astron-support', True).value
+        __builtins__['__execWarnings__'] = ConfigVariableBool('want-exec-warnings', False).value
         OTPBase.notify.info('__astron__ == %s' % __astron__)
-        if ConfigVariableBool('want-phase-checker', 0).value:
+        if ConfigVariableBool('want-phase-checker', False).value:
             from direct.showbase import Loader
             Loader.phaseChecker = self.loaderPhaseChecker
             self.errorAccumulatorBuffer = ''
@@ -24,15 +22,15 @@ class OTPBase(ShowBase):
                 self.delayedErrorCheck,
                 'delayedErrorCheck',
                 priority=10000)
-        self.idTags = ConfigVariableBool('want-id-tags', 0).value
+        self.idTags = ConfigVariableBool('want-id-tags', False).value
         if not self.idTags:
             del self.idTags
-        self.wantNametags = ConfigVariableBool('want-nametags', 1).value
-        self.slowCloseShard = ConfigVariableBool('slow-close-shard', 0).value
+        self.wantNametags = ConfigVariableBool('want-nametags', True).value
+        self.slowCloseShard = ConfigVariableBool('slow-close-shard', False).value
         self.slowCloseShardDelay = ConfigVariableDouble(
             'slow-close-shard-delay', 10.0).value
         self.fillShardsToIdealPop = ConfigVariableBool(
-            'fill-shards-to-ideal-pop', 1).value
+            'fill-shards-to-ideal-pop', True).value
         self.logPrivateInfo = ConfigVariableBool(
             'log-private-info', __dev__).value
         self.wantDynamicShadows = 1
@@ -210,7 +208,7 @@ class OTPBase(ShowBase):
 
     def loaderPhaseChecker(self, path, loaderOptions):
         if 'audio/' in path:
-            return 1
+            return True
         file = Filename(path)
         if not file.getExtension():
             file.setExtension('bam')
@@ -248,7 +246,7 @@ class OTPBase(ShowBase):
         result = ShowBase.openMainWindow(self, *args, **kw)
         if result:
             self.wantEnviroDR = not self.win.getGsg().isHardware(
-            ) or ConfigVariableBool('want-background-region', 1).value
+            ) or ConfigVariableBool('want-background-region', True).value
             self.backgroundDrawable = self.win
         return result
 

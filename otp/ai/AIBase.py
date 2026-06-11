@@ -22,35 +22,35 @@ class AIBase:
 
     def __init__(self):
         self.config = DConfig
-        __builtins__['__dev__'] = ConfigVariableBool('want-dev', 0)
-        __builtins__['__astron__'] = ConfigVariableBool('astron-support', 1)
+        __builtins__['__dev__'] = ConfigVariableBool('want-dev', False)
+        __builtins__['__astron__'] = ConfigVariableBool('astron-support', True)
         __builtins__['__execWarnings__'] = ConfigVariableBool(
-            'want-exec-warnings', 0)
+            'want-exec-warnings', False)
         logStackDump = (
             ConfigVariableBool(
                 'log-stack-dump',
                 (not __debug__)) or ConfigVariableBool(
                 'ai-log-stack-dump',
                 (not __debug__)))
-        uploadStackDump = ConfigVariableBool('upload-stack-dump', 0)
+        uploadStackDump = ConfigVariableBool('upload-stack-dump', False)
         if logStackDump or uploadStackDump:
             ExceptionVarDump.install(logStackDump, uploadStackDump)
-        if ConfigVariableBool('use-vfs', 1):
+        if ConfigVariableBool('use-vfs', True):
             vfs = VirtualFileSystem.getGlobalPtr()
         else:
             vfs = None
         self.wantTk = ConfigVariableBool('want-tk', 0)
         self.AISleep = ConfigVariableDouble('ai-sleep', 0.04)
-        self.AIRunningNetYield = ConfigVariableBool('ai-running-net-yield', 0)
-        self.AIForceSleep = ConfigVariableBool('ai-force-sleep', 0)
+        self.AIRunningNetYield = ConfigVariableBool('ai-running-net-yield', False)
+        self.AIForceSleep = ConfigVariableBool('ai-force-sleep', False)
         self.eventMgr = eventMgr
         self.messenger = messenger
         self.bboard = bulletinBoard
         self.taskMgr = taskMgr
         Task.TaskManager.taskTimerVerbose = ConfigVariableBool(
-            'task-timer-verbose', 0)
+            'task-timer-verbose', False)
         Task.TaskManager.extendedExceptions = ConfigVariableBool(
-            'extended-exceptions', 0)
+            'extended-exceptions', False)
         self.sfxManagerList = None
         self.musicManager = None
         self.jobMgr = jobMgr
@@ -66,14 +66,13 @@ class AIBase:
         __builtins__['globalClock'] = globalClock
         __builtins__['vfs'] = vfs
         __builtins__['hidden'] = self.hidden
-        # AIBase.notify.info('__dev__ == %s' % __dev__)
         AIBase.notify.debug('__dev__ == %s' % __dev__)
         AIBase.notify.debug('__astron__ == %s' % __astron__)
         PythonUtil.recordFunctorCreationStacks()
         __builtins__['wantTestObject'] = ConfigVariableBool(
-            'want-test-object', 0)
-        self.wantStats = ConfigVariableBool('want-pstats', 0)
-        Task.TaskManager.pStatsTasks = ConfigVariableBool('pstats-tasks', 0)
+            'want-test-object', False)
+        self.wantStats = ConfigVariableBool('want-pstats', False)
+        Task.TaskManager.pStatsTasks = ConfigVariableBool('pstats-tasks', False)
         taskMgr.resumeFunc = PStatClient.resumeAfterPause
         defaultValue = 1
         if __dev__:
@@ -82,8 +81,8 @@ class AIBase:
             'want-fake-textures-ai', defaultValue)
         if wantFakeTextures:
             from panda3d.core import loadPrcFileData
-            loadPrcFileData('aibase', 'textures-header-only 1')
-        self.wantPets = ConfigVariableBool('want-pets', 1)
+            loadPrcFileData('aibase', 'textures-header-only #t')
+        self.wantPets = ConfigVariableBool('want-pets', True)
         if self.wantPets:
             if game.name == 'toontown':
                 from toontown.pets import PetConstants
@@ -97,20 +96,21 @@ class AIBase:
                     'pet-move-period', PetConstants.MovePeriod)
                 self.petPosBroadcastPeriod = ConfigVariableDouble(
                     'pet-pos-broadcast-period', PetConstants.PosBroadcastPeriod)
-        self.wantBingo = ConfigVariableBool('want-fish-bingo', 1)
-        self.wantKarts = ConfigVariableBool('wantKarts', 1)
+        self.wantFishing = ConfigVariableBool('want-fishing', True)
+        self.wantBingo = ConfigVariableBool('want-fish-bingo', True)
+        self.wantKarts = ConfigVariableBool('want-karts', True)
         self.newDBRequestGen = ConfigVariableBool(
-            'new-database-request-generate', 1)
-        self.waitShardDelete = ConfigVariableBool('wait-shard-delete', 1)
-        self.blinkTrolley = ConfigVariableBool('blink-trolley', 0)
+            'new-database-request-generate', True)
+        self.waitShardDelete = ConfigVariableBool('wait-shard-delete', True)
+        self.blinkTrolley = ConfigVariableBool('blink-trolley', False)
         self.fakeDistrictPopulations = ConfigVariableBool(
-            'fake-district-populations', 0)
-        self.wantSwitchboard = ConfigVariableBool('want-switchboard', 0)
+            'fake-district-populations', False)
+        self.wantSwitchboard = ConfigVariableBool('want-switchboard', False)
         self.wantSwitchboardHacks = ConfigVariableBool(
-            'want-switchboard-hacks', 0)
+            'want-switchboard-hacks', False)
         self.GEMdemoWhisperRecipientDoid = ConfigVariableBool(
-            'gem-demo-whisper-recipient-doid', 0)
-        self.sqlAvailable = ConfigVariableBool('sql-available', 1)
+            'gem-demo-whisper-recipient-doid', False)
+        self.sqlAvailable = ConfigVariableBool('sql-available', True)
         self.createStats()
         self.restart()
         return
@@ -123,7 +123,7 @@ class AIBase:
         if affinityMask != -1:
             TrueClock.getGlobalPtr().setCpuAffinity(affinityMask)
         else:
-            autoAffinity = ConfigVariableBool('auto-single-cpu-affinity', 0)
+            autoAffinity = ConfigVariableBool('auto-single-cpu-affinity', False)
             if game.name == 'uberDog':
                 affinity = ConfigVariableInt('uberdog-cpu-affinity', -1)
                 if autoAffinity and affinity == -1:

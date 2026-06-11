@@ -1,6 +1,7 @@
 from direct.interval.IntervalGlobal import *
 from direct.task.TaskManagerGlobal import *
 from direct.directnotify import DirectNotifyGlobal
+from panda3d.physics import *
 from toontown.toonbase import TTLocalizer
 from . import DistributedBossCog
 from direct.task.Task import Task

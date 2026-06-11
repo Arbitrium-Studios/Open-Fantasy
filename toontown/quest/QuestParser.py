@@ -530,7 +530,8 @@ class NPCMoviePlayer(DirectObject.DirectObject):
             notify.debug(
                 'VarName tomDialogue getting added. Tutorial Ack: %d' %
                 base.localAvatar.tutorialAck)
-        if base.config.GetString('language', 'english') == 'japanese':
+        self.chosenLanguage = base.settings.getSetting(setting='language')
+        if f'{self.chosenLanguage}'.lower() == 'japanese':
             dialogue = base.loader.loadSfx(fileName)
         else:
             dialogue = None
@@ -541,9 +542,10 @@ class NPCMoviePlayer(DirectObject.DirectObject):
         token, varName, filenameTemplate = line
         # TODO figure out the option for ppl who want minnie to show them around
         classicChar = 'mickey'
-       
+
         filename = filenameTemplate % classicChar
-        if base.config.GetString('language', 'english') == 'japanese':
+        self.chosenLanguage = base.settings.getSetting(setting='language')
+        if f'{self.chosenLanguage}'.lower() == 'japanese':
             dialogue = base.loader.loadSfx(filename)
         else:
             dialogue = None
@@ -1093,7 +1095,8 @@ class NPCMoviePlayer(DirectObject.DirectObject):
             3.5), LerpFunctionInterval(updateGagLevel, fromData=7, toData=1, duration=0.3), Func(restoreTrackAccess), Func(messenger.send, 'doneThrowSquirtPreview'))
 
     def parseSetMusicVolume(self, line):
-        if base.config.GetString('language', 'english') == 'japanese':
+        self.chosenLanguage = base.settings.getSetting(setting='language')
+        if f'{self.chosenLanguage}'.lower() == 'japanese':
             try:
                 loader = base.cr.playGame.place.loader
                 type = 'music'

@@ -1326,10 +1326,10 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                5109: "Let's go to the Bullion Mint.",
                                5110: "Let's go to the C.F.O. Battle.",
                                5111: "Let's go to the Chief Justice Battle.",
-                               5112: "Let's go to the Lawbot A Office.",
-                               5113: "Let's go to the Lawbot B Office.",
-                               5114: "Let's go to the Lawbot C Office.",
-                               5115: "Let's go to the Lawbot D Office.",
+                               5112: "Let's go to the Lawbot Office A.",
+                               5113: "Let's go to the Lawbot Office B.",
+                               5114: "Let's go to the Lawbot Office C.",
+                               5115: "Let's go to the Lawbot Office D.",
                                5200: "We're going to the Front Three.",
                                5201: "We're going to the Middle Six.",
                                5202: "We're going to the Back Nine.",
@@ -1342,10 +1342,10 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
                                5209: "We're going to the Bullion Mint.",
                                5210: "We're going to the C.F.O. Battle.",
                                5211: "We're going to the Chief Justice Battle.",
-                               5212: "We're going to the Lawbot A Office.",
-                               5213: "We're going to the Lawbot B Office.",
-                               5214: "We're going to the Lawbot C Office.",
-                               5215: "We're going to the Lawbot D Office.",
+                               5212: "We're going to the Lawbot Office A.",
+                               5213: "We're going to the Lawbot Office B.",
+                               5214: "We're going to the Lawbot Office C.",
+                               5215: "We're going to the Lawbot Office D.",
                                5300: "Let's go to a party.",
                                5301: 'See you at the party!',
                                5302: 'My party has started!',
@@ -2858,10 +2858,8 @@ TTAccountCustomerServiceHelp = '\nIf you need help, please call Customer Service
 TTAccountIntractibleError = 'An error occurred.'
 
 HotkeyCategoryNames = {
-        "HotKeys": "HotKeys",
-
- }
-
+    "HotKeys": "HotKeys",
+}
 
 # MovementHotKeys = 0
 HotkeyUp = 0
@@ -2881,25 +2879,25 @@ HotkeyChat = 13
 HotkeySecondaryBook = 14
 HotkeyChatLog = 15
 HotkeyNames = {
-0: {
-       HotkeyUp: 'Move Forward',
-       HotkeyDown: 'Move Backwards',
-       HotkeyLeft: 'Move Left',
-       HotkeyRight: 'Move Right',
-       HotkeyJump: 'Jump',
-       HotkeyThrow: 'Throw',
-       HotkeySprint: 'Sprint',
-       HotkeyBook: 'Open Book',
-       HotkeyTasks: 'Open Tasks',
-       HotkeyInventory: 'Open Inventory',
-       HotkeyFriends: 'Open Friends',
-       HotkeyMap: 'Open Map',
-       HotkeyScreenshot: 'Take Screenshot',
-       HotkeyChat: 'Open Chat', 
-       HotkeySecondaryBook: 'Open Book Secondary',
-       HotkeyChatLog: 'Open Chat Log',
-       # MovementHotKeys: HotkeyUp + HotkeyLeft + HotkeyDown + HotkeyRight,
-}
+    0: {
+        HotkeyUp: 'Move Forward',
+        HotkeyDown: 'Move Backwards',
+        HotkeyLeft: 'Move Left',
+        HotkeyRight: 'Move Right',
+        HotkeyJump: 'Jump',
+        HotkeyThrow: 'Throw',
+        HotkeySprint: 'Sprint',
+        HotkeyBook: 'Open Book',
+        HotkeyTasks: 'Open Tasks',
+        HotkeyInventory: 'Open Inventory',
+        HotkeyFriends: 'Open Friends',
+        HotkeyMap: 'Open Map',
+        HotkeyScreenshot: 'Take Screenshot',
+        HotkeyChat: 'Open Chat', 
+        HotkeySecondaryBook: 'Open Book Secondary',
+        HotkeyChatLog: 'Open Chat Log',
+        # MovementHotKeys: HotkeyUp + HotkeyLeft + HotkeyDown + HotkeyRight,
+    }
 }
 
 def timeElapsedString(timeDelta):

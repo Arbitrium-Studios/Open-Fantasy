@@ -23,17 +23,17 @@ EventsPage_News = 3
 
 class EventsPage(ShtikerPage.ShtikerPage):
     notify = DirectNotifyGlobal.directNotify.newCategory('EventsPage')
-    UseNewsTab = ConfigVariableBool('want-news-tab', 0).value
-    DefaultNewsUrl = 'resources/phase_3.5/maps/news_urls.txt'
+    UseNewsTab = ConfigVariableBool('want-news-tab', False).value
+    DefaultNewsUrl = 'resources/phase_3.5/models/news/http_news_index.txt'
     NewsUrl = ConfigVariableString('news-url', DefaultNewsUrl).value
     DownloadArticlesTaskName = 'downloadArticlesTask'
-    NonblockingDownload = ConfigVariableBool('news-nonblocking', 1).value
+    NonblockingDownload = ConfigVariableBool('news-nonblocking', True).value
 
     def __init__(self):
         ShtikerPage.ShtikerPage.__init__(self)
         self.mode = EventsPage_Calendar
         self.setMode(self.mode)
-        self.noTeleport = ConfigVariableBool('Parties-page-disable', 0).value
+        self.noTeleport = ConfigVariableBool('Parties-page-disable', False).value
         self.isPrivate = True
         self.gotRssFeed = False
         self.gotArticles = False

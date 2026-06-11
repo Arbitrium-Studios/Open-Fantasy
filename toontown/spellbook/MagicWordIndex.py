@@ -48,6 +48,7 @@ from toontown.parties import PartyGlobals
 from toontown.suit import DistributedSuitPlanner
 from toontown.battle import SuitBattleGlobals
 # from toontown.suit import DistributedBossCog
+from otp.otpbase import PythonUtil
 
 # from otp.ai.AIBaseGlobal import *
 
@@ -3004,6 +3005,35 @@ class SkipCFO(MagicWord):
 
 # TODO add skipcj and skipcfo
 
+class Sleep(MagicWord):
+    aliases = ["toggleSleep", "sleeping", "toggleSleeping"]
+    desc = "Toggles sleeping for the target."
+    advancedDesc = "This Magic Word will toggle On/Off sleeping for the target"
+    execLocation = MagicWordConfig.EXEC_LOC_SERVER
+    arguments = []
+    accessLevel = 'DEVELOPER'
+
+    def handleWord(self, invoker, avId, toon, *args):
+
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.currentSleepStatus = self.settings.getSetting('want-sleep', True)
+            if self.currentSleepStatus:
+                self.wantSleep = bool(False)
+                self.wantSleepToggleDialog = 'off'
+            else:
+                self.wantSleep = bool(True)
+                self.wantSleepToggleDialog = 'on'
+
+            self.settings.updateSetting('want-sleep', self.wantSleep)
+            self.settings.writeSettings()
+            self.updatedWantSleep = self.settings.getSetting('want-sleep', True)
+            return "{} has toggled {} sleeping.".format(toon.getName(), self.wantSleepToggleDialog)
+        else:
+            return "Unable to toggle sleeping at this time..."
 
 # Instantiate all classes defined here to register them.
 # A bit hacky, but better than the old system

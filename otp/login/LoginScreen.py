@@ -540,16 +540,16 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
         else:
             WhiteListResponse = 'NO'
         if WhiteListResponse == 'YES':
-            self.cr.whiteListChatEnabled = 1
+            self.cr.whiteListChatEnabled = True
         else:
-            self.cr.whiteListChatEnabled = 0
+            self.cr.whiteListChatEnabled = False
         self.lastLoggedInStr = ConfigVariableString('last-logged-in', '').value
         self.cr.lastLoggedIn = datetime.now()
         if hasattr(self.cr, 'toontownTimeManager'):
             self.cr.lastLoggedIn = self.cr.toontownTimeManager.convertStrToToontownTime(
                 self.lastLoggedInStr)
         self.cr.withParentAccount = ConfigVariableBool(
-            'dev-with-parent-account', 0).value
+            'dev-with-parent-account', False).value
         self.notify.info('Login response return code %s' % returnCode)
         if returnCode == 0:
             self.__handleLoginSuccess()

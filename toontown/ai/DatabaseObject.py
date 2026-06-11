@@ -142,6 +142,12 @@ class DatabaseObject:
             dg.addString(field)
 
         for field, value in items:
+            print(f'Field Type: {type(field).__name__}')
+            print(f'Value Type: {type(value).__name__}')
+            print()
+            print(f'Value: {value}\n')
+            print(f'value.getMessage(): {value.getMessage()}')
+            print()
             dg.addString(value.getMessage())
 
         self.air.send(dg)

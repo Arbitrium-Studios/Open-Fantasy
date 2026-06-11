@@ -79,10 +79,12 @@ class HtmlView(DirectObject):
         self.accept('mouse3-up', self.mouseUp, [AwWebView.RIGHTMOUSEBTN])
 
     def getInGameNewsUrl(self):
-        result = base.config.GetString(
-            'fallback-news-url',
-            'http://dolimg.com/toontown/en/gamenews/').value
-        override = base.config.GetString('in-game-news-url', '')
+        # result = base.config.GetString('fallback-news-url', '').value
+        # override = base.config.GetString('in-game-news-url', '')
+
+        result = base.config.GetString('fallback-news-url', 'https://web.archive.org/web/20260610233829/https://dolimg.com/toontown/en/gamenews/').value # Was http://dolimg.com/toontown/en/gamenews/
+        override = base.config.GetString('in-game-news-url', 'https://www.toontownfantasy.com/toon_hq/gamenews/').value
+
         if override:
             self.notify.info(
                 'got an override url,  using %s for in a game news' %
@@ -91,7 +93,7 @@ class HtmlView(DirectObject):
         else:
             try:
                 launcherUrl = base.launcher.getValue(
-                    'GAME_IN_GAME_NEWS_URL', 'https://cdn.arbitriumstudios.com/bf_assets/media/player_zer0_studio/toontown_fantasy/game/english/resources/phase_3.5/models/gamenews/img/news/')
+                    'GAME_IN_GAME_NEWS_URL', 'https://www.toontownfantasy.com/toon_hq/gamenews/')
                 if launcherUrl:
                     result = launcherUrl
                     self.notify.info(

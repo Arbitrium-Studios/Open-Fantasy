@@ -19,7 +19,6 @@ class ControlManager(DirectObject):
         self.changedHotkeys = {ToontownGlobals.HotkeyGroup: []}
         self.disableAlphaNumericHotkeys = False
         self.reloadHotkeys(True)
-        
 
     def reloadHotkeys(self, realtime=True):
         self.ignoreAll()
@@ -93,7 +92,7 @@ class ControlManager(DirectObject):
         for hotkey in hotkeys:
             if hotkey == id:
                 hotkeyName = names.get(hotkey)
-                
+
                 if controlCategory.get(str(hotkey)) is not None:
                 #If we have the keys in settings
                     keyName = controlCategory.get(str(hotkey).lower())

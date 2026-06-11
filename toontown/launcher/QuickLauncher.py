@@ -14,7 +14,7 @@ class QuickLauncher(LauncherBase):
         self.toontownBlueKey = 'TOONTOWN_BLUE'
         LauncherBase.__init__(self)
         self.useTTSpecificLogin = ConfigVariableBool(
-            'tt-specific-login', 0).value
+            'tt-specific-login', False).value
         self.toontownPlayTokenKey = self.getToontownFantasyPlayTokenKey()
         print('useTTSpecificLogin=%s' % self.useTTSpecificLogin)
         self.secretNeedsParentPasswordKey = False
@@ -25,14 +25,12 @@ class QuickLauncher(LauncherBase):
 
     def getToontownFantasyPlayTokenKey(self):
         self.useTTSpecificLogin = ConfigVariableBool(
-        'tt-specific-login', 0).value
+        'tt-specific-login', False).value
 
         if self.useTTSpecificLogin:
             self.toontownPlayTokenKey = ToontownGlobals.defaultToontownPlayTokenKey
         else:
-            # self.toontownPlayTokenKey = 'PLAYTOKEN'
             self.toontownPlayTokenKey = ToontownGlobals.fallbackToontownPlayTokenKey
-        print(f'The toontownPlayTokenKey variable is set to {self.toontownPlayTokenKey}')
         return self.toontownPlayTokenKey
 
     def getValue(self, key, default=None):
@@ -44,7 +42,7 @@ class QuickLauncher(LauncherBase):
         os.environ[key] = value
 
     def getTestServerFlag(self):
-        return self.getValue('IS_TEST_SERVER', 0)
+        return self.getValue('IS_TEST_SERVER', False)
 
     def getGameServer(self):
         return self.getValue('GAME_SERVER', '')

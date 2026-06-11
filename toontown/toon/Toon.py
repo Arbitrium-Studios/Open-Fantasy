@@ -193,7 +193,7 @@ else:
 
 def loadModels():
     global Preloaded
-    preloadAvatars = ConfigVariableBool('preload-avatars', 0).value
+    preloadAvatars = ConfigVariableBool('preload-avatars', False).value
     if preloadAvatars:
 
         def loadTex(path):
@@ -2354,22 +2354,37 @@ class Toon(Avatar.Avatar, ToonHead):
         Emote.globalEmote.releaseBody(self)
 
     def enterSleep(self, animMultiplier=1, ts=0, callback=None, extraArgs=[]):
-        self.stopLookAround()
-        self.stopBlink()
-        self.closeEyes()
-        self.lerpLookAt(Point3(0, 1, -4))
-        self.loop('neutral')
-        self.setPlayRate(animMultiplier * 0.4, 'neutral')
-        self.setChatAbsolute(SLEEP_STRING, CFThought)
-        if base.wantRichPresence:
-            base.discord.sleeping()
-        if self == base.localAvatar:
-            print('adding timeout task')
-            taskMgr.doMethodLater(
-                self.afkTimeout,
-                self.__handleAfkTimeout,
-                self.uniqueName('afkTimeout'))
-        self.setActiveShadow(0)
+
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+
+            if not self.wantSleep:
+                return
+            else:
+                if base.wantRichPresence:
+                    base.discord.sleeping()
+
+                wantAfkTimeout = ConfigVariableBool('want-afk-timeout', True).value
+                if self.wantSleep and wantAfkTimeout:
+                    self.stopLookAround()
+                    self.stopBlink()
+                    self.closeEyes()
+                    self.lerpLookAt(Point3(0, 1, -4))
+                    self.loop('neutral')
+                    self.setPlayRate(animMultiplier * 0.4, 'neutral')
+                    self.setChatAbsolute(SLEEP_STRING, CFThought)
+
+                    if self == base.localAvatar:
+                        print('adding timeout task')
+                        taskMgr.doMethodLater(
+                            self.afkTimeout,
+                            self.__handleAfkTimeout,
+                            self.uniqueName('afkTimeout'))
+                    self.setActiveShadow(0)
 
     def __handleAfkTimeout(self, task):
         print('handling timeout')
@@ -2401,6 +2416,16 @@ class Toon(Avatar.Avatar, ToonHead):
         if doClear:
             self.clearChat()
         self.lerpLookAt(Point3(0, 1, 0), time=0.25)
+
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+
+            if self.wantSleep and base.wantRichPresence:
+                base.discord.reawaken()
         self.stop()
 
     def enterPush(self, animMultiplier=1, ts=0, callback=None, extraArgs=[]):

@@ -1,3 +1,4 @@
+from panda3d.core import ConfigVariableString
 from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
@@ -17,87 +18,71 @@ gameLogo = 'toontown-logo'
 gameName = TTLocalizer.setGameName
 canEnableRichPresence = bool(False)
 
-playgroundZoneID = ToontownGlobals.ToontownCentral
-streetZoneID = ToontownGlobals.BarnacleBoulevard
-
-lInThePlayground = f'{TTLocalizer.GlobalStreetNames[playgroundZoneID][-2]}'.capitalize()
-lOnStreet = f'{TTLocalizer.GlobalStreetNames[streetZoneID][-2]}'.capitalize()
-lFoggyFjord = f'{TTLocalizer.FoggyFjord[2]}'.title()
-lInAcornAcres = f'{TTLocalizer.AcornAcres[1]} {TTLocalizer.AcornAcres[2]}'.title()
-lInToontownStadium = f'{TTLocalizer.ToontownStadium[1]} {TTLocalizer.ToontownStadium[2]}'.title()
-lOnToontorialTerrace = f'{TTLocalizer.GlobalStreetNames[ToontownGlobals.TutorialTerrace][-2]} {TTLocalizer.GlobalStreetNames[ToontownGlobals.TutorialTerrace][-1]}'.title()
-lInTheBossbotHQ = f'{TTLocalizer.GlobalStreetNames[ToontownGlobals.BossbotHQ][-2]}'.capitalize()
-lInTheSellbotHQ = f'{TTLocalizer.GlobalStreetNames[ToontownGlobals.SellbotHQ][-2]}'.capitalize()
-lInTheCashbotHQ = f'{TTLocalizer.GlobalStreetNames[ToontownGlobals.CashbotHQ][-2]}'.capitalize()
-lInTheLawbotHQ = f'{TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotHQ][-2]}'.capitalize()
-
 zone2imgdesc = { # A dict of ZoneID -> An image and a description
 
-    1000: ["foggy-fjord", f"{lInThePlayground} {TTLocalizer.GlobalStreetNames[playgroundZoneID][-1]}, {lFoggyFjord}"],
-    1100: ["foggy-fjord", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.BarnacleBoulevard][-1]}, {lFoggyFjord}"],
-    1200: ["foggy-fjord", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.SeaweedStreet][-1]}, {lFoggyFjord}"],
-    1300: ["foggy-fjord", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.LighthouseLane][-1]}, {lFoggyFjord}"],
+    ToontownGlobals.FoggyFjord: ['foggy_fjord_playground', f'Sailing around the {TTLocalizer.lFoggyFjord} playground'],
+    ToontownGlobals.BarnacleBoulevard: ['foggy_fjord_street_barnacle_boulevard', f'Sailing through {TTLocalizer.GlobalStreetNames[ToontownGlobals.BarnacleBoulevard][-1]} in {TTLocalizer.lFoggyFjord}'],
+    ToontownGlobals.SeaweedStreet: ['foggy_fjord_street_seaweed_street', f'Sailing through {TTLocalizer.GlobalStreetNames[ToontownGlobals.SeaweedStreet][-1]} in {TTLocalizer.lFoggyFjord}'],
+    ToontownGlobals.LighthouseLane: ['foggy_fjord_street_lighthouse_lane', f'Sailing through {TTLocalizer.GlobalStreetNames[ToontownGlobals.LighthouseLane][-1]} in {TTLocalizer.lFoggyFjord}'],
 
-    2000: ["toontown-central", f"{lInThePlayground} {TTLocalizer.GlobalStreetNames[playgroundZoneID][-1]}, {TTLocalizer.lToontownCentral}"],
-    2100: ["toontown-central", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.SillyStreet][-1]}, {TTLocalizer.lToontownCentral}"],
-    2200: ["toontown-central", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.LoopyLane][-1]}, {TTLocalizer.lToontownCentral}"],
-    2300: ["toontown-central", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.PunchlinePlace][-1]}, {TTLocalizer.lToontownCentral}"],
+    ToontownGlobals.ToontownCentral: ['toontown_central_playground', f'Hanging around the {TTLocalizer.lToontownCentral} playground'],
+    ToontownGlobals.SillyStreet: ['toontown_central_street_silly_street', f'Walking through {TTLocalizer.GlobalStreetNames[ToontownGlobals.SillyStreet][-1]} in {TTLocalizer.lToontownCentral}'],
+    ToontownGlobals.LoopyLane: ['toontown_central_street_loopy_lane', f'Walking through {TTLocalizer.GlobalStreetNames[ToontownGlobals.LoopyLane][-1]} in {TTLocalizer.lToontownCentral}'],
+    ToontownGlobals.PunchlinePlace: ['toontown_central_street_punchline_place', f'Walking through {TTLocalizer.GlobalStreetNames[ToontownGlobals.PunchlinePlace][-1]} in {TTLocalizer.lToontownCentral}'],
+    ToontownGlobals.TutorialTerrace: ['toontown_central_street_toontorial_terrace', f'Walking through {TTLocalizer.GlobalStreetNames[ToontownGlobals.TutorialTerrace][-1]}'.title()],
 
-    3000: ["tundra-wonderland", f"{lInThePlayground} {TTLocalizer.GlobalStreetNames[playgroundZoneID][-1]}, {TTLocalizer.lTundraWonderland}"],
-    3100: ["tundra-wonderland", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.WalrusWay][-1]}, {TTLocalizer.lTundraWonderland}"],
-    3200: ["tundra-wonderland", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.SleetStreet][-1]}, {TTLocalizer.lTundraWonderland}"],
-    3300: ["tundra-wonderland", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.PolarPlace][-1]}, {TTLocalizer.lTundraWonderland}"],
+    ToontownGlobals.TundraWonderland: ['tundra_wonderland_playground', f'Chilling in {TTLocalizer.lTundraWonderland} playground'],
+    ToontownGlobals.WalrusWay: ['tundra_wonderland_street_walrus_way', f'Freezing all the way through {TTLocalizer.GlobalStreetNames[ToontownGlobals.WalrusWay][-1]} in {TTLocalizer.lTundraWonderland}'],
+    ToontownGlobals.SleetStreet: ['tundra_wonderland_street_sleet_street', f'Freezing all the way through {TTLocalizer.GlobalStreetNames[ToontownGlobals.SleetStreet][-1]} in {TTLocalizer.lTundraWonderland}'],
+    ToontownGlobals.PolarPlace: ['tundra_wonderland_street_polar_place', f'Freezing all the way through {TTLocalizer.GlobalStreetNames[ToontownGlobals.PolarPlace][-1]} in {TTLocalizer.lTundraWonderland}'],
 
-    4000: ["harmony-haven", f"{lInThePlayground} {TTLocalizer.GlobalStreetNames[playgroundZoneID][-1]}, {TTLocalizer.lHarmoniousHaven}"],
-    4100: ["harmony-haven", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.AltoAvenue][-1]}, {TTLocalizer.lHarmoniousHaven}"],
-    4200: ["harmony-haven", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.BaritoneBoulevard][-1]}, {TTLocalizer.lHarmoniousHaven}"],
-    4300: ["harmony-haven", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.TenorTerrace][-1]}, {TTLocalizer.lHarmoniousHaven}"],
+    ToontownGlobals.HarmoniousHaven: ['harmonious_haven_playground', f'Feeling the flow of the music in {TTLocalizer.lHarmoniousHaven} playground'],
+    ToontownGlobals.AltoAvenue: ['harmonious_haven_street_alto_avenue', f'Skipping through {TTLocalizer.GlobalStreetNames[ToontownGlobals.AltoAvenue][-1]} in {TTLocalizer.lHarmoniousHaven}'],
+    ToontownGlobals.BaritoneBoulevard: ['harmonious_haven_street_baritone_boulevard', f'Skipping through {TTLocalizer.GlobalStreetNames[ToontownGlobals.BaritoneBoulevard][-1]} in {TTLocalizer.lHarmoniousHaven}'],
+    ToontownGlobals.TenorTerrace: ['harmonious_haven_street_tenor_terrace', f'Skipping through {TTLocalizer.GlobalStreetNames[ToontownGlobals.TenorTerrace][-1]} in {TTLocalizer.lHarmoniousHaven}'],
 
-    5000: ["flowering-grove", f"{lInThePlayground} {TTLocalizer.GlobalStreetNames[playgroundZoneID][-1]}, {TTLocalizer.lFloweringGrove}"],
-    5100: ["flowering-grove", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.ElmStreet][-1]}, {TTLocalizer.lFloweringGrove}"],
-    5200: ["flowering-grove", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.MapleStreet][-1]}, {TTLocalizer.lFloweringGrove}"],
-    5300: ["flowering-grove", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.OakStreet][-1]}, {TTLocalizer.lFloweringGrove}"],
+    ToontownGlobals.FloweringGrove: ['flowering_grove_playground', f'Smelling the flowers in the {TTLocalizer.lFloweringGrove} playground'],
+    ToontownGlobals.ElmStreet: ['flowering_grove_street_elm_street', f'Strolling through {TTLocalizer.GlobalStreetNames[ToontownGlobals.ElmStreet][-1]} in {TTLocalizer.lFloweringGrove}'],
+    ToontownGlobals.MapleStreet: ['flowering_grove_street_maple_street', f'Strolling through {TTLocalizer.GlobalStreetNames[ToontownGlobals.MapleStreet][-1]} in {TTLocalizer.lFloweringGrove}'],
+    ToontownGlobals.OakStreet: ['flowering_grove_street_oak_street', f'Strolling through {TTLocalizer.GlobalStreetNames[ToontownGlobals.OakStreet][-1]} in {TTLocalizer.lFloweringGrove}'],
 
-    6000: ["acorn-acres", f"{lInAcornAcres}"],
+    ToontownGlobals.AcornAcres: ['acorn_acres_playground', f'Hiking through {TTLocalizer.lAcornAcres}'],
 
-    8000: ["toontown-stadium", f"{lInToontownStadium}"],
+    ToontownGlobals.ToontownStadium: ['toontown_stadium_racing', f'Drifting through {TTLocalizer.lToontownStadium}'],
+    ToontownGlobals.GolfZone: ['toontown_stadium_minigolf', f'Putting around {TTLocalizer.lGolfZone}'], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontown Stadium
+    # ToontownGlobals.FunnyFarms: ['funny_farms_playground', f'Uncovering the mysteries of {TTLocalizer.lFunnyFarms}']
 
-    9000: ["twlight-dreamland", f"{lInThePlayground} {TTLocalizer.GlobalStreetNames[playgroundZoneID][-1]}, {TTLocalizer.lTwilightDreamland}"],
-    9100: ["twlight-dreamland", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.LullabyLane][-1]}, {TTLocalizer.lTwilightDreamland}"],
-    9200: ["twlight-dreamland", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.PajamaPlace][-1]}, {TTLocalizer.lTwilightDreamland}"],
-    9300: ["twlight-dreamland", f"{lOnStreet} {TTLocalizer.GlobalStreetNames[ToontownGlobals.TwilightTerrace][-1]}, {TTLocalizer.lTwilightDreamland}"],
+    ToontownGlobals.TwilightDreamland: ['twilight_dreamland_playground', f'Dreaming {TTLocalizer.GlobalStreetNames[ToontownGlobals.TwilightDreamland][-2]} {TTLocalizer.lTwilightDreamland} playground'],
+    ToontownGlobals.LullabyLane: ['twilight_dreamland_street_lullaby_lane', f'Sleepwalking through {TTLocalizer.GlobalStreetNames[ToontownGlobals.LullabyLane][-1]} in {TTLocalizer.lTwilightDreamland}'],
+    ToontownGlobals.PajamaPlace: ['twilight_dreamland_street_pajama_place', f'Sleepwalking through {TTLocalizer.GlobalStreetNames[ToontownGlobals.PajamaPlace][-1]} in {TTLocalizer.lTwilightDreamland}'],
+    ToontownGlobals.TwilightTerrace: ['twilight_dreamland_street_twilight_terrace', f'Sleepwalking through {TTLocalizer.GlobalStreetNames[ToontownGlobals.TwilightTerrace][-1]} in {TTLocalizer.lTwilightDreamland}'],
 
-    10000: ["bossbot-hq", f"{lInTheBossbotHQ} {TTLocalizer.GlobalStreetNames[ToontownGlobals.BossbotHQ][-1]}, {TTLocalizer.lBossbotHQ}"],
-    10100: ["bossbot-hq", f"The Chief Executive Officer's Clubhouse"],
-    10200: ["bossbot-hq", f"The Chief Executive Officer's Clubhouse"],
-    10500: ["bossbot-hq", f"The Front Three"],
-    10600: ["bossbot-hq", f"The Middle Six"],
-    10700: ["bossbot-hq", f"The Back Nine"],
+    ToontownGlobals.BossbotHQ: ['bossbot_hq_country_club', f'Snooping around the {TTLocalizer.GlobalStreetNames[ToontownGlobals.BossbotHQ][-1]} {TTLocalizer.lInBossbotHQ}'],
+    ToontownGlobals.BossbotLobby: ['bossbot_hq_clubhouse_lobby', f'Waiting {TTLocalizer.GlobalStreetNames[ToontownGlobals.BossbotLobby][-2]} {TTLocalizer.GlobalStreetNames[ToontownGlobals.BossbotLobby][-1]} {TTLocalizer.lInBossbotHQ}'],
+    ToontownGlobals.BossbotCountryClubIntA: ['bossbot_hq_the_front_three', f'Infiltrating {TTLocalizer.GlobalStreetNames[ToontownGlobals.BossbotCountryClubIntA][-1]} {TTLocalizer.lInBossbotHQ}'],
+    ToontownGlobals.BossbotCountryClubIntB: ['bossbot_hq_the_middle_six', f'Infiltrating {TTLocalizer.GlobalStreetNames[ToontownGlobals.BossbotCountryClubIntB][-1]} {TTLocalizer.lInBossbotHQ}'],
+    ToontownGlobals.BossbotCountryClubIntC: ['bossbot_hq_the_back_nine', f'Infiltrating {TTLocalizer.GlobalStreetNames[ToontownGlobals.BossbotCountryClubIntC][-1]} {TTLocalizer.lInBossbotHQ}'],
 
-    11000: ["sellbot-hq", f"{lInTheSellbotHQ} {TTLocalizer.GlobalStreetNames[ToontownGlobals.SellbotHQ][-1]}, {TTLocalizer.lSellbotHQ}"],
-    11100: ["sellbot-hq", f"The Vice President's Lobby, {TTLocalizer.lSellbotHQ}"],
-    11200: ["sellbot-hq", f"The Sellbot HQ Factory Exterior, {TTLocalizer.lSellbotHQ}"],
-    11500: ["sellbot-hq", f"The Sellbot Factory, {TTLocalizer.lSellbotHQ}"],
+    ToontownGlobals.SellbotHQ: ['sellbot_hq_courtyard', f'Waltzing around the {TTLocalizer.GlobalStreetNames[ToontownGlobals.SellbotHQ][-1]} {TTLocalizer.lInSellbotHQ}'],
+    ToontownGlobals.SellbotLobby: ['sellbot_hq_towers_lobby', f'Waiting {TTLocalizer.GlobalStreetNames[ToontownGlobals.SellbotLobby][-2]} {TTLocalizer.GlobalStreetNames[ToontownGlobals.SellbotLobby][-1]} {TTLocalizer.lInSellbotHQ}'],
+    ToontownGlobals.SellbotFactoryExt: ['sellbot_hq_factory_exterior', f'Sneaking around the {TTLocalizer.GlobalStreetNames[ToontownGlobals.SellbotFactoryExt][-1]} Exterior {TTLocalizer.lInSellbotHQ}'],
+    ToontownGlobals.SellbotFactoryInt: ['sellbot_hq_factory_interior', f'Infiltrating the {TTLocalizer.GlobalStreetNames[ToontownGlobals.SellbotFactoryInt][-1]} {TTLocalizer.lInSellbotHQ}'],
 
-    12000: ["cashbot-hq", f"{lInTheCashbotHQ} {TTLocalizer.GlobalStreetNames[ToontownGlobals.CashbotHQ][-1]}, {TTLocalizer.lCashbotHQ}"],
-    12100: ["cashbot-hq", f"The Chief Financial Officer's Lobby"],
-    12500: ["cashbot-hq", f"The Cashbot Coin Mint"],
-    12600: ["cashbot-hq", f"The Cashbot Dollar Mint"],
-    12700: ["cashbot-hq", f"The Cashbot Bullion Mint"],
+    ToontownGlobals.CashbotHQ: ['cashbot_hq_trainyard', f'Dodging Trains {TTLocalizer.GlobalStreetNames[ToontownGlobals.CashbotHQ][-2]} {TTLocalizer.GlobalStreetNames[ToontownGlobals.CashbotHQ][-1]} {TTLocalizer.lInCashbotHQ}'],
+    ToontownGlobals.CashbotLobby: ['cashbot_hq_lobby', f'Waiting {TTLocalizer.GlobalStreetNames[ToontownGlobals.CashbotLobby][-2]} {TTLocalizer.lCashbotVaultLobby} {TTLocalizer.lInCashbotHQ}'],
+    ToontownGlobals.CashbotMintIntA: ['cashbot_hq_mint_coin', f'Infiltrating the {TTLocalizer.GlobalStreetNames[ToontownGlobals.CashbotMintIntA][-1]} {TTLocalizer.lInCashbotHQ}'],
+    ToontownGlobals.CashbotMintIntB: ['cashbot_hq_mint_dollar', f'Infiltrating the {TTLocalizer.GlobalStreetNames[ToontownGlobals.CashbotMintIntB][-1]} {TTLocalizer.lInCashbotHQ}'],
+    ToontownGlobals.CashbotMintIntC: ['cashbot_hq_mint_bullion', f'Infiltrating the {TTLocalizer.GlobalStreetNames[ToontownGlobals.CashbotMintIntC][-1]} {TTLocalizer.lInCashbotHQ}'],
 
-    13000: ["lawbot-hq", f"{lInTheLawbotHQ} {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotHQ][-1]}, {TTLocalizer.lLawbotHQ}"],
-    13100: ["lawbot-hq", f"The Chief Justice's Lobby"],
-    13200: ["lawbot-hq", f"The DA's Office Lobby"],
-    13300: ["lawbot-hq", f"The Lawbot Office A"],
-    13400: ["lawbot-hq", f"The Lawbot Office B"],
-    13500: ["lawbot-hq", f"The Lawbot Office C"],
-    13600: ["lawbot-hq", f"The Lawbot Office D"],
+    ToontownGlobals.LawbotHQ: ['lawbot_hq_courtyard', f'Wandering around the {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotHQ][-1]} {TTLocalizer.lInLawbotHQ}'],
+    ToontownGlobals.LawbotLobby: ['lawbot_hq_courthouse_lobby', f'Waiting {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotLobby][-2]} Lawbot {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotLobby][-1]} {TTLocalizer.lInLawbotHQ}'],
+    ToontownGlobals.LawbotOfficeExt: ['lawbot_hq_da_office_lobby', f'Strolling through the {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotOfficeExt][-1]} {TTLocalizer.lInLawbotHQ}'],
+    ToontownGlobals.LawbotStageIntA: ['lawbot_hq_da_office_a', f'Infiltrating the {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotStageIntA][-1]} {TTLocalizer.lInLawbotHQ}'],
+    ToontownGlobals.LawbotStageIntB: ['lawbot_hq_da_office_b', f'Infiltrating the {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotStageIntB][-1]} {TTLocalizer.lInLawbotHQ}'],
+    ToontownGlobals.LawbotStageIntC: ['lawbot_hq_da_office_c', f'Infiltrating the {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotStageIntC][-1]} {TTLocalizer.lInLawbotHQ}'],
+    ToontownGlobals.LawbotStageIntD: ['lawbot_hq_da_office_d', f'Infiltrating the {TTLocalizer.GlobalStreetNames[ToontownGlobals.LawbotStageIntD][-1]} {TTLocalizer.lInLawbotHQ}'],
 
-    14000: ["toontorial", f"{lOnToontorialTerrace}"],
-
-    16000: ["toon-estate", f"A Toon Estate"],
-
-    17000: ['mini-golf', f"{TTLocalizer.lGolfZone}"], # Remove this once we've begun merging Goofy Speedway and the Mini-Golf Area into Toontown Stadium
+    ToontownGlobals.MyEstate: ['toon-estate', f'Hanging out {TTLocalizer.lAtHome}'],
 }
 
 class DiscordRPC(object):
@@ -106,11 +91,17 @@ class DiscordRPC(object):
 
     def __init__(self):
         self.RPC = None
+        self.avatarNameKey = 'AVATAR_NAME'
+        self.zoneIdKey = 'ZONE_ID'
+        self.currentDetailsKey = 'CURRENT_DETAILS'
+        self.previousDetailsKey = 'PREVIOUS_DETAILS'
 
         if base.wantRichPresence:
             self.enable()
         else:
             self.disable()
+
+        self.gameName = str(gameName)
 
         toontownPlayTokenKey = QuickLauncher.getToontownFantasyPlayTokenKey(self)
         self.username = QuickLauncher.getUsername(self)
@@ -132,11 +123,13 @@ class DiscordRPC(object):
 
         self.updateTask = None
         self.details = '   ' # text next to photo
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         self.large_image = gameLogo # Sets the main image displayed on the Discord profile
-        self.large_text = gameName # Hover text for main image 
+        self.large_text = self.gameName # Hover text for main image 
         self.smallLogo = 'game-icon' # Set the image that appears in the bottom-right corner of the main image
         self.state = '   ' # Set the text that appears underneath the details (used for boarding groups)
-        self.smallTxt = '   ' # Sets the text that appears when you hover over the smaller logo
+        self.serverVersion = ConfigVariableString('server-version', '').value
+        self.smallTxt = f'{self.serverVersion}' # Sets the text that appears when you hover over the smaller logo
         self.discordTaskLoop = None
 
     def stopBoarding(self):
@@ -150,7 +143,7 @@ class DiscordRPC(object):
         if not base.wantRichPresence:
             return
 
-        self.state = 'in a boarding group'
+        self.state = str(TTLocalizer.lInBoardingGroup)
         self.setData()
 
     def setBoarding(self, size):
@@ -177,7 +170,7 @@ class DiscordRPC(object):
 
         if self.RPC is not None:
             try:
-                self.RPC.update(name=gameName, state=self.state, details=details, large_image=large_image, large_text=large_text, small_image=smallLogo, small_text=smallTxt)
+                self.RPC.update(name=f'{self.gameName}', state=self.state, details=details, large_image=large_image, large_text=large_text, small_image=smallLogo, small_text=smallTxt)
 
             except (PipeClosed, BrokenPipeError, ServerError):
                 self.disable()
@@ -196,7 +189,7 @@ class DiscordRPC(object):
         if not base.wantRichPresence:
             return
 
-        self.state = '{0}: {1}/{2}'.format(base.localAvatar.getName(), hp, maxHp)
+        self.state = '({0}/{1}) {2}'.format(hp, maxHp, base.localAvatar.getName())
         self.setData()
 
     def updateTasks(self, task):
@@ -212,7 +205,8 @@ class DiscordRPC(object):
             return
 
         self.large_image = gameLogo
-        self.details = 'Picking a Toon'
+        self.details = str(TTLocalizer.lPickingAToon)
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         self.state = '  '
         DiscordRPC.notify.info(f'{self.username} is choosing an avatar!')
         self.setData()
@@ -222,8 +216,10 @@ class DiscordRPC(object):
             return
 
         self.large_image = gameLogo
-        self.details = 'Starting Toontown...'
-        self.smallTxt = 'Starting...'
+        startingGameList = [f'{TTLocalizer.lStartingGame}', f'{TTLocalizer.lBootingUpGame}', f'{TTLocalizer.lLoadingIntoGame}']
+        self.details = f'{random.choice(startingGameList)}'.format(f'Toontown')
+
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         DiscordRPC.notify.info(f'{self.username} is starting {gameName}!')
         self.setData()
 
@@ -232,27 +228,37 @@ class DiscordRPC(object):
             return
 
         self.large_image = gameLogo
-        self.details = 'Making a Toon...'
+        self.details = str(TTLocalizer.lMakingAToon)
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         DiscordRPC.notify.info(f'{self.username} is making a Toon!')
         self.setData()
 
-    def loading(self):
+    def loading(self, avatarName):
         if not base.wantRichPresence:
             return
 
+        QuickLauncher.setValue(self, key=self.avatarNameKey, value=f'{avatarName}')
+
+        self.avatarName = QuickLauncher.getValue(self, key=self.avatarNameKey, default=None)
+
         self.large_image = gameLogo
-        self.details = 'Loading into Toontown...'
-        self.smallTxt = 'Loading...'
+        self.details = f'{TTLocalizer.lLoadingIntoGame}'.format('Toontown')
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         self.state = '  '
-        DiscordRPC.notify.info(f'{self.username} is loading into {gameName}!')
+        if self.avatarName is not None:
+            self.smallTxt = f'Playing as {self.avatarName}'
+            DiscordRPC.notify.info(f'{self.username} is loading into {gameName} as {self.avatarName}!')
+        else:
+            DiscordRPC.notify.info(f'{self.username} is loading into {gameName}!')
         self.setData()
 
     def vp(self):
         if not base.wantRichPresence:
             return
 
-        self.large_image = 'sellbot_hq_vp'
-        self.details = 'Fighting the V.P.'
+        self.large_image = 'sellbot_hq_towers' # sellbot_hq_vp
+        self.details = f'{TTLocalizer.lSellbotTowersRPC}' # TTLocalizer.lFightingTheVP
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         DiscordRPC.notify.info(f'{self.username} is fighting the V.P.!')
         self.setData()
 
@@ -260,8 +266,9 @@ class DiscordRPC(object):
         if not base.wantRichPresence:
             return
 
-        self.large_image = 'cashbot_hq_cfo'
-        self.details = 'Fighting the C.F.O.'
+        self.large_image = 'cashbot_hq_vault'
+        self.details = f'{TTLocalizer.lCashbotVaultRPC}' # TTLocalizer.lFightingTheCFO
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         DiscordRPC.notify.info(f'{self.username} is fighting the C.F.O.!')
         self.setData()
 
@@ -269,8 +276,10 @@ class DiscordRPC(object):
         if not base.wantRichPresence:
             return
 
-        self.large_image = 'lawbot_hq_cj'
-        self.details = 'Fighting the C.J.'
+        self.large_image = 'lawbot_hq_courthouse' # lawbot_hq_cj
+        # self.details = str(TTLocalizer.lFightingTheCJ)
+        self.details = f'{TTLocalizer.lLawbotCourthouseRPC}' # TTLocalizer.lFightingTheCJ
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         DiscordRPC.notify.info(f'{self.username} is fighting the C.J.!')
         self.setData()
 
@@ -278,8 +287,9 @@ class DiscordRPC(object):
         if not base.wantRichPresence:
             return
 
-        self.large_image = 'bossbot_hq_ceo'
-        self.details = 'Fighting the C.E.O.'
+        self.large_image = 'bossbot_hq_clubhouse' # bossbot_hq_ceo
+        self.details = f'{TTLocalizer.lBossbotClubhouseRPC}' # TTLocalizer.lFightingTheCEO
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
         DiscordRPC.notify.info(f'{self.username} is fighting the C.E.O.!')
         self.setData()
 
@@ -288,17 +298,43 @@ class DiscordRPC(object):
             return
 
         self.large_image = 'cog-building'
-        self.details = 'in a Cog Building'
-        DiscordRPC.notify.info(f'{self.username} has entered a cog building!')
+        self.details = str(TTLocalizer.lInACogBuilding)
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
+        self.avatarName = QuickLauncher.getValue(self, key=self.avatarNameKey, default=None)
+        DiscordRPC.notify.info(f'{self.avatarName} has entered a C.O.G. building!')
         self.setData()
 
     def sleeping(self):
         if not base.wantRichPresence:
             return
 
-        self.smallLogo = 'sleeping'
-        self.details = f'{self.smallLogo}'.capitalize()
-        DiscordRPC.notify.info(f'{self.username} has fallen asleep!')
+        self.grabbedCurrentDetails = QuickLauncher.getValue(self, key=self.currentDetailsKey, default=None)
+        if self.grabbedCurrentDetails is not None:
+            QuickLauncher.setValue(self, key=self.previousDetailsKey, value=f'{self.grabbedCurrentDetails}')
+
+        self.details = f'{TTLocalizer.lSleeping}...'
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
+        self.smallLogo = f'sleeping'
+
+        self.avatarName = QuickLauncher.getValue(self, key=self.avatarNameKey, default=None)
+        DiscordRPC.notify.info(f'{self.avatarName} has fallen asleep!')
+        self.setData()
+
+    def reawaken(self):
+        if not base.wantRichPresence:
+            return
+
+        self.grabbedPreviousDetailsKey = QuickLauncher.getValue(self, key=self.previousDetailsKey, default=None)
+        if self.grabbedPreviousDetailsKey is not None:
+            QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.grabbedPreviousDetailsKey}')
+            self.details = QuickLauncher.getValue(self, key=self.currentDetailsKey, default=None)
+        else:
+            self.details = '  '
+        QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
+
+        self.avatarName = QuickLauncher.getValue(self, key=self.avatarNameKey, default=None)
+        DiscordRPC.notify.info(f'{self.avatarName} has reawoken from falling asleep!')
+        self.smallLogo = 'game-icon'
         self.setData()
 
     def startTasks(self):
@@ -318,15 +354,19 @@ class DiscordRPC(object):
     def setZone(self, zone): # Set image and text based on the zone
         if not isinstance(zone, int) or not base.wantRichPresence:
             return
+        QuickLauncher.setValue(self, key=self.zoneIdKey, value=f'{zone}')
 
         zone -= zone % 100
-        DiscordRPC.notify.debug(f'The zone is set to "{zone}"')
+        DiscordRPC.notify.info(f'The zone is set to "{zone}"')
         data = zone2imgdesc.get(zone, None)
         if not data:
-            DiscordRPC.notify.debug(f'Error: Zone Not Found!: {zone}')
+            DiscordRPC.notify.error(f'Error: Zone Not Found!: {zone}')
         else:
             self.large_image = data[0]
+            # self.details = '  '
             self.details = data[1]
+            QuickLauncher.setValue(self, key=self.currentDetailsKey, value=f'{self.details}')
+            self.large_text = data[1]
             self.setData()
 
     def reconnectDiscord(self):
@@ -335,7 +375,6 @@ class DiscordRPC(object):
 
     def enable(self):
         try:
-
             if self.RPC is None:
                 self.RPC = pypresence.Presence(clientId)
 

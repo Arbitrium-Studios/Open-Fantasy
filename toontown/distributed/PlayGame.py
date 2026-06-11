@@ -480,7 +480,8 @@ class PlayGame(StateData.StateData):
         base.localAvatar.chatMgr.obscure(1, 1)
         base.localAvatar.obscureFriendsListButton(1)
         requestStatus['how'] = 'tutorial'
-        if base.config.GetString('language', 'english') == 'japanese':
+        self.chosenLanguage = base.settings.getSetting(setting='language')
+        if f'{self.chosenLanguage}'.lower() == 'japanese':
             musicVolume = base.config.GetFloat('tutorial-music-volume', 0.5)
             requestStatus['musicVolume'] = musicVolume
         self.hood.enter(requestStatus)

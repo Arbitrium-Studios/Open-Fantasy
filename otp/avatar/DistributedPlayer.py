@@ -10,7 +10,7 @@ from otp.chat import TalkAssistant
 from otp.otpbase import OTPGlobals
 from otp.avatar.Avatar import teleportNotify
 from otp.distributed.TelemetryLimited import TelemetryLimited
-if ConfigVariableBool('want-chatfilter-hacks', 0).value:
+if ConfigVariableBool('want-chatfilter-hacks', False).value:
     from otp.switchboard import badwordpy
     import os
     badwordpy.init(os.environ.get('OTP') + '\\src\\switchboard\\', '')
@@ -43,7 +43,7 @@ class DistributedPlayer(DistributedAvatar.DistributedAvatar,
             self.accessLevel = 0
             self.autoRun = 0
             self.whiteListEnabled = ConfigVariableBool(
-                'whitelist-chat-enabled', 1).value
+                'whitelist-chat-enabled', True).value
 
         return
 
@@ -244,9 +244,9 @@ class DistributedPlayer(DistributedAvatar.DistributedAvatar,
                 chatString) > 0 and chatString[0] == '~':
             messenger.send('magicWord', [chatString])
         else:
-            if ConfigVariableBool('want-chatfilter-hacks', 0).value:
+            if ConfigVariableBool('want-chatfilter-hacks', False).value:
                 if ConfigVariableBool(
-                        'want-chatfilter-drop-offending', 0).value:
+                        'want-chatfilter-drop-offending', False).value:
                     if badwordpy.test(chatString):
                         return
                 else:
@@ -399,7 +399,7 @@ class DistributedPlayer(DistributedAvatar.DistributedAvatar,
                         self.doId, 0, 0, 0, 0, sendToId=requesterId)
                     return
             if self.__teleportAvailable and not self.ghostMode and ConfigVariableBool(
-                    'can-be-teleported-to', 1).value:
+                    'can-be-teleported-to', True).value:
                 teleportNotify.debug('teleport initiation successful')
                 self.setSystemMessage(
                     requesterId,

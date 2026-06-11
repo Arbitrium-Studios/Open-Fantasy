@@ -10,7 +10,7 @@ from direct.showbase.PythonUtil import makeTuple
 class SCMenu(SCObject, NodePath):
     SpeedChatRolloverTolerance = ConfigVariableDouble(
         'speedchat-rollover-tolerance', 0.08).value
-    WantFade = ConfigVariableBool('want-speedchat-fade', 0).value
+    WantFade = ConfigVariableBool('want-speedchat-fade', False).value
     FadeDuration = ConfigVariableDouble('speedchat-fade-duration', 0.2).value
     SerialNum = 0
     BackgroundModelName = None

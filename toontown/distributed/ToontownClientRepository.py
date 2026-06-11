@@ -90,7 +90,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         self.deliveryManager = self.generateGlobalObject(
             OtpDoGlobals.OTP_DO_ID_TOONTOWN_DELIVERY_MANAGER,
             'DistributedDeliveryManager')
-        if ConfigVariableBool('want-code-redemption', 1).value:
+        if ConfigVariableBool('want-code-redemption', True).value:
             self.codeRedemptionManager = self.generateGlobalObject(
                 OtpDoGlobals.OTP_DO_ID_TOONTOWN_CODE_REDEMPTION_MANAGER, 'TTCodeRedemptionMgr')
         self.streetSign = None
@@ -123,9 +123,9 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         state = self.gameFSM.getStateNamed('playGame')
         state.addTransition('skipTutorialRequest')
         self.wantCogdominiums = ConfigVariableBool(
-            'want-cogdominiums', 1).value
-        self.wantEmblems = ConfigVariableBool('want-emblems', 0).value
-        if ConfigVariableBool('tt-node-check', 0).value:
+            'want-cogdominiums', True).value
+        self.wantEmblems = ConfigVariableBool('want-emblems', False).value
+        if ConfigVariableBool('tt-node-check', False).value:
             for species in ToonDNA.toonSpeciesTypes:
                 for head in ToonDNA.getHeadList(species):
                     for torso in ToonDNA.toonTorsoTypes:
@@ -275,7 +275,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
             self.avChoiceDoneEvent,
             self.__handleAvatarChooserDone,
             [avList])
-        if ConfigVariableBool('want-gib-loader', 1).value:
+        if ConfigVariableBool('want-gib-loader', True).value:
             self.loadingBlocker = ToontownLoadingBlocker.ToontownLoadingBlocker(
                 avList)
         return
@@ -300,6 +300,9 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                 self.notify.info('================')
                 self.notify.info('Chose avatar id: %s' % av.id)
                 self.notify.info('Chose avatar name: %s' % av.name)
+                # if base.wantRichPresence:
+                    # base.discord.loading(avatarName=av.name)
+                    # base.discord.loading()
                 dna = ToonDNA.ToonDNA()
                 dna.makeFromNetString(av.dna)
                 if base.logPrivateInfo:
@@ -313,7 +316,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                 self.notify.info('================')
 
         if base.wantRichPresence:
-            base.discord.loading()
+            base.discord.loading(avatarName=av.name)
 
         if done == 'chose':
             self.avChoice.exit()

@@ -1,23 +1,30 @@
 import json
 import os
 
-
 class Settings:
     defaultSettings = {
         "music": True,
         "sfx": True,
+        "toon-chat-sounds": True,
+        "smooth-animations": False,
         "show-fps": False,
         "want-laff-meter-over-head": False,
         "rich-presence": False,
         "windowed-mode": True,
         "accepting-new-friends": True,
+        "windowed-mode": True,
+        "language": "english",
+        "display-mode": "windowed", # For later update on how TTFan handles Display modes (which will hopefully include Borderless Mode)
+        "want-sleep": True,
     }
 
     def __init__(self):
         self.__settings = {}
-        if not os.path.exists('users/'):
-            os.mkdir('users/')
-        self.__filename = 'users/preferences.json'
+        usersDir = 'users'
+        preferencesFile = 'preferences.json'
+        if not os.path.exists(f'{usersDir}'):
+            os.mkdir(f'{usersDir}')
+        self.__filename = f'{usersDir}/{preferencesFile}'
 
     def doSavedSettingsExist(self):
         return os.path.exists(self.__filename)
@@ -32,9 +39,6 @@ class Settings:
                 self.__settings = json.load(f)
         except BaseException:
             self.__settings = {}
-
-    def get(self, setting: str):
-        return self.__settings.get(setting)
 
     def writeSettings(self):
         with open(self.__filename, 'w+') as f:

@@ -17,16 +17,18 @@ class DirectNewsFrame(DirectObject.DirectObject):
     TaskName = 'HtmlViewUpdateTask'
     TaskChainName = 'RedownladTaskChain'
     RedownloadTaskName = 'RedownloadNewsTask'
-    NewsBaseDir = ConfigVariableString('news-base-dir', '/news/').value # Was set to: httpNews
-    NewsStageDir = ConfigVariableString('news-stage-dir', 'resources/phase_3.5/models' + NewsBaseDir).value
+    NewsBaseDir = base.config.GetString('news-base-dir', 'phase_3.5/models/news')#.value # Was set to: httpNews
+    NewsStageDir = base.config.GetString('news-stage-dir', 'resources/phase_3.5/models/')
+    if not NewsStageDir.endswith(NewsBaseDir):
+        NewsStageDir = f'{NewsStageDir}' + NewsBaseDir
+    NewsUrl = base.config.GetString('news-url', 'resources/phase_3.5/models/news/http_news_index.txt')
     FrameDimensions = (-1.30666637421,
                        1.30666637421,
                        -0.751666665077,
                        0.751666665077)
     notify = DirectNotifyGlobal.directNotify.newCategory('DirectNewsFrame')
-    NewsIndexFilename = ConfigVariableString(
-        'news-index-filename', 'http_news_index.txt').value
-    NewsOverHttp = ConfigVariableBool('news-over-http', False).value
+    NewsIndexFilename = base.config.GetString('news-index-filename', 'http_news_index.txt')#.value # phase_3.5/models/news/
+    NewsOverHttp = config.GetBool('news-over-http', False)#.value
     CacheIndexFilename = 'cache_index.txt'
     SectionIdents = ['hom',
                      'new',
@@ -158,43 +160,57 @@ class DirectNewsFrame(DirectObject.DirectObject):
     def findNewsDir(self):
 
         if self.NewsOverHttp:
+            # return self.NewsStageDir + self.NewsIndexFilename
             return self.NewsStageDir
         searchPath = DSearchPath()
         if AppRunnerGlobal.appRunner:
-            searchPath.appendDirectory(
-                Filename.expandFrom('resources/phase_3.5/models'))
+            print(f'Hello from if AppRunnerGlobal.appRunner!\n')
+            searchPath.appendDirectory(Filename.expandFrom('$TT_3_5_ROOT/phase_3.5/models/news'))
         else:
-            # newsCombinedPath = self.NewsStageDir + self.NewsBaseDir
-            newsDir = self.NewsStageDir
-            resourcesFolder = "/resources"
-            os.environ["TTMODELS"] = "/phase_3.5/models"
-            basePath = os.path.expandvars('$TTMODELS')
-            basePathStrQuotated = f'"basePath"'
-            basePathQuotated = f'"{basePath}"'
-            print(f'The {basePathStrQuotated} is set to {basePathQuotated}!\n')
-            searchPath.appendDirectory(
-                Filename.fromOsSpecific(
-                    resourcesFolder + 
-                    basePath +
-                    # self.NewsStageDir +
-                    self.NewsBaseDir))
-            
-            # searchPath.appendDirectory(Filename(newsCombinedPath))
-            print(f'News directory found at: {searchPath.appendDirectory(Filename.fromOsSpecific(resourcesFolder + basePath + self.NewsBaseDir))}')
+            basePath = os.path.expandvars('$TTMODELS') or './ttmodels'
+            searchPath.appendDirectory(Filename.fromOsSpecific(basePath + '/built/' + self.NewsBaseDir))
+            searchPath.appendDirectory(Filename(self.NewsBaseDir))
+            # # newsCombinedPath = self.NewsStageDir + self.NewsBaseDir
+            # # newsDir = self.NewsStageDir
+            # # resourcesFolder = "resources"
+            # # os.environ["TTMODELS"] = "/phase_3.5/models"
+            # # newsDir = f'{resourcesFolder}/{self.NewsStageDir}'
+            # # newsDirQuotated = f'"{newsDir}"'
+            # # newsDirStrQuotated = '"newsDir"'
+            # # # newsPath = str(newsDir + self.NewsIndexFilename)
+            # # if newsDir.endswith('/'):
+            # #     newsDir = newsDir.replace('/', '')
+            # # # newsPathStrQuotated = '"newsPath"'
+            # # # newsPathQuotated = f'"{newsPath}"'
+            # # print(f'NewsStageDir: {self.NewsStageDir}\n')
+            # # print(f'NewsIndexFilename: {self.NewsIndexFilename}\n')
+            # newsPath = self.NewsUrl
+            # # newsPath = os.path.join(self.NewsStageDir, self.NewsIndexFilename)
+            # newsPathStrQuotated = '"newsPath"'
+            # newsPathQuotated = f'"{newsPath}"'
+            # print(f'The {newsPathStrQuotated} is set to {newsPathQuotated}!\n')
+            # # print(f'The {newsDirStrQuotated} is set to {newsDirQuotated}!\n')
+            # newsDir = 'resources/phase_3.5/models/news'
+            # searchPath.appendDirectory(Filename.fromOsSpecific(newsDir))
+            # # searchPath.appendDirectory(Filename(newsDir))
 
+            # searchPath.appendDirectory(Filename(newsCombinedPath))
+            # print(f'newsDir searchPath set to: {searchPath.appendDirectory(Filename(newsDir))}')
+
+        print(f'searchPath: {searchPath}\n')
         pfile = Filename(self.NewsIndexFilename)
         found = vfs.resolveFilename(pfile, searchPath)
+        # filename = Filename(self.NewsIndexFilename)
+        # found = vfs.resolveFilename(filename, searchPath)
+        # # found = vfs.resolveFilename(pfile, searchPath)
         if not found:
-            self.notify.warning(
-                'findNewsDir - no path: %s' %
-                self.NewsIndexFilename)
-            print(f"There is no path for findNewsDir: {self.NewsIndexFilename}")
-            self.setErrorMessage(
-                TTLocalizer.NewsPageErrorDownloadingFile %
-                self.NewsIndexFilename)
+            # self.notify.warning('findNewsDir - Path not found:\n\nsearchPath: {}\n\nNews File Name: {}'.format(f'{searchPath}', f'{self.NewsIndexFilename}'))
+            self.notify.warning('findNewsDir - no path: %s' % self.NewsIndexFilename)
+                # print(f"There is no path for findNewsDir: {self.NewsIndexFilename}")
+            self.setErrorMessage(TTLocalizer.NewsPageErrorDownloadingFile % self.NewsIndexFilename)
             return None
         self.notify.debug('found index file %s' % pfile)
-        print(f"Found index file: {pfile.getFullpath()}")
+        self.notify.info(f'Found index file: {pfile.getFullpath()}')
         realDir = pfile.getDirname()
         return realDir
 
@@ -425,12 +441,11 @@ class DirectNewsFrame(DirectObject.DirectObject):
 
     def saveNewsCache(self):
         cacheIndexFilename = Filename(self.newsDir, self.CacheIndexFilename)
+        print(f'cacheIndexFilename: {cacheIndexFilename}\n')
         try:
             file = open(cacheIndexFilename.toOsSpecific(), 'w')
         except IOError as e:
-            self.notify.warning(
-                'error opening news cache file %s: %s' %
-                (cacheIndexFilename, str(e)))
+            self.notify.warning('error opening news cache file %s: %s' % (cacheIndexFilename, str(e)))
             return
 
         for filename, (size, date) in list(self.newsCache.items()):
@@ -445,10 +460,8 @@ class DirectNewsFrame(DirectObject.DirectObject):
                 self.redownloadNews() # To Do: Grab news in launcher while downloading update and then rewrite all of this to check then grab the news locally.
 
     def getInGameNewsUrl(self):
-        result = ConfigVariableString(
-            'fallback-news-url',
-            'http://dolimg.com/toontown/en/gamenews/').value
-        override = ConfigVariableString('in-game-news-url', '').value
+        result = ConfigVariableString('fallback-news-url', 'https://web.archive.org/web/20260610233829/https://dolimg.com/toontown/en/gamenews/').value
+        override = ConfigVariableString('in-game-news-url', 'https://www.toontownfantasy.com/toon_hq/gamenews/').value
         if override:
             self.notify.info(
                 'got an override url, using %s for in game news' %
@@ -457,7 +470,7 @@ class DirectNewsFrame(DirectObject.DirectObject):
         else:
             try:
                 launcherUrl = base.launcher.getValue(
-                    'GAME_IN_GAME_NEWS_URL', 'https://cdn.arbitriumstudios.com/bf_assets/media/player_zer0_studio/toontown_fantasy/game/english/resources/phase_3.5/models/gamenews/img/news/')
+                    'GAME_IN_GAME_NEWS_URL', 'https://www.toontownfantasy.com/toon_hq/gamenews/')
                 if launcherUrl:
                     result = launcherUrl
                     self.notify.info(

@@ -257,8 +257,8 @@ class OptionsTabPage(DirectFrame):
     DisplaySettingsTaskName = 'save-display-settings'
     DisplaySettingsDelay = 60
     ChangeDisplaySettings = ConfigVariableBool(
-        'change-display-settings', 1).value
-    ChangeDisplayAPI = ConfigVariableBool('change-display-api', 0).value
+        'change-display-settings', True).value
+    ChangeDisplayAPI = ConfigVariableBool('change-display-api', False).value
 
     def __init__(self, parent=aspect2d):
         self._parent = parent
@@ -553,7 +553,7 @@ class OptionsTabPage(DirectFrame):
     def enter(self):
         self.show()
         taskMgr.remove(self.DisplaySettingsTaskName)
-        self.settingsChanged = 0
+        self.settingsChanged = False
         self.__setMusicButton()
         self.__setSoundFXButton()
         self.__setAcceptFriendsButton()
@@ -580,7 +580,7 @@ class OptionsTabPage(DirectFrame):
                 self.DisplaySettingsTaskName)
 
     def updateSettings(self):
-        if self.settingsChanged != 0:
+        if self.settingsChanged != False:
             base.settings.writeSettings()
 
     def unload(self):
@@ -619,12 +619,12 @@ class OptionsTabPage(DirectFrame):
     def __doToggleMusic(self):
         messenger.send('wakeup')
         if base.musicActive:
-            base.enableMusic(0)
+            base.enableMusic(False)
             base.settings.updateSetting('music', False)
         else:
-            base.enableMusic(1)
+            base.enableMusic(True)
             base.settings.updateSetting('music', True)
-        self.settingsChanged = 1
+        self.settingsChanged = True
         self.__setMusicButton()
         self.updateSettings()
 
@@ -639,24 +639,24 @@ class OptionsTabPage(DirectFrame):
     def __doToggleSfx(self):
         messenger.send('wakeup')
         if base.sfxActive:
-            base.enableSoundEffects(0)
+            base.enableSoundEffects(False)
             base.settings.updateSetting('sfx', False)
         else:
-            base.enableSoundEffects(1)
+            base.enableSoundEffects(True)
             base.settings.updateSetting('sfx', True)
-        self.settingsChanged = 1
+        self.settingsChanged = True
         self.__setSoundFXButton()
         self.updateSettings()
 
     def __doToggleToonChatSounds(self):
         messenger.send('wakeup')
         if base.toonChatSounds:
-            base.toonChatSounds = 0
+            base.toonChatSounds = False
             base.settings.updateSetting('toon-chat-sounds', False)
         else:
-            base.toonChatSounds = 1
+            base.toonChatSounds = True
             base.settings.updateSetting('toon-chat-sounds', True)
-        self.settingsChanged = 1
+        self.settingsChanged = True
         self.__setToonChatSoundsButton()
         self.updateSettings()
 
@@ -686,24 +686,24 @@ class OptionsTabPage(DirectFrame):
     def __doToggleAcceptFriends(self):
         messenger.send('wakeup')
         if base.localAvatar.acceptingNewFriends:
-            base.localAvatar.acceptingNewFriends = 0
+            base.localAvatar.acceptingNewFriends = False
             base.settings.updateSetting('accepting-new-friends', False)
         else:
-            base.localAvatar.acceptingNewFriends = 1
+            base.localAvatar.acceptingNewFriends = True
             base.settings.updateSetting('accepting-new-friends', True)
-        self.settingsChanged = 1
+        self.settingsChanged = True
         self.__setAcceptFriendsButton()
         self.updateSettings()
 
     def __doToggleAcceptWhispers(self):
         messenger.send('wakeup')
         if base.localAvatar.acceptingNonFriendWhispers:
-            base.localAvatar.acceptingNonFriendWhispers = 0
+            base.localAvatar.acceptingNonFriendWhispers = False
             base.settings.updateSetting('accepting-non-friend-whispers', False)
         else:
-            base.localAvatar.acceptingNonFriendWhispers = 1
+            base.localAvatar.acceptingNonFriendWhispers = True
             base.settings.updateSetting('accepting-non-friend-whispers', True)
-        self.settingsChanged = 1
+        self.settingsChanged = True
         self.__setAcceptWhispersButton()
 
     def __setAcceptFriendsButton(self):
@@ -1189,7 +1189,7 @@ class ExtraOptionsTabPage(DirectFrame):
 
     def enter(self):
         self.show()
-        self.settingsChanged = 0
+        self.settingsChanged = False
 
     def exit(self):
         self.hide()
@@ -1197,7 +1197,7 @@ class ExtraOptionsTabPage(DirectFrame):
 
     def updateSettings(self):
         if hasattr(self, 'settingsChanged'):
-            if self.settingsChanged != 0:
+            if self.settingsChanged != False:
                 base.settings.writeSettings()
 
     def unload(self):
@@ -1219,7 +1219,7 @@ class ExtraOptionsTabPage(DirectFrame):
             self.canEnableRichPresenceUpdated = bool(not self.canEnableRichPresence)
             ExtraOptionsTabPage.notify.debug(f'Cannot update Rich Presence from {self.canEnableRichPresence} to {self.canEnableRichPresenceUpdated} yet...')
         else:
-            self.settingsChanged = 1
+            self.settingsChanged = True
             wantRichPresenceNow = base.wantRichPresence
             ExtraOptionsTabPage.notify.debug(f'wantRichPresenceNow is set to {wantRichPresenceNow}...')
             base.settings.updateSetting('rich-presence', not base.wantRichPresence)

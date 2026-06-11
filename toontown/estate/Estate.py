@@ -266,7 +266,14 @@ class Estate(Place.Place):
 
     def enterMailbox(self):
         Place.Place.enterPurchase(self)
-        base.localAvatar.startSleepWatch(self.__handleFallingAsleepMailbox)
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.__handleFallingAsleepMailbox)
         self.enablePeriodTimer()
 
     def __handleFallingAsleepMailbox(self, arg):

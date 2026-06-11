@@ -192,7 +192,14 @@ class House(Place.Place):
         base.localAvatar.setTeleportAvailable(1)
         base.localAvatar.laffMeter.start()
         base.localAvatar.obscureMoveFurnitureButton(1)
-        base.localAvatar.startSleepWatch(self.__handleFallingAsleepCloset)
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.__handleFallingAsleepCloset)
         self.enablePeriodTimer()
 
     def __handleFallingAsleepCloset(self, arg):

@@ -226,7 +226,8 @@ class AvatarChoice(DirectButton):
             elif self.rejectedName != '':
                 self.nameYourToonButton.hide()
                 self.statusText['text'] = TTLocalizer.AvatarChoiceNameRejected
-            elif self.allowedName == 1 and (base.cr.allowFreeNames() or self.hasPaid):
+            # elif self.allowedName == 1 and (base.cr.allowFreeNames() or self.hasPaid):
+            elif self.allowedName and (base.cr.allowFreeNames() or self.hasPaid):
                 self.nameYourToonButton.show()
                 self.statusText['text'] = ''
             else:

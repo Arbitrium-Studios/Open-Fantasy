@@ -12,11 +12,25 @@ class ChineseTutorial(DirectFrame, FSM.FSM):
     def __init__(self, doneFunction, doneEvent=None, callback=None):
         FSM.FSM.__init__(self, 'ChineseTutorial')
         self.doneFunction = doneFunction
-        base.localAvatar.startSleepWatch(self.handleQuit)
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.handleQuit)
         self.doneEvent = doneEvent
         self.callback = callback
         self.setStateArray(['Page1', 'Page2', 'Quit'])
-        base.localAvatar.startSleepWatch(self.handleQuit)
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.handleQuit)
         DirectFrame.__init__(self,
                              pos=(-0.7,
                                   0.0,
@@ -166,7 +180,14 @@ class CheckersTutorial(DirectFrame, FSM.FSM):
     def __init__(self, doneFunction, doneEvent=None, callback=None):
         FSM.FSM.__init__(self, 'CheckersTutorial')
         self.doneFunction = doneFunction
-        base.localAvatar.startSleepWatch(self.handleQuit)
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
+        if not self.ignoreUserOptions:
+            self.settings.readSettings()
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+            if self.wantSleep:
+                base.localAvatar.startSleepWatch(self.handleQuit)
         self.doneEvent = doneEvent
         self.callback = callback
         self.setStateArray(['Page1',
