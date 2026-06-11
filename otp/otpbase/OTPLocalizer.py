@@ -27,6 +27,9 @@ class LanguageManager:
 
     def loadLocalizer(self):
         language = LanguageManager.chosenLanguage(self)
+        if language is None:
+            language = self.defaultLanguage or 'english'
+
         if language == self.defaultLanguage:
             languageAdjusted = f'{language}'.title()
             OTP_LOCALIZER_LANG_FILE = f'{self.OTP_LOCALIZER_NAME}{languageAdjusted}.py'

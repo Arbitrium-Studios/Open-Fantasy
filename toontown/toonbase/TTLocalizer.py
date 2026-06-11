@@ -27,6 +27,9 @@ class LanguageManager:
 
     def loadLocalizer(self):
         language = LanguageManager.chosenLanguage(self)
+        if language is None:
+            language = self.defaultLanguage or 'english'
+
         if language == self.defaultLanguage:
             language = f'{language}'.title()
             TT_LOCALIZER_LANG_FILE = f'{self.TT_LOCALIZER_NAME}{language}.py'
