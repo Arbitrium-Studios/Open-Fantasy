@@ -1009,13 +1009,13 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
         if self.disguisePage:
             self.disguisePage.updatePage()
 
-    def readyForPromotion(self, dept):
+    def readyForPromotion(self, dept) -> bool:
         merits = base.localAvatar.cogMerits[dept]
         totalMerits = CogDisguiseGlobals.getTotalMerits(self, dept)
         if merits >= totalMerits:
-            return 1
+            return True
         else:
-            return 0
+            return False
 
     def setCogIndex(self, index):
         self.cogIndex = index

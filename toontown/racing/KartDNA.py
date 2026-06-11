@@ -473,10 +473,10 @@ def checkNumFieldsValidity(numFields):
     return KartDNA.decalType == numFields - 1
 
 
-def checkKartFieldValidity(field):
+def checkKartFieldValidity(field) -> bool:
     if field < KartDNA.bodyType or field > KartDNA.decalType:
-        return 0
-    return 1
+        return False
+    return True
 
 
 def getNumFields():

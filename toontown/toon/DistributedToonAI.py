@@ -1526,13 +1526,13 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
             merits[dept] = 0
         self.d_setCogMerits(merits)
 
-    def readyForPromotion(self, dept):
+    def readyForPromotion(self, dept) -> bool:
         merits = self.cogMerits[dept]
         totalMerits = CogDisguiseGlobals.getTotalMerits(self, dept)
         if merits >= totalMerits:
-            return 1
+            return True
         else:
-            return 0
+            return False
 
     def b_setCogIndex(self, index):
         self.setCogIndex(index)
