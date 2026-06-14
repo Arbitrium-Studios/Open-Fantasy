@@ -636,6 +636,87 @@ def __doWaterGun(squirt, delay, fShowStun):
     return tracks
 
 
+def __doWaterBalloon(squirt: dict, delay: float, fShowStun) -> Parallel:
+    toon = squirt['toon']
+    level = squirt['level']
+    hpbonus = squirt['hpbonus']
+    target = squirt['target']
+    suit = target[0]['suit']
+    hp = target[0]['hp']
+    kbbonus = target[0]['kbbonus']
+    died = target[0]['died']
+    revived = target[0]['revived']
+    leftSuits = target[0]['leftSuits']
+    rightSuits = target[0]['rightSuits']
+    battle = squirt['battle']
+    suitPos = suit.getPos(battle)
+    origHpr = toon.getHpr(battle)
+    hitSuit = hp > 0
+    scale = sprayScales[level]
+    from .MovieThrow import tPieLeavesHand, tPieHitsSuit, tSuitDodges, ratioMissToHit, tPieShrink, pieFlyTaskName, __propPreflight, __showProp, __billboardProp, __suitMissPoint, __piePreMiss, __pieMissLerpCallback
+    tracks: Parallel = Parallel()
+    toonTrack: Sequence = Sequence(
+        Wait(delay),
+        Func(toon.headsUp, battle, suitPos),
+        ActorInterval(toon, 'throw'),
+        Func(toon.loop, 'neutral'),
+        Func(toon.setHpr, battle, origHpr)
+    )
+    tracks.append(toonTrack)
+    soundTrack: Track = Track((2.6, SoundInterval(globalBattleSoundCache.getSound('AA_pie_throw_only.ogg'), node=toon)))
+    if hitSuit:
+        soundTrack.append((tPieHitsSuit, SoundInterval(globalBattleSoundCache.getSound('SA_watercooler_spray_only.ogg'), node=toon)))
+    tracks.append(soundTrack)
+    from toontown.cogdominium.CogdoMazeGameGlobals import GagColors
+    color: tuple[float, float, float, float] = random.choice(GagColors)
+    # Mock the globalPropPool.getProp() method here, as I am not fond of moving the water balloon model to another place or overhauling our code just to make the method work.
+    if 'waterBalloon' not in globalPropPool.props:
+        prop = loader.loadModel('phase_5/models/cogdominium/tt_m_ara_cmg_waterBalloon')
+        prop.setName('waterBalloon')
+        globalPropPool.storeProp('waterBalloon', prop)
+    pie = globalPropPool.props['waterBalloon'].copyTo(hidden)
+    pie2 = MovieUtil.copyProp(pie)
+    pies = [pie, pie2]
+    pie.setColorScale(color)
+    pie2.setColorScale(color)
+    hands = toon.getRightHands()
+    splat = globalPropPool.getProp('splash-from-splat')
+    splat.setScale(sprayScales[level])
+    pieTrack: Sequence = Sequence(
+        Wait(delay),
+        Func(MovieUtil.showProps, pies, hands),
+        Parallel(
+            LerpScaleInterval(pie, 1.0, pie.getScale(), startScale=MovieUtil.PNT3_NEARZERO),
+            LerpScaleInterval(pie2, 1.0, pie2.getScale(), startScale=MovieUtil.PNT3_NEARZERO)
+        ),
+        Func(battle.movie.needRestoreRenderProp, pies[0]),
+        Wait(tPieLeavesHand - 1.0),
+        Func(__propPreflight, pies, suit, toon, battle)
+    )
+    if hitSuit:
+        pieTrack.append(LerpPosInterval(pie, tPieHitsSuit - tPieLeavesHand, pos=MovieUtil.avatarFacePoint(suit, other=battle), name=pieFlyTaskName, other=battle))
+        pieTrack.append(Func(MovieUtil.removeProps, pies))
+        pieTrack.append(Func(battle.movie.clearRenderProp, pies[0]))
+        pieTrack.append(Func(__showProp, splat, suit, Point3(0, 0, suit.getHeight())))
+        pieTrack.append(Func(__billboardProp, splat))
+        pieTrack.append(ActorInterval(splat, 'splash-from-splat'))
+        pieTrack.append(Func(MovieUtil.removeProp, splat))
+    else:
+        missDict: dict = {}
+        if squirt['sidestep']:
+            suitPoint = MovieUtil.avatarFacePoint(suit, other=battle)
+        else:
+            suitPoint = __suitMissPoint(suit, other=battle)
+        pieTrack.append(Func(__piePreMiss, missDict, pie, suitPoint, battle))
+        pieTrack.append(LerpFunctionInterval(__pieMissLerpCallback, extraArgs=[missDict], duration=(tPieHitsSuit - tPieLeavesHand) * ratioMissToHit))
+        pieTrack.append(Func(MovieUtil.removeProps, pies))
+        pieTrack.append(Func(battle.movie.clearRenderProp, pies[0]))
+    tracks.append(pieTrack)
+    if (hp > 0 or delay <= 0.0) and suit:
+        tracks.append(__getSuitTrack(suit, tPieHitsSuit, tSuitDodges, hp, hpbonus, kbbonus, 'squirt-small-react', died, leftSuits, rightSuits, battle, toon, fShowStun, revived=revived))
+    return tracks
+
+
 def __doSeltzerBottle(squirt, delay, fShowStun):
     toon = squirt['toon']
     level = squirt['level']
