@@ -80,7 +80,7 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
         self._wantBarrelRoom = config.GetBool('cogdo-want-barrel-room', 0)
         self.barrelRoom = None
         self.responses = {}
-        self.ignoreResponses = 0
+        self.ignoreResponses: bool = False
         self.ignoreElevatorDone = 0
         self.ignoreReserveJoinDone = 0
         self.toonIds = copy.copy(elevator.seats)
@@ -259,14 +259,14 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
         for toon in self.toons:
             self.responses[toon] = 0
 
-        self.ignoreResponses = 0
+        self.ignoreResponses = False
 
     def __allToonsResponded(self):
         for toon in self.toons:
             if self.responses[toon] == 0:
                 return 0
 
-        self.ignoreResponses = 1
+        self.ignoreResponses = True
         return 1
 
     def getZoneId(self):
@@ -381,7 +381,7 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
 
     def elevatorDone(self):
         toonId = self.air.getAvatarIdFromSender()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             return
         elif self.toons.count(toonId) == 0:
             self.air.writeServerEvent(
@@ -415,7 +415,7 @@ class DistributedCogdoInteriorAI(DistributedObjectAI.DistributedObjectAI):
 
     def reserveJoinDone(self):
         toonId = self.air.getAvatarIdFromSender()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             return
         elif self.toons.count(toonId) == 0:
             self.air.writeServerEvent(

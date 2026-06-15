@@ -46,7 +46,7 @@ class DistributedBattleBldgAI(DistributedBattleBaseAI.DistributedBattleBaseAI):
 
     def faceOffDone(self):
         toonId = self.air.getAvatarIdFromSender()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             self.notify.debug('faceOffDone() - ignoring toon: %d' % toonId)
             return
         else:

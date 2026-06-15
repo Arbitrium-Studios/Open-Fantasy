@@ -66,7 +66,7 @@ class DistributedBattleBaseAI(
         self.movieHasPlayed = 0
         self.rewardHasPlayed = 0
         self.movieRequested = 0
-        self.ignoreResponses = 0
+        self.ignoreResponses: bool = False
         self.ignoreAdjustingResponses = 0
         self.taskNames = []
         self.exitedToons = []
@@ -838,7 +838,7 @@ class DistributedBattleBaseAI(
 
     def toonRequestRun(self):
         toonId = self.air.getAvatarIdFromSender()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             self.notify.debug('ignoring response from toon: %d' % toonId)
             return
         self.notify.debug('toonRequestRun(%d)' % toonId)
@@ -905,22 +905,22 @@ class DistributedBattleBaseAI(
         for t in self.toons:
             self.responses[t] = 0
 
-        self.ignoreResponses = 0
+        self.ignoreResponses = False
 
-    def allToonsResponded(self):
+    def allToonsResponded(self) -> bool:
         for t in self.toons:
             if self.responses[t] == 0:
-                return 0
+                return False
 
-        self.ignoreResponses = 1
-        return 1
+        self.ignoreResponses = True
+        return True
 
     def __allPendingActiveToonsResponded(self):
         for t in self.pendingToons + self.activeToons:
             if self.responses[t] == 0:
                 return 0
 
-        self.ignoreResponses = 1
+        self.ignoreResponses = True
         return 1
 
     def __allActiveToonsResponded(self):
@@ -928,12 +928,12 @@ class DistributedBattleBaseAI(
             if self.responses[t] == 0:
                 return 0
 
-        self.ignoreResponses = 1
+        self.ignoreResponses = True
         return 1
 
     def __removeResponse(self, toonId):
         del self.responses[toonId]
-        if self.ignoreResponses == 0 and len(self.toons) > 0:
+        if self.ignoreResponses == False and len(self.toons) > 0:
             currStateName = self.fsm.getCurrentState().getName()
             if currStateName == 'WaitForInput':
                 if self.__allActiveToonsResponded():
@@ -1037,7 +1037,7 @@ class DistributedBattleBaseAI(
 
     def timeout(self):
         toonId = self.air.getAvatarIdFromSender()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             self.notify.debug('timeout() - ignoring toon: %d' % toonId)
             return
         else:
@@ -1061,7 +1061,7 @@ class DistributedBattleBaseAI(
 
     def movieDone(self):
         toonId = self.air.getAvatarIdFromSender()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             self.notify.debug('movieDone() - ignoring toon: %d' % toonId)
             return
         else:
@@ -1087,7 +1087,7 @@ class DistributedBattleBaseAI(
     def rewardDone(self):
         toonId = self.air.getAvatarIdFromSender()
         stateName = self.fsm.getCurrentState().getName()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             self.notify.debug('rewardDone() - ignoring toon: %d' % toonId)
             return
         else:
@@ -1144,7 +1144,7 @@ class DistributedBattleBaseAI(
 
     def requestAttack(self, track, level, av):
         toonId = self.air.getAvatarIdFromSender()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             self.notify.debug('requestAttack() - ignoring toon: %d' % toonId)
             return
         else:
@@ -1259,7 +1259,7 @@ class DistributedBattleBaseAI(
 
     def requestPetProxy(self, av):
         toonId = self.air.getAvatarIdFromSender()
-        if self.ignoreResponses == 1:
+        if self.ignoreResponses:
             self.notify.debug('requestPetProxy() - ignoring toon: %d' % toonId)
             return
         else:
@@ -1443,7 +1443,7 @@ class DistributedBattleBaseAI(
 
     def __serverTimedOut(self):
         self.notify.debug('wait for input timed out on server')
-        self.ignoreResponses = 1
+        self.ignoreResponses = True
         self.__requestMovie(timeout=1)
 
     def enterMakeMovie(self):
@@ -1470,12 +1470,12 @@ class DistributedBattleBaseAI(
 
     def __serverMovieDone(self):
         self.notify.debug('movie timed out on server')
-        self.ignoreResponses = 1
+        self.ignoreResponses = True
         self.__movieDone()
 
     def serverRewardDone(self):
         self.notify.debug('reward timed out on server')
-        self.ignoreResponses = 1
+        self.ignoreResponses = True
         self.handleRewardDone()
 
     def handleRewardDone(self):
@@ -1492,7 +1492,7 @@ class DistributedBattleBaseAI(
             return
         self.movieHasBeenMade = 0
         self.movieHasPlayed = 1
-        self.ignoreResponses = 1
+        self.ignoreResponses = True
         needUpdate = 0
         toonHpDict = {}
         for toon in self.activeToons:
@@ -2046,7 +2046,7 @@ class DistributedBattleBaseAI(
                     toon.doId)
             if self.activeToons.count(toon) == 0:
                 self.activeToons.append(toon)
-                self.ignoreResponses = 0
+                self.ignoreResponses = False
                 self.sendEarnedExperience(toon)
             else:
                 self.notify.warning(
