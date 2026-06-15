@@ -153,6 +153,7 @@ def getSuitVitals(name: str, level=-1):
         adict['name'] = name
         adict['animName'] = SuitAttacks[name][0]
         adict['hp'] = a.hp[level]
+        adict['effects'] = a.effects
         adict['acc'] = a.acc[level]
         adict['freq'] = a.freq[level]
         adict['group'] = a.targets
@@ -212,6 +213,7 @@ def getSuitAttack(suitName: str, suitLevel: int, attackNum: int = -1) -> dict:
     adict['animName'] = SuitAttacks[name][0]
     # TODO: Get around to adding status effects.
     adict['hp'] = attack.hp[suitLevel]
+    adict['effects'] = attack.effects
     adict['acc'] = attack.acc[suitLevel]
     adict['freq'] = attack.freq[suitLevel]
     adict['group'] = attack.targets
@@ -230,20 +232,20 @@ SuitAttributesDict: dict[str, SuitAttributes] = {'f': SuitAttributes(name=TTLoca
                      freq=(50, 30, 10, 5, 5),
                      acc=(35, 40, 45, 50, 55),
                      attacks=(SuitAttack('PoundKey',
-                                            hp=(2, 2, 3, 4, 6),
-                                            acc=(75, 75, 80, 80, 90),
-                                            freq=(30, 35, 40, 45, 50),
-                                            targets=ATK_TGT_SINGLE),
-                                 SuitAttack('Shred',
-                                            hp=(3, 4, 5, 6, 7),
-                                            acc=(50, 55, 60, 65, 70),
-                                            freq=(10, 15, 20, 25, 30),
-                                            targets=ATK_TGT_SINGLE),
-                                 SuitAttack('ClipOnTie',
-                                            hp=(1, 1, 2, 2, 3),
-                                            acc=(75, 80, 85, 90, 95),
-                                            freq=(60, 50, 40, 30, 20),
-                                            targets=ATK_TGT_SINGLE))),
+                                         hp=(2, 2, 3, 4, 6),
+                                         acc=(75, 75, 80, 80, 90),
+                                         freq=(30, 35, 40, 45, 50),
+                                         targets=ATK_TGT_SINGLE),
+                              SuitAttack('Shred',
+                                         hp=(3, 4, 5, 6, 7),
+                                         acc=(50, 55, 60, 65, 70),
+                                         freq=(10, 15, 20, 25, 30),
+                                         targets=ATK_TGT_SINGLE),
+                              SuitAttack('ClipOnTie',
+                                         hp=(1, 1, 2, 2, 3),
+                                         acc=(75, 80, 85, 90, 95),
+                                         freq=(60, 50, 40, 30, 20),
+                                         targets=ATK_TGT_SINGLE))),
  'p': SuitAttributes(name=TTLocalizer.SuitPencilPusher,
                      singularname=TTLocalizer.SuitPencilPusherS,
                      pluralname=TTLocalizer.SuitPencilPusherP,
@@ -668,7 +670,8 @@ SuitAttributesDict: dict[str, SuitAttributes] = {'f': SuitAttributes(name=TTLoca
                                           freq=(25, 25, 25, 25, 25),
                                           targets=ATK_TGT_SINGLE),
                                SuitAttack('SensoryOverload',  # This move would reduce a Toon's accuracy.
-                                          hp=(0, 0, 0, 0, 0), # This is where the accuracy reduction should probably go.
+                                          hp=(0, 0, 0, 0, 0), # A miss animation will play regardless of whether or not the attack hits.
+                                          effects=(StatusEffects.AccuracyModifier(2, -10),),
                                           acc=(75, 75, 75, 75, 75),
                                           freq=(0, 0, 0, 0, 0),
                                           targets=ATK_TGT_SINGLE))),

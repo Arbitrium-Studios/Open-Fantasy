@@ -1,9 +1,10 @@
+from copy import copy # For Status Effects.
 from .BattleBase import *
 from .DistributedBattleAI import *
 from toontown.toonbase.ToontownBattleGlobals import *
 import random
 from toontown.suit import DistributedSuitBaseAI
-from . import SuitBattleGlobals, BattleExperienceAI
+from . import SuitBattleGlobals, BattleExperienceAI, StatusEffects
 from toontown.toon import NPCToons
 from toontown.pets import PetTricks, DistributedPetProxyAI
 from direct.showbase.PythonUtil import lerp
@@ -50,6 +51,10 @@ class BattleCalculatorAI:
         self.tutorialFlag = tutorialFlag
         self.trainTrapTriggered = False
 
+        # TODO: Get correct data types of Toon and Cog keys; Any is a placeholder.
+        self.toonStatusEffects: dict[any, list[StatusEffects.StatusEffect]] = {}
+        self.suitStatusEffects: dict[any, list[StatusEffects.StatusEffect]] = {}
+
     def setSkillCreditMultiplier(self, mult):
         self.__skillCreditMultiplier = mult
 
@@ -59,6 +64,25 @@ class BattleCalculatorAI:
     def cleanup(self):
         self.battle = None
         return
+    
+    def getAllRelevantEffects(self, avId, effectType: type, *, suit: bool) -> tuple[StatusEffects.StatusEffect, ...]:
+        '''
+        Find all matching status effects and return them as a tuple.
+
+        Parameters:
+            avId: The avatar ID of the one whose effects are being checked.
+            effectType (type): The StatusEffect to match.
+            suit (bool): Whether or not we are checking a Cog or Toon, which will determine which dict we look at.
+        
+        Returns:
+            out (tuple): Returns a tuple of all matching effects an avatar has.
+        '''
+        matches: tuple[StatusEffects.StatusEffect, ...] = ()
+        for effect in (self.suitStatusEffects if suit else self.toonStatusEffects)[avId]:
+            if isinstance(effect, effectType):
+                matches += (effect,)
+
+        return matches
 
     def __calcToonAtkHit(self, attackIndex, atkTargets):
         if len(atkTargets) == 0:
@@ -1177,6 +1201,23 @@ class BattleCalculatorAI:
                         atkInfo = SuitBattleGlobals.getSuitAttack(
                             theSuit.dna.name, theSuit.getLevel(), atkType)
                         result = atkInfo['hp']
+                        for effect in self.getAllRelevantEffects(attack[SUIT_ID_COL], StatusEffects.DamageModifier, suit=True):
+                            if isinstance(effect.damageMod, int):
+                                result += effect.damageMod
+                            else:
+                                result *= effect.damageMod
+
+                        for effect in self.getAllRelevantEffects(toonId, StatusEffects.DefenseModifier, suit=False):
+                            if isinstance(effect.defenseMod, int):
+                                result += effect.defenseMod
+                            else:
+                                result *= effect.defenseMod
+
+                        # Also apply status effects here.
+                        for effect in atkInfo['effects']:
+                            appendEffect: StatusEffects.StatusEffect = copy(effect) # Copy the existing effect.  On later lines, we may have to modify it.
+                            self.toonStatusEffects[toonId].append(appendEffect)
+
             targetIndex = self.battle.activeToons.index(toonId)
             attack[SUIT_HP_COL][targetIndex] = result
 
@@ -1383,6 +1424,19 @@ class BattleCalculatorAI:
         self.__calculateToonAttacks()
         self.__updateLureTimeouts()
         self.__calculateSuitAttacks()
+        # Tick down the status effect rounds for Toons and Cogs while also affecting the effect by turn if needed.
+        for toonId in self.toonStatusEffects.keys():
+            for i in range(len(self.toonStatusEffects[toonId]) - 1, -1, -1):
+                self.toonStatusEffects[toonId][i].decrementRounds()
+                if self.toonStatusEffects[toonId][i].currRounds == 0: # Is the effect expired?
+                    del self.toonStatusEffects[toonId][i] # Delete it.
+        
+        for suitId in self.suitStatusEffects.keys():
+            for i in range(len(self.suitStatusEffects[suitId]) - 1, -1, -1):
+                self.suitStatusEffects[suitId][i].decrementRounds()
+                if self.suitStatusEffects[suitId][i].currRounds == 0: # Is the effect expired?
+                    del self.suitStatusEffects[suitId][i] # Delete it.
+
         if toonsHit == 1:
             BattleCalculatorAI.toonsAlwaysHit = 0
         if cogsMiss == 1:

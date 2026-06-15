@@ -464,6 +464,7 @@ class DistributedBattleBaseAI(
         self.suits.append(suit)
         suit.battleTrap = NO_TRAP
         self.numSuitsEver += 1
+        self.battleCalc.suitStatusEffects[suit.doId] = []
 
     def __joinSuit(self, suit):
         self.joiningSuits.append(suit)
@@ -586,6 +587,7 @@ class DistributedBattleBaseAI(
             self.toonOrigQuests[avId] = flattenedQuests
         if avId not in self.toonItems:
             self.toonItems[avId] = ([], [])
+        self.battleCalc.toonStatusEffects[avId] = []
         return 1
 
     def __joinToon(self, avId, pos):
@@ -742,6 +744,7 @@ class DistributedBattleBaseAI(
             self.luredSuits.remove(suit)
         self.suitGone = 1
         del suit.battleTrap
+        del self.battleCalc.suitStatusEffects[suit.doId]
 
     def __removeToon(self, toonId, userAborted=0):
         self.notify.debug('__removeToon(%d)' % toonId)
@@ -825,6 +828,7 @@ class DistributedBattleBaseAI(
                     'killing mem leak from temporary DistributedToonAI %d' %
                     toonId)
                 toon.deleteDummy()
+        del self.battleCalc.toonStatusEffects[toonId]
         return
 
     def getToon(self, toonId):
