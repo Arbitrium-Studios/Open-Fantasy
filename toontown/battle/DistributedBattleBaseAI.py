@@ -1802,7 +1802,7 @@ class DistributedBattleBaseAI(
                 adict = getSuitAttack(
                     suit.getStyleName(), suit.getLevel(), attack)
                 hps = self.suitAttacks[i][SUIT_HP_COL]
-                if adict['group'] == ATK_TGT_GROUP:
+                if adict['group'].numTargets == 'all':
                     for activeToon in self.activeToons:
                         toon = self.getToon(activeToon)
                         if toon is not None:
@@ -1821,7 +1821,7 @@ class DistributedBattleBaseAI(
                                         toonHpDict[toon.doId][2] = 1
                                     toonHpDict[toon.doId][1] += hp
 
-                elif adict['group'] == ATK_TGT_SINGLE:
+                elif adict['group'].numTargets == 1:
                     targetIndex = self.suitAttacks[i][SUIT_TGT_COL]
                     if targetIndex >= len(self.activeToons):
                         self.notify.warning(

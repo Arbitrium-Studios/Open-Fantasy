@@ -884,7 +884,7 @@ class Movie(DirectObject.DirectObject):
                 adict['playByPlayText'] = self.playByPlayText
                 adict['taunt'] = sa[SUIT_TAUNT_COL]
                 hps = sa[SUIT_HP_COL]
-                if adict['group'] == ATK_TGT_GROUP:
+                if adict['group'].numTargets == 'all':
                     targets = []
                     for t in toons:
                         if t != -1:
@@ -906,7 +906,7 @@ class Movie(DirectObject.DirectObject):
                         adict['target'] = targets
                     else:
                         targetGone = 1
-                elif adict['group'] == ATK_TGT_SINGLE:
+                elif adict['group'].numTargets == 1:
                     targetIndex = sa[SUIT_TGT_COL]
                     targetId = toons[targetIndex]
                     target = self.battle.findToon(targetId)
