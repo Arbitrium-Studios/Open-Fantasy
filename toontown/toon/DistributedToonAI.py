@@ -2759,15 +2759,22 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI,
     def setNumPies(self, numPies):
         self.numPies = numPies
 
+    def getNumPies(self):
+        return self.numPies
+
     def b_setPieType(self, pieType):
-        self.setPieType(pieType)
         self.d_setPieType(pieType)
+        self.setPieType(pieType)
 
     def d_setPieType(self, pieType):
         self.sendUpdate('setPieType', [pieType])
 
     def setPieType(self, pieType):
         self.pieType = pieType
+        return self.pieType
+
+    def getPieType(self):
+        return self.pieType
 
     def d_setTrophyScore(self, score):
         self.sendUpdate('setTrophyScore', [score])

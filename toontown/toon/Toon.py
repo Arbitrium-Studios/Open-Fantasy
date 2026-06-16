@@ -3351,6 +3351,7 @@ class Toon(Avatar.Avatar, ToonHead):
         if self.pieModel is None:
             self.__pieModelType = self.pieType
             pieName = ToontownBattleGlobals.pieNames[self.pieType]
+
             self.pieModel = BattleProps.globalPropPool.getProp(pieName)
             self.pieScale = self.pieModel.getScale()
         return self.pieModel
@@ -3361,6 +3362,7 @@ class Toon(Avatar.Avatar, ToonHead):
         from toontown.battle import MovieUtil
         pie = self.getPieModel()
         pieName = ToontownBattleGlobals.pieNames[self.pieType]
+
         pieType = BattleProps.globalPropPool.getPropType(pieName)
         animPie = Sequence()
         pingpongPie = Sequence()
@@ -3385,6 +3387,7 @@ class Toon(Avatar.Avatar, ToonHead):
         pie = self.getPieModel()
         flyPie = pie.copyTo(NodePath('a'))
         pieName = ToontownBattleGlobals.pieNames[self.pieType]
+
         pieType = BattleProps.globalPropPool.getPropType(pieName)
         animPie = Sequence()
         if pieType == 'actor':
@@ -3447,6 +3450,7 @@ class Toon(Avatar.Avatar, ToonHead):
         from toontown.toonbase import ToontownBattleGlobals
         from toontown.battle import BattleProps
         pieName = ToontownBattleGlobals.pieNames[self.pieType]
+
         splatName = 'splat-%s' % pieName
         if pieName == 'lawbook':
             splatName = 'dust'

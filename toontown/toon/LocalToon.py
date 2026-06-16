@@ -134,9 +134,9 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.tossPieStart = None
             self.__presentingPie = 0
             self.__pieSequence = 0
-            self.wantBattles = base.config.GetBool('want-battles', 1)
-            self.seeGhosts = base.config.GetBool('see-ghosts', 0)
-            wantNameTagAvIds = base.config.GetBool('want-nametag-avids', 0)
+            self.wantBattles = base.config.GetBool('want-battles', True)
+            self.seeGhosts = base.config.GetBool('see-ghosts', False)
+            wantNameTagAvIds = base.config.GetBool('want-nametag-avids', False)
             if wantNameTagAvIds:
                 messenger.send('nameTagShowAvId', [])
                 base.idTags = 1
@@ -147,7 +147,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.ticker = 0
             self.glitchOkay = 1
             self.tempGreySpacing = 0
-            self.wantStatePrint = base.config.GetBool('want-statePrint', 0)
+            self.wantStatePrint = base.config.GetBool('want-statePrint', False)
             self.__gardeningGui = None
             self.__gardeningGuiFake = None
             self.__shovelButton = None

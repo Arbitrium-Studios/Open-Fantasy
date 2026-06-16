@@ -1,6 +1,7 @@
 from .ToontownGlobals import *
 import math
 from . import TTLocalizer
+
 BattleCamFaceOffFov = 80.0
 BattleCamFaceOffPos = Point3(0, -10, 4)
 BattleCamDefaultPos = Point3(0, -8.6, 16.5)
@@ -468,6 +469,7 @@ DLF_CFO = 8
 DLF_SUPERVISOR = 16
 DLF_VIRTUAL = 32
 DLF_REVIVES = 64
+
 pieNames = ['tart',
             'fruitpie-slice',
             'creampie-slice',
@@ -476,6 +478,7 @@ pieNames = ['tart',
             'birthday-cake',
             'wedding-cake',
             'lawbook']
+
 AvProps = (('feather',
             'bullhorn',
             'lipstick',

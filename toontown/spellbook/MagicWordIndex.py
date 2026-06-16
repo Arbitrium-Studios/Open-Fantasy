@@ -799,7 +799,7 @@ class SetMoney(MagicWord):
 class SetBankMoney(MagicWord):
     desc = "Sets the target's current amount of jellybeans in the bank."
     advancedDesc = "Sets the target's current amount of jellybeans in the bank. If no args are given give max beans."
-    aliases = ['setbank', 'bank', 'bankmoney', ]
+    aliases = ['setbank', 'bank', 'bankmoney']
     arguments = [('money', int, False, 30000)]
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
@@ -816,54 +816,89 @@ class SetBankMoney(MagicWord):
 class SetMaxBankMoney(MagicWord):
     desc = "Sets the target's max amount of jellybeans in the bank."
     advancedDesc = "Sets the target's max amount of jellybeans in the bank."
-    aliases = ['setmaxbank', 'maxbank', 'maxbankmoney', ]
-    arguments = [('money', int, True)]
+    aliases = ['setmaxbank', 'maxbank', 'maxbankmoney']
+    arguments = [('money', int, False, ToontownGlobals.DefaultMaxBankMoney)]
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
 
     def handleWord(self, invoker, avId, toon, *args):
 
-        if len(args) >= 1:
-            count = int(args[0])
-            toon.b_setMaxBankMoney(count)
-            response = "Max bank money set to %s" % (count)
-
+        DefaultMaxBankMoney = ToontownGlobals.DefaultMaxBankMoney
+        if len(args) == 0:
+            count = DefaultMaxBankMoney
         else:
-            response = "Max bank money is %s" % (toon.getMaxBankMoney())
+            count = int(args[0])
+
+        if count > DefaultMaxBankMoney:
+            count = DefaultMaxBankMoney
+
+        toon.b_setMaxBankMoney(count)
+        response = "Max bank money set to %s" % (count)
+
         return response
 
 
 class GivePies(MagicWord):
     desc = 'Gives the target the specified pie type.'
     aliases = ['give', 'pie', 'pies', 'givepie']
-    arguments = [('type', str, True)]
+    arguments = [('type', str, True), ('amount', int, False, ToontownGlobals.FullPies)]
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'DEVELOPER'
 
     def handleWord(self, invoker, avId, toon, *args):
-        # Give ourselves a pie.  Or four.
+        # Give ourselves a pie (or 65,535).
+
         count = 0
         _type = None
-        if len(args) == 1:
-            count = 1
-        for arg in args[1:]:
+        checkPieName = None
+
+        try:
             from toontown.toonbase import ToontownBattleGlobals
-            if arg in ToontownBattleGlobals.pieNames:
-                _type = ToontownBattleGlobals.pieNames.index(arg)
+
+            checkPieName = None
+            if f'{args[0]}'.isdigit():
+                argsListItem = int(args[0])
+                argsList = [argsListItem]
+                pieName = [pie for indexed_pies, pie in enumerate(ToontownBattleGlobals.pieNames) if indexed_pies in argsList]
+                checkPieName = pieName[0]
             else:
-                try:
-                    count = int(arg)
-                except BaseException:
-                    response = "Invalid pie argument: %s" % (arg)
+                checkPieName = args[0]
+
+            if checkPieName in ToontownBattleGlobals.pieNames:
+                _type = ToontownBattleGlobals.pieNames.index(checkPieName)
+
+            if len(args) == 1:
+                count = ToontownGlobals.FullPies
+            else:
+                count = int(args[1])
+        except BaseException as e:
+            response = "Invalid pie argument: {}".format(args[0])
+            print_response = f'{response}\n\n{e}\n'
+            self.notify.error(print_response)
 
         if _type is not None:
-            toon.b_setPieType(_type)
-        toon.b_setNumPies(toon.numPies + count)
-        response = 'Set pies to {0} with num of {1}'.format(
-            toon.getPieType(), toon.getNumPies())
-        
-        # if _type is not None:
-        #         return "Invalid Pie type!"
+            pieType = toon.b_setPieType(_type)
+            if checkPieName is None:
+                checkPieName = _type
+
+        toon.b_setNumPies(count)
+
+        if checkPieName is None:
+            checkPieName = toon.getPieType()
+
+        if '-' in checkPieName:
+            checkPieName = f'{checkPieName}'.title()
+            checkPieName = checkPieName.replace('-', ' ')
+
+        if count != 1:
+            checkPieName = f'{checkPieName}s'
+            if count == ToontownGlobals.FullPies:
+                count = f'infinite'
+            if count == 0:
+                count = f'no'
+
+        response = f'You now have {count} {checkPieName}!'
+
         return response
 
 

@@ -795,6 +795,7 @@ class DistributedCogThiefGame(DistributedMinigame):
         pie.setScale(0.9)
         flyPie = pie.copyTo(NodePath('a'))
         pieName = ToontownBattleGlobals.pieNames[toon.pieType]
+
         pieType = BattleProps.globalPropPool.getPropType(pieName)
         animPie = Sequence()
         if pieType == 'actor':
