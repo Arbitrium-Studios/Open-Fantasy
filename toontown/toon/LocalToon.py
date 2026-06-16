@@ -79,38 +79,47 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             chatMgr = ToontownChatManager.ToontownChatManager(cr, self)
             talkAssistant = TTTalkAssistant.TTTalkAssistant()
             LocalAvatar.LocalAvatar.__init__(self, cr, chatMgr, talkAssistant, passMessagesThrough=True)
+            self.wantPlayerFriends = base.config.GetBool('want-player-friends', False)
+            self.wantNewsButton = base.config.GetBool('want-news-button', False)
             self.soundRun = base.loader.loadSfx('phase_3.5/audio/sfx/AV_footstep_runloop.ogg')
             self.soundWalk = base.loader.loadSfx('phase_3.5/audio/sfx/AV_footstep_walkloop.ogg')
             self.soundWhisper = base.loader.loadSfx('phase_3.5/audio/sfx/GUI_whisper_3.ogg')
             self.soundPhoneRing = base.loader.loadSfx('phase_3.5/audio/sfx/telephone_ring.ogg')
             self.soundSystemMessage = base.loader.loadSfx('phase_3/audio/sfx/clock03.ogg')
             self.positionExaminer = PositionExaminer.PositionExaminer()
-            friendsGui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
-            friendsButtonNormal = friendsGui.find('**/FriendsBox_Closed')
-            friendsButtonPressed = friendsGui.find('**/FriendsBox_Rollover')
-            friendsButtonRollover = friendsGui.find('**/FriendsBox_Rollover')
+            if self.wantPlayerFriends:
+                friendsGui = loader.loadModel('phase_3.5/models/gui/friendslist_gui')
+                friendsButtonNormal = friendsGui.find('**/FriendsBox_Closed')
+                friendsButtonPressed = friendsGui.find('**/FriendsBox_Rollover')
+                friendsButtonRollover = friendsGui.find('**/FriendsBox_Rollover')
+            else:
+                friendsGui = None
+                self.bFriendsList = None
             newScale = oldScale = 0.8
             if WantNewsPage:
                 newScale = oldScale * ToontownGlobals.NewsPageScaleAdjust
-            self.bFriendsList = DirectButton(image=(friendsButtonNormal, friendsButtonPressed, 
-                                                    friendsButtonRollover), 
-                                             relief=None,
-                                             pos=(-0.14, 0, -0.13),
-                                             parent=base.a2dTopRight,
-                                             scale=newScale, 
-                                             text=('', TTLocalizer.FriendsListLabel,
-                                                   TTLocalizer.FriendsListLabel),
-                                             text_scale=0.09, text_fg=Vec4(1, 1, 1, 1),
-                                             text_shadow=Vec4(0, 0, 0, 1),
-                                             text_pos=(0, -0.18),
-                                             text_font=ToontownGlobals.getInterfaceFont(), 
-                                             command=self.sendFriendsListEvent)
-            self.bFriendsList.hide()
+            if self.wantPlayerFriends:
+                self.bFriendsList = DirectButton(image=(friendsButtonNormal, friendsButtonPressed, 
+                                                        friendsButtonRollover), 
+                                                relief=None,
+                                                pos=(-0.14, 0, -0.13),
+                                                parent=base.a2dTopRight,
+                                                scale=newScale, 
+                                                text=('', TTLocalizer.FriendsListLabel,
+                                                    TTLocalizer.FriendsListLabel),
+                                                text_scale=0.09, text_fg=Vec4(1, 1, 1, 1),
+                                                text_shadow=Vec4(0, 0, 0, 1),
+                                                text_pos=(0, -0.18),
+                                                text_font=ToontownGlobals.getInterfaceFont(), 
+                                                command=self.sendFriendsListEvent)
+                self.bFriendsList.hide()
             self.friendsListButtonActive = 0
             self.friendsListButtonObscured = 0
             self.moveFurnitureButtonObscured = 0
             self.clarabelleButtonObscured = 0
-            friendsGui.removeNode()
+
+            if self.wantPlayerFriends:
+                friendsGui.removeNode()
             self.__furnitureGui = None
             self.__clarabelleButton = None
             self.__clarabelleFlash = None
@@ -175,7 +184,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             if not hasattr(base.cr, 'lastLoggedIn'):
                 base.cr.lastLoggedIn = self.cr.toontownTimeManager.convertStrToToontownTime('')
             self.setLastTimeReadNews(base.cr.lastLoggedIn)
-            self.acceptingNewFriends = base.settings.getSetting('accepting-new-friends', True) and base.config.GetBool('accepting-new-friends-default', True)
+            self.acceptingNewFriends = base.settings.getSetting('accepting-new-friends', False) and base.config.GetBool('accepting-new-friends-default', False)
             self.acceptingNonFriendWhispers = base.settings.getSetting('accepting-non-friend-whispers', True) and base.config.GetBool('accepting-non-friend-whispers-default', True)
             self.physControls.event.addAgainPattern('again%in')
             self.oldPos = None
@@ -261,7 +270,8 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         if hasattr(self, 'purchaseButton'):
             self.purchaseButton.destroy()
             del self.purchaseButton
-        self.newsButtonMgr.request('Off')
+        if self.wantNewsButton:
+            self.newsButtonMgr.request('Off')
         base.whiteList.unload()
         self.book.unload()
         del self.optionsPage
@@ -298,8 +308,9 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             QuestParser.clear()
             DistributedToon.DistributedToon.delete(self)
             LocalAvatar.LocalAvatar.delete(self)
-            self.bFriendsList.destroy()
-            del self.bFriendsList
+            if self.wantPlayerFriends:
+                self.bFriendsList.destroy()
+                del self.bFriendsList
             if self.__pieButton:
                 self.__pieButton.destroy()
                 self.__pieButton = None
@@ -332,8 +343,11 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         return
 
     def initInterface(self):
-        self.newsButtonMgr = NewsPageButtonManager.NewsPageButtonManager()
-        self.newsButtonMgr.request('Hidden')
+        if self.wantNewsButton:
+            self.newsButtonMgr = NewsPageButtonManager.NewsPageButtonManager()
+            self.newsButtonMgr.request('Hidden')
+        else:
+            self.newsButtonMgr = None
         self.book = ShtikerBook.ShtikerBook('bookDone')
         self.book.load()
         self.book.hideButton()
@@ -1049,8 +1063,9 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.__clarabelleButton['text'] = ['', TTLocalizer.CatalogNewCatalogButton, TTLocalizer.CatalogNewCatalogButton]
         if not self.mailboxNotify and not self.awardNotify and self.catalogNotify == ToontownGlobals.OldItems and (self.simpleMailNotify != ToontownGlobals.NoItems or self.inviteMailNotify != ToontownGlobals.NoItems):
             self.__clarabelleButton['text'] = ['', TTLocalizer.MailNewMailButton, TTLocalizer.MailNewMailButton]
-        if self.newsButtonMgr.isNewIssueButtonShown():
-            self.clarabelleNewsPageCollision(True)
+        if self.wantNewsButton:
+            if self.newsButtonMgr.isNewIssueButtonShown():
+                self.clarabelleNewsPageCollision(True)
         self.__clarabelleButton.show()
         self.__clarabelleFlash.resume()
 
@@ -1165,27 +1180,30 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         self.refreshOnscreenButtons()
 
     def refreshOnscreenButtons(self):
-        self.bFriendsList.hide()
+
+        if self.wantPlayerFriends:
+            self.bFriendsList.hide()
         self.hideFurnitureGui()
         self.hideClarabelleGui()
         clarabelleHidden = 1
-        self.ignore(ToontownGlobals.FriendsListHotkey)
-        if self.friendsListButtonActive and self.friendsListButtonObscured <= 0:
-            self.bFriendsList.show()
-            self.accept(ToontownGlobals.FriendsListHotkey, self.sendFriendsListEvent)
-            if self.clarabelleButtonObscured <= 0 and self.isTeleportAllowed():
-                if self.catalogNotify == ToontownGlobals.NewItems or self.mailboxNotify == ToontownGlobals.NewItems or self.simpleMailNotify == ToontownGlobals.NewItems or self.inviteMailNotify == ToontownGlobals.NewItems or self.awardNotify == ToontownGlobals.NewItems:
-                    showClarabelle = not launcher or launcher.getPhaseComplete(5.5)
-                    for quest in self.quests:
-                        if quest[0] in Quests.PreClarabelleQuestIds and self.mailboxNotify != ToontownGlobals.NewItems and self.awardNotify != ToontownGlobals.NewItems:
-                            showClarabelle = 0
+        if self.wantPlayerFriends:
+            self.ignore(ToontownGlobals.FriendsListHotkey)
+            if self.friendsListButtonActive and self.friendsListButtonObscured <= 0:
+                self.bFriendsList.show()
+                self.accept(ToontownGlobals.FriendsListHotkey, self.sendFriendsListEvent)
+                if self.clarabelleButtonObscured <= 0 and self.isTeleportAllowed():
+                    if self.catalogNotify == ToontownGlobals.NewItems or self.mailboxNotify == ToontownGlobals.NewItems or self.simpleMailNotify == ToontownGlobals.NewItems or self.inviteMailNotify == ToontownGlobals.NewItems or self.awardNotify == ToontownGlobals.NewItems:
+                        showClarabelle = not launcher or launcher.getPhaseComplete(5.5)
+                        for quest in self.quests:
+                            if quest[0] in Quests.PreClarabelleQuestIds and self.mailboxNotify != ToontownGlobals.NewItems and self.awardNotify != ToontownGlobals.NewItems:
+                                showClarabelle = 0
 
-                    if base.cr.playGame.getPlace().getState() == 'stickerBook':
-                        showClarabelle = 0
-                    if showClarabelle:
-                        newItemsInMailbox = self.mailboxNotify == ToontownGlobals.NewItems or self.awardNotify == ToontownGlobals.NewItems
-                        self.showClarabelleGui(newItemsInMailbox)
-                        clarabelleHidden = 0
+                        if base.cr.playGame.getPlace().getState() == 'stickerBook':
+                            showClarabelle = 0
+                        if showClarabelle:
+                            newItemsInMailbox = self.mailboxNotify == ToontownGlobals.NewItems or self.awardNotify == ToontownGlobals.NewItems
+                            self.showClarabelleGui(newItemsInMailbox)
+                            clarabelleHidden = 0
         if clarabelleHidden:
             if self.__catalogNotifyDialog:
                 self.__catalogNotifyDialog.cleanup()

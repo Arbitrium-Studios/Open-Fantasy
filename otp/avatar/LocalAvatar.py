@@ -30,7 +30,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
     sleepTimeout = ConfigVariableInt('sleep-timeout', 120).value
     swimTimeout = ConfigVariableInt('afk-timeout', 600).value
     __enableMarkerPlacement = ConfigVariableBool('place-markers', False).value
-    acceptingNewFriends = ConfigVariableBool('accepting-new-friends', True).value
+    acceptingNewFriends = ConfigVariableBool('accepting-new-friends', False).value
     acceptingNonFriendWhispers = ConfigVariableBool(
         'accepting-non-friend-whispers', False).value
 

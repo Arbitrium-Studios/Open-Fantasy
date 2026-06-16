@@ -123,7 +123,7 @@ class TTChatInputWhiteList(ChatInputWhiteListFrame):
         self.chatEntry.bind(DGG.OVERFLOW, self.chatOverflow)
         self.chatEntry.bind(DGG.TYPE, self.typeCallback)
         self.trueFriendChat = 0
-        if base.config.GetBool('whisper-to-nearby-true-friends', 1):
+        if base.config.GetBool('whisper-to-nearby-true-friends', True):
             self.accept(self.TFToggleKey, self.shiftPressed)
         return
 

@@ -56,14 +56,17 @@ class NewsPage(ShtikerPage.ShtikerPage):
     def enter(self):
         self.updatePage()
         ShtikerPage.ShtikerPage.enter(self)
+        self.wantNewsButton = base.config.GetBool('want-news-button', False)
         if HaveNewsFrame:
             if self.book:
-                self.book.prevArrow.hide()
-                self.book.disableAllPageTabs()
+                if self.wantNewsButton:
+                    self.book.prevArrow.hide()
+                    self.book.disableAllPageTabs()
             self.newsFrame.activate()
             base.setCellsAvailable(base.leftCells, 0)
             base.setCellsAvailable([base.rightCells[1]], 0)
-            localAvatar.book.bookCloseButton.hide()
+            if self.wantNewsButton:
+                localAvatar.book.bookCloseButton.hide()
             localAvatar.setLastTimeReadNews(
                 base.cr.toontownTimeManager.getCurServerDateTime())
 

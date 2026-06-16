@@ -27,7 +27,7 @@ default-model-extension .bam
 vfs-case-sensitive 0
 
 
-# Server Settings:
+# Server Setting Configs:
 
 server-version Fantasy_Dev
 server-failover 80 443
@@ -36,7 +36,7 @@ tt-specific-login 1
 collect-tcp 1
 
 
-# Developer Options:
+# Developer Option Configs:
 
 want-dev #f
 schellgames-dev #f
@@ -48,7 +48,7 @@ dc-file etc/toon.dc
 dc-file etc/otp.dc
 
 
-# Gameplay Settings:
+# Gameplay Setting Configs:
 
 want-pets #t
 want-new-species #f
@@ -57,19 +57,20 @@ want-code-redemption #t
 want-cogdominiums #t
 want-emblems #f
 
-# Racing Settings:
+
+# Racing Setting Configs:
 
 want-karts #t
 
 
-# Fishing Settings:
+# Fishing Setting Configs:
 
 want-fishing #f
 want-fish-bingo #t
 want-fish-audio #t
 
 
-# Estate Settings:
+# Estate Setting Configs:
 
 want-estates #t
 estate-cannons #f
@@ -79,21 +80,21 @@ estate-clouds #f
 allow-greyspacing #f
 
 
-# Sleep Settings:
+# Sleep Setting Configs:
 
 want-afk-timeout #f
 sleep-timeout 120
 inactivity-timeout 180.0
 
 
-# Graphical Settings:
+# Graphical Setting Configs:
 
 want-particles #t
 change-display-settings #t
 change-display-api #f
 
 
-# HTTP/Downloading:
+# HTTP/Downloading Configs:
 
 verify-ssl #f
 downloader-timeout-retries 4
@@ -106,9 +107,11 @@ extra-ssl-handshake-time 20.0
 early-random-seed 1
 
 
-# News:
+# News Configs:
 
 want-news-tab #f
+want-news-page #t
+want-news-button #f
 news-over-http #f
 news-url resources/phase_3.5/models/news/http_news_index.txt
 in-game-news-url https://www.toontownfantasy.com/toon_hq/gamenews/
@@ -138,7 +141,14 @@ whitelist-filename twhitelist.dat
 fallback-whitelist-url https://raw.githubusercontent.com/Arbitrium-Studios/resources/refs/heads/release/phase_3/etc/
 
 
-# Notify Settings:
+# Friends Configs:
+
+switchboard-friends #f
+want-player-friends #f
+whisper-to-nearby-true-friends #f
+
+
+# Notify Setting Configs:
 
 notify-level-collide warning
 notify-level-chan warning
@@ -150,7 +160,7 @@ default-directnotify-level info
 console-output #t
 
 
-# Panda3D/DirectX:
+# Panda3D/DirectX Configs:
 
 # Configure this true if you have a buggy graphics driver that doesn't correctly implement the third parameter, NumVertices, of DrawIndexedPrimitive(). In particular, the NVIDIA Quadro driver version 6.14.10.7184 seems to treat this as a maximum vertex index, rather than a delta between the maximum and minimum vertex index. Turn this on if you are seeing stray triangles, or you are not seeing all of your triangles. Enabling this should work around this bug, at the cost of some additional rendering overhead on the GPU. 
 dx-broken-max-index 1
@@ -182,14 +192,14 @@ vertex-buffers #f
 #vertex-buffers 0
 
 
-# GUI Settings:
+# GUI Config Settings:
 
 #direct-wtext 0
 direct-wtext #f
 on-screen-debug-font ImpressBT.ttf
 
 
-# Misc Settings:
+# Misc Setting Configs:
 
 # If require-window is true, it means that we should raise an exception if the window fails to open correctly.
 require-window #f
@@ -208,7 +218,6 @@ text-minfilter linear_mipmap_linear
 gc-save-all 0
 server-data-folder data
 sync-video #f
-switchboard-friends #f
 free-clothes #f
 want-new-cogs #f
 preload-avatars #f

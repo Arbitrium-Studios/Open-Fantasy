@@ -9,12 +9,11 @@ class Settings:
         "smooth-animations": False,
         "show-fps": False,
         "want-laff-meter-over-head": False,
-        "rich-presence": False,
+        "accepting-new-friends": False,
         "windowed-mode": True,
-        "accepting-new-friends": True,
-        "windowed-mode": True,
-        "language": "english",
         "display-mode": "windowed", # For later update on how TTFan handles Display modes (which will hopefully include Borderless Mode)
+        "rich-presence": False,
+        "language": "english",
         "want-sleep": True,
     }
 

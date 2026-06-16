@@ -45,7 +45,7 @@ class FriendInviter(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('FriendInviter')
 
     def __init__(self, avId, avName, avDisableName):
-        self.wantPlayerFriends = base.config.GetBool('want-player-friends', 0)
+        self.wantPlayerFriends = base.config.GetBool('want-player-friends', False)
         DirectFrame.__init__(self, pos = (-1.03, 0.1, -0.35), parent= base.a2dTopRight, image_color=GlobalDialogColor, 
                              image_scale=(1.0, 1.0, 0.6), text='', 
                              text_wordwrap=TTLocalizer.FIdirectFrameWordwrap, 
