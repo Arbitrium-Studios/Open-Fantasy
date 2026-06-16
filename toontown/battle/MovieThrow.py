@@ -258,7 +258,7 @@ def __getWeddingCakeSoundTrack(level, hitSuit, node=None):
         missTrack = Sequence()
         missTrack.append(Wait(tSuitDodges))
         missTrack.append(SoundInterval(missSound, node=node))
-        throwTrack.append(Parallel(songTrack, splatTrack))
+        throwTrack.append(Parallel(songTrack, missTrack))
     return throwTrack
 
 
