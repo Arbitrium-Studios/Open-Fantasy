@@ -2434,6 +2434,11 @@ def doPlayHardball(attack):
         'b': 2.56,
         'c': 1.86
     }
+    soundDelay = {
+        'a': 3.1,
+        'b': 3.1,
+        'c': 2.4
+    }
     suitTrack = getSuitTrack(attack)
     ballPosPoints = [Point3(0.04, 0.03, -0.31), VBase3(-1.152, 86.581, -76.784)]
     propTrack = Sequence(getPropAppearTrack(ball, suit.getRightHand(), ballPosPoints, 0.8, Point3(5, 5, 5), scaleUpTime=0.5))
@@ -2456,7 +2461,7 @@ def doPlayHardball(attack):
         propTrack.append(LerpPosInterval(ball, 0.1, Point3(x, y + 8.5, z + 0.6)))
         propTrack.append(LerpPosInterval(ball, 0.1, Point3(x, y + 9, z + 0.2)))
         propTrack.append(Wait(0.4))
-        soundTrack = getSoundTrack('SA_hardball_impact_only.ogg', delay=2.8, node=suit)
+        soundTrack = getSoundTrack('SA_hardball_impact_only.ogg', delay=soundDelay[suitType] - 0.3, node=suit)
     else:
         propTrack.append(LerpPosInterval(ball, 0.5, Point3(x, y + 2, z)))
         propTrack.append(LerpPosInterval(ball, 0.4, Point3(x, y - 1, z + 2)))
@@ -2466,13 +2471,13 @@ def doPlayHardball(attack):
         propTrack.append(LerpPosInterval(ball, 0.1, Point3(x, y - 5.5, z + 0.6)))
         propTrack.append(LerpPosInterval(ball, 0.1, Point3(x, y - 6, z + 0.2)))
         propTrack.append(Wait(0.4))
-        soundTrack = getSoundTrack('SA_hardball.ogg', delay=3.1, node=suit)
+        soundTrack = getSoundTrack('SA_hardball.ogg', delay=soundDelay[suitType], node=suit)
     propTrack.append(LerpScaleInterval(ball, 0.3, MovieUtil.PNT3_NEARZERO))
     propTrack.append(Func(MovieUtil.removeProp, ball))
     propTrack.append(Func(battle.movie.clearRenderProp, ball))
     damageAnims = [['conked', damageDelay[suitType], 0.01, 0.5],
      ['slip-backward', 0.01, 0.7]]
-    toonTrack = getToonTrack(attack, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'], showDamageExtraTime=3.9)
+    toonTrack: Sequence = getToonTrack(attack, splicedDamageAnims=damageAnims, dodgeDelay=dodgeDelay[suitType], dodgeAnimNames=['sidestep'], showDamageExtraTime=3.9)
     return Parallel(suitTrack, toonTrack, propTrack, soundTrack)
 
 
