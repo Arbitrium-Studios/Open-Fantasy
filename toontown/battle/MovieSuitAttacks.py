@@ -2879,11 +2879,11 @@ def doTremor(attack):
 def doHangUp(attack):
     suit = attack['suit']
     battle = attack['battle']
-    suitTrack = getSuitTrack(attack)
+    suitTrack: Sequence = getSuitTrack(attack)
     propTrack: Sequence = getPhoneTrack(suit)
-    toonTrack = getToonTrack(attack, 5.5, ['slip-backward'], 4.7, ['jump'])
-    soundTrack = getSoundTrack('SA_hangup.ogg', delay=1.3, node=suit)
-    return Parallel(suitTrack, toonTrack, propTrack, soundTrack)
+    toonTracks: Parallel = getToonTracks(attack, 5.5, ['slip-backward'], 4.7, ['jump'])
+    soundTrack: Sequence = getSoundTrack('SA_hangup.ogg', delay=1.3, node=suit)
+    return Parallel(suitTrack, toonTracks, propTrack, soundTrack)
 
 
 def doRedTape(attack):
