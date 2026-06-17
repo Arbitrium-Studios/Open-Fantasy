@@ -932,13 +932,13 @@ class DistributedGolfGreenGame(BattleBlocker.BattleBlocker):
                     cellX - 1, cellZ - 1) == colorType or self.matchWild(cellX - 1, cellZ - 1, colorType):
                 self.fillMatchList(cellX - 1, cellZ - 1)
 
-    def testGridfull(self, cell):
+    def testGridfull(self, cell) -> bool:
         if not cell:
-            return 0
+            return False
         elif cell[0] is not None:
-            return 1
+            return True
         else:
-            return 0
+            return False
         return
 
     def getValidGrid(self, x, z):
