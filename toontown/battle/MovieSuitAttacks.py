@@ -1542,8 +1542,7 @@ def doRazzleDazzle(attack):
 def doSynergy(attack):
     suit = attack['suit']
     battle = attack['battle']
-    target = attack['target']
-    dmg = target[0]['hp']
+    targets = attack['target']
     damageDelay = 1.7
     particleEffect = BattleParticles.createParticleEffect('Synergy')
     waterfallEffect = BattleParticles.createParticleEffect(file='synergyWaterfall')
@@ -1553,13 +1552,13 @@ def doSynergy(attack):
     dodgeAnims = [['jump', 0.01, 0, 0.6]]
     dodgeAnims.extend(getSplicedLerpAnims('jump', 0.31, 1.3, startTime=0.6))
     dodgeAnims.append(['jump', 0, 0.91])
-    toonTrack = getToonTrack(attack, damageDelay=damageDelay, damageAnimNames=['slip-forward'], dodgeDelay=0.91, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.0)
+    toonTracks = getToonTracks(attack, damageDelay=damageDelay, damageAnimNames=['slip-forward'], dodgeDelay=0.91, splicedDodgeAnims=dodgeAnims, showMissedExtraTime=1.0)
     synergySoundTrack = getSoundTrack('SA_synergy.ogg', delay=0.9, node=suit)
-    if dmg > 0:
+    if hitAtleastOneToon(targets):
         fallingSoundTrack = getSoundTrack('Toon_bodyfall_synergy.ogg', delay=damageDelay + 0.5, node=suit)
-        return Parallel(suitTrack, partTrack, waterfallTrack, synergySoundTrack, fallingSoundTrack, toonTrack)
+        return Parallel(suitTrack, partTrack, waterfallTrack, synergySoundTrack, fallingSoundTrack, toonTracks)
     else:
-        return Parallel(suitTrack, partTrack, waterfallTrack, synergySoundTrack, toonTrack)
+        return Parallel(suitTrack, partTrack, waterfallTrack, synergySoundTrack, toonTracks)
 
 
 def doTeeOff(attack):
