@@ -417,6 +417,8 @@ def chooseSuitShot(attack, attackDuration):
             camTrack.append(defaultCamera(openShotDuration=3.3))
         case 'Crunch':
             camTrack.append(defaultCamera(openShotDuration=3.4))
+        case 'DamageOverTime':
+            camTrack.append(randomActorShot(target[0]['toon'], battle, attackDuration, 'toon'))
         case 'Demotion':
             camTrack.append(defaultCamera(openShotDuration=1.7))
         case 'DoubleTalk':
@@ -562,7 +564,7 @@ def chooseSuitShot(attack, attackDuration):
                 name)
             camTrack.append(defaultCamera())
     pbpText = attack['playByPlayText']
-    displayName: str = TTLocalizer.SuitAttackNames[name]
+    displayName: str = TTLocalizer.SuitAttackNames.get(name, '')
     pbpTrack = pbpText.getShowInterval(displayName, 3.5)
     return Parallel(camTrack, pbpTrack)
 

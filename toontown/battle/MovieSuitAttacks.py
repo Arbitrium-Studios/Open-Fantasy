@@ -141,6 +141,8 @@ def doSuitAttack(attack: dict):
             suitTrack = doClipOnTie(attack)
         case 'Crunch':
             suitTrack = doCrunch(attack)
+        case 'DamageOverTime':
+            return doDamageOverTime(attack) # Special case due to lacking a Cog.
         case 'Demotion':
             suitTrack = doDemotion(attack)
         case 'DoubleTalk':
@@ -300,6 +302,37 @@ def doSuitAttack(attack: dict):
         return (resetSuitTrack, resetCamTrack)
     else:
         return (suitTrack, camTrack)
+
+
+def doDamageOverTime(attack: dict):
+    '''
+    A small, brief movie to play for the Toon getting hit over the course of a few rounds.
+
+    Parameters:
+        attack (dict): The attack dictionary.
+    
+    Returns:
+        out (Parallel): The movie of all Toons getting hit.
+    '''
+    targets: list[dict] = attack['target']
+    toonTracks: Parallel = Parallel() # getToonTracks() (actually getToonTrack(), which the aforementioned method uses) has a function that causes the Toon to turn to the Cog, so manually create one without it since the Cog is supposed to be absent.
+    for i in range(len(targets)):
+        tgt = targets[i]
+        toon = tgt['toon']
+        dmg = tgt['hp']
+        if dmg > 0:
+            toonTracks.append(getToonTakeDamageTrack(toon, tgt['died'], dmg, 1e-06, ['cringe']))
+        elif dmg < 0: # Heal for some reason.
+            indicatorTrack = Sequence(Wait(1e-06 + 0.01))
+            if toon.hp is not None:
+                indicatorTrack.append(Func(toon.toonUp, -dmg))
+                indicatorTrack.append(Wait(1.95)) # Wait for the HP text track to do its thing.
+            toonTracks.append(indicatorTrack)
+        else: # Not sure why we would ever come to this, but just in case...
+            toonTracks.append(getToonDodgeTrack(tgt, 0.0001, dodgeAnimNames=['shrug'], splicedDodgeAnims=None, showMissedExtraTime=0.5))
+
+    camTrack: Parallel = MovieCamera.chooseSuitShot(attack, toonTracks.getDuration())
+    return (toonTracks, camTrack)
 
 
 def getResetTrack(suit, battle):
