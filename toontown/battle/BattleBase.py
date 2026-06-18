@@ -97,7 +97,7 @@ def getDefaultSuitAttacks() -> list[list]:
 
 
 def getDefaultSuitAttack() -> list:
-    return [NO_ID, NO_ATTACK, -1, [], 0, 0, 0]
+    return [NO_ID, '', -1, [], 0, 0, 0]
 
 
 def findToonAttack(toons, attacks, track):

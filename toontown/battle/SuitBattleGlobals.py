@@ -177,29 +177,33 @@ def pickSuitAttack(attacks: tuple[SuitAttack, ...], suitLevel: int):
 
     configAttackName = simbase.config.GetString('attack-type', 'random')
     if configAttackName == 'random':
-        return attackNum
+        return attacks[attackNum].name
     elif configAttackName == 'sequence':
         for i in range(len(attacks)):
-            if attacks[i] not in debugAttackSequence:
-                debugAttackSequence[attacks[i]] = 1
-                return i
+            if attacks[i].name not in debugAttackSequence:
+                debugAttackSequence[attacks[i].name] = 1
+                return attacks[i].name
 
-        return attackNum
+        return attacks[attackNum].name
     else:
         for i in range(len(attacks)):
             if attacks[i].name == configAttackName:
-                return i
+                return attacks[i].name
 
-        return attackNum
+        return attacks[attackNum].name
     return
 
 
-def getSuitAttack(suitName: str, suitLevel: int, attackNum: int = -1) -> dict:
+def getSuitAttack(suitName: str, suitLevel: int, attackName: str = '') -> dict:
     attackChoices: tuple[SuitAttack, ...] = SuitAttributesDict[suitName].attacks
-    if attackNum == -1:
+    if attackName == '':
         notify.debug('getSuitAttack: picking attacking for %s' % suitName)
-        attackNum = pickSuitAttack(attackChoices, suitLevel)
-    attack: SuitAttack = attackChoices[attackNum]
+        attackName = pickSuitAttack(attackChoices, suitLevel)
+    for i in range(len(attackChoices)):
+        if attackChoices[i].name == attackName:
+            attack: SuitAttack = attackChoices[i]
+            break
+
     adict = {}
     adict['suitName'] = suitName
     name: str = attack.name

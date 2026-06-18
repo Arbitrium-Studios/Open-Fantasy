@@ -384,22 +384,21 @@ class DistributedBattleBaseAI(
             suitAttack = []
             if id != -1:
                 index = suitIds.index(id)
-            if sa[SUIT_ATK_COL] == -1:
+            if sa[SUIT_ATK_COL] == '':
                 targetIndex = -1
             else:
                 targetIndex = sa[SUIT_TGT_COL]
                 if targetIndex == -1:
                     self.notify.debug(
-                        'suit attack: %d must be group' %
+                        'suit attack: %s must be group' %
                         sa[SUIT_ATK_COL])
                 else:
                     toonId = self.activeToons[targetIndex]
             suitAttack += [index, sa[SUIT_ATK_COL], targetIndex]
             sa[SUIT_TAUNT_COL] = 0
-            if sa[SUIT_ATK_COL] != -1:
+            if sa[SUIT_ATK_COL] != '':
                 suit = self.findSuit(id)
-                sa[SUIT_TAUNT_COL] = getAttackTauntIndexFromIndex(
-                    suit, sa[SUIT_ATK_COL])
+                sa[SUIT_TAUNT_COL] = getAttackTauntIndex(sa[SUIT_ATK_COL])
             suitAttack.extend(sa[3:])
             suitAttacks.append(suitAttack)
 
@@ -1783,7 +1782,7 @@ class DistributedBattleBaseAI(
         self.notify.debug('calculate hit points, %s' % self.suitAttacks)
         for i in range(len(self.suitAttacks)):
             attack = self.suitAttacks[i][SUIT_ATK_COL]
-            if attack != NO_ATTACK:
+            if attack != '':
                 suitId = self.suitAttacks[i][SUIT_ID_COL]
                 suit = self.findSuit(suitId)
                 if suit is None:

@@ -891,7 +891,7 @@ struct toonAttack {
 
 struct suitAttack {
   int8 sid;
-  int8 at;
+  string at;
   int8 stg;
   int16[] dm;
   int8 sd;

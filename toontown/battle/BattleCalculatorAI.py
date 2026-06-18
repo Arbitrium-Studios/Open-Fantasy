@@ -1165,7 +1165,7 @@ class BattleCalculatorAI:
 
     def __createSuitTargetList(self, attack: list) -> list:
         targetList = []
-        if attack[SUIT_ATK_COL] == NO_ATTACK:
+        if attack[SUIT_ATK_COL] == '':
             self.notify.debug('No attack, no targets')
             return targetList
         debug = self.notify.getDebug()
@@ -1295,7 +1295,7 @@ class BattleCalculatorAI:
                 attack[SUIT_HP_COL].append(-1)
 
             self.__calcSuitAtkHp(attack)
-            if attack[SUIT_ATK_COL] != NO_ATTACK:
+            if attack[SUIT_ATK_COL] != '':
                 if self.__suitAtkAffectsGroup(attack):
                     for currTgt in self.battle.activeToons:
                         self.__updateSuitAtkStat(currTgt)

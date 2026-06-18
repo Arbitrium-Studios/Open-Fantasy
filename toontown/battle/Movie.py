@@ -871,7 +871,7 @@ class Movie(DirectObject.DirectObject):
         for sa in suitAttacks:
             targetGone = 0
             attack = sa[SUIT_ATK_COL]
-            if attack != NO_ATTACK:
+            if attack != '':
                 suitIndex = sa[SUIT_ID_COL]
                 suitId = suits[suitIndex]
                 suit = self.battle.findSuit(suitId)
