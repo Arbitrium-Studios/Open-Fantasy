@@ -363,6 +363,7 @@ SuitAttributesDict: dict[str, SuitAttributes] = {'f': SuitAttributes(name=TTLoca
                                           targets=Targeting('toon', 1)),
                                SuitAttack('Fired',
                                           hp=(6, 8, 10, 12, 14),
+                                          effects=(StatusEffects.DamageOverTime(2, 2),),
                                           acc=(70, 75, 80, 85, 90),
                                           freq=(20, 20, 20, 20, 20),
                                           targets=Targeting('toon', 1)),

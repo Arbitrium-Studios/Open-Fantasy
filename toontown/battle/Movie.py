@@ -877,8 +877,12 @@ class Movie(DirectObject.DirectObject):
                 suit = self.battle.findSuit(suitId)
                 if suit is None:
                     self.notify.error('suit: %d not in battle!' % suitId)
-                adict = getSuitAttack(
-                    suit.getStyleName(), suit.getLevel(), attack)
+                adict: dict
+                if attack == 'DamageOverTime': # Special case for damage over time.  Without it, we run into problems.
+                    adict = {'name': 'DamageOverTime',
+                             'group': Targeting('toon', 1)}
+                else:
+                    adict = getSuitAttack(suit.getStyleName(), suit.getLevel(), attack)
                 adict['suit'] = suit
                 adict['battle'] = self.battle
                 adict['playByPlayText'] = self.playByPlayText
