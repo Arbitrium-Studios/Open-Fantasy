@@ -580,8 +580,9 @@ class OptionsTabPage(DirectFrame):
                 self.DisplaySettingsTaskName)
 
     def updateSettings(self):
-        if self.settingsChanged != False:
-            base.settings.writeSettings()
+        if hasattr(self, 'settingsChanged'):
+            if self.settingsChanged != False:
+                base.settings.writeSettings()
 
     def unload(self):
         self.writeDisplaySettings()

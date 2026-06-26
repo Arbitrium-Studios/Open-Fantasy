@@ -233,6 +233,7 @@ class ToonBase(OTPBase.OTPBase):
 
         self.wantSleep = self.settings.getSetting('want-sleep', True)
         self.settings.updateSetting('want-sleep', self.wantSleep)
+        self.wantAfkTimeout = ConfigVariableBool('want-afk-timeout', True).value
 
         self.toggleFPS(self.showFPS)
         self.settings.writeSettings()

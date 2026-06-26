@@ -26,8 +26,8 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
     wantDevCameraPositions = ConfigVariableBool(
         'want-dev-camera-positions', False).value
     wantMouse = ConfigVariableBool('want-mouse', False).value
-    wantSleep = ConfigVariableBool('want-sleep', True).value
     sleepTimeout = ConfigVariableInt('sleep-timeout', 120).value
+    wantAfkTimeout = ConfigVariableBool('want-afk-timeout', True).value
     swimTimeout = ConfigVariableInt('afk-timeout', 600).value
     __enableMarkerPlacement = ConfigVariableBool('place-markers', False).value
     acceptingNewFriends = ConfigVariableBool('accepting-new-friends', False).value
@@ -68,6 +68,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         self.soundRun = None
         self.soundWalk = None
         self.sleepFlag = 0
+        self.wantSleep = base.wantSleep
         self.isDisguised = 0
         self.movingFlag = 0
         self.swimmingFlag = 0
@@ -1084,27 +1085,14 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         return
 
     def gotoSleep(self):
-
-        from otp.settings.Settings import Settings
-        self.settings = Settings()
-        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
-        if not self.ignoreUserOptions:
-            self.settings.readSettings()
-            self.wantSleep = self.settings.getSetting('want-sleep', True)
-            if self.wantSleep and not self.sleepFlag:
-                self.b_setAnimState('Sleep', self.animMultiplier)
-                self.sleepFlag = 1
+        if not self.sleepFlag and self.wantSleep:
+            self.b_setAnimState('Sleep', self.animMultiplier)
+            self.sleepFlag = 1
 
     def forceGotoSleep(self):
-        from otp.settings.Settings import Settings
-        self.settings = Settings()
-        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
-        if not self.ignoreUserOptions:
-            self.settings.readSettings()
-            self.wantSleep = self.settings.getSetting('want-sleep', True)
-            if self.wantSleep and self.hp > 0:
-                self.sleepFlag = 0
-                self.gotoSleep()
+        if self.hp > 0:
+            self.sleepFlag = 0
+            self.gotoSleep()
 
     def startSleepWatch(self, callback):
         self.sleepCallback = callback
@@ -1166,17 +1154,10 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar,
         if self.movingFlag or self.hp <= 0:
             self.wakeUp()
         elif not self.sleepFlag:
-
-            from otp.settings.Settings import Settings
-            self.settings = Settings()
-            self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
-            if not self.ignoreUserOptions:
-                self.settings.readSettings()
-                self.wantSleep = self.settings.getSetting('want-sleep', True)
-                if self.wantSleep:
-                    now = globalClock.getFrameTime()
-                    if now - self.lastMoved > self.sleepTimeout:
-                        self.gotoSleep()
+            if self.wantSleep:
+                now = globalClock.getFrameTime()
+                if now - self.lastMoved > self.sleepTimeout: 
+                    self.gotoSleep()
         state = None
         if self.sleepFlag:
             state = 'Sleep'

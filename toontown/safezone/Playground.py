@@ -196,6 +196,7 @@ class Playground(Place.Place):
         self.npcfaDoneEvent = 'npcfaDoneEvent'
         self.dialog = None
         self.deathAckBox = None
+        self.wantSleep = base.wantSleep
         return
 
     def enter(self, requestStatus):
@@ -632,14 +633,8 @@ class Playground(Place.Place):
             base.localAvatar.b_setAnimState('neutral', 1.0)
         self.accept('teleportQuery', self.handleTeleportQuery)
         base.localAvatar.setTeleportAvailable(1)
-        from otp.settings.Settings import Settings
-        self.settings = Settings()
-        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
-        if not self.ignoreUserOptions:
-            self.settings.readSettings()
-            self.wantSleep = self.settings.getSetting('want-sleep', True)
-            if self.wantSleep:
-                base.localAvatar.startSleepWatch(self.__handleFallingAsleepPopup)
+        if self.wantSleep:
+            base.localAvatar.startSleepWatch(self.__handleFallingAsleepPopup)
 
     def exitPopup(self):
         base.localAvatar.stopSleepWatch()

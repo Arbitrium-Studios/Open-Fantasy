@@ -64,14 +64,9 @@ class DistributedPicnicTable(DistributedNode.DistributedNode):
         self.happyDance = base.loader.loadSfx(
             'phase_5/audio/sfx/AA_heal_happydance.ogg')
         self.accept('stoppedAsleep', self.handleSleep)
-        from otp.settings.Settings import Settings
-        self.settings = Settings()
-        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
-        if not self.ignoreUserOptions:
-            self.settings.readSettings()
-            self.wantSleep = self.settings.getSetting('want-sleep', True)
-            if self.wantSleep:
-                base.localAvatar.startSleepWatch(self.handleSleep)
+        self.wantSleep = base.wantSleep
+        if self.wantSleep:
+            base.localAvatar.startSleepWatch(self.handleSleep)
         self.__toonTracks = {}
         self.fsm = ClassicFSM.ClassicFSM('PicnicTable', [State.State('off', self.enterOff, self.exitOff, ['chooseMode', 'observing']),
                                                          State.State(

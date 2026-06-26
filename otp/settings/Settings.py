@@ -47,4 +47,5 @@ class Settings:
         self.__settings[setting] = value
 
     def getSetting(self, setting, default=None):
+        self.readSettings()
         return self.__settings.get(setting, default)

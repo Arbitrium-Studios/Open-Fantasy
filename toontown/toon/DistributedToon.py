@@ -197,6 +197,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
         self.gmNameTagColor = 'whiteGM'
         self.gmNameTagString = ''
         self.transitioning = False
+
         self.laffMeterOverHead = None
         return
 
@@ -300,12 +301,13 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon,
         self.setGlasses(*oldGlasses)
         self.setBackpack(*oldBackpack)
         self.setShoes(*oldShoes)
-        
-     ### Overhead Laff Meter ###
+
+    ### Overhead Laff Meter ###
     def setHp(self, hp):
         DistributedPlayer.DistributedPlayer.setHp(self, hp)
         if self.isLocal():
             self.updateOverHeadLaffMeter()
+
     def setHat(self, idx, textureIdx, colorIdx):
         Toon.Toon.setHat(self, idx, textureIdx, colorIdx)
 

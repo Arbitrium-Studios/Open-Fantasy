@@ -29,8 +29,7 @@ MagicWordIndex = magicWordIndex.copy()
 
 
 class ToontownMagicWordManager(DistributedObject.DistributedObject):
-    notify = DirectNotifyGlobal.directNotify.newCategory(
-        'ToontownMagicWordManager')
+    notify = DirectNotifyGlobal.directNotify.newCategory('ToontownMagicWordManager')
     neverDisable = 1
 
     def __init__(self, cr):

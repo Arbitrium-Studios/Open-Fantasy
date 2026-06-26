@@ -190,17 +190,17 @@ class MagicWord:
             else:
                 name = avId
 
+            # TODO check also if toon is locked
             if not self.validateTarget(toon):
+                # if len(self.targets) > 1:
+                #     validTargets -= 1
+                #     continue
+                # return "{} is currently locked. You can only use administrative commands on them.".format(name)
+
                 if len(self.targets) > 1:
                     validTargets -= 1
                     continue
                 return "{} is not a valid target!".format(name)
-            # TODO check also if toon is locked
-            #                if len(self.targets) > 1:
-            #                   validTargets -= 1
-            #                  continue
-            # return "{} is currently locked. You can only use administrative commands
-            # on them.".format(name)
 
             if invoker.getAccessLevel() <= toon.getAccessLevel() and toon != invoker:
                 if len(self.targets) > 1:
@@ -230,10 +230,10 @@ class MagicWord:
                                           self.__class__.__name__,
                                           executedWord)
 
+        self.notify.info(f'{now} | {self.invokerId}: {self.__class__.__name__}')
         # darth you do know this thing is clientside right o_O
         with open('users/logs/magic-words/magic-words-log.txt', 'a') as magicWordLogFile:
-            magicWordLogFile.write(
-                f"{now} | {self.invokerId}: {self.__class__.__name__}\n")
+            magicWordLogFile.write(f'{now} | {self.invokerId}: {self.__class__.__name__}\n')
         # If you're only using the Magic Word on one person and there is a
         # response, return that response
         if executedWord and len(self.targets) == 1:
@@ -666,8 +666,8 @@ class BadName(MagicWord):
         return 'Changed {0} name to {1}'.format(pastName, toon.getName())
 
 
-class fix(MagicWord):
-    aliases = ['fixavatar', 'fixtoon']
+class FixAvatar(MagicWord):
+    aliases = ['fix', 'fixtoon']
     desc = "Fix whatever might be out-of-whack for the avatar."
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     accessLevel = 'MODERATOR'
@@ -721,7 +721,8 @@ class ToggleFPS(MagicWord):
             response = 'frame rate OFF'
         return response
 
-class allstuff(MagicWord):
+
+class AllStuff(MagicWord):
     aliases = [
         'restockinventory',
         'restockinv',
@@ -752,7 +753,7 @@ class allstuff(MagicWord):
         return 'Successfully gave your toon the max amount of gags.'
 
 
-class nostuff(MagicWord):
+class NoStuff(MagicWord):
     aliases = ['emptyinventory', 'emptyinv', 'zeroinv', 'zeroinventory', 'inventoryzero']
     desc = 'Gives target all the inventory they can carry.'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
@@ -764,7 +765,7 @@ class nostuff(MagicWord):
         return ("Zeroing inventory for " + toon._name)
 
 
-class rich(MagicWord):
+class Rich(MagicWord):
     desc = 'Gives the target full bank jellybeans'
     aliases = ['maxjbs', 'maxjellybeans', 'maxbankjellybeans']
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
@@ -1438,6 +1439,7 @@ class GetInvasion(MagicWord):
 
 
 class StartInvasion(MagicWord):
+    aliases = ['invasion', 'startcoginvasion']
     desc = 'Starts a cog invasion.'
     accessLevel = 'MODERATOR'
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
@@ -1447,38 +1449,46 @@ class StartInvasion(MagicWord):
     def handleWord(self, invoker, avId, av, *args):
         invMgr = self.air.suitInvasionManager
 
-        if invMgr.getInvading():
-            cogType = invMgr.getCogType()
-            numRemaining = invMgr.getNumCogsRemaining()
-            cogName: str = SuitBattleGlobals.SuitAttributesDict[cogType[0]].name
-            response = (
-                "Invasion already in progress: %s, %s" %
-                (cogName, numRemaining))
-        else:
-            if len(args) < 2 or len(args) > 3:
-                response = "Error: Must specify cogType and numCogs"
+        try:
+            if invMgr.getInvading():
+                cogType = invMgr.getCogType()
+                numRemaining = invMgr.getNumCogsRemaining()
+                cogName: str = SuitBattleGlobals.SuitAttributesDict[cogType[0]].name
+                response = (
+                    "Invasion already in progress: %s, %s" %
+                    (cogName, numRemaining))
             else:
-                cogType = args[0]
-                numCogs = int(args[1])
-                if len(args) == 3:
-                    skeleton = args[2]
+                if len(args) < 2 or len(args) > 3:
+                    response = "Error: Must specify cogType and numCogs"
                 else:
-                    skeleton = 0
-                cogNameDict: SuitBattleGlobals.SuitAttributes | None = SuitBattleGlobals.SuitAttributesDict.get(cogType)
-                if cogNameDict:
-                    cogName: str = cogNameDict.name
-                    if skeleton:
-                        cogName = TTLocalizer.Skeleton + " " + cogName
-                    if invMgr.startInvasion(cogType, numCogs, skeleton):
-                        response = (
-                            "Invasion started: %s, %s" %
-                            (cogName, numCogs))
+                    cogType = args[0]
+                    numCogs = int(args[1])
+                    if numCogs == 0 or numCogs == -1:
+                        numCogs = int(ToontownGlobals.DefaultNumberOfCogs)
+                    if len(args) == 3:
+                        skeleton = args[2]
                     else:
-                        response = (
-                            "Invasion failed: %s, %s" %
-                            (cogName, numCogs))
-                else:
-                    response = ("Unknown cogType: %s" % (cogType))
+                        skeleton = 0
+
+                    cogNameDict: SuitBattleGlobals.SuitAttributes | None = SuitBattleGlobals.SuitAttributesDict.get(cogType)
+                    if cogNameDict:
+                        cogName: str = cogNameDict.name
+                        if skeleton:
+                            cogName = TTLocalizer.Skeleton + " " + cogName
+                        if invMgr.startInvasion(cogType, numCogs, skeleton):
+                            response = (
+                                "Invasion started: %s, %s" %
+                                (cogName, numCogs))
+                        else:
+                            response = (
+                                "Invasion failed: %s, %s" %
+                                (cogName, numCogs))
+                    else:
+                        response = ("Unknown cogType: %s" % (cogType))
+        except BaseException as reasonForBaseException:
+            classObj = StartInvasion()
+            class_name = type(classObj).__name__
+            response = (f"Failed to run the {class_name} for the following reason: %s" % (reasonForBaseException))
         return response
 
 
@@ -1643,7 +1653,9 @@ class DoMinigame(MagicWord):
 
         return response
 
+
 # TO DO AllSummons MagicWord command to get ALL summons in your Shtiker Book.
+
 
 class SummonSuit(MagicWord):
     aliases = ['call', 'summoncog']
@@ -1726,7 +1738,9 @@ class TeleportAll(MagicWord):
         av.b_setTeleportAccess(ToontownGlobals.HoodsForTeleportAll)
         return 'You can now teleport anywhere.'
 
+
 # TODO God Mode MagicWord command to become Immortal to damage, have unlimited gags, have unlimited unites, fires, etc.!
+
 
 class ToggleImmortality(MagicWord):
     aliases = ['immortal', 'toggleimmortal', 'invincible', 'toggleinvincible']
@@ -2520,6 +2534,7 @@ class GiveBessies(MagicWord):
 # bossBattle state to one of the indicated tokens."""
 # arguments = [('dept', str, False , ''), ()]
 
+
 class ToggleDisguisePage(MagicWord):
     aliases = ['disguisepage']
     desc = 'Turns on or off the disguise page flag.  The default is on (1).'
@@ -3038,37 +3053,136 @@ class SkipCFO(MagicWord):
                 boss.b_setState('Victory')
                 return "Skipping final round..."
 
-# TODO add skipcj and skipcfo
 
-class Sleep(MagicWord):
-    aliases = ["toggleSleep", "sleeping", "toggleSleeping"]
+# TODO: Test if "SkipCJ" works...
+# class SkipCJ(MagicWord):
+#     desc = "Skips to the indicated round of the CJ."
+#     execLocation = MagicWordConfig.EXEC_LOC_SERVER
+#     arguments = [("round", str, False, "next")]
+#     accessLevel = "DEVELOPER"
+
+#     def handleWord(self, invoker, avId, toon, *args):
+#         battle = args[0]
+
+#         from toontown.suit.DistributedLawbotBossAI import DistributedLawbotBossAI
+#         boss = None
+#         for do in simbase.air.doId2do.values():
+#             if isinstance(do, DistributedLawbotBossAI):
+#                 if invoker.doId in do.involvedToons:
+#                     boss = do
+#                     break
+#         if not boss:
+#             return "You aren't in a CFO!"
+
+#         battle = battle.lower()
+
+#         if battle == 'two':
+#             if boss.state in ('PrepareBattleThree', 'BattleThree'):
+#                 return "You can not return to previous rounds!"
+#             else:
+#                 boss.exitIntroduction()
+#                 boss.b_setState('PrepareBattleThree')
+#                 return "Skipping to last round..."
+
+#         if battle == 'next':
+#             if boss.state in ('PrepareBattleOne', 'BattleOne'):
+#                 boss.exitIntroduction()
+#                 boss.b_setState('PrepareBattleThree')
+#                 return "Skipping current round..."
+#             elif boss.state in ('PrepareBattleThree', 'BattleThree'):
+#                 boss.exitIntroduction()
+#                 boss.b_setState('Victory')
+#                 return "Skipping final round..."
+
+
+# TODO: Test if "SkipCEO" works...
+# class SkipCEO(MagicWord):
+#     desc = "Skips to the indicated round of the CEO."
+#     execLocation = MagicWordConfig.EXEC_LOC_SERVER
+#     arguments = [("round", str, False, "next")]
+#     accessLevel = "DEVELOPER"
+
+#     def handleWord(self, invoker, avId, toon, *args):
+#         round = args[0]
+#         from toontown.suit.DistributedBossbotBossAI import DistributedBossbotBossAI
+#         boss = None
+#         for do in simbase.air.doId2do.values():
+#             if isinstance(do, DistributedBossbotBossAI):
+#                 if invoker.doId in do.involvedToons:
+#                     boss = do
+#                     break
+#         if not boss:
+#             return "You aren't in a CEO!"
+
+#         round = round.lower()
+
+#         if round == 'three':
+#             if boss.state in ('PrepareBattleThree', 'BattleThree'):
+#                 return "You can not return to previous rounds!"
+#             else:
+#                 boss.exitIntroduction()
+#                 boss.b_setState('PrepareBattleThree')
+#                 return "Skipping to final round."
+#         elif round == 'two':
+#             if boss.state in ('PrepareBattleThree', 'BattleThree'):
+#                 return "You can not return to previous rounds!"
+#             else:
+#                 boss.exitIntroduction()
+#                 boss.b_setState('RollToBattleTwo')
+#                 return 'Skipping to 2nd round.'
+#         if round == 'next':
+#             if boss.state in ('PrepareBattleOne', 'BattleOne'):
+#                 boss.exitIntroduction()
+#                 boss.b_setState('PrepareBattleTwo')
+#                 return "Skipping current round..."
+#             elif boss.state in ('PrepareBattleTwo', 'BattleTwo'):
+#                 boss.b_setState('PrepareBattleThree')
+#                 return 'Skipping to round three.'
+#             elif boss.state in ('PrepareBattleThree', 'BattleThree'):
+#                 boss.b_setState('PrepareBattleFour')
+#                 return 'Skipping to final round.'
+
+#             elif boss.state in ('PrepareBattleFour', 'BattleFour'):
+#                 boss.exitIntroduction()
+#                 boss.b_setState('Victory')
+#                 return "Killing the CEO."
+
+
+class ToggleSleep(MagicWord):
+    aliases = ["sleep", "sleeping", "toggleSleeping"]
     desc = "Toggles sleeping for the target."
     advancedDesc = "This Magic Word will toggle On/Off sleeping for the target"
     execLocation = MagicWordConfig.EXEC_LOC_SERVER
     arguments = []
     accessLevel = 'DEVELOPER'
 
-    def handleWord(self, invoker, avId, toon, *args):
-
+    def getWantSleep(self):
         from otp.settings.Settings import Settings
         self.settings = Settings()
         self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
-        if not self.ignoreUserOptions:
-            self.settings.readSettings()
-            self.currentSleepStatus = self.settings.getSetting('want-sleep', True)
-            if self.currentSleepStatus:
-                self.wantSleep = bool(False)
-                self.wantSleepToggleDialog = 'off'
-            else:
-                self.wantSleep = bool(True)
-                self.wantSleepToggleDialog = 'on'
-
-            self.settings.updateSetting('want-sleep', self.wantSleep)
-            self.settings.writeSettings()
-            self.updatedWantSleep = self.settings.getSetting('want-sleep', True)
-            return "{} has toggled {} sleeping.".format(toon.getName(), self.wantSleepToggleDialog)
+        if self.ignoreUserOptions:
+            self.wantSleep = ConfigVariableBool('want-sleep', True).value
         else:
-            return "Unable to toggle sleeping at this time..."
+            self.wantSleep = self.settings.getSetting('want-sleep', True)
+        return self.wantSleep
+
+    def toggleSleep(self):
+        from otp.settings.Settings import Settings
+        self.settings = Settings()
+        wantSleepStatus = self.getWantSleep()
+        self.wantSleep = not wantSleepStatus
+        self.settings.updateSetting('want-sleep', self.wantSleep)
+        self.settings.writeSettings()
+        return self.wantSleep
+
+    def handleWord(self, invoker, avId, toon, *args):
+
+        self.wantSleep = self.toggleSleep()
+
+        self.wantSleepToggleDialog = 'on' if self.wantSleep else 'off'
+        self.notify.info('{} has toggled {} sleeping.'.format(toon.getName(), self.wantSleepToggleDialog))
+        return f'Sleep has been turned {self.wantSleepToggleDialog}!'
+
 
 # Instantiate all classes defined here to register them.
 # A bit hacky, but better than the old system

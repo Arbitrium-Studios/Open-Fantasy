@@ -71,7 +71,7 @@ if "%repo_name%" EQU "THE_STAICY_B0T" (
 )
 
 set "wantExtraLogging=False"
-set "wantDirLoggingCLS=False"
+set "wantToClearLogs=False"
 
 set "fileName=%~nx0"
 
@@ -846,6 +846,16 @@ goto :ending
 :ending
 
 pause
-cls
+
+if "!wantToClearLogs!" EQU "True" (
+    cls
+)
+
 goto :launcher
-endlocal
+pause
+
+:exitScript
+
+pause
+EndLocal
+exit

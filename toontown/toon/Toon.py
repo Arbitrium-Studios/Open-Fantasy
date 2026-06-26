@@ -661,6 +661,8 @@ class Toon(Avatar.Avatar, ToonHead):
             State('ScientistPlay', self.enterScientistPlay, self.enterScientistPlay)], 'off', 'off')
         animStateList = self.animFSM.getStates()
         self.animFSM.enterInitialState()
+        self.wantSleep = base.wantSleep
+        self.wantAfkTimeout = base.wantAfkTimeout
 
     def stopAnimations(self):
         if hasattr(self, 'animFSM'):
@@ -2355,21 +2357,15 @@ class Toon(Avatar.Avatar, ToonHead):
 
     def enterSleep(self, animMultiplier=1, ts=0, callback=None, extraArgs=[]):
 
-        from otp.settings.Settings import Settings
-        self.settings = Settings()
-        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
-        if not self.ignoreUserOptions:
+        if not base.localAvatar.ignoreUserOptions:
             self.settings.readSettings()
-            self.wantSleep = self.settings.getSetting('want-sleep', True)
-
             if not self.wantSleep:
                 return
             else:
                 if base.wantRichPresence:
                     base.discord.sleeping()
 
-                wantAfkTimeout = ConfigVariableBool('want-afk-timeout', True).value
-                if self.wantSleep and wantAfkTimeout:
+                if self.wantSleep and self.wantAfkTimeout:
                     self.stopLookAround()
                     self.stopBlink()
                     self.closeEyes()
@@ -2417,15 +2413,8 @@ class Toon(Avatar.Avatar, ToonHead):
             self.clearChat()
         self.lerpLookAt(Point3(0, 1, 0), time=0.25)
 
-        from otp.settings.Settings import Settings
-        self.settings = Settings()
-        self.ignoreUserOptions = ConfigVariableBool('ignore-user-options', False).value
-        if not self.ignoreUserOptions:
-            self.settings.readSettings()
-            self.wantSleep = self.settings.getSetting('want-sleep', True)
-
-            if self.wantSleep and base.wantRichPresence:
-                base.discord.reawaken()
+        if self.wantSleep and base.wantRichPresence:
+            base.discord.reawaken()
         self.stop()
 
     def enterPush(self, animMultiplier=1, ts=0, callback=None, extraArgs=[]):
