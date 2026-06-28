@@ -822,7 +822,7 @@ def throwPos(t: float, object, duration: float, target, values: dict, gravity: f
     object.setPos(x, y, z)
 
 
-def getToonTakeDamageTrack(toon, died, dmg, delay: float, damageAnimNames: list[str] | None = None, splicedDamageAnims: list[list] | None = None, showDamageExtraTime: float = 0.01) -> Parallel:
+def getToonTakeDamageTrack(toon, died, dmg, delay: float, damageAnimNames: list[str] | None = None, splicedDamageAnims: splicedAnims | None = None, showDamageExtraTime: float = 0.01) -> Parallel:
     toonTrack: Sequence = Sequence()
     toonTrack.append(Wait(delay))
     if damageAnimNames:
