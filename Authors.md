@@ -7,16 +7,16 @@
 
 ### Technical Team:
 + The Professor | Developer
-+ Sighost | Developer
++ (Retired) Sighost | Developer
 + Gracie "THE PLAYER ZER0" Lovelight | Developer
 
 ### Creative Team:
-+ SirDapperPenguin | 3D Modeler
-+ Jardin | Artist
-+ April | Artist
-+ AiGenics | Story Writer
++ (Retired) SirDapperPenguin | 3D Modeler
++ (Retired) Jardin | Artist
++ (Retired) April | Artist
++ (Retired) AiGenics | Story Writer
 + Gracie "THE PLAYER ZER0" Lovelight | Story Writer
-+ Pizza Taco Burger | Creative Writer
++ (Retired) Pizza Taco Burger | Creative Writer
 
 ### Contributors:
 + See the CONTRIBUTORS.md file

@@ -118,8 +118,7 @@ class ToontownChatManager(ChatManager.ChatManager):
                                                 command=self.__whisperCancelPressed)
         gui.removeNode()
         ChatManager.ChatManager.__init__(self, cr, localAvatar)
-        self.defaultToWhiteList = base.config.GetBool(
-            'white-list-is-default', 1)
+        self.defaultToWhiteList = base.config.GetBool('white-list-is-default', True)
         self.chatInputSpeedChat = TTChatInputSpeedChat(self)
         self.normalPos = Vec3(0.25, 0, -0.196)
         self.whisperPos = Vec3(0, 0, -0.296)

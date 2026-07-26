@@ -1244,15 +1244,18 @@ class BattleCalculatorAI:
                 if attack[SUIT_HP_COL][position] <= 0:
                     continue
                 toonHp = self.__getToonHp(t)
+                self.notify.info(f'Toon HP: {toonHp}\n')
                 if toonHp - attack[SUIT_HP_COL][position] <= 0:
                     if self.notify.getDebug():
                         self.notify.debug('Toon %d has died, removing' % t)
                     self.toonLeftBattle(t)
                     attack[TOON_DIED_COL] = attack[TOON_DIED_COL] | 1 << position
                 if self.notify.getDebug():
-                    self.notify.debug('Toon ' + str(t) + ' takes ' + str(attack[SUIT_HP_COL][position]) + ' damage')
+                    self.notify.info('Toon ' + str(t) + ' takes ' + str(attack[SUIT_HP_COL][position]) + ' damage')
+                self.notify.info('Toon ' + str(t) + ' takes ' + str(attack[SUIT_HP_COL][position]) + ' damage')
                 self.toonHPAdjusts[t] -= attack[SUIT_HP_COL][position]
-                self.notify.debug('Toon ' + str(t) + ' now has ' + str(self.__getToonHp(t)) + ' health')
+                self.notify.info(f'toonHPAdjusts: {self.toonHPAdjusts[t]}\n')
+                self.notify.info('Toon ' + str(t) + ' now has ' + str(self.__getToonHp(t)) + ' health')
 
     def __suitCanAttack(self, suitId) -> bool:
         if self.__combatantDead(suitId, toon=0) or self.__suitIsLured(suitId) or self.__combatantJustRevived(suitId):
@@ -1297,7 +1300,7 @@ class BattleCalculatorAI:
             if self.__suitAtkAffectsGroup(attack):
                 for currTgt in self.battle.activeToons:
                     self.__updateSuitAtkStat(currTgt)
-            
+
             else:
                 tgtId = self.battle.activeToons[attack[SUIT_TGT_COL]]
                 self.__updateSuitAtkStat(tgtId)
@@ -1307,7 +1310,7 @@ class BattleCalculatorAI:
             if self.__getToonHp(currTgt) > 0:
                 allTargetsDead = False
                 break
-        
+
         if allTargetsDead:
             attack = getDefaultSuitAttack()
             if self.notify.getDebug():
@@ -1362,10 +1365,10 @@ class BattleCalculatorAI:
                                 result += effect.defenseMod
                             else:
                                 result *= effect.defenseMod
-                        
+
                         if result < 0: # It's a damage over time, not a heal over time, which is covered in an above condition.  Set it to 0 if it ever falls below that.
                             result = 0
-                    
+
                     targetIndex = self.battle.activeToons.index(tgtId)
                     dotAttack[SUIT_HP_COL][targetIndex] = result
 
@@ -1375,7 +1378,12 @@ class BattleCalculatorAI:
                     if self.__getToonHp(currTgt) > 0:
                         allTargetsDead = False
                         break
-                
+
+                # For helping with debugging DOT
+                for t_test in self.battle.activeToons:
+                    toonHpTest = self.__getToonHp(t_test)
+                    self.notify.info(f'(Pre-__applySuitAttackDamages) Toon HP: {toonHpTest}\n')
+
                 if allTargetsDead:
                     dotAttack = getDefaultSuitAttack()
                     if self.notify.getDebug():
@@ -1383,9 +1391,15 @@ class BattleCalculatorAI:
                         self.notify.debug('suit attack is now ' + repr(dotAttack))
                         self.notify.debug('all attacks: ' + repr(self.battle.suitAttacks))
                 if self.__attackHasHit(dotAttack, suit=1):
+                    self.notify.info(f'dotAttack: {dotAttack}\n')
                     self.__applySuitAttackDamages(dotAttack)
+
+                    for tDot in self.battle.activeToons:
+                        toonHpDot = self.__getToonHp(tDot)
+                        self.notify.info(f'(Post-__applySuitAttackDamages) Toon HP: {toonHpDot}\n')
+                        # toon.b_setHp(toonHpDot)
                 if self.notify.getDebug():
-                    self.notify.debug('Suit attack: ' + str(dotAttack))
+                    self.notify.info('Suit attack: ' + str(dotAttack))
                 dotAttack[SUIT_BEFORE_TOONS_COL] = 0
                 self.battle.suitAttacks.append(dotAttack)
 
@@ -1484,13 +1498,14 @@ class BattleCalculatorAI:
         self.__calculateToonAttacks()
         self.__updateLureTimeouts()
         self.__calculateSuitAttacks()
+
         # Tick down the status effect rounds for Toons and Cogs while also affecting the effect by turn if needed.
         for toonId in self.toonStatusEffects.keys():
             for i in range(len(self.toonStatusEffects[toonId]) - 1, -1, -1):
                 self.toonStatusEffects[toonId][i].decrementRounds()
                 if self.toonStatusEffects[toonId][i].currRounds == 0: # Is the effect expired?
                     del self.toonStatusEffects[toonId][i] # Delete it.
-        
+
         for suitId in self.suitStatusEffects.keys():
             for i in range(len(self.suitStatusEffects[suitId]) - 1, -1, -1):
                 self.suitStatusEffects[suitId][i].decrementRounds()

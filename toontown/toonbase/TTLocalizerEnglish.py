@@ -10149,8 +10149,6 @@ lDivingInto = 'Diving into'
 lChatting = 'Chatting'
 lChilling = 'Chilling'
 
-
-
 lPlayerInFoggyFjord = (f'{lFoggyFjord}') # Diving into / Sleeping in
 lPlayerInToontownCentral = ('{}', 'in', f'{lToontownCentral}') # Chatting / Sleeping in
 lPlayerInTundraWonderland = ('{} in', f'{TundraWonderland}') # Chilling / Sleeping in

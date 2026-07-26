@@ -217,6 +217,7 @@ class ChatManager(DirectObject.DirectObject):
         self.ignoreAll()
         if hasattr(self, 'chatLog'):
             self.chatLog.destroy()
+
     def start(self):
         self.fsm.request('mainMenu')
         self.chatLog = ChatLog.ChatLog(self)
@@ -295,6 +296,7 @@ class ChatManager(DirectObject.DirectObject):
                 ['normalChat'])
             if not self.wantBackgroundFocus:
                 self.accept(base.CHAT, messenger.send, ['enterNormalChat'])
+
     def checkObscurred(self):
         if not self.__scObscured:
             self.scButton.show()
@@ -625,6 +627,6 @@ class ChatManager(DirectObject.DirectObject):
             if base.controlManager.isAlphaNumericHotkey(key) and str(base.CHAT) != str(key):
                 return True
         return False
-        
+
     def setBackgroundFocus(self, backgroundFocus):
         self.wantBackgroundFocus = backgroundFocus

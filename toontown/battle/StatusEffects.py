@@ -149,7 +149,7 @@ class DamageOverTime(StatusEffect):
         StatusEffect.__init__(self, currRounds, **kwargs)
         self.damagePerRound: int = damagePerRound
         self.updateEffect()
-    
+
     def updateEffect(self) -> None:
         '''
         If this effect ever gets updated for some reason, update whether or not it is still good.

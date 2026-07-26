@@ -83,7 +83,7 @@ class SuitAttack:
 
 
 class SuitAttributes:
-    
+
     def __init__(self, *, name: str, singularname: str, pluralname: str, level: int, hp: tuple[int, ...], defense: tuple[int, ...], freq: tuple[int, ...], acc: tuple[int, ...], attacks: tuple[SuitAttack, ...]) -> None:
         '''
         Parameters:
@@ -221,7 +221,8 @@ def getSuitAttack(suitName: str, suitLevel: int, attackName: str = '') -> dict:
 ATK_TGT_UNKNOWN: Literal[1] = 1
 ATK_TGT_SINGLE: Literal[2] = 2
 ATK_TGT_GROUP: Literal[3] = 3
-SuitAttributesDict: dict[str, SuitAttributes] = {'f': SuitAttributes(name=TTLocalizer.SuitFlunky,
+SuitAttributesDict: dict[str, SuitAttributes] = {
+ 'f': SuitAttributes(name=TTLocalizer.SuitFlunky,
                      singularname=TTLocalizer.SuitFlunkyS,
                      pluralname=TTLocalizer.SuitFlunkyP,
                      level=0,
